@@ -10,7 +10,7 @@ export const Notes = (props: Props): ReactElement => {
     <ProfileDataField
       inputWidth="default"
       fieldName={"notes"}
-      fieldOptions={{ multiline: true, minRows: 4, inputProps: { maxLength: "500" } }}
+      fieldOptions={{ multiline: true, minRows: 4, slotProps: { htmlInput: { maxLength: "500" } } }}
       handleChange={props.handleChangeOverride}
     />
   );

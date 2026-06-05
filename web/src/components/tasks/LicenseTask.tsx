@@ -5,6 +5,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { Icon } from "@/components/njwds/Icon";
+import { getTabId, getTabPanelId, TabPanel } from "@/components/TabPanel";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CheckLicenseStatus } from "@/components/tasks/CheckLicenseStatus";
 import { LicenseDetailReceipt } from "@/components/tasks/LicenseDetailReceipt";
@@ -23,8 +24,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { LicenseSearchError, TaskWithLicenseTaskId } from "@businessnjgovnavigator/shared/types";
-import { TabContext, TabList, TabPanel } from "@mui/lab/";
-import { Box, Tab } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
@@ -68,15 +68,14 @@ export const LicenseTask = (props: Props): ReactElement => {
     }
   }, [licenseNameForTask, business]);
 
-  const onSelectTab = (event: React.SyntheticEvent, newValue: string): void => {
-    const index = Number.parseInt(newValue);
-    if (index === APPLICATION_TAB_INDEX) {
+  const onSelectTab = (event: React.SyntheticEvent, newValue: number): void => {
+    if (newValue === APPLICATION_TAB_INDEX) {
       analytics.event.task_tab_start_application.click.view_application_tab();
-    } else if (index === STATUS_TAB_INDEX) {
+    } else if (newValue === STATUS_TAB_INDEX) {
       analytics.event.task_tab_check_status.click.view_status_tab();
     }
 
-    setTabIndex(index);
+    setTabIndex(newValue);
   };
 
   const onEdit = (): void => {
@@ -133,81 +132,92 @@ export const LicenseTask = (props: Props): ReactElement => {
           tooltipText={hasCompletedSearch ? Config.licenseSearchTask.tooltipText : undefined}
         />
         <Box sx={{ width: "100%" }}>
-          <TabContext value={tabIndex.toString()}>
-            <Box>
-              <TabList
-                onChange={onSelectTab}
-                aria-label="License task"
-                sx={{
-                  borderBottom: 1,
-                  borderColor: "divider",
-                  marginTop: ".25rem",
-                  marginLeft: ".5rem",
-                }}
-              >
-                <Tab value="0" sx={tabStyle} label={Config.licenseSearchTask.tab1Text} />
-                <Tab value="1" sx={tabStyle} label={Config.licenseSearchTask.tab2Text} />
-              </TabList>
-            </Box>
-            <TabPanel value="0">
-              <div className="margin-top-3">
-                <UnlockedBy task={props.task} />
-                <Content>{props.task.summaryDescriptionMd || ""}</Content>
-                <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
-              </div>
-              <CtaContainer>
-                <ActionBarLayout>
-                  <div className="margin-top-2 mobile-lg:margin-top-0">
-                    <SecondaryButton
-                      isColor="primary"
-                      onClick={(): void => {
-                        analytics.event.task_button_i_already_submitted.click.view_status_tab(
-                          "check_status",
-                          "start_application",
-                        );
-                        setTabIndex(STATUS_TAB_INDEX);
-                      }}
-                      dataTestId="cta-secondary"
-                    >
-                      {Config.licenseSearchTask.secondaryCTAFirstLineText}
-                    </SecondaryButton>
-                  </div>
-                  <PrimaryButton
+          <Box>
+            <Tabs
+              onChange={onSelectTab}
+              aria-label="License task"
+              value={tabIndex}
+              sx={{
+                borderBottom: 1,
+                borderColor: "divider",
+                marginTop: ".25rem",
+                marginLeft: ".5rem",
+              }}
+            >
+              <Tab
+                aria-controls={getTabPanelId("license-task", APPLICATION_TAB_INDEX)}
+                id={getTabId("license-task", APPLICATION_TAB_INDEX)}
+                value={APPLICATION_TAB_INDEX}
+                sx={tabStyle}
+                label={Config.licenseSearchTask.tab1Text}
+              />
+              <Tab
+                aria-controls={getTabPanelId("license-task", STATUS_TAB_INDEX)}
+                id={getTabId("license-task", STATUS_TAB_INDEX)}
+                value={STATUS_TAB_INDEX}
+                sx={tabStyle}
+                label={Config.licenseSearchTask.tab2Text}
+              />
+            </Tabs>
+          </Box>
+          <TabPanel activeValue={tabIndex} idPrefix="license-task" value={APPLICATION_TAB_INDEX}>
+            <div className="margin-top-3">
+              <UnlockedBy task={props.task} />
+              <Content>{props.task.summaryDescriptionMd || ""}</Content>
+              <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+            </div>
+            <CtaContainer>
+              <ActionBarLayout>
+                <div className="margin-top-2 mobile-lg:margin-top-0">
+                  <SecondaryButton
                     isColor="primary"
                     onClick={(): void => {
-                      analytics.event.task_primary_call_to_action.click.open_external_website(
-                        Config.licenseSearchTask.primaryCTAFirstLineText,
-                        callToActionLink,
+                      analytics.event.task_button_i_already_submitted.click.view_status_tab(
+                        "check_status",
                         "start_application",
                       );
-                      openInNewTab(callToActionLink);
+                      setTabIndex(STATUS_TAB_INDEX);
                     }}
-                    isRightMarginRemoved
-                    dataTestId="cta-primary"
+                    dataTestId="cta-secondary"
                   >
-                    {Config.licenseSearchTask.primaryCTAFirstLineText}
-                    <Icon iconName="launch" className="usa-icon-button-margin" />
-                  </PrimaryButton>
-                </ActionBarLayout>
-              </CtaContainer>
-            </TabPanel>
-            <TabPanel value="1">
-              {hasCompletedSearch && licenseDetails ? (
-                <LicenseDetailReceipt
-                  licenseTaskId={props.task.id}
-                  licenseDetails={licenseDetails}
-                  onEdit={onEdit}
-                />
-              ) : (
-                <CheckLicenseStatus
-                  onSubmit={onSubmit}
-                  error={error}
-                  isLoading={isLoading}
-                  licenseTaskId={props.task.id}
-                />
-              )}
-            </TabPanel>
-          </TabContext>
+                    {Config.licenseSearchTask.secondaryCTAFirstLineText}
+                  </SecondaryButton>
+                </div>
+                <PrimaryButton
+                  isColor="primary"
+                  onClick={(): void => {
+                    analytics.event.task_primary_call_to_action.click.open_external_website(
+                      Config.licenseSearchTask.primaryCTAFirstLineText,
+                      callToActionLink,
+                      "start_application",
+                    );
+                    openInNewTab(callToActionLink);
+                  }}
+                  isRightMarginRemoved
+                  dataTestId="cta-primary"
+                >
+                  {Config.licenseSearchTask.primaryCTAFirstLineText}
+                  <Icon iconName="launch" className="usa-icon-button-margin" />
+                </PrimaryButton>
+              </ActionBarLayout>
+            </CtaContainer>
+          </TabPanel>
+          <TabPanel activeValue={tabIndex} idPrefix="license-task" value={STATUS_TAB_INDEX}>
+            {hasCompletedSearch && licenseDetails ? (
+              <LicenseDetailReceipt
+                licenseTaskId={props.task.id}
+                licenseDetails={licenseDetails}
+                onEdit={onEdit}
+              />
+            ) : (
+              <CheckLicenseStatus
+                onSubmit={onSubmit}
+                error={error}
+                isLoading={isLoading}
+                licenseTaskId={props.task.id}
+              />
+            )}
+          </TabPanel>
         </Box>
       </div>
     </NeedsAccountModalWrapper>

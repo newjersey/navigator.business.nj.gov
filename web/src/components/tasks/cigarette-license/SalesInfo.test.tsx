@@ -14,7 +14,7 @@ import { emptyCigaretteLicenseData } from "@businessnjgovnavigator/shared/cigare
 import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { SUPPLIER_NAMES } from "@/components/tasks/cigarette-license/fields/CigaretteSupplierDropdown";
@@ -23,6 +23,8 @@ import { useState } from "react";
 const Config = getMergedConfig();
 
 describe("<SalesInfo />", () => {
+  const startDateOfSalesLabel = Config.cigaretteLicenseStep3.fields.startDateOfSales.label;
+
   const renderComponent = ({
     business,
     userData,
@@ -92,11 +94,7 @@ describe("<SalesInfo />", () => {
     it("renders start date of cigarette sales field", () => {
       renderComponent();
 
-      expect(
-        screen.getByRole("textbox", {
-          name: Config.cigaretteLicenseStep3.fields.startDateOfSales.label,
-        }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("group", { name: startDateOfSalesLabel })).toBeInTheDocument();
     });
 
     it("renders cigarette suppliers dropdown", () => {
@@ -114,9 +112,7 @@ describe("<SalesInfo />", () => {
     it("renders error for Start Date of Cigarette Sales when empty on blur", async () => {
       renderComponent({});
 
-      await userEvent.click(
-        screen.getByLabelText(Config.cigaretteLicenseStep3.fields.startDateOfSales.label),
-      );
+      await userEvent.click(screen.getByRole("group", { name: startDateOfSalesLabel }));
       await userEvent.tab();
 
       expect(
@@ -127,10 +123,9 @@ describe("<SalesInfo />", () => {
     it("renders error for Start Date of Cigarette Sales when invalid date on blur", async () => {
       renderComponent({});
 
-      await userEvent.type(
-        screen.getByLabelText(Config.cigaretteLicenseStep3.fields.startDateOfSales.label),
-        "000000",
-      );
+      const startDateField = screen.getByRole("group", { name: startDateOfSalesLabel });
+      const monthInput = within(startDateField).getByRole("spinbutton", { name: "Month" });
+      await userEvent.type(monthInput, "000000");
       await userEvent.tab();
 
       expect(

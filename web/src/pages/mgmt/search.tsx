@@ -419,7 +419,9 @@ const SearchContentPage = (props: Props): ReactElement => {
         value={searchState.term}
         onChange={handleSearchInput}
         onKeyDown={(event): void => handleKeyPress(event, onSearchSubmit)}
-        inputProps={{ id: "search" }}
+        slotProps={{
+          htmlInput: { id: "search" },
+        }}
       />
       <button onClick={onSearchSubmit} className="usa-button margin-top-2 margin-bottom-4">
         Submit

@@ -141,9 +141,11 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
             value={formValues.address1}
             onChange={handleChangeForKey("address1")}
             variant="outlined"
-            inputProps={{
-              id: "address-1",
-              "data-testid": "address-1",
+            slotProps={{
+              htmlInput: {
+                id: "address-1",
+                "data-testid": "address-1",
+              },
             }}
           />
         </div>
@@ -155,9 +157,11 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
             value={formValues.address2}
             onChange={handleChangeForKey("address2")}
             variant="outlined"
-            inputProps={{
-              id: "address-2",
-              "data-testid": "address-2",
+            slotProps={{
+              htmlInput: {
+                id: "address-2",
+                "data-testid": "address-2",
+              },
             }}
           />
         </div>
@@ -185,14 +189,16 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
               value={"New Jersey"}
               onChange={(): void => {}}
               variant="outlined"
-              inputProps={{
-                id: "state",
-                "data-testid": "state",
-                style: {
-                  color: "#1b1b1b",
+              disabled
+              slotProps={{
+                htmlInput: {
+                  id: "state",
+                  "data-testid": "state",
+                  style: {
+                    color: "#1b1b1b",
+                  },
                 },
               }}
-              disabled
             />
           </div>
         </div>

@@ -48,9 +48,11 @@ export const MgmtAuth = (props: Props): ReactElement => {
         helperText={hasError ? "Authentication failed" : ""}
         onChange={handlePasswordInput}
         onKeyPress={handleKeyPress}
-        inputProps={{
-          id: "password",
-          "data-testid": "mgmt-password-field",
+        slotProps={{
+          htmlInput: {
+            id: "password",
+            "data-testid": "mgmt-password-field",
+          },
         }}
       />
       <button onClick={onSubmit} className="usa-button margin-top-2" data-testid="mgmt-submit-bttn">

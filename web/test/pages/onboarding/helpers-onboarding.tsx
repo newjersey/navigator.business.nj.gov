@@ -75,7 +75,7 @@ export type PageHelpers = {
   chooseRadio: (value: string) => void;
   clickNext: () => void;
   clickBack: () => void;
-  getDateOfFormationValue: () => string;
+  getDateOfFormationValue: () => string | undefined;
   getLegalStructureValue: () => string;
   getSectorIDValue: () => string;
   getIndustryValue: () => string;
@@ -96,8 +96,10 @@ export const createPageHelpers = (): PageHelpers => {
   };
 
   const selectDate = (label: string, value: DateObject): void => {
-    fillText(label, value.format("MM/YYYY"));
-    fireEvent.blur(screen.getByLabelText("Date of formation"));
+    screen.getByRole("group", { name: label });
+    const item = screen.getByTestId("date-dateOfFormation") as HTMLInputElement;
+    fireEvent.change(item, { target: { value: value.format("MM/YYYY") } });
+    fireEvent.blur(item);
   };
 
   const selectByValue = (label: string, value: string): void => {
@@ -124,8 +126,8 @@ export const createPageHelpers = (): PageHelpers => {
     fireEvent.click(screen.getAllByTestId("back")[0]);
   };
 
-  const getDateOfFormationValue = (): string => {
-    return (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
+  const getDateOfFormationValue = (): string | undefined => {
+    return (screen.queryByTestId("date-dateOfFormation") as HTMLInputElement | null)?.value;
   };
 
   const getSectorIDValue = (): string => {

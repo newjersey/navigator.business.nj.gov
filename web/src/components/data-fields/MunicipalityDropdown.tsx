@@ -85,11 +85,6 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
           <div className="text-field-width-default">
             <TextField
               {...params}
-              inputProps={{
-                "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
-                "data-testid": props.fieldName,
-                ...params.inputProps,
-              }}
               value={searchText}
               onChange={handleChange}
               onSubmit={props.onValidation}
@@ -102,6 +97,15 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
                 },
               }}
               required={props.required}
+              slotProps={{
+                ...params.slotProps,
+
+                htmlInput: {
+                  "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
+                  "data-testid": props.fieldName,
+                  ...params.slotProps.htmlInput,
+                },
+              }}
             />
           </div>
         );

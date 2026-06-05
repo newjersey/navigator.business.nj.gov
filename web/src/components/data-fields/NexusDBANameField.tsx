@@ -13,7 +13,7 @@ export const NexusDBANameField = (props: Props): ReactElement => {
     <ProfileDataField
       fieldName={"nexusDbaName"}
       fieldOptions={{
-        inputProps: { "data-testid": "nexusDBAName" },
+        slotProps: { htmlInput: { "data-testid": "nexusDBAName" } },
       }}
       inputWidth="default"
       {...props}

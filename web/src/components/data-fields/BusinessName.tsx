@@ -5,7 +5,7 @@ export const BusinessName = (props: Omit<ProfileDataFieldProps, "fieldName">): R
   return (
     <ProfileDataField
       fieldOptions={{
-        inputProps: { "data-testid": "businessName" },
+        slotProps: { htmlInput: { "data-testid": "businessName" } },
       }}
       {...props}
       fieldName="businessName"

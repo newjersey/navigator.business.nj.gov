@@ -1,11 +1,11 @@
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { getTabId, getTabPanelId, TabPanel } from "@/components/TabPanel";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { templateEval } from "@/lib/utils/helpers";
 import { Certification, Funding } from "@businessnjgovnavigator/shared/types";
-import { TabContext, TabList, TabPanel } from "@mui/lab/";
-import Tab from "@mui/material/Tab";
+import { Tab, Tabs } from "@mui/material";
 import * as React from "react";
 import { ReactElement, ReactNode, useEffect } from "react";
 
@@ -85,41 +85,48 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
           {props.aboveTabs}
           <hr />
         </div>
-        <TabContext value={tabIndex.toString()}>
-          <div className="border radius-lg border-base-lighter bg-base-extra-light margin-top-3 padding-1">
-            <TabList
-              onChange={handleChange}
-              aria-label="Dashboard Tabs"
-              variant="fullWidth"
-              sx={tabStyling}
-            >
-              <Tab
-                label={Config.dashboardDefaults.mobileFirstTabText}
-                value={DASHBOARD_TAB.toString()}
-                sx={tabIndex === DASHBOARD_TAB ? selectedButtonStyling : unselectedButtonStyling}
-              />
-              <Tab
-                data-testid="for-you-tab"
-                label={
-                  <div className="fdr fjc">
-                    {templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-                      count: getForYouCardCount(
-                        business,
-                        props.certifications,
-                        props.fundings,
-                      ).toString(),
-                    })}
-                    {getIndicator()}
-                  </div>
-                }
-                value={FOR_YOU_TAB.toString()}
-                sx={tabIndex === FOR_YOU_TAB ? selectedButtonStyling : unselectedButtonStyling}
-              />
-            </TabList>
-          </div>
-          <TabPanel value="0">{props.firstTab}</TabPanel>
-          <TabPanel value="1">{props.secondTab}</TabPanel>
-        </TabContext>
+        <div className="border radius-lg border-base-lighter bg-base-extra-light margin-top-3 padding-1">
+          <Tabs
+            onChange={handleChange}
+            aria-label="Dashboard Tabs"
+            variant="fullWidth"
+            value={tabIndex}
+            sx={tabStyling}
+          >
+            <Tab
+              aria-controls={getTabPanelId("dashboard", DASHBOARD_TAB)}
+              id={getTabId("dashboard", DASHBOARD_TAB)}
+              label={Config.dashboardDefaults.mobileFirstTabText}
+              value={DASHBOARD_TAB}
+              sx={tabIndex === DASHBOARD_TAB ? selectedButtonStyling : unselectedButtonStyling}
+            />
+            <Tab
+              aria-controls={getTabPanelId("dashboard", FOR_YOU_TAB)}
+              data-testid="for-you-tab"
+              id={getTabId("dashboard", FOR_YOU_TAB)}
+              label={
+                <div className="fdr fjc">
+                  {templateEval(Config.dashboardDefaults.mobileSecondTabText, {
+                    count: getForYouCardCount(
+                      business,
+                      props.certifications,
+                      props.fundings,
+                    ).toString(),
+                  })}
+                  {getIndicator()}
+                </div>
+              }
+              value={FOR_YOU_TAB}
+              sx={tabIndex === FOR_YOU_TAB ? selectedButtonStyling : unselectedButtonStyling}
+            />
+          </Tabs>
+        </div>
+        <TabPanel activeValue={tabIndex} idPrefix="dashboard" value={DASHBOARD_TAB}>
+          {props.firstTab}
+        </TabPanel>
+        <TabPanel activeValue={tabIndex} idPrefix="dashboard" value={FOR_YOU_TAB}>
+          {props.secondTab}
+        </TabPanel>
       </SingleColumnContainer>
     </div>
   );

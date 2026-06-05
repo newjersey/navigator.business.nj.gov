@@ -4,7 +4,6 @@ import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import TabPanel from "@mui/lab/TabPanel";
 import { ReactNode } from "react";
 
 export const XrayTabZero = (props: {
@@ -20,7 +19,7 @@ export const XrayTabZero = (props: {
   ctaSecondaryOnClick: () => void;
 }): ReactNode => {
   return (
-    <TabPanel value="0">
+    <>
       <div className="margin-top-3">
         <Content>{props.xrayContent.summaryMd || ""}</Content>
         <Content>{props.xrayContent.contentMd}</Content>
@@ -48,6 +47,6 @@ export const XrayTabZero = (props: {
           </PrimaryButton>
         </ActionBarLayout>
       </CtaContainer>
-    </TabPanel>
+    </>
   );
 };

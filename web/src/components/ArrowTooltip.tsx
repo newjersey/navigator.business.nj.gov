@@ -1,26 +1,30 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import { ClickAwayListener, Theme, Tooltip, TooltipProps, useMediaQuery } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {
+  ClickAwayListener,
+  Tooltip,
+  tooltipClasses,
+  TooltipProps,
+  useMediaQuery,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { ReactElement, useState } from "react";
 
-const useStylesBootstrap = makeStyles((theme: Theme) => {
-  return {
-    arrow: {
-      color: theme.palette.common.black,
-    },
-    tooltip: {
-      backgroundColor: theme.palette.common.black,
-      fontSize: "1em",
-      padding: ".5em .75em",
-    },
-  };
-});
+const NavigatorTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.arrow}`]: {
+    color: theme.palette.common.black,
+  },
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.black,
+    fontSize: "1em",
+    padding: ".5em .75em",
+  },
+}));
 
 export const ArrowTooltip = (props: TooltipProps): ReactElement => {
-  const classes = useStylesBootstrap();
-
   const isMobile = useMediaQuery(MediaQueries.isMobile);
 
   const [open, setOpen] = useState(false);
@@ -30,13 +34,14 @@ export const ArrowTooltip = (props: TooltipProps): ReactElement => {
       {isMobile ? (
         <ClickAwayListener onClickAway={(): void => setOpen(false)}>
           <div className="display-flex">
-            <Tooltip
+            <NavigatorTooltip
               arrow
               enterTouchDelay={0}
-              classes={classes}
               onOpen={analytics.event.tooltip.mouseover.view_tooltip}
-              PopperProps={{
-                disablePortal: true,
+              slotProps={{
+                popper: {
+                  disablePortal: true,
+                },
               }}
               onClose={(): void => setOpen(false)}
               open={open}
@@ -50,14 +55,13 @@ export const ArrowTooltip = (props: TooltipProps): ReactElement => {
                   {props.children}
                 </UnStyledButton>
               </div>
-            </Tooltip>
+            </NavigatorTooltip>
           </div>
         </ClickAwayListener>
       ) : (
-        <Tooltip
+        <NavigatorTooltip
           arrow
           enterTouchDelay={0}
-          classes={classes}
           {...props}
           onOpen={analytics.event.tooltip.mouseover.view_tooltip}
         />

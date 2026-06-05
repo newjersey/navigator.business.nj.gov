@@ -1,3 +1,4 @@
+/* global process */
 import { lighthouse, prepareAudit } from "@cypress-audit/lighthouse";
 import { pa11y } from "@cypress-audit/pa11y";
 import { defineConfig } from "cypress";
@@ -43,6 +44,8 @@ export default defineConfig({
       });
 
       config = dotenvPlugin(config);
+      config.env.ADMIN_PASSWORD =
+        process.env.ADMIN_PASSWORD || config.env.ADMIN_PASSWORD || "Test1!";
       return config;
     },
     baseUrl: "http://localhost:3000",

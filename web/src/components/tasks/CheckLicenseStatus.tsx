@@ -12,20 +12,14 @@ import {
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LicenseSearchError } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
-import createStyles from "@mui/styles/createStyles";
-import makeStyles from "@mui/styles/makeStyles";
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 
-const useStyles = makeStyles(() => {
-  return createStyles({
-    zipCodeField: {
-      "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-        {
-          display: "none",
-        },
+const numberTextFieldSx = {
+  "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+    {
+      display: "none",
     },
-  });
-});
+};
 
 interface Props {
   onSubmit: (nameAndAddress: LicenseSearchNameAndAddress) => void;
@@ -42,7 +36,6 @@ const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
 };
 
 export const CheckLicenseStatus = (props: Props): ReactElement => {
-  const classes = useStyles();
   const [formValues, setFormValues] = useState<LicenseSearchNameAndAddress>(
     createEmptyLicenseSearchNameAndAddress(),
   );
@@ -133,9 +126,11 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
             value={formValues.name}
             onChange={handleChangeForKey("name")}
             variant="outlined"
-            inputProps={{
-              id: "business-name",
-              "data-testid": "business-name",
+            slotProps={{
+              htmlInput: {
+                id: "business-name",
+                "data-testid": "business-name",
+              },
             }}
           />
         </div>
@@ -147,9 +142,11 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
             value={formValues.addressLine1}
             onChange={handleChangeForKey("addressLine1")}
             variant="outlined"
-            inputProps={{
-              id: "address-1",
-              "data-testid": "address-1",
+            slotProps={{
+              htmlInput: {
+                id: "address-1",
+                "data-testid": "address-1",
+              },
             }}
           />
         </div>
@@ -161,9 +158,11 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
             value={formValues.addressLine2}
             onChange={handleChangeForKey("addressLine2")}
             variant="outlined"
-            inputProps={{
-              id: "address-2",
-              "data-testid": "address-2",
+            slotProps={{
+              htmlInput: {
+                id: "address-2",
+                "data-testid": "address-2",
+              },
             }}
           />
         </div>
@@ -176,12 +175,14 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
               value={formValues.zipCode}
               onChange={handleChangeForKey("zipCode")}
               variant="outlined"
-              inputProps={{
-                id: "zipcode",
-                "data-testid": "zipcode",
-                type: "number",
+              sx={numberTextFieldSx}
+              slotProps={{
+                htmlInput: {
+                  id: "zipcode",
+                  "data-testid": "zipcode",
+                  type: "number",
+                },
               }}
-              className={`${classes.zipCodeField}`}
             />
           </div>
           <div className="flex-half padding-left-1">
@@ -192,14 +193,16 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
               value={"New Jersey"}
               onChange={(): void => {}}
               variant="outlined"
-              inputProps={{
-                id: "state",
-                "data-testid": "state",
-                style: {
-                  color: "#1b1b1b",
+              disabled
+              slotProps={{
+                htmlInput: {
+                  id: "state",
+                  "data-testid": "state",
+                  style: {
+                    color: "#1b1b1b",
+                  },
                 },
               }}
-              disabled
             />
           </div>
         </div>

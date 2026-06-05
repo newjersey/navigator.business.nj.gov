@@ -112,11 +112,6 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
           return (
             <TextField
               {...params}
-              inputProps={{
-                "aria-label": "Sector",
-                "data-testid": "sectorId",
-                ...params.inputProps,
-              }}
               onBlur={onValidation}
               onSubmit={onValidation}
               value={searchText}
@@ -124,6 +119,15 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
               variant="outlined"
               error={isFormFieldInvalid}
               helperText={isFormFieldInvalid ? contentFromConfig.errorTextRequired : ""}
+              slotProps={{
+                ...params.slotProps,
+
+                htmlInput: {
+                  "aria-label": "Sector",
+                  "data-testid": "sectorId",
+                  ...params.slotProps.htmlInput,
+                },
+              }}
             />
           );
         }}

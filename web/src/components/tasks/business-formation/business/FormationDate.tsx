@@ -16,11 +16,10 @@ import {
   getCurrentDateInNewJersey,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
-import { TextField } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { ReactElement, useContext, useMemo } from "react";
+import { ChangeEvent, InputHTMLAttributes, ReactElement, useContext, useMemo } from "react";
 
 advancedDateLibrary();
 type Props = {
@@ -81,6 +80,11 @@ export const FormationDate = (props: Props): ReactElement => {
     });
   };
 
+  const handleTextInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const parsedDate = parseDateWithFormat(event.target.value, dateFormat);
+    handleChange(parsedDate.isValid() ? parsedDate.format(defaultDateFormat) : event.target.value);
+  };
+
   const getMinDate = (): dayjs.Dayjs | undefined => {
     const startDate = dayjs(getCurrentDateInNewJersey().format(dateFormat));
     return props.fieldName === "businessStartDate" ? startDate : undefined;
@@ -113,7 +117,7 @@ export const FormationDate = (props: Props): ReactElement => {
                   )
                 : null
             }
-            inputFormat={dateFormat}
+            format={dateFormat}
             onChange={(newValue: DateObject | null): void => {
               if (newValue) {
                 handleChange(newValue.format(defaultDateFormat));
@@ -122,33 +126,31 @@ export const FormationDate = (props: Props): ReactElement => {
                 handleChange("");
               }
             }}
-            renderInput={(params): JSX.Element => {
-              return (
-                <div className="width-100">
-                  <TextField
-                    {...params}
-                    variant="outlined"
-                    error={doesFieldHaveError(props.fieldName)}
-                    onBlur={(): void => {
-                      setFieldsInteracted([props.fieldName]);
-                    }}
-                    helperText={
-                      doesFieldHaveError(props.fieldName) &&
-                      contentProps[props.fieldName].helperText
-                    }
-                    sx={{
-                      svg: { fill: "#4b7600" },
-                    }}
-                    required
-                    inputProps={{
-                      ...params.inputProps,
-                      placeholder: "",
-                      "aria-label": camelCaseToSentence(props.fieldName),
-                      "data-testid": `date-${props.fieldName}`,
-                    }}
-                  />
-                </div>
-              );
+            slotProps={{
+              textField: {
+                className: "width-100",
+                error: doesFieldHaveError(props.fieldName),
+                helperText:
+                  doesFieldHaveError(props.fieldName) && contentProps[props.fieldName].helperText,
+                slotProps: {
+                  input: {
+                    "aria-label": camelCaseToSentence(props.fieldName),
+                  },
+                  htmlInput: {
+                    onChange: handleTextInputChange,
+                    placeholder: "",
+                    "data-testid": `date-${props.fieldName}`,
+                  } as InputHTMLAttributes<HTMLInputElement> & Record<"data-testid", string>,
+                },
+                onBlur: (): void => {
+                  setFieldsInteracted([props.fieldName]);
+                },
+                required: true,
+                sx: {
+                  svg: { fill: "#4b7600" },
+                },
+                variant: "outlined",
+              },
             }}
           />
         </LocalizationProvider>

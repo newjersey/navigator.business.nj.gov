@@ -526,10 +526,13 @@ describe("profile-foreign", () => {
           }),
         });
 
-        fireEvent.change(screen.getByLabelText("Date of formation"), {
+        screen.getByRole("group", { name: "Date of formation" });
+        const dateOfFormation = screen.getByTestId("date-dateOfFormation") as HTMLInputElement;
+
+        fireEvent.change(dateOfFormation, {
           target: { value: "09/2025" },
         });
-        fireEvent.blur(screen.getByLabelText("Date of formation"));
+        fireEvent.blur(dateOfFormation);
         expect(
           screen.queryByText(
             Config.profileDefaults.fields.dateOfFormation.default.errorTextRequired,

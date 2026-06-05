@@ -22,7 +22,7 @@ import {
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -358,10 +358,8 @@ describe("onboarding - foreign business", () => {
       });
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
-      fireEvent.change(screen.getByLabelText("Industry"), {
-        target: { value: secondIndustryId },
-      });
-      fireEvent.click(screen.getByText("Acupuncture"));
+      fireEvent.mouseDown(screen.getByLabelText("Industry"));
+      fireEvent.click(within(screen.getByRole("listbox")).getByTestId(secondIndustryId));
       page.clickNext();
       await waitFor(() => {
         expect(currentBusiness().profileData.homeBasedBusiness).toBe(false);

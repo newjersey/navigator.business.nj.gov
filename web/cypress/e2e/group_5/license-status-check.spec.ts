@@ -37,6 +37,6 @@ describe("License Status Check [feature] [all] [group5]", () => {
     fillOutLicenseStatusCheckForm(checkStatusFormData);
 
     cy.get('[data-testid="check-status-submit"]').click();
-    cy.contains("Permit Status:");
+    cy.contains("Permit Status:").should("be.visible");
   });
 });

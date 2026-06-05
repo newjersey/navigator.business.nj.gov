@@ -6,9 +6,8 @@ import { templateEval } from "@/lib/utils/helpers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
-import createStyles from "@mui/styles/createStyles";
-import makeStyles from "@mui/styles/makeStyles";
 import {
+  type CSSProperties,
   type ChangeEvent,
   type FormEvent,
   type ReactElement,
@@ -29,20 +28,17 @@ export interface CrtkFacilityDetails {
 
 export type CrtkSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
-const useStyles = makeStyles(() => {
-  return createStyles({
-    zipCodeField: {
-      "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-        {
-          display: "none",
-        },
+const errorFieldStyle: CSSProperties = {
+  borderLeft: "4px solid #b50909",
+  paddingLeft: "0.5rem",
+};
+
+const numberTextFieldSx = {
+  "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+    {
+      display: "none",
     },
-    errorField: {
-      borderLeft: "4px solid #b50909",
-      paddingLeft: "0.5rem",
-    },
-  });
-});
+};
 
 interface Props {
   onSubmit: (facilityDetails: CrtkFacilityDetails) => Promise<void>;
@@ -69,7 +65,6 @@ const CrtkErrorLookup: Record<CrtkSearchError, string> = {
 };
 
 export const CrtkStatus = (props: Props): ReactElement => {
-  const classes = useStyles();
   const [formValues, setFormValues] = useState<CrtkFacilityDetails>({
     businessName: "",
     businessStreetAddress: "",
@@ -283,8 +278,9 @@ export const CrtkStatus = (props: Props): ReactElement => {
 
         <form onSubmit={onSubmit}>
           <div
-            className={`margin-bottom-2 ${fieldErrors.businessName ? classes.errorField : ""}`}
+            className="margin-bottom-2"
             id="question-business-name"
+            style={fieldErrors.businessName ? errorFieldStyle : undefined}
           >
             <label className="text-bold" htmlFor="business-name">
               {Config.crtkTask.businessNameLabel}
@@ -293,19 +289,22 @@ export const CrtkStatus = (props: Props): ReactElement => {
               value={formValues?.businessName}
               onChange={handleChangeForKey("businessName")}
               variant="outlined"
-              inputProps={{
-                id: "business-name",
-                "data-testid": "business-name",
-              }}
               onBlur={handleBlurForKey("businessName")}
               error={!!fieldErrors.businessName}
               helperText={fieldErrors.businessName}
+              slotProps={{
+                htmlInput: {
+                  id: "business-name",
+                  "data-testid": "business-name",
+                },
+              }}
             />
           </div>
 
           <div
-            className={`margin-bottom-2 ${fieldErrors.businessStreetAddress ? classes.errorField : ""}`}
+            className="margin-bottom-2"
             id="question-business-street-address"
+            style={fieldErrors.businessStreetAddress ? errorFieldStyle : undefined}
           >
             <label className="text-bold" htmlFor="business-street-address">
               {Config.crtkTask.businessStreetAddressLabel}
@@ -314,17 +313,22 @@ export const CrtkStatus = (props: Props): ReactElement => {
               value={formValues?.businessStreetAddress}
               onChange={handleChangeForKey("businessStreetAddress")}
               variant="outlined"
-              inputProps={{
-                id: "business-street-address",
-                "data-testid": "business-street-address",
-              }}
               onBlur={handleBlurForKey("businessStreetAddress")}
               error={!!fieldErrors.businessStreetAddress}
               helperText={fieldErrors.businessStreetAddress}
+              slotProps={{
+                htmlInput: {
+                  id: "business-street-address",
+                  "data-testid": "business-street-address",
+                },
+              }}
             />
           </div>
 
-          <div className={`fdr margin-bottom-2 ${fieldErrors.zip ? classes.errorField : ""}`}>
+          <div
+            className="fdr margin-bottom-2"
+            style={fieldErrors.zip ? errorFieldStyle : undefined}
+          >
             <div className={`flex-1 padding-right-1 `}>
               <div id="question-city">
                 <label className="text-bold" htmlFor="city">
@@ -334,13 +338,15 @@ export const CrtkStatus = (props: Props): ReactElement => {
                   value={formValues?.city}
                   onChange={handleChangeForKey("city")}
                   variant="outlined"
-                  inputProps={{
-                    id: "city",
-                    "data-testid": "city",
-                  }}
                   onBlur={handleBlurForKey("city")}
                   error={!!fieldErrors.city}
                   helperText={fieldErrors.city}
+                  slotProps={{
+                    htmlInput: {
+                      id: "city",
+                      "data-testid": "city",
+                    },
+                  }}
                 />
               </div>
             </div>
@@ -353,14 +359,16 @@ export const CrtkStatus = (props: Props): ReactElement => {
                   value={"NJ"}
                   onChange={(): void => {}}
                   variant="outlined"
-                  inputProps={{
-                    id: "state",
-                    "data-testid": "state",
-                    style: {
-                      color: "#1b1b1b",
+                  disabled
+                  slotProps={{
+                    htmlInput: {
+                      id: "state",
+                      "data-testid": "state",
+                      style: {
+                        color: "#1b1b1b",
+                      },
                     },
                   }}
-                  disabled
                 />
               </div>
             </div>
@@ -373,15 +381,17 @@ export const CrtkStatus = (props: Props): ReactElement => {
                   value={formValues?.zip}
                   onChange={handleChangeForKey("zip")}
                   variant="outlined"
-                  inputProps={{
-                    id: "zip",
-                    "data-testid": "zip",
-                    maxLength: 5,
-                  }}
-                  className={classes.zipCodeField}
+                  sx={numberTextFieldSx}
                   onBlur={handleBlurForKey("zip")}
                   error={!!fieldErrors.zip}
                   helperText={fieldErrors.zip}
+                  slotProps={{
+                    htmlInput: {
+                      id: "zip",
+                      "data-testid": "zip",
+                      maxLength: 5,
+                    },
+                  }}
                 />
               </div>
             </div>
@@ -400,9 +410,11 @@ export const CrtkStatus = (props: Props): ReactElement => {
               value={formValues?.ein}
               onChange={handleChangeForKey("ein")}
               variant="outlined"
-              inputProps={{
-                id: "ein",
-                "data-testid": "ein",
+              slotProps={{
+                htmlInput: {
+                  id: "ein",
+                  "data-testid": "ein",
+                },
               }}
             />
           </div>

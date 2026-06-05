@@ -186,11 +186,15 @@ export const ActivitiesForm = (props: Props): ReactElement => {
                 maxRows: 20,
                 className: "override-padding",
                 error: businessActivitiesError,
-                inputProps: {
-                  maxLength: 600,
-                  minLength: 20,
-                  sx: {
-                    padding: "1rem",
+                slotProps: {
+                  htmlInput: {
+                    maxLength: 600,
+                    minLength: 20,
+                  },
+                  input: {
+                    sx: {
+                      padding: "1rem",
+                    },
                   },
                 },
                 helperText: Config?.crtkTask?.characterCountHelper,
@@ -218,11 +222,15 @@ export const ActivitiesForm = (props: Props): ReactElement => {
                 minRows: 3,
                 maxRows: 20,
                 className: "override-padding",
-                inputProps: {
-                  maxLength: 600,
-                  minLength: 20,
-                  sx: {
-                    padding: "1rem",
+                slotProps: {
+                  htmlInput: {
+                    maxLength: 600,
+                    minLength: 20,
+                  },
+                  input: {
+                    sx: {
+                      padding: "1rem",
+                    },
                   },
                 },
                 error: materialsError,

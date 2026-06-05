@@ -14,6 +14,7 @@ import {
   FocusEvent,
   forwardRef,
   HTMLInputTypeAttribute,
+  InputHTMLAttributes,
   ReactElement,
   RefObject,
   useMemo,
@@ -135,7 +136,13 @@ export const GenericTextField = forwardRef(
       };
       fieldOptions = {
         ...fieldOptions,
-        inputProps: { ...fieldOptions?.inputProps, inputMode: "numeric" },
+        slotProps: {
+          ...fieldOptions?.slotProps,
+          htmlInput: {
+            ...fieldOptions?.slotProps?.htmlInput,
+            inputMode: "numeric",
+          },
+        },
       };
     }
 
@@ -163,6 +170,13 @@ export const GenericTextField = forwardRef(
     };
 
     const error = props.error ?? isFormFieldInvalid;
+    const fieldSlotProps = fieldOptions?.slotProps as
+      | {
+          htmlInput?: InputHTMLAttributes<HTMLInputElement>;
+          input?: Partial<OutlinedInputProps>;
+        }
+      | undefined;
+
     return (
       <div className={`${widthStyling} ${props.className ?? ""} ${error ? "error" : ""}`}>
         <TextField
@@ -179,26 +193,30 @@ export const GenericTextField = forwardRef(
           disabled={props.disabled}
           {...fieldOptions}
           sx={{ width: 1, ...fieldOptions?.sx }}
-          inputProps={{
-            readOnly: props.readOnly,
-            "aria-readonly": props.readOnly,
-            className: `${props.readOnly ? "bg-base-lightest" : ""}`,
-            ...fieldOptions?.inputProps,
-            "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
-            tabIndex: 0,
-          }}
-          InputProps={{
-            readOnly: props.readOnly,
-            "aria-readonly": props.readOnly,
-            className: `${props.readOnly ? "bg-base-lightest" : ""}`,
-            ...props.inputProps,
-          }}
           required={props.required}
           type={props.type}
           onFocus={props.onFocus}
           onKeyDown={props.onKeyDown}
-        />
+          slotProps={{
+            ...fieldSlotProps,
+            input: {
+              ...fieldSlotProps?.input,
+              readOnly: props.readOnly,
+              "aria-readonly": props.readOnly,
+              className: `${props.readOnly ? "bg-base-lightest" : ""}`,
+              ...props.inputProps,
+            },
 
+            htmlInput: {
+              ...fieldSlotProps?.htmlInput,
+              readOnly: props.readOnly,
+              "aria-readonly": props.readOnly,
+              className: `${props.readOnly ? "bg-base-lightest" : ""}`,
+              "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
+              tabIndex: 0,
+            },
+          }}
+        />
         <div aria-live="polite" className="screen-reader-only">
           {error && (
             <div>{`${

@@ -100,6 +100,14 @@ export const renderPage = ({
 };
 
 export const fillText = (label: string, value: string, selector?: string): void => {
+  if (label === "Date of formation" && !selector) {
+    screen.getByRole("group", { name: "Date of formation" });
+    const dateOfFormation = screen.getByTestId("date-dateOfFormation") as HTMLInputElement;
+    fireEvent.change(dateOfFormation, { target: { value: value } });
+    fireEvent.blur(dateOfFormation);
+    return;
+  }
+
   const options = selector ? { selector } : undefined;
   const element = screen.getByLabelText(label, options);
 
@@ -144,8 +152,8 @@ export const getEntityIdValue = (): string => {
   return (screen.queryByLabelText("Entity id") as HTMLInputElement)?.value;
 };
 
-export const getDateOfFormation = (): string => {
-  return (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
+export const getDateOfFormation = (): string | undefined => {
+  return (screen.queryByTestId("date-dateOfFormation") as HTMLInputElement | null)?.value;
 };
 
 export const getNotesValue = (): string => {

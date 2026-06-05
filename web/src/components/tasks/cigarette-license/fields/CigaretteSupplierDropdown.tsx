@@ -12,7 +12,7 @@ import {
   Checkbox,
   TextField,
 } from "@mui/material";
-import { HTMLAttributes, ReactElement, SyntheticEvent, useContext } from "react";
+import { HTMLAttributes, Key, ReactElement, SyntheticEvent, useContext } from "react";
 
 const SUPPLIERS = [
   { licenseNumber: 501, name: "A TRENK, INC" },
@@ -162,7 +162,7 @@ export const CigaretteSupplierDropdown = (props: Props): ReactElement => {
 
   const renderOption = (
     props: HTMLAttributes<HTMLLIElement> & {
-      key: string;
+      key: Key;
     },
     option: string,
     { selected }: AutocompleteRenderOptionState,
