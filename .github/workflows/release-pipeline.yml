@@ -96,7 +96,7 @@ jobs:
           echo "COGNITO_USER_POOL_ID=${{ secrets.COGNITO_USER_POOL_ID_PROD }}" >> $GITHUB_ENV
           echo "COGNITO_WEB_CLIENT_ID=${{ secrets.COGNITO_WEB_CLIENT_ID_PROD }}" >> $GITHUB_ENV
           echo "COGNITO_UNAUTH_ROLE_ARN=${{ vars.COGNITO_UNAUTH_ROLE_ARN }}" >> $GITHUB_ENV
-          echo "COGNITO_AUTH_ROLE_ARN: ${{ vars.COGNITO_AUTH_ROLE_ARN }}" >> $GITHUB_ENV
+          echo "COGNITO_AUTH_ROLE_ARN= ${{ vars.COGNITO_AUTH_ROLE_ARN }}" >> $GITHUB_ENV
 
 
           echo "FORMATION_API_ACCOUNT=${{ secrets.FORMATION_API_ACCOUNT_PROD }}" >> $GITHUB_ENV
