@@ -1,3 +1,10 @@
+## [2026.13.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.13.1...v2026.13.2) (2026-06-05)
+
+
+### Bug Fixes
+
+* correct authRole in prod ([292ca7f](https://github.com/newjersey/navigator.business.nj.gov/commit/292ca7f2133351e513b94bdf50a72bbe8dd879ce))
+
 ## [2026.13.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.13.0...v2026.13.1) (2026-06-05)
 
 
