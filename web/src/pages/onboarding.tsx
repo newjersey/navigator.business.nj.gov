@@ -1,4 +1,3 @@
-import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
@@ -7,6 +6,7 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
 import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPreviousBusinessBar";
 import { CssTransition } from "@/components/transitions/CssTransition";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthContext } from "@/contexts/authContext";
 import {
   createDataFormErrorMap,
@@ -14,8 +14,6 @@ import {
 } from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { MediaQueries } from "@/lib/PageSizes";
-import { UpdateQueue } from "@/lib/UpdateQueue";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -31,6 +29,8 @@ import {
   ROUTES,
   routeShallowWithQuery,
 } from "@/lib/domain-logic/routes";
+import { MediaQueries } from "@/lib/PageSizes";
+import { UpdateQueue } from "@/lib/UpdateQueue";
 import analytics from "@/lib/utils/analytics";
 import {
   sendOnboardingOnSubmitEvents,
@@ -417,9 +417,14 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
       sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
-      setAnalyticsDimensions(newProfileData);
 
-      if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {
+      updateQueue.queueProfileData(newProfileData);
+      setAnalyticsDimensions(updateQueue.current());
+
+      const isForeignBusinessTypeUnsupported =
+        determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE";
+      const hasMoreOnboardingPages = page.current + 1 <= onboardingFlows[currentFlow].pages.length;
+      if (isForeignBusinessTypeUnsupported) {
         router &&
           (await router.push({
             pathname: ROUTES.unsupported,
@@ -430,8 +435,8 @@ const OnboardingPage = (props: Props): ReactElement => {
                 }
               : {},
           }));
-      } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
-        await updateQueue.queueProfileData(newProfileData).update({ local: true });
+      } else if (hasMoreOnboardingPages) {
+        await updateQueue.update({ local: true });
         const nextPage = page.current + 1;
         setPage({
           current: nextPage,

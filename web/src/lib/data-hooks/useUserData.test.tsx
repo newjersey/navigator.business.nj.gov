@@ -159,20 +159,33 @@ describe("useUserData", () => {
         return updateQueue?.queueProfileData({ businessName: "some new name" }).update();
       });
 
-      const expectedProfileData = {
-        ...newUserData.businesses[newUserData.currentBusinessId].profileData,
-        businessName: "some new name",
+      const expectedBusiness = {
+        ...newUserData.businesses[newUserData.currentBusinessId],
+        profileData: {
+          ...newUserData.businesses[newUserData.currentBusinessId].profileData,
+          businessName: "some new name",
+        },
+      };
+
+      const expectedFullUserData = {
+        ...newUserData,
+        businesses: {
+          ...newUserData.businesses,
+          [newUserData.currentBusinessId]: expectedBusiness,
+        },
       };
 
       await waitFor(() => {
         return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(
-          expectedProfileData,
+          expectedBusiness.profileData,
           roadmapTask,
           expect.stringMatching(/^Experience[AB]$/),
         );
       });
       expect(mockSetRoadmap).toHaveBeenCalledWith(returnedRoadmap);
-      expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(expectedProfileData);
+      expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(
+        expectedFullUserData,
+      );
     });
 
     it("updates data from api when calling refresh", async () => {

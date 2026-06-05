@@ -22,7 +22,7 @@ type RegistrationProgress =
   | "Fully Registered";
 
 export const setOnLoadDimensions = (userData: UserData): void => {
-  setAnalyticsDimensions(getCurrentBusiness(userData).profileData, true);
+  setAnalyticsDimensions(userData, true);
   setUserId(userData.user.id, true);
   setABExperienceDimension(userData.user.abExperience);
 };
@@ -89,7 +89,10 @@ export const phaseChangeAnalytics = ({
   }
 };
 
-export const setAnalyticsDimensions = (profileData: ProfileData, queue = false): void => {
+export const setAnalyticsDimensions = (userData: UserData, queue = false): void => {
+  const profileData = getCurrentBusiness(userData).profileData;
+
+  analytics.dimensions.currentBusinessId(userData.currentBusinessId);
   analytics.dimensions.industry(profileData.industryId);
   analytics.dimensions.municipality(profileData.municipality?.displayName);
   analytics.dimensions.legalStructure(profileData.legalStructureId);
