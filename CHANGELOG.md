@@ -1,3 +1,10 @@
+## [2026.13.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.13.0...v2026.13.1) (2026-06-05)
+
+
+### Bug Fixes
+
+* load all page content regardless of ordering continuity ([7f16ddd](https://github.com/newjersey/navigator.business.nj.gov/commit/7f16ddd5a6d1ae0379c8c9c8b90a129c8406b0fe))
+
 # [2026.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.12.1...v2026.13.0) (2026-06-03)
 
 
