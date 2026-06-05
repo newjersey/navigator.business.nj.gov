@@ -1,6 +1,6 @@
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import * as fs from "node:fs";
-import { Stack, StackProps } from "aws-cdk-lib";
+import { RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
 import {
   COGNITO_DOMAIN_NAME,
@@ -139,13 +139,15 @@ export class CognitoStack extends Stack {
         },
       ],
     });
-
-    new cognito.CfnUserPoolDomain(this, "UserPoolDomain", {
+    userPool.applyRemovalPolicy(RemovalPolicy.RETAIN);
+    const userpoolDomain = new cognito.CfnUserPoolDomain(this, "UserPoolDomain", {
       domain: domainName,
       userPoolId: userPool.ref,
     });
 
-    new cognito.CfnUserPoolClient(this, "UserPoolClient", {
+    userpoolDomain.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
+    const userPoolClient = new cognito.CfnUserPoolClient(this, "UserPoolClient", {
       clientName: COGNITO_USERPOOL_CLIENT_NAME,
       userPoolId: userPool.ref,
       callbackUrLs: callbackUrls,
@@ -159,6 +161,7 @@ export class CognitoStack extends Stack {
       allowedOAuthScopes: ["aws.cognito.signin.user.admin", "email", "openid", "profile"],
     });
 
+    userPoolClient.applyRemovalPolicy(RemovalPolicy.RETAIN);
     const myNJidentityProvider = new cognito.CfnUserPoolIdentityProvider(
       this,
       "CognitoIdentityProvider",
@@ -180,6 +183,7 @@ export class CognitoStack extends Stack {
       },
     );
 
+    myNJidentityProvider.applyRemovalPolicy(RemovalPolicy.RETAIN);
     const userpoolWebClient = new cognito.CfnUserPoolClient(this, "UserPoolWebClient", {
       clientName: webClientName,
       userPoolId: userPool.ref,
@@ -199,6 +203,8 @@ export class CognitoStack extends Stack {
       },
     });
 
+    userpoolWebClient.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
     const identityPool = new cognito.CfnIdentityPool(this, "IdentityPool", {
       identityPoolName: `${COGNITO_USERPOOL_NAME}-${props.stage}`,
       allowUnauthenticatedIdentities: false,
@@ -212,12 +218,18 @@ export class CognitoStack extends Stack {
       ],
     });
 
-    new cognito.CfnIdentityPoolRoleAttachment(this, "IdentityPoolRoleAttachment", {
-      identityPoolId: identityPool.ref,
-      roles: {
-        authenticated: props.authRoleArn,
-        unauthenticated: props.unAuthRoleArn,
+    identityPool.applyRemovalPolicy(RemovalPolicy.RETAIN);
+    const identityPoolAttachment = new cognito.CfnIdentityPoolRoleAttachment(
+      this,
+      "IdentityPoolRoleAttachment",
+      {
+        identityPoolId: identityPool.ref,
+        roles: {
+          authenticated: props.authRoleArn,
+          unauthenticated: props.unAuthRoleArn,
+        },
       },
-    });
+    );
+    identityPoolAttachment.applyRemovalPolicy(RemovalPolicy.RETAIN);
   }
 }
