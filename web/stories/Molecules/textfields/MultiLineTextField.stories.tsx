@@ -48,10 +48,14 @@ const Template = () => {
             minRows: 3,
             maxRows: 20,
             className: "override-padding",
-            inputProps: {
-              maxLength: 500,
-              sx: {
-                padding: "1rem",
+            slotProps: {
+              htmlInput: {
+                maxLength: 500,
+              },
+              input: {
+                sx: {
+                  padding: "1rem",
+                },
               },
             },
           }}
@@ -70,10 +74,14 @@ const Template = () => {
               minRows: 3,
               maxRows: 20,
               className: "override-padding",
-              inputProps: {
-                maxLength: 500,
-                sx: {
-                  padding: "1rem",
+              slotProps: {
+                htmlInput: {
+                  maxLength: 500,
+                },
+                input: {
+                  sx: {
+                    padding: "1rem",
+                  },
                 },
               },
             }}

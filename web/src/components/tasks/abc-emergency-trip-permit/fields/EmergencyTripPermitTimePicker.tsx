@@ -114,11 +114,6 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
                 fullWidth
                 id={props.fieldName}
                 name={props.fieldName}
-                inputProps={{
-                  "aria-label": camelCaseToSentence(props.fieldName),
-                  "data-testid": props.fieldName,
-                  ...params.inputProps,
-                }}
                 autoComplete={"true"}
                 variant="outlined"
                 onClick={(): void => {
@@ -126,6 +121,15 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
                 }}
                 error={false}
                 helperText={false}
+                slotProps={{
+                  ...params.slotProps,
+
+                  htmlInput: {
+                    "aria-label": camelCaseToSentence(props.fieldName),
+                    "data-testid": props.fieldName,
+                    ...params.slotProps.htmlInput,
+                  },
+                }}
               />
             );
           }}

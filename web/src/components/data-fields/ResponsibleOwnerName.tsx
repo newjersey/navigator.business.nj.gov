@@ -8,7 +8,7 @@ export const ResponsibleOwnerName = (
     <ProfileDataField
       fieldName="responsibleOwnerName"
       fieldOptions={{
-        inputProps: { "data-testid": "responsibleOwnerName" },
+        slotProps: { htmlInput: { "data-testid": "responsibleOwnerName" } },
       }}
       inputWidth="default"
       {...props}

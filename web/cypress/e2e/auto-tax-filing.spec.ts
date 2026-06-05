@@ -39,6 +39,7 @@ describe(
       cy.get('input[name="taxId"]').type("777777777771");
       cy.get("button").contains("Save").click();
       cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
+      onDashboardPage.getDashboardHeader().should("be.visible");
       cy.get('[data-testid="cta-funding-nudge"]').first().click();
       cy.get('[data-testid="get-tax-access"]').should("not.exist");
       cy.get('[data-testid="alert-content-container"]').should("exist");
@@ -60,6 +61,7 @@ describe(
       cy.get('input[name="taxId"]').type("777777777771");
       cy.get("button").contains("Save").click();
       cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
+      onDashboardPage.getDashboardHeader().should("be.visible");
       cy.get('[data-testid="cta-funding-nudge"]').first().click();
       cy.get('[data-testid="tax-calendar-access-submit-button"]').should("exist");
       cy.get('[data-testid="alert-content-container"]').should("not.exist");
@@ -77,6 +79,7 @@ describe(
       selectDate("04/2021");
       selectLocation("Allendale");
       clickModalSaveButton();
+      onDashboardPage.getDashboardHeader().should("be.visible");
       cy.get('[data-testid="cta-funding-nudge"]').first().click();
       cy.get('[data-testid="tax-calendar-access-submit-button"]').should("exist");
       cy.get('[data-testid="alert-content-container"]').should("not.exist");

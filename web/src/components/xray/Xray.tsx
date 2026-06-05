@@ -1,5 +1,6 @@
 import { TaskHeader } from "@/components/TaskHeader";
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
+import { getTabId, getTabPanelId, TabPanel } from "@/components/TabPanel";
 import { XrayTabOne } from "@/components/xray/XrayTabOne";
 import { XrayTabZero } from "@/components/xray/XrayTabZero";
 
@@ -18,8 +19,7 @@ import type {
   XrayRegistrationStatus,
   XraySearchError,
 } from "@businessnjgovnavigator/shared/xray";
-import { TabContext, TabList, TabPanel } from "@mui/lab/";
-import { Box, Tab } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 
 interface Props {
@@ -55,9 +55,8 @@ export const Xray = (props: Props): ReactElement => {
     setTabIndex(APPLICATION_TAB_INDEX);
   };
 
-  const onSelectTab = (event: React.SyntheticEvent, newValue: string): void => {
-    const index = Number.parseInt(newValue);
-    setTabIndex(index);
+  const onSelectTab = (event: React.SyntheticEvent, newValue: number): void => {
+    setTabIndex(newValue);
   };
 
   const allFieldsHaveValues = (facilityDetails: FacilityDetails): boolean => {
@@ -173,58 +172,61 @@ export const Xray = (props: Props): ReactElement => {
       <div className="flex flex-column">
         {getHeader()}
         <Box sx={{ width: "100%" }}>
-          <TabContext value={tabIndex.toString()}>
-            <Box>
-              <TabList
-                onChange={onSelectTab}
-                aria-label={xrayContent.ariaLabel}
-                sx={{
-                  borderBottom: 1,
-                  borderColor: "divider",
-                  marginTop: ".25rem",
-                  marginLeft: ".5rem",
-                }}
-              >
-                <Tab
-                  value="0"
-                  sx={tabStyle}
-                  label={xrayContent.tab1Text}
-                  data-testid={"start-application-tab"}
-                />
-                <Tab
-                  value="1"
-                  sx={tabStyle}
-                  label={xrayContent.tab2Text}
-                  data-testid={"check-status-tab"}
-                />
-              </TabList>
-            </Box>
-            <TabPanel value="0">
-              <XrayTabZero
-                xrayContent={xrayContent}
-                ctaPrimaryText={xrayContent.callToActionPrimaryText}
-                ctaPrimaryOnClick={(callToActionLink: string): void => {
-                  analytics.event.xray_registration_expired_cta.click.xray_renewal_started_cta();
-                  openInNewTab(callToActionLink);
-                }}
-                ctaSecondaryText={xrayContent.callToActionSecondaryText}
-                ctaSecondaryOnClick={(): void => {
-                  setTabIndex(STATUS_TAB_INDEX);
-                }}
-                issuingAgency={Config.xrayRegistrationTask.issuingAgency}
+          <Box>
+            <Tabs
+              onChange={onSelectTab}
+              aria-label={xrayContent.ariaLabel}
+              value={tabIndex}
+              sx={{
+                borderBottom: 1,
+                borderColor: "divider",
+                marginTop: ".25rem",
+                marginLeft: ".5rem",
+              }}
+            >
+              <Tab
+                aria-controls={getTabPanelId("xray", APPLICATION_TAB_INDEX)}
+                data-testid={"start-application-tab"}
+                id={getTabId("xray", APPLICATION_TAB_INDEX)}
+                value={APPLICATION_TAB_INDEX}
+                sx={tabStyle}
+                label={xrayContent.tab1Text}
               />
-            </TabPanel>
-            <TabPanel value="1">
-              <XrayTabOne
-                xrayRegistrationData={xrayRegistrationData}
-                error={error}
-                isLoading={isLoading}
-                onEdit={onEdit}
-                onSubmit={onSubmit}
-                goToRegistrationTab={goToRegistrationTab}
+              <Tab
+                aria-controls={getTabPanelId("xray", STATUS_TAB_INDEX)}
+                data-testid={"check-status-tab"}
+                id={getTabId("xray", STATUS_TAB_INDEX)}
+                value={STATUS_TAB_INDEX}
+                sx={tabStyle}
+                label={xrayContent.tab2Text}
               />
-            </TabPanel>
-          </TabContext>
+            </Tabs>
+          </Box>
+          <TabPanel activeValue={tabIndex} idPrefix="xray" value={APPLICATION_TAB_INDEX}>
+            <XrayTabZero
+              xrayContent={xrayContent}
+              ctaPrimaryText={xrayContent.callToActionPrimaryText}
+              ctaPrimaryOnClick={(callToActionLink: string): void => {
+                analytics.event.xray_registration_expired_cta.click.xray_renewal_started_cta();
+                openInNewTab(callToActionLink);
+              }}
+              ctaSecondaryText={xrayContent.callToActionSecondaryText}
+              ctaSecondaryOnClick={(): void => {
+                setTabIndex(STATUS_TAB_INDEX);
+              }}
+              issuingAgency={Config.xrayRegistrationTask.issuingAgency}
+            />
+          </TabPanel>
+          <TabPanel activeValue={tabIndex} idPrefix="xray" value={STATUS_TAB_INDEX}>
+            <XrayTabOne
+              xrayRegistrationData={xrayRegistrationData}
+              error={error}
+              isLoading={isLoading}
+              onEdit={onEdit}
+              onSubmit={onSubmit}
+              goToRegistrationTab={goToRegistrationTab}
+            />
+          </TabPanel>
         </Box>
       </div>
     </NeedsAccountModalWrapper>

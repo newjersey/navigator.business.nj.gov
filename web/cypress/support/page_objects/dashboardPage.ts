@@ -50,7 +50,13 @@ export class DashboardPage {
   }
 
   registerForTaxes() {
-    return cy.get('[data-testid="register-for-taxes"]').first().click();
+    // Navigate directly to the task page rather than clicking the roadmap link.
+    // Clicking the link is prone to a race condition after the dashboard
+    // re-renders (e.g. after saving a modal), so we use cy.visit like the rest
+    // of this spec does for /profile. The task-page header guards that the page
+    // has fully loaded past its PageCircularIndicator before callers touch the form.
+    cy.visit("/tasks/tax-registration");
+    cy.get('[data-task-id="register-for-taxes"]').should("be.visible");
   }
 
   getRemoveBusinessLink = () => {

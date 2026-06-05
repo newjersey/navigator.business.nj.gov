@@ -212,8 +212,10 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                     }}
                     required
                     variant="outlined"
-                    inputProps={{
-                      "aria-label": props.config.inputLabel ?? "Search business name",
+                    slotProps={{
+                      htmlInput: {
+                        "aria-label": props.config.inputLabel ?? "Search business name",
+                      },
                     }}
                   />
                 </div>

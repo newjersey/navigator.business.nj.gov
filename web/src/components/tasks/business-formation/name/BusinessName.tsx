@@ -97,13 +97,15 @@ export const BusinessName = (): ReactElement => {
                 }}
                 required
                 variant="outlined"
-                inputProps={{
-                  "aria-label": "Search business name",
-                }}
                 error={hasError}
                 onBlur={(event: FocusEvent<HTMLInputElement>): void => {
                   setFieldsInteracted([FIELD_NAME]);
                   onBlurNameField(event.target.value);
+                }}
+                slotProps={{
+                  htmlInput: {
+                    "aria-label": "Search business name",
+                  },
                 }}
               />
               <div className="text-bold margin-top-1">
@@ -128,9 +130,6 @@ export const BusinessName = (): ReactElement => {
                 }}
                 required
                 variant="outlined"
-                inputProps={{
-                  "aria-label": "Confirm business name",
-                }}
                 error={hasError}
                 helperText={
                   hasError
@@ -144,6 +143,11 @@ export const BusinessName = (): ReactElement => {
                 onBlur={(): void => {
                   resetNameAvailability();
                   setFieldsInteracted([FIELD_NAME]);
+                }}
+                slotProps={{
+                  htmlInput: {
+                    "aria-label": "Confirm business name",
+                  },
                 }}
               />
               {state.businessNameAvailability?.status === "UNAVAILABLE" && (

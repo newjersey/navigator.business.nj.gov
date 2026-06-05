@@ -7,7 +7,7 @@ export const TradeName = (props: Omit<ProfileDataFieldProps, "fieldName">): Reac
       fieldName="tradeName"
       inputWidth="default"
       fieldOptions={{
-        inputProps: { "data-testid": "tradeName" },
+        slotProps: { htmlInput: { "data-testid": "tradeName" } },
       }}
       {...props}
     />

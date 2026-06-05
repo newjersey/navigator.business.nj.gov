@@ -147,7 +147,7 @@ export class OnboardingPage {
   }
 
   getBusinessFormationDatePicker() {
-    return cy.get('input[name="dateOfFormation"]');
+    return cy.get('[data-testid="date-dateOfFormation"]');
   }
 
   getEntityId() {
@@ -198,7 +198,7 @@ export class OnboardingPage {
   }
 
   typeBusinessFormationDate(monthYearString: string) {
-    cy.chooseDatePicker('[name="dateOfFormation"]', monthYearString);
+    cy.chooseDatePicker('[data-testid="date-dateOfFormation"]', monthYearString);
   }
 
   typeEntityId(EID: string) {

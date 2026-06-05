@@ -25,6 +25,11 @@ const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoa
 const Config = getMergedConfig();
 
 describe("<SidebarCardFormationNudge />", () => {
+  const getDateOfFormationInput = (): HTMLInputElement => {
+    screen.getByRole("group", { name: "Date of formation" });
+    return screen.getByTestId("date-dateOfFormation") as HTMLInputElement;
+  };
+
   let card: SidebarCardContent;
 
   const renderWithBusiness = (business: Partial<Business>): void => {
@@ -63,7 +68,7 @@ describe("<SidebarCardFormationNudge />", () => {
 
       fireEvent.click(screen.getByTestId("cta-formation-nudge"));
 
-      const input = screen.getByLabelText("Date of formation");
+      const input = getDateOfFormationInput();
       fireEvent.change(input, { target: { value: "05/2021" } });
       fireEvent.blur(input);
 
@@ -92,7 +97,7 @@ describe("<SidebarCardFormationNudge />", () => {
 
       fireEvent.click(screen.getByTestId("cta-formation-nudge"));
 
-      const input = screen.getByLabelText("Date of formation");
+      const input = getDateOfFormationInput();
       fireEvent.change(input, { target: { value: "05/2021" } });
       fireEvent.blur(input);
 

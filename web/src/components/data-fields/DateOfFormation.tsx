@@ -1,9 +1,9 @@
-import { GenericTextField } from "@/components/GenericTextField";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   advancedDateLibrary,
@@ -11,12 +11,12 @@ import {
   defaultDateFormat,
   getCurrentDate,
   parseDate,
+  parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
 import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { TextFieldProps } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { ReactElement, useContext } from "react";
+import React, { InputHTMLAttributes, ReactElement, useContext } from "react";
 
 advancedDateLibrary();
 
@@ -67,6 +67,16 @@ export const DateOfFormation = (props: Props): ReactElement => {
     });
   };
 
+  const handleTextInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.value.trim() === "") {
+      handleChange(null);
+      return;
+    }
+
+    const date = parseDateWithFormat(event.target.value, "MM/YYYY");
+    handleChange(date);
+  };
+
   const Picker =
     process.env.NODE_ENV === "test" || process.env.CI === "true" ? DesktopDatePicker : DatePicker;
 
@@ -74,9 +84,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Picker
         views={["year", "month"]}
-        inputFormat={"MM/YYYY"}
-        disableMaskedInput={false}
-        mask={"__/____"}
+        format={"MM/YYYY"}
         disableFuture={!props.futureAllowed}
         openTo="year"
         disabled={props.disabled}
@@ -84,28 +92,34 @@ export const DateOfFormation = (props: Props): ReactElement => {
         value={dateValue}
         onClose={onValidation}
         onChange={handleChange}
-        onError={(hasError: string | null): void => {
+        onError={(hasError): void => {
           setDateError(!!hasError);
         }}
-        renderInput={(params: TextFieldProps): ReactElement => {
-          return (
-            <GenericTextField
-              inputWidth={props.inputWidth || "reduced"}
-              fieldName={fieldName}
-              onValidation={onValidation}
-              validationText={errorText}
-              error={isFormFieldInvalid}
-              inputProps={params.InputProps}
-              fieldOptions={{
-                ...params,
-                inputProps: {
-                  ...params.inputProps,
-                },
-                error: isFormFieldInvalid,
-                sx: { svg: { fill: "#4b7600" } },
-              }}
-            />
-          );
+        slotProps={{
+          textField: {
+            className:
+              props.inputWidth === "full"
+                ? "width-100"
+                : props.inputWidth === "default"
+                  ? "text-field-width-default"
+                  : "text-field-width-reduced",
+            error: isFormFieldInvalid,
+            helperText: isFormFieldInvalid && errorText,
+            onBlur: onValidation,
+            required: props.required,
+            slotProps: {
+              input: {
+                "aria-label": camelCaseToSentence(fieldName),
+              },
+              htmlInput: {
+                name: fieldName,
+                "data-testid": `date-${fieldName}`,
+                onChange: handleTextInputChange,
+                placeholder: "__/____",
+              } as InputHTMLAttributes<HTMLInputElement> & Record<"data-testid", string>,
+            },
+            sx: { svg: { fill: "#4b7600" } },
+          },
         }}
       />
     </LocalizationProvider>

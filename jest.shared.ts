@@ -1,5 +1,6 @@
 /** @type {import('jest').Config} */
 export default {
+  workerIdleMemoryLimit: "1GB",
   transform: {
     "\\.m?[jt]sx?$": [
       "@swc/jest",

@@ -33,7 +33,7 @@ export class ProfilePage extends OnboardingPage {
   }
 
   getBusinessFormationDatePicker() {
-    return cy.get('input[name="dateOfFormation"]');
+    return cy.get('[data-testid="date-dateOfFormation"]');
   }
 
   getSaveButton() {
@@ -59,7 +59,7 @@ export class ProfilePage extends OnboardingPage {
 
   typeBusinessFormationDate(monthYearString: string) {
     cy.get('[data-testid="info"').click({ force: true });
-    cy.chooseDatePicker('[name="dateOfFormation"]', monthYearString);
+    cy.chooseDatePicker('[data-testid="date-dateOfFormation"]', monthYearString);
   }
 
   typeEmployerId(EIN: string) {

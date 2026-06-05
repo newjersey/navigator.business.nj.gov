@@ -5,8 +5,6 @@ import analytics from "@/lib/utils/analytics";
 import type { FacilityDetails, XraySearchError } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { TextField } from "@mui/material";
-import createStyles from "@mui/styles/createStyles";
-import makeStyles from "@mui/styles/makeStyles";
 import {
   type ChangeEvent,
   type FormEvent,
@@ -17,16 +15,12 @@ import {
   useState,
 } from "react";
 
-const useStyles = makeStyles(() => {
-  return createStyles({
-    addressZipCodeField: {
-      "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-        {
-          display: "none",
-        },
+const numberTextFieldSx = {
+  "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+    {
+      display: "none",
     },
-  });
-});
+};
 
 interface Props {
   onSubmit: (facilityDetails: FacilityDetails) => void;
@@ -49,7 +43,6 @@ const XrayRegistrationErrorLookup: Record<XraySearchError, string> = {
 };
 
 export const XrayStatus = (props: Props): ReactElement => {
-  const classes = useStyles();
   const [formValues, setFormValues] = useState<FacilityDetails>({
     businessName: "",
     addressLine1: "",
@@ -253,13 +246,15 @@ export const XrayStatus = (props: Props): ReactElement => {
             value={formValues?.businessName}
             onChange={handleChangeForKey("businessName")}
             variant="outlined"
-            inputProps={{
-              id: "business-name",
-              "data-testid": "business-name",
-            }}
             onBlur={handleBlurForKey("businessName")}
             error={!!fieldErrors.businessName}
             helperText={fieldErrors.businessName}
+            slotProps={{
+              htmlInput: {
+                id: "business-name",
+                "data-testid": "business-name",
+              },
+            }}
           />
         </div>
 
@@ -274,13 +269,15 @@ export const XrayStatus = (props: Props): ReactElement => {
             value={formValues?.addressLine1}
             onChange={handleChangeForKey("addressLine1")}
             variant="outlined"
-            inputProps={{
-              id: "address-1",
-              "data-testid": "address-1",
-            }}
             onBlur={handleBlurForKey("addressLine1")}
             error={!!fieldErrors.addressLine1}
             helperText={fieldErrors.addressLine1}
+            slotProps={{
+              htmlInput: {
+                id: "address-1",
+                "data-testid": "address-1",
+              },
+            }}
           />
         </div>
 
@@ -292,9 +289,11 @@ export const XrayStatus = (props: Props): ReactElement => {
             value={formValues?.addressLine2}
             onChange={handleChangeForKey("addressLine2")}
             variant="outlined"
-            inputProps={{
-              id: "address-2",
-              "data-testid": "address-2",
+            slotProps={{
+              htmlInput: {
+                id: "address-2",
+                "data-testid": "address-2",
+              },
             }}
           />
         </div>
@@ -308,15 +307,17 @@ export const XrayStatus = (props: Props): ReactElement => {
               value={formValues?.addressZipCode}
               onChange={handleChangeForKey("addressZipCode")}
               variant="outlined"
-              inputProps={{
-                id: "addressZipCode",
-                "data-testid": "addressZipCode",
-                type: "number",
-              }}
-              className={classes.addressZipCodeField}
+              sx={numberTextFieldSx}
               onBlur={handleBlurForKey("addressZipCode")}
               error={!!fieldErrors.addressZipCode}
               helperText={fieldErrors.addressZipCode}
+              slotProps={{
+                htmlInput: {
+                  id: "addressZipCode",
+                  "data-testid": "addressZipCode",
+                  type: "number",
+                },
+              }}
             />
           </div>
           <div className="flex-half padding-left-1">
@@ -327,14 +328,16 @@ export const XrayStatus = (props: Props): ReactElement => {
               value={"New Jersey"}
               onChange={(): void => {}}
               variant="outlined"
-              inputProps={{
-                id: "state",
-                "data-testid": "state",
-                style: {
-                  color: "#1b1b1b",
+              disabled
+              slotProps={{
+                htmlInput: {
+                  id: "state",
+                  "data-testid": "state",
+                  style: {
+                    color: "#1b1b1b",
+                  },
                 },
               }}
-              disabled
             />
           </div>
         </div>

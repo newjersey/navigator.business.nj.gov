@@ -10,7 +10,6 @@ import {
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
 import { FieldStateActionKind } from "@businessnjgovnavigator/shared/types";
-import { TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
@@ -39,7 +38,7 @@ export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
             ? parseDateWithFormat(context.state.applicationInfo.permitDate, defaultDateFormat)
             : getMinDate()
         }
-        inputFormat={dateFormat}
+        format={dateFormat}
         onChange={(newValue: DateObject | null): void => {
           if (newValue) {
             const newApplicationInfo = {
@@ -71,23 +70,20 @@ export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
             });
           }
         }}
-        renderInput={(params): JSX.Element => {
-          return (
-            <div className="width-100">
-              <TextField
-                {...params}
-                variant="outlined"
-                error={false}
-                sx={{
-                  svg: { fill: "#4b7600" },
-                }}
-                inputProps={{
-                  ...params.inputProps,
-                  "aria-label": camelCaseToSentence(props.fieldName),
-                }}
-              />
-            </div>
-          );
+        slotProps={{
+          textField: {
+            className: "width-100",
+            error: false,
+            slotProps: {
+              input: {
+                "aria-label": camelCaseToSentence(props.fieldName),
+              },
+            },
+            sx: {
+              svg: { fill: "#4b7600" },
+            },
+            variant: "outlined",
+          },
         }}
       />
     </LocalizationProvider>

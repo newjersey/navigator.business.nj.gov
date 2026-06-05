@@ -946,7 +946,7 @@ describe("Formation - BusinessStep", () => {
 
     it("defaults date picker to current date when it has no value", async () => {
       const page = await getPageHelper({}, { businessStartDate: "" });
-      expect(screen.getByLabelText("Business start date")).toBeInTheDocument();
+      expect(screen.getByRole("group", { name: "Business start date" })).toBeInTheDocument();
       await page.submitBusinessStep();
       expect(currentBusiness().formationData.formationFormData.businessStartDate).toEqual(
         getCurrentDateInNewJersey().format(defaultDateFormat),
@@ -955,8 +955,8 @@ describe("Formation - BusinessStep", () => {
 
     it("resets date on initial load", async () => {
       const yesterday = getCurrentDate().subtract(1, "day").format(defaultDateFormat);
-      await getPageHelper({}, { businessStartDate: yesterday });
-      expect(screen.getByLabelText("Business start date")).toHaveValue(
+      const page = await getPageHelper({}, { businessStartDate: yesterday });
+      expect(page.getInputElementByLabel("Business start date")).toHaveValue(
         getCurrentDateInNewJersey().format(defaultDisplayDateFormat),
       );
     });
@@ -1047,12 +1047,12 @@ describe("Formation - BusinessStep", () => {
         legalStructureIds.map((legalStructureId) =>
           describe(`${legalStructureId}`, () => {
             it("shows field as disabled", async () => {
-              await getPageHelper({ legalStructureId, businessPersona }, {});
-              expect(screen.getByLabelText("Business start date")).toBeDisabled();
+              const page = await getPageHelper({ legalStructureId, businessPersona }, {});
+              expect(page.getInputElementByLabel("Business start date")).toBeDisabled();
             });
 
             it("reset to current date", async () => {
-              await getPageHelper(
+              const page = await getPageHelper(
                 { legalStructureId, businessPersona },
                 {
                   businessStartDate: getCurrentDate()
@@ -1060,7 +1060,7 @@ describe("Formation - BusinessStep", () => {
                     .format(defaultDisplayDateFormat),
                 },
               );
-              expect(screen.getByLabelText("Business start date")).toHaveValue(
+              expect(page.getInputElementByLabel("Business start date")).toHaveValue(
                 getCurrentDateInNewJersey().format(defaultDisplayDateFormat),
               );
             });

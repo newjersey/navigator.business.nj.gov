@@ -181,11 +181,6 @@ export const IndustryDropdown = (props: Props): ReactElement => {
             <TextField
               {...params}
               id="industryId"
-              inputProps={{
-                "aria-label": "Industry",
-                "data-testid": "industryId",
-                ...params.inputProps,
-              }}
               value={searchText}
               onChange={handleSearchBoxChange}
               onSubmit={props.onValidation}
@@ -193,6 +188,15 @@ export const IndustryDropdown = (props: Props): ReactElement => {
               error={props.error}
               helperText={props.error && props.validationText}
               placeholder={contentFromConfig.searchPlaceHolderText}
+              slotProps={{
+                ...params.slotProps,
+
+                htmlInput: {
+                  "aria-label": "Industry",
+                  "data-testid": "industryId",
+                  ...params.slotProps.htmlInput,
+                },
+              }}
             />
           </div>
         );

@@ -25,10 +25,12 @@ export const SnackbarAlert = (props: Props): ReactElement => {
       onClose={props.close}
       autoHideDuration={props.autoHideDuration === null ? null : 5000}
       disableWindowBlurListener={true}
-      ClickAwayListenerProps={{ mouseEvent: false, touchEvent: false }}
       role="alert"
       aria-live="polite"
       {...props.snackBarProps}
+      slotProps={{
+        clickAwayListener: { mouseEvent: false, touchEvent: false },
+      }}
     >
       <div>
         <Paper>

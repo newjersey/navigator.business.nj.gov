@@ -44,9 +44,7 @@ export const CigaretteSignatures = (props: Props): ReactElement => {
   return (
     <div className="grid-col" data-testid="signers-section">
       <Heading level={2}>{Config.cigaretteLicenseStep4.signersHeader}</Heading>
-
       <Content>{Config.cigaretteLicenseStep4.signersDescription}</Content>
-
       <div className="grid-row grid-gap-2 margin-y-2">
         <div className="grid-col-5 margin-right-2" id="question-signerName">
           <WithErrorBar hasError={props.CMS_ONLY_show_error || isSignerNameValid} type="ALWAYS">
@@ -95,15 +93,16 @@ export const CigaretteSignatures = (props: Props): ReactElement => {
             <Checkbox
               checked={state.signature || false}
               onChange={(event) => handleChange(event.target.checked, "signature")}
-              inputProps={{
-                "aria-label": Config.cigaretteLicenseStep4.signLabel,
-              }}
               {...(isSignatureValid && { color: "error" })}
+              slotProps={{
+                input: {
+                  "aria-label": Config.cigaretteLicenseStep4.signLabel,
+                },
+              }}
             />
           </div>
         </div>
       </div>
-
       <div className="margin-bottom-2">
         <Content>{Config.cigaretteLicenseStep4.signersConfirmationText}</Content>
       </div>

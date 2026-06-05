@@ -84,10 +84,14 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                   multiline: true,
                   rows: 3,
                   className: "override-padding",
-                  inputProps: {
-                    maxLength: props.maxChars,
-                    sx: {
-                      padding: "1rem",
+                  slotProps: {
+                    htmlInput: {
+                      maxLength: props.maxChars,
+                    },
+                    input: {
+                      sx: {
+                        padding: "1rem",
+                      },
                     },
                   },
                 }}

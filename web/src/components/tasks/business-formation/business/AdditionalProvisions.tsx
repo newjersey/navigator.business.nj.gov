@@ -99,10 +99,14 @@ export const AdditionalProvisions = (): ReactElement => {
                     minRows: 3,
                     maxRows: 20,
                     className: "override-padding",
-                    inputProps: {
-                      maxLength: MAX_CHARS,
-                      sx: {
-                        padding: "1rem",
+                    slotProps: {
+                      htmlInput: {
+                        maxLength: MAX_CHARS,
+                      },
+                      input: {
+                        sx: {
+                          padding: "1rem",
+                        },
                       },
                     },
                   }}

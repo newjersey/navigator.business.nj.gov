@@ -53,8 +53,10 @@ export const BusinessActivities = (props: Props): ReactElement => {
             data-testid="registered-business-checkbox"
             checked={registeredBusiness}
             onChange={(e) => setRegisteredBusiness(e.target.checked)}
-            inputProps={{
-              "aria-labelledby": "registered-business-label",
+            slotProps={{
+              input: {
+                "aria-labelledby": "registered-business-label",
+              },
             }}
           />
 

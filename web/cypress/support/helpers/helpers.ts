@@ -13,8 +13,6 @@ import { LighthouseConfig, Pa11yThresholds } from "../types";
 
 const Config = getMergedConfig();
 
-/* eslint-disable cypress/no-unnecessary-waiting */
-
 export const lighthouseDesktopConfig: LighthouseConfig = {
   formFactor: "desktop",
   screenEmulation: {
@@ -81,11 +79,11 @@ export const clickDeferredSaveButton = () => {
 
 export const clickModalSaveButton = (): void => {
   cy.get('[data-testid="modal-button-primary"]').first().click();
-  cy.wait(1000);
+  cy.get('[data-testid="modal-button-primary"]').should("not.exist");
 };
 
 export const selectDate = (monthYear: string): void => {
-  cy.chooseDatePicker('[name="dateOfFormation"]', monthYear);
+  cy.chooseDatePicker('[data-testid="date-dateOfFormation"]', monthYear);
 };
 
 export const selectLocation = (townDisplayName: string): void => {
@@ -191,12 +189,28 @@ export const fillOutTaxClearanceForm = ({
 };
 
 export const completeTaxClearanceFlow = (): void => {
+  // Step 2 (Check Eligibility) → Step 3 (Review)
   cy.contains("button", "Save & Continue").click();
-  cy.wait(1000);
-  cy.contains("button", "Save & Continue").click();
+  cy.get('[data-testid="next-button"]').should("be.visible");
+  // Step 3 (Review) → submit (triggers the async certificate API call)
+  cy.get('[data-testid="next-button"]').click();
+  // The submit is async; the result is either the Download screen or a "Tax ID in use" error.
+  // There is no single DOM signal guaranteed before both outcomes, so we wait for the API
+  // response window before inspecting the conditional Unlink state.
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(1000);
 
-  cy.contains(Config.taxClearanceCertificateDownload.headerTwoLabel, { timeout: 500 })
+  cy.get("body").then(($body) => {
+    if ($body.find("button:contains('Unlink Tax ID')").length > 0) {
+      cy.contains("button", "Unlink Tax ID").click();
+      cy.contains("button", "Unlink Tax ID").should("not.exist");
+      // After unlinking, re-advance through Review and submit.
+      // On success the system navigates directly to Download without pausing on Review.
+      cy.contains("button", "Save & Continue").click();
+    }
+  });
+
+  cy.contains(Config.taxClearanceCertificateDownload.headerTwoLabel)
     .should("be.visible")
     .and("contain.text", "Your Certificate is Ready!");
 };

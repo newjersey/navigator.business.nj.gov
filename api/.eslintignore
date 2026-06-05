@@ -11,13 +11,13 @@ jspm_packages
 src/setupTests.js
 src/teardownTests.js
 # Large file with binary/hex contents
-api/wiremock/__files/tax-clearance-success.json
-api/cdk/lib/**/*.js
-api/cdk/bin/**/*.js
-api/cdk/cdk.out/
-api/cdk/cdk.out/**
+wiremock/__files/tax-clearance-success.json
+cdk/lib/**/*.js
+cdk/bin/**/*.js
+cdk/cdk.out/
+cdk/cdk.out/**
 
-api/cdk/test/**/*.js
+cdk/test/**/*.js
 dist/
-api/dist/*.js
+dist/*.js
 lib/

@@ -106,7 +106,7 @@ export const SplitTaxId = ({
             value={taxIdValue}
             formContext={TaxIdFormContext}
             fieldOptions={{
-              FormHelperTextProps: { sx: { whiteSpace: "nowrap" } },
+              slotProps: { formHelperText: { sx: { whiteSpace: "nowrap" } } },
             }}
             fieldName={fieldName as string}
             error={isFormFieldInvalid}

@@ -126,11 +126,6 @@ export const StateDropdown = (props: Props): ReactElement => {
             id={props.fieldName}
             name={props.fieldName}
             disabled={props.disabled}
-            inputProps={{
-              "aria-label": camelCaseToSentence(props.fieldName),
-              "data-testid": props.fieldName,
-              ...params.inputProps,
-            }}
             onSubmit={onValidation}
             autoComplete={props.autoComplete ? "address-level1" : "no"}
             variant="outlined"
@@ -142,6 +137,15 @@ export const StateDropdown = (props: Props): ReactElement => {
             required={props.required}
             error={props.error}
             helperText={props.error && props.validationText}
+            slotProps={{
+              ...params.slotProps,
+
+              htmlInput: {
+                "aria-label": camelCaseToSentence(props.fieldName),
+                "data-testid": props.fieldName,
+                ...params.slotProps.htmlInput,
+              },
+            }}
           />
         );
       }}

@@ -25,8 +25,9 @@ import {
   generateProfileData,
   generateUserData,
 } from "@businessnjgovnavigator/shared/test";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { ReactNode } from "react";
+import { MenuList } from "@mui/material";
+import { fireEvent, render as testingLibraryRender, screen, waitFor } from "@testing-library/react";
+import { ReactElement, ReactNode } from "react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -89,6 +90,10 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+
+const render = (element: ReactElement): ReturnType<typeof testingLibraryRender> => {
+  return testingLibraryRender(<MenuList>{element}</MenuList>);
+};
 
 describe("shared-submenu-components", () => {
   beforeEach(() => {

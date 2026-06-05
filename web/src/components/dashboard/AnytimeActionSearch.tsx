@@ -208,12 +208,6 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
             return (
               <TextField
                 {...params}
-                inputProps={{
-                  "aria-label": "anytimeActionSearch",
-                  "data-testid": "anytimeActionSearch",
-                  ...params.inputProps,
-                  className: `disable-focus-outline ${params.inputProps.className}`,
-                }}
                 placeholder={
                   isFocused ? "" : Config.dashboardAnytimeActionDefaults.searchFieldHintText
                 }
@@ -222,13 +216,24 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
                   setOpen(true);
                 }}
                 onBlur={() => setIsFocused(false)}
-                InputProps={{
-                  ...params.InputProps,
-                  startAdornment: (
-                    <img className="" src="/img/search.svg" alt="" role="presentation" />
-                  ),
-                }}
                 variant="outlined"
+                slotProps={{
+                  ...params.slotProps,
+
+                  input: {
+                    ...params.slotProps.input,
+                    startAdornment: (
+                      <img className="" src="/img/search.svg" alt="" role="presentation" />
+                    ),
+                  },
+
+                  htmlInput: {
+                    "aria-label": "anytimeActionSearch",
+                    "data-testid": "anytimeActionSearch",
+                    ...params.slotProps.htmlInput,
+                    className: `disable-focus-outline ${params.slotProps.htmlInput.className}`,
+                  },
+                }}
               />
             );
           }}
@@ -236,16 +241,6 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
             setInputValue(newInputValue);
           }}
           inputValue={inputValue}
-          componentsProps={{
-            popper: {
-              modifiers: [
-                {
-                  name: "flip",
-                  enabled: false,
-                },
-              ],
-            },
-          }}
           getOptionLabel={(option: AnytimeActionWithTypeAndCategory | string) => {
             if (typeof option === "string") {
               return option;
@@ -255,7 +250,8 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
           isOptionEqualToValue={(option, value) => {
             return option.name === value.name && option.filename === value.filename;
           }}
-          groupBy={(option) => option.category[0].categoryName} // Currently just showing the first category
+          // Currently just showing the first category
+          groupBy={(option) => option.category[0].categoryName}
           renderGroup={(params) => {
             return (
               <li key={params.key} className="anytime-action-header-group">
@@ -336,6 +332,16 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
             );
           }}
           className={" anytime-action-dropdown width-100 "}
+          slotProps={{
+            popper: {
+              modifiers: [
+                {
+                  name: "flip",
+                  enabled: false,
+                },
+              ],
+            },
+          }}
         />
       </span>
     </>

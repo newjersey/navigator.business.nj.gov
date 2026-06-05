@@ -242,7 +242,23 @@ export type FormationPageHelpers = {
 export const createFormationPageHelpers = (): FormationPageHelpers => {
   const mockApi = api as jest.Mocked<typeof api>;
 
+  const getFormationDateInput = (
+    label: "Business start date" | "Foreign date of formation",
+  ): HTMLInputElement => {
+    const testId =
+      label === "Business start date" ? "date-businessStartDate" : "date-foreignDateOfFormation";
+    return screen.getByTestId(testId) as HTMLInputElement;
+  };
+
   const fillText = (label: string, value: string): void => {
+    if (label === "Business start date" || label === "Foreign date of formation") {
+      screen.getByRole("group", { name: label });
+      const item = getFormationDateInput(label);
+      fireEvent.change(item, { target: { value: value } });
+      fireEvent.blur(item);
+      return;
+    }
+
     const item = screen.getByLabelText(label);
     fireEvent.change(item, { target: { value: value } });
     fireEvent.blur(item);
@@ -427,6 +443,10 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
       return within(container).getByLabelText(label) as HTMLInputElement;
     }
 
+    if (label === "Business start date" || label === "Foreign date of formation") {
+      return getFormationDateInput(label);
+    }
+
     return screen.getByLabelText(label) as HTMLInputElement;
   };
 
@@ -549,8 +569,10 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     value: DateObject,
     fieldType: "Business start date" | "Foreign date of formation",
   ): void => {
-    fillText(fieldType, value.format(defaultDisplayDateFormat));
-    fireEvent.blur(screen.getByLabelText(fieldType));
+    screen.getByRole("group", { name: fieldType });
+    const item = getFormationDateInput(fieldType);
+    fireEvent.change(item, { target: { value: value.format(defaultDisplayDateFormat) } });
+    fireEvent.blur(item);
   };
 
   const completeRequiredBillingFields = (): void => {

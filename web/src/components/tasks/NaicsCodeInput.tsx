@@ -254,7 +254,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                 value={naicsCode}
                 ariaLabel="Save NAICS Code"
                 fieldOptions={{
-                  inputProps: { style: { backgroundColor: "white" } },
+                  slotProps: { htmlInput: { style: { backgroundColor: "white" } } },
                 }}
                 error={isInvalid !== undefined}
                 handleChange={handleTextInputChange}

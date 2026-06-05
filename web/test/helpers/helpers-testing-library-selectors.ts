@@ -28,7 +28,8 @@ export const fillTextUserEvent = async (label: string, value: string): Promise<v
 };
 
 export const selectDate = (date: Dayjs): void => {
-  const item = screen.getByLabelText("Date of formation");
+  screen.getByRole("group", { name: "Date of formation" });
+  const item = screen.getByTestId("date-dateOfFormation") as HTMLInputElement;
   fireEvent.change(item, { target: { value: date.format("MM/YYYY") } });
   fireEvent.blur(item);
 };
