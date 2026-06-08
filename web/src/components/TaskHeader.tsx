@@ -8,7 +8,7 @@ import {
   getModifiedTaskBooleanUndefined,
   getModifiedTaskContent,
 } from "@/lib/utils/roadmap-helpers";
-import { TaskProgress, isFormationTask } from "@businessnjgovnavigator/shared";
+import { isFormationTask, TaskProgress } from "@businessnjgovnavigator/shared";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement } from "react";
 
@@ -65,7 +65,11 @@ export const TaskHeader = (props: Props): ReactElement => {
           data-testid="taskProgress"
         >
           <div className="margin-right-105 margin-bottom-1">
-            <TaskProgressCheckbox taskId={props.task.id} disabledTooltipText={getDisabledText()} />
+            <TaskProgressCheckbox
+              taskId={props.task.id}
+              disabledTooltipText={getDisabledText()}
+              needsAccount={props.task.required}
+            />
           </div>
           {getModifiedTaskBooleanUndefined(roadmap, props.task, "required") === true && (
             <span className={`${getTextColorClass()} display-inline-block margin-bottom-1`}>

@@ -62,6 +62,7 @@ export const Task = (props: Props): ReactElement => {
               <TaskProgressCheckbox
                 taskId={props.task.id}
                 disabledTooltipText={getDisabledTooltipText(props.task.id, taskProgress)}
+                needsAccount={props.task.required}
               />
             ) : (
               TaskProgressTagLookup[taskProgress]
