@@ -33,7 +33,9 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({
+  buildUserRoadmap: jest.fn(),
+}));
 
 const Config = getMergedConfig();
 let setShowNeedsAccountModal: jest.Mock;
@@ -64,11 +66,14 @@ describe("<TaskProgressCheckbox />", () => {
       withNeedsAccountContext(
         <MunicipalitiesContext.Provider value={{ municipalities: [] }}>
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
-            <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} />
+            <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} needsAccount />
           </WithStatefulUserData>
         </MunicipalitiesContext.Provider>,
         IsAuthenticated.FALSE,
-        { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal },
+        {
+          showNeedsAccountModal: false,
+          setShowNeedsAccountModal: setShowNeedsAccountModal,
+        },
       ),
     );
   };
@@ -90,7 +95,9 @@ describe("<TaskProgressCheckbox />", () => {
 
   it("updates task status when progress checkbox is clicked", async () => {
     const taskId = "123";
-    const taskProgress: Record<string, TaskProgress> = { "some-id": "COMPLETED" };
+    const taskProgress: Record<string, TaskProgress> = {
+      "some-id": "COMPLETED",
+    };
 
     renderTaskCheckbox(taskId, generateBusiness({ taskProgress }));
 
@@ -224,7 +231,9 @@ describe("<TaskProgressCheckbox />", () => {
     it("updates status and date of formation, and redirects user on save", async () => {
       jest.useFakeTimers();
       const id = formationTaskId;
-      const startingPersonaForRoadmapUrl = generateProfileData({ businessPersona: "STARTING" });
+      const startingPersonaForRoadmapUrl = generateProfileData({
+        businessPersona: "STARTING",
+      });
       renderTaskCheckbox(
         formationTaskId,
         generateBusiness({ profileData: startingPersonaForRoadmapUrl }),
