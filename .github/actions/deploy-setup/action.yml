@@ -22,33 +22,12 @@ runs:
           s3://nj-bfs-all-accounts-config-files/${{ inputs.stage }}-cognito-metadata.xml \
           ${{ github.workspace }}/cognito-metadata.xml
 
-    - name: Verify metadata file
+    - name: Debug metadata env path
       shell: bash
       run: |
-        set -e
-        FILE="${{ github.workspace }}/cognito-metadata.xml"
-
-        echo "Checking file exists..."
-        test -f "$FILE"
-
-        echo "File size:"
-        ls -lh "$FILE"
-
-        echo "First 20 lines:"
-        head -n 20 "$FILE"
-
-        echo "Checking SAML EntityDescriptor presence..."
-        grep -q "EntityDescriptor" "$FILE"
-
-        echo "Checking stage marker in entityID (basic sanity check)..."
-        grep -q "nj.gov/idp" "$FILE"
+        echo "COGNITO_METADATA_FILE=$COGNITO_METADATA_FILE"
 
     - name: Deploy CDK
       uses: ./.github/actions/deploy-cdk
       env:
         COGNITO_METADATA_FILE: ${{ github.workspace }}/cognito-metadata.xml
-
-    - name: Debug metadata env path
-      shell: bash
-      run: |
-        echo "COGNITO_METADATA_FILE=$COGNITO_METADATA_FILE"
