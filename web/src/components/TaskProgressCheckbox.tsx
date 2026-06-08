@@ -2,10 +2,10 @@ import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { TaskStatusTaxRegistrationSnackbar } from "@/components/TaskStatusTaxRegistrationSnackbar";
-import { Icon } from "@/components/njwds/Icon";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -22,6 +22,7 @@ import { ReactElement, ReactNode, useContext, useEffect, useState } from "react"
 
 interface Props {
   taskId: string;
+  needsAccount?: boolean;
   disabledTooltipText: string | undefined;
   STORYBOOK_ONLY_currentTaskProgress?: TaskProgress;
 }
@@ -69,7 +70,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const setToNextStatus = (config?: { redirectOnSuccess: boolean }): void => {
     if (!updateQueue) return;
     let redirectOnSuccess = config?.redirectOnSuccess;
-    if (isAuthenticated === IsAuthenticated.FALSE) {
+    if (props.needsAccount && isAuthenticated === IsAuthenticated.FALSE) {
       setShowNeedsAccountModal(true);
       return;
     }
@@ -86,7 +87,9 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         return;
       }
       if (currentOpenModal === "formation-unset") {
-        updateQueue.queueProfileData({ dateOfFormation: emptyProfileData.dateOfFormation });
+        updateQueue.queueProfileData({
+          dateOfFormation: emptyProfileData.dateOfFormation,
+        });
       }
     }
 
@@ -134,7 +137,12 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     }
   };
 
-  const getStyles = (): { border: string; bg: string; textColor: string; hover: string } => {
+  const getStyles = (): {
+    border: string;
+    bg: string;
+    textColor: string;
+    hover: string;
+  } => {
     switch (currentTaskProgress) {
       case "TO_DO":
         if (isDisabled) {
