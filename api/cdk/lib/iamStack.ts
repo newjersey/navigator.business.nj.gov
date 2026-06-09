@@ -427,6 +427,7 @@ export class IamStack extends Stack {
             "iam:PassRole",
             "logs:*",
             "kms:*",
+            "elasticache:*",
           ],
           resources: ["*"],
         }),
