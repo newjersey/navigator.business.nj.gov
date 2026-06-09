@@ -13,6 +13,8 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
+import { GoogleTagManager } from "@/components/analytics/GoogleTagManager";
+import { Intercom } from "@/components/analytics/Intercom";
 import { GovBanner } from "@/components/landing/GovBanner";
 import { IdentifierSection } from "@/components/landing/IdentifierSection";
 import { SiteFooter } from "@/components/landing/SiteFooter";
@@ -173,6 +175,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
         <link href={NJWDS_STYLESHEET_PATH} rel="stylesheet" />
       </head>
       <body>
+        <GoogleTagManager />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SkipNav
             label={messages.layout.skipNavigationLabel}
@@ -188,6 +191,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
           <IdentifierSection content={messages.layout.identifier} />
         </NextIntlClientProvider>
         <Script src={NJWDS_SCRIPT_PATH} strategy="afterInteractive" />
+        <Intercom />
       </body>
     </html>
   );
