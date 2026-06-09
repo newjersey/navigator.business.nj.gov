@@ -11,8 +11,8 @@ export const QuickServicesSection = ({ content }: QuickServicesSectionProps) => 
   return (
     <section className="usa-section">
       <div className="grid-container">
-        <h2 className="font-heading-xl">{content.title}</h2>
-        <p>{content.subtitle}</p>
+        <h2 className="font-heading-2xl dark-blue">{content.title}</h2>
+        <p className="margin-bottom-5">{content.subtitle}</p>
         <div className="grid-row grid-gap">
           {content.items.map((item) => (
             <QuickServiceCard item={item} key={item.title} />

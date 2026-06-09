@@ -27,7 +27,7 @@ a.card:hover {
 }
 
 .card__description {
-  font-size: 0.93rem;
+  text-align: center;
   color: #565c65;
   margin: 0;
 }
@@ -54,6 +54,11 @@ a.card:hover {
   border: 3px solid var(--dark-blue);
   border-radius: 50%;
   margin-bottom: 1.5rem;
+}
+
+/* Specifically targeting the navigation icon */
+.support-card__container:first-child .support-card__icon img {
+  width: 65px;
 }
 
 .brought-to-you-by__logo {

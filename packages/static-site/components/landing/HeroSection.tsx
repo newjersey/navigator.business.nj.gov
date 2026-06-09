@@ -34,7 +34,7 @@ export const HeroSection = ({ content }: HeroSectionProps) => {
       <div className="grid-container">
         <div className="grid-row grid-gap flex-align-center">
           <div className="tablet:grid-col-6">
-            <h1 className="usa-hero__heading dark-blue">{content.title}</h1>
+            <h1 className="usa-hero__heading dark-blue font-heading-3xl">{content.title}</h1>
             <p className="usa-hero__text">{content.paragraph}</p>
             <LocalizedLink className="usa-button" link={content.callToActionLink} />
           </div>
