@@ -9,7 +9,7 @@ export const BroughtToYouBySection = ({ content }: BroughtToYouBySectionProps) =
   return (
     <section className="usa-section">
       <div className="grid-container">
-        <h2 className="font-heading-xl margin-bottom-4">{content.title}</h2>
+        <h2 className="font-heading-2xl dark-blue">{content.title}</h2>
         <div className="brought-to-you-by__logos">
           {content.agencies.map((agency) => (
             <LocalizedLink
