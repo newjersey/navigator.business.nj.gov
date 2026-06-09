@@ -3,8 +3,13 @@
  *
  * Supports up to three levels: top-level items, child links, and grandchild
  * links. Active state is indicated via the `isCurrent` flag on each item.
+ * Top-level items with children render as expandable sections.
  */
 
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
 import { LocalizedLink } from "@/components/landing/LocalizedLink";
 import type { ContentLink } from "@/domain/content/messageTypes";
 
@@ -71,41 +76,89 @@ export interface SideNavProps {
  * ```
  */
 export const SideNav = ({ ariaLabel, items }: SideNavProps) => {
+  const [expandedKeys, setExpandedKeys] = useState<ReadonlySet<string>>(() => {
+    const initial = new Set<string>();
+    for (const item of items) {
+      if (item.isCurrent && item.children && item.children.length > 0) {
+        initial.add(item.link.href);
+      }
+    }
+    return initial;
+  });
+
+  const toggleExpanded = (key: string) => {
+    setExpandedKeys((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
+      return next;
+    });
+  };
+
   return (
     <nav aria-label={ariaLabel}>
       <ul className="usa-sidenav">
-        {items.map((item) => (
-          <li key={item.link.href} className="usa-sidenav__item">
-            <LocalizedLink
-              link={item.link}
-              className={item.isCurrent ? "usa-current" : undefined}
-            />
-            {item.children && item.children.length > 0 && (
-              <ul className="usa-sidenav__sublist">
-                {item.children.map((child) => (
-                  <li key={child.link.href} className="usa-sidenav__item">
-                    <LocalizedLink
-                      link={child.link}
-                      className={child.isCurrent ? "usa-current" : undefined}
+        {items.map((item) => {
+          const hasChildren = item.children && item.children.length > 0;
+          const isExpanded = expandedKeys.has(item.link.href);
+
+          return (
+            <li key={item.link.href} className="usa-sidenav__item">
+              {hasChildren ? (
+                <button
+                  type="button"
+                  className={`sidenav-category-button${item.isCurrent ? " usa-current" : ""}`}
+                  aria-expanded={isExpanded}
+                  onClick={() => toggleExpanded(item.link.href)}
+                >
+                  <span className="sidenav-item-label">
+                    {item.link.label}
+                    <Image
+                      src="/img/chevron-down.svg"
+                      alt=""
+                      width={16}
+                      height={16}
+                      className={`sidenav-chevron${isExpanded ? " sidenav-chevron--expanded" : ""}`}
+                      aria-hidden="true"
                     />
-                    {child.children && child.children.length > 0 && (
-                      <ul className="usa-sidenav__sublist">
-                        {child.children.map((grandchild) => (
-                          <li key={grandchild.link.href} className="usa-sidenav__item">
-                            <LocalizedLink
-                              link={grandchild.link}
-                              className={grandchild.isCurrent ? "usa-current" : undefined}
-                            />
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
+                  </span>
+                </button>
+              ) : (
+                <LocalizedLink
+                  link={item.link}
+                  className={item.isCurrent ? "usa-current" : undefined}
+                />
+              )}
+              {hasChildren && isExpanded && (
+                <ul className="usa-sidenav__sublist">
+                  {item.children.map((child) => (
+                    <li key={child.link.href} className="usa-sidenav__item">
+                      <LocalizedLink
+                        link={child.link}
+                        className={child.isCurrent ? "usa-current" : undefined}
+                      />
+                      {child.children && child.children.length > 0 && (
+                        <ul className="usa-sidenav__sublist">
+                          {child.children.map((grandchild) => (
+                            <li key={grandchild.link.href} className="usa-sidenav__item">
+                              <LocalizedLink
+                                link={grandchild.link}
+                                className={grandchild.isCurrent ? "usa-current" : undefined}
+                              />
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

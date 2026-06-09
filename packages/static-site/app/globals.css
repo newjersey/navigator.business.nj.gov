@@ -53,6 +53,8 @@ div.usa-card__container {
 
   .learn-side-nav nav {
     margin-right: 48px;
+    position: sticky;
+    top: 20px;
   }
 }
 
@@ -62,4 +64,35 @@ li {
 
 :is(h1, h2, h3, h4, h5, h6).dark-blue {
   color: var(--dark-blue);
+}
+
+.sidenav-category-button {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  line-height: 1.6rem;
+}
+
+.sidenav-category-button:hover {
+  background-color: #f0f0f0;
+}
+
+.sidenav-item-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sidenav-chevron {
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.sidenav-chevron--expanded {
+  transform: rotate(180deg);
 }
