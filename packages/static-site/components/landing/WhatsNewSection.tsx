@@ -19,19 +19,7 @@ export const WhatsNewSection = ({ content, recents }: WhatsNewSectionProps) => {
         <h2 className="font-heading-2xl dark-blue">{content.title}</h2>
         <ul className="usa-card-group">
           {recents.map((recent) => (
-            <li key={recent.slug} className="usa-card tablet:grid-col-4">
-              <Link href={`/recent/${recent.slug}`}>
-                <div className="usa-card__container">
-                  <div className="usa-card__header">
-                    {recent.topics && <span className="usa-tag">{recent.topics}</span>}
-                    <h3 className="usa-card__heading margin-top-1">{recent.name}</h3>
-                  </div>
-                  <div className="usa-card__body">
-                    {recent.date && <p className="text-base">{recent.date}</p>}
-                  </div>
-                </div>
-              </Link>
-            </li>
+            <WhatsNewCardElement recent={recent} key={recent.name} />
           ))}
         </ul>
         <div className="text-center margin-top-4">
@@ -39,5 +27,23 @@ export const WhatsNewSection = ({ content, recents }: WhatsNewSectionProps) => {
         </div>
       </div>
     </section>
+  );
+};
+
+const WhatsNewCardElement = (props: { recent: RecentItem }) => {
+  return (
+    <li key={props.recent.slug} className="usa-card tablet:grid-col-4">
+      <Link href={`/recent/${props.recent.slug}`}>
+        <div className="usa-card__container">
+          <div className="usa-card__header">
+            {props.recent.topics && <span className="usa-tag">{props.recent.topics}</span>}
+            <h3 className="usa-card__heading margin-top-1">{props.recent.name}</h3>
+          </div>
+          <div className="usa-card__body">
+            {props.recent.date && <p className="text-base">{props.recent.date}</p>}
+          </div>
+        </div>
+      </Link>
+    </li>
   );
 };
