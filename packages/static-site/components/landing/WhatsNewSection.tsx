@@ -16,7 +16,7 @@ export const WhatsNewSection = ({ content, recents }: WhatsNewSectionProps) => {
   return (
     <section className="usa-section">
       <div className="grid-container">
-        <h2 className="font-heading-xl margin-bottom-4">{content.title}</h2>
+        <h2 className="font-heading-2xl dark-blue">{content.title}</h2>
         <ul className="usa-card-group">
           {recents.map((recent) => (
             <li key={recent.slug} className="usa-card tablet:grid-col-4">
