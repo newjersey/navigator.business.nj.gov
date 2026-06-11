@@ -5353,7 +5353,7 @@ __metadata:
     nc: "git+https://github.com/dsueltenfuss/nc.git"
     next: "npm:16.2.6"
     next-intl: "npm:4.9.2"
-    next-router-mock: "npm:0.9.13"
+    next-router-mock: "npm:1.0.5"
     next-seo: "npm:6.8.0"
     playwright: "npm:1.59.1"
     playwright-core: "npm:1.59.1"
@@ -5547,7 +5547,7 @@ __metadata:
     js-yaml: "npm:4.1.1"
     lodash: "npm:4.18.1"
     next: "npm:16.2.6"
-    next-router-mock: "npm:0.9.13"
+    next-router-mock: "npm:1.0.5"
     next-seo: "npm:6.8.0"
     prettier: "npm:3.8.3"
     prettier-plugin-organize-imports: "npm:4.3.0"
@@ -29570,13 +29570,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-router-mock@npm:0.9.13":
-  version: 0.9.13
-  resolution: "next-router-mock@npm:0.9.13"
+"next-router-mock@npm:1.0.5":
+  version: 1.0.5
+  resolution: "next-router-mock@npm:1.0.5"
   peerDependencies:
     next: ">=10.0.0"
     react: ">=17.0.0"
-  checksum: 10/582858b4521b987ff7299d97b81b526ba5debdb93b7ada83a595927ca1138082e902ff8dbb7c6cb9db79d65b1a7aa4d86fbbbf24ea73a033d317d964ca3ea95b
+  checksum: 10/301b28ab4c962f6c18ee6386ea3086c679a41bac98ad429b790ebda5216db3601f2cf897dc9bd77f2b3130651b151264d2cb04eb3c165d00ab03406e4960f283
   languageName: node
   linkType: hard
 
