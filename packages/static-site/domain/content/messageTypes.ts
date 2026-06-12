@@ -382,6 +382,10 @@ export interface LandingMetadataContent {
 export interface LearnSideNav {
   /** Accessible name for the section. */
   readonly ariaLabel: string;
+  /** Label for the button that reveals all categories. */
+  readonly showFullMenuLabel: string;
+  /** Label for the button that hides non-current categories. */
+  readonly hideFullMenuLabel: string;
   /** The top-level "Introduction" entry linking to /learn. */
   readonly learnCategory: LearnCategory;
 }
