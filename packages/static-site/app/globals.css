@@ -100,3 +100,37 @@ li {
 .sidenav-chevron--expanded {
   transform: rotate(180deg);
 }
+
+.sidenav-toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.sidenav-toggle-button img {
+  /* equates to #005ea2 */
+  filter: invert(19%) sepia(89%) saturate(1981%) hue-rotate(187deg) brightness(103%) contrast(101%);
+}
+
+@media (max-width: 39.99em) {
+  .sidenav-collapsible-item {
+    overflow: hidden;
+    /* This height could limit the number of visible items in SideNav,
+    but is necessary for animating open/close. Should be adequate. */
+    max-height: 500px;
+    opacity: 1;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.3s ease,
+      margin 0.3s ease;
+  }
+
+  .sidenav--collapsed .sidenav-collapsible-item {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+  }
+}

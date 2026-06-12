@@ -33,6 +33,8 @@ export interface SideNavChildItem {
   readonly isCurrent?: boolean;
   /** Optional grandchild links rendered as a nested sublist. */
   readonly children?: readonly SideNavGrandchildItem[];
+  /** When true, this item can be hidden in collapsed mobile mode. */
+  readonly isCollapsible?: boolean;
 }
 
 /**
@@ -45,6 +47,8 @@ export interface SideNavItem {
   readonly isCurrent?: boolean;
   /** Optional child links rendered as a nested sublist. */
   readonly children?: readonly SideNavChildItem[];
+  /** When true, this item can be hidden in collapsed mobile mode. */
+  readonly isCollapsible?: boolean;
 }
 
 /**
@@ -55,6 +59,8 @@ export interface SideNavProps {
   readonly ariaLabel: string;
   /** Top-level navigation items to render. */
   readonly items: readonly SideNavItem[];
+  /** Called when a navigation item is selected. */
+  readonly onItemSelect?: () => void;
 }
 
 /**
@@ -75,7 +81,7 @@ export interface SideNavProps {
  * />
  * ```
  */
-export const SideNav = ({ ariaLabel, items }: SideNavProps) => {
+export const SideNav = ({ ariaLabel, items, onItemSelect }: SideNavProps) => {
   const [expandedKeys, setExpandedKeys] = useState<ReadonlySet<string>>(() => {
     const initial = new Set<string>();
     for (const item of items) {
@@ -106,7 +112,10 @@ export const SideNav = ({ ariaLabel, items }: SideNavProps) => {
           const isExpanded = expandedKeys.has(item.link.href);
 
           return (
-            <li key={item.link.href} className="usa-sidenav__item">
+            <li
+              key={item.link.href}
+              className={`usa-sidenav__item${item.isCollapsible ? " sidenav-collapsible-item" : ""}`}
+            >
               {hasChildren ? (
                 <button
                   type="button"
@@ -135,7 +144,12 @@ export const SideNav = ({ ariaLabel, items }: SideNavProps) => {
               {hasChildren && isExpanded && (
                 <ul className="usa-sidenav__sublist">
                   {item.children.map((child) => (
-                    <li key={child.link.href} className="usa-sidenav__item">
+                    // biome-ignore lint/a11y/useKeyWithClickEvents: Because these are links, the browser will fire an onClick for "enter". Key event hook is redundant.
+                    <li
+                      key={child.link.href}
+                      className={`usa-sidenav__item${child.isCollapsible ? " sidenav-collapsible-item" : ""}`}
+                      onClick={onItemSelect}
+                    >
                       <LocalizedLink
                         link={child.link}
                         className={child.isCurrent ? "usa-current" : undefined}

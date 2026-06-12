@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { LearnSideNav } from "@/components/learn/LearnSideNav";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
@@ -37,6 +37,7 @@ const categoryChildren = Object.fromEntries(
   }),
 );
 
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: test suite
 describe("LearnSideNav", () => {
   describe("nav item order", () => {
     let navItems: HTMLElement[];
@@ -120,6 +121,64 @@ describe("LearnSideNav", () => {
       expect(screen.getByRole("link", { name: firstChildPage.link.label })).toHaveClass(
         "usa-current",
       );
+    });
+  });
+
+  describe("mobile - show/hide full menu toggle", () => {
+    const { showFullMenuLabel, hideFullMenuLabel } = messages.learn.sideNav;
+
+    beforeEach(async () => {
+      const { usePathname } = vi.mocked(await import("next/navigation"));
+      usePathname.mockReturnValue("/en-US/plan");
+    });
+
+    it("renders show full menu button by default", () => {
+      render(<LearnSideNav content={messages.learn} categoryChildren={categoryChildren} />);
+      expect(screen.getByRole("button", { name: showFullMenuLabel })).toBeInTheDocument();
+    });
+
+    it("marks non-current categories as collapsible", () => {
+      const { container } = render(
+        <LearnSideNav content={messages.learn} categoryChildren={categoryChildren} />,
+      );
+      const collapsibleItems = container.querySelectorAll(".sidenav-collapsible-item");
+      expect(collapsibleItems.length).toBeGreaterThan(0);
+
+      const currentButton = container.querySelector(".usa-current");
+      expect(currentButton?.closest(".sidenav-collapsible-item")).toBeNull();
+    });
+
+    it("wraps nav in sidenav--collapsed class by default", () => {
+      const { container } = render(
+        <LearnSideNav content={messages.learn} categoryChildren={categoryChildren} />,
+      );
+      expect(container.querySelector(".sidenav--collapsed")).toBeInTheDocument();
+    });
+
+    it("removes collapsed class and shows hide full menu after clicking toggle", () => {
+      const { container } = render(
+        <LearnSideNav content={messages.learn} categoryChildren={categoryChildren} />,
+      );
+      const toggleButton = screen.getByRole("button", { name: showFullMenuLabel });
+      fireEvent.click(toggleButton);
+
+      expect(container.querySelector(".sidenav--collapsed")).not.toBeInTheDocument();
+      expect(screen.getByRole("button", { name: hideFullMenuLabel })).toBeInTheDocument();
+    });
+
+    it("collapses menu when a child nav item is clicked", () => {
+      const { container } = render(
+        <LearnSideNav content={messages.learn} categoryChildren={categoryChildren} />,
+      );
+      const toggleButton = screen.getByRole("button", { name: showFullMenuLabel });
+      fireEvent.click(toggleButton);
+      expect(container.querySelector(".sidenav--collapsed")).not.toBeInTheDocument();
+
+      const sublist = container.querySelector(".usa-sidenav__sublist");
+      const childLink = sublist?.querySelector("a");
+      // biome-ignore lint/style/noNonNullAssertion: Needed for the test
+      fireEvent.click(childLink!);
+      expect(container.querySelector(".sidenav--collapsed")).toBeInTheDocument();
     });
   });
 });

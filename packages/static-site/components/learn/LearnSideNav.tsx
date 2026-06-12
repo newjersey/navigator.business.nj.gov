@@ -5,7 +5,9 @@
 
 "use client";
 
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import type { SideNavChildItem } from "@/components/SideNav";
 import { SideNav } from "@/components/SideNav";
 import type { LearnPageContent } from "@/domain/content/messageTypes";
@@ -20,6 +22,9 @@ export interface LearnSideNavProps {
   readonly categoryChildren: Readonly<Record<string, readonly SideNavChildItem[]>>;
 }
 
+const VISIBILITY_ICON = "/assets/njwds/dist/img/usa-icons/visibility.svg";
+const VISIBILITY_OFF_ICON = "/assets/njwds/dist/img/usa-icons/visibility_off.svg";
+
 /**
  * Renders a side navigation for the learn section, marking the current page
  * based on the active route segment below the learn layout.
@@ -30,6 +35,7 @@ export interface LearnSideNavProps {
  */
 export const LearnSideNav = ({ content, categoryChildren }: LearnSideNavProps) => {
   const pathname = usePathname();
+  const [showFullMenu, setShowFullMenu] = useState(false);
   const pathWithoutLocale = pathname.replace(/^\/[^/]+/, "");
 
   const sideNavCategories = [content.sideNav.learnCategory, ...content.categories];
@@ -44,19 +50,42 @@ export const LearnSideNav = ({ content, categoryChildren }: LearnSideNavProps) =
       (pathWithoutLocale === category.link.href && !hasCurrentChild) ||
       hasCurrentChild;
 
-    const childrenWithCurrent = hasCurrentChild
-      ? children.map((child, i) => ({
-          ...child,
-          isCurrent: i === currentChildIndex,
-        }))
-      : children;
+    const childrenWithCurrent = children.map((child, i) => ({
+      ...child,
+      isCurrent: hasCurrentChild && i === currentChildIndex,
+      isCollapsible: !hasCurrentChild || i !== currentChildIndex,
+    }));
 
     return {
       link: { ...category.link, label: category.title },
       isCurrent: isCategoryCurrent,
       children: childrenWithCurrent,
+      isCollapsible: !isCategoryCurrent,
     };
   });
 
-  return <SideNav ariaLabel={content.sideNav.ariaLabel} items={items} />;
+  return (
+    <div className={showFullMenu ? "" : "sidenav--collapsed"}>
+      <SideNav
+        ariaLabel={content.sideNav.ariaLabel}
+        items={items}
+        onItemSelect={() => setShowFullMenu(false)}
+      />
+      <button
+        type="button"
+        className="usa-button usa-button--outline sidenav-toggle-button tablet:display-none"
+        aria-expanded={showFullMenu}
+        onClick={() => setShowFullMenu((prev) => !prev)}
+      >
+        <Image
+          src={showFullMenu ? VISIBILITY_OFF_ICON : VISIBILITY_ICON}
+          alt=""
+          width={20}
+          height={20}
+          aria-hidden="true"
+        />
+        {showFullMenu ? content.sideNav.hideFullMenuLabel : content.sideNav.showFullMenuLabel}
+      </button>
+    </div>
+  );
 };

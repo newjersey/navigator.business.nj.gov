@@ -516,6 +516,8 @@
     },
     "sideNav": {
       "ariaLabel": "Side navigation",
+      "showFullMenuLabel": "Show Full Menu",
+      "hideFullMenuLabel": "Hide Full Menu",
       "learnCategory": {
         "key": "learn",
         "title": "Introduction",
