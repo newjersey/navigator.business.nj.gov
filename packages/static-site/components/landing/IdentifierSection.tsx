@@ -93,7 +93,9 @@ export const IdentifierSection = ({ content }: IdentifierSectionProps) => {
             </a>
           </div>
           <div className="usa-identifier__identity">
-            <p className="usa-identifier__identity-domain">{content.domain}</p>
+            <p className="usa-identifier__identity-domain">
+              <bdi dir="ltr">{content.domain}</bdi>
+            </p>
             <p className="usa-identifier__identity-disclaimer">
               {content.disclaimerPrefix} <LocalizedLink link={content.disclaimerLink} />
             </p>

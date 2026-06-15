@@ -46,7 +46,7 @@ export const GovBanner = ({ content }: GovBannerProps) => {
             <div className="grid-col-auto">
               <Image
                 alt={content.stateSealAlt}
-                className="margin-right-1"
+                className="nj-margin-inline-end-1"
                 height={36}
                 src="/state-seal-2px.png"
                 width={36}
@@ -55,9 +55,11 @@ export const GovBanner = ({ content }: GovBannerProps) => {
             <div className="grid-col-fill">
               <LocalizedLink link={content.stateSiteLink} />
             </div>
-            <ul className="grid-col-auto display-flex flex-align-center">
+            <ul className="grid-col-auto display-flex flex-align-center nj-inline-separators">
               <li>
-                <LocalizedLink link={content.governorIdentityLink} />
+                <LocalizedLink link={content.governorIdentityLink}>
+                  <bdi dir="ltr">{content.governorIdentityLink.label}</bdi>
+                </LocalizedLink>
               </li>
               <li className="grid-col-auto">
                 <LocalizedLink
@@ -66,7 +68,7 @@ export const GovBanner = ({ content }: GovBannerProps) => {
                 >
                   <svg
                     aria-hidden="true"
-                    className="usa-icon usa-icon--size-3 nj-banner__mail-icon margin-right-05"
+                    className="usa-icon usa-icon--size-3 nj-banner__mail-icon nj-margin-inline-end-05"
                     focusable="false"
                   >
                     <use xlinkHref={`${NJWDS_SPRITE_PATH}#mail`} />

@@ -387,6 +387,12 @@ yarn install && yarn build || { echo "Root install or build failed."; exit 1; }
 (
     cd packages/static-site
     pnpm install
+    # Playwright drives the static-site accessibility and e2e suites; install the
+    # browsers here (dev/CI only) rather than via a package postinstall, which
+    # would also pull Chromium into production Docker image builds. The headless
+    # shell is a separate download from full Chromium and is what the headless
+    # test runs actually launch.
+    pnpm exec playwright install chromium chromium-headless-shell
     pnpm build
 ) || {
     echo "Static-site install or build failed."

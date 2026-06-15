@@ -1,0 +1,27 @@
+import { defineConfig } from "@playwright/test";
+
+const SERVER_URL = "http://127.0.0.1:3100";
+
+/**
+ * Defines Playwright configuration for functional end-to-end tests.
+ *
+ * Kept separate from the accessibility config so behavior specs and a11y audits
+ * stay clearly named and can run independently. Uses a dedicated port to avoid
+ * clashing with the a11y suite's dev server.
+ */
+const playwrightE2eConfig = defineConfig({
+  testDir: "./tests/e2e",
+  timeout: 120_000,
+  use: {
+    baseURL: SERVER_URL,
+    headless: true,
+  },
+  webServer: {
+    command: "pnpm dev --port 3100",
+    reuseExistingServer: true,
+    timeout: 120_000,
+    url: SERVER_URL,
+  },
+});
+
+export default playwrightE2eConfig;

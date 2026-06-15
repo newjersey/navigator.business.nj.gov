@@ -5,8 +5,10 @@
  * and renders the landing page component.
  */
 
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Script from "next/script";
+
 import { BroughtToYouBySection } from "@/components/landing/BroughtToYouBySection";
 import { CtaBannerSection } from "@/components/landing/CtaBannerSection";
 import { FeedbackBar } from "@/components/landing/FeedbackBar";
@@ -15,6 +17,7 @@ import { QuickServicesSection } from "@/components/landing/QuickServicesSection"
 import { SupportSection } from "@/components/landing/SupportSection";
 import { WhatsNewSection } from "@/components/landing/WhatsNewSection";
 import { loadRecents } from "@/domain/content/loadContent";
+import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
 import { hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 
@@ -37,6 +40,19 @@ interface LocalizedPageProps {
   /** Asynchronous route parameters provided by Next.js. */
   readonly params: Promise<LocalePageParams>;
 }
+
+/**
+ * Generates metadata advertising hreflang alternates for the landing page.
+ *
+ * @returns Metadata containing canonical and alternate-language links.
+ * @example
+ * ```ts
+ * const metadata = generateMetadata();
+ * ```
+ */
+export const generateMetadata = (): Metadata => {
+  return { alternates: buildAlternateLanguages({ pathnameWithoutLocale: "/" }) };
+};
 
 /**
  * Renders the localized landing page route.

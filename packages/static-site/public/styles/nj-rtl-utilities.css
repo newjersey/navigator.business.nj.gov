@@ -1,0 +1,60 @@
+/*
+ * Flow-relative (RTL-aware) utility classes that compose onto NJWDS components.
+ *
+ * NJWDS (a USWDS derivative) ships only physical directional properties
+ * (right / border-right / padding-left / …) and no RTL support, so its
+ * components do not mirror under dir="rtl". These single-purpose utilities use
+ * CSS logical properties to flip automatically with the document direction.
+ *
+ * This sheet is <link>ed AFTER the NJWDS stylesheet so that, at equal
+ * specificity, these utilities win on source order without needing !important —
+ * matching the USWDS "utilities are authoritative" convention. Each utility
+ * also resets the physical edge NJWDS set, so a single class is correct in both
+ * LTR and RTL. Every rule here corresponds to a documented NJWDS RTL gap
+ * (see docs/njwds-rtl-feedback.md).
+ */
+
+/* Anchors an absolutely-positioned block to the inline-end edge (flips under
+   RTL). Composes onto .usa-nav__secondary, whose NJWDS rule hard-codes
+   right: 2rem at the desktop breakpoint. */
+.nj-inset-inline-end-2 {
+  right: auto;
+  left: auto;
+  inset-inline-end: 2rem;
+}
+
+/* Inline-end separator for adjacent items: a border + spacing on the side
+   facing the next item, flipping under RTL. Opt-in on the list.
+
+   Split into two rules on purpose. The base rule neutralizes NJWDS's physical
+   right edge in both directions; the separator itself is a logical property
+   added per-item below so it flips with the document direction. Keeping the
+   reset and the separator in one block is unsafe: in LTR `border-inline-end`
+   resolves to `border-right`, so a `border-right` reset in the same block
+   would clobber the separator. */
+.nj-inline-separators > li {
+  margin-right: 0;
+  padding-right: 0;
+  border-right: 0;
+}
+
+/* The separator sits between adjacent items, so the final item is excluded.
+   The (0,2,1) specificity beats NJWDS's `.nj-banner__header li` (0,1,1), so the
+   logical border wins regardless of source order. */
+.nj-inline-separators > li:not(:last-child) {
+  margin-inline-end: 0.5rem;
+  padding-inline-end: 0.5rem;
+  border-inline-end: 1px solid currentcolor;
+}
+
+/* Opens an absolutely-positioned dropdown from the inline-end edge (flips under
+   RTL). Composes onto the language submenu, whose NJWDS rule hard-codes
+   right: 0. NJWDS targets it with a (0,3,0) selector
+   (.usa-language__primary-item:last-of-type .usa-language__submenu), so this
+   utility is qualified with the item + submenu classes to reach equal (0,3,0)
+   specificity and win on source order rather than fighting with !important. */
+.usa-language__primary-item .usa-language__submenu.nj-dropdown-inline-end {
+  right: auto;
+  left: auto;
+  inset-inline-end: 0;
+}

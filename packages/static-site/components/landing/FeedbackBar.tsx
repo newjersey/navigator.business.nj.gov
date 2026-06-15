@@ -12,9 +12,9 @@ export const FeedbackBar = ({ content }: FeedbackBarProps) => {
           <div className="tablet:grid-col-8">
             <p className="margin-y-0 font-body-md">{content.question}</p>
           </div>
-          <div className="tablet:grid-col-4 text-right">
+          <div className="tablet:grid-col-4 nj-text-align-end">
             <button
-              className="usa-button usa-button--outline usa-button--inverse margin-right-1"
+              className="usa-button usa-button--outline usa-button--inverse nj-margin-inline-end-1"
               type="button"
             >
               {content.yesLabel}

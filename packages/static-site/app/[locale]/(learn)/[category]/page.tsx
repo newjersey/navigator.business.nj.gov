@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
+import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
 import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 
@@ -11,6 +13,19 @@ interface PageParams {
 interface Props {
   readonly params: Promise<PageParams>;
 }
+
+/**
+ * Generates metadata advertising hreflang alternates for a category page.
+ *
+ * @param props Route props provided by Next.js.
+ * @param props.params Async route params including the category segment.
+ * @returns Metadata containing canonical and alternate-language links.
+ */
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { category } = await params;
+
+  return { alternates: buildAlternateLanguages({ pathnameWithoutLocale: `/${category}` }) };
+};
 
 /**
  * Returns the list of category segments to pre-render at build time.
