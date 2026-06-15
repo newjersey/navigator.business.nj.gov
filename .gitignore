@@ -110,3 +110,4 @@ api/src/functions/messagingService/email-templates/*.txt
 api/src/domain/userSchema.generated.ts
 
 .claude/settings.json
+claude.local.md
