@@ -215,6 +215,40 @@ export interface LayoutIdentifierContent {
 }
 
 /**
+ * Localized chrome for the header language switcher control.
+ *
+ * Shown in the viewer's current language. Language option labels themselves are
+ * autonyms drawn from `LANGUAGE_DESCRIPTORS`, not from this content.
+ */
+export interface LayoutLanguageSwitcherContent {
+  /** Accessible label for the language navigation region. */
+  readonly navigationAriaLabel: string;
+  /** Label shown on the dropdown trigger button. */
+  readonly buttonLabel: string;
+  /** Visually-hidden suffix marking the currently active language option. */
+  readonly currentLanguageLabel: string;
+}
+
+/**
+ * Localized copy for the preferred-language prompt modal.
+ *
+ * Shown in the page's current language; `redirectLabel` is a template whose
+ * `{language}` placeholder is filled with the target language's autonym.
+ */
+export interface LayoutLanguagePromptContent {
+  /** Modal heading text. */
+  readonly title: string;
+  /** Body text explaining the language choice offered. */
+  readonly body: string;
+  /** Label for the button that keeps the visitor on the current page. */
+  readonly stayLabel: string;
+  /** Accessible label for the modal close control. */
+  readonly closeLabel: string;
+  /** Redirect button template containing a `{language}` placeholder. */
+  readonly redirectLabel: string;
+}
+
+/**
  * Shared localized content rendered on every page of the site.
  */
 export interface LayoutContent {
@@ -226,6 +260,10 @@ export interface LayoutContent {
   readonly banner: LayoutBannerContent;
   /** Header section content. */
   readonly header: LayoutHeaderContent;
+  /** Language switcher chrome content. */
+  readonly languageSwitcher: LayoutLanguageSwitcherContent;
+  /** Preferred-language prompt modal content. */
+  readonly languagePrompt: LayoutLanguagePromptContent;
   /** Footer section content. */
   readonly footer: LayoutFooterContent;
   /** Identifier section content. */

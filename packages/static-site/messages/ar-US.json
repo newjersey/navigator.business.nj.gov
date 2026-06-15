@@ -1,16 +1,16 @@
 {
   "metadata": {
-    "title": "Business.NJ.gov | Plan, Start, and Grow",
-    "description": "Landing page prototype for a Next.js and NJWDS-powered business guidance experience."
+    "title": "هذا من الصفحة النهائي مؤقت الصفحة",
+    "description": "من المنتج عربي النهائي اتجاه اتجاه النهائي عربي إلى نص عربي"
   },
   "layout": {
-    "skipNavigationLabel": "Skip to main content",
+    "skipNavigationLabel": "مؤقت المنتج لاحقا سيتم",
     "mainContentId": "main-content",
     "banner": {
-      "sectionAriaLabel": "Official government website",
-      "stateSealAlt": "New Jersey state seal",
+      "sectionAriaLabel": "عربي هذا في",
+      "stateSealAlt": "اتجاه من عربي حذفه",
       "stateSiteLink": {
-        "label": "Official Site of the State of New Jersey",
+        "label": "لاختبار نص سيتم سيتم من لاحقا لاحقا سيتم",
         "href": "https://nj.gov",
         "isInternal": false,
         "opensInNewTab": true
@@ -22,30 +22,30 @@
         "opensInNewTab": true
       },
       "updatesLink": {
-        "label": "Get Updates",
+        "label": "نص اليمين",
         "href": "https://nj.gov/subscribe/",
         "isInternal": false,
         "opensInNewTab": true
       }
     },
     "header": {
-      "primaryNavigationAriaLabel": "Primary navigation",
+      "primaryNavigationAriaLabel": "لاختبار المحتوى",
       "homeLink": {
         "label": "Business.NJ.gov",
         "href": "/",
         "isInternal": true,
         "opensInNewTab": false
       },
-      "homeLinkTitle": "Home",
-      "homeLinkAriaLabel": "Business.NJ.gov home",
+      "homeLinkTitle": "إلى",
+      "homeLinkAriaLabel": "من حذفه",
       "siteTitle": "Business.NJ.Gov",
-      "menuButtonLabel": "Menu",
-      "closeButtonAlt": "Close menu",
+      "menuButtonLabel": "من",
+      "closeButtonAlt": "من الصفحة",
       "primaryItems": [
         {
           "kind": "link",
           "link": {
-            "label": "Learn",
+            "label": "اتجاه",
             "href": "/learn",
             "isInternal": true,
             "opensInNewTab": false
@@ -55,7 +55,7 @@
         {
           "kind": "link",
           "link": {
-            "label": "Updates",
+            "label": "اليسار",
             "href": "/updates",
             "isInternal": true,
             "opensInNewTab": false
@@ -65,28 +65,28 @@
       ],
       "secondaryLinks": [],
       "searchAction": "/search",
-      "searchInputLabel": "Search site",
-      "searchSubmitIconAlt": "Search"
+      "searchInputLabel": "هذا إلى",
+      "searchSubmitIconAlt": "من"
     },
     "languageSwitcher": {
-      "navigationAriaLabel": "Language",
-      "buttonLabel": "Languages",
-      "currentLanguageLabel": "Current language"
+      "navigationAriaLabel": "لاحقا",
+      "buttonLabel": "هذا",
+      "currentLanguageLabel": "اليمين سيتم"
     },
     "languagePrompt": {
-      "title": "View this page in your language?",
-      "body": "This page is available in another language that matches your browser settings.",
-      "stayLabel": "Stay on this page",
-      "closeLabel": "Close",
-      "redirectLabel": "Switch to {language}"
+      "title": "هذا إلى هذا اتجاه عربي هذا",
+      "body": "الصفحة اليسار من اليسار عربي حذفه اتجاه تجريبي لاحقا هذا هذا المنتج",
+      "stayLabel": "الكتابة في إلى المحتوى",
+      "closeLabel": "مؤقت",
+      "redirectLabel": "اتجاه اتجاه هذا"
     },
     "footer": {
-      "returnToTopLabel": "Return to top",
-      "navigationAriaLabel": "Footer navigation",
+      "returnToTopLabel": "نص الكتابة حذفه",
+      "navigationAriaLabel": "حذفه اليسار",
       "primaryLinks": [
         {
           "link": {
-            "label": "Plan",
+            "label": "اليمين",
             "href": "/plan",
             "isInternal": true,
             "opensInNewTab": false
@@ -94,7 +94,7 @@
         },
         {
           "link": {
-            "label": "Start",
+            "label": "في",
             "href": "/start",
             "isInternal": true,
             "opensInNewTab": false
@@ -102,7 +102,7 @@
         },
         {
           "link": {
-            "label": "Operate",
+            "label": "الكتابة",
             "href": "/operate",
             "isInternal": true,
             "opensInNewTab": false
@@ -110,7 +110,7 @@
         },
         {
           "link": {
-            "label": "Grow",
+            "label": "من",
             "href": "/grow",
             "isInternal": true,
             "opensInNewTab": false
@@ -118,81 +118,81 @@
         },
         {
           "link": {
-            "label": "Support",
+            "label": "لاحقا",
             "href": "/support",
             "isInternal": true,
             "opensInNewTab": false
           }
         }
       ],
-      "agencyLogoAlt": "Business.NJ.gov logo",
+      "agencyLogoAlt": "الكتابة هذا",
       "agencyName": "Business.NJ.gov",
       "socialLinks": [
         {
           "modifier": "github",
           "link": {
-            "label": "GitHub",
+            "label": "عربي",
             "href": "https://github.com/newjersey/",
             "isInternal": false,
             "opensInNewTab": true
           },
-          "iconAlt": "GitHub",
+          "iconAlt": "من",
           "iconPath": "/assets/njwds/dist/img/usa-icons/github.svg"
         },
         {
           "modifier": "facebook",
           "link": {
-            "label": "Facebook",
+            "label": "مؤقت",
             "href": "https://www.facebook.com/BusinessNJgov",
             "isInternal": false,
             "opensInNewTab": true
           },
-          "iconAlt": "Facebook",
+          "iconAlt": "اليسار",
           "iconPath": "/assets/njwds/dist/img/usa-icons/facebook.svg"
         },
         {
           "modifier": "youtube",
           "link": {
-            "label": "YouTube",
+            "label": "لاختبار",
             "href": "https://www.youtube.com/@BusinessExperience-NJOOI",
             "isInternal": false,
             "opensInNewTab": true
           },
-          "iconAlt": "YouTube",
+          "iconAlt": "لاحقا",
           "iconPath": "/assets/njwds/dist/img/usa-icons/youtube.svg"
         }
       ],
-      "contactHeading": "Business.NJ.gov Contact Center",
+      "contactHeading": "من اتجاه اليسار",
       "phoneLink": {
-        "label": "(800) CALL-GOVT",
+        "label": "حذفه اليمين",
         "href": "tel:1-800-555-5555",
         "isInternal": false,
         "opensInNewTab": false
       },
       "emailLink": {
-        "label": "info@business.nj.gov",
+        "label": "نص",
         "href": "mailto:info@business.nj.gov",
         "isInternal": false,
         "opensInNewTab": false
       }
     },
     "identifier": {
-      "agencySectionAriaLabel": "Agency identifier",
-      "stateLogoAlt": "State of New Jersey logo",
-      "agencyLogoAlt": "Business.NJ.gov logo",
+      "agencySectionAriaLabel": "إلى تجريبي",
+      "stateLogoAlt": "النهائي الكتابة هذا هذا من",
+      "agencyLogoAlt": "سيتم النهائي",
       "domain": "business.nj.gov",
-      "disclaimerPrefix": "An official website of the",
+      "disclaimerPrefix": "الكتابة اتجاه في إلى حذفه",
       "disclaimerLink": {
-        "label": "State of New Jersey",
+        "label": "في المنتج حذفه في",
         "href": "https://nj.gov",
         "isInternal": false,
         "opensInNewTab": false
       },
-      "importantLinksAriaLabel": "Important links",
+      "importantLinksAriaLabel": "المنتج إلى",
       "requiredLinks": [
         {
           "link": {
-            "label": "Governor Mikie Sherrill",
+            "label": "هذا من اليسار",
             "href": "https://nj.gov/governor/admin/about/",
             "isInternal": false,
             "opensInNewTab": false
@@ -200,7 +200,7 @@
         },
         {
           "link": {
-            "label": "Lt. Governor Dr. Dale G. Caldwell",
+            "label": "اليمين سيتم من من لاختبار الكتابة",
             "href": "https://nj.gov/governor/admin/lt/",
             "isInternal": false,
             "opensInNewTab": false
@@ -208,7 +208,7 @@
         },
         {
           "link": {
-            "label": "NJ Home",
+            "label": "اليمين عربي",
             "href": "https://nj.gov/",
             "isInternal": false,
             "opensInNewTab": false
@@ -216,7 +216,7 @@
         },
         {
           "link": {
-            "label": "Services A to Z",
+            "label": "تجريبي المحتوى لاحقا اتجاه",
             "href": "https://nj.gov/nj/gov/njgov/alphaserv.html",
             "isInternal": false,
             "opensInNewTab": false
@@ -224,7 +224,7 @@
         },
         {
           "link": {
-            "label": "Departments/Agencies",
+            "label": "الصفحة",
             "href": "https://nj.gov/nj/gov/deptserv/",
             "isInternal": false,
             "opensInNewTab": false
@@ -232,7 +232,7 @@
         },
         {
           "link": {
-            "label": "FAQs",
+            "label": "الكتابة",
             "href": "https://nj.gov/faqs/",
             "isInternal": false,
             "opensInNewTab": false
@@ -240,7 +240,7 @@
         },
         {
           "link": {
-            "label": "Contact Us",
+            "label": "لاختبار هذا",
             "href": "https://nj.gov/nj/feedback.html",
             "isInternal": false,
             "opensInNewTab": false
@@ -248,7 +248,7 @@
         },
         {
           "link": {
-            "label": "Privacy Notice",
+            "label": "المحتوى المنتج",
             "href": "https://nj.gov/nj/privacy.html",
             "isInternal": false,
             "opensInNewTab": false
@@ -256,7 +256,7 @@
         },
         {
           "link": {
-            "label": "Legal Statement & Disclaimers",
+            "label": "المنتج الكتابة مؤقت تجريبي",
             "href": "https://nj.gov/nj/legal.html",
             "isInternal": false,
             "opensInNewTab": false
@@ -264,7 +264,7 @@
         },
         {
           "link": {
-            "label": "Accessibility",
+            "label": "لاحقا",
             "href": "https://nj.gov/nj/accessibility.html",
             "isInternal": false,
             "opensInNewTab": false
@@ -272,24 +272,24 @@
         },
         {
           "link": {
-            "label": "Open Public Records Act (OPRA)",
+            "label": "اليمين من مؤقت تجريبي لاحقا",
             "href": "https://nj.gov/opra/",
             "isInternal": false,
             "opensInNewTab": false
           }
         }
       ],
-      "usGovernmentSectionAriaLabel": "U.S. government information and services",
-      "usGovernmentDescription": "Copyright \u00a9 2026 State of New Jersey"
+      "usGovernmentSectionAriaLabel": "اليمين الكتابة هذا اليسار الصفحة",
+      "usGovernmentDescription": "المنتج اليسار النهائي عربي هذا المحتوى لاختبار"
     }
   },
   "landing": {
     "hero": {
-      "sectionAriaLabel": "Introduction",
-      "title": "Your New Jersey business needs. All in one place.",
-      "paragraph": "Get your personalized business starter kit, find funding opportunities, discover your tax obligations, and more.",
+      "sectionAriaLabel": "هذا",
+      "title": "حذفه هذا عربي من اليسار اليسار لاحقا سيتم لاختبار",
+      "paragraph": "من من تجريبي اتجاه عربي حذفه حذفه هذا نص إلى لاحقا اليسار لاختبار اتجاه لاختبار",
       "callToActionLink": {
-        "label": "Get Your Personalized Guide",
+        "label": "هذا هذا من المحتوى",
         "href": "https://account.business.nj.gov/onboarding",
         "isInternal": false,
         "opensInNewTab": true
@@ -297,93 +297,93 @@
       "carouselImages": [
         {
           "src": "/img/hero/image_1.png",
-          "alt": "A woman smiling while working on her laptop at home."
+          "alt": "تجريبي لاحقا تجريبي النهائي تجريبي الكتابة عربي مؤقت اليسار مؤقت"
         },
         {
           "src": "/img/hero/image_2.png",
-          "alt": "A tattoo artist working in his New Jersey shop."
+          "alt": "نص عربي نص تجريبي في عربي النهائي من لاختبار"
         },
         {
           "src": "/img/hero/image_3.png",
-          "alt": "A female entrepreneur reviewing documents in her business."
+          "alt": "اتجاه من اليسار في النهائي مؤقت هذا لاختبار"
         },
         {
           "src": "/img/hero/image_4.png",
-          "alt": "The owner of a New Jersey restaurant preparing food."
+          "alt": "الكتابة حذفه سيتم في عربي سيتم سيتم عربي تجريبي"
         }
       ]
     },
     "quickServices": {
-      "title": "Quick Services",
-      "subtitle": "Access popular business services",
+      "title": "من اتجاه",
+      "subtitle": "الكتابة المحتوى الصفحة لاحقا",
       "items": [
         {
-          "title": "Business Registration",
-          "description": "Start your LLC, corporation, or partnership",
+          "title": "الصفحة من",
+          "description": "في تجريبي المحتوى في الصفحة حذفه",
           "iconPath": "/img/checklist.svg",
-          "iconAlt": "Checklist icon",
+          "iconAlt": "النهائي المحتوى",
           "link": {
-            "label": "Business Registration",
+            "label": "مؤقت من",
             "href": "/pages/register-your-business",
             "isInternal": true,
             "opensInNewTab": false
           }
         },
         {
-          "title": "Licenses & Permits",
-          "description": "Apply for required business licenses",
+          "title": "من المنتج في",
+          "description": "من النهائي المنتج من الصفحة",
           "iconPath": "/img/planning.svg",
-          "iconAlt": "Planning icon",
+          "iconAlt": "نص مؤقت",
           "link": {
-            "label": "Licenses & Permits",
+            "label": "عربي هذا نص",
             "href": "/pages/licensing-and-certification-guide",
             "isInternal": true,
             "opensInNewTab": false
           }
         },
         {
-          "title": "Business Names",
-          "description": "Choose available names to represent your business",
+          "title": "النهائي نص",
+          "description": "لاحقا لاحقا نص اليسار تجريبي في عربي",
           "iconPath": "/img/paper.svg",
-          "iconAlt": "Stack of paper icon",
+          "iconAlt": "اليمين اتجاه إلى حذفه",
           "link": {
-            "label": "Business Names",
+            "label": "حذفه المنتج",
             "href": "/pages/business-names",
             "isInternal": true,
             "opensInNewTab": false
           }
         },
         {
-          "title": "File Your Annual Report",
-          "description": "Never miss a deadline",
+          "title": "اليمين لاحقا الصفحة في",
+          "description": "تجريبي هذا الصفحة عربي",
           "iconPath": "/img/arrow.svg",
-          "iconAlt": "Up arrow icon",
+          "iconAlt": "الكتابة نص لاختبار",
           "link": {
-            "label": "File Your Annual Report",
+            "label": "من من الصفحة النهائي",
             "href": "/pages/filings-and-accounting",
             "isInternal": true,
             "opensInNewTab": false
           }
         },
         {
-          "title": "Employer Obligations",
-          "description": "Employer registration and resources",
+          "title": "الصفحة هذا",
+          "description": "المنتج المنتج المنتج الصفحة",
           "iconPath": "/img/shaking_hands.svg",
-          "iconAlt": "Shaking hands icon",
+          "iconAlt": "سيتم عربي لاختبار",
           "link": {
-            "label": "Employer Obligations",
+            "label": "اليسار المنتج",
             "href": "/pages/employer-requirements",
             "isInternal": true,
             "opensInNewTab": false
           }
         },
         {
-          "title": "Business Support",
-          "description": "Access grants and assistance programs",
+          "title": "المحتوى نص",
+          "description": "اتجاه سيتم حذفه سيتم حذفه",
           "iconPath": "/img/finance.svg",
-          "iconAlt": "Finance icon",
+          "iconAlt": "إلى نص",
           "link": {
-            "label": "Business Support",
+            "label": "اتجاه مؤقت",
             "href": "/pages/business-support",
             "isInternal": true,
             "opensInNewTab": false
@@ -392,59 +392,59 @@
       ]
     },
     "ctaBanner": {
-      "title": "Access Your Personalized Business Information",
-      "subtitle": "Start and grow your New Jersey or out-of-state business with your Business.NJ.gov account today!",
+      "title": "مؤقت اليسار هذا اتجاه من",
+      "subtitle": "نص من المنتج تجريبي إلى اليمين حذفه من تجريبي اتجاه تجريبي مؤقت من في",
       "callToActionLink": {
-        "label": "Create Account",
+        "label": "النهائي الكتابة",
         "href": "https://account.business.nj.gov/onboarding",
         "isInternal": false,
         "opensInNewTab": true
       }
     },
     "whatsNew": {
-      "title": "What\u2019s New",
+      "title": "مؤقت النهائي",
       "viewAllLink": {
-        "label": "View All Updates",
+        "label": "النهائي المحتوى مؤقت",
         "href": "/updates",
         "isInternal": true,
         "opensInNewTab": false
       }
     },
     "support": {
-      "title": "For More Support",
-      "description": "Looking for more expert advice? Try our free, personalized online business registration guides, speak to a representative on our chat, or sign up for business updates straight to your email. A print version and digital file of our [Small Business Manual](https://cdn.prod.website-files.com/5e31b06cb76b830809358a75/662a750614519d466e63f6c7_NJ_Small_Business_Manual_for_download.pdf) is also available.",
+      "title": "هذا لاحقا المحتوى",
+      "description": "الصفحة حذفه في تجريبي الكتابة النهائي من النهائي المحتوى لاختبار المحتوى الكتابة النهائي المحتوى اتجاه المنتج في لاختبار سيتم نص نص اليمين مؤقت لاحقا تجريبي هذا هذا الصفحة لاختبار في اليمين لاختبار المحتوى من تجريبي تجريبي لاحقا في لاحقا من المنتج اتجاه النهائي اتجاه",
       "cards": [
         {
-          "title": "Your Business.NJ.gov Account",
-          "description": "Get a free, personalized step-by-step guide for starting your business in New Jersey.",
+          "title": "اليسار من هذا",
+          "description": "تجريبي عربي اليسار لاختبار النهائي المحتوى مؤقت عربي هذا اليسار اتجاه تجريبي المحتوى",
           "iconPath": "/img/navigation.svg",
-          "iconAlt": "Navigation icon",
+          "iconAlt": "عربي هذا",
           "link": {
-            "label": "Your Business.NJ.gov Account",
+            "label": "لاحقا المحتوى الصفحة",
             "href": "https://account.business.nj.gov/",
             "isInternal": false,
             "opensInNewTab": true
           }
         },
         {
-          "title": "One-on-One Support",
-          "description": "Chat with a business advocate with decades of experience, anytime from 9a.m. - 5p.m. Monday - Friday.",
+          "title": "تجريبي اتجاه",
+          "description": "تجريبي تجريبي نص نص الصفحة تجريبي اليسار نص المنتج لاختبار اليمين تجريبي النهائي سيتم نص اليسار لاحقا",
           "iconPath": "/img/hands.svg",
-          "iconAlt": "Helping hands icon",
+          "iconAlt": "لاختبار اتجاه المنتج",
           "link": {
-            "label": "One-on-One Support",
+            "label": "النهائي في",
             "href": "/support",
             "isInternal": true,
             "opensInNewTab": false
           }
         },
         {
-          "title": "Business Newsletter",
-          "description": "Stay up to date on recently announced programs or regulations likely to affect your business.",
+          "title": "سيتم هذا",
+          "description": "لاحقا مؤقت مؤقت اليمين حذفه لاختبار اليمين النهائي المنتج من لاختبار من الصفحة مؤقت إلى",
           "iconPath": "/img/piechart.svg",
-          "iconAlt": "Business chart icon",
+          "iconAlt": "مؤقت من هذا",
           "link": {
-            "label": "Business Newsletter",
+            "label": "من مؤقت",
             "href": "https://business.nj.gov/newsletter",
             "isInternal": false,
             "opensInNewTab": true
@@ -453,58 +453,58 @@
       ]
     },
     "broughtToYouBy": {
-      "title": "Brought to you by",
+      "title": "اليسار تجريبي المنتج إلى",
       "agencies": [
         {
-          "name": "Office of the Governor",
+          "name": "من تجريبي الكتابة سيتم",
           "logo": "/img/New_Jersey_state_seal.png",
-          "logoAlt": "State of New Jersey Seal",
+          "logoAlt": "من هذا المحتوى حذفه الكتابة",
           "link": {
-            "label": "Office of the Governor",
+            "label": "من الصفحة إلى نص",
             "href": "https://nj.gov/governor/",
             "isInternal": false,
             "opensInNewTab": true
           }
         },
         {
-          "name": "New Jersey Business Action Center",
+          "name": "الكتابة في اليمين مؤقت المنتج",
           "logo": "/img/njbac_logo.png",
-          "logoAlt": "New Jersey Business Action Center Logo",
+          "logoAlt": "من نص إلى نص من عربي",
           "link": {
-            "label": "New Jersey Business Action Center",
+            "label": "لاختبار سيتم لاختبار لاختبار هذا",
             "href": "https://www.nj.gov/state/bac/bac.shtml",
             "isInternal": false,
             "opensInNewTab": true
           }
         },
         {
-          "name": "New Jersey Economic Development Authority",
+          "name": "لاختبار المحتوى النهائي المنتج سيتم",
           "logo": "/img/njeda_logo.png",
-          "logoAlt": "New Jersey Economic Development Authority Logo",
+          "logoAlt": "اليمين هذا مؤقت المحتوى مؤقت سيتم",
           "link": {
-            "label": "New Jersey Economic Development Authority",
+            "label": "نص عربي نص إلى الكتابة",
             "href": "https://www.njeda.com/",
             "isInternal": false,
             "opensInNewTab": true
           }
         },
         {
-          "name": "Department of the Treasury",
+          "name": "المنتج من المنتج من",
           "logo": "/img/treasuryseal.webp",
-          "logoAlt": "New Jersey Department of Treasury Seal",
+          "logoAlt": "اليمين المحتوى لاختبار من المنتج سيتم",
           "link": {
-            "label": "Department of the Treasury",
+            "label": "الصفحة المحتوى في إلى",
             "href": "https://www.state.nj.us/treasury/",
             "isInternal": false,
             "opensInNewTab": true
           }
         },
         {
-          "name": "New Jersey Innovation Authority",
+          "name": "من اليمين النهائي نص",
           "logo": "/img/nj_logo.svg",
-          "logoAlt": "New Jersey Innovation Authority Logo",
+          "logoAlt": "إلى حذفه نص المنتج سيتم",
           "link": {
-            "label": "New Jersey Innovation Authority",
+            "label": "سيتم إلى عربي هذا",
             "href": "https://innovation.nj.gov/",
             "isInternal": false,
             "opensInNewTab": true
@@ -513,26 +513,24 @@
       ]
     },
     "feedbackBar": {
-      "question": "Did you find what you were looking for on this page?",
-      "yesLabel": "Yes",
-      "noLabel": "No"
+      "question": "اليسار تجريبي في لاختبار الكتابة لاحقا المنتج من لاختبار اتجاه عربي",
+      "yesLabel": "مؤقت",
+      "noLabel": "هذا"
     }
   },
   "learn": {
-    "name": "Learn",
-    "subHeadingText": "Find guides and resources for every stage \u2014 from your first idea to long-term growth.",
-    "heading2": "Where are you in your business journey?",
-    "cardLinkText": "Learn more",
+    "name": "مؤقت",
+    "subHeadingText": "اليمين الصفحة نص في الصفحة اليمين نص سيتم إلى لاختبار اليمين في من لاختبار اليمين",
+    "heading2": "اليمين سيتم من المحتوى اليسار من المنتج",
+    "cardLinkText": "تجريبي لاختبار",
     "categoryPages": {
-      "allTopics": "All Topics"
+      "allTopics": "حذفه الصفحة"
     },
     "sideNav": {
-      "ariaLabel": "Side navigation",
-      "showFullMenuLabel": "Show Full Menu",
-      "hideFullMenuLabel": "Hide Full Menu",
+      "ariaLabel": "مؤقت نص",
       "learnCategory": {
         "key": "learn",
-        "title": "Introduction",
+        "title": "اتجاه",
         "link": {
           "href": "/learn",
           "isInternal": true,
@@ -543,8 +541,8 @@
     "categories": [
       {
         "key": "plan",
-        "title": "Plan",
-        "subtitle": "Expand on your great idea to lay the foundation for a successful business.",
+        "title": "مؤقت",
+        "subtitle": "من حذفه هذا لاحقا الكتابة في اليمين المنتج حذفه مؤقت المنتج اليمين المحتوى",
         "link": {
           "href": "/plan",
           "isInternal": true,
@@ -553,8 +551,8 @@
       },
       {
         "key": "start",
-        "title": "Start",
-        "subtitle": "Learn what it means to be an employer in New Jersey and register your new business.",
+        "title": "اليسار",
+        "subtitle": "عربي لاختبار نص إلى سيتم المحتوى من المنتج حذفه حذفه الكتابة إلى هذا المحتوى نص سيتم",
         "link": {
           "href": "/start",
           "isInternal": true,
@@ -563,8 +561,8 @@
       },
       {
         "key": "operate",
-        "title": "Operate",
-        "subtitle": "Understand the requirements of keeping your business running smoothly.",
+        "title": "إلى",
+        "subtitle": "الكتابة الصفحة من تجريبي نص من إلى اليمين لاختبار",
         "link": {
           "href": "/operate",
           "isInternal": true,
@@ -573,8 +571,8 @@
       },
       {
         "key": "grow",
-        "title": "Grow",
-        "subtitle": "Expand your business and see it flourish with financing and new opportunities.",
+        "title": "تجريبي",
+        "subtitle": "في تجريبي من إلى إلى إلى مؤقت إلى الكتابة سيتم النهائي حذفه",
         "link": {
           "href": "/grow",
           "isInternal": true,

@@ -45,7 +45,7 @@
         {
           "kind": "link",
           "link": {
-            "label": "Learn",
+            "label": "Aprender",
             "href": "/learn",
             "isInternal": true,
             "opensInNewTab": false
@@ -55,7 +55,7 @@
         {
           "kind": "link",
           "link": {
-            "label": "Updates",
+            "label": "Actualizaciones",
             "href": "/updates",
             "isInternal": true,
             "opensInNewTab": false
@@ -67,6 +67,18 @@
       "searchAction": "/search",
       "searchInputLabel": "Buscar en el sitio",
       "searchSubmitIconAlt": "Buscar"
+    },
+    "languageSwitcher": {
+      "navigationAriaLabel": "Idioma",
+      "buttonLabel": "Idiomas",
+      "currentLanguageLabel": "Idioma actual"
+    },
+    "languagePrompt": {
+      "title": "¿Ver esta página en su idioma?",
+      "body": "Esta página está disponible en otro idioma que coincide con la configuración de su navegador.",
+      "stayLabel": "Permanecer en esta página",
+      "closeLabel": "Cerrar",
+      "redirectLabel": "Cambiar a {language}"
     },
     "footer": {
       "returnToTopLabel": "Volver arriba",

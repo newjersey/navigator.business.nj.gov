@@ -33,7 +33,9 @@
     "test:watch": "vitest",
     "pretest:accessibility": "pnpm sync:njwds-assets",
     "sync:njwds-assets": "tsx scripts/syncNjwdsAssets.ts",
-    "test:accessibility": "playwright test --config=playwright.a11y.config.ts"
+    "test:accessibility": "playwright test --config=playwright.a11y.config.ts",
+    "pretest:e2e": "pnpm sync:njwds-assets",
+    "test:e2e": "playwright test --config=playwright.e2e.config.ts"
   },
   "keywords": [],
   "author": {

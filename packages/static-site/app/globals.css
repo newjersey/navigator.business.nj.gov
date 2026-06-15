@@ -12,6 +12,15 @@ body a {
   text-decoration: none;
 }
 
+/* Inline links inside running text must stay distinguishable without relying on
+   color alone (WCAG 1.4.1), so restore their underline. Block/standalone links
+   such as cards and nav items keep the underline-free treatment above. */
+p a,
+.usa-prose a,
+.usa-identifier__identity-disclaimer a {
+  text-decoration: underline;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -19,6 +28,21 @@ body {
 
 .grid-container p {
   max-width: unset;
+}
+
+/* Flow-relative spacing/alignment utilities. NJWDS/USWDS ship only physical
+   utilities (margin-right-*, text-right), which do not flip under dir="rtl".
+   These logical equivalents auto-flip, keeping our approach class-based. */
+.nj-margin-inline-end-1 {
+  margin-inline-end: 1rem;
+}
+
+.nj-margin-inline-end-05 {
+  margin-inline-end: 0.5rem;
+}
+
+.nj-text-align-end {
+  text-align: end;
 }
 
 .nj-banner__inner ul {
@@ -40,13 +64,11 @@ body {
 }
 
 ul.usa-card-group {
-  margin-left: -0.75rem;
-  margin-right: -0.75rem;
+  margin-inline: -0.75rem;
 }
 
 div.usa-card__container {
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
+  margin-inline: 0.75rem;
 }
 
 @media (min-width: 40em) {
@@ -56,7 +78,7 @@ div.usa-card__container {
   }
 
   .learn-side-nav nav {
-    margin-right: 48px;
+    margin-inline-end: 48px;
     position: sticky;
     top: 20px;
   }
@@ -93,7 +115,7 @@ li {
 
 .sidenav-chevron {
   flex-shrink: 0;
-  margin-left: 0.5rem;
+  margin-inline-start: 0.5rem;
   transition: transform 0.2s ease;
 }
 
@@ -133,4 +155,17 @@ li {
     opacity: 0;
     margin: 0;
   }
+}
+
+/* Show at most six language options before scrolling, per USWDS language-selector spec. */
+.usa-language__submenu {
+  max-height: 13.5rem;
+  overflow-y: auto;
+}
+
+/* Drop the USWDS default divider line between options, per Figma design.
+   Scoped under .usa-language__submenu to outrank the single-class NJWDS rule
+   on specificity, independent of stylesheet load order. */
+.usa-language__submenu .usa-language__submenu-item {
+  border-top: none;
 }

@@ -5,7 +5,11 @@
  * dedicated navigation subcomponents.
  */
 
-import type { LayoutHeaderContent } from "@/domain/content/messageTypes";
+import type {
+  LayoutHeaderContent,
+  LayoutLanguageSwitcherContent,
+} from "@/domain/content/messageTypes";
+import { HeaderLanguageSwitcher } from "./HeaderLanguageSwitcher";
 import { HeaderPrimaryNav } from "./HeaderPrimaryNav";
 import { HeaderSecondaryNav } from "./HeaderSecondaryNav";
 import { LocalizedLink } from "./LocalizedLink";
@@ -18,6 +22,8 @@ import { LocalizedLink } from "./LocalizedLink";
 export interface SiteHeaderProps {
   /** Localized content used by header subcomponents. */
   readonly content: LayoutHeaderContent;
+  /** Localized language switcher chrome shown in the utility area. */
+  readonly languageSwitcher: LayoutLanguageSwitcherContent;
 }
 
 /**
@@ -25,13 +31,14 @@ export interface SiteHeaderProps {
  *
  * @param props Component props.
  * @param props.content Localized header content.
+ * @param props.languageSwitcher Localized language switcher chrome.
  * @returns The full extended header markup.
  * @example
  * ```tsx
- * <SiteHeader content={landing.header} />
+ * <SiteHeader content={landing.header} languageSwitcher={landing.languageSwitcher} />
  * ```
  */
-export const SiteHeader = ({ content }: SiteHeaderProps) => {
+export const SiteHeader = ({ content, languageSwitcher }: SiteHeaderProps) => {
   return (
     <>
       <div className="usa-overlay" />
@@ -44,7 +51,7 @@ export const SiteHeader = ({ content }: SiteHeaderProps) => {
                 link={content.homeLink}
                 title={content.homeLinkTitle}
               >
-                {content.siteTitle}
+                <bdi dir="ltr">{content.siteTitle}</bdi>
               </LocalizedLink>
             </em>
           </div>
@@ -56,6 +63,9 @@ export const SiteHeader = ({ content }: SiteHeaderProps) => {
           <div className="usa-nav__inner">
             <HeaderPrimaryNav header={content} />
             <HeaderSecondaryNav header={content} />
+            <div className="usa-nav__secondary nj-inset-inline-end-2">
+              <HeaderLanguageSwitcher content={languageSwitcher} />
+            </div>
           </div>
         </nav>
       </header>
