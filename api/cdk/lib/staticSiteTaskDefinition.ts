@@ -150,6 +150,7 @@ const createStaticSiteContainerEnvironment = (
     HOSTNAME: "0.0.0.0",
     NODE_ENV: "production",
     PORT: STATIC_SITE_CONTAINER_PORT.toString(),
+    NEXT_PUBLIC_SURVEY_MONKEY_ENABLED: props.stage === PROD_STAGE ? "true" : "false",
   };
 
   if (!isStaticSiteBasicAuthStage(props.stage)) {
