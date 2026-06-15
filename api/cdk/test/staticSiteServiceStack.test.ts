@@ -141,6 +141,7 @@ describe("StaticSiteServiceStack", () => {
       ContainerDefinitions: Match.arrayWith([
         Match.objectLike({
           Environment: Match.arrayWith([
+            { Name: "NEXT_PUBLIC_SURVEY_MONKEY_ENABLED", Value: "false" },
             { Name: "USE_BASIC_AUTH", Value: "true" },
             { Name: "BASIC_AUTH_USERNAME", Value: "test-user" },
             { Name: "BASIC_AUTH_PASSWORD", Value: "test-password" },
@@ -184,6 +185,7 @@ describe("StaticSiteServiceStack", () => {
       ContainerDefinitions: Match.arrayWith([
         Match.objectLike({
           Environment: Match.arrayWith([
+            { Name: "NEXT_PUBLIC_SURVEY_MONKEY_ENABLED", Value: "true" },
             { Name: "USE_BASIC_AUTH", Value: "true" },
             { Name: "BASIC_AUTH_USERNAME", Value: "test-user" },
             { Name: "BASIC_AUTH_PASSWORD", Value: "test-password" },

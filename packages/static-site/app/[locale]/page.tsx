@@ -74,11 +74,16 @@ const LocalizedLandingPage = async ({ params }: LocalizedPageProps) => {
       <SupportSection content={messages.landing.support} />
       <BroughtToYouBySection content={messages.landing.broughtToYouBy} />
       <FeedbackBar content={messages.landing.feedbackBar} />
-      <Script
-        id="smcx-sdk"
-        src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd_2Fl0hAvWCD8cNdKnWc8kt0IafoTskhMiZ5h9m_2FJavuow.js"
-        strategy="afterInteractive"
-      />
+      {
+        // biome-ignore lint/style/noProcessEnv: NEXT_PUBLIC_ vars are inlined at build time.
+        process.env.NEXT_PUBLIC_SURVEY_MONKEY_ENABLED === "true" && (
+          <Script
+            id="smcx-sdk"
+            src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd_2Fl0hAvWCD8cNdKnWc8kt0IafoTskhMiZ5h9m_2FJavuow.js"
+            strategy="afterInteractive"
+          />
+        )
+      }
     </>
   );
 };
