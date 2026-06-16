@@ -128,7 +128,7 @@
     "@aws-sdk/client-cognito-identity-provider": "3.777.0",
     "@aws-sdk/types": "3.893.0",
     "@axe-core/playwright": "4.11.2",
-    "@babel/core": "7.29.0",
+    "@babel/core": "7.29.6",
     "@biomejs/biome": "2.4.12",
     "@businessnjgovnavigator/shared": "*",
     "@cypress-audit/lighthouse": "1.4.2",
