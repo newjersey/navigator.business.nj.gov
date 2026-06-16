@@ -19,6 +19,7 @@ report-industries-and-non-essential-questions.csv
 # testing
 /coverage
 coverage/
+.playwright-mcp/
 
 # next.js
 web/.next/

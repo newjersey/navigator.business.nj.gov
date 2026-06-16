@@ -17,5 +17,10 @@ import { APP_LOCALES, DEFAULT_LOCALE } from "./locales";
 export const routing = defineRouting({
   locales: APP_LOCALES,
   defaultLocale: DEFAULT_LOCALE,
-  localePrefix: "always",
+  // `as-needed` leaves the default locale (en-US) unprefixed (`/page/x`) while
+  // prefixing every other locale (`/es-US/page/x`).
+  localePrefix: "as-needed",
+  // The preferred-language modal handles locale suggestion client-side, so the
+  // middleware must never silently redirect based on cookie or accept-language.
+  localeDetection: false,
 });

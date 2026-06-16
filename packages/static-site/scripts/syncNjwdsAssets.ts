@@ -200,6 +200,10 @@ const REQUIRED_NJWDS_ASSETS: readonly RequiredNjwdsAsset[] = [
     description: "NJWDS icon sprite",
   },
   {
+    relativePath: "img/us_flag_small.png",
+    description: "NJWDS US flag image",
+  },
+  {
     relativePath: "img/usa-icons/facebook.svg",
     description: "NJWDS Facebook icon",
   },

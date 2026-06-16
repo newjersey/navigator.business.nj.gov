@@ -17,11 +17,14 @@ import { GoogleTagManager } from "@/components/analytics/GoogleTagManager";
 import { Intercom } from "@/components/analytics/Intercom";
 import { GovBanner } from "@/components/landing/GovBanner";
 import { IdentifierSection } from "@/components/landing/IdentifierSection";
+import { LanguagePromptModal } from "@/components/landing/LanguagePromptModal";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { SkipNav } from "@/components/landing/SkipNav";
+import { textDirectionForLocale } from "@/domain/i18n/languages";
 import { APP_LOCALES, hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
+import { SITE_BASE_URL } from "@/domain/siteConfig";
 
 /**
  * Stores the logo path used in metadata icons and social previews.
@@ -29,14 +32,18 @@ import { getApplicationMessages } from "@/domain/i18n/messages";
 const NJ_LOGO_IMAGE_PATH = "/assets/njwds/dist/img/nj-logo-gray-20.png";
 
 /**
- * Stores the canonical production URL for metadata URL resolution.
- */
-const METADATA_BASE_URL = "https://next.business.nj.gov";
-
-/**
  * Public path for the synced NJWDS stylesheet.
  */
 const NJWDS_STYLESHEET_PATH = "/assets/njwds/dist/css/styles.css";
+
+/**
+ * Public path for our flow-relative (RTL-aware) utility classes.
+ *
+ * Loaded immediately after the NJWDS stylesheet so these utilities win on
+ * source order at equal specificity, letting them flip NJWDS's physical
+ * directional properties under `dir="rtl"` without `!important`.
+ */
+const NJ_RTL_UTILITIES_STYLESHEET_PATH = "/styles/nj-rtl-utilities.css";
 
 /**
  * Public path for the synced NJWDS runtime script.
@@ -116,7 +123,7 @@ export const generateMetadata = async ({ params }: GenerateMetadataProps): Promi
   return {
     title: messages.metadata.title,
     description: messages.metadata.description,
-    metadataBase: new URL(METADATA_BASE_URL),
+    metadataBase: new URL(SITE_BASE_URL),
     icons: {
       icon: NJ_LOGO_IMAGE_PATH,
       shortcut: NJ_LOGO_IMAGE_PATH,
@@ -170,9 +177,10 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
   const messages = getApplicationMessages({ locale });
 
   return (
-    <html lang={locale}>
+    <html dir={textDirectionForLocale(locale)} lang={locale}>
       <head>
         <link href={NJWDS_STYLESHEET_PATH} rel="stylesheet" />
+        <link href={NJ_RTL_UTILITIES_STYLESHEET_PATH} rel="stylesheet" />
       </head>
       <body>
         <GoogleTagManager />
@@ -182,13 +190,17 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
             mainContentId={messages.layout.mainContentId}
           />
           <GovBanner content={messages.layout.banner} />
-          <SiteHeader content={messages.layout.header} />
+          <SiteHeader
+            content={messages.layout.header}
+            languageSwitcher={messages.layout.languageSwitcher}
+          />
           <main id={messages.layout.mainContentId}>{children}</main>
           <SiteFooter
             content={messages.layout.footer}
             mainContentId={messages.layout.mainContentId}
           />
           <IdentifierSection content={messages.layout.identifier} />
+          <LanguagePromptModal />
         </NextIntlClientProvider>
         <Script src={NJWDS_SCRIPT_PATH} strategy="afterInteractive" />
         <Intercom />
