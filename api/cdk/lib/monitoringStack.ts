@@ -1,18 +1,18 @@
-import { RemovalPolicy, Stack, StackProps, Duration } from "aws-cdk-lib";
-import { Construct } from "constructs";
-import * as logs from "aws-cdk-lib/aws-logs";
-import * as sns from "aws-cdk-lib/aws-sns";
+import { Duration, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
 import * as cloudwatch from "aws-cdk-lib/aws-cloudwatch";
 import * as cloudwatch_actions from "aws-cdk-lib/aws-cloudwatch-actions";
+import * as logs from "aws-cdk-lib/aws-logs";
+import * as sns from "aws-cdk-lib/aws-sns";
+import { Construct } from "constructs";
 import {
+  BUSINESSES_TABLE,
+  ECS_CLUSTER_NAME,
+  ECS_SERVICE_NAME,
+  HEALTH_CHECK_ENDPOINTS,
   HEALTH_CHECK_SERVICE,
   NAVIGATOR_DB_CLIENT,
   NAVIGATOR_WEBSERVICE,
-  HEALTH_CHECK_ENDPOINTS,
   USERS_TABLE,
-  BUSINESSES_TABLE,
-  ECS_SERVICE_NAME,
-  ECS_CLUSTER_NAME,
 } from "./constants";
 
 export interface MonitoringStackProps extends StackProps {
@@ -479,7 +479,8 @@ export class MonitoringStack extends Stack {
       const lambdaAnomalyAlarm = new cloudwatch.CfnAlarm(this, "LambdaAnomalyAlarm", {
         alarmName: `${props.stage}-bfs-navigator-lambda-excessive-executions`,
         comparisonOperator: "GreaterThanUpperThreshold",
-        evaluationPeriods: 1,
+        evaluationPeriods: 3,
+        datapointsToAlarm: 2,
         thresholdMetricId: "ad1",
         treatMissingData: "notBreaching",
 
@@ -504,7 +505,7 @@ export class MonitoringStack extends Stack {
           },
           {
             id: "ad1",
-            expression: "ANOMALY_DETECTION_BAND(m1, 2)",
+            expression: "ANOMALY_DETECTION_BAND(m1, 3)",
             label: "Expected Invocations",
             returnData: true,
           },
