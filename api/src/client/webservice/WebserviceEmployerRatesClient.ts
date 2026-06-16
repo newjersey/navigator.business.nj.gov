@@ -1,8 +1,9 @@
-import { LogWriterType } from "@libs/logWriter";
 import { EmployerRatesClient } from "@domain/types";
+import { STAGE } from "@functions/config";
+import { LogWriterType } from "@libs/logWriter";
+import { getConfigValue } from "@libs/ssmUtils";
 import { EmployerRatesRequest, EmployerRatesResponse } from "@shared/employerRates";
 import axios, { AxiosError } from "axios";
-import { getConfigValue } from "@libs/ssmUtils";
 
 export const WebserviceEmployerRatesClient = (logWriter: LogWriterType): EmployerRatesClient => {
   const getEmployerRates = async (
@@ -10,7 +11,11 @@ export const WebserviceEmployerRatesClient = (logWriter: LogWriterType): Employe
   ): Promise<EmployerRatesResponse> => {
     const baseUrl = await getConfigValue("boomi-runtime/alb-url");
 
-    const url = `${baseUrl}/ws/simple/queryDeptOfLaborEmployerRates`;
+    const url =
+      STAGE === "prod"
+        ? `${baseUrl}/ws/simple/queryDeptOfLaborEmployerRatesProd`
+        : `${baseUrl}/ws/simple/queryDeptOfLaborEmployerRates`;
+
     const logId = logWriter.GetId();
 
     logWriter.LogInfo(
