@@ -281,7 +281,8 @@ export type County =
   | "Warren";
 
 export interface FormationSignedAddress
-  extends FormationMember, Partial<Omit<FormationSigner, "name">> {}
+  extends FormationMember,
+    Partial<Omit<FormationSigner, "name">> {}
 
 export type FormationDbaContent = {
   DbaResolution: TaskWithoutLinks;

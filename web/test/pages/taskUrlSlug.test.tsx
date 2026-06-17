@@ -458,40 +458,38 @@ describe("task page", () => {
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
   });
 
-  it.each(operatingPhasesDisplayingBusinessStructurePrompt)(
-    "hides nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
-    (operatingPhase) => {
-      setLargeScreen(false);
-      renderPage(
-        generateTask({ id: businessStructureTaskId }),
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase,
-          }),
-          taskProgress: { [businessStructureTaskId]: "TO_DO" },
+  it.each(
+    operatingPhasesDisplayingBusinessStructurePrompt,
+  )("hides nextUrlSlug on business structure task when its not mark as completed for %p operating phase", (operatingPhase) => {
+    setLargeScreen(false);
+    renderPage(
+      generateTask({ id: businessStructureTaskId }),
+      generateBusiness({
+        profileData: generateProfileData({
+          operatingPhase,
         }),
-      );
-      expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();
-    },
-  );
+        taskProgress: { [businessStructureTaskId]: "TO_DO" },
+      }),
+    );
+    expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();
+  });
 
-  it.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
-    "shows nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
-    (operatingPhase) => {
-      setLargeScreen(false);
-      renderPage(
-        generateTask({ id: businessStructureTaskId }),
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase,
-          }),
-          taskProgress: { [businessStructureTaskId]: "COMPLETED" },
+  it.each(
+    operatingPhasesNotDisplayingBusinessStructurePrompt,
+  )("shows nextUrlSlug on business structure task when its not mark as completed for %p operating phase", (operatingPhase) => {
+    setLargeScreen(false);
+    renderPage(
+      generateTask({ id: businessStructureTaskId }),
+      generateBusiness({
+        profileData: generateProfileData({
+          operatingPhase,
         }),
-      );
+        taskProgress: { [businessStructureTaskId]: "COMPLETED" },
+      }),
+    );
 
-      expect(screen.getByTestId("nextUrlSlugButton")).toBeInTheDocument();
-    },
-  );
+    expect(screen.getByTestId("nextUrlSlugButton")).toBeInTheDocument();
+  });
 
   describe("deferred location question", () => {
     const contentWithLocationSection =

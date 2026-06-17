@@ -136,24 +136,23 @@ describe("updateRoadmapSidebarCards", () => {
       OperatingPhaseId.REMOTE_SELLER_WORKER,
     ];
 
-    it.each(operatingPhasesWithNoFormationNudge)(
-      "removes formation-nudge if operatingPhase is %s",
-      (operatingPhase) => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              operatingPhase: operatingPhase as OperatingPhaseId,
-            }),
-            preferences: generatePreferences({ visibleSidebarCards: [formationNudge] }),
+    it.each(
+      operatingPhasesWithNoFormationNudge,
+    )("removes formation-nudge if operatingPhase is %s", (operatingPhase) => {
+      const userData = generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({
+            operatingPhase: operatingPhase as OperatingPhaseId,
           }),
-        );
+          preferences: generatePreferences({ visibleSidebarCards: [formationNudge] }),
+        }),
+      );
 
-        const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-          formationNudge,
-        );
-      },
-    );
+      const updatedUserData = updateSidebarCards(userData);
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+        formationNudge,
+      );
+    });
   });
 
   describe("funding nudge", () => {

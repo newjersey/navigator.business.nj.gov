@@ -55,10 +55,7 @@
     }
   ],
   "name": "Interior Design",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "selfgenerator-transporter-registration"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "selfgenerator-transporter-registration"],
   "displayname": "interior-designer",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

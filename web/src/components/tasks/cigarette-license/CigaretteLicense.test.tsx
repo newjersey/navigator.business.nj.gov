@@ -148,28 +148,25 @@ describe("<CigaretteLicense />", () => {
         ["general-partnership", ["Responsible owner name", "Trade name"], ["Business name"]],
         ["limited-liability-company", ["Business name"], ["Responsible owner name", "Trade name"]],
         ["c-corporation", ["Business name"], ["Responsible owner name", "Trade name"]],
-      ])(
-        "for %s business type, %s fields are visible and %s fields are hidden",
-        async (legalStructureId, presentFields, hiddenFields) => {
-          const business = generateBusiness({
-            profileData: generateProfileData({
-              legalStructureId: legalStructureId,
-            }),
-            formationData: generateFormationData({
-              formationFormData: createEmptyFormationFormData(),
-            }),
-          });
+      ])("for %s business type, %s fields are visible and %s fields are hidden", async (legalStructureId, presentFields, hiddenFields) => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            legalStructureId: legalStructureId,
+          }),
+          formationData: generateFormationData({
+            formationFormData: createEmptyFormationFormData(),
+          }),
+        });
 
-          await renderComponent(business, 1);
+        await renderComponent(business, 1);
 
-          for (const field of presentFields) {
-            expect(screen.getByLabelText(field)).toBeInTheDocument();
-          }
-          for (const field of hiddenFields) {
-            expect(screen.queryByLabelText(field)).not.toBeInTheDocument();
-          }
-        },
-      );
+        for (const field of presentFields) {
+          expect(screen.getByLabelText(field)).toBeInTheDocument();
+        }
+        for (const field of hiddenFields) {
+          expect(screen.queryByLabelText(field)).not.toBeInTheDocument();
+        }
+      });
     });
   });
 

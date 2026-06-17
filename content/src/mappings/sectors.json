@@ -18,9 +18,7 @@
     {
       "id": "arts-entertainment-and-recreation",
       "name": "Arts, Entertainment, and Recreation",
-      "nonEssentialQuestionsIds": [
-        "resale-tax-cert"
-      ]
+      "nonEssentialQuestionsIds": ["resale-tax-cert"]
     },
     {
       "id": "cannabis",
@@ -85,17 +83,12 @@
     {
       "id": "other-services",
       "name": "Other Services",
-      "nonEssentialQuestionsIds": [
-        "resale-tax-cert",
-        "streamlined-sales-tax-registration"
-      ]
+      "nonEssentialQuestionsIds": ["resale-tax-cert", "streamlined-sales-tax-registration"]
     },
     {
       "id": "professional-scientific-and-technical-services",
       "name": "Professional, Scientific, and Technical Services",
-      "nonEssentialQuestionsIds": [
-        "streamlined-sales-tax-registration"
-      ]
+      "nonEssentialQuestionsIds": ["streamlined-sales-tax-registration"]
     },
     {
       "id": "real-estate",
@@ -105,16 +98,12 @@
     {
       "id": "retail-trade-and-ecommerce",
       "name": "Retail Trade and E-Commerce",
-      "nonEssentialQuestionsIds": [
-        "streamlined-sales-tax-registration"
-      ]
+      "nonEssentialQuestionsIds": ["streamlined-sales-tax-registration"]
     },
     {
       "id": "technology",
       "name": "Technology",
-      "nonEssentialQuestionsIds": [
-        "streamlined-sales-tax-registration"
-      ]
+      "nonEssentialQuestionsIds": ["streamlined-sales-tax-registration"]
     },
     {
       "id": "transportation-and-warehousing",
@@ -134,9 +123,7 @@
     {
       "id": "wholesale-trade",
       "name": "Wholesale Trade",
-      "nonEssentialQuestionsIds": [
-        "streamlined-sales-tax-registration"
-      ]
+      "nonEssentialQuestionsIds": ["streamlined-sales-tax-registration"]
     }
   ]
 }

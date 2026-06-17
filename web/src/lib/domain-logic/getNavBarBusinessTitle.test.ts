@@ -41,53 +41,53 @@ describe("getNavBarBusinessTitle", () => {
 
   describe("when name is defined", () => {
     describe("when legal structure undefined", () => {
-      it.each(["STARTING", "OWNING"])(
-        "shows business name for %s when name is populated",
-        (businessPersona) => {
-          const business = generateBusiness({
-            profileData: generateProfileData({
-              businessPersona: businessPersona as BusinessPersona,
-              businessName: name,
-              tradeName: "",
-              legalStructureId: undefined,
-            }),
-          });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
-          expect(navBarBusinessTitle).toEqual(name);
-        },
-      );
+      it.each([
+        "STARTING",
+        "OWNING",
+      ])("shows business name for %s when name is populated", (businessPersona) => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: businessPersona as BusinessPersona,
+            businessName: name,
+            tradeName: "",
+            legalStructureId: undefined,
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
+        expect(navBarBusinessTitle).toEqual(name);
+      });
 
-      it.each(["STARTING", "OWNING"])(
-        "shows business name for %s when name is empty",
-        (businessPersona) => {
-          const business = generateBusiness({
-            profileData: generateProfileData({
-              businessPersona: businessPersona as BusinessPersona,
-              businessName: "",
-              tradeName: name,
-              legalStructureId: undefined,
-            }),
-          });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
-          expect(navBarBusinessTitle).toEqual(name);
-        },
-      );
+      it.each([
+        "STARTING",
+        "OWNING",
+      ])("shows business name for %s when name is empty", (businessPersona) => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: businessPersona as BusinessPersona,
+            businessName: "",
+            tradeName: name,
+            legalStructureId: undefined,
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
+        expect(navBarBusinessTitle).toEqual(name);
+      });
 
-      it.each(["STARTING", "OWNING"])(
-        "shows business name over trade name if both defined for %s",
-        (businessPersona) => {
-          const business = generateBusiness({
-            profileData: generateProfileData({
-              businessPersona: businessPersona as BusinessPersona,
-              businessName: name,
-              tradeName: "some trade name",
-              legalStructureId: undefined,
-            }),
-          });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
-          expect(navBarBusinessTitle).toEqual(name);
-        },
-      );
+      it.each([
+        "STARTING",
+        "OWNING",
+      ])("shows business name over trade name if both defined for %s", (businessPersona) => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: businessPersona as BusinessPersona,
+            businessName: name,
+            tradeName: "some trade name",
+            legalStructureId: undefined,
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
+        expect(navBarBusinessTitle).toEqual(name);
+      });
     });
 
     describe("Public Filing", () => {
@@ -356,24 +356,25 @@ describe("getNavBarBusinessTitle", () => {
     });
 
     describe("FOREIGN", () => {
-      it.each(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])(
-        "shows Unnamed Out-of-State Business when FOREIGN and %s",
-        (foreignBusinessTypeId) => {
-          const business = generateBusiness({
-            profileData: generateProfileData({
-              legalStructureId: undefined,
-              businessName: undefined,
-              tradeName: undefined,
-              businessPersona: "FOREIGN",
-              foreignBusinessTypeIds: [foreignBusinessTypeId] as ForeignBusinessTypeId[],
-            }),
-          });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
-          expect(navBarBusinessTitle).toEqual(
-            Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText,
-          );
-        },
-      );
+      it.each([
+        "employeesInNJ",
+        "revenueInNJ",
+        "transactionsInNJ",
+      ])("shows Unnamed Out-of-State Business when FOREIGN and %s", (foreignBusinessTypeId) => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            legalStructureId: undefined,
+            businessName: undefined,
+            tradeName: undefined,
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: [foreignBusinessTypeId] as ForeignBusinessTypeId[],
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
+        expect(navBarBusinessTitle).toEqual(
+          Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText,
+        );
+      });
     });
   });
 });

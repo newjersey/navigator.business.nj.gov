@@ -858,21 +858,20 @@ describe("profile - starting business", () => {
       OperatingPhaseId.NEEDS_TO_FORM,
     ];
 
-    it.each(operatingPhaseIdsExcludingFormedAndUpAndRunning)(
-      `does not render the existing employees field and ownership field when phase is %s`,
-      (operatingPhase: OperatingPhaseId) => {
-        const initialBusiness = generateBusinessForProfile({
-          profileData: generateProfileData({
-            businessPersona: "STARTING",
-            operatingPhase: operatingPhase,
-          }),
-        });
-        renderPage({ business: initialBusiness });
+    it.each(
+      operatingPhaseIdsExcludingFormedAndUpAndRunning,
+    )(`does not render the existing employees field and ownership field when phase is %s`, (operatingPhase: OperatingPhaseId) => {
+      const initialBusiness = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          operatingPhase: operatingPhase,
+        }),
+      });
+      renderPage({ business: initialBusiness });
 
-        expect(screen.queryByLabelText("Existing employees")).not.toBeInTheDocument();
-        expect(screen.queryByLabelText("Ownership")).not.toBeInTheDocument();
-      },
-    );
+      expect(screen.queryByLabelText("Existing employees")).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("Ownership")).not.toBeInTheDocument();
+    });
 
     it("renders the existing employees field and ownership field when phase is FORMED", () => {
       const initialBusiness = generateBusinessForProfile({
@@ -932,111 +931,108 @@ describe("profile - starting business", () => {
     expect(screen.getByLabelText("Sector")).toBeInTheDocument();
   });
 
-  it.each(OperatingPhases.filter((it) => !it.sectorRequired).map((it) => it.id))(
-    "does not require sector when %s phase",
-    (phase) => {
-      renderPage({
-        business: generateBusinessForProfile({
-          profileData: generateProfileData({
-            operatingPhase: phase,
-            businessPersona: "STARTING",
-            industryId: "generic",
-            legalStructureId: "limited-liability-partnership",
-            sectorId: undefined,
-          }),
-        }),
-      });
-      expect(screen.getByLabelText("Sector")).toBeInTheDocument();
-      chooseTab("numbers");
-      expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
-      const header = screen.getByTestId("profile-tab-header");
-      expect(
-        within(header).getByText(Config.profileDefaults.default.profileTabNumbersTitle),
-      ).toBeInTheDocument();
-      expect(
-        within(header).queryByText(Config.profileDefaults.default.profileTabInfoTitle),
-      ).not.toBeInTheDocument();
-    },
-  );
-
-  it.each(OperatingPhases.filter((it) => it.sectorRequired).map((it) => it.id))(
-    "requires sector when %s phase",
-    (phase) => {
-      renderPage({
-        business: generateBusinessForProfile({
-          profileData: generateProfileData({
-            operatingPhase: phase,
-            businessPersona: "STARTING",
-            industryId: "generic",
-            sectorId: undefined,
-          }),
-        }),
-      });
-      expect(screen.getByLabelText("Sector")).toBeInTheDocument();
-      chooseTab("numbers");
-      expect(screen.getByLabelText("Sector")).toBeInTheDocument();
-      const header = screen.getByTestId("profile-tab-header");
-      expect(
-        within(header).getByText(Config.profileDefaults.default.profileTabInfoTitle),
-      ).toBeInTheDocument();
-      expect(
-        within(header).queryByText(Config.profileDefaults.default.profileTabNumbersTitle),
-      ).not.toBeInTheDocument();
-    },
-  );
-
-  it.each(industryIdsWithOutEssentialQuestion.filter((industry) => industry !== "generic"))(
-    "saves userData when sector dropdown is removed from DOM when %s industry is selected",
-    async (industry) => {
-      const newIndustry = industry;
-
-      const business = generateBusinessForProfile({
+  it.each(
+    OperatingPhases.filter((it) => !it.sectorRequired).map((it) => it.id),
+  )("does not require sector when %s phase", (phase) => {
+    renderPage({
+      business: generateBusinessForProfile({
         profileData: generateProfileData({
+          operatingPhase: phase,
+          businessPersona: "STARTING",
+          industryId: "generic",
+          legalStructureId: "limited-liability-partnership",
+          sectorId: undefined,
+        }),
+      }),
+    });
+    expect(screen.getByLabelText("Sector")).toBeInTheDocument();
+    chooseTab("numbers");
+    expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
+    const header = screen.getByTestId("profile-tab-header");
+    expect(
+      within(header).getByText(Config.profileDefaults.default.profileTabNumbersTitle),
+    ).toBeInTheDocument();
+    expect(
+      within(header).queryByText(Config.profileDefaults.default.profileTabInfoTitle),
+    ).not.toBeInTheDocument();
+  });
+
+  it.each(
+    OperatingPhases.filter((it) => it.sectorRequired).map((it) => it.id),
+  )("requires sector when %s phase", (phase) => {
+    renderPage({
+      business: generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: phase,
           businessPersona: "STARTING",
           industryId: "generic",
           sectorId: undefined,
-          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
-          legalStructureId: "limited-liability-company",
-          ...emptyIndustrySpecificData,
         }),
+      }),
+    });
+    expect(screen.getByLabelText("Sector")).toBeInTheDocument();
+    chooseTab("numbers");
+    expect(screen.getByLabelText("Sector")).toBeInTheDocument();
+    const header = screen.getByTestId("profile-tab-header");
+    expect(
+      within(header).getByText(Config.profileDefaults.default.profileTabInfoTitle),
+    ).toBeInTheDocument();
+    expect(
+      within(header).queryByText(Config.profileDefaults.default.profileTabNumbersTitle),
+    ).not.toBeInTheDocument();
+  });
+
+  it.each(
+    industryIdsWithOutEssentialQuestion.filter((industry) => industry !== "generic"),
+  )("saves userData when sector dropdown is removed from DOM when %s industry is selected", async (industry) => {
+    const newIndustry = industry;
+
+    const business = generateBusinessForProfile({
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        industryId: "generic",
+        sectorId: undefined,
+        operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+        legalStructureId: "limited-liability-company",
+        ...emptyIndustrySpecificData,
+      }),
+      onboardingFormProgress: "COMPLETED",
+    });
+    renderPage({ business });
+    fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
+    await waitFor(() => {
+      expect(
+        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
+      ).toBeInTheDocument();
+    });
+    selectByValue("Industry", newIndustry);
+    await waitFor(() => {
+      expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
+    });
+    clickSave();
+    await waitFor(() => {
+      expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
+    });
+    expect(currentBusiness()).toEqual(
+      expect.objectContaining({
+        ...business,
         onboardingFormProgress: "COMPLETED",
-      });
-      renderPage({ business });
-      fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
-      await waitFor(() => {
-        expect(
-          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
-        ).toBeInTheDocument();
-      });
-      selectByValue("Industry", newIndustry);
-      await waitFor(() => {
-        expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
-      });
-      clickSave();
-      await waitFor(() => {
-        expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
-      });
-      expect(currentBusiness()).toEqual(
-        expect.objectContaining({
-          ...business,
-          onboardingFormProgress: "COMPLETED",
-          profileData: {
-            ...business.profileData,
-            industryId: newIndustry,
-            sectorId: LookupIndustryById(newIndustry).defaultSectorId,
-            homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
-            naicsCode: "",
-            nonEssentialRadioAnswers: expect.anything(),
-          },
-          taskProgress: {
-            ...business.taskProgress,
-            [naicsCodeTaskId]: "TO_DO",
-          },
-          taskItemChecklist: {},
-        }),
-      );
-    },
-  );
+        profileData: {
+          ...business.profileData,
+          industryId: newIndustry,
+          sectorId: LookupIndustryById(newIndustry).defaultSectorId,
+          homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
+          naicsCode: "",
+          nonEssentialRadioAnswers: expect.anything(),
+        },
+        taskProgress: {
+          ...business.taskProgress,
+          [naicsCodeTaskId]: "TO_DO",
+        },
+        taskItemChecklist: {},
+      }),
+    );
+  });
 
   it("prevents user from saving if in up-and-running and sector is not selected", async () => {
     const business = generateBusinessForProfile({
@@ -1174,26 +1170,25 @@ describe("profile - starting business", () => {
     });
   });
 
-  it.each(industryIdsWithSingleRequiredEssentialQuestion)(
-    "prevents user from saving when %s is selected as industry, but essential question is not answered",
-    async (industryId) => {
-      const business = generateBusinessForProfile({
-        onboardingFormProgress: "UNSTARTED",
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          industryId: industryId,
-          ...emptyIndustrySpecificData,
-        }),
-      });
-      renderPage({ business });
-      clickSave();
-      await waitFor(() => {
-        expect(
-          screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
-        ).toBeInTheDocument();
-      });
-    },
-  );
+  it.each(
+    industryIdsWithSingleRequiredEssentialQuestion,
+  )("prevents user from saving when %s is selected as industry, but essential question is not answered", async (industryId) => {
+    const business = generateBusinessForProfile({
+      onboardingFormProgress: "UNSTARTED",
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        industryId: industryId,
+        ...emptyIndustrySpecificData,
+      }),
+    });
+    renderPage({ business });
+    clickSave();
+    await waitFor(() => {
+      expect(
+        screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
+      ).toBeInTheDocument();
+    });
+  });
 
   it("prevents user from saving when employment agency is selected as industry, but essential question is not answered", async () => {
     const business = generateBusinessForProfile({

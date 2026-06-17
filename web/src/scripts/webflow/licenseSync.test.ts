@@ -1,6 +1,8 @@
 import fs from "fs";
 import industryJson from "../../../../content/lib/industry.json" with { type: "json" };
-import taskAgenciesJSON from "../../../../content/src/mappings/taskAgency.json" with { type: "json" };
+import taskAgenciesJSON from "../../../../content/src/mappings/taskAgency.json" with {
+  type: "json",
+};
 import * as helpers from "./helpers";
 import { LicenseClassificationLookup } from "./licenseClassifications";
 import * as licenseLoader from "../licenseLoader";

@@ -48,25 +48,24 @@ describe("migrate_v126_to_v127", () => {
     "companyOperatedVehiclesInNJ",
   ];
 
-  it.each(foreignBusinessTypeIds)(
-    "does not modify operatingPhase for other Foreign businesses %s",
-    (foreignBusinessTypeId) => {
-      const id = "biz-1";
-      const v126ProfileData = generateV126ProfileData({});
-      const v126Business = generateV126Business({
-        id,
-        profileData: {
-          ...v126ProfileData,
-          operatingPhase: "NEEDS_TO_FORM",
-          foreignBusinessTypeIds: [foreignBusinessTypeId],
-        },
-      });
-      const v126UserData = generateV126UserData({ businesses: { "biz-1": v126Business } });
+  it.each(
+    foreignBusinessTypeIds,
+  )("does not modify operatingPhase for other Foreign businesses %s", (foreignBusinessTypeId) => {
+    const id = "biz-1";
+    const v126ProfileData = generateV126ProfileData({});
+    const v126Business = generateV126Business({
+      id,
+      profileData: {
+        ...v126ProfileData,
+        operatingPhase: "NEEDS_TO_FORM",
+        foreignBusinessTypeIds: [foreignBusinessTypeId],
+      },
+    });
+    const v126UserData = generateV126UserData({ businesses: { "biz-1": v126Business } });
 
-      const v127 = migrate_v126_to_v127(v126UserData);
-      expect(v127.businesses[id].profileData.operatingPhase).toEqual("NEEDS_TO_FORM");
-    },
-  );
+    const v127 = migrate_v126_to_v127(v126UserData);
+    expect(v127.businesses[id].profileData.operatingPhase).toEqual("NEEDS_TO_FORM");
+  });
 
   it("does not modify operatingPhase for business without foreignBusinessTypeIds", () => {
     const id = "biz-1";

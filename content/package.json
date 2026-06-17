@@ -10,8 +10,8 @@
     "clean": "rimraf lib",
     "dev": "yarn build",
     "test": "vitest run",
-    "prettier": "prettier --write . --ignore-path=../.eslintignore",
-    "prettier:check": "prettier . --check --ignore-path=../.eslintignore",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
     "spellcheck": "cspell '**/*.md' '**/*.json' --config ../cspell.json --no-progress"
   },
   "dependencies": {

@@ -361,19 +361,20 @@ describe("<AnytimeActionSearch />", () => {
         businessProfileDataOverrides: {},
         isShown: false,
       },
-    ])(
-      "only shows tasks that match the business: $taskOverrides.name - shown $isShown",
-      ({ taskOverrides, businessProfileDataOverrides, isShown }) => {
-        useMockBusiness({
-          profileData: generateProfileData(businessProfileDataOverrides),
-        });
-        anytimeActionTasks = [generateAnytimeActionTask(taskOverrides)];
-        renderAnytimeActionSearch();
-        fireEvent.click(screen.getByLabelText("Open"));
+    ])("only shows tasks that match the business: $taskOverrides.name - shown $isShown", ({
+      taskOverrides,
+      businessProfileDataOverrides,
+      isShown,
+    }) => {
+      useMockBusiness({
+        profileData: generateProfileData(businessProfileDataOverrides),
+      });
+      anytimeActionTasks = [generateAnytimeActionTask(taskOverrides)];
+      renderAnytimeActionSearch();
+      fireEvent.click(screen.getByLabelText("Open"));
 
-        expect(!!screen.queryByText(taskOverrides.name)).toBe(isShown);
-      },
-    );
+      expect(!!screen.queryByText(taskOverrides.name)).toBe(isShown);
+    });
 
     it("does NOT renders license reinstatement anytime action when license is NOT expired", () => {
       const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));

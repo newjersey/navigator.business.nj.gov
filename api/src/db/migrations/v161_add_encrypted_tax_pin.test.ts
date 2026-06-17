@@ -29,29 +29,30 @@ describe("v161 migration encrypts and masks tax pin if defined", () => {
   it.each([
     { taxPin: undefined, expectedTaxPin: undefined, expectedEncryptedTaxPin: undefined },
     { taxPin: "1234", expectedTaxPin: "****", expectedEncryptedTaxPin: "encrypted 1234" },
-  ])(
-    "should encrypt and mask $taxPin correctly",
-    async ({ taxPin, expectedTaxPin, expectedEncryptedTaxPin }) => {
-      const id = "biz-1";
-      const v160UserData = generatev160UserData({
-        businesses: {
-          id: generatev160Business({
-            id,
-            profileData: generatev160ProfileData({
-              taxPin: taxPin,
-            }),
+  ])("should encrypt and mask $taxPin correctly", async ({
+    taxPin,
+    expectedTaxPin,
+    expectedEncryptedTaxPin,
+  }) => {
+    const id = "biz-1";
+    const v160UserData = generatev160UserData({
+      businesses: {
+        id: generatev160Business({
+          id,
+          profileData: generatev160ProfileData({
+            taxPin: taxPin,
           }),
-        },
-      });
-      const migratedUserData = await migrate_v160_to_v161(v160UserData, {
-        cryptoClient,
-      });
+        }),
+      },
+    });
+    const migratedUserData = await migrate_v160_to_v161(v160UserData, {
+      cryptoClient,
+    });
 
-      expect(migratedUserData.version).toBe(161);
-      expect(migratedUserData.businesses[id].profileData.taxPin).toEqual(expectedTaxPin);
-      expect(migratedUserData.businesses[id].profileData.encryptedTaxPin).toEqual(
-        expectedEncryptedTaxPin,
-      );
-    },
-  );
+    expect(migratedUserData.version).toBe(161);
+    expect(migratedUserData.businesses[id].profileData.taxPin).toEqual(expectedTaxPin);
+    expect(migratedUserData.businesses[id].profileData.encryptedTaxPin).toEqual(
+      expectedEncryptedTaxPin,
+    );
+  });
 });

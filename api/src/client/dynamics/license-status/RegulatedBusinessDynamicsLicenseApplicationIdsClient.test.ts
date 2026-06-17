@@ -442,30 +442,33 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
       }
     });
 
-    it.each(RGB_LICENSE_APPLICATION_INFORMATION)(
-      "returns object whose professionNameAndLicenseType key is $expectedProfession",
-      async ({ appTypeCode, expectedProfession, uuid }) => {
-        const mockLicenseApplicationIdResponse = {
-          value: [
-            generateLicenseApplicationIdApiResponseValue({
-              rgb_number: "39PM00105300",
-              rgb_versioncode: 100000000,
-              statecode: 0,
-              statuscode: 100000006,
-              [RGB_APP_TYPE_KEYS[uuid]]: appTypeCode,
-              _rgb_apptypeid_value: uuid,
-            }),
-          ],
-        };
+    it.each(
+      RGB_LICENSE_APPLICATION_INFORMATION,
+    )("returns object whose professionNameAndLicenseType key is $expectedProfession", async ({
+      appTypeCode,
+      expectedProfession,
+      uuid,
+    }) => {
+      const mockLicenseApplicationIdResponse = {
+        value: [
+          generateLicenseApplicationIdApiResponseValue({
+            rgb_number: "39PM00105300",
+            rgb_versioncode: 100000000,
+            statecode: 0,
+            statuscode: 100000006,
+            [RGB_APP_TYPE_KEYS[uuid]]: appTypeCode,
+            _rgb_apptypeid_value: uuid,
+          }),
+        ],
+      };
 
-        mockAxios.get.mockResolvedValue({ data: mockLicenseApplicationIdResponse });
+      mockAxios.get.mockResolvedValue({ data: mockLicenseApplicationIdResponse });
 
-        const repsonse = await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
-          mockBusinessNameAndId_1,
-        ]);
-        console.log(repsonse[0].professionNameAndLicenseType);
-        expect(repsonse[0].professionNameAndLicenseType).toEqual(expectedProfession);
-      },
-    );
+      const repsonse = await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
+        mockBusinessNameAndId_1,
+      ]);
+      console.log(repsonse[0].professionNameAndLicenseType);
+      expect(repsonse[0].professionNameAndLicenseType).toEqual(expectedProfession);
+    });
   });
 });

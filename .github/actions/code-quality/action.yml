@@ -1,5 +1,5 @@
 name: "Code Quality Checks"
-description: "Runs typecheck, prettier, linting, spellcheck, and dependency checks."
+description: "Runs typecheck, format check, linting, spellcheck, and dependency checks."
 
 runs:
   using: "composite"
@@ -14,10 +14,10 @@ runs:
       run: |
         yarn workspace @businessnjgovnavigator/web typecheck:cypress
 
-    - name: Run Prettier
+    - name: Run Format Check
       shell: bash
       run: |
-        yarn prettier:check
+        yarn format:check
 
     - name: Run Linting
       shell: bash

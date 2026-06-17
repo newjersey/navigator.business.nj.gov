@@ -321,14 +321,11 @@ describe("CigaretteLicenseClient", () => {
         StatusCodes.INTERNAL_SERVER_ERROR,
         mockErrorEmailResponse.message,
       ],
-    ])(
-      "returns response of email client for status %s",
-      async (mockResponse, expectedStatus, expectedMessage) => {
-        mockEmailClient.sendEmail.mockResolvedValue(mockResponse);
-        const response = await client.sendEmailConfirmation(userData, decryptedTaxId);
-        expect(response.statusCode).toEqual(expectedStatus);
-        expect(response.message).toEqual(expectedMessage);
-      },
-    );
+    ])("returns response of email client for status %s", async (mockResponse, expectedStatus, expectedMessage) => {
+      mockEmailClient.sendEmail.mockResolvedValue(mockResponse);
+      const response = await client.sendEmailConfirmation(userData, decryptedTaxId);
+      expect(response.statusCode).toEqual(expectedStatus);
+      expect(response.message).toEqual(expectedMessage);
+    });
   });
 });

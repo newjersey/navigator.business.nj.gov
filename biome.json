@@ -1,16 +1,10 @@
 {
-  "root": false,
-  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "includes": [
       "**",
       "!**/.yarn/*",
-      "!.next",
-      "!public/vendor",
-      "!public/assets",
-      "!coverage",
-      "!test-results",
-      "!playwright-report",
+      "!web/.next/*",
       "!package-lock.json",
       "!pnpm-lock.yaml",
       "!yarn.lock",
@@ -32,6 +26,7 @@
     "useEditorconfig": true,
     "includes": [
       "**",
+      "!**/package.json",
       "!api/wiremock/__files/tax-clearance-success.json",
       "!**/docker-compose.yml",
       "!packages/static-site",
@@ -44,43 +39,28 @@
     "rules": {
       "recommended": false,
       "complexity": {
-        "noExcessiveCognitiveComplexity": "warn",
-        "noExcessiveLinesPerFunction": { "level": "warn", "options": { "maxLines": 80 } },
-        "noForEach": "warn",
+        "noForEach": "error",
         "useArrowFunction": "error",
-        "useMaxParams": { "level": "error", "options": { "max": 2 } }
+        "useMaxParams": { "level": "error", "options": { "max": 4 } }
       },
       "correctness": { "noUnusedImports": "error", "noUnusedVariables": "error" },
       "nursery": {
-        "noFloatingPromises": "warn",
-        "noNestedPromises": "warn",
-        "useErrorCause": "warn"
+        "noFloatingPromises": "off",
+        "noNestedPromises": "error",
+        "useErrorCause": "error"
       },
       "style": {
         "noCommonJs": "error",
         "noParameterAssign": "error",
-        "noProcessEnv": "error",
-        "noRestrictedImports": {
-          "level": "error",
-          "options": {
-            "patterns": [
-              {
-                "group": ["../**"],
-                "message": "Use @/ absolute imports instead of parent-relative imports.",
-                "invertImportNamePattern": false
-              }
-            ]
-          }
-        },
         "useConst": "error",
         "useExportType": "error",
         "useImportType": "error",
         "useNodejsImportProtocol": "error",
-        "useTemplate": "warn",
+        "useTemplate": "error",
         "useThrowOnlyError": "error"
       },
       "suspicious": {
-        "noConsole": "warn",
+        "noConsole": "error",
         "noExplicitAny": "error",
         "noImportCycles": "error",
         "noVar": "error"

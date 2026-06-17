@@ -44,7 +44,9 @@ beforeEach(function () {
   // Reusing the same seed for reruns thus allows us to better discover breaking edge cases. Unlike in unit tests,
   // where we error on duplicate test name.
   const randomSeed =
-    Cypress.env("RANDOM_SEED") || testRandomSeeds.get(testName) || Math.random().toString(36).slice(2);
+    Cypress.env("RANDOM_SEED") ||
+    testRandomSeeds.get(testName) ||
+    Math.random().toString(36).slice(2);
   testRandomSeeds.set(testName, randomSeed);
   seedrandom(randomSeed, { global: true });
 });
@@ -59,8 +61,8 @@ afterEach(function () {
     cy.task(
       "log",
       `Failed ${testName}. Replicate Math.random() values by running with CYPRESS_RANDOM_SEED=${testRandomSeeds.get(
-        testName
-      )}`
+        testName,
+      )}`,
     );
   }
 });
@@ -80,7 +82,10 @@ declare global {
     interface Chainable {
       loginByCognitoApi(): Chainable;
       chooseDatePicker(selector: string, value: string): void;
-      lighthouse(lighthouseThresholds?: LighthouseThresholds, lighthouseConfig?: LighthouseConfig): void;
+      lighthouse(
+        lighthouseThresholds?: LighthouseThresholds,
+        lighthouseConfig?: LighthouseConfig,
+      ): void;
       pa11y(thresholds?: Pa11yThresholds): void;
       forceClick: () => void;
     }

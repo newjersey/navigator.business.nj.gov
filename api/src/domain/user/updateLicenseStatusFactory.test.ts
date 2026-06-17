@@ -304,31 +304,32 @@ describe("updateLicenseStatus", () => {
       });
     });
 
-    it.each([NO_MATCH_ERROR, NO_MAIN_APPS_ERROR, NO_ADDRESS_MATCH_ERROR])(
-      "returns empty license task of current task to have error license data when rgb receives %s and webservice also fails",
-      async (error) => {
-        stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error("fails"));
-        stubRGBLicenseStatusSearch.mockRejectedValue(new Error(error));
+    it.each([
+      NO_MATCH_ERROR,
+      NO_MAIN_APPS_ERROR,
+      NO_ADDRESS_MATCH_ERROR,
+    ])("returns empty license task of current task to have error license data when rgb receives %s and webservice also fails", async (error) => {
+      stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error("fails"));
+      stubRGBLicenseStatusSearch.mockRejectedValue(new Error(error));
 
-        userData = modifyCurrentBusiness(userData, (business) => ({
-          ...business,
-          licenseData: generateLicenseData({}),
-        }));
+      userData = modifyCurrentBusiness(userData, (business) => ({
+        ...business,
+        licenseData: generateLicenseData({}),
+      }));
 
-        const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
-        const resultCurrentBusiness = getCurrentBusiness(resultUserData);
+      const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+      const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
-        const resultLicenseData = resultCurrentBusiness.licenseData;
-        const licenseType1Expected = {};
+      const resultLicenseData = resultCurrentBusiness.licenseData;
+      const licenseType1Expected = {};
 
-        expect(resultLicenseData).toEqual({
-          lastUpdatedISO: expectedCurrentDate,
-          licenses: {
-            ...licenseType1Expected,
-          },
-        });
-      },
-    );
+      expect(resultLicenseData).toEqual({
+        lastUpdatedISO: expectedCurrentDate,
+        licenses: {
+          ...licenseType1Expected,
+        },
+      });
+    });
   });
 
   describe("task progress", () => {});

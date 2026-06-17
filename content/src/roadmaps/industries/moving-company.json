@@ -74,11 +74,7 @@
     }
   ],
   "name": "Moving Company",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "resale-tax-cert",
-    "vehicle-dealership-q"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "resale-tax-cert", "vehicle-dealership-q"],
   "displayname": "moving-company",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

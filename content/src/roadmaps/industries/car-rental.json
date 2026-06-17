@@ -75,10 +75,7 @@
     }
   ],
   "name": "Car Rental and Dealerships ",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "bus-initial-inspection"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "bus-initial-inspection"],
   "displayname": "car-rental ",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false
