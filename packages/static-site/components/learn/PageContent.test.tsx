@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/complexity/noExcessiveLinesPerFunction: <explanation> */
+/** biome-ignore-all lint/complexity/noExcessiveLinesPerFunction: test suite */
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { PageItem } from "@/domain/content/types";

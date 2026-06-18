@@ -1,8 +1,9 @@
+/** biome-ignore-all lint/suspicious/noDocumentCookie: tests set and clear cookies directly to drive the modal's dismissal state. */
 import { render, screen } from "@testing-library/react";
 import { useLocale } from "next-intl";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { usePathname, useRouter } from "@/domain/i18n/navigation";
-import { LANGUAGE_PROMPT_DISMISSED_COOKIE } from "@/domain/siteConfig";
+import { usePathname } from "@/domain/i18n/navigation";
+import { LANGUAGE_PROMPT_DISMISSED_COOKIE, NEXT_LOCALE_COOKIE_NAME } from "@/domain/siteConfig";
 import { LanguagePromptModal } from "./LanguagePromptModal";
 
 vi.mock("next-intl", () => {
@@ -11,8 +12,7 @@ vi.mock("next-intl", () => {
 
 const mockedUseLocale = vi.mocked(useLocale);
 const mockedUsePathname = vi.mocked(usePathname);
-const mockedUseRouter = vi.mocked(useRouter);
-const replaceMock = vi.fn();
+const assignMock = vi.fn();
 
 /**
  * Overrides the browser's reported language preferences for one test.
@@ -29,10 +29,12 @@ const renderModal = () => render(<LanguagePromptModal />);
 describe("LanguagePromptModal", () => {
   beforeEach(() => {
     mockedUsePathname.mockReturnValue("/learn");
-    mockedUseRouter.mockReturnValue({
-      replace: replaceMock,
-    } as unknown as ReturnType<typeof useRouter>);
+    Object.defineProperty(window, "location", {
+      value: { assign: assignMock },
+      writable: true,
+    });
     document.cookie = `${LANGUAGE_PROMPT_DISMISSED_COOKIE}=; max-age=0; path=/`;
+    document.cookie = `${NEXT_LOCALE_COOKIE_NAME}=; max-age=0; path=/`;
   });
 
   afterEach(() => {
@@ -79,10 +81,10 @@ describe("LanguagePromptModal", () => {
     screen.getByRole("button", { name: /Permanecer/i }).click();
 
     expect(document.cookie).toContain(`${LANGUAGE_PROMPT_DISMISSED_COOKIE}=true`);
-    expect(replaceMock).not.toHaveBeenCalled();
+    expect(assignMock).not.toHaveBeenCalled();
   });
 
-  it("navigates to the preferred locale and sets the dismissal cookie when switching", () => {
+  it("navigates to the preferred locale and sets the cookies when switching", () => {
     mockedUseLocale.mockReturnValue("en-US");
     setBrowserLanguages(["es-US"]);
 
@@ -90,6 +92,7 @@ describe("LanguagePromptModal", () => {
     screen.getByRole("button", { name: /Español/ }).click();
 
     expect(document.cookie).toContain(`${LANGUAGE_PROMPT_DISMISSED_COOKIE}=true`);
-    expect(replaceMock).toHaveBeenCalledWith("/learn", { locale: "es-US" });
+    expect(document.cookie).toContain(`${NEXT_LOCALE_COOKIE_NAME}=es-US`);
+    expect(assignMock).toHaveBeenCalledWith("/es-US/learn");
   });
 });

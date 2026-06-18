@@ -8,7 +8,8 @@
  * current one and the dismissal cookie is absent, it opens the NJWDS modal
  * offering to stay or switch. It never redirects automatically. The visitor's
  * choice is recorded in a dismissal cookie so they are not prompted again; the
- * switch action also persists `NEXT_LOCALE` via the next-intl router.
+ * switch action also persists `NEXT_LOCALE` and performs a full-page navigation
+ * to the target locale.
  *
  * The entire dialog is shown in the preferred/target language so the visitor
  * — who may not read the current page's locale — can understand the prompt.
@@ -21,9 +22,9 @@ import { LANGUAGE_DESCRIPTORS } from "@/domain/i18n/languages";
 import { addLocalePrefix, stripLocalePrefix } from "@/domain/i18n/localePath";
 import { type AppLocale, resolveAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
-import { usePathname, useRouter } from "@/domain/i18n/navigation";
+import { usePathname } from "@/domain/i18n/navigation";
 import { resolvePreferredLocale } from "@/domain/i18n/preferredLocale";
-import { LANGUAGE_PROMPT_DISMISSED_COOKIE } from "@/domain/siteConfig";
+import { LANGUAGE_PROMPT_DISMISSED_COOKIE, NEXT_LOCALE_COOKIE_NAME } from "@/domain/siteConfig";
 import { LanguagePromptModalView } from "./LanguagePromptModalView";
 
 /**
@@ -66,6 +67,7 @@ const hasDismissalCookie = (): boolean => {
  * @param value Cookie value to store.
  */
 const writeCookie = (name: string, value: string): void => {
+  // biome-ignore lint/suspicious/noDocumentCookie: a synchronous write is required here; the async Cookie Store API would let navigation race ahead of the cookie persisting.
   document.cookie = `${name}=${value}; path=/; max-age=${ONE_YEAR_IN_SECONDS}; samesite=lax`;
 };
 
@@ -93,7 +95,6 @@ const nativeNameOfLocale = (locale: AppLocale): string => {
 export const LanguagePromptModal = () => {
   const currentLocale = resolveAppLocale({ locale: useLocale() });
   const pathname = usePathname();
-  const router = useRouter();
   const openTriggerRef = useRef<HTMLButtonElement>(null);
   const [preferredLocale, setPreferredLocale] = useState<AppLocale | undefined>(undefined);
 
@@ -125,17 +126,20 @@ export const LanguagePromptModal = () => {
     }
 
     writeCookie(LANGUAGE_PROMPT_DISMISSED_COOKIE, "true");
+    writeCookie(NEXT_LOCALE_COOKIE_NAME, preferredLocale);
 
-    const targetPathname = stripLocalePrefix(pathname);
-
-    try {
-      router.replace(targetPathname, { locale: preferredLocale });
-    } catch {
-      window.location.assign(
-        addLocalePrefix({ pathnameWithoutLocale: targetPathname, locale: preferredLocale }),
-      );
-    }
-  }, [pathname, preferredLocale, router]);
+    // Use a full-page navigation rather than a client-side router transition.
+    // The open NJWDS modal hoists its DOM node out of React's tree into a
+    // body-level wrapper; a client-side re-render then tries to unmount a node
+    // React no longer owns, throwing a `removeChild` NotFoundError that trips
+    // the framework error boundary.
+    window.location.assign(
+      addLocalePrefix({
+        pathnameWithoutLocale: stripLocalePrefix(pathname),
+        locale: preferredLocale,
+      }),
+    );
+  }, [pathname, preferredLocale]);
 
   if (!preferredLocale) {
     return null;
