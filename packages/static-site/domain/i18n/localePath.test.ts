@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { addLocalePrefix, localeOfPathname, stripLocalePrefix } from "./localePath";
 
@@ -57,5 +57,19 @@ describe("localePath", () => {
     it("defaults to en-US when unprefixed", () => {
       expect(localeOfPathname("/learn")).toBe("en-US");
     });
+  });
+});
+
+describe("localeOfPathname with multilingual disabled", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  });
+
+  it("returns en-US for /es-US/learn when flag is false", async () => {
+    vi.stubEnv("NEXT_PUBLIC_MULTILINGUAL_ENABLED", "false");
+    vi.resetModules();
+    const { localeOfPathname: localeOf } = await import("./localePath");
+    expect(localeOf("/es-US/learn")).toBe("en-US");
   });
 });

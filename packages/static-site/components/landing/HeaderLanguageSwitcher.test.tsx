@@ -44,3 +44,22 @@ describe("HeaderLanguageSwitcher", () => {
     expect(activeLink).toHaveAttribute("hreflang", "en-US");
   });
 });
+
+describe("HeaderLanguageSwitcher with multilingual disabled", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+    vi.clearAllMocks();
+  });
+
+  it("renders nothing when multilingual is disabled", async () => {
+    mockedUseLocale.mockReturnValue("en-US");
+    mockedUsePathname.mockReturnValue("/");
+    vi.stubEnv("NEXT_PUBLIC_MULTILINGUAL_ENABLED", "false");
+    vi.resetModules();
+    const { HeaderLanguageSwitcher: Switcher } = await import("./HeaderLanguageSwitcher");
+    const content = getApplicationMessages({ locale: "en-US" }).layout.languageSwitcher;
+    const { container } = render(<Switcher content={content} />);
+    expect(container.firstChild).toBeNull();
+  });
+});

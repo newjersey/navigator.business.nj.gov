@@ -35,7 +35,10 @@
     "sync:njwds-assets": "tsx scripts/syncNjwdsAssets.ts",
     "test:accessibility": "playwright test --config=playwright.a11y.config.ts",
     "pretest:e2e": "pnpm sync:njwds-assets",
-    "test:e2e": "playwright test --config=playwright.e2e.config.ts"
+    "test:e2e": "playwright test --config=playwright.e2e.config.ts",
+    "pretest:e2e:english-only": "pnpm sync:njwds-assets",
+    "test:e2e:english-only": "playwright test --config=playwright.e2e.english-only.config.ts",
+    "test:e2e:all": "pnpm test:e2e && pnpm test:e2e:english-only"
   },
   "keywords": [],
   "author": {

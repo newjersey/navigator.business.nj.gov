@@ -20,7 +20,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { LANGUAGE_DESCRIPTORS } from "@/domain/i18n/languages";
 import { addLocalePrefix, stripLocalePrefix } from "@/domain/i18n/localePath";
-import { type AppLocale, resolveAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, isMultilingualEnabled, resolveAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { usePathname } from "@/domain/i18n/navigation";
 import { resolvePreferredLocale } from "@/domain/i18n/preferredLocale";
@@ -99,7 +99,7 @@ export const LanguagePromptModal = () => {
   const [preferredLocale, setPreferredLocale] = useState<AppLocale | undefined>(undefined);
 
   useEffect(() => {
-    if (hasDismissalCookie()) {
+    if (!isMultilingualEnabled() || hasDismissalCookie()) {
       return;
     }
 

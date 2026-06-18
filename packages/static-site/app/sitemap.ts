@@ -11,7 +11,7 @@ import type { MetadataRoute } from "next";
 
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
 import { addLocalePrefix } from "@/domain/i18n/localePath";
-import { APP_LOCALES } from "@/domain/i18n/locales";
+import { ENABLED_LOCALES } from "@/domain/i18n/locales";
 import { SITE_BASE_URL } from "@/domain/siteConfig";
 
 /**
@@ -21,7 +21,7 @@ import { SITE_BASE_URL } from "@/domain/siteConfig";
  * @param locale Locale to apply before resolving against the site origin.
  * @returns The absolute URL for the locale variant.
  */
-const toAbsoluteUrl = (pathnameWithoutLocale: string, locale: (typeof APP_LOCALES)[number]) => {
+const toAbsoluteUrl = (pathnameWithoutLocale: string, locale: (typeof ENABLED_LOCALES)[number]) => {
   return new URL(addLocalePrefix({ pathnameWithoutLocale, locale }), SITE_BASE_URL).toString();
 };
 
@@ -34,7 +34,7 @@ const toAbsoluteUrl = (pathnameWithoutLocale: string, locale: (typeof APP_LOCALE
 const buildSitemapEntry = (pathnameWithoutLocale: string): MetadataRoute.Sitemap[number] => {
   const languages: Record<string, string> = {};
 
-  for (const locale of APP_LOCALES) {
+  for (const locale of ENABLED_LOCALES) {
     languages[locale] = toAbsoluteUrl(pathnameWithoutLocale, locale);
   }
 
