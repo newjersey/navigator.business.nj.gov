@@ -7,7 +7,7 @@
  * access so it stays fully table-testable.
  */
 
-import { APP_LOCALES, type AppLocale } from "./locales";
+import { type AppLocale, ENABLED_LOCALES } from "./locales";
 
 /**
  * Describes input for resolving a preferred locale.
@@ -26,7 +26,7 @@ export interface ResolvePreferredLocaleParams {
  * @returns The supported locale sharing that subtag, or `undefined`.
  */
 const matchLanguageSubtag = (languageSubtag: string): AppLocale | undefined => {
-  return APP_LOCALES.find((locale) => {
+  return ENABLED_LOCALES.find((locale) => {
     return locale.toLowerCase().split("-")[0] === languageSubtag;
   });
 };

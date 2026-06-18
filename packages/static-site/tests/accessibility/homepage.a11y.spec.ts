@@ -2,7 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import type { BrowserContext, Page } from "playwright";
 import type { AppLocale } from "@/domain/i18n/locales";
-import { APP_LOCALES } from "@/domain/i18n/locales";
+import { ENABLED_LOCALES } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { LANGUAGE_PROMPT_DISMISSED_COOKIE } from "@/domain/siteConfig";
 
@@ -50,7 +50,7 @@ const createLocaleAccessibilityTest = ({ locale }: CreateLocaleAccessibilityTest
   };
 };
 
-for (const locale of APP_LOCALES) {
+for (const locale of ENABLED_LOCALES) {
   test(
     `landing page has no automated WCAG violations for ${locale}`,
     createLocaleAccessibilityTest({ locale }),

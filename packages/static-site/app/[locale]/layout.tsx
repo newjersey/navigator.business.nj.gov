@@ -22,7 +22,7 @@ import { SiteFooter } from "@/components/landing/SiteFooter";
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { SkipNav } from "@/components/landing/SkipNav";
 import { textDirectionForLocale } from "@/domain/i18n/languages";
-import { APP_LOCALES, hasAppLocale } from "@/domain/i18n/locales";
+import { ENABLED_LOCALES, hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { SITE_BASE_URL } from "@/domain/siteConfig";
 
@@ -92,7 +92,7 @@ interface GenerateMetadataProps {
  * ```
  */
 export const generateStaticParams = () => {
-  return APP_LOCALES.map((locale) => {
+  return ENABLED_LOCALES.map((locale) => {
     return { locale };
   });
 };

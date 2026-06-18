@@ -20,6 +20,9 @@ const vitestConfig = defineConfig({
     ],
     exclude: ["node_modules/**", "tests/accessibility/**"],
     environment: "jsdom",
+    // Default to multilingual enabled so tests that exercise the full locale set
+    // keep passing. Flag-OFF tests override this with vi.stubEnv per case.
+    env: { NEXT_PUBLIC_MULTILINGUAL_ENABLED: "true" },
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
   },

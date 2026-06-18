@@ -10,7 +10,7 @@
 import { useLocale } from "next-intl";
 
 import type { LayoutLanguageSwitcherContent } from "@/domain/content/messageTypes";
-import { resolveAppLocale } from "@/domain/i18n/locales";
+import { isMultilingualEnabled, resolveAppLocale } from "@/domain/i18n/locales";
 import { usePathname } from "@/domain/i18n/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
@@ -38,6 +38,10 @@ export interface HeaderLanguageSwitcherProps {
 export const HeaderLanguageSwitcher = ({ content }: HeaderLanguageSwitcherProps) => {
   const pathname = usePathname();
   const currentLocale = resolveAppLocale({ locale: useLocale() });
+
+  if (!isMultilingualEnabled()) {
+    return null;
+  }
 
   return (
     <LanguageSwitcher

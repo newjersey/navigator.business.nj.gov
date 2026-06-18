@@ -7,7 +7,7 @@
  * the language switcher can re-target the current page at another locale.
  */
 
-import { APP_LOCALES, type AppLocale, DEFAULT_LOCALE, hasAppLocale } from "./locales";
+import { type AppLocale, DEFAULT_LOCALE, hasAppLocale, isLocaleEnabled } from "./locales";
 
 /**
  * Describes input for building a locale-prefixed pathname.
@@ -99,8 +99,8 @@ export const addLocalePrefix = ({
 export const localeOfPathname = (pathname: string): AppLocale => {
   const leadingSegment = readLeadingSegment(pathname);
 
-  if (leadingSegment && APP_LOCALES.includes(leadingSegment as AppLocale)) {
-    return leadingSegment as AppLocale;
+  if (leadingSegment && isLocaleEnabled(leadingSegment)) {
+    return leadingSegment;
   }
 
   return DEFAULT_LOCALE;

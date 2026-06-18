@@ -6,7 +6,7 @@
 
 import { defineRouting } from "next-intl/routing";
 
-import { APP_LOCALES, DEFAULT_LOCALE } from "./locales";
+import { DEFAULT_LOCALE, ENABLED_LOCALES } from "./locales";
 
 /**
  * Builds locale-aware route settings for `next-intl`.
@@ -15,7 +15,7 @@ import { APP_LOCALES, DEFAULT_LOCALE } from "./locales";
  * middleware use the same rules.
  */
 export const routing = defineRouting({
-  locales: APP_LOCALES,
+  locales: ENABLED_LOCALES,
   defaultLocale: DEFAULT_LOCALE,
   // `as-needed` leaves the default locale (en-US) unprefixed (`/page/x`) while
   // prefixing every other locale (`/es-US/page/x`).

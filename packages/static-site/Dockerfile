@@ -16,6 +16,7 @@ FROM base AS builder
 WORKDIR /app
 
 ARG NEXT_PUBLIC_WEB_BASE_URL
+ARG NEXT_PUBLIC_MULTILINGUAL_ENABLED
 
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY --from=dependencies /content-types /content-types
@@ -25,6 +26,7 @@ COPY content/src /content/src
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_PUBLIC_WEB_BASE_URL=$NEXT_PUBLIC_WEB_BASE_URL
+ENV NEXT_PUBLIC_MULTILINGUAL_ENABLED=$NEXT_PUBLIC_MULTILINGUAL_ENABLED
 RUN pnpm exec tsc --build /content-types/tsconfig.json
 RUN pnpm build
 

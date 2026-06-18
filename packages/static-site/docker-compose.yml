@@ -8,6 +8,7 @@ services:
     command: pnpm dev --hostname 0.0.0.0 --port 3000
     environment:
       CHOKIDAR_USEPOLLING: "true"
+      NEXT_PUBLIC_MULTILINGUAL_ENABLED: "true"
       NODE_ENV: development
       WATCHPACK_POLLING: "true"
     ports:

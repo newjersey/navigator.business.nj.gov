@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { buildAlternateLanguages } from "./alternateLanguages";
 
@@ -25,5 +25,22 @@ describe("alternateLanguages", () => {
         "x-default": "/pages/foo",
       });
     });
+  });
+});
+
+describe("alternateLanguages with multilingual disabled", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  });
+
+  it("emits only en-US and x-default when flag is false", async () => {
+    vi.stubEnv("NEXT_PUBLIC_MULTILINGUAL_ENABLED", "false");
+    vi.resetModules();
+    const { buildAlternateLanguages: build } = await import("./alternateLanguages");
+    const alternates = build({ pathnameWithoutLocale: "/learn" });
+
+    expect(Object.keys(alternates.languages ?? {})).toEqual(["en-US", "x-default"]);
+    expect(alternates.languages?.["es-US"]).toBeUndefined();
   });
 });

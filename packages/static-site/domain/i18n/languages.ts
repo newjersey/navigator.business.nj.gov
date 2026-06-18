@@ -6,7 +6,7 @@
  * is the single extension point when adding a new supported language.
  */
 
-import { type AppLocale, DEFAULT_LOCALE } from "./locales";
+import { type AppLocale, DEFAULT_LOCALE, isLocaleEnabled } from "./locales";
 
 /**
  * Display metadata for one selectable language.
@@ -59,7 +59,9 @@ const LANGUAGE_DESCRIPTORS_BY_LOCALE: readonly LanguageDescriptor[] = [
  */
 export const LANGUAGE_DESCRIPTORS: readonly LanguageDescriptor[] = [
   ...LANGUAGE_DESCRIPTORS_BY_LOCALE,
-].sort((a, b) => a.nativeName.localeCompare(b.nativeName));
+]
+  .filter((descriptor) => isLocaleEnabled(descriptor.locale))
+  .sort((a, b) => a.nativeName.localeCompare(b.nativeName));
 
 /**
  * Resolves the writing direction for a locale from its descriptor.

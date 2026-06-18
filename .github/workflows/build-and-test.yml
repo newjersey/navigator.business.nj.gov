@@ -31,6 +31,7 @@ env: &integration-env
   CYPRESS_API_BASE_URL: http://localhost:5002
   USE_FAKE_SELF_REG: "true"
   REDIRECT_URL: http://localhost:3000/
+  NEXT_PUBLIC_MULTILINGUAL_ENABLED: "true"
   NEXT_PUBLIC_WEB_BASE_URL: http://localhost:3000
   USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: "true"
   ADMIN_PASSWORD: Test1!

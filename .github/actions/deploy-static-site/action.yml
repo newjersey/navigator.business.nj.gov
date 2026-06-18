@@ -42,6 +42,7 @@ runs:
         docker buildx build --platform linux/amd64 \
           -f packages/static-site/Dockerfile . \
           --build-arg NEXT_PUBLIC_WEB_BASE_URL="${NEXT_PUBLIC_WEB_BASE_URL:-}" \
+          --build-arg NEXT_PUBLIC_MULTILINGUAL_ENABLED="${NEXT_PUBLIC_MULTILINGUAL_ENABLED:-}" \
           -t "$image_repo:$image_name-$IMAGE_VERSION" \
           -t "$image_repo:$image_name" \
           -t "$image_repo:$image_name-latest" \

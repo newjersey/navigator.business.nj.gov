@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { LANGUAGE_DESCRIPTORS, textDirectionForLocale } from "./languages";
 import type { AppLocale } from "./locales";
 
@@ -29,5 +29,27 @@ describe("languages", () => {
         expect(textDirectionForLocale(descriptor.locale)).toBe(descriptor.textDirection);
       }
     });
+  });
+});
+
+describe("LANGUAGE_DESCRIPTORS with multilingual disabled", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  });
+
+  it("contains only the English descriptor when flag is false", async () => {
+    vi.stubEnv("NEXT_PUBLIC_MULTILINGUAL_ENABLED", "false");
+    vi.resetModules();
+    const { LANGUAGE_DESCRIPTORS: descriptors } = await import("./languages");
+    expect(descriptors).toHaveLength(1);
+    expect(descriptors[0].locale).toBe("en-US");
+  });
+
+  it("contains both descriptors when flag is true", async () => {
+    vi.stubEnv("NEXT_PUBLIC_MULTILINGUAL_ENABLED", "true");
+    vi.resetModules();
+    const { LANGUAGE_DESCRIPTORS: descriptors } = await import("./languages");
+    expect(descriptors).toHaveLength(2);
   });
 });

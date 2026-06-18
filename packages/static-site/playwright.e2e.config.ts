@@ -18,7 +18,10 @@ const playwrightE2eConfig = defineConfig({
   },
   webServer: {
     command: "pnpm dev --port 3100",
-    reuseExistingServer: true,
+    // biome-ignore lint/style/noProcessEnv: playwright webServer inherits the host env and reads CI flag.
+    env: { ...process.env, NEXT_PUBLIC_MULTILINGUAL_ENABLED: "true" },
+    // biome-ignore lint/style/noProcessEnv: reuse existing server locally; always restart in CI.
+    reuseExistingServer: !process.env.CI,
     timeout: 120_000,
     url: SERVER_URL,
   },

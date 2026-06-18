@@ -59,6 +59,7 @@ a.card:hover {
 /* Specifically targeting the navigation icon */
 .support-card__container:first-child .support-card__icon img {
   width: 65px;
+  height: auto;
 }
 
 .brought-to-you-by__logo {

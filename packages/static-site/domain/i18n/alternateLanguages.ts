@@ -10,7 +10,7 @@
 import type { Metadata } from "next";
 
 import { addLocalePrefix } from "./localePath";
-import { APP_LOCALES } from "./locales";
+import { ENABLED_LOCALES } from "./locales";
 
 /**
  * Describes input for building alternate-language metadata.
@@ -45,7 +45,7 @@ export const buildAlternateLanguages = ({
 
   const languages: Record<string, string> = {};
 
-  for (const locale of APP_LOCALES) {
+  for (const locale of ENABLED_LOCALES) {
     languages[locale] = addLocalePrefix({ pathnameWithoutLocale, locale });
   }
 

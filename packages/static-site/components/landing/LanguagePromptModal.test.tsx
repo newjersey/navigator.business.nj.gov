@@ -96,3 +96,32 @@ describe("LanguagePromptModal", () => {
     expect(assignMock).toHaveBeenCalledWith("/es-US/learn");
   });
 });
+
+describe("LanguagePromptModal with multilingual disabled", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+    vi.clearAllMocks();
+    document.cookie = `${LANGUAGE_PROMPT_DISMISSED_COOKIE}=; max-age=0; path=/`;
+  });
+
+  it("renders nothing even when browser language differs from current locale", async () => {
+    mockedUseLocale.mockReturnValue("en-US");
+    mockedUsePathname.mockReturnValue("/learn");
+    Object.defineProperty(window.navigator, "languages", {
+      value: ["es-ES"],
+      configurable: true,
+    });
+    Object.defineProperty(window, "location", {
+      value: { assign: assignMock },
+      writable: true,
+    });
+    document.cookie = `${LANGUAGE_PROMPT_DISMISSED_COOKIE}=; max-age=0; path=/`;
+
+    vi.stubEnv("NEXT_PUBLIC_MULTILINGUAL_ENABLED", "false");
+    vi.resetModules();
+    const { LanguagePromptModal: Modal } = await import("./LanguagePromptModal");
+    const { container } = render(<Modal />);
+    expect(container.firstChild).toBeNull();
+  });
+});
