@@ -57,6 +57,7 @@ const renderSwitcher = ({ currentLocale, pathname, descriptors }: RenderSwitcher
   );
 };
 
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: test suite
 describe("LanguageSwitcher", () => {
   it("renders the trigger button with the button label", () => {
     renderSwitcher({ currentLocale: "en-US", pathname: "/learn" });
