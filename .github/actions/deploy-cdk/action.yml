@@ -62,3 +62,65 @@ runs:
           --verbose \
           --region us-east-1 \
           --require-approval never
+
+    - name: Preserve expiring backup recovery points
+      shell: bash
+      run: |
+        VAULT_NAME="BizX_dynamodb_backups"
+        CUTOFF_DATE=$(date -u -d "+30 days" +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v+30d +%Y-%m-%dT%H:%M:%SZ)
+
+        echo "Removing deletion deadline from recovery points expiring before $CUTOFF_DATE"
+
+        ARNS=$(aws backup list-recovery-points-by-backup-vault \
+          --backup-vault-name "$VAULT_NAME" \
+          --region us-east-1 \
+          --query "RecoveryPoints[?Lifecycle.DeleteAt<='${CUTOFF_DATE}'].RecoveryPointArn" \
+          --output text)
+
+        if [ -z "$ARNS" ] || [ "$ARNS" = "None" ]; then
+          echo "No recovery points expiring within 30 days."
+          exit 0
+        fi
+
+        for ARN in $ARNS; do
+          echo "Extending: $ARN"
+          aws backup update-recovery-point-lifecycle \
+            --backup-vault-name "$VAULT_NAME" \
+            --recovery-point-arn "$ARN" \
+            --lifecycle '{"MoveToColdStorageAfterDays": 14}' \
+            --region us-east-1
+        done
+
+        echo "Done. Extended $(echo "$ARNS" | wc -w | tr -d ' ') recovery points."
+
+    # Uncomment the step below to reapply the 6-month deletion policy to
+    # recovery points that were previously set to retain forever.
+    #
+    # - name: Reapply 6-month retention to preserved recovery points
+    #   shell: bash
+    #   run: |
+    #     VAULT_NAME="BizX_dynamodb_backups"
+    #
+    #     echo "Reapplying 180-day retention to recovery points with no deletion date"
+    #
+    #     ARNS=$(aws backup list-recovery-points-by-backup-vault \
+    #       --backup-vault-name "$VAULT_NAME" \
+    #       --region us-east-1 \
+    #       --query "RecoveryPoints[?!Lifecycle.DeleteAt].RecoveryPointArn" \
+    #       --output text)
+    #
+    #     if [ -z "$ARNS" ] || [ "$ARNS" = "None" ]; then
+    #       echo "No recovery points without a deletion date."
+    #       exit 0
+    #     fi
+    #
+    #     for ARN in $ARNS; do
+    #       echo "Reapplying retention: $ARN"
+    #       aws backup update-recovery-point-lifecycle \
+    #         --backup-vault-name "$VAULT_NAME" \
+    #         --recovery-point-arn "$ARN" \
+    #         --lifecycle '{"MoveToColdStorageAfterDays": 14, "DeleteAfterDays": 180}' \
+    #         --region us-east-1
+    #     done
+    #
+    #     echo "Done. Updated $(echo "$ARNS" | wc -w | tr -d ' ') recovery points."
