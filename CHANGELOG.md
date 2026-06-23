@@ -1,3 +1,10 @@
+## [2026.14.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.14.0...v2026.14.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* trigger deployment ([6e90316](https://github.com/newjersey/navigator.business.nj.gov/commit/6e9031690987b356b299cdd3c8908f9886f35557))
+
 # [2026.14.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.13.1...v2026.14.0) (2026-06-17)
 
 
