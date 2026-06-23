@@ -8,6 +8,7 @@ id: form-business-entity
 callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName
 callToActionText: Form My Business
 agencyId: nj-revenue-enterprise-services
+needsAccount: true
 ---
 
 ## Application Requirements

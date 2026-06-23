@@ -325,6 +325,7 @@ export interface Task {
   requiresLocation?: boolean;
   industryId?: string;
   stepLabel?: string;
+  needsAccount?: boolean;
 }
 
 export interface TaskWithLicenseTaskId extends Task {

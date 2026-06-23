@@ -14,6 +14,7 @@ callToActionLink: ""
 callToActionText: ""
 agencyAdditionalContext: Internal Revenue Service
 formName: SS-4
+needsAccount: true
 ---
 
 ## Application Requirements

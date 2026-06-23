@@ -21,6 +21,7 @@ callToActionLink: ""
 callToActionText: ""
 agencyId: nj-revenue-enterprise-services
 formName: NJ-Reg
+needsAccount: true
 ---
 
 ## Application Requirements
