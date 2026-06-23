@@ -606,6 +606,7 @@
     "filterReset": "Reset",
     "resultCount": "Showing <bold>{filtered}</bold> results of {total} items",
     "filteringByLabel": "Filtering by:",
+    "filterSearchChip": "Search: \"{query}\"",
     "filterRemoveLabel": "Remove {filter} filter",
     "paginationPrevious": "Previous",
     "paginationNext": "Next"

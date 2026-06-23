@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import type { FundingPageMessages } from "@/domain/content/messageTypes";
 import type { Funding, FundingType, PageItem, Sector } from "@/domain/content/types";
 import FundingCard from "./FundingCard";
+import { parseFundingContent } from "./parseFundingContent";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -42,6 +43,14 @@ const matchesFilters = (funding: Funding, filters: AppliedFilters): boolean => {
   return typeMatch && industryMatch;
 };
 
+const fundingSearchableText = (funding: Funding): string => {
+  const { eligibility, benefits } = parseFundingContent(funding.contentMd ?? "");
+  return `${funding.name} ${eligibility} ${benefits}`.toLowerCase();
+};
+
+const matchesQuery = (searchableText: string, normalizedQuery: string): boolean =>
+  normalizedQuery === "" || searchableText.includes(normalizedQuery);
+
 interface FilterChipProps {
   readonly label: string;
   readonly removeLabel: string;
@@ -66,18 +75,22 @@ interface FilteringByBarProps {
   readonly messages: FundingPageMessages;
   readonly sectors: readonly Sector[];
   readonly applied: AppliedFilters;
+  readonly query: string;
   readonly onRemoveIndustry: (id: string) => void;
   readonly onRemoveFundingType: (id: FundingType) => void;
+  readonly onRemoveQuery: () => void;
 }
 
 const FilteringByBar = ({
   messages,
   sectors,
   applied,
+  query,
   onRemoveIndustry,
   onRemoveFundingType,
+  onRemoveQuery,
 }: FilteringByBarProps) => {
-  if (applied.industries.size === 0 && applied.fundingTypes.size === 0) {
+  if (applied.industries.size === 0 && applied.fundingTypes.size === 0 && query.trim() === "") {
     return null;
   }
 
@@ -92,6 +105,14 @@ const FilteringByBar = ({
       className="funding-filtering-by margin-bottom-2 padding-2 radius-md bg-primary-lightest border-1px border-primary"
     >
       <span className="margin-right-1">{messages.filteringByLabel}</span>
+      {query.trim() !== "" && (
+        <FilterChip
+          key="search"
+          label={messages.filterSearchChip.replace("{query}", query)}
+          removeLabel={removeLabel(messages.filterSearchChip.replace("{query}", query))}
+          onRemove={onRemoveQuery}
+        />
+      )}
       {sectors
         .map((s) => s.id)
         .filter((id) => applied.industries.has(id))
@@ -132,10 +153,24 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
     industries: new Set(),
     fundingTypes: new Set(),
   });
+  const [query, setQuery] = useState("");
+
+  const searchableEntries = useMemo(
+    () => fundings.map((funding) => ({ funding, searchableText: fundingSearchableText(funding) })),
+    [fundings],
+  );
+
+  const normalizedQuery = query.trim().toLowerCase();
 
   const filteredFundings = useMemo(
-    () => fundings.filter((f) => matchesFilters(f, applied)),
-    [fundings, applied],
+    () =>
+      searchableEntries
+        .filter(
+          ({ funding, searchableText }) =>
+            matchesFilters(funding, applied) && matchesQuery(searchableText, normalizedQuery),
+        )
+        .map(({ funding }) => funding),
+    [searchableEntries, applied, normalizedQuery],
   );
 
   const pendingFiltered = useMemo(
@@ -227,6 +262,16 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
     setCurrentPage(1);
   };
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setQuery(event.target.value);
+    setCurrentPage(1);
+  };
+
+  const removeQuery = (): void => {
+    setQuery("");
+    setCurrentPage(1);
+  };
+
   const clearPendingIndustries = (): void => {
     setPendingIndustries(new Set());
   };
@@ -259,15 +304,21 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
 
       <aside className="border-1px border-base-lighter padding-3 radius-lg funding-filter-col">
         <h2>{messages.filterHeading}</h2>
+
         <div className="margin-y-3" style={{ display: "flow-root" }}>
           <label className="usa-label text-bold margin-bottom-1" htmlFor="funding-search">
             {messages.filterSearch}
           </label>
-          <input id="funding-search" className="usa-input" type="search" readOnly />
+          <input
+            id="funding-search"
+            className="usa-input"
+            type="search"
+            value={query}
+            onChange={handleSearchChange}
+          />
         </div>
 
         <hr className="border-base-lighter border-top-1px margin-y-2" />
-
         <fieldset className="usa-fieldset margin-bottom-2">
           <legend className="usa-legend text-bold display-flex flex-justify flex-align-center width-full margin-bottom-1">
             {messages.filterIndustry}
@@ -352,14 +403,16 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
           messages={messages}
           sectors={sectors}
           applied={applied}
+          query={query}
           onRemoveIndustry={removeIndustry}
           onRemoveFundingType={removeFundingType}
+          onRemoveQuery={removeQuery}
         />
 
         <p className="margin-bottom-2">{resultCount}</p>
 
         {pageSlice.map((funding) => (
-          <FundingCard key={funding.id} funding={funding} />
+          <FundingCard key={funding.id} funding={funding} query={query} />
         ))}
 
         {totalPages > 1 && (

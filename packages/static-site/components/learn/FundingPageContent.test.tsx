@@ -21,6 +21,7 @@ const messages: FundingPageMessages = {
   filterReset: "Reset",
   resultCount: "Showing <bold>{filtered}</bold> results of {total} items",
   filteringByLabel: "Filtering by:",
+  filterSearchChip: 'Search: "{query}"',
   filterRemoveLabel: "Remove {filter} filter",
   paginationPrevious: "Previous",
   paginationNext: "Next",
@@ -313,5 +314,75 @@ describe("FundingPageContent", () => {
     expect(screen.getByRole("button", { name: "Remove Technology filter" })).toBeInTheDocument();
     // Technology checkbox unticked (pending state cleared)
     expect((screen.getByLabelText("Technology") as HTMLInputElement).checked).toBe(false);
+  });
+
+  it("filters cards live by name as the user types, without clicking a button", async () => {
+    const user = userEvent.setup();
+    const fundings = [makeFunding("Grant Alpha"), makeFunding("Loan Beta")];
+    renderWithIntl(
+      <FundingPageContent messages={messages} page={page} fundings={fundings} sectors={sectors} />,
+    );
+
+    await user.type(screen.getByRole("searchbox"), "alpha");
+
+    expect(screen.getByRole("heading", { name: "Grant Alpha" })).toBeInTheDocument();
+    expect(screen.queryByText("Loan Beta")).not.toBeInTheDocument();
+  });
+
+  it("matches case-insensitively against the funding body text", async () => {
+    const user = userEvent.setup();
+    const fundings = [
+      makeFunding("Alpha", {
+        contentMd: `## Eligibility\n\n- Must be WIDGET maker\n\n:::largeCallout{ showHeader="true" headerText="Benefits:" calloutType="conditional" }\n\nGreat benefit.\n\n:::`,
+      }),
+      makeFunding("Beta"),
+    ];
+    renderWithIntl(
+      <FundingPageContent messages={messages} page={page} fundings={fundings} sectors={sectors} />,
+    );
+
+    await user.type(screen.getByRole("searchbox"), "widget");
+
+    expect(screen.getByText("Alpha")).toBeInTheDocument();
+    expect(screen.queryByText("Beta")).not.toBeInTheDocument();
+  });
+
+  it("shows a removable search chip whose x clears the query", async () => {
+    const user = userEvent.setup();
+    const fundings = [makeFunding("Grant Alpha"), makeFunding("Loan Beta")];
+    renderWithIntl(
+      <FundingPageContent messages={messages} page={page} fundings={fundings} sectors={sectors} />,
+    );
+
+    await user.type(screen.getByRole("searchbox"), "alpha");
+    expect(screen.getByText('Search: "alpha"')).toBeInTheDocument();
+    expect(screen.queryByText("Loan Beta")).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: 'Remove Search: "alpha" filter' }));
+
+    expect(screen.queryByText('Search: "alpha"')).not.toBeInTheDocument();
+    expect(screen.getByText("Loan Beta")).toBeInTheDocument();
+    expect((screen.getByRole("searchbox") as HTMLInputElement).value).toBe("");
+  });
+
+  it("AND-combines the search query with applied checkbox filters", async () => {
+    const user = userEvent.setup();
+    const fundings = [
+      makeFunding("Grant Alpha", { fundingType: "grant" }),
+      makeFunding("Grant Beta", { fundingType: "grant" }),
+      makeFunding("Loan Alpha", { fundingType: "loan" }),
+    ];
+    renderWithIntl(
+      <FundingPageContent messages={messages} page={page} fundings={fundings} sectors={sectors} />,
+    );
+
+    await user.click(screen.getByLabelText("Grant"));
+    await user.click(screen.getByRole("button", { name: "Show 2 Results" }));
+    await user.type(screen.getByRole("searchbox"), "alpha");
+
+    // grant AND "alpha" -> only "Grant Alpha"
+    expect(screen.getByRole("heading", { name: "Grant Alpha" })).toBeInTheDocument();
+    expect(screen.queryByText("Grant Beta")).not.toBeInTheDocument();
+    expect(screen.queryByText("Loan Alpha")).not.toBeInTheDocument();
   });
 });

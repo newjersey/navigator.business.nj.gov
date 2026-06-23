@@ -518,6 +518,8 @@ export interface FundingPageMessages {
   readonly resultCount: string;
   /** Label preceding the filter chips ("Filtering by:"). */
   readonly filteringByLabel: string;
+  /** Chip label for the active search query; {query} is replaced at runtime. */
+  readonly filterSearchChip: string;
   /** aria-label template for chip remove buttons; {filter} is replaced at runtime. */
   readonly filterRemoveLabel: string;
   /** Label for pagination "Previous" control. */

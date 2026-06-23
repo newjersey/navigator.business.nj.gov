@@ -79,4 +79,32 @@ describe("FundingCard", () => {
     render(<FundingCard funding={funding({ dueDate: "2026-12-31" })} />);
     expect(screen.getByText(/2026-12-31/)).toBeInTheDocument();
   });
+
+  it("highlights a query match in the funding name", () => {
+    render(<FundingCard funding={funding({ name: "Grant Program" })} query="grant" />);
+    const heading = screen.getByRole("heading", { name: "Grant Program" });
+    const mark = heading.querySelector("mark.funding-search-highlight");
+    expect(mark).not.toBeNull();
+    expect(mark).toHaveTextContent("Grant");
+  });
+
+  it("highlights a query match in the eligibility body", () => {
+    const { container } = render(<FundingCard funding={funding()} query="registered" />);
+    const marks = container.querySelectorAll("mark.funding-search-highlight");
+    expect([...marks].some((m) => m.textContent === "registered")).toBe(true);
+  });
+
+  it("renders no highlight marks when no query is given", () => {
+    const { container } = render(<FundingCard funding={funding()} />);
+    expect(container.querySelector("mark.funding-search-highlight")).toBeNull();
+  });
+
+  it("keeps markdown rendering for a whitespace-only query", () => {
+    const { container } = render(<FundingCard funding={funding()} query="   " />);
+    // A whitespace-only query matches and highlights nothing, so the
+    // Eligibility section should stay in its <Markdown> rendering (a list)
+    // rather than the plain-text fallback used while actively searching.
+    expect(container.querySelector("ul")).not.toBeNull();
+    expect(container.querySelector("mark.funding-search-highlight")).toBeNull();
+  });
 });
