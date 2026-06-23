@@ -19,19 +19,24 @@ vi.mock("@/domain/categories", () => ({
 vi.mock("@/domain/content/loadContent", () => ({
   loadPageBySlug: (slug: string) => ({
     slug,
-    name: "Create a Business Plan",
-    category: "plan",
+    name: slug === "funding" ? "Funding" : "Create a Business Plan",
+    category: slug === "funding" ? "grow" : "plan",
+    "sub-heading-text":
+      slug === "funding" ? "Whether you're looking for startup capital..." : undefined,
   }),
+  loadFundings: () => [],
+  loadSectors: () => [],
 }));
 
 describe("generateStaticParams", () => {
   it("returns one entry per slug in CATEGORY_HIERARCHY", () => {
     const result = generateStaticParams();
-    expect(result).toHaveLength(3);
+    expect(result).toHaveLength(4);
     expect(result).toEqual([
       { slug: "create-a-business-plan" },
       { slug: "choose-a-business-structure" },
       { slug: "something-else" },
+      { slug: "funding" },
     ]);
   });
 });
@@ -51,5 +56,19 @@ describe("ContentPage", () => {
     expect(
       screen.getByRole("heading", { level: 1, name: "Create a Business Plan" }),
     ).toBeInTheDocument();
+  });
+});
+
+describe("ContentPage — funding slug", () => {
+  it("renders FundingPageContent for the funding slug", async () => {
+    render(
+      await ContentPage({
+        params: Promise.resolve({
+          locale: "en-US",
+          slug: "funding",
+        }),
+      }),
+    );
+    expect(screen.getByRole("heading", { level: 1, name: "Funding" })).toBeInTheDocument();
   });
 });

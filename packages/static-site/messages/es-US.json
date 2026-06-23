@@ -591,5 +591,21 @@
         }
       }
     ]
+  },
+  "funding": {
+    "title": "Funding",
+    "ctaHeading": "Find Funding Fit for Your Business",
+    "ctaBody": "Answers just a few questions, and we'll find programs you may be eligible for.",
+    "ctaButton": "Create Account",
+    "filterHeading": "Filter All Funding Options",
+    "filterSearch": "Search",
+    "filterIndustry": "Industry",
+    "filterFundingType": "Funding Type",
+    "filterClear": "Clear",
+    "filterShowResults": "Show {count} Results",
+    "filterReset": "Reset",
+    "resultCount": "Showing {count} items",
+    "paginationPrevious": "Previous",
+    "paginationNext": "Next"
   }
 }

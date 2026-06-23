@@ -31,6 +31,35 @@ body {
   min-height: 100vh;
 }
 
+.grid-container:has(.layout-wide) {
+  max-width: 90rem;
+}
+
+/*
+ * Wide pages need more room for content (e.g. a right-rail filter), so the
+ * side-nav gives up space: 4/8 becomes 3/9. Gated at 64em — narrower than
+ * that, the three-column inner layout doesn't have room to breathe and the
+ * site side-nav gets squeezed. Overridden in CSS rather than conditionally
+ * in `(learn)/layout.tsx` because the layout can't see which child route
+ * is rendering.
+ */
+@media (min-width: 64em) {
+  .grid-row:has(.layout-wide) > .tablet\:grid-col-4 {
+    width: 25%;
+  }
+  .grid-row:has(.layout-wide) > .tablet\:grid-col-8 {
+    width: 75%;
+  }
+}
+
+#funding-search {
+  border-right: 1px solid var(--color-base-dark);
+}
+
+.usa-nav__inner {
+  max-width: 80rem !important;
+}
+
 .grid-container p {
   max-width: unset;
 }
@@ -58,6 +87,23 @@ body {
   margin-top: 0;
 }
 
+.usa-pagination .usa-current {
+  text-decoration: none;
+}
+
+.usa-pagination .usa-pagination__button:not(.usa-current) {
+  background-color: white;
+  text-decoration: underline;
+}
+
+.usa-pagination__previous-page,
+.usa-pagination__next-page {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
 .usa-header--extended .usa-nav__secondary-links a,
 .usa-header--extended .usa-nav__secondary-links a:visited {
   color: var(--color-base-lighter);
@@ -73,7 +119,12 @@ ul.usa-card-group {
 }
 
 div.usa-card__container {
-  margin-inline: 0.75rem;
+  margin-inline: 0;
+}
+
+.funding-layout {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 40em) {
@@ -87,6 +138,28 @@ div.usa-card__container {
     margin-inline-end: 48px;
     position: sticky;
     top: 20px;
+  }
+}
+
+@media (min-width: 64em) {
+  .funding-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "header filter"
+      "results filter";
+    column-gap: 2rem;
+    align-items: start;
+  }
+
+  .funding-header-col {
+    grid-area: header;
+  }
+  .funding-filter-col {
+    grid-area: filter;
+  }
+  .funding-results-col {
+    grid-area: results;
   }
 }
 

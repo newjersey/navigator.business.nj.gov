@@ -489,6 +489,40 @@ export interface LearnPageContent {
 }
 
 /**
+ * Localized content for the funding page.
+ */
+export interface FundingPageMessages {
+  /** Page H1 title. */
+  readonly title: string;
+  /** Heading inside the "Find Funding Fit" CTA box. */
+  readonly ctaHeading: string;
+  /** Body text inside the "Find Funding Fit" CTA box. */
+  readonly ctaBody: string;
+  /** Label for the "Create Account" CTA button. */
+  readonly ctaButton: string;
+  /** Heading for the filter sidebar. */
+  readonly filterHeading: string;
+  /** Label for the search input. */
+  readonly filterSearch: string;
+  /** Label for the industry filter group. */
+  readonly filterIndustry: string;
+  /** Label for the funding type filter group. */
+  readonly filterFundingType: string;
+  /** Label for the "Clear" button inside each filter fieldset. */
+  readonly filterClear: string;
+  /** Label for the "Show Results" button; {count} is replaced at runtime. */
+  readonly filterShowResults: string;
+  /** Label for the "Reset" button. */
+  readonly filterReset: string;
+  /** Result count line; {count} is replaced at runtime. */
+  readonly resultCount: string;
+  /** Label for pagination "Previous" control. */
+  readonly paginationPrevious: string;
+  /** Label for pagination "Next" control. */
+  readonly paginationNext: string;
+}
+
+/**
  * Complete localized message payload for one locale.
  */
 export interface ApplicationMessages {
@@ -500,4 +534,6 @@ export interface ApplicationMessages {
   readonly landing: LandingPageContent;
   /** Learn page content strings and links. */
   readonly learn: LearnPageContent;
+  /** Funding page content strings. */
+  readonly funding: FundingPageMessages;
 }
