@@ -1,5 +1,7 @@
 import { render, screen } from "@testing-library/react";
+import { NextIntlClientProvider } from "next-intl";
 import { describe, expect, it, vi } from "vitest";
+import { getApplicationMessages } from "@/domain/i18n/messages";
 import ContentPage, { generateStaticParams } from "./page";
 
 vi.mock("@/domain/categories", () => ({
@@ -19,10 +21,14 @@ vi.mock("@/domain/categories", () => ({
 vi.mock("@/domain/content/loadContent", () => ({
   loadPageBySlug: (slug: string) => ({
     slug,
-    name: "Create a Business Plan",
-    category: "plan",
+    name: slug === "funding" ? "Funding" : "Create a Business Plan",
+    category: slug === "funding" ? "grow" : "plan",
+    "sub-heading-text":
+      slug === "funding" ? "Whether you're looking for startup capital..." : undefined,
   }),
   loadIndustries: () => [],
+  loadFundings: () => [],
+  loadSectors: () => [],
 }));
 
 describe("generateStaticParams", () => {
@@ -52,5 +58,22 @@ describe("ContentPage", () => {
     expect(
       screen.getByRole("heading", { level: 1, name: "Create a Business Plan" }),
     ).toBeInTheDocument();
+  });
+});
+
+describe("ContentPage — funding slug", () => {
+  it("renders FundingPageContent for the funding slug", async () => {
+    const page = await ContentPage({
+      params: Promise.resolve({
+        locale: "en-US",
+        slug: "funding",
+      }),
+    });
+    render(
+      <NextIntlClientProvider locale="en-US" messages={getApplicationMessages({ locale: "en-US" })}>
+        {page}
+      </NextIntlClientProvider>,
+    );
+    expect(screen.getByRole("heading", { level: 1, name: "Funding" })).toBeInTheDocument();
   });
 });

@@ -33,7 +33,7 @@ export const SiteHeader = ({ content, languageSwitcher }: SiteHeaderProps) => {
         onAccountOpen={() => setIsAccountOpen(true)}
         onNavOpen={() => setIsNavOpen(true)}
       />
-      <header className="usa-header usa-header--extended">
+      <header className="usa-header usa-header--extended border-bottom-1px border-base-lighter">
         <nav aria-label={content.primaryNavigationAriaLabel} className="usa-nav">
           <div className="usa-nav__inner">
             <HeaderPrimaryNav header={content} />
