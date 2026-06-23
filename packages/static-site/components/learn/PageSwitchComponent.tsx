@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import { FundingPage } from "@/components/learn/FundingPage";
 import PageContent from "@/components/learn/PageContent";
 import { StarterKitsPage } from "@/components/learn/StarterKitsPage";
 import type { PageItem } from "@/domain/content/types";
@@ -11,6 +12,8 @@ interface Props {
 
 export const PageSwitchComponent = ({ page, locale }: Props): ReactElement => {
   switch (page.slug) {
+    case "funding":
+      return <FundingPage page={page} locale={locale} />;
     case "starter-kits":
       return <StarterKitsPage page={page} locale={locale} />;
     default:
