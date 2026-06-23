@@ -14,6 +14,7 @@ urlSlug: naics-code-determination
 displayname: naics-code-determination
 name: Determine Your NAICS Code
 id: determine-naics-code
+needsAccount: true
 ---
 
 ${naicsCodeLookupComponent}

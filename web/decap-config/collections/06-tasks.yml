@@ -377,6 +377,10 @@ collections:
           - { label: "individual license", value: "individual-license" }
           - { label: "school/course", value: "school-course" }
           - { label: "object or vehicle", value: "object-vehicle" }
+      - label: "Needs Account"
+        name: "needsAccount"
+        widget: "boolean"
+        required: false
 
   - name: "license-tasks"
     label: "License Tasks (Navigator with Webflow mappings)"

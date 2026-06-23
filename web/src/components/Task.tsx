@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { taskIdsWithLicenseSearchEnabled } from "@/components/TaskPageSwitchComponent";
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -69,7 +70,7 @@ export const Task = (props: Props): ReactElement => {
             )}
           </span>
         )}
-        <div>
+        <div className="flex flex-align-center">
           <Link
             href={`/tasks/${props.task.urlSlug}`}
             passHref
@@ -82,7 +83,13 @@ export const Task = (props: Props): ReactElement => {
           >
             {props.task.name}
           </Link>
-
+          {(props.task.needsAccount || taskIdsWithLicenseSearchEnabled.includes(props.task.id)) && (
+            <img
+              className="usa-icon display-block margin-right-105"
+              src="/img/lock.svg"
+              alt="Requires account"
+            />
+          )}
           {isTabletAndUp && renderRequiredLabel()}
         </div>
       </div>
