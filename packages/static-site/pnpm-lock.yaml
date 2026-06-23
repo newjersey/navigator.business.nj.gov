@@ -14,6 +14,9 @@ importers:
       '@newjersey/njwds':
         specifier: 2.9.1
         version: 2.9.1
+      '@trussworks/react-uswds':
+        specifier: ^11.1.0
+        version: 11.1.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@uswds/uswds@3.10.0)(focus-trap-react@11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
@@ -931,6 +934,17 @@ packages:
       '@types/react-dom':
         optional: true
 
+  '@trussworks/react-uswds@11.1.0':
+    resolution: {integrity: sha512-trvTYjbokohPKUPWbhMxEHIfuW/MEnQUuaMeOqV7XPBTv6OYvZsv6/jI5ul0YSRd/VyT0m8L8Fj0cRTCQx4GoQ==}
+    engines: {node: '>= 20'}
+    peerDependencies:
+      '@types/react': ^16.x || ^17.x || ^18.x || ^19.x
+      '@types/react-dom': ^16.x || ^17.x || ^18.x || ^19.x
+      '@uswds/uswds': ^3.13.0
+      focus-trap-react: ^11.0.4
+      react: ^16.x || ^17.x || ^18.x || ^19.x
+      react-dom: ^16.x || ^17.x || ^18.x || ^19.x
+
   '@tybys/wasm-util@0.10.2':
     resolution: {integrity: sha512-RoBvJ2X0wuKlWFIjrwffGw1IqZHKQqzIchKaadZZfnNpsAYp2mM0h36JtPCjNDAHGgYez/15uMBpfGwchhiMgg==}
 
@@ -1232,6 +1246,17 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  focus-trap-react@11.0.6:
+    resolution: {integrity: sha512-8YbWR8kDf2pQ8G9LT11p39VY4T7eWVrj00Fhp1HUSdv5uW9q6+WK8OMAdy9Ui7vGb1zNouFDzwBIqJwt82rIYQ==}
+    peerDependencies:
+      '@types/react': ^18.0.0 || ^19.0.0
+      '@types/react-dom': ^18.0.0 || ^19.0.0
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+
+  focus-trap@7.8.0:
+    resolution: {integrity: sha512-/yNdlIkpWbM0ptxno3ONTuf+2g318kh2ez3KSeZN5dZ8YC6AAmgeWz+GasYYiBJPFaYcSAPeu4GfhUaChzIJXA==}
 
   fsevents@2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
@@ -1820,6 +1845,9 @@ packages:
 
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
+
+  tabbable@6.5.0:
+    resolution: {integrity: sha512-wieBHXygIm7OyQOu5hQlkk62/WyCFYGlWg7L6/ZCUZwx0o398Zkn4pVmMyfYhfMG8kGrj/Krt8eIk6UKC6VzwA==}
 
   tinybench@2.9.0:
     resolution: {integrity: sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg==}
@@ -2609,6 +2637,15 @@ snapshots:
       '@types/react': 19.2.17
       '@types/react-dom': 19.2.3(@types/react@19.2.17)
 
+  '@trussworks/react-uswds@11.1.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@uswds/uswds@3.10.0)(focus-trap-react@11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+    dependencies:
+      '@types/react': 19.2.17
+      '@types/react-dom': 19.2.3(@types/react@19.2.17)
+      '@uswds/uswds': 3.10.0
+      focus-trap-react: 11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
+
   '@tybys/wasm-util@0.10.2':
     dependencies:
       tslib: 2.8.1
@@ -2887,6 +2924,19 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.4):
     optionalDependencies:
       picomatch: 4.0.4
+
+  focus-trap-react@11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+    dependencies:
+      '@types/react': 19.2.17
+      '@types/react-dom': 19.2.3(@types/react@19.2.17)
+      focus-trap: 7.8.0
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
+      tabbable: 6.5.0
+
+  focus-trap@7.8.0:
+    dependencies:
+      tabbable: 6.5.0
 
   fsevents@2.3.2:
     optional: true
@@ -3665,6 +3715,8 @@ snapshots:
       react: 19.2.7
 
   symbol-tree@3.2.4: {}
+
+  tabbable@6.5.0: {}
 
   tinybench@2.9.0: {}
 

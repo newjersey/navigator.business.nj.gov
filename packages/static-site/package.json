@@ -77,6 +77,7 @@
   "dependencies": {
     "@businessnjgovnavigator/content-types": "file:../content-types",
     "@newjersey/njwds": "2.9.1",
+    "@trussworks/react-uswds": "^11.1.0",
     "gray-matter": "^4.0.3",
     "next": "16.2.9",
     "next-intl": "4.13.0",
