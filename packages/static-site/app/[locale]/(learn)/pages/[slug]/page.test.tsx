@@ -1,5 +1,7 @@
 import { render, screen } from "@testing-library/react";
+import { NextIntlClientProvider } from "next-intl";
 import { describe, expect, it, vi } from "vitest";
+import { getApplicationMessages } from "@/domain/i18n/messages";
 import ContentPage, { generateStaticParams } from "./page";
 
 vi.mock("@/domain/categories", () => ({
@@ -61,13 +63,16 @@ describe("ContentPage", () => {
 
 describe("ContentPage — funding slug", () => {
   it("renders FundingPageContent for the funding slug", async () => {
-    render(
-      await ContentPage({
-        params: Promise.resolve({
-          locale: "en-US",
-          slug: "funding",
-        }),
+    const page = await ContentPage({
+      params: Promise.resolve({
+        locale: "en-US",
+        slug: "funding",
       }),
+    });
+    render(
+      <NextIntlClientProvider locale="en-US" messages={getApplicationMessages({ locale: "en-US" })}>
+        {page}
+      </NextIntlClientProvider>,
     );
     expect(screen.getByRole("heading", { level: 1, name: "Funding" })).toBeInTheDocument();
   });

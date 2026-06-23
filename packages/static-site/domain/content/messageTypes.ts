@@ -514,8 +514,12 @@ export interface FundingPageMessages {
   readonly filterShowResults: string;
   /** Label for the "Reset" button. */
   readonly filterReset: string;
-  /** Result count line; {count} is replaced at runtime. */
+  /** Result count line; {filtered} (wrapped in <bold>) and {total} are substituted at runtime via t.rich. */
   readonly resultCount: string;
+  /** Label preceding the filter chips ("Filtering by:"). */
+  readonly filteringByLabel: string;
+  /** aria-label template for chip remove buttons; {filter} is replaced at runtime. */
+  readonly filterRemoveLabel: string;
   /** Label for pagination "Previous" control. */
   readonly paginationPrevious: string;
   /** Label for pagination "Next" control. */

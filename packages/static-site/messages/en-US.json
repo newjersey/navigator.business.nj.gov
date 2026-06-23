@@ -604,7 +604,9 @@
     "filterClear": "Clear",
     "filterShowResults": "Show {count} Results",
     "filterReset": "Reset",
-    "resultCount": "Showing {count} items",
+    "resultCount": "Showing <bold>{filtered}</bold> results of {total} items",
+    "filteringByLabel": "Filtering by:",
+    "filterRemoveLabel": "Remove {filter} filter",
     "paginationPrevious": "Previous",
     "paginationNext": "Next"
   }

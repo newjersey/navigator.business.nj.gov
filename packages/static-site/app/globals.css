@@ -5,6 +5,7 @@
   --color-base-dark: #565c65; /* USWDS base-dark / gray-cool-60 */
   --color-base-lightest: #f0f0f0; /* USWDS base-lightest / gray-5 */
   --color-ink: #1b1b1b; /* USWDS ink / gray-90 */
+  --color-primary: #005ea2; /* Note: this primary, per designs, contracts the NJWDS "primary" */
   --color-primary-dark: #2c608a; /* NJ primary dark blue; USWDS primary-dark (NJ override) */
   --color-accent-cool-darkest: #38536f; /* NJ-specific; no exact USWDS palette match */
 }
@@ -247,4 +248,42 @@ li {
    on specificity, independent of stylesheet load order. */
 .usa-language__submenu .usa-language__submenu-item {
   border-top: none;
+}
+
+.funding-filtering-by {
+  background-color: #e1f3f8;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.funding-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.15rem;
+  border: 1px solid var(--color-primary);
+  gap: 0.25rem;
+  color: var(--color-primary);
+  background-color: white;
+  padding: 0.125rem 0.5rem 0.125rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.funding-filter-chip__remove {
+  background: none;
+  border: 0;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0 0.25rem;
+}
+
+.funding-filter-chip__remove:hover,
+.funding-filter-chip__remove:focus {
+  color: var(--color-primary);
 }
