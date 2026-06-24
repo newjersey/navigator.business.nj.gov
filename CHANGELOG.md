@@ -1,3 +1,24 @@
+# [2026.15.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.14.1...v2026.15.0) (2026-06-24)
+
+
+### Bug Fixes
+
+* content should deploy on merges to content-repo ([657214f](https://github.com/newjersey/navigator.business.nj.gov/commit/657214f9e1a06b1620398e9d1c138d47047a2845))
+* **deps:** update dependency @smithy/node-http-handler to v4.8.0 ([29031bc](https://github.com/newjersey/navigator.business.nj.gov/commit/29031bce8309a3c52dd83b11f4eaa107a1435692))
+* **deps:** update dependency js-yaml to v4.2.0 [security] ([8661a7a](https://github.com/newjersey/navigator.business.nj.gov/commit/8661a7a821bcb1c1ec056ba63e88d5705030a67b))
+* static site language modal ([6ba8efa](https://github.com/newjersey/navigator.business.nj.gov/commit/6ba8efa66366532d9d6e1f7caa2f515bc5201e43))
+* update Cloudwatch alarm for`lambda-excessive-executions` ([bd5e727](https://github.com/newjersey/navigator.business.nj.gov/commit/bd5e7275fbd2b81c784493f3c6d0b032dfe910e2))
+
+
+### Features
+
+* [AB#17709](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17709) add "Log In" and "My Account" nav buttons/links ([52343c4](https://github.com/newjersey/navigator.business.nj.gov/commit/52343c4b2e522eb77acc1f10c48433efef96eaad))
+* [AB#17710](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17710) add category dropdowns to side nav ([b7277b6](https://github.com/newjersey/navigator.business.nj.gov/commit/b7277b6a26b5565e2d1523b13a30c18587f5a529))
+* [AB#17710](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17710) static-site show/hide category menu on mobile ([6a73c4a](https://github.com/newjersey/navigator.business.nj.gov/commit/6a73c4abc6632aadb97505d40e72194672648baf))
+* [AB#17824](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17824) add language picker, simplify english setup ([b7470c7](https://github.com/newjersey/navigator.business.nj.gov/commit/b7470c7430559628c64e3897f916f56ca3fc7594))
+* feature flag multilingual support ([67b7fa8](https://github.com/newjersey/navigator.business.nj.gov/commit/67b7fa807cfa23bd92a71e83c830ca3d124df127))
+* gate SurveyMonkey script behind NEXT_PUBLIC_SURVEY_MONKEY_ENABLED ([962734a](https://github.com/newjersey/navigator.business.nj.gov/commit/962734abf55e692ed69ba3bd63dd7e7207f894d5))
+
 ## [2026.14.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.14.0...v2026.14.1) (2026-06-23)
 
 
