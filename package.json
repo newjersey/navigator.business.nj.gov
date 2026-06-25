@@ -202,7 +202,7 @@
     "clean-webpack-plugin": "4.0.0",
     "cli-highlight": "2.1.11",
     "concurrently": "9.2.1",
-    "copy-webpack-plugin": "13.0.1",
+    "copy-webpack-plugin": "14.0.0",
     "cross-env": "10.1.0",
     "cspell": "9.8.0",
     "cypress": "15.14.2",
