@@ -37,4 +37,13 @@ describe("parseFundingContent", () => {
     expect(eligibility).toBe(eligibility.trim());
     expect(benefits).toBe(benefits.trim());
   });
+
+  it("strips the |id suffix from inline code contextual info links", () => {
+    const content = `## Eligibility\n\n- Must use a \`Qualified Incentive Track|qit-njeda\` designation\n\n:::largeCallout{ showHeader="true" headerText="Benefits:" calloutType="conditional" }\n\nSee \`program terms|some-id\` for details.\n\n:::`;
+    const { eligibility, benefits } = parseFundingContent(content);
+    expect(eligibility).toContain("Qualified Incentive Track");
+    expect(eligibility).not.toContain("|qit-njeda");
+    expect(benefits).toContain("program terms");
+    expect(benefits).not.toContain("|some-id");
+  });
 });

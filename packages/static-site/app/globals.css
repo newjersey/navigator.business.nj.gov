@@ -54,10 +54,6 @@ body {
   }
 }
 
-#funding-search {
-  border-right: 1px solid var(--color-base-dark);
-}
-
 .usa-nav__inner {
   max-width: 80rem !important;
 }
@@ -124,11 +120,6 @@ div.usa-card__container {
   margin-inline: 0;
 }
 
-.funding-layout {
-  display: flex;
-  flex-direction: column;
-}
-
 @media (min-width: 40em) {
   /* 640px for a 16px font-size default */
   li.usa-card,
@@ -140,28 +131,6 @@ div.usa-card__container {
     margin-inline-end: 48px;
     position: sticky;
     top: 20px;
-  }
-}
-
-@media (min-width: 64em) {
-  .funding-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-areas:
-      "header filter"
-      "results filter";
-    column-gap: 2rem;
-    align-items: start;
-  }
-
-  .funding-header-col {
-    grid-area: header;
-  }
-  .funding-filter-col {
-    grid-area: filter;
-  }
-  .funding-results-col {
-    grid-area: results;
   }
 }
 
@@ -249,47 +218,4 @@ li {
    on specificity, independent of stylesheet load order. */
 .usa-language__submenu .usa-language__submenu-item {
   border-top: none;
-}
-
-.funding-filtering-by {
-  background-color: #e1f3f8;
-  border-radius: 0.25rem;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.funding-filter-chip {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 0.15rem;
-  border: 1px solid var(--color-primary);
-  gap: 0.25rem;
-  color: var(--color-primary);
-  background-color: white;
-  padding: 0.125rem 0.5rem 0.125rem 0.75rem;
-  font-size: 0.875rem;
-}
-
-.funding-filter-chip__remove {
-  background: none;
-  border: 0;
-  color: var(--color-primary);
-  cursor: pointer;
-  font-size: 1rem;
-  line-height: 1;
-  padding: 0 0.25rem;
-}
-
-.funding-filter-chip__remove:hover,
-.funding-filter-chip__remove:focus {
-  color: var(--color-primary);
-}
-
-.funding-search-highlight {
-  color: white;
-  background-color: var(--color-primary);
 }

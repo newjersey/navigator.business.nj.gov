@@ -1,7 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { Fragment, type ReactNode, useMemo, useState } from "react";
 import type { FundingPageMessages } from "@/domain/content/messageTypes";
 import type { Funding, FundingType, PageItem, Sector } from "@/domain/content/types";
 import FundingCard from "./FundingCard";
@@ -9,19 +8,35 @@ import { parseFundingContent } from "./parseFundingContent";
 
 const ITEMS_PER_PAGE = 10;
 
-const FUNDING_TYPES: readonly FundingType[] = [
-  "grant",
-  "loan",
-  "tax credit",
-  "tax exemption",
-  "technical assistance",
-  "hiring and employee training support",
-];
+const fundingTypes = (messages: FundingPageMessages): readonly FundingType[] =>
+  Object.keys(messages.fundingTypeLabels) as FundingType[];
 
-const formatFundingType = (type: FundingType): string =>
-  type === "hiring and employee training support"
-    ? "Hiring & Employee Training Support"
-    : type.replace(/\b\w/g, (c) => c.toUpperCase());
+interface ResultCountParams {
+  readonly template: string;
+  readonly filtered: number;
+  readonly total: number;
+}
+
+/**
+ * Renders the result-count template, substituting `{total}` as text and the
+ * `<bold>…</bold>`-wrapped `{filtered}` count as a `<strong>` element. Keeping
+ * the whole sentence in one message (rather than splitting it in the component)
+ * lets translators control word order around the bolded count.
+ */
+const renderResultCount = ({ template, filtered, total }: ResultCountParams): ReactNode => {
+  const withTotal = template.replace("{total}", String(total));
+  return withTotal.split(/(<bold>.*?<\/bold>)/).map((part, index) => {
+    const boldMatch = part.match(/^<bold>(.*?)<\/bold>$/);
+    if (boldMatch === null) {
+      // biome-ignore lint/suspicious/noArrayIndexKey: segments are positional and stable per render
+      return <Fragment key={index}>{part}</Fragment>;
+    }
+    return (
+      // biome-ignore lint/suspicious/noArrayIndexKey: segments are positional and stable per render
+      <strong key={index}>{boldMatch[1].replace("{filtered}", String(filtered))}</strong>
+    );
+  });
+};
 
 interface Props {
   readonly messages: FundingPageMessages;
@@ -127,23 +142,24 @@ const FilteringByBar = ({
             />
           );
         })}
-      {FUNDING_TYPES.filter((id) => applied.fundingTypes.has(id)).map((id) => {
-        const label = formatFundingType(id);
-        return (
-          <FilterChip
-            key={`type-${id}`}
-            label={label}
-            removeLabel={removeLabel(label)}
-            onRemove={() => onRemoveFundingType(id)}
-          />
-        );
-      })}
+      {fundingTypes(messages)
+        .filter((id) => applied.fundingTypes.has(id))
+        .map((id) => {
+          const label = messages.fundingTypeLabels[id];
+          return (
+            <FilterChip
+              key={`type-${id}`}
+              label={label}
+              removeLabel={removeLabel(label)}
+              onRemove={() => onRemoveFundingType(id)}
+            />
+          );
+        })}
     </section>
   );
 };
 
 const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
-  const t = useTranslations("funding");
   const [currentPage, setCurrentPage] = useState(1);
   const [pendingIndustries, setPendingIndustries] = useState<ReadonlySet<string>>(new Set());
   const [pendingFundingTypes, setPendingFundingTypes] = useState<ReadonlySet<FundingType>>(
@@ -175,13 +191,14 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
 
   const pendingFiltered = useMemo(
     () =>
-      fundings.filter((f) =>
-        matchesFilters(f, {
-          industries: pendingIndustries,
-          fundingTypes: pendingFundingTypes,
-        }),
+      searchableEntries.filter(
+        ({ funding, searchableText }) =>
+          matchesFilters(funding, {
+            industries: pendingIndustries,
+            fundingTypes: pendingFundingTypes,
+          }) && matchesQuery(searchableText, normalizedQuery),
       ),
-    [fundings, pendingIndustries, pendingFundingTypes],
+    [searchableEntries, pendingIndustries, pendingFundingTypes, normalizedQuery],
   );
 
   const totalPages = Math.max(1, Math.ceil(filteredFundings.length / ITEMS_PER_PAGE));
@@ -192,10 +209,10 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
     safePage * ITEMS_PER_PAGE,
   );
 
-  const resultCount = t.rich("resultCount", {
+  const resultCount = renderResultCount({
+    template: messages.resultCount,
     filtered: filteredFundings.length,
     total: fundings.length,
-    bold: (chunks) => <strong>{chunks}</strong>,
   });
   const showResultsLabel = messages.filterShowResults.replace(
     "{count}",
@@ -330,7 +347,7 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
               {messages.filterClear}
             </button>
           </legend>
-          <div style={{ maxHeight: "240px", overflowY: "auto" }}>
+          <div className="funding-filter-options">
             {sectors.map((sector) => (
               <div key={sector.id} className="usa-checkbox">
                 <input
@@ -361,8 +378,8 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
               {messages.filterClear}
             </button>
           </legend>
-          <div style={{ maxHeight: "240px", overflowY: "auto" }}>
-            {FUNDING_TYPES.map((type) => {
+          <div className="funding-filter-options">
+            {fundingTypes(messages).map((type) => {
               const inputId = `type-${type.replace(/\s+/g, "-")}`;
               return (
                 <div key={type} className="usa-checkbox">
@@ -374,7 +391,7 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
                     onChange={() => toggleFundingType(type)}
                   />
                   <label className="usa-checkbox__label" htmlFor={inputId}>
-                    {formatFundingType(type)}
+                    {messages.fundingTypeLabels[type]}
                   </label>
                 </div>
               );
@@ -412,11 +429,11 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
         <p className="margin-bottom-2">{resultCount}</p>
 
         {pageSlice.map((funding) => (
-          <FundingCard key={funding.id} funding={funding} query={query} />
+          <FundingCard key={funding.id} funding={funding} messages={messages} query={query} />
         ))}
 
         {totalPages > 1 && (
-          <nav aria-label="Pagination" className="usa-pagination">
+          <nav aria-label={messages.paginationLabel} className="usa-pagination">
             <ul className="usa-pagination__list">
               <li className="usa-pagination__item usa-pagination__arrow">
                 <button
@@ -443,7 +460,7 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
                       safePage === pageNumber ? " usa-current" : ""
                     }`}
                     onClick={() => setCurrentPage(pageNumber)}
-                    aria-label={`Page ${pageNumber}`}
+                    aria-label={messages.paginationPageLabel.replace("{page}", String(pageNumber))}
                     aria-current={safePage === pageNumber ? "page" : undefined}
                   >
                     {pageNumber}

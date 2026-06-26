@@ -15,14 +15,18 @@ export const parseFundingContent = (contentMd: string): FundingContentSections =
     return { eligibility: "", benefits: "" };
   }
 
-  const eligibility = contentMd
-    .slice(eligibilityStart + eligibilityMarker.length, calloutStart)
-    .trim();
+  const stripContextualInfoIds = (text: string): string => text.replace(/`([^`|]+)\|[^`]+`/g, "$1");
+
+  const eligibility = stripContextualInfoIds(
+    contentMd.slice(eligibilityStart + eligibilityMarker.length, calloutStart).trim(),
+  );
 
   const benefitsBodyStart = contentMd.indexOf("\n", calloutStart) + 1;
   const calloutEndIndex = contentMd.indexOf(calloutEnd, calloutStart + calloutMarker.length);
   const benefits =
-    calloutEndIndex === -1 ? "" : contentMd.slice(benefitsBodyStart, calloutEndIndex).trim();
+    calloutEndIndex === -1
+      ? ""
+      : stripContextualInfoIds(contentMd.slice(benefitsBodyStart, calloutEndIndex).trim());
 
   return { eligibility, benefits };
 };

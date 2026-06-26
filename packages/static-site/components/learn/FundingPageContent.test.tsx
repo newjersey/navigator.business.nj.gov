@@ -16,6 +16,14 @@ const messages: FundingPageMessages = {
   filterSearch: "Search",
   filterIndustry: "Industry",
   filterFundingType: "Funding Type",
+  fundingTypeLabels: {
+    grant: "Grant",
+    loan: "Loan",
+    "tax credit": "Tax Credit",
+    "tax exemption": "Tax Exemption",
+    "technical assistance": "Technical Assistance",
+    "hiring and employee training support": "Hiring & Employee Training Support",
+  },
   filterClear: "Clear",
   filterShowResults: "Show {count} Results",
   filterReset: "Reset",
@@ -25,6 +33,11 @@ const messages: FundingPageMessages = {
   filterRemoveLabel: "Remove {filter} filter",
   paginationPrevious: "Previous",
   paginationNext: "Next",
+  paginationLabel: "Pagination",
+  paginationPageLabel: "Page {page}",
+  cardDueLabel: "Due:",
+  cardEligibilityHeading: "Eligibility",
+  cardBenefitsHeading: "Benefits",
 };
 
 const renderWithIntl = (ui: ReactElement) =>
@@ -266,6 +279,30 @@ describe("FundingPageContent", () => {
 
     await user.click(screen.getByLabelText("Grant"));
     expect(screen.getByRole("button", { name: "Show 2 Results" })).toBeInTheDocument();
+  });
+
+  it("Show Results button count reflects the active search query", async () => {
+    const user = userEvent.setup();
+    const fundings = [
+      makeFunding("Grant Alpha", { fundingType: "grant" }),
+      makeFunding("Grant Beta", { fundingType: "grant" }),
+      makeFunding("Loan Alpha", { fundingType: "loan" }),
+    ];
+    renderWithIntl(
+      <FundingPageContent messages={messages} page={page} fundings={fundings} sectors={sectors} />,
+    );
+
+    expect(screen.getByRole("button", { name: "Show 3 Results" })).toBeInTheDocument();
+
+    await user.type(screen.getByRole("searchbox"), "alpha");
+
+    // Only "Grant Alpha" and "Loan Alpha" match the query.
+    expect(screen.getByRole("button", { name: "Show 2 Results" })).toBeInTheDocument();
+
+    await user.click(screen.getByLabelText("Grant"));
+
+    // grant AND "alpha" -> only "Grant Alpha".
+    expect(screen.getByRole("button", { name: "Show 1 Results" })).toBeInTheDocument();
   });
 
   it("Reset clears all pending and applied filters", async () => {

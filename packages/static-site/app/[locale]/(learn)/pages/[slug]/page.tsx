@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import FundingPageContent from "@/components/learn/FundingPageContent";
-import PageContent from "@/components/learn/PageContent";
+import { PageSwitchComponent } from "@/components/learn/PageSwitchComponent";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
-import { loadFundings, loadPageBySlug, loadSectors } from "@/domain/content/loadContent";
+import { loadPageBySlug } from "@/domain/content/loadContent";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
 import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
-import { getApplicationMessages } from "@/domain/i18n/messages";
 
 interface PageParams {
   readonly locale: AppLocale;
@@ -32,7 +30,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 
 export const generateStaticParams = () => {
   const allChildren = Object.values(CATEGORY_HIERARCHY).flatMap((category) => category.children);
-  return [...allChildren.map((page) => ({ slug: page.slug })), { slug: "funding" }];
+  return allChildren.map((page) => ({ slug: page.slug }));
 };
 
 const ContentPage = async ({ params }: Props) => {
@@ -42,18 +40,9 @@ const ContentPage = async ({ params }: Props) => {
     notFound();
   }
 
-  if (slug === "funding") {
-    const page = loadPageBySlug("funding");
-    const fundings = loadFundings().sort((a, b) => a.name.localeCompare(b.name));
-    const sectors = loadSectors();
-    const { funding: messages } = getApplicationMessages({ locale });
-    return (
-      <FundingPageContent messages={messages} page={page} fundings={fundings} sectors={sectors} />
-    );
-  }
-
   const page = loadPageBySlug(slug);
-  return <PageContent page={page} />;
+
+  return <PageSwitchComponent page={page} locale={locale} />;
 };
 
 export default ContentPage;

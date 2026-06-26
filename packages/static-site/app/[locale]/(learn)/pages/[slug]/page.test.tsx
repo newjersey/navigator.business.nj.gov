@@ -33,12 +33,11 @@ vi.mock("@/domain/content/loadContent", () => ({
 describe("generateStaticParams", () => {
   it("returns one entry per slug in CATEGORY_HIERARCHY", () => {
     const result = generateStaticParams();
-    expect(result).toHaveLength(4);
+    expect(result).toHaveLength(3);
     expect(result).toEqual([
       { slug: "create-a-business-plan" },
       { slug: "choose-a-business-structure" },
       { slug: "something-else" },
-      { slug: "funding" },
     ]);
   });
 });

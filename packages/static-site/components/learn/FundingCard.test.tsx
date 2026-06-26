@@ -1,7 +1,18 @@
 import { render, screen } from "@testing-library/react";
+import type { ComponentProps } from "react";
 import { describe, expect, it } from "vitest";
+import type { FundingPageMessages } from "@/domain/content/messageTypes";
 import type { Funding } from "@/domain/content/types";
 import FundingCard from "./FundingCard";
+
+const cardMessages = {
+  cardDueLabel: "Due:",
+  cardEligibilityHeading: "Eligibility",
+  cardBenefitsHeading: "Benefits",
+} as FundingPageMessages;
+
+const renderCard = (props: Omit<ComponentProps<typeof FundingCard>, "messages">) =>
+  render(<FundingCard messages={cardMessages} {...props} />);
 
 const funding = (overrides: Partial<Funding> = {}): Funding =>
   ({
@@ -39,49 +50,49 @@ const funding = (overrides: Partial<Funding> = {}): Funding =>
 
 describe("FundingCard", () => {
   it("renders the funding name as a heading", () => {
-    render(<FundingCard funding={funding()} />);
+    renderCard({ funding: funding() });
     expect(screen.getByRole("heading", { name: "Test Funding Program" })).toBeInTheDocument();
   });
 
   it("renders status badge uppercased", () => {
-    render(<FundingCard funding={funding({ status: "rolling application" })} />);
+    renderCard({ funding: funding({ status: "rolling application" }) });
     expect(screen.getByText("ROLLING APPLICATION")).toBeInTheDocument();
   });
 
   it("renders funding type badge uppercased", () => {
-    render(<FundingCard funding={funding({ fundingType: "grant" })} />);
+    renderCard({ funding: funding({ fundingType: "grant" }) });
     expect(screen.getByText("GRANT")).toBeInTheDocument();
   });
 
   it("renders eligibility bullet from contentMd", () => {
-    render(<FundingCard funding={funding()} />);
+    renderCard({ funding: funding() });
     expect(screen.getByText(/Must be NJ registered/)).toBeInTheDocument();
   });
 
   it("renders benefits callout from contentMd", () => {
-    render(<FundingCard funding={funding()} />);
+    renderCard({ funding: funding() });
     expect(screen.getByText(/The benefit is great/)).toBeInTheDocument();
   });
 
   it("renders Benefits heading on the callout box", () => {
-    render(<FundingCard funding={funding()} />);
+    renderCard({ funding: funding() });
     expect(screen.getByRole("heading", { name: "Benefits" })).toBeInTheDocument();
   });
 
   it("does not render status badge when status is empty", () => {
-    render(
-      <FundingCard funding={funding({ status: undefined as unknown as "rolling application" })} />,
-    );
+    renderCard({
+      funding: funding({ status: undefined as unknown as "rolling application" }),
+    });
     expect(screen.queryByText("ROLLING APPLICATION")).not.toBeInTheDocument();
   });
 
   it("renders due date when present", () => {
-    render(<FundingCard funding={funding({ dueDate: "2026-12-31" })} />);
+    renderCard({ funding: funding({ dueDate: "2026-12-31" }) });
     expect(screen.getByText(/2026-12-31/)).toBeInTheDocument();
   });
 
   it("highlights a query match in the funding name", () => {
-    render(<FundingCard funding={funding({ name: "Grant Program" })} query="grant" />);
+    renderCard({ funding: funding({ name: "Grant Program" }), query: "grant" });
     const heading = screen.getByRole("heading", { name: "Grant Program" });
     const mark = heading.querySelector("mark.funding-search-highlight");
     expect(mark).not.toBeNull();
@@ -89,18 +100,33 @@ describe("FundingCard", () => {
   });
 
   it("highlights a query match in the eligibility body", () => {
-    const { container } = render(<FundingCard funding={funding()} query="registered" />);
+    const { container } = renderCard({ funding: funding(), query: "registered" });
     const marks = container.querySelectorAll("mark.funding-search-highlight");
     expect([...marks].some((m) => m.textContent === "registered")).toBe(true);
   });
 
+  it("highlights a query match in the benefits body", () => {
+    const { container } = renderCard({ funding: funding(), query: "benefit" });
+    const marks = container.querySelectorAll("mark.funding-search-highlight");
+    expect([...marks].some((m) => m.textContent === "benefit")).toBe(true);
+  });
+
+  it("preserves markdown list structure in benefits when a query is active", () => {
+    const withList = funding({
+      contentMd: `## Eligibility\n\n- Must be NJ registered\n\n:::largeCallout{ showHeader="true" headerText="Benefits:" calloutType="conditional" }\n\n- Benefit one\n- Benefit two\n\n:::`,
+    });
+    const { container } = renderCard({ funding: withList, query: "benefit" });
+    const benefitsBox = container.querySelector('[role="note"]');
+    expect(benefitsBox?.querySelector("ul")).not.toBeNull();
+  });
+
   it("renders no highlight marks when no query is given", () => {
-    const { container } = render(<FundingCard funding={funding()} />);
+    const { container } = renderCard({ funding: funding() });
     expect(container.querySelector("mark.funding-search-highlight")).toBeNull();
   });
 
   it("keeps markdown rendering for a whitespace-only query", () => {
-    const { container } = render(<FundingCard funding={funding()} query="   " />);
+    const { container } = renderCard({ funding: funding(), query: "   " });
     // A whitespace-only query matches and highlights nothing, so the
     // Eligibility section should stay in its <Markdown> rendering (a list)
     // rather than the plain-text fallback used while actively searching.

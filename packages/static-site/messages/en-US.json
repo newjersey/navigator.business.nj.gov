@@ -601,6 +601,14 @@
     "filterSearch": "Search",
     "filterIndustry": "Industry",
     "filterFundingType": "Funding Type",
+    "fundingTypeLabels": {
+      "grant": "Grant",
+      "loan": "Loan",
+      "tax credit": "Tax Credit",
+      "tax exemption": "Tax Exemption",
+      "technical assistance": "Technical Assistance",
+      "hiring and employee training support": "Hiring & Employee Training Support"
+    },
     "filterClear": "Clear",
     "filterShowResults": "Show {count} Results",
     "filterReset": "Reset",
@@ -609,6 +617,11 @@
     "filterSearchChip": "Search: \"{query}\"",
     "filterRemoveLabel": "Remove {filter} filter",
     "paginationPrevious": "Previous",
-    "paginationNext": "Next"
+    "paginationNext": "Next",
+    "paginationLabel": "Pagination",
+    "paginationPageLabel": "Page {page}",
+    "cardDueLabel": "Due:",
+    "cardEligibilityHeading": "Eligibility",
+    "cardBenefitsHeading": "Benefits"
   }
 }

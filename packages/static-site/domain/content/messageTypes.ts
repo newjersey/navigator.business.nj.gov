@@ -5,6 +5,8 @@
  * and rendered UI sections.
  */
 
+import type { FundingType } from "./types";
+
 /**
  * A localized link used by landing-page components.
  */
@@ -508,6 +510,8 @@ export interface FundingPageMessages {
   readonly filterIndustry: string;
   /** Label for the funding type filter group. */
   readonly filterFundingType: string;
+  /** Display labels for each funding type, keyed by its content value. */
+  readonly fundingTypeLabels: Record<FundingType, string>;
   /** Label for the "Clear" button inside each filter fieldset. */
   readonly filterClear: string;
   /** Label for the "Show Results" button; {count} is replaced at runtime. */
@@ -526,6 +530,16 @@ export interface FundingPageMessages {
   readonly paginationPrevious: string;
   /** Label for pagination "Next" control. */
   readonly paginationNext: string;
+  /** aria-label for the pagination navigation landmark. */
+  readonly paginationLabel: string;
+  /** aria-label template for a numbered page button; {page} is replaced at runtime. */
+  readonly paginationPageLabel: string;
+  /** Prefix label for a funding's due date on the card. */
+  readonly cardDueLabel: string;
+  /** Heading for the eligibility section on a funding card. */
+  readonly cardEligibilityHeading: string;
+  /** Heading for the benefits callout on a funding card. */
+  readonly cardBenefitsHeading: string;
 }
 
 /**
