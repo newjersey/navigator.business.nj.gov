@@ -396,7 +396,7 @@ communities throughout the state.
 
 Business.NJ.gov is an open source project that is meant to serve as a base for anyone who is looking
 to create an online resource for their own business community. The software code in this repository
-is licensed under the [MIT License](./LICENSE.md). Content (text, data, and other non-code assets)
+is licensed under the [MIT License](./LICENSE). Content (text, data, and other non-code assets)
 is separately licensed — you can find those details at
 [Business.NJ.gov/license](https://business.nj.gov/license).
 

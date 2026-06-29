@@ -134,4 +134,4 @@ Before opening a pull request for this package, run:
 ## License
 
 This project is licensed under the MIT license. For more information, see
-[LICENSE](../../LICENSE.md).
+[LICENSE](../../LICENSE).
