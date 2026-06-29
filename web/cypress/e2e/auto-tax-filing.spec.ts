@@ -38,9 +38,12 @@ describe(
       onDashboardPage.registerForTaxes();
       cy.get('input[name="taxId"]').type("777777777771");
       cy.get("button").contains("Save").click();
+      cy.get('input[name="taxId"]').should("be.disabled");
       cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
       onDashboardPage.getDashboardHeader().should("be.visible");
+      cy.intercept("POST", "/api/taxFilings/onboarding").as("taxFilingsOnboarding");
       cy.get('[data-testid="cta-funding-nudge"]').first().click();
+      cy.wait("@taxFilingsOnboarding").its("response.statusCode").should("eq", 200);
       cy.get('[data-testid="get-tax-access"]').should("not.exist");
       cy.get('[data-testid="alert-content-container"]').should("exist");
       onDashboardPage.getTaxFilingCalendar().should("contain", "Your Tax Calendar is pending.");

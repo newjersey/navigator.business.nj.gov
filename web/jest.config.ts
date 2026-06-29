@@ -13,6 +13,7 @@ const esmModulePattern = [
   "direction",
   "entities",
   "escape-string-regexp",
+  "estree-util-is-identifier-name",
   "hast-[^/]*",
   "hastscript",
   "html-void-elements",

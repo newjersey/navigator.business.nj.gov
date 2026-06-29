@@ -172,6 +172,16 @@ describe("helpers", () => {
 
       expect(result.join("")).not.toContain(":::infoAlert");
     });
+
+    it("keeps only the display label from contextual-info code spans (label|contextual-id)", () => {
+      const markdown = "See `display label|some-contextual-id` for details.";
+      const result = contentToStrings(markdown);
+      const html = result.join("");
+
+      expect(html).toContain("display label");
+      expect(html).not.toContain("some-contextual-id");
+      expect(html).not.toContain("|");
+    });
   });
 
   describe("getHtml", () => {
