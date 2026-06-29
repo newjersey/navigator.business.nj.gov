@@ -1,3 +1,4 @@
+import type { Element, Root, RootContent } from "hast";
 import rehypeFormat from "rehype-format";
 import rehypeRaw from "rehype-raw";
 import rehypeRewrite from "rehype-rewrite";
@@ -77,29 +78,22 @@ export const contentToStrings = (content: string): string[] => {
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
-    .use(
-      // @ts-expect-error - rehypeRewrite doesn't have proper TypeScript types
-      rehypeRewrite,
-      {
-        selector: "code",
-        rewrite: (node: {
-          type?: string;
-          value?: string;
-          children?: Array<{ value: string }>;
-          properties?: unknown;
-          tagName?: string;
-        }) => {
-          const obj = node.children?.[0];
-          if (obj?.value?.includes("|")) {
-            node.type = "text";
-            node.value = obj.value.split("|")[0];
-            delete node.children;
-            delete node.properties;
-            delete node.tagName;
-          }
-        },
+    .use(rehypeRewrite, {
+      selector: "code",
+      rewrite: (node: Root | RootContent) => {
+        if (node.type !== "element") return;
+        const element = node as Element;
+        const child = element.children?.[0];
+        if (child?.type === "text" && child.value.includes("|")) {
+          const textNode = node as unknown as { type: string; value: string };
+          textNode.type = "text";
+          textNode.value = child.value.split("|")[0];
+          delete (node as Partial<Element>).children;
+          delete (node as Partial<Element>).properties;
+          delete (node as Partial<Element>).tagName;
+        }
       },
-    )
+    })
     .use(rehypeFormat)
     .use(rehypeStringify, { allowDangerousHtml: true })
     .processSync(content).value as string;

@@ -66,4 +66,30 @@ describe("<Content />", () => {
     expect(screen.getByText("body text")).toBeInTheDocument();
     expect(screen.getByTestId("callout-icon")).toBeInTheDocument();
   });
+
+  it("hides the icon when miniCallout hideIcon is true", () => {
+    const mdString = `:::miniCallout{ calloutType="conditional" hideIcon="true" }\nbody text\n:::`;
+
+    render(<Content>{mdString}</Content>);
+    expect(screen.getByText("body text")).toBeInTheDocument();
+    expect(screen.queryByTestId("callout-icon")).not.toBeInTheDocument();
+  });
+
+  describe("GFM", () => {
+    it("renders a GFM table", () => {
+      const mdString = "| Col A | Col B |\n| --- | --- |\n| one | two |";
+
+      render(<Content>{mdString}</Content>);
+      expect(screen.getByText("Col A")).toBeInTheDocument();
+      expect(screen.getByText("one")).toBeInTheDocument();
+      expect(screen.getByText("two")).toBeInTheDocument();
+    });
+
+    it("renders GFM strikethrough", () => {
+      const mdString = "~~deleted text~~";
+
+      render(<Content>{mdString}</Content>);
+      expect(screen.getByText("deleted text")).toBeInTheDocument();
+    });
+  });
 });

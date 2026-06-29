@@ -192,15 +192,16 @@ const OutlineBox = (props: any): ReactElement => {
 };
 
 const ListOrCheckbox = (props: any): ReactElement => {
-  if (
-    props.children &&
-    Array.isArray(props.children) &&
-    props.children.length > 0 &&
-    typeof props.children[0] === "string" &&
-    props.children[0].startsWith("[]")
-  ) {
-    const checklistItemId = props.children[0].slice("[]".length).split("{")[1].split("}")[0];
-    const checklistItemBody = [props.children[0].split("}")[1], ...props.children.slice(1)];
+  // rehype-react@8 passes a bare string for single-child list items; normalize to array
+  const children: ReactNode[] = Array.isArray(props.children)
+    ? props.children
+    : props.children === null || props.children === undefined
+      ? []
+      : [props.children];
+
+  if (children.length > 0 && typeof children[0] === "string" && children[0].startsWith("[]")) {
+    const checklistItemId = children[0].slice("[]".length).split("{")[1].split("}")[0];
+    const checklistItemBody = [children[0].split("}")[1], ...children.slice(1)];
 
     return (
       <div>

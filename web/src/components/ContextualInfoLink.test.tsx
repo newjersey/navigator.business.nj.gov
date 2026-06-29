@@ -21,6 +21,12 @@ describe("<ContextualInfoLink />", () => {
     expect(screen.queryByText("legal-structure")).not.toBeInTheDocument();
   });
 
+  it("supports a bare string child", () => {
+    render(<ContextualInfoLink>legal structure|legal-structure</ContextualInfoLink>);
+    expect(screen.getByText("legal structure")).toBeInTheDocument();
+    expect(screen.getByTestId("legal-structure")).toBeInTheDocument();
+  });
+
   it("sets the contextual info context when clicked", async () => {
     mockFetchContextualInfo.mockResolvedValue({
       isVisible: false,
