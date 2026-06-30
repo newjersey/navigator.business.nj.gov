@@ -58,7 +58,7 @@
     "@newjersey/njwds": "0.3.0",
     "@pigment-css/react": "0.0.31",
     "@types/mdast": "4.0.4",
-    "aws-amplify": "6.15.8",
+    "aws-amplify": "6.18.0",
     "axios": "1.16.0",
     "cypress-axe": "1.7.0",
     "dayjs": "1.11.19",
