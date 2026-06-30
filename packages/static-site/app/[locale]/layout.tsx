@@ -11,7 +11,6 @@ import "@/app/landing.css";
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
 import { GoogleTagManager } from "@/components/analytics/GoogleTagManager";
@@ -45,11 +44,6 @@ const NJWDS_STYLESHEET_PATH = "/assets/njwds/dist/css/styles.css";
  * directional properties under `dir="rtl"` without `!important`.
  */
 const NJ_RTL_UTILITIES_STYLESHEET_PATH = "/styles/nj-rtl-utilities.css";
-
-/**
- * Public path for the synced NJWDS runtime script.
- */
-const NJWDS_SCRIPT_PATH = "/assets/njwds/dist/js/uswds.min.js";
 
 /**
  * Describes route params for locale-scoped pages.
@@ -203,7 +197,6 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
           <IdentifierSection content={messages.layout.identifier} />
           <LanguagePromptModal />
         </NextIntlClientProvider>
-        <Script src={NJWDS_SCRIPT_PATH} strategy="afterInteractive" />
         <Intercom />
       </body>
     </html>

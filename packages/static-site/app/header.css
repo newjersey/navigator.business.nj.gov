@@ -267,6 +267,14 @@
   .usa-header--extended {
     display: block;
   }
+
+  /* Languages Dropdown */
+  .usa-nav .usa-nav__secondary {
+    position: static;
+    margin-top: 0;
+    min-width: auto;
+    inset-inline-end: unset;
+  }
 }
 
 /* ── End mobile nav ───────────────────────────────────────────────────────── */
