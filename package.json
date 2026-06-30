@@ -191,7 +191,7 @@
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "@vitejs/plugin-react": "6.0.1",
-    "@vitest/coverage-v8": "2.1.9",
+    "@vitest/coverage-v8": "4.1.9",
     "aws-cdk": "2.1121.0",
     "aws-cdk-lib": "2.253.0",
     "axe-core": "4.11.1",
@@ -260,7 +260,7 @@
     "tsx": "4.21.0",
     "typescript": "5.9.3",
     "vite": "8.0.16",
-    "vitest": "3.2.6",
+    "vitest": "4.1.9",
     "webpack": "5.106.2",
     "wiremock": "3.13.2",
     "yarn-workspace-sync-deps": "0.3.3"

@@ -13,7 +13,6 @@ export default defineConfig({
       reporter: ["text", "html", "lcov"],
       include: ["build.ts"],
       exclude: ["build.test.ts", "node_modules/**"],
-      all: true,
     },
   },
 });
