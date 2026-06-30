@@ -5161,7 +5161,7 @@ __metadata:
     prettier: "npm:3.8.3"
     prettier-plugin-organize-imports: "npm:4.3.0"
     rimraf: "npm:6.1.3"
-    serverless-http: "npm:3.2.0"
+    serverless-http: "npm:4.0.0"
     simple-oauth2: "npm:5.1.0"
     supertest: "npm:7.2.2"
     ts-jest: "npm:29.4.9"
@@ -5423,7 +5423,7 @@ __metadata:
     sass-loader: "npm:16.0.7"
     seedrandom: "npm:3.0.5"
     semantic-release: "npm:19.0.5"
-    serverless-http: "npm:3.2.0"
+    serverless-http: "npm:4.0.0"
     simple-oauth2: "npm:5.1.0"
     slick-carousel: "npm:1.8.1"
     storybook: "npm:10.3.6"
@@ -33769,10 +33769,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-http@npm:3.2.0":
-  version: 3.2.0
-  resolution: "serverless-http@npm:3.2.0"
-  checksum: 10/82bee1b327d2ca653ad76ad4ec6975ad24bfd983327d07dca9a54b5a6b8843ef45763eacc616e783255a093ef005382d1058ef6b498576b16ab648711eaab2df
+"serverless-http@npm:4.0.0":
+  version: 4.0.0
+  resolution: "serverless-http@npm:4.0.0"
+  checksum: 10/d4e73f5150d900d5ccc824ed004de920ab65068144e5a4af4857687b8d45aafff0c13ee6faf1d78626a621cc5d7dc7eba2ee9a9f19e0a5caf7a832cd70ce26e4
   languageName: node
   linkType: hard
 
