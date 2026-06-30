@@ -21,8 +21,9 @@ export class DashboardPage {
   };
 
   clickEditProfileInDropdown = () => {
-    this.getDropdown().first().click();
-    this.getProfileLinkInDropdown().first().click();
+    this.getDropdown().first().should("be.visible").click({ force: true });
+    cy.get('[data-testid="nav-bar-popup-menu"]').should("be.visible");
+    this.getProfileLinkInDropdown().first().should("be.visible").click({ force: true });
   };
 
   clickRoadmapTask = (taskId: string) => {
