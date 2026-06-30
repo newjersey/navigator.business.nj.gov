@@ -289,7 +289,7 @@
         }
       ],
       "usGovernmentSectionAriaLabel": "U.S. government information and services",
-      "usGovernmentDescription": "Copyright \u00a9 2026 State of New Jersey"
+      "usGovernmentDescription": "Copyright © 2026 State of New Jersey"
     }
   },
   "landing": {
@@ -411,7 +411,7 @@
       }
     },
     "whatsNew": {
-      "title": "What\u2019s New",
+      "title": "What’s New",
       "viewAllLink": {
         "label": "View All Updates",
         "href": "/updates",
@@ -529,7 +529,7 @@
   },
   "learn": {
     "name": "Learn",
-    "subHeadingText": "Find guides and resources for every stage \u2014 from your first idea to long-term growth.",
+    "subHeadingText": "Find guides and resources for every stage — from your first idea to long-term growth.",
     "heading2": "Where are you in your business journey?",
     "cardLinkText": "Learn more",
     "categoryPages": {
@@ -590,6 +590,48 @@
           "opensInNewTab": false
         }
       }
-    ]
+    ],
+    "starterKits": {
+      "topIndustries": [
+        {
+          "name": "Online Business",
+          "id": "e-commerce",
+          "description": "Ready to start selling your products and services online? Explore our start-up checklist for potential items to get your business off the ground.",
+          "ctaText": "Online Business Kit"
+        },
+        {
+          "name": "Real Estate Investor",
+          "id": "real-estate-investor",
+          "description": "Get ready to start buying, selling, and renting property in New Jersey. Make sure you have everything you need to start on the right foot.",
+          "ctaText": "Get an Account"
+        },
+        {
+          "name": "Home Contractor",
+          "id": "home-contractor",
+          "description": "If you've got the best product for your New Jersey community, our personalized starter kit can guide you through the registration process!",
+          "ctaText": "Home Contractor Kit"
+        },
+        {
+          "name": "Retail",
+          "id": "retail",
+          "description": "If you've got the best product for your New Jersey community, our personalized starter kit can guide you through the registration process!",
+          "ctaText": "Retail Kit"
+        },
+        {
+          "name": "Healthcare",
+          "id": "healthcare",
+          "description": "If you've got the best product for your New Jersey community, our personalized starter kit can guide you through the registration process!",
+          "ctaText": "Healthcare Kit"
+        },
+        {
+          "name": "Management Consulting",
+          "id": "management-consulting",
+          "description": "If you've got the best product for your New Jersey community, our personalized starter kit can guide you through the registration process!",
+          "ctaText": "Management Consulting Kit"
+        }
+      ],
+      "industrySelectorHeading": "Find Your Industry",
+      "industrySelectorCta": "Go to Starter Kit"
+    }
   }
 }

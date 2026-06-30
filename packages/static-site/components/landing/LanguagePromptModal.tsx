@@ -5,18 +5,18 @@
  *
  * On mount this molecule compares the visitor's browser languages against the
  * page's current locale. When a supported preferred locale differs from the
- * current one and the dismissal cookie is absent, it opens the NJWDS modal
- * offering to stay or switch. It never redirects automatically. The visitor's
- * choice is recorded in a dismissal cookie so they are not prompted again; the
- * switch action also persists `NEXT_LOCALE` and performs a full-page navigation
- * to the target locale.
+ * current one and the dismissal cookie is absent, it opens the modal offering
+ * to stay or switch. It never redirects automatically. The visitor's choice is
+ * recorded in a dismissal cookie so they are not prompted again; the switch
+ * action also persists `NEXT_LOCALE` and performs a full-page navigation to
+ * the target locale.
  *
  * The entire dialog is shown in the preferred/target language so the visitor
  * — who may not read the current page's locale — can understand the prompt.
  */
 
 import { useLocale } from "next-intl";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { LANGUAGE_DESCRIPTORS } from "@/domain/i18n/languages";
 import { addLocalePrefix, stripLocalePrefix } from "@/domain/i18n/localePath";
@@ -95,7 +95,7 @@ const nativeNameOfLocale = (locale: AppLocale): string => {
 export const LanguagePromptModal = () => {
   const currentLocale = resolveAppLocale({ locale: useLocale() });
   const pathname = usePathname();
-  const openTriggerRef = useRef<HTMLButtonElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [preferredLocale, setPreferredLocale] = useState<AppLocale | undefined>(undefined);
 
   useEffect(() => {
@@ -107,17 +107,13 @@ export const LanguagePromptModal = () => {
 
     if (preferred && preferred !== currentLocale) {
       setPreferredLocale(preferred);
+      setIsOpen(true);
     }
   }, [currentLocale]);
 
-  useEffect(() => {
-    if (preferredLocale) {
-      openTriggerRef.current?.click();
-    }
-  }, [preferredLocale]);
-
   const handleStay = useCallback(() => {
     writeCookie(LANGUAGE_PROMPT_DISMISSED_COOKIE, "true");
+    setIsOpen(false);
   }, []);
 
   const handleRedirect = useCallback(() => {
@@ -158,9 +154,9 @@ export const LanguagePromptModal = () => {
     <LanguagePromptModalView
       body={preferredContent.body}
       closeLabel={preferredContent.closeLabel}
+      isOpen={isOpen}
       onRedirect={handleRedirect}
       onStay={handleStay}
-      openTriggerRef={openTriggerRef}
       redirectLabel={redirectLabel}
       stayLabel={preferredContent.stayLabel}
       title={preferredContent.title}

@@ -1,11 +1,9 @@
 /**
- * Renders the stateless language switcher control for the site header.
+ * Renders the language switcher control for the site header.
  *
- * This presentational atom maps `LANGUAGE_DESCRIPTORS` into a USWDS
- * `usa-language` dropdown. A trigger button opens a `usa-language__submenu`
- * list; the NJWDS bundled `uswds.min.js` language-selector module handles
- * toggle, focus-trap, and keyboard (Escape/Tab) behavior automatically by
- * selecting `button.usa-language__link` within `.usa-language__primary`.
+ * This component maps `LANGUAGE_DESCRIPTORS` into a USWDS `usa-language`
+ * dropdown. A trigger button toggles a `usa-language__submenu` list.
+ * Toggle, keyboard (Escape), and click-outside behavior are managed in React.
  *
  * Each submenu option follows the USWDS pattern:
  *   **Español** (Spanish)
@@ -13,6 +11,9 @@
  * itself which appears without a parenthetical.
  */
 
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { LANGUAGE_DESCRIPTORS, type LanguageDescriptor } from "@/domain/i18n/languages";
 import type { AppLocale } from "@/domain/i18n/locales";
 import { Link } from "@/domain/i18n/navigation";
@@ -140,19 +141,50 @@ export const LanguageSwitcher = ({
   descriptors = LANGUAGE_DESCRIPTORS,
   submenuId = DEFAULT_LANGUAGE_SUBMENU_ID,
 }: LanguageSwitcherProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <nav aria-label={navigationAriaLabel} className="usa-language">
       <ul className="usa-language__primary usa-list--unstyled">
-        <li className="usa-language__primary-item">
+        <li className="usa-language__primary-item" ref={containerRef}>
           <button
             aria-controls={submenuId}
-            aria-expanded="false"
+            aria-expanded={isOpen}
             className="usa-button usa-button--outline usa-language__link"
+            onClick={() => setIsOpen((prev) => !prev)}
             type="button"
           >
             {buttonLabel}
           </button>
-          <ul className="usa-language__submenu nj-dropdown-inline-end" hidden id={submenuId}>
+          <ul
+            className="usa-language__submenu nj-dropdown-inline-end"
+            hidden={!isOpen || undefined}
+            id={submenuId}
+          >
             {descriptors.map((descriptor) => {
               return renderLanguageOption({
                 descriptor,

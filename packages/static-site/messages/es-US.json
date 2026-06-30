@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Business.NJ.gov | Planifique, Comience y Haga Crecer",
-    "description": "Prototipo de p\u00e1gina principal para una experiencia de orientaci\u00f3n empresarial impulsada por Next.js y NJWDS."
+    "description": "Prototipo de página principal para una experiencia de orientación empresarial impulsada por Next.js y NJWDS."
   },
   "layout": {
     "skipNavigationLabel": "Saltar al contenido principal",
@@ -29,7 +29,7 @@
       }
     },
     "header": {
-      "primaryNavigationAriaLabel": "Navegaci\u00f3n principal",
+      "primaryNavigationAriaLabel": "Navegación principal",
       "homeLink": {
         "label": "Business.NJ.gov",
         "href": "/",
@@ -40,7 +40,7 @@
       "homeLinkAriaLabel": "Inicio de Business.NJ.gov",
       "siteTitle": "Business.NJ.gov",
       "logoAlt": "Business.NJ.gov",
-      "closeButtonAlt": "Cerrar men\u00fa",
+      "closeButtonAlt": "Cerrar menú",
       "primaryItems": [
         {
           "kind": "link",
@@ -91,7 +91,7 @@
     },
     "footer": {
       "returnToTopLabel": "Volver arriba",
-      "navigationAriaLabel": "Navegaci\u00f3n del pie de p\u00e1gina",
+      "navigationAriaLabel": "Navegación del pie de página",
       "primaryLinks": [
         {
           "link": {
@@ -249,7 +249,7 @@
         },
         {
           "link": {
-            "label": "Cont\u00e1ctenos",
+            "label": "Contáctenos",
             "href": "https://nj.gov/nj/feedback.html",
             "isInternal": false,
             "opensInNewTab": false
@@ -265,7 +265,7 @@
         },
         {
           "link": {
-            "label": "Declaraci\u00f3n legal y exenciones",
+            "label": "Declaración legal y exenciones",
             "href": "https://nj.gov/nj/legal.html",
             "isInternal": false,
             "opensInNewTab": false
@@ -281,24 +281,24 @@
         },
         {
           "link": {
-            "label": "Ley de Registros P\u00fablicos Abiertos (OPRA)",
+            "label": "Ley de Registros Públicos Abiertos (OPRA)",
             "href": "https://nj.gov/opra/",
             "isInternal": false,
             "opensInNewTab": false
           }
         }
       ],
-      "usGovernmentSectionAriaLabel": "Informaci\u00f3n y servicios del gobierno de EE. UU.",
-      "usGovernmentDescription": "Copyright \u00a9 2026 Estado de New Jersey"
+      "usGovernmentSectionAriaLabel": "Información y servicios del gobierno de EE. UU.",
+      "usGovernmentDescription": "Copyright © 2026 Estado de New Jersey"
     }
   },
   "landing": {
     "hero": {
-      "sectionAriaLabel": "Introducci\u00f3n",
+      "sectionAriaLabel": "Introducción",
       "title": "Las necesidades de su negocio en New Jersey. Todo en un solo lugar.",
-      "paragraph": "Obtenga su gu\u00eda personalizada para comenzar su negocio, encuentre oportunidades de financiamiento y descubra sus obligaciones fiscales.",
+      "paragraph": "Obtenga su guía personalizada para comenzar su negocio, encuentre oportunidades de financiamiento y descubra sus obligaciones fiscales.",
       "callToActionLink": {
-        "label": "Obtenga su gu\u00eda personalizada",
+        "label": "Obtenga su guía personalizada",
         "href": "https://account.business.nj.gov/onboarding",
         "isInternal": false,
         "opensInNewTab": true
@@ -306,7 +306,7 @@
       "carouselImages": [
         {
           "src": "/img/hero/image_1.png",
-          "alt": "Una mujer sonriendo mientras trabaja en su computadora port\u00e1til en casa."
+          "alt": "Una mujer sonriendo mientras trabaja en su computadora portátil en casa."
         },
         {
           "src": "/img/hero/image_2.png",
@@ -318,19 +318,19 @@
         },
         {
           "src": "/img/hero/image_4.png",
-          "alt": "El due\u00f1o de un restaurante de New Jersey preparando comida."
+          "alt": "El dueño de un restaurante de New Jersey preparando comida."
         }
       ]
     },
     "quickServices": {
-      "title": "Servicios r\u00e1pidos",
+      "title": "Servicios rápidos",
       "subtitle": "Acceda a servicios empresariales populares",
       "items": [
         {
           "title": "Registro empresarial",
-          "description": "Inicie su LLC, corporaci\u00f3n o sociedad",
+          "description": "Inicie su LLC, corporación o sociedad",
           "iconPath": "/img/checklist.svg",
-          "iconAlt": "Icono de lista de verificaci\u00f3n",
+          "iconAlt": "Icono de lista de verificación",
           "link": {
             "label": "Registro empresarial",
             "href": "/pages/register-your-business",
@@ -342,7 +342,7 @@
           "title": "Licencias y permisos",
           "description": "Solicite las licencias comerciales requeridas",
           "iconPath": "/img/planning.svg",
-          "iconAlt": "Icono de planificaci\u00f3n",
+          "iconAlt": "Icono de planificación",
           "link": {
             "label": "Licencias y permisos",
             "href": "/pages/licensing-and-certification-guide",
@@ -364,7 +364,7 @@
         },
         {
           "title": "Presente su informe anual",
-          "description": "Nunca pierda una fecha l\u00edmite",
+          "description": "Nunca pierda una fecha límite",
           "iconPath": "/img/arrow.svg",
           "iconAlt": "Icono de flecha",
           "link": {
@@ -378,7 +378,7 @@
           "title": "Obligaciones del empleador",
           "description": "Registro y recursos para empleadores",
           "iconPath": "/img/shaking_hands.svg",
-          "iconAlt": "Icono de apret\u00f3n de manos",
+          "iconAlt": "Icono de apretón de manos",
           "link": {
             "label": "Obligaciones del empleador",
             "href": "/pages/employer-requirements",
@@ -401,8 +401,8 @@
       ]
     },
     "ctaBanner": {
-      "title": "Acceda a su informaci\u00f3n empresarial personalizada",
-      "subtitle": "\u00a1Comience y haga crecer su negocio en New Jersey o fuera del estado con su cuenta de Business.NJ.gov hoy!",
+      "title": "Acceda a su información empresarial personalizada",
+      "subtitle": "¡Comience y haga crecer su negocio en New Jersey o fuera del estado con su cuenta de Business.NJ.gov hoy!",
       "callToActionLink": {
         "label": "Crear cuenta",
         "href": "https://account.business.nj.gov/onboarding",
@@ -420,14 +420,14 @@
       }
     },
     "support": {
-      "title": "M\u00e1s apoyo",
-      "description": "\u00bfBusca asesor\u00eda m\u00e1s especializada? Pruebe nuestras gu\u00edas gratuitas y personalizadas de registro empresarial en l\u00ednea, hable con un representante en nuestro chat o reg\u00edstrese para recibir actualizaciones empresariales directamente en su correo electr\u00f3nico. Tambi\u00e9n est\u00e1 disponible una versi\u00f3n impresa y digital de nuestro [Manual para peque\u00f1as empresas](https://cdn.prod.website-files.com/5e31b06cb76b830809358a75/662a750614519d466e63f6c7_NJ_Small_Business_Manual_for_download.pdf).",
+      "title": "Más apoyo",
+      "description": "¿Busca asesoría más especializada? Pruebe nuestras guías gratuitas y personalizadas de registro empresarial en línea, hable con un representante en nuestro chat o regístrese para recibir actualizaciones empresariales directamente en su correo electrónico. También está disponible una versión impresa y digital de nuestro [Manual para pequeñas empresas](https://cdn.prod.website-files.com/5e31b06cb76b830809358a75/662a750614519d466e63f6c7_NJ_Small_Business_Manual_for_download.pdf).",
       "cards": [
         {
           "title": "Su cuenta de Business.NJ.gov",
-          "description": "Obtenga una gu\u00eda gratuita y personalizada paso a paso para iniciar su negocio en New Jersey.",
+          "description": "Obtenga una guía gratuita y personalizada paso a paso para iniciar su negocio en New Jersey.",
           "iconPath": "/img/navigation.svg",
-          "iconAlt": "Icono de navegaci\u00f3n",
+          "iconAlt": "Icono de navegación",
           "link": {
             "label": "Su cuenta de Business.NJ.gov",
             "href": "https://account.business.nj.gov/",
@@ -437,7 +437,7 @@
         },
         {
           "title": "Apoyo individual",
-          "description": "Converse con un asesor empresarial con d\u00e9cadas de experiencia, de 9a.m. a 5p.m. de lunes a viernes.",
+          "description": "Converse con un asesor empresarial con décadas de experiencia, de 9a.m. a 5p.m. de lunes a viernes.",
           "iconPath": "/img/hands.svg",
           "iconAlt": "Icono de manos",
           "link": {
@@ -448,12 +448,12 @@
           }
         },
         {
-          "title": "Bolet\u00edn empresarial",
-          "description": "Mant\u00e9ngase al d\u00eda sobre programas o regulaciones anunciados recientemente que puedan afectar su negocio.",
+          "title": "Boletín empresarial",
+          "description": "Manténgase al día sobre programas o regulaciones anunciados recientemente que puedan afectar su negocio.",
           "iconPath": "/img/piechart.svg",
-          "iconAlt": "Icono de gr\u00e1fico",
+          "iconAlt": "Icono de gráfico",
           "link": {
-            "label": "Bolet\u00edn empresarial",
+            "label": "Boletín empresarial",
             "href": "https://business.nj.gov/newsletter",
             "isInternal": false,
             "opensInNewTab": true
@@ -476,22 +476,22 @@
           }
         },
         {
-          "name": "Centro de Acci\u00f3n Empresarial de New Jersey",
+          "name": "Centro de Acción Empresarial de New Jersey",
           "logo": "/img/njbac_logo.png",
-          "logoAlt": "Logotipo del Centro de Acci\u00f3n Empresarial de New Jersey",
+          "logoAlt": "Logotipo del Centro de Acción Empresarial de New Jersey",
           "link": {
-            "label": "Centro de Acci\u00f3n Empresarial de New Jersey",
+            "label": "Centro de Acción Empresarial de New Jersey",
             "href": "https://www.nj.gov/state/bac/bac.shtml",
             "isInternal": false,
             "opensInNewTab": true
           }
         },
         {
-          "name": "Autoridad de Desarrollo Econ\u00f3mico de New Jersey",
+          "name": "Autoridad de Desarrollo Económico de New Jersey",
           "logo": "/img/njeda_logo.png",
-          "logoAlt": "Logotipo de la Autoridad de Desarrollo Econ\u00f3mico de New Jersey",
+          "logoAlt": "Logotipo de la Autoridad de Desarrollo Económico de New Jersey",
           "link": {
-            "label": "Autoridad de Desarrollo Econ\u00f3mico de New Jersey",
+            "label": "Autoridad de Desarrollo Económico de New Jersey",
             "href": "https://www.njeda.com/",
             "isInternal": false,
             "opensInNewTab": true
@@ -509,11 +509,11 @@
           }
         },
         {
-          "name": "Oficina de Innovaci\u00f3n",
+          "name": "Oficina de Innovación",
           "logo": "/img/nj_logo.svg",
-          "logoAlt": "Logotipo de la Oficina de Innovaci\u00f3n de New Jersey",
+          "logoAlt": "Logotipo de la Oficina de Innovación de New Jersey",
           "link": {
-            "label": "Oficina de Innovaci\u00f3n",
+            "label": "Oficina de Innovación",
             "href": "https://innovation.nj.gov/",
             "isInternal": false,
             "opensInNewTab": true
@@ -522,8 +522,8 @@
       ]
     },
     "feedbackBar": {
-      "question": "\u00bfEncontr\u00f3 lo que buscaba en esta p\u00e1gina?",
-      "yesLabel": "S\u00ed",
+      "question": "¿Encontró lo que buscaba en esta página?",
+      "yesLabel": "Sí",
       "noLabel": "No"
     }
   },
@@ -590,6 +590,48 @@
           "opensInNewTab": false
         }
       }
-    ]
+    ],
+    "starterKits": {
+      "topIndustries": [
+        {
+          "name": "Online Business",
+          "id": "e-commerce",
+          "description": "Ready to start selling your products and services online? Explore our start-up checklist for potential items to get your business off the ground.",
+          "ctaText": "Online Business Kit"
+        },
+        {
+          "name": "Real Estate Investor",
+          "id": "real-estate-investor",
+          "description": "Get ready to start buying, selling, and renting property in New Jersey. Make sure you have everything you need to start on the right foot.",
+          "ctaText": "Get an Account"
+        },
+        {
+          "name": "Home Contractor",
+          "id": "home-contractor",
+          "description": "If you've got the best product for your New Jersey community, our personalized starter kit can guide you through the registration process!",
+          "ctaText": "Home Contractor Kit"
+        },
+        {
+          "name": "Retail",
+          "id": "retail",
+          "description": "If you've got the best product for your New Jersey community, our personalized starter kit can guide you through the registration process!",
+          "ctaText": "Retail Kit"
+        },
+        {
+          "name": "Healthcare",
+          "id": "healthcare",
+          "description": "If you've got the best product for your New Jersey community, our personalized starter kit can guide you through the registration process!",
+          "ctaText": "Healthcare Kit"
+        },
+        {
+          "name": "Management Consulting",
+          "id": "management-consulting",
+          "description": "If you've got the best product for your New Jersey community, our personalized starter kit can guide you through the registration process!",
+          "ctaText": "Management Consulting Kit"
+        }
+      ],
+      "industrySelectorHeading": "Find Your Industry",
+      "industrySelectorCta": "Go to Starter Kit"
+    }
   }
 }

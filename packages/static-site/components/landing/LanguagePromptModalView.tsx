@@ -1,20 +1,14 @@
 /**
  * Renders the stateless preferred-language prompt modal markup.
  *
- * This presentational atom mirrors the NJWDS `usa-modal` structure and exposes
- * a visually-hidden `data-open-modal` trigger via `ref`. NJWDS ships no
- * programmatic open API, so the molecule opens the modal by clicking that
- * hidden trigger; the bundled `toggleModal` handler then runs its focus-trap
- * and inert logic. All decision logic lives in the molecule, keeping this
- * component trivial to render and audit for accessibility.
+ * This presentational atom renders a dialog with focus-trap and backdrop
+ * behavior managed in React. The molecule controls visibility via the
+ * `isOpen` prop.
  */
 
-import type { Ref } from "react";
+"use client";
 
-/**
- * Element id linking the open trigger to the modal container.
- */
-const MODAL_ID = "language-prompt-modal";
+import { useEffect, useRef } from "react";
 
 /**
  * Element id for the modal heading, referenced by `aria-labelledby`.
@@ -46,12 +40,12 @@ export interface LanguagePromptModalViewProps {
   readonly onStay: () => void;
   /** Handler invoked when the visitor chooses to switch language. */
   readonly onRedirect: () => void;
-  /** Ref to the hidden open trigger so the molecule can open the modal. */
-  readonly openTriggerRef: Ref<HTMLButtonElement>;
+  /** Whether the modal is currently visible. */
+  readonly isOpen: boolean;
 }
 
 /**
- * Renders the preferred-language prompt modal and its hidden open trigger.
+ * Renders the preferred-language prompt modal.
  *
  * @param props Component props.
  * @param props.title Modal heading text.
@@ -61,8 +55,8 @@ export interface LanguagePromptModalViewProps {
  * @param props.redirectLabel Resolved redirect button label.
  * @param props.onStay Handler for the stay action.
  * @param props.onRedirect Handler for the redirect action.
- * @param props.openTriggerRef Ref to the hidden open trigger.
- * @returns The modal markup and its hidden trigger.
+ * @param props.isOpen Whether the modal is currently visible.
+ * @returns The modal markup, or null when closed.
  * @example
  * ```tsx
  * <LanguagePromptModalView
@@ -73,7 +67,7 @@ export interface LanguagePromptModalViewProps {
  *   redirectLabel="Switch to Español"
  *   onStay={handleStay}
  *   onRedirect={handleRedirect}
- *   openTriggerRef={triggerRef}
+ *   isOpen={true}
  * />
  * ```
  */
@@ -85,34 +79,44 @@ export const LanguagePromptModalView = ({
   redirectLabel,
   onStay,
   onRedirect,
-  openTriggerRef,
+  isOpen,
 }: LanguagePromptModalViewProps) => {
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onStay();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onStay]);
+
+  useEffect(() => {
+    if (isOpen && dialogRef.current) {
+      const focusable = dialogRef.current.querySelector<HTMLElement>(
+        "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])",
+      );
+      focusable?.focus();
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
   return (
-    <>
-      <button
-        aria-controls={MODAL_ID}
-        aria-hidden="true"
-        data-open-modal
-        ref={openTriggerRef}
-        style={{ position: "fixed", top: 0, insetInlineStart: "-9999px" }}
-        tabIndex={-1}
-        type="button"
-      >
-        {title}
-      </button>
-      {/* No role="dialog" or aria-modal here: the NJWDS modal script moves the
-          dialog role and the id/aria-labelledby/aria-describedby onto the
-          .usa-modal-wrapper it generates, and that wrapper is the real dialog.
-          Declaring role="dialog" here too would leave a second, unnamed dialog
-          (fails aria-dialog-name), and aria-modal without a dialog role is
-          invalid (fails aria-allowed-attr). The aria-labelledby/describedby
-          stay because the script reads them from here. */}
-      {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: the NJWDS modal script requires aria-labelledby/describedby on .usa-modal — it reads them to label the .usa-modal-wrapper it generates (and throws if absent). The role lives on that wrapper, not here. */}
+    <div className="usa-modal-wrapper is-visible">
+      <div className="usa-modal-overlay" aria-hidden="true" onClick={onStay} />
       <div
         aria-describedby={MODAL_DESCRIPTION_ID}
         aria-labelledby={MODAL_HEADING_ID}
+        aria-modal="true"
         className="usa-modal"
-        id={MODAL_ID}
+        ref={dialogRef}
+        role="dialog"
       >
         <div className="usa-modal__content">
           <div className="usa-modal__main">
@@ -132,7 +136,6 @@ export const LanguagePromptModalView = ({
                 <li className="usa-button-group__item">
                   <button
                     className="usa-button usa-button--unstyled padding-105 text-center"
-                    data-close-modal
                     onClick={onStay}
                     type="button"
                   >
@@ -145,7 +148,6 @@ export const LanguagePromptModalView = ({
           <button
             aria-label={closeLabel}
             className="usa-button usa-modal__close"
-            data-close-modal
             onClick={onStay}
             type="button"
           >
@@ -155,6 +157,6 @@ export const LanguagePromptModalView = ({
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };

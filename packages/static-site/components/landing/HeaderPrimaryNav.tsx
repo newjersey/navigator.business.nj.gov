@@ -2,10 +2,13 @@
  * Renders primary header navigation for the landing page.
  *
  * This module maps primary menu items from localized content into NJWDS
- * navigation markup.
+ * navigation markup. Submenu accordion behavior is managed in React state.
  */
 
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 import type {
   HeaderPrimaryItem,
@@ -119,61 +122,10 @@ const renderHeaderPrimaryLinkItem = ({ item }: RenderHeaderPrimaryLinkItemParams
 };
 
 /**
- * Renders one top-level submenu navigation item.
- *
- * @param params Render parameters.
- * @param params.item Primary submenu item data.
- * @returns One primary navigation list item with submenu children.
- * @example
- * ```tsx
- * renderHeaderPrimarySubmenuItem({ item: primarySubmenuItem });
- * ```
- */
-const renderHeaderPrimarySubmenuItem = ({ item }: RenderHeaderPrimarySubmenuItemParams) => {
-  const buttonClassName = item.isCurrent
-    ? "usa-accordion__button usa-nav__link usa-current"
-    : "usa-accordion__button usa-nav__link nj-nav__link";
-
-  return (
-    <li className="usa-nav__primary-item" key={item.submenuId}>
-      <button
-        aria-controls={item.submenuId}
-        aria-expanded="false"
-        className={buttonClassName}
-        type="button"
-      >
-        <span>{item.label}</span>
-      </button>
-      <ul className="usa-nav__submenu" id={item.submenuId}>
-        {item.links.map((submenuLinkItem, index) => {
-          return renderHeaderSubmenuLink({ item: submenuLinkItem, index });
-        })}
-      </ul>
-    </li>
-  );
-};
-
-/**
- * Renders one primary navigation item from the discriminated union.
- *
- * @param params Render parameters.
- * @param params.item Primary item that may be a link or submenu.
- * @returns The matching rendered navigation item.
- * @example
- * ```tsx
- * renderHeaderPrimaryItem({ item: header.primaryItems[0] });
- * ```
- */
-const renderHeaderPrimaryItem = ({ item }: RenderHeaderPrimaryItemParams) => {
-  if (item.kind === "submenu") {
-    return renderHeaderPrimarySubmenuItem({ item });
-  }
-
-  return renderHeaderPrimaryLinkItem({ item });
-};
-
-/**
  * Renders the full primary navigation list.
+ *
+ * Submenu accordion toggles are managed in React state. Only one submenu
+ * can be open at a time.
  *
  * @param props Component props.
  * @param props.header Header content with primary items.
@@ -184,6 +136,64 @@ const renderHeaderPrimaryItem = ({ item }: RenderHeaderPrimaryItemParams) => {
  * ```
  */
 export const HeaderPrimaryNav = ({ header }: HeaderPrimaryNavProps) => {
+  const [openSubmenuId, setOpenSubmenuId] = useState<string | null>(null);
+
+  const toggleSubmenu = (submenuId: string) => {
+    setOpenSubmenuId((prev) => (prev === submenuId ? null : submenuId));
+  };
+
+  /**
+   * Renders one top-level submenu navigation item.
+   *
+   * @param params Render parameters.
+   * @param params.item Primary submenu item data.
+   * @returns One primary navigation list item with submenu children.
+   */
+  const renderHeaderPrimarySubmenuItem = ({ item }: RenderHeaderPrimarySubmenuItemParams) => {
+    const isOpen = openSubmenuId === item.submenuId;
+    const buttonClassName = item.isCurrent
+      ? "usa-accordion__button usa-nav__link usa-current"
+      : "usa-accordion__button usa-nav__link nj-nav__link";
+
+    return (
+      <li className="usa-nav__primary-item" key={item.submenuId}>
+        <button
+          aria-controls={item.submenuId}
+          aria-expanded={isOpen}
+          className={buttonClassName}
+          onClick={() => toggleSubmenu(item.submenuId)}
+          type="button"
+        >
+          <span>{item.label}</span>
+        </button>
+        <ul className="usa-nav__submenu" hidden={!isOpen || undefined} id={item.submenuId}>
+          {item.links.map((submenuLinkItem, index) => {
+            return renderHeaderSubmenuLink({ item: submenuLinkItem, index });
+          })}
+        </ul>
+      </li>
+    );
+  };
+
+  /**
+   * Renders one primary navigation item from the discriminated union.
+   *
+   * @param params Render parameters.
+   * @param params.item Primary item that may be a link or submenu.
+   * @returns The matching rendered navigation item.
+   * @example
+   * ```tsx
+   * renderHeaderPrimaryItem({ item: header.primaryItems[0] });
+   * ```
+   */
+  const renderHeaderPrimaryItem = ({ item }: RenderHeaderPrimaryItemParams) => {
+    if (item.kind === "submenu") {
+      return renderHeaderPrimarySubmenuItem({ item });
+    }
+
+    return renderHeaderPrimaryLinkItem({ item });
+  };
+
   return (
     <>
       <button className="usa-nav__close" type="button">
