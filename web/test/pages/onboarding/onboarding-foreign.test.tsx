@@ -9,6 +9,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   composeOnBoardingTitle,
+  industryIdsWithRequiredEssentialQuestion,
   industryIdsWithSingleRequiredEssentialQuestion,
   mockEmptyApiSignups,
   renderPage,
@@ -346,8 +347,15 @@ describe("onboarding - foreign business", () => {
     });
 
     it("sets homeBasedBusiness to false if business is foreign nexus with location in NJ", async () => {
-      const firstIndustryId = randomHomeBasedIndustry(["acupuncture"]);
-      const secondIndustryId = randomHomeBasedIndustry(["acupuncture", firstIndustryId]);
+      const firstIndustryId = randomHomeBasedIndustry([
+        "acupuncture",
+        ...industryIdsWithRequiredEssentialQuestion,
+      ]);
+      const secondIndustryId = randomHomeBasedIndustry([
+        "acupuncture",
+        firstIndustryId,
+        ...industryIdsWithRequiredEssentialQuestion,
+      ]);
 
       const userData = generateTestUserData({
         ...emptyIndustrySpecificData,

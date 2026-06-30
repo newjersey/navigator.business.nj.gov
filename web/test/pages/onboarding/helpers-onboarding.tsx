@@ -267,6 +267,22 @@ export const industryIdsWithSingleRequiredEssentialQuestion =
     return someQuestionsStartAsUndefined;
   });
 
+const industryHasRequiredUndefinedEssentialQuestion = (industryId: string): boolean => {
+  return EssentialQuestions.filter((question) => {
+    return question.isQuestionApplicableToIndustryId(industryId);
+  }).some((question) => {
+    return emptyIndustrySpecificData[question.fieldName] === undefined;
+  });
+};
+
+// Industries whose onboarding save is blocked by an unanswered required essential
+// question (field starts `undefined` in emptyIndustrySpecificData). Used to keep
+// seeded-random industry picks deterministic when a test only needs a save to succeed.
+export const industryIdsWithRequiredEssentialQuestion: string[] = getIndustries()
+  .filter((industry) => industry.isEnabled)
+  .filter((industry) => industryHasRequiredUndefinedEssentialQuestion(industry.id))
+  .map((industry) => industry.id);
+
 export const composeOnBoardingTitle = (step: string, pageTitle?: string): string => {
   const Config = getMergedConfig();
   if (pageTitle === undefined) {

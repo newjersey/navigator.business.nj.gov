@@ -234,6 +234,9 @@ export const filterRandomIndustry = (function_: (industry: Industry) => boolean)
   const filteredIndustries = getIndustries().filter((x: Industry) => {
     return function_(x);
   });
+  if (filteredIndustries.length === 0) {
+    throw new Error("filterRandomIndustry: no industries matched the provided filter");
+  }
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];
 };
