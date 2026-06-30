@@ -1,0 +1,242 @@
+// Renovate configuration for the Business.NJ.gov Navigator monorepo.
+// Docs: https://docs.renovatebot.com/configuration-options/
+//
+// Find more information on NJIA's default Renovate config at
+// https://newjersey.github.io/innovation-engineering/guides/development/set-up-renovate/
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+
+  // Base presets:
+  // - config:recommended              Renovate defaults + Dependency Dashboard
+  // - :semanticCommits                fix:/chore: prefixes (matches our conventional commits)
+  // - :pinVersions                    exact versions for reproducible installs
+  // - group:allNonMajor               catch-all: ungrouped minor+patch land in one PR
+  //                                   (ecosystem rules below override this per-package)
+  // - helpers:pinGitHubActionDigests  pin Actions to commit SHAs (supply-chain hardening)
+  extends: [
+    "config:recommended",
+    ":semanticCommits",
+    ":pinVersions",
+    "group:allNonMajor",
+    "helpers:pinGitHubActionDigests",
+  ],
+
+  labels: ["dependencies", "renovate"],
+
+  // Keep our current throughput; minimumReleaseAge already throttles volume.
+  prConcurrentLimit: 15,
+
+  // Don't surface a PR until its branch has finished building.
+  prCreation: "not-pending",
+
+  // Run outside business hours to minimize disruption.
+  schedule: ["after 8pm every weekday", "before 8am every weekday", "every weekend"],
+  timezone: "US/Eastern",
+
+  // SUPPLY-CHAIN COOLDOWN: wait 3 days before adopting any release. Malicious
+  // versions are usually caught + unpublished within days; this keeps them out
+  // of branches/PRs and out of automerge.
+  minimumReleaseAge: "3 days",
+
+  // OSV feed flags MALICIOUS packages, not only CVEs.
+  osvVulnerabilityAlerts: true,
+
+  // Real security fixes bypass the cooldown + schedule so we can patch fast.
+  vulnerabilityAlerts: {
+    minimumReleaseAge: null,
+    schedule: [],
+    labels: ["security", "renovate"],
+  },
+
+  // Don't scan Yarn's internal cache.
+  ignorePaths: [".yarn"],
+
+  // Dedupe to the highest compatible version after updates (Yarn).
+  postUpdateOptions: ["yarnDedupeHighest"],
+
+  // Refresh lockfiles on a cadence even when no dep update is pending.
+  lockFileMaintenance: { enabled: true },
+
+  // Managed elsewhere / intentionally pinned outside Renovate.
+  // cimg/node is the CircleCI node image used in BuilderImage.Dockerfile;
+  // it tracks .nvmrc manually.
+  ignoreDeps: ["node", "cimg/node", "kill-port", "semantic-release"],
+
+  // Only rebase branches when they actually conflict (less CI churn).
+  rebaseWhen: "conflicted",
+
+  packageRules: [
+    // Major GitHub Actions bumps are breaking-ish: label + require manual merge.
+    {
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["major"],
+      labels: ["ci", "breaking-change"],
+      automerge: false,
+    },
+
+    // Aggressive automerge for low-risk updates. CI + branch protection gate the
+    // merge, and minimumReleaseAge ensures the cooldown elapses first.
+    {
+      matchUpdateTypes: ["minor", "patch", "pin", "digest"],
+      automerge: true,
+      automergeStrategy: "rebase",
+    },
+
+    // Auth/CMS surfaces are high-blast-radius: always review by hand.
+    {
+      matchPackageNames: ["@aws-amplify/core", "@aws-amplify/auth", "decap-cms-app"],
+      automerge: false,
+    },
+
+    // ---- Ecosystem groups (override group:allNonMajor's default groupName) ----
+    // packageRules are applied in order; later rules override earlier ones for the
+    // same field, so the catch-all above is safely overridden here per ecosystem.
+
+    // E2E + audit plugins move together.
+    {
+      matchPackageNames: ["cypress*", "@cypress-audit/*"],
+      groupName: "cypress",
+    },
+
+    // Jest core + its transformers/types.
+    {
+      matchPackageNames: ["@types/jest", "ts-jest", "babel-jest", "@jest/types", "jest*"],
+      groupName: "jest",
+    },
+
+    // ESLint + TypeScript-ESLint toolchain (eslint-config-prettier lives here too).
+    {
+      matchPackageNames: [
+        "@types/eslint",
+        "babel-eslint",
+        "@typescript-eslint/*",
+        "eslint*",
+        "eslint-config-prettier",
+      ],
+      groupName: "eslint",
+    },
+
+    // @types/node: keep on its own and never auto-bump the major (tied to the
+    // Node runtime in .nvmrc).
+    { matchPackageNames: ["@types/node"] },
+    {
+      matchPackageNames: ["@types/node"],
+      matchUpdateTypes: ["major"],
+      enabled: false,
+    },
+
+    // React core + DOM types + focus-trap (versions with React).
+    {
+      matchPackageNames: ["@types/react", "focus-trap-react", "@types/react-dom", "react*"],
+      groupName: "react",
+    },
+
+    { matchPackageNames: ["@testing-library/*"], groupName: "testing-library" },
+    { matchPackageNames: ["@storybook/*"], groupName: "storybook" },
+    { matchPackageNames: ["@aws-amplify/*"], groupName: "aws-amplify" },
+    { matchPackageNames: ["@swc/*"], groupName: "swc" },
+
+    // MUI + its zero-runtime Pigment engine (same release cadence).
+    {
+      matchPackageNames: ["@mui/*", "@pigment-css/*"],
+      groupName: "material-ui",
+    },
+
+    // AWS SDK v3 runtime family: SDK + crypto utilities + Smithy internals.
+    {
+      matchPackageNames: ["@aws-sdk/*", "@aws-crypto/*", "@smithy/*"],
+      groupName: "aws-sdk",
+    },
+
+    // Unified markdown pipeline.
+    {
+      matchPackageNames: ["unified", "remark", "remark-*", "rehype", "rehype-*"],
+      groupName: "unified",
+    },
+
+    // Next.js core + bundled plugins. eslint-config-next and next-seo track
+    // major Next versions; next-router-mock is a test helper that follows Next.
+    {
+      matchPackageNames: ["next", "@next/*", "eslint-config-next", "next-seo", "next-router-mock"],
+      groupName: "next",
+    },
+
+    // AWS CDK infrastructure stack: CDK CLI, library, and constructs must stay
+    // in sync to avoid breaking CDK apps.
+    {
+      matchPackageNames: ["aws-cdk", "aws-cdk-lib", "constructs"],
+      groupName: "aws-cdk",
+    },
+
+    // Playwright test runner + companion packages.
+    {
+      matchPackageNames: ["@playwright/*", "playwright", "playwright-core"],
+      groupName: "playwright",
+    },
+
+    // Prettier formatter + plugins.
+    {
+      matchPackageNames: ["prettier", "prettier-plugin-*"],
+      groupName: "prettier",
+    },
+
+    // Babel compiler + loaders. babel-jest/ts-jest stay in the jest group;
+    // babel-plugin-react-compiler follows the React compiler, not Babel core.
+    {
+      matchPackageNames: ["@babel/*", "babel-loader", "babel-plugin-react-compiler"],
+      groupName: "babel",
+    },
+
+    // Emotion CSS-in-JS (used alongside MUI).
+    { matchPackageNames: ["@emotion/*"], groupName: "emotion" },
+
+    // i18n: next-intl is the only member today; forward-compatible with i18next.
+    {
+      matchPackageNames: ["next-intl", "i18next", "react-i18next"],
+      groupName: "i18n",
+    },
+
+    // React Email template toolkit.
+    {
+      matchPackageNames: ["@react-email/*", "react-email"],
+      groupName: "react-email",
+    },
+
+    // Biome formatter/linter (used by static-site and root).
+    { matchPackageNames: ["@biomejs/*"], groupName: "biome" },
+
+    // Vitest test runner; split from Vite since they release independently.
+    { matchPackageNames: ["vitest", "@vitest/*"], groupName: "vitest" },
+
+    // Vite bundler + official plugins; separate from Vitest.
+    { matchPackageNames: ["vite", "@vitejs/*"], groupName: "vite" },
+
+    // Sass compiler + webpack loader.
+    { matchPackageNames: ["sass", "sass-loader"], groupName: "sass" },
+
+    // Git hooks tooling.
+    { matchPackageNames: ["husky", "lint-staged"], groupName: "git-hooks" },
+
+    // Axe accessibility tooling (axe-core, @axe-core/playwright, cypress-axe).
+    {
+      matchPackageNames: ["axe-core", "@axe-core/*", "cypress-axe"],
+      groupName: "axe",
+    },
+
+    // Python requirements: low-risk, skip test gating.
+    {
+      matchManagers: ["pip_requirements"],
+      automerge: true,
+      ignoreTests: true,
+    },
+
+    // Static-site is a separate pnpm workspace with its own lockfile. Its deps
+    // often skew from the yarn workspaces. The branch prefix + label keep pnpm
+    // updates visually distinct in the PR list.
+    {
+      matchFileNames: ["packages/static-site/**"],
+      additionalBranchPrefix: "static-site-",
+      addLabels: ["static-site"],
+    },
+  ],
+}
