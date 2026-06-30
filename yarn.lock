@@ -5265,7 +5265,7 @@ __metadata:
     "@mui/x-date-pickers": "npm:9.4.0"
     "@newjersey/njwds": "npm:0.3.0"
     "@next/bundle-analyzer": "npm:16.2.4"
-    "@next/eslint-plugin-next": "npm:15.5.15"
+    "@next/eslint-plugin-next": "npm:16.2.9"
     "@open_resources/semantic-release-uv": "npm:1.5.1"
     "@pigment-css/react": "npm:0.0.31"
     "@playwright/test": "npm:1.59.1"
@@ -5510,7 +5510,7 @@ __metadata:
     "@mui/x-date-pickers": "npm:9.4.0"
     "@newjersey/njwds": "npm:0.3.0"
     "@next/bundle-analyzer": "npm:16.2.4"
-    "@next/eslint-plugin-next": "npm:15.5.15"
+    "@next/eslint-plugin-next": "npm:16.2.9"
     "@pigment-css/react": "npm:0.0.31"
     "@storybook/addon-designs": "npm:11.1.3"
     "@storybook/addon-docs": "npm:10.3.6"
@@ -8903,6 +8903,15 @@ __metadata:
   dependencies:
     fast-glob: "npm:3.3.1"
   checksum: 10/35ac4a63f7591c968ac3668a592a17055cb3e7352de08bba637a18e5f0a4d2fb319facfda16945c3ee629b2280cbb7708b36c6cdfda96149aea3b1524910f9cf
+  languageName: node
+  linkType: hard
+
+"@next/eslint-plugin-next@npm:16.2.9":
+  version: 16.2.9
+  resolution: "@next/eslint-plugin-next@npm:16.2.9"
+  dependencies:
+    fast-glob: "npm:3.3.1"
+  checksum: 10/1c70d686291846353544bbc9f4c49c84e0b44ceda9cc8a22c31563a37929dabe4812d3393c7ef14d01017cfbf1803107c6166dbda20b0e365964fe6da4530a93
   languageName: node
   linkType: hard
 
