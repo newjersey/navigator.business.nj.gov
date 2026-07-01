@@ -5,4 +5,5 @@ export * from "./task";
 export * from "./filing";
 export * from "./anytime-action";
 export * from "./license-event";
+export * from "./license";
 export * from "./industry";

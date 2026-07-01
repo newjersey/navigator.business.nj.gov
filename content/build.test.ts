@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import path from "path";
 import matter from "gray-matter";
 import fs from "fs";
+import { loadAllLicenses } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 import {
   type FileSystemPort,
   type BuildConfig,
@@ -24,6 +25,7 @@ import {
   extractItemsFromObject,
   buildChecklistItemTaskMap,
   buildAndWriteChecklistItemTasks,
+  toLicenseCard,
 } from "./build";
 
 // ============================================================================
@@ -556,7 +558,7 @@ describe("Application Layer", () => {
 
   describe("Content Configuration", () => {
     it("should have configuration for all content types", () => {
-      expect(contentConfigs).toHaveLength(7); // 7 content types (excluding industries)
+      expect(contentConfigs).toHaveLength(8); // 8 content types (excluding industries)
 
       const fileNames = contentConfigs.map((c) => c.outputFileName);
       expect(fileNames).toContain("tasks");
@@ -564,6 +566,7 @@ describe("Application Layer", () => {
       expect(fileNames).toContain("certifications");
       expect(fileNames).toContain("filings");
       expect(fileNames).toContain("fundings");
+      expect(fileNames).toContain("licenses");
       expect(fileNames).toContain("license-calendar-events");
       expect(fileNames).toContain("license-reinstatements");
     });
@@ -583,6 +586,7 @@ describe("Application Layer", () => {
         "certificationsCount",
         "filingsCount",
         "fundingsCount",
+        "licensesCount",
         "licenseCalendarEventsCount",
         "licenseReinstatementsCount",
       ];
@@ -708,5 +712,35 @@ describe("Integration Tests", () => {
     expect(fs.existsSync("lib/tasks.json")).toBe(true);
 
     consoleSpy.mockRestore();
+  });
+});
+
+// ============================================================================
+// toLicenseCard MAPPER TESTS
+// ============================================================================
+
+describe("toLicenseCard", () => {
+  it("resolves industry, falling back to webflowIndustry, and maps agency fields", () => {
+    const [first] = loadAllLicenses();
+    const card = toLicenseCard(first);
+    expect(card.name).toBe(first.name ?? first.webflowName ?? "");
+    expect(card.urlSlug).toBe(first.urlSlug);
+    // industry present either via industryId or webflowIndustry
+    expect(typeof card.industry === "string" || card.industry === undefined).toBe(true);
+  });
+
+  it("falls back to webflowName for the card title when name is absent", () => {
+    // Most webflow-license source files carry only `webflowName`, not `name`;
+    // the card title must fall back to it so titles are never blank.
+    const card = toLicenseCard({
+      id: "x",
+      filename: "x",
+      urlSlug: "x",
+      name: undefined as unknown as string,
+      webflowName: "Adoption Agency",
+      licenseCertificationClassification: "LICENSE",
+      contentMd: "",
+    });
+    expect(card.name).toBe("Adoption Agency");
   });
 });

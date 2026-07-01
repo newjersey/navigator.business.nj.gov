@@ -10,6 +10,7 @@ import type {
   Filing,
   Funding,
   Industry,
+  License,
   LicenseEventType,
   PageItem,
   RecentItem,
@@ -145,6 +146,9 @@ export const loadLicenseReinstatements = (): AnytimeActionLicenseReinstatement[]
       licenseReinstatements: AnytimeActionLicenseReinstatement[];
     }
   ).licenseReinstatements;
+
+export const loadLicenses = (): License[] =>
+  (readContentJson("licenses.json") as { licenses: License[] }).licenses;
 
 export const loadPages = (): PageItem[] => readMarkdownDirectory<PageItem>("pages");
 

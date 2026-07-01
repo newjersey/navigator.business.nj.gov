@@ -1,0 +1,27 @@
+/** A license/certification card on the Licensing & Certification Guide page. */
+export interface License {
+  /** Card title. */
+  name: string;
+  /** URL-friendly slug. */
+  urlSlug: string;
+  /** Legacy Webflow CMS identifier. */
+  webflowId?: string;
+  /** Webflow display name (may differ from `name`). */
+  webflowName?: string;
+  /** "Who it's for" classification, e.g. "LICENSE" or "CERTIFICATION". */
+  licenseCertificationClassification?: string;
+  /** Resolved industry display name. */
+  industry?: string;
+  /** Summary description markdown rendered in the card body. */
+  summaryDescriptionMd?: string;
+  /** Resolved agency display name (no URL — TaskAgency has no link field). */
+  agency?: string;
+  /** Agency division / additional context. */
+  division?: string;
+  /** Division phone number. */
+  divisionPhone?: string;
+  /** Primary CTA button label. */
+  callToActionText?: string;
+  /** Primary CTA button link. */
+  callToActionLink?: string;
+}

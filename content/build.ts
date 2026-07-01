@@ -36,7 +36,14 @@ import { loadAllCertifications } from "@businessnjgovnavigator/shared/static/loa
 import { loadAllFilings } from "@businessnjgovnavigator/shared/static/loadFilings";
 import { loadAllFundings } from "@businessnjgovnavigator/shared/static/loadFundings";
 import { loadAllLicenseCalendarEvents } from "@businessnjgovnavigator/shared/static/loadLicenseCalendarEvents";
+import {
+  loadAllLicenses,
+  type WebflowLicenseCard,
+} from "@businessnjgovnavigator/shared/static/loadAllLicenses";
+import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { loadAllTasks } from "@businessnjgovnavigator/shared/static/loadTasks";
+import type { License } from "@businessnjgovnavigator/content-types";
 
 // ============================================================================
 // DOMAIN TYPES
@@ -60,6 +67,8 @@ export interface BuildResult {
   filingsCount: number;
   /** Number of fundings built */
   fundingsCount: number;
+  /** Number of licenses built */
+  licensesCount: number;
   /** Number of license calendar events built */
   licenseCalendarEventsCount: number;
   /** Number of license reinstatements built */
@@ -92,6 +101,31 @@ export interface FileSystemPort {
   /** Writes data to file as pretty-printed JSON with 2-space indentation */
   writePrettyJsonFile: (filePath: string, data: unknown) => void;
 }
+
+// ============================================================================
+// DOMAIN MAPPERS
+// ============================================================================
+
+/**
+ * Converts a raw WebflowLicenseCard (from shared loader) to a display-ready License card.
+ * Resolves agencyId → agency name and industryId → industry name, falling back to webflowIndustry.
+ */
+export const toLicenseCard = (license: WebflowLicenseCard): License => ({
+  name: license.name ?? license.webflowName ?? "",
+  urlSlug: license.urlSlug,
+  webflowId: license.webflowId,
+  webflowName: license.webflowName,
+  licenseCertificationClassification: license.licenseCertificationClassification,
+  industry: license.industryId
+    ? LookupIndustryById(license.industryId).name
+    : license.webflowIndustry,
+  summaryDescriptionMd: license.summaryDescriptionMd,
+  agency: license.agencyId ? LookupTaskAgencyById(license.agencyId).name : undefined,
+  division: license.agencyAdditionalContext,
+  divisionPhone: license.divisionPhone,
+  callToActionText: license.callToActionText,
+  callToActionLink: license.callToActionLink,
+});
 
 // ============================================================================
 // INFRASTRUCTURE LAYER - File System Port
@@ -602,6 +636,12 @@ export const contentConfigs: ContentConfig[] = [
     resultKey: "fundingsCount",
   },
   {
+    loader: () => loadAllLicenses().map(toLicenseCard),
+    outputFileName: "licenses",
+    dataKey: "licenses",
+    resultKey: "licensesCount",
+  },
+  {
     loader: () => loadAllLicenseCalendarEvents(),
     outputFileName: "license-calendar-events",
     dataKey: "licenseCalendarEvents",
@@ -697,6 +737,7 @@ export const logBuildResults = (result: BuildResult): void => {
   console.log(`✓ Built certifications.json with ${result.certificationsCount} certifications`);
   console.log(`✓ Built filings.json with ${result.filingsCount} filings`);
   console.log(`✓ Built fundings.json with ${result.fundingsCount} fundings`);
+  console.log(`✓ Built licenses.json with ${result.licensesCount} licenses`);
   console.log(
     `✓ Built license-calendar-events.json with ${result.licenseCalendarEventsCount} license-related calendar events`,
   );
