@@ -15,7 +15,7 @@ const messages = {
 const license = (overrides: Partial<License> = {}): License => ({
   name: "A-901 License to Transport Waste",
   urlSlug: "a-901-license-to-transport-waste",
-  licenseCertificationClassification: "Businesses",
+  webflowType: "business-license",
   industry: "Waste",
   summaryDescriptionMd: "You need an A-901 license to transport waste.",
   agency: "NJ Division of Consumer Affairs",
@@ -38,6 +38,37 @@ describe("LicenseCard", () => {
     expect(screen.getByText("(973) 504-6380")).toBeInTheDocument();
     const cta = screen.getByRole("link", { name: "Apply for My A-901 License" });
     expect(cta).toHaveAttribute("href", "https://example.com");
+  });
+
+  it("maps webflowType to its 'Who it's for' display label", () => {
+    const { container } = renderCard({ license: license({ webflowType: "individual-license" }) });
+    expect(screen.getByText(/Who it's for:/)).toBeInTheDocument();
+    expect(container.querySelector(".usa-card__header p")?.textContent).toContain("Individuals");
+  });
+
+  it("omits the 'Who it's for' row when webflowType is unknown or missing", () => {
+    renderCard({ license: license({ webflowType: undefined }) });
+    expect(screen.queryByText(/Who it's for:/)).not.toBeInTheDocument();
+  });
+
+  it("omits the Industry row when the value is the literal string 'undefined'", () => {
+    renderCard({ license: license({ webflowType: undefined, industry: "undefined" }) });
+    expect(screen.queryByText(/Industry:/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/undefined/)).not.toBeInTheDocument();
+  });
+
+  it("omits the Industry row when the value is empty or whitespace", () => {
+    renderCard({ license: license({ webflowType: undefined, industry: "   " }) });
+    expect(screen.queryByText(/Industry:/)).not.toBeInTheDocument();
+  });
+
+  it("omits the entire meta line when neither classification nor industry is present", () => {
+    const { container } = renderCard({
+      license: license({ webflowType: undefined, industry: undefined }),
+    });
+    expect(screen.queryByText(/Who it's for:/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Industry:/)).not.toBeInTheDocument();
+    expect(container.querySelector(".usa-card__header p")).toBeNull();
   });
 
   it("omits the CTA when no link is present", () => {
@@ -80,11 +111,18 @@ describe("LicenseCard", () => {
 
   it("does not render a leading separator when industry has no classification", () => {
     renderCard({
-      license: license({ licenseCertificationClassification: undefined, industry: "Credit Union" }),
+      license: license({ webflowType: undefined, industry: "Credit Union" }),
     });
     expect(screen.queryByText(/Who it's for:/)).not.toBeInTheDocument();
     // The "|" separator must not appear when only Industry is present.
     expect(screen.queryByText(/\|/)).not.toBeInTheDocument();
     expect(screen.getByText(/Industry:/)).toBeInTheDocument();
+  });
+
+  it("renders the separator only when both classification and industry are present", () => {
+    renderCard({ license: license({ webflowType: "business-license", industry: "Waste" }) });
+    expect(screen.getByText(/Who it's for:/)).toBeInTheDocument();
+    expect(screen.getByText(/Industry:/)).toBeInTheDocument();
+    expect(screen.getByText(/\|/)).toBeInTheDocument();
   });
 });

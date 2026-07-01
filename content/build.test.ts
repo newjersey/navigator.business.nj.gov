@@ -744,6 +744,19 @@ describe("toLicenseCard", () => {
     expect(card.name).toBe("Adoption Agency");
   });
 
+  it("carries webflowType through for the classification label", () => {
+    const card = toLicenseCard({
+      id: "x",
+      filename: "x",
+      urlSlug: "x",
+      name: "X",
+      webflowType: "business-license",
+      licenseCertificationClassification: "LICENSE",
+      contentMd: "",
+    });
+    expect(card.webflowType).toBe("business-license");
+  });
+
   it("falls back to webflowName when name is an empty string (not just missing)", () => {
     // e.g. veterinarian.md has `name: ""` with a real webflowName — `??` would
     // keep the empty string and produce a blank (a11y empty-heading) title.

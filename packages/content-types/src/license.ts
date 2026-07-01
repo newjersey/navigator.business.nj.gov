@@ -10,6 +10,12 @@ export interface License {
   webflowName?: string;
   /** "Who it's for" classification, e.g. "LICENSE" or "CERTIFICATION". */
   licenseCertificationClassification?: string;
+  /**
+   * Clean classification key from Webflow (`business-license`,
+   * `individual-license`, `object-vehicle`, `school-course`). Drives the
+   * "Who it's for" label; prefer this over `licenseCertificationClassification`.
+   */
+  webflowType?: string;
   /** Resolved industry display name. */
   industry?: string;
   /** Summary description markdown rendered in the card body. */

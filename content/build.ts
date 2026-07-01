@@ -118,9 +118,11 @@ export const toLicenseCard = (license: WebflowLicenseCard): License => ({
   webflowId: license.webflowId,
   webflowName: license.webflowName,
   licenseCertificationClassification: license.licenseCertificationClassification,
-  industry: license.industryId
-    ? LookupIndustryById(license.industryId).name
-    : license.webflowIndustry,
+  webflowType: license.webflowType,
+  // Prefer the resolved industry name, but fall back to webflowIndustry when the
+  // industryId is missing OR unmatched (LookupIndustryById returns name: "").
+  industry:
+    (license.industryId && LookupIndustryById(license.industryId).name) || license.webflowIndustry,
   summaryDescriptionMd: license.summaryDescriptionMd,
   agency: license.agencyId ? LookupTaskAgencyById(license.agencyId).name : undefined,
   division: license.agencyAdditionalContext,

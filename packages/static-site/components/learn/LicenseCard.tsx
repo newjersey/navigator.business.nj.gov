@@ -3,6 +3,7 @@ import type { LicensingGuidePageMessages } from "@/domain/content/messageTypes";
 import type { License } from "@/domain/content/types";
 import { HighlightedText, makeHighlightPlugin } from "./highlightMatches";
 import { stripContentDirectives } from "./stripContentDirectives";
+import { whoItsForLabel } from "./whoItsForLabel";
 
 interface Props {
   readonly license: License;
@@ -10,8 +11,20 @@ interface Props {
   readonly query?: string;
 }
 
+/**
+ * Returns the trimmed value, or undefined when it is blank or the literal
+ * string "undefined" — both stand in for "no value" in the synced content and
+ * must not be rendered as a label row.
+ */
+const presentValue = (value: string | undefined): string | undefined => {
+  const trimmed = value?.trim();
+  return trimmed && trimmed !== "undefined" ? trimmed : undefined;
+};
+
 const LicenseCard = ({ license, messages, query = "" }: Props) => {
   const rehypePlugins = query.trim() ? [makeHighlightPlugin(query)] : [];
+  const whoItsFor = whoItsForLabel(license.webflowType);
+  const industry = presentValue(license.industry);
 
   return (
     <div className="usa-card__container margin-bottom-3">
@@ -19,20 +32,21 @@ const LicenseCard = ({ license, messages, query = "" }: Props) => {
         <h3 className="usa-card__heading">
           <HighlightedText text={license.name} query={query} />
         </h3>
-        <p className="margin-top-1 text-base">
-          {license.licenseCertificationClassification && (
-            <>
-              <strong>{messages.cardWhoForLabel}</strong>{" "}
-              {license.licenseCertificationClassification}
-            </>
-          )}
-          {license.industry && (
-            <>
-              {license.licenseCertificationClassification && " | "}
-              <strong>{messages.cardIndustryLabel}</strong> {license.industry}
-            </>
-          )}
-        </p>
+        {(whoItsFor || industry) && (
+          <p className="margin-top-1">
+            {whoItsFor && (
+              <>
+                <strong>{messages.cardWhoForLabel}</strong> {whoItsFor}
+              </>
+            )}
+            {industry && (
+              <>
+                {whoItsFor && " | "}
+                <strong>{messages.cardIndustryLabel}</strong> {industry}
+              </>
+            )}
+          </p>
+        )}
       </div>
       <div className="usa-card__body">
         {license.summaryDescriptionMd && (
