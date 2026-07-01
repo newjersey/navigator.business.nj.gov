@@ -84,7 +84,13 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Internal Notes",
+          name: "notesMd",
+          widget: "markdown",
+          required: false,
+          pattern: ["^(?!.*#).*", "Please remove the # before saving."],
+        }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
       - {
           label: "URL Slug",
@@ -160,7 +166,13 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Internal Notes",
+          name: "notesMd",
+          widget: "markdown",
+          required: false,
+          pattern: ["^(?!.*#).*", "Please remove the # before saving."],
+        }
       - {
           label: "Url Slug / Filename",
           name: "urlSlug",
@@ -232,7 +244,13 @@ collections:
         editor:
           preview: true
         fields:
-          - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+          - {
+              label: "Internal Notes",
+              name: "notesMd",
+              widget: "markdown",
+              required: false,
+              pattern: ["^(?!.*#).*", "Please remove the # before saving."],
+            }
           - {
               label: "Id",
               name: "id",
