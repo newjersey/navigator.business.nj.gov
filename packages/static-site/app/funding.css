@@ -81,3 +81,13 @@
   color: white;
   background-color: var(--color-primary);
 }
+
+.funding-card__heading-link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.funding-card__heading-link:hover,
+.funding-card__heading-link:focus {
+  cursor: pointer;
+}

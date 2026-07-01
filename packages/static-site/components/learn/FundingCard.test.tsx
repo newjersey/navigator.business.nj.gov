@@ -134,3 +134,30 @@ describe("FundingCard", () => {
     expect(container.querySelector("mark.funding-search-highlight")).toBeNull();
   });
 });
+
+describe("FundingCard callToActionLink", () => {
+  it("links the funding name to callToActionLink in a new tab", () => {
+    renderCard({ funding: funding({ callToActionLink: "https://example.com/apply" }) });
+    const link = screen.getByRole("link", { name: "Test Funding Program" });
+    expect(link).toHaveAttribute("href", "https://example.com/apply");
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noreferrer");
+  });
+
+  it("renders the funding name as plain text when callToActionLink is empty", () => {
+    renderCard({ funding: funding({ callToActionLink: "" }) });
+    expect(screen.getByRole("heading", { name: "Test Funding Program" })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Test Funding Program" })).not.toBeInTheDocument();
+  });
+
+  it("highlights a query match inside the linked funding name", () => {
+    renderCard({
+      funding: funding({ name: "Grant Program", callToActionLink: "https://example.com" }),
+      query: "grant",
+    });
+    const link = screen.getByRole("link", { name: "Grant Program" });
+    const mark = link.querySelector("mark.funding-search-highlight");
+    expect(mark).not.toBeNull();
+    expect(mark).toHaveTextContent("Grant");
+  });
+});

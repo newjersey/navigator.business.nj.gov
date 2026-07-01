@@ -44,7 +44,18 @@ const FundingCard = ({ funding, messages, query = "" }: Props) => {
     <div className="usa-card__container margin-bottom-3">
       <div className="usa-card__header">
         <h3 className="usa-card__heading">
-          <HighlightedText text={funding.name} query={query} />
+          {funding.callToActionLink ? (
+            <a
+              className="funding-card__heading-link"
+              href={funding.callToActionLink}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <HighlightedText text={funding.name} query={query} />
+            </a>
+          ) : (
+            <HighlightedText text={funding.name} query={query} />
+          )}
         </h3>
         <div className="margin-top-1">
           {funding.status && (
