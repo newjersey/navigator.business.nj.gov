@@ -22,6 +22,7 @@ vi.mock("@/domain/content/loadContent", () => ({
     name: "Create a Business Plan",
     category: "plan",
   }),
+  loadIndustries: () => [],
 }));
 
 describe("generateStaticParams", () => {

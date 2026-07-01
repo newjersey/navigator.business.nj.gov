@@ -1,13 +1,18 @@
 import type { ReactElement } from "react";
 import PageContent from "@/components/learn/PageContent";
+import { StarterKitsPage } from "@/components/learn/StarterKitsPage";
 import type { PageItem } from "@/domain/content/types";
+import type { AppLocale } from "@/domain/i18n/locales";
 
 interface Props {
   readonly page: PageItem;
+  readonly locale: AppLocale;
 }
 
-export const PageSwitchComponent = ({ page }: Props): ReactElement => {
+export const PageSwitchComponent = ({ page, locale }: Props): ReactElement => {
   switch (page.slug) {
+    case "starter-kits":
+      return <StarterKitsPage page={page} locale={locale} />;
     default:
       return <PageContent page={page} />;
   }

@@ -107,7 +107,9 @@ const readJsonDirectory = <T>(subdir: string): T[] => {
 };
 
 export const loadIndustries = (): Industry[] =>
-  (readContentJson("industry.json") as { industries: Industry[] }).industries;
+  (readContentJson("industry.json") as { industries: Industry[] }).industries.filter(
+    (industry) => industry.isEnabled,
+  );
 
 export const loadSectors = (): Sector[] =>
   (readContentJson("sectors.json") as { sectors: Sector[] }).sectors;

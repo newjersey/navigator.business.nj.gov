@@ -469,6 +469,34 @@ export interface LearnCategoryPagesContent {
 }
 
 /**
+ * A featured industry displayed on the starter kits page.
+ */
+export interface StarterKitIndustry {
+  /** Display name of the industry. */
+  readonly name: string;
+  /** Identifier used to construct the onboarding URL. */
+  readonly id: string;
+  /** Short description shown on the industry card. */
+  readonly description: string;
+  /** Label for the card's call-to-action link. */
+  readonly ctaText: string;
+}
+
+/**
+ * Localized content for the starter kits page.
+ */
+export interface StarterKitsContent {
+  /** Heading displayed above the industry dropdown. */
+  readonly industrySelectorHeading: string;
+  /** Button label for the industry selector CTA. */
+  readonly industrySelectorCta: string;
+  /** Heading displayed above the top industries card grid. */
+  readonly topIndustriesHeading: string;
+  /** Featured industries shown as cards below the selector. */
+  readonly topIndustries: readonly StarterKitIndustry[];
+}
+
+/**
  * All localized content needed to render the learn page.
  */
 export interface LearnPageContent {
@@ -486,6 +514,8 @@ export interface LearnPageContent {
   readonly categories: readonly LearnCategory[];
   /** Shared strings used across category pages. */
   readonly categoryPages: LearnCategoryPagesContent;
+  /** Starter kits page content. */
+  readonly starterKits: StarterKitsContent;
 }
 
 /**

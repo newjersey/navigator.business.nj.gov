@@ -42,7 +42,7 @@ const ContentPage = async ({ params }: Props) => {
 
   const page = loadPageBySlug(slug);
 
-  return <PageSwitchComponent page={page} />;
+  return <PageSwitchComponent page={page} locale={locale} />;
 };
 
 export default ContentPage;

@@ -121,6 +121,21 @@ version. Pre-launch ECS deployments enable HTTP Basic Auth from the repository-l
 `BASIC_AUTH_USERNAME` variable and `BASIC_AUTH_PASSWORD` secret. Local runs leave Basic Auth
 disabled by default.
 
+## Testing
+
+Test factories in `tests/factories.ts` use a seeded PRNG for deterministic random data generation.
+A seed is generated once per test run and logged to stdout at the start:
+
+```
+[test] seed: 2503204477
+```
+
+To reproduce a specific test run, pass the seed as an environment variable:
+
+```bash
+TEST_SEED=2503204477 pnpm test
+```
+
 ## Contributing
 
 Before opening a pull request for this package, run:
