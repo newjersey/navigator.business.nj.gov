@@ -1,3 +1,12 @@
+/* Establishes a block formatting context so the search input's margins are
+   contained within the field wrapper. */
+.funding-search-field {
+  display: flow-root;
+}
+
+/* TODO: the search input was being clipped on its inline-end edge; this border
+   is a stopgap outline of that edge. Revisit the real cause (likely input
+   box-sizing/overflow within the filter aside) and remove this. */
 #funding-search {
   border-inline-end: 1px solid var(--color-base-dark);
 }

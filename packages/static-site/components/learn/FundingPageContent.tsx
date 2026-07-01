@@ -323,7 +323,7 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
       <aside className="border-1px border-base-lighter padding-3 radius-lg funding-filter-col">
         <h2>{messages.filterHeading}</h2>
 
-        <div className="margin-y-3" style={{ display: "flow-root" }}>
+        <div className="margin-y-3 funding-search-field">
           <label className="usa-label text-bold margin-bottom-1" htmlFor="funding-search">
             {messages.filterSearch}
           </label>
@@ -427,7 +427,9 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
           onRemoveQuery={removeQuery}
         />
 
-        <p className="margin-bottom-2">{resultCount}</p>
+        <p className="margin-bottom-2" role="status" aria-live="polite">
+          {resultCount}
+        </p>
 
         {pageSlice.map((funding) => (
           <FundingCard key={funding.id} funding={funding} messages={messages} query={query} />
@@ -440,7 +442,7 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
                 <button
                   type="button"
                   className="usa-pagination__link usa-pagination__previous-page"
-                  onClick={() => setCurrentPage((p) => p - 1)}
+                  onClick={() => setCurrentPage(safePage - 1)}
                   disabled={safePage === 1}
                   aria-label={messages.paginationPrevious}
                 >
@@ -472,7 +474,7 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
                 <button
                   type="button"
                   className="usa-pagination__link usa-pagination__next-page"
-                  onClick={() => setCurrentPage((p) => p + 1)}
+                  onClick={() => setCurrentPage(safePage + 1)}
                   disabled={safePage === totalPages}
                   aria-label={messages.paginationNext}
                 >

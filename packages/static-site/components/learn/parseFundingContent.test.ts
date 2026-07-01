@@ -26,7 +26,24 @@ describe("parseFundingContent", () => {
     expect(benefits).toContain("The tax credit ranges from $5,000 to $10,000.");
   });
 
-  it("returns empty strings when sections are missing", () => {
+  it("extracts the section under a non-Eligibility heading", () => {
+    const content = `## Eligible Expenses
+
+- Electric vehicles and EV charging stations
+- Program development and operation
+
+:::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" }
+
+Previous awards have ranged between $100K to $8M.
+
+:::`;
+    const { eligibility, benefits } = parseFundingContent(content);
+    expect(eligibility).toContain("Electric vehicles and EV charging stations");
+    expect(eligibility).not.toContain("Eligible Expenses");
+    expect(benefits).toContain("Previous awards have ranged between $100K to $8M.");
+  });
+
+  it("returns empty strings when there is no heading or callout", () => {
     const { eligibility, benefits } = parseFundingContent("No sections here.");
     expect(eligibility).toBe("");
     expect(benefits).toBe("");
