@@ -26,6 +26,8 @@ export interface Industry {
   readonly canHavePermanentLocation?: boolean;
   /** Ordered steps in the industry's roadmap. */
   readonly roadmapSteps: RoadmapStep[];
+  /** Indicates if this industry is enabled and should be visible to users. */
+  readonly isEnabled: boolean;
 }
 
 /** A business sector containing related industries. */
