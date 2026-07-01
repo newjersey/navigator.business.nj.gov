@@ -305,7 +305,7 @@ describe("FundingPageContent", () => {
     expect(screen.getByRole("button", { name: "Show 1 Results" })).toBeInTheDocument();
   });
 
-  it("Reset clears all pending and applied filters", async () => {
+  it("Reset clears all pending, applied, and search filters", async () => {
     const user = userEvent.setup();
     const fundings = [
       makeFunding("Grant A", { fundingType: "grant" }),
@@ -317,13 +317,16 @@ describe("FundingPageContent", () => {
 
     await user.click(screen.getByLabelText("Grant"));
     await user.click(screen.getByRole("button", { name: "Show 1 Results" }));
+    await user.type(screen.getByRole("searchbox"), "grant");
     expect(screen.queryByText("Loan B")).not.toBeInTheDocument();
+    expect(screen.getByText('Search: "grant"')).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: "Reset" }));
 
     expect(screen.getByText("Loan B")).toBeInTheDocument();
     expect(screen.queryByText("Filtering by:")).not.toBeInTheDocument();
     expect((screen.getByLabelText("Grant") as HTMLInputElement).checked).toBe(false);
+    expect((screen.getByRole("searchbox") as HTMLInputElement).value).toBe("");
   });
 
   it("Clear inside the Industry fieldset clears pending only, not applied", async () => {

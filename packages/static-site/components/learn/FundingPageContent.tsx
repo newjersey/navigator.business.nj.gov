@@ -301,6 +301,7 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
     setPendingIndustries(new Set());
     setPendingFundingTypes(new Set());
     setApplied({ industries: new Set(), fundingTypes: new Set() });
+    setQuery("");
     setCurrentPage(1);
   };
 
