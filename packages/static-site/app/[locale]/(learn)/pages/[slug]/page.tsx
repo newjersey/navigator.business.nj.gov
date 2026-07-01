@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import PageContent from "@/components/learn/PageContent";
+import { PageSwitchComponent } from "@/components/learn/PageSwitchComponent";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
 import { loadPageBySlug } from "@/domain/content/loadContent";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
@@ -42,7 +42,7 @@ const ContentPage = async ({ params }: Props) => {
 
   const page = loadPageBySlug(slug);
 
-  return <PageContent page={page} />;
+  return <PageSwitchComponent page={page} locale={locale} />;
 };
 
 export default ContentPage;

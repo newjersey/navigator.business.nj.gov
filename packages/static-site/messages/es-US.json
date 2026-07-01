@@ -591,5 +591,37 @@
         }
       }
     ]
+  },
+  "funding": {
+    "title": "Financiamiento",
+    "ctaHeading": "Encuentre el financiamiento adecuado para su negocio",
+    "ctaBody": "Responda solo unas pocas preguntas y encontraremos programas para los que podría ser elegible.",
+    "ctaButton": "Crear cuenta",
+    "filterHeading": "Filtrar todas las opciones de financiamiento",
+    "filterSearch": "Buscar",
+    "filterIndustry": "Industria",
+    "filterFundingType": "Tipo de financiamiento",
+    "fundingTypeLabels": {
+      "grant": "Subvención",
+      "loan": "Préstamo",
+      "tax credit": "Crédito fiscal",
+      "tax exemption": "Exención fiscal",
+      "technical assistance": "Asistencia técnica",
+      "hiring and employee training support": "Apoyo para contratación y capacitación de empleados"
+    },
+    "filterClear": "Borrar",
+    "filterShowResults": "Mostrar {count} resultados",
+    "filterReset": "Restablecer",
+    "resultCount": "Mostrando <bold>{filtered}</bold> resultados de {total} elementos",
+    "filteringByLabel": "Filtrando por:",
+    "filterSearchChip": "Búsqueda: \"{query}\"",
+    "filterRemoveLabel": "Quitar el filtro {filter}",
+    "paginationPrevious": "Anterior",
+    "paginationNext": "Siguiente",
+    "paginationLabel": "Paginación",
+    "paginationPageLabel": "Página {page}",
+    "cardDueLabel": "Fecha límite:",
+    "cardEligibilityHeading": "Elegibilidad",
+    "cardBenefitsHeading": "Beneficios"
   }
 }

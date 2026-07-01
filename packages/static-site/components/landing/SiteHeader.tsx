@@ -35,7 +35,7 @@ export const SiteHeader = ({ content, languageSwitcher }: SiteHeaderProps) => {
       />
       <header className="usa-header usa-header--extended">
         <nav aria-label={content.primaryNavigationAriaLabel} className="usa-nav">
-          <div className="usa-nav__inner">
+          <div className="usa-nav__inner border-bottom-1px border-base-lighter">
             <HeaderPrimaryNav header={content} />
             <HeaderSecondaryNav header={content} />
             <div className="usa-nav__secondary nj-inset-inline-end-2">

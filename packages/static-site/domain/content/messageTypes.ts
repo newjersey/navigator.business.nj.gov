@@ -5,6 +5,8 @@
  * and rendered UI sections.
  */
 
+import type { FundingType } from "./types";
+
 /**
  * A localized link used by landing-page components.
  */
@@ -489,6 +491,58 @@ export interface LearnPageContent {
 }
 
 /**
+ * Localized content for the funding page.
+ */
+export interface FundingPageMessages {
+  /** Page H1 title. */
+  readonly title: string;
+  /** Heading inside the "Find Funding Fit" CTA box. */
+  readonly ctaHeading: string;
+  /** Body text inside the "Find Funding Fit" CTA box. */
+  readonly ctaBody: string;
+  /** Label for the "Create Account" CTA button. */
+  readonly ctaButton: string;
+  /** Heading for the filter sidebar. */
+  readonly filterHeading: string;
+  /** Label for the search input. */
+  readonly filterSearch: string;
+  /** Label for the industry filter group. */
+  readonly filterIndustry: string;
+  /** Label for the funding type filter group. */
+  readonly filterFundingType: string;
+  /** Display labels for each funding type, keyed by its content value. */
+  readonly fundingTypeLabels: Record<FundingType, string>;
+  /** Label for the "Clear" button inside each filter fieldset. */
+  readonly filterClear: string;
+  /** Label for the "Show Results" button; {count} is replaced at runtime. */
+  readonly filterShowResults: string;
+  /** Label for the "Reset" button. */
+  readonly filterReset: string;
+  /** Result count line; {filtered} (wrapped in <bold>) and {total} are substituted at runtime via t.rich. */
+  readonly resultCount: string;
+  /** Label preceding the filter chips ("Filtering by:"). */
+  readonly filteringByLabel: string;
+  /** Chip label for the active search query; {query} is replaced at runtime. */
+  readonly filterSearchChip: string;
+  /** aria-label template for chip remove buttons; {filter} is replaced at runtime. */
+  readonly filterRemoveLabel: string;
+  /** Label for pagination "Previous" control. */
+  readonly paginationPrevious: string;
+  /** Label for pagination "Next" control. */
+  readonly paginationNext: string;
+  /** aria-label for the pagination navigation landmark. */
+  readonly paginationLabel: string;
+  /** aria-label template for a numbered page button; {page} is replaced at runtime. */
+  readonly paginationPageLabel: string;
+  /** Prefix label for a funding's due date on the card. */
+  readonly cardDueLabel: string;
+  /** Heading for the eligibility section on a funding card. */
+  readonly cardEligibilityHeading: string;
+  /** Heading for the benefits callout on a funding card. */
+  readonly cardBenefitsHeading: string;
+}
+
+/**
  * Complete localized message payload for one locale.
  */
 export interface ApplicationMessages {
@@ -500,4 +554,6 @@ export interface ApplicationMessages {
   readonly landing: LandingPageContent;
   /** Learn page content strings and links. */
   readonly learn: LearnPageContent;
+  /** Funding page content strings. */
+  readonly funding: FundingPageMessages;
 }

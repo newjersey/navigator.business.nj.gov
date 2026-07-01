@@ -5,6 +5,8 @@
   --color-base-dark: #565c65; /* USWDS base-dark / gray-cool-60 */
   --color-base-lightest: #f0f0f0; /* USWDS base-lightest / gray-5 */
   --color-ink: #1b1b1b; /* USWDS ink / gray-90 */
+  --color-primary: #005ea2; /* Note: this primary, per designs, contracts the NJWDS "primary" */
+  --color-primary-lighter: #cfe8ff;
   --color-primary-dark: #2c608a; /* NJ primary dark blue; USWDS primary-dark (NJ override) */
   --color-accent-cool-darkest: #38536f; /* NJ-specific; no exact USWDS palette match */
 }
@@ -29,6 +31,31 @@ p a,
 body {
   margin: 0;
   min-height: 100vh;
+}
+
+.grid-container:has(.layout-wide) {
+  max-width: 90rem;
+}
+
+/*
+ * Wide pages need more room for content (e.g. a right-rail filter), so the
+ * side-nav gives up space: 4/8 becomes 3/9. Gated at 64em — narrower than
+ * that, the three-column inner layout doesn't have room to breathe and the
+ * site side-nav gets squeezed. Overridden in CSS rather than conditionally
+ * in `(learn)/layout.tsx` because the layout can't see which child route
+ * is rendering.
+ */
+@media (min-width: 64em) {
+  .grid-row:has(.layout-wide) > .tablet\:grid-col-4 {
+    width: 25%;
+  }
+  .grid-row:has(.layout-wide) > .tablet\:grid-col-8 {
+    width: 75%;
+  }
+}
+
+.usa-nav__inner {
+  max-width: 80rem !important;
 }
 
 .grid-container p {
@@ -58,6 +85,23 @@ body {
   margin-top: 0;
 }
 
+.usa-pagination .usa-current {
+  text-decoration: none;
+}
+
+.usa-pagination .usa-pagination__button:not(.usa-current) {
+  background-color: white;
+  text-decoration: underline;
+}
+
+.usa-pagination__previous-page,
+.usa-pagination__next-page {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
 .usa-header--extended .usa-nav__secondary-links a,
 .usa-header--extended .usa-nav__secondary-links a:visited {
   color: var(--color-base-lighter);
@@ -73,7 +117,7 @@ ul.usa-card-group {
 }
 
 div.usa-card__container {
-  margin-inline: 0.75rem;
+  margin-inline: 0;
 }
 
 @media (min-width: 40em) {
