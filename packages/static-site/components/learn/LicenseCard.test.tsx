@@ -45,6 +45,39 @@ describe("LicenseCard", () => {
     expect(screen.queryByRole("link", { name: /Apply/ })).not.toBeInTheDocument();
   });
 
+  it("highlights a query match in the summary body", () => {
+    const { container } = renderCard({
+      license: license({ summaryDescriptionMd: "You need a license to transport waste." }),
+      query: "transport",
+    });
+    const marks = container.querySelectorAll("mark.funding-search-highlight");
+    expect([...marks].some((m) => m.textContent === "transport")).toBe(true);
+  });
+
+  it("renders no highlight marks in the body when no query is given", () => {
+    const { container } = renderCard({
+      license: license({ summaryDescriptionMd: "You need a license to transport waste." }),
+    });
+    expect(container.querySelector(".usa-card__body mark.funding-search-highlight")).toBeNull();
+  });
+
+  it("unwraps CMS directives in the summary instead of showing raw ::: fences", () => {
+    renderCard({
+      license: license({
+        summaryDescriptionMd: [
+          ":::infoAlert",
+          "**Keep in mind:** the A-901 process takes 14 to 16 months.",
+          ":::",
+          "",
+          "You need an A-901 license to transport waste.",
+        ].join("\n"),
+      }),
+    });
+    expect(screen.queryByText(/:::/)).not.toBeInTheDocument();
+    expect(screen.getByText(/the A-901 process takes 14 to 16 months/)).toBeInTheDocument();
+    expect(screen.getByText(/You need an A-901 license to transport waste/)).toBeInTheDocument();
+  });
+
   it("does not render a leading separator when industry has no classification", () => {
     renderCard({
       license: license({ licenseCertificationClassification: undefined, industry: "Credit Union" }),
