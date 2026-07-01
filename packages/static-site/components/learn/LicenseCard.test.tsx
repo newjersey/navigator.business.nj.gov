@@ -40,6 +40,13 @@ describe("LicenseCard", () => {
     expect(cta).toHaveAttribute("href", "https://example.com");
   });
 
+  it("prefixes agency with the account_balance icon and phone with the phone icon", () => {
+    const { container } = renderCard();
+    const hrefs = [...container.querySelectorAll("use")].map((u) => u.getAttribute("href"));
+    expect(hrefs).toContain("/assets/njwds/dist/img/sprite.svg#account_balance");
+    expect(hrefs).toContain("/assets/njwds/dist/img/sprite.svg#phone");
+  });
+
   it("maps webflowType to its 'Who it's for' display label", () => {
     const { container } = renderCard({ license: license({ webflowType: "individual-license" }) });
     expect(screen.getByText(/Who it's for:/)).toBeInTheDocument();
@@ -74,6 +81,14 @@ describe("LicenseCard", () => {
   it("omits the CTA when no link is present", () => {
     renderCard({ license: license({ callToActionLink: undefined }) });
     expect(screen.queryByRole("link", { name: /Apply/ })).not.toBeInTheDocument();
+  });
+
+  it("renders a base-light divider between the card header and body", () => {
+    const { container } = renderCard();
+    const divider = container.querySelector("hr.border-base-light");
+    expect(divider).not.toBeNull();
+    expect(divider?.previousElementSibling?.classList.contains("usa-card__header")).toBe(true);
+    expect(divider?.nextElementSibling?.classList.contains("usa-card__body")).toBe(true);
   });
 
   it("highlights a query match in the summary body", () => {

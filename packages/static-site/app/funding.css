@@ -81,3 +81,11 @@
   color: white;
   background-color: var(--color-primary);
 }
+
+/* Keeps a leading inline icon from shrinking in a flex row and aligns it with
+   the cap height of the first text line (the 1em icon otherwise sits slightly
+   above the text top). */
+.nj-icon-text-top {
+  flex-shrink: 0;
+  margin-top: 0.2em;
+}

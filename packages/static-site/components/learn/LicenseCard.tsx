@@ -1,4 +1,5 @@
 import Markdown from "react-markdown";
+import { Icon } from "@/components/Icon";
 import type { LicensingGuidePageMessages } from "@/domain/content/messageTypes";
 import type { License } from "@/domain/content/types";
 import { HighlightedText, makeHighlightPlugin } from "./highlightMatches";
@@ -48,31 +49,50 @@ const LicenseCard = ({ license, messages, query = "" }: Props) => {
           </p>
         )}
       </div>
+      <hr className="border-base-light border-top-1px margin-x-3 margin-y-1" />
       <div className="usa-card__body">
         {license.summaryDescriptionMd && (
           <Markdown rehypePlugins={rehypePlugins}>
             {stripContentDirectives(license.summaryDescriptionMd)}
           </Markdown>
         )}
-        {license.agency && (
-          <p className="margin-bottom-1">
-            <strong>{messages.cardAgencyLabel}</strong> {license.agency}
-            {license.division ? `, ${license.division}` : ""}
+        {license.summaryDescriptionMd && (license.agency || license.divisionPhone) && (
+          <hr className="border-base-light border-top-1px margin-x-0 margin-y-1" />
+        )}
+        {(license.agency || license.division) && (
+          <p className="margin-bottom-1 display-flex flex-align-start">
+            <Icon
+              iconName="account_balance"
+              className="text-primary nj-margin-inline-end-05 nj-icon-text-top"
+            />
+            <span>
+              <strong>{messages.cardAgencyLabel}</strong> {license.agency || license.division}
+            </span>
           </p>
         )}
         {license.divisionPhone && (
-          <p className="margin-bottom-0">
-            <strong>{messages.cardPhoneLabel}</strong> {license.divisionPhone}
+          <p className="margin-bottom-0 display-flex flex-align-start">
+            <Icon
+              iconName="phone"
+              className="text-primary nj-margin-inline-end-05 nj-icon-text-top"
+            />
+            <span>
+              <strong>{messages.cardPhoneLabel}</strong> {license.divisionPhone}
+            </span>
           </p>
         )}
       </div>
-      {license.callToActionLink && (
-        <div className="usa-card__footer">
-          <a href={license.callToActionLink} className="usa-button">
-            {license.callToActionText ?? license.callToActionLink}
-          </a>
-        </div>
-      )}
+      {license.callToActionLink &&
+        (license.summaryDescriptionMd || license.agency || license.divisionPhone) && (
+          <>
+            <hr className="border-base-light border-top-1px margin-x-3 margin-y-1" />
+            <div className="usa-card__footer">
+              <a href={license.callToActionLink} className="usa-button">
+                {license.callToActionText ?? license.callToActionLink}
+              </a>
+            </div>
+          </>
+        )}
     </div>
   );
 };

@@ -29,6 +29,7 @@ const FundingCard = ({ funding, messages, query = "" }: Props) => {
           )}
         </div>
       </div>
+      <hr className="border-base-light border-top-1px margin-x-3 margin-y-1" />
       <div className="usa-card__body">
         {funding.dueDate && (
           <p className="text-base margin-bottom-1">
