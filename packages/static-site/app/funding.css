@@ -4,9 +4,11 @@
   display: flow-root;
 }
 
-/* TODO: the search input was being clipped on its inline-end edge; this border
-   is a stopgap outline of that edge. Revisit the real cause (likely input
-   box-sizing/overflow within the filter aside) and remove this. */
+/* USWDS's [type="search"] reset drops the input's inline-end border because it
+   assumes a search field sits flush against an attached submit button that
+   covers that edge. This is a standalone search field with no button, so its
+   right side looked open ("cut off"); restore the border to match the other
+   three sides. */
 #funding-search {
   border-inline-end: 1px solid var(--color-base-dark);
 }
