@@ -1,10 +1,7 @@
-import type { Element, ElementContent, Parents, Root, Text } from "hast";
 import Markdown from "react-markdown";
-import type { Node } from "unist";
-import { visitParents } from "unist-util-visit-parents";
 import type { FundingPageMessages } from "@/domain/content/messageTypes";
 import type { Funding } from "@/domain/content/types";
-import { HighlightedText, splitHighlight } from "./highlightMatches";
+import { HighlightedText, makeHighlightPlugin } from "./highlightMatches";
 import { parseFundingContent } from "./parseFundingContent";
 
 interface Props {
@@ -12,29 +9,6 @@ interface Props {
   readonly messages: FundingPageMessages;
   readonly query?: string;
 }
-
-const makeHighlightPlugin = (query: string) => () => (tree: Root) => {
-  visitParents(tree as Node, "text", (node: Text, ancestors) => {
-    const parent = ancestors.at(-1) as Parents | undefined;
-    if (parent === undefined) return;
-    const index = parent.children.indexOf(node);
-    const segments = splitHighlight(node.value, query);
-    if (segments.length === 1 && !segments[0].match) return;
-
-    const replacement: ElementContent[] = segments.map((seg) =>
-      seg.match
-        ? {
-            type: "element",
-            tagName: "mark",
-            properties: { className: ["funding-search-highlight"] },
-            children: [{ type: "text", value: seg.text }],
-          }
-        : { type: "text", value: seg.text },
-    );
-
-    (parent as Element).children.splice(index, 1, ...replacement);
-  });
-};
 
 const FundingCard = ({ funding, messages, query = "" }: Props) => {
   const { eligibility, benefits } = parseFundingContent(funding.contentMd ?? "");
@@ -55,6 +29,7 @@ const FundingCard = ({ funding, messages, query = "" }: Props) => {
           )}
         </div>
       </div>
+      <hr className="border-base-light border-top-1px margin-x-3 margin-y-1" />
       <div className="usa-card__body">
         {funding.dueDate && (
           <p className="text-base margin-bottom-1">

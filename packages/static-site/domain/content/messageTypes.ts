@@ -518,8 +518,12 @@ export interface FundingPageMessages {
   readonly filterShowResults: string;
   /** Label for the "Reset" button. */
   readonly filterReset: string;
-  /** Result count line; {filtered} (wrapped in <bold>) and {total} are substituted at runtime via t.rich. */
-  readonly resultCount: string;
+  /** Unfiltered result-count line; {start}, {end} (range wrapped in <bold>), and {total}. */
+  readonly resultCountShowing: string;
+  /** Filtered result-count line; {start}, {end} (range wrapped in <bold>), {filtered}, and {total}. */
+  readonly resultCountFiltered: string;
+  /** Result-count line when the filtered set is empty; {total}. */
+  readonly resultCountFilteredEmpty: string;
   /** Label preceding the filter chips ("Filtering by:"). */
   readonly filteringByLabel: string;
   /** Chip label for the active search query; {query} is replaced at runtime. */
@@ -543,6 +547,56 @@ export interface FundingPageMessages {
 }
 
 /**
+ * Localized content for the Licensing and Certification Guide page.
+ */
+export interface LicensingGuidePageMessages {
+  /** Page H1 title. */
+  readonly title: string;
+  /** Heading inside the CTA box. */
+  readonly ctaHeading: string;
+  /** Body text inside the CTA box. */
+  readonly ctaBody: string;
+  /** Label for the CTA button. */
+  readonly ctaButton: string;
+  /** Heading for the filter sidebar. */
+  readonly filterHeading: string;
+  /** Label for the search input. */
+  readonly filterSearch: string;
+  /** Label for the "Show Results" button; {count} is replaced at runtime. */
+  readonly filterShowResults: string;
+  /** Label for the "Reset" button. */
+  readonly filterReset: string;
+  /** Unfiltered result-count line; {start}, {end} (range wrapped in <bold>), and {total}. */
+  readonly resultCountShowing: string;
+  /** Filtered result-count line; {start}, {end} (range wrapped in <bold>), {filtered}, and {total}. */
+  readonly resultCountFiltered: string;
+  /** Result-count line when the filtered set is empty; {total}. */
+  readonly resultCountFilteredEmpty: string;
+  /** Label preceding the filter chips ("Filtering by:"). */
+  readonly filteringByLabel: string;
+  /** Chip label for the active search query; {query} is replaced at runtime. */
+  readonly filterSearchChip: string;
+  /** aria-label template for chip remove buttons; {filter} is replaced at runtime. */
+  readonly filterRemoveLabel: string;
+  /** Label for pagination "Previous" control. */
+  readonly paginationPrevious: string;
+  /** Label for pagination "Next" control. */
+  readonly paginationNext: string;
+  /** aria-label for the pagination navigation landmark. */
+  readonly paginationLabel: string;
+  /** aria-label template for a numbered page button; {page} is replaced at runtime. */
+  readonly paginationPageLabel: string;
+  /** Prefix label for the "Who it's for" field on a license card. */
+  readonly cardWhoForLabel: string;
+  /** Prefix label for the industry field on a license card. */
+  readonly cardIndustryLabel: string;
+  /** Prefix label for the agency field on a license card. */
+  readonly cardAgencyLabel: string;
+  /** Prefix label for the phone field on a license card. */
+  readonly cardPhoneLabel: string;
+}
+
+/**
  * Complete localized message payload for one locale.
  */
 export interface ApplicationMessages {
@@ -556,4 +610,6 @@ export interface ApplicationMessages {
   readonly learn: LearnPageContent;
   /** Funding page content strings. */
   readonly funding: FundingPageMessages;
+  /** Licensing & Certification Guide page content strings. */
+  readonly licensingGuide: LicensingGuidePageMessages;
 }

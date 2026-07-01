@@ -1,5 +1,21 @@
-#funding-search {
+/* NJWDS strips the inline-end border off `[type="search"]` inputs because its
+   search pattern seams the field against an attached button. Our filter search
+   fields stand alone, so restore the border to close the box.
+
+   `.usa-input` also caps width at 30rem, which leaves the search field short of
+   the filter aside on single-column widths; drop the cap so it fills the aside
+   like the checkbox rows do. */
+.funding-filter-col .usa-input[type="search"] {
   border-inline-end: 1px solid var(--color-base-dark);
+  max-width: none;
+}
+
+/* `.usa-legend` shares the same 30rem cap, which would leave each filter
+   group's "Clear" button short of the aside edge that the search input,
+   dividers, and checkbox rows all fill. Drop the cap so the legend row spans
+   the full width and the Clear buttons align with everything else. */
+.funding-filter-col .usa-legend {
+  max-width: none;
 }
 
 .funding-layout {
@@ -10,7 +26,11 @@
 @media (min-width: 64em) {
   .funding-layout {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    /* `minmax(0, …)` lets the tracks shrink below their content's min-content,
+       so a wide grid item (e.g. a long card or the filter list) can't force a
+       column past its fraction and overflow the layout at narrow desktop
+       widths. */
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     grid-template-areas:
       "header filter"
       "results filter";
@@ -80,4 +100,12 @@
 .funding-search-highlight {
   color: white;
   background-color: var(--color-primary);
+}
+
+/* Keeps a leading inline icon from shrinking in a flex row and aligns it with
+   the cap height of the first text line (the 1em icon otherwise sits slightly
+   above the text top). */
+.nj-icon-text-top {
+  flex-shrink: 0;
+  margin-top: 0.2em;
 }

@@ -15,6 +15,7 @@ export type {
   FundingStatus,
   FundingType,
   Industry,
+  License,
   LicenseEventType,
   RoadmapStep,
   Sector,
