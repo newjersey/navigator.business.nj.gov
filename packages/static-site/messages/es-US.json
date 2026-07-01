@@ -623,5 +623,27 @@
     "cardDueLabel": "Fecha límite:",
     "cardEligibilityHeading": "Elegibilidad",
     "cardBenefitsHeading": "Beneficios"
+  },
+  "licensingGuide": {
+    "title": "Guía de Licencias y Certificaciones",
+    "ctaHeading": "¡Obtenga su Guía de Registro!",
+    "ctaBody": "¡Comience su negocio en Nueva Jersey o fuera del estado hoy!",
+    "ctaButton": "Comenzar",
+    "filterHeading": "Acotar Resultados",
+    "filterSearch": "Buscar",
+    "filterShowResults": "Mostrar {count} resultados",
+    "filterReset": "Restablecer",
+    "resultCount": "Mostrando <bold>{filtered}</bold> resultados de {total} elementos",
+    "filteringByLabel": "Filtrando por:",
+    "filterSearchChip": "Búsqueda: \"{query}\"",
+    "filterRemoveLabel": "Quitar el filtro {filter}",
+    "paginationPrevious": "Anterior",
+    "paginationNext": "Siguiente",
+    "paginationLabel": "Paginación",
+    "paginationPageLabel": "Página {page}",
+    "cardWhoForLabel": "Para quién es:",
+    "cardIndustryLabel": "Industria:",
+    "cardAgencyLabel": "Agencia:",
+    "cardPhoneLabel": "Teléfono:"
   }
 }

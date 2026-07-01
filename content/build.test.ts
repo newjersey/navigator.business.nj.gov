@@ -723,7 +723,7 @@ describe("toLicenseCard", () => {
   it("resolves industry, falling back to webflowIndustry, and maps agency fields", () => {
     const [first] = loadAllLicenses();
     const card = toLicenseCard(first);
-    expect(card.name).toBe(first.name ?? first.webflowName ?? "");
+    expect(card.name).toBe(first.name || first.webflowName || "");
     expect(card.urlSlug).toBe(first.urlSlug);
     // industry present either via industryId or webflowIndustry
     expect(typeof card.industry === "string" || card.industry === undefined).toBe(true);
@@ -742,5 +742,20 @@ describe("toLicenseCard", () => {
       contentMd: "",
     });
     expect(card.name).toBe("Adoption Agency");
+  });
+
+  it("falls back to webflowName when name is an empty string (not just missing)", () => {
+    // e.g. veterinarian.md has `name: ""` with a real webflowName — `??` would
+    // keep the empty string and produce a blank (a11y empty-heading) title.
+    const card = toLicenseCard({
+      id: "veterinarian",
+      filename: "veterinarian",
+      urlSlug: "veterinarian",
+      name: "",
+      webflowName: "Veterinarian",
+      licenseCertificationClassification: "REGISTRATION/LICENSE",
+      contentMd: "",
+    });
+    expect(card.name).toBe("Veterinarian");
   });
 });

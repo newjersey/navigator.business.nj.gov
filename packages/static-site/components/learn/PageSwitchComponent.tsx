@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { FundingPage } from "@/components/learn/FundingPage";
+import { LicensingGuidePage } from "@/components/learn/LicensingGuidePage";
 import PageContent from "@/components/learn/PageContent";
 import type { PageItem } from "@/domain/content/types";
 import type { AppLocale } from "@/domain/i18n/locales";
@@ -13,6 +14,8 @@ export const PageSwitchComponent = ({ page, locale }: Props): ReactElement => {
   switch (page.slug) {
     case "funding":
       return <FundingPage page={page} locale={locale} />;
+    case "licensing-and-certification-guide":
+      return <LicensingGuidePage page={page} locale={locale} />;
     default:
       return <PageContent page={page} />;
   }

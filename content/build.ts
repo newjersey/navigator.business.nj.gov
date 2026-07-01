@@ -111,7 +111,9 @@ export interface FileSystemPort {
  * Resolves agencyId → agency name and industryId → industry name, falling back to webflowIndustry.
  */
 export const toLicenseCard = (license: WebflowLicenseCard): License => ({
-  name: license.name ?? license.webflowName ?? "",
+  // Some source files carry an empty `name:` (not missing), so use truthiness
+  // rather than `??` to fall back to webflowName and avoid blank card titles.
+  name: license.name || license.webflowName || "",
   urlSlug: license.urlSlug,
   webflowId: license.webflowId,
   webflowName: license.webflowName,
