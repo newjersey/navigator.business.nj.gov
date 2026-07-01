@@ -4,6 +4,7 @@ import { Fragment, type ReactNode, useMemo, useState } from "react";
 import type { FundingPageMessages } from "@/domain/content/messageTypes";
 import type { Funding, FundingType, PageItem, Sector } from "@/domain/content/types";
 import FundingCard from "./FundingCard";
+import Pagination from "./Pagination";
 import { parseFundingContent } from "./parseFundingContent";
 
 const ITEMS_PER_PAGE = 10;
@@ -202,7 +203,6 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
   );
 
   const totalPages = Math.max(1, Math.ceil(filteredFundings.length / ITEMS_PER_PAGE));
-  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
   const safePage = Math.min(currentPage, totalPages);
   const pageSlice = filteredFundings.slice(
     (safePage - 1) * ITEMS_PER_PAGE,
@@ -432,58 +432,12 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
           <FundingCard key={funding.id} funding={funding} messages={messages} query={query} />
         ))}
 
-        {totalPages > 1 && (
-          <nav aria-label={messages.paginationLabel} className="usa-pagination">
-            <ul className="usa-pagination__list">
-              <li className="usa-pagination__item usa-pagination__arrow">
-                <button
-                  type="button"
-                  className="usa-pagination__link usa-pagination__previous-page"
-                  onClick={() => setCurrentPage((p) => p - 1)}
-                  disabled={safePage === 1}
-                  aria-label={messages.paginationPrevious}
-                >
-                  <svg className="usa-icon" aria-hidden="true" focusable="false" role="img">
-                    <use href="/assets/njwds/dist/img/sprite.svg#navigate_before" />
-                  </svg>
-                  <span className="usa-pagination__link-text">{messages.paginationPrevious}</span>
-                </button>
-              </li>
-              {pageNumbers.map((pageNumber) => (
-                <li
-                  key={`page-${pageNumber}`}
-                  className="usa-pagination__item usa-pagination__page-no"
-                >
-                  <button
-                    type="button"
-                    className={`usa-pagination__button${
-                      safePage === pageNumber ? " usa-current" : ""
-                    }`}
-                    onClick={() => setCurrentPage(pageNumber)}
-                    aria-label={messages.paginationPageLabel.replace("{page}", String(pageNumber))}
-                    aria-current={safePage === pageNumber ? "page" : undefined}
-                  >
-                    {pageNumber}
-                  </button>
-                </li>
-              ))}
-              <li className="usa-pagination__item usa-pagination__arrow">
-                <button
-                  type="button"
-                  className="usa-pagination__link usa-pagination__next-page"
-                  onClick={() => setCurrentPage((p) => p + 1)}
-                  disabled={safePage === totalPages}
-                  aria-label={messages.paginationNext}
-                >
-                  <span className="usa-pagination__link-text">{messages.paginationNext}</span>
-                  <svg className="usa-icon" aria-hidden="true" focusable="false" role="img">
-                    <use href="/assets/njwds/dist/img/sprite.svg#navigate_next" />
-                  </svg>
-                </button>
-              </li>
-            </ul>
-          </nav>
-        )}
+        <Pagination
+          messages={messages}
+          currentPage={safePage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </div>
   );
