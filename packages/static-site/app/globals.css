@@ -53,7 +53,14 @@ body {
   }
 }
 
-.usa-nav__inner {
+/*
+ * Widen the header to line up with the wider content on `.layout-wide` pages.
+ * The header (`.usa-nav__inner`) is a sibling of `<main>` — not an ancestor of
+ * `.layout-wide` — so it's scoped via `body:has(.layout-wide)` rather than the
+ * `.grid-container`/`.grid-row` scoping used for the in-page columns above.
+ * `!important` overrides the USWDS-compiled `.usa-nav__inner` max-width.
+ */
+body:has(.layout-wide) .usa-nav__inner {
   max-width: 80rem !important;
 }
 
@@ -117,6 +124,13 @@ ul.usa-card-group {
 
 div.usa-card__container {
   margin-inline: 0;
+}
+
+/* The header's full-width bottom border already divides the header from the
+   content below it. Drop the side-nav's own bottom border so it doesn't stack
+   a second, near-parallel hairline just under that rule. */
+.learn-side-nav .usa-sidenav {
+  border-bottom: none;
 }
 
 @media (min-width: 40em) {
