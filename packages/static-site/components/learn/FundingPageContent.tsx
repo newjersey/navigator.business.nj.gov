@@ -6,6 +6,7 @@ import type { Funding, FundingType, PageItem, Sector } from "@/domain/content/ty
 import FundingCard from "./FundingCard";
 import Pagination from "./Pagination";
 import { parseFundingContent } from "./parseFundingContent";
+import { usePaginatedScroll } from "./usePaginatedScroll";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -171,6 +172,7 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
     fundingTypes: new Set(),
   });
   const [query, setQuery] = useState("");
+  const { resultsRef, handlePageChange } = usePaginatedScroll(setCurrentPage);
 
   const searchableEntries = useMemo(
     () => fundings.map((funding) => ({ funding, searchableText: fundingSearchableText(funding) })),
@@ -415,7 +417,12 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
         </div>
       </aside>
 
-      <div className="funding-results-col">
+      <section
+        ref={resultsRef}
+        tabIndex={-1}
+        aria-label={messages.title}
+        className="funding-results-col"
+      >
         <FilteringByBar
           messages={messages}
           sectors={sectors}
@@ -436,9 +443,9 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
           messages={messages}
           currentPage={safePage}
           totalPages={totalPages}
-          onPageChange={setCurrentPage}
+          onPageChange={handlePageChange}
         />
-      </div>
+      </section>
     </div>
   );
 };

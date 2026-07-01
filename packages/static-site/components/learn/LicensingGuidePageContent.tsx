@@ -5,6 +5,7 @@ import type { LicensingGuidePageMessages } from "@/domain/content/messageTypes";
 import type { License, PageItem } from "@/domain/content/types";
 import LicenseCard from "./LicenseCard";
 import Pagination from "./Pagination";
+import { usePaginatedScroll } from "./usePaginatedScroll";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -67,6 +68,7 @@ const searchableText = (license: License): string =>
 const LicensingGuidePageContent = ({ messages, page, licenses }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
+  const { resultsRef, handlePageChange } = usePaginatedScroll(setCurrentPage);
 
   const entries = useMemo(
     () => licenses.map((license) => ({ license, text: searchableText(license) })),
@@ -154,7 +156,12 @@ const LicensingGuidePageContent = ({ messages, page, licenses }: Props) => {
         </div>
       </aside>
 
-      <div className="funding-results-col">
+      <section
+        ref={resultsRef}
+        tabIndex={-1}
+        aria-label={messages.title}
+        className="funding-results-col"
+      >
         {query.trim() !== "" && (
           <section
             aria-label={messages.filteringByLabel}
@@ -182,9 +189,9 @@ const LicensingGuidePageContent = ({ messages, page, licenses }: Props) => {
           messages={messages}
           currentPage={safePage}
           totalPages={totalPages}
-          onPageChange={setCurrentPage}
+          onPageChange={handlePageChange}
         />
-      </div>
+      </section>
     </div>
   );
 };
