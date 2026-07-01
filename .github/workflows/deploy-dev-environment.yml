@@ -126,7 +126,7 @@ jobs:
         "${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }},${{ secrets.COGNITO_IDENTITY_POOL_ID_TESTING
         }},${{ secrets.COGNITO_IDENTITY_POOL_ID_CONTENT }}"
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
       - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc

@@ -18,13 +18,13 @@ jobs:
           app-id: "2454947"
           private-key: ${{ secrets.OOI_PULL_REQUEST_APP }}
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           repository: newjersey/innovation-shared-actions
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           path: self
 
