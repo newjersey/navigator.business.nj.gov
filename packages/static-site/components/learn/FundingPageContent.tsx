@@ -1,44 +1,18 @@
 "use client";
 
-import { Fragment, type ReactNode, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { FundingPageMessages } from "@/domain/content/messageTypes";
 import type { Funding, FundingType, PageItem, Sector } from "@/domain/content/types";
 import FundingCard from "./FundingCard";
 import Pagination from "./Pagination";
 import { parseFundingContent } from "./parseFundingContent";
+import { renderResultCount } from "./renderResultCount";
 import { usePaginatedScroll } from "./usePaginatedScroll";
 
 const ITEMS_PER_PAGE = 10;
 
 const fundingTypes = (messages: FundingPageMessages): readonly FundingType[] =>
   Object.keys(messages.fundingTypeLabels) as FundingType[];
-
-interface ResultCountParams {
-  readonly template: string;
-  readonly filtered: number;
-  readonly total: number;
-}
-
-/**
- * Renders the result-count template, substituting `{total}` as text and the
- * `<bold>…</bold>`-wrapped `{filtered}` count as a `<strong>` element. Keeping
- * the whole sentence in one message (rather than splitting it in the component)
- * lets translators control word order around the bolded count.
- */
-const renderResultCount = ({ template, filtered, total }: ResultCountParams): ReactNode => {
-  const withTotal = template.replace("{total}", String(total));
-  return withTotal.split(/(<bold>.*?<\/bold>)/).map((part, index) => {
-    const boldMatch = part.match(/^<bold>(.*?)<\/bold>$/);
-    if (boldMatch === null) {
-      // biome-ignore lint/suspicious/noArrayIndexKey: segments are positional and stable per render
-      return <Fragment key={index}>{part}</Fragment>;
-    }
-    return (
-      // biome-ignore lint/suspicious/noArrayIndexKey: segments are positional and stable per render
-      <strong key={index}>{boldMatch[1].replace("{filtered}", String(filtered))}</strong>
-    );
-  });
-};
 
 interface Props {
   readonly messages: FundingPageMessages;
@@ -206,15 +180,16 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
 
   const totalPages = Math.max(1, Math.ceil(filteredFundings.length / ITEMS_PER_PAGE));
   const safePage = Math.min(currentPage, totalPages);
-  const pageSlice = filteredFundings.slice(
-    (safePage - 1) * ITEMS_PER_PAGE,
-    safePage * ITEMS_PER_PAGE,
-  );
+  const pageStartIndex = (safePage - 1) * ITEMS_PER_PAGE;
+  const pageSlice = filteredFundings.slice(pageStartIndex, safePage * ITEMS_PER_PAGE);
 
   const resultCount = renderResultCount({
-    template: messages.resultCount,
-    filtered: filteredFundings.length,
-    total: fundings.length,
+    start: pageStartIndex + 1,
+    end: pageStartIndex + pageSlice.length,
+    shownCount: pageSlice.length,
+    filteredCount: filteredFundings.length,
+    totalCount: fundings.length,
+    messages,
   });
   const showResultsLabel = messages.filterShowResults.replace(
     "{count}",

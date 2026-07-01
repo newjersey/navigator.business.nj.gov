@@ -518,8 +518,12 @@ export interface FundingPageMessages {
   readonly filterShowResults: string;
   /** Label for the "Reset" button. */
   readonly filterReset: string;
-  /** Result count line; {filtered} (wrapped in <bold>) and {total} are substituted at runtime via t.rich. */
-  readonly resultCount: string;
+  /** Unfiltered result-count line; {start}, {end} (range wrapped in <bold>), and {total}. */
+  readonly resultCountShowing: string;
+  /** Filtered result-count line; {start}, {end} (range wrapped in <bold>), {filtered}, and {total}. */
+  readonly resultCountFiltered: string;
+  /** Result-count line when the filtered set is empty; {total}. */
+  readonly resultCountFilteredEmpty: string;
   /** Label preceding the filter chips ("Filtering by:"). */
   readonly filteringByLabel: string;
   /** Chip label for the active search query; {query} is replaced at runtime. */
@@ -562,8 +566,12 @@ export interface LicensingGuidePageMessages {
   readonly filterShowResults: string;
   /** Label for the "Reset" button. */
   readonly filterReset: string;
-  /** Result count line; {filtered} (wrapped in <bold>) and {total} are substituted at runtime via t.rich. */
-  readonly resultCount: string;
+  /** Unfiltered result-count line; {start}, {end} (range wrapped in <bold>), and {total}. */
+  readonly resultCountShowing: string;
+  /** Filtered result-count line; {start}, {end} (range wrapped in <bold>), {filtered}, and {total}. */
+  readonly resultCountFiltered: string;
+  /** Result-count line when the filtered set is empty; {total}. */
+  readonly resultCountFilteredEmpty: string;
   /** Label preceding the filter chips ("Filtering by:"). */
   readonly filteringByLabel: string;
   /** Chip label for the active search query; {query} is replaced at runtime. */

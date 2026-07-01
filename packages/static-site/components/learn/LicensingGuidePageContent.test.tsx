@@ -13,7 +13,10 @@ const messages = {
   filterSearch: "Search",
   filterShowResults: "Show {count} Results",
   filterReset: "Reset",
-  resultCount: "Showing <bold>{filtered}</bold> results of {total} items",
+  resultCountShowing: "Showing <bold>{start}–{end}</bold> of {total} items",
+  resultCountFiltered:
+    "Showing <bold>{start}–{end}</bold> of {filtered} matching items (of {total} total)",
+  resultCountFilteredEmpty: "0 matching items (of {total} total)",
   filteringByLabel: "Filtering by:",
   filterSearchChip: "Search: {query}",
   filterRemoveLabel: "Remove filter {filter}",
@@ -60,6 +63,7 @@ describe("LicensingGuidePageContent", () => {
     expect(
       screen.queryByRole("heading", { level: 3, name: "Alpha License" }),
     ).not.toBeInTheDocument();
+    expect(screen.getByText("0 matching items (of 1 total)")).toBeInTheDocument();
   });
 
   it("shows a search chip when query is non-empty and clears on remove", () => {

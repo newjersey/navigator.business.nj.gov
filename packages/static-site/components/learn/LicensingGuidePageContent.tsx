@@ -1,40 +1,14 @@
 "use client";
 
-import { Fragment, type ReactNode, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { LicensingGuidePageMessages } from "@/domain/content/messageTypes";
 import type { License, PageItem } from "@/domain/content/types";
 import LicenseCard from "./LicenseCard";
 import Pagination from "./Pagination";
+import { renderResultCount } from "./renderResultCount";
 import { usePaginatedScroll } from "./usePaginatedScroll";
 
 const ITEMS_PER_PAGE = 10;
-
-interface ResultCountParams {
-  readonly template: string;
-  readonly filtered: number;
-  readonly total: number;
-}
-
-/**
- * Renders the result-count template, substituting `{total}` as text and the
- * `<bold>…</bold>`-wrapped `{filtered}` count as a `<strong>` element. Keeping
- * the whole sentence in one message (rather than splitting it in the component)
- * lets translators control word order around the bolded count.
- */
-const renderResultCount = ({ template, filtered, total }: ResultCountParams): ReactNode => {
-  const withTotal = template.replace("{total}", String(total));
-  return withTotal.split(/(<bold>.*?<\/bold>)/).map((part, index) => {
-    const boldMatch = part.match(/^<bold>(.*?)<\/bold>$/);
-    if (boldMatch === null) {
-      // biome-ignore lint/suspicious/noArrayIndexKey: segments are positional and stable per render
-      return <Fragment key={index}>{part}</Fragment>;
-    }
-    return (
-      // biome-ignore lint/suspicious/noArrayIndexKey: segments are positional and stable per render
-      <strong key={index}>{boldMatch[1].replace("{filtered}", String(filtered))}</strong>
-    );
-  });
-};
 
 interface FilterChipProps {
   readonly label: string;
@@ -86,12 +60,16 @@ const LicensingGuidePageContent = ({ messages, page, licenses }: Props) => {
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
   const safePage = Math.min(currentPage, totalPages);
-  const pageSlice = filtered.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
+  const pageStartIndex = (safePage - 1) * ITEMS_PER_PAGE;
+  const pageSlice = filtered.slice(pageStartIndex, safePage * ITEMS_PER_PAGE);
 
   const resultCount = renderResultCount({
-    template: messages.resultCount,
-    filtered: filtered.length,
-    total: licenses.length,
+    start: pageStartIndex + 1,
+    end: pageStartIndex + pageSlice.length,
+    shownCount: pageSlice.length,
+    filteredCount: filtered.length,
+    totalCount: licenses.length,
+    messages,
   });
   const showResultsLabel = messages.filterShowResults.replace("{count}", String(filtered.length));
 
