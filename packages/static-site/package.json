@@ -46,7 +46,7 @@
     "url": "https://github.com/newjersey"
   },
   "license": "MIT",
-  "packageManager": "pnpm@10.19.0",
+  "packageManager": "pnpm@11.5.3",
   "devDependencies": {
     "@axe-core/playwright": "4.11.3",
     "@biomejs/biome": "2.5.0",
