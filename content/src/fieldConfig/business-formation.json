@@ -149,10 +149,10 @@
       "officialFormationDocument": {
         "label": "Official Formation Document",
         "labelContextualInfo": "certificate-formation",
-        "cost": "125",
+        "cost": "100",
         "overrides": {
           "nonprofit": {
-            "cost": "75"
+            "cost": "50"
           }
         }
       },
