@@ -634,5 +634,37 @@
       "industrySelectorCta": "Go to Starter Kit",
       "topIndustriesHeading": "Top Industries"
     }
+  },
+  "funding": {
+    "title": "Funding",
+    "ctaHeading": "Find Funding Fit for Your Business",
+    "ctaBody": "Answers just a few questions, and we'll find programs you may be eligible for.",
+    "ctaButton": "Create Account",
+    "filterHeading": "Filter All Funding Options",
+    "filterSearch": "Search",
+    "filterIndustry": "Industry",
+    "filterFundingType": "Funding Type",
+    "fundingTypeLabels": {
+      "grant": "Grant",
+      "loan": "Loan",
+      "tax credit": "Tax Credit",
+      "tax exemption": "Tax Exemption",
+      "technical assistance": "Technical Assistance",
+      "hiring and employee training support": "Hiring & Employee Training Support"
+    },
+    "filterClear": "Clear",
+    "filterShowResults": "Show {count} Results",
+    "filterReset": "Reset",
+    "resultCount": "Showing <bold>{filtered}</bold> results of {total} items",
+    "filteringByLabel": "Filtering by:",
+    "filterSearchChip": "Search: \"{query}\"",
+    "filterRemoveLabel": "Remove {filter} filter",
+    "paginationPrevious": "Previous",
+    "paginationNext": "Next",
+    "paginationLabel": "Pagination",
+    "paginationPageLabel": "Page {page}",
+    "cardDueLabel": "Due:",
+    "cardEligibilityHeading": "Eligibility",
+    "cardBenefitsHeading": "Benefits"
   }
 }
