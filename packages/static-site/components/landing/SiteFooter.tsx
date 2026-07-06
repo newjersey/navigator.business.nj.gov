@@ -150,7 +150,7 @@ export const SiteFooter = ({ content, mainContentId }: SiteFooterProps) => {
                 />
               </div>
               <div className="mobile-lg:grid-col-auto">
-                <h3 className="usa-footer__logo-heading">{content.agencyName}</h3>
+                <h2 className="usa-footer__logo-heading">{content.agencyName}</h2>
               </div>
             </div>
             <div className="usa-footer__contact-links mobile-lg:grid-col-6">
@@ -159,7 +159,7 @@ export const SiteFooter = ({ content, mainContentId }: SiteFooterProps) => {
                   return renderFooterSocialLink({ socialLink, index });
                 })}
               </div>
-              <h3 className="usa-footer__contact-heading">{content.contactHeading}</h3>
+              <h2 className="usa-footer__contact-heading">{content.contactHeading}</h2>
               <address className="usa-footer__address">
                 <div className="usa-footer__contact-info grid-row grid-gap">
                   <div className="grid-col-auto">

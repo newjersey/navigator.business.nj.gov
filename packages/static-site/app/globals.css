@@ -5,7 +5,7 @@
   --color-base-dark: #565c65; /* USWDS base-dark / gray-cool-60 */
   --color-base-lightest: #f0f0f0; /* USWDS base-lightest / gray-5 */
   --color-ink: #1b1b1b; /* USWDS ink / gray-90 */
-  --color-primary: #005ea2; /* Funding-scoped accent (chips, search highlight); per designs it contrasts the NJWDS "primary". Does not override NJWDS/USWDS theming, which is SCSS-compiled. */
+  --color-primary: #005ea2; /* NJWDS default link color ($theme-link-color: "blue-60v"); SCSS-only in NJWDS, not exposed as a runtime CSS variable there. Also used as a funding-scoped accent (chips, search highlight) that per designs contrasts the NJWDS "primary". */
   --color-primary-dark: #2c608a; /* NJ primary dark blue; USWDS primary-dark (NJ override) */
   --color-accent-cool-darkest: #38536f; /* NJ-specific; no exact USWDS palette match */
 }
@@ -25,6 +25,27 @@ p a,
 .usa-prose a,
 .usa-identifier__identity-disclaimer a {
   text-decoration: underline;
+}
+
+/* A <button> triggering an in-page action (e.g. Intercom launch) inside running
+   text should read identically to the inline links around it. NJWDS's
+   `.usa-button--unstyled` cascade ends on a `font-weight: 700` rule of equal
+   specificity, so it can't be overridden by adding another utility class.
+   Buttons have no `:visited` state, so there is no equivalent rule below. */
+.text-link-button {
+  background: none;
+  border: 0;
+  color: var(--color-primary);
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* Keep the visited state on-brand instead of the browser default purple,
+   matching .brought-to-you-by__agency:visited in landing.css. */
+.page-not-found__home-link:visited {
+  color: var(--color-primary-dark);
 }
 
 body {
@@ -62,6 +83,18 @@ body {
  */
 body:has(.layout-wide) .usa-nav__inner {
   max-width: 80rem !important;
+}
+
+/*
+ * The footer's "Return to top" link is a no-op on the 404 page — there is no
+ * scrollable content above it to return to. The footer is a sibling of
+ * `<main>`, not an ancestor of `.page-not-found`, so this is scoped via
+ * `body:has()` rather than `.grid-container`/`.grid-row` scoping, matching
+ * the `.layout-wide` pattern above (the layout can't see which child route
+ * is rendering).
+ */
+body:has(.page-not-found) .usa-footer__return-to-top {
+  display: none;
 }
 
 .grid-container p {
