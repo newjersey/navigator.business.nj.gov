@@ -67,3 +67,12 @@ services (`yarn services:up`) and a running dev server.
 ## Module Aliases
 
 Path aliases are configured in `tsconfig.json`. Use `@/components/...`, `@/lib/...`, etc. rather than relative paths crossing directory boundaries.
+
+## Test Conventions
+
+**Tests must not hardcode user-facing copy.** When a query needs matchable text —
+`getByText`, or the `name` field inside `getByRole`/`getByLabelText`/etc. — pass the
+value from `getMergedConfig()` (`@businessnjgovnavigator/shared/contexts`), not a
+retyped copy of the string. Hardcoded copies silently drift from the real content
+and pass even after the copy changes. See `NavbarBusinessNjGovLogo.test.tsx` or
+`ChecklistTag.test.tsx` for the pattern.

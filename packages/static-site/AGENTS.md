@@ -35,6 +35,11 @@ pnpm test:accessibility  # Playwright + axe-core a11y tests (requires running se
 - **Do not use Jest APIs here.** Use `vi.fn()`, `vi.mock()`, etc. (Vitest, not Jest).
 - **Do not use ESLint or Prettier.** Biome handles both linting and formatting.
 - Localized strings live in `messages/*.json`. Do not hardcode user-facing copy in components.
+- **Tests must not hardcode user-facing copy.** When a query needs matchable text — `getByText`,
+  or the `name` field inside `getByRole`/`getByLabelText`/etc. — pass the value from
+  `getApplicationMessages({ locale })` (or other real config), not a retyped copy of the string.
+  Hardcoded copies silently drift from `messages/*.json` and pass even after the real copy
+  changes. See `app/[locale]/not-found.test.tsx` and `components/learn/LearnSideNav.test.tsx`.
 - `proxy.ts` configures `next-intl` middleware for locale detection — edit with care.
 - The Docker build runs from the **repo root** (needs access to generated content packages):
   ```bash
