@@ -43,6 +43,9 @@ yarn-error.log*
 # Content build
 content/lib
 
+# Generated test fixture (produced by content/test/cspell.json.test.ts)
+content/test/cspell.json
+
 # Netlify build
 web/out_*
 

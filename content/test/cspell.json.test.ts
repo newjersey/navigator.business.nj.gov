@@ -10,6 +10,7 @@ fs.writeFileSync(
   JSON.stringify(
     {
       ...cspellConfig,
+      import: ["../src/spellcheck-exceptions.json"],
       ignorePaths: [],
     },
     null,
