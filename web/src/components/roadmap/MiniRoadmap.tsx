@@ -1,13 +1,12 @@
-import { BusinessStructurePrompt } from "@/components/dashboard/BusinessStructurePrompt";
-import { MiniSectionAccordion } from "@/components/dashboard/MiniSectionAccordion";
-import { MiniRoadmapStep } from "@/components/roadmap/MiniRoadmapStep";
+import { LockedTasksPrompt } from "@/components/dashboard/LockedTasksPrompt";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { Icon } from "@/components/njwds/Icon";
+import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
-import analytics from "@/lib/utils/analytics";
-import { hasCompletedBusinessStructure } from "@businessnjgovnavigator/shared/domain-logic/hasCompletedBusinessStructure";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
-import { ReactElement, useCallback } from "react";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   activeTaskId?: string | undefined;
@@ -15,75 +14,39 @@ interface Props {
 }
 
 export const MiniRoadmap = (props: Props): ReactElement => {
-  const { roadmap, sectionNamesInRoadmap } = useRoadmap();
-  const { updateQueue, business } = useUserData();
+  const { roadmap } = useRoadmap();
+  const { Config } = useConfig();
+  const { isAuthenticated } = useContext(NeedsAccountContext);
 
-  const displayBusinessStructurePrompt = LookupOperatingPhaseById(
-    business?.profileData.operatingPhase,
-  ).displayBusinessStructurePrompt;
-  const completedBusinessStructure = hasCompletedBusinessStructure(business);
-
-  const onToggleStep = useCallback(
-    async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
-      if (!business || !updateQueue) return;
-
-      const openSteps = business.preferences.roadmapOpenSteps;
-      click && analytics.event.task_mini_roadmap_step.click.expand_contract();
-      if (openSteps.includes(stepNumber)) {
-        if (setOpen) {
-          return;
-        }
-
-        await updateQueue
-          .queuePreferences({
-            roadmapOpenSteps: openSteps.filter((openStep) => {
-              return openStep !== stepNumber;
-            }),
-          })
-          .update();
-      } else {
-        await updateQueue
-          .queuePreferences({
-            roadmapOpenSteps: [...openSteps, stepNumber],
-          })
-          .update();
-      }
-    },
-    [updateQueue, business],
-  );
+  const dropdownIconClasses = "usa-icon--size-5 text-base-light";
 
   return (
     <>
-      {sectionNamesInRoadmap.map((section) => {
-        return (
-          <MiniSectionAccordion key={section} sectionType={section}>
-            {section === "START" &&
-            !completedBusinessStructure &&
-            displayBusinessStructurePrompt ? (
-              <BusinessStructurePrompt isCTAButtonHidden={true} />
-            ) : (
-              roadmap?.steps
-                .filter((step) => {
-                  return step.section === section;
-                })
-                .map((step, index, array) => {
-                  return (
-                    <MiniRoadmapStep
-                      step={step}
-                      isLast={index === array.length - 1}
-                      activeTaskId={props.activeTaskId}
-                      completed={isStepCompleted(roadmap, step, business)}
-                      isOpen={business?.preferences.roadmapOpenSteps.includes(step.stepNumber)}
-                      toggleStep={onToggleStep}
-                      onTaskClick={props.onTaskClick}
-                      key={step.stepNumber}
-                    />
-                  );
-                })
-            )}
-          </MiniSectionAccordion>
-        );
-      })}
+      <Accordion defaultExpanded>
+        <AccordionSummary
+          expandIcon={<Icon className={dropdownIconClasses} iconName="expand_more" />}
+        >
+          <Heading level={3} className="flex flex-align-center margin-0-override">
+            {Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderAbbreviatedText}
+          </Heading>
+        </AccordionSummary>
+        <AccordionDetails>
+          {roadmap?.tasks
+            .filter((task) => task.required)
+            .map((task) => {
+              return (
+                <div key={task.id} className="margin-y-1">
+                  <MiniRoadmapTask
+                    task={task}
+                    active={task.id === props.activeTaskId}
+                    onTaskClick={props.onTaskClick}
+                  />
+                </div>
+              );
+            })}
+          {isAuthenticated && <LockedTasksPrompt isCTAButtonHidden />}
+        </AccordionDetails>
+      </Accordion>
     </>
   );
 };

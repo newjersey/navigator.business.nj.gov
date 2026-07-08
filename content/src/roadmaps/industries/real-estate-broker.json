@@ -18,7 +18,7 @@
       "step": 1,
       "weight": 50,
       "task": "determine-naics-code",
-      "required": true
+      "required": false
     },
     {
       "step": 1,

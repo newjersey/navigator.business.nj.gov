@@ -80,7 +80,7 @@ export const TaskPageSwitchComponent = ({
       />
     );
   }
-
+  console.log(roadmap);
   const isCigaretteLicenseEnabled = process.env.FEATURE_CIGARETTE_LICENSE === "true";
 
   return rswitch(task.id, {
@@ -125,12 +125,7 @@ export const TaskPageSwitchComponent = ({
     "business-structure": (
       <BusinessStructureTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />
     ),
-    [formationTaskId]: (
-      <BusinessFormation
-        task={getTaskFromRoadmap(roadmap, task.id)}
-        displayContent={displayContent}
-      />
-    ),
+    [formationTaskId]: <BusinessFormation task={task} displayContent={displayContent} />,
     "community-right-to-know-survey": (
       <CrtkPage task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_default_functionality} />
     ),

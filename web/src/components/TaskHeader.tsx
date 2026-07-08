@@ -65,11 +65,7 @@ export const TaskHeader = (props: Props): ReactElement => {
           data-testid="taskProgress"
         >
           <div className="margin-right-105 margin-bottom-1">
-            <TaskProgressCheckbox
-              taskId={props.task.id}
-              disabledTooltipText={getDisabledText()}
-              needsAccount={props.task.required}
-            />
+            <TaskProgressCheckbox taskId={props.task.id} disabledTooltipText={getDisabledText()} />
           </div>
           {getModifiedTaskBooleanUndefined(roadmap, props.task, "required") === true && (
             <span className={`${getTextColorClass()} display-inline-block margin-bottom-1`}>

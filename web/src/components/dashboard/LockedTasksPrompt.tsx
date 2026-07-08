@@ -12,7 +12,7 @@ import { ReactElement } from "react";
 interface Props {
   isCTAButtonHidden?: boolean;
 }
-export const BusinessStructurePrompt = (props: Props): ReactElement => {
+export const LockedTasksPrompt = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const router = useRouter();
@@ -23,23 +23,12 @@ export const BusinessStructurePrompt = (props: Props): ReactElement => {
     : "";
 
   return (
-    <div
-      className={"prompt-border padding-3 margin-top-2"}
-      data-testid={"business-structure-prompt"}
-    >
+    <div className={"prompt-border padding-3 margin-top-2"}>
       <div className={isDesktopAndUp ? "flex flex-row flex-align-start" : ""}>
         <div className={isDesktopAndUp ? "flex-fill margin-right-2" : ""}>
-          {router && router.asPath === `/tasks/${businessStructureUrlSlug}` ? (
-            <div data-testid={"content-when-on-business-structure-task"}>
-              <Content>
-                {Config.businessStructurePrompt.notCompletedTaskPromptBusinessStructureTask}
-              </Content>
-            </div>
-          ) : (
-            <div data-testid={"content-when-not-on-business-structure-task"}>
-              <Content>{Config.businessStructurePrompt.notCompletedTaskPromptAnyTask}</Content>
-            </div>
-          )}
+          <div>
+            <Content>{Config.lockedTasksPrompt.promptText}</Content>
+          </div>
         </div>
         {!props.isCTAButtonHidden && (
           <div className={isDesktopAndUp ? "flex-auto" : "margin-top-2"}>
@@ -50,9 +39,8 @@ export const BusinessStructurePrompt = (props: Props): ReactElement => {
               onClick={(): void => {
                 router && router.push(`/tasks/${businessStructureUrlSlug}`);
               }}
-              dataTestId={"business-structure-prompt-button"}
             >
-              {Config.businessStructurePrompt.buttonText}
+              {Config.lockedTasksPrompt.buttonText}
             </PrimaryButton>
           </div>
         )}

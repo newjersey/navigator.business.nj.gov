@@ -443,12 +443,12 @@ describe("<DashboardOnDesktop />", () => {
       renderDashboardComponent({});
 
       expect(
-        screen.getByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
+        screen.getByText(Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderText),
       ).toBeInTheDocument();
       expect(
         screen.queryAllByRole("heading", {
           level: 2,
-          name: Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
+          name: Config.dashboardRoadmapHeaderDefaults.domesticEmployerRoadmapTasksHeaderText,
         }).length,
       ).toEqual(0);
     },
@@ -462,13 +462,13 @@ describe("<DashboardOnDesktop />", () => {
     renderDashboardComponent({});
 
     expect(
-      screen.queryByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
+      screen.queryByText(Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderText),
     ).not.toBeInTheDocument();
 
     expect(
       screen.getByRole("heading", {
         level: 2,
-        name: Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
+        name: Config.dashboardRoadmapHeaderDefaults.domesticEmployerRoadmapTasksHeaderText,
       }),
     ).toBeInTheDocument();
   });

@@ -7,10 +7,8 @@ $progress-bar-label-offset: 33px;
 }
 
 .section-progress-bar-label {
+  transform: translate(0px, -7px);
   font-size: 0.9rem;
-  position: absolute;
-  bottom: 16px;
-  right: $progress-bar-label-offset;
   font-weight: bold;
 
   &--zero {
