@@ -480,7 +480,7 @@ export class MonitoringStack extends Stack {
         alarmName: `${props.stage}-bfs-navigator-lambda-excessive-executions`,
         comparisonOperator: "GreaterThanUpperThreshold",
         evaluationPeriods: 3,
-        datapointsToAlarm: 2,
+        datapointsToAlarm: 3,
         thresholdMetricId: "ad1",
         treatMissingData: "notBreaching",
 
@@ -498,7 +498,7 @@ export class MonitoringStack extends Stack {
                   },
                 ],
               },
-              period: 300,
+              period: 900,
               stat: "Sum",
             },
             returnData: true,
