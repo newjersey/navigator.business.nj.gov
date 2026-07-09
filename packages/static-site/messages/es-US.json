@@ -414,44 +414,36 @@
     "support": {
       "title": "Más apoyo",
       "description": "¿Busca asesoría más especializada? Pruebe nuestras guías gratuitas y personalizadas de registro empresarial en línea, hable con un representante en nuestro chat o regístrese para recibir actualizaciones empresariales directamente en su correo electrónico. También está disponible una versión impresa y digital de nuestro [Manual para pequeñas empresas](https://files.business.nj.gov/static/nj-small-business-manual.pdf).",
-      "cards": [
-        {
-          "title": "Su cuenta de Business.NJ.gov",
-          "description": "Obtenga una guía gratuita y personalizada paso a paso para iniciar su negocio en New Jersey.",
-          "iconPath": "/img/navigation.svg",
-          "iconAlt": "Icono de navegación",
-          "link": {
-            "label": "Su cuenta de Business.NJ.gov",
-            "href": "https://account.business.nj.gov/",
-            "isInternal": false,
-            "opensInNewTab": true
-          }
-        },
-        {
-          "title": "Apoyo individual",
-          "description": "Converse con un asesor empresarial con décadas de experiencia, de 9a.m. a 5p.m. de lunes a viernes.",
-          "iconPath": "/img/hands.svg",
-          "iconAlt": "Icono de manos",
-          "link": {
-            "label": "Apoyo individual",
-            "href": "/support",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "title": "Boletín empresarial",
-          "description": "Manténgase al día sobre programas o regulaciones anunciados recientemente que puedan afectar su negocio.",
-          "iconPath": "/img/piechart.svg",
-          "iconAlt": "Icono de gráfico",
-          "link": {
-            "label": "Boletín empresarial",
-            "href": "https://business.nj.gov/newsletter",
-            "isInternal": false,
-            "opensInNewTab": true
-          }
+      "businessNjGovCard": {
+        "title": "Su cuenta de Business.NJ.gov",
+        "description": "Obtenga una guía gratuita y personalizada paso a paso para iniciar su negocio en New Jersey.",
+        "iconPath": "/img/navigation.svg",
+        "iconAlt": "Icono de navegación",
+        "link": {
+          "label": "Su cuenta de Business.NJ.gov",
+          "href": "https://account.business.nj.gov/",
+          "isInternal": false,
+          "opensInNewTab": true
         }
-      ]
+      },
+      "oneOnOneSupportCard": {
+        "title": "Apoyo individual",
+        "description": "Converse con un asesor empresarial con décadas de experiencia, de 9a.m. a 5p.m. de lunes a viernes.",
+        "iconPath": "/img/hands.svg",
+        "iconAlt": "Icono de manos"
+      },
+      "businessLetter": {
+        "title": "Boletín empresarial",
+        "description": "Manténgase al día sobre programas o regulaciones anunciados recientemente que puedan afectar su negocio.",
+        "iconPath": "/img/piechart.svg",
+        "iconAlt": "Icono de gráfico",
+        "link": {
+          "label": "Boletín empresarial",
+          "href": "https://business.nj.gov/newsletter",
+          "isInternal": false,
+          "opensInNewTab": true
+        }
+      }
     },
     "broughtToYouBy": {
       "title": "Presentado por",
