@@ -5193,6 +5193,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
+    "@businessnjgovnavigator/content-types": "npm:*"
     "@businessnjgovnavigator/shared": "npm:*"
     "@types/node": "npm:24.12.2"
     "@vitest/coverage-v8": "npm:4.1.9"

@@ -1,4 +1,7 @@
+import type { Element, ElementContent, Parents, Root, Text } from "hast";
 import { Fragment, type ReactElement } from "react";
+import type { Node } from "unist";
+import { visitParents } from "unist-util-visit-parents";
 
 export interface HighlightSegment {
   readonly text: string;
@@ -54,3 +57,31 @@ export const HighlightedText = ({ text, query }: HighlightedTextProps): ReactEle
     )}
   </>
 );
+
+/**
+ * `react-markdown` rehype plugin that wraps query matches inside rendered
+ * markdown text nodes in `<mark>` elements, so search highlighting reaches card
+ * body content (not just the plain-text heading handled by `HighlightedText`).
+ */
+export const makeHighlightPlugin = (query: string) => () => (tree: Root) => {
+  visitParents(tree as Node, "text", (node: Text, ancestors) => {
+    const parent = ancestors.at(-1) as Parents | undefined;
+    if (parent === undefined) return;
+    const index = parent.children.indexOf(node);
+    const segments = splitHighlight(node.value, query);
+    if (segments.length === 1 && !segments[0].match) return;
+
+    const replacement: ElementContent[] = segments.map((seg) =>
+      seg.match
+        ? {
+            type: "element",
+            tagName: "mark",
+            properties: { className: ["funding-search-highlight"] },
+            children: [{ type: "text", value: seg.text }],
+          }
+        : { type: "text", value: seg.text },
+    );
+
+    (parent as Element).children.splice(index, 1, ...replacement);
+  });
+};

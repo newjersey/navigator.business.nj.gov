@@ -166,6 +166,7 @@ Test content`;
 
   describe("loadAllLicenses", () => {
     it("combines navigator and webflow licenses", () => {
+      mockFs.existsSync.mockReturnValue(true);
       (mockFs.readdirSync as jest.Mock).mockReturnValue(["license1.md"]);
       mockFs.readFileSync.mockReturnValue("test content");
       mockMatter.mockReturnValue({

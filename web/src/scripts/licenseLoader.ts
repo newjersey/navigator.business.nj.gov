@@ -1,6 +1,7 @@
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
+import { loadAllLicenses as loadAllLicensesShared } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 
 const webflowLicenseDir = path.resolve(`${__dirname}/../../../content/src/webflow-licenses`);
 
@@ -47,12 +48,11 @@ const convertLicenseMd = (mdContents: string, filename: string): LicenseData => 
   } as LicenseData;
 };
 
-export const loadAllLicenses = (): LicenseData[] => {
-  const webflowLicenses = loadAllNavigatorWebflowLicenses();
-  const navigatorLicenses = loadAllNavigatorLicenses();
-
-  return [...navigatorLicenses, ...webflowLicenses];
-};
+// The shared loader returns WebflowLicenseCard, which makes `id`/`displayname`
+// optional where this script's LicenseData requires them. The underlying
+// frontmatter is identical, so the bridge cast is safe.
+export const loadAllLicenses = (): LicenseData[] =>
+  loadAllLicensesShared() as unknown as LicenseData[];
 
 export const loadAllNavigatorWebflowLicenses = (): LicenseData[] => {
   const webflowFileNames = fs.readdirSync(webflowLicenseDir);
