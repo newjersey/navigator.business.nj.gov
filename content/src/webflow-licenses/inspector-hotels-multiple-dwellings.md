@@ -11,4 +11,5 @@ webflowIndustry: Hotel Inspector
 divisionPhone: (609) 984-7834
 webflowId: 5f7729945adcc85451b64a81
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

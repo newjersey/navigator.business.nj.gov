@@ -11,4 +11,5 @@ webflowIndustry: Social Worker
 divisionPhone: (973) 504-6495
 webflowId: 5f7729dc1b42b9eccdbf1ce3
 licenseCertificationClassification: REGISTRATION/LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

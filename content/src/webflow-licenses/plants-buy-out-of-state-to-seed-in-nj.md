@@ -11,4 +11,5 @@ webflowIndustry: Plants
 divisionPhone: (609) 406-6939
 webflowId: 5f7728e42edc678a57b4a6fd
 licenseCertificationClassification: CERTIFICATE
+agencyWebsite: "https://www.nj.gov/agriculture/"
 ---

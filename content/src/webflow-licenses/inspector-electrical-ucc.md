@@ -11,4 +11,5 @@ webflowIndustry: Electrical Inspector
 divisionPhone: (609) 984-7834
 webflowId: 5f7729958e9f8750f56859c7
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

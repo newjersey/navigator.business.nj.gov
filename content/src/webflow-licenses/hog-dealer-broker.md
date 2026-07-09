@@ -11,4 +11,5 @@ webflowIndustry: Hog Dealer
 divisionPhone: (609) 633-2954
 webflowId: 5f7728e1240061e2267834b7
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/agriculture/"
 ---

@@ -11,4 +11,5 @@ webflowIndustry: Legislative Agent
 divisionPhone: (609) 292-8700
 webflowId: 5f772961ef496213b346d0df
 licenseCertificationClassification: REGISTRATION
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

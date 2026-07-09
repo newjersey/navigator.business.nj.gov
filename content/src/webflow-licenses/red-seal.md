@@ -11,4 +11,5 @@ webflowIndustry: Red Seal
 divisionPhone: (609) 292-2345
 webflowId: 5f772953eb555847e8feb5a0
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

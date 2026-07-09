@@ -11,4 +11,5 @@ webflowIndustry: Athletic Trainer
 divisionPhone: (609) 826-7100
 webflowId: 5f772972e022948cbaeaa5cc
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

@@ -11,4 +11,5 @@ webflowIndustry: Building Inspector
 divisionPhone: (609) 984-7834
 webflowId: 5f77297ddd6a49a4dd9b6068
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

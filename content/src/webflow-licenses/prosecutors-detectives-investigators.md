@@ -11,4 +11,5 @@ webflowIndustry: Prosecutors Detectives and Investigators
 divisionPhone: (609) 984-6500
 webflowId: 5f772963614a2d1694d207b1
 licenseCertificationClassification: CONTACT
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

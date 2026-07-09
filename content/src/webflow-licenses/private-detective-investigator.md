@@ -11,4 +11,5 @@ webflowIndustry: Private Detective
 divisionPhone: (609) 882-2000
 webflowId: 5f77296338625456e5bb0e47
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

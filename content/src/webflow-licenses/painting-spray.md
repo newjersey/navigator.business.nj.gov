@@ -11,4 +11,5 @@ webflowIndustry: Spray Painting
 divisionPhone: "(888) 656-6225 #21"
 webflowId: 5f7729119a1bb864c0b3b90f
 licenseCertificationClassification: PERMIT/LICENSE (LEAD BASED)
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

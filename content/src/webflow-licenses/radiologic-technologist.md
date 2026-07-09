@@ -11,4 +11,5 @@ webflowIndustry: Radiologic Technologist
 divisionPhone: (609) 984-5890
 webflowId: 5f77291b614a2d58ced207a2
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

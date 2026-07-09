@@ -11,4 +11,5 @@ webflowIndustry: Black Seal
 divisionPhone: (609) 292-2345
 webflowId: 5f77294f8e9f8735f86859bc
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

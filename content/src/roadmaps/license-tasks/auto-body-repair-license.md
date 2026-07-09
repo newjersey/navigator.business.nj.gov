@@ -18,6 +18,7 @@ agencyId: nj-motor-vehicle
 divisionPhone: (609) 292-6500
 webflowType: business-license
 webflowId: 5f7729541a08097ccbbb2ecb
+agencyWebsite: "https://www.nj.gov/mvc/"
 ---
 
 ## Eligibility Criteria

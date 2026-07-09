@@ -11,4 +11,5 @@ webflowIndustry: Fish
 divisionPhone: (609) 292-2965
 webflowId: 5f7728fd90d9ac17051309d4
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

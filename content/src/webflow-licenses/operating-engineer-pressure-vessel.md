@@ -11,4 +11,5 @@ webflowIndustry: Engineer
 divisionPhone: (609) 292-2345
 webflowId: 5f7729512f04da521958b5f3
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

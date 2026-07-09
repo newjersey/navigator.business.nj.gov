@@ -11,4 +11,5 @@ webflowIndustry: Recycling Transfer Station
 divisionPhone: (609) 292-5855
 webflowId: 5f77291db4710faf9d3c37b0
 licenseCertificationClassification: PERMIT
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

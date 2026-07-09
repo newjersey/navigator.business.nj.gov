@@ -11,4 +11,5 @@ webflowIndustry: Youth Camp
 divisionPhone: (609) 826-4941
 webflowId: 5f772947f17efbb3c0eefb37
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/health/"
 ---

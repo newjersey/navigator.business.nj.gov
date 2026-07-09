@@ -11,4 +11,5 @@ webflowIndustry: Shellfish Program
 divisionPhone: ""
 webflowId: 5f77291e3862541895bb0e3f
 licenseCertificationClassification: PERMIT
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

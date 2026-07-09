@@ -10,4 +10,5 @@ webflowIndustry: Lottery Agent
 licenseCertificationClassification: LICENSE
 divisionPhone: (609) 599-5877
 webflowId: 5f77296beb555857a1feb5a1
+agencyWebsite: "https://www.nj.gov/treasury/"
 ---

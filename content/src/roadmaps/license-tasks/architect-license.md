@@ -18,6 +18,7 @@ agencyAdditionalContext: Board of Architects
 divisionPhone: (973) 504-6385
 webflowType: individual-license
 webflowId: 5f772971b0544fd3d536617b
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---
 
 ## Education Requirements (Initial Licensure by Examination)

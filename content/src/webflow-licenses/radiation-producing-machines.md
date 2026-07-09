@@ -11,4 +11,5 @@ webflowIndustry: Radiation Machine
 divisionPhone: (609) 984-5890
 webflowId: 5f77291bef4962087946d0d7
 licenseCertificationClassification: LICENSE/REGISTRATION
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

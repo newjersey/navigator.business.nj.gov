@@ -11,4 +11,5 @@ webflowIndustry: Paramedic
 divisionPhone: (609) 633-7777
 webflowId: 5f77294a5ef8c176ff019ec3
 licenseCertificationClassification: CERTIFICATE
+agencyWebsite: "https://www.nj.gov/health/ems/"
 ---

@@ -11,4 +11,5 @@ webflowIndustry: Casino Key Employee
 divisionPhone: (609) 441-3422
 webflowId: 5f77295eecb74e2b5223aad7
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

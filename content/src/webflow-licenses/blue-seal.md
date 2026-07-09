@@ -11,4 +11,5 @@ webflowIndustry: Blue Seal
 divisionPhone: (609) 292-2345
 webflowId: 5f77294fb4710f2cf13c37bb
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

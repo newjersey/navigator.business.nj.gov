@@ -106,6 +106,47 @@ export interface FileSystemPort {
 // ============================================================================
 
 /**
+ * Builds an agencyId → website map from the license set, keeping only agencies
+ * whose populated licenses all point to the same website. Agencies with no
+ * website, or with conflicting websites across licenses, are omitted so the
+ * fallback never guesses between ambiguous URLs.
+ */
+export const deriveSingleAgencyWebsites = (
+  licenses: readonly WebflowLicenseCard[],
+): Map<string, string> => {
+  const websitesByAgencyId = new Map<string, Set<string>>();
+  for (const license of licenses) {
+    if (!license.agencyId || !license.agencyWebsite) continue;
+    const websites = websitesByAgencyId.get(license.agencyId) ?? new Set<string>();
+    websites.add(license.agencyWebsite);
+    websitesByAgencyId.set(license.agencyId, websites);
+  }
+
+  const singleWebsiteByAgencyId = new Map<string, string>();
+  for (const [agencyId, websites] of websitesByAgencyId) {
+    if (websites.size === 1) singleWebsiteByAgencyId.set(agencyId, [...websites][0]);
+  }
+  return singleWebsiteByAgencyId;
+};
+
+/**
+ * Fills a blank agencyWebsite from its agencyId's single known website, when one
+ * exists. Licenses that already carry a website, or whose agencyId has no single
+ * unambiguous website, are left unchanged. Matches the published site's behavior
+ * of linking the agency name to its department page where the URL is known.
+ */
+export const applyAgencyWebsiteFallback = (
+  licenses: readonly WebflowLicenseCard[],
+): WebflowLicenseCard[] => {
+  const singleWebsiteByAgencyId = deriveSingleAgencyWebsites(licenses);
+  return licenses.map((license) => {
+    if (license.agencyWebsite || !license.agencyId) return license;
+    const fallback = singleWebsiteByAgencyId.get(license.agencyId);
+    return fallback ? { ...license, agencyWebsite: fallback } : license;
+  });
+};
+
+/**
  * Converts a raw WebflowLicenseCard (from shared loader) to a display-ready License card.
  * Resolves agencyId → agency name and industryId → industry name, falling back to webflowIndustry.
  *
@@ -136,6 +177,7 @@ export const toLicenseCard = (
   summaryDescriptionMd: license.summaryDescriptionMd,
   agency: license.agencyId ? LookupTaskAgencyById(license.agencyId).name : undefined,
   division: license.agencyAdditionalContext,
+  agencyWebsite: license.agencyWebsite,
   divisionPhone: license.divisionPhone,
   callToActionText: license.callToActionText,
   callToActionLink: license.callToActionLink,
@@ -662,7 +704,10 @@ export const getContentConfigs = (
     resultKey: "fundingsCount",
   },
   {
-    loader: () => loadAllLicenses().map((license) => toLicenseCard(license, industryNamesById)),
+    loader: () =>
+      applyAgencyWebsiteFallback(loadAllLicenses()).map((license) =>
+        toLicenseCard(license, industryNamesById),
+      ),
     outputFileName: "licenses",
     dataKey: "licenses",
     resultKey: "licensesCount",

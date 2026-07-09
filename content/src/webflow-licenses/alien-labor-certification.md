@@ -11,4 +11,5 @@ webflowIndustry: Seasonal Labor
 divisionPhone: (609) 777-1838
 webflowId: 5f77294de022944a11eaa5c7
 licenseCertificationClassification: ALIEN LABOR CERTIFICATION PROGRAM
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

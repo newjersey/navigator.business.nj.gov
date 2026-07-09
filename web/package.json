@@ -40,7 +40,8 @@
     "webflow:faq-pull": "tsx ./src/scripts/webflow/faqPull.ts",
     "webflow:pages-pull": "tsx ./src/scripts/webflow/pagePull.ts",
     "webflow:recents-pull": "tsx ./src/scripts/webflow/recentPull.ts",
-    "webflow:tropical-storm-ida-pull": "tsx ./src/scripts/webflow/tropicalStormIdaPull.ts"
+    "webflow:tropical-storm-ida-pull": "tsx ./src/scripts/webflow/tropicalStormIdaPull.ts",
+    "webflow:license-department-website-pull": "tsx ./src/scripts/webflow/licenseDepartmentWebsitePull.ts"
   },
   "dependencies": {
     "@aws-crypto/sha256-browser": "5.2.0",

@@ -11,4 +11,5 @@ webflowIndustry: Investment Advisor
 divisionPhone: (973) 504-3600
 webflowId: 5f77296ff17efb0a3aeefb3d
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

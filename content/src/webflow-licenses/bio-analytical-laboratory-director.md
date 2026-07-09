@@ -11,4 +11,5 @@ webflowIndustry: Bio-analytical Laboratory Director
 divisionPhone: (973) 504-6200
 webflowId: 5f772978e8bf5057e73178a2
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

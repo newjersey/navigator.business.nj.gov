@@ -11,4 +11,5 @@ webflowIndustry: Horse Races
 divisionPhone: (609) 292-0613
 webflowId: 5f7729618e9f8777bc6859bf
 licenseCertificationClassification: PERMIT
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

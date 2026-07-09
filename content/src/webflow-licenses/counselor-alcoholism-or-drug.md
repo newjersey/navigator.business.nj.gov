@@ -10,4 +10,5 @@ webflowIndustry: Substance Counselor
 licenseCertificationClassification: CERTIFICATE
 divisionPhone: (973) 504-6582
 webflowId: 5f7729838fbb22725e6ec090
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

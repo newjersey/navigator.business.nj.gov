@@ -11,4 +11,5 @@ webflowIndustry: Food Manufacturing
 divisionPhone: (609) 826-4935
 webflowId: 5f772940b4710f56bc3c37b6
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/health/"
 ---

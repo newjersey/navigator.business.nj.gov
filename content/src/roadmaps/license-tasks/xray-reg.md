@@ -18,6 +18,7 @@ callToActionLink: https://www.nj.gov/dep/rpp/reg/index.htm
 divisionPhone: (609) 984-5463
 webflowId: 676af48d3cee0bce2f93edd8
 licenseCertificationClassification: undefined
+agencyWebsite: "https://www.nj.gov/dep/rpp/reg/index.htm"
 ---
 
 ## Registration Requirements

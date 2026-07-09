@@ -20,10 +20,12 @@ export interface License {
   industry?: string;
   /** Summary description markdown rendered in the card body. */
   summaryDescriptionMd?: string;
-  /** Resolved agency display name (no URL — TaskAgency has no link field). */
+  /** Resolved agency display name. */
   agency?: string;
   /** Agency division / additional context. */
   division?: string;
+  /** Agency website URL; the agency name links to this when present. */
+  agencyWebsite?: string;
   /** Division phone number. */
   divisionPhone?: string;
   /** Primary CTA button label. */

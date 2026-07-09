@@ -11,4 +11,5 @@ webflowIndustry: Grain Dealer
 divisionPhone: (609) 292-5649
 webflowId: 5f7728e11a08098953bb2ec3
 licenseCertificationClassification: LICENSE/BOND
+agencyWebsite: "https://www.nj.gov/agriculture/"
 ---

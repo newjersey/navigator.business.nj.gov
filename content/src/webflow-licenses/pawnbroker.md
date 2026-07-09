@@ -11,4 +11,5 @@ webflowIndustry: Pawnbroker
 divisionPhone: (609) 292-7272
 webflowId: 5f77292b8150be1726f3be24
 licenseCertificationClassification: PERMIT
+agencyWebsite: "https://www.nj.gov/dobi/"
 ---

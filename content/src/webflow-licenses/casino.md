@@ -11,4 +11,5 @@ webflowIndustry: Casino
 divisionPhone: (609) 441-3422
 webflowId: 5f77295ea6bfb58d9c02ee07
 licenseCertificationClassification: CONTACT
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

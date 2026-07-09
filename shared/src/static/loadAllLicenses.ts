@@ -14,6 +14,7 @@ export interface WebflowLicenseCard {
   callToActionText?: string;
   agencyId?: string;
   agencyAdditionalContext?: string;
+  agencyWebsite?: string;
   divisionPhone?: string;
   industryId?: string;
   webflowType?: string;

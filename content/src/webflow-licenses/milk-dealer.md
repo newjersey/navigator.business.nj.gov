@@ -11,4 +11,5 @@ webflowIndustry: Milk Dealer
 divisionPhone: (609) 292-5646
 webflowId: 5f7728e2862dc1da74be499d
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/agriculture/"
 ---

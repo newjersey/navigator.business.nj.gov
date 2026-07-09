@@ -11,4 +11,5 @@ webflowIndustry: Electrical Sub code
 divisionPhone: (609) 984-7834
 webflowId: 5f772986862dc166babe49a4
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

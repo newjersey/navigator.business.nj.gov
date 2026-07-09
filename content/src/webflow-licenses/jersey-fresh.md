@@ -11,4 +11,5 @@ webflowIndustry: Jersey Fresh
 divisionPhone: (609) 292-5536
 webflowId: 5f7728e1b4710f3f613c37ae
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/agriculture/"
 ---
