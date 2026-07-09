@@ -11,4 +11,5 @@ webflowIndustry: Livestock Dealer
 divisionPhone: (609) 633-2954
 webflowId: 5f7728e2306c6c2570066f9c
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/agriculture/"
 ---

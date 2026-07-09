@@ -11,4 +11,5 @@ webflowIndustry: Elevator Inspector
 divisionPhone: (609) 984-7834
 webflowId: 5f772995862dc18444be49a5
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

@@ -27,7 +27,10 @@ import {
   buildChecklistItemTaskMap,
   buildAndWriteChecklistItemTasks,
   toLicenseCard,
+  deriveSingleAgencyWebsites,
+  applyAgencyWebsiteFallback,
 } from "./build";
+import type { WebflowLicenseCard } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 
 // ============================================================================
 // TEST UTILITIES - Mock Ports
@@ -542,6 +545,7 @@ describe("Application Layer", () => {
         certificationsCount: 5,
         filingsCount: 15,
         fundingsCount: 25,
+        licensesCount: 42,
         licenseCalendarEventsCount: 8,
         licenseReinstatementsCount: 12,
         checklistItemTasksCount: 77,
@@ -556,6 +560,7 @@ describe("Application Layer", () => {
       expect(consoleSpy).toHaveBeenCalledWith("✓ Built certifications.json with 5 certifications");
       expect(consoleSpy).toHaveBeenCalledWith("✓ Built filings.json with 15 filings");
       expect(consoleSpy).toHaveBeenCalledWith("✓ Built fundings.json with 25 fundings");
+      expect(consoleSpy).toHaveBeenCalledWith("✓ Built licenses.json with 42 licenses");
       expect(consoleSpy).toHaveBeenCalledWith(
         "✓ Built license-calendar-events.json with 8 license-related calendar events",
       );
@@ -849,5 +854,110 @@ describe("toLicenseCard", () => {
       new Map(),
     );
     expect(card.name).toBe("Veterinarian");
+  });
+
+  it("carries the agency website url through", () => {
+    const card = toLicenseCard(
+      {
+        id: "animal-dealer",
+        filename: "animal-dealer",
+        urlSlug: "animal-dealer",
+        name: "Animal Dealer",
+        licenseCertificationClassification: "LICENSE",
+        contentMd: "",
+        agencyWebsite: "https://www.nj.gov/agriculture/",
+      },
+      new Map(),
+    );
+    expect(card.agencyWebsite).toBe("https://www.nj.gov/agriculture/");
+  });
+
+  it("leaves the agency website undefined when the source has none", () => {
+    const card = toLicenseCard(
+      {
+        id: "no-website",
+        filename: "no-website",
+        urlSlug: "no-website",
+        name: "No Website",
+        licenseCertificationClassification: "LICENSE",
+        contentMd: "",
+      },
+      new Map(),
+    );
+    expect(card.agencyWebsite).toBeUndefined();
+  });
+});
+
+// ============================================================================
+// AGENCY WEBSITE FALLBACK
+// ============================================================================
+
+const rawLicense = (overrides: Partial<WebflowLicenseCard>): WebflowLicenseCard => ({
+  id: "x",
+  filename: "x",
+  urlSlug: "x",
+  name: "X",
+  licenseCertificationClassification: "LICENSE",
+  contentMd: "",
+  ...overrides,
+});
+
+describe("deriveSingleAgencyWebsites", () => {
+  it("maps an agencyId to its website when every populated sibling agrees", () => {
+    const map = deriveSingleAgencyWebsites([
+      rawLicense({ agencyId: "agriculture", agencyWebsite: "https://www.nj.gov/agriculture/" }),
+      rawLicense({ agencyId: "agriculture" }),
+    ]);
+    expect(map.get("agriculture")).toBe("https://www.nj.gov/agriculture/");
+  });
+
+  it("omits an agencyId whose licenses carry conflicting websites", () => {
+    const map = deriveSingleAgencyWebsites([
+      rawLicense({ agencyId: "njdep", agencyWebsite: "https://www.nj.gov/dep/" }),
+      rawLicense({ agencyId: "njdep", agencyWebsite: "https://www.nj.gov/bpu/" }),
+    ]);
+    expect(map.has("njdep")).toBe(false);
+  });
+
+  it("omits an agencyId that has no website on any license", () => {
+    const map = deriveSingleAgencyWebsites([rawLicense({ agencyId: "empty" })]);
+    expect(map.has("empty")).toBe(false);
+  });
+
+  it("ignores licenses without an agencyId", () => {
+    const map = deriveSingleAgencyWebsites([
+      rawLicense({ agencyId: undefined, agencyWebsite: "https://www.fcc.gov/" }),
+    ]);
+    expect(map.size).toBe(0);
+  });
+});
+
+describe("applyAgencyWebsiteFallback", () => {
+  it("fills a blank agencyWebsite from its agencyId's single known website", () => {
+    const licenses = [
+      rawLicense({ agencyId: "agriculture", agencyWebsite: "https://www.nj.gov/agriculture/" }),
+      rawLicense({ agencyId: "agriculture" }),
+    ];
+    const filled = applyAgencyWebsiteFallback(licenses);
+    expect(filled[1].agencyWebsite).toBe("https://www.nj.gov/agriculture/");
+  });
+
+  it("leaves an explicit agencyWebsite untouched", () => {
+    const licenses = [
+      rawLicense({ agencyId: "agriculture", agencyWebsite: "https://www.nj.gov/agriculture/" }),
+      rawLicense({ agencyId: "agriculture", agencyWebsite: "https://special.example.gov/" }),
+    ];
+    const filled = applyAgencyWebsiteFallback(licenses);
+    expect(filled[1].agencyWebsite).toBe("https://special.example.gov/");
+  });
+
+  it("leaves a blank agencyWebsite blank when the agencyId's websites conflict", () => {
+    const licenses = [
+      rawLicense({ agencyId: "njdep", agencyWebsite: "https://www.nj.gov/dep/" }),
+      rawLicense({ agencyId: "njdep", agencyWebsite: "https://www.nj.gov/bpu/" }),
+      rawLicense({ agencyId: "njdep" }),
+    ];
+    const filled = applyAgencyWebsiteFallback(licenses);
+    expect(filled[2].agencyWebsite).toBeUndefined();
   });
 });

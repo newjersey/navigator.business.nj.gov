@@ -11,4 +11,5 @@ webflowIndustry: Commercial Fishing
 divisionPhone: (609) 748-2020
 webflowId: 5f7729002f04da3b5958b5e8
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

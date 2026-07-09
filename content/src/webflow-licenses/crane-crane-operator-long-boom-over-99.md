@@ -11,4 +11,5 @@ webflowIndustry: Crane Operator
 divisionPhone: (609) 292-5626
 webflowId: 5f77294f24006134967834ba
 licenseCertificationClassification: OPERATOR'S LICENSE
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

@@ -11,4 +11,5 @@ webflowIndustry: Job Fair
 divisionPhone: (973) 504-6370
 webflowId: 5f772997a67e4ae1e45c0f39
 licenseCertificationClassification: LICENSE (IF RESUMES ARE COLLECTED & REGISTRATION FEE CHARGED ATTENDEES)
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

@@ -11,4 +11,5 @@ webflowIndustry: Child Abuse Counselor
 divisionPhone: (973) 504-6495
 webflowId: 5f772980eb5558041efeb5a3
 licenseCertificationClassification: REGISTRATION/LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

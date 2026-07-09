@@ -11,4 +11,5 @@ webflowIndustry: Alcohol Beverage Home Brewer
 divisionPhone: (609) 984-2830
 webflowId: 5f772965a6bfb52b2702ee09
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/oag/abc/"
 ---

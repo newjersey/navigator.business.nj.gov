@@ -11,4 +11,5 @@ webflowIndustry: Dental Assistant
 divisionPhone: (973) 504-6405
 webflowId: 5f772983a6bfb5e72b02ee16
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

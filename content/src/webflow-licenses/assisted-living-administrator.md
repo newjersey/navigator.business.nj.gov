@@ -11,4 +11,5 @@ webflowIndustry: Assisted Living
 divisionPhone: (609) 292-9900
 webflowId: 5f77293bde9e063d927f599f
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/health/"
 ---

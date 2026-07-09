@@ -11,4 +11,5 @@ webflowIndustry: Emergency Medical Technician
 divisionPhone: (609) 633-7777
 webflowId: 5f77293fdf77de204ce1a4c7
 licenseCertificationClassification: CERTIFICATE
+agencyWebsite: "https://www.nj.gov/health/"
 ---

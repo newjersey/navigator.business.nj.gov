@@ -11,4 +11,5 @@ webflowIndustry: Hazardous Hauling
 divisionPhone: (212) 292-7081
 webflowId: 5f772905386254b049bb0e3e
 licenseCertificationClassification: ""
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

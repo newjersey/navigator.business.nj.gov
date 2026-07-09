@@ -12,4 +12,5 @@ webflowIndustry: Health Care Facility
 divisionPhone: (609) 292-5960
 webflowId: 5f772941f278ccdf91b0ce1f
 licenseCertificationClassification: CERTIFICATE OF NEED/LICENSE
+agencyWebsite: "https://www.nj.gov/health/"
 ---

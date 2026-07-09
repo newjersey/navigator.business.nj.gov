@@ -11,4 +11,5 @@ webflowIndustry: Continuing Care
 divisionPhone: (609) 633-3888
 webflowId: 5f772981d9d23735566f48c1
 licenseCertificationClassification: CERTIFICATE OF AUTHORITY
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

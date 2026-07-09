@@ -11,4 +11,5 @@ webflowIndustry: Commodities Broker
 divisionPhone: (609) 292-5576
 webflowId: 5f7728e18150be052bf3be1b
 licenseCertificationClassification: LICENSE & BOND
+agencyWebsite: "https://www.nj.gov/agriculture/"
 ---

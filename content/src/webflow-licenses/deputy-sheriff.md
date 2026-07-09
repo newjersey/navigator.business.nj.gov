@@ -12,4 +12,5 @@ divisionPhone: (Department of Law & Public Safety, Division of Criminal
   JusticePolice Training Commission
 webflowId: 5f77295f0b0d002a64f25226
 licenseCertificationClassification: CERTIFICATE
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

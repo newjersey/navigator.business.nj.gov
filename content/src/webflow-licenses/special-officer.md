@@ -11,4 +11,5 @@ webflowIndustry: Special Officer
 divisionPhone: (609) 984-0960
 webflowId: 5f7729642edc6760a2b4a705
 licenseCertificationClassification: CERTIFICATE
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

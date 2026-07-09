@@ -11,4 +11,5 @@ webflowIndustry: Amusement
 divisionPhone: (973) 273-8000
 webflowId: 5f772970e8bf5063bb3178a1
 licenseCertificationClassification: APPROVAL
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

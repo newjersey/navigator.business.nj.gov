@@ -11,4 +11,5 @@ webflowIndustry: X-ray Technician
 divisionPhone: (609) 984-5890
 webflowId: 5f7728fbe10dec0a6d024f11
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

@@ -12,4 +12,5 @@ webflowIndustry: Nuclear Engineer
 divisionPhone: (609) 292-2345
 webflowId: 5f772950c8aaf53279c9b531
 licenseCertificationClassification: CERTIFICATE
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

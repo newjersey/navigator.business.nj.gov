@@ -11,4 +11,5 @@ webflowIndustry: Small Loan Company
 divisionPhone: (609) 292-7272
 webflowId: 5f77292feb55581183feb59f
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/dobi/"
 ---

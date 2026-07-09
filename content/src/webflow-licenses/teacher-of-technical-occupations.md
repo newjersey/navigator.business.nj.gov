@@ -11,4 +11,5 @@ webflowIndustry: Teacher of Technical Occupations
 divisionPhone: (609) 292-2070
 webflowId: 5f772939e8bf50b6f031789e
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/education/"
 ---

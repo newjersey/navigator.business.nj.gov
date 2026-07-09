@@ -12,4 +12,5 @@ webflowIndustry: Ambulance
 divisionPhone: (609) 633-7777
 webflowId: 5f7729495ef8c1ca9d019ec1
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/health/ems/"
 ---

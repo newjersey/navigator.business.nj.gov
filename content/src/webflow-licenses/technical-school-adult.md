@@ -11,4 +11,5 @@ webflowIndustry: Technical School
 divisionPhone: (609) 292-7272
 webflowId: 5f77295428e8559bb31958c2
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

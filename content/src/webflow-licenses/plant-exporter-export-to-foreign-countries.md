@@ -11,4 +11,5 @@ webflowIndustry: Plant Exporter
 divisionPhone: (609) 406-6939
 webflowId: 5f7728e390d9ac73241306f5
 licenseCertificationClassification: CERTIFICATE OF INSPECTION
+agencyWebsite: "https://www.nj.gov/agriculture/"
 ---

@@ -11,4 +11,5 @@ webflowIndustry: Seed Wholesale
 divisionPhone: (609) 947-7512
 webflowId: 5f7728e6eb55585c5afeb56d
 licenseCertificationClassification: CERTIFICATE OF VARIETAL PURITY
+agencyWebsite: "https://www.nj.gov/agriculture/"
 ---

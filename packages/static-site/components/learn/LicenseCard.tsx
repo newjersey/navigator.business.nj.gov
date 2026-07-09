@@ -35,9 +35,11 @@ const LicenseCard = ({ license, messages, query = "" }: Props) => {
   const rehypePlugins = query.trim() ? [makeHighlightPlugin(query)] : [];
   const whoItsFor = whoItsForLabel(license.webflowType, messages.whoItsForLabels);
   const industry = presentValue(license.industry);
-  // The agency line is the resolved agency name and its additional context
-  // (division), comma-joined when both are present, matching the published site.
-  const agencyLine = [license.agency, license.division].filter(Boolean).join(", ");
+  // The agency line shows the resolved agency name followed by its additional
+  // context (division), comma-separated. Matching the published site, the agency
+  // name links to the agency website when one is present; the division stays
+  // plain text.
+  const hasAgencyLine = Boolean(license.agency || license.division);
   const showCallToAction =
     license.callToActionLink !== undefined &&
     !hasUnresolvedTemplate(license.callToActionLink) &&
@@ -72,17 +74,27 @@ const LicenseCard = ({ license, messages, query = "" }: Props) => {
             {stripContentDirectives(license.summaryDescriptionMd)}
           </Markdown>
         )}
-        {license.summaryDescriptionMd && (agencyLine || license.divisionPhone) && (
+        {license.summaryDescriptionMd && (hasAgencyLine || license.divisionPhone) && (
           <hr className="border-base-light border-top-1px margin-x-0 margin-y-1" />
         )}
-        {agencyLine && (
+        {hasAgencyLine && (
           <p className="margin-bottom-1 display-flex flex-align-start">
             <Icon
               iconName="account_balance"
               className="text-primary nj-margin-inline-end-05 nj-icon-text-top"
             />
             <span>
-              <strong>{messages.cardAgencyLabel}</strong> {agencyLine}
+              <strong>{messages.cardAgencyLabel}</strong>{" "}
+              {license.agency &&
+                (license.agencyWebsite ? (
+                  <a href={license.agencyWebsite} rel="noreferrer" target="_blank">
+                    {license.agency}
+                  </a>
+                ) : (
+                  license.agency
+                ))}
+              {license.agency && license.division && ", "}
+              {license.division}
             </span>
           </p>
         )}

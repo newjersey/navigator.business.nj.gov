@@ -11,4 +11,5 @@ webflowIndustry: Toxicology Laboratory
 divisionPhone: (609) 292-3950
 webflowId: 5f772921eb55581671feb59c
 licenseCertificationClassification: CERTIFICATION
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

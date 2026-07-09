@@ -11,4 +11,5 @@ webflowIndustry: Fire Suppression
 divisionPhone: (609) 633-8105
 webflowId: 5f77298c5adcc8a5d0b64a80
 licenseCertificationClassification: CERTIFICATION
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

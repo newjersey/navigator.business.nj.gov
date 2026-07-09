@@ -11,4 +11,5 @@ webflowIndustry: Money Transmitter
 divisionPhone: (609) 292-7272
 webflowId: 5f77292ad9d237ac296f48bb
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/dobi/"
 ---

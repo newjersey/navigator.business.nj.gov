@@ -11,4 +11,5 @@ webflowIndustry: Fundraiser
 divisionPhone: (973) 504-6262
 webflowId: 5f77298d147ced7cb526bf47
 licenseCertificationClassification: REGISTRATION
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

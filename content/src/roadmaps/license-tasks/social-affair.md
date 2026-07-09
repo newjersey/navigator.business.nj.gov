@@ -14,6 +14,7 @@ callToActionText: Apply for My Social Affair Permit
 callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/posse-online-licensing-system/
 webflowId: 6902260638a874c45142d3d3
 licenseCertificationClassification: undefined
+agencyWebsite: "https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/"
 ---
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }

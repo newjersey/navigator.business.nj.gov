@@ -11,4 +11,5 @@ webflowIndustry: Agricultural Crew
 divisionPhone: (609) 292-2515
 webflowId: 5f77294ddd6a49eddc9b6064
 licenseCertificationClassification: REGISTRATION
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

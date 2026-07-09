@@ -11,4 +11,5 @@ webflowIndustry: Adult School
 divisionPhone: (609) 292-7272
 webflowId: 5f7729525ddf762af53ac436
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/labor/"
 ---
