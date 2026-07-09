@@ -412,44 +412,36 @@
     "support": {
       "title": "هذا لاحقا المحتوى",
       "description": "الصفحة حذفه في تجريبي الكتابة النهائي من النهائي المحتوى لاختبار المحتوى الكتابة النهائي المحتوى اتجاه المنتج في لاختبار سيتم نص نص اليمين مؤقت لاحقا تجريبي هذا هذا الصفحة لاختبار في اليمين لاختبار المحتوى من تجريبي تجريبي لاحقا في لاحقا من المنتج اتجاه النهائي اتجاه",
-      "cards": [
-        {
-          "title": "اليسار من هذا",
-          "description": "تجريبي عربي اليسار لاختبار النهائي المحتوى مؤقت عربي هذا اليسار اتجاه تجريبي المحتوى",
-          "iconPath": "/img/navigation.svg",
-          "iconAlt": "عربي هذا",
-          "link": {
-            "label": "لاحقا المحتوى الصفحة",
-            "href": "https://account.business.nj.gov/",
-            "isInternal": false,
-            "opensInNewTab": true
-          }
-        },
-        {
-          "title": "تجريبي اتجاه",
-          "description": "تجريبي تجريبي نص نص الصفحة تجريبي اليسار نص المنتج لاختبار اليمين تجريبي النهائي سيتم نص اليسار لاحقا",
-          "iconPath": "/img/hands.svg",
-          "iconAlt": "لاختبار اتجاه المنتج",
-          "link": {
-            "label": "النهائي في",
-            "href": "/support",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "title": "سيتم هذا",
-          "description": "لاحقا مؤقت مؤقت اليمين حذفه لاختبار اليمين النهائي المنتج من لاختبار من الصفحة مؤقت إلى",
-          "iconPath": "/img/piechart.svg",
-          "iconAlt": "مؤقت من هذا",
-          "link": {
-            "label": "من مؤقت",
-            "href": "https://business.nj.gov/newsletter",
-            "isInternal": false,
-            "opensInNewTab": true
-          }
+      "businessNjGovCard": {
+        "title": "اليسار من هذا",
+        "description": "تجريبي عربي اليسار لاختبار النهائي المحتوى مؤقت عربي هذا اليسار اتجاه تجريبي المحتوى",
+        "iconPath": "/img/navigation.svg",
+        "iconAlt": "عربي هذا",
+        "link": {
+          "label": "لاحقا المحتوى الصفحة",
+          "href": "https://account.business.nj.gov/",
+          "isInternal": false,
+          "opensInNewTab": true
         }
-      ]
+      },
+      "oneOnOneSupportCard": {
+        "title": "تجريبي اتجاه",
+        "description": "تجريبي تجريبي نص نص الصفحة تجريبي اليسار نص المنتج لاختبار اليمين تجريبي النهائي سيتم نص اليسار لاحقا",
+        "iconPath": "/img/hands.svg",
+        "iconAlt": "لاختبار اتجاه المنتج"
+      },
+      "businessLetter": {
+        "title": "سيتم هذا",
+        "description": "لاحقا مؤقت مؤقت اليمين حذفه لاختبار اليمين النهائي المنتج من لاختبار من الصفحة مؤقت إلى",
+        "iconPath": "/img/piechart.svg",
+        "iconAlt": "مؤقت من هذا",
+        "link": {
+          "label": "من مؤقت",
+          "href": "https://business.nj.gov/newsletter",
+          "isInternal": false,
+          "opensInNewTab": true
+        }
+      }
     },
     "broughtToYouBy": {
       "title": "اليسار تجريبي المنتج إلى",

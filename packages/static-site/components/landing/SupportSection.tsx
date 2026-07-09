@@ -14,9 +14,15 @@ export const SupportSection = ({ content }: SupportSectionProps) => {
         <h2 className="font-heading-2xl dark-blue">{content.title}</h2>
         <Markdown>{content.description}</Markdown>
         <div className="margin-top-5 grid-row grid-gap">
-          {content.cards.map((card) => (
-            <SupportCardElement card={card} key={card.title} />
-          ))}
+          <SupportCardElement
+            card={content.businessNjGovCard}
+            key={content.businessNjGovCard.title}
+          />
+          <OneOnOneSupportCard
+            card={content.oneOnOneSupportCard}
+            key={content.oneOnOneSupportCard.title}
+          />
+          <SupportCardElement card={content.businessLetter} key={content.businessLetter.title} />
         </div>
       </div>
     </section>
@@ -33,6 +39,25 @@ const SupportCardElement = (props: { card: SupportCard }) => {
         <h3 className="card__title">{props.card.title}</h3>
         <p className="card__description  font-sans-2xs">{props.card.description}</p>
       </LocalizedLink>
+    </div>
+  );
+};
+
+const OneOnOneSupportCard = (props: { card: Omit<SupportCard, "link"> }) => {
+  return (
+    <div className="tablet:grid-col-4 margin-bottom-2 support-card__container">
+      {/* The onClick is handled by the intercomlaunch class */}
+      <button
+        className="card support-card intercomlaunch"
+        type="button"
+        aria-label={props.card.title}
+      >
+        <div className="support-card__icon">
+          <Image src={props.card.iconPath} alt={props.card.iconAlt} width={80} height={80} />
+        </div>
+        <h3 className="card__title">{props.card.title}</h3>
+        <p className="card__description  font-sans-2xs">{props.card.description}</p>
+      </button>
     </div>
   );
 };

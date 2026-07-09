@@ -422,44 +422,36 @@
     "support": {
       "title": "For More Support",
       "description": "Looking for more expert advice? Try our free, personalized online business registration guides, speak to a representative on our chat, or sign up for business updates straight to your email. A print version and digital file of our [Small Business Manual](https://files.business.nj.gov/static/nj-small-business-manual.pdf) is also available.",
-      "cards": [
-        {
-          "title": "Your Business.NJ.gov Account",
-          "description": "Get a free, personalized step-by-step guide for starting your business in New Jersey.",
-          "iconPath": "/img/navigation.svg",
-          "iconAlt": "Navigation icon",
-          "link": {
-            "label": "Your Business.NJ.gov Account",
-            "href": "https://account.business.nj.gov/",
-            "isInternal": false,
-            "opensInNewTab": true
-          }
-        },
-        {
-          "title": "One-on-One Support",
-          "description": "Chat with a business advocate with decades of experience, anytime from 9a.m. - 5p.m. Monday - Friday.",
-          "iconPath": "/img/hands.svg",
-          "iconAlt": "Helping hands icon",
-          "link": {
-            "label": "One-on-One Support",
-            "href": "/support",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "title": "Business Newsletter",
-          "description": "Stay up to date on recently announced programs or regulations likely to affect your business.",
-          "iconPath": "/img/piechart.svg",
-          "iconAlt": "Business chart icon",
-          "link": {
-            "label": "Business Newsletter",
-            "href": "https://business.nj.gov/newsletter",
-            "isInternal": false,
-            "opensInNewTab": true
-          }
+      "businessNjGovCard": {
+        "title": "Your Business.NJ.gov Account",
+        "description": "Get a free, personalized step-by-step guide for starting your business in New Jersey.",
+        "iconPath": "/img/navigation.svg",
+        "iconAlt": "Navigation icon",
+        "link": {
+          "label": "Your Business.NJ.gov Account",
+          "href": "https://account.business.nj.gov/",
+          "isInternal": false,
+          "opensInNewTab": true
         }
-      ]
+      },
+      "oneOnOneSupportCard": {
+        "title": "One-on-One Support",
+        "description": "Chat with a business advocate with decades of experience, anytime from 9a.m. - 5p.m. Monday - Friday.",
+        "iconPath": "/img/hands.svg",
+        "iconAlt": "Helping hands icon"
+      },
+      "businessLetter": {
+        "title": "Business Newsletter",
+        "description": "Stay up to date on recently announced programs or regulations likely to affect your business.",
+        "iconPath": "/img/piechart.svg",
+        "iconAlt": "Business chart icon",
+        "link": {
+          "label": "Business Newsletter",
+          "href": "https://business.nj.gov/newsletter",
+          "isInternal": false,
+          "opensInNewTab": true
+        }
+      }
     },
     "broughtToYouBy": {
       "title": "Brought to you by",
