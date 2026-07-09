@@ -60,14 +60,16 @@ const PageLayout = async ({ children, params }: PageLayoutProps) => {
   );
 
   return (
-    <main className="grid-container usa-section">
+    // A `div`, not `main`: the app shell (locale layout) already provides the
+    // top-level `<main>` landmark, so this inner wrapper must not be a second one.
+    <div className="grid-container usa-section">
       <div className="grid-row grid-gap">
         <div className="tablet:grid-col-4 learn-side-nav">
           <LearnSideNav content={messages.learn} categoryChildren={categoryChildren} />
         </div>
         <div className="tablet:grid-col-8">{children}</div>
       </div>
-    </main>
+    </div>
   );
 };
 

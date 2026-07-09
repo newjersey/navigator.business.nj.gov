@@ -59,6 +59,15 @@ describe("FundingCard", () => {
     expect(screen.getByText("ROLLING APPLICATION")).toBeInTheDocument();
   });
 
+  it("renders a base-light divider between the card header and body", () => {
+    const { container } = renderCard({ funding: funding() });
+    const divider = container.querySelector("hr.border-base-light");
+    expect(divider).not.toBeNull();
+    // The divider sits between the header and the body.
+    expect(divider?.previousElementSibling?.classList.contains("usa-card__header")).toBe(true);
+    expect(divider?.nextElementSibling?.classList.contains("usa-card__body")).toBe(true);
+  });
+
   it("renders funding type badge uppercased", () => {
     renderCard({ funding: funding({ fundingType: "grant" }) });
     expect(screen.getByText("GRANT")).toBeInTheDocument();
