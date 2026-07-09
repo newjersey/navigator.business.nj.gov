@@ -249,14 +249,6 @@
         },
         {
           "link": {
-            "label": "Contáctenos",
-            "href": "https://nj.gov/nj/feedback.html",
-            "isInternal": false,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
             "label": "Aviso de privacidad",
             "href": "https://nj.gov/nj/privacy.html",
             "isInternal": false,
@@ -288,6 +280,7 @@
           }
         }
       ],
+      "contactUs": "Contáctenos",
       "usGovernmentSectionAriaLabel": "Información y servicios del gobierno de EE. UU.",
       "usGovernmentDescription": "Copyright © 2026 Estado de New Jersey"
     }

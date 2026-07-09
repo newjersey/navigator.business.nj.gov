@@ -228,6 +228,8 @@ export interface LayoutIdentifierContent {
   readonly importantLinksAriaLabel: string;
   /** Required links rendered in identifier navigation. */
   readonly requiredLinks: readonly LandingIdentifierRequiredLink[];
+  /** Contact Us button text that launches Intercom when clicked. */
+  readonly contactUs: string;
   /** Accessible label for the U.S. government information section. */
   readonly usGovernmentSectionAriaLabel: string;
   /** Description text rendered in the U.S. government section. */

@@ -239,14 +239,6 @@
         },
         {
           "link": {
-            "label": "لاختبار هذا",
-            "href": "https://nj.gov/nj/feedback.html",
-            "isInternal": false,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
             "label": "المحتوى المنتج",
             "href": "https://nj.gov/nj/privacy.html",
             "isInternal": false,
@@ -278,6 +270,7 @@
           }
         }
       ],
+      "contactUs": "لاختبار هذا",
       "usGovernmentSectionAriaLabel": "اليمين الكتابة هذا اليسار الصفحة",
       "usGovernmentDescription": "المنتج اليسار النهائي عربي هذا المحتوى لاختبار"
     }
