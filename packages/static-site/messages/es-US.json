@@ -704,5 +704,222 @@
     },
     "orConnector": "o",
     "chatWithExpertLabel": "Chatee con un experto empresarial en Nueva Jersey"
+  },
+  "impactReport": {
+    "title": "Informe de Impacto",
+    "subtitle": "2020–2025",
+    "downloadLink": {
+      "label": "Descargar el Informe",
+      "href": "https://files.business.nj.gov/static/business-nj-impact-report.pdf",
+      "isInternal": false,
+      "opensInNewTab": true
+    },
+    "aboutUs": {
+      "heading": "Sobre Nosotros",
+      "introParagraph": "Business.NJ.gov es una plataforma digital que sirve como una ventanilla única para que las empresas gestionen y completen permisos y licencias en Nueva Jersey. Diseñada para simplificar el proceso de iniciar, operar y hacer crecer un negocio en el estado, Business.NJ.gov ofrece apoyo integral para emprendedores y dueños de pequeños negocios.",
+      "resourcesParagraph": "Business.NJ.gov ofrece una amplia variedad de recursos, entre ellos:\n\n- Kits de inicio empresarial para gestionar licencias y permisos\n- Recomendaciones personalizadas de oportunidades de financiamiento en todo el Estado\n- Actualizaciones sobre las regulaciones y oportunidades de financiamiento más recientes\n- Un calendario personalizado con obligaciones fiscales y fechas límite para renovar permisos",
+      "image": {
+        "src": "/img/impact-report/about-us.jpg",
+        "alt": "Un dueño de negocio de Nueva Jersey sentado en su escritorio. Hay una laptop frente a él y está sonriendo."
+      },
+      "closingParagraph": "Este informe describe el impacto que Business.NJ.gov ha tenido en la comunidad empresarial desde su lanzamiento en marzo de 2020 hasta abril de 2025.",
+      "quote": {
+        "text": "Crearemos un portal digital único de primera parada para que las empresas promuevan un mejor acceso a los servicios empresariales en todo el estado…vinculado a una plataforma digital interactiva de permisos.",
+        "attribution": "Plan Económico Más Fuerte y Más Justo del Gobernador Murphy"
+      },
+      "stats": [
+        {
+          "text": "**39,768,502** Cantidad de veces que el contenido de Business.NJ.gov apareció en resultados de búsqueda web del 31 de octubre de 2023 al 1 de abril de 2025",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**10,846,068** Total de visitas a Business.NJ.gov del 15 de marzo de 2020 al 1 de abril de 2024",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**3,175,826** Total de visitas a Business.NJ.gov del 1 de abril de 2024 al 1 de abril de 2025",
+          "variant": "dark",
+          "emphasis": "lead"
+        }
+      ]
+    },
+    "makingItEasier": {
+      "heading": "Facilitando el Inicio y Crecimiento de un Negocio",
+      "beforeStatsParagraphs": [
+        "Antes de Business.NJ.gov, para iniciar y operar un negocio en el Estado Jardín, las empresas y los aspirantes a emprendedores tenían que navegar un proceso complicado, revisando 15 sitios web estatales y creando múltiples cuentas para presentar formularios y trámites regulatorios. Business.NJ.gov simplifica estos procesos y consolida tareas repartidas entre múltiples agencias en una sola plataforma fácil de usar para los negocios de Nueva Jersey.",
+        "Business.NJ.gov ha sido utilizado por millones de usuarios, cientos de miles de los cuales han aprovechado nuestro contenido empresarial con información de más de una docena de agencias estatales."
+      ],
+      "quote": {
+        "text": "Estoy verdaderamente agradecido como dueño de un pequeño negocio de lo manejable que han hecho esto. Realmente pensé que iba a ser muy difícil registrar mi pequeño negocio desde casa.",
+        "attribution": "Usuario de Business.NJ.gov"
+      },
+      "stats": [
+        {
+          "text": "En promedio, los dueños de negocios que usan Business.NJ.gov inician su negocio **30% más rápido** que quienes no lo usan.",
+          "variant": "dark"
+        },
+        {
+          "text": "**502,994** - Cantidad de visitas a las guías personalizadas de Business.NJ.gov para iniciar un negocio"
+        },
+        {
+          "text": "**403,103** - Cantidad de visitas a permisos y licencias relacionados con agencias en Business.NJ.gov"
+        },
+        {
+          "text": "**277,121** - Cantidad de veces que los negocios han usado las herramientas de recursos de financiamiento de Business.NJ.gov"
+        },
+        {
+          "text": "**57,079** - Cantidad de negocios formados a través de Business.NJ.gov de abril de 2022 a marzo de 2025"
+        },
+        {
+          "text": "**75%** - Porcentaje de usuarios que dicen que es más probable que inicien un negocio usando Business.NJ.gov"
+        }
+      ],
+      "afterStatsParagraphs": [
+        "Business.NJ.gov facilitó directamente la formación de más de 55,000 negocios y guió a los dueños de negocios a través de cientos de miles de tareas relacionadas con el inicio u operación de sus negocios.",
+        "Uno de cada siete negocios establecidos en Nueva Jersey ahora se forman a través de Business.NJ.gov.",
+        "Los usuarios reportan que Business.NJ.gov les ahorra tiempo y que es más probable que inicien un negocio usando los kits de inicio de Business.NJ.gov y otras funciones dentro de la plataforma que ayudan a los dueños de negocios a iniciar y operar su negocio."
+      ]
+    },
+    "awarenessAndCompliance": {
+      "heading": "Conocimiento y Cumplimiento de Permisos, Financiamiento y Más",
+      "paragraphs": [
+        "Business.NJ.gov mejora el acceso y la transparencia gubernamental para la comunidad empresarial de Nueva Jersey a través de varias iniciativas clave. Al asociarse con agencias estatales, la plataforma simplifica los complejos requisitos regulatorios en formatos digitales accesibles, facilitando a los dueños de negocios la obtención de permisos y licencias.",
+        "Para ahorrarles tiempo a los usuarios, Business.NJ.gov se integra con varias bases de datos y sistemas, proporcionando acceso continuo a información esencial. Este centro centralizado permite a los dueños de negocios recuperar rápidamente el estado de sus licencias y otra información relevante.",
+        "La plataforma también utiliza un lenguaje sencillo para explicar reglas y regulaciones, facilitando a los dueños de negocios la comprensión de sus obligaciones. Este enfoque fomenta un entorno empresarial más transparente.",
+        "Además, Business.NJ.gov mantiene informada a la comunidad a través de un boletín con más de 275,000 suscriptores, brindando actualizaciones sobre cambios regulatorios, programas de financiamiento y otra información esencial."
+      ],
+      "stats": [
+        {
+          "text": "**3,599,211 de 4,798,884** Cantidad de interacciones anuales de permisos cubiertas por permisos explicados en Business.NJ.gov al 1 de abril de 2025",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**3,042,715 de 4,798,884** Cantidad de interacciones anuales de permisos cubiertas por permisos integrados en Business.NJ.gov al 1 de abril de 2025",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**275,555** - Suscriptores del boletín de Business.NJ.gov que reciben actualizaciones quincenales"
+        },
+        {
+          "text": "**353,883** - Cantidad de referencias a sitios de agencias del 1 de julio de 2024 al 1 de abril de 2025"
+        },
+        {
+          "text": "**287** - Cantidad de permisos explicados en Business.NJ.gov"
+        },
+        {
+          "text": "**32** - Cantidad de sistemas de agencias integrados con Business.NJ.gov"
+        },
+        {
+          "text": "**188** - Cantidad de definiciones interactivas que explican terminología gubernamental confusa al 1 de abril de 2025"
+        },
+        {
+          "text": "**75%** - Porcentaje de interacciones anuales de permisos explicadas en Business.NJ.gov a abril de 2025"
+        },
+        {
+          "text": "**63%** - Porcentaje de interacciones anuales de permisos integradas en Business.NJ.gov a abril de 2025"
+        }
+      ],
+      "quote": {
+        "text": "Esta hoja de ruta me ayudó y me ahorró cientos de dólares que iba a pagarle a otra empresa para establecer mi negocio. Fue fácil de usar y seguir. Gracias a quien se le ocurrió esto. Esta herramienta es increíble.",
+        "attribution": "Usuario de Business.NJ.gov"
+      }
+    },
+    "fosteringEconomicGrowth": {
+      "heading": "Fomentando el Crecimiento Económico",
+      "paragraphs": [
+        "Business.NJ.gov es un catalizador del crecimiento económico en Nueva Jersey, brindando a los dueños de negocios actuales y aspirantes los recursos esenciales que necesitan para iniciar y operar sus negocios. Desde que introdujo su capacidad de formación de negocios en 2022, la plataforma ha procesado la formación de más de 57,000 negocios, contribuyendo significativamente a la creación de empleo, la innovación y la prosperidad económica.",
+        "La plataforma ofrece orientación integral paso a paso, información regulatoria y herramientas esenciales, permitiendo que los negocios se lancen de manera más rápida y eficiente. Según una encuesta a más de 700 dueños de negocios de Nueva Jersey, los usuarios de Business.NJ.gov iniciaron sus negocios 25 días más rápido en promedio que quienes no lo usaron.",
+        "Al acelerar el proceso de lanzamiento de negocios, Business.NJ.gov permite que los emprendedores comiencen a generar ingresos, contratar personal y participar en el comercio más pronto. Esta aceleración genera ganancias económicas adicionales y fortalece el PIB de Nueva Jersey."
+      ],
+      "stats": [
+        {
+          "text": "**25 días más rápido** Cantidad promedio de tiempo ahorrado por los negocios que usan Business.NJ.gov para lanzar su negocio en comparación con quienes no lo usaron. [^1]",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**$7k** Ganancias adicionales promedio estimadas por dueño de negocio que se formó a través de Business.NJ.gov en 2024 debido a que su negocio inició antes. [^2]",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**$167.7M** Total de ganancias adicionales estimadas para los dueños de negocios que formaron su negocio a través de Business.NJ.gov debido a que su negocio inició antes en 2024. [^3]",
+          "variant": "dark",
+          "emphasis": "lead"
+        }
+      ],
+      "footnotes": [
+        {
+          "id": 1,
+          "text": "Esta estimación se basó en una encuesta exploratoria de 341 dueños de negocios que utilizaron Business.NJ.gov para iniciar su negocio y 395 que no lo hicieron. Se les preguntó a los dueños de negocios “¿Cuánto tiempo tomó todo el proceso de iniciar su negocio, incluyendo el inicio de su investigación, la recepción de su certificado de formación y la investigación de todos los demás permisos y licencias?” y se les dieron rangos para elegir, desde 1 a 3 días hasta más de 12 meses. La encuesta no fue controlada por tipo o tamaño de negocio."
+        },
+        {
+          "id": 2,
+          "text": "Esta estimación se basó en multiplicar las ganancias promedio por hora de los dueños de pequeños negocios en Nueva Jersey por la cantidad de horas laborables ahorradas al formarse a través de Business.NJ.gov. Las horas laborables se definen como 8 horas de trabajo por cada día laboral adicional en que el negocio puede operar antes. **Esta métrica es provisional y está sujeta a revisión a medida que mejoramos nuestra metodología y obtenemos datos más precisos.**"
+        },
+        {
+          "id": 3,
+          "text": "Esta estimación se basó en multiplicar las ganancias adicionales promedio estimadas en 2024 por dueño de negocio formado a través de Business.NJ.gov por la cantidad total de negocios formados a través de Business.NJ.gov en 2024. **Esta métrica es provisional y está sujeta a revisión a medida que mejoramos nuestra metodología y obtenemos datos más precisos.**"
+        }
+      ]
+    },
+    "customerServiceExperience": {
+      "heading": "Unificando la Experiencia de Servicio al Cliente",
+      "beforeQuoteParagraphs": [
+        "Business.NJ.gov mejora el servicio al cliente para la comunidad empresarial de Nueva Jersey a través de varias iniciativas estratégicas.",
+        "Al asociarse con varias agencias estatales, la plataforma ofrece un servicio de Chat en Vivo donde los usuarios pueden comunicarse directamente con expertos relevantes a sus problemas. Este acceso inmediato a asesoría especializada garantiza una asistencia precisa y eficaz para los dueños de negocios."
+      ],
+      "quote": {
+        "text": "He registrado al menos 10 empresas a lo largo de mi carrera y este navegador es POR MUCHO la experiencia más fácil y mejor que he tenido trabajando con un gobierno estatal. Esto no solo es un gran alivio para mí como emprendedor que inicia un nuevo negocio, sino que también refleja muy bien el esfuerzo de Nueva Jersey por ser más amigable con los negocios y me hace sentir mucho más positivo sobre hacer negocios en NJ.",
+        "attribution": "Usuario de Business.NJ.gov"
+      },
+      "afterQuoteParagraphs": [
+        "El Chat en Vivo también simplifica la comunicación interagencial sobre solicitudes y apoyo de los clientes. Cuando las consultas involucran a varias agencias, la plataforma facilita la coordinación interagencial, lo que resulta en respuestas útiles y oportunas para los dueños de negocios. La gran mayoría de los usuarios reportan estar satisfechos con su experiencia de Chat en Vivo."
+      ],
+      "imageRowParagraphs": [
+        "A través de estas iniciativas, Business.NJ.gov demuestra un fuerte compromiso con la mejora del servicio al cliente, facilitando que los dueños de negocios de Nueva Jersey superen desafíos y se enfoquen en el crecimiento.",
+        "Decenas de miles de dueños de negocios de Nueva Jersey han confiado en el Chat en Vivo de Business.NJ.gov para responder preguntas críticas sobre sus negocios.",
+        "Los residentes de Nueva Jersey que han utilizado el Chat en Vivo reportan altas tasas de satisfacción. Business.NJ.gov reúne a varias agencias para coordinar respuestas a preguntas de clientes que requieren experiencia interagencial."
+      ],
+      "image": {
+        "src": "/img/impact-report/customer-service.jpg",
+        "alt": "Un dueño de negocio de Nueva Jersey se está riendo en su oficina. Lleva puesta una sudadera con capucha naranja con letras azules del logotipo de su empresa."
+      },
+      "stats": [
+        {
+          "text": "**165,267** - Cantidad de conversaciones en el Chat en Vivo del 15 de marzo de 2020 al 1 de abril de 2025"
+        },
+        {
+          "text": "**4m 9s** - Tiempo mediano de respuesta a consultas a través del Chat en Vivo del 1 de mayo de 2023 al 1 de abril de 2025"
+        },
+        {
+          "text": "**73%** - Porcentaje de usuarios que reportan estar muy contentos o contentos con sus conversaciones del 1 de marzo de 2025 al 1 de abril de 2025"
+        },
+        {
+          "text": "**5** - Cantidad de agencias que participan en el Chat en Vivo"
+        }
+      ]
+    },
+    "drivingEquity": {
+      "heading": "Impulsando la Equidad y Accesibilidad",
+      "paragraphs": [
+        "Business.NJ.gov ha mejorado significativamente la equidad y accesibilidad para la comunidad empresarial de Nueva Jersey. La plataforma ha estado ampliando su contenido en español, avanzando en los esfuerzos para satisfacer diversas necesidades lingüísticas. Usuarios de todas las regiones de Nueva Jersey acceden al sitio, destacando su amplio alcance. La plataforma atrae a una audiencia diversa, que abarca varios grupos de edad y géneros, reflejando un compromiso de promover un entorno empresarial inclusivo y accesible."
+      ],
+      "stats": [
+        {
+          "text": "**70%** - Crecimiento aproximado interanual en sesiones de miembros de comunidades desatendidas"
+        },
+        {
+          "text": "**100%** - Porcentaje de páginas del sitio estático de Business.NJ.gov traducidas al español"
+        },
+        {
+          "text": "**40,748** - Cantidad de visitas a contenido en español del 1 de junio de 2023 al 1 de abril de 2025"
+        }
+      ]
+    }
   }
 }

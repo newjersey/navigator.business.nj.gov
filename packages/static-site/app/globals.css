@@ -8,6 +8,7 @@
   --color-primary: #005ea2; /* NJWDS default link color ($theme-link-color: "blue-60v"); SCSS-only in NJWDS, not exposed as a runtime CSS variable there. Also used as a funding-scoped accent (chips, search highlight) that per designs contrasts the NJWDS "primary". */
   --color-primary-dark: #2c608a; /* NJ primary dark blue; USWDS primary-dark (NJ override) */
   --color-accent-cool-darkest: #38536f; /* NJ-specific; no exact USWDS palette match */
+  --color-accent-cool: #00bde3; /* USWDS accent-cool; matches usa-section--dark's heading color and usa-alert--info's border. */
 }
 
 * {
