@@ -655,6 +655,182 @@ export interface PageNotFoundContent {
 }
 
 /**
+ * Visual treatment applied to one stat, per the design.
+ *
+ * "plain" renders as a bulleted line of prose with the bolded figure in
+ * --color-primary blue; "dark" renders as a full-width dark callout block
+ * (matching `usa-section--dark`) with the bolded figure in teal. Defaults to
+ * "plain" when omitted.
+ */
+export type ImpactReportStatVariant = "plain" | "dark";
+
+/**
+ * One statistic rendered in an impact report stat group.
+ */
+export interface ImpactReportStat {
+  /** Full sentence as markdown, with the statistic bolded (e.g. "**502,994** visits to…"). */
+  readonly text: string;
+  /** Visual treatment for this stat; defaults to "plain". */
+  readonly variant?: ImpactReportStatVariant;
+  /** Renders the leading bold figure as a large block when set. */
+  readonly emphasis?: "lead";
+}
+
+/**
+ * One highlighted quote rendered in an impact report section.
+ */
+export interface ImpactReportQuote {
+  /** Quote text. */
+  readonly text: string;
+  /** Attribution rendered below the quote. */
+  readonly attribution: string;
+}
+
+/**
+ * One photo rendered alongside text in an impact report section.
+ */
+export interface ImpactReportImage {
+  /** Public path to the image asset. */
+  readonly src: string;
+  /** Alt text describing the image for screen reader users. */
+  readonly alt: string;
+}
+
+/**
+ * Localized content for the impact report's "About Us" section.
+ */
+export interface AboutUsContent {
+  /** Section heading text. */
+  readonly heading: string;
+  /** Introductory paragraph rendered full-width; markdown, supports **bold** spans. */
+  readonly introParagraph: string;
+  /** Paragraph (including the bulleted resource list) paired with `image` in a two-column row; markdown. */
+  readonly resourcesParagraph: string;
+  /** Photo rendered beside `resourcesParagraph`. */
+  readonly image: ImpactReportImage;
+  /** Closing paragraph rendered full-width after the image row; markdown. */
+  readonly closingParagraph: string;
+  /** Highlighted quote rendered above the stats. */
+  readonly quote: ImpactReportQuote;
+  /** Stat tiles rendered at the bottom of the section. */
+  readonly stats: readonly ImpactReportStat[];
+}
+
+/**
+ * Localized content for the impact report's "Making it Easier to Start and
+ * Grow a Business" section.
+ */
+export interface MakingItEasierContent {
+  /** Section heading text. */
+  readonly heading: string;
+  /** Body paragraphs rendered before the stats; markdown, supports **bold** spans. */
+  readonly beforeStatsParagraphs: readonly string[];
+  /** Highlighted quote rendered at the top of the section. */
+  readonly quote: ImpactReportQuote;
+  /** Stats rendered in order; the "dark" one is the "…30% faster…" callout. */
+  readonly stats: readonly ImpactReportStat[];
+  /** Body paragraphs rendered after the stats; markdown, supports **bold** spans. */
+  readonly afterStatsParagraphs: readonly string[];
+}
+
+/**
+ * Localized content for the impact report's "Awareness of and Compliance
+ * with Permits, Funding, and More" section.
+ */
+export interface AwarenessAndComplianceContent {
+  /** Section heading text. */
+  readonly heading: string;
+  /** Body paragraphs rendered as markdown; supports **bold** spans. */
+  readonly paragraphs: readonly string[];
+  /** Stat tiles rendered within the section. */
+  readonly stats: readonly ImpactReportStat[];
+  /** Highlighted quote rendered at the bottom of the section. */
+  readonly quote: ImpactReportQuote;
+}
+
+/**
+ * One footnote rendered in the impact report's "Fostering Economic Growth" section.
+ */
+export interface ImpactReportFootnote {
+  /** Identifier referenced by a `[^N]` marker in stat text. */
+  readonly id: number;
+  /** Footnote body as markdown. */
+  readonly text: string;
+}
+
+/**
+ * Localized content for the impact report's "Fostering Economic Growth" section.
+ */
+export interface FosteringEconomicGrowthContent {
+  /** Section heading text. */
+  readonly heading: string;
+  /** Body paragraphs rendered as markdown; supports **bold** spans. */
+  readonly paragraphs: readonly string[];
+  /** Dark-callout stats rendered at the end of the section. */
+  readonly stats: readonly ImpactReportStat[];
+  /** Footnotes rendered as markdown at the end of the section, highlighted light-green. */
+  readonly footnotes: readonly ImpactReportFootnote[];
+}
+
+/**
+ * Localized content for the impact report's "Unifying the Customer Service
+ * Experience" section.
+ */
+export interface CustomerServiceExperienceContent {
+  /** Section heading text. */
+  readonly heading: string;
+  /** Body paragraphs rendered before the quote; markdown, supports **bold** spans. */
+  readonly beforeQuoteParagraphs: readonly string[];
+  /** Highlighted quote rendered within the section. */
+  readonly quote: ImpactReportQuote;
+  /** Body paragraphs rendered full-width after the quote, before the image row; markdown. */
+  readonly afterQuoteParagraphs: readonly string[];
+  /** Paragraphs paired with `image` in a two-column row; markdown, supports **bold** spans. */
+  readonly imageRowParagraphs: readonly string[];
+  /** Photo rendered beside `imageRowParagraphs`. */
+  readonly image: ImpactReportImage;
+  /** Stat tiles rendered within the section. */
+  readonly stats: readonly ImpactReportStat[];
+}
+
+/**
+ * Localized content for the impact report's "Driving Equity and
+ * Accessibility" section.
+ */
+export interface DrivingEquityContent {
+  /** Section heading text. */
+  readonly heading: string;
+  /** Body paragraphs rendered as markdown; supports **bold** spans. */
+  readonly paragraphs: readonly string[];
+  /** Stat tiles rendered within the section. */
+  readonly stats: readonly ImpactReportStat[];
+}
+
+/**
+ * Localized content for the impact report page.
+ */
+export interface ImpactReportMessages {
+  /** Page H1 title. */
+  readonly title: string;
+  /** Year range for report. */
+  readonly subtitle: string;
+  /** Link to the downloadable PDF version of the report. */
+  readonly downloadLink: ContentLink;
+  /** "About Us" section content. */
+  readonly aboutUs: AboutUsContent;
+  /** "Making it Easier to Start and Grow a Business" section content. */
+  readonly makingItEasier: MakingItEasierContent;
+  /** "Awareness of and Compliance with Permits, Funding, and More" section content. */
+  readonly awarenessAndCompliance: AwarenessAndComplianceContent;
+  /** "Fostering Economic Growth" section content. */
+  readonly fosteringEconomicGrowth: FosteringEconomicGrowthContent;
+  /** "Unifying the Customer Service Experience" section content. */
+  readonly customerServiceExperience: CustomerServiceExperienceContent;
+  /** "Driving Equity and Accessibility" section content. */
+  readonly drivingEquity: DrivingEquityContent;
+}
+
+/**
  * Complete localized message payload for one locale.
  */
 export interface ApplicationMessages {
@@ -672,4 +848,6 @@ export interface ApplicationMessages {
   readonly licensingGuide: LicensingGuidePageMessages;
   /** 404 page content strings and links. */
   readonly pageNotFound: PageNotFoundContent;
+  /** Impact report page content strings. */
+  readonly impactReport: ImpactReportMessages;
 }

@@ -30,7 +30,8 @@ const matchesFilters = (funding: Funding, filters: AppliedFilters): boolean => {
   const typeMatch =
     filters.fundingTypes.size === 0 || filters.fundingTypes.has(funding.fundingType);
   const industryMatch =
-    filters.industries.size === 0 || funding.sector.some((id) => filters.industries.has(id));
+    filters.industries.size === 0 ||
+    funding.sector.some((id: string) => filters.industries.has(id));
   return typeMatch && industryMatch;
 };
 

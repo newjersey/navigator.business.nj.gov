@@ -9,6 +9,7 @@ import "@/app/globals.css";
 import "@/app/header.css";
 import "@/app/landing.css";
 import "@/app/funding.css";
+import "@/app/impact-report.css";
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
