@@ -62,6 +62,29 @@ const renderIdentifierRequiredLink = ({ item, index }: RenderIdentifierRequiredL
 };
 
 /**
+ * Renders an Intercom launch button styled as an identifier required link.
+ *
+ * This button maintains the visual appearance of other identifier links while
+ * providing click functionality to open the Intercom chat widget instead of
+ * navigating to a new page.
+ *
+ * @param content The display text for the button.
+ * @returns One `<li>` element containing a styled button for the required links list.
+ */
+const ContactUsIntercomLaunch = (content: string) => {
+  return (
+    <li className="usa-identifier__required-links-item">
+      <button
+        className="usa-identifier__required-link usa-link button-styled-as-link intercomlaunch"
+        type="button"
+      >
+        {content}
+      </button>
+    </li>
+  );
+};
+
+/**
  * Renders the full identifier section from typed content.
  *
  * @param props Component props.
@@ -111,6 +134,7 @@ export const IdentifierSection = ({ content }: IdentifierSectionProps) => {
             {content.requiredLinks.map((item, index) => {
               return renderIdentifierRequiredLink({ item, index });
             })}
+            {ContactUsIntercomLaunch(content.contactUs)}
           </ul>
         </div>
       </nav>
