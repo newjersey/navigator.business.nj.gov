@@ -10,4 +10,5 @@ webflowIndustry: Attorney
 licenseCertificationClassification: CERTIFICATE OF ADMISSION
 divisionPhone: (609) 815-2911
 webflowId: 5f77296d8150be09eaf3be2a
+agencyWebsite: "https://www.njbarexams.org/"
 ---

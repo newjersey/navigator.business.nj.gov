@@ -11,4 +11,5 @@ webflowIndustry: Modular Homes
 divisionPhone: (973) 504-6370
 webflowId: 5f77299de10decf559025081
 licenseCertificationClassification: REGISTRATION & WARRANTING OF NEW HOMES
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

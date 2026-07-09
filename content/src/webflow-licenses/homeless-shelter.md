@@ -11,4 +11,5 @@ webflowIndustry: Homeless Shelter
 divisionPhone: (609) 984-1706
 webflowId: 5f7729925ef8c11c45019ec8
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

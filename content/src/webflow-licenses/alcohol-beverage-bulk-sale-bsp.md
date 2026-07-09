@@ -11,4 +11,5 @@ webflowIndustry: Alcohol Beverage Bulk Sale
 divisionPhone: (609) 984-2830
 webflowId: 5f772965f17efbd901eefb3a
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/oag/abc/"
 ---

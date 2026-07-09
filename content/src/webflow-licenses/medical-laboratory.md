@@ -11,4 +11,5 @@ webflowIndustry: Medical Laboratory
 divisionPhone: (609) 826-7100
 webflowId: 5f77299cdd6a49425e9b606b
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

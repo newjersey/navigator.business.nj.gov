@@ -11,4 +11,5 @@ webflowIndustry: Teacher of Vocational Arts and Dance
 divisionPhone: (609) 292-2070
 webflowId: 5f77293adf77de7f3ae1a4c4
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/education/"
 ---

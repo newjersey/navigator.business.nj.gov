@@ -11,4 +11,5 @@ webflowIndustry: Teacher of Practical Nursing
 divisionPhone: (609) 292-2070
 webflowId: 5f77293990d9ac342c1309d9
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/education/"
 ---

@@ -11,4 +11,5 @@ webflowIndustry: Mechanical Inspector
 divisionPhone: (609) 984-7834
 webflowId: 5f772996d2749af8c79cf7e0
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

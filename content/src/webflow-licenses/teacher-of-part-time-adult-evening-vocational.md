@@ -11,4 +11,5 @@ webflowIndustry: Teacher of Vocational Occupations
 divisionPhone: (609) 292-2070
 webflowId: 5f7729388075e89585a8d940
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/education/"
 ---

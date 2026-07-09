@@ -10,4 +10,5 @@ webflowIndustry: Education
 licenseCertificationClassification: LICENSE
 divisionPhone: (609) 292-2955
 webflowId: 640b8468e10ad956fbb3ede4
+agencyWebsite: "https://www.nj.gov/highereducation/"
 ---

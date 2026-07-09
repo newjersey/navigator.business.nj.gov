@@ -11,4 +11,5 @@ webflowIndustry: Physical Therapist Assistant
 divisionPhone: (973)504-6455
 webflowId: 5f7729c1d20a7f5a503604e6
 licenseCertificationClassification: REGISTRATION/LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

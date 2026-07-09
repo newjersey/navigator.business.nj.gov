@@ -18,6 +18,7 @@ agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Accountancy
 divisionPhone: (973) 504-6380
 webflowId: 5f7729d28aa6e3de76f1e60c
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---
 
 ## Eligibility Criteria

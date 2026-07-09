@@ -12,4 +12,5 @@ webflowIndustry: Produce Dealer
 divisionPhone: (609) 292-5651
 webflowId: 5f7728e5147ced6a7326bf2e
 licenseCertificationClassification: LICENSE/BOND
+agencyWebsite: "https://www.nj.gov/agriculture/"
 ---

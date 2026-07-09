@@ -12,4 +12,5 @@ webflowIndustry: Electroplating
 divisionPhone: (609) 292-2121
 webflowId: 5f772950d2749a6ec39cf7d8
 licenseCertificationClassification: LICENSE & PERMIT
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

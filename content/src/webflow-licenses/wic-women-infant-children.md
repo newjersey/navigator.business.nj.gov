@@ -11,4 +11,5 @@ webflowIndustry: WIC
 divisionPhone: (866) 446-5942
 webflowId: 5f7729473862542f6abb0e44
 licenseCertificationClassification: REGISTRATION TO ACCEPT WIC
+agencyWebsite: "https://www.nj.gov/health/"
 ---

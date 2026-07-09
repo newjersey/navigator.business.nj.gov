@@ -11,4 +11,5 @@ webflowIndustry: Radio Therapy Technologist
 divisionPhone: (609) 984-5890
 webflowId: 5f77291be02294838beaa5ad
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

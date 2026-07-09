@@ -11,4 +11,5 @@ webflowIndustry: Firearms
 divisionPhone: (609) 882-2000
 webflowId: 5f7729604ad0ae6bffa54a58
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

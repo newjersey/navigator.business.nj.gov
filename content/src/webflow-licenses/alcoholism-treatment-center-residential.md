@@ -11,4 +11,5 @@ webflowIndustry: Alcoholism Treatment
 divisionPhone: (609) 826-4935
 webflowId: 5f772947614a2d98b1d207a5
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/health/ceohs/"
 ---

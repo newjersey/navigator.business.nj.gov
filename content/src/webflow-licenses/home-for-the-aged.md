@@ -11,4 +11,5 @@ webflowIndustry: Home for the Aged
 divisionPhone: (609) 292-8773
 webflowId: 5f772942c8aaf5cca3c9b52f
 licenseCertificationClassification: CERTIFICATE OF NEED
+agencyWebsite: "https://www.nj.gov/health/"
 ---

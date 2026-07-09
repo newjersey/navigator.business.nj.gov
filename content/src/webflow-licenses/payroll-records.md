@@ -11,4 +11,5 @@ webflowIndustry: Payroll Records
 divisionPhone: (609) 292-9664
 webflowId: 5f772952ef49623c3846d0de
 licenseCertificationClassification: PERMIT
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

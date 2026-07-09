@@ -12,4 +12,5 @@ webflowIndustry: Milk Plant
 divisionPhone: (609) 826-4935
 webflowId: 5f7729446f3d8d215775ef32
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/health/"
 ---

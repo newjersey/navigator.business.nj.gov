@@ -11,4 +11,5 @@ webflowIndustry: Out of State Payroll
 divisionPhone: (609) 292-9664
 webflowId: 5f772951486eeb23f7c25614
 licenseCertificationClassification: PERMIT
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

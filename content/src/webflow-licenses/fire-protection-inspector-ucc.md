@@ -11,4 +11,5 @@ webflowIndustry: Fire Inspector
 divisionPhone: 609-984-7860
 webflowId: 5f77298cd2749a8ce79cf7de
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

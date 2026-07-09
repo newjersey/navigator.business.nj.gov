@@ -11,4 +11,5 @@ webflowIndustry: Inspector
 divisionPhone: (609) 984-7834
 webflowId: 5f772997a195c8fa2e15b190
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

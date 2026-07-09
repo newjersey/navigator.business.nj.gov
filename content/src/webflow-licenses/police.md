@@ -11,4 +11,5 @@ webflowIndustry: Police
 divisionPhone: (609) 376-2800
 webflowId: 5f7729630b0d002834f25227
 licenseCertificationClassification: CERTIFICATION
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

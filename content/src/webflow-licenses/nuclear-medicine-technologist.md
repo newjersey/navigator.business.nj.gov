@@ -11,4 +11,5 @@ webflowIndustry: Nuclear Medicine Technologist
 divisionPhone: (609) 984-5890
 webflowId: 5f77291190d9ac440e1309d7
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

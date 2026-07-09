@@ -11,4 +11,5 @@ webflowIndustry: Wildlife
 divisionPhone: (908) 735-6200
 webflowId: 5f772922e10dec2d9c024f15
 licenseCertificationClassification: CONTACT
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

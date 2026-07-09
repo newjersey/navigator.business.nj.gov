@@ -11,4 +11,5 @@ webflowIndustry: Certified Environmental Laboratory
 divisionPhone: (609) 292-3950
 webflowId: 5f7728fbf17efb302ceefb31
 licenseCertificationClassification: CERTIFICATE
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

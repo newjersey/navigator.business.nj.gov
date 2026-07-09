@@ -11,4 +11,5 @@ webflowIndustry: Nurse
 divisionPhone: (973) 504-6430
 webflowId: 5f7729a62edc67cbbfb4a70c
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

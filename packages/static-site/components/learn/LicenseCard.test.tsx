@@ -71,6 +71,34 @@ describe("LicenseCard", () => {
     expect(screen.queryByText(/,/)).not.toBeInTheDocument();
   });
 
+  it("links the agency name to the agency website, keeping the division as plain text", () => {
+    renderCard({
+      license: license({
+        agency: "Department of Agriculture",
+        division: "Division of Animal Health",
+        agencyWebsite: "https://www.nj.gov/agriculture/",
+      }),
+    });
+    const link = screen.getByRole("link", { name: "Department of Agriculture" });
+    expect(link).toHaveAttribute("href", "https://www.nj.gov/agriculture/");
+    // External agency site opens in a new tab, matching the published site and
+    // the sibling funding card convention.
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noreferrer");
+    // The division stays plain text, not part of the link.
+    expect(screen.getByText(/, Division of Animal Health/)).toBeInTheDocument();
+  });
+
+  it("renders the agency name as plain text when there is no agency website", () => {
+    renderCard({
+      license: license({ agency: "Federal Trade Commission", agencyWebsite: undefined }),
+    });
+    expect(
+      screen.queryByRole("link", { name: "Federal Trade Commission" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText(/Federal Trade Commission/)).toBeInTheDocument();
+  });
+
   it("prefixes agency with the account_balance icon and phone with the phone icon", () => {
     const { container } = renderCard();
     const hrefs = [...container.querySelectorAll("use")].map((u) => u.getAttribute("href"));

@@ -11,4 +11,5 @@ webflowIndustry: Race Regatta
 divisionPhone: (609) 882-2000  6173
 webflowId: 5f7729649491d5352b036b58
 licenseCertificationClassification: PERMIT
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

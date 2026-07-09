@@ -12,4 +12,5 @@ webflowIndustry: Rehabilitation Hospital
 divisionPhone: (609) 292-5960
 webflowId: 5f772945e022948cdceaa5c6
 licenseCertificationClassification: LICENSE/CERTIFICATE OF NEED
+agencyWebsite: "https://www.nj.gov/health/"
 ---

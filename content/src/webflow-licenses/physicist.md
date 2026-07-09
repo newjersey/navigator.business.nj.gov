@@ -11,4 +11,5 @@ webflowIndustry: Physicist
 divisionPhone: (866) 534-7789
 webflowId: 5f77291aecb74e8cbd23aacc
 licenseCertificationClassification: CERTIFICATION
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

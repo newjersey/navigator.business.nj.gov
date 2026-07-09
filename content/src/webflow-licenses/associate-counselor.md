@@ -11,4 +11,5 @@ webflowIndustry: Associate Counselor
 divisionPhone: (908) 504-6582
 webflowId: 5f772971b0544f24ac36617d
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

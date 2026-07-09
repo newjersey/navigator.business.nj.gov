@@ -11,4 +11,5 @@ webflowIndustry: Wine Making
 divisionPhone: (609) 984-2830
 webflowId: 5f7729650b0d004991f25228
 licenseCertificationClassification: PERMIT
+agencyWebsite: "https://www.nj.gov/oag/"
 ---

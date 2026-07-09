@@ -367,6 +367,13 @@ collections:
           widget: "string",
           required: false,
         }
+      - {
+          label: "Agency Website (Static Site License Cards)",
+          name: "agencyWebsite",
+          widget: "string",
+          required: false,
+          hint: "URL the agency name links to on the license card.",
+        }
       - { label: "Form Name", name: "formName", widget: "string", required: false }
       - label: "Type (Webflow)"
         name: "webflowType"
@@ -481,6 +488,13 @@ collections:
           widget: "string",
           required: false,
         }
+      - {
+          label: "Agency Website (Static Site License Cards)",
+          name: "agencyWebsite",
+          widget: "string",
+          required: false,
+          hint: "URL the agency name links to on the license card.",
+        }
       - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
       - label: "Type (Webflow)"
         name: "webflowType"
@@ -579,6 +593,13 @@ collections:
           name: "agencyAdditionalContext",
           widget: "string",
           required: false,
+        }
+      - {
+          label: "Agency Website (Static Site License Cards)",
+          name: "agencyWebsite",
+          widget: "string",
+          required: false,
+          hint: "URL the agency name links to on the license card.",
         }
       - {
           label: "Form Name (Webflow & Navigator)",

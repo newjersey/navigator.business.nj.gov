@@ -11,4 +11,5 @@ webflowIndustry: Water Laboratory
 divisionPhone: (609) 292-3950
 webflowId: 5f7729220b0d005e26f25209
 licenseCertificationClassification: CERTIFICATION
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

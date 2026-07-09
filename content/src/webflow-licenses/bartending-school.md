@@ -11,4 +11,5 @@ webflowIndustry: Bartending School
 divisionPhone: (609) 984-2242
 webflowId: 5f77294e8fbb22532a6ec08a
 licenseCertificationClassification: CERTIFICATE OF APPROVAL
+agencyWebsite: "https://www.nj.gov/labor/"
 ---

@@ -11,4 +11,5 @@ webflowIndustry: Arson Investigation
 divisionPhone: (609) 984-7860
 webflowId: 5f7728f38075e845a4a8d93a
 licenseCertificationClassification: CERTIFICATE
+agencyWebsite: "https://www.nj.gov/dca/"
 ---

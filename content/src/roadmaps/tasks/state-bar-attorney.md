@@ -16,6 +16,7 @@ summaryDescriptionMd: >-
   may apply for admission to the State Bar by transferring your Uniform Bar
   Examination (UBE) Score.
 syncToWebflow: true
+agencyWebsite: "https://www.njbarexams.org/home"
 ---
 
 ## Eligibility Criteria

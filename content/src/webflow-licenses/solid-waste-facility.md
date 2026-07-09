@@ -11,4 +11,5 @@ webflowIndustry: Solid Waste Facility
 divisionPhone: (609) 292-7081
 webflowId: 5f77291f486eeb6579c2560e
 licenseCertificationClassification: CERTIFICATE
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

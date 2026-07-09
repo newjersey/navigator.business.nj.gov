@@ -11,4 +11,5 @@ webflowIndustry: Practical Nurse
 divisionPhone: (973) 504-6430
 webflowId: 5f7729cbebae0c00632b868f
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

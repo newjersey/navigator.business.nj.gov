@@ -11,4 +11,5 @@ webflowIndustry: Coastal Wetlands
 divisionPhone: (609) 292-0060
 webflowId: 5f7728fb24006107aa7834b8
 licenseCertificationClassification: PERMIT
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

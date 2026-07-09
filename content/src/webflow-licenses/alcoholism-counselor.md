@@ -10,4 +10,5 @@ webflowIndustry: Alcoholism Counselor
 licenseCertificationClassification: CERTIFICATE
 divisionPhone: (973) 504-6582
 webflowId: 5f772970df77de8b55e1a52c
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

@@ -11,4 +11,5 @@ webflowIndustry: Games of Chance
 divisionPhone: (973) 273-8000
 webflowId: 5f77298ee8bf5046be3178a4
 licenseCertificationClassification: LICENSE & REGISTRATION
+agencyWebsite: "https://www.njconsumeraffairs.gov/"
 ---

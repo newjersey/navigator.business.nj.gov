@@ -11,4 +11,5 @@ webflowIndustry: Dental X-ray
 divisionPhone: (609) 984-5890
 webflowId: 5f7728fc1a08091cedbb2ec6
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

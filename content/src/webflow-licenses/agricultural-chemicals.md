@@ -12,4 +12,5 @@ webflowIndustry: Agricultural Chemicals
 divisionPhone: (609) 984-6507
 webflowId: 5f7728fae10dec0d72024f10
 licenseCertificationClassification: LICENSE
+agencyWebsite: "https://www.nj.gov/dep/"
 ---

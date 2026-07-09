@@ -11,4 +11,5 @@ webflowIndustry: Hunting and Fishing
 divisionPhone: (609) 292-4860
 webflowId: 5f7729081a08092ef5bb2ec7
 licenseCertificationClassification: CONTACT
+agencyWebsite: "https://www.nj.gov/dep/"
 ---
