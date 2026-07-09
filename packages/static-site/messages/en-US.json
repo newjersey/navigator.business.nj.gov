@@ -655,7 +655,9 @@
     "filterClear": "Clear",
     "filterShowResults": "Show {count} Results",
     "filterReset": "Reset",
-    "resultCount": "Showing <bold>{filtered}</bold> results of {total} items",
+    "resultCountShowing": "Showing <bold>{start}–{end}</bold> of {total} items",
+    "resultCountFiltered": "Showing <bold>{start}–{end}</bold> of {filtered} matching items (of {total} total)",
+    "resultCountFilteredEmpty": "0 matching items (of {total} total)",
     "filteringByLabel": "Filtering by:",
     "filterSearchChip": "Search: \"{query}\"",
     "filterRemoveLabel": "Remove {filter} filter",
@@ -666,5 +668,34 @@
     "cardDueLabel": "Due:",
     "cardEligibilityHeading": "Eligibility",
     "cardBenefitsHeading": "Benefits"
+  },
+  "licensingGuide": {
+    "title": "Licensing and Certification Guide",
+    "ctaHeading": "Get Your Registration Guide!",
+    "ctaBody": "Start your New Jersey or out-of-state business today!",
+    "ctaButton": "Get Started",
+    "filterHeading": "Narrow Results",
+    "filterSearch": "Search",
+    "filterShowResults": "Show {count} Results",
+    "filterReset": "Reset",
+    "resultCountShowing": "Showing <bold>{start}–{end}</bold> of {total} items",
+    "resultCountFiltered": "Showing <bold>{start}–{end}</bold> of {filtered} matching items (of {total} total)",
+    "resultCountFilteredEmpty": "0 matching items (of {total} total)",
+    "filteringByLabel": "Filtering by:",
+    "filterSearchChip": "Search: \"{query}\"",
+    "filterRemoveLabel": "Remove {filter} filter",
+    "paginationPrevious": "Previous",
+    "paginationNext": "Next",
+    "paginationLabel": "Pagination",
+    "paginationPageLabel": "Page {page}",
+    "cardWhoForLabel": "Who it's for:",
+    "cardIndustryLabel": "Industry:",
+    "cardAgencyLabel": "Agency:",
+    "cardPhoneLabel": "Phone:",
+    "whoItsForLabels": {
+      "business-license": "Businesses",
+      "individual-license": "Individuals",
+      "object-vehicle": "Object/Vehicle"
+    }
   }
 }

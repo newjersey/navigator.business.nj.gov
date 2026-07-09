@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import path from "path";
 import matter from "gray-matter";
 import fs from "fs";
+import { loadAllLicenses } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 import {
   type FileSystemPort,
   type BuildConfig,
@@ -13,7 +14,8 @@ import {
   buildSectors,
   buildAndWriteSectors,
   buildAndWriteContent,
-  contentConfigs,
+  getContentConfigs,
+  toIndustryNamesById,
   executeBuild,
   createBuildConfig,
   logBuildResults,
@@ -24,6 +26,7 @@ import {
   extractItemsFromObject,
   buildChecklistItemTaskMap,
   buildAndWriteChecklistItemTasks,
+  toLicenseCard,
 } from "./build";
 
 // ============================================================================
@@ -206,6 +209,19 @@ describe("Domain Layer", () => {
 
       const industries = buildIndustries(mockFs, "/industries");
       expect(industries).toHaveLength(0);
+    });
+
+    it("should build an industryId to name lookup map", () => {
+      const industries = [
+        { id: "ind1", name: "Industry 1" },
+        { id: "ind2", name: "Industry 2" },
+      ];
+
+      const industryNamesById = toIndustryNamesById(industries);
+
+      expect(industryNamesById.get("ind1")).toBe("Industry 1");
+      expect(industryNamesById.get("ind2")).toBe("Industry 2");
+      expect(industryNamesById.get("unknown")).toBeUndefined();
     });
   });
 
@@ -556,7 +572,8 @@ describe("Application Layer", () => {
 
   describe("Content Configuration", () => {
     it("should have configuration for all content types", () => {
-      expect(contentConfigs).toHaveLength(7); // 7 content types (excluding industries)
+      const contentConfigs = getContentConfigs(new Map());
+      expect(contentConfigs).toHaveLength(8); // 8 content types (excluding industries)
 
       const fileNames = contentConfigs.map((c) => c.outputFileName);
       expect(fileNames).toContain("tasks");
@@ -564,11 +581,13 @@ describe("Application Layer", () => {
       expect(fileNames).toContain("certifications");
       expect(fileNames).toContain("filings");
       expect(fileNames).toContain("fundings");
+      expect(fileNames).toContain("licenses");
       expect(fileNames).toContain("license-calendar-events");
       expect(fileNames).toContain("license-reinstatements");
     });
 
     it("should have valid loader functions", () => {
+      const contentConfigs = getContentConfigs(new Map());
       for (const config of contentConfigs) {
         expect(typeof config.loader).toBe("function");
         const result = config.loader();
@@ -583,10 +602,12 @@ describe("Application Layer", () => {
         "certificationsCount",
         "filingsCount",
         "fundingsCount",
+        "licensesCount",
         "licenseCalendarEventsCount",
         "licenseReinstatementsCount",
       ];
 
+      const contentConfigs = getContentConfigs(new Map());
       const resultKeys = contentConfigs.map((c) => c.resultKey);
       expect(resultKeys).toEqual(expectedKeys);
     });
@@ -708,5 +729,125 @@ describe("Integration Tests", () => {
     expect(fs.existsSync("lib/tasks.json")).toBe(true);
 
     consoleSpy.mockRestore();
+  });
+});
+
+// ============================================================================
+// toLicenseCard MAPPER TESTS
+// ============================================================================
+
+describe("toLicenseCard", () => {
+  it("resolves industry, falling back to webflowIndustry, and maps agency fields", () => {
+    const [first] = loadAllLicenses();
+    const card = toLicenseCard(first, new Map());
+    expect(card.name).toBe(first.webflowName || first.name || "");
+    expect(card.urlSlug).toBe(first.urlSlug);
+    // industry present either via industryId or webflowIndustry
+    expect(typeof card.industry === "string" || card.industry === undefined).toBe(true);
+  });
+
+  it("resolves the industry name from the provided industryNamesById map", () => {
+    const card = toLicenseCard(
+      {
+        id: "x",
+        filename: "x",
+        urlSlug: "x",
+        name: "X",
+        industryId: "restaurant",
+        licenseCertificationClassification: "LICENSE",
+        contentMd: "",
+      },
+      new Map([["restaurant", "Restaurant"]]),
+    );
+    expect(card.industry).toBe("Restaurant");
+  });
+
+  it("falls back to webflowIndustry when industryId is unmatched in the map", () => {
+    const card = toLicenseCard(
+      {
+        id: "x",
+        filename: "x",
+        urlSlug: "x",
+        name: "X",
+        industryId: "unknown-industry",
+        webflowIndustry: "General",
+        licenseCertificationClassification: "LICENSE",
+        contentMd: "",
+      },
+      new Map([["restaurant", "Restaurant"]]),
+    );
+    expect(card.industry).toBe("General");
+  });
+
+  it("falls back to webflowName for the card title when name is absent", () => {
+    // Most webflow-license source files carry only `webflowName`, not `name`;
+    // the card title must fall back to it so titles are never blank.
+    const card = toLicenseCard(
+      {
+        id: "x",
+        filename: "x",
+        urlSlug: "x",
+        name: undefined as unknown as string,
+        webflowName: "Adoption Agency",
+        licenseCertificationClassification: "LICENSE",
+        contentMd: "",
+      },
+      new Map(),
+    );
+    expect(card.name).toBe("Adoption Agency");
+  });
+
+  it("carries webflowType through for the classification label", () => {
+    const card = toLicenseCard(
+      {
+        id: "x",
+        filename: "x",
+        urlSlug: "x",
+        name: "X",
+        webflowType: "business-license",
+        licenseCertificationClassification: "LICENSE",
+        contentMd: "",
+      },
+      new Map(),
+    );
+    expect(card.webflowType).toBe("business-license");
+  });
+
+  it("prefers webflowName over name when both are present", () => {
+    // Roadmap license-task files carry an imperative `name` ("Apply for Your
+    // Food Truck License") alongside the Webflow catalog `webflowName` ("Food
+    // Truck License"). The licensing directory must show the catalog name, matching
+    // what the Webflow-published pages display.
+    const card = toLicenseCard(
+      {
+        id: "food-truck",
+        filename: "apply-for-food-truck-license",
+        urlSlug: "food-truck",
+        name: "Apply for Your Food Truck License",
+        webflowName: "Food Truck License",
+        licenseCertificationClassification: "LICENSE",
+        contentMd: "",
+      },
+      new Map(),
+    );
+    expect(card.name).toBe("Food Truck License");
+  });
+
+  it("falls back to webflowName when name is an empty string (not just missing)", () => {
+    // e.g. veterinarian.md has `name: ""` with a real webflowName — `??` would
+    // keep the empty string and produce a blank (a11y empty-heading) title.
+    const card = toLicenseCard(
+      {
+        id: "veterinarian",
+        filename: "veterinarian",
+        urlSlug: "veterinarian",
+        name: "",
+        webflowName: "Veterinarian",
+        licenseCertificationClassification: "REGISTRATION/LICENSE",
+        contentMd: "",
+      },
+      new Map(),
+    );
+    expect(card.name).toBe("Veterinarian");
   });
 });

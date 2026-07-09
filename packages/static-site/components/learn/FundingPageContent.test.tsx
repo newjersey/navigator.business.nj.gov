@@ -27,7 +27,10 @@ const messages: FundingPageMessages = {
   filterClear: "Clear",
   filterShowResults: "Show {count} Results",
   filterReset: "Reset",
-  resultCount: "Showing <bold>{filtered}</bold> results of {total} items",
+  resultCountShowing: "Showing <bold>{start}–{end}</bold> of {total} items",
+  resultCountFiltered:
+    "Showing <bold>{start}–{end}</bold> of {filtered} matching items (of {total} total)",
+  resultCountFilteredEmpty: "0 matching items (of {total} total)",
   filteringByLabel: "Filtering by:",
   filterSearchChip: 'Search: "{query}"',
   filterRemoveLabel: "Remove {filter} filter",
@@ -125,8 +128,26 @@ describe("FundingPageContent", () => {
       <FundingPageContent messages={messages} page={page} fundings={fundings} sectors={sectors} />,
     );
     const countLine = screen.getByText(/Showing/).closest("p");
-    expect(countLine).toHaveTextContent("Showing 5 results of 5 items");
-    expect(countLine?.querySelector("strong")).toHaveTextContent("5");
+    expect(countLine).toHaveTextContent("Showing 1–5 of 5 items");
+    expect(countLine?.querySelector("strong")).toHaveTextContent("1–5");
+  });
+
+  it("renders paginated and filtered result count with the grand total", async () => {
+    const user = userEvent.setup();
+    // 11 names contain "alpha" (spanning two pages); 4 do not.
+    const fundings = [
+      ...Array.from({ length: 11 }, (_, i) => makeFunding(`Alpha ${String(i + 1)}`)),
+      ...Array.from({ length: 4 }, (_, i) => makeFunding(`Beta ${String(i + 1)}`)),
+    ];
+    renderWithIntl(
+      <FundingPageContent messages={messages} page={page} fundings={fundings} sectors={sectors} />,
+    );
+
+    await user.type(screen.getByRole("searchbox"), "alpha");
+
+    const countLine = screen.getByText(/Showing/).closest("p");
+    expect(countLine).toHaveTextContent("Showing 1–10 of 11 matching items (of 15 total)");
+    expect(countLine?.querySelector("strong")).toHaveTextContent("1–10");
   });
 
   it("renders up to 10 cards on the first page", () => {

@@ -1,3 +1,5 @@
+import { stripContextualInfoIds } from "./stripContentDirectives";
+
 export interface FundingContentSections {
   readonly eligibility: string;
   readonly benefits: string;
@@ -15,8 +17,6 @@ export const parseFundingContent = (contentMd: string): FundingContentSections =
   // beneath it, up to the callout when one is present.
   const headingMatch = contentMd.match(/^##[^\n#][^\n]*$/m);
   const headingStart = headingMatch?.index ?? -1;
-
-  const stripContextualInfoIds = (text: string): string => text.replace(/`([^`|]+)\|[^`]+`/g, "$1");
 
   let eligibility = "";
   if (headingStart !== -1) {

@@ -36,7 +36,13 @@ import { loadAllCertifications } from "@businessnjgovnavigator/shared/static/loa
 import { loadAllFilings } from "@businessnjgovnavigator/shared/static/loadFilings";
 import { loadAllFundings } from "@businessnjgovnavigator/shared/static/loadFundings";
 import { loadAllLicenseCalendarEvents } from "@businessnjgovnavigator/shared/static/loadLicenseCalendarEvents";
+import {
+  loadAllLicenses,
+  type WebflowLicenseCard,
+} from "@businessnjgovnavigator/shared/static/loadAllLicenses";
+import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import { loadAllTasks } from "@businessnjgovnavigator/shared/static/loadTasks";
+import type { License } from "@businessnjgovnavigator/content-types";
 
 // ============================================================================
 // DOMAIN TYPES
@@ -60,6 +66,8 @@ export interface BuildResult {
   filingsCount: number;
   /** Number of fundings built */
   fundingsCount: number;
+  /** Number of licenses built */
+  licensesCount: number;
   /** Number of license calendar events built */
   licenseCalendarEventsCount: number;
   /** Number of license reinstatements built */
@@ -92,6 +100,46 @@ export interface FileSystemPort {
   /** Writes data to file as pretty-printed JSON with 2-space indentation */
   writePrettyJsonFile: (filePath: string, data: unknown) => void;
 }
+
+// ============================================================================
+// DOMAIN MAPPERS
+// ============================================================================
+
+/**
+ * Converts a raw WebflowLicenseCard (from shared loader) to a display-ready License card.
+ * Resolves agencyId → agency name and industryId → industry name, falling back to webflowIndustry.
+ *
+ * Takes industryNamesById rather than importing @businessnjgovnavigator/shared/industry directly:
+ * that module reads content's own build output (content/lib/industry.json), which does not exist
+ * yet on a cold build when content builds itself. Industries are built earlier in the same
+ * process (see executeBuild), so its in-memory result is passed in here instead.
+ */
+export const toLicenseCard = (
+  license: WebflowLicenseCard,
+  industryNamesById: ReadonlyMap<string, string>,
+): License => ({
+  // Prefer webflowName: it is the Webflow-canonical catalog title shown on the
+  // published license pages. Roadmap license-task files carry an imperative
+  // `name` ("Apply for Your Food Truck License") that reads wrong on a license
+  // directory, so it is only the fallback. Truthiness (not `??`) also skips the
+  // empty `name:` some source files carry, avoiding blank card titles.
+  name: license.webflowName || license.name || "",
+  urlSlug: license.urlSlug,
+  webflowId: license.webflowId,
+  webflowName: license.webflowName,
+  licenseCertificationClassification: license.licenseCertificationClassification,
+  webflowType: license.webflowType,
+  // Prefer the resolved industry name, but fall back to webflowIndustry when the
+  // industryId is missing or unmatched.
+  industry:
+    (license.industryId && industryNamesById.get(license.industryId)) || license.webflowIndustry,
+  summaryDescriptionMd: license.summaryDescriptionMd,
+  agency: license.agencyId ? LookupTaskAgencyById(license.agencyId).name : undefined,
+  division: license.agencyAdditionalContext,
+  divisionPhone: license.divisionPhone,
+  callToActionText: license.callToActionText,
+  callToActionLink: license.callToActionLink,
+});
 
 // ============================================================================
 // INFRASTRUCTURE LAYER - File System Port
@@ -224,6 +272,14 @@ interface IndustryData {
   readonly naicsCodes?: string;
   readonly defaultSectorId?: string;
 }
+
+/**
+ * Builds an industryId → name lookup from the in-memory industries built earlier in the
+ * same process. Used by the licenses loader below instead of importing
+ * @businessnjgovnavigator/shared/industry, which reads content's own build output.
+ */
+export const toIndustryNamesById = (industries: unknown[]): Map<string, string> =>
+  new Map((industries as IndustryData[]).map((industry) => [industry.id, industry.name]));
 
 /**
  * Sector structure from sectors.json.
@@ -556,7 +612,7 @@ export interface ContentConfig {
 }
 
 /**
- * Configuration array defining all content types to build.
+ * Builds the configuration array defining all content types to build.
  *
  * This is the metaprogramming approach that replaces 7 individual build functions.
  * Each entry defines how to build a specific content type (tasks, actions, etc.).
@@ -568,9 +624,13 @@ export interface ContentConfig {
  * 4. No other code changes needed!
  *
  * Note: Industries are handled separately (buildAndWriteIndustries) because they
- * use a custom file-based loader instead of the shared package loaders.
+ * use a custom file-based loader instead of the shared package loaders. This function
+ * takes the built industries so the licenses loader can resolve industry names without
+ * a circular dependency on content's own build output.
  */
-export const contentConfigs: ContentConfig[] = [
+export const getContentConfigs = (
+  industryNamesById: ReadonlyMap<string, string>,
+): ContentConfig[] => [
   {
     loader: () => loadAllTasks(false),
     outputFileName: "tasks",
@@ -600,6 +660,12 @@ export const contentConfigs: ContentConfig[] = [
     outputFileName: "fundings",
     dataKey: "fundings",
     resultKey: "fundingsCount",
+  },
+  {
+    loader: () => loadAllLicenses().map((license) => toLicenseCard(license, industryNamesById)),
+    outputFileName: "licenses",
+    dataKey: "licenses",
+    resultKey: "licensesCount",
   },
   {
     loader: () => loadAllLicenseCalendarEvents(),
@@ -647,6 +713,8 @@ export const executeBuild = (fileSystem: FileSystemPort, config: BuildConfig): B
     industriesCount: industries.length,
     sectorsCount: sectors.length,
   };
+
+  const contentConfigs = getContentConfigs(toIndustryNamesById(industries));
 
   // Loop through each content type config and build it
   for (const contentConfig of contentConfigs) {
@@ -697,6 +765,7 @@ export const logBuildResults = (result: BuildResult): void => {
   console.log(`✓ Built certifications.json with ${result.certificationsCount} certifications`);
   console.log(`✓ Built filings.json with ${result.filingsCount} filings`);
   console.log(`✓ Built fundings.json with ${result.fundingsCount} fundings`);
+  console.log(`✓ Built licenses.json with ${result.licensesCount} licenses`);
   console.log(
     `✓ Built license-calendar-events.json with ${result.licenseCalendarEventsCount} license-related calendar events`,
   );
