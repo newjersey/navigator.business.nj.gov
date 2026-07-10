@@ -690,6 +690,37 @@
       "object-vehicle": "Object/Vehicle"
     }
   },
+  "updates": {
+    "title": "All Updates",
+    "intro": "Learn about new rules, resources, and upcoming changes that may affect your business — including critical information and programs for state emergencies.",
+    "filterHeading": "Filter All Updates",
+    "filterSearch": "Search",
+    "filterCategory": "Category",
+    "categoryLabels": {
+      "Grants and Resources": "Grants and Resources",
+      "Rules and Regulations": "Rules and Regulations"
+    },
+    "filterClear": "Clear",
+    "filterShowResults": "Show {count} Results",
+    "filterReset": "Reset",
+    "sortLabel": "Sort by:",
+    "sortMostRecent": "Most Recent",
+    "sortAZ": "A-Z",
+    "sortZA": "Z-A",
+    "resultCountShowing": "Showing <bold>{start}–{end}</bold> of {total} Updates",
+    "resultCountFiltered": "Showing <bold>{start}–{end}</bold> of {filtered} Updates (of {total} total)",
+    "resultCountFilteredEmpty": "0 matching Updates (of {total} total)",
+    "filteringByLabel": "Filtering by:",
+    "filterSearchChip": "Search: \"{query}\"",
+    "filterRemoveLabel": "Remove {filter} filter",
+    "paginationPrevious": "Previous",
+    "paginationNext": "Next",
+    "paginationLabel": "Pagination",
+    "paginationPageLabel": "Page {page}",
+    "cardUpdatedLabel": "Last Updated",
+    "cardReadMore": "Read more",
+    "detailCtaFallback": "Learn More"
+  },
   "pageNotFound": {
     "iconAlt": "404 icon",
     "title": "An Error Occurred",

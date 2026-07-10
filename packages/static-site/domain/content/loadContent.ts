@@ -156,7 +156,8 @@ export const loadPages = (): PageItem[] => readMarkdownDirectory<PageItem>("page
 
 export const loadPageBySlug = (slug: string): PageItem => readMarkdownFile<PageItem>("pages", slug);
 
-export const loadRecents = (): RecentItem[] => readMarkdownDirectory<RecentItem>("recents");
+export const loadRecents = (): RecentItem[] =>
+  readMarkdownDirectory<RecentItem>("recents").filter((recent) => recent.status === "Published");
 
 export const loadFaqs = (): FaqItem[] => readMarkdownDirectory<FaqItem>("faqs");
 
