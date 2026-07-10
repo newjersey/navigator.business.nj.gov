@@ -94,9 +94,4 @@ The EEOC issued guidance on these topics in May 2021, which can be found on thei
 - Federal EEO laws do not prevent or limit employers from offering incentives to employees to voluntarily provide documentation or other confirmation of vaccination obtained from a third party (not the employer) in the community, such as a pharmacy, personal health care provider, or public clinic. If employers choose to obtain vaccination information from their employees, employers must keep vaccination information confidential pursuant to the ADA.
 - Employers that are administering vaccines to their employees may offer incentives for employees to be vaccinated, as long as the incentives are not coercive. Because vaccinations require employees to answer pre-vaccination disability-related screening questions, a very large incentive could make employees feel pressured to disclose protected medical information.
 
- 
-
- 
-
-     
 **‍**

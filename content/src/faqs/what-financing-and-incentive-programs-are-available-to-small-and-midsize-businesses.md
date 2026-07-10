@@ -73,8 +73,7 @@ The EDA is pleased to offer this listing of participating financial institutions
 - Santander Bank
 - Wells Fargo
 - JPMorgan Chase
-
-* Sterling National Bank
+- Sterling National Bank
   (as of 2/14/2018)
 
 ### 2. Direct Loans

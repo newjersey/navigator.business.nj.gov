@@ -20,9 +20,7 @@ PO Box 230
 Trenton, NJ 08625-0230
 609-984-5396Submit your application online at: [https://www.state.nj.us/treasury/purchase/forms.shtml](https://www.state.nj.us/treasury/purchase/forms.shtml)
 
-### ‍\*\*
-
-Casino Industry\*\*
+### ‍**Casino Industry**
 
 If a business is interested in transacting business with Atlantic City Hotels/Casino or you require information regarding vendor registration, licensing or general procedures for the casino industry, contact:
 
