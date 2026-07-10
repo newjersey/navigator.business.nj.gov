@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: "https://www.njeda.gov/bidding/#OET"
 cta-text: Learn More
 cta-link: "https://www.njeda.gov/bidding/#OET"
+status: Draft
 ---
 
 Commercial building owners, property developers, architects, contractors and many others can now inform the State’s efforts to accelerate building decarbonization within the commercial building sector. A Request for Information Issued by the New Jersey Economic Development Authority (NJEDA) will help the State develop programs to reduce the amount of greenhouse gas emitted by commercial buildings in New Jersey.

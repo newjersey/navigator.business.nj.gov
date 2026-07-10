@@ -8,6 +8,7 @@ source: |-
   https://www.njeda.com/pilot-clean-tech-demonstration-grant-program/
 
   ‍
+status: Draft
 ---
 
 Clean technology businesses seeking to validate their existing prototypes in a real-world setting can receive up to $250,000 in funding. Grants can cover on-site testing, equipment, licenses, and patent fees through the Pilot Clean Tech Demonstration Program.

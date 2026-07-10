@@ -7,6 +7,7 @@ topics: Rules and Regulations
 source: "https://www.nj.gov/cannabis/news-events/approved/20230209.shtml"
 cta-text: Learn More
 cta-link: "https://www.nj.gov/cannabis/news-events/approved/20230209.shtml"
+status: Draft
 ---
 
 There are several new changes to the rules that govern the cannabis industry in New Jersey:

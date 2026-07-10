@@ -7,6 +7,7 @@ topics: Grants and Resources
 cta-text: Register
 cta-link: >-
   https://www.njeda.com/event/nj-zip-purchaser-application-overview/?utm_campaign=20230125digest&utm_medium=email&utm_source=govdelivery
+status: Draft
 ---
 
 The [New Jersey Zero Emission Incentive Program (NJ ZIP)](https://www.njeda.com/njzip/) is designed to help New Jersey businesses and institutions purchase new, zero-emission, medium and heavy duty vehicles. Base vouchers will range from $20,000 - $175,000, based on vehicle class, with additional bonuses available.

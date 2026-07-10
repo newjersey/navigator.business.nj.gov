@@ -8,6 +8,7 @@ source: "https://www.njeda.gov/small-business-liquor-license-grant/"
 cta-text: Apply Now
 cta-link: "https://www.njeda.gov/small-business-liquor-license-grant/"
 agency: NJ Economic Development Authority
+status: Published
 ---
 
 Restaurants, bars, and other hospitality small businesses can apply for reimbursement of up to 50% of the cost of purchasing an inactive liquor license, up to $100,000. The New Jersey Economic Development Authority (NJEDA) Small Business Liquor License Grant Program supports businesses that purchased an inactive Class C Plenary Retail Consumption License within the past 12 months.

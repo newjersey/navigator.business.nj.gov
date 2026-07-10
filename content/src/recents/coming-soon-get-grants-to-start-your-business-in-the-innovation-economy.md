@@ -12,6 +12,7 @@ source: |-
   ‍
 cta-text: Get Grants to Start Your Business in the Innovation Economy
 cta-link: "https://www.njeda.com/new-jersey-innovation-fellows-program/"
+status: Draft
 ---
 
 Teams of would-be entrepreneurs can apply to receive grants of up to $400,000 and mentorship through a competitive program: [New Jersey Innovation Fellows](https://www.njeda.com/new-jersey-innovation-fellows-program/).

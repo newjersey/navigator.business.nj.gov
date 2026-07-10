@@ -5,6 +5,7 @@ webflowId: 632382eff3c8f2183d02e49f
 date: "2022-09-22"
 topics: Grants and Resources
 source: "https://www.njeda.com/microbusinessloan/"
+status: Draft
 ---
 
 Businesses with ten or fewer full-time employees and no more than $1.5 million in annual revenue can soon apply to receive low-cost financing of up to $50,000 through the **Main Street Micro Business Loan.**

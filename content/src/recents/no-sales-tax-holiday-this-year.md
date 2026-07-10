@@ -9,6 +9,7 @@ homepage-announcement-text-2: No Sales Tax Holiday This Year
 cta-text: Learn More
 cta-link: "https://www.nj.gov/treasury/taxation/businesses/salestax/salestaxholiday.shtml"
 agency: NJ Department of Treasury
+status: Draft
 ---
 
 There is no back-to-school sales tax holiday this year. Sellers should charge sales tax on all taxable items.

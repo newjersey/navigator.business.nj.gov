@@ -8,6 +8,7 @@ source: "https://njeda.powerappsportals.us/en-US/CSITPrograms/CTSG-List/"
 cta-text: Apply Now
 cta-link: "https://njeda.powerappsportals.us/en-US/CSITPrograms/CTSG-List/"
 agency: NJ Economic Development Authority
+status: Draft
 ---
 
 Apply for up to $75,000 to support your clean technology projects with the Clean Tech R&D Seed Grant Round 4. This initiative from the New Jersey Commission on Science, Innovation and Technology (CSIT)  is designed to accelerate the development of technologies that reduce greenhouse gas emissions.

@@ -9,6 +9,7 @@ source: >-
 cta-text: Learn More
 cta-link: >-
   https://www.nj.gov/treasury/taxation/businesses/salestax/salesexemptioncontractor.shtml
+status: Published
 ---
 
 Contractors buying materials for affordable housing can now claim a Sales Tax exemption. Use Form ST-13 to certify tax-free purchases for qualifying projects. Keep records for potential audits. Incorrectly paid taxes? You can file for a refund within four years. Questions? Email Taxation.RegulatoryServices@treas.nj.gov.

@@ -10,6 +10,7 @@ source: >-
 cta-text: More Information
 cta-link: >-
   https://www.njeda.gov/njeda-awards-7-new-lenders-funding-under-main-street-lenders-grant-program/
+status: Published
 ---
 
 New Jersey has approved seven lenders to provide flexible, low-cost financing to micro businesses across the state. The Main Street Lenders Grant program offers working capital term loans with favorable terms designed to help small businesses access capital and grow.

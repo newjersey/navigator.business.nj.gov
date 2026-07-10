@@ -7,6 +7,7 @@ source: |-
   https://www.childcarenj.gov
 
   ‍
+status: Archived
 ---
 
 The [2022 Summer Youth Camp Grant](https://www.childcarenj.gov/ChildCareNJ/media/media_library/FINAL_2022_Summer_Youth_Camp_Grants.pdf) application is now available, with grants amounts ranging from $7,500 - $25,000. **Applications will be accepted through August 5th, 2022.**

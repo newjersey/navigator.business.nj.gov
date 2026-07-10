@@ -7,6 +7,7 @@ webflowId: 60944226901c60278622ac63
 date: "2021-05-06"
 topics: Rules and Regulations
 source: New Jersey Department of the Treasury
+status: Archived
 ---
 
 **Effective June 1st, 2021**

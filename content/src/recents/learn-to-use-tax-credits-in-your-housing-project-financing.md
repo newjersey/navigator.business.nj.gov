@@ -4,6 +4,7 @@ slug: learn-to-use-tax-credits-in-your-housing-project-financing
 webflowId: 632c737f0d3aa1a6a05b52af
 date: "2022-09-22"
 topics: Grants and Resources
+status: Draft
 ---
 
 Developers and other businesses can learn how to use tax credits to advance affordable housing, preservation, and community development projects. A webinar by the New Jersey Redevelopment Authority will explain to developers how to access the 9% Low Income Housing Tax Credits (LIHTC) and other tax credit incentive programs on October 20th, 2022 from 10:00-11:30 a.m. 

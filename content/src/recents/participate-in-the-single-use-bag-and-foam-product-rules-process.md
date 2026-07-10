@@ -7,6 +7,7 @@ topics: Rules and Regulations
 source: "https://content.govdelivery.com/accounts/NJDEP/bulletins/393c1c6"
 cta-text: Learn More
 cta-link: "https://content.govdelivery.com/accounts/NJDEP/bulletins/393c1c6"
+status: Draft
 ---
 
 Proposed new rules will regulate single-use plastic and paper bags and polystyrene foam food service products to better protect our environment. Businesses and residents are invited to participate in the rules process through an upcoming public hearing on May 1st, 2024.

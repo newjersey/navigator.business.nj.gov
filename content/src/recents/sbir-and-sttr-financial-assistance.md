@@ -7,6 +7,7 @@ webflowId: 61155e2b9260da7881137dd5
 date: "2021-10-13"
 topics: Grants and Resources
 source: NJEDA
+status: Draft
 ---
 
 Applications closed October 8th, 2021. 

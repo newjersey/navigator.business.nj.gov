@@ -10,6 +10,7 @@ source: >-
 homepage-announcement-text-2: >-
   May 4, 2022, the Ban on Plastic Bags and Polystyrene Foam Products goes into
   effect. Read more.
+status: Archived
 ---
 
 Effective May 4, 2022, all stores and foodservice businesses are banned from providing or selling single-use plastic carryout bags or polystyrene foam food service products to customers.

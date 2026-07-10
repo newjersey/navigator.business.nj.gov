@@ -10,6 +10,7 @@ source: |-
   ‍
 cta-text: Learn More
 cta-link: "https://www.njeda.com/AngelMatch/"
+status: Published
 ---
 
 Early-stage, product-based technology companies in certain industries may be eligible to have up to $500,000 in direct investments matched by the Angel Match program from the New Jersey Economic Development Authority. The funding can be used for product development, marketing, research and development, and other working capital needs.

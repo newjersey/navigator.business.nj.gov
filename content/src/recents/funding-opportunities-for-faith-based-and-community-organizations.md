@@ -9,6 +9,7 @@ source: >-
   Opportunities](https://www.nj.gov/state/ofbi-grant-opportunities.shtml)
 cta-text: Visit OFBI
 cta-link: "https://www.nj.gov/state/ofbi-grant-opportunities.shtml"
+status: Published
 ---
 
 Faith and community-based organizations (FBCOs) can leverage several grant programs offered by the New Jersey Office of Faith-Based Initiatives (OFBI) to enhance their services and reach within the community.

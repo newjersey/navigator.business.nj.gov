@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: >-
   [Cannabis Regulatory Commission Homepage
   (nj.gov)](https://www.nj.gov/cannabis/)
+status: Archived
 ---
 
 Applications for prospective Cannabis Retailers are open now. While there is no limit to the number of applications the State accepts, you should check with your local government on their requirements. The [Business.NJ.gov Navigator](https://navigator.business.nj.gov/) can provide you with a personalized step-by-step business registration guide for your new cannabis business.

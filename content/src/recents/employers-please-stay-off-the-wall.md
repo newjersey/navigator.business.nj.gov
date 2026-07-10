@@ -8,6 +8,7 @@ source: "https://www.nj.gov/labor/ea/osec/wall.shtml"
 cta-text: Visit The WALL
 cta-link: "https://www.nj.gov/labor/ea/osec/wall.shtml"
 agency: NJ Department of Labor
+status: Draft
 ---
 
 Employers with outstanding liabilities for violations of wage, benefit, or tax laws are ineligible for public contracting opportunities when they are added to the [**Workplace Accountability in Labor List**](https://www.nj.gov/labor/ea/osec/wall.shtml?utm_campaign=20240105digest&utm_medium=email&utm_source=govdelivery) (The WALL). Any business whose name appears on The WALL is barred from public contracting with State, county, or local governments until they pay their liabilities in full and their business name is removed from The WALL.

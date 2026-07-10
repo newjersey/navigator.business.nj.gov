@@ -9,6 +9,7 @@ source: >-
 cta-text: Download Guide
 cta-link: >-
   https://www.njclean.org/images/best-practices/resources/litter-items/Litter-Prevention-for-Businesses-Guide.pdf
+status: Published
 ---
 
 Providing trash and recycling receptacles outside your store and in parking areas can reduce litter on your property. This is one of many tips in a new, freely available guide that can help your business become more sustainable and environmentally friendly.

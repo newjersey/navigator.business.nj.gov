@@ -5,6 +5,7 @@ webflowId: 61685492bc1196594dc810b7
 date: "2021-11-03"
 topics: Grants and Resources
 source: NJEDA
+status: Archived
 ---
 
 The New Jersey Angel Investor Tax Credit Program establishes refundable tax credits for qualified investments in New Jersey emerging technology businesses to stimulate investment in the innovation economy. Applications received now will be considered for the 2022 program.

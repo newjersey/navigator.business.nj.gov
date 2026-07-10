@@ -10,6 +10,7 @@ source: |-
   ‍
 cta-text: Learn More
 cta-link: "https://dep.nj.gov/ej/law/"
+status: Draft
 ---
 
 Businesses that operate certain types of facilities may be affected by newly implemented environmental justice rules.

@@ -7,6 +7,7 @@ topics: Grants and Resources
 cta-text: Apply Now
 cta-link: "https://www.njeda.gov/asset-activation-planning-grant/"
 agency: NJ Economic Development Authority
+status: Published
 ---
 
 The Asset Activation Planning Grant provides up to $100,000 to help organizations develop plans that demonstrate how to revitalize under-utilized public assets—vacant buildings, distressed land, or underused infrastructure owned by municipalities, counties, or public agencies.

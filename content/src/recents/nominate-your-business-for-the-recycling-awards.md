@@ -7,6 +7,7 @@ topics: Grants and Resources
 homepage-announcement-text-2: Nominate Your Business for the Recycling Awards
 cta-text: Learn More
 cta-link: "https://njtruckparkingsurvey.mysocialpinpoint.com/"
+status: Draft
 ---
 
 Nominate your business for the annual recycling awards from the NJ Department of Environmental Protection. Celebrate innovative individuals and organizations making strides in sustainability. Submit nominations by July 19, 2024 to [njrecycles@dep.nj.gov](mailto:njrecycles@dep.nj.gov).

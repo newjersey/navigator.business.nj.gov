@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: >-
   [Program Specific Feedback -
   NJEDA](https://www.njeda.com/economicrecoveryact/program-specific-feedback/)
+status: Draft
 ---
 
 Developers, investors, real estate professionals, attorneys, environmental professionals, and economic development teams are encouraged to attend one of the listening sessions for the Brownfields Redevelopment Incentive on September 7th and September 8th, 2022. The Brownfields Redevelopment Incentive Program is a $300 million tax credit program designed to compensate developers of redevelopment projects located on brownfields sites for remediation costs. Comments on the program may also be [submitted online](https://www.njeda.com/economicrecoveryact/program-specific-feedback/).

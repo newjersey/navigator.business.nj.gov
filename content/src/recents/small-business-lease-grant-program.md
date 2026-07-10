@@ -5,6 +5,7 @@ webflowId: 616854d2725b540ffee1211f
 date: "2021-10-14"
 topics: Grants and Resources
 source: NJEDA
+status: Archived
 ---
 
 The Small Business Lease Grant supports the growth and success of small businesses and non-profits by providing grant funding to cover a portion of lease payments for businesses and non-profits leasing new or additional space. Applications will be accepted on a rolling basis beginning Wednesday, October 20th, 2021.

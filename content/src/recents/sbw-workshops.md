@@ -5,6 +5,7 @@ webflowId: 61391f8d04376cafb37679c5
 date: "2021-09-08"
 topics: Grants and Resources
 source: NJEDA
+status: Archived
 ---
 
 Get support starting or growing your business during a one-hour virtual workshop, part of National Small Business Week.

@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: "https://icic.org/urban-business-initiatives/building-for-growth/new-jersey/"
 cta-text: Learn More
 cta-link: "https://icic.org/urban-business-initiatives/building-for-growth/new-jersey/"
+status: Published
 ---
 
 New Jersey construction companies that are 51% minority-, woman-, or veteran-owned can now enroll in Building for Growth (BFG), a tuition-free, 18-week hybrid training program that teaches participants how to build business capacity, access capital, and secure larger contracts. Eligible companies are based in New Jersey (or conduct significant operations there) and meet specific revenue criteria. Sessions are hosted at Kean University in Union County and online via Zoom.

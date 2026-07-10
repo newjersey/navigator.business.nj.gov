@@ -11,6 +11,7 @@ source: >-
 cta-text: Learn More
 cta-link: "https://www.nj.gov/labor/lwdhome/press/2023/20231102_traininggrant.shtml"
 agency: NJ Department of Labor
+status: Draft
 ---
 
 New Jersey employers can apply for up to $200,000 in reimbursement to train employees for skilled jobs. Successful applicants for the UPSKILL: NJ Incumbent Worker Training Grant will be reimbursed up to 50 percent of the cost of further training existing workers.

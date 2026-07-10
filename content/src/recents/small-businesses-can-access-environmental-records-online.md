@@ -8,6 +8,7 @@ source: "https://dep.nj.gov/docminer/"
 cta-text: Access DocMiner
 cta-link: "https://dep.nj.gov/docminer/"
 agency: NJ Department of Environmental Protection
+status: Published
 ---
 
 The New Jersey Department of Environmental Protection (NJDEP) launched NJDEP DocMiner, a free online tool that provides quick access to environmental public records without filing formal records requests. Search by regulated entity name, DEP identification numbers, or address to find remediation records, air/water/land use permits, and compliance documents.

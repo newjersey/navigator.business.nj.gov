@@ -10,6 +10,7 @@ source: >-
 cta-text: File Now
 cta-link: "https://www.fincen.gov/boi"
 agency: NJ Business Action Center
+status: Draft
 ---
 
 Many businesses in the U.S. must follow new federal rules for reporting who owns or controls them. The Corporate Transparency Act went into effect on January 1, 2024 and This is because of a law called the Corporate Transparency Act. It aims to stop illegal activities and keep our country safe.

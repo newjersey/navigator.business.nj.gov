@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: >-
   [School Bus Rebates: Clean School Bus Program | US
   EPA](https://www.epa.gov/cleanschoolbus/school-bus-rebates-clean-school-bus-program)
+status: Archived
 ---
 
 Eligible applicants can receive up to $9,375,000 to replace diesel-powered school buses under the U.S. EPA Clean School Bus program.

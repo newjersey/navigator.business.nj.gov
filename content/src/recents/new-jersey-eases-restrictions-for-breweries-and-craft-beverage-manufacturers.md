@@ -6,6 +6,7 @@ date: "2024-01-25"
 topics: Rules and Regulations
 cta-text: Learn More
 cta-link: "https://nj.gov/governor/news/news/562024/approved/20240116c.shtml"
+status: Draft
 ---
 
 A new law provides breweries, distilleries, and other craft beverage manufacturers with additional operational flexibility. Here are the key provisions:
