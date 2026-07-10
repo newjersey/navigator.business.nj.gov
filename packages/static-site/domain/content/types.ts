@@ -77,6 +77,8 @@ export interface RecentItem {
   "cta-link"?: string;
   /** Publishing agency name. */
   agency?: string;
+  /** Publish state; only "Published" items should be rendered on the site. */
+  status?: "Published" | "Draft" | "Archived";
   /** Full markdown article content. */
   body: string;
 }

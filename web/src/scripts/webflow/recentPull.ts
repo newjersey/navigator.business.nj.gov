@@ -75,6 +75,7 @@ const webflowRecentToNavigatorFormat = (item: WebflowItem<WebflowRecentFieldData
   if (fieldData["cta-text"]) recent["cta-text"] = normalizeQuotes(fieldData["cta-text"]);
   if (fieldData["cta-link"]) recent["cta-link"] = fieldData["cta-link"];
   if (agency) recent.agency = agency;
+  recent.status = item.isArchived ? "Archived" : item.isDraft ? "Draft" : "Published";
 
   return recent;
 };

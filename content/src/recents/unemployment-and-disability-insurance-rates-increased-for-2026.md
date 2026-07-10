@@ -10,6 +10,7 @@ source: >-
   2026](https://nj.gov/labor/lwdhome/press/2025/20251229_newbenefitrates2026.shtml)
 cta-text: Learn More
 cta-link: "https://nj.gov/labor/lwdhome/press/2025/20251229_newbenefitrates2026.shtml"
+status: Published
 ---
 
 Maximum weekly benefit rates for Unemployment Insurance, Temporary Disability Insurance, Family Leave Insurance, and Workers' Compensation increased on January 1, 2026.

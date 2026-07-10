@@ -4,6 +4,7 @@ slug: leniency-may-be-available-for-first-time-violators-of-some-rules-regulatio
 webflowId: 646ba0d9e0a4d6dbf1c0b024
 date: "2023-05-22"
 topics: Rules and Regulations
+status: Published
 ---
 
 Businesses in New Jersey must comply with rules and regulations, but under a new law that takes effect on June 19th, 2023, state agencies can suspend enforcement of penalties on certain first-time violations at their discretion. Penalties may be suspended only if the first-time violation doesn’t impact public welfare, cause employees to lose income or benefits, or present the risk of environmental harm. The temporary waiver provided under this new law is available to businesses with 50 or fewer full-time employees and subject to several important exceptions, including:

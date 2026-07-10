@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: "https://www.njeda.gov/bidding/#OET"
 cta-text: Learn More
 cta-link: "https://www.njeda.gov/bidding/#OET"
+status: Draft
 ---
 
 The New Jersey Economic Development Authority has released a Request for Information (RFI) to gather best practices and address challenges in developing an Employee Ownership program. Businesses, Employee-Owned entities, researchers, and anyone with relevant experience, including experts outside of New Jersey, are welcome to provide input.

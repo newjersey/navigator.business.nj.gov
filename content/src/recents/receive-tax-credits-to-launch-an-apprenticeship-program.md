@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: "https://www.nj.gov/labor/career-services/apprenticeship/taxcredit.shtml"
 cta-text: Learn More
 cta-link: "https://www.nj.gov/labor/career-services/apprenticeship/taxcredit.shtml"
+status: Draft
 ---
 
 Businesses, labor unions, and nonprofits can receive up to $10,000 in tax credits to offset the costs of establishing a federally recognized apprenticeship program. The Apprenticeship Tax Credit Program is intended to help cultivate a skilled New Jersey workforce and support the State’s economic growth. Some industries, including advanced manufacturing, construction, healthcare, logistics, pharmaceuticals, transportation, tourism, and renewable energy, may be eligible for enhanced tax credit incentives.

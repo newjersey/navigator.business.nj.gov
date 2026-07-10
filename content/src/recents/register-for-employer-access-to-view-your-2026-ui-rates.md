@@ -10,6 +10,7 @@ cta-text: Register Now
 cta-link: >-
   https://www.nj.gov/labor/ea/employer-services/register-update/employeraccess.shtml
 agency: NJ Department of Labor
+status: Published
 ---
 
 New Jersey employers must register for an Employer Access account to view their 2026 Unemployment Insurance contribution rates. The state is eliminating mailed rate notices as part of a paperless transition.

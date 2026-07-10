@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: "https://www.nj.gov/labor/employer-services/business/returnandearn.shtml"
 cta-text: Learn More
 cta-link: "https://www.nj.gov/labor/employer-services/business/returnandearn.shtml"
+status: Published
 ---
 
 Employers willing to hire and train dislocated workers with identifiable skills gaps can receive up to $20,000 in wage reimbursement per worker. Through the Return and Earn program, employers are reimbursed for 50% of the wages paid for regular hours worked during their training period.

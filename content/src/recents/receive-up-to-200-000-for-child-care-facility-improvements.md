@@ -9,6 +9,7 @@ source: >-
   NJEDA](https://www.njeda.com/child-care-improvement-program/)
 cta-text: Learn More Details at NJEDA
 cta-link: "https://www.njeda.com/child-care-improvement-program/"
+status: Draft
 ---
 
 State-licensed, center-based child care providers can soon apply for up to $200,000 in grants for facilities improvements through the [Child Care Facility Improvement Program](https://www.njeda.com/child-care-improvement-program/). Providers may propose interior and exterior facility improvements to enhance the quality of their programs and receive funding to cover the full costs of the project. Applications will open on November 15th, 2022.

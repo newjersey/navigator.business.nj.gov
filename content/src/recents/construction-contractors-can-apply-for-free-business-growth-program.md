@@ -10,6 +10,7 @@ cta-text: Apply Now
 cta-link: >-
   https://survey.alchemer.com/s3/8409672/2026-Building-for-Growth-in-New-Jersey-Initial-Application-copy
 agency: NJ Economic Development Authority
+status: Published
 ---
 
 Construction contractors in or serving [overburdened communities](https://dep.nj.gov/ej/communities/) can apply for Building for Growth, an 18-week executive education program starting mid-April. The program is offered at no cost through a partnership between [Kean University](https://www.kean.edu/), the [New Jersey Economic Development Authority](https://www.njeda.gov/), and the [Initiative for a Competitive Inner City](https://icic.org/about/).

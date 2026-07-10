@@ -6,6 +6,7 @@ date: "2023-03-13"
 topics: Grants and Resources
 cta-text: Check your Eligibility
 cta-link: "https://www.njeda.com/jointventureseligibilty/"
+status: Draft
 ---
 
 The first phase of the Cannabis Equity Grant Program will award grants of $250,000 to 24 entities that have a conditional or annual license. The program is not yet accepting applications.

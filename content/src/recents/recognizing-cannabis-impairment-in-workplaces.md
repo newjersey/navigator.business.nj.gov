@@ -7,6 +7,7 @@ topics: Rules and Regulations
 source: >-
   [Workplace Impairment Guidance 922.pdf
   (nj.gov)](https://www.nj.gov/cannabis/documents/businesses/Business%20Resources/Workplace%20Impairment%20Guidance%20922.pdf)
+status: Draft
 ---
 
 Employers concerned about cannabis-related impairment in the workplace can now consult guidance issued by the New Jersey Cannabis Regulatory Commission.

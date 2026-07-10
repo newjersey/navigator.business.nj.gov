@@ -570,6 +570,8 @@ export interface CovidItem {
   [key: `section-${number}`]: string | undefined;
 }
 
+export type RecentStatus = "Published" | "Draft" | "Archived";
+
 export interface RecentItem {
   name: string;
   slug: string;
@@ -583,6 +585,7 @@ export interface RecentItem {
   "cta-text"?: string;
   "cta-link"?: string;
   agency?: string;
+  status?: RecentStatus;
   body: string;
 }
 

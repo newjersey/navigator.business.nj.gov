@@ -9,6 +9,7 @@ source: >-
   Zoom](https://njeda.zoom.us/webinar/register/WN_qqfW9C8aRmSlphJr48o2bw#/registration)
 cta-text: Register Now
 cta-link: "https://njeda.zoom.us/webinar/register/WN_qqfW9C8aRmSlphJr48o2bw#/registration"
+status: Draft
 ---
 
 Small businesses seeking financing for clean energy projects, new clean energy companies, and small business banking partners can learn how to finance qualifying clean energy initiatives by attending a virtual information session about the[ New Jersey Clean Energy Loans (NJ CELs) program](https://www.njeda.gov/njcels/) on Monday, April 17th, 2023 at 1:00 p.m. Applications for the program will open on Wednesday, April 19th, 2023.

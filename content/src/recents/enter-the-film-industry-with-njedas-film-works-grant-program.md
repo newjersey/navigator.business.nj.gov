@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: "https://www.njeda.gov/new-jersey-film-works-grant-program/"
 cta-text: Apply Now
 cta-link: "https://www.njeda.gov/new-jersey-film-works-grant-program/"
+status: Draft
 ---
 
 Step into New Jersey’s growing film industry with the NJ Film Works Grant Program. NJEDA invites applications for grants from $250,000 to $750,000 to fund workforce development and skills training initiatives. Eligible entities, including nonprofits and educational institutions, can apply by July 11, 2025.

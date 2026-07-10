@@ -9,6 +9,7 @@ source: >-
 cta-text: Learn More
 cta-link: >-
   https://www.njeda.com/njeda-seeks-public-input-to-shape-potential-development-of-a-clean-hydrogen-demonstration-program/
+status: Draft
 ---
 
 Subject matter experts on clean energy technologies and other interested stakeholders can inform New Jersey’s transition to a clean energy economy by submitting responses to a request for information (RFI) from the New Jersey Economic Development Authority (NJEDA).

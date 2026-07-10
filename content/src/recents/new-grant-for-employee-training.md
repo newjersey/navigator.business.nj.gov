@@ -11,6 +11,7 @@ cta-text: Download NGO
 cta-link: >-
   https://www.nj.gov/labor/assets/PDFs/Grants/FY25/FY25%20UPSKILL%20NGO%208-13-2024.pdf
 agency: NJ Department of Labor
+status: Draft
 ---
 
 Businesses can now access funding through the NJ Department of Labor and Workforce Development's UPSKILL: NJ Incumbent Worker Training Grant. This grant helps employers cover up to 50% of training costs for frontline employees, aiding in skill development for mid- and high-skill jobs. Individual employers can apply for up to $500,000. For details and application instructions, download and complete the Notice of Grant Opportunity (NGO).

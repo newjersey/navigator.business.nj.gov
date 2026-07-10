@@ -8,6 +8,7 @@ source: "[Emerging Developers - NJEDA](https://www.njeda.gov/emerging-developers
 cta-text: Learn More
 cta-link: "https://www.njeda.gov/emerging-developers/"
 agency: NJ Economic Development Authority
+status: Draft
 ---
 
 Small-scale developers can apply for grants of up to $250,000 for pre-development soft costs through the Emerging Developers Grant pilot program. Developers who have completed between two and five commercial or mixed-use properties of a similar scope may be eligible. Interested developers can take an eligibility assessment to determine if they qualify. 

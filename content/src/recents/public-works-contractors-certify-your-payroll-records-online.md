@@ -7,6 +7,7 @@ topics: Rules and Regulations
 cta-text: Certify Payroll
 cta-link: "http://njwages.nj.gov"
 agency: NJ Department of Treasury
+status: Draft
 ---
 
 Effective August 15, 2024, all registered contractors performing public work must report certified payroll records via the New Jersey Wage Hub. This online portal ensures compliance with State labor laws, enhances worker protections, and improves wage transparency. You can register using your My New Jersey Account, submit weekly payroll records, and access user guides.

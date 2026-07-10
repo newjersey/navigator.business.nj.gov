@@ -8,6 +8,7 @@ source: "https://www.njeda.gov/esop-assistance-program/"
 cta-text: Apply Now
 cta-link: "https://www.njeda.gov/esop-assistance-program/"
 agency: NJ Economic Development Authority
+status: Published
 ---
 
 Eligible companies with at least 20 full-time employees can now apply for the ESOP Assistance Program from the New Jersey Economic Development Authority (NJEDA), which supports transitions to employee stock ownership plans. The program offers feasibility studies and technical assistance to enhance employee financial security and business continuity. Applications are accepted on a rolling basis.

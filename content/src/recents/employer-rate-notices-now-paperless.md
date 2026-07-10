@@ -7,6 +7,7 @@ topics: Rules and Regulations
 source: "http://www.nj.gov/labor/employers"
 cta-text: Register Now
 cta-link: "http://www.nj.gov/labor/employers"
+status: Draft
 ---
 
 Employer rate notices are now posted electronically to Employer Access (formerly TWES). The 2024-25 notice is the last that will be mailed to employers.

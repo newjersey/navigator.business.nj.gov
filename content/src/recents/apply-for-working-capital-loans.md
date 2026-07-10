@@ -10,6 +10,7 @@ source: >-
 cta-text: Learn More
 cta-link: "https://njcapitalaccessfund.com/"
 agency: NJ Economic Development Authority
+status: Draft
 ---
 
 Small businesses and nonprofits can now apply for working capital loans of up to $250,000 from the NJ Capital Access Fund.

@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: >-
   [Department of the Treasury
   (state.nj.us)](https://www.state.nj.us/treasury/media/njeitc/)
+status: Archived
 ---
 
 For tax year 2021, people who earned less than $57,414 could receive a refundable credit of up to $2,691 from the state and $6,728 from the federal government. About one in four New Jersey residents who qualify for the Earned Income Tax Credit (EITC) fails to claim it. The NJ EITC Marketing Toolkit includes posters and other downloadable materials to help you tell your employees about money they might be leaving on the table.

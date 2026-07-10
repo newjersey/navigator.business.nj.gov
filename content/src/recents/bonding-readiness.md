@@ -8,6 +8,7 @@ date: "2021-07-28"
 topics: Grants and Resources
 source: NJEDA
 heading-1: Small Business Bonding Readiness Assistance Program (SBBRAP)
+status: Archived
 ---
 
 The Small Business Bonding Readiness Assistance Program prepares small, minority-, and women-owned business owners to obtain surety bonds that allow them to compete for state and federal government contracts.

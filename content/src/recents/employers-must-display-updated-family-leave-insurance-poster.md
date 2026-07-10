@@ -18,6 +18,7 @@ source: >-
   Employers must display this updated version to remain in compliance.
 cta-text: Download Poster
 cta-link: "https://www.nj.gov/labor/myleavebenefits/assets/pdfs/PR-2%20(9-25).pdf"
+status: Published
 ---
 
 The New Jersey Department of Labor has released an updated Family Leave Insurance workplace poster (PR-2, dated 9/25) that employers must display in a place noticeable to all employees.

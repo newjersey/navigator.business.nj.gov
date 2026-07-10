@@ -10,6 +10,7 @@ source: |-
   ‍
 cta-text: Review Laws
 cta-link: "https://www.nj.gov/labor/wageandhour/tools-resources/laws/"
+status: Published
 ---
 
 Employers of all sizes are required by State law to provide full-time, part-time, and temporary employees with up to 40 hours of paid sick leave per year to care for themselves or a loved one. Employers can provide all 40 hours of the earned sick leave up front each year, or they can provide one hour of earned leave for every 30 hours worked.

@@ -12,6 +12,7 @@ source: >-
   Disparate Impact Discrimination Under New Jersey Law - New Jersey Office of
   Attorney
   General](https://www.njoag.gov/ag-platkin-announces-division-on-civil-rights-adopts-landmark-rules-on-disparate-impact-discrimination-under-new-jersey-law/)
+status: Published
 ---
 
 **What This Means for Your Business**

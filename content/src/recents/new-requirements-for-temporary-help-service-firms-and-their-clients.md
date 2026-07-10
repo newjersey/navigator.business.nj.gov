@@ -9,6 +9,7 @@ source: >-
 cta-text: Learn More
 cta-link: >-
   https://www.nj.gov/labor/worker-protections/myworkrights/temporaryworkers.shtml
+status: Published
 ---
 
 A new law is making changes to records keeping and reporting requirements for temporary help service firms and for the client companies that employ their workers. The law covers many people in temporary work assignments, with some exceptions. Two of these requirements are now in effect, as of May 7th, 2023. 

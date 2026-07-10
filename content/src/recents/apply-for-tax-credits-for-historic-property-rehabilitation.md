@@ -8,6 +8,7 @@ source: "NJEDA:\_https://www.njeda.gov/historic-property-reinvestment-program/"
 cta-text: Learn More
 cta-link: "https://www.njeda.gov/historic-property-reinvestment-program/"
 agency: NJ Economic Development Authority
+status: Draft
 ---
 
 Apply for tax credits worth up to 45 percent of your project's eligible costs through the Historic Property Reinvestment Program, a competitive program that incentivizes rehabilitation of designated historic structures across New Jersey. 

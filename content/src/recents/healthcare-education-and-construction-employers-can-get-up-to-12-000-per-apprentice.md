@@ -11,6 +11,7 @@ source: "https://www.nj.gov/labor/research-info/grants.shtml"
 cta-text: Apply Now
 cta-link: "https://www.nj.gov/labor/research-info/grants.shtml"
 agency: NJ Department of Labor
+status: Published
 ---
 
 New Jersey employers hiring registered apprentices can receive up to $12,000 per apprentice to offset wage costs over 52 weeks. The GAINS program reimburses 50% of wages for new apprentices in high-growth fields including healthcare, education, construction trades, and other industries.

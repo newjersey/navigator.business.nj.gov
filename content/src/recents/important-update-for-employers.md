@@ -7,6 +7,7 @@ topics: Rules and Regulations
 source: "https://www.nj.gov/labor/myworkrights/wages/pay-transparency/"
 cta-text: Learn More
 cta-link: "https://www.nj.gov/labor/myworkrights/wages/pay-transparency/"
+status: Published
 ---
 
 Pay Transparency is now the law in New Jersey! The[ New Jersey pay and benefits transparency law](https://www.nj.gov/labor/myworkrights/wages/pay-transparency/) went into effect June 1, 2025.

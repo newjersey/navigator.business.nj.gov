@@ -10,6 +10,7 @@ cta-text: Learn More
 cta-link: >-
   https://www.nj.gov/labor/lwdhome/press/2024/20240103_compliance.shtml?utm_campaign=20240105digest&utm_medium=email&utm_source=govdelivery
 agency: NJ Department of Labor
+status: Draft
 ---
 
 New Jersey laundromats will soon receive materials to help ensure they are in compliance with State labor laws in 2024. Retail laundromats, like all New Jersey employers, are required to:

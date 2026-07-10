@@ -5,6 +5,7 @@ webflowId: 615cd9a7c1827a441cd3e1a0
 date: "2021-10-05"
 topics: Grants and Resources
 source: NJEDA
+status: Archived
 ---
 
 Your response to the Federal Reserve Bank's 2021 annual business survey can help to bring additional resources or support to New Jersey businesses. The Federal Reserve Bank’s 2021 Small Business Credit Survey provides crucial insights into the financial health of small businesses Responses are due November 19th, 2021.

@@ -8,6 +8,7 @@ source: >-
   [NJ Division of Taxation - Notice: Sign Purchases and Installation Services
   Sales and Use Tax Effective October 1,
   2022](https://www.nj.gov/treasury/taxation/businesses/salestax/signpurchaseinstallservices.shtml)
+status: Draft
 ---
 
 A new law (P.L. 2022, c. 97) excludes sign installation from the existing capital improvement sales tax exemption. Sign installers are now required to charge sales tax on the installation of all signs.

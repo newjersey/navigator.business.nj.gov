@@ -11,6 +11,7 @@ source: >-
 cta-text: Try it Now
 cta-link: "https://experience.arcgis.com/experience/196a9c8077e847c3b4a815d7c814930c"
 agency: NJ Department of Environmental Protection
+status: Published
 ---
 
 Businesses interested in opportunities to support the State’s climate resilience are encouraged to visit the new [Climate Resilience Funding Directory](https://experience.arcgis.com/experience/196a9c8077e847c3b4a815d7c814930c). The Directory offers streamlined access to opportunities for State and federal grants. Though intended primarily for municipalities and community-based nonprofits, the Directory also includes numerous opportunities for small businesses and other private sector organizations. Use the “Applicant Type” menu and select “Private Sector and/or Small Businesses.”

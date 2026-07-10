@@ -5,6 +5,7 @@ webflowId: 65b2dc33023143e5fcddbb40
 date: "2024-01-25"
 topics: Rules and Regulations
 homepage-announcement-text-2: Information for Liquor License Holders
+status: Published
 ---
 
 Upcoming changes to liquor license regulations in New Jersey may require holders of inactive licenses to take action. Beginning August 1st, 2024, if a liquor license has not been used for two consecutive license terms, the holder may face the risk of the license expiring. However, there are options for transferring the license and preventing its expiration.

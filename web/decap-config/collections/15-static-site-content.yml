@@ -102,13 +102,24 @@ collections:
     identifier_field: "{{slug}}"
     slug: "{{slug}}"
     delete: false
-    sortable_fields: ["name", "date", "topics"]
+    sortable_fields: ["name", "date", "topics", "status"]
     create: false
     editor:
       preview: false
     fields:
       - { label: "Name", name: "name", widget: "string", required: true }
       - { label: "Slug", name: "slug", widget: "no-space", required: true }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        required: false
+        hint:
+          "Only Published updates appear on the site. Imported from Webflow's draft/archived state;
+          set directly here for content authored in Decap."
+        options:
+          - { label: "Published", value: "Published" }
+          - { label: "Draft", value: "Draft" }
+          - { label: "Archived", value: "Archived" }
       - {
           label: "Date Posted",
           name: "date",
