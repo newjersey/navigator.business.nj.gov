@@ -8,11 +8,11 @@ main-link-text: View Guide to Managing Employees
 main-text-1: "As a business owner, motivating staff and inspiring loyalty will help you get the most out of your employees. Start by hiring the right people for your needs. Understand interviewing techniques and the skills needed to do the job. Once your team is built, add clarity and structure to their responsibilities to ensure the work is being done and on time. Employees that are not motivated and productive will cost your business money and hurt its long-term success. \_Here are a few management practices you can implement to help maintain motivation and increase productivity."
 heading-2: Provide Incentives
 main-text-2: It is a common practice to reward management for their work, but don't neglect incentives for your front-line staff. Consider different incentives that will help to motivate your team to perform their best.
-heading-3: "‍Provide Meaningful Feedback "
+heading-3: Provide Meaningful Feedback
 main-text-3: Feedback is an essential management skill. Practice providing regular, helpful feedback to employees in a manner that encourages them and helps them to grow as individuals and professionals.
-heading-4: "Respect Employees as Individuals​​ "
+heading-4: Respect Employees as Individuals​​
 main-text-4: When employees feel genuinely respected, they’re much more likely “to go the extra mile” to help a company succeed.
-heading-5: "Invest in Training "
+heading-5: Invest in Training
 main-text-5: "Consider training opportunities - not only for your team to grow their skills and investment in your business, but in yourself as a manager. Look for resources and courses that can help you to continue to evolve as a leader and manage effectively. Businesses can leverage [SkillUp New Jersey](https://www.nj.gov/labor/career-services/education-training/skillup-nj/), a FREE virtual training program to help employees acquire new skills, enhance existing skills, or prepare for certification. \n\n**Becoming an Apprenticeship Employer**\n\nInvesting in apprentices increases productivity, quality of work, and more. The NJDOL Office of Apprenticeship is the primary contact and technical resource for employers, educational institutions, trade associations, and current/future apprentices for all statewide [New Jersey Apprenticeship Network (NJAN) initiatives](https://www.nj.gov/labor/career-services/apprenticeship/foremployers.shtml).\_\n\nLook at the State’s [funding options](/pages/funding) for more resources."
 heading-6: "‍Model Good Behavior "
 main-text-6: As a manager, your employees are always watching you. Behave in a way that builds respect among your staff, and you could benefit from a strong and motivated workforce.
