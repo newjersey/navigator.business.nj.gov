@@ -14,4 +14,4 @@ agency: NJ Department of Public Utilities
 status: Draft
 ---
 
-Solar, construction, engineering, and environmental services businesses can use a new website to identify solar energy projects that are eligible for incentive programs. **"**[**Landfill to Solar**](https://nj.gov/landfillsolar/?utm_source=govdelivery&utm_medium=email&utm_campaign=20240913_nwsltr&utm_content=biz&utm_term=env)**"** offers a step-by-step guide to locate potential project sites in your community and find funding opportunities.
+Solar, construction, engineering, and environmental services businesses can use a new website to identify solar energy projects that are eligible for incentive programs. [**"Landfill to Solar"**](https://nj.gov/landfillsolar/?utm_source=govdelivery&utm_medium=email&utm_campaign=20240913_nwsltr&utm_content=biz&utm_term=env) offers a step-by-step guide to locate potential project sites in your community and find funding opportunities.

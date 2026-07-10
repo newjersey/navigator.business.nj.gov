@@ -10,7 +10,7 @@ status: Draft
 
 **Applications are Now Open**
 
-**The Clean Tech Research & Development (R&D) Voucher Program **is designed to help early-stage New Jersey clean technology companies more easily access resources such as specialized equipment within the Garden State. Through the Clean Tech R&D Voucher Program, eligible applicants will receive vouchers to subsidize the costs associated with use of New Jersey university or federal laboratory facility equipment for testing and development and training in preparation for independent use of the facility.
+**The Clean Tech Research & Development (R&D) Voucher Program** is designed to help early-stage New Jersey clean technology companies more easily access resources such as specialized equipment within the Garden State. Through the Clean Tech R&D Voucher Program, eligible applicants will receive vouchers to subsidize the costs associated with use of New Jersey university or federal laboratory facility equipment for testing and development and training in preparation for independent use of the facility.
 
 Applications are now open and will be accepted on a rolling basis until the funding is expended. The Commission on Science, Innovation and Technology (CSIT) held an informational webinar on the Clean Tech R&D Voucher Program on March 16. A recorded version of the webinar and copy of materials presented are available on the [CSIT webpage](https://www.njeda.com/csit/).
 
