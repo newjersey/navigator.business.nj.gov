@@ -8,6 +8,7 @@ homepage-announcement-text-2: Download the NJ Small Business Manual
 cta-text: Download the Manual
 cta-link: >-
   https://www.nj.gov/state/bac/assets/downloads/NJ_Small_Business_Manual_for_download.pdf
+status: Published
 ---
 
 The new Small Business Manual from the [New Jersey Business Action Center (NJBAC)](https://www.nj.gov/state/bac/) is designed to provide support and guidance for small business owners and entrepreneurs. This free resource offers a wealth of information on planning, launching, operating, and growing your business in New Jersey.

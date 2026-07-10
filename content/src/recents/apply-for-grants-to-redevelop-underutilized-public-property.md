@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: "https://www.njeda.gov/asset-activation-planning-grant/"
 cta-text: How to Apply
 cta-link: "https://www.njeda.gov/asset-activation-planning-grant/"
+status: Draft
 ---
 
 Private, nonprofit, and public entities can receive grants of up to $50,000 to propose innovative reuse projects for underutilized public property assets. The New Jersey Asset Activation Planning Grant Program seeks proposals that target deficient, underutilized, or vacant land, buildings, or infrastructure owned by a county, municipality, or other public body.

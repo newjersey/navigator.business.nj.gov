@@ -10,6 +10,7 @@ cta-text: Learn More
 cta-link: >-
   https://www.nj.gov/labor/wageandhour/support/faqs/wageandhourworkerfaqs.shtml#minimumwage
 agency: NJ Department of Labor
+status: Published
 ---
 
 The minimum wage in New Jersey increased to $15.92 per hour on January 1, 2026, up from $15.49.

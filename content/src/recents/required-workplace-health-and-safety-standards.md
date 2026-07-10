@@ -57,6 +57,7 @@ source: >-
 
 
   ‍
+status: Archived
 ---
 
 All  new state contracted workers, workers in certain state and private health care facilities, and high-risk congregate settings in New Jersey will be required to be fully vaccinated against COVID-19 or be subject to COVID-19 testing at minimum one to two times per week. Learn more about the requirements.

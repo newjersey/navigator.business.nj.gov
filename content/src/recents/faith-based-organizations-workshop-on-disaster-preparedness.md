@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: "https://us02web.zoom.us/meeting/register/tZErdOCorT0qE9K5pMZgg5wKr0pedJiDj0_T"
 cta-text: Pre-Register
 cta-link: "https://us02web.zoom.us/meeting/register/tZErdOCorT0qE9K5pMZgg5wKr0pedJiDj0_T"
+status: Draft
 ---
 
 Faith-Based Organizations can join a virtual workshop on disaster preparedness, resilience resources, and FEMA grant opportunities. Attendees will learn about a range of resources for faith based organizations. Current NJ Office of Faith Based Initiatives grantees can consider adopting these programs into their grant's scope of work. The workshop will be held January 30th, 2023 at 12:00pm.

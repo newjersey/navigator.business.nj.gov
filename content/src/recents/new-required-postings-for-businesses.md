@@ -7,6 +7,7 @@ topics: Rules and Regulations
 source: >-
   [Required Posters - New Jersey Office of Attorney General
   (njoag.gov)](https://www.njoag.gov/about/divisions-and-offices/division-on-civil-rights-home/division-on-civil-rights-resources/required-posters/)
+status: Draft
 ---
 
 All employers are required to display posters to employees and prospective employees that advise them of their civil rights under [New Jersey’s Law Against Discrimination and Family Leave Act](https://www.njoag.gov/division-on-civil-rights-adopts-new-and-amended-rules-governing-posters-launches-new-posters-to-heighten-public-awareness-of-new-jerseys-law-against-discrimination-and-family-leave-act/).  

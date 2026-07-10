@@ -10,6 +10,7 @@ source: |-
   ‍
 cta-text: Learn More
 cta-link: "https://www.njeda.gov/njrise/"
+status: Published
 ---
 
 Eligible companies can receive grants worth up to $500,000 per business to relocate out-of-State, NJ-resident employees back to New Jersey. Applications will be accepted on a rolling basis until funding is exhausted.

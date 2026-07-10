@@ -6,6 +6,7 @@ date: "2022-02-11"
 topics: Grants and Resources
 source: NJEDA
 heading-1: Small Business Improvement Grant
+status: Archived
 ---
 
 The Small Business Improvement Grant reimburses eligible small businesses and nonprofits for up to 50% of eligible project costs associated with building improvements or the purchase and/or installation of new furniture, fixtures, and equipment made on or after March 9th, 2020. The maximum grant award is $50,000. Applications are first-come-first-served.

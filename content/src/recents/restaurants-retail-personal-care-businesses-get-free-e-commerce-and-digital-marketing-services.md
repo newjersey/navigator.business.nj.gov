@@ -14,6 +14,7 @@ source: |-
 cta-text: Consultant List (PDF)
 cta-link: "https://www.njeda.gov/wp-content/uploads/2024/07/Consultant-Contacts.pdf"
 agency: NJ Economic Development Authority
+status: Published
 ---
 
 Small businesses with a commercial location in New Jersey can receive up to $11,400 in free ecommerce and digital marketing consulting services. Restaurants, retail stores, and personal care businesses are eligible for website development, online ordering platforms, and e-commerce setup assistance. Contact an NJEDA partner consultant directly.

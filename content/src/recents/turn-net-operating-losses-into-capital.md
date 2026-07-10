@@ -7,6 +7,7 @@ topics: Grants and Resources
 source: "https://www.njeda.com/nol/"
 cta-text: Learn More
 cta-link: "https://www.njeda.com/nol/"
+status: Draft
 ---
 
 Technology or biotechnology companies with fewer than 225 U.S. employees may apply to sell a percentage of their net operating losses and unused research and development tax credits to unrelated, profitable corporations for cash through the Net Operating Loss (NOL) Program. The net operating losses and R&D tax credits may be sold for at least 80% of their value, up to a maximum lifetime benefit of $20 million per business.

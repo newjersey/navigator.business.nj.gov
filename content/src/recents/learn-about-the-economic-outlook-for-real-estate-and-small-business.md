@@ -10,6 +10,7 @@ source: >-
   (cvent.com)](https://web.cvent.com/event/3dd66ccc-8cb8-4593-8f51-a8780b5365b3/summary)
 cta-text: Register Now
 cta-link: "https://web.cvent.com/event/3dd66ccc-8cb8-4593-8f51-a8780b5365b3/summary"
+status: Draft
 ---
 
 Developers and other interested small businesses can learn about the economic outlook for real estate and small businesses in New Jersey by attending a workshop on March 9th, 2023 at 10:00 a.m. at Kean University.

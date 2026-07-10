@@ -12,6 +12,7 @@ source: >-
 cta-text: Learn More
 cta-link: >-
   https://www.njeda.com/food-and-agriculture-research-development-pilot-grant-program/
+status: Draft
 ---
 
 Early-stage, innovation and agriculture-based companies can apply for $75,000 grants to fund their research and development activities. The Food and Agriculture Research & Development Pilot Seed Grant Program will award ten such grants to startups working on food and/or agriculture-related innovation in the life sciences, technology, and food and beverage sectors. Eligibility requirements and other information are available on the program website.

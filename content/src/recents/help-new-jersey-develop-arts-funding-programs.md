@@ -11,6 +11,7 @@ cta-text: Learn More
 cta-link: >-
   https://www.njeda.gov/wp-content/uploads/2024/01/Capital-for-Arts-Culture-Entities-v4-Final-Fillable-003.pdf
 agency: NJ Economic Development Authority
+status: Draft
 ---
 
 Artists, arts organizations, and similar entities can inform the development of funding solutions and programs to support the arts and culture sector.

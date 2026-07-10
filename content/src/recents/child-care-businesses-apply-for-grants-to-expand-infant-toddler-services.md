@@ -10,6 +10,7 @@ source: >-
 cta-text: Learn More
 cta-link: >-
   https://www.childcarenj.gov/Providers/Grants/ThrivingbyThree?utm_campaign=20230330digest&utm_medium=email&utm_source=govdelivery
+status: Draft
 ---
 
 Licensed child care centers and Head Start/Early Head Start programs can now apply online for the Thriving by Three Infant and Toddler Child Care Grant. This grant helps providers expand their capacity for infants and toddlers, and increase high-quality child care services available to families. Eligible providers will receive an initial minimum grant of $3,000 per new infant or toddler child care slot created; $1,000 from each slot must be directed for teacher-related expenses (i.e., bonus or incentive).

@@ -5,6 +5,7 @@ webflowId: 6101bd7a2c857080489d4b1d
 date: "2021-07-28"
 topics: Grants and Resources
 source: NJEDA
+status: Archived
 ---
 
 The Commercial ERG Program is an incentive for developers and businesses to address project financing gaps, which include below market development margins or rates of return in development or redevelopment projects.

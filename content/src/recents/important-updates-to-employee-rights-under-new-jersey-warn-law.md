@@ -10,6 +10,7 @@ source: |-
   ‍
 cta-text: Learn More
 cta-link: "https://www.nj.gov/labor/employer-services/warn/"
+status: Published
 ---
 
 Employers with at least 100 employees have obligations under the State’s Worker Adjustment and Retraining Notification (WARN) law. As of April 10th, 2023, several new changes to the law are in effect. Among the most significant changes: 

@@ -208,6 +208,30 @@ describe("recentPull", () => {
 
       expect(result.body).toBe("<p>Article body</p>");
     });
+
+    it("should set status to Published when neither draft nor archived", () => {
+      const item = generateWebflowRecent({ isDraft: false, isArchived: false });
+
+      const result = webflowRecentToNavigatorFormat(item);
+
+      expect(result.status).toBe("Published");
+    });
+
+    it("should set status to Draft when isDraft is true and isArchived is false", () => {
+      const item = generateWebflowRecent({ isDraft: true, isArchived: false });
+
+      const result = webflowRecentToNavigatorFormat(item);
+
+      expect(result.status).toBe("Draft");
+    });
+
+    it("should set status to Archived when isArchived is true, regardless of isDraft", () => {
+      const item = generateWebflowRecent({ isDraft: false, isArchived: true });
+      const itemBothFlags = generateWebflowRecent({ isDraft: true, isArchived: true });
+
+      expect(webflowRecentToNavigatorFormat(item).status).toBe("Archived");
+      expect(webflowRecentToNavigatorFormat(itemBothFlags).status).toBe("Archived");
+    });
   });
 
   describe("writeRecentFile", () => {

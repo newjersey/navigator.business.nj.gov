@@ -9,6 +9,7 @@ source: >-
 cta-text: Learn More
 cta-link: >-
   https://www.njeda.com/njeda-announces-grant-program-to-support-indoor-amusement-facilities/
+status: Draft
 ---
 
 The New Jersey Indoor Amusement Park Grant Program will award one-time grants ranging from $5,000 up to $100,000. Those in [Opportunity Zone](https://nj.gov/governor/njopportunityzones/) eligible census tracts will be eligible for up to $150,000. The funds may only be used for working capital costs.

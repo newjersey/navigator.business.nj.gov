@@ -5,6 +5,8 @@ import { SectorType } from "@businessnjgovnavigator/shared/sector";
 export interface WebflowItem<T = Record<string, unknown>> {
   id: string;
   fieldData: T;
+  isDraft?: boolean;
+  isArchived?: boolean;
 }
 
 export interface WebflowPagination {

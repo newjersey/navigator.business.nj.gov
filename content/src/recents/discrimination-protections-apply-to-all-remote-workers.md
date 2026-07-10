@@ -14,6 +14,7 @@ source: >-
   ‍
 cta-link: >-
   https://www.njoag.gov/wp-content/uploads/2024/05/2024-05-07-DCR-Guidance-on-Remote-Work.pdf
+status: Published
 ---
 
 The NJ Law Against Discrimination (LAD) protects employees of NJ-based employers, regardless of where they work remotely. All protected characteristics under the LAD are included.

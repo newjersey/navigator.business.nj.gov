@@ -8,6 +8,7 @@ source: "NJ DOL press release:\_https://www.nj.gov/labor/lwdhome/press/2023/2023
 cta-text: Learn More
 cta-link: "https://www.nj.gov/labor/lwdhome/press/2023/20231106_gains.shtml"
 agency: NJ Department of Labor
+status: Draft
 ---
 
 Apprenticeships can help identify new talent, particularly in tight labor markets and during periods of low unemployment. New Jersey businesses can train new workers with support from the following programs:

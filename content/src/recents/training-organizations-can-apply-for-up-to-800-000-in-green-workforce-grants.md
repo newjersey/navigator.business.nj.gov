@@ -8,6 +8,7 @@ source: "https://www.njeda.gov/green-workforce-grant-2/"
 cta-text: Apply Now
 cta-link: "https://www.njeda.gov/green-workforce-grant-2/"
 agency: NJ Economic Development Authority
+status: Draft
 ---
 
 Organizations that provide workforce training and job placement services can apply for grants between $500,000 and $800,000 to develop green economy training programs. The Green Workforce Training Grant Challenge supports training in renewable energy, energy efficiency, sustainable manufacturing, and other green industries.

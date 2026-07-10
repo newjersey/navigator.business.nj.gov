@@ -10,6 +10,7 @@ cta-text: View Guidance
 cta-link: >-
   https://nj.gov/treasury/taxation/businesses/salestax/cash-rounding-guidance.shtml
 agency: NJ Department of Treasury
+status: Published
 ---
 
 Businesses accepting cash payments can voluntarily round transactions up or down to the nearest nickel due to the penny shortage caused by discontinued U.S. Mint production. Rounding policies must be disclosed clearly and conspicuously before customers incur charges.

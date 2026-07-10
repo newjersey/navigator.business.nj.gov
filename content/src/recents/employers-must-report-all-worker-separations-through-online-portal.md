@@ -9,6 +9,7 @@ source: >-
 cta-text: Register Now
 cta-link: >-
   https://www.nj.gov/labor/ea/employer-services/register-update/employeraccess.shtml
+status: Published
 ---
 
 New Jersey employers must report all employee separations electronically through the Employer Access portal as of December 8, 2025. This requirement applies to all separations regardless of reason: layoffs, terminations, resignations, or retirements.

@@ -8,6 +8,7 @@ source: "https://www.nj.gov/treasury/taxation/zevnotice.shtml"
 cta-text: Learn More
 cta-link: "https://www.nj.gov/treasury/taxation/zevnotice.shtml"
 agency: NJ Department of Treasury
+status: Published
 ---
 
 Zero emission vehicles (ZEVs) are now subject to sales and use taxes in New Jersey. ZEVs incur a 3.3125% reduced tax rate until July 2025, when they will transition to the standard rate of 6.625%.

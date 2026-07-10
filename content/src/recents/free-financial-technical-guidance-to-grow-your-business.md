@@ -9,6 +9,7 @@ cta-text: Register Now
 cta-link: >-
   https://www.eventbrite.com/e/njbac-southern-regional-resources-for-growth-small-business-event-tickets-888488371637
 agency: NJ Business Action Center
+status: Draft
 ---
 
 Access financial, mentoring, and technical support for your business at a Resources for Growth event at Rowan University in Cumberland County on September 27, 2024. More than 40 exhibitors will offer detailed information on a wealth of resources and programs designed to boost your business growth. Free registration is required.

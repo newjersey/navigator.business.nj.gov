@@ -6,6 +6,7 @@ date: "2023-03-19"
 topics: Grants and Resources
 cta-text: Learn More
 cta-link: "https://www.njeda.com/angelmatch/"
+status: Published
 ---
 
 Business owners and their investors can receive guarantees on their loans from the NJ Entrepreneur Support Program. The program provides guarantees totaling a maximum of $200,000 on investor loans advanced for working capital to businesses.

@@ -9,6 +9,7 @@ source: >-
   (hesaa.org)](https://www.hesaa.org/Pages/NJSTEMLRP.aspx)
 cta-text: Learn More
 cta-link: "https://www.hesaa.org/Pages/NJSTEMLRP.aspx"
+status: Draft
 ---
 
 Enhance your recruiting and retention of highly-skilled employees with STEM Loan Redemption. The New Jersey Higher Education Student Assistance Authority **(**[**HESAA**](https://www.hesaa.org/Pages/Default.aspx)**)** will help qualifying employees payoff student loans by matching your company's contribution of $1,000 per year for up to four years. Eligible STEM professionals can receive a total of $8,000 towards their student loans.

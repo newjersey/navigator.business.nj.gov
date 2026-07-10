@@ -15,6 +15,7 @@ source: >-
 cta-text: Learn More
 cta-link: >-
   https://www.njeda.com/njeda-seeking-service-providers-for-trenton-based-maternal-and-infant-health-innovation-center/
+status: Draft
 ---
 
 The New Jersey Economic Development Authority is seeking a health care services provider, an Institution of Higher Education (IHE), and a Trenton-based Multi-Service Organization (MSO) to serve as initial anchor tenants at the Trenton-based Maternal and Infant Health Center. Organizations may also express interest in providing direct services or establishing partnerships with the Center or the selected anchor tenants. 
