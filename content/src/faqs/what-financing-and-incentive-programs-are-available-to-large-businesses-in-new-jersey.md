@@ -132,8 +132,7 @@ A number of statutory tests must be met in addition to basic eligibility and cou
 - Award Limit: 90 percent of state income tax withholding for new and retained jobs in Priority Areas and Other Eligible Areas.
 - Material Factor: A company’s CEO must certify that the incentives are a material factor in the company’s decision to locate in NJ, and whether existing jobs are in fact “at risk” of leaving NJ.
 
-* Gap test for large awards: On awards in excess of $4 million/year, NJEDA is required to perform a detailed “gap analysis” to establish the minimum amount of tax credit needed to win the project. This will require a comparative cost analysis of competing out-of-state
-  location options.
+* Gap test for large awards: On awards in excess of $4 million/year, NJEDA is required to perform a detailed “gap analysis” to establish the minimum amount of tax credit needed to win the project. This will require a comparative cost analysis of competing out-of-state location options.
 
 - Job Maintenance and Determining Employment Threshold: Companies are required to maintain 80 percent of project and statewide employment for 1.5x the term of the tax credit. A company’s Employment Threshold (statewide employment count) is determined at the end of the last tax period prior to credit approval.
 - Eligible position or “full-time job” means a full-time position in a business in this State that the business has filled with a full-time employee. To be eligible, the employee must have his or her primary office at the qualified business facility and must spend at least 80 percent of his or her time at the qualified business facility. (Contractors, temporary, and 1099 tax filers are not eligible.)
@@ -452,13 +451,13 @@ _Private Component:_
 
 \*Public Component:
 
-- • Title
-  • Survey
-  • Environmental investigation and remediation;
-  • Pre-development costs;
-  • On-site infrastructure;
-  • General construction and/or rehabilitation; and
-  • Marketing the site for sale
+- Title
+- Survey
+- Environmental investigation and remediation;
+- Pre-development costs;
+- On-site infrastructure;
+- General construction and/or rehabilitation; and
+- Marketing the site for sale
 
   **Financing Instruments:**
 
@@ -493,18 +492,18 @@ _Private Component:_
 
 \*Private Component:
 
-- • Interest rate: 3%
-  • Payment on accrued interest shall be made from the project’s net cash flow, after payment of all project debt, based on loan percentage in relation to the percentage of total equity contributed by the applicant at the time of project completion, issuance of a permanent certificate of occupancy and submission of the final project. However, in no event shall the actual total equity contributed by the applicant to the project be less than what was presented at the time of approval of the loan.
-  • If net cash flow is insufficient to pay interest only, then any unpaid interest shall accrue and be added to the outstanding principal balance.
-  • If the percentage of net cash flow is in excess of the current interest, then the payment shall first be applied to accrued interest, if any, and then to reduce outstanding principal.
-  • At approval, the Board shall determine the Effective Rate of the loan, which shall range between 3 – 10%, determined by the economic feasibility and the need of the loan for the project.
-  • All unpaid or deferred interest payments and principal plus amount equal to Effective Rate shall be due in full at end of the loan term or at a Liquidity Event.
+- Interest rate: 3%
+- Payment on accrued interest shall be made from the project’s net cash flow, after payment of all project debt, based on loan percentage in relation to the percentage of total equity contributed by the applicant at the time of project completion, issuance of a permanent certificate of occupancy and submission of the final project. However, in no event shall the actual total equity contributed by the applicant to the project be less than what was presented at the time of approval of the loan.
+- If net cash flow is insufficient to pay interest only, then any unpaid interest shall accrue and be added to the outstanding principal balance.
+- If the percentage of net cash flow is in excess of the current interest, then the payment shall first be applied to accrued interest, if any, and then to reduce outstanding principal.
+- At approval, the Board shall determine the Effective Rate of the loan, which shall range between 3 – 10%, determined by the economic feasibility and the need of the loan for the project.
+- All unpaid or deferred interest payments and principal plus amount equal to Effective Rate shall be due in full at end of the loan term or at a Liquidity Event.
 
   \*Public Component:
 
-- • Interest rate: 3%
-  • During the term of the loan, interest shall accrue and be added to principal annually at the stated interest rate until the earlier of the Liquidity Event or the end of the term.
-  • All unpaid or deferred interest payments and principal shall be due in full at the end of the loan term, or at a Liquidity Event.
+- Interest rate: 3%
+- During the term of the loan, interest shall accrue and be added to principal annually at the stated interest rate until the earlier of the Liquidity Event or the end of the term.
+- All unpaid or deferred interest payments and principal shall be due in full at the end of the loan term, or at a Liquidity Event.
 
 Fees apply and are non-refundable.
 
