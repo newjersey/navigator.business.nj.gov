@@ -42,5 +42,13 @@ jobs:
         shell: bash
         run: yarn install --immutable
 
+      - name: Build Content
+        shell: bash
+        run: yarn workspace @businessnjgovnavigator/content build
+
+      - name: Build Content Types
+        shell: bash
+        run: yarn workspace @businessnjgovnavigator/content-types build
+
       - name: Deploy Static Site
         uses: ./.github/actions/deploy-static-site

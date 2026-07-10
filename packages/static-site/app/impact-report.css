@@ -1,0 +1,78 @@
+/* The header is rendered as a full-viewport-width sibling of
+  .grid-container (not nested inside it) so its background isn't capped to
+  the constrained content width; zero top margin/padding lets it butt
+  directly against the site header above with no gap. */
+.impact-report-header {
+  margin-top: 0;
+  padding-block: 2rem;
+}
+
+.impact-report-header h1 {
+  margin-top: 0;
+}
+
+.impact-report-quote {
+  border-inline-start: 0.25rem solid var(--color-primary);
+  padding-inline-start: 1.5rem;
+  margin-inline: 0;
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+.impact-report-quote__attribution {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.impact-report-stats-list {
+  margin-block: 1.5rem;
+}
+
+.impact-report-stats-list strong {
+  color: var(--color-primary);
+}
+
+.impact-report-stat--dark {
+  margin-block: 1.5rem;
+  padding: 1rem !important;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.impact-report-stat--dark strong {
+  color: var(--color-accent-cool);
+}
+
+.impact-report-stat--dark-lead strong:first-child {
+  display: block;
+  font-size: 1.75rem;
+}
+
+/* Since we're rendering footnote content away from the footnote superscripts,
+   we need to manually apply the superscript styling ourselves. */
+a[href^="#impact-report-footnote-"] {
+  vertical-align: super;
+  font-size: 0.75em;
+}
+
+.impact-report-footnotes {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+
+  hr {
+    margin-left: 0;
+    width: 50%;
+  }
+}
+
+.impact-report-footnotes ol {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+}

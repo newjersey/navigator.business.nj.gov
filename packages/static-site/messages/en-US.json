@@ -704,5 +704,222 @@
     },
     "orConnector": "or",
     "chatWithExpertLabel": "Chat with a NJ-based business expert"
+  },
+  "impactReport": {
+    "title": "Impact Report",
+    "subtitle": "2020–2025",
+    "downloadLink": {
+      "label": "Download the Report",
+      "href": "https://files.business.nj.gov/static/business-nj-impact-report.pdf",
+      "isInternal": false,
+      "opensInNewTab": true
+    },
+    "aboutUs": {
+      "heading": "About Us",
+      "introParagraph": "Business.NJ.gov is a digital platform serving as a one-stop shop for businesses to navigate and complete permits and licenses in New Jersey. Designed to streamline and simplify the process of starting, operating, and growing a business in the state, Business.NJ.gov offers comprehensive support for entrepreneurs and small business owners.",
+      "resourcesParagraph": "Business.NJ.gov provides a wide range of resources, including:\n\n- Business Starter Kits for navigating licensing and permits\n- Personalized recommendations for funding opportunities across the State\n- Updates on the latest regulations and funding opportunities\n- A customized calendar with tax obligations and permit renewal deadlines",
+      "image": {
+        "src": "/img/impact-report/about-us.jpg",
+        "alt": "A New Jersey business owner sitting at their desk. There is a laptop in front of them and they are smiling."
+      },
+      "closingParagraph": "This report outlines the impact that Business.NJ.gov has had on the business community since its launch in March 2020 through April 2025.",
+      "quote": {
+        "text": "We will create a first-stop, single digital portal for businesses to promote improved access to business services across the state…linked to an interactive digital permitting platform.",
+        "attribution": "Governor Murphy’s Stronger and Fairer Economic Plan"
+      },
+      "stats": [
+        {
+          "text": "**39,768,502** Number of times Business.NJ.gov content appeared in web search results from October 31, 2023, to April 1, 2025",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**10,846,068** Total visits to Business.NJ.gov from March 15, 2020, to April 1, 2024",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**3,175,826** Total visits to Business.NJ.gov from April 1, 2024, to April 1, 2025",
+          "variant": "dark",
+          "emphasis": "lead"
+        }
+      ]
+    },
+    "makingItEasier": {
+      "heading": "Making it Easier to Start and Grow a Business",
+      "beforeStatsParagraphs": [
+        "Prior to Business.NJ.gov, to start and operate a business in the Garden State, companies and aspiring entrepreneurs had to navigate a byzantine process, sifting through 15 State websites and creating multiple accounts to file forms and regulatory filings. Business.NJ.gov streamlines these processes and consolidates tasks spread across multiple agencies into a single, easy-to-use platform for New Jersey businesses.",
+        "Business.NJ.gov has been accessed by millions of users, hundreds of thousands of whom have leveraged our business content featuring information from more than a dozen State agencies."
+      ],
+      "quote": {
+        "text": "I am truly thankful as a small business owner of how manageable you have made this. I truly believed it was going to be so hard to register my small home business.",
+        "attribution": "Business.NJ.gov user"
+      },
+      "stats": [
+        {
+          "text": "On average, business owners that use Business.NJ.gov start their business **30% faster** than those that don't.",
+          "variant": "dark"
+        },
+        {
+          "text": "**502,994** - Number of visits to Business.NJ.gov's personalized guides to starting a business"
+        },
+        {
+          "text": "**403,103** - Number of visits to agency-related permits and licenses on Business.NJ.gov"
+        },
+        {
+          "text": "**277,121** - Number of times businesses have used Business.NJ.gov's funding resource tools"
+        },
+        {
+          "text": "**57,079** - Number of businesses formed via Business.NJ.gov from April 2022 to March 2025"
+        },
+        {
+          "text": "**75%** - Percent of users who say they are more likely to start a business using Business.NJ.gov"
+        }
+      ],
+      "afterStatsParagraphs": [
+        "Business.NJ.gov directly facilitated the formation of over 55,000 businesses and guided business owners through hundreds of thousands of tasks related to starting or operating their businesses.",
+        "One out of every seven businesses established in New Jersey are now formed through Business.NJ.gov.",
+        "Users report that Business.NJ.gov saves them time and are more likely to start a business using Business.NJ.gov's starter kits and other features within the platform that help business owners start and operate their business."
+      ]
+    },
+    "awarenessAndCompliance": {
+      "heading": "Awareness of and Compliance with Permits, Funding, and More",
+      "paragraphs": [
+        "Business.NJ.gov enhances access and government transparency for New Jersey's business community through several key initiatives. By partnering with State agencies, the platform simplifies complex regulatory requirements into accessible digital formats, making it easier for business owners to obtain permits and licenses.",
+        "To save users time, Business.NJ.gov integrates with various databases and systems, providing seamless access to essential information. This centralized hub allows quick retrieval of license statuses and other relevant information by business owners.",
+        "The platform also uses plain language to explain rules and regulations, making it easier for business owners to understand their obligations. This approach fosters a more transparent business environment.",
+        "Additionally, Business.NJ.gov keeps the community informed through a newsletter with more than 275,000 subscribers, providing updates on regulatory changes, funding programs, and other essential information."
+      ],
+      "stats": [
+        {
+          "text": "**3,599,211 out of 4,798,884** Number of annual permit interactions covered by permits explained in Business.NJ.gov as of April 1, 2025",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**3,042,715 out of 4,798,884** Number of annual permit interactions covered by permits integrated in Business.NJ.gov as of April 1, 2025",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**275,555** - Business.NJ.gov newsletter subscribers receiving biweekly updates"
+        },
+        {
+          "text": "**353,883** - Number of referrals to agency sites from July 1, 2024, to April 1, 2025"
+        },
+        {
+          "text": "**287** - Number of permits explained in Business.NJ.gov"
+        },
+        {
+          "text": "**32** - Number of agency systems integrated with Business.NJ.gov"
+        },
+        {
+          "text": "**188** - Number of interactive definitions explaining confusing government terminology as of April 1, 2025"
+        },
+        {
+          "text": "**75%** - Percent of annual permit interactions explained in Business.NJ.gov as of April 2025"
+        },
+        {
+          "text": "**63%** - Percent of annual permit interactions integrated into Business.NJ.gov as of April 2025"
+        }
+      ],
+      "quote": {
+        "text": "This road map helped me and saved me hundreds I was going to pay another company to set up my business. This was easy to use and follow. Thank whoever came up with it. This tool is awesome.",
+        "attribution": "Business.NJ.gov user"
+      }
+    },
+    "fosteringEconomicGrowth": {
+      "heading": "Fostering Economic Growth",
+      "paragraphs": [
+        "Business.NJ.gov is a catalyst for economic growth in New Jersey, empowering both aspiring and current business owners with the essential resources they need to start and operate their businesses. Since introducing its business formation capability in 2022, the platform has processed the formation of over 57,000 businesses, significantly contributing to job creation, innovation, and economic prosperity.",
+        "The platform offers comprehensive step-by-step guidance, regulatory information, and essential tools, enabling businesses to launch more swiftly and efficiently. According to a survey of over 700 New Jersey business owners, users of Business.NJ.gov launched their businesses 25 days faster on average than those who did not use it.",
+        "By expediting the business launch process, Business.NJ.gov empowers entrepreneurs to start earning, hiring, and engaging in commerce sooner. This acceleration results in additional economic gains and enhances New Jersey's GDP."
+      ],
+      "stats": [
+        {
+          "text": "**25 days faster** Average amount of time saved by businesses using Business.NJ.gov to launch their business versus those who did not. [^1]",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**$7k** Estimated average additional earnings per business owner that formed via Business.NJ.gov in 2024 due to their business starting sooner. [^2]",
+          "variant": "dark",
+          "emphasis": "lead"
+        },
+        {
+          "text": "**$167.7M** Estimated total additional earnings for business owners that formed their business via Business.NJ.gov due to their business starting sooner in 2024. [^3]",
+          "variant": "dark",
+          "emphasis": "lead"
+        }
+      ],
+      "footnotes": [
+        {
+          "id": 1,
+          "text": "This estimate was based on an exploratory survey of 341 business owners who utilized Business.NJ.gov to start their business and 395 who did not. Business owners were asked “How long did the entire process of starting your business take you, including starting your research, receiving your certificate of formation, and researching all other permits and licenses?” and given ranges to choose from starting at 1-3 days to over 12 months. Survey was not controlled for type or size of business."
+        },
+        {
+          "id": 2,
+          "text": "This estimate was based on multiplying the average earnings per hour of small business owners in New Jersey by the number of workable hours saved by forming via Business.NJ.gov. Workable hours is defined as 8 hours of work for each additional weekday that the business is able to operate sooner. **This metric is provisional and subject to revision as we enhance our methodology and obtain more precise data.**"
+        },
+        {
+          "id": 3,
+          "text": "This estimate was based on multiplying the estimated average additional earnings in 2024 per business owner formed via Business.NJ.gov by the total number of businesses formed via Business.NJ.gov in 2024. **This metric is provisional and subject to revision as we enhance our methodology and obtain more precise data.**"
+        }
+      ]
+    },
+    "customerServiceExperience": {
+      "heading": "Unifying the Customer Service Experience",
+      "beforeQuoteParagraphs": [
+        "Business.NJ.gov enhances customer service for New Jersey's business community through several strategic initiatives.",
+        "By partnering with various State agencies, the platform offers a Live Chat service where users can directly correspond with experts relevant to their issues. This immediate access to specialized advice ensures accurate and effective assistance for business owners."
+      ],
+      "quote": {
+        "text": "I've registered at least 10 companies over the course of my career and this navigator is BY FAR the easiest and best experience I've had working with a state government. This is not only a huge relief for me as an entrepreneur starting a new business but reflects extremely well on New Jersey making an effort to be more business-friendly and makes me much more positive about doing business in NJ.",
+        "attribution": "Business.NJ.gov user"
+      },
+      "afterQuoteParagraphs": [
+        "The Live Chat also streamlines interagency communication on customer requests and support. When queries involve multiple agencies, the platform facilitates interagency coordination resulting in helpful and timely responses to business owners. The overwhelming majority of users report they are satisfied with their Live Chat experience."
+      ],
+      "imageRowParagraphs": [
+        "Through these initiatives, Business.NJ.gov demonstrates a strong commitment to improving customer service, making it easier for New Jersey business owners to navigate challenges and focus on growth.",
+        "Tens of thousands of New Jersey business owners have relied on the Business.NJ.gov Live Chat to answer critical questions regarding their businesses.",
+        "New Jerseyans that have relied on the Live Chat report high satisfaction rates. Business.NJ.gov brings together multiple agencies to coordinate on customer questions that require interagency expertise."
+      ],
+      "image": {
+        "src": "/img/impact-report/customer-service.jpg",
+        "alt": "A New Jersey business owner is laughing in their office. They are wearing an orange hooded sweatshirt with blue lettering of their company logo."
+      },
+      "stats": [
+        {
+          "text": "**165,267** - Number of conversations in Live Chat from March 15, 2020, to April 1, 2025"
+        },
+        {
+          "text": "**4m 9s** - Median response time to reply to inquiries via Live Chat from May 1, 2023, to April 1, 2025"
+        },
+        {
+          "text": "**73%** - Percent of users who report being very happy or happy with their conversations from March 1, 2025, to April 1, 2025"
+        },
+        {
+          "text": "**5** - Number of agencies participating in Live Chat"
+        }
+      ]
+    },
+    "drivingEquity": {
+      "heading": "Driving Equity and Accessibility",
+      "paragraphs": [
+        "Business.NJ.gov has significantly improved equity and accessibility for New Jersey's business community. The platform has been expanding its Spanish content, advancing efforts to meet diverse language needs. Users from every region of New Jersey access the site, highlighting its extensive reach. The platform attracts a diverse demographic, encompassing various age groups and genders, reflecting a commitment to promoting an inclusive and accessible business environment."
+      ],
+      "stats": [
+        {
+          "text": "**70%** - Approximate year-over-year growth in sessions from members of underserved communities"
+        },
+        {
+          "text": "**100%** - Percentage of static site pages on Business.NJ.gov translated into Spanish"
+        },
+        {
+          "text": "**40,748** - Number of visits to Spanish language content from June 1, 2023, to April 1, 2025"
+        }
+      ]
+    }
   }
 }
