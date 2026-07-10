@@ -33,7 +33,7 @@ heading-5: Attend Trade Shows to Find Buyers
 main-text-5: |-
   Trade shows provide excellent opportunities to exhibit your products to international buyers.
 
-  The [**New Jersey Department of Agriculture’s Export Development**](https://www.nj.gov/agriculture/divisions/md/prog/export.html)** **program can assist New Jersey businesses with participating in international trade shows, generating leads on trade opportunities, and international product promotion.
+  The [**New Jersey Department of Agriculture’s Export Development**](https://www.nj.gov/agriculture/divisions/md/prog/export.html program can assist New Jersey businesses with participating in international trade shows, generating leads on trade opportunities, and international product promotion.
 heading-6: Find Financing and Funding
 main-text-6: |-
   If you’re looking for financing surrounding exports, you’ll encounter these types of services: assistance in remittance (payment) and collection, currency exchange, commercial letters of credit, financing exports, establishing payment terms, collecting export receivables, and providing necessary financial documentation.

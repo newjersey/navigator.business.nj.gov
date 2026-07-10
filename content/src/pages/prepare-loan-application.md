@@ -1,5 +1,5 @@
 ---
-name: "Prepare a Loan Application "
+name: "Prepare a Loan Application"
 slug: prepare-loan-application
 webflowId: 62043129389191124d2e8a47
 category: grow
@@ -16,18 +16,18 @@ main-text-2: |-
   * **Banks**: Banks are a traditional way to finance a business but have the strictest requirements for providing loans. You may be required to provide an alternate source of income and/or an impressive credit score or be able to provide significant collateral. They may also require that you have a business plan if you are a new business, they will want projected cash flows and other financial documents.
   * **Investors**: Your investors may be people you know, such as friends, relatives, or colleagues. Investment can also come from venture capital—angel investors or venture capital firms that want to invest in your business. Examples include commercial finance companies and venture capital funds.
   * **Community Development Financial Institutions / Micro Lenders:** This is a good option if you are unable to get a traditional loan. This could be a good first step to building credit and getting a bigger loan down the line.
-  * **Life insurance companies: **We strongly encourage working with an attorney on this approach due to tax implications.
-  * **Crowdfunding:** Also known as peer-to-peer lending or investing, is an alternative funding model often via internet platforms. Crowdfunding can also raise awareness of your company or brand.[‍](/pages/funding)
-  * **Government funding: **Funding programs with different government agencies are another way to fund some business ventures. These programs can provide a variety of capital or offer tax breaks for your business. [View open government funding opportunities](/pages/funding).
+  * **Life insurance companies:** We strongly encourage working with an attorney on this approach due to tax implications.
+  * **Crowdfunding:** Also known as peer-to-peer lending or investing, is an alternative funding model often via internet platforms. Crowdfunding can also raise awareness of your company or brand.
+  * **Government funding:** Funding programs with different government agencies are another way to fund some business ventures. These programs can provide a variety of capital or offer tax breaks for your business. [View open government funding opportunities](/pages/funding).
 heading-3: Estimate How Much Money To Borrow
 main-text-3: Once the building and equipment needs have been met, the business owner(s) must have enough money on hand to cover operating expenses for at least a year. These expenses include salaries and money to repay the loan. Work closely with your accountant to estimate cash flow needs.
 heading-4: Understand the Different Types of Business Loans‍
 main-text-4: |-
   Short-Term Loans are paid back in less than one year. Types of short-term loans include:
 
-  * **Working Capital Loan: **Should not be used for something like expansion but rather a situation where a business needs cash quickly to cover immediate expenses
-  * **Accounts Receivable Loan: **Uses accounts receivable as collateral. The bank would typically lend a fraction of the value of the receivables
-  * **Line of Credit: **It’s a preset amount of money that a financial institution like a bank or credit union has agreed to lend you and that you can borrow in increments
+  * **Working Capital Loan:** Should not be used for something like expansion but rather a situation where a business needs cash quickly to cover immediate expenses
+  * **Accounts Receivable Loan:** Uses accounts receivable as collateral. The bank would typically lend a fraction of the value of the receivables
+  * **Line of Credit:** It’s a preset amount of money that a financial institution like a bank or credit union has agreed to lend you and that you can borrow in increments
 
   Long-Term Loans last longer than one year. These loans are used for major business expansions, purchases of real property, acquisitions, and in some instances, start-up costs Types of long-term loans include:
 
@@ -82,7 +82,7 @@ main-text-7: |-
   * Has the principal(s) prepared a loan proposal and business plan that demonstrates an understanding of the business and commitment to the success of the business?
   * Does the business have sufficient “cash flow” to make the monthly payments on the loan request?
 heading-8: Find Loan Resources
-main-text-8: "These organizations have workshops, people who can answer questions, mentoring programs, and more. Whether you’re refining a business plan, thinking through potential expansion, or need some questions clarified, these entities will have information and support.\_\n\n* [**New Jersey Business Action Center**](https://nj.gov/state/bac/)**\_**\n* [**Small Business Development Centers**](https://njsbdc.com/)\n* [**SCORE**](https://www.score.org/)\n\nFor more, visit the business.nj.gov [business support page](/pages/business-support)."
+main-text-8: "These organizations have workshops, people who can answer questions, mentoring programs, and more. Whether you’re refining a business plan, thinking through potential expansion, or need some questions clarified, these entities will have information and support.\_\n\n* [**New Jersey Business Action Center**](https://nj.gov/state/bac/)\n* [**Small Business Development Centers**](https://njsbdc.com/)\n* [**SCORE**](https://www.score.org/)\n\nFor more, visit the business.nj.gov [business support page](/pages/business-support)."
 heading-9: A Note of Caution
 main-text-9: |-
   Be aware of advertisements or programs from so-called experts that offer “insider information” on financing a business with claims the state government or other public organizations have funds in the form of grants or extremely low-rate loans are available to the following groups:
@@ -95,5 +95,5 @@ main-text-9: |-
 
   Once a person begins calling these numbers to request money they quickly find out that the programs often have been misrepresented. Make sure you understand the terms, conditions, and obligations of the loan to avoid predatory lenders.
 
-  If you’re interested in information on financing a business through government funds, you can[ check out our verified, government-created database.](/pages/funding)
+  If you’re interested in information on financing a business through government funds, you can [check out our verified, government-created database.](/pages/funding)
 ---
