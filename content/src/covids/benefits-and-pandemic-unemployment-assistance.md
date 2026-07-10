@@ -23,9 +23,9 @@ section-1: |-
   The recently-enacted CARES ACT establishes Pandemic Unemployment assistance, extending unemployment benefits to freelancers, gig workers and independent contractors, who typically are not eligible. Visit NJDOL's [Information for Self-Employed NJ Workers](https://myunemployment.nj.gov/labor/myunemployment/independentcontractors.shtml). In addition to people who are self-employed or independent contractors, this includes those who do not have enough recent earnings to receive regular unemployment benefits.
 
   Claimants must certify for these benefits online each week. The certification schedule—based on Social Security number—can be found at [myunemployment.nj.gov](https://myunemployment.nj.gov/labor/myunemployment/schedule.shtml). For more information and instructions, see the [NJDOL's April 29, 2020 press release](https://www.nj.gov/labor/lwdhome/press/2020/20200429_puapayments.shtml).
-s2-headline: "CARES Act Unemployment Insurance Enhancements "
+s2-headline: "CARES Act Unemployment Insurance Enhancements"
 section-2: |-
-  The CARES Act enacted three types of assistance: 
+  The CARES Act enacted three types of assistance:
 
   * **Pandemic Unemployment Assistance:** expands eligibility for individuals who are typically ineligible for Unemployment benefits, for example [independent contractors, and self-employed and “gig” workers](https://myunemployment.nj.gov/labor/myunemployment/independentcontractors.shtml); those who do not have enough earnings to qualify for regular unemployment; and eligible individuals who are unemployed, partially unemployed, or unable to available to work due to a covered COVID-19 reason. See above for information regarding how to apply.
   * **Pandemic Unemployment Compensation:** provided an additional $600 per week, on top of regular benefits, to all recipients of Unemployment Insurance through July 25, 2020. This enhanced federal benefit has now expired. This section will be updated to reflect any new legislation enacted by Congress.

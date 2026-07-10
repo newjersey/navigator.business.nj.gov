@@ -20,22 +20,22 @@ s6-headline: Italian
 section-6: |-
   NJEDA offre appositi servizi a sostegno del [Programma per il fondo sussidiario di emergenza alle piccole imprese](/covid/check-status-njeda-small-business-emergency-assistance-grant-program) ([Small Business Emergency Assistance Grant Program](/covid/check-status-njeda-small-business-emergency-assistance-grant-program)) in 11 lingue. Puoi chiedere assistenza in: **arabo, cantonese, gujarati, hindi, italiano, coreano, mandarino, polacco, portoghese, spagnolo e tagalog.** Se ti serve aiuto con le lingue, invia a NJEDA il tuo nome, lingua parlata e numero di telefono all’indirizzo [languagehelp@njeda.com](mailto:languagehelp@njeda.com).
 
-   
+
 
   **Attenzione: anche se l'assistenza è disponibile nelle lingue sopra elencate, il modulo di richiesta deve essere compilato in inglese o spagnolo.**
-s7-headline: "Korean "
+s7-headline: "Korean"
 section-7: "NJEDA에서는 [Small Business Emergency Assistance Grant Program](/covid/check-status-njeda-small-business-emergency-assistance-grant-program)([소규모 기업 긴급 지원금 프로그램](/covid/check-status-njeda-small-business-emergency-assistance-grant-program))을 지원하기 위해 11가지 언어로 언어 서비스를 제공합니다. 언어 지원은 아랍어**, **광동어**, **구자라트어**, **힌디어**, **이탈리아어**, **한국어**, **북경** **중국어**, **폴란드어**, **포르투갈어**, **스페인어** **및** **타갈로그어로 제공됩니다. \_언어 지원이 필요하시면 NJEDA에 귀하의 이름, 사용하시는 언어 및 전화번호를 [**languagehelp@njeda.com**](mailto:languagehelp@njeda.com)으로 보내 주십시오. \n\n언어** **지원은** **참고용으로만** **제공되는** **것이며** **실제** **신청서** **작성은** **반드시** **영어** **또는** **스페인어로만** **해야** **합니다**.**"
 s8-headline: Polish
 section-8: NJEDA oferuje usługi językowe do pomocy w ramach [Small Business Emergency Assistance Grant Program](/covid/check-status-njeda-small-business-emergency-assistance-grant-program) ([Programu dotacji na pomoc dla małych firm w sytuacji klęski](/covid/check-status-njeda-small-business-emergency-assistance-grant-program)) w 11 językach. Pomoc można uzyskać w językach **arabskim, kantońskim, gudżarackim, hindi, włoskim, koreańskim, mandaryńskim, polskim, portugalskim, hiszpańskim i tagalog.** Osoby pragnące skorzystać z pomocy językowej proszone są o przesłanie do NJEDA swojego imienia i nazwiska, informacji o języku, którym się posługują i numeru telefonu na adres [**languagehelp@njeda.com**](mailto:languagehelp@njeda.com). **Należy pamiętać, że chociaż dostępna jest pomoc w wyżej wymienionych językach, formularz wniosku należy wypełnić w języku angielskim lub hiszpańskim.**
-s9-headline: "Portuguese "
+s9-headline: "Portuguese"
 section-9: "A NJEDA oferece serviços de idiomas para o [programa de ajuda econômica emergencial para pequenas empresas (Small Business Emergency Assistance Grant Program)](/covid/check-status-njeda-small-business-emergency-assistance-grant-program). Os serviços estão disponíveis para os 11 idiomas a seguir: **árabe, cantonês, gujarati, hindi, italiano, coreano, mandarim, polonês, português, espanhol e tagalo.** Se você precisar de ajuda com um idioma, envie ao NJEDA seu nome, idioma falado e número de telefone: [languagehelp@njeda.com](mailto:languagehelp@njeda.com). **Observe que, embora a ajuda esteja disponível para os idiomas acima, o pedido em si deve ser preenchido em inglês ou espanhol.**"
 s10-headline: Simplified Chinese
 section-10: |-
-  NJEDA 用 11 种语言提供语言服务，来协助[小型企业紧急补助计划](/covid/check-status-njeda-small-business-emergency-assistance-grant-program) ([Small Business Emergency Assistance Grant Program](/covid/check-status-njeda-small-business-emergency-assistance-grant-program))。可以使用**阿拉伯语、粤语、古吉拉特语、北印度语、意大利语、韩语、普通话、波兰语、葡萄牙语、西班牙语和他加禄语**提供此协助。如果您需要语言协助，请向 NJEDA 发送您的姓名，告知您的口头语言，并将电话号码发送至 [**languagehelp@njeda.com**](mailto:languagehelp@njeda.com)。 
+  NJEDA 用 11 种语言提供语言服务，来协助[小型企业紧急补助计划](/covid/check-status-njeda-small-business-emergency-assistance-grant-program) ([Small Business Emergency Assistance Grant Program](/covid/check-status-njeda-small-business-emergency-assistance-grant-program))。可以使用**阿拉伯语、粤语、古吉拉特语、北印度语、意大利语、韩语、普通话、波兰语、葡萄牙语、西班牙语和他加禄语**提供此协助。如果您需要语言协助，请向 NJEDA 发送您的姓名，告知您的口头语言，并将电话号码发送至 [**languagehelp@njeda.com**](mailto:languagehelp@njeda.com)。
 
   **请注意，虽然可以使用这些语言提供此协助，但必须用英语或西班牙语填写该申请表。**
 section-11: |-
-  NJEDA 用 11 種語言提供語言服務，來協助[小型企業緊急補助計劃](/covid/check-status-njeda-small-business-emergency-assistance-grant-program) ([Small Business Emergency Assistance Grant Program](/covid/check-status-njeda-small-business-emergency-assistance-grant-program))。可以使用**阿拉伯語、粵語、古吉拉特語、北印度語、義大利語、韓語、普通話、波蘭語、葡萄牙語、西班牙語和他加祿語**提供此協助。如果您需要語言協助，請向 NJEDA 傳送您的姓名，告知您的口頭語言，並將電話號碼傳送至 [**languagehelp@njeda.com**](mailto:languagehelp@njeda.com)。 
+  NJEDA 用 11 種語言提供語言服務，來協助[小型企業緊急補助計劃](/covid/check-status-njeda-small-business-emergency-assistance-grant-program) ([Small Business Emergency Assistance Grant Program](/covid/check-status-njeda-small-business-emergency-assistance-grant-program))。可以使用**阿拉伯語、粵語、古吉拉特語、北印度語、義大利語、韓語、普通話、波蘭語、葡萄牙語、西班牙語和他加祿語**提供此協助。如果您需要語言協助，請向 NJEDA 傳送您的姓名，告知您的口頭語言，並將電話號碼傳送至 [**languagehelp@njeda.com**](mailto:languagehelp@njeda.com)。
 
   **請注意，雖然可以使用這些語言提供此協助，但必須用英語或西班牙語填寫該申請表。**
 s12-headline: Spanish
