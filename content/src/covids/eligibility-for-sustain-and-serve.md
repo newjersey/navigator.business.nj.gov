@@ -1,5 +1,5 @@
 ---
-name: "What is the status of the Sustain and Serve NJ Program (Phase 2)? "
+name: "What is the status of the Sustain and Serve NJ Program (Phase 2)?"
 slug: eligibility-for-sustain-and-serve
 webflowId: 5fbbfb5a68386e2e90457507
 topic: Economic Assistance for Businesses

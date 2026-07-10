@@ -16,7 +16,7 @@ section-1: |-
 
   This assistance includes, but is not limited to, preparing financial information, packaging application documentation, and completing and submitting the on-line or paper-based application. Compensation for these organizations will be based on completed and submitted SBA applications. The assistance may be conducted in person or electronically.
 
-  Additionally, the SBA has a number of other approved technical assistance providers who may also be able to help you: 
+  Additionally, the SBA has a number of other approved technical assistance providers who may also be able to help you:
 
   **Small Business Development Centers** in New Jersey can be located at [https://www.njeda.com/pdfs/NJSBDC-Map.aspx [pdf]](https://www.njeda.com/pdfs/NJSBDC-Map.aspx)
 
