@@ -690,5 +690,19 @@
       "individual-license": "Individuos",
       "object-vehicle": "Objeto/Vehículo"
     }
+  },
+  "pageNotFound": {
+    "iconAlt": "Ícono de error 404",
+    "title": "Se produjo un error",
+    "description": "Central Jersey existe! Pero esta página no...",
+    "returnToPrefix": "Puede regresar a la",
+    "homeLink": {
+      "label": "página de inicio",
+      "href": "/",
+      "isInternal": true,
+      "opensInNewTab": false
+    },
+    "orConnector": "o",
+    "chatWithExpertLabel": "Chatee con un experto empresarial en Nueva Jersey"
   }
 }

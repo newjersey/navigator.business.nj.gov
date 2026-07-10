@@ -635,6 +635,26 @@ export interface LicensingGuidePageMessages {
 }
 
 /**
+ * Localized content for the 404 (page not found) page.
+ */
+export interface PageNotFoundContent {
+  /** Alt text for the 404 illustration. */
+  readonly iconAlt: string;
+  /** Page H1 title. */
+  readonly title: string;
+  /** Description text shown below the title. */
+  readonly description: string;
+  /** Text before the home page link, e.g. "You can return to the". */
+  readonly returnToPrefix: string;
+  /** Link back to the home page. */
+  readonly homeLink: ContentLink;
+  /** Text joining the two links, e.g. "or". */
+  readonly orConnector: string;
+  /** Label for the Intercom chat launcher link. */
+  readonly chatWithExpertLabel: string;
+}
+
+/**
  * Complete localized message payload for one locale.
  */
 export interface ApplicationMessages {
@@ -650,4 +670,6 @@ export interface ApplicationMessages {
   readonly funding: FundingPageMessages;
   /** Licensing & Certification Guide page content strings. */
   readonly licensingGuide: LicensingGuidePageMessages;
+  /** 404 page content strings and links. */
+  readonly pageNotFound: PageNotFoundContent;
 }
