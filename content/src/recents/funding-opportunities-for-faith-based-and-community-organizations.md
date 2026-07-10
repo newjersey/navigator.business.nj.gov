@@ -24,7 +24,7 @@ Faith and community-based organizations (FBCOs) can leverage several grant progr
 - _Food Security_: Projects supporting organizations providing consistent food services at least four times a week to reduce food insecurity.
 - _Services to Seniors_: Projects that support aging in place, preventing isolation, and improving the quality of life for low-income seniors.
 
-**Social Innovation\***: \*This category includes:
+**Social Innovation\***: This category includes:
 
 - _College Readiness_: Help students aged 16-25 gain access to college or trade schools, covering costs like application fees and arranging college tours.
 - _Trade Skills Readiness_: Educate and provide access to trade schools and apprenticeships for individuals aged 16-30, including paid internships and trade fairs.
