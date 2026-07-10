@@ -135,7 +135,6 @@
         }
       ],
       "agencyLogoAlt": "Logotipo de Business.NJ.gov",
-      "agencyName": "Business.NJ.gov",
       "socialLinks": [
         {
           "modifier": "github",
@@ -189,7 +188,7 @@
       "agencySectionAriaLabel": "Identificador de la agencia",
       "stateLogoAlt": "Logotipo del estado de New Jersey",
       "agencyLogoAlt": "Logotipo de Business.NJ.gov",
-      "domain": "business.nj.gov",
+      "domain": "Business.NJ.gov",
       "disclaimerPrefix": "Un sitio web oficial del",
       "disclaimerLink": {
         "label": "Estado de New Jersey",
