@@ -125,7 +125,6 @@
         }
       ],
       "agencyLogoAlt": "الكتابة هذا",
-      "agencyName": "Business.NJ.gov",
       "socialLinks": [
         {
           "modifier": "github",
@@ -179,7 +178,7 @@
       "agencySectionAriaLabel": "إلى تجريبي",
       "stateLogoAlt": "النهائي الكتابة هذا هذا من",
       "agencyLogoAlt": "سيتم النهائي",
-      "domain": "business.nj.gov",
+      "domain": "Business.NJ.gov",
       "disclaimerPrefix": "الكتابة اتجاه في إلى حذفه",
       "disclaimerLink": {
         "label": "في المنتج حذفه في",

@@ -188,8 +188,6 @@ export interface LayoutFooterContent {
   readonly primaryLinks: readonly LandingFooterPrimaryLink[];
   /** Alt text for the agency logo image. */
   readonly agencyLogoAlt: string;
-  /** Agency name heading rendered near the logo. */
-  readonly agencyName: string;
   /** Social links rendered in the footer secondary row. */
   readonly socialLinks: readonly LandingSocialLink[];
   /** Contact heading rendered above phone/email links. */
