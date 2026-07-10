@@ -15,9 +15,9 @@ import type {
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
- * Public path for the synced NJWDS footer logo image.
+ * Public path for the Business.NJ.gov site logo.
  */
-const FOOTER_LOGO_IMAGE_PATH = "/assets/njwds/dist/img/logo-img.png";
+const SITE_LOGO_PATH = "/img/business.NJ.gov-logo.svg";
 
 /**
  * Describes props used by the site footer component.
@@ -142,15 +142,12 @@ export const SiteFooter = ({ content, mainContentId }: SiteFooterProps) => {
               <div className="mobile-lg:grid-col-auto">
                 <Image
                   alt={content.agencyLogoAlt}
-                  className="usa-footer__logo-img"
-                  height={80}
-                  src={FOOTER_LOGO_IMAGE_PATH}
+                  height={50}
+                  src={SITE_LOGO_PATH}
+                  style={{ height: "auto", maxWidth: "100%" }}
                   unoptimized
-                  width={80}
+                  width={200}
                 />
-              </div>
-              <div className="mobile-lg:grid-col-auto">
-                <h2 className="usa-footer__logo-heading">{content.agencyName}</h2>
               </div>
             </div>
             <div className="usa-footer__contact-links mobile-lg:grid-col-6">

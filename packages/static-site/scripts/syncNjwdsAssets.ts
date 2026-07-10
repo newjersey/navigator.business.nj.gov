@@ -188,10 +188,6 @@ const REQUIRED_NJWDS_ASSETS: readonly RequiredNjwdsAsset[] = [
     description: "NJWDS graphic-list image",
   },
   {
-    relativePath: "img/logo-img.png",
-    description: "NJWDS footer logo image",
-  },
-  {
     relativePath: "img/nj-logo-gray-20.png",
     description: "NJWDS New Jersey logo image",
   },
