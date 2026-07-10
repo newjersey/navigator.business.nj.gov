@@ -32,8 +32,8 @@ export const WhatsNewSection = ({ content, recents }: WhatsNewSectionProps) => {
 
 const WhatsNewCardElement = (props: { recent: RecentItem }) => {
   return (
-    <li key={props.recent.slug} className="usa-card tablet:grid-col-4">
-      <Link href={`/recent/${props.recent.slug}`}>
+    <li key={props.recent.slug} className="usa-card tablet:grid-col-4 padding-x-1">
+      <Link href={`/updates/${props.recent.slug}`}>
         <div className="usa-card__container">
           <div className="usa-card__header">
             {props.recent.topics && <span className="usa-tag">{props.recent.topics}</span>}

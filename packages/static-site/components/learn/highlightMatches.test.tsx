@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
+import Markdown from "react-markdown";
 import { describe, expect, it } from "vitest";
-import { HighlightedText, splitHighlight } from "./highlightMatches";
+import { HighlightedText, makeHighlightPlugin, splitHighlight } from "./highlightMatches";
 
 describe("splitHighlight", () => {
   it("returns the whole string as one non-match segment for an empty query", () => {
@@ -59,5 +60,30 @@ describe("HighlightedText", () => {
     const { container } = render(<HighlightedText text="Grant Program" query="" />);
     expect(container.querySelector("mark")).toBeNull();
     expect(container).toHaveTextContent("Grant Program");
+  });
+});
+
+describe("makeHighlightPlugin", () => {
+  it("wraps a single match with one mark, not nested marks, when text surrounds the match", () => {
+    const { container } = render(
+      <Markdown rehypePlugins={[makeHighlightPlugin("Alpha")]}>Body for Alpha Update.</Markdown>,
+    );
+    const marks = container.querySelectorAll("mark.funding-search-highlight");
+    expect(marks).toHaveLength(1);
+    expect(marks[0]).toHaveTextContent("Alpha");
+    expect(marks[0].querySelector("mark")).toBeNull();
+  });
+
+  it("wraps each of multiple distinct matches with exactly one mark each", () => {
+    const { container } = render(
+      <Markdown rehypePlugins={[makeHighlightPlugin("grant")]}>
+        Apply for a grant and check the grant status later.
+      </Markdown>,
+    );
+    const marks = container.querySelectorAll("mark.funding-search-highlight");
+    expect(marks).toHaveLength(2);
+    for (const mark of marks) {
+      expect(mark.querySelector("mark")).toBeNull();
+    }
   });
 });

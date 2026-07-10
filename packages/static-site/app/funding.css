@@ -95,12 +95,15 @@
 
 /* Scrollable checkbox list. The inline-start padding (offset by a negative
    margin to preserve alignment) keeps the focused checkbox's outline from being
-   clipped against the scroll container's inline-start overflow edge. */
+   clipped against the scroll container's inline-start overflow edge. The
+   block-end padding keeps the last checkbox's border from sitting flush
+   against the container's bottom edge, which otherwise reads as cut off. */
 .funding-filter-options {
   max-height: 240px;
   overflow-y: auto;
   padding-inline-start: 6px;
   margin-inline-start: -6px;
+  padding-block-end: 4px;
 }
 
 .funding-search-highlight {
@@ -111,6 +114,16 @@
 .funding-card__heading-link {
   color: inherit;
   text-decoration: underline;
+}
+
+/* NJWDS's `.usa-tag` rule forces text to uppercase and loads after this
+   stylesheet, so a same-specificity override here loses the cascade. The
+   compound selector raises specificity above `.usa-tag` alone to win
+   regardless of load order. Update categories ("Grants and Resources",
+   "Rules and Regulations") are proper nouns meant to display in title case
+   as authored. */
+.usa-tag.updates-category-tag {
+  text-transform: none;
 }
 
 .funding-card__heading-link:hover,

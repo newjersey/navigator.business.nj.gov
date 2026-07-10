@@ -633,6 +633,70 @@ export interface LicensingGuidePageMessages {
 }
 
 /**
+ * Localized content for the Updates page.
+ */
+export interface UpdatesPageMessages {
+  /** Page H1 title. */
+  readonly title: string;
+  /** Intro paragraph below the title. */
+  readonly intro: string;
+  /** Heading for the filter sidebar. */
+  readonly filterHeading: string;
+  /** Label for the search input. */
+  readonly filterSearch: string;
+  /** Label for the category filter group. */
+  readonly filterCategory: string;
+  /**
+   * Display labels for each update category, keyed by its content value
+   * (`topics`). These keys are the source of truth for the listing's category
+   * filter, so they must stay in lockstep with the `topics` vocabulary used in
+   * recents content: a `topics` value with no matching key here is silently
+   * unfilterable and renders untagged.
+   */
+  readonly categoryLabels: Record<string, string>;
+  /** Label for the "Clear" button inside the category fieldset. */
+  readonly filterClear: string;
+  /** Label for the "Show Results" button; {count} is replaced at runtime. */
+  readonly filterShowResults: string;
+  /** Label for the "Reset" button. */
+  readonly filterReset: string;
+  /** Label for the sort dropdown. */
+  readonly sortLabel: string;
+  /** Sort option: newest first by date. */
+  readonly sortMostRecent: string;
+  /** Sort option: alphabetical A-Z by name. */
+  readonly sortAZ: string;
+  /** Sort option: reverse alphabetical Z-A by name. */
+  readonly sortZA: string;
+  /** Unfiltered result-count line; {start}, {end} (range wrapped in <bold>), and {total}. */
+  readonly resultCountShowing: string;
+  /** Filtered result-count line; {start}, {end} (range wrapped in <bold>), {filtered}, and {total}. */
+  readonly resultCountFiltered: string;
+  /** Result-count line when the filtered set is empty; {total}. */
+  readonly resultCountFilteredEmpty: string;
+  /** Label preceding the filter chips ("Filtering by:"). */
+  readonly filteringByLabel: string;
+  /** Chip label for the active search query; {query} is replaced at runtime. */
+  readonly filterSearchChip: string;
+  /** aria-label template for chip remove buttons; {filter} is replaced at runtime. */
+  readonly filterRemoveLabel: string;
+  /** Label for pagination "Previous" control. */
+  readonly paginationPrevious: string;
+  /** Label for pagination "Next" control. */
+  readonly paginationNext: string;
+  /** aria-label for the pagination navigation landmark. */
+  readonly paginationLabel: string;
+  /** aria-label template for a numbered page button; {page} is replaced at runtime. */
+  readonly paginationPageLabel: string;
+  /** Prefix label for the "Last Updated" date on an update card. */
+  readonly cardUpdatedLabel: string;
+  /** Label for the "Read more" link on an update card. */
+  readonly cardReadMore: string;
+  /** Fallback label for the detail-page CTA button when the item has no `cta-text`. */
+  readonly detailCtaFallback: string;
+}
+
+/**
  * Localized content for the 404 (page not found) page.
  */
 export interface PageNotFoundContent {
@@ -844,6 +908,8 @@ export interface ApplicationMessages {
   readonly funding: FundingPageMessages;
   /** Licensing & Certification Guide page content strings. */
   readonly licensingGuide: LicensingGuidePageMessages;
+  /** Updates page content strings. */
+  readonly updates: UpdatesPageMessages;
   /** 404 page content strings and links. */
   readonly pageNotFound: PageNotFoundContent;
   /** Impact report page content strings. */
