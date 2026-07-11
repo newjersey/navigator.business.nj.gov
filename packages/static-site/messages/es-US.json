@@ -690,6 +690,37 @@
       "object-vehicle": "Objeto/Vehículo"
     }
   },
+  "updates": {
+    "title": "Todas las Actualizaciones",
+    "intro": "Conozca las nuevas normas, recursos y próximos cambios que puedan afectar su negocio, incluyendo información crítica y programas para emergencias estatales.",
+    "filterHeading": "Filtrar Todas las Actualizaciones",
+    "filterSearch": "Buscar",
+    "filterCategory": "Categoría",
+    "categoryLabels": {
+      "Grants and Resources": "Subvenciones y Recursos",
+      "Rules and Regulations": "Normas y Regulaciones"
+    },
+    "filterClear": "Borrar",
+    "filterShowResults": "Mostrar {count} resultados",
+    "filterReset": "Restablecer",
+    "sortLabel": "Ordenar por:",
+    "sortMostRecent": "Más Reciente",
+    "sortAZ": "A-Z",
+    "sortZA": "Z-A",
+    "resultCountShowing": "Mostrando <bold>{start}–{end}</bold> de {total} actualizaciones",
+    "resultCountFiltered": "Mostrando <bold>{start}–{end}</bold> de {filtered} actualizaciones (de {total} en total)",
+    "resultCountFilteredEmpty": "0 actualizaciones coincidentes (de {total} en total)",
+    "filteringByLabel": "Filtrando por:",
+    "filterSearchChip": "Búsqueda: \"{query}\"",
+    "filterRemoveLabel": "Quitar el filtro {filter}",
+    "paginationPrevious": "Anterior",
+    "paginationNext": "Siguiente",
+    "paginationLabel": "Paginación",
+    "paginationPageLabel": "Página {page}",
+    "cardUpdatedLabel": "Última Actualización",
+    "cardReadMore": "Leer más",
+    "detailCtaFallback": "Más Información"
+  },
   "pageNotFound": {
     "iconAlt": "Ícono de error 404",
     "title": "Se produjo un error",

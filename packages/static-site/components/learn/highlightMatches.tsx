@@ -1,7 +1,7 @@
 import type { Element, ElementContent, Parents, Root, Text } from "hast";
 import { Fragment, type ReactElement } from "react";
 import type { Node } from "unist";
-import { visitParents } from "unist-util-visit-parents";
+import { SKIP, visitParents } from "unist-util-visit-parents";
 
 export interface HighlightSegment {
   readonly text: string;
@@ -83,5 +83,9 @@ export const makeHighlightPlugin = (query: string) => () => (tree: Root) => {
     );
 
     (parent as Element).children.splice(index, 1, ...replacement);
+    // The replacement nodes (including their <mark> text children) are newly
+    // inserted, not part of the original tree. Without skipping past them,
+    // the visitor would re-visit and re-wrap the same matched text again.
+    return [SKIP, index + replacement.length];
   });
 };
