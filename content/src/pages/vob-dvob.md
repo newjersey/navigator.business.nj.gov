@@ -13,7 +13,7 @@ main-text-1: |-
 
   A "Veteran-owned business" is a business that has its principal place of business in the State, is independently owned and operated, and at least 51% of the business is owned and controlled by persons who are veterans. The Principal Owner must provide a copy of their Federal Form DD-214 indicating honorable discharge or release under honorable circumstances.
 
-  If you are a VOB and seek certification, register[ online with the State of New Jersey application](https://www.njportal.com/DOR/SBERegistry/). This certification needs to be reverified annually, [complete the VOB verification form here](https://www.njportal.com/DOR/SBERegistry/).
+  If you are a VOB and seek certification, register [online with the State of New Jersey application](https://www.njportal.com/DOR/SBERegistry/). This certification needs to be reverified annually, [complete the VOB verification form here](https://www.njportal.com/DOR/SBERegistry/).
 heading-2: DVOB Eligibility and Registration
 main-text-2: |-
   Disabled Veterans-owned business means a business that:

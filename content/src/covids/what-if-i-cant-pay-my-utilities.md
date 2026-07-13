@@ -18,7 +18,7 @@ section-1: |-
   * [Emergency Rental Assistance](https://njdca.onlinepha.com/) (covers utilities included in rental costs)
   * [Low Income Home Energy Assistance Program](https://www.nj.gov/dca/divisions/dhcr/offices/hea.html) (gives financial assistance for utilities)
 
-  The[Utility Customer’s Bill of Rights](https://www.nj.gov/bpu/assistance/rights/) (outlines the laws around customer protections)
+  The [Utility Customer’s Bill of Rights](https://www.nj.gov/bpu/assistance/rights/) (outlines the laws around customer protections)
 
   For additional help, the Department of Community Affairs has a [variety of programs](http://nj.gov/dca/dcaid) that can help with rent costs, eviction prevention, and more.**
   **

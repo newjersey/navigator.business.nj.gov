@@ -10,6 +10,6 @@ Before you register your business, you should make sure your intended business‚Ä
 
 For more information, visit [https://www.nj.gov/treasury/revenue/checkbusiness.shtml](https://www.nj.gov/treasury/revenue/checkbusiness.shtml).
 
-You should also check [trademark ](https://www.uspto.gov/)and [website domain](https://whois.icann.org/en) databases.
+You should also check [trademark](https://www.uspto.gov/) and [website domain](https://whois.icann.org/en) databases.
 
 ‚Äç

@@ -67,7 +67,7 @@ Fees apply and are non-refundable unless otherwise stated.
 
 - [Application](https://application.njeda.com/angeltaxcredit.aspx)
 - [Steps for Review, Approval, and Securing a Replacement Certificate](https://application.njeda.com/angeltaxcredit.aspx)
-- [Sample Application ](https://application.njeda.com/angeltaxcredit.aspx)(for illustrative purposes only - see application link above to apply)
+- [Sample Application](https://application.njeda.com/angeltaxcredit.aspx) (for illustrative purposes only - see application link above to apply)
 - [New Jersey Angel Investor Tax Credit Act, P.L. 2014, c. 14](https://www.njeda.com/pdfs/Rules-and-Regs/NewJerseyAngelInvestorTaxCreditAct_P-L-2013_c-14.aspx)
 - [P.L. 2017, c.40 Permits holding companies of eligible New Jersey emerging technology](https://www.njeda.com/pdfs/Rules-and-Regs/NewJerseyAngelInvestorTaxCreditAct_P-L-2013_c-14.aspx) [companies to receive investments under New Jersey Angel Investor Tax Credit Act](https://www.njeda.com/pdfs/Rules-and-Regs/P-L-2017,-c-40-Permits-holding-companies-to-receiv.aspx)
 - [Frequently Asked Questions](https://www.njeda.com/pdfs/Rules-and-Regs/P-L-2017,-c-40-Permits-holding-companies-to-receiv.aspx)
@@ -107,10 +107,10 @@ Fees apply and are non-refundable.
 
 **Program Links:**
 
-- [Sample Online Application ](https://www.njeda.com/pdfs/2018NOL_Sample-Application.aspx)(for illustrative purposes only - see application link below to apply)
+- [Sample Online Application](https://www.njeda.com/pdfs/2018NOL_Sample-Application.aspx) (for illustrative purposes only - see application link below to apply)
 - [Frequently Asked Questions](https://www.njeda.com/pdfs/2018NOL_FAQ.aspx)
-- [List of Required Documents ](https://www.njeda.com/pdfs/2018NOL_FAQ.aspx)(these items must be attached in the online application, if applicable
-- [Benefit Estimator ](https://www.njeda.com/pdfs/2019-NOL-CARRYOVER-AND-R-D-TAX-CREDIT-BENEFIT-ESTI.aspx)(for estimate purposes only)
+- [List of Required Documents](https://www.njeda.com/pdfs/2018NOL_FAQ.aspx) (these items must be attached in the online application, if applicable
+- [Benefit Estimator](https://www.njeda.com/pdfs/2019-NOL-CARRYOVER-AND-R-D-TAX-CREDIT-BENEFIT-ESTI.aspx) (for estimate purposes only)
 - [Buyers List](https://www.njeda.com/pdfs/2018NOL_BuyersList.aspx)
 - [New Jersey Emerging Technology and Biotechnology Financial Assistance Act, N.J.S.A. 34:1B-7.37 et seq.Technology Business Tax Certificate Transfer (NOL) Program At a Glance](https://www.njeda.com/pdfs/2018NOL_BuyersList.aspx)
 - [Courtesy Copy of Current Technology Business Tax Certificate Transfer Program Rules](https://www.njeda.com/pdfs/2018NOL_BuyersList.aspx) [N.J.A.C. 19:31 12.1 through 12.8 \*](https://www.njeda.com/pdfs/Rules-and-Regs/NOL-Program-Rules-Updated-08_17_2015.aspx)

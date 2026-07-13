@@ -74,5 +74,5 @@ main-text-9: |-
   * **Dress code policies:** Let employees ask for exceptions. Not allowing exceptions can violate their rights
   * **Physical requirements:** Don’t require workers to lift a certain weight if the job doesn’t need heavy lifting
 
-  Learn more about the[ New Jersey Law Against Discrimination](https://www.njoag.gov/about/divisions-and-offices/division-on-civil-rights-home/know-the-law/njlad/).
+  Learn more about the [New Jersey Law Against Discrimination](https://www.njoag.gov/about/divisions-and-offices/division-on-civil-rights-home/know-the-law/njlad/).
 ---

@@ -13,7 +13,7 @@ section-2: |-
   On Saturday, March 28, 2020, Governor Phil Murphy signed [Executive Order 111](https://nj.gov/infobank/eo/056murphy/pdf/EO-111.pdf), which requires health care facilities—including licensed acute care hospitals, long-term care facilities, hospital systems including specialty hospitals, and all emergency field treatment facilities—to report their capacity and supplies on a daily basis beginning Sunday, March 29, 2020. This information is due by 10:00 a.m. each day, and will continue as long as Executive Order No. 111 is in effect. This information should be submitted via [report.covid19.nj.gov](https://report.covid19.nj.gov/).
 s3-headline: PPE Purchasing
 section-3: |-
-  The State of New Jersey has assembled a [PPE Supplier Registry Public Listing](https://forms.business.nj.gov/ppevendor/list/). The State also offers a[ PPE Access Program ](https://business.nj.gov/covid/nj-small-and-micro-business-ppe-access-program)to help businesses and non-profits afford and purchase these supplies.
+  The State of New Jersey has assembled a [PPE Supplier Registry Public Listing](https://forms.business.nj.gov/ppevendor/list/). The State also offers a [PPE Access Program](https://business.nj.gov/covid/nj-small-and-micro-business-ppe-access-program) to help businesses and non-profits afford and purchase these supplies.
 
   The information about the vendors and products in the former listing was volunteered by the vendors, compiled by the State, and is provided for the express purpose of assisting private businesses and organizations in New Jersey access potential suppliers for PPE and other COVID-related goods and services. Any other use of this information is prohibited.
 
