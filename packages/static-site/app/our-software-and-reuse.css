@@ -1,0 +1,17 @@
+.hero-section {
+  background-color: #ecf4fb;
+  padding: 1rem 1rem;
+}
+
+.title {
+  color: var(--color-primary);
+  font-size: 3rem;
+}
+
+.subtitle {
+  color: var(--color-base-dark);
+}
+
+
+
+

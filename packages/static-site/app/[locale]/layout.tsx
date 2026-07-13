@@ -5,15 +5,12 @@
  * injects NJWDS assets, and builds localized metadata.
  */
 
+import "@/app/funding.css";
 import "@/app/globals.css";
 import "@/app/header.css";
 import "@/app/landing.css";
-import "@/app/funding.css";
+import "@/app/our-software-and-reuse.css";
 
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { NextIntlClientProvider } from "next-intl";
-import type { ReactNode } from "react";
 import { GoogleTagManager } from "@/components/analytics/GoogleTagManager";
 import { Intercom } from "@/components/analytics/Intercom";
 import { GovBanner } from "@/components/landing/GovBanner";
@@ -26,6 +23,10 @@ import { textDirectionForLocale } from "@/domain/i18n/languages";
 import { ENABLED_LOCALES, hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { SITE_BASE_URL } from "@/domain/siteConfig";
+import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
 
 /**
  * Stores the logo path used in metadata icons and social previews.
