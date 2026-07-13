@@ -12,7 +12,7 @@
       "step": 1,
       "weight": 50,
       "task": "determine-naics-code",
-      "required": false
+      "required": true
     },
     {
       "step": 1,
@@ -51,7 +51,8 @@
     {
       "step": 4,
       "weight": 100,
-      "licenseTask": "food-safety-course"
+      "licenseTask": "food-safety-course",
+      "required": true
     },
     {
       "step": 4,

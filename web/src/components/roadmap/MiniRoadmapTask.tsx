@@ -33,6 +33,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
             : "h6-styling"
         }`}
         data-task={props.task.id}
+        data-testid={`mini-roadmap-task-${props.task.id}`}
       >
         {taskProgress === "COMPLETED" ? (
           <Icon className="margin-right-1 checked-task text-success" iconName="check_circle" />

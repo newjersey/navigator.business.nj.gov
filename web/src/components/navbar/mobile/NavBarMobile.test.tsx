@@ -1,6 +1,6 @@
 import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
-import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
+import { generateRoadmap, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
@@ -14,7 +14,7 @@ import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 
 const Config = getMergedConfig();
 
@@ -30,12 +30,31 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
-jest.mock(
-  "next/link",
-  () =>
-    ({ children }: { children: ReactNode }): ReactNode =>
-      children,
-);
+jest.mock("next/link", () => {
+  function MockLink({
+    children,
+    onClick,
+    href,
+  }: {
+    children: ReactNode;
+    onClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
+    href?: string;
+  }): ReactNode {
+    return (
+      <a
+        href={href}
+        onClick={(e): void => {
+          e.preventDefault();
+          onClick?.(e);
+        }}
+      >
+        {children}
+      </a>
+    );
+  }
+  MockLink.displayName = "MockLink";
+  return MockLink;
+});
 
 const setLargeScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
@@ -317,7 +336,7 @@ describe("<NavBarMobile />", () => {
   describe("side bar and mini-roadmap", () => {
     it("does not display mini-roadmap when hideMiniRoadmap is true", () => {
       useMockBusiness({});
-      useMockRoadmap(generateRoadmap({ steps: [generateStep({ name: "step1" })] }));
+      useMockRoadmap(generateRoadmap({ tasks: [generateTask({ name: "task1", required: true })] }));
       render(
         <NavBarMobile
           variant={NavBarVariant.FULL_AUTHENTICATED}
@@ -328,19 +347,16 @@ describe("<NavBarMobile />", () => {
           previousBusinessId={undefined}
         />,
       );
-      expect(screen.queryByText("step1")).not.toBeInTheDocument();
+      expect(screen.queryByText("task1")).not.toBeInTheDocument();
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
-      expect(screen.queryByText("step1")).not.toBeInTheDocument();
+      expect(screen.queryByText("task1")).not.toBeInTheDocument();
     });
 
-    it("displays mini-roadmap with PLAN/START when hideMiniRoadmap does not exist", () => {
+    it("displays mini-roadmap tasks when hideMiniRoadmap does not exist", () => {
       useMockBusiness({});
       useMockRoadmap(
         generateRoadmap({
-          steps: [
-            generateStep({ name: "step1", section: "PLAN" }),
-            generateStep({ name: "step2", section: "START" }),
-          ],
+          tasks: [generateTask({ name: "task1", required: true })],
         }),
       );
       render(
@@ -354,21 +370,16 @@ describe("<NavBarMobile />", () => {
         />,
       );
 
-      expect(screen.queryByText("step1")).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
+      expect(screen.queryByText("task1")).not.toBeInTheDocument();
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
-      expect(screen.getByText("step1")).toBeInTheDocument();
-      expect(screen.getByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
-      expect(screen.getByText(Config.sectionHeaders.START)).toBeInTheDocument();
+      expect(screen.getByText("task1")).toBeInTheDocument();
     });
 
     it("hide drawer when mini-roadmap task is clicked", async () => {
       useMockBusiness({});
       useMockRoadmap(
         generateRoadmap({
-          steps: [generateStep({ name: "step1", stepNumber: 1 })],
-          tasks: [generateTask({ name: "task1", stepNumber: 1 })],
+          tasks: [generateTask({ name: "task1", id: "task1", required: true })],
         }),
       );
       render(
@@ -384,7 +395,6 @@ describe("<NavBarMobile />", () => {
 
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
 
-      fireEvent.click(screen.getByText("step1"));
       fireEvent.click(screen.getByText("task1"));
 
       await waitForElementToBeRemoved(() => {

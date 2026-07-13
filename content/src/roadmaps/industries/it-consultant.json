@@ -12,7 +12,7 @@
       "step": 1,
       "weight": 5,
       "task": "determine-naics-code",
-      "required": false
+      "required": true
     },
     {
       "step": 1,

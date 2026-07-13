@@ -44,7 +44,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
                 </div>
               );
             })}
-          {isAuthenticated && <LockedTasksPrompt isCTAButtonHidden />}
+          {isAuthenticated === "FALSE" && <LockedTasksPrompt isCTAButtonHidden />}
         </AccordionDetails>
       </Accordion>
     </>
