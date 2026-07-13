@@ -33,9 +33,7 @@ If a party meets these criteria, they would be eligible for 50 percent of the to
 • Duly incorporated volunteer fire, ambulance, first aid emergency or rescue companies
 • Independent colleges and universities of New Jersey
 
-###
-
-Assistance for New Jersey Technology Companies
+### Assistance for New Jersey Technology Companies
 
 **New Jersey Commission on Science, Innovation and Technology**
 

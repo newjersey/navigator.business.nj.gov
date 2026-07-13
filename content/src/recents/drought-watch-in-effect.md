@@ -15,4 +15,4 @@ status: Draft
 
 New Jersey is under a drought watch as of August 9th, 2022. Businesses and residents are urged to conserve water as persistent dry and hot conditions continue to stress water supplies throughout the state.
 
-[Current water supply status ](https://dep.nj.gov/drought/)is available from the website of the state Department of Environmental Protection.
+[Current water supply status](https://dep.nj.gov/drought/) is available from the website of the state Department of Environmental Protection.

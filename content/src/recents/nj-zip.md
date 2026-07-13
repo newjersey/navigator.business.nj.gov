@@ -16,6 +16,6 @@ NJ ZIP is the first initiative in New Jersey’s holistic, Regional Greenhouse G
 
 Vouchers will be awarded on a first-come, first-served basis to eligible buyers with $5 million set aside for micro and small businesses. The pilot program will only be available in the greater Newark and greater Camden areas, defined as the overburdened communities within or intersected by a circle with a 10-mile radius centered on Newark and Camden.
 
-**Learn more and apply at **[**https://www.njeda.com/njzip**](https://urldefense.com/v3/__https://www.njeda.com/njzip__;!!J30X0ZrnC1oQtbA!dhHFpCNxDyMd7dpQl-1AH5IOdceYJG8tPYed1gvTbl7TOliAXuj5kBx5mpeODburXm1FHn8$)**.**
+**Learn more and apply at [**https://www.njeda.com/njzip**](https://urldefense.com/v3/__https://www.njeda.com/njzip__;!!J30X0ZrnC1oQtbA!dhHFpCNxDyMd7dpQl-1AH5IOdceYJG8tPYed1gvTbl7TOliAXuj5kBx5mpeODburXm1FHn8$).
 
 This program is administered by the NJEDA.

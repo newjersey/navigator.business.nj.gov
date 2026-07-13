@@ -9,7 +9,7 @@ section-1: |-
 
   ### [Employer COVID-19 Vaccine Promotion Toolkit](https://njchamber.com/images/PDF/NJ-Employer-COVID-19-Vaccine-Toolkit.pdf)
 
-  Stopping a pandemic requires using all the tools we have available, and now we have a powerful new tool—vaccines. COVID-19 vaccines area key enabler of the new normal and New Jersey’s economic recovery from the pandemic. Because of this, the State of New Jersey is asking for the help of employers to promote the vaccine among the New Jersey workforce. 
+  Stopping a pandemic requires using all the tools we have available, and now we have a powerful new tool—vaccines. COVID-19 vaccines area key enabler of the new normal and New Jersey’s economic recovery from the pandemic. Because of this, the State of New Jersey is asking for the help of employers to promote the vaccine among the New Jersey workforce.
 
   To support employers, the State of New Jersey is launching the New Jersey Employer COVID-19 Vaccine Promotion Toolkit which highlights key actions that employers can take right now to support vaccine uptake. These include:
 
@@ -22,9 +22,9 @@ section-1: |-
 
   **Earned Sick Leave Resources **
 
-  Under NJ state law, employers must provide up to 40 hours of paid earned sick leave per year to most full- and part-time employees, including migrant and seasonal employees. Employees may use these hours to take paid time off work to receive the COVID-19 vaccine, including travel to and from the vaccine appointment and recovery from any side effects. 
+  Under NJ state law, employers must provide up to 40 hours of paid earned sick leave per year to most full- and part-time employees, including migrant and seasonal employees. Employees may use these hours to take paid time off work to receive the COVID-19 vaccine, including travel to and from the vaccine appointment and recovery from any side effects.
 
-  Find more information about NJ Earned Sick Leave policy and how it pertains to COVID-19 vaccination at [mysickdays.nj.gov](http://mysickdays.nj.gov). 
+  Find more information about NJ Earned Sick Leave policy and how it pertains to COVID-19 vaccination at [mysickdays.nj.gov](http://mysickdays.nj.gov).
 
   **Other Resources and Toolkits**
 
@@ -33,5 +33,5 @@ section-1: |-
   * [CDC Vaccination Toolkits](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/toolkits.html)[‍](https://covid19.nj.gov/)
   * [COVID-19 Information Hub](https://covid19.nj.gov/)[‍](https://www.state.nj.us/health/cd/topics/covid2019_vaccination.shtml)
   * [NJ Vaccination Homepage](https://www.state.nj.us/health/cd/topics/covid2019_vaccination.shtml)
-  * [Vaccine Pop-Up FAQ ](http://www.business.nj.gov/faqs/covid-vaccination-pop-up-qa)
+  * [Vaccine Pop-Up FAQ](http://www.business.nj.gov/faqs/covid-vaccination-pop-up-qa)
 ---

@@ -34,9 +34,7 @@ main-text-3: |-
   [Princeton Score: Middlesex, Mercer, Burlington, Camden, Gloucester & Salem Counties](https://princeton.score.org/)
 heading-4: Statewide Business Organizations
 main-text-4: |-
-  [NJ Business and Industry Association
-
-  ](https://njbia.org/)[Latin American Economic Development Association](http://www.laeda.com/) (LAEDA)
+  [NJ Business and Industry Association](https://njbia.org/) [Latin American Economic Development Association](http://www.laeda.com/) (LAEDA)
 
   [TechUnited](https://techunited.co/) (New Jersey Technology Council)
 
@@ -44,9 +42,9 @@ main-text-4: |-
 
   [New Jersey Association of Women Business Owners](https://www.njawbo.org/) (NJAWBO) - This member-supported organization allows women business owners to network, collaborate, educate, lead, and grow professionally
 
-  ### Support for Nonprofits[‍](https://www.probonopartner.org/)
+  ### Support for Nonprofits
 
-  [Pro Bono Partnership](https://www.probonopartner.org/) - This group offers free business and transactional legal assistance to nonprofits.[‍](https://njnonprofits.org/)
+  [Pro Bono Partnership](https://www.probonopartner.org/) - This group offers free business and transactional legal assistance to nonprofits.
 
   [NJ Center for Nonprofits](https://njnonprofits.org/) - The Center provides tools and learning resources for New Jersey’s nonprofit community
 
@@ -54,13 +52,15 @@ main-text-4: |-
 
   ### Support for Women Business Owners
 
-  **Northern New Jersey
-  ‍**[Women’s Center for Entrepreneurship](https://www.wcecnj.org/) - This organization offers classes and counseling, including guiding business owners to available funding options through its Women’s Business Center.
+  **Northern New Jersey**
 
-  **Southern New Jersey
-  ‍**[The LAEDA Women’s Business Center](http://laedawbc.com/contact/) - The Women’s Business Center supports and encourages women’s business ownership by offering business skills and creating a support, referral, and resource network. (Phone 856-338-1177 and email wbc@laeda.com)
+  [Women’s Center for Entrepreneurship](https://www.wcecnj.org/) - This organization offers classes and counseling, including guiding business owners to available funding options through its Women’s Business Center.
+
+  **Southern New Jersey‍**
+
+  [The LAEDA Women’s Business Center](http://laedawbc.com/contact/) - The Women’s Business Center supports and encourages women’s business ownership by offering business skills and creating a support, referral, and resource network. (Phone 856-338-1177 and email wbc@laeda.com)
 heading-5: DEP Small Business Assistance Program
-main-text-5: "The Small Business Assistance Program (SBAP) helps New Jersey’s small businesses understand the complex world of environmental regulation.\_ The services that we provide include the following:\n\n* Consultations:\_The SBAP provides consultations on the phone, by e-mail, or on-site, where we discuss how State and Federal environmental rules and permits may apply to your particular situation\n* Referrals:\_ The SBAP has access to engineers, scientists, and environmental specialists who can help you with your environmental questions or concerns\n* Guidance Documents:\_The SBAP develops and distributes guidance documents to help small businesses comply with environmental regulations and permits\n* Education & Outreach:\_The SBAP provides seminars, workshops, and on-site training, on a range of regulatory topics that help small businesses stay in and go beyond compliance\n* Fostering Innovation:\_The SBAP supports innovative ideas which help small businesses improve energy efficiency, resource conservation, pollution prevention, and sustainability**\n**"
+main-text-5: "The Small Business Assistance Program (SBAP) helps New Jersey’s small businesses understand the complex world of environmental regulation.\_ The services that we provide include the following:\n\n* Consultations:\_The SBAP provides consultations on the phone, by e-mail, or on-site, where we discuss how State and Federal environmental rules and permits may apply to your particular situation\n* Referrals:\_ The SBAP has access to engineers, scientists, and environmental specialists who can help you with your environmental questions or concerns\n* Guidance Documents:\_The SBAP develops and distributes guidance documents to help small businesses comply with environmental regulations and permits\n* Education & Outreach:\_The SBAP provides seminars, workshops, and on-site training, on a range of regulatory topics that help small businesses stay in and go beyond compliance\n* Fostering Innovation:\_The SBAP supports innovative ideas which help small businesses improve energy efficiency, resource conservation, pollution prevention, and sustainability"
 link-text-5: DEP Small Business Support
 link-url-5: https://www.state.nj.us/dep/aqes/sbap/
 heading-6: NJ Research Asset Database
@@ -82,7 +82,7 @@ main-text-7: |-
 
   Many libraries also conduct and host training offered by partner business organizations, including the New Jersey Division of Taxation, Small Business Administration, SCORE, UCEDC, Small Business Development Centers, and more.
 
-  For more information, visit your local public library,[ JerseyClicks.org](http://www.njstatelib.org/services_for_libraries/statewide_services/jerseyclicks/), or the[ New Jersey State Library](https://www.njstatelib.org/).
+  For more information, visit your local public library, [JerseyClicks.org](http://www.njstatelib.org/services_for_libraries/statewide_services/jerseyclicks/), or the [New Jersey State Library](https://www.njstatelib.org/).
 link-text-7: Browse NJ State Library Resources
 link-url-7: https://libguides.njstatelib.org/nonprofits/home
 heading-8: Chambers of Commerce (Member Supported Organization)
@@ -101,9 +101,9 @@ heading-9: Main Street New Jersey
 main-text-9: Main Street New Jersey is a comprehensive revitalization program that promotes the historic and economic redevelopment of traditional business districts in New Jersey. Every two years, select communities join the program and receive valuable technical support and training to assist in restoring their Main Streets. These communities demonstrate commitment to a volunteer board of directors, procurement of long-term funding, development of private-public partnerships, the hiring of an executive director, and other criteria. Exploring this program is a good idea if you are a business owner interested in whether your downtown is a part of Main Street New Jersey or interested in starting the process.
 link-text-9: Visit Main Street New Jersey
 link-url-9: https://nj.gov/dca/divisions/lps/msnj.html
-heading-10: "U.S. Small Business Administration\_"
+heading-10: "U.S. Small Business Administration"
 main-text-10: |-
-  [(SBA) Learning Platform – ](https://www.sba.gov/sba-learning-platform)Includes courses ranging from launch to management to market. It also includes a free online learning center for women – Ascent – and development programs for transitioning service members and their spouses.
+  [(SBA) Learning Platform](https://www.sba.gov/sba-learning-platform) - Includes courses ranging from launch to management to market. It also includes a free online learning center for women – Ascent – and development programs for transitioning service members and their spouses.
 
   ‍
 link-text-10: New Jersey SBA District Office

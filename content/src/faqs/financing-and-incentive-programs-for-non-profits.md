@@ -7,7 +7,7 @@ category: "finance-a-business"
 
 Visit the New Jersey Economic Development Authority website to learn more about the below options for financing a non-profit:
 
-[Bond Financing ](https://njeda.com/bondfinancing/)
+[Bond Financing](https://njeda.com/bondfinancing/)
 
 [Premier Lender Program](https://njeda.com/premierlender/)
 

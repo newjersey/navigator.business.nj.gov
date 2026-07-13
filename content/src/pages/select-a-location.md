@@ -31,7 +31,7 @@ main-text-6: |-
   * **Legal help:** Hire a real estate professional, like a tenant representative. A tenant representative can assist with property searches, negotiations, and other services.**‍**
   * **Lease duration and renewal:** Determine the length of the lease and whether there are options for renewal. Consider your business's long-term goals and ensure the lease duration aligns with your plans.**‍**
   * **Rent and other costs:** Understand the rent amount, payment schedule, and any other costs or fees associated with the lease. Other costs could include maintenance, utilities, or property taxes. Be aware of any rent increases and how the landlord determines them.**‍**
-  * **Security deposit: **Know the amount of the security deposit required and the conditions under which it can be withheld by the landlord. Understand the process for returning the deposit at the end of the lease term.**‍**
+  * **Security deposit:** Know the amount of the security deposit required and the conditions under which it can be withheld by the landlord. Understand the process for returning the deposit at the end of the lease term.**‍**
   * **Tenant improvements:** Know who handles repairs and maintenance and how to submit requests. Find out if you can make alterations or improvements to your space. Clarify any restrictions, approval processes, and cost coverage.**‍**
   * **Subleasing and assignment:** Check whether assigning the lease to another party is permitted. Understand the landlord's requirements and approval process.**‍**
   * **Termination and default:** Understand lease termination conditions and consequences for defaulting on terms. Pay attention to any required notice periods for termination or renewal.**‍**

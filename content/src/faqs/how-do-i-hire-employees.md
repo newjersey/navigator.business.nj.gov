@@ -13,6 +13,6 @@ Also, you must register with the Internal Revenue Service for a federal Employee
 To learn more about your obligations as an employer visit our [Hire Employees page.](https://business.nj.gov/pages/hire-employees)
 
 - New Jersey Department of Labor and Workforce Development - Employer Registration • [https://www.nj.gov/labor/ea/empreg/earegindex.html](https://www.nj.gov/labor/ea/empreg/earegindex.html)
-- Internal Revenue Service - Apply for an Employer Identification Number (EIN) Online • [https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online ](https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online)
+- Internal Revenue Service - Apply for an Employer Identification Number (EIN) Online • [https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online](https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online)
 
 ‍

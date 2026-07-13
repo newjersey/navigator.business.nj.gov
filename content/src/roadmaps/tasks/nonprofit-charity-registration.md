@@ -31,7 +31,7 @@ The following charities are not required to register:
 
 ## Application Requirements
 
-- Signed [Certification Form ](https://www.njconsumeraffairs.gov/charities/Documents/CRI-PFR-Certification-Signature-150I-300R-200.pdf)
+- Signed [Certification Form](https://www.njconsumeraffairs.gov/charities/Documents/CRI-PFR-Certification-Signature-150I-300R-200.pdf)
 - IRS determination letter
 - [IRS Form 990](https://www.irs.gov/pub/irs-pdf/f990.pdf)
 - Certified audit if your business exceeds $25,000 in total gross contributions AND has total gross revenue over $1,000,000 for the reported `fiscal year|fiscal-year`

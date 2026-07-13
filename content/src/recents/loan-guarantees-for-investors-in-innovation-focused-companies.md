@@ -15,4 +15,4 @@ Existing investors supporting early-stage, innovation-focused companies in New J
 
 Completed applications from investors and the company for guarantees will be considered on a first-come, first-served basis, including the ability to consider multiple guarantees per company towards the $400,000 company exposure cap.
 
-Please review the program website at[ www.njeda.com/njesp](https://www.njeda.gov/njesp/) for further information and to determine your eligibility for the program.
+Please review the program website at [www.njeda.com/njesp](https://www.njeda.gov/njesp/) for further information and to determine your eligibility for the program.
