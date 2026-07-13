@@ -33,5 +33,5 @@ section-1: |-
   * [CDC Vaccination Toolkits](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/toolkits.html)[‍](https://covid19.nj.gov/)
   * [COVID-19 Information Hub](https://covid19.nj.gov/)[‍](https://www.state.nj.us/health/cd/topics/covid2019_vaccination.shtml)
   * [NJ Vaccination Homepage](https://www.state.nj.us/health/cd/topics/covid2019_vaccination.shtml)
-  * [Vaccine Pop-Up FAQ ](http://www.business.nj.gov/faqs/covid-vaccination-pop-up-qa)
+  * [Vaccine Pop-Up FAQ](http://www.business.nj.gov/faqs/covid-vaccination-pop-up-qa)
 ---

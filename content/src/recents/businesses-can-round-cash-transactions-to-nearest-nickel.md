@@ -17,4 +17,4 @@ Businesses accepting cash payments can voluntarily round transactions up or down
 
 Sales tax must be calculated on the actual purchase price before rounding and remitted as required. Businesses paying Corporation Business Tax or Gross Income Tax must use exact accounting when determining gross receipts or total income. Rounding up creates additional income; rounding down reduces the gross receipt figure.
 
-The Division of Consumer Affairs provides a[ sample notice businesses can display](https://www.njconsumeraffairs.gov/News/Documents/penny-alert.pdf). Businesses can create their own notices if they clearly describe their rounding policy.
+The Division of Consumer Affairs provides a [sample notice businesses can display](https://www.njconsumeraffairs.gov/News/Documents/penny-alert.pdf). Businesses can create their own notices if they clearly describe their rounding policy.

@@ -10,7 +10,7 @@ sidebarCardBodyText: "A Socially and Economically Disadvantaged Business
   contracts. "
 summaryDescriptionMd: Having a Socially and Economically Disadvantaged Business
   Enterprise (SEDB) certification may give you an advantage with [government
-  contracts. ](https://business.nj.gov/pages/government-contracting)You must
+  contracts](https://business.nj.gov/pages/government-contracting). You must
   verify your information every year and renew your application every 5 years.
 urlSlug: sedb
 name: Get a Socially and Economically Disadvantaged Business Certificate

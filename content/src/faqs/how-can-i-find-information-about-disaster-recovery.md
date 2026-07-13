@@ -73,6 +73,6 @@ For information on emergency planning and technical assistance, contact the Busi
 **Disaster Recovery & Preparedness Checklist
 **To help small businesses be prepared for an emergency, the State has condensed pages of resource materials and information into a simple, easy-to-follow document that contains key information, resources and reminders regarding NJ disaster preparedness, disaster recovery and business continuity planning.
 
-- [Plan and Prepare ](http://business.nj.gov/category/plan)
+- [Plan and Prepare](http://business.nj.gov/category/plan)
 
 ‍

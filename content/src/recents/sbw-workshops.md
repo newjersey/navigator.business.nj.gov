@@ -22,7 +22,7 @@ Local service providers and lender representatives will also attend each worksho
 
 ##### Participate in the online workshops in your region!
 
-[Register for the South Jersey workshop ](https://us02web.zoom.us/meeting/register/tZ0ucumppzgsG9MMGyt2C53wbgdlW_WYDB0W)on Tuesday, September 14th, 2021, from 12:00 - 1:00p.m.
+[Register for the South Jersey workshop](https://us02web.zoom.us/meeting/register/tZ0ucumppzgsG9MMGyt2C53wbgdlW_WYDB0W) on Tuesday, September 14th, 2021, from 12:00 - 1:00p.m.
 
 [Register for the Central Jersey workshop](https://us02web.zoom.us/meeting/register/tZcvfuqtqD0sGNBy0T6eOjpucz65LuVhODzh) on Wednesday, September 15th, 2021, from 5:00 - 6:00p.m.
 

@@ -61,7 +61,7 @@ heading-7: Urban Enterprise Zone (UEZ) Certification
 main-text-7: |-
   Qualified businesses in certain urban areas can apply to be an Urban Enterprise Zone (UEZ) business. A UEZ business may be eligible for benefits such as a reduced sales tax rate and tax-free purchases.
 
-  Check if your business is in one of the[ urban areas eligible for the UEZ program](https://njdca.maps.arcgis.com/apps/InformationLookup/index.html?appid=0db472ac220a419d938e9060574d2f21). If your business is eligible, you can apply to be a UEZ business.
+  Check if your business is in one of the [urban areas eligible for the UEZ program](https://njdca.maps.arcgis.com/apps/InformationLookup/index.html?appid=0db472ac220a419d938e9060574d2f21). If your business is eligible, you can apply to be a UEZ business.
 link-text-7: Apply for UEZ Certification
 link-url-7: https://www.njportal.com/DOR/SBERegistry
 heading-8: Socially and Economically Disadvantaged Business (SEBD) Certification

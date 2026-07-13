@@ -8,7 +8,7 @@ webflowName: Daycare Site Requirements
 filename: daycare-site-requirements
 summaryDescriptionMd: >-
   :::infoAlert
-   These requirements are for a child care facility with 6 or more children. Go to [your profile ](https://dev.account.business.nj.gov/profile)to change this selection if necessary.
+   These requirements are for a child care facility with 6 or more children. Go to [your profile](https://dev.account.business.nj.gov/profile) to change this selection if necessary.
   :::
 
 

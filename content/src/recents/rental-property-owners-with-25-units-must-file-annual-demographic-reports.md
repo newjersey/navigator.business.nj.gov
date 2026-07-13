@@ -12,7 +12,7 @@ cta-link: >-
 status: Published
 ---
 
-The Division on Civil Rights (DCR) requires owners with a combined total of 25 or more dwelling units across properties located anywhere in New Jersey to electronically file an annual Multiple Dwelling Reporting Rule (MDRR) Report in the[ MDRR portal](https://mdrr.njcivilrights.gov/). For example, an owner with five properties with five units each (25 total units) must file five separate reports, one for each location.
+The Division on Civil Rights (DCR) requires owners with a combined total of 25 or more dwelling units across properties located anywhere in New Jersey to electronically file an annual Multiple Dwelling Reporting Rule (MDRR) Report in the [MDRR portal](https://mdrr.njcivilrights.gov/). For example, an owner with five properties with five units each (25 total units) must file five separate reports, one for each location.
 
 The MDRR report collects demographic information about housing applicants, data on unit turnovers, rental rates, apartment size, and whether developments are barrier free. Annual reports are due each year by January 30.
 
