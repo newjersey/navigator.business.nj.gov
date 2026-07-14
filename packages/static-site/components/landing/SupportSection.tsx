@@ -22,7 +22,7 @@ export const SupportSection = ({ content }: SupportSectionProps) => {
             card={content.oneOnOneSupportCard}
             key={content.oneOnOneSupportCard.title}
           />
-          <SupportCardElement card={content.businessLetter} key={content.businessLetter.title} />
+          <SupportCardElement card={content.businessUpdates} key={content.businessUpdates.title} />
         </div>
       </div>
     </section>
