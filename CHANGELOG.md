@@ -1,3 +1,36 @@
+# [2026.16.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.15.1...v2026.16.0) (2026-07-14)
+
+
+### Bug Fixes
+
+* (static site) remove section with dead link on `/open-another-location` route ([6c2735f](https://github.com/newjersey/navigator.business.nj.gov/commit/6c2735f19dd8676678a4e96d7a73038479e4d397))
+* [AB#17863](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17863) add publish status to Webflow recents import and sync content ([6e15f87](https://github.com/newjersey/navigator.business.nj.gov/commit/6e15f87ac44d6c9b82ebe019e8e05c335f200f29))
+* [AB#17919](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17919) open starter kit links in a new tab ([eefc24d](https://github.com/newjersey/navigator.business.nj.gov/commit/eefc24dbb0e43cc4ea867a6f52f49b912c9eb6ea))
+* stabilize guest dropdown e2e ([edeedd6](https://github.com/newjersey/navigator.business.nj.gov/commit/edeedd673ceef7e2562d552b5b786d8417a248ab))
+* stop tracking generated cspell test fixture & fix its import path ([c950b66](https://github.com/newjersey/navigator.business.nj.gov/commit/c950b66ea32a9cd0dab065e229505b2ce8948fd2))
+* update failing test caused by commit 74c1114 ([304a63a](https://github.com/newjersey/navigator.business.nj.gov/commit/304a63a3f0cebe8ca3d417f8008267dc6f83cf6e))
+
+
+### Features
+
+* [AB[#17905](https://github.com/newjersey/navigator.business.nj.gov/issues/17905) AB[#17906](https://github.com/newjersey/navigator.business.nj.gov/issues/17906)] cleanup secondary footer and remove nav ([3e61f98](https://github.com/newjersey/navigator.business.nj.gov/commit/3e61f9811c719f04d6cc37e5c28964ab0f008350))
+* [AB#17822](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17822) add funding page ([b04a328](https://github.com/newjersey/navigator.business.nj.gov/commit/b04a328147991b68b64b2422d640baf524447d75))
+* [AB#17823](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17823) add the Licensing & Certification Guide page to the static site ([5bc873d](https://github.com/newjersey/navigator.business.nj.gov/commit/5bc873d07e0de9d59e0ec3785d8c901dd5ae4bed))
+* [AB#17823](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17823) link agency names to their websites on license cards ([0c2151b](https://github.com/newjersey/navigator.business.nj.gov/commit/0c2151b88f1d95733bcbd42b6c871ee87ab12c44)), closes [AB#17892](https://github.com/AB/issues/17892)
+* [AB#17828](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17828) add starter kits page ([9ad68ef](https://github.com/newjersey/navigator.business.nj.gov/commit/9ad68ef5090d5d5aeafd2b6c609373d6d22f47fe))
+* [AB#17839](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17839) implement 404 page & handle illegal routes ([2117aa6](https://github.com/newjersey/navigator.business.nj.gov/commit/2117aa64fa10ee7edd10c089ee1045946ba7907f))
+* [AB#17846](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17846) handle static-site legacy redirects ([ae9eb36](https://github.com/newjersey/navigator.business.nj.gov/commit/ae9eb368b59e6c1974a9ffaf4ad42cba0dfdb705))
+* [AB#17847](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17847) one-on-one support intercom card ([e7c9667](https://github.com/newjersey/navigator.business.nj.gov/commit/e7c9667f8fd628efa18c3031736159fba823b50f))
+* [AB#17854](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17854) show lock icons next to tasks that need login ([2e068d3](https://github.com/newjersey/navigator.business.nj.gov/commit/2e068d3b2ec7c099e13553bdf29a5b9d9fbc0f5d))
+* [AB#17858](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17858) add impact report page ([2c100f2](https://github.com/newjersey/navigator.business.nj.gov/commit/2c100f2032ff20e05e5351e08e7369460775bd65))
+* [AB#17863](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17863) add Updates listing and detail pages ([5ec6647](https://github.com/newjersey/navigator.business.nj.gov/commit/5ec66473dee1641cf5e25e4204ccd732ada8e53c))
+* [AB#17879](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17879)  footer contact us launches intercom ([377d23b](https://github.com/newjersey/navigator.business.nj.gov/commit/377d23b2c5a3bef0a403a6c213828adbf514baa5))
+* [AB#17886](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17886) use Business.NJ.gov logo in static-site footer ([b161634](https://github.com/newjersey/navigator.business.nj.gov/commit/b161634e926d15774957ee3d2b160efee0e22b14))
+* [AB#17903](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17903) temporarily remove the Feedback Widget ([4d53922](https://github.com/newjersey/navigator.business.nj.gov/commit/4d539220518c69c7dc49efacee55d44edbe3313c))
+* [AB#17909](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17909) update biz.nj.gov card to point at onboarding ([981a84d](https://github.com/newjersey/navigator.business.nj.gov/commit/981a84de335e976b63fc1fd6516936f8cd92b627))
+* [AB#17911](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17911) change business newsletter to updates ([7cd0d4d](https://github.com/newjersey/navigator.business.nj.gov/commit/7cd0d4d679fb1936370e2bc3cd764ec8861bdbd0))
+* [AB#17923](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/17923) (static site) update CTAs on funding and licensing pages to link to onboarding ([74c1114](https://github.com/newjersey/navigator.business.nj.gov/commit/74c111431ca1fe2a43523b3cef15140d5d86c647))
+
 ## [2026.15.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.15.0...v2026.15.1) (2026-07-02)
 
 
