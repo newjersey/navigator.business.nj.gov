@@ -50,6 +50,8 @@ export const IndustrySelector = ({ industries, baseUrl, heading, ctaText }: Prop
             href={href}
             className={`usa-button width-full${!selectedIndustryId ? " usa-button--disabled" : ""}`}
             aria-disabled={!selectedIndustryId}
+            rel="noreferrer"
+            target="_blank"
             style={{ height: "2.5rem" }}
           >
             {ctaText}
