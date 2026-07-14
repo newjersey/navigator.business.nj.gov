@@ -376,16 +376,16 @@
         "iconPath": "/img/hands.svg",
         "iconAlt": "Icono de manos"
       },
-      "businessLetter": {
-        "title": "Boletín empresarial",
+      "businessUpdates": {
+        "title": "Actualizaciones empresariales",
         "description": "Manténgase al día sobre programas o regulaciones anunciados recientemente que puedan afectar su negocio.",
         "iconPath": "/img/piechart.svg",
         "iconAlt": "Icono de gráfico",
         "link": {
-          "label": "Boletín empresarial",
-          "href": "https://business.nj.gov/newsletter",
-          "isInternal": false,
-          "opensInNewTab": true
+          "label": "Actualizaciones empresariales",
+          "href": "/updates",
+          "isInternal": true,
+          "opensInNewTab": false
         }
       }
     },

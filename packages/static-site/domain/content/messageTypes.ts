@@ -367,7 +367,7 @@ export interface SupportSectionContent {
   /** Support cards rendered in the section. */
   readonly businessNjGovCard: SupportCard;
   readonly oneOnOneSupportCard: Omit<SupportCard, "link">;
-  readonly businessLetter: SupportCard;
+  readonly businessUpdates: SupportCard;
 }
 
 /**
