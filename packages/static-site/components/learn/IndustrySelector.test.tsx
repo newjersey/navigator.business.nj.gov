@@ -67,4 +67,25 @@ describe("IndustrySelector", () => {
     expect(cta).toHaveAttribute("href", `${baseUrl}?industry=${targetIndustry.id}`);
     expect(cta).toHaveAttribute("aria-disabled", "false");
   });
+
+  it("opens the CTA in a new tab", () => {
+    render(
+      <IndustrySelector
+        industries={industries}
+        baseUrl={baseUrl}
+        heading={starterKits.industrySelectorHeading}
+        ctaText={starterKits.industrySelectorCta}
+      />,
+    );
+
+    const input = screen.getByRole("combobox");
+    fireEvent.click(input);
+
+    const option = screen.getByRole("option", { name: industries[0].name });
+    fireEvent.click(option);
+
+    const cta = screen.getByRole("link", { name: starterKits.industrySelectorCta });
+    expect(cta).toHaveAttribute("target", "_blank");
+    expect(cta).toHaveAttribute("rel", "noreferrer");
+  });
 });

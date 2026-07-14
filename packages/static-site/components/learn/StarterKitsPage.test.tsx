@@ -41,4 +41,14 @@ describe("StarterKitsPage", () => {
       screen.getByRole("heading", { name: starterKits.topIndustriesHeading }),
     ).toBeInTheDocument();
   });
+
+  it("opens each top industry tile link in a new tab", async () => {
+    render(await StarterKitsPage({ page, locale: "en-US" }));
+
+    for (const industry of starterKits.topIndustries) {
+      const link = screen.getByRole("link", { name: industry.ctaText });
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noreferrer");
+    }
+  });
 });
