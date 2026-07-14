@@ -8,10 +8,10 @@ import {
   CONTENT_STAGE,
   DEV_STAGE,
   PROD_STAGE,
+  STAGING_STAGE,
   STATIC_SITE_CONTAINER_NAME,
   STATIC_SITE_CONTAINER_PORT,
   STATIC_SITE_SERVICE_BASE_NAME,
-  STAGING_STAGE,
   TESTING_STAGE,
 } from "./constants";
 import { applyStandardTags } from "./stackUtils";
@@ -69,7 +69,6 @@ const STATIC_SITE_BASIC_AUTH_STAGES = new Set([
   CONTENT_STAGE,
   TESTING_STAGE,
   STAGING_STAGE,
-  PROD_STAGE,
 ]);
 
 /** Inputs for creating runtime environment variables injected into the static-site ECS container. */
