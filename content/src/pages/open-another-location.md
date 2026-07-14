@@ -11,12 +11,8 @@ heading-2: Finance a New Location
 main-text-2: Opening a new location will require financing, but do not count on your existing location for any funding; rather, consider the new location as a separate business. Be certain that you have pre-arranged, adequate financing for the proposed new location. This may include funding sources such as loans, outside investors, and your own personal capital. Read our tips on financing your business as a refresher.
 link-text-2: Finance Your Business
 link-url-2: /pages/finance-your-business
-heading-3: Choose a New Location
-main-text-3: You already chose a great location once. Review our tips on how to choose a location to help you identify new target markets and assess the strength of demand for your services.
-link-text-3: Choose a Location
-link-url-3: /pages/choose-a-location
-heading-4: Register a New Location
-main-text-4: You will need to register your new location with the Division of Revenue alongside your original location.
-link-text-4: NJ Division of Revenue
-link-url-4: https://www.state.nj.us/treasury/revenue/
+heading-3: Register a New Location
+main-text-3: You will need to register your new location with the Division of Revenue alongside your original location.
+link-text-3: NJ Division of Revenue
+link-url-3: https://www.state.nj.us/treasury/revenue/
 ---
