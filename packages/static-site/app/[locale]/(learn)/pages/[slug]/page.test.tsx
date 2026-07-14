@@ -19,13 +19,15 @@ vi.mock("@/domain/categories", () => ({
 }));
 
 vi.mock("@/domain/content/loadContent", () => ({
-  loadPageBySlug: (slug: string) => ({
-    slug,
-    name: slug === "funding" ? "Funding" : "Create a Business Plan",
-    category: slug === "funding" ? "grow" : "plan",
-    "sub-heading-text":
-      slug === "funding" ? "Whether you're looking for startup capital..." : undefined,
-  }),
+  loadPages: () => [
+    { slug: "create-a-business-plan", name: "Create a Business Plan", category: "plan" },
+    {
+      slug: "funding",
+      name: "Funding",
+      category: "grow",
+      "sub-heading-text": "Whether you're looking for startup capital...",
+    },
+  ],
   loadIndustries: () => [],
   loadFundings: () => [],
   loadSectors: () => [],
@@ -58,6 +60,19 @@ describe("ContentPage", () => {
     expect(
       screen.getByRole("heading", { level: 1, name: "Create a Business Plan" }),
     ).toBeInTheDocument();
+  });
+});
+
+describe("ContentPage — unknown slug", () => {
+  it("triggers a 404 for a slug with no matching content page", async () => {
+    await expect(
+      ContentPage({
+        params: Promise.resolve({
+          locale: "en-US",
+          slug: "something",
+        }),
+      }),
+    ).rejects.toThrow();
   });
 });
 
