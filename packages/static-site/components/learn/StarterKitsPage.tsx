@@ -48,7 +48,9 @@ export const StarterKitsPage = async ({ page, locale }: Props) => {
               <div className="usa-card__body">
                 <h3>{industry.name}</h3>
                 <p>{industry.description}</p>
-                <a href={buildOnboardingHref(industry.id)}>{industry.ctaText}</a>
+                <a href={buildOnboardingHref(industry.id)} rel="noreferrer" target="_blank">
+                  {industry.ctaText}
+                </a>
               </div>
             </div>
           </li>
