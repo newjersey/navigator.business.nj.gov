@@ -24,11 +24,11 @@ const mockSupportSectionContent: SupportSectionContent = {
     iconPath: "/icons/support.svg",
     iconAlt: "Support icon",
   },
-  businessLetter: {
-    title: "Business Letter Service",
-    description: "Get official business letters and documents",
-    iconPath: "/icons/letter.svg",
-    iconAlt: "Letter icon",
+  businessUpdates: {
+    title: "Business Updates",
+    description: "Get the latest news and updates for your business",
+    iconPath: "/icons/updates.svg",
+    iconAlt: "Updates icon",
     link: {
       label: "Request Letter",
       href: "/services/letters",
@@ -49,19 +49,19 @@ describe("SupportSection", () => {
       screen.getByRole("heading", { name: mockSupportSectionContent.oneOnOneSupportCard.title }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: mockSupportSectionContent.businessLetter.title }),
+      screen.getByRole("heading", { name: mockSupportSectionContent.businessUpdates.title }),
     ).toBeInTheDocument();
   });
 
-  describe("SupportCardElement (businessNjGovCard and businessLetter)", () => {
+  describe("SupportCardElement (businessNjGovCard and businessUpdates)", () => {
     it("renders cards with links as clickable links", () => {
       render(<SupportSection content={mockSupportSectionContent} />);
 
       const businessNjLink = screen.getByRole("link", {
         name: new RegExp(mockSupportSectionContent.businessNjGovCard.title, "i"),
       });
-      const businessLetterLink = screen.getByRole("link", {
-        name: new RegExp(mockSupportSectionContent.businessLetter.title, "i"),
+      const businessUpdatesLink = screen.getByRole("link", {
+        name: new RegExp(mockSupportSectionContent.businessUpdates.title, "i"),
       });
 
       expect(businessNjLink).toBeInTheDocument();
@@ -70,10 +70,10 @@ describe("SupportSection", () => {
         mockSupportSectionContent.businessNjGovCard.link.href,
       );
 
-      expect(businessLetterLink).toBeInTheDocument();
-      expect(businessLetterLink).toHaveAttribute(
+      expect(businessUpdatesLink).toBeInTheDocument();
+      expect(businessUpdatesLink).toHaveAttribute(
         "href",
-        mockSupportSectionContent.businessLetter.link.href,
+        mockSupportSectionContent.businessUpdates.link.href,
       );
     });
   });

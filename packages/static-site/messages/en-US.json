@@ -376,16 +376,16 @@
         "iconPath": "/img/hands.svg",
         "iconAlt": "Helping hands icon"
       },
-      "businessLetter": {
-        "title": "Business Newsletter",
+      "businessUpdates": {
+        "title": "Business Updates",
         "description": "Stay up to date on recently announced programs or regulations likely to affect your business.",
         "iconPath": "/img/piechart.svg",
-        "iconAlt": "Business chart icon",
+        "iconAlt": "Business updates icon",
         "link": {
-          "label": "Business Newsletter",
-          "href": "https://business.nj.gov/newsletter",
-          "isInternal": false,
-          "opensInNewTab": true
+          "label": "Business Updates",
+          "href": "/updates",
+          "isInternal": true,
+          "opensInNewTab": false
         }
       }
     },

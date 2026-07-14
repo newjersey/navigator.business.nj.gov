@@ -366,16 +366,16 @@
         "iconPath": "/img/hands.svg",
         "iconAlt": "لاختبار اتجاه المنتج"
       },
-      "businessLetter": {
-        "title": "سيتم هذا",
+      "businessUpdates": {
+        "title": "تحديثات الأعمال",
         "description": "لاحقا مؤقت مؤقت اليمين حذفه لاختبار اليمين النهائي المنتج من لاختبار من الصفحة مؤقت إلى",
         "iconPath": "/img/piechart.svg",
-        "iconAlt": "مؤقت من هذا",
+        "iconAlt": "أيقونة تحديثات الأعمال",
         "link": {
-          "label": "من مؤقت",
-          "href": "https://business.nj.gov/newsletter",
-          "isInternal": false,
-          "opensInNewTab": true
+          "label": "تحديثات الأعمال",
+          "href": "/updates",
+          "isInternal": true,
+          "opensInNewTab": false
         }
       }
     },
