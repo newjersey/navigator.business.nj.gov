@@ -7,11 +7,7 @@
 
 import Image from "next/image";
 
-import type {
-  LandingFooterPrimaryLink,
-  LandingSocialLink,
-  LayoutFooterContent,
-} from "@/domain/content/messageTypes";
+import type { LandingSocialLink, LayoutFooterContent } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
@@ -32,18 +28,6 @@ export interface SiteFooterProps {
 }
 
 /**
- * Describes input used to render one primary footer link item.
- *
- * This type defines a stable shape for related data.
- */
-interface RenderFooterPrimaryLinkParams {
-  /** Primary link content and positional metadata. */
-  readonly item: LandingFooterPrimaryLink;
-  /** Positional index for React key generation fallback. */
-  readonly index: number;
-}
-
-/**
  * Describes input used to render one footer social link item.
  *
  * This type defines a stable shape for related data.
@@ -54,29 +38,6 @@ interface RenderFooterSocialLinkParams {
   /** Positional index for React key generation fallback. */
   readonly index: number;
 }
-
-/**
- * Renders one item in the primary footer links row.
- *
- * @param params Render parameters.
- * @param params.item Primary footer link data.
- * @param params.index Position used for fallback key composition.
- * @returns One primary footer link list item.
- * @example
- * ```tsx
- * renderFooterPrimaryLink({ item: content.primaryLinks[0], index: 0 });
- * ```
- */
-const renderFooterPrimaryLink = ({ item, index }: RenderFooterPrimaryLinkParams) => {
-  return (
-    <li
-      className="mobile-lg:grid-col-4 desktop:grid-col-auto usa-footer__primary-content"
-      key={`${item.link.href}-${index}`}
-    >
-      <LocalizedLink className="usa-footer__primary-link" link={item.link} />
-    </li>
-  );
-};
 
 /**
  * Renders one social link icon in the footer.
@@ -126,15 +87,6 @@ export const SiteFooter = ({ content, mainContentId }: SiteFooterProps) => {
       <div className="grid-container usa-footer__return-to-top">
         <a href={`#${mainContentId}`}>{content.returnToTopLabel}</a>
       </div>
-      <div className="usa-footer__primary-section">
-        <nav aria-label={content.navigationAriaLabel} className="usa-footer__nav">
-          <ul className="grid-row grid-gap">
-            {content.primaryLinks.map((item, index) => {
-              return renderFooterPrimaryLink({ item, index });
-            })}
-          </ul>
-        </nav>
-      </div>
       <div className="usa-footer__secondary-section">
         <div className="grid-container">
           <div className="grid-row grid-gap">
@@ -156,17 +108,6 @@ export const SiteFooter = ({ content, mainContentId }: SiteFooterProps) => {
                   return renderFooterSocialLink({ socialLink, index });
                 })}
               </div>
-              <h2 className="usa-footer__contact-heading">{content.contactHeading}</h2>
-              <address className="usa-footer__address">
-                <div className="usa-footer__contact-info grid-row grid-gap">
-                  <div className="grid-col-auto">
-                    <LocalizedLink link={content.phoneLink} />
-                  </div>
-                  <div className="grid-col-auto">
-                    <LocalizedLink link={content.emailLink} />
-                  </div>
-                </div>
-              </address>
             </div>
           </div>
         </div>

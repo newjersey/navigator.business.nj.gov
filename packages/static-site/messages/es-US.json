@@ -91,49 +91,6 @@
     },
     "footer": {
       "returnToTopLabel": "Volver arriba",
-      "navigationAriaLabel": "Navegación del pie de página",
-      "primaryLinks": [
-        {
-          "link": {
-            "label": "Planificar",
-            "href": "/plan",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
-            "label": "Comenzar",
-            "href": "/start",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
-            "label": "Operar",
-            "href": "/operate",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
-            "label": "Crecer",
-            "href": "/grow",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
-            "label": "Soporte",
-            "href": "/support",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        }
-      ],
       "agencyLogoAlt": "Logotipo de Business.NJ.gov",
       "socialLinks": [
         {
@@ -169,20 +126,7 @@
           "iconAlt": "YouTube",
           "iconPath": "/assets/njwds/dist/img/usa-icons/youtube.svg"
         }
-      ],
-      "contactHeading": "Centro de contacto de Business.NJ.gov",
-      "phoneLink": {
-        "label": "(800) CALL-GOVT",
-        "href": "tel:1-800-555-5555",
-        "isInternal": false,
-        "opensInNewTab": false
-      },
-      "emailLink": {
-        "label": "info@business.nj.gov",
-        "href": "mailto:info@business.nj.gov",
-        "isInternal": false,
-        "opensInNewTab": false
-      }
+      ]
     },
     "identifier": {
       "agencySectionAriaLabel": "Identificador de la agencia",
