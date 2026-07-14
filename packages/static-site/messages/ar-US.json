@@ -81,49 +81,6 @@
     },
     "footer": {
       "returnToTopLabel": "نص الكتابة حذفه",
-      "navigationAriaLabel": "حذفه اليسار",
-      "primaryLinks": [
-        {
-          "link": {
-            "label": "اليمين",
-            "href": "/plan",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
-            "label": "في",
-            "href": "/start",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
-            "label": "الكتابة",
-            "href": "/operate",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
-            "label": "من",
-            "href": "/grow",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
-            "label": "لاحقا",
-            "href": "/support",
-            "isInternal": true,
-            "opensInNewTab": false
-          }
-        }
-      ],
       "agencyLogoAlt": "الكتابة هذا",
       "socialLinks": [
         {
@@ -159,20 +116,7 @@
           "iconAlt": "لاحقا",
           "iconPath": "/assets/njwds/dist/img/usa-icons/youtube.svg"
         }
-      ],
-      "contactHeading": "من اتجاه اليسار",
-      "phoneLink": {
-        "label": "حذفه اليمين",
-        "href": "tel:1-800-555-5555",
-        "isInternal": false,
-        "opensInNewTab": false
-      },
-      "emailLink": {
-        "label": "نص",
-        "href": "mailto:info@business.nj.gov",
-        "isInternal": false,
-        "opensInNewTab": false
-      }
+      ]
     },
     "identifier": {
       "agencySectionAriaLabel": "إلى تجريبي",
