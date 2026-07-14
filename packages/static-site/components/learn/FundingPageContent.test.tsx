@@ -119,7 +119,7 @@ describe("FundingPageContent", () => {
     );
     expect(screen.getByText("Find Funding Fit for Your Business")).toBeInTheDocument();
     const button = screen.getByRole("link", { name: "Create Account" });
-    expect(button).toHaveAttribute("href", "https://account.business.nj.gov/");
+    expect(button).toHaveAttribute("href", "https://account.business.nj.gov/onboarding");
   });
 
   it("renders result count with total fundings", () => {
