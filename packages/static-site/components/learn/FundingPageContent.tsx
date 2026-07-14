@@ -292,7 +292,7 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
         <div className="padding-3 margin-bottom-3 radius-lg border-2px border-base-lighter">
           <h2 className="margin-top-0">{messages.ctaHeading}</h2>
           <p>{messages.ctaBody}</p>
-          <a href="https://account.business.nj.gov/" className="usa-button">
+          <a href="https://account.business.nj.gov/onboarding" className="usa-button">
             {messages.ctaButton}
           </a>
         </div>
