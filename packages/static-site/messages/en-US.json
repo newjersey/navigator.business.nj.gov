@@ -365,7 +365,7 @@
         "iconAlt": "Navigation icon",
         "link": {
           "label": "Your Business.NJ.gov Account",
-          "href": "https://account.business.nj.gov/",
+          "href": "https://account.business.nj.gov/onboarding",
           "isInternal": false,
           "opensInNewTab": true
         }

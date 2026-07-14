@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageSwitchComponent } from "@/components/learn/PageSwitchComponent";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
-import { loadPageBySlug } from "@/domain/content/loadContent";
+import { loadPages } from "@/domain/content/loadContent";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
 import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
 
@@ -40,7 +40,10 @@ const ContentPage = async ({ params }: Props) => {
     notFound();
   }
 
-  const page = loadPageBySlug(slug);
+  const page = loadPages().find((item) => item.slug === slug);
+  if (!page) {
+    notFound();
+  }
 
   return <PageSwitchComponent page={page} locale={locale} />;
 };
