@@ -133,23 +133,29 @@ describe("StaticSiteServiceStack", () => {
     });
   });
 
-  test("injects Basic Auth runtime settings for protected static-site tasks", () => {
-    const template = createStaticSiteTemplate("dev");
+  test.each(["dev", "content", "testing", "staging"])(
+    "injects Basic Auth runtime settings for the protected %s static-site task",
+    (stage) => {
+      const template = createStaticSiteTemplate(stage);
 
-    expect(template.toJSON()).toBeDefined();
-    template.hasResourceProperties("AWS::ECS::TaskDefinition", {
-      ContainerDefinitions: Match.arrayWith([
-        Match.objectLike({
-          Environment: Match.arrayWith([
-            { Name: "NEXT_PUBLIC_SURVEY_MONKEY_ENABLED", Value: "false" },
-            { Name: "USE_BASIC_AUTH", Value: "true" },
-            { Name: "BASIC_AUTH_USERNAME", Value: "test-user" },
-            { Name: "BASIC_AUTH_PASSWORD", Value: "test-password" },
-          ]),
-        }),
-      ]),
-    });
-  });
+      expect(template.toJSON()).toBeDefined();
+      template.hasResourceProperties("AWS::ECS::TaskDefinition", {
+        ContainerDefinitions: Match.arrayWith([
+          Match.objectLike({
+            Environment: Match.arrayEquals([
+              { Name: "HOSTNAME", Value: "0.0.0.0" },
+              { Name: "NODE_ENV", Value: "production" },
+              { Name: "PORT", Value: "3000" },
+              { Name: "NEXT_PUBLIC_SURVEY_MONKEY_ENABLED", Value: "false" },
+              { Name: "USE_BASIC_AUTH", Value: "true" },
+              { Name: "BASIC_AUTH_USERNAME", Value: "test-user" },
+              { Name: "BASIC_AUTH_PASSWORD", Value: "test-password" },
+            ]),
+          }),
+        ]),
+      });
+    },
+  );
 
   test("uses the staging account static-site certificate for staging", () => {
     const template = createStaticSiteTemplate("staging");
@@ -177,18 +183,19 @@ describe("StaticSiteServiceStack", () => {
     );
   });
 
-  test("injects Basic Auth runtime settings for production static-site tasks", () => {
+  test("disables Basic Auth for production static-site tasks and omits credentials", () => {
     const template = createStaticSiteTemplate("prod");
 
     expect(template.toJSON()).toBeDefined();
     template.hasResourceProperties("AWS::ECS::TaskDefinition", {
       ContainerDefinitions: Match.arrayWith([
         Match.objectLike({
-          Environment: Match.arrayWith([
+          Environment: Match.arrayEquals([
+            { Name: "HOSTNAME", Value: "0.0.0.0" },
+            { Name: "NODE_ENV", Value: "production" },
+            { Name: "PORT", Value: "3000" },
             { Name: "NEXT_PUBLIC_SURVEY_MONKEY_ENABLED", Value: "true" },
-            { Name: "USE_BASIC_AUTH", Value: "true" },
-            { Name: "BASIC_AUTH_USERNAME", Value: "test-user" },
-            { Name: "BASIC_AUTH_PASSWORD", Value: "test-password" },
+            { Name: "USE_BASIC_AUTH", Value: "false" },
           ]),
         }),
       ]),

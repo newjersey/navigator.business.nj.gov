@@ -1,4 +1,8 @@
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
+import {
+  answerIndustrySpecificQuestions,
+  deriveIndustrySpecificAnswers,
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers-industry-specific-questions";
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
 import {
@@ -145,6 +149,24 @@ export const updateNewBusinessProfilePage = ({
   townDisplayName,
   homeBasedQuestion,
   liquorLicenseQuestion,
+  requiresCpa,
+  providesStaffingService,
+  certifiedInteriorDesigner,
+  realEstateAppraisalManagement,
+  interstateLogistics,
+  interstateMoving,
+  carService,
+  isChildcareForSixOrMore,
+  willSellPetCareItems,
+  petCareHousing,
+  whatIsPropertyLeaseType,
+  hasThreeOrMoreRentalUnits,
+  cannabisLicenseType,
+  constructionType,
+  residentialConstructionType,
+  publicWorksContractor,
+  employmentPersonnelServiceType,
+  employmentPlacementType,
   employerId,
   taxId,
   notes,
@@ -161,6 +183,34 @@ export const updateNewBusinessProfilePage = ({
       .getIndustryDropdown()
       .invoke("prop", "value")
       .should("contain", (industry as Industry).name);
+
+    const industrySpecificAnswers = deriveIndustrySpecificAnswers(industry as Industry, {
+      liquorLicenseQuestion,
+      requiresCpa,
+      providesStaffingService,
+      certifiedInteriorDesigner,
+      realEstateAppraisalManagement,
+      interstateLogistics,
+      interstateMoving,
+      carService,
+      isChildcareForSixOrMore,
+      willSellPetCareItems,
+      petCareHousing,
+      whatIsPropertyLeaseType,
+      hasThreeOrMoreRentalUnits,
+      cannabisLicenseType,
+      constructionType,
+      residentialConstructionType,
+      publicWorksContractor,
+      employmentPersonnelServiceType,
+      employmentPlacementType,
+    });
+    answerIndustrySpecificQuestions({ page: onProfilePage, ...industrySpecificAnswers });
+  }
+
+  if (businessName && !legalStructureId) {
+    onProfilePage.typeBusinessName(businessName);
+    onProfilePage.getBusinessName().invoke("prop", "value").should("contain", businessName);
   }
 
   if (legalStructureId) {
@@ -224,7 +274,7 @@ export const updateNewBusinessProfilePage = ({
     onProfilePage.getNotes().invoke("prop", "value").should("contain", notes);
   }
 
-  if (liquorLicenseQuestion) {
+  if (liquorLicenseQuestion && !industry) {
     onProfilePage.selectLiquorLicense(liquorLicenseQuestion);
     onProfilePage.getLiquorLicense(liquorLicenseQuestion).should("be.checked");
     onProfilePage.getLiquorLicense(!liquorLicenseQuestion).should("not.be.checked");

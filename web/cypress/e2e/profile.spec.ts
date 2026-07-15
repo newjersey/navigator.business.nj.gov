@@ -1,5 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
+import { deriveIndustrySpecificAnswers } from "@businessnjgovnavigator/cypress/support/helpers/helpers-industry-specific-questions";
 import {
   completeExistingBusinessOnboarding,
   completeForeignBusinessOnboarding,
@@ -13,7 +14,6 @@ import {
   updateNewBusinessProfilePage,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-profile";
 import {
-  homeBasedIndustries,
   liquorLicenseIndustries,
   randomHomeBasedIndustry,
   randomNonHomeBasedNonDomesticEmployerIndustry,
@@ -67,11 +67,8 @@ describe("Profile [feature] [all] [group4]", () => {
       });
 
       const newBusinessName = `Generic Business Name ${randomInt()}`;
-      const newIndustry = randomElementFromArray(
-        homeBasedIndustries.filter((x) => {
-          return x.isEnabled;
-        }) as Industry[],
-      );
+      const newIndustry = randomHomeBasedIndustry();
+      const newIndustrySpecificAnswers = deriveIndustrySpecificAnswers(newIndustry);
       const newtownDisplayName = "Bass River";
       const newHomeBasedQuestion = Boolean(randomInt() % 2);
       const newEmployerId = randomInt(9).toString();
@@ -81,6 +78,7 @@ describe("Profile [feature] [all] [group4]", () => {
       updateNewBusinessProfilePage({
         businessName: newBusinessName,
         industry: newIndustry,
+        ...newIndustrySpecificAnswers,
         townDisplayName: newtownDisplayName,
         homeBasedQuestion: newHomeBasedQuestion,
         employerId: newEmployerId,
