@@ -1,8 +1,9 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { generateTask } from "@/test/factories";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -18,7 +19,7 @@ describe("<UnlockedBy />", () => {
   it("renders <UnlockingAlert />", () => {
     const task = generateTask({});
     fakeTaskFromRoadmap.mockReturnValue(task);
-    render(<UnlockedBy task={task} />);
+    renderWithUserData(<UnlockedBy task={task} />);
 
     expect(screen.getByText(Config.taskDefaults.unlockedBySingular)).toBeInTheDocument();
   });
@@ -29,7 +30,7 @@ describe("<UnlockedBy />", () => {
       unlockedBy: [generateTask({ id: "certificate-good-standing-foreign" })],
     });
     fakeTaskFromRoadmap.mockReturnValue(task);
-    render(<UnlockedBy task={task} />);
+    renderWithUserData(<UnlockedBy task={task} />);
 
     const alertMatchedWithStartingText = screen.getByText((content) =>
       content.includes(Config.formation.intro.certificateOfGoodStandingAlert.beginning),

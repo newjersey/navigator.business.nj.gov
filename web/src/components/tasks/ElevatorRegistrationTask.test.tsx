@@ -3,6 +3,8 @@ import { HousingMunicipalitiesContext } from "@/contexts/housingMunicipalitiesCo
 import * as api from "@/lib/api-client/apiClient";
 import analyticsBase from "@/lib/utils/analytics-base";
 import { generateTask } from "@/test/factories";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { generateUserData } from "@businessnjgovnavigator/shared";
 import {
   generateElevatorSafetyRegistration,
   generateElevatorSafetyRegistrationSummary,
@@ -32,11 +34,13 @@ describe("<ElevatorRegistrationTask />", () => {
 
   const renderTask = (): void => {
     render(
-      <HousingMunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
-        <ThemeProvider theme={createTheme()}>
-          <ElevatorRegistrationTask task={task} />
-        </ThemeProvider>
-      </HousingMunicipalitiesContext.Provider>,
+      <WithStatefulUserData initialUserData={generateUserData({})}>
+        <HousingMunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
+          <ThemeProvider theme={createTheme()}>
+            <ElevatorRegistrationTask task={task} />
+          </ThemeProvider>
+        </HousingMunicipalitiesContext.Provider>
+      </WithStatefulUserData>,
     );
   };
 

@@ -1,7 +1,8 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { CrtkSearchResult } from "@/components/crtk/CrtkSearchResult";
 import type { CrtkData } from "@/components/crtk/crtkTypes";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
@@ -55,7 +56,7 @@ describe("<CrtkSearchResult />", () => {
             },
     };
 
-    render(
+    renderWithUserData(
       <CrtkSearchResult
         isLoading={false}
         crtkData={mergedData}

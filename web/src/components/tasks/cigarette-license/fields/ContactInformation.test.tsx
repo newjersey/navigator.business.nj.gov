@@ -1,3 +1,4 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { ContactInformation } from "@/components/tasks/cigarette-license/fields/ContactInformation";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import {
@@ -12,7 +13,7 @@ import {
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test/factories";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { useState } from "react";
 
 const Config = getMergedConfig();
@@ -41,7 +42,7 @@ describe("<ContactInformation />", () => {
       );
     };
 
-    render(<TestComponent />);
+    renderWithUserData(<TestComponent />);
   };
 
   describe("Basic Rendering", () => {

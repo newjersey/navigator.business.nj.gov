@@ -1,12 +1,13 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { Task } from "@/components/Task";
 import { generateTask } from "@/test/factories";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 describe("<Task />", () => {
   it("links to the task page by url slug", () => {
     const task = generateTask({ urlSlug: "url-slug-1", name: "task 1" });
-    render(
+    renderWithUserData(
       <ThemeProvider theme={createTheme()}>
         <Task task={task} />
       </ThemeProvider>,
@@ -17,7 +18,7 @@ describe("<Task />", () => {
   it("renders required content when task is required", () => {
     const task = generateTask({ urlSlug: "url-slug-1", name: "task 1", required: true });
 
-    render(
+    renderWithUserData(
       <ThemeProvider theme={createTheme()}>
         <Task task={task} />
       </ThemeProvider>,

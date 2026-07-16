@@ -80,7 +80,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     case NavBarVariant.MINIMAL_WITH_LOGIN:
       return (
         <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
-          <NavBarDesktopHomeLogo previousBusinessId={undefined} />
+          <NavBarDesktopHomeLogo previousBusinessId={undefined} isLoginPage />
           <div className={"display-flex flex-row flex-align-center"}>
             <NavBarLoginButton />
           </div>

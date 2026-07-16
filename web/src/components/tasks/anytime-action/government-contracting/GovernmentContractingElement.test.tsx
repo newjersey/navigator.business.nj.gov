@@ -1,14 +1,15 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
 import { generateAnytimeActionTask } from "@/test/factories";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
 describe("AnytimeActionGovernmentContractingElement", () => {
   const renderComponent = (): void => {
     const task = generateAnytimeActionTask({ filename: "government-contracting" });
-    render(<GovernmentContractingElement anytimeActionHeaderText={task.name} />);
+    renderWithUserData(<GovernmentContractingElement anytimeActionHeaderText={task.name} />);
   };
 
   it("renders first tab", () => {

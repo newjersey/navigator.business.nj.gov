@@ -1,15 +1,16 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { EmergencyTripPermit } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermit";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
 } from "@/contexts/dataFormErrorMapContext";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 
 describe("EmergencyTripPermit", () => {
   const renderPage = (): void => {
-    render(
+    renderWithUserData(
       <ThemeProvider theme={createTheme()}>
         <DataFormErrorMapContext.Provider
           value={{

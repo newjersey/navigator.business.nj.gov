@@ -1,10 +1,11 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 jest.mock("../../../../../shared/lib/content/lib/industry.json", () => ({
   industries: [
@@ -89,7 +90,7 @@ const mockGetNonEssentialQuestionText = (
 describe("ProfileNonEssentialQuestionsSection", () => {
   useMockIntersectionObserver();
   const renderComponent = (profileData: Partial<ProfileData>): void => {
-    render(
+    renderWithUserData(
       <WithStatefulProfileData
         initialData={generateProfileData({
           ...profileData,

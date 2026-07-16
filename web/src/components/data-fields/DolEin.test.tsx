@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { screen } from "@testing-library/react";
 import { DolEin } from "@/components/data-fields/DolEin";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
@@ -27,7 +28,7 @@ describe("<DolEin />", () => {
     editable?: boolean;
   }
   const renderComponent = (profileData?: ProfileData, props?: Props): void => {
-    render(
+    renderWithUserData(
       <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
         <DolEin value={undefined} startHidden={props?.startHidden} editable={props?.editable} />
       </WithStatefulProfileData>,

@@ -1,8 +1,9 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { AlertVariants } from "@/components/njwds-extended/Alert";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
@@ -15,7 +16,7 @@ describe("<FieldEntryAlert/>", () => {
   });
 
   it("renders when fields are provided", () => {
-    render(
+    renderWithUserData(
       <FieldEntryAlert
         alertMessage={alertMessage}
         alertProps={{
@@ -28,7 +29,7 @@ describe("<FieldEntryAlert/>", () => {
   });
 
   it("does not render when fields is an empty array", () => {
-    render(
+    renderWithUserData(
       <FieldEntryAlert
         alertMessage={alertMessage}
         alertProps={{
@@ -43,7 +44,7 @@ describe("<FieldEntryAlert/>", () => {
   it.each(AlertVariants)(
     "sets Alert variant accordingly when provided variant is %s",
     (variant) => {
-      render(
+      renderWithUserData(
         <FieldEntryAlert
           alertMessage={alertMessage}
           alertProps={{
@@ -73,7 +74,7 @@ describe("<FieldEntryAlert/>", () => {
       },
     ];
 
-    render(
+    renderWithUserData(
       <FieldEntryAlert
         alertMessage={alertMessage}
         alertProps={{
@@ -93,7 +94,7 @@ describe("<FieldEntryAlert/>", () => {
 
   it("calls shallow routing to asPath value", async () => {
     useMockRouter({ asPath: "welcome/2" });
-    render(
+    renderWithUserData(
       <FieldEntryAlert
         alertMessage={alertMessage}
         alertProps={{

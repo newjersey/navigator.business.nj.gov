@@ -1,6 +1,7 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import AnytimeActionTaskPage from "@/pages/actions/[anytimeActionTaskUrlSlug]";
 import { generateAnytimeActionTask } from "@/test/factories";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 describe("anytime action page", () => {
   it("shows the anytime action details", () => {
@@ -12,7 +13,7 @@ describe("anytime action page", () => {
       issuingAgency: "some agency",
     });
 
-    render(<AnytimeActionTaskPage anytimeActionTask={anytimeAction} />);
+    renderWithUserData(<AnytimeActionTaskPage anytimeActionTask={anytimeAction} />);
 
     expect(screen.getByText("Some Anytime Action Name")).toBeInTheDocument();
     expect(screen.getByText("Click here")).toBeInTheDocument();
@@ -28,7 +29,7 @@ describe("anytime action page", () => {
       filename: "state-contracting-task",
     });
 
-    render(<AnytimeActionTaskPage anytimeActionTask={anytimeAction} />);
+    renderWithUserData(<AnytimeActionTaskPage anytimeActionTask={anytimeAction} />);
 
     expect(screen.getByText("State contracting task")).toBeInTheDocument();
   });
