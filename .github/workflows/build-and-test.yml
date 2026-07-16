@@ -114,7 +114,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
 
@@ -149,7 +149,7 @@ jobs:
         shard: [1, 2, 3, 4, 5, 6, 7, 8]
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
       - name: Download workspace artifact
@@ -159,7 +159,7 @@ jobs:
           path: .
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: yarn
@@ -195,7 +195,7 @@ jobs:
     if: *tests_allowed
     env: *integration-env
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
       - uses: actions/download-artifact@v8
@@ -215,7 +215,7 @@ jobs:
     if: *tests_allowed
     env: *integration-env
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
       - uses: actions/download-artifact@v8
@@ -235,7 +235,7 @@ jobs:
     if: *tests_allowed
     env: *integration-env
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
       - uses: actions/download-artifact@v8
@@ -255,7 +255,7 @@ jobs:
     if: *tests_allowed
     env: *integration-env
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
       - uses: actions/download-artifact@v8
@@ -275,7 +275,7 @@ jobs:
     if: *tests_allowed
     env: *integration-env
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
       - uses: actions/download-artifact@v8
