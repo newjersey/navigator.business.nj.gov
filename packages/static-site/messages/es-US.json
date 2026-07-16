@@ -887,5 +887,8 @@
         }
       ]
     }
+  },
+  "newsletterSignup": {
+    "title": "Subscribe to Business.NJ.gov Updates"
   }
 }
