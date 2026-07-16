@@ -1,8 +1,9 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { AnytimeActionTaxClearanceCertificateAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateAlert";
 import analytics from "@/lib/utils/analytics";
 import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -27,7 +28,7 @@ jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
   it("displays single field text in header if there is only one error", () => {
-    render(
+    renderWithUserData(
       <AnytimeActionTaxClearanceCertificateAlert
         fieldErrors={["entityId"]}
         setStepIndex={() => {}}
@@ -39,7 +40,7 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
   });
 
   it("displays multiple fields text in header if there is more than one error", () => {
-    render(
+    renderWithUserData(
       <AnytimeActionTaxClearanceCertificateAlert
         fieldErrors={["requestingAgencyId", "entityId"]}
         setStepIndex={() => {}}
@@ -50,7 +51,9 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
   });
 
   it("displays nothing if there are no errors", () => {
-    render(<AnytimeActionTaxClearanceCertificateAlert fieldErrors={[]} setStepIndex={() => {}} />);
+    renderWithUserData(
+      <AnytimeActionTaxClearanceCertificateAlert fieldErrors={[]} setStepIndex={() => {}} />,
+    );
     expect(screen.queryByTestId("tax-clearance-error-alert")).not.toBeInTheDocument();
   });
 
@@ -89,7 +92,7 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
     ],
   ])("when responseErrorType is %s", (errorType, expectedMessage) => {
     it(`displays "${expectedMessage}"`, () => {
-      render(
+      renderWithUserData(
         <AnytimeActionTaxClearanceCertificateAlert
           fieldErrors={[]}
           responseErrorType={errorType}
@@ -103,7 +106,7 @@ describe("<AnytimeActionTaxClearanceCertificateAlert>", () => {
   });
 
   it("fires the correct analytics event when live chat button is clicked", async () => {
-    render(
+    renderWithUserData(
       <AnytimeActionTaxClearanceCertificateAlert
         fieldErrors={["requestingAgencyId"]}
         setStepIndex={() => {}}

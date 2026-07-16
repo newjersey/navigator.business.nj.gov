@@ -1,6 +1,7 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
 
@@ -15,7 +16,7 @@ describe("CigaretteLicenseAlert", () => {
   };
 
   it("renders null when no errors", () => {
-    render(<CigaretteLicenseAlert {...defaultProps} />);
+    renderWithUserData(<CigaretteLicenseAlert {...defaultProps} />);
     const alertBox = screen.queryByRole("alert");
     expect(alertBox).not.toBeInTheDocument();
   });
@@ -26,7 +27,7 @@ describe("CigaretteLicenseAlert", () => {
       fieldErrors: ["businessName", "contactEmail"],
     };
 
-    render(<CigaretteLicenseAlert {...props} />);
+    renderWithUserData(<CigaretteLicenseAlert {...props} />);
 
     expect(screen.getByRole("alert")).toBeInTheDocument();
     expect(
@@ -44,7 +45,7 @@ describe("CigaretteLicenseAlert", () => {
       submissionError,
     };
 
-    render(<CigaretteLicenseAlert {...props} />);
+    renderWithUserData(<CigaretteLicenseAlert {...props} />);
 
     expect(screen.getByRole("alert")).toBeInTheDocument();
     // getByTestId needed - markdown content renders across multiple lines
@@ -58,7 +59,7 @@ describe("CigaretteLicenseAlert", () => {
       submissionError,
     };
 
-    render(<CigaretteLicenseAlert {...props} />);
+    renderWithUserData(<CigaretteLicenseAlert {...props} />);
 
     expect(screen.getByRole("alert")).toBeInTheDocument();
     // getByTestId needed - markdown content renders across multiple lines
@@ -73,7 +74,7 @@ describe("CigaretteLicenseAlert", () => {
       submissionError,
     };
 
-    render(<CigaretteLicenseAlert {...props} />);
+    renderWithUserData(<CigaretteLicenseAlert {...props} />);
 
     expect(screen.getByRole("alert")).toBeInTheDocument();
     // getByTestId needed - markdown content renders across multiple lines
@@ -90,7 +91,7 @@ describe("CigaretteLicenseAlert", () => {
       fieldErrors: ["businessName"],
     };
 
-    render(<CigaretteLicenseAlert {...props} />);
+    renderWithUserData(<CigaretteLicenseAlert {...props} />);
 
     await userEvent.click(
       screen.getByText(Config.cigaretteLicenseShared.alertFieldNames.businessName),
@@ -104,7 +105,7 @@ describe("CigaretteLicenseAlert", () => {
       fieldErrors: ["salesInfoSupplier"],
     };
 
-    render(<CigaretteLicenseAlert {...props} />);
+    renderWithUserData(<CigaretteLicenseAlert {...props} />);
 
     await userEvent.click(
       screen.getByText(Config.cigaretteLicenseShared.alertFieldNames.salesInfoSupplier),
@@ -118,7 +119,7 @@ describe("CigaretteLicenseAlert", () => {
       fieldErrors: ["signature"],
     };
 
-    render(<CigaretteLicenseAlert {...props} />);
+    renderWithUserData(<CigaretteLicenseAlert {...props} />);
 
     await userEvent.click(
       screen.getByText(Config.cigaretteLicenseShared.alertFieldNames.signature),
@@ -132,7 +133,7 @@ describe("CigaretteLicenseAlert", () => {
       fieldErrors: ["businessName", "contactEmail"],
     };
 
-    render(<CigaretteLicenseAlert {...props} />);
+    renderWithUserData(<CigaretteLicenseAlert {...props} />);
 
     const businessNameLink = screen.getByRole("link", {
       name: Config.cigaretteLicenseShared.alertFieldNames.businessName,

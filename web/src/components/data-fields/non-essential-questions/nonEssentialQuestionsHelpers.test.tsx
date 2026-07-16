@@ -1,5 +1,5 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
-import { render } from "@testing-library/react";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
@@ -8,7 +8,7 @@ import analytics from "@/lib/utils/analytics";
 
 const renderNonEssentialQuestionsHelpers = (questionId: ProfileContentField): void => {
   const initialProfileData = generateProfileData({});
-  render(
+  renderWithUserData(
     <WithStatefulProfileData initialData={initialProfileData}>
       <NonEssentialQuestionForPersonas questionId={questionId} />
     </WithStatefulProfileData>,

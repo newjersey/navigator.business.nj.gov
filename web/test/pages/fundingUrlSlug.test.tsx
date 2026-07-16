@@ -1,7 +1,8 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import FundingPage from "@/pages/funding/[fundingUrlSlug]";
 import { generateFunding } from "@/test/factories";
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 describe("funding page", () => {
   it("shows the funding details", () => {
@@ -13,7 +14,7 @@ describe("funding page", () => {
       status: "deadline",
     });
 
-    render(<FundingPage funding={funding} />);
+    renderWithUserData(<FundingPage funding={funding} />);
 
     expect(screen.getByText("Some Funding Name")).toBeInTheDocument();
     expect(screen.getByText("DUE: 07/01/2025")).toBeInTheDocument();
@@ -26,7 +27,7 @@ describe("funding page", () => {
       agency: ["njeda"],
     });
 
-    render(<FundingPage funding={funding} />);
+    renderWithUserData(<FundingPage funding={funding} />);
 
     expect(screen.getByTestId("funding-agency-header")).toBeInTheDocument();
     const expectedText = LookupFundingAgencyById("njeda").name;
@@ -38,7 +39,7 @@ describe("funding page", () => {
       agency: ["njeda", "njdol"],
     });
 
-    render(<FundingPage funding={funding} />);
+    renderWithUserData(<FundingPage funding={funding} />);
 
     const edaText = LookupFundingAgencyById("njeda").name;
     const dolText = LookupFundingAgencyById("njdol").name;
@@ -55,7 +56,7 @@ describe("funding page", () => {
       agency: [],
     });
 
-    render(<FundingPage funding={funding} />);
+    renderWithUserData(<FundingPage funding={funding} />);
 
     expect(screen.queryByTestId("funding-agency-header")).not.toBeInTheDocument();
   });
@@ -71,7 +72,7 @@ describe("funding page", () => {
         agency: [],
       });
 
-      render(<FundingPage funding={funding} />);
+      renderWithUserData(<FundingPage funding={funding} />);
 
       expect(screen.getByText("FIRST COME, FIRST SERVE")).toBeInTheDocument();
     });
@@ -86,7 +87,7 @@ describe("funding page", () => {
         agency: [],
       });
 
-      render(<FundingPage funding={funding} />);
+      renderWithUserData(<FundingPage funding={funding} />);
 
       expect(screen.getByText("DEADLINE")).toBeInTheDocument();
     });
@@ -101,7 +102,7 @@ describe("funding page", () => {
         agency: [],
       });
 
-      render(<FundingPage funding={funding} />);
+      renderWithUserData(<FundingPage funding={funding} />);
 
       expect(screen.queryByText("DEADLINE")).not.toBeInTheDocument();
     });

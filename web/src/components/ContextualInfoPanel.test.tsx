@@ -1,10 +1,11 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { withContextualInfo } from "@/test/helpers/helpers-renderers";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 describe("<ContextualInfoPanel />", () => {
   it("is closed when contextual info is empty", () => {
-    render(
+    renderWithUserData(
       withContextualInfo(
         <ContextualInfoPanel />,
         { isVisible: false, header: "", markdown: "" },
@@ -16,7 +17,7 @@ describe("<ContextualInfoPanel />", () => {
   });
 
   it("is open when the content is set", () => {
-    render(
+    renderWithUserData(
       withContextualInfo(
         <ContextualInfoPanel />,
         { isVisible: true, header: "some header", markdown: "some content" },
@@ -28,7 +29,7 @@ describe("<ContextualInfoPanel />", () => {
   });
 
   it("displays the content as markdown", () => {
-    render(
+    renderWithUserData(
       withContextualInfo(
         <ContextualInfoPanel />,
         { isVisible: true, header: "a header", markdown: "a paragraph" },

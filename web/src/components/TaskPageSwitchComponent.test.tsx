@@ -1,7 +1,8 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
 import { generateFormationDbaContent, generateRoadmap, generateTask } from "@/test/factories";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 describe("TaskPageSwitchComponent", () => {
   const initialFeatureCigaretteLicense = process.env.FEATURE_CIGARETTE_LICENSE;
@@ -21,7 +22,7 @@ describe("TaskPageSwitchComponent", () => {
     it("renders multi step cigarette task when true", () => {
       process.env.FEATURE_CIGARETTE_LICENSE = "true";
 
-      render(
+      renderWithUserData(
         <TaskPageSwitchComponent
           task={task}
           displayContent={displayContent}
@@ -37,7 +38,7 @@ describe("TaskPageSwitchComponent", () => {
     it("renders static content cigarette task when not true", () => {
       process.env.FEATURE_CIGARETTE_LICENSE = "some other string";
 
-      render(
+      renderWithUserData(
         <TaskPageSwitchComponent
           task={task}
           displayContent={displayContent}

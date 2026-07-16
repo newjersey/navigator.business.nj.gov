@@ -1,6 +1,7 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import CertificationPage from "@/pages/certification/[certificationUrlSlug]";
 import { generateCertification } from "@/test/factories";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 describe("certification page", () => {
   it("shows the certification details", () => {
@@ -10,7 +11,7 @@ describe("certification page", () => {
       contentMd: "Some content description",
     });
 
-    render(<CertificationPage certification={certification} />);
+    renderWithUserData(<CertificationPage certification={certification} />);
 
     expect(screen.getByText("Some Cert Name")).toBeInTheDocument();
     expect(screen.getByText("Click here")).toBeInTheDocument();

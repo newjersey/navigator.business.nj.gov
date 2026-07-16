@@ -1,10 +1,11 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { AuthContext, initialState } from "@/contexts/authContext";
 import { authReducer, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as session from "@/lib/auth/sessionHelper";
 import LoginSupportPage from "@/pages/support/login";
 import { generateActiveUser } from "@/test/factories";
 import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import { useReducer, type ReactNode } from "react";
 
 jest.mock("@/lib/auth/sessionHelper", () => ({
@@ -34,7 +35,7 @@ describe("login support page", () => {
     const activeUser = generateActiveUser({});
     mockSession.getActiveUser.mockResolvedValue(activeUser);
 
-    render(
+    renderWithUserData(
       <AuthContextWrapper
         authState={{
           activeUser,
@@ -52,7 +53,7 @@ describe("login support page", () => {
   });
 
   it("hides the logout message and shows 'Log in' if a user is unauthenticated", async () => {
-    render(
+    renderWithUserData(
       <AuthContextWrapper>
         <LoginSupportPage />
       </AuthContextWrapper>,

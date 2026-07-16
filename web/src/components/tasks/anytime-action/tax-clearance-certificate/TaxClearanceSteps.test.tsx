@@ -1,3 +1,4 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -8,7 +9,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { withNeedsAccountContext, withUserDataError } from "@/test/helpers/helpers-renderers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { ReactElement } from "react";
 import { TaxClearanceSteps } from "./TaxClearanceSteps";
 
@@ -59,7 +60,7 @@ describe("TaxClearanceSteps", () => {
   };
 
   const renderWithContext = (isAuthenticated: IsAuthenticated): void => {
-    render(<DataErrorContextWrapper isAuthenticated={isAuthenticated} />);
+    renderWithUserData(<DataErrorContextWrapper isAuthenticated={isAuthenticated} />);
   };
 
   it("shows modal when clicking step 2 and user is not authenticated", () => {

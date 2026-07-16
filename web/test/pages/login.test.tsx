@@ -1,3 +1,4 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { AuthContext, initialState } from "@/contexts/authContext";
 import { authReducer } from "@/lib/auth/AuthContext";
 import * as session from "@/lib/auth/sessionHelper";
@@ -5,7 +6,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import LoginPage from "@/pages/login";
 import { generateActiveUser } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { useReducer, type ReactNode } from "react";
 import analytics from "@/lib/utils/analytics";
 
@@ -47,7 +48,7 @@ describe("login page", () => {
     const activeUser = generateActiveUser({});
     mockSession.getActiveUser.mockResolvedValue(activeUser);
 
-    render(
+    renderWithUserData(
       <AuthContextWrapper>
         <LoginPage />
       </AuthContextWrapper>,
@@ -61,7 +62,7 @@ describe("login page", () => {
   it("renders the login form for any unauthenticated users", () => {
     mockSession.getActiveUser.mockRejectedValue("No current user");
 
-    render(
+    renderWithUserData(
       <AuthContextWrapper>
         <LoginPage />
       </AuthContextWrapper>,
@@ -74,7 +75,7 @@ describe("login page", () => {
   it("fires analytics event when chat with a Business Expert button is clicked", () => {
     mockSession.getActiveUser.mockRejectedValue("No current user");
 
-    render(
+    renderWithUserData(
       <AuthContextWrapper>
         <LoginPage />
       </AuthContextWrapper>,

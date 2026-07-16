@@ -156,11 +156,16 @@ export const ProfileMenuItem = (props: {
       const businessMenuItems = [
         NavMenuItem({
           onClick: async (): Promise<void> => {
+            props.handleClose();
+            if (isProfileSelected) {
+              router && (await router.push(ROUTES.dashboard));
+            }
             if (Object.keys(userData.businesses).length > 1) {
               await updateQueue?.queue(switchCurrentBusiness(userData, businessId)).update();
             }
-            props.handleClose();
-            router && (await router.push(ROUTES.dashboard));
+            if (!isProfileSelected) {
+              router && (await router.push(ROUTES.dashboard));
+            }
           },
           selected: !isProfileSelected && isCurrent,
           icon: <ButtonIcon svgFilename={`business-${getBusinessIconColor(i)}`} sizePx="35px" />,

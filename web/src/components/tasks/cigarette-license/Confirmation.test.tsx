@@ -1,5 +1,6 @@
 import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
 import * as api from "@/lib/api-client/apiClient";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { CigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -80,10 +81,12 @@ describe("<ConfirmationPage />", () => {
   });
 
   const renderComponent = (business?: Business): void => {
+    const currentBusiness =
+      business || generateBusiness({ cigaretteLicenseData: mockCigaretteLicenseData });
     render(
-      <ConfirmationPage
-        business={business || generateBusiness({ cigaretteLicenseData: mockCigaretteLicenseData })}
-      />,
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(currentBusiness)}>
+        <ConfirmationPage business={currentBusiness} />
+      </WithStatefulUserData>,
     );
   };
 
@@ -187,7 +190,7 @@ describe("<ConfirmationPage />", () => {
         },
         cigaretteLicenseData: mockCigaretteLicenseData,
       });
-      render(<ConfirmationPage business={business} />);
+      renderComponent(business);
 
       await waitFor(() => {
         expect(
@@ -207,7 +210,7 @@ describe("<ConfirmationPage />", () => {
         },
         cigaretteLicenseData: mockCigaretteLicenseData,
       });
-      render(<ConfirmationPage business={business} />);
+      renderComponent(business);
 
       await waitFor(() => {
         expect(
