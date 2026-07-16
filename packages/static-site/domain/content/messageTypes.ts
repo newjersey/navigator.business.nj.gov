@@ -895,6 +895,14 @@ export interface ImpactReportMessages {
 }
 
 /**
+ * Localized content for the newsletter signup page.
+ */
+export interface NewsletterSignupMessages {
+  /** Page H1 title. */
+  readonly title: string;
+}
+
+/**
  * Complete localized message payload for one locale.
  */
 export interface ApplicationMessages {
@@ -916,4 +924,6 @@ export interface ApplicationMessages {
   readonly pageNotFound: PageNotFoundContent;
   /** Impact report page content strings. */
   readonly impactReport: ImpactReportMessages;
+  /** Newsletter signup page content strings. */
+  readonly newsletterSignup: NewsletterSignupMessages;
 }
