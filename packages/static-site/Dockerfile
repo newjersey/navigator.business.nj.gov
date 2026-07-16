@@ -9,7 +9,7 @@ FROM base AS dependencies
 WORKDIR /app
 
 COPY packages/content-types /content-types
-COPY packages/static-site/package.json packages/static-site/pnpm-lock.yaml ./
+COPY packages/static-site/package.json packages/static-site/pnpm-lock.yaml packages/static-site/pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 FROM base AS builder
