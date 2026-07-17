@@ -267,11 +267,11 @@ main-text-8: >-
   The [New Jersey Family Leave Act (NJFLA)](https://www.njoag.gov/about/divisions-and-offices/division-on-civil-rights-home/know-the-law/new-jersey-family-leave-act/) is a state law that allows eligible employees to take up to 12 weeks of job-protected leave within a 24-month period for specific family needs. An employee is eligible if:
 
 
-  * They must work for a state or local government, or a company with 30 or more employees worldwide
+  * They must work for a company or organization with 15 or more employees worldwide, or a state or local government agency
 
-  * They worked for their employer for at least one year
+  * They have worked for their employer for at least 3 months
 
-  * They worked at least 1,000 hours in the past year
+  * They have worked for their employer for at least 250 hours in the past year
 
 
   Employees can take leave:
