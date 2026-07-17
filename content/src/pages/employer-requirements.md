@@ -277,9 +277,9 @@ main-text-8: >-
   Employees can take leave:
 
 
-  * To care for or bond with a new baby. They must start leave within 1 year of the child's birth, adoption, or placement in foster care
+  * To care for or bond with their child. They must start leave within 1 year of the child's birth or placement with the employee for adoption or foster care
 
-  * To care for a family member. They can take leave to care for a loved one with serious physical or mental health conditions. Family members include anyone an employee considers family, such as in-laws or chosen family members
+  * To care for a family member, or someone who is the equivalent of family. They can take leave to care for a loved one with a serious physical or mental health condition (including cancer, pregnancy or postpartum complications, surgery, or a diagnosis of a communicable disease); Employees can take leave to care for people who are related by marriage and blood, as well as other people who are not biologically or legally related, such as in-laws or chosen family members
 
   * To care for a child whose school or daycare is closed. The closure must be ordered by a public official during a health emergency, like an outbreak of a contagious disease such as COVID-19
 
