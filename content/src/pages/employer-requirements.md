@@ -21,9 +21,9 @@ main-text-1: >-
 
   * The individual has been and will continue to be free from control or direction over the performance of work performed, both under a contract of service and in fact; *and*
 
-  * The work is either outside the usual course of the business for which such service is performed, or the work is performed outside of all the places of business of the enterprise for which such service is performed;* and*
+  * The work is either outside the usual course of the business for which such service is performed, or the work is performed outside of all the places of business of the enterprise for which such service is performed; *and*
 
-  * The individual is customarily engaged in an independently established trade, occupation, profession, or business.
+  * The individual is customarily engaged in an independently established trade, occupation, profession, or business
 link-text-1: Learn More
 link-url-6: /pages/government-contracting
 heading-2: Understand Wage and Hour Compliance
@@ -378,7 +378,7 @@ main-text-8: >-
 
   * Distribute Earned Sick Leave policy to employees
 
-  * Establish a 12-month benefit year for each employee to accrue and use sick leave.
+  * Establish a 12-month benefit year for each employee to accrue and use sick leave
 heading-9: Understand Different Types of Job-Protected Leave
 main-text-9: >-
   The Family Medical Leave Act (FMLA) provides eligible employees of covered
