@@ -258,7 +258,7 @@ main-text-8: >-
   ### Job-Protected Leave
 
 
-  **These laws have changed recently. Learn more here.**
+  **These laws have changed recently. [Learn more here](https://nj.gov/labor/myleavebenefits/worker/job-protection-information/more-protections.shtml?_gl=1*1htuio6*_ga*MTMwNTIxODg0MC4xNzc1NDg3NjU2*_ga_N8RFJ4LE4D*czE3ODQzMTE2NzkkbzMkZzEkdDE3ODQzMTE2ODQkajU1JGwwJGgw*_ga_2F7W0D0NDJ*czE3ODQzMTE2NzkkbzMkZzEkdDE3ODQzMTE2ODQkajU1JGwwJGgw&_ga=2.236109512.831384258.1784301239-1305218840.1775487656).**
 
 
   #### **New Jersey Family Leave Act**
