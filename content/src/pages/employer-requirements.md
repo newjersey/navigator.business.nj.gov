@@ -406,16 +406,18 @@ main-text-9: >-
   * Employer headquarters does no’t have to be in N.J.
 
 
-  **TDI/FLI Job Protection**
-
-
-  * If your employee is receiving TDI/FLI benefits through the State or a private plan and leave is not covered under NJFLA or FMLA.
-
-
   **FMLA**
 
 
   * Private-sector employers who employ 50 or more employees in 20 or more workweeks in either the current calendar year or the previous calendar year
+
+
+  **TDI/FLI Job Protection**
+
+
+  * If your employee is receiving TDI/FLI benefits through the State or a private plan and leave is not covered under NJFLA or FMLA
+
+
 
 
   ### What Does FMLA and NJFLA Protect?
