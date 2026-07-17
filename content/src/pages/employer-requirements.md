@@ -446,6 +446,12 @@ main-text-9: >-
   * Employers are required to continue group health insurance coverage for an employee on FMLA leave under the same terms and conditions as if the employee had not taken leave.
 
 
+  **TDI/FLI Job Protection**
+
+
+  * When the employee’s leave ends, you must reinstate them to their same job or one with the same pay, benefits, seniority, and other terms of employment.  
+
+
   ### What Must I Provide My Employees?
 
 
