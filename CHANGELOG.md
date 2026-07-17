@@ -1,3 +1,10 @@
+## [2026.16.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.16.0...v2026.16.1) (2026-07-17)
+
+
+### Bug Fixes
+
+* hotfix deploy for employer-requirements changes ([d04573e](https://github.com/newjersey/navigator.business.nj.gov/commit/d04573e7c90e4ec91e24a466ca019c069d3fb7a1))
+
 # [2026.16.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.15.1...v2026.16.0) (2026-07-14)
 
 
