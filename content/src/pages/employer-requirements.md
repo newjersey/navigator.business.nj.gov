@@ -281,7 +281,9 @@ main-text-8: >-
 
   * To care for a family member, or someone who is the equivalent of family. They can take leave to care for a loved one with a serious physical or mental health condition (including cancer, pregnancy or postpartum complications, surgery, or a diagnosis of a communicable disease); Employees can take leave to care for people who are related by marriage and blood, as well as other people who are not biologically or legally related, such as in-laws or chosen family members
 
-  * To care for a child whose school or daycare is closed. The closure must be ordered by a public official during a health emergency, like an outbreak of a contagious disease such as COVID-19
+  * During a state of emergency: To care for a family member, or someone who is the equivalent of family, who has been isolated or quarantined because of suspected exposure to a communicable disease; or to care for their child if their school or daycare is closed. The closure must be ordered by a public official during a public health emergency, like an epidemic of a contagious disease 
+
+
 
 
   #### **FMLA**
