@@ -507,7 +507,7 @@ main-text-9: >-
   **FMLA**
 
 
-  * Employee eligibility is determined, and notice of eligibility status must be provided, the first time the employee takes leave for an FMLA-qualifying reason in the employer’s designated 12-month leave year.
+  * Employee eligibility is determined, and notice of eligibility status must be provided, the first time the employee takes leave for an FMLA-qualifying reason in the employer’s designated 12-month leave year
 
 
   The eligibility notice provided by the employer may be either oral or in writing and must:
@@ -517,7 +517,19 @@ main-text-9: >-
 
   * Inform the employee of his or her eligibility status; and
 
-  * If the employee is determined to be not eligible for FMLA leave, state at least 1 reason why.
+  * If the employee is determined to be not eligible for FMLA leave, state at least 1 reason why
+
+
+  **TDI/FLI**
+
+
+  * Generally, your employee has to give you reasonable notice for Temporary Disability leave and continuous family caregiving leave except for unforeseen or emergency circumstances
+
+  * For intermittent caregiving leave, your employee must give you 15 days notice except for unforeseen or emergency circumstances
+
+  * For bonding leave, your employee must give you 30 days notice for continuous bonding leave
+
+  * For intermittent bonding leave, your employee must give you 15 days notice
 heading-10: Providing an Employee Retirement Program
 main-text-10: >-
   If you have 25 or more employees in New Jersey, you must offer a retirement
