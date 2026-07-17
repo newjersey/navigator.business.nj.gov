@@ -458,9 +458,9 @@ main-text-9: >-
   **NJFLA**
 
 
-  * Employers are required to provide employees with written guidance concerning employees’ rights and obligations under the NJFLA.  An employer that maintains written guidance to employees concerning employee benefits or leave rights, such as in an employee handbook, must include information concerning leave and employee obligations under the NJFLA in the written guidance. If an employer does not maintain written policies, manuals, or handbooks describing employee  benefits and leave provisions, the employer must provide written guidance to each employee concerning the employee’s rights and obligations under the NJFLA. The employer may provide employees a copy of the Division on Civil Rights’ Fact Sheet and Frequently Asked Questions, available at www.njcivilrights.gov, to provide the required written guidance. 
+  * Employers are required to provide employees with written guidance concerning employees’ rights and obligations under the NJFLA.  An employer that maintains written guidance to employees concerning employee benefits or leave rights, such as in an employee handbook, must include information concerning leave and employee obligations under the NJFLA in the written guidance. If an employer does not maintain written policies, manuals, or handbooks describing employee  benefits and leave provisions, the employer must provide written guidance to each employee concerning the employee’s rights and obligations under the NJFLA. The employer may provide employees a copy of the Division on Civil Rights’ Fact Sheet and Frequently Asked Questions, available at www.njcivilrights.gov, to provide the required written guidance.
 
-  * Employers covered by the NJFLA must display the official Family Leave Act poster of the Division on Civil Rights, available at www.njcivilrights.gov, in places easily visible to all employees, in accordance with N.J.A.C. 13:8-2.2.
+  * Employers covered by the NJFLA must display the official Family Leave Act poster of the Division on Civil Rights, available at www.njcivilrights.gov, in places easily visible to all employees, in accordance with N.J.A.C. 13:8-2.2
 
 
 
@@ -475,7 +475,7 @@ main-text-9: >-
 
   * Notify employees concerning their eligibility status and rights and responsibilities under the FMLA; and
 
-  * Notify employees whether specific leave is designated as FMLA leave and the amount of time that will count against their FMLA leave entitlement.
+  * Notify employees whether specific leave is designated as FMLA leave and the amount of time that will count against their FMLA leave entitlement
 
   * Including this information in the Employee Handbook would satisfy many of these requirements
 
@@ -483,9 +483,9 @@ main-text-9: >-
   **TDI/FLI**
 
 
-  * Display the Temporary Disability Insurance poster and the Family Leave Insurance poster in a workplace location where employees can clearly see them.
+  * Display the Temporary Disability Insurance poster and the Family Leave Insurance poster in a workplace location where employees can clearly see them
 
-    Give written notice of these programs when an employee is hired, requests information, or notifies an employer of their need for leave.
+    Give written notice of these programs when an employee is hired, requests information, or notifies an employer of their need for leave
 
 
 
