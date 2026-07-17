@@ -406,6 +406,12 @@ main-text-9: >-
   * Employer headquarters does no’t have to be in N.J.
 
 
+  **TDI/FLI Job Protection**
+
+
+  * If your employee is receiving TDI/FLI benefits through the State or a private plan and leave is not covered under NJFLA or FMLA.
+
+
   **FMLA**
 
 
