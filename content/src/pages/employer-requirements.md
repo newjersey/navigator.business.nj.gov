@@ -399,9 +399,11 @@ main-text-9: >-
   **NJFLA**
 
 
-  * Private employers with 30 or more employees who have worked at least 20 weeks in the current or preceding year (30 employees do not have to be in N.J. – can be anywhere)
+  * State or local government agencies regardless of the number of employees
 
-  * Employer headquarters doesn’t have to be in N.J.
+  * Private employers with 15 or more employees who have worked at least 20 weeks in the current or preceding year (15 employees do not have to be in N.J. – can be anywhere)
+
+  * Employer headquarters does no’t have to be in N.J.
 
 
   **FMLA**
