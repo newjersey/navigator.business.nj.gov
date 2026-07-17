@@ -401,9 +401,9 @@ main-text-9: >-
 
   * State or local government agencies regardless of the number of employees
 
-  * Private employers with 15 or more employees who have worked at least 20 weeks in the current or preceding year (15 employees do not have to be in N.J. – can be anywhere)
+  * Private employers with 15 or more employees who have worked at least 20 weeks in the current or preceding year (15 employees do not have to be in NJ – can be anywhere)
 
-  * Employer headquarters does no’t have to be in N.J.
+  * Employer headquarters does no’t have to be in NJ
 
 
   **FMLA**
@@ -418,21 +418,21 @@ main-text-9: >-
   * If your employee is receiving TDI/FLI benefits through the State or a private plan and leave is not covered under NJFLA or FMLA
 
 
-
-
   ### What Does FMLA and NJFLA Protect?
 
 
   **NJFLA**
 
 
-  * NJFLA leave is not the same as the Federal Family Medical Leave Act (FMLA)
+  * Leave taken under the New Jersey Family Leave Act (NJFLA)  is not the same as leave taken under the Federal Family and Medical Leave Act (FMLA)
 
-  * Unpaid job protection for 12 weeks over a 24-month period due to a triggering event that guarantees the same role or equivalent
+  * The NJFLA provides unpaid job protection for 12 weeks of leave over a 24-month period due to a covered reason and guarantees the same role or equivalent position upon return
 
-  * Employers must continue health insurance coverage while the employee is on leave. If the coverage was set to end had the employee not been on leave, then the employer is not required to continue the coverage after the date of its expiration.
+  * Employers must continue health insurance coverage while the employee is on NJFLA leave. If the coverage was set to end had the employee not been on leave, then the employer is not required to continue the coverage after the date of its expiration
 
-  * The employer must continue any other employment benefits that are provided to employees on temporary leave.
+  * While the employee is on leave, the employer must continue any other employment benefits that are provided to employees taking other types of leave that are similar to family leave
+
+
 
 
   **FMLA**
