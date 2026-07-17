@@ -8,7 +8,8 @@ import { applyStandardTags } from "./stackUtils";
  * Number of tagged static-site images retained in the shared ECR repository.
  *
  * The shared repository carries dev, content, testing, staging, and production tags, so the policy
- * keeps enough history for lower-environment SHA tags and production point-release tags.
+ * keeps enough history for lower-environment SHA tags, the independent static-site pipeline's
+ * date-SHA tags, and production point-release tags.
  */
 const STATIC_SITE_TAGGED_IMAGE_RETENTION_COUNT = 100;
 
