@@ -465,8 +465,6 @@ main-text-9: >-
 
 
 
-
-
   **FMLA**
 
 
@@ -480,6 +478,15 @@ main-text-9: >-
   * Notify employees whether specific leave is designated as FMLA leave and the amount of time that will count against their FMLA leave entitlement.
 
   * Including this information in the Employee Handbook would satisfy many of these requirements
+
+
+  **TDI/FLI**
+
+
+  * Display the Temporary Disability Insurance poster and the Family Leave Insurance poster in a workplace location where employees can clearly see them.
+
+    Give written notice of these programs when an employee is hired, requests information, or notifies an employer of their need for leave.
+
 
 
   ### What Are the Notification Requirements?
