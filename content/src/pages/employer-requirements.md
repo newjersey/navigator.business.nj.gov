@@ -321,7 +321,16 @@ main-text-8: >-
   * Have been employed for at least 12 months
 
 
-  #### **TDI/FLI Job Protection**
+  #### **TDI/FLI Job Protection**[](https://www.nj.gov/labor/wageandhour/assets/PDFs/Employer%20Poster%20Packet/AD-289%20(4-22).pdf)
+
+
+  TDI/FLI job protection covers eligible employees who receive TDI/FLI benefits from the State or a private plan during their leave, and their leave is not already covered under NJFLA or FMLA.  
+
+
+  There are no minimum employer size requirements or work history requirements to be eligible for TDI/FLI benefits. Eligibility for benefits is based on recent earnings.  
+
+
+  If leave is covered under TDI/FLI law, when the leave ends, the employer must reinstate them to the same job or one with the same pay, benefits, seniority, and other terms of employment. 
 
 
   #### **SAFE Act**
