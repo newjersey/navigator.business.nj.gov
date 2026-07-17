@@ -48,7 +48,9 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
 
   const onStepClick = (step: number): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      updateQueue?.queuePreferences({ returnToLink: ROUTES.taxClearanceCertificate }).update();
+      updateQueue
+        ?.queuePreferences({ returnToLink: ROUTES.taxClearanceCertificate })
+        .updateInBackground();
       setShowNeedsAccountModal(true);
     } else {
       if (step === 2) {

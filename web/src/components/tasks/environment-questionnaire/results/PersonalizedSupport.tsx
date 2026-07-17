@@ -53,7 +53,7 @@ export const PersonalizedSupport = (): ReactElement => {
           ?.queueEnvironmentData({
             sbapEmailSent: true,
           })
-          .update();
+          .updateInBackground();
         analytics.event.email_sbap_clicked.click.email_sbap_clicked();
       })
       .catch(() => {

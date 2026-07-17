@@ -79,7 +79,7 @@ export const DbaFormationPaginator = (): ReactElement => {
       stepperState[1].isComplete = stepIndex === 2;
       return stepperState;
     });
-    updateQueue.queueFormationData({ lastVisitedPageIndex: stepIndex }).update();
+    updateQueue.queueFormationData({ lastVisitedPageIndex: stepIndex }).updateInBackground();
     moveToStep(stepIndex);
   };
 

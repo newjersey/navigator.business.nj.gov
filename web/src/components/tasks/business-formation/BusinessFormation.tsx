@@ -185,6 +185,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
             router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, {
               shallow: true,
             });
+          })
+          .catch(() => {
+            setIsLoadingGetFiling(false);
           });
       }
     })();

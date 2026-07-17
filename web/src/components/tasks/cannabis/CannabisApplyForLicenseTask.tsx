@@ -116,7 +116,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       business.taskProgress[props.task.id] === "TO_DO"
     ) {
       setSuccessSnackbarIsOpen(true);
-      updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).update();
+      updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).updateInBackground();
     }
   };
 

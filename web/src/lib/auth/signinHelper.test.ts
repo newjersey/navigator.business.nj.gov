@@ -54,6 +54,7 @@ describe("SigninHelper", () => {
     jest.restoreAllMocks();
     mockPush = jest.fn();
     mockDispatch = jest.fn();
+    mockSession.triggerSignOut.mockResolvedValue(undefined);
     mockUserDataStorage.UserDataStorageFactory.mockImplementation(() => ({
       ...originalModule.UserDataStorageFactory(),
       getCurrentUserData: mockGetCurrentUserData,
@@ -405,17 +406,32 @@ describe("SigninHelper", () => {
 
   describe("onSignOut", () => {
     it("dispatches a logout with undefined user", async () => {
-      const user = generateActiveUser({});
-      mockSession.getActiveUser.mockResolvedValue(user);
-      const userStorageMock = mockDelete.mockImplementation(() => {});
-      await onSignOut(mockPush, mockDispatch);
+      const clearUserData = jest.fn().mockResolvedValue(undefined);
+      await onSignOut({ push: mockPush, dispatch: mockDispatch, clearUserData });
       expect(mockSession.triggerSignOut).toHaveBeenCalled();
-      expect(userStorageMock).toHaveBeenCalledWith(user.id);
+      expect(clearUserData).toHaveBeenCalled();
+      expect(mockSession.triggerSignOut.mock.invocationCallOrder[0]).toBeLessThan(
+        clearUserData.mock.invocationCallOrder[0],
+      );
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGOUT",
-        user: undefined,
+        activeUser: undefined,
       });
       expect(mockPush).toHaveBeenCalledWith(ROUTES.landing);
+    });
+
+    it("preserves user data and auth state when sign-out fails", async () => {
+      const signOutError = new Error("Failed to sign out");
+      const clearUserData = jest.fn().mockResolvedValue(undefined);
+      mockSession.triggerSignOut.mockRejectedValueOnce(signOutError);
+
+      await expect(
+        onSignOut({ push: mockPush, dispatch: mockDispatch, clearUserData }),
+      ).rejects.toBe(signOutError);
+
+      expect(clearUserData).not.toHaveBeenCalled();
+      expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockPush).not.toHaveBeenCalled();
     });
   });
 });

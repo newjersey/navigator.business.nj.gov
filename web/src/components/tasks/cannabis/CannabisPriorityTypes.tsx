@@ -53,7 +53,9 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
     }
 
     if (priorityTypeSelected && business.taskItemChecklist[noneOfTheAbovePriorityId]) {
-      updateQueue.queueTaskItemChecklist({ [noneOfTheAbovePriorityId]: false }).update();
+      updateQueue
+        .queueTaskItemChecklist({ [noneOfTheAbovePriorityId]: false })
+        .updateInBackground();
     }
   }, [business, updateQueue]);
 
@@ -110,13 +112,13 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
           ...unselectPriorityTasks,
           [noneOfTheAbovePriorityId]: true,
         })
-        .update();
+        .updateInBackground();
     } else {
       updateQueue
         .queueTaskItemChecklist({
           [noneOfTheAbovePriorityId]: false,
         })
-        .update();
+        .updateInBackground();
     }
   };
 

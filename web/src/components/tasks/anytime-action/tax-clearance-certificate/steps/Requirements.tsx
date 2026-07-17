@@ -23,7 +23,9 @@ export const Requirements = (props: Props): ReactElement => {
 
   const onContinueClick = (): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      updateQueue?.queuePreferences({ returnToLink: ROUTES.taxClearanceCertificate }).update();
+      updateQueue
+        ?.queuePreferences({ returnToLink: ROUTES.taxClearanceCertificate })
+        .updateInBackground();
       setShowNeedsAccountModal(true);
     } else {
       analytics.event.tax_clearance.click.switch_to_step_two();

@@ -41,10 +41,10 @@ import { useRouter } from "next/compat/router";
 import Head from "next/head";
 import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
-import { SWRConfig } from "swr";
+import { Cache, SWRConfig } from "swr";
 import "../styles/main.scss";
 
-const createSWRCache = (): Map<unknown, unknown> => new Map();
+const createSWRCache = (): Cache<unknown> => new Map();
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";

@@ -171,7 +171,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
     });
 
     queueFormationChangesInProfile();
-    updateQueue.update();
+    updateQueue.updateInBackground();
   };
 
   const queueFormationChangesInProfile = (): void => {
@@ -324,7 +324,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
       window.location.href,
       state.foreignGoodStandingFile,
     );
-    updateQueue.queue(newUserData).update();
+    updateQueue.queue(newUserData).updateInBackground();
     const newBusiness = getCurrentBusiness(newUserData);
     submitToApiAnalytics(newBusiness);
     resetInteractedFields(newBusiness);

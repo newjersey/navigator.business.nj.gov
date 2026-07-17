@@ -41,14 +41,19 @@ export const LoginMenuItem = (): ReactElement => {
 export const LogoutMenuItem = (props: { handleClose: () => void }): ReactElement => {
   const { Config } = useConfig();
   const { dispatch } = useContext(AuthContext);
+  const { clearUserData } = useUserData();
 
   const router = useRouter();
 
   return NavMenuItem({
     onClick: (): void => {
       if (!router) return;
-      onSignOut(router.push, dispatch);
       props.handleClose();
+      void Promise.resolve(onSignOut({ push: router.push, dispatch, clearUserData })).catch(
+        (error: unknown) => {
+          console.error("Failed to sign out", error);
+        },
+      );
     },
     icon: <ButtonIcon svgFilename="logout" sizePx="25px" />,
     itemText: Config.navigationDefaults.logoutButton,

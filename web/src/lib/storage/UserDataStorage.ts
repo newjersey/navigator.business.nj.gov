@@ -41,16 +41,128 @@ const isRecord = (value: unknown): value is UnknownRecord => {
   return typeof value === "object" && value !== null;
 };
 
+const isStringArray = (value: unknown): value is string[] => {
+  return Array.isArray(value) && value.every((item) => typeof item === "string");
+};
+
+const isNumberArray = (value: unknown): value is number[] => {
+  return Array.isArray(value) && value.every((item) => typeof item === "number");
+};
+
+const isOptionalBoolean = (value: unknown): value is boolean | undefined => {
+  return value === undefined || typeof value === "boolean";
+};
+
+const isBusinessUser = (value: unknown, expectedUserId: string): boolean => {
+  return (
+    isRecord(value) &&
+    value.id === expectedUserId &&
+    typeof value.email === "string" &&
+    isRecord(value.externalStatus) &&
+    typeof value.receiveNewsletter === "boolean" &&
+    typeof value.userTesting === "boolean" &&
+    typeof value.receiveUpdatesAndReminders === "boolean" &&
+    typeof value.accountCreationSource === "string" &&
+    typeof value.contactSharingWithAccountCreationPartner === "boolean" &&
+    (value.abExperience === "ExperienceA" || value.abExperience === "ExperienceB")
+  );
+};
+
+const isPreferences = (value: unknown): boolean => {
+  return (
+    isRecord(value) &&
+    isStringArray(value.roadmapOpenSections) &&
+    isNumberArray(value.roadmapOpenSteps) &&
+    isStringArray(value.visibleSidebarCards) &&
+    typeof value.returnToLink === "string" &&
+    typeof value.isCalendarFullView === "boolean" &&
+    typeof value.isHideableRoadmapOpen === "boolean" &&
+    typeof value.phaseNewlyChanged === "boolean"
+  );
+};
+
+const isProfileData = (value: unknown): boolean => {
+  if (!isRecord(value) || !isRecord(value.documents)) {
+    return false;
+  }
+
+  return (
+    typeof value.businessName === "string" &&
+    typeof value.responsibleOwnerName === "string" &&
+    typeof value.tradeName === "string" &&
+    typeof value.notes === "string" &&
+    typeof value.naicsCode === "string" &&
+    typeof value.nexusDbaName === "string" &&
+    typeof value.deptOfLaborEin === "string" &&
+    typeof value.documents.formationDoc === "string" &&
+    typeof value.documents.standingDoc === "string" &&
+    typeof value.documents.certifiedDoc === "string" &&
+    isStringArray(value.ownershipTypeIds) &&
+    isStringArray(value.foreignBusinessTypeIds) &&
+    typeof value.operatingPhase === "string" &&
+    isRecord(value.nonEssentialRadioAnswers) &&
+    typeof value.liquorLicense === "boolean" &&
+    typeof value.providesStaffingService === "boolean" &&
+    typeof value.certifiedInteriorDesigner === "boolean" &&
+    typeof value.realEstateAppraisalManagement === "boolean" &&
+    isOptionalBoolean(value.interstateLogistics) &&
+    isOptionalBoolean(value.interstateMoving)
+  );
+};
+
+const isBusiness = (value: unknown, businessId: string, expectedUserId: string): boolean => {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    value.id === businessId &&
+    value.userId === expectedUserId &&
+    typeof value.dateCreatedISO === "string" &&
+    typeof value.lastUpdatedISO === "string" &&
+    typeof value.dateDeletedISO === "string" &&
+    typeof value.version === "number" &&
+    typeof value.versionWhenCreated === "number" &&
+    (value.onboardingFormProgress === "UNSTARTED" ||
+      value.onboardingFormProgress === "COMPLETED") &&
+    isProfileData(value.profileData) &&
+    isRecord(value.taskProgress) &&
+    isRecord(value.taskItemChecklist) &&
+    isPreferences(value.preferences) &&
+    isRecord(value.taxFilingData) &&
+    Array.isArray(value.taxFilingData.filings) &&
+    isRecord(value.formationData) &&
+    isRecord(value.formationData.formationFormData) &&
+    typeof value.formationData.completedFilingPayment === "boolean" &&
+    typeof value.formationData.lastVisitedPageIndex === "number" &&
+    isRecord(value.roadmapTaskData)
+  );
+};
+
 const isUserData = (value: unknown, expectedUserId: string): value is UserData => {
   if (!isRecord(value) || !isRecord(value.user) || !isRecord(value.businesses)) {
     return false;
   }
 
-  if (value.user.id !== expectedUserId || typeof value.currentBusinessId !== "string") {
+  if (
+    !isBusinessUser(value.user, expectedUserId) ||
+    typeof value.currentBusinessId !== "string" ||
+    typeof value.version !== "number" ||
+    typeof value.versionWhenCreated !== "number" ||
+    typeof value.dateCreatedISO !== "string" ||
+    typeof value.lastUpdatedISO !== "string"
+  ) {
     return false;
   }
 
-  return isRecord(value.businesses[value.currentBusinessId]);
+  const businesses = Object.entries(value.businesses);
+  return (
+    businesses.length > 0 &&
+    businesses.every(([businessId, business]) =>
+      isBusiness(business, businessId, expectedUserId),
+    ) &&
+    isBusiness(value.businesses[value.currentBusinessId], value.currentBusinessId, expectedUserId)
+  );
 };
 
 const isPersistedUserData = (

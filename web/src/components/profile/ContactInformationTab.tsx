@@ -35,7 +35,7 @@ export const ContactInformationTab = ({ clearGovDeliveryError }: Props): ReactEl
   useEffect(() => {
     if (!updateQueue || hasRefreshedRef.current) return;
     hasRefreshedRef.current = true;
-    void refresh();
+    void refresh().catch(() => undefined);
   }, [updateQueue, refresh]);
 
   useEffect(() => {
