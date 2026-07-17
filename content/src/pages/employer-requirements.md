@@ -321,11 +321,10 @@ main-text-8: >-
   * Have been employed for at least 12 months
 
 
-  #### **TDI/FLI Job Protection**\
+  #### **TDI/FLI Job Protection**
 
-  \
 
-  **SAFE Act**
+  #### **SAFE Act**
 
 
   [The New Jersey Security and Financial Empowerment Act (NJ SAFE Act)](https://www.nj.gov/labor/wageandhour/assets/PDFs/Employer%20Poster%20Packet/AD-289%20(4-22).pdf) lets employees take up to 20 days of unpaid leave each year due to domestic or sexual violence. Leave is for employees who experience domestic or sexual violence or have a child, parent, spouse, or partner who experiences it. To be eligible, employees must have:
