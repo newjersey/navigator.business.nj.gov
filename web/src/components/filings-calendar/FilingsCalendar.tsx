@@ -109,7 +109,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
         .queuePreferences({
           isCalendarFullView: !business.preferences.isCalendarFullView,
         })
-        .update();
+        .updateInBackground();
     };
 
     if (displayToggleButton) {

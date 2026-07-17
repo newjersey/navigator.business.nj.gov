@@ -218,3 +218,32 @@ export const sendOnboardingOnSubmitEvents = (
     sendEssentialQuestionEvents(newProfileData);
   }
 };
+interface UserDataSyncReport {
+  readonly operation: "fetch" | "save" | "profile-sync" | "background-update";
+  readonly outcome: "error" | "discarded";
+  readonly error?: unknown;
+}
+
+const getErrorStatus = (error: unknown): string | undefined => {
+  if (typeof error === "number") {
+    return error.toString();
+  }
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "status" in error &&
+    typeof error.status === "number"
+  ) {
+    return error.status.toString();
+  }
+  return undefined;
+};
+
+export const reportUserDataSync = ({ operation, outcome, error }: UserDataSyncReport): void => {
+  analytics.eventRunner.track({
+    event: "user_data_sync",
+    operation,
+    outcome,
+    status: getErrorStatus(error),
+  });
+};

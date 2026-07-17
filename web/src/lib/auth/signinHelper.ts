@@ -178,20 +178,23 @@ export const onGuestSignIn = async ({
   }
 };
 
-export const onSignOut = async (
-  push: (url: string) => Promise<boolean>,
-  dispatch: Dispatch<AuthAction>,
-): Promise<void> => {
+interface SignOutOptions {
+  readonly push: (url: string) => Promise<boolean>;
+  readonly dispatch: Dispatch<AuthAction>;
+  readonly clearUserData: () => Promise<void>;
+}
+
+export const onSignOut = async ({
+  push,
+  dispatch,
+  clearUserData,
+}: SignOutOptions): Promise<void> => {
   analytics.event.roadmap_logout_button.click.log_out();
-  const user = await session.getActiveUser();
-
-  const userDataStorage = UserDataStorageFactory();
-  userDataStorage.delete(user.id);
-
   await triggerSignOut();
+  await clearUserData();
   dispatch({
     type: "LOGOUT",
     activeUser: undefined,
   });
-  push(ROUTES.landing);
+  await push(ROUTES.landing);
 };

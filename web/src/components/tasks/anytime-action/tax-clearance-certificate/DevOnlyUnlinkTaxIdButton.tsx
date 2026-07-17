@@ -20,7 +20,7 @@ export const DevOnlyUnlinkTaxIdButton = (props: Props): ReactElement => {
     const res: UnlinkTaxIdResponse = await api.unlinkTaxId(userData);
 
     if (res.success) {
-      refresh();
+      await refresh();
       props.setResponseErrorType !== undefined && props.setResponseErrorType(undefined);
     }
   };

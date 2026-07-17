@@ -12,6 +12,38 @@ interface Props {
   previousBusinessId?: string | undefined;
 }
 
+interface PublicProps {
+  readonly linkText: string;
+  readonly className?: string;
+}
+
+const accountLinkText = (props: PublicProps): ReactNode => {
+  return (
+    <span className={`text-primary text-semibold font-body-sm ${props.className ?? ""}`}>
+      {props.linkText}
+    </span>
+  );
+};
+
+export const NavBarPublicDashboardLink = (props: PublicProps): ReactNode => {
+  const router = useRouter();
+
+  return (
+    <div>
+      <UnStyledButton
+        onClick={async (): Promise<void> => {
+          if (!router) return;
+          analytics.event.my_account.click.my_account();
+          await router.push(ROUTES.onboarding);
+        }}
+        ariaLabel="My Account Home"
+      >
+        {accountLinkText(props)}
+      </UnStyledButton>
+    </div>
+  );
+};
+
 export const NavBarDashboardLink = (props: Props): ReactNode => {
   const router = useRouter();
   const { updateQueue, userData, business } = useUserData();
@@ -45,9 +77,7 @@ export const NavBarDashboardLink = (props: Props): ReactNode => {
             : "My Account Home"
         }
       >
-        <span className={`text-primary text-semibold font-body-sm ${props.className ?? ""}`}>
-          {props.linkText}
-        </span>
+        {accountLinkText(props)}
       </UnStyledButton>
     </div>
   );

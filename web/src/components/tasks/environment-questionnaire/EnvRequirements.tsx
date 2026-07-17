@@ -56,7 +56,7 @@ export const EnvRequirements = (props: Props): ReactElement => {
       .queueTaskProgress({
         ["env-requirements"]: "COMPLETED",
       })
-      .update();
+      .updateInBackground();
   };
 
   const onClickForEdit = (): void => {
@@ -69,7 +69,7 @@ export const EnvRequirements = (props: Props): ReactElement => {
       .queueTaskProgress({
         ["env-requirements"]: "TO_DO",
       })
-      .update();
+      .updateInBackground();
   };
 
   const isMediaAreaApplicable = (mediaArea: MediaArea): boolean => {

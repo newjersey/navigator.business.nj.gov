@@ -30,7 +30,9 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
       await updateQueue.update();
     }
 
-    router && routeShallowWithQuery(router, QUERIES.fromFunding, "true");
+    if (router) {
+      await routeShallowWithQuery(router, QUERIES.fromFunding, "true");
+    }
   };
 
   const onClick = async (): Promise<void> => {

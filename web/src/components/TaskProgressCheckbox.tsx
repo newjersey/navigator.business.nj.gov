@@ -50,7 +50,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   useEffect(() => {
     if (updateTaskProgressDueToWiremockFormationCompletion) {
       updateQueue?.queueTaskProgress({ [formationTaskId]: "COMPLETED" });
-      updateQueue?.update();
+      updateQueue?.updateInBackground();
     }
   }, [business, updateQueue, updateTaskProgressDueToWiremockFormationCompletion]);
 

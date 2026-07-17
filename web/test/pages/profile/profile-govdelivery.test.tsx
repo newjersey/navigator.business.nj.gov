@@ -69,7 +69,8 @@ const renderProfileOnContactTab = (business: Business, mockUpdate: jest.Mock): v
     hasCompletedFetch: true,
     updateQueue: mockUpdateQueue,
     createUpdateQueue: jest.fn(),
-    refresh: jest.fn(),
+    refresh: jest.fn().mockResolvedValue(undefined),
+    clearUserData: jest.fn().mockResolvedValue(undefined),
     clearUserDataError: jest.fn(),
   });
 
@@ -235,7 +236,8 @@ describe("profile - govDelivery error handling", () => {
       hasCompletedFetch: true,
       updateQueue: mockUpdateQueue,
       createUpdateQueue: jest.fn(),
-      refresh: jest.fn(),
+      refresh: jest.fn().mockResolvedValue(undefined),
+      clearUserData: jest.fn().mockResolvedValue(undefined),
       clearUserDataError: mockClearUserDataError,
     });
 

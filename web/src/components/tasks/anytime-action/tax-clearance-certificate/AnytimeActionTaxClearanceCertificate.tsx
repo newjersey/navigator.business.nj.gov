@@ -97,7 +97,7 @@ export const AnytimeActionTaxClearanceCertificate = (props: Props): ReactElement
         },
         lastUpdatedISO: new Date(Date.now()).toISOString(),
       })
-      .update();
+      .updateInBackground();
   };
 
   useMountEffectWhenDefined(() => {

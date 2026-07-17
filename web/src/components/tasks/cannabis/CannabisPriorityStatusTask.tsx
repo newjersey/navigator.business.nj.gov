@@ -38,7 +38,7 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
       business.taskProgress[props.task.id] === "TO_DO"
     ) {
       setSuccessSnackbarIsOpen(true);
-      updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).update();
+      updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).updateInBackground();
     }
   };
 
@@ -52,7 +52,7 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
 
     setSuccessSnackbarIsOpen(true);
     queueUpdateTaskProgress(props.task.id, "COMPLETED");
-    updateQueue.update();
+    updateQueue.updateInBackground();
   };
 
   return (

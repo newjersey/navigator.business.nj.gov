@@ -38,7 +38,7 @@ export const EinTask = (props: Props): ReactElement => {
     updateQueue
       .queueTaskProgress({ [props.task.id]: "TO_DO" })
       .queueProfileData({ employerId: newEinValue })
-      .update();
+      .updateInBackground();
   };
 
   const onEdit = (): void => {

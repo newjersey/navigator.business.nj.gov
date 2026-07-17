@@ -149,7 +149,7 @@ export const Review = (props: Props): ReactElement => {
         );
         props.setCertificatePdfBlob(blob);
         props.setResponseErrorType(undefined);
-        updateQueue?.queue(taxClearanceResponse.userData).update();
+        updateQueue?.queue(taxClearanceResponse.userData).updateInBackground();
       }
     } catch {
       analytics.event.tax_clearance.submit.validation_error();

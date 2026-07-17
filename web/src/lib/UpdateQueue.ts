@@ -29,6 +29,7 @@ export interface UpdateQueue {
   queueXrayRegistrationData: (xrayRegistrationData: Partial<XrayData>) => UpdateQueue;
   queueRoadmapTaskData: (roadmapData: Partial<RoadmapTaskData>) => UpdateQueue;
   update: (config?: { local?: boolean }) => Promise<void>;
+  updateInBackground: (config?: { local?: boolean }) => void;
   current: () => UserData;
   currentBusiness: () => Business;
 }
@@ -263,6 +264,11 @@ export class UpdateQueueFactory implements UpdateQueue {
 
   update(config?: { local?: boolean }): Promise<void> {
     return this.updateFunction(this.internalQueue, config);
+  }
+
+  updateInBackground(config?: { local?: boolean }): void {
+    // UserDataProvider reports failures before rejecting; background UI updates do not await them.
+    void this.update(config).catch(() => undefined);
   }
 
   current(): UserData {

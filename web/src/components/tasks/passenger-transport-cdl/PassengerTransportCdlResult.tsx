@@ -46,7 +46,7 @@ export const PassengerTransportCdlResult = (props: Props): ReactElement => {
     updateQueue?.queueRoadmapTaskData({
       passengerTransportSixteenOrMorePassengers: undefined,
     });
-    updateQueue?.update();
+    updateQueue?.updateInBackground();
   };
 
   const getEndorsementText = (): Content => {

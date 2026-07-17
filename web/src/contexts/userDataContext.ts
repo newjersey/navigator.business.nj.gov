@@ -12,6 +12,7 @@ export interface UseUserDataResponse {
   refresh: () => Promise<void>;
   updateQueue: UpdateQueue | undefined;
   createUpdateQueue: (userData: UserData) => Promise<UpdateQueue>;
+  clearUserData: () => Promise<void>;
   clearUserDataError: () => void;
 }
 

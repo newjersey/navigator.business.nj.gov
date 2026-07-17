@@ -5,7 +5,11 @@ import {
   generateUserData,
   getIndustries,
 } from "@businessnjgovnavigator/shared/";
-import { sendOnboardingOnSubmitEvents, setOnLoadDimensions } from "./analytics-helpers";
+import {
+  reportUserDataSync,
+  sendOnboardingOnSubmitEvents,
+  setOnLoadDimensions,
+} from "./analytics-helpers";
 
 jest.mock("@/lib/utils/analytics");
 
@@ -18,6 +22,38 @@ const liquorLicenseApplicableIndustries = getIndustries().filter((industry) => {
 describe("analytics-helpers", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+  });
+
+  describe("reportUserDataSync", () => {
+    it("reports a narrowed numeric status without user data", () => {
+      reportUserDataSync({
+        operation: "save",
+        outcome: "error",
+        error: { status: 502, data: { sensitive: "not reported" } },
+      });
+
+      expect(mockAnalytic.eventRunner.track).toHaveBeenCalledWith({
+        event: "user_data_sync",
+        operation: "save",
+        outcome: "error",
+        status: "502",
+      });
+    });
+
+    it("omits status for an unrecognized error shape", () => {
+      reportUserDataSync({
+        operation: "fetch",
+        outcome: "discarded",
+        error: new Error("discarded"),
+      });
+
+      expect(mockAnalytic.eventRunner.track).toHaveBeenCalledWith({
+        event: "user_data_sync",
+        operation: "fetch",
+        outcome: "discarded",
+        status: undefined,
+      });
+    });
   });
 
   describe("setOnLoadDimensions", () => {

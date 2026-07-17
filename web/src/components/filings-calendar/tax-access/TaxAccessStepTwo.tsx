@@ -173,7 +173,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         analytics.event.tax_calendar.submit.tax_deadlines_added_to_calendar();
         props.onSuccess();
         queueUpdateTaskProgress("determine-naics-code", "COMPLETED");
-        updateQueue.update();
+        updateQueue.updateInBackground();
       }
 
       if (taxFilingData.state === "PENDING") {

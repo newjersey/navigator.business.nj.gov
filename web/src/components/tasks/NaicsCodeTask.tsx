@@ -45,7 +45,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
     updateQueue
       .queueTaskProgress({ [props.task.id]: "TO_DO" })
       .queueProfileData({ naicsCode: newNaicsValue })
-      .update();
+      .updateInBackground();
   };
 
   const onEdit = (): void => {

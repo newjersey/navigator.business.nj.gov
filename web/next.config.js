@@ -36,6 +36,7 @@ module.exports = withBundleAnalyzer({
     OUTAGE_ALERT_CONFIG_URL: process.env.OUTAGE_ALERT_CONFIG_URL,
     REDIRECT_URL: process.env.REDIRECT_URL,
     SHOW_DISABLED_INDUSTRIES: process.env.SHOW_DISABLED_INDUSTRIES ?? "false",
+    STAGE: process.env.STAGE,
     USE_BASIC_AUTH: process.env.USE_BASIC_AUTH,
     USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH:
       process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH ?? "false",

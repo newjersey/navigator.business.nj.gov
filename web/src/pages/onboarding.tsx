@@ -161,8 +161,8 @@ const OnboardingPage = (props: Props): ReactElement => {
   }, [profileData, userData]);
 
   const routeToPage = useCallback(
-    (page: number) => {
-      return router && routeShallowWithQuery(router, "page", page);
+    async (page: number): Promise<boolean> => {
+      return router ? routeShallowWithQuery(router, "page", page) : false;
     },
     [router],
   );
@@ -182,7 +182,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
 
   useEffect(() => {
-    (async (): Promise<void> => {
+    void (async (): Promise<void> => {
       if (
         !router?.isReady ||
         hasHandledRouting.current ||
@@ -199,7 +199,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       let currentUserData = updateQueue?.current();
 
       if (protectUpdateQueueAgainstRaceCondition(currentUserData)) {
-        router.push(ROUTES.dashboard);
+        await router.push(ROUTES.dashboard);
         return;
       }
 
@@ -254,7 +254,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         }
 
         if (utmSource) {
-          localUpdateQueue
+          await localUpdateQueue
             ?.queueUser({
               accountCreationSource: utmSource,
             })
@@ -296,10 +296,12 @@ const OnboardingPage = (props: Props): ReactElement => {
           await setBusinessPersonaAndRouteToPage(queryFlow, localUpdateQueue);
         } else {
           setPage({ current: 1, previous: 1 });
-          routeToPage(1);
+          await routeToPage(1);
         }
       }
-    })();
+    })().catch((error: unknown) => {
+      console.error("Failed to initialize onboarding", error);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router, state.activeUser, state.isAuthenticated, hasCompletedFetch]);
 
@@ -436,13 +438,21 @@ const OnboardingPage = (props: Props): ReactElement => {
               : {},
           }));
       } else if (hasMoreOnboardingPages) {
-        await updateQueue.update({ local: true });
+        try {
+          await updateQueue.update({ local: true });
+        } catch (error) {
+          throw new Error("Failed to persist the onboarding page", { cause: error });
+        }
         const nextPage = page.current + 1;
         setPage({
           current: nextPage,
           previous: page.current,
         });
-        routeToPage(nextPage);
+        try {
+          await routeToPage(nextPage);
+        } catch (error) {
+          throw new Error("Failed to navigate to the next onboarding page", { cause: error });
+        }
         headerRef.current?.focus();
       } else {
         await completeOnboarding(newProfileData, updateQueue);
@@ -472,7 +482,9 @@ const OnboardingPage = (props: Props): ReactElement => {
         current: previousPage,
         previous: page.current,
       });
-      routeToPage(previousPage);
+      void routeToPage(previousPage).catch((error: unknown) => {
+        console.error("Failed to navigate to the previous onboarding page", error);
+      });
       headerRef.current?.focus();
     }
   };
