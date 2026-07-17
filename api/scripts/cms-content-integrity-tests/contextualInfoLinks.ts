@@ -1,6 +1,6 @@
 import {
   allContextualInfoFileNames,
-  conextualLinkRegexGlobal,
+  contextualLinkRegexGlobal,
 } from "@businessnjgovnavigator/api/scripts/cms-content-integrity-tests/contextualInfoLinksUtil";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts";
 import { getIndustries } from "@businessnjgovnavigator/shared/src/industry";
@@ -68,7 +68,7 @@ export const findMatchingContextualInfo = (
     const blockTexts = fileDataElement.blockTexts;
     for (const blockTextElement of blockTexts) {
       if (blockTextElement) {
-        const matches = [...blockTextElement.matchAll(conextualLinkRegexGlobal)];
+        const matches = [...blockTextElement.matchAll(contextualLinkRegexGlobal)];
         const contextualInfoFileName = matches.map((match) => match[1]);
         if (contextualInfoFileName) {
           for (const contextualInfoName of contextualInfoFileName) {
@@ -83,7 +83,7 @@ export const findMatchingContextualInfo = (
     const labelledTexts = fileDataElement.labelledTexts;
     for (const labelledTextElement of labelledTexts) {
       if (labelledTextElement.content) {
-        const matches = [...labelledTextElement.content.matchAll(conextualLinkRegexGlobal)];
+        const matches = [...labelledTextElement.content.matchAll(contextualLinkRegexGlobal)];
         const contextualInfoFileNames = matches.map((match) => match[1]);
         for (const contextualInfoFileName of contextualInfoFileNames) {
           if (contextualInfoFileName && !allContextualInfoFileNames().has(contextualInfoFileName)) {
@@ -97,7 +97,7 @@ export const findMatchingContextualInfo = (
     for (const ListTextsTextElement of ListTextsTexts) {
       if (ListTextsTextElement.content) {
         for (const listTextElementContent of ListTextsTextElement.content) {
-          const matches = [...listTextElementContent.matchAll(conextualLinkRegexGlobal)];
+          const matches = [...listTextElementContent.matchAll(contextualLinkRegexGlobal)];
           const contextualInfoFileNames = matches.map((match) => match[1]);
           for (const contextualInfoFileName of contextualInfoFileNames) {
             if (
@@ -196,13 +196,13 @@ export const checkContextualInfoLinksUsage = async (topicArn: string): Promise<b
 
   const configMatches: ConfigMatch[] = [];
   try {
-    const conextualInfoInstanceMatch = searchConfig(
+    const contextualInfoInstanceMatch = searchConfig(
       Config,
-      { regex: conextualLinkRegexGlobal },
+      { regex: contextualLinkRegexGlobal },
       loadCmsConfig(true),
     );
 
-    for (const configMatch of conextualInfoInstanceMatch) {
+    for (const configMatch of contextualInfoInstanceMatch) {
       for (const innerMatch of configMatch.matches) {
         if (!allContextualInfoFileNames().has(innerMatch.value)) {
           configMatches.push(innerMatch);
@@ -214,7 +214,7 @@ export const checkContextualInfoLinksUsage = async (topicArn: string): Promise<b
       anyErrors = true;
 
       for (const configMatch of configMatches) {
-        const logMessage = `business-ux-content: In the CMS config *"${configMatch.cmsLabelPath.join("/")}"* the contexual link *"${configMatch.value}"* is broken. Please replace it with a valid value`;
+        const logMessage = `business-ux-content: In the CMS config *"${configMatch.cmsLabelPath.join("/")}"* the contextual link *"${configMatch.value}"* is broken. Please replace it with a valid value`;
         console.error(logMessage);
         await publishSnsMessage(logMessage, topicArn);
       }

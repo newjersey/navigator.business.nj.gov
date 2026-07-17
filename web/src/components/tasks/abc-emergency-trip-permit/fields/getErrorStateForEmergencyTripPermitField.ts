@@ -17,17 +17,17 @@ export const getErrorStateForEmergencyTripPermitField = (
     "payerAddress2",
     "textMsgMobile",
     "additionalEmail",
-    "additionalConfirmemail",
+    "additionalConfirmEmail",
     "shouldAttachPdfToEmail",
-    "requestorConfirmemail",
+    "requestorConfirmEmail",
     "shouldSendTextConfirmation",
   ];
   const emailFields: EmergencyTripPermitFieldNames[] = [
     "requestorEmail",
     "additionalEmail",
-    "additionalConfirmemail",
+    "additionalConfirmEmail",
     "payerEmail",
-    "requestorConfirmemail",
+    "requestorConfirmEmail",
   ];
   const maxLength = getMaximumLengthForFieldName(fieldName);
   const minLength = getMinimumLengthForFieldName(fieldName);
@@ -156,9 +156,9 @@ export const getMaximumLengthForFieldName = (
     case "payerEmail":
       return 50;
     case "requestorEmail":
-    case "requestorConfirmemail":
+    case "requestorConfirmEmail":
     case "additionalEmail":
-    case "additionalConfirmemail":
+    case "additionalConfirmEmail":
       return 60;
     case "carrier":
     case "deliverySiteName":

@@ -28,8 +28,8 @@ export const migrate_v165_to_v166 = async (
 export const migrate_v165Business_to_v166Business = async (
   business: v165Business,
 ): Promise<v166Business> => {
-  const v165BuinessCopy = cloneDeep(business);
-  const newBusiness = { ...v165BuinessCopy, version: 166, roadmapTaskData: {} } as v166Business;
+  const v165BusinessCopy = cloneDeep(business);
+  const newBusiness = { ...v165BusinessCopy, version: 166, roadmapTaskData: {} } as v166Business;
 
   const nonEssentialRadioAnswers =
     newBusiness.profileData.nonEssentialRadioAnswers["business-vehicle-title-reg"];

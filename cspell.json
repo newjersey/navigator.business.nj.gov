@@ -9,7 +9,8 @@
     "package.json",
     "content/lib/industry.json",
     "content/test/**",
-    "content/src/covids/language-assistance-for-completing-the-emergency-grant-application.md"
+    "content/src/covids/language-assistance-for-completing-the-emergency-grant-application.md",
+    "CHANGELOG.md"
   ],
   "overrides": [
     {

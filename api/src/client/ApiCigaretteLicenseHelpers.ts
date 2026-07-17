@@ -113,8 +113,8 @@ export const mockErrorPostResponse: PreparePaymentResponse = {
   errorResult: {
     statusCode: 500,
     errorCode: "139",
-    userMessage: "An unknown error occured",
-    developerMessage: "An unknown error occured",
+    userMessage: "An unknown error occurred",
+    developerMessage: "An unknown error occurred",
   },
 };
 
@@ -128,8 +128,8 @@ export const mockErrorGetResponse: GetOrderByTokenResponse = {
   errorResult: {
     statusCode: 500,
     errorCode: "139",
-    userMessage: "An unknown error occured",
-    developerMessage: "An unknown error occured",
+    userMessage: "An unknown error occurred",
+    developerMessage: "An unknown error occurred",
   },
 };
 

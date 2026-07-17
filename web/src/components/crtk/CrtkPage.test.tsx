@@ -9,7 +9,7 @@ import type { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
-  searchBuisnessInCrtkDB: jest.fn(),
+  searchBusinessInCrtkDB: jest.fn(),
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
@@ -148,7 +148,7 @@ describe("<CrtkPage />", () => {
     );
 
     it("submits the form and displays results on successful search", async () => {
-      mockApi.searchBuisnessInCrtkDB.mockResolvedValue(mockSuccessfulResponse);
+      mockApi.searchBusinessInCrtkDB.mockResolvedValue(mockSuccessfulResponse);
 
       renderWithBusinessData();
 
@@ -170,7 +170,7 @@ describe("<CrtkPage />", () => {
     });
 
     it("displays the not found flow when the business is not in CRTK database", async () => {
-      mockApi.searchBuisnessInCrtkDB.mockResolvedValue(mockNotFoundResponse);
+      mockApi.searchBusinessInCrtkDB.mockResolvedValue(mockNotFoundResponse);
       renderWithBusinessData();
       fillOutSearchForm("Nonexistent Business", "123 Fake St", "Some City", "12345");
       fireEvent.click(screen.getByTestId("crtk-submit"));
@@ -181,7 +181,7 @@ describe("<CrtkPage />", () => {
 
     it("displays SEARCH_FAILED error when API call fails", async () => {
       const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
-      mockApi.searchBuisnessInCrtkDB.mockRejectedValue(new Error("API Error"));
+      mockApi.searchBusinessInCrtkDB.mockRejectedValue(new Error("API Error"));
 
       renderWithBusinessData();
 
@@ -191,7 +191,7 @@ describe("<CrtkPage />", () => {
 
       // Wait for the API call to complete
       await waitFor(() => {
-        expect(mockApi.searchBuisnessInCrtkDB).toHaveBeenCalled();
+        expect(mockApi.searchBusinessInCrtkDB).toHaveBeenCalled();
       });
 
       // Wait for error to appear
@@ -230,7 +230,7 @@ describe("<CrtkPage />", () => {
     });
 
     it("submits form without EIN when EIN is not provided", async () => {
-      mockApi.searchBuisnessInCrtkDB.mockResolvedValue(mockSuccessfulResponse);
+      mockApi.searchBusinessInCrtkDB.mockResolvedValue(mockSuccessfulResponse);
 
       renderWithBusinessData();
 
@@ -239,7 +239,7 @@ describe("<CrtkPage />", () => {
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
       await waitFor(() => {
-        expect(mockApi.searchBuisnessInCrtkDB).toHaveBeenCalledWith({
+        expect(mockApi.searchBusinessInCrtkDB).toHaveBeenCalledWith({
           businessName: "M&U INTERNATIONAL LLC",
           addressLine1: "31 READINGTON RD",
           city: "BRANCHBURG TWP",
@@ -250,7 +250,7 @@ describe("<CrtkPage />", () => {
     });
 
     it("includes EIN in API call when provided", async () => {
-      mockApi.searchBuisnessInCrtkDB.mockResolvedValue(mockSuccessfulResponse);
+      mockApi.searchBusinessInCrtkDB.mockResolvedValue(mockSuccessfulResponse);
 
       renderWithBusinessData();
 
@@ -265,7 +265,7 @@ describe("<CrtkPage />", () => {
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
       await waitFor(() => {
-        expect(mockApi.searchBuisnessInCrtkDB).toHaveBeenCalledWith({
+        expect(mockApi.searchBusinessInCrtkDB).toHaveBeenCalledWith({
           businessName: "M&U INTERNATIONAL LLC",
           addressLine1: "31 READINGTON RD",
           city: "BRANCHBURG TWP",
@@ -297,7 +297,7 @@ describe("<CrtkPage />", () => {
 
     it("clears search error when searching again after an error", async () => {
       const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
-      mockApi.searchBuisnessInCrtkDB.mockRejectedValueOnce(new Error("API Error"));
+      mockApi.searchBusinessInCrtkDB.mockRejectedValueOnce(new Error("API Error"));
 
       renderWithBusinessData();
 
@@ -312,7 +312,7 @@ describe("<CrtkPage />", () => {
         { timeout: 2000 },
       );
 
-      mockApi.searchBuisnessInCrtkDB.mockResolvedValue(
+      mockApi.searchBusinessInCrtkDB.mockResolvedValue(
         generateUserDataForBusiness(
           generateBusiness({
             crtkData: generateCrtkData(),

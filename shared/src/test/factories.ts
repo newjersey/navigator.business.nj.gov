@@ -735,7 +735,7 @@ export const generateEmergencyTripPermitApplicationData = (
   const payerEmail = `email-${randomInt()}@email.com`;
   const additionalEmail = `email-${randomInt()}@email.com`;
   return {
-    additionalConfirmemail: additionalEmail,
+    additionalConfirmEmail: additionalEmail,
     additionalEmail: additionalEmail,
     carrier: `some-carrier-${randomInt()}`,
     deliveryAddress: `some-delivery-address-${randomInt()}`,
@@ -769,7 +769,7 @@ export const generateEmergencyTripPermitApplicationData = (
     requestorAddress2: `some-requestor-address-2-${randomInt()}`,
     requestorAddress1: `some-requestor-address-1-${randomInt()}`,
     requestorCity: `some-requestor-city-${randomInt()}`,
-    requestorConfirmemail: requestorEmail,
+    requestorConfirmEmail: requestorEmail,
     requestorCountry: "US",
     requestorEmail: requestorEmail,
     requestorFirstName: `some-requestor-first-name-${randomInt()}`,

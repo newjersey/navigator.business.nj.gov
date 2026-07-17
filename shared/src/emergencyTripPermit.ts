@@ -18,7 +18,7 @@ export interface EmergencyTripPermitApplicationInfo {
   requestorFirstName: string;
   requestorLastName: string;
   requestorEmail: string;
-  requestorConfirmemail: string;
+  requestorConfirmEmail: string;
   requestorPhone: string;
   carrier: string;
   requestorAddress1: string;
@@ -48,7 +48,7 @@ export interface EmergencyTripPermitApplicationInfo {
   pickupCountry: string;
   pickupZipPostalCode: string;
   additionalEmail?: string;
-  additionalConfirmemail?: string;
+  additionalConfirmEmail?: string;
   shouldSendTextConfirmation: boolean;
   textMsgMobile?: string;
   shouldAttachPdfToEmail: boolean;
@@ -63,7 +63,7 @@ export const getEarliestPermitDate = (): Dayjs => {
 
 export const generateNewEmergencyTripPermitData = (): EmergencyTripPermitApplicationInfo => {
   return {
-    additionalConfirmemail: "",
+    additionalConfirmEmail: "",
     additionalEmail: "",
     carrier: "",
     deliveryAddress: "",
@@ -95,7 +95,7 @@ export const generateNewEmergencyTripPermitData = (): EmergencyTripPermitApplica
     requestorAddress2: "",
     requestorAddress1: "",
     requestorCity: "",
-    requestorConfirmemail: "",
+    requestorConfirmEmail: "",
     requestorCountry: "US",
     requestorEmail: "",
     requestorFirstName: "",
@@ -135,8 +135,8 @@ export type EmergencyTripPermitSubmitResponse =
 export type EmergencyTripPermitFieldNames = keyof EmergencyTripPermitApplicationInfo;
 export type EmergencyTripPermitUserEnteredFieldNames = Exclude<
   EmergencyTripPermitFieldNames,
-  | "requestorConfirmemail"
-  | "additionalConfirmemail"
+  | "requestorConfirmEmail"
+  | "additionalConfirmEmail"
   | "shouldAttachPdfToEmail"
   | "shouldSendTextConfirmation"
 >;

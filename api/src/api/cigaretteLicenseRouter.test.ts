@@ -310,7 +310,7 @@ describe("cigaretteLicenseRouter", () => {
           ...business.cigaretteLicenseData,
           paymentInfo: {
             ...business.cigaretteLicenseData?.paymentInfo,
-            confirmationEmailsent: true,
+            confirmationEmailSent: true,
           },
         },
       }));

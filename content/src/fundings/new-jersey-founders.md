@@ -20,7 +20,7 @@ summaryDescriptionMd: >
 callToActionLink: ""
 callToActionText: ""
 fundingType: technical assistance
-programFrequency: reoccuring
+programFrequency: recurring
 status: rolling application
 programPurpose: In State
 agency:

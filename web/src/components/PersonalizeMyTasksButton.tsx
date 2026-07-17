@@ -20,7 +20,7 @@ export const PersonalizeMyTasksButton = (props: Props): ReactElement => {
   const isMobile = useMediaQuery(MediaQueries.isMobile);
 
   const handleClick = (): void => {
-    analytics.event.roadmap_personlize_my_tasks_button.click.go_to_profile_tasks_screen();
+    analytics.event.roadmap_personalize_my_tasks_button.click.go_to_profile_tasks_screen();
     router && router.push(`${ROUTES.profile}?tab=${tabValue}`);
   };
 

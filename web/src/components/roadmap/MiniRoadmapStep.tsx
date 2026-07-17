@@ -52,7 +52,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
           last={props.isLast}
           completed={props.completed}
           miniRoadmap={true}
-          miniRoadmapSubtaskisOpen={isOpen}
+          miniRoadmapSubtaskIsOpen={isOpen}
         />
 
         <button

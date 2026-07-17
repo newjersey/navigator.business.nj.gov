@@ -23,7 +23,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
     return `${name} ${suffix}`;
   };
 
-  const formattLawResponse = (willPracticeLaw: boolean | undefined): string | undefined => {
+  const formatLawResponse = (willPracticeLaw: boolean | undefined): string | undefined => {
     if (willPracticeLaw === true) {
       return Config.formation.fields.willPracticeLaw.radioYesText;
     } else if (willPracticeLaw === false) {
@@ -78,7 +78,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
       {isForeignCorporation(state.formationFormData.legalType) && (
         <ReviewLineItem
           label={Config.formation.fields.willPracticeLaw.label}
-          value={formattLawResponse(state.formationFormData.willPracticeLaw)}
+          value={formatLawResponse(state.formationFormData.willPracticeLaw)}
           dataTestId={"review-will-practice-law"}
           noColonAfterLabel={true}
         />

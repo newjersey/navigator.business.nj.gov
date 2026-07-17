@@ -6,9 +6,9 @@ export const searchXrayRenewalCalendarEvent = (
   renewalCalendarEvent: XrayRenewalCalendarEventType,
   term: string,
 ): Match[] => {
-  const eventDatas = getXrayRenewalCalendarEventData(renewalCalendarEvent);
+  const eventData = getXrayRenewalCalendarEventData(renewalCalendarEvent);
 
-  return convertFileDataToMatchList(eventDatas, term);
+  return convertFileDataToMatchList(eventData, term);
 };
 
 export const getXrayRenewalCalendarEventData = (

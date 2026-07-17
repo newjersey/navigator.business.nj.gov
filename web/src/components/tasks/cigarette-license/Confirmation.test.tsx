@@ -23,7 +23,7 @@ describe("<ConfirmationPage />", () => {
       token: "12345",
       orderId: 12345,
       orderTimestamp: "2024-01-15T10:30:00Z",
-      confirmationEmailsent: true,
+      confirmationEmailSent: true,
     },
     businessName: "Mock Success Business",
     responsibleOwnerName: "John Doe",
@@ -48,7 +48,7 @@ describe("<ConfirmationPage />", () => {
   const mockFailCigaretteLicenseData: CigaretteLicenseData = {
     paymentInfo: {
       token: "12345",
-      confirmationEmailsent: false,
+      confirmationEmailSent: false,
     },
     businessName: "Mock Fail Business",
     responsibleOwnerName: "John Doe",

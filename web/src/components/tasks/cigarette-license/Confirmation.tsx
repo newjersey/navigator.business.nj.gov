@@ -44,7 +44,7 @@ export const ConfirmationPage = (props: Props): ReactElement => {
   const checkPaymentConfirmation = async (
     cigLicenseData: CigaretteLicenseData,
   ): Promise<CheckPaymentResponse> => {
-    if (cigLicenseData?.paymentInfo?.orderId && cigLicenseData.paymentInfo.confirmationEmailsent) {
+    if (cigLicenseData?.paymentInfo?.orderId && cigLicenseData.paymentInfo.confirmationEmailSent) {
       return {
         success: true,
         data: cigLicenseData,
@@ -57,7 +57,7 @@ export const ConfirmationPage = (props: Props): ReactElement => {
 
       if (
         currentBusiness?.cigaretteLicenseData?.paymentInfo?.orderId &&
-        currentBusiness?.cigaretteLicenseData?.paymentInfo?.confirmationEmailsent
+        currentBusiness?.cigaretteLicenseData?.paymentInfo?.confirmationEmailSent
       ) {
         return {
           success: true,

@@ -37,7 +37,7 @@ describe("<MgmtAuth />", () => {
     render(<MgmtAuth password={password} setPassword={setPassword} setIsAuthed={setIsAuthed} />);
     const pwField = screen.getByTestId("mgmt-password-field");
     fireEvent.change(pwField, { target: { value: "1234" } });
-    fireEvent.click(screen.getByTestId("mgmt-submit-bttn"));
+    fireEvent.click(screen.getByTestId("mgmt-submit-button"));
     await waitFor(() => {
       return expect(mockApi.post).toHaveBeenCalled();
     });
@@ -63,7 +63,7 @@ describe("<MgmtAuth />", () => {
     render(<MgmtAuth password={password} setPassword={setPassword} setIsAuthed={setIsAuthed} />);
     const pwField = screen.getByTestId("mgmt-password-field");
     fireEvent.change(pwField, { target: { value: "1234" } });
-    fireEvent.click(screen.getByTestId("mgmt-submit-bttn"));
+    fireEvent.click(screen.getByTestId("mgmt-submit-button"));
     await waitFor(() => {
       return expect(screen.getByText("Authentication failed")).toBeInTheDocument();
     });

@@ -20,7 +20,7 @@ summaryDescriptionMd: >+
 callToActionLink: https://www.state.nj.us/transportation/business/civilrights/ssp.shtm
 callToActionText: Learn more
 fundingType: hiring and employee training support
-programFrequency: reoccuring
+programFrequency: recurring
 status: first come, first serve
 programPurpose: Both
 agency:

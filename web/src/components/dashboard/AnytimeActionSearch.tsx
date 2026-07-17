@@ -79,7 +79,7 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
     );
 
     const nonEssentialAnytimeActionsWithRecommendedCategory =
-      moveNonEssentialAnyTimeActionsToRecommendeForYou(
+      moveNonEssentialAnyTimeActionsToRecommendedForYou(
         props.anytimeActionTasksFromNonEssentialQuestions,
       );
     const allTasks = [...nonEssentialAnytimeActionsWithRecommendedCategory, ...deduplicatedTasks];
@@ -126,19 +126,20 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
     Config.dashboardAnytimeActionDefaults.recommendedForYouCategoryHeader;
   const RECOMMENDED_FOR_YOU_ID = "recommended-for-you";
 
-  const moveNonEssentialAnyTimeActionsToRecommendeForYou = (
+  const moveNonEssentialAnyTimeActionsToRecommendedForYou = (
     nonEssentialAnytimeActions: AnytimeActionTask[],
   ): AnytimeActionTask[] => {
-    const nonEssentialAnytimeActionsRecommendedForYouCategorysOverriden =
+    const nonEssentialAnytimeActionsRecommendedForYouCategoriesOverridden =
       nonEssentialAnytimeActions;
     for (const [index] of nonEssentialAnytimeActions.entries()) {
-      nonEssentialAnytimeActionsRecommendedForYouCategorysOverriden[
+      nonEssentialAnytimeActionsRecommendedForYouCategoriesOverridden[
         index
       ].category[0].categoryName = RECOMMENDED_FOR_YOU_DISPLAY_TEXT;
-      nonEssentialAnytimeActionsRecommendedForYouCategorysOverriden[index].category[0].categoryId =
-        RECOMMENDED_FOR_YOU_ID;
+      nonEssentialAnytimeActionsRecommendedForYouCategoriesOverridden[
+        index
+      ].category[0].categoryId = RECOMMENDED_FOR_YOU_ID;
     }
-    return nonEssentialAnytimeActionsRecommendedForYouCategorysOverriden;
+    return nonEssentialAnytimeActionsRecommendedForYouCategoriesOverridden;
   };
 
   const removeNonEssentialAnytimeActionTasksFromGenericAnytimeActionList = (
@@ -162,21 +163,21 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
   const moveAnytimeActionsToRecommendedForYouSection = (
     anytimeActions: AnytimeActionTask[],
   ): AnytimeActionTask[] => {
-    const anytimeActionsWithRecommendedForYouCategorysOverriden = anytimeActions;
+    const anytimeActionsWithRecommendedForYouCategoriesOverridden = anytimeActions;
 
     for (const [
       index,
       anytimeAction,
-    ] of anytimeActionsWithRecommendedForYouCategorysOverriden.entries()) {
+    ] of anytimeActionsWithRecommendedForYouCategoriesOverridden.entries()) {
       if (anytimeAction.moveToRecommendedForYouSection) {
-        anytimeActionsWithRecommendedForYouCategorysOverriden[index].category[0].categoryName =
+        anytimeActionsWithRecommendedForYouCategoriesOverridden[index].category[0].categoryName =
           RECOMMENDED_FOR_YOU_DISPLAY_TEXT;
-        anytimeActionsWithRecommendedForYouCategorysOverriden[index].category[0].categoryId =
+        anytimeActionsWithRecommendedForYouCategoriesOverridden[index].category[0].categoryId =
           RECOMMENDED_FOR_YOU_ID;
       }
     }
 
-    return anytimeActionsWithRecommendedForYouCategorysOverriden;
+    return anytimeActionsWithRecommendedForYouCategoriesOverridden;
   };
 
   const [isFocused, setIsFocused] = useState(false);

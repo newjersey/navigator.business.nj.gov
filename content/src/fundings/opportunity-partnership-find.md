@@ -20,7 +20,7 @@ summaryDescriptionMd: >+
 callToActionLink: https://www.nj.gov/labor/employer-services/business/businessprograms.shtml?open=specialty
 callToActionText: Learn more
 fundingType: grant
-programFrequency: reoccuring
+programFrequency: recurring
 status: opening soon
 programPurpose: In State
 agency:

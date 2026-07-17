@@ -16,7 +16,7 @@ summaryDescriptionMd: The Small Business Bonding Readiness Assistance Program
 callToActionLink: https://www.aaccnj.com/bonding-program---sbbrap
 callToActionText: Learn more
 fundingType: technical assistance
-programFrequency: reoccuring
+programFrequency: recurring
 status: first come, first serve
 programPurpose: In State
 agency:

@@ -77,7 +77,7 @@ export const ApiCigaretteLicenseClient = (
         const errorResponse: PaymentApiError = {
           statusCode: 500,
           errorCode: "139",
-          userMessage: "An unknown error occured",
+          userMessage: "An unknown error occurred",
           developerMessage: JSON.stringify(error),
         };
 
@@ -123,7 +123,7 @@ export const ApiCigaretteLicenseClient = (
         const errorResponse: PaymentApiError = {
           statusCode: 500,
           errorCode: "139",
-          userMessage: "An unknown error occured",
+          userMessage: "An unknown error occurred",
           developerMessage: JSON.stringify(error),
         };
 
@@ -152,8 +152,8 @@ export const ApiCigaretteLicenseClient = (
       };
     }
 
-    if (cigaretteLicenseData.paymentInfo?.confirmationEmailsent) {
-      const errorMessage = `Cigarette License Client - Id:${logId} - the email confimation has already been sent for this user`;
+    if (cigaretteLicenseData.paymentInfo?.confirmationEmailSent) {
+      const errorMessage = `Cigarette License Client - Id:${logId} - the email confirmation has already been sent for this user`;
       logger.LogError(errorMessage);
       return {
         statusCode: StatusCodes.CONFLICT,

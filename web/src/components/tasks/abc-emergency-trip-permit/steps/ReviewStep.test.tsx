@@ -51,7 +51,7 @@ describe("Review step", () => {
     it("shows the additional email field if the user indicated they want to send permit link to additional email", async () => {
       applicationInfo = generateEmergencyTripPermitApplicationData({
         additionalEmail: "",
-        additionalConfirmemail: "",
+        additionalConfirmEmail: "",
       });
       renderPage();
       expect(screen.queryByText("Send Permit Link to Alternative Email:")).not.toBeInTheDocument();

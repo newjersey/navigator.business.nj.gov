@@ -178,12 +178,12 @@ export const BusinessFormationPaginator = (): ReactElement => {
     if (!updateQueue) return;
 
     if (isStep("Business")) {
-      const muncipalityEnteredForFirstTime =
+      const municipalityEnteredForFirstTime =
         updateQueue.currentBusiness().profileData.municipality === undefined &&
         updateQueue.currentBusiness().formationData.formationFormData.addressMunicipality !==
           undefined;
 
-      if (muncipalityEnteredForFirstTime) {
+      if (municipalityEnteredForFirstTime) {
         analytics.event.business_formation_location_question.submit.location_entered_for_first_time();
       }
 

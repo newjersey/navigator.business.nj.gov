@@ -153,7 +153,7 @@ export const cigaretteLicenseRouterFactory = (
         }));
       }
 
-      if (!currentBusiness?.cigaretteLicenseData?.paymentInfo?.confirmationEmailsent) {
+      if (!currentBusiness?.cigaretteLicenseData?.paymentInfo?.confirmationEmailSent) {
         const decryptedTaxId = await cryptoClient.decryptValue(
           currentBusiness.cigaretteLicenseData.encryptedTaxId || "",
         );
@@ -224,7 +224,7 @@ export const sendEmailConfirmation = async (
         ...business.cigaretteLicenseData,
         paymentInfo: {
           ...business.cigaretteLicenseData?.paymentInfo,
-          confirmationEmailsent: true,
+          confirmationEmailSent: true,
         },
       },
     }));
