@@ -16,7 +16,7 @@ summaryDescriptionMd: The Growing Apprenticeship in Nontraditional Sectors
 callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more
 fundingType: hiring and employee training support
-programFrequency: reoccuring
+programFrequency: recurring
 status: deadline
 programPurpose: Both
 agency:

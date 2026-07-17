@@ -18,7 +18,7 @@ summaryDescriptionMd: >+
 callToActionLink: https://www.njeda.gov/food-and-agriculture-research-development-pilot-grant-program/
 callToActionText: Learn more
 fundingType: grant
-programFrequency: reoccuring
+programFrequency: recurring
 status: opening soon
 programPurpose: Both
 agency:

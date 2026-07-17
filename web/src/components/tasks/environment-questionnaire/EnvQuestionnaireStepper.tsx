@@ -155,12 +155,12 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
       categoryName,
     );
 
-    const userNotAuthandDoesntWantToSave =
+    const userNotAuthAndDoesNotWantToSave =
       envContext.state.stepIndex === 0 &&
       isAuthenticated === IsAuthenticated.FALSE &&
       userWantsToContinueWithoutSaving === false;
 
-    if (userNotAuthandDoesntWantToSave) {
+    if (userNotAuthAndDoesNotWantToSave) {
       updateQueue?.queuePreferences({ returnToLink: ROUTES.environmentRequirements }).update();
       setShowContinueWithoutSaving(true);
       setShowNeedsAccountModal(true);

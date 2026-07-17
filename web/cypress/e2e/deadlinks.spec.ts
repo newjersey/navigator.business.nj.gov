@@ -7,14 +7,14 @@ describe("unusedContent page [feature] [all] [group3]", () => {
     });
     it("loads the auth screen", () => {
       cy.get('input[data-testid="mgmt-password-field"]').should("exist");
-      cy.get('button[data-testid="mgmt-submit-bttn"]').should("exist");
+      cy.get('button[data-testid="mgmt-submit-button"]').should("exist");
     });
 
     it("allows the user to login", () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       cy.get('input[data-testid="mgmt-password-field"]').clear();
       cy.get('input[data-testid="mgmt-password-field"]').type(Cypress.env("ADMIN_PASSWORD"));
-      cy.get('button[data-testid="mgmt-submit-bttn"]').click();
+      cy.get('button[data-testid="mgmt-submit-button"]').click();
       cy.get('[data-testid="dl-task-header"]').should("exist");
     });
   });
@@ -28,14 +28,14 @@ describe("unusedContent page [feature] [all] [group3]", () => {
     });
     it("loads the auth screen when not authenticated with cognito", () => {
       cy.get('input[data-testid="mgmt-password-field"]').should("exist");
-      cy.get('button[data-testid="mgmt-submit-bttn"]').should("exist");
+      cy.get('button[data-testid="mgmt-submit-button"]').should("exist");
     });
 
     it("allows the user to login", () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       cy.get('input[data-testid="mgmt-password-field"]').clear();
       cy.get('input[data-testid="mgmt-password-field"]').type(Cypress.env("ADMIN_PASSWORD"));
-      cy.get('button[data-testid="mgmt-submit-bttn"]').click();
+      cy.get('button[data-testid="mgmt-submit-button"]').click();
       cy.get('[data-testid="dl-task-header"]').should("exist");
     });
   });

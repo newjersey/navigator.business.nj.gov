@@ -30,7 +30,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
       </Tag>
     ),
     certification: (
-      <Tag isLowerCase={true} backgroundColor="accent-cool-lighter-border-darktext">
+      <Tag isLowerCase={true} backgroundColor="accent-cool-lighter-border-dark-text">
         {capitalizeEachWord(Config.dashboardDefaults.certificationTagText)}
       </Tag>
     ),

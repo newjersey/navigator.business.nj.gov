@@ -266,7 +266,7 @@ type Item =
   | "account_menu_my_profile"
   | "roadmap_section"
   | "roadmap_profile_edit_button"
-  | "roadmap_personlize_my_tasks_button"
+  | "roadmap_personalize_my_tasks_button"
   | "landing_page_navbar_log_in"
   | "guest_modal"
   | "guest_menu"
@@ -872,7 +872,7 @@ export default {
         },
       },
     },
-    roadmap_personlize_my_tasks_button: {
+    roadmap_personalize_my_tasks_button: {
       click: {
         go_to_profile_tasks_screen: () => {
           eventRunner.track({

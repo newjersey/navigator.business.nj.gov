@@ -55,7 +55,7 @@ import { migrate_v51_to_v52 } from "@db/migrations/v52_add_naics_code";
 import { migrate_v52_to_v53 } from "@db/migrations/v53_migrate_cannabis_dvob";
 import { migrate_v53_to_v54 } from "@db/migrations/v54_add_business_purpose";
 import { migrate_v54_to_v55 } from "@db/migrations/v55_marketing_and_pr";
-import { migrate_v55_to_v56 } from "@db/migrations/v56_cleaning_janatorial";
+import { migrate_v55_to_v56 } from "@db/migrations/v56_cleaning_janitorial";
 import { migrate_v56_to_v57 } from "@db/migrations/v57_add_provisions";
 import { migrate_v57_to_v58 } from "@db/migrations/v58_add_welcome_card_to_preferences";
 import { migrate_v58_to_v59 } from "@db/migrations/v59_fix_welcome_card_to_preferences";
@@ -64,7 +64,7 @@ import { migrate_v60_to_v61 } from "@db/migrations/v61_add_corp_formation";
 import { migrate_v61_to_v62 } from "@db/migrations/v62_rename_has_existing_business";
 import { migrate_v62_to_v63 } from "@db/migrations/v63_add_foreign_persona";
 import { migrate_v63_to_v64 } from "@db/migrations/v64_save_formation_address_checkboxes";
-import { migrate_v64_to_v65 } from "@db/migrations/v65_add_task_progess_card";
+import { migrate_v64_to_v65 } from "@db/migrations/v65_add_task_progress_card";
 import { migrate_v65_to_v66 } from "@db/migrations/v66_add_nexus_to_profile";
 import { migrate_v66_to_v67 } from "@db/migrations/v67_add_graduation_card";
 import { migrate_v67_to_v68 } from "@db/migrations/v68_complete_formation_task_if_success";
@@ -192,6 +192,7 @@ import { migrate_v187_to_v188 } from "@db/migrations/v188_zod_cleanup_address_st
 import { migrate_v188_to_v189 } from "@db/migrations/v189_update_env_task_id";
 import { migrate_v189_to_v190 } from "@db/migrations/v190_remove_hidden_fundings_and_certifications";
 import { migrate_v190_to_v191 } from "@db/migrations/v191_rotate_new_kms_keys";
+import { migrate_v191_to_v192 } from "@db/migrations/v192_fix_confirmation_email_sent_typo";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -388,6 +389,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v188_to_v189,
   migrate_v189_to_v190,
   migrate_v190_to_v191,
+  migrate_v191_to_v192,
 ];
 
-export { generatev191UserData as CURRENT_GENERATOR } from "@db/migrations/v191_rotate_new_kms_keys";
+export { generatev192UserData as CURRENT_GENERATOR } from "@db/migrations/v192_fix_confirmation_email_sent_typo";

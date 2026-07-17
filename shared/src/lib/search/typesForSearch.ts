@@ -44,7 +44,7 @@ export interface FileData {
   listTexts: LabelledContentList[];
 }
 
-export interface MatchComparitor {
+export interface MatchComparator {
   regex?: RegExp;
   term?: string;
 }

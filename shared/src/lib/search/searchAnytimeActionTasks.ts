@@ -6,9 +6,9 @@ export const searchAnytimeActionTasks = (
   anytimeActionTasks: AnytimeActionTask[],
   term: string,
 ): Match[] => {
-  const AnytimeActionDatas: FileData[] = getAnytimeActionTasksData(anytimeActionTasks);
+  const AnytimeActionData: FileData[] = getAnytimeActionTasksData(anytimeActionTasks);
 
-  return convertFileDataToMatchList(AnytimeActionDatas, term);
+  return convertFileDataToMatchList(AnytimeActionData, term);
 };
 
 export const getAnytimeActionTasksData = (anytimeActionTasks: AnytimeActionTask[]): FileData[] => {

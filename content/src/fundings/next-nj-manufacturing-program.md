@@ -15,7 +15,7 @@ summaryDescriptionMd: The Next New Jersey Manufacturing Program offers up to
 callToActionLink: "https://www.njeda.gov/nextnjmfg/  "
 callToActionText: Learn more
 fundingType: tax credit
-programFrequency: reoccuring
+programFrequency: recurring
 status: deadline
 programPurpose: In State
 agency:
@@ -43,19 +43,20 @@ sector:
   - technology
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-To be eligible for the Next NJ Manufacturing program, a project must: 
+To be eligible for the Next NJ Manufacturing program, a project must:
 
-* Invest at least $10 million in a business facility
-* Create at least 20 new full-time jobs
-* Make sure the facility mostly does manufacturing work
-* Pay full-time workers a median salary at least 120% of the county's median for manufacturing
-* Keep the facility as a qualified business facility during the commitment period
-* Enter a collaborative relationship with a New Jersey-based school, college, workforce organization, or similar group
-* Meet environmental and sustainability standards
-* Follow affirmative action requirements
-* Pay workers at least the prevailing wage rate for construction or building services
+- Invest at least $10 million in a business facility
+- Create at least 20 new full-time jobs
+- Make sure the facility mostly does manufacturing work
+- Pay full-time workers a median salary at least 120% of the county's median for manufacturing
+- Keep the facility as a qualified business facility during the commitment period
+- Enter a collaborative relationship with a New Jersey-based school, college, workforce organization, or similar group
+- Meet environmental and sustainability standards
+- Follow affirmative action requirements
+- Pay workers at least the prevailing wage rate for construction or building services
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
 

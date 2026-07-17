@@ -39,7 +39,7 @@ const statusColorScheme: Record<XrayRegistrationStatus, StatusColorScheme> = {
   },
 };
 
-const getFormatedExpirationDate = (Config: ConfigType, expirationDate: string): string => {
+const getFormattedExpirationDate = (Config: ConfigType, expirationDate: string): string => {
   dayjs.extend(localizedFormat);
   const daysToExpiration = dayjs(expirationDate).diff(getCurrentDate(), "day");
   if (daysToExpiration <= 30 && daysToExpiration >= 0) {
@@ -90,7 +90,7 @@ export const XraySummary = (props: Props): ReactElement => {
             }  height-3 width-3 padding-5px bg-error-extra-light radius-pill margin-right-1`}
           />
           <span className="font-open-sans-7">
-            {getFormatedExpirationDate(Config, xrayData.expirationDate ?? "")}
+            {getFormattedExpirationDate(Config, xrayData.expirationDate ?? "")}
           </span>
         </div>
         <HorizontalLine customMargin={"margin-top-2"} />

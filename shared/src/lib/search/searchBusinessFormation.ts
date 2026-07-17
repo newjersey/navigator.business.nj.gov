@@ -3,9 +3,9 @@ import { convertFileDataToMatchList } from "../search/helpers";
 import { FileData, Match } from "./typesForSearch";
 
 export const searchBusinessFormation = (tasks: TaskWithoutLinks[], term: string): Match[] => {
-  const BusinessFormationDatas = getBusinessFormationData(tasks);
+  const businessFormationData = getBusinessFormationData(tasks);
 
-  return convertFileDataToMatchList(BusinessFormationDatas, term);
+  return convertFileDataToMatchList(businessFormationData, term);
 };
 
 export const getBusinessFormationData = (tasks: TaskWithoutLinks[]): FileData[] => {

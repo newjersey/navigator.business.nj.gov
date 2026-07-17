@@ -11,7 +11,7 @@ const generateApplicationInfo = (
   overrides: Partial<EmergencyTripPermitApplicationInfo>,
 ): EmergencyTripPermitApplicationInfo => {
   return {
-    additionalConfirmemail: "test@test.com",
+    additionalConfirmEmail: "test@test.com",
     additionalEmail: "test2@test.com",
     carrier: "Carrier",
     deliveryAddress: "123 Street",
@@ -42,7 +42,7 @@ const generateApplicationInfo = (
     requestorAddress2: "",
     requestorAddress1: "Another Street",
     requestorCity: "Fiji",
-    requestorConfirmemail: "email98989@email.com",
+    requestorConfirmEmail: "email98989@email.com",
     requestorCountry: "US",
     requestorEmail: "testemail5@email.com",
     requestorFirstName: "Liz",

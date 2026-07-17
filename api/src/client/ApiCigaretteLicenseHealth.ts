@@ -35,7 +35,7 @@ const cigLicenseData: CigaretteLicenseData = {
     orderId: undefined,
     orderStatus: "",
     orderTimestamp: "",
-    confirmationEmailsent: false,
+    confirmationEmailSent: false,
   },
 };
 

@@ -4438,7 +4438,7 @@
     "FourDigitCode": 4412,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Automotive Parts and Accessories Retailers",
@@ -4447,7 +4447,7 @@
     "FourDigitCode": 4413,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Tire Dealers",
@@ -4456,7 +4456,7 @@
     "FourDigitCode": 4413,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Home Centers",
@@ -4481,7 +4481,7 @@
     "FourDigitCode": 4441,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Other Building Material Dealers",
@@ -4490,7 +4490,7 @@
     "FourDigitCode": 4441,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Outdoor Power Equipment Retailers",
@@ -4499,7 +4499,7 @@
     "FourDigitCode": 4442,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Nursery, Garden Center, and Farm Supply Retailers",
@@ -4508,7 +4508,7 @@
     "FourDigitCode": 4442,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Supermarkets and Other Grocery Retailers (except Convenience Retailers)",
@@ -4525,7 +4525,7 @@
     "FourDigitCode": 4451,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Vending Machine Operators",
@@ -4551,7 +4551,7 @@
     "FourDigitCode": 4452,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Fish and Seafood Retailers",
@@ -4560,7 +4560,7 @@
     "FourDigitCode": 4452,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Baked Goods Retailers",
@@ -4585,7 +4585,7 @@
     "FourDigitCode": 4452,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Beer, Wine, and Liquor Retailers",
@@ -4594,7 +4594,7 @@
     "FourDigitCode": 4453,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Furniture Retailers",
@@ -4603,7 +4603,7 @@
     "FourDigitCode": 4491,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Floor Covering Retailers",
@@ -4612,7 +4612,7 @@
     "FourDigitCode": 4491,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Window Treatment Retailers",
@@ -4621,7 +4621,7 @@
     "FourDigitCode": 4491,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "All Other Home Furnishings Retailers",
@@ -4630,7 +4630,7 @@
     "FourDigitCode": 4491,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Electronics and Appliance Retailers",
@@ -4639,7 +4639,7 @@
     "FourDigitCode": 4492,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Department Stores",
@@ -4648,7 +4648,7 @@
     "FourDigitCode": 4551,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Warehouse Clubs and Supercenters",
@@ -4657,7 +4657,7 @@
     "FourDigitCode": 4552,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "All Other General Merchandise Retailers",
@@ -4666,7 +4666,7 @@
     "FourDigitCode": 4552,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Pharmacies and Drug Retailers",
@@ -4684,7 +4684,7 @@
     "FourDigitCode": 4561,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Optical Goods Retailers",
@@ -4693,7 +4693,7 @@
     "FourDigitCode": 4561,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Food (Health) Supplement Retailers",
@@ -4702,7 +4702,7 @@
     "FourDigitCode": 4561,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "All Other Health and Personal Care Retailers",
@@ -4711,7 +4711,7 @@
     "FourDigitCode": 4561,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Gasoline Stations with Convenience Stores",
@@ -4746,7 +4746,7 @@
     "FourDigitCode": 4581,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Shoe Retailers",
@@ -4755,7 +4755,7 @@
     "FourDigitCode": 4582,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Jewelry Retailers",
@@ -4764,7 +4764,7 @@
     "FourDigitCode": 4583,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Luggage and Leather Goods Retailers",
@@ -4773,7 +4773,7 @@
     "FourDigitCode": 4583,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Sporting Goods Retailers",
@@ -4782,7 +4782,7 @@
     "FourDigitCode": 4591,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Hobby, Toy, and Game Retailers",
@@ -4791,7 +4791,7 @@
     "FourDigitCode": 4591,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Sewing, Needlework, and Piece Goods Retailers",
@@ -4800,7 +4800,7 @@
     "FourDigitCode": 4591,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Musical Instrument and Supplies Retailers",
@@ -4809,7 +4809,7 @@
     "FourDigitCode": 4591,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Book Retailers and News Dealers",
@@ -4818,7 +4818,7 @@
     "FourDigitCode": 4592,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Florists",
@@ -4827,7 +4827,7 @@
     "FourDigitCode": 4593,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Office Supplies and Stationery Retailers",
@@ -4836,7 +4836,7 @@
     "FourDigitCode": 4594,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Gift, Novelty, and Souvenir Retailers",
@@ -4845,7 +4845,7 @@
     "FourDigitCode": 4594,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Used Merchandise Retailers",
@@ -4854,7 +4854,7 @@
     "FourDigitCode": 4595,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Pet and Pet Supplies Retailers",
@@ -4863,7 +4863,7 @@
     "FourDigitCode": 4599,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Art Dealers",
@@ -4872,7 +4872,7 @@
     "FourDigitCode": 4599,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Manufactured (Mobile) Home Dealers",
@@ -4889,7 +4889,7 @@
     "FourDigitCode": 4599,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail", "Cannabis", "Smoke Shop"]
+    "industryIds": ["Online Business", "Retail", "Cannabis", "Smoke Shop"]
   },
   {
     "SixDigitDescription": "All Other Miscellaneous Retailers",
@@ -4898,7 +4898,7 @@
     "FourDigitCode": 4599,
     "TwoDigitDescription": "Retail Trade",
     "TwoDigitCode": [44, 45],
-    "industryIds": ["Online Bussiness", "Retail"]
+    "industryIds": ["Online Business", "Retail"]
   },
   {
     "SixDigitDescription": "Scheduled Passenger Air Transportation",
@@ -5291,7 +5291,7 @@
     "TwoDigitCode": [48, 49]
   },
   {
-    "SixDigitDescription": "Freight Transportation Arrangemen",
+    "SixDigitDescription": "Freight Transportation Arrangement",
     "SixDigitCode": 488510,
     "FourDigitDescription": "Freight Transportation Arrangement",
     "FourDigitCode": 4885,
@@ -5666,7 +5666,7 @@
     "TwoDigitCode": [52]
   },
   {
-    "SixDigitDescription": "Real Estate Credi",
+    "SixDigitDescription": "Real Estate Credit",
     "SixDigitCode": 522292,
     "FourDigitDescription": "Nondepository Credit Intermediation",
     "FourDigitCode": 5222,
@@ -6471,7 +6471,7 @@
     "TwoDigitCode": [54]
   },
   {
-    "SixDigitDescription": "Photography Studios, Portrai",
+    "SixDigitDescription": "Photography Studios, Portrait",
     "SixDigitCode": 541921,
     "FourDigitDescription": "Other Professional, Scientific, and Technical Services",
     "FourDigitCode": 5419,
@@ -8059,7 +8059,7 @@
   {
     "SixDigitDescription": "Executive Offices",
     "SixDigitCode": 921110,
-    "FourDigitDescription": "Executive, Legislative, and Other General Government Suppor",
+    "FourDigitDescription": "Executive, Legislative, and Other General Government Support",
     "FourDigitCode": 9211,
     "TwoDigitDescription": "Public Administration",
     "TwoDigitCode": [92]
@@ -8067,7 +8067,7 @@
   {
     "SixDigitDescription": "Legislative Bodies",
     "SixDigitCode": 921120,
-    "FourDigitDescription": "Executive, Legislative, and Other General Government Suppor",
+    "FourDigitDescription": "Executive, Legislative, and Other General Government Support",
     "FourDigitCode": 9211,
     "TwoDigitDescription": "Public Administration",
     "TwoDigitCode": [92]
@@ -8075,7 +8075,7 @@
   {
     "SixDigitDescription": "Public Finance Activities",
     "SixDigitCode": 921130,
-    "FourDigitDescription": "Executive, Legislative, and Other General Government Suppor",
+    "FourDigitDescription": "Executive, Legislative, and Other General Government Support",
     "FourDigitCode": 9211,
     "TwoDigitDescription": "Public Administration",
     "TwoDigitCode": [92]
@@ -8083,7 +8083,7 @@
   {
     "SixDigitDescription": "Executive and Legislative Offices, Combined",
     "SixDigitCode": 921140,
-    "FourDigitDescription": "Executive, Legislative, and Other General Government Suppor",
+    "FourDigitDescription": "Executive, Legislative, and Other General Government Support",
     "FourDigitCode": 9211,
     "TwoDigitDescription": "Public Administration",
     "TwoDigitCode": [92]
@@ -8091,15 +8091,15 @@
   {
     "SixDigitDescription": "American Indian and Alaska Native Tribal Governments",
     "SixDigitCode": 921150,
-    "FourDigitDescription": "Executive, Legislative, and Other General Government Suppor",
+    "FourDigitDescription": "Executive, Legislative, and Other General Government Support",
     "FourDigitCode": 9211,
     "TwoDigitDescription": "Public Administration",
     "TwoDigitCode": [92]
   },
   {
-    "SixDigitDescription": "Other General Government Suppor",
+    "SixDigitDescription": "Other General Government Support",
     "SixDigitCode": 921190,
-    "FourDigitDescription": "Executive, Legislative, and Other General Government Suppor",
+    "FourDigitDescription": "Executive, Legislative, and Other General Government Support",
     "FourDigitCode": 9211,
     "TwoDigitDescription": "Public Administration",
     "TwoDigitCode": [92]
@@ -8211,15 +8211,15 @@
   {
     "SixDigitDescription": "Administration of Housing Programs",
     "SixDigitCode": 925110,
-    "FourDigitDescription": "Administration of Housing Programs, Urban Planning, and Community Developmen",
+    "FourDigitDescription": "Administration of Housing Programs, Urban Planning, and Community Development",
     "FourDigitCode": 9251,
     "TwoDigitDescription": "Public Administration",
     "TwoDigitCode": [92]
   },
   {
-    "SixDigitDescription": "Administration of Urban Planning and Community and Rural Developmen",
+    "SixDigitDescription": "Administration of Urban Planning and Community and Rural Development",
     "SixDigitCode": 925120,
-    "FourDigitDescription": "Administration of Housing Programs, Urban Planning, and Community Developmen",
+    "FourDigitDescription": "Administration of Housing Programs, Urban Planning, and Community Development",
     "FourDigitCode": 9251,
     "TwoDigitDescription": "Public Administration",
     "TwoDigitCode": [92]

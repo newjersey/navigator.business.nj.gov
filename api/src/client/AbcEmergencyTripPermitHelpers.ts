@@ -173,7 +173,7 @@ export const generateSampleAPISubmissionBody = (
       DeliveryStateProvince: "NJ",
       DeliveryZipPostalCode: "01922",
       DeliveryCountry: "US",
-      PickupSiteName: "Joshs Liquors",
+      PickupSiteName: "Josh's Liquors",
       PickupAddress: "121 Fairmont Avenue",
       PickupCity: "Trenton",
       PickupStateProvince: "NJ",

@@ -3,7 +3,7 @@ import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { createContext } from "react";
 
 export interface IntercomContextType {
-  setOperatingPhaseId: (operatingphaseId: OperatingPhaseId | undefined) => void;
+  setOperatingPhaseId: (operatingPhaseId: OperatingPhaseId | undefined) => void;
   setLegalStructureId: (legalStructureId: string | undefined) => void;
   setIndustryId: (industryId: string | undefined) => void;
   setBusinessPersona: (businessPersona: BusinessPersona | undefined) => void;

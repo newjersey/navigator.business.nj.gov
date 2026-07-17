@@ -1,5 +1,5 @@
 import { type MigrationClients } from "@db/migrations/types";
-import { v65UserData } from "@db/migrations/v65_add_task_progess_card";
+import { v65UserData } from "@db/migrations/v65_add_task_progress_card";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v66UserData {

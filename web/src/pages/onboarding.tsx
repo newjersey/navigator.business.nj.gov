@@ -45,7 +45,7 @@ import {
   getTimeout,
   industryQueryParamIsValid,
   mapFlowQueryToPersona,
-  pageQueryParamisValid,
+  pageQueryParamIsValid,
   sectorQueryParamIsValid,
 } from "@/lib/utils/onboardingPageHelpers";
 import {
@@ -290,7 +290,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           setProfileData(newProfileData);
           localUpdateQueue?.queueProfileData(newProfileData);
           await completeOnboarding(newProfileData, localUpdateQueue);
-        } else if (pageQueryParamisValid(onboardingFlows, currentBusiness, queryPage)) {
+        } else if (pageQueryParamIsValid(onboardingFlows, currentBusiness, queryPage)) {
           setPage({ current: queryPage, previous: queryPage - 1 });
         } else if (flowQueryParamIsValid(queryFlow)) {
           await setBusinessPersonaAndRouteToPage(queryFlow, localUpdateQueue);

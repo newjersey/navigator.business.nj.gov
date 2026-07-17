@@ -99,7 +99,7 @@ collections:
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
-        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
+        options: ["annual", "ongoing", "recurring", "one-time", "pilot", "other"]
       - label: "Status"
         name: "status"
         widget: "select"
@@ -338,7 +338,7 @@ collections:
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
-        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
+        options: ["annual", "ongoing", "recurring", "one-time", "pilot", "other"]
       - label: "Status"
         name: "status"
         widget: "select"

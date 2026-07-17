@@ -38,10 +38,10 @@ export const convertAnytimeActionLicenseReinstatementMd = (
   filename: string,
 ): AnytimeActionLicenseReinstatement => {
   const matterResult = matter(anytimeActionLicenseReinstatementMdContents);
-  const anytimeActionGrayMatter = matterResult.data as AnytimeActionLicenseReinsatementGrayMatter;
+  const anytimeActionGrayMatter = matterResult.data as AnytimeActionLicenseReinstatementGrayMatter;
 
   const anytimeActionCategoryMappings = loadAnytimeActionCategoryMappings();
-  const permermitsAndLicenseReinstatementCategoryInfo = {
+  const permitsAndLicenseReinstatementCategoryInfo = {
     categoryName:
       anytimeActionCategoryMappings["reactivate-my-expired-permit-license-or-registration"],
     categoryId: "reactivate-my-expired-permit-license-or-registration",
@@ -51,7 +51,7 @@ export const convertAnytimeActionLicenseReinstatementMd = (
     contentMd: matterResult.content,
     filename,
     ...anytimeActionGrayMatter,
-    category: [permermitsAndLicenseReinstatementCategoryInfo],
+    category: [permitsAndLicenseReinstatementCategoryInfo],
     type: "license-reinstatement",
   };
 };
@@ -67,7 +67,7 @@ export const convertAnytimeActionCategoryMd = (
   };
 };
 
-const anytimeActionsCatgoriesDirectoryApp = path.join(
+const anytimeActionsCategoriesDirectoryApp = path.join(
   process.cwd(),
   "..",
   "content",
@@ -75,29 +75,29 @@ const anytimeActionsCatgoriesDirectoryApp = path.join(
   "anytime-action-categories",
 );
 
-const anytimeActionsCatgoriesDirectoryTest = path.join(
+const anytimeActionsCategoriesDirectoryTest = path.join(
   process.cwd(),
   "content",
   "src",
   "anytime-action-categories",
 );
 
-const getAnytimeActionsCatgoriesDirectory = (isTest: boolean): string => {
+const getAnytimeActionsCategoriesDirectory = (isTest: boolean): string => {
   if (isTest) {
-    return anytimeActionsCatgoriesDirectoryTest;
+    return anytimeActionsCategoriesDirectoryTest;
   }
-  return anytimeActionsCatgoriesDirectoryApp;
+  return anytimeActionsCategoriesDirectoryApp;
 };
 
 export const loadAnytimeActionCategoryMappings = (
   isTest: boolean = false,
 ): AnytimeActionCategoryMapping => {
-  const fileNames = fs.readdirSync(getAnytimeActionsCatgoriesDirectory(isTest));
+  const fileNames = fs.readdirSync(getAnytimeActionsCategoriesDirectory(isTest));
 
   const categoryArrayMapping = fileNames.map((fileName) => {
-    return loadIndividualAnytimeActionCatgory(
+    return loadIndividualAnytimeActionCategory(
       fileName,
-      getAnytimeActionsCatgoriesDirectory(isTest),
+      getAnytimeActionsCategoriesDirectory(isTest),
     );
   });
 
@@ -113,7 +113,7 @@ export const loadAnytimeActionCategoryMappings = (
   return categoryArrayMappingTwo;
 };
 
-const loadIndividualAnytimeActionCatgory = (
+const loadIndividualAnytimeActionCategory = (
   fileName: string,
   directory: string,
 ): AnytimeActionCategoryMapping => {
@@ -137,7 +137,7 @@ type AnytimeActionTaskGrayMatter = {
   summaryDescriptionMd: string;
 };
 
-type AnytimeActionLicenseReinsatementGrayMatter = {
+type AnytimeActionLicenseReinstatementGrayMatter = {
   name: string;
   urlSlug: string;
   callToActionLink: string;

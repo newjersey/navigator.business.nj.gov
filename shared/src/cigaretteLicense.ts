@@ -35,7 +35,7 @@ export type CigaretteLicensePaymentInfo = {
   orderId?: number;
   orderStatus?: string;
   orderTimestamp?: string;
-  confirmationEmailsent?: boolean;
+  confirmationEmailSent?: boolean;
 };
 
 export const emptyCigaretteLicenseData: CigaretteLicenseData = {
@@ -72,7 +72,7 @@ export const emptyCigaretteLicensePaymentInfo: CigaretteLicensePaymentInfo = {
   orderId: undefined,
   orderStatus: "",
   orderTimestamp: "",
-  confirmationEmailsent: false,
+  confirmationEmailSent: false,
 };
 
 export type SubmissionError = "PAYMENT" | "UNAVAILABLE" | undefined;

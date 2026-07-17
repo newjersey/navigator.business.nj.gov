@@ -23,7 +23,7 @@ export interface UpdateQueue {
   queuePreferences: (preferences: Partial<Preferences>) => UpdateQueue;
   queueTaxFilingData: (taxFilingData: Partial<TaxFilingData>) => UpdateQueue;
   queueFormationData: (formationData: Partial<FormationData>) => UpdateQueue;
-  queueFormationFormData: (formatdionFormData: Partial<FormationFormData>) => UpdateQueue;
+  queueFormationFormData: (formationFormData: Partial<FormationFormData>) => UpdateQueue;
   queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
   queueEnvironmentData: (environmentData: Partial<EnvironmentData>) => UpdateQueue;
   queueXrayRegistrationData: (xrayRegistrationData: Partial<XrayData>) => UpdateQueue;

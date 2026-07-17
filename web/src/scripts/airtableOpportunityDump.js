@@ -142,7 +142,7 @@ const convertProgramFrequency = (value) => {
       return "ongoing";
     }
     case "ongoing with annual cap": {
-      return "reoccuring";
+      return "recurring";
     }
     case "ongoing with cap": {
       return "ongoing";

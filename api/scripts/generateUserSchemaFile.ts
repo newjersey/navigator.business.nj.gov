@@ -15,7 +15,7 @@ import path from "node:path";
 
 const migrationFilePath = path.resolve(
   __dirname,
-  "../src/db/migrations/v191_rotate_new_kms_keys.ts",
+  "../src/db/migrations/v192_fix_confirmation_email_sent_typo.ts",
 );
 
 const tsconfigPath = path.resolve(__dirname, "../tsconfig.json");

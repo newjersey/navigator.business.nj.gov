@@ -66,49 +66,49 @@ const getLicenseDataFromMd = (licenseMd: LicenseData): [string | undefined, Webf
   ];
 };
 
-const getAllLicenseDatasFromWebflow = async (): Promise<
+const getAllLicenseDataListFromWebflow = async (): Promise<
   WebflowItem<WebflowLicenseDataFieldData>[]
 > => {
   return await getAllItems<WebflowLicenseDataFieldData>(licenseCollectionId);
 };
 
 //  returns list of LicenseData MD loaded from navigator license-tasks folder
-const getLicenseDatasAlreadyInWebflow = async (): Promise<LicenseData[]> => {
-  const allLicenseDatas = await getAllLicenseDatasFromWebflow();
-  const currentLicenseDatasInWebflowIds = new Set(allLicenseDatas.map((it) => it.id));
-  const currentLicenseDatasInNavigator = loadAllNavigatorLicenses();
+const getLicenseDataListAlreadyInWebflow = async (): Promise<LicenseData[]> => {
+  const allLicenseDataList = await getAllLicenseDataListFromWebflow();
+  const currentLicenseDataListInWebflowIds = new Set(allLicenseDataList.map((it) => it.id));
+  const currentLicenseDataListInNavigator = loadAllNavigatorLicenses();
 
-  return currentLicenseDatasInNavigator.filter(
-    (it) => it.webflowId !== undefined && currentLicenseDatasInWebflowIds.has(it.webflowId),
+  return currentLicenseDataListInNavigator.filter(
+    (it) => it.webflowId !== undefined && currentLicenseDataListInWebflowIds.has(it.webflowId),
   );
 };
 
 //  returns list of LicenseData MD loaded from navigator webflow-licenses folder
-const getWebflowLicenseDatasAlreadyInWebflow = async (): Promise<LicenseData[]> => {
-  const allLicenseDatas = await getAllLicenseDatasFromWebflow();
-  const currentLicenseDatasInWebflowIds = new Set(allLicenseDatas.map((it) => it.id));
-  const currentWebflowLicenseDatasInNavigator = loadAllNavigatorWebflowLicenses();
+const getWebflowLicenseDataListAlreadyInWebflow = async (): Promise<LicenseData[]> => {
+  const allLicenseDataList = await getAllLicenseDataListFromWebflow();
+  const currentLicenseDataListInWebflowIds = new Set(allLicenseDataList.map((it) => it.id));
+  const currentWebflowLicenseDataListInNavigator = loadAllNavigatorWebflowLicenses();
 
-  return currentWebflowLicenseDatasInNavigator.filter(
-    (it) => it.webflowId !== undefined && currentLicenseDatasInWebflowIds.has(it.webflowId),
+  return currentWebflowLicenseDataListInNavigator.filter(
+    (it) => it.webflowId !== undefined && currentLicenseDataListInWebflowIds.has(it.webflowId),
   );
 };
 
 //CAN WE REMOVE THE COMMENT BELOW? IS THIS STILL TRUE?
 // returns a list of license MD objects that don't yet exist in webflow
-const getNewLicenseDatas = async (): Promise<LicenseData[]> => {
-  const currentLicenseDatasInNavigator = loadAllLicenses();
-  const allLicenseDatas = await getAllLicenseDatasFromWebflow();
-  const currentLicenseDatasInWebflowIds = new Set(allLicenseDatas.map((it) => it.id));
+const getNewLicenseDataList = async (): Promise<LicenseData[]> => {
+  const currentLicenseDataListInNavigator = loadAllLicenses();
+  const allLicenseDataList = await getAllLicenseDataListFromWebflow();
+  const currentLicenseDataListInWebflowIds = new Set(allLicenseDataList.map((it) => it.id));
 
   //CAN WE REMOVE THE COMMENT BELOW? IS THIS STILL TRUE?
   // right now only syncs license-tasks, not yet webflow-licenses also
-  return currentLicenseDatasInNavigator.filter(
-    (it) => it.webflowId === undefined || !currentLicenseDatasInWebflowIds.has(it.webflowId),
+  return currentLicenseDataListInNavigator.filter(
+    (it) => it.webflowId === undefined || !currentLicenseDataListInWebflowIds.has(it.webflowId),
   );
 };
 
-const updateLicenseDatas = async (licenseMarkdowns: LicenseData[]): Promise<void> => {
+const updateLicenseDataList = async (licenseMarkdowns: LicenseData[]): Promise<void> => {
   const modify = async (licenseMd: LicenseData): Promise<void> => {
     console.info(`Attempting to modify ${licenseMd.urlSlug}`);
     const [webflowItemId, webflowItem] = getLicenseDataFromMd(licenseMd);
@@ -148,8 +148,8 @@ const updateLicenseDataWithWebflowId = (webflowId: string, filename: string): vo
   fs.writeFileSync(`${filepath}`, stringifiedFile);
 };
 
-const createNewLicenseDatas = async (): Promise<void> => {
-  const newLicenseDatas = await getNewLicenseDatas();
+const createNewLicenseDataList = async (): Promise<void> => {
+  const newLicenseDataList = await getNewLicenseDataList();
 
   const create = async (licenseMd: LicenseData): Promise<void> => {
     console.info(`Attempting to create ${licenseMd.urlSlug}`);
@@ -179,31 +179,33 @@ const createNewLicenseDatas = async (): Promise<void> => {
     return;
   };
 
-  const licensePromises = newLicenseDatas.map((item): (() => Promise<void>) => {
+  const licensePromises = newLicenseDataList.map((item): (() => Promise<void>) => {
     return (): Promise<void> => create(item);
   });
 
   await resolveApiPromises(licensePromises);
 
-  console.info(`Created a total of ${newLicenseDatas.length} licenses`);
+  console.info(`Created a total of ${newLicenseDataList.length} licenses`);
 };
 
 const getUnusedLicenseDataIds = async (): Promise<WebflowItem<WebflowLicenseDataFieldData>[]> => {
-  const localLicenseDatasRaw = loadAllLicenses();
-  const localLicenseDatasWithWebflowIds = localLicenseDatasRaw.filter(
+  const localLicenseDataListRaw = loadAllLicenses();
+  const localLicenseDataListWithWebflowIds = localLicenseDataListRaw.filter(
     (it) => it.webflowId !== undefined,
   );
-  const localLicenseDatasIds = new Set(localLicenseDatasWithWebflowIds.map((it) => it.webflowId));
+  const localLicenseDataListIds = new Set(
+    localLicenseDataListWithWebflowIds.map((it) => it.webflowId),
+  );
 
-  const webflowLicenseDataArray = await getAllLicenseDatasFromWebflow();
+  const webflowLicenseDataArray = await getAllLicenseDataListFromWebflow();
 
   return webflowLicenseDataArray.filter((item) => {
-    const hasValueInLocalCmsAndWebflowRemote = localLicenseDatasIds.has(item.id);
+    const hasValueInLocalCmsAndWebflowRemote = localLicenseDataListIds.has(item.id);
     return !hasValueInLocalCmsAndWebflowRemote;
   });
 };
 
-const deleteLicenseDatas = async (): Promise<void> => {
+const deleteLicenseDataList = async (): Promise<void> => {
   const licenses = await getUnusedLicenseDataIds();
   const deleteLicenseData = async (
     license: WebflowItem<WebflowLicenseDataFieldData>,
@@ -222,26 +224,26 @@ const deleteLicenseDatas = async (): Promise<void> => {
   await resolveApiPromises(licensePromises);
 };
 
-const syncLicenseDatas = async (params: { create: boolean }): Promise<void> => {
+const syncLicenseDataList = async (params: { create: boolean }): Promise<void> => {
   console.log("deleting licenses");
-  await deleteLicenseDatas();
+  await deleteLicenseDataList();
   await wait();
   console.log("updating licenses");
-  const licensesAlreadyInWebflow = await getLicenseDatasAlreadyInWebflow();
-  await updateLicenseDatas(licensesAlreadyInWebflow);
+  const licensesAlreadyInWebflow = await getLicenseDataListAlreadyInWebflow();
+  await updateLicenseDataList(licensesAlreadyInWebflow);
   console.log("updating webflow-licenses");
-  const webflowLicenseDatasToUpdate = await getWebflowLicenseDatasAlreadyInWebflow();
-  await updateLicenseDatas(webflowLicenseDatasToUpdate);
+  const webflowLicenseDataListToUpdate = await getWebflowLicenseDataListAlreadyInWebflow();
+  await updateLicenseDataList(webflowLicenseDataListToUpdate);
   console.log("creating new licenses (no new webflow-licenses will be created)");
   await wait();
   if (params.create) {
-    await createNewLicenseDatas();
+    await createNewLicenseDataList();
     console.log("Complete license sync!");
   }
 };
 
 const main = async (): Promise<void> => {
-  await syncLicenseDatas({ create: true });
+  await syncLicenseDataList({ create: true });
   /* eslint-disable-next-line unicorn/no-process-exit */
   process.exit(0);
 };

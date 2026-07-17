@@ -32,7 +32,7 @@ export const LookupNameByStepIndex = (index: number): EmergencyTripPermitStepNam
 
 export const generateEmptyErrorMap = (): Record<EmergencyTripPermitFieldNames, boolean> => {
   return {
-    additionalConfirmemail: false,
+    additionalConfirmEmail: false,
     additionalEmail: false,
     carrier: false,
     deliveryAddress: false,
@@ -64,7 +64,7 @@ export const generateEmptyErrorMap = (): Record<EmergencyTripPermitFieldNames, b
     requestorAddress1: false,
     requestorAddress2: false,
     requestorCity: false,
-    requestorConfirmemail: false,
+    requestorConfirmEmail: false,
     requestorCountry: false,
     requestorEmail: false,
     requestorFirstName: false,
@@ -131,7 +131,7 @@ export const getStepFromFieldName = (
     case "payerStateAbbreviation":
     case "payerZipCode":
     case "additionalEmail":
-    case "additionalConfirmemail":
+    case "additionalConfirmEmail":
     case "textMsgMobile":
       return "Billing";
     default:

@@ -12,7 +12,7 @@
     "test": "vitest run",
     "prettier": "prettier --write . --ignore-path=../.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=../.eslintignore",
-    "spellcheck": "cspell '**/*.md' '**/*.json' --config ../cspell.json --no-progress"
+    "spellcheck": "cspell '**/*.md' '**/*.json' '*.ts' '!*.test.ts' --config ../cspell.json --no-progress"
   },
   "dependencies": {
     "gray-matter": "4.0.3"

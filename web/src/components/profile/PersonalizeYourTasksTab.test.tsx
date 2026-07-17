@@ -106,7 +106,7 @@ describe("PersonalizeYourTasksTab", () => {
   });
 
   describe("Annual Report Deadline Accordian", () => {
-    it("does display a chevron for the annualReportDeadlineAccordianSection section if dateOfFormation has value", () => {
+    it("does display a chevron for the annualReportDeadlineAccordionSection section if dateOfFormation has value", () => {
       const profileData = generateProfileData({
         businessPersona: "STARTING",
         sectorId: "unknown",
@@ -119,11 +119,11 @@ describe("PersonalizeYourTasksTab", () => {
         futureAllowed: true,
       });
 
-      const accordion = screen.getByTestId("annualReportDeadlineAccordianSection");
+      const accordion = screen.getByTestId("annualReportDeadlineAccordionSection");
       expect(within(accordion).getByTestId("ExpandMoreIcon")).toBeInTheDocument();
     });
 
-    it("does not display a chevron for the annualReportDeadlineAccordianSection section if dateOfFormation not visible", () => {
+    it("does not display a chevron for the annualReportDeadlineAccordionSection section if dateOfFormation not visible", () => {
       const profileData = generateProfileData({
         businessPersona: "STARTING",
         sectorId: "unknown",
@@ -136,7 +136,7 @@ describe("PersonalizeYourTasksTab", () => {
         futureAllowed: false,
       });
 
-      const accordion = screen.getByTestId("annualReportDeadlineAccordianSection");
+      const accordion = screen.getByTestId("annualReportDeadlineAccordionSection");
       expect(within(accordion).queryByTestId("ExpandMoreIcon")).not.toBeInTheDocument();
     });
   });
@@ -151,7 +151,7 @@ describe("PersonalizeYourTasksTab", () => {
       renderPersonalizeYourTasksTab({ profileData });
 
       fireEvent.click(
-        within(screen.getByTestId("nonEssentialQuestionsAccordianSection")).getByTestId(
+        within(screen.getByTestId("nonEssentialQuestionsAccordionSection")).getByTestId(
           "ExpandMoreIcon",
         ),
       );
@@ -168,7 +168,7 @@ describe("PersonalizeYourTasksTab", () => {
       renderPersonalizeYourTasksTab({ profileData });
 
       expect(
-        within(screen.getByTestId("nonEssentialQuestionsAccordianSection")).queryByTestId(
+        within(screen.getByTestId("nonEssentialQuestionsAccordionSection")).queryByTestId(
           "ExpandMoreIcon",
         ),
       ).not.toBeInTheDocument();
@@ -183,7 +183,7 @@ describe("PersonalizeYourTasksTab", () => {
       renderPersonalizeYourTasksTab({ profileData });
 
       expect(
-        within(screen.getByTestId("nonEssentialQuestionsAccordianSection")).getByTestId(
+        within(screen.getByTestId("nonEssentialQuestionsAccordionSection")).getByTestId(
           "ExpandMoreIcon",
         ),
       ).toBeInTheDocument();

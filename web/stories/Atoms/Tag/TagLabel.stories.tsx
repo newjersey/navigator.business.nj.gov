@@ -20,7 +20,7 @@ const defaultArgs = { children: "Tag Component Text", isLowerCase: true };
 export const Certification: Story = {
   args: {
     ...defaultArgs,
-    backgroundColor: "accent-cool-lighter-border-darktext",
+    backgroundColor: "accent-cool-lighter-border-dark-text",
   },
 };
 

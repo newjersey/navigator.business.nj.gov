@@ -16,7 +16,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ searchBuisnessInCrtkDB: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({ searchBusinessInCrtkDB: jest.fn() }));
 
 const mockOnSearchAgain = jest.fn();
 const mockResubmit = jest.fn();

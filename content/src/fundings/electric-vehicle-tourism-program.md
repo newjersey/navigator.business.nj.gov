@@ -17,7 +17,7 @@ summaryDescriptionMd: >+
 callToActionLink: https://njcleanenergy.com/files/file/EV/FY23/EVs%20-%20EV%20Tourism%20Program%20-%20Application%20for%20FY23%20-%20Round%201%20-%20FINAL%207_22_22.pdf
 callToActionText: Learn more
 fundingType: grant
-programFrequency: reoccuring
+programFrequency: recurring
 status: deadline
 programPurpose: In State
 agency:

@@ -68,7 +68,7 @@ export const PersonalizeYourTasksTab = (props: Props): ReactElement => {
         profileAlertRef={props.profileAlertRef}
       />
       <hr className="margin-y-4" />
-      <Accordion data-testid="annualReportDeadlineAccordianSection">
+      <Accordion data-testid="annualReportDeadlineAccordionSection">
         <AccordionHeader
           icon={"calendar_today"}
           headerText={Config.profileDefaults.default.annualReportDeadlineHeader}
@@ -115,7 +115,7 @@ export const PersonalizeYourTasksTab = (props: Props): ReactElement => {
         </AccordionDetails>
       </Accordion>
       <hr className="margin-y-4" />
-      <Accordion data-testid="nonEssentialQuestionsAccordianSection">
+      <Accordion data-testid="nonEssentialQuestionsAccordionSection">
         <AccordionHeader
           icon={"search"}
           headerText={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionHeader}

@@ -24,7 +24,7 @@ export type FundingStatus =
 export type FundingProgramFrequency =
   | "annual"
   | "ongoing"
-  | "reoccuring"
+  | "recurring"
   | "one-time"
   | "pilot"
   | "other";

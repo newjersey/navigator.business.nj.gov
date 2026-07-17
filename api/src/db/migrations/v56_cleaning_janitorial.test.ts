@@ -5,7 +5,7 @@ import {
   v55ProfileData,
   v55UserData,
 } from "@db/migrations/v55_marketing_and_pr";
-import { migrate_v55_to_v56 } from "@db/migrations/v56_cleaning_janatorial";
+import { migrate_v55_to_v56 } from "@db/migrations/v56_cleaning_janitorial";
 
 describe("migrate_v55_to_v56", () => {
   const user = generatev55User({});

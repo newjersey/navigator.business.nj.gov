@@ -16,7 +16,7 @@ summaryDescriptionMd: The New Jersey Angel Investor Tax Credit Program offers
 callToActionLink: https://www.njeda.com/angeltaxcredit/
 callToActionText: Learn more
 fundingType: tax credit
-programFrequency: reoccuring
+programFrequency: recurring
 status: rolling application
 programPurpose: In State
 agency:

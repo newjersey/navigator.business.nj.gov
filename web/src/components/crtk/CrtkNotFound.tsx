@@ -20,7 +20,7 @@ export const CrtkNotFound = (props: Props): ReactElement => {
   const [crtkEmailSent, setCrtkEmailSent] = useState(business?.crtkData?.crtkEmailSent || false);
   const [notFoundModal, setNotFoundModal] = useState(false);
 
-  const WhatifIncompleteCrtkInfo = (): ReactElement => {
+  const WhatIfIncompleteCrtkInfo = (): ReactElement => {
     return (
       <div className="bg-warning-extra-light padding-2 radius-lg text-normal margin-y-3">
         <div className="text-bold">{Config?.crtkTask?.warningTitle}</div>
@@ -92,7 +92,7 @@ export const CrtkNotFound = (props: Props): ReactElement => {
           setCrtkEmailSent={setCrtkEmailSent}
         />
       )}
-      {WhatifIncompleteCrtkInfo()}
+      {WhatIfIncompleteCrtkInfo()}
     </div>
   );
 };

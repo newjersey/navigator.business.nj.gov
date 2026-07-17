@@ -31,7 +31,7 @@ interface Props {
 export const CannabisPriorityTypes = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
   const [displayNextTabButton, setDisplayNextTabButton] = useState(false);
-  const [eligibityPhrase, setEligibiltyPhrase] = useState("");
+  const [eligibilityPhrase, setEligibilityPhrase] = useState("");
   const { Config } = useConfig();
 
   useMountEffect(() => {
@@ -88,11 +88,11 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
       | "phrase2"
       | "phrase3";
     if (priorityStatusArray.length > 0 && priorityStatusArray.length < 4) {
-      setEligibiltyPhrase(
+      setEligibilityPhrase(
         templateEval(Config.cannabisPriorityStatus[configLocation], priorityStatusesAsIndexMap),
       );
     } else {
-      setEligibiltyPhrase("");
+      setEligibilityPhrase("");
     }
   }, [business, Config.cannabisPriorityStatus]);
 
@@ -140,9 +140,9 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
         </ul>
       </div>
 
-      {eligibityPhrase !== "" && (
+      {eligibilityPhrase !== "" && (
         <Alert variant="info">
-          <Content>{eligibityPhrase}</Content>
+          <Content>{eligibilityPhrase}</Content>
         </Alert>
       )}
 
