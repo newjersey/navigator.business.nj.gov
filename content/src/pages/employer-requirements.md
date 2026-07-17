@@ -495,13 +495,14 @@ main-text-9: >-
   **NJFLA**
 
 
-  * Employers may require that employees provide notice in writing, but they must allow employees to provide oral notice in emergent circumstances.
+  * Employers may require that employees provide notice in writing, but they must allow employees to provide oral notice in emergent circumstances
 
-    When taking leave to care for or bond with their child, employees must provide at least 30 days’ notice for consecutive leave or 15 days’ notice for intermittent or reduced leave.
+  * When taking leave to care for or bond with their child, employees must provide at least 30 days’ notice for consecutive leave or 15 days’ notice for intermittent or reduced leave
 
-    When taking leave to care for a family member with a serious health condition or to care for a family member made necessary by an epidemic of a communicable disease, a known or suspected exposure to a communicable disease, or efforts to prevent spread of a communicable disease, employees must provide notice as soon as practicable. 
+  * When taking leave to care for a family member with a serious health condition or to care for a family member made necessary by an epidemic of a communicable disease, a known or suspected exposure to a communicable disease, or efforts to prevent spread of a communicable disease, employees must provide notice as soon as practicable
 
-    Employers may require employees to submit certification in connection with their NJFLA leave, which may include certification from a health care professional, public health authority, or school or place of care. The type of certification employers may require depends on the reason for leave, and employers should review public resources, available at www.njcivilrights.gov, for detailed information. 
+  * Employers may require employees to submit certification in connection with their NJFLA leave, which may include certification from a health care professional, public health authority, or school or place of care. The type of certification employers may require depends on the reason for leave, and employers should review public resources, available at www.njcivilrights.gov, for detailed information
+
 
   **FMLA**
 
