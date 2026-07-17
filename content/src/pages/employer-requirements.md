@@ -387,7 +387,10 @@ main-text-9: >-
   conditions as if they had not taken leave.
 
 
-  The New Jersey Family Leave Act (NJFLA) generally entitles certain employees to take up to 12 weeks of family leave in a 24-month period without losing their jobs.
+  The New Jersey Family Leave Act (NJFLA) generally entitles certain employees to take up to 12 weeks of family leave in a 24-month period without losing their jobs. 
+
+
+  TDI/FLI job protection covers eligible employees who receive TDI/FLI benefits from the State or a private plan during their leave, and their leave is not already covered under NJFLA or FMLA. 
 
 
   ### Do I Qualify to Provide Protected Leave?
@@ -397,7 +400,6 @@ main-text-9: >-
 
 
   * Private employers with 30 or more employees who have worked at least 20 weeks in the current or preceding year (30 employees do not have to be in N.J. – can be anywhere)
-
 
   * Employer headquarters doesn’t have to be in N.J.
 
