@@ -89,7 +89,7 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
           },
         },
       };
-      updateQueue?.queueProfileData(profileData).update();
+      updateQueue?.queueProfileData(profileData).updateInBackground();
     }
     props.onSubmit({
       address1: formValues.address1,

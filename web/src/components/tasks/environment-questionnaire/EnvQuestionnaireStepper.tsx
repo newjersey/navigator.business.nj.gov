@@ -161,7 +161,9 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
       userWantsToContinueWithoutSaving === false;
 
     if (userNotAuthAndDoesNotWantToSave) {
-      updateQueue?.queuePreferences({ returnToLink: ROUTES.environmentRequirements }).update();
+      updateQueue
+        ?.queuePreferences({ returnToLink: ROUTES.environmentRequirements })
+        .updateInBackground();
       setShowContinueWithoutSaving(true);
       setShowNeedsAccountModal(true);
     }
@@ -285,7 +287,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
             ) {
               updateQueue
                 ?.queuePreferences({ returnToLink: ROUTES.environmentRequirements })
-                .update();
+                .updateInBackground();
               setShowContinueWithoutSaving(true);
               analytics.event.gen_guidance_stepper_save_modal_displayed.appears.general_guidance_save_modal_displayed();
               setShowNeedsAccountModal(true);

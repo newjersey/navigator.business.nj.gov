@@ -32,7 +32,7 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
   useEffect(() => {
     if (!business || !updateQueue) return;
     if (tabIndex === FOR_YOU_TAB && business.preferences.phaseNewlyChanged) {
-      updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();
+      updateQueue.queuePreferences({ phaseNewlyChanged: false }).updateInBackground();
     }
   }, [tabIndex, business, updateQueue]);
 

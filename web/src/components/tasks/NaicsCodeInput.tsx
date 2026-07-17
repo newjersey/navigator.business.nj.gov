@@ -139,7 +139,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     if (!updateQueue) {
       return;
     }
-    updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).update();
+    updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).updateInBackground();
   };
 
   useMountEffectWhenDefined(() => {

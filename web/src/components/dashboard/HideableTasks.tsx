@@ -25,7 +25,7 @@ export const HideableTasks = (): ReactElement => {
       .queuePreferences({
         isHideableRoadmapOpen: !business.preferences.isHideableRoadmapOpen,
       })
-      .update();
+      .updateInBackground();
   };
 
   const hiddenTasksCount = (): number => {

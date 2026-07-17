@@ -182,7 +182,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
           },
         },
       })
-      .update();
+      .updateInBackground();
   }, [updateQueue, business, queueUpdateTaskProgress]);
 
   useEffect(() => {
@@ -236,7 +236,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
         },
         lastUpdatedISO: new Date(Date.now()).toISOString(),
       })
-      .update();
+      .updateInBackground();
   };
 
   useMountEffectWhenDefined(() => {
@@ -336,7 +336,7 @@ export const CigaretteLicense = (props: Props): ReactElement => {
 
   const onStepClick = (step: number): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      updateQueue?.queuePreferences({ returnToLink: ROUTES.cigaretteLicense }).update();
+      updateQueue?.queuePreferences({ returnToLink: ROUTES.cigaretteLicense }).updateInBackground();
       setShowNeedsAccountModal(true);
     } else {
       saveCigaretteLicenseData();

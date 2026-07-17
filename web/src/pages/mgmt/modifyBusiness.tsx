@@ -158,7 +158,7 @@ const ModifyBusinessPage = (): ReactElement => {
                     setLicenseStatus("");
                     setLicenseName("");
                     setTaskId("");
-                    updateQueue?.update();
+                    updateQueue?.updateInBackground();
                   }
                 }}
               >
@@ -191,7 +191,7 @@ const ModifyBusinessPage = (): ReactElement => {
                     setLicenseStatus("");
                     setLicenseName("");
                     setTaskId("");
-                    updateQueue?.update();
+                    updateQueue?.updateInBackground();
                   }
                 }}
               >

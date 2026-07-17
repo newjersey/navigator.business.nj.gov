@@ -96,7 +96,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
         businessName: submittedName,
         nexusDbaName: emptyProfileData.nexusDbaName,
       })
-      .update();
+      .updateInBackground();
 
     setFormationFormData((previousFormationData) => {
       return {
@@ -118,7 +118,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
       .queueProfileData({
         nexusDbaName: submittedName,
       })
-      .update();
+      .updateInBackground();
   };
 
   const doSearch = useCallback(
@@ -153,7 +153,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
         .queueProfileData({
           nexusDbaName: "",
         })
-        .update();
+        .updateInBackground();
     }
   };
 

@@ -1,7 +1,7 @@
 import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
-import { useMockRouter } from "@/test/mock/mockRouter";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -117,6 +117,9 @@ describe("<NavBarMobile />", () => {
 
       expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText(Config.navigationDefaults.navBarMyAccountText));
+      expect(mockPush).toHaveBeenCalledWith("/onboarding");
     });
   });
 

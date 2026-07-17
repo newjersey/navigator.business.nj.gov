@@ -1,9 +1,20 @@
 import { BrowserStorage } from "@/lib/storage/BrowserStorage";
 import { userDataPrefix, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { generateUser, generateUserData } from "@businessnjgovnavigator/shared";
+import {
+  BusinessUser,
+  generateBusiness,
+  generateUser,
+  generateUserData,
+  generateUserDataForBusiness,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 
 const legacyUserDataPrefix = "$swrUserData$";
 const registrationStatusKey = "selfRegStatus";
+
+const generateUserDataForUser = (user: BusinessUser): UserData => {
+  return generateUserDataForBusiness(generateBusiness({ userId: user.id }), { user });
+};
 
 interface BrowserStorageHarness {
   readonly browserStorage: jest.Mocked<BrowserStorage>;
@@ -34,7 +45,7 @@ describe("UserDataStorage", () => {
     const { browserStorage, values } = createBrowserStorage();
     const now = new Date("2026-07-16T12:00:00.000Z");
     const user = generateUser({});
-    const userData = generateUserData({ user });
+    const userData = generateUserDataForUser(user);
     const storage = UserDataStorageFactory({ browserStorage, now: () => now });
 
     expect(storage.set(user.id, userData)).toBe(true);
@@ -51,7 +62,7 @@ describe("UserDataStorage", () => {
   it("returns buffered data without reading browser storage again", () => {
     const { browserStorage } = createBrowserStorage();
     const user = generateUser({});
-    const userData = generateUserData({ user });
+    const userData = generateUserDataForUser(user);
     const storage = UserDataStorageFactory({ browserStorage });
 
     storage.set(user.id, userData);
@@ -62,7 +73,7 @@ describe("UserDataStorage", () => {
   it("loads valid persisted data and removes a leftover legacy copy", () => {
     const { browserStorage, values } = createBrowserStorage();
     const user = generateUser({});
-    const userData = generateUserData({ user });
+    const userData = generateUserDataForUser(user);
 
     UserDataStorageFactory({ browserStorage }).set(user.id, userData);
     values.set(`${legacyUserDataPrefix}${user.id}`, JSON.stringify(userData));
@@ -71,10 +82,24 @@ describe("UserDataStorage", () => {
     expect(values.has(`${legacyUserDataPrefix}${user.id}`)).toBe(false);
   });
 
+  it("loads persisted API data when optional interstate fields are omitted", () => {
+    const { browserStorage } = createBrowserStorage();
+    const user = generateUser({});
+    const userData = generateUserDataForUser(user);
+    const profileData = userData.businesses[userData.currentBusinessId]
+      .profileData as unknown as Record<string, unknown>;
+    delete profileData.interstateLogistics;
+    delete profileData.interstateMoving;
+
+    UserDataStorageFactory({ browserStorage }).set(user.id, userData);
+
+    expect(UserDataStorageFactory({ browserStorage }).get(user.id)).toEqual(userData);
+  });
+
   it("migrates legacy raw user data and removes the legacy copy", () => {
     const { browserStorage, values } = createBrowserStorage();
     const user = generateUser({});
-    const userData = generateUserData({ user });
+    const userData = generateUserDataForUser(user);
     values.set(`${legacyUserDataPrefix}${user.id}`, JSON.stringify(userData));
 
     const storage = UserDataStorageFactory({ browserStorage });
@@ -87,7 +112,7 @@ describe("UserDataStorage", () => {
   it("retains legacy data when migration cannot be persisted", () => {
     const { browserStorage, values } = createBrowserStorage();
     const user = generateUser({});
-    const userData = generateUserData({ user });
+    const userData = generateUserDataForUser(user);
     values.set(`${legacyUserDataPrefix}${user.id}`, JSON.stringify(userData));
     browserStorage.set.mockReturnValue(false);
 
@@ -121,6 +146,57 @@ describe("UserDataStorage", () => {
     expect(values.has(`${userDataPrefix}user-1`)).toBe(false);
   });
 
+  it.each([
+    [
+      "an active business without its required nested data",
+      (userData: Record<string, unknown>): void => {
+        const businesses = userData.businesses as Record<string, unknown>;
+        businesses[userData.currentBusinessId as string] = {};
+      },
+    ],
+    [
+      "a malformed non-active business",
+      (userData: Record<string, unknown>): void => {
+        const businesses = userData.businesses as Record<string, unknown>;
+        businesses["malformed-business"] = {};
+      },
+    ],
+    [
+      "an active business with malformed profile data",
+      (userData: Record<string, unknown>): void => {
+        const businesses = userData.businesses as Record<string, Record<string, unknown>>;
+        businesses[userData.currentBusinessId as string].profileData = {};
+      },
+    ],
+    [
+      "a business owned by another user",
+      (userData: Record<string, unknown>): void => {
+        const businesses = userData.businesses as Record<string, Record<string, unknown>>;
+        businesses[userData.currentBusinessId as string].userId = "another-user";
+      },
+    ],
+  ])("rejects and removes %s", (_, makeMalformed) => {
+    const { browserStorage, values } = createBrowserStorage();
+    const user = generateUser({});
+    const userData = generateUserDataForUser(user);
+    const malformedUserData = JSON.parse(JSON.stringify(userData)) as Record<string, unknown>;
+    makeMalformed(malformedUserData);
+    values.set(
+      `${userDataPrefix}${user.id}`,
+      JSON.stringify({
+        version: 1,
+        userId: user.id,
+        savedAt: "2026-07-17T12:00:00.000Z",
+        data: malformedUserData,
+      }),
+    );
+
+    const storage = UserDataStorageFactory({ browserStorage });
+
+    expect(storage.get(user.id)).toBeUndefined();
+    expect(values.has(`${userDataPrefix}${user.id}`)).toBe(false);
+  });
+
   it("rejects writes where the key and payload identities differ", () => {
     const { browserStorage } = createBrowserStorage();
     const userData = generateUserData({ user: generateUser({ id: "payload-user" }) });
@@ -133,7 +209,7 @@ describe("UserDataStorage", () => {
   it("keeps in-memory data usable when browser storage throws", () => {
     const { browserStorage } = createBrowserStorage();
     const user = generateUser({});
-    const userData = generateUserData({ user });
+    const userData = generateUserDataForUser(user);
     browserStorage.set.mockImplementation(() => {
       throw new DOMException("Quota exceeded", "QuotaExceededError");
     });
@@ -193,7 +269,7 @@ describe("UserDataStorage", () => {
   it("deletes the only current user", () => {
     const { browserStorage } = createBrowserStorage();
     const user = generateUser({});
-    const userData = generateUserData({ user });
+    const userData = generateUserDataForUser(user);
     const storage = UserDataStorageFactory({ browserStorage });
     storage.set(user.id, userData);
 

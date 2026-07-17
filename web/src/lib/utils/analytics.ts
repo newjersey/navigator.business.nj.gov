@@ -39,6 +39,7 @@ type EventType =
   | "tax_clearance_validation_error"
   | "tax_clearance_validation_success"
   | "tool_tip_mouseover"
+  | "user_data_sync"
   | "xray_lookup_failed"
   | "xray_renewal_started_cta"
   | "xray_renewal_started_expired_card"
@@ -88,6 +89,7 @@ const eventMap: Record<EventType, string> = {
   tax_clearance_validation_error: "tax_clearance_validation_error",
   tax_clearance_validation_success: "tax_clearance_validation_success",
   tool_tip_mouseover: "tool_tip_mouseover",
+  user_data_sync: "user_data_sync",
   xray_lookup_failed: "xray_lookup_failed",
   xray_renewal_started_cta: "xray_renewal_started_cta",
   xray_renewal_started_expired_card: "xray_renewal_started_expired_card",
@@ -127,7 +129,10 @@ type ParameterType =
   | "item"
   | "clicked"
   | "form_name"
-  | "server_response";
+  | "server_response"
+  | "operation"
+  | "outcome"
+  | "status";
 
 const parameterMap: Record<ParameterType, string> = {
   click_text: "click_text",
@@ -144,6 +149,9 @@ const parameterMap: Record<ParameterType, string> = {
   item: "item",
   form_name: "form_name",
   server_response: "server_response",
+  operation: "operation",
+  outcome: "outcome",
+  status: "status",
   legacy_event_action: "legacy_event_action",
   legacy_event_category: "legacy_event_category",
   legacy_event_label: "legacy_event_label",
@@ -332,6 +340,9 @@ export interface GTMEventData {
   form_name?: FormName;
   questions?: Partial<Questions>;
   server_response?: ServerResponse;
+  operation?: string;
+  outcome?: string;
+  status?: string;
 }
 
 const getSiteSectionFromUrl = (

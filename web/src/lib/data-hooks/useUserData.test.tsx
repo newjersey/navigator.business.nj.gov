@@ -23,9 +23,12 @@ import {
 import { UserDataError } from "@businessnjgovnavigator/shared/types";
 import { act, render, renderHook, waitFor } from "@testing-library/react";
 import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useState } from "react";
-import { SWRConfig } from "swr";
+import { Cache, SWRConfig } from "swr";
 
-jest.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: jest.fn() }));
+jest.mock("@/lib/utils/analytics-helpers", () => ({
+  reportUserDataSync: jest.fn(),
+  setAnalyticsDimensions: jest.fn(),
+}));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   getUserData: jest.fn(),
@@ -56,6 +59,11 @@ interface UserDataHookOptions {
   readonly authState: AuthState;
   readonly storage?: UserDataStorage;
   readonly multipleConsumers?: boolean;
+  readonly swrIntervals?: {
+    readonly dedupingInterval?: number;
+    readonly errorRetryInterval?: number;
+    readonly focusThrottleInterval?: number;
+  };
 }
 
 interface UserDataHookHarness {
@@ -101,8 +109,9 @@ const renderUserDataHook = ({
   authState: initialAuthState,
   storage = createTestStorage(),
   multipleConsumers = false,
+  swrIntervals,
 }: UserDataHookOptions): UserDataHookHarness => {
-  const cache = new Map<unknown, unknown>();
+  const cache: Cache<unknown> = new Map();
   const setUserDataErrorCalls = jest.fn<void, [UserDataError | undefined]>();
   const setRoadmap = jest.fn();
   const intercom: jest.Mocked<IntercomContextType> = {
@@ -151,7 +160,9 @@ const renderUserDataHook = ({
                 }}
               >
                 <IntercomContext.Provider value={intercom}>
-                  <UserDataProvider userDataStorage={storage}>{children}</UserDataProvider>
+                  <UserDataProvider userDataStorage={storage} swrIntervals={swrIntervals}>
+                    {children}
+                  </UserDataProvider>
                 </IntercomContext.Provider>
               </RoadmapContext.Provider>
             </UserDataErrorContext.Provider>
@@ -189,10 +200,24 @@ const guestState = (userId: string): AuthState => ({
   isAuthenticated: IsAuthenticated.FALSE,
 });
 
+const originalStage = process.env.STAGE;
+
 describe("useUserData", () => {
+  let consoleDebugSpy: jest.SpyInstance<void, Parameters<typeof console.debug>>;
+
   beforeEach(() => {
     jest.resetAllMocks();
+    consoleDebugSpy = jest.spyOn(console, "debug").mockImplementation(() => {});
     mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
+  });
+
+  afterEach(() => {
+    if (originalStage === undefined) {
+      delete process.env.STAGE;
+    } else {
+      process.env.STAGE = originalStage;
+    }
+    consoleDebugSpy.mockRestore();
   });
 
   it("fails clearly when a rendered consumer is outside UserDataProvider", () => {
@@ -226,6 +251,43 @@ describe("useUserData", () => {
     });
 
     expect(mockApi.getUserData).not.toHaveBeenCalled();
+  });
+
+  it.each([undefined, "testing", "dev"])(
+    "logs the complete SWR key when STAGE is %s",
+    async (stage) => {
+      if (stage === undefined) {
+        delete process.env.STAGE;
+      } else {
+        process.env.STAGE = stage;
+      }
+      const user = generateUser({});
+      const userData = generateUserData({ user });
+      mockApi.getUserData.mockResolvedValue(userData);
+
+      renderUserDataHook({ authState: authenticatedState(user.id) });
+
+      await waitFor(() => {
+        expect(consoleDebugSpy).toHaveBeenCalledWith("Fetching SWR user data", {
+          resource: "user-data",
+          userId: user.id,
+        });
+      });
+    },
+  );
+
+  it.each(["staging", "prod"])("does not log the SWR key when STAGE is %s", async (stage) => {
+    process.env.STAGE = stage;
+    const user = generateUser({});
+    const userData = generateUserData({ user });
+    mockApi.getUserData.mockResolvedValue(userData);
+
+    renderUserDataHook({ authState: authenticatedState(user.id) });
+
+    await waitFor(() => {
+      expect(mockApi.getUserData).toHaveBeenCalledWith(user.id);
+    });
+    expect(consoleDebugSpy).not.toHaveBeenCalled();
   });
 
   it("creates and exposes local data without an active auth user", async () => {
@@ -320,6 +382,28 @@ describe("useUserData", () => {
     expect(utils.result.current.hasCompletedFetch).toBe(false);
   });
 
+  it("clears provider-owned persisted and buffered data before logout", async () => {
+    const user = generateUser({});
+    const userData = generateUserData({ user });
+    const storage = createTestStorage();
+    mockApi.getUserData.mockResolvedValue(userData);
+    const utils = renderUserDataHook({
+      authState: authenticatedState(user.id),
+      storage,
+    });
+    await waitFor(() => {
+      expect(utils.result.current.userData).toEqual(userData);
+    });
+
+    await act(async () => {
+      await utils.result.current.clearUserData();
+    });
+
+    expect(storage.get(user.id)).toBeUndefined();
+    expect(utils.result.current.userData).toBeUndefined();
+    expect(utils.result.current.updateQueue).toBeUndefined();
+  });
+
   it("starts fetching when authentication resolves", async () => {
     const request = deferredPromise<UserData>();
     const user = generateUser({});
@@ -362,6 +446,28 @@ describe("useUserData", () => {
     expect(utils.storage.get(user.id)).toEqual(userData);
   });
 
+  it("uses SWR loading state while the initial authenticated request is pending", async () => {
+    const request = deferredPromise<UserData>();
+    const user = generateUser({});
+    mockApi.getUserData.mockReturnValue(request.promise);
+    const utils = renderUserDataHook({ authState: authenticatedState(user.id) });
+
+    await waitFor(() => {
+      expect(mockApi.getUserData).toHaveBeenCalledWith(user.id);
+    });
+    expect(utils.result.current.isLoading).toBe(true);
+    expect(utils.result.current.hasCompletedFetch).toBe(false);
+
+    request.resolve(generateUserData({ user }));
+    await act(async () => {
+      await request.promise;
+    });
+    await waitFor(() => {
+      expect(utils.result.current.isLoading).toBe(false);
+    });
+    expect(utils.result.current.hasCompletedFetch).toBe(true);
+  });
+
   it("shows persisted authenticated data while revalidating", async () => {
     const request = deferredPromise<UserData>();
     const user = generateUser({});
@@ -392,6 +498,75 @@ describe("useUserData", () => {
     });
     await waitFor(() => {
       expect(storage.get(user.id)).toEqual(refreshedUserData);
+    });
+    expect(utils.result.current.userData).toEqual(refreshedUserData);
+  });
+
+  it("completes initialization when a save discards the initial persisted-data fetch", async () => {
+    const request = deferredPromise<UserData>();
+    const saveResponse = deferredPromise<UserData>();
+    const user = generateUser({});
+    const persistedUserData = generateUserData({ user });
+    const storage = createTestStorage();
+    storage.set(user.id, persistedUserData);
+    mockApi.getUserData.mockReturnValue(request.promise);
+    mockApi.postUserData.mockReturnValue(saveResponse.promise);
+    const utils = renderUserDataHook({
+      authState: authenticatedState(user.id),
+      storage,
+    });
+    await waitFor(() => {
+      expect(utils.result.current.updateQueue).toBeDefined();
+    });
+    expect(utils.result.current.hasCompletedFetch).toBe(false);
+
+    let savePromise: Promise<void> = Promise.resolve();
+    await act(async () => {
+      savePromise =
+        utils.result.current.updateQueue?.queuePreferences({ phaseNewlyChanged: true }).update() ??
+        Promise.resolve();
+      await Promise.resolve();
+    });
+    await waitFor(() => {
+      expect(mockApi.postUserData).toHaveBeenCalledTimes(1);
+    });
+
+    request.resolve(persistedUserData);
+    await act(async () => {
+      await request.promise;
+    });
+    await waitFor(() => {
+      expect(utils.result.current.hasCompletedFetch).toBe(true);
+    });
+    expect(mockAnalyticsHelpers.reportUserDataSync).toHaveBeenCalledWith({
+      operation: "fetch",
+      outcome: "discarded",
+    });
+
+    const savedUserData = utils.result.current.updateQueue?.current();
+    expect(savedUserData).toBeDefined();
+    saveResponse.resolve(savedUserData!);
+    await act(async () => {
+      await savePromise;
+    });
+  });
+
+  it("rejects fetched data whose payload identity does not match the request", async () => {
+    const requestedUser = generateUser({ id: "requested-user" });
+    const otherUserData = generateUserData({ user: generateUser({ id: "other-user" }) });
+    mockApi.getUserData.mockResolvedValue(otherUserData);
+
+    const utils = renderUserDataHook({ authState: authenticatedState(requestedUser.id) });
+
+    await waitFor(() => {
+      expect(utils.result.current.error).toBe("NO_DATA");
+    });
+    expect(utils.result.current.userData).toBeUndefined();
+    expect(utils.storage.get(requestedUser.id)).toBeUndefined();
+    expect(mockAnalyticsHelpers.reportUserDataSync).toHaveBeenCalledWith({
+      operation: "fetch",
+      outcome: "error",
+      error: expect.any(Error),
     });
   });
 
@@ -441,6 +616,17 @@ describe("useUserData", () => {
     });
 
     expect(mockApi.getUserData).not.toHaveBeenCalled();
+    expect(utils.result.current.hasCompletedFetch).toBe(true);
+  });
+
+  it("completes empty guest hydration without calling the authenticated endpoint", () => {
+    const user = generateUser({});
+    const utils = renderUserDataHook({ authState: guestState(user.id) });
+
+    expect(utils.result.current.userData).toBeUndefined();
+    expect(utils.result.current.isLoading).toBe(false);
+    expect(utils.result.current.hasCompletedFetch).toBe(true);
+    expect(mockApi.getUserData).not.toHaveBeenCalled();
   });
 
   it("completes guest initialization without calling the authenticated endpoint", () => {
@@ -466,9 +652,10 @@ describe("useUserData", () => {
     expect(mockApi.postUserData).not.toHaveBeenCalled();
   });
 
-  it("persists guest updates without posting them", async () => {
+  it("publishes and persists guest updates without posting them", async () => {
     const user = generateUser({});
     const userData = generateUserData({ user });
+    const taskId = "guest-task";
     const storage = createTestStorage();
     storage.set(user.id, userData);
     const utils = renderUserDataHook({
@@ -480,15 +667,14 @@ describe("useUserData", () => {
     });
 
     await act(async () => {
-      await utils.result.current.updateQueue
-        ?.queueProfileData({ businessName: "Guest business" })
-        .update();
+      await utils.result.current.updateQueue?.queueTaskProgress({ [taskId]: "COMPLETED" }).update();
     });
 
     expect(mockApi.postUserData).not.toHaveBeenCalled();
-    expect(
-      storage.get(user.id)?.businesses[userData.currentBusinessId].profileData.businessName,
-    ).toBe("Guest business");
+    expect(utils.result.current.business?.taskProgress[taskId]).toBe("COMPLETED");
+    expect(storage.get(user.id)?.businesses[userData.currentBusinessId].taskProgress[taskId]).toBe(
+      "COMPLETED",
+    );
   });
 
   it("does not post an authenticated update marked as local", async () => {
@@ -586,6 +772,86 @@ describe("useUserData", () => {
     ).toEqual(expect.objectContaining({ businessName: "Unsaved business" }));
   });
 
+  it("preserves an active save error across fetch failure and recovery", async () => {
+    const user = generateUser({});
+    const initialUserData = generateUserData({ user });
+    const refreshedUserData = {
+      ...initialUserData,
+      lastUpdatedISO: "2026-07-17T14:00:00.000Z",
+    };
+    mockApi.getUserData.mockResolvedValueOnce(initialUserData);
+    mockApi.postUserData.mockRejectedValue({ status: 502 });
+    const utils = renderUserDataHook({ authState: authenticatedState(user.id) });
+    await waitFor(() => {
+      expect(utils.result.current.updateQueue).toBeDefined();
+    });
+
+    await act(async () => {
+      await utils.result.current.updateQueue
+        ?.queueProfileData({ businessName: "Unsaved business" })
+        .update()
+        .catch(() => undefined);
+    });
+    expect(utils.result.current.error).toBe("UPDATE_FAILED");
+
+    mockApi.getUserData.mockRejectedValueOnce(404);
+    await act(async () => {
+      await utils.result.current.refresh();
+    });
+    expect(utils.result.current.error).toBe("UPDATE_FAILED");
+
+    mockApi.getUserData.mockResolvedValueOnce(refreshedUserData);
+    await act(async () => {
+      await utils.result.current.refresh();
+    });
+    expect(utils.result.current.error).toBe("UPDATE_FAILED");
+    expect(utils.result.current.business?.profileData.businessName).toBe("Unsaved business");
+    expect(
+      utils.storage.get(user.id)?.businesses[initialUserData.currentBusinessId].profileData
+        .businessName,
+    ).toBe("Unsaved business");
+  });
+
+  it("clears an active save error after a successful retry", async () => {
+    const user = generateUser({});
+    const initialUserData = generateUserData({ user });
+    const canonicalUserData = {
+      ...initialUserData,
+      businesses: {
+        ...initialUserData.businesses,
+        [initialUserData.currentBusinessId]: {
+          ...initialUserData.businesses[initialUserData.currentBusinessId],
+          profileData: generateProfileData({ businessName: "Saved business" }),
+        },
+      },
+    };
+    mockApi.getUserData.mockResolvedValue(initialUserData);
+    mockApi.postUserData
+      .mockRejectedValueOnce({ status: 502 })
+      .mockResolvedValueOnce(canonicalUserData);
+    const utils = renderUserDataHook({ authState: authenticatedState(user.id) });
+    await waitFor(() => {
+      expect(utils.result.current.updateQueue).toBeDefined();
+    });
+
+    await act(async () => {
+      await utils.result.current.updateQueue
+        ?.queueProfileData({ businessName: "Unsaved business" })
+        .update()
+        .catch(() => undefined);
+    });
+    expect(utils.result.current.error).toBe("UPDATE_FAILED");
+
+    await act(async () => {
+      await utils.result.current.updateQueue
+        ?.queueProfileData({ businessName: "Saved business" })
+        .update();
+    });
+
+    expect(utils.result.current.error).toBeUndefined();
+    expect(utils.result.current.userData).toEqual(canonicalUserData);
+  });
+
   it("rebuilds profile-derived state exactly once for one update", async () => {
     const user = generateUser({});
     const initialUserData = generateUserData({ user });
@@ -611,7 +877,6 @@ describe("useUserData", () => {
   });
 
   it("accepts a successful save when profile-derived state synchronization fails", async () => {
-    const consoleError = jest.spyOn(console, "error").mockImplementation(() => {});
     const user = generateUser({});
     const initialUserData = generateUserData({ user });
     const canonicalUserData = {
@@ -642,11 +907,11 @@ describe("useUserData", () => {
     expect(utils.storage.get(user.id)).toEqual(canonicalUserData);
     expect(utils.result.current.error).toBeUndefined();
     expect(utils.setUserDataErrorCalls).not.toHaveBeenLastCalledWith("UPDATE_FAILED");
-    expect(consoleError).toHaveBeenCalledWith(
-      "Failed to synchronize profile-derived state after user data save",
-      expect.any(Error),
-    );
-    consoleError.mockRestore();
+    expect(mockAnalyticsHelpers.reportUserDataSync).toHaveBeenCalledWith({
+      operation: "profile-sync",
+      outcome: "error",
+      error: expect.any(Error),
+    });
   });
 
   it("refreshes the queue and persisted data from the API", async () => {
@@ -676,6 +941,158 @@ describe("useUserData", () => {
     expect(mockApi.getUserData).toHaveBeenCalledTimes(2);
     expect(utils.result.current.business?.profileData.businessName).toBe("Refreshed business");
     expect(utils.storage.get(user.id)).toEqual(refreshedUserData);
+  });
+
+  it("does not let a refresh started before a save overwrite the saved data", async () => {
+    const user = generateUser({});
+    const initialUserData = generateUserData({ user });
+    const staleRefreshedUserData = {
+      ...initialUserData,
+      businesses: {
+        ...initialUserData.businesses,
+        [initialUserData.currentBusinessId]: {
+          ...initialUserData.businesses[initialUserData.currentBusinessId],
+          profileData: generateProfileData({ businessName: "Stale refresh" }),
+        },
+      },
+    };
+    const savedUserData = {
+      ...initialUserData,
+      businesses: {
+        ...initialUserData.businesses,
+        [initialUserData.currentBusinessId]: {
+          ...initialUserData.businesses[initialUserData.currentBusinessId],
+          profileData: generateProfileData({ businessName: "Saved business" }),
+        },
+      },
+    };
+    const refreshRequest = deferredPromise<UserData>();
+    mockApi.getUserData.mockResolvedValueOnce(initialUserData);
+    mockApi.postUserData.mockResolvedValueOnce(savedUserData);
+    const utils = renderUserDataHook({ authState: authenticatedState(user.id) });
+    await waitFor(() => {
+      expect(utils.result.current.updateQueue).toBeDefined();
+    });
+    mockApi.getUserData.mockReturnValueOnce(refreshRequest.promise);
+
+    let refreshPromise: Promise<void> = Promise.resolve();
+    await act(async () => {
+      refreshPromise = utils.result.current.refresh();
+      await Promise.resolve();
+    });
+    expect(mockApi.getUserData).toHaveBeenCalledTimes(2);
+
+    await act(async () => {
+      await utils.result.current.updateQueue
+        ?.queueProfileData({ businessName: "Optimistic business" })
+        .update();
+    });
+    expect(utils.result.current.business?.profileData.businessName).toBe("Saved business");
+
+    refreshRequest.resolve(staleRefreshedUserData);
+    await act(async () => {
+      await refreshPromise;
+    });
+
+    expect(utils.result.current.business?.profileData.businessName).toBe("Saved business");
+    expect(utils.result.current.updateQueue?.current()).toEqual(savedUserData);
+    expect(utils.storage.get(user.id)).toEqual(savedUserData);
+  });
+
+  it("revalidates authenticated data on focus", async () => {
+    const user = generateUser({});
+    const initialUserData = generateUserData({ user });
+    const focusedUserData = {
+      ...initialUserData,
+      lastUpdatedISO: "2026-07-17T12:00:00.000Z",
+    };
+    mockApi.getUserData
+      .mockResolvedValueOnce(initialUserData)
+      .mockResolvedValueOnce(focusedUserData);
+    const utils = renderUserDataHook({
+      authState: authenticatedState(user.id),
+      swrIntervals: { dedupingInterval: 0, focusThrottleInterval: 0 },
+    });
+    await waitFor(() => {
+      expect(utils.result.current.userData).toEqual(initialUserData);
+    });
+
+    await act(async () => {
+      window.dispatchEvent(new Event("focus"));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    await waitFor(() => {
+      expect(mockApi.getUserData).toHaveBeenCalledTimes(2);
+    });
+    expect(utils.storage.get(user.id)).toEqual(focusedUserData);
+    expect(utils.result.current.userData).toEqual(focusedUserData);
+  });
+
+  it("revalidates authenticated data on reconnect", async () => {
+    const user = generateUser({});
+    const initialUserData = generateUserData({ user });
+    const reconnectedUserData = {
+      ...initialUserData,
+      lastUpdatedISO: "2026-07-17T13:00:00.000Z",
+    };
+    mockApi.getUserData
+      .mockResolvedValueOnce(initialUserData)
+      .mockResolvedValueOnce(reconnectedUserData);
+    const utils = renderUserDataHook({
+      authState: authenticatedState(user.id),
+      swrIntervals: { dedupingInterval: 0 },
+    });
+    await waitFor(() => {
+      expect(utils.result.current.userData).toEqual(initialUserData);
+    });
+
+    await act(async () => {
+      window.dispatchEvent(new Event("online"));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    await waitFor(() => {
+      expect(mockApi.getUserData).toHaveBeenCalledTimes(2);
+    });
+    expect(utils.storage.get(user.id)).toEqual(reconnectedUserData);
+    expect(utils.result.current.userData).toEqual(reconnectedUserData);
+  });
+
+  it("does not retry terminal authenticated fetch failures", async () => {
+    jest.useFakeTimers();
+    try {
+      const user = generateUser({});
+      mockApi.getUserData.mockRejectedValue(404);
+      renderUserDataHook({ authState: authenticatedState(user.id) });
+
+      await act(async () => {
+        await Promise.resolve();
+        await jest.advanceTimersByTimeAsync(1_000_000);
+      });
+
+      expect(mockApi.getUserData).toHaveBeenCalledTimes(1);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it("stops retrying transient authenticated fetch failures at the configured limit", async () => {
+    jest.useFakeTimers();
+    try {
+      const user = generateUser({});
+      mockApi.getUserData.mockRejectedValue(500);
+      renderUserDataHook({ authState: authenticatedState(user.id) });
+
+      await act(async () => {
+        await Promise.resolve();
+        await jest.advanceTimersByTimeAsync(1_000_000);
+      });
+
+      expect(mockApi.getUserData).toHaveBeenCalledTimes(4);
+    } finally {
+      jest.useRealTimers();
+    }
   });
 
   it("does not apply a prior user's late refresh to the active user's queue", async () => {
@@ -886,6 +1303,244 @@ describe("useUserData", () => {
         .businessName,
     ).toBe("First user's optimistic edit");
     expect(mockBuildUserRoadmap.buildUserRoadmap).not.toHaveBeenCalled();
+  });
+
+  it("does not start a queued save after switching to another user", async () => {
+    const firstUser = generateUser({ id: "first-user" });
+    const secondUser = generateUser({ id: "second-user" });
+    const firstUserData = generateUserData({ user: firstUser });
+    const secondUserData = generateUserData({ user: secondUser });
+    const firstSaveRequest = deferredPromise<UserData>();
+    const secondSaveRequest = deferredPromise<UserData>();
+    const secondUserRequest = deferredPromise<UserData>();
+    mockApi.getUserData
+      .mockResolvedValueOnce(firstUserData)
+      .mockReturnValueOnce(secondUserRequest.promise);
+    mockApi.postUserData
+      .mockReturnValueOnce(firstSaveRequest.promise)
+      .mockReturnValueOnce(secondSaveRequest.promise);
+    const utils = renderUserDataHook({ authState: authenticatedState(firstUser.id) });
+    await waitFor(() => {
+      expect(utils.result.current.updateQueue).toBeDefined();
+    });
+
+    let firstSave: Promise<void> = Promise.resolve();
+    let secondSave: Promise<void> = Promise.resolve();
+    await act(async () => {
+      firstSave =
+        utils.result.current.updateQueue
+          ?.queueProfileData({ businessName: "First edit" })
+          .update() ?? Promise.resolve();
+      await Promise.resolve();
+    });
+    await waitFor(() => {
+      expect(mockApi.postUserData).toHaveBeenCalledTimes(1);
+    });
+    await act(async () => {
+      secondSave =
+        utils.result.current.updateQueue
+          ?.queueProfileData({ businessName: "Second edit" })
+          .update() ?? Promise.resolve();
+      await Promise.resolve();
+    });
+
+    await utils.setAuthState(authenticatedState(secondUser.id));
+    firstSaveRequest.resolve(firstUserData);
+    await act(async () => {
+      await Promise.all([firstSave, secondSave]);
+    });
+
+    expect(mockApi.postUserData).toHaveBeenCalledTimes(1);
+    secondUserRequest.resolve(secondUserData);
+    await act(async () => {
+      await secondUserRequest.promise;
+    });
+    await waitFor(() => {
+      expect(utils.result.current.userData).toEqual(secondUserData);
+    });
+    expect(utils.result.current.error).toBeUndefined();
+  });
+
+  it("does not start a queued save after logout", async () => {
+    const user = generateUser({});
+    const userData = generateUserData({ user });
+    const firstSaveRequest = deferredPromise<UserData>();
+    const secondSaveRequest = deferredPromise<UserData>();
+    mockApi.getUserData.mockResolvedValue(userData);
+    mockApi.postUserData
+      .mockReturnValueOnce(firstSaveRequest.promise)
+      .mockReturnValueOnce(secondSaveRequest.promise);
+    const utils = renderUserDataHook({ authState: authenticatedState(user.id) });
+    await waitFor(() => {
+      expect(utils.result.current.updateQueue).toBeDefined();
+    });
+
+    let firstSave: Promise<void> = Promise.resolve();
+    let secondSave: Promise<void> = Promise.resolve();
+    await act(async () => {
+      firstSave =
+        utils.result.current.updateQueue
+          ?.queueProfileData({ businessName: "First edit" })
+          .update() ?? Promise.resolve();
+      await Promise.resolve();
+    });
+    await waitFor(() => {
+      expect(mockApi.postUserData).toHaveBeenCalledTimes(1);
+    });
+    await act(async () => {
+      secondSave =
+        utils.result.current.updateQueue
+          ?.queueProfileData({ businessName: "Second edit" })
+          .update() ?? Promise.resolve();
+      await Promise.resolve();
+    });
+
+    await utils.setAuthState({
+      activeUser: undefined,
+      isAuthenticated: IsAuthenticated.FALSE,
+    });
+    firstSaveRequest.resolve(userData);
+    await act(async () => {
+      await Promise.all([firstSave, secondSave]);
+    });
+
+    expect(mockApi.postUserData).toHaveBeenCalledTimes(1);
+    expect(utils.result.current.userData).toBeUndefined();
+    expect(utils.result.current.error).toBeUndefined();
+  });
+
+  it("serializes overlapping saves and applies only the newest canonical response", async () => {
+    const user = generateUser({});
+    const initialUserData = generateUserData({ user });
+    const firstResponse = deferredPromise<UserData>();
+    const secondResponse = deferredPromise<UserData>();
+    mockApi.getUserData.mockResolvedValue(initialUserData);
+    mockApi.postUserData
+      .mockReturnValueOnce(firstResponse.promise)
+      .mockReturnValueOnce(secondResponse.promise);
+    const utils = renderUserDataHook({ authState: authenticatedState(user.id) });
+    await waitFor(() => {
+      expect(utils.result.current.updateQueue).toBeDefined();
+    });
+
+    let firstSave: Promise<void> = Promise.resolve();
+    let secondSave: Promise<void> = Promise.resolve();
+    await act(async () => {
+      firstSave =
+        utils.result.current.updateQueue
+          ?.queueProfileData({ businessName: "First optimistic edit" })
+          .update() ?? Promise.resolve();
+      await Promise.resolve();
+    });
+    await waitFor(() => {
+      expect(mockApi.postUserData).toHaveBeenCalledTimes(1);
+    });
+
+    await act(async () => {
+      secondSave =
+        utils.result.current.updateQueue
+          ?.queueProfileData({ businessName: "Second optimistic edit" })
+          .update() ?? Promise.resolve();
+      await Promise.resolve();
+    });
+    expect(utils.result.current.business?.profileData.businessName).toBe("Second optimistic edit");
+    expect(mockApi.postUserData).toHaveBeenCalledTimes(1);
+
+    const firstCanonicalData = {
+      ...initialUserData,
+      businesses: {
+        ...initialUserData.businesses,
+        [initialUserData.currentBusinessId]: {
+          ...initialUserData.businesses[initialUserData.currentBusinessId],
+          profileData: generateProfileData({ businessName: "First canonical response" }),
+        },
+      },
+    };
+    firstResponse.resolve(firstCanonicalData);
+    await act(async () => {
+      await firstSave;
+    });
+    await waitFor(() => {
+      expect(mockApi.postUserData).toHaveBeenCalledTimes(2);
+    });
+    expect(utils.result.current.business?.profileData.businessName).toBe("Second optimistic edit");
+
+    const secondCanonicalData = {
+      ...initialUserData,
+      businesses: {
+        ...initialUserData.businesses,
+        [initialUserData.currentBusinessId]: {
+          ...initialUserData.businesses[initialUserData.currentBusinessId],
+          profileData: generateProfileData({ businessName: "Second canonical response" }),
+        },
+      },
+    };
+    secondResponse.resolve(secondCanonicalData);
+    await act(async () => {
+      await secondSave;
+    });
+
+    expect(utils.result.current.business?.profileData.businessName).toBe(
+      "Second canonical response",
+    );
+    expect(utils.storage.get(user.id)).toEqual(secondCanonicalData);
+  });
+
+  it("synchronizes profile-derived state after a newer non-profile save supersedes a profile save", async () => {
+    const user = generateUser({});
+    const initialUserData = generateUserData({ user });
+    const firstResponse = deferredPromise<UserData>();
+    const secondResponse = deferredPromise<UserData>();
+    mockApi.getUserData.mockResolvedValue(initialUserData);
+    mockApi.postUserData
+      .mockReturnValueOnce(firstResponse.promise)
+      .mockReturnValueOnce(secondResponse.promise);
+    const utils = renderUserDataHook({ authState: authenticatedState(user.id) });
+    await waitFor(() => {
+      expect(utils.result.current.updateQueue).toBeDefined();
+    });
+    mockBuildUserRoadmap.buildUserRoadmap.mockClear();
+    mockAnalyticsHelpers.setAnalyticsDimensions.mockClear();
+    utils.setRoadmap.mockClear();
+
+    let profileSave: Promise<void> = Promise.resolve();
+    let preferenceSave: Promise<void> = Promise.resolve();
+    await act(async () => {
+      profileSave =
+        utils.result.current.updateQueue
+          ?.queueProfileData({ businessName: "Optimistic business" })
+          .update() ?? Promise.resolve();
+      await Promise.resolve();
+    });
+    await waitFor(() => {
+      expect(mockApi.postUserData).toHaveBeenCalledTimes(1);
+    });
+    await act(async () => {
+      preferenceSave =
+        utils.result.current.updateQueue?.queuePreferences({ phaseNewlyChanged: true }).update() ??
+        Promise.resolve();
+      await Promise.resolve();
+    });
+
+    firstResponse.resolve(initialUserData);
+    await act(async () => {
+      await profileSave;
+    });
+    await waitFor(() => {
+      expect(mockApi.postUserData).toHaveBeenCalledTimes(2);
+    });
+    expect(mockBuildUserRoadmap.buildUserRoadmap).not.toHaveBeenCalled();
+
+    const canonicalUserData = utils.result.current.updateQueue?.current();
+    expect(canonicalUserData).toBeDefined();
+    secondResponse.resolve(canonicalUserData!);
+    await act(async () => {
+      await preferenceSave;
+    });
+
+    expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledTimes(1);
+    expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledTimes(1);
+    expect(utils.setRoadmap).toHaveBeenCalledTimes(1);
   });
 
   it("keeps business data aligned during an ordinary business switch", async () => {

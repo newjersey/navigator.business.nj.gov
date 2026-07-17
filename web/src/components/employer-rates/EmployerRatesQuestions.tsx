@@ -137,7 +137,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
       return;
     }
 
-    updateQueue?.queueProfileData({ deptOfLaborEin: dolEinValue }).update();
+    updateQueue?.queueProfileData({ deptOfLaborEin: dolEinValue }).updateInBackground();
 
     setLoading(true);
     const employerRates = {

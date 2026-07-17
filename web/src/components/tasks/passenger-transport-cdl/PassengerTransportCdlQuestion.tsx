@@ -76,7 +76,7 @@ export const PassengerTransportCdlQuestion = (props: Props): ReactElement => {
     updateQueue?.queueRoadmapTaskData({
       passengerTransportSixteenOrMorePassengers: props.passengersRadioValue,
     });
-    updateQueue?.update();
+    updateQueue?.updateInBackground();
   });
 
   const isSchoolBusError = props.CMS_ONLY_show_error || isSchoolBusFormFieldValid;

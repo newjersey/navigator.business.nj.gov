@@ -67,7 +67,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const [hasElevatorViolations, setHasElevatorViolations] = useState(false);
 
   useMountEffectWhenDefined(() => {
-    (async (): Promise<void> => {
+    void (async (): Promise<void> => {
       if (
         business?.profileData.operatingPhase === OperatingPhaseId.GUEST_MODE &&
         (business?.profileData.businessPersona === "STARTING" ||
@@ -117,7 +117,9 @@ const DashboardPage = (props: Props): ReactElement => {
         );
         setHasElevatorViolations(hasViolations);
       }
-    })();
+    })().catch((error: unknown) => {
+      console.error("Failed to initialize dashboard", error);
+    });
   }, [business, updateQueue]);
 
   return (

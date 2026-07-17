@@ -64,11 +64,15 @@ const LoadingPage = (): ReactElement => {
         .update()
         .then(() => {
           router && router.push(pageLink);
-        });
+        })
+        .catch(() => undefined);
     } else {
-      updateQueue.update().then(() => {
-        router && router.push(ROUTES.dashboard);
-      });
+      updateQueue
+        .update()
+        .then(() => {
+          router && router.push(ROUTES.dashboard);
+        })
+        .catch(() => undefined);
     }
   }, userData);
 
