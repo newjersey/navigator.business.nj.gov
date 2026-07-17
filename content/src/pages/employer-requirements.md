@@ -284,8 +284,6 @@ main-text-8: >-
   * During a state of emergency: To care for a family member, or someone who is the equivalent of family, who has been isolated or quarantined because of suspected exposure to a communicable disease; or to care for their child if their school or daycare is closed. The closure must be ordered by a public official during a public health emergency, like an epidemic of a contagious disease 
 
 
-
-
   #### **FMLA**
 
 
@@ -323,7 +321,11 @@ main-text-8: >-
   * Have been employed for at least 12 months
 
 
-  #### **SAFE Act**
+  #### **TDI/FLI Job Protection**\
+
+  \
+
+  **SAFE Act**
 
 
   [The New Jersey Security and Financial Empowerment Act (NJ SAFE Act)](https://www.nj.gov/labor/wageandhour/assets/PDFs/Employer%20Poster%20Packet/AD-289%20(4-22).pdf) lets employees take up to 20 days of unpaid leave each year due to domestic or sexual violence. Leave is for employees who experience domestic or sexual violence or have a child, parent, spouse, or partner who experiences it. To be eligible, employees must have:
