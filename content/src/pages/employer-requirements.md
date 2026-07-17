@@ -458,9 +458,13 @@ main-text-9: >-
   **NJFLA**
 
 
-  * An employer must prominently display notice of its employees' rights and obligations under the NJFLA in places easily visible to its employees, and use other appropriate means to keep its employees so informed, like the company’s employee handbook
+  * Employers are required to provide employees with written guidance concerning employees’ rights and obligations under the NJFLA.  An employer that maintains written guidance to employees concerning employee benefits or leave rights, such as in an employee handbook, must include information concerning leave and employee obligations under the NJFLA in the written guidance. If an employer does not maintain written policies, manuals, or handbooks describing employee  benefits and leave provisions, the employer must provide written guidance to each employee concerning the employee’s rights and obligations under the NJFLA. The employer may provide employees a copy of the Division on Civil Rights’ Fact Sheet and Frequently Asked Questions, available at www.njcivilrights.gov, to provide the required written guidance. 
 
-  * Employers covered by the NJFLA must display the official Family Leave Act poster of the Division on Civil Rights in accordance with N.J.A.C. 13:8-2.2.
+  * Employers covered by the NJFLA must display the official Family Leave Act poster of the Division on Civil Rights, available at www.njcivilrights.gov, in places easily visible to all employees, in accordance with N.J.A.C. 13:8-2.2.
+
+
+
+
 
 
   **FMLA**
