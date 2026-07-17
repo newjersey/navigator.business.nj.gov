@@ -433,8 +433,6 @@ main-text-9: >-
   * While the employee is on leave, the employer must continue any other employment benefits that are provided to employees taking other types of leave that are similar to family leave
 
 
-
-
   **FMLA**
 
 
@@ -463,8 +461,6 @@ main-text-9: >-
   * Employers covered by the NJFLA must display the official Family Leave Act poster of the Division on Civil Rights, available at www.njcivilrights.gov, in places easily visible to all employees, in accordance with N.J.A.C. 13:8-2.2
 
 
-
-
   **FMLA**
 
 
@@ -485,8 +481,7 @@ main-text-9: >-
 
   * Display the Temporary Disability Insurance poster and the Family Leave Insurance poster in a workplace location where employees can clearly see them
 
-    Give written notice of these programs when an employee is hired, requests information, or notifies an employer of their need for leave
-
+  * Give written notice of these programs when an employee is hired, requests information, or notifies an employer of their need for leave
 
 
   ### What Are the Notification Requirements?
