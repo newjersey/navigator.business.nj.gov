@@ -441,15 +441,15 @@ main-text-9: >-
   **‍**Nothing in the FMLA prevents employees from receiving protections under State laws. Workers have the right to benefit from all the laws that apply.
 
 
-  * Unpaid job protection for 12 weeks, meaning they have the right to go back to work at their same job or to an equivalent job that has the same pay, benefits, and other terms and conditions of employment at the end of their FMLA leave.
+  * Unpaid job protection for 12 weeks, meaning they have the right to go back to work at their same job or to an equivalent job that has the same pay, benefits, and other terms and conditions of employment at the end of their FMLA leave
 
-  * Employers are required to continue group health insurance coverage for an employee on FMLA leave under the same terms and conditions as if the employee had not taken leave.
+  * Employers are required to continue group health insurance coverage for an employee on FMLA leave under the same terms and conditions as if the employee had not taken leave
 
 
   **TDI/FLI Job Protection**
 
 
-  * When the employee’s leave ends, you must reinstate them to their same job or one with the same pay, benefits, seniority, and other terms of employment.  
+  * When the employee’s leave ends, you must reinstate them to their same job or one with the same pay, benefits, seniority, and other terms of employment
 
 
   ### What Must I Provide My Employees?
