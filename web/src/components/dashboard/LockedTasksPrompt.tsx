@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
+import analytics from "@/lib/utils/analytics";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
@@ -29,7 +30,10 @@ export const LockedTasksPrompt = (props: Props): ReactElement => {
               isRightMarginRemoved
               isFullWidthOnDesktop
               onClick={(): void => {
-                router && router.push(`/account-setup`);
+                if (router) {
+                  analytics.event.create_account_prompt.click.create_account_prompt_button();
+                  router.push(`/account-setup`);
+                }
               }}
             >
               {Config.lockedTasksPrompt.buttonText}

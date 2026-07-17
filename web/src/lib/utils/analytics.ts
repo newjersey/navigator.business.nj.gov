@@ -3043,6 +3043,20 @@ export default {
         },
       },
     },
+    create_account_prompt: {
+      click: {
+        create_account_prompt_button: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "create_account_prompt_cta_button",
+            legacy_event_label: "go_to_account_setup",
+            click_text: "create_account_prompt_button",
+            clicked_to: "/account-setup",
+          });
+        },
+      },
+    },
     select_business_structure_task: {
       click: {
         open_live_chat: () => {
