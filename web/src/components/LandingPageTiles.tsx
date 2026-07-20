@@ -90,7 +90,7 @@ export const LandingPageTiles = ({ tiles }: LandingPageTilesProps): ReactElement
   }));
 
   return (
-    <div className="display-flex fjc fac padding-top-2 dekstop:padding-bottom-2 padding-bottom-3">
+    <div className="display-flex fjc fac padding-top-2 desktop:padding-bottom-2 padding-bottom-3">
       <div className={"landing-grid-container padding-x-6 desktop:grid-container-widescreen"}>
         {actionTiles.map((actionTile, index) => {
           const actionTileObj = {

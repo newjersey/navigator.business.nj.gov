@@ -18,7 +18,7 @@ summaryDescriptionMd: >+
 callToActionLink: https://www.njeda.com/nol/
 callToActionText: Learn more
 fundingType: tax credit
-programFrequency: reoccuring
+programFrequency: recurring
 status: deadline
 programPurpose: In State
 agency:

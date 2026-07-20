@@ -356,8 +356,8 @@ async function main() {
         // Update the DynamoDB entry
         const location = docUrl.split("/undefined/")[0];
         const newDocUrl = `${location}/${encodeURIComponent(customIdentityId)}/${docName}`;
-        const udpatedBusiness = await updateBusinessDocumentUrl(businessId, userId, newDocUrl);
-        if (udpatedBusiness) {
+        const updatedBusiness = await updateBusinessDocumentUrl(businessId, userId, newDocUrl);
+        if (updatedBusiness) {
           successCount++;
         }
       } catch (error) {

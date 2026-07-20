@@ -149,7 +149,7 @@ describe("ApiCigaretteLicenseHelpers", () => {
       orderId: randomInt(),
       orderStatus: "COMPLETE",
       orderTimestamp: new Date().toISOString(),
-      confirmationEmailsent: false,
+      confirmationEmailSent: false,
     };
     const mockCigaretteLicenseData: CigaretteLicenseData = generateCigaretteLicenseData({
       paymentInfo: mockPaymentInfo,

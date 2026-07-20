@@ -454,7 +454,7 @@ describe("<CigaretteLicense />", () => {
           paymentInfo: {
             paymentComplete: true,
             orderId: 12345,
-            confirmationEmailsent: true,
+            confirmationEmailSent: true,
           },
         }),
       });

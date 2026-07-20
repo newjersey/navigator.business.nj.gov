@@ -6,11 +6,11 @@ export const searchAnytimeActionLicenseReinstatements = (
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[],
   term: string,
 ): Match[] => {
-  const AnytimeActionDatas: FileData[] = getAnytimeActionLicenseReinstatementsData(
+  const AnytimeActionData: FileData[] = getAnytimeActionLicenseReinstatementsData(
     anytimeActionLicenseReinstatements,
   );
 
-  return convertFileDataToMatchList(AnytimeActionDatas, term);
+  return convertFileDataToMatchList(AnytimeActionData, term);
 };
 
 export const getAnytimeActionLicenseReinstatementsData = (

@@ -82,7 +82,7 @@ export const checkXrayRegistrationStatus = (
   return post(`/xray-registration`, { facilityDetails });
 };
 
-export const searchBuisnessInCrtkDB = (
+export const searchBusinessInCrtkDB = (
   crtkBusinessDetails: CrtkBusinessDetails,
 ): Promise<UserData> => {
   return post(`/crtk-lookup`, { crtkBusinessDetails });

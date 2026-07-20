@@ -3,8 +3,8 @@ import { ReactElement } from "react";
 export type BgColors =
   | "primary-lightest"
   | "base-lighter"
-  | "accent-cool-lighter-border-darktext"
-  | "accent-cool-lighter-lighttext"
+  | "accent-cool-lighter-border-dark-text"
+  | "accent-cool-lighter-light-text"
   | "accent-warm-lighter"
   | "white"
   | "accent-cooler-lightest"
@@ -34,10 +34,10 @@ export const Tag = (props: Props): ReactElement => {
     case "base-lighter":
       styling = "bg-base-lighter text-base-dark";
       break;
-    case "accent-cool-lighter-border-darktext":
+    case "accent-cool-lighter-border-dark-text":
       styling = "bg-accent-cool-lighter text-base-darkest border border-accent-cool";
       break;
-    case "accent-cool-lighter-lighttext":
+    case "accent-cool-lighter-light-text":
       styling = "bg-accent-cool-lighter text-base-darkest text-accent-cool-darker";
       break;
     case "accent-warm-lighter":

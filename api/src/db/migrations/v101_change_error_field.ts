@@ -396,7 +396,7 @@ type v101GetFilingResponse = {
 
 // v101 factories
 
-export const generatrv101User = (overrides: Partial<v101BusinessUser>): v101BusinessUser => {
+export const generateV101User = (overrides: Partial<v101BusinessUser>): v101BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -607,7 +607,7 @@ export const generateV101UserData = (overrides: Partial<v101UserData>): v101User
   const profileData = generateV101ProfileData({});
   return {
     version: 101,
-    user: generatrv101User({}),
+    user: generateV101User({}),
     profileData: generateV101ProfileData({}),
     formProgress: "UNSTARTED",
     taskProgress: {},

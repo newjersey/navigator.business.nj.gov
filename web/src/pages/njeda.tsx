@@ -38,7 +38,7 @@ interface Props {
   CMS_PREVIEW_ONLY_OPEN_MODAL?: number;
 }
 
-const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
+const NJEDAFundingsOnboardingPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const router = useRouter();
   const currentUserData = createEmptyUserData(createEmptyUser());
@@ -48,7 +48,7 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
       currentUserData.businesses[currentUserData.currentBusinessId].profileData,
   );
   const [isNonProfit, setIsNonProfit] = useState<boolean | undefined>(undefined);
-  const [numberOfEmployees, setNumberofEmployees] = useState<string>(
+  const [numberOfEmployees, setNumberOfEmployees] = useState<string>(
     business?.profileData.existingEmployees ?? "",
   );
   const [shouldCloseModal, setShouldCloseModal] = useState<boolean>(
@@ -269,7 +269,7 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
                     </div>
                     <ExistingEmployees
                       onChange={(val) => {
-                        setNumberofEmployees(val);
+                        setNumberOfEmployees(val);
                       }}
                     />
                   </div>
@@ -347,4 +347,4 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
   };
 };
 
-export default NJEDAFundingsOnboardingPaage;
+export default NJEDAFundingsOnboardingPage;

@@ -62,8 +62,8 @@ export const AddTaskDependencyUsage = (matches: Match[]): void => {
         addTaskDependency(matches[index], addedPhrase);
       }
       if (dependency.taskDependencies) {
-        for (const TaskDependnecy of dependency.taskDependencies) {
-          if (match.filename === TaskDependnecy) {
+        for (const TaskDependency of dependency.taskDependencies) {
+          if (match.filename === TaskDependency) {
             const addedPhrase = composeIsTaskDependencyTaskString(
               dependency.task ?? dependency.licenseTask ?? "",
             );
@@ -72,8 +72,8 @@ export const AddTaskDependencyUsage = (matches: Match[]): void => {
         }
       }
       if (dependency.licenseTaskDependencies) {
-        for (const LicenseTaskDependnecy of dependency.licenseTaskDependencies) {
-          if (match.filename === LicenseTaskDependnecy) {
+        for (const LicenseTaskDependency of dependency.licenseTaskDependencies) {
+          if (match.filename === LicenseTaskDependency) {
             const addedPhrase = composeIsLicenseTaskDependencyString(
               dependency.task ?? dependency.licenseTask ?? "",
             );
@@ -106,12 +106,12 @@ export const AddIndustryUsage = (matches: Match[], industries: Industry[]): void
     for (const industry of industries) {
       for (const roadMapStep of industry.roadmapSteps) {
         if (match.filename === roadMapStep.task) {
-          const addedPhrase = composeIndstryTaskString(industry.name);
+          const addedPhrase = composeIndustryTaskString(industry.name);
 
           addIndustryDependency(matches[index], addedPhrase, industry.id);
         }
         if (match.filename === roadMapStep.licenseTask) {
-          const addedPhrase = composeIndstryLicenseTaskString(industry.name);
+          const addedPhrase = composeIndustryLicenseTaskString(industry.name);
 
           addIndustryDependency(matches[index], addedPhrase, industry.id);
         }
@@ -120,11 +120,11 @@ export const AddIndustryUsage = (matches: Match[], industries: Industry[]): void
   }
 };
 
-export const composeIndstryTaskString = (name: string): string => {
+export const composeIndustryTaskString = (name: string): string => {
   return `this Task is used in the "${name}" industry roadmap`;
 };
 
-export const composeIndstryLicenseTaskString = (name: string): string => {
+export const composeIndustryLicenseTaskString = (name: string): string => {
   return `this License Task is used in the "${name}" industry roadmap`;
 };
 

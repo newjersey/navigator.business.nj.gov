@@ -119,7 +119,7 @@ const fundingMd = [
     agencyContact: "",
     publishStageArchive: "",
     status: "first come, first serve",
-    programFrequency: "reoccuring",
+    programFrequency: "recurring",
     businessStage: "both",
     employeesRequired: "n/a",
     homeBased: "unknown",

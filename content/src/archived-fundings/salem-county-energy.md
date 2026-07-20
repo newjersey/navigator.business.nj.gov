@@ -17,7 +17,7 @@ summaryDescriptionMd: >+
 callToActionLink: https://www.njeda.com/salem-county-energy-sales-tax-exemption/
 callToActionText: Learn more
 fundingType: tax exemption
-programFrequency: reoccuring
+programFrequency: recurring
 status: first come, first serve
 programPurpose: In State
 agency:

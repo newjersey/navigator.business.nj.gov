@@ -18,7 +18,7 @@ summaryDescriptionMd: >+
 callToActionLink: https://www.nj.gov/state/bac/njstep.shtml
 callToActionText: Learn more
 fundingType: grant
-programFrequency: reoccuring
+programFrequency: recurring
 status: deadline
 programPurpose: In State
 agency:

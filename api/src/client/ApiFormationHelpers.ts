@@ -466,7 +466,7 @@ type ApiLocation = {
   State: StateNames | undefined; // required if country = US. Must be full state name. Ex: Alabama
   Province?: string;
   Zipcode: string; // max 5 if country=US, 11 otherwise
-  Country: CountriesShortCodes | undefined; //alpha-2 iban code
+  Country: CountriesShortCodes | undefined; //alpha-2 ISO code
 };
 
 type BusinessType =

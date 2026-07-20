@@ -471,7 +471,7 @@ export const randomFundingStatus = (): FundingStatus => {
 };
 
 export const randomFundingProgramFrequency = (): FundingProgramFrequency => {
-  const all = ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"];
+  const all = ["annual", "ongoing", "recurring", "one-time", "pilot", "other"];
   const randomIndex = Math.floor(Math.random() * all.length);
   return all[randomIndex] as FundingProgramFrequency;
 };

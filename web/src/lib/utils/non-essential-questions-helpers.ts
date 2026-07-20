@@ -28,23 +28,23 @@ export const doesSectorHaveNonEssentialQuestions = (profileData: ProfileData): b
 };
 
 export const getPersonaBasedNonEssentialQuestionsIds = (profileData: ProfileData): string[] => {
-  const nonEssentialQuesionIds: string[] = [];
+  const nonEssentialQuestionIds: string[] = [];
 
   if (profileData.businessPersona === "STARTING") {
-    nonEssentialQuesionIds.push("vacantPropertyOwner");
+    nonEssentialQuestionIds.push("vacantPropertyOwner");
   }
   if (profileData.businessPersona === "OWNING") {
     if (profileData.sectorId === "arts-entertainment-and-recreation") {
-      nonEssentialQuesionIds.push("carnivalRideOwningBusiness");
-      nonEssentialQuesionIds.push("travelingCircusOrCarnivalOwningBusiness");
+      nonEssentialQuestionIds.push("carnivalRideOwningBusiness");
+      nonEssentialQuestionIds.push("travelingCircusOrCarnivalOwningBusiness");
     }
     if (
       profileData.industryId === "real-estate-investor" ||
       profileData.sectorId === "real-estate"
     ) {
-      nonEssentialQuesionIds.push("vacantPropertyOwner");
+      nonEssentialQuestionIds.push("vacantPropertyOwner");
     }
   }
 
-  return nonEssentialQuesionIds;
+  return nonEssentialQuestionIds;
 };

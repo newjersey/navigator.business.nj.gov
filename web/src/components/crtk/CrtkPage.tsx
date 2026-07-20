@@ -37,7 +37,7 @@ export const CrtkPage = (props: Props): ReactElement => {
     setLastSearchParams(facilityDetails);
 
     try {
-      const crtkSearchResponse = await api.searchBuisnessInCrtkDB({
+      const crtkSearchResponse = await api.searchBusinessInCrtkDB({
         businessName: facilityDetails.businessName.trim().toUpperCase(),
         addressLine1: facilityDetails.businessStreetAddress.trim().toUpperCase(),
         city: facilityDetails.city.trim().toUpperCase(),

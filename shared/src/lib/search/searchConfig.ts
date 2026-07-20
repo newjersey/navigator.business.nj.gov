@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { makeSnippet } from "./helpers";
-import { ConfigMatch, GroupedConfigMatch, MatchComparitor } from "./typesForSearch";
+import { ConfigMatch, GroupedConfigMatch, MatchComparator } from "./typesForSearch";
 
 const collectionInfo = new Map<string, string[]>();
 export const searchConfig = (
   object: any,
-  matchComparitor: MatchComparitor,
+  matchComparator: MatchComparator,
   cmsConfig: any,
 ): GroupedConfigMatch[] => {
-  const configMatches = searchObject(object.default, matchComparitor, [], []).map((it) => {
+  const configMatches = searchObject(object.default, matchComparator, [], []).map((it) => {
     const cmsPath = findCmsConfigPath(cmsConfig, it.keyPath);
     return {
-      value: makeSnippet(it.value, matchComparitor),
+      value: makeSnippet(it.value, matchComparator),
       cmsLabelPath: cmsPath,
     };
   });
@@ -38,7 +38,7 @@ const groupByCMSFile = (configMatches: ConfigMatch[]): GroupedConfigMatch[] => {
 
 const searchObject = (
   object: any,
-  matchComparitor: MatchComparitor,
+  matchComparator: MatchComparator,
   matches: JsonMatch[],
   keyPaths: string[],
 ): JsonMatch[] => {
@@ -46,8 +46,8 @@ const searchObject = (
     for (const key of Object.keys(object)) {
       const value = object[key];
       if (typeof value === "string") {
-        if (matchComparitor.term) {
-          if (value.toLowerCase().includes(matchComparitor.term)) {
+        if (matchComparator.term) {
+          if (value.toLowerCase().includes(matchComparator.term)) {
             matches = [
               ...matches,
               {
@@ -56,15 +56,15 @@ const searchObject = (
               },
             ];
           }
-        } else if (matchComparitor.regex) {
-          const regexMatches = [...value.matchAll(matchComparitor.regex)];
+        } else if (matchComparator.regex) {
+          const regexMatches = [...value.matchAll(matchComparator.regex)];
           const contextualInfoFileNames = regexMatches.map((match) => match[1]);
           if (contextualInfoFileNames.length > 0) {
-            for (const conextualInfoFileName of contextualInfoFileNames) {
+            for (const contextualInfoFileName of contextualInfoFileNames) {
               matches = [
                 ...matches,
                 {
-                  value: conextualInfoFileName,
+                  value: contextualInfoFileName,
                   keyPath: [...keyPaths, key],
                 },
               ];
@@ -72,7 +72,7 @@ const searchObject = (
           }
         }
       } else if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-        matches = searchObject(value, matchComparitor, matches, [...keyPaths, key]);
+        matches = searchObject(value, matchComparator, matches, [...keyPaths, key]);
       }
     }
 

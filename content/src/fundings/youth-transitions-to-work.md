@@ -21,7 +21,7 @@ summaryDescriptionMd: >+
 callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more
 fundingType: grant
-programFrequency: reoccuring
+programFrequency: recurring
 status: deadline
 agency:
   - njdol

@@ -10,8 +10,8 @@ import {
   composeAddOnTaskToReplaceFilenameString,
   composeHasLicenseTaskDependenciesString,
   composeHasTaskDependenciesString,
-  composeIndstryLicenseTaskString,
-  composeIndstryTaskString,
+  composeIndustryLicenseTaskString,
+  composeIndustryTaskString,
   composeIsLicenseTaskDependencyString,
   composeIsTaskDependencyTaskString,
 } from "./usageHelpers";
@@ -134,7 +134,7 @@ describe("usageHelpers", () => {
 
       AddIndustryUsage(matches, [industry]);
       expect(matches[0].additionalUsageLocations?.industries?.[0]).toStrictEqual({
-        description: composeIndstryTaskString("name"),
+        description: composeIndustryTaskString("name"),
         link: "/mgmt/cms#/collections/roadmaps/entries/id",
       });
     });
@@ -144,7 +144,7 @@ describe("usageHelpers", () => {
 
       AddIndustryUsage(matches, [industry]);
       expect(matches[0].additionalUsageLocations?.industries?.[0]).toStrictEqual({
-        description: composeIndstryLicenseTaskString("name"),
+        description: composeIndustryLicenseTaskString("name"),
         link: "/mgmt/cms#/collections/roadmaps/entries/id",
       });
     });

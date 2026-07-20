@@ -14,7 +14,7 @@ summaryDescriptionMd: The Digital Media Tax Credit Program provides your
 callToActionLink: https://www.njeda.com/film
 callToActionText: Learn more
 fundingType: tax credit
-programFrequency: reoccuring
+programFrequency: recurring
 status: first come, first serve
 programPurpose: Both
 agency:

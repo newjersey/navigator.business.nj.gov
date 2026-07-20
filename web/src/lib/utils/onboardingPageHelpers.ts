@@ -25,7 +25,7 @@ export const flowQueryParamIsValid = (flow: string): boolean => {
   return Object.keys(mapFlowQueryToPersona).includes(flow);
 };
 
-export const pageQueryParamisValid = (
+export const pageQueryParamIsValid = (
   onboardingFlows: Record<FlowType, OnboardingFlow>,
   business: Business,
   page: number,

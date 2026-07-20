@@ -223,7 +223,7 @@ export const FundingStatusOrder: Record<FundingStatus, number> = {
 export type FundingProgramFrequency =
   | "annual"
   | "ongoing"
-  | "reoccuring"
+  | "recurring"
   | "one-time"
   | "pilot"
   | "other";

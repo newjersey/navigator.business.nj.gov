@@ -18,7 +18,7 @@ summaryDescriptionMd: >+
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/aqes-njccp.htm
 callToActionText: Learn More
 fundingType: grant
-programFrequency: reoccuring
+programFrequency: recurring
 status: first come, first serve
 programPurpose: In State
 agency:

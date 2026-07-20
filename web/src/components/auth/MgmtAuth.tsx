@@ -55,7 +55,11 @@ export const MgmtAuth = (props: Props): ReactElement => {
           },
         }}
       />
-      <button onClick={onSubmit} className="usa-button margin-top-2" data-testid="mgmt-submit-bttn">
+      <button
+        onClick={onSubmit}
+        className="usa-button margin-top-2"
+        data-testid="mgmt-submit-button"
+      >
         Submit
       </button>
     </>

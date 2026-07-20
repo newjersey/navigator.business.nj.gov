@@ -12,9 +12,11 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "rimraf lib",
+    "spellcheck": "cspell 'src/**/*.ts' '!**/*.test.ts' --config ../../cspell.json --no-progress",
     "typecheck": "tsc --noemit"
   },
   "devDependencies": {
+    "cspell": "9.8.0",
     "rimraf": "6.1.3",
     "typescript": "5.9.3"
   }
