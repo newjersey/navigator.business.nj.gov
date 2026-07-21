@@ -13,8 +13,8 @@ const Config = getMergedConfig();
 
 export const getRoadmapHeadingText = (industryId?: string): string => {
   return industryId === "domestic-employer"
-    ? Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText
-    : Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText;
+    ? Config.dashboardRoadmapHeaderDefaults.domesticEmployerRoadmapTasksHeaderText
+    : Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderText;
 };
 
 export const getPersonalizeTaskButtonTabValue = (business: Business | undefined): ProfileTabs => {

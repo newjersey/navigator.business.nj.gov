@@ -13,21 +13,21 @@ describe("dashboardHelpers", () => {
   const Config = getMergedConfig();
 
   describe("getRoadmapHeadingText", () => {
-    it("returns DomesticEmployerRoadmapTasksHeaderText for 'domestic-employer'", () => {
+    it("returns domesticEmployerRoadmapTasksHeaderText for 'domestic-employer'", () => {
       const result = getRoadmapHeadingText("domestic-employer");
       expect(result).toBe(
-        Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
+        Config.dashboardRoadmapHeaderDefaults.domesticEmployerRoadmapTasksHeaderText,
       );
     });
 
-    it("returns RoadmapTasksHeaderText for other industries", () => {
+    it("returns roadmapTasksHeaderText for other industries", () => {
       const result = getRoadmapHeadingText("something-else");
-      expect(result).toBe(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText);
+      expect(result).toBe(Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderText);
     });
 
-    it("returns RoadmapTasksHeaderText when no industryId is passed", () => {
+    it("returns roadmapTasksHeaderText when no industryId is passed", () => {
       const result = getRoadmapHeadingText(undefined);
-      expect(result).toBe(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText);
+      expect(result).toBe(Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderText);
     });
   });
 

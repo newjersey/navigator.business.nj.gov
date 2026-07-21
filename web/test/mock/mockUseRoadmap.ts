@@ -27,7 +27,7 @@ export const setMockRoadmapResponse = (params: {
 };
 
 export const useMockRoadmapTask = (overrides: Partial<Task>): void => {
-  const mockTask = generateTask(overrides);
+  const mockTask = generateTask({ required: true, ...overrides });
   useMockRoadmap({
     steps: [generateStep({ stepNumber: mockTask.stepNumber })],
     tasks: [mockTask],

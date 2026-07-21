@@ -31,10 +31,10 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
 
     completeBusinessStructureTask({ legalStructureId });
 
-    // go to regular task
-    cy.get('[data-task="town-mercantile-license"]').first().click({ force: true });
+    // go to regular task (non-auth-blocked)
+    cy.get('[data-task="cosmetology-license"]').first().click({ force: true });
     cy.get(`[data-industry='${industry.id}']`).should("not.exist");
-    cy.get('[data-task-id="town-mercantile-license"]').should("exist");
+    cy.get('[data-task-id="cosmetology-license"]').should("exist");
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
     cy.get('[data-testid="needs-account-alert"]').should("not.exist");
 

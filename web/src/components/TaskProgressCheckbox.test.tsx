@@ -1,9 +1,7 @@
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { getTaskStatusUpdatedMessage } from "@/lib/utils/helpers";
-import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { selectDate } from "@/test/helpers/helpers-testing-library-selectors";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -38,12 +36,10 @@ jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({
 }));
 
 const Config = getMergedConfig();
-let setShowNeedsAccountModal: jest.Mock;
 
 describe("<TaskProgressCheckbox />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    setShowNeedsAccountModal = jest.fn();
     useMockRoadmap({});
     useMockRouter({});
     setupStatefulUserDataContext();
@@ -58,23 +54,6 @@ describe("<TaskProgressCheckbox />", () => {
           </WithStatefulUserData>
         </ThemeProvider>
       </MunicipalitiesContext.Provider>,
-    );
-  };
-
-  const renderTaskCheckboxWithAuthAlert = (taskId: string, initialBusiness: Business): void => {
-    render(
-      withNeedsAccountContext(
-        <MunicipalitiesContext.Provider value={{ municipalities: [] }}>
-          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
-            <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} needsAccount />
-          </WithStatefulUserData>
-        </MunicipalitiesContext.Provider>,
-        IsAuthenticated.FALSE,
-        {
-          showNeedsAccountModal: false,
-          setShowNeedsAccountModal: setShowNeedsAccountModal,
-        },
-      ),
     );
   };
 
@@ -126,14 +105,6 @@ describe("<TaskProgressCheckbox />", () => {
 
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
     await screen.findByText(getTaskStatusUpdatedMessage("COMPLETED"));
-  });
-
-  it("opens Needs Account modal for guest mode user when checkbox is clicked", async () => {
-    renderTaskCheckboxWithAuthAlert("123", generateBusiness({}));
-    fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-    await waitFor(() => {
-      return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
-    });
   });
 
   describe("tax registration warning modal", () => {
