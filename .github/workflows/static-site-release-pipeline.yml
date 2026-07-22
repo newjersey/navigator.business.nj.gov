@@ -1,0 +1,142 @@
+name: Static Site Release Pipeline
+
+# Deploys only the static site, independently of the navigator monorepo release.
+# The static site builds to its own image, ECR repository, and ECS service, so it
+# can ship on its own cadence. Both stages deploy the same image tag, so the
+# artifact approved on staging is the exact artifact promoted to production.
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: static-site-release-pipeline
+  cancel-in-progress: false
+
+jobs:
+  # The tag is resolved once and reused by both stages. Resolving it per job would
+  # let staging and production diverge when an approval lands on a later date.
+  resolve-image-tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      image_tag: ${{ steps.resolve.outputs.image_tag }}
+    steps:
+      - name: Resolve Image Tag
+        id: resolve
+        shell: bash
+        run: |
+          image_tag="$(date -u +%Y%m%d)-${GITHUB_SHA:0:7}"
+          echo "image_tag=$image_tag" >> "$GITHUB_OUTPUT"
+          echo "Static site image tag: $image_tag"
+
+  deploy-staging:
+    needs: resolve-image-tag
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    environment: staging
+    env:
+      AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID_STAGING }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_STAGING }}
+      AWS_REGION: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}
+      BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
+      BASIC_AUTH_USERNAME: ${{ vars.BASIC_AUTH_USERNAME }}
+      NEXT_PUBLIC_MULTILINGUAL_ENABLED: ${{ vars.NEXT_PUBLIC_MULTILINGUAL_ENABLED }}
+      NEXT_PUBLIC_WEB_BASE_URL: ${{ vars.WEB_BASE_URL_STAGING }}
+      SG_ID: ${{ vars.SG_ID_AWS_STAGING }}
+      STAGE: ${{ vars.STAGE_STAGING }}
+      SUBNET_ID_01: ${{ vars.SUBNET_ID_01_AWS_STAGING }}
+      SUBNET_ID_02: ${{ vars.SUBNET_ID_02_AWS_STAGING }}
+      VPC_ID: ${{ vars.VPC_ID_AWS_STAGING }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+
+      - name: Install Dependencies
+        shell: bash
+        run: yarn install --immutable
+
+      # The static site Dockerfile copies content/lib into the build, and
+      # content/lib is generated rather than committed.
+      - name: Build Content
+        shell: bash
+        run: yarn workspace @businessnjgovnavigator/content build
+
+      - name: Build Content Types
+        shell: bash
+        run: yarn workspace @businessnjgovnavigator/content-types build
+
+      - name: Deploy Static Site
+        uses: ./.github/actions/deploy-static-site
+        with:
+          image_tag: ${{ needs.resolve-image-tag.outputs.image_tag }}
+
+  production-hold:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    environment: prod-hold
+    steps:
+      - run: echo "Awaiting approval for static site production release."
+
+  deploy-production:
+    needs: [resolve-image-tag, production-hold]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    environment: prod
+    env:
+      AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID_PROD }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+      AWS_REGION: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}
+      BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
+      BASIC_AUTH_USERNAME: ${{ vars.BASIC_AUTH_USERNAME }}
+      NEXT_PUBLIC_MULTILINGUAL_ENABLED: ${{ vars.NEXT_PUBLIC_MULTILINGUAL_ENABLED }}
+      NEXT_PUBLIC_WEB_BASE_URL: ${{ vars.WEB_BASE_URL_PROD }}
+      SG_ID: ${{ vars.SG_ID_AWS_PROD }}
+      STAGE: ${{ vars.STAGE_PROD }}
+      SUBNET_ID_01: ${{ vars.SUBNET_ID_01_AWS_PROD }}
+      SUBNET_ID_02: ${{ vars.SUBNET_ID_02_AWS_PROD }}
+      VPC_ID: ${{ vars.VPC_ID_AWS_PROD }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+
+      - name: Install Dependencies
+        shell: bash
+        run: yarn install --immutable
+
+      # The static site Dockerfile copies content/lib into the build, and
+      # content/lib is generated rather than committed.
+      - name: Build Content
+        shell: bash
+        run: yarn workspace @businessnjgovnavigator/content build
+
+      - name: Build Content Types
+        shell: bash
+        run: yarn workspace @businessnjgovnavigator/content-types build
+
+      - name: Deploy Static Site
+        uses: ./.github/actions/deploy-static-site
+        with:
+          image_tag: ${{ needs.resolve-image-tag.outputs.image_tag }}
