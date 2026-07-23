@@ -21,7 +21,7 @@ export const ManageBusinessVehicleResults = (props: Props): ReactElement => {
   const handleClick = (): void => {
     updateQueue?.queueTaskProgress({ [props.taskId]: "TO_DO" });
     updateQueue?.queueRoadmapTaskData({ manageBusinessVehicles: undefined });
-    updateQueue?.update();
+    updateQueue?.updateInBackground();
   };
 
   return (

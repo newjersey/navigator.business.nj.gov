@@ -93,7 +93,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
           },
         },
       };
-      updateQueue?.queueProfileData(profileData).update();
+      updateQueue?.queueProfileData(profileData).updateInBackground();
     }
     analytics.event.task_elevator_registration.submit.elevator_registration_form_submission();
     props.onSubmit({

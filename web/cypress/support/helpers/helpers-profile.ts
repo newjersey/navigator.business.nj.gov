@@ -386,7 +386,7 @@ export const updateForeignBusinessProfilePage = ({
   notes,
 }: Partial<ForeignProfileData>): void => {
   cy.url().should("contain", "/dashboard");
-  onDashboardPage.clickEditProfileInDropdown();
+  cy.visit("/profile");
   cy.url().should("contain", "/profile");
   cy.wait(1000);
 

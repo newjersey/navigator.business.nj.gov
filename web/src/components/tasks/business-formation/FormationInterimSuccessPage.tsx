@@ -31,7 +31,8 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
         props.setStepIndex(LookupStepIndexByName("Review"));
         router &&
           router.replace({ pathname: `/tasks/${props.taskUrlSlug}` }, undefined, { shallow: true });
-      });
+      })
+      .catch(() => undefined);
   };
 
   return (

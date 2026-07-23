@@ -1,4 +1,7 @@
-import { NavBarDashboardLink } from "@/components/navbar/NavBarDashboardLink";
+import {
+  NavBarDashboardLink,
+  NavBarPublicDashboardLink,
+} from "@/components/navbar/NavBarDashboardLink";
 import { NavBarVerticalLine } from "@/components/navbar/NavBarVerticalLine";
 import { NavbarBusinessNjGovLogo } from "@/components/navbar/NavbarBusinessNjGovLogo";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -6,6 +9,7 @@ import { ReactElement } from "react";
 
 interface Props {
   isLoginPage?: boolean;
+  isPublicAccountLink?: boolean;
   scrolled: boolean;
   showSidebar: boolean | undefined;
   previousBusinessId: string | undefined;
@@ -27,6 +31,11 @@ export const NavBarMobileHomeLogo = (props: Props): ReactElement => {
         <div>
           {props.isLoginPage ? (
             <span className="my-account-login-text font-body-sm">My Account</span>
+          ) : props.isPublicAccountLink ? (
+            <NavBarPublicDashboardLink
+              className={props.showSidebar ? "truncate-long-business-names_NavBarMobile" : ""}
+              linkText={Config.navigationDefaults.navBarMyAccountText}
+            />
           ) : (
             <NavBarDashboardLink
               className={props.showSidebar ? "truncate-long-business-names_NavBarMobile" : ""}

@@ -102,8 +102,8 @@ export const Xray = (props: Props): ReactElement => {
       .catch(() => {
         setError("SEARCH_FAILED");
       })
-      .finally(async () => {
-        refresh();
+      .finally(() => {
+        void refresh().catch(() => undefined);
         setIsLoading(false);
       });
   };

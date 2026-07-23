@@ -96,7 +96,7 @@ export const ActivitiesForm = (props: Props): ReactElement => {
                 crtkEmailSent: true,
               },
             })
-            .update();
+            .updateInBackground();
         props.setCrtkEmailSent(true);
       })
       .catch(() => {

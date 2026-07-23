@@ -19,8 +19,8 @@ import { UserDataError } from "@businessnjgovnavigator/shared/types";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { ReactElement, useState } from "react";
-import { SWRConfig } from "swr";
+import { ReactElement, useMemo, useState } from "react";
+import { Cache, SWRConfig } from "swr";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
@@ -33,6 +33,8 @@ jest.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: jest
 const mockApi = api as jest.Mocked<typeof api>;
 const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
 const Config = getMergedConfig();
+const dispatch = jest.fn();
+const setRoadmap = jest.fn();
 
 const LocalUserDataProbe = (): ReactElement => {
   const { business, userData } = useUserData();
@@ -53,27 +55,31 @@ interface TestAppProps {
 const TestApp = ({ children, storage }: TestAppProps): ReactElement => {
   const [updateQueue, setUpdateQueue] = useState<UpdateQueue>();
   const [userDataError, setUserDataError] = useState<UserDataError>();
-  const intercom: IntercomContextType = {
-    setOperatingPhaseId: jest.fn(),
-    setLegalStructureId: jest.fn(),
-    setIndustryId: jest.fn(),
-    setBusinessPersona: jest.fn(),
-  };
+  const [cache] = useState<Cache<unknown>>(() => new Map());
+  const intercom = useMemo<IntercomContextType>(
+    () => ({
+      setOperatingPhaseId: jest.fn(),
+      setLegalStructureId: jest.fn(),
+      setIndustryId: jest.fn(),
+      setBusinessPersona: jest.fn(),
+    }),
+    [],
+  );
 
   return (
-    <SWRConfig value={{ provider: () => new Map(), shouldRetryOnError: false }}>
+    <SWRConfig value={{ provider: () => cache, shouldRetryOnError: false }}>
       <AuthContext.Provider
         value={{
           state: {
             activeUser: undefined,
             isAuthenticated: IsAuthenticated.UNKNOWN,
           },
-          dispatch: jest.fn(),
+          dispatch,
         }}
       >
         <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
           <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
-            <RoadmapContext.Provider value={{ roadmap: undefined, setRoadmap: jest.fn() }}>
+            <RoadmapContext.Provider value={{ roadmap: undefined, setRoadmap }}>
               <IntercomContext.Provider value={intercom}>
                 <UserDataProvider userDataStorage={storage}>
                   <>

@@ -1,7 +1,7 @@
 import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
-import { useMockRouter } from "@/test/mock/mockRouter";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
@@ -86,6 +86,9 @@ describe("<NavBarDesktop />", () => {
       quickLinksDoNotExist();
       expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText(Config.navigationDefaults.navBarMyAccountText));
+      expect(mockPush).toHaveBeenCalledWith("/onboarding");
     });
   });
 

@@ -1,4 +1,7 @@
-import { NavBarDashboardLink } from "@/components/navbar/NavBarDashboardLink";
+import {
+  NavBarDashboardLink,
+  NavBarPublicDashboardLink,
+} from "@/components/navbar/NavBarDashboardLink";
 import { NavBarVerticalLine } from "@/components/navbar/NavBarVerticalLine";
 import { NavbarBusinessNjGovLogo } from "@/components/navbar/NavbarBusinessNjGovLogo";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -7,6 +10,7 @@ import { ReactElement } from "react";
 interface Props {
   previousBusinessId?: string;
   isLoginPage?: boolean;
+  isPublicAccountLink?: boolean;
 }
 
 export const NavBarDesktopHomeLogo = (props: Props): ReactElement => {
@@ -20,6 +24,8 @@ export const NavBarDesktopHomeLogo = (props: Props): ReactElement => {
       </div>
       {props.isLoginPage ? (
         <span className="my-account-login-text">My Account</span>
+      ) : props.isPublicAccountLink ? (
+        <NavBarPublicDashboardLink linkText={Config.navigationDefaults.navBarMyAccountText} />
       ) : (
         <NavBarDashboardLink
           linkText={Config.navigationDefaults.navBarMyAccountText}

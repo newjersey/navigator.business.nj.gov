@@ -55,6 +55,7 @@ export const generateUseUserDataResponse = (
     refresh: jest.fn().mockResolvedValue({}),
     updateQueue: new UpdateQueueFactory(userData, jest.fn().mockResolvedValue({})),
     createUpdateQueue: jest.fn().mockResolvedValue({}),
+    clearUserData: jest.fn().mockResolvedValue(undefined),
     hasCompletedFetch: true,
     clearUserDataError: jest.fn(),
     ...overrides,

@@ -16,6 +16,7 @@ const createDefaultUserDataContext = (): UseUserDataResponse => {
     createUpdateQueue: async (userData: UserData): Promise<UpdateQueue> => {
       return new UpdateQueueFactory(userData, async (): Promise<void> => {});
     },
+    clearUserData: async (): Promise<void> => {},
     clearUserDataError: (): void => {},
   };
 };

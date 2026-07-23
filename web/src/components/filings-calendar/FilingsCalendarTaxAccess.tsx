@@ -34,7 +34,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
           encryptedTaxId: business.profileData.encryptedTaxId as string,
         });
 
-        updateQueue?.queue(updatedUserData).update();
+        updateQueue?.queue(updatedUserData).updateInBackground();
       }
     })();
   }, business);
@@ -54,7 +54,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
               ?.queuePreferences({
                 returnToLink: `${ROUTES.dashboard}`,
               })
-              .update();
+              .updateInBackground();
             analytics.event.tax_calendar_register_button.click.show_myNJ_registration_prompt_modal();
             setShowNeedsAccountModal(true);
           }}

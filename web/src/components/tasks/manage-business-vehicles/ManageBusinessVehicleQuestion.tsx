@@ -48,7 +48,7 @@ export const ManageBusinessVehicleQuestion: React.FC<Props> = (props: Props) => 
   props.formFuncWrapper(() => {
     updateQueue?.queueTaskProgress({ [props.taskId]: "COMPLETED" });
     updateQueue?.queueRoadmapTaskData({ manageBusinessVehicles: radioValue });
-    updateQueue?.update();
+    updateQueue?.updateInBackground();
   });
 
   const isError = props.CMS_ONLY_disable_error || isFormFieldInvalid;

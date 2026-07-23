@@ -23,7 +23,7 @@ export const GeneralInfo = (props: Props): ReactElement => {
 
   const onContinueClick = (): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      updateQueue?.queuePreferences({ returnToLink: ROUTES.cigaretteLicense }).update();
+      updateQueue?.queuePreferences({ returnToLink: ROUTES.cigaretteLicense }).updateInBackground();
       setShowNeedsAccountModal(true);
     } else {
       analytics.event.cigarette_license.click.step_one_continue_button();

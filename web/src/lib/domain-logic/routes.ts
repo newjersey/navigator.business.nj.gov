@@ -71,8 +71,8 @@ export const routeShallowWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(
   router: NextRouter,
   query: K,
   value: QUERY_PARAMS_VALUES[K],
-): void => {
-  router.push({ query: { ...router.query, [query]: value } }, undefined, { shallow: true });
+): Promise<boolean> => {
+  return router.push({ query: { ...router.query, [query]: value } }, undefined, { shallow: true });
 };
 
 export const routeWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(

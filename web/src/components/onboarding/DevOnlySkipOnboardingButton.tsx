@@ -7,14 +7,14 @@ import { ReactElement, useContext } from "react";
 
 interface Props {
   setPage: (page: { current: number; previous: number }) => void;
-  routeToPage: (page: number) => void;
+  routeToPage: (page: number) => Promise<boolean>;
 }
 
 export const DevOnlySkipOnboardingButton = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { updateQueue } = useUserData();
 
-  const devOnlySkipOnboarding = (): void => {
+  const devOnlySkipOnboarding = async (): Promise<void> => {
     setProfileData({
       ...emptyProfileData,
       businessPersona: "STARTING",
@@ -22,11 +22,11 @@ export const DevOnlySkipOnboardingButton = (props: Props): ReactElement => {
       legalStructureId: "c-corporation",
     });
     props.setPage({ current: 2, previous: 1 });
-    props.routeToPage(2);
+    await props.routeToPage(2);
     updateQueue?.queueTaskProgress({
       [businessStructureTaskId]: "COMPLETED",
     });
-    updateQueue?.update();
+    updateQueue?.updateInBackground();
   };
 
   if (state.page === 1 && process.env.NODE_ENV === "development") {

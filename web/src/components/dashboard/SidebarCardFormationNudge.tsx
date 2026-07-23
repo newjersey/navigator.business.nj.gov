@@ -25,7 +25,9 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
     }
     queueUpdateTaskProgress(formationTaskId, "COMPLETED");
     await updateQueue.update();
-    router && routeShallowWithQuery(router, QUERIES.fromForming, "true");
+    if (router) {
+      await routeShallowWithQuery(router, QUERIES.fromForming, "true");
+    }
   };
 
   const onClick = (): void => {

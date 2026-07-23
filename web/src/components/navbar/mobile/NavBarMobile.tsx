@@ -86,7 +86,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
       return (
         <NavBarMobileWrapper scrolled={scrolled}>
           <NavBarMobileHomeLogo
-            isLoginPage
+            isPublicAccountLink
             scrolled={props.scrolled}
             showSidebar={props.showSidebar}
             previousBusinessId={props.previousBusinessId}

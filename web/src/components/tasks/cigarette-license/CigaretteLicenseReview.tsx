@@ -244,7 +244,7 @@ export const CigaretteLicenseReview = (props: Props): ReactElement => {
           cigaretteLicenseResponse.userData &&
           router
         ) {
-          updateQueue
+          await updateQueue
             ?.queueBusiness({
               ...updateQueue.currentBusiness(),
               cigaretteLicenseData: {

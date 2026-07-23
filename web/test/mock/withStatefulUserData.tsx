@@ -66,7 +66,8 @@ const StatefulUserDataProvider = ({ children }: { children: ReactNode }): ReactE
     hasCompletedFetch: true,
     updateQueue,
     createUpdateQueue,
-    refresh: jest.fn(),
+    refresh: jest.fn().mockResolvedValue(undefined),
+    clearUserData: jest.fn().mockResolvedValue(undefined),
     clearUserDataError: jest.fn(),
   };
 
@@ -99,7 +100,8 @@ export const setupStatefulUserDataContext = (): void => {
       hasCompletedFetch: true,
       updateQueue: updateQueue,
       createUpdateQueue,
-      refresh: jest.fn(),
+      refresh: jest.fn().mockResolvedValue(undefined),
+      clearUserData: jest.fn().mockResolvedValue(undefined),
       clearUserDataError: jest.fn(),
     };
   });

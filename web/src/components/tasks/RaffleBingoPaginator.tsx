@@ -77,7 +77,7 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
     if (!business || !updateQueue) return;
     const completed: TaskProgress = "COMPLETED";
     updateQueue.queueTaskProgress({ [props.task.id]: completed });
-    updateQueue.update();
+    updateQueue.updateInBackground();
     setSuccessSnackbarIsOpen(true);
   };
 

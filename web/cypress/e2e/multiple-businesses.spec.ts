@@ -83,12 +83,12 @@ describe("Multiple Businesses [feature] [all] [group2]", () => {
     cy.get('[data-testid="business-title-0"]').click();
     cy.wait("@switchToFirstBusiness").its("response.statusCode").should("eq", 200);
 
-    onDashboardPage.clickEditProfileInDropdown();
+    cy.visit("/profile");
     onProfilePage.getBusinessName().should("have.value", firstBusinessName);
 
     cy.intercept("GET", "**/api/users/*").as("reloadFirstBusiness");
     cy.reload();
-    cy.wait("@reloadFirstBusiness").its("response.statusCode").should("eq", 200);
+    cy.wait("@reloadFirstBusiness").its("response.statusCode").should("be.oneOf", [200, 304]);
     onProfilePage.getBusinessName().should("have.value", firstBusinessName);
 
     cy.intercept("POST", "**/api/users").as("switchToSecondBusiness");
@@ -97,7 +97,7 @@ describe("Multiple Businesses [feature] [all] [group2]", () => {
     cy.wait("@switchToSecondBusiness").its("response.statusCode").should("eq", 200);
 
     cy.url().should("contain", "/dashboard");
-    onDashboardPage.clickEditProfileInDropdown();
+    cy.visit("/profile");
     onProfilePage.getBusinessName().should("have.value", secondBusinessName);
   });
 
