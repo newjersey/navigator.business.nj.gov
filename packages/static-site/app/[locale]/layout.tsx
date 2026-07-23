@@ -5,11 +5,11 @@
  * injects NJWDS assets, and builds localized metadata.
  */
 
+import "@/app/funding.css";
 import "@/app/globals.css";
 import "@/app/header.css";
-import "@/app/landing.css";
-import "@/app/funding.css";
 import "@/app/impact-report.css";
+import "@/app/landing.css";
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -17,6 +17,7 @@ import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
 import { GoogleTagManager } from "@/components/analytics/GoogleTagManager";
 import { Intercom } from "@/components/analytics/Intercom";
+import { SiteImprove } from "@/components/analytics/SiteImprove";
 import { GovBanner } from "@/components/landing/GovBanner";
 import { IdentifierSection } from "@/components/landing/IdentifierSection";
 import { LanguagePromptModal } from "@/components/landing/LanguagePromptModal";
@@ -200,6 +201,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
           <LanguagePromptModal />
         </NextIntlClientProvider>
         <Intercom />
+        <SiteImprove />
       </body>
     </html>
   );

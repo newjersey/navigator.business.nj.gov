@@ -60,6 +60,20 @@
   margin-left: 0.25rem;
 }
 
+/* Scoped via the parent class rather than `li a` so this rule's specificity
+   doesn't descend below the sibling selectors that follow it. */
+.usa-nav__auth-dropdown a {
+  display: block;
+  padding: 0.625rem 1rem;
+  font-size: 1rem;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.usa-nav__auth-dropdown a:hover {
+  background: var(--color-base-lightest);
+}
+
 .usa-nav__auth-dropdown {
   position: absolute;
   top: calc(100% + 4px);
@@ -73,18 +87,6 @@
   min-width: 140px;
   z-index: 100;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.usa-nav__auth-dropdown li a {
-  display: block;
-  padding: 0.625rem 1rem;
-  font-size: 1rem;
-  color: var(--color-ink);
-  text-decoration: none;
-}
-
-.usa-nav__auth-dropdown li a:hover {
-  background: var(--color-base-lightest);
 }
 
 .usa-nav__primary .nj-nav__link:not(.usa-current) {

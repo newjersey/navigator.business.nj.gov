@@ -35,9 +35,12 @@
   color: var(--color-primary);
 }
 
-.impact-report-stat--dark {
+/* Combined with `.usa-section` to out-specificity USWDS's `.usa-section`
+   padding rule without `!important` — this class always co-occurs with
+   `.usa-section` on the rendered element (see ImpactStatGroup.tsx). */
+.impact-report-stat--dark.usa-section {
   margin-block: 1.5rem;
-  padding: 1rem !important;
+  padding: 1rem;
 
   &:first-child {
     margin-top: 0;
