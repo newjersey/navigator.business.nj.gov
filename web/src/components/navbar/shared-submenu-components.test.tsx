@@ -15,10 +15,11 @@ import {
 } from "@/components/navbar/shared-submenu-components";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import analytics from "@/lib/utils/analytics";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
@@ -244,6 +245,45 @@ describe("shared-submenu-components", () => {
 
       expect(screen.getByText("first-biz")).toBeInTheDocument();
       expect(screen.getByText("second-biz")).toBeInTheDocument();
+    });
+
+    it("navigates away from the profile before switching businesses", async () => {
+      const firstBusiness = generateBusiness({
+        profileData: generateProfileData({
+          businessName: "first-biz",
+          legalStructureId: randomPublicFilingLegalStructure(),
+        }),
+      });
+      const secondBusiness = generateBusiness({
+        profileData: generateProfileData({
+          businessName: "second-biz",
+          legalStructureId: randomPublicFilingLegalStructure(),
+        }),
+      });
+      const userData = generateUserData({
+        currentBusinessId: firstBusiness.id,
+        businesses: {
+          [firstBusiness.id]: firstBusiness,
+          [secondBusiness.id]: secondBusiness,
+        },
+      });
+      const update = jest.fn().mockResolvedValue(undefined);
+      setMockUserDataResponse({
+        userData,
+        updateQueue: new UpdateQueueFactory(userData, update),
+      });
+      useMockRouter({ route: ROUTES.profile });
+      render(
+        <ProfileMenuItem handleClose={() => null} isAuthenticated={true} userData={userData} />,
+      );
+
+      fireEvent.click(screen.getByText("second-biz"));
+
+      await waitFor(() => {
+        expect(update).toHaveBeenCalled();
+      });
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+      expect(mockPush.mock.invocationCallOrder[0]).toBeLessThan(update.mock.invocationCallOrder[0]);
     });
 
     it("only shows profile link for current business", () => {

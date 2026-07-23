@@ -1,9 +1,10 @@
 import { LoginEmailCheck } from "@/components/LoginEmailCheck";
 import * as api from "@/lib/api-client/apiClient";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -21,7 +22,7 @@ describe("<LoginEmailCheck />", () => {
   it("calls triggerSignIn when a matching user is found", async () => {
     const email = "test@example.com";
     mockApi.postUserEmailCheck.mockReturnValue(Promise.resolve({ email, found: true }));
-    render(<LoginEmailCheck />);
+    renderWithUserData(<LoginEmailCheck />);
 
     const emailField = screen.getByLabelText("Email");
     fireEvent.change(emailField, { target: { value: email } });
@@ -37,8 +38,8 @@ describe("<LoginEmailCheck />", () => {
 
   it("displays an error when a matching user is not found", async () => {
     const email = "test@example.com";
-    mockApi.postUserEmailCheck.mockReturnValue(Promise.reject(404));
-    render(<LoginEmailCheck />);
+    mockApi.postUserEmailCheck.mockRejectedValue(404);
+    renderWithUserData(<LoginEmailCheck />);
 
     const emailField = screen.getByLabelText("Email");
     fireEvent.change(emailField, { target: { value: email } });
@@ -57,7 +58,7 @@ describe("<LoginEmailCheck />", () => {
 
   it("displays an error when an invalid email address is entered", async () => {
     const invalidEmail = "what is an email, even?";
-    render(<LoginEmailCheck />);
+    renderWithUserData(<LoginEmailCheck />);
 
     const emailField = screen.getByLabelText("Email");
     fireEvent.change(emailField, { target: { value: invalidEmail } });
@@ -75,11 +76,11 @@ describe("<LoginEmailCheck />", () => {
   });
 
   it("displays a default error message if an unknown error occurs", async () => {
-    render(<LoginEmailCheck />);
+    renderWithUserData(<LoginEmailCheck />);
     const email = "test@example.com";
     // Doesn't matter what status code we use here, as long as it's not
     // one that we currently account for in our error handling.
-    mockApi.postUserEmailCheck.mockReturnValue(Promise.reject(418));
+    mockApi.postUserEmailCheck.mockRejectedValue(418);
 
     const emailField = screen.getByLabelText("Email");
     fireEvent.change(emailField, { target: { value: email } });
@@ -100,7 +101,7 @@ describe("<LoginEmailCheck />", () => {
     const email = "test@example.com";
     mockApi.postUserEmailCheck.mockReturnValue(Promise.resolve({ email, found: true }));
 
-    render(<LoginEmailCheck />);
+    renderWithUserData(<LoginEmailCheck />);
 
     const emailField = screen.getByLabelText("Email");
     fireEvent.change(emailField, { target: { value: email } });

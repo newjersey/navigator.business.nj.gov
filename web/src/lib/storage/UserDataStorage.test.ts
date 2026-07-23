@@ -1,99 +1,231 @@
-import {
-  swrPrefixToIgnore,
-  userDataPrefix,
-  UserDataStorageFactory,
-} from "@/lib/storage/UserDataStorage";
-import { generateUserData } from "@businessnjgovnavigator/shared";
+import { BrowserStorage } from "@/lib/storage/BrowserStorage";
+import { userDataPrefix, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
+import { generateUser, generateUserData } from "@businessnjgovnavigator/shared";
 
-describe("userDataStorage", () => {
-  const storage = UserDataStorageFactory();
-  const user = generateUserData({});
-  let setItemSpy: jest.SpyInstance, getItemSpy: jest.SpyInstance;
+const legacyUserDataPrefix = "$swrUserData$";
+const registrationStatusKey = "selfRegStatus";
 
-  beforeEach(() => {
-    jest.restoreAllMocks();
-    getItemSpy = jest.spyOn(global.Storage.prototype, "getItem");
-    setItemSpy = jest.spyOn(global.Storage.prototype, "setItem");
-    storage.clear();
-  });
+interface BrowserStorageHarness {
+  readonly browserStorage: jest.Mocked<BrowserStorage>;
+  readonly values: Map<string, string>;
+}
 
-  it("returns undefined when key does not exist", async () => {
-    expect(storage.get("whatever")).toBeUndefined();
-  });
+const createBrowserStorage = (): BrowserStorageHarness => {
+  const values = new Map<string, string>();
+  const browserStorage: jest.Mocked<BrowserStorage> = {
+    get: jest.fn((key) => values.get(key)),
+    set: jest.fn((key, value) => {
+      values.set(key, value);
+      return true;
+    }),
+    keys: jest.fn(() => [...values.keys()]),
+    delete: jest.fn((key) => {
+      values.delete(key);
+    }),
+    clear: jest.fn(() => {
+      values.clear();
+    }),
+  };
+  return { browserStorage, values };
+};
 
-  it("stores userData", async () => {
-    expect(storage.set("whatever", user)).toBeTruthy();
-    expect(storage.get("whatever")).toEqual(user);
-  });
+describe("UserDataStorage", () => {
+  it("stores a versioned user-data envelope in its own namespace", () => {
+    const { browserStorage, values } = createBrowserStorage();
+    const now = new Date("2026-07-16T12:00:00.000Z");
+    const user = generateUser({});
+    const userData = generateUserData({ user });
+    const storage = UserDataStorageFactory({ browserStorage, now: () => now });
 
-  it("deletes stored userData", async () => {
-    storage.set("whatever", user);
-    storage.delete("whatever");
-    expect(storage.get("whatever")).toBeUndefined();
-  });
-
-  it("clears stored userData", async () => {
-    storage.set("whatever", user);
-    storage.clear();
-    expect(storage.get("whatever")).toBeUndefined();
-  });
-
-  it("sets a prefix key during normal use", async () => {
-    storage.set("whatever", user);
-    expect(setItemSpy).toHaveBeenCalledWith(`${userDataPrefix}whatever`, JSON.stringify(user));
-  });
-
-  it("ignores useSWR internal prefix values", async () => {
-    storage.set(`${swrPrefixToIgnore}whatever`, user);
-    expect(setItemSpy).toHaveBeenCalledWith(`${swrPrefixToIgnore}whatever`, JSON.stringify(user));
-  });
-
-  it("returns stored userData from memory cache after being set", async () => {
-    storage.set("whatever", user);
-    expect(storage.get("whatever")).toEqual(user);
-    expect(getItemSpy).toHaveBeenCalledTimes(0);
-  });
-
-  it("returns stored userData from sessionStorage on initialization", async () => {
-    getItemSpy.mockImplementation(() => {
-      return JSON.stringify(user);
+    expect(storage.set(user.id, userData)).toBe(true);
+    expect(storage.get(user.id)).toEqual(userData);
+    expect(JSON.parse(values.get(`${userDataPrefix}${user.id}`) ?? "")).toEqual({
+      version: 1,
+      userId: user.id,
+      savedAt: now.toISOString(),
+      data: userData,
     });
-    expect(storage.get("whatever")).toEqual(user);
-    expect(getItemSpy).toHaveBeenCalledWith(`${userDataPrefix}whatever`);
+    expect(values.has(`${legacyUserDataPrefix}${user.id}`)).toBe(false);
   });
 
-  it("returns stored userData from memory cache after initialization", async () => {
-    getItemSpy.mockImplementation(() => {
-      return JSON.stringify(user);
+  it("returns buffered data without reading browser storage again", () => {
+    const { browserStorage } = createBrowserStorage();
+    const user = generateUser({});
+    const userData = generateUserData({ user });
+    const storage = UserDataStorageFactory({ browserStorage });
+
+    storage.set(user.id, userData);
+    expect(storage.get(user.id)).toEqual(userData);
+    expect(browserStorage.get).not.toHaveBeenCalled();
+  });
+
+  it("loads valid persisted data and removes a leftover legacy copy", () => {
+    const { browserStorage, values } = createBrowserStorage();
+    const user = generateUser({});
+    const userData = generateUserData({ user });
+
+    UserDataStorageFactory({ browserStorage }).set(user.id, userData);
+    values.set(`${legacyUserDataPrefix}${user.id}`, JSON.stringify(userData));
+
+    expect(UserDataStorageFactory({ browserStorage }).get(user.id)).toEqual(userData);
+    expect(values.has(`${legacyUserDataPrefix}${user.id}`)).toBe(false);
+  });
+
+  it("migrates legacy raw user data and removes the legacy copy", () => {
+    const { browserStorage, values } = createBrowserStorage();
+    const user = generateUser({});
+    const userData = generateUserData({ user });
+    values.set(`${legacyUserDataPrefix}${user.id}`, JSON.stringify(userData));
+
+    const storage = UserDataStorageFactory({ browserStorage });
+
+    expect(storage.get(user.id)).toEqual(userData);
+    expect(values.has(`${userDataPrefix}${user.id}`)).toBe(true);
+    expect(values.has(`${legacyUserDataPrefix}${user.id}`)).toBe(false);
+  });
+
+  it("retains legacy data when migration cannot be persisted", () => {
+    const { browserStorage, values } = createBrowserStorage();
+    const user = generateUser({});
+    const userData = generateUserData({ user });
+    values.set(`${legacyUserDataPrefix}${user.id}`, JSON.stringify(userData));
+    browserStorage.set.mockReturnValue(false);
+
+    const storage = UserDataStorageFactory({ browserStorage });
+
+    expect(storage.get(user.id)).toEqual(userData);
+    expect(values.has(`${legacyUserDataPrefix}${user.id}`)).toBe(true);
+  });
+
+  it.each([
+    ["malformed JSON", "{"],
+    [
+      "an unknown envelope version",
+      JSON.stringify({ version: 2, userId: "user-1", savedAt: "now", data: {} }),
+    ],
+    [
+      "a mismatched user ID",
+      JSON.stringify({
+        version: 1,
+        userId: "other-user",
+        savedAt: "2026-07-16T12:00:00.000Z",
+        data: generateUserData({ user: generateUser({ id: "other-user" }) }),
+      }),
+    ],
+  ])("rejects and removes %s", (_, serializedValue) => {
+    const { browserStorage, values } = createBrowserStorage();
+    values.set(`${userDataPrefix}user-1`, serializedValue);
+    const storage = UserDataStorageFactory({ browserStorage });
+
+    expect(storage.get("user-1")).toBeUndefined();
+    expect(values.has(`${userDataPrefix}user-1`)).toBe(false);
+  });
+
+  it("rejects writes where the key and payload identities differ", () => {
+    const { browserStorage } = createBrowserStorage();
+    const userData = generateUserData({ user: generateUser({ id: "payload-user" }) });
+    const storage = UserDataStorageFactory({ browserStorage });
+
+    expect(storage.set("different-user", userData)).toBe(false);
+    expect(browserStorage.set).not.toHaveBeenCalled();
+  });
+
+  it("keeps in-memory data usable when browser storage throws", () => {
+    const { browserStorage } = createBrowserStorage();
+    const user = generateUser({});
+    const userData = generateUserData({ user });
+    browserStorage.set.mockImplementation(() => {
+      throw new DOMException("Quota exceeded", "QuotaExceededError");
     });
-    expect(storage.get("whatever")).toEqual(user);
-    expect(storage.get("whatever")).toEqual(user);
-    expect(getItemSpy).toHaveBeenCalledTimes(1);
+    const storage = UserDataStorageFactory({ browserStorage });
+
+    expect(storage.set(user.id, userData)).toBe(false);
+    expect(storage.get(user.id)).toEqual(userData);
+    expect(storage.getCurrentUserId()).toBe(user.id);
+    expect(storage.getCurrentUserData()).toEqual(userData);
   });
 
-  it("returns current user id when it exists", async () => {
-    storage.set("whatever", user);
-    expect(storage.get("whatever")).toEqual(user);
-    expect(storage.getCurrentUserId()).toEqual("whatever");
+  it("handles browser storage being unavailable for reads and deletion", () => {
+    const { browserStorage } = createBrowserStorage();
+    browserStorage.get.mockImplementation(() => {
+      throw new DOMException("Unavailable", "SecurityError");
+    });
+    browserStorage.keys.mockImplementation(() => {
+      throw new DOMException("Unavailable", "SecurityError");
+    });
+    browserStorage.delete.mockImplementation(() => {
+      throw new DOMException("Unavailable", "SecurityError");
+    });
+    const storage = UserDataStorageFactory({ browserStorage });
+
+    expect(storage.get("user-1")).toBeUndefined();
+    expect(storage.getCurrentUserId()).toBeUndefined();
+    expect(() => storage.delete("user-1")).not.toThrow();
+    expect(() => storage.clear()).not.toThrow();
   });
 
-  it("returns current userData when it exists", async () => {
-    storage.set("whatever", user);
-    expect(storage.getCurrentUserData()).toEqual(user);
+  it("clears only current and legacy user-data namespaces", () => {
+    const { browserStorage, values } = createBrowserStorage();
+    const firstUser = generateUser({ id: "first-user" });
+    const secondUser = generateUser({ id: "second-user" });
+    const storage = UserDataStorageFactory({ browserStorage });
+    storage.set(firstUser.id, generateUserData({ user: firstUser }));
+    values.set(
+      `${legacyUserDataPrefix}${secondUser.id}`,
+      JSON.stringify(generateUserData({ user: secondUser })),
+    );
+    values.set(registrationStatusKey, "IN_PROGRESS");
+    values.set("$swr$unrelated", "SWR state");
+    values.set("unrelated", "preserve me");
+    values.set(userDataPrefix, "malformed namespaced data");
+    values.set(legacyUserDataPrefix, "malformed legacy data");
+
+    storage.clear();
+
+    expect([...values.entries()]).toEqual([
+      [registrationStatusKey, "IN_PROGRESS"],
+      ["$swr$unrelated", "SWR state"],
+      ["unrelated", "preserve me"],
+    ]);
+    expect(browserStorage.clear).not.toHaveBeenCalled();
   });
 
-  it("deletes current user", async () => {
-    storage.set("whatever", user);
+  it("deletes the only current user", () => {
+    const { browserStorage } = createBrowserStorage();
+    const user = generateUser({});
+    const userData = generateUserData({ user });
+    const storage = UserDataStorageFactory({ browserStorage });
+    storage.set(user.id, userData);
+
+    expect(storage.getCurrentUserId()).toBe(user.id);
+    expect(storage.getCurrentUserData()).toEqual(userData);
+
     storage.deleteCurrentUser();
-    expect(storage.get("whatever")).toBeUndefined();
+
     expect(storage.getCurrentUserId()).toBeUndefined();
+    expect(storage.get(user.id)).toBeUndefined();
   });
 
-  it("return undefined when if no users or multiple exist", async () => {
-    storage.set("whatever", user);
-    storage.set("whateve2", user);
+  it("removes ambiguous user data when multiple users are stored", () => {
+    const { browserStorage, values } = createBrowserStorage();
+    const firstUser = generateUser({ id: "first-user" });
+    const secondUser = generateUser({ id: "second-user" });
+    const storage = UserDataStorageFactory({ browserStorage });
+    storage.set(firstUser.id, generateUserData({ user: firstUser }));
+    storage.set(secondUser.id, generateUserData({ user: secondUser }));
+
     expect(storage.getCurrentUserId()).toBeUndefined();
-    storage.clear();
-    expect(storage.getCurrentUserId()).toBeUndefined();
+    expect([...values.keys()]).toEqual([]);
+  });
+
+  it("validates registration status read from storage", () => {
+    const { browserStorage, values } = createBrowserStorage();
+    const storage = UserDataStorageFactory({ browserStorage });
+
+    storage.setRegistrationStatus("SUCCESS");
+    expect(storage.getRegistrationStatus()).toBe("SUCCESS");
+
+    values.set(registrationStatusKey, "not-a-status");
+    expect(storage.getRegistrationStatus()).toBeUndefined();
   });
 });

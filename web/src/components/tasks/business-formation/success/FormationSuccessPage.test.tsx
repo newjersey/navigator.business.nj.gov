@@ -1,3 +1,4 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { generateFormationProfileData } from "@/test/helpers/helpers-formation";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
@@ -12,7 +13,7 @@ import {
   generateFormationData,
   generateGetFilingResponse,
 } from "@businessnjgovnavigator/shared/test";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useDocuments");
 const Config = getMergedConfig();
@@ -45,7 +46,7 @@ describe("Formation - <FormationSuccessPage />", () => {
         profileData.legalStructureId as FormationLegalType,
       ),
     });
-    render(<FormationSuccessPage business={business} />);
+    renderWithUserData(<FormationSuccessPage business={business} />);
   };
 
   it("displays success page, documents, entity id, confirmation id", () => {

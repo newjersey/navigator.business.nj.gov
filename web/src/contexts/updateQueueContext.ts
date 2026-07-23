@@ -3,7 +3,7 @@ import { createContext } from "react";
 
 export interface UpdateQueueContextType {
   updateQueue: UpdateQueue | undefined;
-  setUpdateQueue: (updateQueue: UpdateQueue) => void;
+  setUpdateQueue: (updateQueue: UpdateQueue | undefined) => void;
 }
 
 export const UpdateQueueContext = createContext<UpdateQueueContextType>({

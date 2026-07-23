@@ -16,6 +16,7 @@ import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { UpdateQueue } from "@/lib/UpdateQueue";
 import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
+import { UserDataProvider } from "@/lib/data-hooks/UserDataProvider";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
@@ -42,6 +43,8 @@ import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 import "../styles/main.scss";
+
+const createSWRCache = (): Map<unknown, unknown> => new Map();
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
@@ -252,40 +255,42 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
             {isSeoPage ? (
               <Component {...pageProps} />
             ) : (
-              <SWRConfig value={{ provider: UserDataStorageFactory }}>
+              <SWRConfig value={{ provider: createSWRCache }}>
                 <AuthContext.Provider value={{ state, dispatch }}>
                   <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
                     <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
                       <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
                         <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
-                          <NeedsAccountContext.Provider
-                            value={{
-                              isAuthenticated: state.isAuthenticated,
-                              showNeedsAccountSnackbar,
-                              showNeedsAccountModal,
-                              registrationStatus: registrationStatus,
-                              setRegistrationStatus: setRegistrationStatusInStateAndStorage,
-                              setShowNeedsAccountSnackbar,
-                              setShowNeedsAccountModal: setShowNeedsAccountModalAndSendAnalytics,
-                              showContinueWithoutSaving,
-                              setShowContinueWithoutSaving,
-                              userWantsToContinueWithoutSaving,
-                              setUserWantsToContinueWithoutSaving,
-                            }}
-                          >
-                            <RemoveBusinessContext.Provider
+                          <UserDataProvider>
+                            <NeedsAccountContext.Provider
                               value={{
-                                showRemoveBusinessModal,
-                                setShowRemoveBusinessModal,
+                                isAuthenticated: state.isAuthenticated,
+                                showNeedsAccountSnackbar,
+                                showNeedsAccountModal,
+                                registrationStatus: registrationStatus,
+                                setRegistrationStatus: setRegistrationStatusInStateAndStorage,
+                                setShowNeedsAccountSnackbar,
+                                setShowNeedsAccountModal: setShowNeedsAccountModalAndSendAnalytics,
+                                showContinueWithoutSaving,
+                                setShowContinueWithoutSaving,
+                                userWantsToContinueWithoutSaving,
+                                setUserWantsToContinueWithoutSaving,
                               }}
                             >
-                              <ContextualInfoPanel />
-                              <Component {...pageProps} />
-                              <RemoveBusinessModal />
-                              <NeedsAccountModal />
-                              <RegistrationStatusSnackbar />
-                            </RemoveBusinessContext.Provider>
-                          </NeedsAccountContext.Provider>
+                              <RemoveBusinessContext.Provider
+                                value={{
+                                  showRemoveBusinessModal,
+                                  setShowRemoveBusinessModal,
+                                }}
+                              >
+                                <ContextualInfoPanel />
+                                <Component {...pageProps} />
+                                <RemoveBusinessModal />
+                                <NeedsAccountModal />
+                                <RegistrationStatusSnackbar />
+                              </RemoveBusinessContext.Provider>
+                            </NeedsAccountContext.Provider>
+                          </UserDataProvider>
                         </RoadmapContext.Provider>
                       </ContextualInfoContext.Provider>
                     </UserDataErrorContext.Provider>

@@ -1,5 +1,9 @@
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
-import { postCigaretteLicensePreparePayment, postUserData } from "@/lib/api-client/apiClient";
+import {
+  cigaretteLicenseConfirmPayment,
+  postCigaretteLicensePreparePayment,
+  postUserData,
+} from "@/lib/api-client/apiClient";
 import { generateTask } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -23,13 +27,17 @@ import userEvent from "@testing-library/user-event";
 const Config = getMergedConfig();
 
 jest.mock("@/lib/api-client/apiClient", () => ({
-  postUserData: jest.fn(),
+  cigaretteLicenseConfirmPayment: jest.fn(),
   postCigaretteLicensePreparePayment: jest.fn(),
+  postUserData: jest.fn(),
 }));
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 const mockApi = {
+  cigaretteLicenseConfirmPayment: cigaretteLicenseConfirmPayment as jest.MockedFunction<
+    typeof cigaretteLicenseConfirmPayment
+  >,
   postUserData: postUserData as jest.MockedFunction<typeof postUserData>,
   postCigaretteLicensePreparePayment: postCigaretteLicensePreparePayment as jest.MockedFunction<
     typeof postCigaretteLicensePreparePayment
@@ -70,6 +78,18 @@ describe("<CigaretteLicense />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
+    const confirmedBusiness = generateBusiness({
+      cigaretteLicenseData: generateCigaretteLicenseData({
+        paymentInfo: {
+          orderId: 12345,
+          confirmationEmailSent: true,
+          paymentComplete: true,
+        },
+      }),
+    });
+    mockApi.cigaretteLicenseConfirmPayment.mockResolvedValue(
+      generateUserDataForBusiness(confirmedBusiness),
+    );
   });
 
   const renderComponent = async (business?: Business, stepIndex?: number): Promise<void> => {

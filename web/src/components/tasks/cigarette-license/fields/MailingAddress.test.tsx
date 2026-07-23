@@ -1,3 +1,4 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { MailingAddress } from "@/components/tasks/cigarette-license/fields/MailingAddress";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import {
@@ -12,7 +13,7 @@ import {
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test/factories";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 
@@ -48,7 +49,7 @@ describe("<MailingAddress />", () => {
       );
     };
 
-    render(<TestComponent />);
+    renderWithUserData(<TestComponent />);
   };
 
   describe("Basic Rendering", () => {

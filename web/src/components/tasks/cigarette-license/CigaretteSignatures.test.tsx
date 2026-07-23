@@ -1,3 +1,4 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import {
   DataFormErrorMapContext,
@@ -7,7 +8,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { fillTextUserEvent } from "@/test/helpers/helpers-testing-library-selectors";
 import { generateCigaretteLicenseData } from "@businessnjgovnavigator/shared";
 import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { useState } from "react";
 import { CigaretteSignatures } from "./CigaretteSignatures";
 
@@ -36,7 +37,7 @@ const renderComponent = (cigaretteLicenseData = generateCigaretteLicenseData({})
     );
   };
 
-  render(<TestComponent />);
+  renderWithUserData(<TestComponent />);
 };
 
 describe("<CigaretteSignatures />", () => {

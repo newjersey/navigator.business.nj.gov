@@ -1,4 +1,5 @@
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
+import { UserDataContext, UseUserDataResponse } from "@/contexts/userDataContext";
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -39,7 +40,37 @@ export const WithStatefulUserData = ({
   children: ReactNode;
   initialUserData: UserData | undefined;
 }): ReactElement => {
-  return WithStatefulData(updateSpy)({ children, initialData: initialUserData });
+  return WithStatefulData(updateSpy)({
+    children: <StatefulUserDataProvider>{children}</StatefulUserDataProvider>,
+    initialData: initialUserData,
+  });
+};
+
+const StatefulUserDataProvider = ({ children }: { children: ReactNode }): ReactElement => {
+  const { genericData, update } = useContext(StatefulDataContext);
+  const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);
+  const userData = genericData as UserData | undefined;
+
+  const createUpdateQueue = async (newUserData: UserData): Promise<UpdateQueue> => {
+    const queue = new UpdateQueueFactory(newUserData, update);
+    setUpdateQueue(queue);
+    await update(newUserData, { local: true });
+    return queue;
+  };
+
+  const value: UseUserDataResponse = {
+    userData,
+    business: userData?.businesses[userData.currentBusinessId],
+    isLoading: false,
+    error: undefined,
+    hasCompletedFetch: true,
+    updateQueue,
+    createUpdateQueue,
+    refresh: jest.fn(),
+    clearUserDataError: jest.fn(),
+  };
+
+  return <UserDataContext.Provider value={value}>{children}</UserDataContext.Provider>;
 };
 
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;

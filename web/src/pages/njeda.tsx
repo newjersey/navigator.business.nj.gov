@@ -30,7 +30,7 @@ import { Funding } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   fundings: Funding[];
@@ -41,7 +41,8 @@ interface Props {
 const NJEDAFundingsOnboardingPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const router = useRouter();
-  const currentUserData = createEmptyUserData(createEmptyUser());
+  const [currentUserData] = useState(() => createEmptyUserData(createEmptyUser()));
+  const hasStartedQueueInitialization = useRef(false);
   const { business, updateQueue, createUpdateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(
     business?.profileData ||
@@ -83,9 +84,14 @@ const NJEDAFundingsOnboardingPage = (props: Props): ReactElement => {
   const allQuestionsAnswered = getQuestionsAnsweredCount() === 3;
 
   useEffect(() => {
-    if (!updateQueue) {
-      createUpdateQueue(currentUserData);
+    if (updateQueue || hasStartedQueueInitialization.current) {
+      return;
     }
+    hasStartedQueueInitialization.current = true;
+    createUpdateQueue(currentUserData).catch((error: unknown) => {
+      hasStartedQueueInitialization.current = false;
+      console.error("Failed to initialize NJEDA user data", error);
+    });
   }, [updateQueue, createUpdateQueue, currentUserData]);
 
   const saveUserData = async (): Promise<void> => {

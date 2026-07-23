@@ -1,9 +1,10 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/components/profile/ProfileTabHeader", () => ({
@@ -44,7 +45,7 @@ const renderPersonalizeYourTasksTab = ({
   futureAllowed?: boolean;
 }): void => {
   const initialProfileData = profileData ?? generateProfileData({});
-  render(
+  renderWithUserData(
     <WithStatefulProfileData initialData={initialProfileData}>
       <PersonalizeYourTasksTab
         fieldErrors={fieldErrors}

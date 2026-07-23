@@ -1,12 +1,13 @@
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { IndustryDropdown } from "@/components/data-fields/IndustryDropdown";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 
 describe("Industry Dropdown", () => {
   it("displays the Generic Industry as the last item in the dropdown list", () => {
-    render(<IndustryDropdown />);
+    renderWithUserData(<IndustryDropdown />);
 
     fireEvent.mouseDown(screen.getByLabelText("Industry"));
     const items = within(screen.getByRole("listbox")).getAllByRole("option");
@@ -15,7 +16,7 @@ describe("Industry Dropdown", () => {
   });
 
   it("displays the generic industry as the single option when there is no industry match", async () => {
-    render(<IndustryDropdown />);
+    renderWithUserData(<IndustryDropdown />);
     const searchTerm = `some-industry-${randomInt()}`;
 
     fireEvent.click(screen.getByLabelText("Industry"));
@@ -30,7 +31,7 @@ describe("Industry Dropdown", () => {
   });
 
   it("displays search affirmation when there is an input", () => {
-    render(<IndustryDropdown />);
+    renderWithUserData(<IndustryDropdown />);
 
     const inputElement = screen.getByLabelText("Industry");
     fireEvent.click(inputElement);
@@ -42,7 +43,7 @@ describe("Industry Dropdown", () => {
 
   describe("domestic employer industry", () => {
     it("filters out domestic employer industry when businessPersona is 'FOREIGN'", () => {
-      render(
+      renderWithUserData(
         <WithStatefulProfileData
           initialData={generateProfileData({
             businessPersona: "FOREIGN",
@@ -57,7 +58,7 @@ describe("Industry Dropdown", () => {
     });
 
     it("displays domestic employer as an industry when businessPersona is 'STARTING'", () => {
-      render(
+      renderWithUserData(
         <WithStatefulProfileData
           initialData={generateProfileData({
             businessPersona: "STARTING",
