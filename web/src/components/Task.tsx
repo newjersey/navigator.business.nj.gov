@@ -14,6 +14,7 @@ import { ReactElement, ReactNode } from "react";
 interface Props {
   task: types.Task;
   showCheckbox?: boolean;
+  showRequiredLabel?: boolean;
 }
 
 export const Task = (props: Props): ReactElement => {
@@ -23,12 +24,12 @@ export const Task = (props: Props): ReactElement => {
   const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "TO_DO";
 
   const renderRequiredLabel = (): ReactNode => {
-    if (!props.task.required) {
+    if (!props.task.required || !props.showRequiredLabel) {
       return <></>;
     }
     return (
       <span
-        className="text-base text-no-underline display-inline-block"
+        className="text-base text-no-underline display-inline-block margin-left-105"
         data-testid="required task"
       >
         <Content>{Config.taskDefaults.requiredLabelText}</Content>
@@ -57,48 +58,39 @@ export const Task = (props: Props): ReactElement => {
           isTabletAndUp ? "margin-bottom-2" : "margin-bottom-1"
         }`}
       >
-        {isTabletAndUp && (
-          <span className="margin-right-205 margin-top-05 padding-top-2px">
-            {props.showCheckbox ? (
-              <TaskProgressCheckbox
-                taskId={props.task.id}
-                disabledTooltipText={getDisabledTooltipText(props.task.id, taskProgress)}
-                needsAccount={props.task.required}
-              />
-            ) : (
-              TaskProgressTagLookup[taskProgress]
-            )}
-          </span>
-        )}
-        <div className="flex flex-align-center">
-          <Link
-            href={`/tasks/${props.task.urlSlug}`}
-            passHref
-            onClick={(): void =>
-              analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)
-            }
-            className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
-            data-task={props.task.id}
-            data-testid={props.task.id}
-          >
-            {props.task.name}
-          </Link>
-          {(props.task.needsAccount || taskIdsWithLicenseSearchEnabled.includes(props.task.id)) && (
-            <img
-              className="usa-icon display-block margin-right-105"
-              src="/img/lock.svg"
-              alt="Requires account"
+        <span className="margin-right-205 margin-top-05 padding-top-2px">
+          {props.showCheckbox ? (
+            <TaskProgressCheckbox
+              taskId={props.task.id}
+              disabledTooltipText={getDisabledTooltipText(props.task.id, taskProgress)}
+              hideTaskProgressTag={!isTabletAndUp}
             />
+          ) : (
+            TaskProgressTagLookup[taskProgress]
           )}
-          {isTabletAndUp && renderRequiredLabel()}
-        </div>
+        </span>
+        <Link
+          href={`/tasks/${props.task.urlSlug}`}
+          passHref
+          onClick={(): void =>
+            analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)
+          }
+          className={`usa-link margin-right-105 line-height-sans-5 ${props.task.required ? "text-bold" : ""}`}
+          data-task={props.task.id}
+          data-testid={props.task.id}
+        >
+          {props.task.name}
+        </Link>{" "}
+        {isTabletAndUp && renderRequiredLabel()}
+        {(props.task.needsAccount || taskIdsWithLicenseSearchEnabled.includes(props.task.id)) && (
+          <img
+            className="usa-icon display-inline-block margin-left-auto"
+            style={{ transform: "translateY(5px)" }}
+            src="/img/lock.svg"
+            alt="Requires account"
+          />
+        )}
       </div>
-      {!isTabletAndUp && (
-        <div className="margin-bottom-2">
-          {TaskProgressTagLookup[taskProgress]}{" "}
-          <span className="margin-left-1">{renderRequiredLabel()}</span>
-        </div>
-      )}
     </li>
   );
 };

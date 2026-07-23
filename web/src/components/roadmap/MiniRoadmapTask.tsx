@@ -1,10 +1,10 @@
 import { Icon } from "@/components/njwds/Icon";
+import { taskIdsWithLicenseSearchEnabled } from "@/components/TaskPageSwitchComponent";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import Link from "next/link";
 import { ReactElement } from "react";
-import { UnStyledButton } from "../njwds-extended/UnStyledButton";
 
 interface Props {
   task: Task;
@@ -18,30 +18,39 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
   const taskProgressReadable = taskProgress.replace("_", " ");
 
   return (
-    <Link href={`/tasks/${props.task.urlSlug}`}>
-      <UnStyledButton
-        onClick={(): void => {
-          analytics.event.task_mini_roadmap_task.click.go_to_task(props.task.urlSlug);
-          props.onTaskClick && props.onTaskClick();
-        }}
+    <Link
+      className="width-full display-block text-no-underline"
+      href={`/tasks/${props.task.urlSlug}`}
+      onClick={(): void => {
+        analytics.event.task_mini_roadmap_task.click.go_to_task(props.task.urlSlug);
+        props.onTaskClick && props.onTaskClick();
+      }}
+    >
+      <div
+        className={`fdr fac width-full padding-y-1 padding-left-1 padding-right-4 text-underline-hover ${
+          props.active
+            ? "bg-cool-lighter mini-roadmap-bg-shape text-primary-dark text-bold h5-styling"
+            : "h6-styling"
+        }`}
+        data-task={props.task.id}
+        data-testid={`mini-roadmap-task-${props.task.id}`}
       >
-        <div
-          className={`fdr fac padding-y-1 padding-left-1 padding-right-4 text-semibold-hover text-underline-hover ${
-            props.active
-              ? "bg-cool-lighter mini-roadmap-bg-shape text-primary-dark text-bold h5-styling"
-              : "h6-styling"
-          }`}
-          data-task={props.task.id}
-        >
-          {taskProgress === "COMPLETED" ? (
-            <Icon className="margin-right-1 checked-task text-success" iconName="check_circle" />
-          ) : (
-            <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
-          )}
-          <span className="margin-right-05">{props.task.name}</span>
-          <span className="screen-reader-only">{taskProgressReadable}</span>
-        </div>
-      </UnStyledButton>
+        {taskProgress === "COMPLETED" ? (
+          <Icon className="margin-right-1 checked-task text-success" iconName="check_circle" />
+        ) : (
+          <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
+        )}
+        <span className="margin-right-05">{props.task.name}</span>
+        {(props.task.needsAccount || taskIdsWithLicenseSearchEnabled.includes(props.task.id)) && (
+          <img
+            className="usa-icon margin-left-auto display-inline-block"
+            style={{ transform: "translateY(2px)" }}
+            src="/img/lock.svg"
+            alt="Requires account"
+          />
+        )}
+        <span className="screen-reader-only">{taskProgressReadable}</span>
+      </div>
     </Link>
   );
 };

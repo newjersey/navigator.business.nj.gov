@@ -52,28 +52,12 @@ describe("Dashboard [feature] [all] [group2]", () => {
         // check dashboard
         onDashboardPage.getDashboardHeader().should("exist");
 
-        // step 1
-        cy.get('[id="plan-content"]').should("be.visible");
-        cy.get('[id="plan-header"]').first().click({ force: true });
-        cy.get('[id="plan-content"]').should("not.be.visible");
-        cy.get('[id="plan-header"]').first().click({ force: true });
-        cy.get('[data-step="1"]').should("exist");
-        cy.get('[data-task="business-plan"]').should("exist");
-        cy.get('[data-task="research-insurance-needs"]').should("exist");
-
-        // step 3
-        cy.get('[id="start-content"]').should("be.visible");
-        cy.get('[id="start-header"]').first().click({ force: true });
-        cy.get('[id="start-content"]').should("not.be.visible");
-        cy.get('[id="start-header"]').first().click({ force: true });
-        cy.get('[data-step="2"]').should("exist");
+        // verify required tasks are displayed
         cy.get('[data-task="register-trade-name"]').should("exist");
-
-        // step 4
-        cy.get('[data-step="3"]').should("exist");
+        cy.get('[data-task="register-for-ein"]').should("exist");
+        cy.get('[data-task="register-for-taxes"]').should("exist");
       });
 
-      //choosing Cannabis for this test, to satisfy the town-mercantile-license option
       it("verifies the task screen and mini-roadmap displays", () => {
         const industry = LookupIndustryById("cannabis");
         const legalStructureId = "general-partnership";
@@ -90,8 +74,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.get('[data-legal-structure="general-partnership"]').should("not.exist");
         cy.get('[data-task-id="register-trade-name"]').should("exist");
 
-        // tasks mini-nav
-        cy.get('[data-step="4"]').first().click({ force: true });
+        // navigate to another task via mini-roadmap
         cy.get('[data-task="town-mercantile-license"]').first().click({ force: true });
         cy.get('[data-task-id="register-trade-name"]').should("not.exist");
         cy.get('[data-task-id="town-mercantile-license"]').should("exist");
@@ -122,7 +105,6 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.url().should("contain", "/dashboard");
 
         // check dashboard
-
         cy.get('[data-task="check-site-requirements"]').should("exist");
         cy.get('[data-task="food-safety-course"]').should("exist");
       });

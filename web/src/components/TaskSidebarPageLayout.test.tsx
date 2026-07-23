@@ -1,5 +1,5 @@
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { generateStep } from "@/test/factories";
+import { generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
@@ -29,16 +29,17 @@ describe("<TaskSidebarPageLayout />", () => {
     useMockRouter({});
     useMockBusiness(generateBusiness({}));
     useMockRoadmap({
-      steps: [generateStep({ section: "PLAN" }), generateStep({ section: "START" })],
+      tasks: [generateTask({ required: true })],
     });
     (useMediaQuery as jest.Mock).mockImplementation(() => {
       return true;
     }); // set large screen
   });
 
-  it("shows only plan/start sections when there are no operateReferences", () => {
+  it("shows the consolidated roadmap section header", () => {
     render(<TaskSidebarPageLayout>stuff</TaskSidebarPageLayout>);
-    expect(screen.getByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
-    expect(screen.getByText(Config.sectionHeaders.START)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderAbbreviatedText),
+    ).toBeInTheDocument();
   });
 });

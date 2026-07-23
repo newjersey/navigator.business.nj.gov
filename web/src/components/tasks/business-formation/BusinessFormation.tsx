@@ -213,7 +213,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         <div>
           <TaskHeader task={props.task} />
           <UnlockedBy task={props.task} />
-          <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+          <Content>{props.task.contentMd}</Content>
         </div>
         {getModifiedTaskContent(roadmap, props.task, "callToActionLink") &&
           getModifiedTaskContent(roadmap, props.task, "callToActionText") && (

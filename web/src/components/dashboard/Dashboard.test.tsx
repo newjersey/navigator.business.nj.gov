@@ -2,7 +2,6 @@ import { Dashboard } from "@/components/dashboard/Dashboard";
 import {
   generateAnytimeActionTask,
   generateSidebarCardContent,
-  generateStep,
   generateTask,
   generateXrayRenewalCalendarEvent,
 } from "@/test/factories";
@@ -41,7 +40,7 @@ import {
 } from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -226,46 +225,27 @@ describe("<DashboardOnDesktop />", () => {
     });
   });
 
-  it("shows steps and tasks from roadmap", () => {
+  it("shows required tasks and excludes non-required tasks", () => {
     useMockRoadmap({
-      steps: [
-        generateStep({
-          name: "step1",
-          timeEstimate: "1-2 weeks",
-          stepNumber: 1,
-        }),
-        generateStep({
-          name: "step2",
-          stepNumber: 2,
-        }),
-      ],
       tasks: [
-        generateTask({ name: "task1", stepNumber: 1 }),
-        generateTask({ name: "task2", stepNumber: 1 }),
-        generateTask({ name: "task3", stepNumber: 2 }),
+        generateTask({ name: "task1", required: true }),
+        generateTask({ name: "task2", required: true }),
+        generateTask({ name: "optional-task", required: false }),
       ],
     });
 
     renderDashboardComponent({});
 
-    expect(screen.getByText("step1", { exact: false })).toBeInTheDocument();
-    expect(screen.getByText("(1-2 weeks)")).toBeInTheDocument();
     expect(screen.getByText("task1")).toBeInTheDocument();
     expect(screen.getByText("task2")).toBeInTheDocument();
-
-    expect(screen.getByText("step2", { exact: false })).toBeInTheDocument();
-    expect(screen.getByText("task3")).toBeInTheDocument();
+    expect(screen.queryByText("optional-task")).not.toBeInTheDocument();
   });
 
-  it("shows task progress tag", () => {
+  it("shows task progress checkboxes reflecting completion state", () => {
     useMockRoadmap({
-      steps: [
-        generateStep({ name: "step1", stepNumber: 1 }),
-        generateStep({ name: "step2", stepNumber: 2 }),
-      ],
       tasks: [
-        generateTask({ id: "task1", name: "task1", stepNumber: 1 }),
-        generateTask({ id: "task2", name: "task2", stepNumber: 1 }),
+        generateTask({ id: "task1", name: "task1", required: true }),
+        generateTask({ id: "task2", name: "task2", required: true }),
       ],
     });
 
@@ -276,59 +256,9 @@ describe("<DashboardOnDesktop />", () => {
 
     renderDashboardComponent({});
 
-    expect(screen.getByText("To do")).toBeInTheDocument();
-    expect(screen.getByText("Completed")).toBeInTheDocument();
-  });
-
-  it("displays each step under associated section", () => {
-    useMockRoadmap({
-      steps: [
-        generateStep({ name: "step1", section: "PLAN" }),
-        generateStep({ name: "step2", section: "START" }),
-        generateStep({ name: "step3", section: "PLAN" }),
-        generateStep({ name: "step4", section: "START" }),
-      ],
-    });
-
-    renderDashboardComponent({});
-
-    const sectionPlan = screen.getByTestId("section-plan");
-    const sectionStart = screen.getByTestId("section-start");
-
-    expect(within(sectionPlan).getByText("step1")).toBeInTheDocument();
-    expect(within(sectionPlan).getByText("step3")).toBeInTheDocument();
-    expect(within(sectionPlan).queryByText("step2")).not.toBeInTheDocument();
-    expect(within(sectionPlan).queryByText("step4")).not.toBeInTheDocument();
-
-    expect(within(sectionStart).queryByText("step1")).not.toBeInTheDocument();
-    expect(within(sectionStart).queryByText("step3")).not.toBeInTheDocument();
-    expect(within(sectionStart).getByText("step2")).toBeInTheDocument();
-    expect(within(sectionStart).getByText("step4")).toBeInTheDocument();
-  });
-
-  it("displays sections based on userData preferences", () => {
-    useMockRoadmap({
-      steps: [
-        generateStep({ name: "step1", section: "PLAN" }),
-        generateStep({ name: "step2", section: "START" }),
-      ],
-    });
-
-    useMockBusiness({
-      preferences: generatePreferences({
-        roadmapOpenSections: ["PLAN", "START"],
-      }),
-      taxFilingData: generateTaxFilingData({}),
-      onboardingFormProgress: "COMPLETED",
-    });
-
-    renderDashboardComponent({});
-
-    const sectionPlan = screen.getByTestId("section-plan");
-    const sectionStart = screen.getByTestId("section-start");
-
-    expect(within(sectionStart).getByText("step2")).toBeVisible();
-    expect(within(sectionPlan).getByText("step1")).toBeVisible();
+    const checkboxes = screen.getAllByRole("checkbox");
+    expect(checkboxes[0]).not.toBeChecked();
+    expect(checkboxes[1]).toBeChecked();
   });
 
   it.each(operatingPhasesThatDontDisplayHideableRoadmapTasks)(
@@ -379,26 +309,6 @@ describe("<DashboardOnDesktop />", () => {
     );
   });
 
-  it("displays step2 for guest mode user when business structure task is completed", () => {
-    useMockRoadmap({
-      steps: [
-        generateStep({ name: "step1", section: "PLAN" }),
-        generateStep({ name: "step2", section: "START" }),
-      ],
-    });
-
-    useMockBusiness({
-      profileData: generateProfileData({
-        operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
-      }),
-      onboardingFormProgress: "COMPLETED",
-    });
-
-    renderDashboardComponent({});
-
-    expect(within(screen.getByTestId("section-start")).getByText("step2")).toBeVisible();
-  });
-
   it("displays filings calendar as list when taxfiling is populated and operatingPhase has ListCalendar", () => {
     const mockDate = new Date("2020-04-13T00:00:00.000+08:00");
     jest.setSystemTime(new Date(mockDate));
@@ -443,12 +353,12 @@ describe("<DashboardOnDesktop />", () => {
       renderDashboardComponent({});
 
       expect(
-        screen.getByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
+        screen.getByText(Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderText),
       ).toBeInTheDocument();
       expect(
         screen.queryAllByRole("heading", {
           level: 2,
-          name: Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
+          name: Config.dashboardRoadmapHeaderDefaults.domesticEmployerRoadmapTasksHeaderText,
         }).length,
       ).toEqual(0);
     },
@@ -462,13 +372,13 @@ describe("<DashboardOnDesktop />", () => {
     renderDashboardComponent({});
 
     expect(
-      screen.queryByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText),
+      screen.queryByText(Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderText),
     ).not.toBeInTheDocument();
 
     expect(
       screen.getByRole("heading", {
         level: 2,
-        name: Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText,
+        name: Config.dashboardRoadmapHeaderDefaults.domesticEmployerRoadmapTasksHeaderText,
       }),
     ).toBeInTheDocument();
   });

@@ -1,6 +1,6 @@
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateStep, generateTask } from "@/test/factories";
+import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   WithStatefulUserData,
@@ -51,11 +51,13 @@ describe("<HideableTasks />", () => {
     await waitFor(() => {
       expect(screen.getByText(content)).toBeInTheDocument();
     });
-    expect(screen.queryByTestId("section-plan")).not.toBeInTheDocument();
   });
 
   it("displays roadmap tasks when show toggle is clicked", async () => {
-    const tasks = [generateTask({}), generateTask({})];
+    const tasks = [
+      generateTask({ name: "visible-task-1", required: true }),
+      generateTask({ required: true }),
+    ];
     const hiddenTasksContent = templateEval(Config.dashboardDefaults.hiddenTasksText, {
       count: String(tasks.length),
     });
@@ -64,17 +66,14 @@ describe("<HideableTasks />", () => {
       preferences: generatePreferences({ isHideableRoadmapOpen: false }),
     });
 
-    useMockRoadmap({
-      steps: [generateStep({ stepNumber: 1, section: "PLAN" })],
-      tasks: tasks,
-    });
+    useMockRoadmap({ tasks: tasks });
 
     renderHideableTask(business);
 
     fireEvent.click(screen.getByText(Config.dashboardDefaults.showTaskText));
 
     await waitFor(() => {
-      expect(screen.getByTestId("section-plan")).toBeInTheDocument();
+      expect(screen.getByText("visible-task-1")).toBeInTheDocument();
     });
 
     expect(screen.queryByText(hiddenTasksContent)).not.toBeInTheDocument();
