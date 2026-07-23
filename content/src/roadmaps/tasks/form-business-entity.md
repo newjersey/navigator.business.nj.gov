@@ -3,9 +3,9 @@ notesMd: The content here will only appear for a user who opens the formation ta
 summaryDescriptionMd: To conduct business in New Jersey, you must register your
   business name and authorize your `business
   structure|business-structure-contextual-link` with the State.
-urlSlug: business-entity-auth
-displayname: business-entity-auth
-name: Authorize Your Business Entity
+urlSlug: form-business-entity
+displayname: form-business-entity
+name: Check Available Names and Form Your Business
 id: form-business-entity
 callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName
 callToActionText: Authorize My Business

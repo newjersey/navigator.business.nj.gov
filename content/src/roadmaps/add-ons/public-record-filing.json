@@ -5,7 +5,7 @@
     {
       "step": 2,
       "weight": 1,
-      "task": "form-business-entity-nj",
+      "task": "form-business-entity",
       "required": true
     }
   ]
