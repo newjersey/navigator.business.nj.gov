@@ -36,7 +36,7 @@ const license = (overrides: Partial<License> = {}): License => ({
 const renderCard = (props: Partial<ComponentProps<typeof LicenseCard>> = {}) =>
   render(<LicenseCard messages={messages} license={license()} {...props} />);
 
-describe("LicenseCard", () => {
+describe("LicenseCard layout", () => {
   it("renders title, meta, agency, phone, and CTA", () => {
     renderCard();
     expect(screen.getByText("A-901 License to Transport Waste")).toBeInTheDocument();
@@ -47,6 +47,70 @@ describe("LicenseCard", () => {
     expect(cta).toHaveAttribute("href", "https://example.com");
   });
 
+  it("renders a base-light divider between the card header and body", () => {
+    const { container } = renderCard();
+    const divider = container.querySelector("hr.border-base-light");
+    expect(divider).not.toBeNull();
+    expect(divider?.previousElementSibling?.classList.contains("usa-card__header")).toBe(true);
+    expect(divider?.nextElementSibling?.classList.contains("usa-card__body")).toBe(true);
+  });
+});
+
+describe("LicenseCard who it's for / industry meta line", () => {
+  it("maps webflowType to its 'Who it's for' display label", () => {
+    const { container } = renderCard({
+      license: license({ webflowType: "individual-license" }),
+    });
+    expect(screen.getByText(messages.cardWhoForLabel)).toBeInTheDocument();
+    expect(container.querySelector(".usa-card__header p")?.textContent).toContain(
+      messages.whoItsForLabels["individual-license"],
+    );
+  });
+
+  it("omits the 'Who it's for' row when webflowType is unknown or missing", () => {
+    renderCard({ license: license({ webflowType: undefined }) });
+    expect(screen.queryByText(messages.cardWhoForLabel)).not.toBeInTheDocument();
+  });
+
+  it("omits the Industry row when the value is the literal string 'undefined'", () => {
+    renderCard({ license: license({ webflowType: undefined, industry: "undefined" }) });
+    expect(screen.queryByText(messages.cardIndustryLabel)).not.toBeInTheDocument();
+    expect(screen.queryByText(/undefined/)).not.toBeInTheDocument();
+  });
+
+  it("omits the Industry row when the value is empty or whitespace", () => {
+    renderCard({ license: license({ webflowType: undefined, industry: "   " }) });
+    expect(screen.queryByText(messages.cardIndustryLabel)).not.toBeInTheDocument();
+  });
+
+  it("omits the entire meta line when neither classification nor industry is present", () => {
+    const { container } = renderCard({
+      license: license({ webflowType: undefined, industry: undefined }),
+    });
+    expect(screen.queryByText(messages.cardWhoForLabel)).not.toBeInTheDocument();
+    expect(screen.queryByText(messages.cardIndustryLabel)).not.toBeInTheDocument();
+    expect(container.querySelector(".usa-card__header p")).toBeNull();
+  });
+
+  it("does not render a leading separator when industry has no classification", () => {
+    renderCard({
+      license: license({ webflowType: undefined, industry: "Credit Union" }),
+    });
+    expect(screen.queryByText(/Who it's for:/)).not.toBeInTheDocument();
+    // The "|" separator must not appear when only Industry is present.
+    expect(screen.queryByText(/\|/)).not.toBeInTheDocument();
+    expect(screen.getByText(/Industry:/)).toBeInTheDocument();
+  });
+
+  it("renders the separator only when both classification and industry are present", () => {
+    renderCard({ license: license({ webflowType: "business-license", industry: "Waste" }) });
+    expect(screen.getByText(/Who it's for:/)).toBeInTheDocument();
+    expect(screen.getByText(/Industry:/)).toBeInTheDocument();
+    expect(screen.getByText(/\|/)).toBeInTheDocument();
+  });
+});
+
+describe("LicenseCard agency line", () => {
   it("renders the agency name and additional context comma-joined when both are present", () => {
     renderCard({
       license: license({
@@ -60,7 +124,9 @@ describe("LicenseCard", () => {
   });
 
   it("renders only the agency name when no additional context is present", () => {
-    renderCard({ license: license({ agency: "Federal Trade Commission", division: undefined }) });
+    renderCard({
+      license: license({ agency: "Federal Trade Commission", division: undefined }),
+    });
     expect(screen.getByText(/Federal Trade Commission/)).toBeInTheDocument();
     expect(screen.queryByText(/,/)).not.toBeInTheDocument();
   });
@@ -99,46 +165,33 @@ describe("LicenseCard", () => {
     expect(screen.getByText(/Federal Trade Commission/)).toBeInTheDocument();
   });
 
+  it("renders the summary/agency divider when only division context is present", () => {
+    // A card with division context (agencyAdditionalContext) but no agency name
+    // and no phone still renders an agency line, so the divider above it must
+    // render too. Keyed off the same value that gates the line, not agency alone.
+    const { container } = renderCard({
+      license: license({
+        agency: undefined,
+        division: "Your Municipality",
+        divisionPhone: undefined,
+        summaryDescriptionMd: "You may need to register with your municipal clerk.",
+      }),
+    });
+    expect(screen.getByText(/Your Municipality/)).toBeInTheDocument();
+    expect(container.querySelector("hr.margin-x-0")).not.toBeNull();
+  });
+});
+
+describe("LicenseCard icons and phone line", () => {
   it("prefixes agency with the account_balance icon and phone with the phone icon", () => {
     const { container } = renderCard();
     const hrefs = [...container.querySelectorAll("use")].map((u) => u.getAttribute("href"));
     expect(hrefs).toContain("/assets/njwds/dist/img/sprite.svg#account_balance");
     expect(hrefs).toContain("/assets/njwds/dist/img/sprite.svg#phone");
   });
+});
 
-  it("maps webflowType to its 'Who it's for' display label", () => {
-    const { container } = renderCard({ license: license({ webflowType: "individual-license" }) });
-    expect(screen.getByText(messages.cardWhoForLabel)).toBeInTheDocument();
-    expect(container.querySelector(".usa-card__header p")?.textContent).toContain(
-      messages.whoItsForLabels["individual-license"],
-    );
-  });
-
-  it("omits the 'Who it's for' row when webflowType is unknown or missing", () => {
-    renderCard({ license: license({ webflowType: undefined }) });
-    expect(screen.queryByText(messages.cardWhoForLabel)).not.toBeInTheDocument();
-  });
-
-  it("omits the Industry row when the value is the literal string 'undefined'", () => {
-    renderCard({ license: license({ webflowType: undefined, industry: "undefined" }) });
-    expect(screen.queryByText(messages.cardIndustryLabel)).not.toBeInTheDocument();
-    expect(screen.queryByText(/undefined/)).not.toBeInTheDocument();
-  });
-
-  it("omits the Industry row when the value is empty or whitespace", () => {
-    renderCard({ license: license({ webflowType: undefined, industry: "   " }) });
-    expect(screen.queryByText(messages.cardIndustryLabel)).not.toBeInTheDocument();
-  });
-
-  it("omits the entire meta line when neither classification nor industry is present", () => {
-    const { container } = renderCard({
-      license: license({ webflowType: undefined, industry: undefined }),
-    });
-    expect(screen.queryByText(messages.cardWhoForLabel)).not.toBeInTheDocument();
-    expect(screen.queryByText(messages.cardIndustryLabel)).not.toBeInTheDocument();
-    expect(container.querySelector(".usa-card__header p")).toBeNull();
-  });
-
+describe("LicenseCard call to action", () => {
   it("omits the CTA when no link is present", () => {
     renderCard({ license: license({ callToActionLink: undefined }) });
     expect(screen.queryByRole("link", { name: /Apply/ })).not.toBeInTheDocument();
@@ -160,31 +213,9 @@ describe("LicenseCard", () => {
     expect(container.querySelector(".usa-card__footer")).toBeNull();
     expect(screen.queryByText(/\$\{/)).not.toBeInTheDocument();
   });
+});
 
-  it("renders the summary/agency divider when only division context is present", () => {
-    // A card with division context (agencyAdditionalContext) but no agency name
-    // and no phone still renders an agency line, so the divider above it must
-    // render too. Keyed off the same value that gates the line, not agency alone.
-    const { container } = renderCard({
-      license: license({
-        agency: undefined,
-        division: "Your Municipality",
-        divisionPhone: undefined,
-        summaryDescriptionMd: "You may need to register with your municipal clerk.",
-      }),
-    });
-    expect(screen.getByText(/Your Municipality/)).toBeInTheDocument();
-    expect(container.querySelector("hr.margin-x-0")).not.toBeNull();
-  });
-
-  it("renders a base-light divider between the card header and body", () => {
-    const { container } = renderCard();
-    const divider = container.querySelector("hr.border-base-light");
-    expect(divider).not.toBeNull();
-    expect(divider?.previousElementSibling?.classList.contains("usa-card__header")).toBe(true);
-    expect(divider?.nextElementSibling?.classList.contains("usa-card__body")).toBe(true);
-  });
-
+describe("LicenseCard summary body and search highlighting", () => {
   it("highlights a query match in the summary body", () => {
     const { container } = renderCard({
       license: license({ summaryDescriptionMd: "You need a license to transport waste." }),
@@ -216,22 +247,5 @@ describe("LicenseCard", () => {
     expect(screen.queryByText(/:::/)).not.toBeInTheDocument();
     expect(screen.getByText(/the A-901 process takes 14 to 16 months/)).toBeInTheDocument();
     expect(screen.getByText(/You need an A-901 license to transport waste/)).toBeInTheDocument();
-  });
-
-  it("does not render a leading separator when industry has no classification", () => {
-    renderCard({
-      license: license({ webflowType: undefined, industry: "Credit Union" }),
-    });
-    expect(screen.queryByText(/Who it's for:/)).not.toBeInTheDocument();
-    // The "|" separator must not appear when only Industry is present.
-    expect(screen.queryByText(/\|/)).not.toBeInTheDocument();
-    expect(screen.getByText(/Industry:/)).toBeInTheDocument();
-  });
-
-  it("renders the separator only when both classification and industry are present", () => {
-    renderCard({ license: license({ webflowType: "business-license", industry: "Waste" }) });
-    expect(screen.getByText(/Who it's for:/)).toBeInTheDocument();
-    expect(screen.getByText(/Industry:/)).toBeInTheDocument();
-    expect(screen.getByText(/\|/)).toBeInTheDocument();
   });
 });

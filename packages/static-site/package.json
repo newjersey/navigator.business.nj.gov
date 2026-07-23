@@ -8,7 +8,7 @@
     "url": "git+https://github.com/newjersey/navigator.business.nj.gov.git",
     "directory": "packages/static-site"
   },
-  "homepage": "https://next.business.nj.gov",
+  "homepage": "https://business.nj.gov",
   "bugs": {
     "url": "https://github.com/newjersey/navigator.business.nj.gov/issues"
   },

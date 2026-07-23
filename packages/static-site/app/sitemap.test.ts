@@ -29,6 +29,15 @@ describe("sitemap with multilingual disabled", () => {
       const langKeys = Object.keys(entry.alternates?.languages ?? {});
       expect(langKeys).toContain("en-US");
       expect(langKeys).toContain("es-US");
+      expect(new URL(entry.url).origin).toBe("https://business.nj.gov");
+
+      for (const alternateUrl of Object.values(entry.alternates?.languages ?? {})) {
+        if (alternateUrl === undefined) {
+          throw new Error("Expected every sitemap language alternate to have a URL.");
+        }
+
+        expect(new URL(alternateUrl).origin).toBe("https://business.nj.gov");
+      }
     }
   });
 });

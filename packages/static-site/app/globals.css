@@ -80,9 +80,14 @@ body {
  * The header (`.usa-nav__inner`) is a sibling of `<main>` — not an ancestor of
  * `.layout-wide` — so it's scoped via `body:has(.layout-wide)` rather than the
  * `.grid-container`/`.grid-row` scoping used for the in-page columns above.
- * `!important` overrides the USWDS-compiled `.usa-nav__inner` max-width.
+ * `!important` overrides the USWDS-compiled `.usa-nav__inner` max-width. This
+ * rule and USWDS's have equal specificity, and the two stylesheets are loaded
+ * through different mechanisms (a `<link>` tag vs. a bundled CSS import), so
+ * cascade order between them isn't reliably controllable — `!important` is
+ * required here rather than a specificity bump.
  */
 body:has(.layout-wide) .usa-nav__inner {
+  /* biome-ignore lint/complexity/noImportantStyles: cascade order vs. the USWDS stylesheet isn't guaranteed; see comment above */
   max-width: 80rem !important;
 }
 
@@ -252,6 +257,20 @@ li {
     opacity: 0;
     margin: 0;
   }
+}
+
+/*
+ * NJWDS's `.usa-modal-wrapper.is-visible` sets `position: fixed` but no
+ * offsets, relying on the (removed) USWDS runtime script to hoist the wrapper
+ * to a `<body>`-level child before toggling visibility — an offset-less fixed
+ * box then falls back to its in-flow "static position", which lands near the
+ * viewport top when hoisted. `LanguagePromptModalView` renders the wrapper in
+ * place instead (see its module comment), so without an explicit offset the
+ * fallback position is wherever the modal happens to sit in the page, often
+ * far below the viewport.
+ */
+.usa-modal-wrapper.is-visible {
+  inset: 0;
 }
 
 /* Show at most six language options before scrolling, per USWDS language-selector spec. */

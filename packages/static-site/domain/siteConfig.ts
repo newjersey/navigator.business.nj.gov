@@ -12,7 +12,7 @@
  * Metadata, hreflang alternates, and the sitemap all resolve relative paths
  * against this origin so every emitted URL points at the same host.
  */
-export const SITE_BASE_URL = "https://next.business.nj.gov";
+export const SITE_BASE_URL = "https://business.nj.gov";
 
 /**
  * Cookie name recording that a visitor dismissed the language prompt.

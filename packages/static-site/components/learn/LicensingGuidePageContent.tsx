@@ -39,6 +39,34 @@ interface Props {
 const searchableText = (license: License): string =>
   `${license.name} ${license.summaryDescriptionMd ?? ""}`.toLowerCase();
 
+interface FilteringByBarProps {
+  readonly messages: LicensingGuidePageMessages;
+  readonly query: string;
+  readonly onRemoveQuery: () => void;
+}
+
+const FilteringByBar = ({ messages, query, onRemoveQuery }: FilteringByBarProps) => {
+  if (query.trim() === "") {
+    return null;
+  }
+
+  const searchChipLabel = messages.filterSearchChip.replace("{query}", query);
+
+  return (
+    <section
+      aria-label={messages.filteringByLabel}
+      className="funding-filtering-by margin-bottom-2 padding-2 radius-md bg-primary-lightest border-1px border-primary"
+    >
+      <span className="margin-right-1">{messages.filteringByLabel}</span>
+      <FilterChip
+        label={searchChipLabel}
+        removeLabel={messages.filterRemoveLabel.replace("{filter}", searchChipLabel)}
+        onRemove={onRemoveQuery}
+      />
+    </section>
+  );
+};
+
 const LicensingGuidePageContent = ({ messages, page, licenses }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [query, setQuery] = useState("");
@@ -82,8 +110,6 @@ const LicensingGuidePageContent = ({ messages, page, licenses }: Props) => {
     setQuery("");
     setCurrentPage(1);
   };
-
-  const searchChipLabel = messages.filterSearchChip.replace("{query}", query);
 
   return (
     <div className="funding-layout layout-wide">
@@ -139,19 +165,7 @@ const LicensingGuidePageContent = ({ messages, page, licenses }: Props) => {
         aria-label={messages.title}
         className="funding-results-col"
       >
-        {query.trim() !== "" && (
-          <section
-            aria-label={messages.filteringByLabel}
-            className="funding-filtering-by margin-bottom-2 padding-2 radius-md bg-primary-lightest border-1px border-primary"
-          >
-            <span className="margin-right-1">{messages.filteringByLabel}</span>
-            <FilterChip
-              label={searchChipLabel}
-              removeLabel={messages.filterRemoveLabel.replace("{filter}", searchChipLabel)}
-              onRemove={clearSearch}
-            />
-          </section>
-        )}
+        <FilteringByBar messages={messages} query={query} onRemoveQuery={clearSearch} />
 
         <p className="margin-bottom-2">{resultCount}</p>
         {pageSlice.map((license) => (

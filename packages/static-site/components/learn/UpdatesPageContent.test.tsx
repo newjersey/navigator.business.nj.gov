@@ -55,7 +55,7 @@ const makeRecents = (count: number): RecentItem[] =>
 const renderPage = (recents: RecentItem[]) =>
   render(<UpdatesPageContent messages={messages} recents={recents} />);
 
-describe("UpdatesPageContent", () => {
+const testStaticContentAndPagination = () => {
   it("renders the page title", () => {
     renderPage([]);
     expect(screen.getByRole("heading", { level: 1, name: "All Updates" })).toBeInTheDocument();
@@ -85,7 +85,9 @@ describe("UpdatesPageContent", () => {
     await userEvent.click(screen.getByRole("button", { name: "Next" }));
     expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(5);
   });
+};
 
+const testSearchFiltering = () => {
   it("filters live by search query without needing Show Results", async () => {
     const user = userEvent.setup();
     renderPage([makeRecent("Alpha Update"), makeRecent("Beta Update")]);
@@ -97,7 +99,9 @@ describe("UpdatesPageContent", () => {
       screen.queryByRole("heading", { level: 3, name: "Beta Update" }),
     ).not.toBeInTheDocument();
   });
+};
 
+const testCategoryFiltering = () => {
   it("renders category checkboxes from categoryLabels", () => {
     renderPage([]);
     expect(screen.getByLabelText("Grants and Resources")).toBeInTheDocument();
@@ -143,7 +147,9 @@ describe("UpdatesPageContent", () => {
       screen.getByRole("button", { name: "Remove Grants and Resources filter" }),
     ).toBeInTheDocument();
   });
+};
 
+const testReset = () => {
   it("resets search, category filters, and page on Reset", async () => {
     const user = userEvent.setup();
     const recents = [
@@ -161,7 +167,9 @@ describe("UpdatesPageContent", () => {
     expect(screen.getByText("Grant Update")).toBeInTheDocument();
     expect(screen.getByText("Rule Update")).toBeInTheDocument();
   });
+};
 
+const testSorting = () => {
   it("sorts alphabetically A-Z when selected", async () => {
     const user = userEvent.setup();
     renderPage([makeRecent("Zeta"), makeRecent("Alpha"), makeRecent("Mid")]);
@@ -191,4 +199,12 @@ describe("UpdatesPageContent", () => {
     const headings = screen.getAllByRole("heading", { level: 3 });
     expect(headings.map((h) => h.textContent)).toEqual(["Newer", "Older"]);
   });
+};
+
+describe("UpdatesPageContent", () => {
+  describe("static content and pagination", testStaticContentAndPagination);
+  describe("search filtering", testSearchFiltering);
+  describe("category filtering", testCategoryFiltering);
+  describe("reset", testReset);
+  describe("sorting", testSorting);
 });

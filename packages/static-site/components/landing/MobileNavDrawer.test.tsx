@@ -80,7 +80,9 @@ describe("MobileNavDrawer", () => {
         <p>content</p>
       </MobileNavDrawer>,
     );
-    fireEvent.click(container.querySelector(".usa-mobile-nav-overlay")!);
+    const overlay = container.querySelector(".usa-mobile-nav-overlay");
+    expect(overlay).not.toBeNull();
+    fireEvent.click(overlay as HTMLElement);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 });
