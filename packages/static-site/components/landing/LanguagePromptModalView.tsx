@@ -11,6 +11,11 @@
 import { useEffect, useRef } from "react";
 
 /**
+ * Element id for the modal dialog, targeted by e2e tests.
+ */
+const MODAL_ID = "language-prompt-modal";
+
+/**
  * Element id for the modal heading, referenced by `aria-labelledby`.
  */
 const MODAL_HEADING_ID = "language-prompt-modal-heading";
@@ -115,6 +120,7 @@ export const LanguagePromptModalView = ({
         aria-labelledby={MODAL_HEADING_ID}
         aria-modal="true"
         className="usa-modal"
+        id={MODAL_ID}
         ref={dialogRef}
         role="dialog"
       >
