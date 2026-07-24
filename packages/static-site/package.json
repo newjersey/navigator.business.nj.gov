@@ -84,7 +84,7 @@
     "@trussworks/react-uswds": "11.1.0",
     "gray-matter": "4.0.3",
     "next": "16.2.11",
-    "next-intl": "4.13.2",
+    "next-intl": "4.13.3",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "react-markdown": "10.1.0",
