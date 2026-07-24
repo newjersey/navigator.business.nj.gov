@@ -21,6 +21,8 @@ export interface LocalizedLinkProps {
   readonly className?: string;
   /** Optional aria-label override for the anchor element. */
   readonly ariaLabel?: string;
+  /** Optional ID of an element that describes the anchor. */
+  readonly ariaDescribedBy?: string;
   /** Optional title attribute for the anchor element. */
   readonly title?: string;
   /** Optional custom children for replacing the link label text. */
@@ -37,6 +39,7 @@ export interface LocalizedLinkProps {
  * @param props.link Link metadata used to select render behavior.
  * @param props.className Optional class names for the rendered link.
  * @param props.ariaLabel Optional aria-label override.
+ * @param props.ariaDescribedBy Optional ID of an element that describes the link.
  * @param props.title Optional title attribute.
  * @param props.children Optional custom link content.
  * @returns A locale-aware link element.
@@ -49,6 +52,7 @@ export const LocalizedLink = ({
   link,
   className,
   ariaLabel,
+  ariaDescribedBy,
   title,
   children,
 }: LocalizedLinkProps) => {
@@ -56,7 +60,13 @@ export const LocalizedLink = ({
 
   if (link.isInternal) {
     return (
-      <Link aria-label={ariaLabel} className={className} href={link.href} title={title}>
+      <Link
+        aria-describedby={ariaDescribedBy}
+        aria-label={ariaLabel}
+        className={className}
+        href={link.href}
+        title={title}
+      >
         {labelContent}
       </Link>
     );
@@ -67,6 +77,7 @@ export const LocalizedLink = ({
 
   return (
     <a
+      aria-describedby={ariaDescribedBy}
       aria-label={ariaLabel}
       className={className}
       href={link.href}
