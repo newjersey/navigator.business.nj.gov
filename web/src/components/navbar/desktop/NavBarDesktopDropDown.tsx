@@ -72,7 +72,7 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
             },
           ]}
         >
-          {({ TransitionProps, placement }): JSX.Element => {
+          {({ TransitionProps, placement }): ReactElement => {
             return (
               <Grow
                 {...TransitionProps}

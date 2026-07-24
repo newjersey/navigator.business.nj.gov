@@ -1,9 +1,9 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import type { FacilityDetails, XraySearchError } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { TextField } from "@mui/material";
 import {
   type ChangeEvent,
@@ -34,15 +34,13 @@ interface FieldErrors {
   addressZipCode?: string;
 }
 
-const Config = getMergedConfig();
-
-const XrayRegistrationErrorLookup: Record<XraySearchError, string> = {
-  NOT_FOUND: Config.xrayRegistrationTask.errorTextNotFound,
-  FIELDS_REQUIRED: Config.xrayRegistrationTask.errorTextFieldsRequired,
-  SEARCH_FAILED: Config.xrayRegistrationTask.errorTextSearchFailed,
-};
-
 export const XrayStatus = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+  const xrayRegistrationErrorLookup: Record<XraySearchError, string> = {
+    NOT_FOUND: Config.xrayRegistrationTask.errorTextNotFound,
+    FIELDS_REQUIRED: Config.xrayRegistrationTask.errorTextFieldsRequired,
+    SEARCH_FAILED: Config.xrayRegistrationTask.errorTextSearchFailed,
+  };
   const [formValues, setFormValues] = useState<FacilityDetails>({
     businessName: "",
     addressLine1: "",
@@ -218,13 +216,13 @@ export const XrayStatus = (props: Props): ReactElement => {
     } else if (props.error === "NOT_FOUND") {
       return (
         <Alert dataTestid={`error-alert-${props.error}`} variant="warning">
-          {XrayRegistrationErrorLookup[props.error]}
+          {xrayRegistrationErrorLookup[props.error]}
         </Alert>
       );
     } else {
       return (
         <Alert dataTestid={`error-alert-${props.error}`} variant="error">
-          {XrayRegistrationErrorLookup[props.error]}
+          {xrayRegistrationErrorLookup[props.error]}
         </Alert>
       );
     }

@@ -122,7 +122,7 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
         disablePortal={true}
         placement={`${props.horizontal ? "bottom" : "bottom-end"}`}
       >
-        {({ TransitionProps, placement }): JSX.Element => {
+        {({ TransitionProps, placement }): ReactElement => {
           return (
             <Grow
               {...TransitionProps}

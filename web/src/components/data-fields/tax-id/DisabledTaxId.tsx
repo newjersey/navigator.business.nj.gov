@@ -13,6 +13,13 @@ import { ReactElement, ReactNode, useContext, useEffect, useMemo, useState } fro
 type Props = {
   template?: (props: { children: ReactNode }) => ReactElement;
 };
+
+const SimpleDiv = (props: { children: ReactNode }): ReactElement => (
+  <div className="flex">
+    <div>{props.children}</div>
+  </div>
+);
+
 export const DisabledTaxId = (props: Props): ReactElement => {
   const fieldName = "taxId";
 
@@ -80,11 +87,6 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     toggleTaxIdDisplay();
   };
 
-  const SimpleDiv = (props: { children: ReactNode }): ReactElement => (
-    <div className="flex">
-      <div>{props.children}</div>
-    </div>
-  );
   const Element = props.template ?? SimpleDiv;
   const value = useMemo(() => {
     return formatTaxId(taxIdValue + locationValue);

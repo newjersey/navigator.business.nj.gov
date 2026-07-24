@@ -6,6 +6,7 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
@@ -15,7 +16,6 @@ import {
   findIndustryByNaicsCode,
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { NaicsCodeObject, Task } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
@@ -30,15 +30,14 @@ interface Props {
 
 type NaicsErrorTypes = "length" | "invalid";
 
-const Config = getMergedConfig();
-const errorMessages: Record<NaicsErrorTypes, string> = {
-  invalid: Config.determineNaicsCode.invalidValidationErrorText,
-  length: Config.determineNaicsCode.lengthValidationErrorText,
-};
-
 const REQUIRED_LENGTH = 6;
 
 export const NaicsCodeInput = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+  const errorMessages: Record<NaicsErrorTypes, string> = {
+    invalid: Config.determineNaicsCode.invalidValidationErrorText,
+    length: Config.determineNaicsCode.lengthValidationErrorText,
+  };
   const userDataFromHook = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const updateQueue = userDataFromHook.updateQueue;

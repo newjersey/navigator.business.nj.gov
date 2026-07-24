@@ -22,7 +22,7 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { renderToStaticMarkup } from "react-dom/server";
+import { renderToStaticMarkup } from "react-dom/server.node";
 import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();

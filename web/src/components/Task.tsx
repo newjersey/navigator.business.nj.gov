@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { taskIdsWithLicenseSearchEnabled } from "@/components/TaskPageSwitchComponent";
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
-import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { getTaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -19,6 +19,7 @@ interface Props {
 export const Task = (props: Props): ReactElement => {
   const { business } = useUserData();
   const { Config } = useConfig();
+  const taskProgressTagLookup = getTaskProgressTagLookup(Config);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "TO_DO";
 
@@ -66,7 +67,7 @@ export const Task = (props: Props): ReactElement => {
                 needsAccount={props.task.required}
               />
             ) : (
-              TaskProgressTagLookup[taskProgress]
+              taskProgressTagLookup[taskProgress]
             )}
           </span>
         )}
@@ -95,7 +96,7 @@ export const Task = (props: Props): ReactElement => {
       </div>
       {!isTabletAndUp && (
         <div className="margin-bottom-2">
-          {TaskProgressTagLookup[taskProgress]}{" "}
+          {taskProgressTagLookup[taskProgress]}{" "}
           <span className="margin-left-1">{renderRequiredLabel()}</span>
         </div>
       )}

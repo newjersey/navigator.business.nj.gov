@@ -2,6 +2,7 @@ import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropd
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Content } from "@/components/Content";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -10,7 +11,6 @@ import {
   Municipality,
   toProperCase,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ElevatorRegistrationSearchError } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
 import { ChangeEvent, FormEvent, ReactElement, useEffect, useState } from "react";
@@ -22,17 +22,16 @@ interface Props {
   municipalities: HousingMunicipality[];
 }
 
-const Config = getMergedConfig();
-const ElevatorSearchErrorLookup: Record<ElevatorRegistrationSearchError, string> = {
-  NO_PROPERTY_INTEREST_FOUND:
-    Config.elevatorRegistrationSearchTask.errorTextNoPropertyInterestFound,
-  NO_ELEVATOR_REGISTRATIONS_FOUND:
-    Config.elevatorRegistrationSearchTask.errorTextNoElevatorRegistrations,
-  FIELDS_REQUIRED: Config.elevatorRegistrationSearchTask.errorTextFieldsRequired,
-  SEARCH_FAILED: Config.elevatorRegistrationSearchTask.errorTextSearchFailed,
-};
-
 export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+  const elevatorSearchErrorLookup: Record<ElevatorRegistrationSearchError, string> = {
+    NO_PROPERTY_INTEREST_FOUND:
+      Config.elevatorRegistrationSearchTask.errorTextNoPropertyInterestFound,
+    NO_ELEVATOR_REGISTRATIONS_FOUND:
+      Config.elevatorRegistrationSearchTask.errorTextNoElevatorRegistrations,
+    FIELDS_REQUIRED: Config.elevatorRegistrationSearchTask.errorTextFieldsRequired,
+    SEARCH_FAILED: Config.elevatorRegistrationSearchTask.errorTextSearchFailed,
+  };
   const [formValues, setFormValues] = useState<ElevatorSafetyAddress>({ address1: "" });
   const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(
     undefined,
@@ -123,7 +122,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
 
     return (
       <Alert dataTestid={`error-alert-${props.error}`} variant="error">
-        {ElevatorSearchErrorLookup[props.error]}
+        {elevatorSearchErrorLookup[props.error]}
       </Alert>
     );
   };

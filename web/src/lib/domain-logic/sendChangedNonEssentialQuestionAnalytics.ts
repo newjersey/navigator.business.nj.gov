@@ -2,8 +2,6 @@ import analytics from "@/lib/utils/analytics";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 
-const Config = getMergedConfig();
-
 export const sendChangedNonEssentialQuestionAnalytics = (
   prevProfileData: ProfileData,
   newProfileData: ProfileData,
@@ -125,6 +123,7 @@ const didNonEssentialQuestionAnswerChange = (
 };
 
 const getNonEssentialQuestionAnswer = (questionAnswer: boolean | undefined): string => {
+  const Config = getMergedConfig();
   return questionAnswer
     ? Config.profileDefaults.fields.nonEssentialQuestions.default.radioButtonTrueText
     : Config.profileDefaults.fields.nonEssentialQuestions.default.radioButtonFalseText;

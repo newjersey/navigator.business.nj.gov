@@ -159,7 +159,7 @@ export const UserDataProvider = ({
   const hasActiveSaveErrorRef = useRef(false);
   const isUpdateQueueDirtyRef = useRef(false);
   const isProfileSyncPendingRef = useRef(false);
-  const dataRef = useRef<UserData>();
+  const dataRef = useRef<UserData | undefined>(undefined);
 
   activeUserIdRef.current = activeUserId;
   ownerUserIdRef.current = ownerUserId;
@@ -300,25 +300,11 @@ export const UserDataProvider = ({
           return undefined;
         }
 
-        return mutate<UserData>(
-          async () => {
-            const response = await api.postUserData(newUserData);
-            if (response.user.id !== updateUserId) {
-              throw new Error("User data save returned a different user");
-            }
-            return response;
-          },
-          {
-            populateCache: (response, currentData) => {
-              const isLatestSave =
-                ownerUserIdRef.current === updateUserId &&
-                saveGenerationRef.current === saveGeneration;
-              return isLatestSave ? response : (currentData ?? response);
-            },
-            revalidate: false,
-            rollbackOnError: false,
-          },
-        );
+        const response = await api.postUserData(newUserData);
+        if (response.user.id !== updateUserId) {
+          throw new Error("User data save returned a different user");
+        }
+        return response;
       };
       const saveRequest = saveChainRef.current.then(saveForActiveOwner);
       saveChainRef.current = saveRequest.then(
@@ -355,6 +341,7 @@ export const UserDataProvider = ({
       hasActiveSaveErrorRef.current = false;
       isUpdateQueueDirtyRef.current = false;
       setUserDataError(undefined);
+      await mutate(response, { revalidate: false });
       userDataStorage.set(response.user.id, response);
       localUpdateQueue.queue(response);
 

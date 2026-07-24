@@ -13,10 +13,10 @@ import {
   Context,
   FocusEvent,
   forwardRef,
+  ForwardedRef,
   HTMLInputTypeAttribute,
   InputHTMLAttributes,
   ReactElement,
-  RefObject,
   useMemo,
 } from "react";
 
@@ -56,14 +56,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
 export const GenericTextField = forwardRef(
-  <T,>(
-    props: GenericTextFieldProps<T>,
-    ref?:
-      | ((instance: HTMLDivElement | null) => void)
-      | RefObject<HTMLDivElement>
-      | null
-      | undefined,
-  ): ReactElement => {
+  <T,>(props: GenericTextFieldProps<T>, ref: ForwardedRef<HTMLDivElement>): ReactElement => {
     const widthStyling =
       props.inputWidth === "reduced"
         ? "text-field-width-reduced"

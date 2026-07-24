@@ -6,20 +6,19 @@ import { NaicsCodeInput } from "@/components/tasks/NaicsCodeInput";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { ReactElement, useContext, useState } from "react";
-
-const Config = getMergedConfig();
 
 interface Props {
   task: Task;
 }
 
 export const NaicsCodeTask = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const [showInput, setShowInput] = useState<boolean>(true);
   const [showIndustryChangedAlert, setShowIndustryChangedAlert] = useState<boolean>(false);
   const [updatedIndustryName, setUpdatedIndustryName] = useState<string>("");

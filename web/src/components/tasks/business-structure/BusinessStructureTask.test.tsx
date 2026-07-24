@@ -23,7 +23,7 @@ import {
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { renderToStaticMarkup } from "react-dom/server";
+import { renderToStaticMarkup } from "react-dom/server.node";
 
 const Config = getMergedConfig();
 

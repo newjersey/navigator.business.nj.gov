@@ -118,8 +118,10 @@ export const Review = (props: Props): ReactElement => {
 
       if (isAnyRequiredFieldEmpty(business.taxClearanceCertificateData) || !props.isValid()) return;
 
-      await api.postUserData(userData); // Need to assert that all businesses in a user's account have hashed data in DB
-      const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
+      // savedUserData carries the server-generated encryptedTaxId/encryptedTaxPin,
+      // which postTaxClearanceCertificate requires.
+      const savedUserData = await api.postUserData(userData);
+      const taxClearanceResponse = await api.postTaxClearanceCertificate(savedUserData);
       if ("error" in taxClearanceResponse) {
         analytics.event.tax_clearance.submit.validation_error();
         analytics.event.api_submit.error(

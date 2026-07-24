@@ -171,8 +171,14 @@ describe("onboarding - additional business", () => {
     const { page } = renderPage({ userData: initialData });
 
     await waitFor(() => {
-      page.chooseRadio("business-persona-foreign");
+      expect(mockPush).toHaveBeenCalledWith(
+        expect.objectContaining({ query: expect.objectContaining({ page: 1 }) }),
+        undefined,
+        { shallow: true },
+      );
     });
+
+    page.chooseRadio("business-persona-foreign");
     await page.visitStep(2);
 
     page.checkByLabelText(nexusNoneOfTheAboveCheckboxLabel);

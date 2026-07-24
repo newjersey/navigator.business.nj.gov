@@ -18,6 +18,7 @@ import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
+  LicenseName,
   LicenseDetails,
   LicenseSearchNameAndAddress,
   taskIdLicenseNameMapping,
@@ -25,7 +26,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { LicenseSearchError, TaskWithLicenseTaskId } from "@businessnjgovnavigator/shared/types";
 import { Box, Tab, Tabs } from "@mui/material";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   task: TaskWithLicenseTaskId;
@@ -35,17 +36,44 @@ interface Props {
 const APPLICATION_TAB_INDEX = 0;
 const STATUS_TAB_INDEX = 1;
 
+interface LicenseTaskState {
+  error: LicenseSearchError | undefined;
+  licenseDetails: LicenseDetails | undefined;
+  tabIndex: number;
+}
+
+const getLicenseTaskState = (
+  business: ReturnType<typeof useUserData>["business"],
+  licenseNameForTask: LicenseName,
+): LicenseTaskState => {
+  const licenseDetails = business?.licenseData?.licenses?.[licenseNameForTask];
+  const hasCompletedSearch = !!licenseDetails?.lastUpdatedISO;
+
+  return {
+    error: !hasCompletedSearch && business?.licenseData?.lastUpdatedISO ? "NOT_FOUND" : undefined,
+    licenseDetails,
+    tabIndex: hasCompletedSearch ? STATUS_TAB_INDEX : APPLICATION_TAB_INDEX,
+  };
+};
+
 export const LicenseTask = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
-  const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
-  const [error, setError] = useState<LicenseSearchError | undefined>(undefined);
-  const [licenseDetails, setLicenseDetails] = useState<LicenseDetails | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { business, refresh } = useUserData();
   const { Config } = useConfig();
 
   const licenseNameForTask = taskIdLicenseNameMapping[props.task.id];
+  const businessLicenseSnapshot = `${licenseNameForTask}:${business?.id ?? ""}:${
+    business?.licenseData?.lastUpdatedISO ?? ""
+  }:${business?.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO ?? ""}`;
+  const [initialState] = useState(() => getLicenseTaskState(business, licenseNameForTask));
+  const [tabIndex, setTabIndex] = useState(initialState.tabIndex);
+  const [error, setError] = useState<LicenseSearchError | undefined>(initialState.error);
+  const [licenseDetails, setLicenseDetails] = useState<LicenseDetails | undefined>(
+    initialState.licenseDetails,
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const synchronizedBusinessLicenseSnapshot = useRef(businessLicenseSnapshot);
   const hasCompletedSearch = !!licenseDetails?.lastUpdatedISO;
 
   const allFieldsHaveValues = (nameAndAddress: LicenseSearchNameAndAddress): boolean => {
@@ -53,20 +81,18 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   useEffect(() => {
-    if (!business) return;
-    const licenseDetailsReceived =
-      business.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO;
-
-    if (!licenseDetailsReceived && business.licenseData?.lastUpdatedISO) {
-      setError("NOT_FOUND");
+    if (synchronizedBusinessLicenseSnapshot.current === businessLicenseSnapshot) {
       return;
     }
+    synchronizedBusinessLicenseSnapshot.current = businessLicenseSnapshot;
 
-    if (licenseDetailsReceived) {
-      setTabIndex(STATUS_TAB_INDEX);
-      setLicenseDetails(business.licenseData?.licenses?.[licenseNameForTask]);
+    const nextState = getLicenseTaskState(business, licenseNameForTask);
+    setError(nextState.error);
+    if (nextState.licenseDetails?.lastUpdatedISO) {
+      setTabIndex(nextState.tabIndex);
+      setLicenseDetails(nextState.licenseDetails);
     }
-  }, [licenseNameForTask, business]);
+  }, [business, businessLicenseSnapshot, licenseNameForTask]);
 
   const onSelectTab = (event: React.SyntheticEvent, newValue: number): void => {
     if (newValue === APPLICATION_TAB_INDEX) {

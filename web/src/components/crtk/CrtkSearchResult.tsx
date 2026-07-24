@@ -7,8 +7,8 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { CrtkData } from "@businessnjgovnavigator/shared/crtk";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import dayjs from "dayjs";
@@ -24,9 +24,29 @@ interface Props {
   onResubmit: (facilityDetails: CrtkFacilityDetails) => Promise<void>;
 }
 
-const Config = getMergedConfig();
+interface CrtkContactInfoProps {
+  title: string;
+}
+
+const CrtkContactInfo = (props: CrtkContactInfoProps): ReactElement => {
+  return (
+    <>
+      <p className="margin-bottom-1 text-bold">{props.title}</p>
+      <ul>
+        <li>Phone: (609) 292-6714</li>
+        <li>
+          Email:{" "}
+          <a href="mailto:rtk@dep.nj.gov" className="text-underline">
+            rtk@dep.nj.gov
+          </a>
+        </li>
+      </ul>
+    </>
+  );
+};
 
 export const CrtkSearchResult = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const { crtkData } = props;
   const status = crtkData.crtkSearchResult as StatusType;
   const businessDetails = crtkData.crtkBusinessDetails;
@@ -36,23 +56,6 @@ export const CrtkSearchResult = (props: Props): ReactElement => {
       header: "Business Found",
       description: `${businessDetails?.businessName || "Your business"} is in the New Jersey Community Right to Know (CRTK) database. This means you may have chemical reporting requirements.`,
     },
-  };
-
-  const CrtkContactInfo = (): ReactElement => {
-    return (
-      <>
-        <p className="margin-bottom-1 text-bold">{Config.crtkTask.contactCrtkExpertTitle}</p>
-        <ul>
-          <li>Phone: (609) 292-6714</li>
-          <li>
-            Email:{" "}
-            <a href="mailto:rtk@dep.nj.gov" className="text-underline">
-              rtk@dep.nj.gov
-            </a>
-          </li>
-        </ul>
-      </>
-    );
   };
 
   const CrtkFound = (): ReactElement => {
@@ -138,7 +141,7 @@ export const CrtkSearchResult = (props: Props): ReactElement => {
                     {`If CRTK approves your exemption, you don't need to fill
                     out the form every year.`}
                   </p>
-                  <CrtkContactInfo />
+                  <CrtkContactInfo title={Config.crtkTask.contactCrtkExpertTitle} />
                 </div>
               </ResultsSectionAccordion>
             </>

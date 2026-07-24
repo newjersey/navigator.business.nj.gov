@@ -1,34 +1,44 @@
 import { OnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
+import { typeTaxId } from "@businessnjgovnavigator/cypress/support/helpers/helpers-form";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
+import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 
 export class ProfilePage extends OnboardingPage {
+  private openTab(tab: ProfileTabs): void {
+    cy.get(`[data-testid="${tab}"]`)
+      .should("be.visible")
+      .click()
+      .should("have.attr", "aria-selected", "true");
+    cy.get(`#tabpanel-${tab}`).should("be.visible");
+  }
+
   getLegalStructure() {
-    cy.get('[data-testid="info"').click({ force: true });
+    this.openTab("info");
     return cy.get("#mui-component-select-legal-structure");
   }
 
   getEmployerId() {
-    cy.get('[data-testid="numbers"').click({ force: true });
+    this.openTab("numbers");
     return cy.get(`input[name="employerId"]`);
   }
 
   getEntityId() {
-    cy.get('[data-testid="numbers"').click({ force: true });
+    this.openTab("numbers");
     return cy.get(`[name="entityId"]`);
   }
 
   getTaxId() {
-    cy.get('[data-testid="numbers"').click({ force: true });
+    this.openTab("numbers");
     return cy.get(`input[name="taxId"]`);
   }
 
   getTaxPin() {
-    cy.get('[data-testid="numbers"').click({ force: true });
+    this.openTab("numbers");
     return cy.get(`input[name="taxPin"]`);
   }
 
   getNotes() {
-    cy.get('[data-testid="notes"').click({ force: true });
+    this.openTab("notes");
     return cy.get(`textarea[name="notes"]`);
   }
 
@@ -37,7 +47,7 @@ export class ProfilePage extends OnboardingPage {
   }
 
   getSaveButton() {
-    return cy.get('[data-testid="save"');
+    return cy.get('[data-testid="save"]');
   }
 
   clickSaveButton() {
@@ -46,39 +56,34 @@ export class ProfilePage extends OnboardingPage {
   }
 
   selectLegalStructure(id: string) {
-    cy.get('[data-testid="info"').click({ force: true });
     const legalStructureName = LookupLegalStructureById(id).name;
     this.getLegalStructure().click();
     cy.get('[role="listbox"]').contains(legalStructureName).click({ force: true });
   }
 
   typeTaxId(taxId: string) {
-    cy.get('[data-testid="numbers"').click({ force: true });
-    this.getTaxId().type(taxId);
+    this.openTab("numbers");
+    typeTaxId('input[name="taxId"]', taxId);
   }
 
   typeBusinessFormationDate(monthYearString: string) {
-    cy.get('[data-testid="info"').click({ force: true });
+    this.openTab("info");
     cy.chooseDatePicker('[data-testid="date-dateOfFormation"]', monthYearString);
   }
 
   typeEmployerId(EIN: string) {
-    cy.get('[data-testid="numbers"').click({ force: true });
     this.getEmployerId().type(EIN);
   }
 
   typeNotes(notes: string) {
-    cy.get('[data-testid="notes"').click({ force: true });
     this.getNotes().type(notes);
   }
 
   typeTaxPin(taxPin: string) {
-    cy.get('[data-testid="numbers"').click({ force: true });
     return this.getTaxPin().clear().type(taxPin);
   }
 
   typeEntityId(EID: string) {
-    cy.get('[data-testid="numbers"').click({ force: true });
     this.getEntityId().clear().type(EID);
   }
 
@@ -87,7 +92,7 @@ export class ProfilePage extends OnboardingPage {
   }
 
   getHomeBased(radio?: boolean) {
-    cy.get('[data-testid="permits"').click({ force: true });
+    this.openTab("permits");
     return cy.get(
       `input[name="home-based-business"]${radio === undefined ? "" : `[value="${radio}"]`}`,
     );

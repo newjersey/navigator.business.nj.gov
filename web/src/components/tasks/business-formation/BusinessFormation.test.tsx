@@ -40,7 +40,7 @@ import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateStartingProfileData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
-import { renderToStaticMarkup } from "react-dom/server";
+import { renderToStaticMarkup } from "react-dom/server.node";
 
 function mockMaterialUI(): typeof materialUi {
   return {

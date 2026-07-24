@@ -8,6 +8,7 @@ import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { sortCalendarEventsEarliestToLatest } from "@/lib/domain-logic/filterCalendarEvents";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
@@ -17,7 +18,6 @@ import {
   parseDateWithFormat,
   TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   FilingUrlSlugParameter,
   loadAllFilingUrlSlugs,
@@ -33,19 +33,19 @@ interface Props {
   filing: Filing;
 }
 
-const Config = getMergedConfig();
-export const taxFilingMethodMap: Record<TaxFilingMethod, string> = {
-  online: Config.filingDefaults.onlineTaxFilingMethod,
-  "paper-or-by-mail-only": Config.filingDefaults.paperOrMailOnlyTaxFilingMethod,
-  "online-required": Config.filingDefaults.onlineRequiredTaxFilingMethod,
-  "online-or-phone": Config.filingDefaults.onlineOrPhoneTaxFilingMethod,
-};
-
 export const FilingElement = (props: {
   filing: Filing;
   dueDate: string;
   preview?: boolean;
 }): ReactElement => {
+  const { Config } = useConfig();
+  const taxFilingMethodMap: Record<TaxFilingMethod, string> = {
+    online: Config.filingDefaults.onlineTaxFilingMethod,
+    "paper-or-by-mail-only": Config.filingDefaults.paperOrMailOnlyTaxFilingMethod,
+    "online-required": Config.filingDefaults.onlineRequiredTaxFilingMethod,
+    "online-or-phone": Config.filingDefaults.onlineOrPhoneTaxFilingMethod,
+  };
+
   return (
     <>
       <div className="min-height-38rem">

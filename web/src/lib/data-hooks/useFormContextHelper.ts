@@ -90,10 +90,7 @@ export const useFormContextHelper = <
     }
   };
 
-  const [fieldStates, fieldStateDispatch] = useReducer<FormContextReducer<T>>(
-    fieldStatesReducer,
-    initState,
-  );
+  const [fieldStates, fieldStateDispatch] = useReducer(fieldStatesReducer, initState);
   debug && console.log(fieldStates);
 
   const getErrors = (): FieldError[] =>

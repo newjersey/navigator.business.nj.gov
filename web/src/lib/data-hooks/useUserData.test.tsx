@@ -22,7 +22,14 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { UserDataError } from "@businessnjgovnavigator/shared/types";
 import { act, render, renderHook, waitFor } from "@testing-library/react";
-import { Dispatch, PropsWithChildren, SetStateAction, useCallback, useState } from "react";
+import {
+  Dispatch,
+  PropsWithChildren,
+  ReactElement,
+  SetStateAction,
+  useCallback,
+  useState,
+} from "react";
 import { Cache, SWRConfig } from "swr";
 
 jest.mock("@/lib/utils/analytics-helpers", () => ({
@@ -124,7 +131,7 @@ const renderUserDataHook = ({
     throw new Error("Auth provider has not rendered");
   };
 
-  const Wrapper = ({ children }: PropsWithChildren): JSX.Element => {
+  const Wrapper = ({ children }: PropsWithChildren): ReactElement => {
     const [authState, setAuthStateInProvider] = useState(initialAuthState);
     const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>();
     const [userDataError, setUserDataError] = useState<UserDataError | undefined>();
@@ -502,7 +509,7 @@ describe("useUserData", () => {
     expect(utils.result.current.userData).toEqual(refreshedUserData);
   });
 
-  it("completes initialization when a save discards the initial persisted-data fetch", async () => {
+  it("completes initialization without letting the initial fetch overwrite a pending save", async () => {
     const request = deferredPromise<UserData>();
     const saveResponse = deferredPromise<UserData>();
     const user = generateUser({});
@@ -538,13 +545,13 @@ describe("useUserData", () => {
     await waitFor(() => {
       expect(utils.result.current.hasCompletedFetch).toBe(true);
     });
-    expect(mockAnalyticsHelpers.reportUserDataSync).toHaveBeenCalledWith({
-      operation: "fetch",
-      outcome: "discarded",
-    });
-
     const savedUserData = utils.result.current.updateQueue?.current();
     expect(savedUserData).toBeDefined();
+    expect(savedUserData?.businesses[savedUserData.currentBusinessId].preferences).toEqual(
+      expect.objectContaining({ phaseNewlyChanged: true }),
+    );
+    expect(storage.get(user.id)).toEqual(savedUserData);
+
     saveResponse.resolve(savedUserData!);
     await act(async () => {
       await savePromise;
@@ -738,7 +745,9 @@ describe("useUserData", () => {
         }),
       }),
     );
-    expect(utils.result.current.business?.profileData.businessName).toBe("Canonical business");
+    await waitFor(() => {
+      expect(utils.result.current.business?.profileData.businessName).toBe("Canonical business");
+    });
     expect(utils.storage.get(user.id)).toEqual(canonicalUserData);
   });
 
@@ -849,7 +858,9 @@ describe("useUserData", () => {
     });
 
     expect(utils.result.current.error).toBeUndefined();
-    expect(utils.result.current.userData).toEqual(canonicalUserData);
+    await waitFor(() => {
+      expect(utils.result.current.userData).toEqual(canonicalUserData);
+    });
   });
 
   it("rebuilds profile-derived state exactly once for one update", async () => {
@@ -987,7 +998,9 @@ describe("useUserData", () => {
         ?.queueProfileData({ businessName: "Optimistic business" })
         .update();
     });
-    expect(utils.result.current.business?.profileData.businessName).toBe("Saved business");
+    await waitFor(() => {
+      expect(utils.result.current.business?.profileData.businessName).toBe("Saved business");
+    });
 
     refreshRequest.resolve(staleRefreshedUserData);
     await act(async () => {
@@ -1480,9 +1493,11 @@ describe("useUserData", () => {
       await secondSave;
     });
 
-    expect(utils.result.current.business?.profileData.businessName).toBe(
-      "Second canonical response",
-    );
+    await waitFor(() => {
+      expect(utils.result.current.business?.profileData.businessName).toBe(
+        "Second canonical response",
+      );
+    });
     expect(utils.storage.get(user.id)).toEqual(secondCanonicalData);
   });
 

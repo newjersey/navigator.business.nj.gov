@@ -8,6 +8,7 @@ import {
   selectLocation,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { typeTaxId } from "@businessnjgovnavigator/cypress/support/helpers/helpers-form";
 import { randomNonHomeBasedNonDomesticEmployerIndustry } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
@@ -36,7 +37,7 @@ describe(
       clickModalSaveButton();
 
       onDashboardPage.registerForTaxes();
-      cy.get('input[name="taxId"]').type("777777777771");
+      typeTaxId('input[name="taxId"]', "777777777771");
       cy.get("button").contains("Save").click();
       cy.get('input[name="taxId"]').should("be.disabled");
       cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
@@ -61,7 +62,7 @@ describe(
       clickModalSaveButton();
 
       onDashboardPage.registerForTaxes();
-      cy.get('input[name="taxId"]').type("777777777771");
+      typeTaxId('input[name="taxId"]', "777777777771");
       cy.get("button").contains("Save").click();
       cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
       onDashboardPage.getDashboardHeader().should("be.visible");

@@ -1,7 +1,7 @@
 import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { EmergencyTripPermitWithValidation } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitWithValidation";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 
 describe("EmergencyPermitWithValidation", () => {
@@ -122,24 +122,24 @@ describe("EmergencyPermitWithValidation", () => {
     it("displays correct completion state for steps after submission attempt", async () => {
       const user = userEvent.setup();
       renderPage();
+      const fillTextField = (name: string, value: string): void => {
+        fireEvent.change(screen.getByRole("textbox", { name }), { target: { value } });
+      };
 
       await user.click(screen.getByRole("button", { name: "Save & Continue" }));
-      await user.type(screen.getByRole("textbox", { name: "Carrier Name" }), "carrier");
-      await user.type(screen.getByRole("textbox", { name: "First Name" }), "firstName");
-      await user.type(screen.getByRole("textbox", { name: "Last Name" }), "lastName");
-      await user.type(screen.getByRole("textbox", { name: "Email Address" }), "email@email.com");
-      await user.type(screen.getByRole("textbox", { name: "Phone Number" }), "1234567890");
-      await user.type(screen.getByRole("textbox", { name: "Address Line 1" }), "add");
-      await user.type(screen.getByRole("textbox", { name: "Address Line 2" }), "add2");
-      await user.type(screen.getByRole("textbox", { name: "City" }), "city");
-      await user.type(screen.getByRole("textbox", { name: "Zip Code" }), "12345");
-      await user.type(screen.getByRole("textbox", { name: "Vehicle Make" }), "make");
-      await user.type(screen.getByRole("textbox", { name: "Vehicle Year" }), "1900");
-      await user.type(
-        screen.getByRole("textbox", { name: "VIN/Serial Number" }),
-        "12345678901234567",
-      );
-      await user.type(screen.getByRole("textbox", { name: "License Plate Number" }), "abc123");
+      fillTextField("Carrier Name", "carrier");
+      fillTextField("First Name", "firstName");
+      fillTextField("Last Name", "lastName");
+      fillTextField("Email Address", "email@email.com");
+      fillTextField("Phone Number", "1234567890");
+      fillTextField("Address Line 1", "add");
+      fillTextField("Address Line 2", "add2");
+      fillTextField("City", "city");
+      fillTextField("Zip Code", "12345");
+      fillTextField("Vehicle Make", "make");
+      fillTextField("Vehicle Year", "1900");
+      fillTextField("VIN/Serial Number", "12345678901234567");
+      fillTextField("License Plate Number", "abc123");
       await user.click(
         screen.getByRole("tab", {
           name: "Formation Stepper Navigation: Review Step, State: Incomplete",
