@@ -1,3 +1,4 @@
+import analytics from "@/lib/utils/analytics";
 import {
   Business,
   BusinessUser,
@@ -159,6 +160,13 @@ export class UpdateQueueFactory implements UpdateQueue {
   }
 
   queueTaskProgress(taskProgress: Record<string, TaskProgress>): UpdateQueue {
+    for (const [taskName, progress] of Object.entries(taskProgress)) {
+      if (progress === "COMPLETED") {
+        analytics.event.task_progress.update.task_completed(taskName);
+      } else if (progress === "TO_DO") {
+        analytics.event.task_progress.update.task_uncompleted(taskName);
+      }
+    }
     this.internalQueue = {
       ...this.internalQueue,
       businesses: {
