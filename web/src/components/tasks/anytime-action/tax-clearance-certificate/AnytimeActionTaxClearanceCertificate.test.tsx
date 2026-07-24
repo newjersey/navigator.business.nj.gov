@@ -63,6 +63,7 @@ const Config = getMergedConfig();
 describe("<AnyTimeActionTaxClearanceCertificate />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    mockApi.postUserData.mockImplementation(async (userData) => userData);
     setupStatefulUserDataContext();
   });
 
@@ -1067,6 +1068,41 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
         ...userData,
         businesses: { ...userData.businesses, [currentBusiness.id]: currentBusiness },
       });
+    });
+  });
+
+  it("submits the userData returned by postUserData, not the pre-save userData", async () => {
+    mockApi.postTaxClearanceCertificate.mockResolvedValue({
+      certificatePdfArray: [],
+      userData: generateUserData({}),
+    });
+    window.URL.createObjectURL = jest.fn();
+    const business = generateBusiness({ id: "Faraz" });
+    const userData = generateUserDataForBusiness(business);
+    const savedUserData: UserData = {
+      ...userData,
+      businesses: {
+        ...userData.businesses,
+        [business.id]: {
+          ...business,
+          taxClearanceCertificateData: generateTaxClearanceCertificateData({
+            ...business.taxClearanceCertificateData,
+            encryptedTaxId: "encrypted-tax-id",
+            encryptedTaxPin: "encrypted-tax-pin",
+          }),
+        },
+      },
+    };
+    mockApi.postUserData.mockResolvedValue(savedUserData);
+    renderComponent({ userData });
+    const thirdTab = screen.getByRole("tab", { name: /Review Step/ });
+    fireEvent.click(thirdTab);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText }),
+    );
+    await waitFor(() => {
+      expect(mockApi.postTaxClearanceCertificate).toHaveBeenCalledWith(savedUserData);
     });
   });
 

@@ -24,10 +24,10 @@ const Home = (): ReactElement => {
   const { Config } = useConfig();
   const router = useRouter();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
-  const sectionHowItWorks = useRef(null);
+  const sectionHowItWorks = useRef<HTMLElement>(null);
   const [fireAnalyticsForSectionHowItWorks, setFireAnalyticsForSectionHowItWorks] = useState(true);
   const sectionHowItWorksInViewport = useIntersectionOnElement(sectionHowItWorks, "-150px");
-  const sectionLookingForSupport = useRef(null);
+  const sectionLookingForSupport = useRef<HTMLElement>(null);
   const [fireAnalyticsForSectionLookingForSupport, setFireAnalyticsForSectionLookingForSupport] =
     useState(true);
   const sectionLookingForSupportInViewport = useIntersectionOnElement(
@@ -36,15 +36,19 @@ const Home = (): ReactElement => {
   );
   const config = getMergedConfig();
 
-  if (sectionHowItWorksInViewport && fireAnalyticsForSectionHowItWorks) {
-    analytics.event.landing_page_how_it_works.scroll.how_it_works_seen();
-    setFireAnalyticsForSectionHowItWorks(false);
-  }
+  useEffect(() => {
+    if (sectionHowItWorksInViewport && fireAnalyticsForSectionHowItWorks) {
+      analytics.event.landing_page_how_it_works.scroll.how_it_works_seen();
+      setFireAnalyticsForSectionHowItWorks(false);
+    }
+  }, [fireAnalyticsForSectionHowItWorks, sectionHowItWorksInViewport]);
 
-  if (sectionLookingForSupportInViewport && fireAnalyticsForSectionLookingForSupport) {
-    analytics.event.landing_page_more_support.scroll.more_support_seen();
-    setFireAnalyticsForSectionLookingForSupport(false);
-  }
+  useEffect(() => {
+    if (sectionLookingForSupportInViewport && fireAnalyticsForSectionLookingForSupport) {
+      analytics.event.landing_page_more_support.scroll.more_support_seen();
+      setFireAnalyticsForSectionLookingForSupport(false);
+    }
+  }, [fireAnalyticsForSectionLookingForSupport, sectionLookingForSupportInViewport]);
 
   const landingPageConfig = Config.landingPage;
   useEffect(() => {

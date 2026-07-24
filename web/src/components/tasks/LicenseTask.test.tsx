@@ -2,7 +2,7 @@ import { LicenseTask } from "@/components/tasks/LicenseTask";
 import * as api from "@/lib/api-client/apiClient";
 import { generateLicenseTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { useMockBusiness, useUndefinedUserData } from "@/test/mock/mockUseUserData";
 import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
@@ -41,8 +41,8 @@ const Config = getMergedConfig();
 describe("<LicenseTask />", () => {
   const task = generateLicenseTask({});
 
-  const renderTask = (): void => {
-    render(
+  const renderTask = (): ReturnType<typeof render> => {
+    return render(
       <ThemeProvider theme={createTheme()}>
         <LicenseTask task={task} />
       </ThemeProvider>,
@@ -343,6 +343,71 @@ describe("<LicenseTask />", () => {
     });
 
     describe("license search", () => {
+      it("shows asynchronously loaded license details", async () => {
+        useUndefinedUserData();
+        const view = renderTask();
+        expect(screen.getByText(task.contentMd)).toBeInTheDocument();
+
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                lastUpdatedISO: "2026-07-24T12:00:00.000Z",
+              }),
+            },
+          ),
+        });
+        view.rerender(
+          <ThemeProvider theme={createTheme()}>
+            <LicenseTask task={task} />
+          </ThemeProvider>,
+        );
+
+        await waitFor(() => {
+          expect(screen.getByTestId("licenseDetailReceipt")).toBeInTheDocument();
+        });
+      });
+
+      it("updates license details when navigating between tasks with matching timestamps", async () => {
+        const activeTask = generateLicenseTask({ id: "apply-for-shop-license" });
+        const pendingTask = generateLicenseTask({ id: "appraiser-company-register" });
+        const lastUpdatedISO = "2026-07-24T12:00:00.000Z";
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            { lastUpdatedISO },
+            {
+              [taskIdLicenseNameMapping[activeTask.id]]: generateLicenseDetails({
+                licenseStatus: "ACTIVE",
+                lastUpdatedISO,
+              }),
+              [taskIdLicenseNameMapping[pendingTask.id]]: generateLicenseDetails({
+                licenseStatus: "PENDING",
+                lastUpdatedISO,
+              }),
+            },
+          ),
+        });
+
+        const view = render(
+          <ThemeProvider theme={createTheme()}>
+            <LicenseTask task={activeTask} />
+          </ThemeProvider>,
+        );
+        expect(screen.getByTestId("permit-ACTIVE")).toBeInTheDocument();
+
+        view.rerender(
+          <ThemeProvider theme={createTheme()}>
+            <LicenseTask task={pendingTask} />
+          </ThemeProvider>,
+        );
+
+        await waitFor(() => {
+          expect(screen.getByTestId("permit-PENDING")).toBeInTheDocument();
+        });
+        expect(screen.queryByTestId("permit-ACTIVE")).not.toBeInTheDocument();
+      });
+
       it("goes directly to license detail receipt screen and shows data from licenseData when lastUpdatedISO is a non empty string", () => {
         useMockBusiness({
           taskProgress: { [task.id]: "COMPLETED" },

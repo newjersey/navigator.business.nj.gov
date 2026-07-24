@@ -10,7 +10,7 @@ type GovDeliveryErrorType = "SUBSCRIBE_FAILED" | "UNSUBSCRIBE_FAILED" | "EMAIL_U
 
 interface Props {
   fieldErrors: string[];
-  profileAlertRef?: RefObject<HTMLDivElement>;
+  profileAlertRef?: RefObject<HTMLDivElement | null>;
   govDeliveryError: GovDeliveryErrorType | null;
   clearGovDeliveryError: () => void;
 }

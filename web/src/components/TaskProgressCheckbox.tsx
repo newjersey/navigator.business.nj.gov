@@ -3,7 +3,7 @@ import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Icon } from "@/components/njwds/Icon";
-import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { getTaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { TaskStatusTaxRegistrationSnackbar } from "@/components/TaskStatusTaxRegistrationSnackbar";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -39,6 +39,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     useState<boolean>(false);
   const router = useRouter();
   const { Config } = useConfig();
+  const taskProgressTagLookup = getTaskProgressTagLookup(Config);
 
   const updateTaskProgressDueToWiremockFormationCompletion =
     process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH === "true" &&
@@ -242,7 +243,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         )}
       </div>
 
-      <span className="flex flex-align-start">{TaskProgressTagLookup[currentTaskProgress]}</span>
+      <span className="flex flex-align-start">{taskProgressTagLookup[currentTaskProgress]}</span>
 
       <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}

@@ -15,13 +15,13 @@ import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test/factories";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 
 const Config = getMergedConfig();
 
 describe("<MailingAddress />", () => {
   const renderComponent = (initialData?: Partial<CigaretteLicenseData>): void => {
-    const TestComponent = (): JSX.Element => {
+    const TestComponent = (): ReactElement => {
       const [cigaretteLicenseData, setCigaretteLicenseData] = useState<CigaretteLicenseData>({
         ...emptyCigaretteLicenseData,
         mailingAddressLine1: "123 Test St",

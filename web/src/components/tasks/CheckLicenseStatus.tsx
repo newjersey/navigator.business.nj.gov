@@ -1,5 +1,6 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -9,7 +10,6 @@ import {
   LicenseTaskId,
   taskIdLicenseNameMapping,
 } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LicenseSearchError } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
@@ -28,14 +28,13 @@ interface Props {
   licenseTaskId: LicenseTaskId;
 }
 
-const Config = getMergedConfig();
-const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
-  NOT_FOUND: Config.licenseSearchTask.errorTextNotFound,
-  FIELDS_REQUIRED: Config.licenseSearchTask.errorTextFieldsRequired,
-  SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
-};
-
 export const CheckLicenseStatus = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+  const licenseSearchErrorLookup: Record<LicenseSearchError, string> = {
+    NOT_FOUND: Config.licenseSearchTask.errorTextNotFound,
+    FIELDS_REQUIRED: Config.licenseSearchTask.errorTextFieldsRequired,
+    SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
+  };
   const [formValues, setFormValues] = useState<LicenseSearchNameAndAddress>(
     createEmptyLicenseSearchNameAndAddress(),
   );
@@ -101,13 +100,13 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
     } else if (props.error === "NOT_FOUND") {
       return (
         <Alert dataTestid={`error-alert-${props.error}`} variant="warning">
-          {LicenseSearchErrorLookup[props.error]}
+          {licenseSearchErrorLookup[props.error]}
         </Alert>
       );
     } else {
       return (
         <Alert dataTestid={`error-alert-${props.error}`} variant="error">
-          {LicenseSearchErrorLookup[props.error]}
+          {licenseSearchErrorLookup[props.error]}
         </Alert>
       );
     }

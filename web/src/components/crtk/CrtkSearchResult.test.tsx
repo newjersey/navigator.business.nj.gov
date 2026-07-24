@@ -1,7 +1,11 @@
 import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { CrtkSearchResult } from "@/components/crtk/CrtkSearchResult";
 import type { CrtkData } from "@/components/crtk/crtkTypes";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  ConfigContext,
+  ConfigType,
+  getMergedConfig,
+} from "@businessnjgovnavigator/shared/contexts";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -39,7 +43,7 @@ describe("<CrtkSearchResult />", () => {
     },
   };
 
-  const renderComponent = (crtkData: Partial<CrtkData> = {}): void => {
+  const renderComponent = (crtkData: Partial<CrtkData> = {}, config: ConfigType = Config): void => {
     const mergedData = {
       ...baseCrtkData,
       ...crtkData,
@@ -57,12 +61,14 @@ describe("<CrtkSearchResult />", () => {
     };
 
     renderWithUserData(
-      <CrtkSearchResult
-        isLoading={false}
-        crtkData={mergedData}
-        onSearchAgain={mockOnSearchAgain}
-        onResubmit={jest.fn()}
-      />,
+      <ConfigContext.Provider value={{ config, setOverrides: jest.fn() }}>
+        <CrtkSearchResult
+          isLoading={false}
+          crtkData={mergedData}
+          onSearchAgain={mockOnSearchAgain}
+          onResubmit={jest.fn()}
+        />
+      </ConfigContext.Provider>,
     );
   };
 
@@ -188,6 +194,22 @@ describe("<CrtkSearchResult />", () => {
       await userEvent.click(screen.getByText("Next Steps"));
       const emailLink = screen.getByRole("link", { name: /rtk@dep.nj.gov/i });
       expect(emailLink).toHaveAttribute("href", "mailto:rtk@dep.nj.gov");
+    });
+
+    it("uses the contact title from the current config context", async () => {
+      const contactTitle = "Contact the current CRTK support team";
+      const config = {
+        ...Config,
+        crtkTask: {
+          ...Config.crtkTask,
+          contactCrtkExpertTitle: contactTitle,
+        },
+      };
+
+      renderComponent({ crtkSearchResult: "FOUND" }, config);
+      await userEvent.click(screen.getByText("Next Steps"));
+
+      expect(screen.getByText(contactTitle)).toBeInTheDocument();
     });
   });
 

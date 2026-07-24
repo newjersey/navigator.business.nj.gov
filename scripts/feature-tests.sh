@@ -43,7 +43,7 @@ while ! echo exit | nc localhost ${API_PORT}; do sleep 1; done
 
 # need to start api before building webapp so that it can query for municipalities
 echo "📦 building webapp"
-API_BASE_URL=${API_BASE_URL} yarn workspace @businessnjgovnavigator/web build
+API_BASE_URL=${API_BASE_URL} DISABLE_GTM=true yarn workspace @businessnjgovnavigator/web build
 
 echo "🚀 starting webapp"
 yarn workspace @businessnjgovnavigator/web start --port=${WEB_PORT} &

@@ -11,7 +11,7 @@ export const NonEssentialQuestionForPersonas = (props: {
   questionId: ProfileContentField;
   displayAltDescription?: boolean;
 }): ReactElement => {
-  const nonEssentialQuestion = useRef(null);
+  const nonEssentialQuestion = useRef<HTMLElement>(null);
   const [hasBeenSeen, setHasBeenSeen] = useState(false);
   const nonEssentialQuestionInViewPort = useIntersectionOnElement(nonEssentialQuestion, "-20px");
   const Config = getMergedConfig();
