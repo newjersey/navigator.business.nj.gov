@@ -83,7 +83,7 @@
     "@newjersey/njwds": "2.9.1",
     "@trussworks/react-uswds": "11.1.0",
     "gray-matter": "4.0.3",
-    "next": "16.2.10",
+    "next": "16.2.11",
     "next-intl": "4.13.2",
     "react": "19.2.7",
     "react-dom": "19.2.7",
