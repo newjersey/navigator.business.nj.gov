@@ -32,6 +32,7 @@ type EventType =
   | "task_search_interactions"
   | "task_tab_clicked"
   | "task_tab_clicks"
+  | "task_progress_updates"
   | "task_tab_continue_button_clicks"
   | "tax_calendar_arrive_v2"
   | "tax_calendar_click_v2"
@@ -82,6 +83,7 @@ const eventMap: Record<EventType, string> = {
   task_search_interactions: "task_search_interactions",
   task_tab_clicked: "task_tab_clicked",
   task_tab_clicks: "task_tab_clicks",
+  task_progress_updates: "task_progress_updates",
   task_tab_continue_button_clicks: "task_tab_continue_button_clicks",
   tax_calendar_arrive_v2: "tax_calendar_arrive_v2",
   tax_calendar_click_v2: "tax_calendar_click_v2",
@@ -924,6 +926,20 @@ export default {
         },
       },
     },
+    roadmap_task: {
+      submit: {
+        expand_contract: () => {
+          eventRunner.track({
+            event: "navigation_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "roadmap_section",
+            legacy_event_label: "expand_contract",
+            clicked: "expand_contract",
+            item: "roadmap_section",
+          });
+        },
+      },
+    },
     api_submit: {
       success: (apiName: LegacyEventApiName, apiDetails?: string) => {
         eventRunner.track({
@@ -1115,6 +1131,28 @@ export default {
             legacy_event_category: "task_status_checklist_edit_button",
             legacy_event_label: "edit_address_form",
             form_name: "task_address_form",
+          });
+        },
+      },
+    },
+    task_progress: {
+      update: {
+        task_completed: (task_name: string) => {
+          eventRunner.track({
+            event: "task_progress_updates",
+            legacy_event_action: "submit",
+            legacy_event_category: "task_progress",
+            legacy_event_label: "task_completed",
+            on_task_id: task_name,
+          });
+        },
+        task_uncompleted: (task_name: string) => {
+          eventRunner.track({
+            event: "task_progress_updates",
+            legacy_event_action: "submit",
+            legacy_event_category: "task_progress",
+            legacy_event_label: "task_uncompleted",
+            on_task_id: task_name,
           });
         },
       },
