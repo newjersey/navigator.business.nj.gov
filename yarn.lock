@@ -5274,7 +5274,7 @@ __metadata:
     "@mui/material-pigment-css": "npm:9.0.1"
     "@mui/system": "npm:9.0.1"
     "@mui/x-date-pickers": "npm:9.4.0"
-    "@newjersey/njwds": "npm:0.3.0"
+    "@newjersey/njwds": "npm:2.9.1"
     "@next/bundle-analyzer": "npm:16.2.4"
     "@next/eslint-plugin-next": "npm:15.5.15"
     "@open_resources/semantic-release-uv": "npm:1.5.1"
@@ -5520,7 +5520,7 @@ __metadata:
     "@mui/material-pigment-css": "npm:9.0.1"
     "@mui/system": "npm:9.0.1"
     "@mui/x-date-pickers": "npm:9.4.0"
-    "@newjersey/njwds": "npm:0.3.0"
+    "@newjersey/njwds": "npm:2.9.1"
     "@next/bundle-analyzer": "npm:16.2.4"
     "@next/eslint-plugin-next": "npm:15.5.15"
     "@pigment-css/react": "npm:0.0.31"
@@ -8870,12 +8870,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@newjersey/njwds@npm:0.3.0":
-  version: 0.3.0
-  resolution: "@newjersey/njwds@npm:0.3.0"
+"@newjersey/njwds@npm:2.9.1":
+  version: 2.9.1
+  resolution: "@newjersey/njwds@npm:2.9.1"
   dependencies:
-    "@uswds/uswds": "npm:3.0.1"
-  checksum: 10/7511a3a6890d88121597bbeff1fae1705071a6c2ac9185939ad82ee8c94aad4e0c7440b8c8c6c22d60f62ab8f87169eb4b8b9f277ef87b08e535a067f555f57d
+    "@uswds/uswds": "npm:3.10.0"
+  checksum: 10/8fc467d76b131bd90c93a878ca3f766325cce6a633b9b67b382cabdc7254ae046872bda4a9b9bf54d4c3a85554e233353983ecae42f4c6f49a81324e50fbef95
   languageName: node
   linkType: hard
 
@@ -14639,16 +14639,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:3.0.1":
-  version: 3.0.1
-  resolution: "@uswds/uswds@npm:3.0.1"
+"@uswds/uswds@npm:3.10.0":
+  version: 3.10.0
+  resolution: "@uswds/uswds@npm:3.10.0"
   dependencies:
-    classlist-polyfill: "npm:1.0.3"
-    domready: "npm:1.0.8"
-    object-assign: "npm:4.1.1"
     receptor: "npm:1.0.0"
     resolve-id-refs: "npm:0.1.0"
-  checksum: 10/00dc9156284b342c9ff863b266043fb16e511d783490e8d395aca165eb7ea39d13dfe10522c286a2ef7755328575e129ec5856a5f403c0c3cedb641710c382ed
+  checksum: 10/9f28f01034221b2b00dd4025dc33b44bd097fe5225d2a6ab3338dfa96ca2affb244569bb0ebe94e98f8ca25043470470e73c9d5f42615dbc2ba96bfae8e7eadb
   languageName: node
   linkType: hard
 
@@ -17343,13 +17340,6 @@ __metadata:
   version: 1.4.3
   resolution: "cjs-module-lexer@npm:1.4.3"
   checksum: 10/d2b92f919a2dedbfd61d016964fce8da0035f827182ed6839c97cac56e8a8077cfa6a59388adfe2bc588a19cef9bbe830d683a76a6e93c51f65852062cfe2591
-  languageName: node
-  linkType: hard
-
-"classlist-polyfill@npm:1.0.3":
-  version: 1.0.3
-  resolution: "classlist-polyfill@npm:1.0.3"
-  checksum: 10/d2a096e9c880a05800c4780e82dc881bf5895174db75161f9a0906e42d5d11ef0d5c85ea237b20a12e846563b7d45b8f60e8936ffe88e397230e29d01033d17c
   languageName: node
   linkType: hard
 
@@ -20094,13 +20084,6 @@ __metadata:
     "@types/trusted-types":
       optional: true
   checksum: 10/d8782b10a0454344476936c91038d06c9450b3e3ada2ceb8f722525e6b54e64d847939b9f35bf385facd4139f0a2eaf7f5553efce351f8e9295620570875f002
-  languageName: node
-  linkType: hard
-
-"domready@npm:1.0.8":
-  version: 1.0.8
-  resolution: "domready@npm:1.0.8"
-  checksum: 10/5b0ee86650226e09f65c89b61d15fcfcda5925931dfffab5e9b82bf8ba96637286605fde1ac4addee19717bf7e486d4b49683e6f99038927560412113d96fde0
   languageName: node
   linkType: hard
 
@@ -29967,7 +29950,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-assign@npm:4.1.1, object-assign@npm:^4, object-assign@npm:^4.0.1, object-assign@npm:^4.1.0, object-assign@npm:^4.1.1":
+"object-assign@npm:^4, object-assign@npm:^4.0.1, object-assign@npm:^4.1.0, object-assign@npm:^4.1.1":
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: 10/fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f

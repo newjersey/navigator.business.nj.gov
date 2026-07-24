@@ -65,7 +65,7 @@
     "@mui/material": "9.0.1",
     "@mui/material-pigment-css": "9.0.1",
     "@mui/x-date-pickers": "9.4.0",
-    "@newjersey/njwds": "0.3.0",
+    "@newjersey/njwds": "2.9.1",
     "@pigment-css/react": "0.0.31",
     "@react-email/components": "1.0.12",
     "@react-email/render": "2.0.8",
