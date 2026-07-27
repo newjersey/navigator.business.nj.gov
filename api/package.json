@@ -31,7 +31,7 @@
     "cms-integrity-tests": "yarn dlx tsx ./scripts/cms-content-integrity-tests/runCmsIntegrityTests.ts"
   },
   "engines": {
-    "node": ">=24.12.0"
+    "node": ">=24.18.0"
   },
   "dependencies": {
     "@aws-crypto/client-node": "4.2.1",
