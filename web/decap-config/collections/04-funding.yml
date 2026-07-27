@@ -17,7 +17,13 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Internal Notes",
+          name: "notesMd",
+          widget: "markdown",
+          required: false,
+          pattern: ["^(?!.*#).*", "Please remove the # before saving."],
+        }
       - {
           label: "Name",
           name: "name",
@@ -257,7 +263,13 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Internal Notes",
+          name: "notesMd",
+          widget: "markdown",
+          required: false,
+          pattern: ["^(?!.*#).*", "Please remove the # before saving."],
+        }
       - {
           label: "Name",
           name: "name",
