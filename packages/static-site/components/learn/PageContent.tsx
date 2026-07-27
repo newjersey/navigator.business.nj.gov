@@ -1,10 +1,40 @@
-import { Fragment } from "react";
-import Markdown from "react-markdown";
+import { type AnchorHTMLAttributes, Fragment } from "react";
+import Markdown, { type Components } from "react-markdown";
 import type { PageItem } from "@/domain/content/types";
 
 interface Props {
   readonly page: PageItem;
 }
+
+/**
+ * Reserved Markdown link target that opens the Intercom messenger instead of
+ * navigating. Content authors write `[Chat with us](#open-chat)`. No element
+ * carries this id and `PageContent` adds no heading-slug plugin, so the
+ * sentinel can never shadow a real in-page anchor.
+ */
+export const INTERCOM_LAUNCHER_HREF = "#open-chat";
+
+/**
+ * Renders the reserved Intercom sentinel link as a launcher button, or any
+ * other Markdown link as a plain anchor. The `.intercomlaunch` class is the
+ * selector `components/analytics/Intercom.tsx` binds the messenger to, and
+ * `.text-link-button` makes the button read like the links around it. A
+ * `button` is phrasing content, so it stays valid inside the `p` that
+ * `Markdown` wraps prose in, and its text children supply its accessible name.
+ */
+const renderMarkdownAnchor = ({ href, children }: AnchorHTMLAttributes<HTMLAnchorElement>) => {
+  if (href === INTERCOM_LAUNCHER_HREF) {
+    return (
+      <button className="text-link-button intercomlaunch" type="button">
+        {children}
+      </button>
+    );
+  }
+
+  return <a href={href}>{children}</a>;
+};
+
+const markdownComponents: Components = { a: renderMarkdownAnchor };
 
 interface Section {
   heading?: string;
@@ -54,7 +84,7 @@ const PageContent = ({ page }: Props) => {
                 </div>
               </div>
             )}
-            {section.body && <Markdown>{section.body}</Markdown>}
+            {section.body && <Markdown components={markdownComponents}>{section.body}</Markdown>}
             {section.linkText && section.linkUrl && (
               <a href={section.linkUrl} className="usa-button">
                 {section.linkText}

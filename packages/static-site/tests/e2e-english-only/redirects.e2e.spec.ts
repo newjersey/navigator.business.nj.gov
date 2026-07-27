@@ -23,6 +23,12 @@ test.describe("Legacy redirects (English-only mode)", () => {
     expect(new URL(page.url()).pathname).toBe(`/updates/${PUBLISHED_UPDATE_SLUG}`);
   });
 
+  test("the bare /license redirects to the software reuse page", async ({ page }) => {
+    const response = await page.goto("/license");
+    expect(response?.status()).toBe(200);
+    expect(new URL(page.url()).pathname).toBe("/our-software-and-reuse");
+  });
+
   test("/license/<anything> aggregates to the licensing guide", async ({ page }) => {
     const response = await page.goto("/license/acupuncture-license");
     expect(response?.status()).toBe(200);
@@ -45,6 +51,22 @@ test.describe("Legacy redirects (English-only mode)", () => {
     const response = await page.goto("/covid19");
     expect(response?.status()).toBe(200);
     expect(new URL(page.url()).pathname).toBe("/pages/covid19");
+  });
+
+  test("/our-software-and-reuse renders directly (standalone route, no redirect)", async ({
+    page,
+  }) => {
+    const response = await page.goto("/our-software-and-reuse");
+    expect(response?.status()).toBe(200);
+    expect(new URL(page.url()).pathname).toBe("/our-software-and-reuse");
+  });
+
+  test("the old /pages/our-software-and-reuse URL redirects to the standalone page", async ({
+    page,
+  }) => {
+    const response = await page.goto("/pages/our-software-and-reuse");
+    expect(response?.status()).toBe(200);
+    expect(new URL(page.url()).pathname).toBe("/our-software-and-reuse");
   });
 
   test("a deliberately skipped legacy path still 404s", async ({ page }) => {

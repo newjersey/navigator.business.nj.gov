@@ -221,6 +221,14 @@
             "isInternal": false,
             "opensInNewTab": false
           }
+        },
+        {
+          "link": {
+            "label": "Nuestro Software y Reutilización",
+            "href": "/our-software-and-reuse",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
         }
       ],
       "contactUs": "Contáctenos",

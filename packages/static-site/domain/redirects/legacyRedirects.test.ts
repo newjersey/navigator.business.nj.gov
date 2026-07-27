@@ -222,3 +222,61 @@ describe("buildLegacyRedirects — impact report", () => {
     expect(find(buildLegacyRedirects(false), "/impact")?.destination).toBe("/impact-report");
   });
 });
+
+describe("buildLegacyRedirects — our software and reuse", () => {
+  it("maps the old /pages/[slug] URL to the standalone canonical page, permanently", () => {
+    const rule = find(buildLegacyRedirects(false), "/pages/our-software-and-reuse");
+    expect(rule?.destination).toBe("/our-software-and-reuse");
+    expect(rule?.permanent).toBe(true);
+  });
+
+  it("routes the /es-us Spanish source to the English page when multilingual is off", () => {
+    expect(
+      find(buildLegacyRedirects(false), "/es-us/pages/our-software-and-reuse")?.destination,
+    ).toBe("/our-software-and-reuse");
+  });
+
+  it("routes the /es-us Spanish source to the /es-US page when multilingual is on", () => {
+    expect(
+      find(buildLegacyRedirects(true), "/es-us/pages/our-software-and-reuse")?.destination,
+    ).toBe("/es-US/our-software-and-reuse");
+  });
+
+  it("orders the generated Spanish route before the /es-us catch-all", () => {
+    const rules = buildLegacyRedirects(false);
+    expect(indexOf(rules, "/es-us/pages/our-software-and-reuse")).toBeLessThan(
+      indexOf(rules, "/es-us/:path*"),
+    );
+  });
+});
+
+describe("buildLegacyRedirects — bare /license splits from /license/*", () => {
+  it("maps the bare /license (old software/credits page) to the reuse page", () => {
+    const rule = find(buildLegacyRedirects(false), "/license");
+    expect(rule?.destination).toBe("/our-software-and-reuse");
+    expect(rule?.permanent).toBe(true);
+  });
+
+  it("keeps deeper /license/* business-license slugs on the licensing guide", () => {
+    expect(find(buildLegacyRedirects(false), "/license/:slug*")?.destination).toBe(
+      "/pages/licensing-and-certification-guide",
+    );
+  });
+
+  it("orders the bare /license before /license/:slug* so first-match-wins keeps them split", () => {
+    const rules = buildLegacyRedirects(false);
+    expect(indexOf(rules, "/license")).toBeLessThan(indexOf(rules, "/license/:slug*"));
+  });
+
+  it("routes the /es-us/license twin to the English reuse page when multilingual is off", () => {
+    expect(find(buildLegacyRedirects(false), "/es-us/license")?.destination).toBe(
+      "/our-software-and-reuse",
+    );
+  });
+
+  it("routes the /es-us/license twin to the /es-US reuse page when multilingual is on", () => {
+    expect(find(buildLegacyRedirects(true), "/es-us/license")?.destination).toBe(
+      "/es-US/our-software-and-reuse",
+    );
+  });
+});
