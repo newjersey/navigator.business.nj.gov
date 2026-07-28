@@ -1,0 +1,65 @@
+import AxeBuilder from "@axe-core/playwright";
+import { expect, test } from "@playwright/test";
+import type { BrowserContext, Page } from "playwright";
+import { loadPageBySlug } from "@/domain/content/loadContent";
+import type { AppLocale } from "@/domain/i18n/locales";
+import { ENABLED_LOCALES } from "@/domain/i18n/locales";
+import { LANGUAGE_PROMPT_DISMISSED_COOKIE } from "@/domain/siteConfig";
+
+/**
+ * Defines the test context provided by Playwright.
+ */
+interface AccessibilityTestContext {
+  /** Browser page used by the test run. */
+  readonly page: Page;
+  /** Browser context, used to seed cookies before navigation. */
+  readonly context: BrowserContext;
+}
+
+/**
+ * Parameters for creating one locale-specific accessibility test.
+ */
+interface CreateLocaleAccessibilityTestParams {
+  /** Locale to evaluate in the browser accessibility audit. */
+  readonly locale: AppLocale;
+}
+
+/**
+ * Creates a Playwright accessibility test for one locale.
+ *
+ * This page is the first content page that renders an interactive control (the
+ * Intercom launcher button) inside Markdown prose, so it exercises axe rules —
+ * button-name, nested-interactive — that the other content-page audits do not.
+ */
+const createLocaleAccessibilityTest = ({ locale }: CreateLocaleAccessibilityTestParams) => {
+  return async ({ page, context }: AccessibilityTestContext) => {
+    const pageName = loadPageBySlug("our-software-and-reuse").name;
+
+    // Suppress the preferred-language prompt modal so its open/animation state
+    // cannot race with the axe scan, which made this audit flaky.
+    await context.addCookies([
+      {
+        name: LANGUAGE_PROMPT_DISMISSED_COOKIE,
+        value: "true",
+        url: "http://127.0.0.1:3000",
+      },
+    ]);
+
+    await page.goto(`/${locale}/our-software-and-reuse`);
+    await page.getByRole("heading", { level: 1, name: pageName }).waitFor();
+
+    // `color-contrast` is a pre-existing NJWDS banner/chrome issue present on
+    // every page (it also fails the homepage audit) and is outside this page's
+    // scope. Excluding it keeps this audit focused on this page's a11y.
+    const results = await new AxeBuilder({ page }).disableRules(["color-contrast"]).analyze();
+
+    expect(results.violations).toEqual([]);
+  };
+};
+
+for (const locale of ENABLED_LOCALES) {
+  test(
+    `our software and reuse page has no automated WCAG violations for ${locale}`,
+    createLocaleAccessibilityTest({ locale }),
+  );
+}

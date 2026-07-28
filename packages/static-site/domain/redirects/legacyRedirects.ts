@@ -40,7 +40,10 @@ const PREFIX_RULES: readonly InternalRule[] = [
   { source: "/recent/disposable-bag-ban", destination: "/pages/plastic-ban-law" },
   { source: "/recent/state-financial-assistance-programs", destination: "/pages/covid19" },
   { source: "/recent/:slug*", destination: "/updates/:slug*" },
-  { source: "/license", destination: "/pages/licensing-and-certification-guide" },
+  // Bare /license was the old software-license and credits page; its successor
+  // is the reuse page. Deeper /license/* paths are real business-license slugs
+  // and stay on the business licensing guide (first-match-wins keeps them split).
+  { source: "/license", destination: "/our-software-and-reuse" },
   { source: "/license/:slug*", destination: "/pages/licensing-and-certification-guide" },
   { source: "/funding", destination: "/pages/funding" },
   { source: "/funding/:slug*", destination: "/pages/funding" },
@@ -132,6 +135,9 @@ const ONE_OFF_RULES: readonly InternalRule[] = [
     source: "/pages/transferring-or-exiting-your-business",
     destination: "/pages/closing-your-business",
   },
+  // The reuse page is a standalone route, not a /pages/[slug] page, but the slug
+  // still resolves under that route (dynamicParams), so send it to the canonical URL.
+  { source: "/pages/our-software-and-reuse", destination: "/our-software-and-reuse" },
 ];
 
 /**

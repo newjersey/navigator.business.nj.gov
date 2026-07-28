@@ -2,7 +2,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { PageItem } from "@/domain/content/types";
-import PageContent from "./PageContent";
+import PageContent, { INTERCOM_LAUNCHER_HREF } from "./PageContent";
 
 const page = (overrides: Partial<PageItem> = {}): PageItem => ({
   name: "Test Page",
@@ -116,5 +116,35 @@ describe("PageContent", () => {
     );
     expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(11);
     expect(document.querySelectorAll("hr")).toHaveLength(11);
+  });
+
+  it("renders the Intercom sentinel link as a launcher button, not a link", () => {
+    render(
+      <PageContent
+        page={page({ "main-text-1": `Question? [Chat with us](${INTERCOM_LAUNCHER_HREF}).` })}
+      />,
+    );
+    const button = screen.getByRole("button", { name: "Chat with us" });
+    expect(button).toHaveClass("text-link-button");
+    expect(button).toHaveClass("intercomlaunch");
+    expect(button).toHaveAttribute("type", "button");
+    expect(screen.queryByRole("link", { name: "Chat with us" })).not.toBeInTheDocument();
+  });
+
+  it("renders a non-sentinel fragment link as a plain anchor", () => {
+    render(
+      <PageContent
+        page={page({ "main-text-1": "See [Set-asides](#Small-Business-Set-Aside-Programs)." })}
+      />,
+    );
+    const link = screen.getByRole("link", { name: "Set-asides" });
+    expect(link).toHaveAttribute("href", "#Small-Business-Set-Aside-Programs");
+    expect(screen.queryByRole("button", { name: "Set-asides" })).not.toBeInTheDocument();
+  });
+
+  it("renders an ordinary external link as a plain anchor", () => {
+    render(<PageContent page={page({ "main-text-1": "Visit [NJ](https://nj.gov)." })} />);
+    const link = screen.getByRole("link", { name: "NJ" });
+    expect(link).toHaveAttribute("href", "https://nj.gov");
   });
 });

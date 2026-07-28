@@ -211,6 +211,14 @@
             "isInternal": false,
             "opensInNewTab": false
           }
+        },
+        {
+          "link": {
+            "label": "برامجنا وإعادة الاستخدام",
+            "href": "/our-software-and-reuse",
+            "isInternal": true,
+            "opensInNewTab": false
+          }
         }
       ],
       "contactUs": "لاختبار هذا",

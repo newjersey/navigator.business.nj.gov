@@ -130,6 +130,34 @@ body:has(.page-not-found) .usa-footer__return-to-top {
   margin-top: 0;
 }
 
+/*
+ * NJWDS lays out this list with CSS multi-column (`column-count` +
+ * `column-fill: balance`), whose balancing algorithm is not
+ * cross-browser-deterministic — WebKit can start later columns a few pixels
+ * lower than the first. CSS Grid with `grid-auto-flow: column` places the
+ * same flat, unmodified list of `<li>` items without that drift, while still
+ * auto-flowing into columns with no manual grouping in markup.
+ */
+.usa-identifier__required-links-list {
+  column-count: initial;
+  display: grid;
+  gap: 0 2rem;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(12, auto);
+}
+
+@media all and (min-width: 40em) {
+  .usa-identifier__required-links-list {
+    grid-template-rows: repeat(6, auto);
+  }
+}
+
+@media all and (min-width: 64em) {
+  .usa-identifier__required-links-list {
+    grid-template-rows: repeat(3, auto);
+  }
+}
+
 .usa-pagination .usa-current {
   text-decoration: none;
 }
