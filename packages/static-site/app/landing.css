@@ -41,10 +41,36 @@ a.card:hover {
 
 .quick-service-card {
   gap: 1rem;
+  position: relative;
+}
+
+.quick-service-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.quick-service-card:focus-within {
+  outline: 0.25rem solid #0050d8;
+  outline-offset: 0;
 }
 
 .quick-service-card__icon {
   flex-shrink: 0;
+}
+
+.quick-service-card__link,
+.quick-service-card__link:visited,
+.quick-service-card__link:hover {
+  color: inherit;
+}
+
+.quick-service-card__link:focus {
+  outline: 0;
+}
+
+.quick-service-card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
 
 .support-card {
