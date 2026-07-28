@@ -95,7 +95,7 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
             setOpen(false);
           }}
           onChange={handleChange}
-          renderOption={(_props, option, { selected }): JSX.Element => {
+          renderOption={(_props, option, { selected }): ReactElement => {
             const { key, ...otherProps } = _props;
             return (
               <li key={key} {...otherProps}>
@@ -107,7 +107,7 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
               </li>
             );
           }}
-          renderInput={(params): JSX.Element => {
+          renderInput={(params): ReactElement => {
             return (
               <TextField
                 {...params}

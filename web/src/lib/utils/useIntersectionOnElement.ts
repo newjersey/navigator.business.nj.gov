@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useState } from "react";
 
 export const useIntersectionOnElement = (
-  element: RefObject<HTMLElement>,
+  element: RefObject<HTMLElement | null>,
   rootMargin: string,
 ): boolean => {
   const [isVisible, setState] = useState(false);
@@ -13,11 +13,14 @@ export const useIntersectionOnElement = (
       { rootMargin },
     );
 
-    element.current && observer.observe(element.current);
+    const observedElement = element.current;
+    if (!observedElement) {
+      return;
+    }
 
-    const el = element.current;
+    observer.observe(observedElement);
     return (): void => {
-      observer.unobserve(el as HTMLElement);
+      observer.unobserve(observedElement);
     };
   }, [element, rootMargin]);
 

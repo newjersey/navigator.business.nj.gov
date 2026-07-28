@@ -1,5 +1,6 @@
 import { Icon } from "@/components/njwds/Icon";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { CheckoffStatus } from "@businessnjgovnavigator/shared/license";
 import { ReactElement } from "react";
 
@@ -14,43 +15,45 @@ interface LicenseStatusMetadata {
   backgroundColor: string;
 }
 
-const Config = getMergedConfig();
-
-export const statusObj: Record<CheckoffStatus, LicenseStatusMetadata> = {
-  ACTIVE: {
-    iconName: "check",
-    iconColor: "text-success",
-    statusText: Config.licenseSearchTask.completedStatusText,
-    backgroundColor: "bg-base-lightest",
-  },
-  PENDING: {
-    iconName: "schedule",
-    iconColor: "text-base",
-    statusText: Config.licenseSearchTask.pendingPermitStatusText,
-    backgroundColor: "bg-base-lightest",
-  },
-  SCHEDULED: {
-    iconName: "event",
-    iconColor: "text-base",
-    statusText: Config.licenseSearchTask.scheduledStatusText,
-    backgroundColor: "bg-base-lightest",
-  },
-  INCOMPLETE: {
-    iconName: "close",
-    iconColor: "text-base",
-    statusText: Config.licenseSearchTask.incompleteStatusText,
-    backgroundColor: "bg-base-lightest",
-  },
-  NOT_APPLICABLE: {
-    iconName: "do-not-disturb",
-    iconColor: "text-base",
-    statusText: Config.licenseSearchTask.notApplicableStatusText,
-    backgroundColor: "bg-base-lightest",
-  },
+const getStatusLookup = (Config: ConfigType): Record<CheckoffStatus, LicenseStatusMetadata> => {
+  return {
+    ACTIVE: {
+      iconName: "check",
+      iconColor: "text-success",
+      statusText: Config.licenseSearchTask.completedStatusText,
+      backgroundColor: "bg-base-lightest",
+    },
+    PENDING: {
+      iconName: "schedule",
+      iconColor: "text-base",
+      statusText: Config.licenseSearchTask.pendingPermitStatusText,
+      backgroundColor: "bg-base-lightest",
+    },
+    SCHEDULED: {
+      iconName: "event",
+      iconColor: "text-base",
+      statusText: Config.licenseSearchTask.scheduledStatusText,
+      backgroundColor: "bg-base-lightest",
+    },
+    INCOMPLETE: {
+      iconName: "close",
+      iconColor: "text-base",
+      statusText: Config.licenseSearchTask.incompleteStatusText,
+      backgroundColor: "bg-base-lightest",
+    },
+    NOT_APPLICABLE: {
+      iconName: "do-not-disturb",
+      iconColor: "text-base",
+      statusText: Config.licenseSearchTask.notApplicableStatusText,
+      backgroundColor: "bg-base-lightest",
+    },
+  };
 };
 
 export const ChecklistTag = (props: Props): ReactElement => {
-  const { iconName, iconColor, statusText, backgroundColor } = statusObj[props.status];
+  const { Config } = useConfig();
+  const { iconName, iconColor, statusText, backgroundColor } =
+    getStatusLookup(Config)[props.status];
 
   return (
     <div

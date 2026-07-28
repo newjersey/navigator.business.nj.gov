@@ -39,7 +39,7 @@ export const LoadingPageComponent = ({
     ),
   };
 
-  const renderErrorState = (): JSX.Element => {
+  const renderErrorState = (): ReactElement => {
     const titleMessage = isLinkingError
       ? Config.loginSupportPage.unlinkedAccount
       : Config.loginSupportPage.havingTrouble;

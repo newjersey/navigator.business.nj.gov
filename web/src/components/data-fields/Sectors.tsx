@@ -87,7 +87,7 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
         getOptionLabel={(sector: SectorType): string => {
           return sector.name;
         }}
-        renderOption={(props, option, { selected }): JSX.Element => {
+        renderOption={(props, option, { selected }): ReactElement => {
           const { key, ...otherProps } = props;
           return (
             <li key={key} {...otherProps}>
@@ -108,7 +108,7 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
         }}
         value={state.profileData.sectorId ? LookupSectorTypeById(state.profileData.sectorId) : null}
         onChange={handleSectorSelect}
-        renderInput={(params): JSX.Element => {
+        renderInput={(params): ReactElement => {
           return (
             <TextField
               {...params}

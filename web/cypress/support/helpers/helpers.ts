@@ -192,13 +192,11 @@ export const completeTaxClearanceFlow = (): void => {
   // Step 2 (Check Eligibility) → Step 3 (Review)
   cy.contains("button", "Save & Continue").click();
   cy.get('[data-testid="next-button"]').should("be.visible");
+  cy.intercept("POST", "**/postTaxClearanceCertificate").as("taxClearance");
   // Step 3 (Review) → submit (triggers the async certificate API call)
   cy.get('[data-testid="next-button"]').click();
   // The submit is async; the result is either the Download screen or a "Tax ID in use" error.
-  // There is no single DOM signal guaranteed before both outcomes, so we wait for the API
-  // response window before inspecting the conditional Unlink state.
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(1000);
+  cy.wait("@taxClearance");
 
   cy.get("body").then(($body) => {
     if ($body.find("button:contains('Unlink Tax ID')").length > 0) {

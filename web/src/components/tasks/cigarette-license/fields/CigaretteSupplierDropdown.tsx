@@ -166,7 +166,7 @@ export const CigaretteSupplierDropdown = (props: Props): ReactElement => {
     },
     option: string,
     { selected }: AutocompleteRenderOptionState,
-  ): JSX.Element => {
+  ): ReactElement => {
     const { key, ...optionProps } = props;
     return (
       <li key={key} {...optionProps}>
@@ -181,7 +181,7 @@ export const CigaretteSupplierDropdown = (props: Props): ReactElement => {
     );
   };
 
-  const renderInput = (params: AutocompleteRenderInputParams): JSX.Element => (
+  const renderInput = (params: AutocompleteRenderInputParams): ReactElement => (
     <TextField
       {...params}
       error={props.CMS_ONLY_show_error || isFormFieldInvalid}

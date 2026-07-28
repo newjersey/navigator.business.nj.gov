@@ -15,7 +15,7 @@ import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { UpdateQueue } from "@/lib/UpdateQueue";
-import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
+import { authReducer } from "@/lib/auth/AuthContext";
 import { UserDataProvider } from "@/lib/data-hooks/UserDataProvider";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
@@ -53,7 +53,7 @@ ContextualInfoContext.displayName = "Contextual Info";
 UserDataErrorContext.displayName = "User Data Error";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
-  const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
+  const [state, dispatch] = useReducer(authReducer, initialState);
   const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
   const [registrationStatus, setRegistrationStatus] = useState<RegistrationStatus | undefined>(

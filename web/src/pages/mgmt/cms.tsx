@@ -251,7 +251,7 @@ const registerPreview = (
   CMS: typeof import("decap-cms-app"),
   name: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  preview: (props: any) => JSX.Element,
+  preview: (props: any) => ReactElement,
 ): void => {
   // @ts-expect-error: No type definition available
   CMS.registerPreviewTemplate(name, applyTheme(preview));

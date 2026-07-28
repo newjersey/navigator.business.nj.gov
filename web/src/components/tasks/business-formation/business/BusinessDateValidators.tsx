@@ -8,8 +8,6 @@ import {
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import dayjs from "dayjs";
 
-const Config = getMergedConfig();
-
 export const isDateValid = (value?: string): boolean => {
   if (!value) return false;
   if (value.split(defaultDateDelimiter).length > 8) return false;
@@ -79,6 +77,7 @@ export const getBusinessStartDateMaxDate = (legalType: FormationLegalType): dayj
 };
 
 export const getBusinessStartDateHelperText = (legalType: FormationLegalType): string => {
+  const Config = getMergedConfig();
   const rule = getBusinessStartDateRule(legalType);
   switch (rule) {
     case "90":

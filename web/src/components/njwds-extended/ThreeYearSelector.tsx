@@ -53,7 +53,7 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
           className?: string;
           [key: string]: any;
           /* eslint-enable @typescript-eslint/no-explicit-any */
-        }): JSX.Element => (
+        }): ReactElement => (
           <div
             {...props}
             className={`radius-lg font-body-2xs text-normal margin-x-05 usa-button padding-05 ${props.className}`}

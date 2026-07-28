@@ -2,6 +2,7 @@ import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropd
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Content } from "@/components/Content";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   HousingAddress,
@@ -9,7 +10,6 @@ import {
   Municipality,
   toProperCase,
 } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   HotelMotelRegistrationSearchError,
   MultipleDwellingSearchError,
@@ -24,21 +24,21 @@ interface Props {
   municipalities: HousingMunicipality[];
 }
 
-const Config = getMergedConfig();
-const HousingRegistrationSearchErrorLookup: Record<
-  HotelMotelRegistrationSearchError | MultipleDwellingSearchError,
-  string
-> = {
-  NO_PROPERTY_INTEREST_FOUND: Config.housingRegistrationSearchTask.errorTextNoPropertyInterestFound,
-  NO_HOTEL_MOTEL_REGISTRATIONS_FOUND:
-    Config.housingRegistrationSearchTask.errorTextNoHotelMotelRegistrations,
-  FIELDS_REQUIRED: Config.housingRegistrationSearchTask.errorTextFieldsRequired,
-  SEARCH_FAILED: Config.housingRegistrationSearchTask.errorTextSearchFailed,
-  NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND:
-    Config.housingRegistrationSearchTask.errorTextNoMultipleDwellingRegistrations,
-};
-
 export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+  const housingRegistrationSearchErrorLookup: Record<
+    HotelMotelRegistrationSearchError | MultipleDwellingSearchError,
+    string
+  > = {
+    NO_PROPERTY_INTEREST_FOUND:
+      Config.housingRegistrationSearchTask.errorTextNoPropertyInterestFound,
+    NO_HOTEL_MOTEL_REGISTRATIONS_FOUND:
+      Config.housingRegistrationSearchTask.errorTextNoHotelMotelRegistrations,
+    FIELDS_REQUIRED: Config.housingRegistrationSearchTask.errorTextFieldsRequired,
+    SEARCH_FAILED: Config.housingRegistrationSearchTask.errorTextSearchFailed,
+    NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND:
+      Config.housingRegistrationSearchTask.errorTextNoMultipleDwellingRegistrations,
+  };
   const [formValues, setFormValues] = useState<HousingAddress>({ address1: "" });
   const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(
     undefined,
@@ -118,7 +118,7 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
 
     return (
       <Alert dataTestid={`error-alert-${props.error}`} variant="error">
-        {HousingRegistrationSearchErrorLookup[props.error]}
+        {housingRegistrationSearchErrorLookup[props.error]}
       </Alert>
     );
   };

@@ -1,7 +1,5 @@
-import dayjs, { Dayjs } from "dayjs";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-
-const Config = getMergedConfig();
+import dayjs, { Dayjs } from "dayjs";
 
 export interface EmployerRatesQuarterObject {
   label: string;
@@ -20,6 +18,7 @@ const getLatestYear = (currentDate?: Dayjs): number => {
 const getEarliestYear = (currentDate?: Dayjs): number => getLatestYear(currentDate) - 4;
 
 const generateQuartersForYear = (year: number): EmployerRatesQuarterObject[] => {
+  const Config = getMergedConfig();
   return [4, 3, 2, 1].map((quarter) => {
     const quarterToConfigMapping = {
       1: Config.employerRates.quarterOneLabel,

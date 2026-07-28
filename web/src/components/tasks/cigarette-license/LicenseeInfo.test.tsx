@@ -24,7 +24,7 @@ import {
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 const Config = getMergedConfig();
@@ -41,7 +41,7 @@ describe("<LicenseeInfo />", () => {
     const testBusiness = business ?? generateBusinessWithDefaults();
     const testUserData = userData ?? generateUserDataForBusiness(testBusiness);
 
-    const TestComponent = (): JSX.Element => {
+    const TestComponent = (): ReactElement => {
       const [cigaretteLicenseData, setCigaretteLicenseData] = useState(emptyCigaretteLicenseData);
       const [profileData, setProfileData] = useState(testBusiness.profileData);
 

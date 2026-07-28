@@ -7,7 +7,7 @@ import { ReactElement, RefObject } from "react";
 
 interface Props {
   fieldErrors: string[];
-  profileAlertRef?: RefObject<HTMLDivElement>;
+  profileAlertRef?: RefObject<HTMLDivElement | null>;
 }
 
 export const ProfileErrorAlert = (props: Props): ReactElement | null => {
