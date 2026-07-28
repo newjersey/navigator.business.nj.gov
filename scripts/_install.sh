@@ -384,6 +384,13 @@ echo "=== [6/7] Install dependencies and build ==="
 # ============================================================
 
 yarn install && yarn build || { echo "Root install or build failed."; exit 1; }
+
+# Cypress's postinstall hook normally downloads the binary during `yarn install`,
+# but Yarn 4 disables dependency lifecycle scripts by default (enableScripts: false).
+# Explicitly verify the binary is present to avoid confusing errors later.
+echo "Verifying Cypress binary..."
+yarn cypress install
+
 (
     cd packages/static-site
     pnpm install
