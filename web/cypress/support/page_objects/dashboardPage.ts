@@ -21,7 +21,7 @@ export class DashboardPage {
   };
 
   clickEditProfileInDropdown = () => {
-    this.getDropdown().first().should("be.visible").click({ force: true });
+    this.getDropdown().first().should("be.visible").and("be.enabled").click({ force: true });
     cy.get('[data-testid="nav-bar-popup-menu"]').should("be.visible");
     this.getProfileLinkInDropdown().first().should("be.visible").click({ force: true });
   };
