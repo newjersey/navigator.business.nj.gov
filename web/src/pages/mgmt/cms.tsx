@@ -87,7 +87,6 @@ const Loading = ({ error }: { error?: Error | null }): ReactElement => {
   );
 };
 const CMS = dynamic(
-  // @ts-expect-error: loader resolves void, not a component; decap mounts itself outside the React tree
   () => {
     return import("decap-cms-app").then(({ default: CMS }) => {
       // @ts-expect-error: decap-cms-core's InitOptions type omits the legacy CMS_CONFIG option
@@ -227,6 +226,9 @@ const CMS = dynamic(
       registerPreview(CMS, "navigation-defaults", NavBarPreview);
 
       registerPreview(CMS, "calloutDefaults", LargeCalloutPreview);
+
+      // decap renders itself into #nc-root, outside the Next tree
+      return (): null => null;
     });
   },
   { ssr: false, loading: Loading },
@@ -234,13 +236,13 @@ const CMS = dynamic(
 
 const registerAsTask = (CMS: typeof CmsType, names: string[]): void => {
   for (const name of names) {
-    CMS.registerPreviewTemplate(name, TaskPreview);
+    registerPreview(CMS, name, TaskPreview);
   }
 };
 
 const registerAsCannabisLicensePreview = (CMS: typeof CmsType, names: string[]): void => {
   for (const name of names) {
-    CMS.registerPreviewTemplate(name, CannabisLicensePreview);
+    registerPreview(CMS, name, CannabisLicensePreview);
   }
 };
 
