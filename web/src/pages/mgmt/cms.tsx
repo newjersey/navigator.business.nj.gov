@@ -61,6 +61,7 @@ import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import XrayRenewalCalendarEventPreview from "@/lib/cms/previews/XrayRenewalCalendarEventPreview";
 import XrayTaskPreview from "@/lib/cms/previews/XrayTaskPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
+import type { CMS as CmsType } from "decap-cms-core";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
@@ -69,7 +70,16 @@ import SelectIndustryPreview from "@/lib/cms/previews/SelectIndustryPreview";
 import jsYaml from "js-yaml";
 
 const CMS_CONFIG = {};
-const Loading = (): ReactElement => {
+const Loading = ({ error }: { error?: Error | null }): ReactElement => {
+  if (error) {
+    return (
+      <div role="alert" className="min-h-screen flex items-center justify-center">
+        <p className="text-red-600 font-semibold text-xl">
+          Failed to load the CMS: {error.message}
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen flex items-center justify-center">
       <p className="text-gray-500 font-semibold text-xl">Loading...</p>
@@ -77,34 +87,26 @@ const Loading = (): ReactElement => {
   );
 };
 const CMS = dynamic(
-  // @ts-expect-error: No type definition available
+  // @ts-expect-error: loader resolves void, not a component; decap mounts itself outside the React tree
   () => {
-    return import("decap-cms-app").then((CMS) => {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      // @ts-expect-error: No type definition available
+    return import("decap-cms-app").then(({ default: CMS }) => {
+      // @ts-expect-error: decap-cms-core's InitOptions type omits the legacy CMS_CONFIG option
       CMS.init({ CMS_CONFIG });
-      // @ts-expect-error: No type definition available
+      // @ts-expect-error: decap-cms-core's CmsWidgetControlProps type omits setActiveStyle/setInactiveStyle, which decap passes at runtime
       CMS.registerWidget("write-once-read-only-no-space", WriteOnceReadOnlyNoSpaceControl);
-      // @ts-expect-error: No type definition available
+      // @ts-expect-error: decap-cms-core's CmsWidgetControlProps type omits setActiveStyle/setInactiveStyle, which decap passes at runtime
       CMS.registerWidget("no-space", NoSpaceControl);
-      // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(ContextEditor);
-      // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(AlertEditor);
-      // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(Note);
-      // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(CannabisLocationAlert);
-      // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(LargeCallout);
-      // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(MiniCallout);
-      // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(IconWidgetEditor);
-      // @ts-expect-error: No type definition available
       // disables line wrapping in front-matter props
       CMS.registerCustomFormat("yaml", "yml", {
         fromFile: (text: string) => jsYaml.load(text),
+        // @ts-expect-error: decap-cms-core's Formatter type declares toFile's param as object, but decap passes the raw string here
         toFile: (value: string) =>
           jsYaml.dump(value, {
             lineWidth: -1,
@@ -230,30 +232,24 @@ const CMS = dynamic(
   { ssr: false, loading: Loading },
 );
 
-const registerAsTask = (CMS: typeof import("decap-cms-app"), names: string[]): void => {
+const registerAsTask = (CMS: CmsType, names: string[]): void => {
   for (const name of names) {
-    // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, TaskPreview);
   }
 };
 
-const registerAsCannabisLicensePreview = (
-  CMS: typeof import("decap-cms-app"),
-  names: string[],
-): void => {
+const registerAsCannabisLicensePreview = (CMS: CmsType, names: string[]): void => {
   for (const name of names) {
-    // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, CannabisLicensePreview);
   }
 };
 
 const registerPreview = (
-  CMS: typeof import("decap-cms-app"),
+  CMS: CmsType,
   name: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   preview: (props: any) => ReactElement,
 ): void => {
-  // @ts-expect-error: No type definition available
   CMS.registerPreviewTemplate(name, applyTheme(preview));
 };
 
