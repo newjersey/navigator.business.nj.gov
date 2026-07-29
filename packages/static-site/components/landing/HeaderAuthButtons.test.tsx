@@ -47,7 +47,7 @@ describe("HeaderAuthButtons", () => {
     );
     expect(screen.getByRole("link", { name: defaultProps.getStartedLabel })).toHaveAttribute(
       "href",
-      defaultProps.accountAppUrl,
+      `${defaultProps.accountAppUrl}/onboarding`,
     );
   });
 
