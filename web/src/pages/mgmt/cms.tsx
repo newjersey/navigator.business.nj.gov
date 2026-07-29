@@ -61,7 +61,7 @@ import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import XrayRenewalCalendarEventPreview from "@/lib/cms/previews/XrayRenewalCalendarEventPreview";
 import XrayTaskPreview from "@/lib/cms/previews/XrayTaskPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
-import type { CMS as CmsType } from "decap-cms-core";
+import type CmsType from "decap-cms-app";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
@@ -232,20 +232,20 @@ const CMS = dynamic(
   { ssr: false, loading: Loading },
 );
 
-const registerAsTask = (CMS: CmsType, names: string[]): void => {
+const registerAsTask = (CMS: typeof CmsType, names: string[]): void => {
   for (const name of names) {
     CMS.registerPreviewTemplate(name, TaskPreview);
   }
 };
 
-const registerAsCannabisLicensePreview = (CMS: CmsType, names: string[]): void => {
+const registerAsCannabisLicensePreview = (CMS: typeof CmsType, names: string[]): void => {
   for (const name of names) {
     CMS.registerPreviewTemplate(name, CannabisLicensePreview);
   }
 };
 
 const registerPreview = (
-  CMS: CmsType,
+  CMS: typeof CmsType,
   name: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   preview: (props: any) => ReactElement,
