@@ -65,7 +65,7 @@ export const HeaderAuthButtons = ({
         {isOpen && (
           <ul className="usa-nav__auth-dropdown">
             <li>
-              <a href={accountAppUrl}>{getStartedLabel}</a>
+              <a href={`${accountAppUrl}/onboarding`}>{getStartedLabel}</a>
             </li>
           </ul>
         )}
