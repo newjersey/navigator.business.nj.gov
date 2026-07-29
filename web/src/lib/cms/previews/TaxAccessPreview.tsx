@@ -26,7 +26,7 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
             name="none"
             value="NONE"
             checked={errorPreview === "NONE"}
-            onClick={(): void => setErrorPreview("NONE")}
+            onChange={(): void => setErrorPreview("NONE")}
           />
           <label htmlFor="none">None</label>
         </div>
@@ -38,7 +38,7 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
             name="api"
             value="API"
             checked={errorPreview === "API"}
-            onClick={(): void => setErrorPreview("API")}
+            onChange={(): void => setErrorPreview("API")}
           />
           <label htmlFor="api">API error</label>
         </div>
@@ -50,7 +50,7 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
             name="unknown"
             value="UNKNOWN"
             checked={errorPreview === "UNKNOWN"}
-            onClick={(): void => setErrorPreview("UNKNOWN")}
+            onChange={(): void => setErrorPreview("UNKNOWN")}
           />
           <label htmlFor="unknown">Unknown error</label>
         </div>
