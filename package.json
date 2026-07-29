@@ -300,6 +300,7 @@
     "glob-parent": "6.0.2",
     "tar": "7.5.21",
     "ansi-regex": "5.0.1",
-    "trim-newlines": "5.0.0"
+    "trim-newlines": "5.0.0",
+    "react-is": "^19.2.0"
   }
 }
