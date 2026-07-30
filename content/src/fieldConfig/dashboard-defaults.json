@@ -7,8 +7,11 @@
     "personalizeMyTasksButtonText": "Personalize My Experience"
   },
   "dashboardRoadmapHeaderDefaults": {
-    "RoadmapTasksHeaderText": "Business Tasks",
-    "DomesticEmployerRoadmapTasksHeaderText": "Tasks"
+    "roadmapTasksHeaderText": "Plan and Register Your Business",
+    "roadmapTasksHeaderAbbreviatedText": "Plan and Register",
+    "domesticEmployerRoadmapTasksHeaderText": "Tasks",
+    "roadmapTasksDescription": "Plan your business and get legally recognized so you can start operating."
+
   },
   "dashboardAnytimeActionDefaults": {
     "defaultHeaderText": "Business Tasks To Stay on Track",

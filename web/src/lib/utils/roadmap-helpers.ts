@@ -37,7 +37,9 @@ export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
   if (!roadmap) {
     return [];
   }
-  return roadmap.tasks.map((task) => {
-    return task.urlSlug;
-  });
+  return roadmap.tasks
+    .filter((task) => task.required)
+    .map((task) => {
+      return task.urlSlug;
+    });
 };

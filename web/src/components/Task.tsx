@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { taskIdsWithLicenseSearchEnabled } from "@/components/TaskPageSwitchComponent";
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
 import { getTaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -9,11 +10,12 @@ import analytics from "@/lib/utils/analytics";
 import * as types from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   task: types.Task;
   showCheckbox?: boolean;
+  showRequiredLabel?: boolean;
 }
 
 export const Task = (props: Props): ReactElement => {
@@ -22,14 +24,15 @@ export const Task = (props: Props): ReactElement => {
   const taskProgressTagLookup = getTaskProgressTagLookup(Config);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "TO_DO";
+  const { isAuthenticated } = useContext(NeedsAccountContext);
 
   const renderRequiredLabel = (): ReactNode => {
-    if (!props.task.required) {
+    if (!props.task.required || !props.showRequiredLabel) {
       return <></>;
     }
     return (
       <span
-        className="text-base text-no-underline display-inline-block"
+        className="text-base text-no-underline display-inline-block margin-left-105"
         data-testid="required task"
       >
         <Content>{Config.taskDefaults.requiredLabelText}</Content>
@@ -58,48 +61,41 @@ export const Task = (props: Props): ReactElement => {
           isTabletAndUp ? "margin-bottom-2" : "margin-bottom-1"
         }`}
       >
-        {isTabletAndUp && (
-          <span className="margin-right-205 margin-top-05 padding-top-2px">
-            {props.showCheckbox ? (
-              <TaskProgressCheckbox
-                taskId={props.task.id}
-                disabledTooltipText={getDisabledTooltipText(props.task.id, taskProgress)}
-                needsAccount={props.task.required}
-              />
-            ) : (
-              taskProgressTagLookup[taskProgress]
-            )}
-          </span>
-        )}
-        <div className="flex flex-align-center">
-          <Link
-            href={`/tasks/${props.task.urlSlug}`}
-            passHref
-            onClick={(): void =>
-              analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)
-            }
-            className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
-            data-task={props.task.id}
-            data-testid={props.task.id}
-          >
-            {props.task.name}
-          </Link>
-          {(props.task.needsAccount || taskIdsWithLicenseSearchEnabled.includes(props.task.id)) && (
+        <span className="margin-right-205 margin-top-05 padding-top-2px">
+          {props.showCheckbox ? (
+            <TaskProgressCheckbox
+              taskId={props.task.id}
+              disabledTooltipText={getDisabledTooltipText(props.task.id, taskProgress)}
+              hideTaskProgressTag={!isTabletAndUp}
+            />
+          ) : (
+            taskProgressTagLookup[taskProgress]
+          )}
+        </span>
+        <Link
+          href={`/tasks/${props.task.urlSlug}`}
+          passHref
+          id={props.task.id}
+          onClick={(): void =>
+            analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)
+          }
+          className={`usa-link margin-right-105 line-height-sans-5 ${props.task.required ? "text-bold" : ""}`}
+          data-task={props.task.id}
+          data-testid={props.task.id}
+        >
+          {props.task.name}
+        </Link>{" "}
+        {isTabletAndUp && renderRequiredLabel()}
+        {isAuthenticated === "FALSE" &&
+          (props.task.needsAccount || taskIdsWithLicenseSearchEnabled.includes(props.task.id)) && (
             <img
-              className="usa-icon display-block margin-right-105"
+              className="usa-icon display-inline-block margin-left-auto"
+              style={{ transform: "translateY(5px)" }}
               src="/img/lock.svg"
               alt="Requires account"
             />
           )}
-          {isTabletAndUp && renderRequiredLabel()}
-        </div>
       </div>
-      {!isTabletAndUp && (
-        <div className="margin-bottom-2">
-          {taskProgressTagLookup[taskProgress]}{" "}
-          <span className="margin-left-1">{renderRequiredLabel()}</span>
-        </div>
-      )}
     </li>
   );
 };

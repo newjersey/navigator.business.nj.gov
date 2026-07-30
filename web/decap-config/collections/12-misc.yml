@@ -3433,3 +3433,22 @@ collections:
               - { label: Updates Link, name: navBarUpdatesLink, widget: no-space }
               - { label: Search, name: navBarSearchText, widget: string }
               - { label: Search Link, name: navBarSearchLink, widget: no-space }
+  - name: "locked-tasks-prompt"
+    label: "Locked Tasks Prompt"
+    delete: false
+    create: false
+    files:
+      - label: "Locked Tasks Prompt"
+        name: "locked-tasks-prompt"
+        file: "content/src/fieldConfig/locked-tasks-prompt.json"
+        editor:
+          preview: false
+        fields:
+          - label: Locked Tasks Prompt
+            name: lockedTasksPrompt
+            collapsed: false
+            widget: object
+            summary: "{{lockedTasksPrompt}}"
+            fields:
+              - { label: Prompt Text, name: promptText, widget: markdown }
+              - { label: Button Text, name: buttonText, widget: string }

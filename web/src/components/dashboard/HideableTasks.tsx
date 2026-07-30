@@ -32,14 +32,14 @@ export const HideableTasks = (): ReactElement => {
     if (!roadmap) {
       return 0;
     }
-    return roadmap.tasks.length;
+    return roadmap.tasks.filter((task) => task.required).length;
   };
 
   return (
     <div className="margin-top-7" data-testid="hideableTasks">
       <div className={`flex flex-align-center margin-bottom-205`}>
         <Heading level={2} className="margin-bottom-0">
-          {Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText}
+          {Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderText}
         </Heading>
         <div className={`mla`}>
           <SecondaryButton

@@ -24,7 +24,7 @@ export const BusinessStructurePrompt = (props: Props): ReactElement => {
 
   return (
     <div
-      className={"business-structure-prompt-border padding-3 margin-top-2"}
+      className={"prompt-border padding-3 margin-top-2"}
       data-testid={"business-structure-prompt"}
     >
       <div className={isDesktopAndUp ? "flex flex-row flex-align-start" : ""}>

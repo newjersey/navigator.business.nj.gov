@@ -271,9 +271,9 @@ describe("task page", () => {
   });
 
   describe("next and previous task buttons", () => {
-    const taskOne = generateTask({ urlSlug: "task-1", stepNumber: 1 });
-    const taskTwo = generateTask({ urlSlug: "task-2", stepNumber: 2 });
-    const taskThree = generateTask({ urlSlug: "task-3", stepNumber: 3 });
+    const taskOne = generateTask({ urlSlug: "task-1", stepNumber: 1, required: true });
+    const taskTwo = generateTask({ urlSlug: "task-2", stepNumber: 2, required: true });
+    const taskThree = generateTask({ urlSlug: "task-3", stepNumber: 3, required: true });
 
     beforeEach(() => {
       useMockRoadmap({
@@ -459,7 +459,7 @@ describe("task page", () => {
   });
 
   it.each(operatingPhasesDisplayingBusinessStructurePrompt)(
-    "hides nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
+    "hides nextUrlSlug on business structure task when it's not marked as completed for %p operating phase",
     (operatingPhase) => {
       setLargeScreen(false);
       renderPage(
@@ -475,12 +475,33 @@ describe("task page", () => {
     },
   );
 
-  it.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
-    "shows nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
+  // These phases never have a business structure task in their roadmap
+  it.each(
+    operatingPhasesNotDisplayingBusinessStructurePrompt.filter(
+      (operatingPhaseId) =>
+        operatingPhaseId !== "DOMESTIC_EMPLOYER" &&
+        operatingPhaseId !== "UP_AND_RUNNING_OWNING" &&
+        operatingPhaseId !== "UP_AND_RUNNING" &&
+        operatingPhaseId !== "GUEST_MODE_OWNING",
+    ),
+  )(
+    "shows nextUrlSlug on business structure task when it's not marked as completed for %p operating phase",
     (operatingPhase) => {
+      const businessStructureTask = generateTask({
+        id: businessStructureTaskId,
+        urlSlug: "business-structure",
+        stepNumber: 1,
+        required: true,
+      });
+      const nextTask = generateTask({ urlSlug: "next-task", stepNumber: 2, required: true });
+      useMockRoadmap({
+        steps: [generateStep({ stepNumber: 1 }), generateStep({ stepNumber: 2 })],
+        tasks: [businessStructureTask, nextTask],
+      });
+
       setLargeScreen(false);
       renderPage(
-        generateTask({ id: businessStructureTaskId }),
+        businessStructureTask,
         generateBusiness({
           profileData: generateProfileData({
             operatingPhase,

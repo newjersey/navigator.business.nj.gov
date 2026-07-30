@@ -12,8 +12,8 @@ import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 export const getRoadmapHeadingText = (industryId?: string): string => {
   const Config = getMergedConfig();
   return industryId === "domestic-employer"
-    ? Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText
-    : Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText;
+    ? Config.dashboardRoadmapHeaderDefaults.domesticEmployerRoadmapTasksHeaderText
+    : Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderText;
 };
 
 export const getPersonalizeTaskButtonTabValue = (business: Business | undefined): ProfileTabs => {
