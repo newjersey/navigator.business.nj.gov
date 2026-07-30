@@ -6,8 +6,13 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+from ado_boards import (
+    CURRENT_PROJECT,
+    CURRENT_PROJECT_MIN_TICKET_ID,
+    LEGACY_PROJECT,
+    work_item_url,
+)
 from generate_ado_link import (
-    ADO_BASE_URL,
     extract_first_line,
     format_ado_link,
     format_pr_title,
@@ -22,13 +27,41 @@ class TestFormatAdoLink(unittest.TestCase):
 
     def test_creates_slack_formatted_link(self):
         result = format_ado_link("AB#1234", "1234")
-        expected = f"<{ADO_BASE_URL}/1234|AB#1234>"
+        expected = f"<{work_item_url('1234')}|AB#1234>"
         self.assertEqual(result, expected)
 
     def test_handles_different_ticket_numbers(self):
         result = format_ado_link("AB#9999", "9999")
         self.assertIn("9999", result)
         self.assertIn("AB#9999", result)
+
+    def test_routes_below_cutover_ticket_to_legacy_project(self):
+        """16426 is a real, hand-authored Business First Stop ticket."""
+        result = format_ado_link("AB#16426", "16426")
+        self.assertIn(LEGACY_PROJECT.replace(" ", "%20"), result)
+        self.assertNotIn(CURRENT_PROJECT, result)
+
+    def test_routes_at_cutover_ticket_to_current_project(self):
+        cutover = str(CURRENT_PROJECT_MIN_TICKET_ID)
+        result = format_ado_link(f"AB#{cutover}", cutover)
+        self.assertIn(CURRENT_PROJECT, result)
+
+    def test_routes_above_cutover_ticket_to_current_project(self):
+        """17706 is a real, hand-authored BizX ticket."""
+        result = format_ado_link("AB#17706", "17706")
+        self.assertIn(CURRENT_PROJECT, result)
+
+    def test_routes_known_current_project_straggler_below_cutover(self):
+        """16176 is a confirmed BizX ticket despite being below the cutover."""
+        result = format_ado_link("AB#16176", "16176")
+        self.assertIn(CURRENT_PROJECT, result)
+
+    def test_routes_known_legacy_project_straggler_at_or_above_cutover(self):
+        """17951 is a confirmed Business First Stop ticket despite being at/above the cutover."""
+        self.assertGreaterEqual(17951, CURRENT_PROJECT_MIN_TICKET_ID)
+        result = format_ado_link("AB#17951", "17951")
+        self.assertIn(LEGACY_PROJECT.replace(" ", "%20"), result)
+        self.assertNotIn(CURRENT_PROJECT, result)
 
 
 class TestExtractFirstLine(unittest.TestCase):
@@ -69,14 +102,22 @@ class TestFormatPrTitle(unittest.TestCase):
     def test_replaces_single_ticket_reference(self):
         pr_title = "AB#1234 Fix login bug"
         result = format_pr_title(pr_title)
-        self.assertIn(f"<{ADO_BASE_URL}/1234|AB#1234>", result)
+        self.assertIn(f"<{work_item_url('1234')}|AB#1234>", result)
         self.assertIn("Fix login bug", result)
 
     def test_replaces_multiple_ticket_references(self):
         pr_title = "AB#1234 AB#5678 Multiple fixes"
         result = format_pr_title(pr_title)
-        self.assertIn(f"<{ADO_BASE_URL}/1234|AB#1234>", result)
-        self.assertIn(f"<{ADO_BASE_URL}/5678|AB#5678>", result)
+        self.assertIn(f"<{work_item_url('1234')}|AB#1234>", result)
+        self.assertIn(f"<{work_item_url('5678')}|AB#5678>", result)
+
+    def test_replaces_tickets_from_both_boards_in_the_same_title(self):
+        pr_title = "AB#16426 legacy fix AB#17706 current fix"
+        result = format_pr_title(pr_title)
+        self.assertIn(f"<{work_item_url('16426')}|AB#16426>", result)
+        self.assertIn(f"<{work_item_url('17706')}|AB#17706>", result)
+        self.assertIn(LEGACY_PROJECT.replace(" ", "%20"), result)
+        self.assertIn(CURRENT_PROJECT, result)
 
     def test_returns_unchanged_title_without_ticket(self):
         pr_title = "Fix login bug without ticket"
@@ -86,13 +127,13 @@ class TestFormatPrTitle(unittest.TestCase):
     def test_handles_ticket_at_end_of_title(self):
         pr_title = "Fix login bug AB#1234"
         result = format_pr_title(pr_title)
-        self.assertIn(f"<{ADO_BASE_URL}/1234|AB#1234>", result)
+        self.assertIn(f"<{work_item_url('1234')}|AB#1234>", result)
         self.assertIn("Fix login bug", result)
 
     def test_handles_ticket_in_middle_of_title(self):
         pr_title = "Fix AB#1234 login bug"
         result = format_pr_title(pr_title)
-        self.assertIn(f"<{ADO_BASE_URL}/1234|AB#1234>", result)
+        self.assertIn(f"<{work_item_url('1234')}|AB#1234>", result)
 
     def test_empty_title(self):
         result = format_pr_title("")

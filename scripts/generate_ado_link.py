@@ -45,8 +45,13 @@ from __future__ import annotations
 import argparse
 import os
 import re
+import sys
 from pathlib import Path
 from typing import Final
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from ado_boards import work_item_url
 
 # Public API
 __all__ = [
@@ -60,9 +65,6 @@ __all__ = [
 ]
 
 # Constants
-ADO_BASE_URL: Final[str] = (
-    "https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit"
-)
 ADO_TICKET_PATTERN: Final[re.Pattern[str]] = re.compile(r"AB#(\d+)")
 
 
@@ -130,8 +132,10 @@ def format_ado_link(ticket_ref: str, ticket_number: str) -> str:
     Note:
         The Slack link format is: <URL|display_text> where the URL is hidden
         and only the display_text is shown to users, but it remains clickable.
+        The URL's project segment (Business First Stop vs. BizX) is chosen by
+        `ado_boards.work_item_url` based on the ticket number's numeric range.
     """
-    return f"<{ADO_BASE_URL}/{ticket_number}|{ticket_ref}>"
+    return f"<{work_item_url(ticket_number)}|{ticket_ref}>"
 
 
 def format_pr_title(pr_title: str) -> str:

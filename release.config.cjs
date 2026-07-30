@@ -9,7 +9,34 @@
 // Constants
 // ---------------------------------------------------------------------------
 
-const ADO_BASE = "https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit";
+// scripts/ado-boards.json is the source of truth for board routing, shared with
+// scripts/ado_boards.py, so the two producers can't drift out of sync.
+const adoBoards = require("./scripts/ado-boards.json");
+const legacyExceptions = new Set(adoBoards.exceptions.legacy);
+const currentExceptions = new Set(adoBoards.exceptions.current);
+
+/**
+ * Returns the ADO work-item edit URL for a ticket, routed by the same
+ * exceptions-then-cutover rule as `scripts/ado_boards.py:project_for_ticket`.
+ *
+ * @param {string | number} ticketId
+ * @returns {string}
+ */
+const adoWorkItemUrl = (ticketId) => {
+  const numericId = Number(ticketId);
+  let project;
+  if (legacyExceptions.has(numericId)) {
+    project = adoBoards.projects.legacy;
+  } else if (currentExceptions.has(numericId)) {
+    project = adoBoards.projects.current;
+  } else {
+    project =
+      numericId >= adoBoards.currentProjectMinTicketId
+        ? adoBoards.projects.current
+        : adoBoards.projects.legacy;
+  }
+  return `https://dev.azure.com/${adoBoards.org}/${encodeURIComponent(project)}/_workitems/edit/${ticketId}`;
+};
 
 // ---------------------------------------------------------------------------
 // Pure helper functions
@@ -65,7 +92,7 @@ const linkifyIssues = (subject, repoBase) => {
   const result = subject.replace(/\[AB#(\d+)\]|#([0-9]+)/g, (match, adoIssue, ghIssue) => {
     if (adoIssue !== undefined) {
       issues.push(adoIssue);
-      return `[AB#${adoIssue}](${ADO_BASE}/${adoIssue})`;
+      return `[AB#${adoIssue}](${adoWorkItemUrl(adoIssue)})`;
     }
     if (ghIssue !== undefined && repoBase) {
       issues.push(ghIssue);
