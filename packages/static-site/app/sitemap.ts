@@ -55,7 +55,14 @@ const collectRoutePathnames = (): readonly string[] => {
     return category.children.map((page) => `/pages/${page.slug}`);
   });
 
-  return ["/", "/learn", "/our-software-and-reuse", ...categoryPathnames, ...contentPathnames];
+  return [
+    "/",
+    "/learn",
+    "/our-software-and-reuse",
+    "/privacy-policy",
+    ...categoryPathnames,
+    ...contentPathnames,
+  ];
 };
 
 /**

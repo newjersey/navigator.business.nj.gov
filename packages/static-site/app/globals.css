@@ -103,7 +103,10 @@ body:has(.page-not-found) .usa-footer__return-to-top {
   display: none;
 }
 
-.grid-container p {
+.grid-container p,
+.grid-container .usa-prose > p,
+.grid-container .usa-prose > ul li,
+.grid-container .usa-prose > ol li {
   max-width: unset;
 }
 
