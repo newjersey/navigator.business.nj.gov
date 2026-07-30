@@ -49,12 +49,6 @@ export class MonitoringStack extends Stack {
       `/aws/lambda/businessnjgov-api-v2-${props.stage}-express`,
     );
 
-    const migrateUsersVersionLogGroup = logs.LogGroup.fromLogGroupName(
-      this,
-      "MigrateUsersVersionLogGroup",
-      `/aws/lambda/businessnjgov-api-v2-${props.stage}-migrateUsersVersion`,
-    );
-
     if (props.stage === "dev") {
       new logs.LogGroup(this, "ApiLogLocalGroup", {
         logGroupName: `/${NAVIGATOR_WEBSERVICE}/local/ApiLogs`,
@@ -115,23 +109,14 @@ export class MonitoringStack extends Stack {
       },
     );
 
-    const migrationFailureMetricFilter = new logs.MetricFilter(
-      this,
-      "MigrationFailureMetricFilter",
-      {
-        logGroup: migrateUsersVersionLogGroup,
-        filterName: `MigrationFailureCount-${props.stage}`,
-        metricNamespace: "BFS/Navigator/Lambda",
-        metricName: "MigrateUserVersionsFailures",
-        filterPattern: logs.FilterPattern.literal('"MigrateUserVersions Failed"'),
-        metricValue: "1",
-        defaultValue: 0,
-      },
-    );
-
-    const migrationFailureMetric = migrationFailureMetricFilter.metric({
+    const migrationFailureMetric = new cloudwatch.Metric({
+      namespace: "AWS/Lambda",
+      metricName: "Errors",
       statistic: "Sum",
       period: Duration.seconds(300),
+      dimensionsMap: {
+        FunctionName: `businessnjgov-api-v2-${props.stage}-migrateUsersVersion`,
+      },
     });
 
     this.migrationLambdaTopic = new sns.Topic(this, "migrationLambdaTopic", {
@@ -166,13 +151,14 @@ export class MonitoringStack extends Stack {
       metric: migrationFailureMetric,
       threshold: 1,
       evaluationPeriods: 1,
-      comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
+      comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
       treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
-      alarmDescription: `Alarm when the MigrateUserVersions failure count exceeds the threshold for ${props.stage}`,
+      alarmDescription: `Alarm when MigrateUserVersions reports an invocation error for ${props.stage}`,
     });
 
     migrationFailureAlarm.addAlarmAction(
       new cloudwatch_actions.SnsAction(migrateUserVersionErrorTopic),
+      new cloudwatch_actions.SnsAction(this.migrationLambdaTopic),
     );
     migrationFailureAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
 

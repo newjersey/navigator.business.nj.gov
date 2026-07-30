@@ -163,7 +163,9 @@ describe("migrations", () => {
       let user: unknown = generateV0UserData({});
       try {
         for (const func of Migrations) {
-          user = await Promise.resolve(func(user, { cryptoClient }));
+          user = await Promise.resolve(
+            func(user, { cryptoClient, newHashingClient: cryptoClient }),
+          );
         }
       } catch (error) {
         logger.LogError(`Dynamo User Migration Test Error - Error: ${error} - Data: ${user}`);
@@ -184,7 +186,9 @@ describe("migrations", () => {
 
       try {
         for (const func of Migrations) {
-          migratedUser = await Promise.resolve(func(migratedUser, { cryptoClient }));
+          migratedUser = await Promise.resolve(
+            func(migratedUser, { cryptoClient, newHashingClient: cryptoClient }),
+          );
         }
       } catch (error) {
         logger.LogError(

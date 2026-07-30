@@ -7,21 +7,49 @@ import {
 import { randomInt } from "@shared/intHelpers";
 import { type MigrationClients } from "@db/migrations/types";
 
+const decryptField = async (
+  fieldName: string,
+  encryptedValue: string,
+  clients: MigrationClients,
+): Promise<string> => {
+  try {
+    return await clients.cryptoClient.decryptValue(encryptedValue);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Migration v192 failed to decrypt ${fieldName}: ${message}`, {
+      cause: error,
+    });
+  }
+};
+
+const encryptField = async (
+  fieldName: string,
+  plaintext: string,
+  clients: MigrationClients,
+): Promise<string> => {
+  try {
+    return await clients.cryptoClient.encryptValue(plaintext);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Migration v192 failed to encrypt ${fieldName}: ${message}`, {
+      cause: error,
+    });
+  }
+};
+
 const reEncryptDeptOfLaborEin = async (
   encryptedValue: string | undefined,
   clients: MigrationClients,
 ): Promise<string> => {
   if (encryptedValue === "" || !encryptedValue) return "";
 
-  if (!clients.legacyTaxIdCryptoClient) {
-    throw new Error("legacyTaxIdCryptoClient is required");
-  }
-
-  const plaintext = await clients.legacyTaxIdCryptoClient.decryptValue(encryptedValue);
-  return await clients.cryptoClient.encryptValue(plaintext);
+  const fieldName = "profileData.deptOfLaborEin";
+  const plaintext = await decryptField(fieldName, encryptedValue, clients);
+  return await encryptField(fieldName, plaintext, clients);
 };
 
 const reEncryptValue = async (
+  fieldName: string,
   encryptedValue: string | undefined,
   clients: MigrationClients,
 ): Promise<string | undefined> => {
@@ -29,12 +57,31 @@ const reEncryptValue = async (
     return encryptedValue;
   }
 
-  if (!clients.legacyTaxIdCryptoClient) {
-    throw new Error("legacyTaxIdCryptoClient is required");
+  const plaintext = await decryptField(fieldName, encryptedValue, clients);
+  return await encryptField(fieldName, plaintext, clients);
+};
+
+const hashTaxId = async (plaintext: string, clients: MigrationClients): Promise<string> => {
+  if (!clients.newHashingClient) {
+    throw new Error("newHashingClient is required");
   }
 
-  const plaintext = await clients.legacyTaxIdCryptoClient.decryptValue(encryptedValue);
-  return await clients.cryptoClient.encryptValue(plaintext);
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      return await clients.newHashingClient.hashValue(plaintext);
+    } catch (error) {
+      lastError = error;
+      clients.logger?.LogError(
+        `Migration v192 failed to hash profileData.encryptedTaxId on attempt ${attempt} of 3: ${error}`,
+      );
+    }
+  }
+  const message = lastError instanceof Error ? lastError.message : String(lastError);
+  throw new Error(
+    `Migration v192 failed to hash profileData.encryptedTaxId after 3 attempts: ${message}`,
+    { cause: lastError },
+  );
 };
 
 const reEncryptAndHashTaxId = async (
@@ -51,19 +98,12 @@ const reEncryptAndHashTaxId = async (
     };
   }
 
-  if (!clients.legacyTaxIdCryptoClient) {
-    throw new Error("legacyTaxIdCryptoClient is required");
-  }
-
-  if (!clients.newHashingClient) {
-    throw new Error("newHashingClient is required");
-  }
-
-  const plaintext = await clients.legacyTaxIdCryptoClient.decryptValue(encryptedTaxId);
+  const fieldName = "profileData.encryptedTaxId";
+  const plaintext = await decryptField(fieldName, encryptedTaxId, clients);
 
   return {
-    encryptedTaxId: await clients.cryptoClient.encryptValue(plaintext),
-    hashedTaxId: await clients.newHashingClient.hashValue(plaintext),
+    encryptedTaxId: await encryptField(fieldName, plaintext, clients),
+    hashedTaxId: await hashTaxId(plaintext, clients),
   };
 };
 
@@ -125,11 +165,16 @@ const migrate_v191Business_to_v192Business = async (
   );
 
   const cigaretteEncryptedTaxId = await reEncryptValue(
+    "cigaretteLicenseData.encryptedTaxId",
     business.cigaretteLicenseData?.encryptedTaxId,
     clients,
   );
 
-  const encryptedTaxPin = await reEncryptValue(business.profileData.encryptedTaxPin, clients);
+  const encryptedTaxPin = await reEncryptValue(
+    "profileData.encryptedTaxPin",
+    business.profileData.encryptedTaxPin,
+    clients,
+  );
 
   const encryptedDeptOfLaborEin = await reEncryptDeptOfLaborEin(
     business.profileData.deptOfLaborEin,

@@ -4,12 +4,14 @@ import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import {
-  BusinessesDataClient,
-  DatabaseClient,
-  UserDataClient,
+  type BusinessesDataClient,
+  type DatabaseClient,
+  MigrationConflictError,
+  type MigrationDataClient,
+  type UserDataClient,
   type CryptoClient,
 } from "@domain/types";
-import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
 
 import { DynamoDataClient } from "@db/DynamoDataClient";
 
@@ -20,7 +22,7 @@ import {
   generateTaxFilingData,
   generateUserDataForBusiness,
 } from "@shared/test";
-import { CURRENT_VERSION, UserData } from "@shared/userData";
+import { CURRENT_VERSION, type UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { getConfigValue } from "@libs/ssmUtils";
 import { parseUserData } from "@db/zodSchema/zodSchemas";
@@ -52,6 +54,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
   let logger: LogWriterType;
   let dynamoUsersDataClient: UserDataClient;
   let cryptoClient: CryptoClient;
+  let migrationDataClient: jest.Mocked<MigrationDataClient>;
 
   let dynamoDataClient: DatabaseClient;
 
@@ -100,12 +103,19 @@ describe("User and Business Migration with DynamoDataClient", () => {
       usersDbConfig.tableName,
       logger,
     );
+    migrationDataClient = {
+      migrateAndPut: jest.fn(async (input) => ({
+        ...input,
+        version: CURRENT_VERSION,
+      })),
+    };
 
     dynamoDataClient = DynamoDataClient(
       dynamoUsersDataClient,
       dynamoBusinessesDataClient,
       logger,
       isKillSwitchOn,
+      migrationDataClient,
     );
     (dynamoBusinessesDataClient.put as jest.Mock) = jest.fn();
     (dynamoUsersDataClient.put as jest.Mock) = jest.fn();
@@ -126,36 +136,23 @@ describe("User and Business Migration with DynamoDataClient", () => {
 
     expect(result.success).toBe(true);
     expect(result.migratedCount).toBeGreaterThan(0);
-    expect(dynamoBusinessesDataClient.put).toHaveBeenCalledTimes(1);
-    const businessId = userData.businesses[userData.currentBusinessId].id;
-    expect(dynamoBusinessesDataClient.put).toHaveBeenCalledWith(
-      expect.objectContaining({ id: businessId }),
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed user ${userData.user.id} in the user data table`),
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Updated business ${businessId} for user ${userData.user.id}`),
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(
-        `Processed business with ID ${businessId} for user ${userData.user.id}`,
-      ),
-    );
+    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledWith(userData);
+    expect(dynamoBusinessesDataClient.put).not.toHaveBeenCalled();
+    expect(dynamoUsersDataClient.put).not.toHaveBeenCalled();
     expect(logger.LogInfo).toHaveBeenCalledWith(expect.stringContaining("Migration complete"));
   });
 
-  it("should log an error when no businesses are found for a user", async () => {
-    userData.businesses = {};
+  it("should atomically migrate a user with no businesses", async () => {
+    const userWithNoBusinesses = { ...userData, businesses: {} };
 
     jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
-      usersToMigrate: [userData],
+      usersToMigrate: [userWithNoBusinesses],
       nextToken: undefined,
     });
 
     await dynamoDataClient.migrateOutdatedVersionUsers();
 
-    expect(logger.LogInfo).toHaveBeenCalledWith(`No businesses found for user ${userData.user.id}`);
+    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledWith(userWithNoBusinesses);
     expect(dynamoBusinessesDataClient.put).not.toHaveBeenCalled();
   });
 
@@ -193,10 +190,6 @@ describe("User and Business Migration with DynamoDataClient", () => {
     const userDataBatch2 = generateUserData();
     const userDataBatch3 = generateUserData();
 
-    const businessId1 = userDataBatch1.businesses[userDataBatch1.currentBusinessId].id;
-    const businessId2 = userDataBatch2.businesses[userDataBatch2.currentBusinessId].id;
-    const businessId3 = userDataBatch3.businesses[userDataBatch3.currentBusinessId].id;
-
     const nextTokenBatch1: string = "nextTokenBatch1";
     const nextTokenBatch2: string = "nextTokenBatch2";
     jest
@@ -217,41 +210,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
 
     const result = await dynamoDataClient.migrateOutdatedVersionUsers();
     expect(result.migratedCount).toBe(3);
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed user ${userDataBatch1.user.id} in the user data table`),
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Updated business ${businessId1} for user ${userDataBatch1.user.id}`),
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(
-        `Processed business with ID ${businessId1} for user ${userDataBatch1.user.id}`,
-      ),
-    );
-
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed user ${userDataBatch2.user.id} in the user data table`),
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Updated business ${businessId2} for user ${userDataBatch2.user.id}`),
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(
-        `Processed business with ID ${businessId2} for user ${userDataBatch2.user.id}`,
-      ),
-    );
-
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed user ${userDataBatch3.user.id} in the user data table`),
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Updated business ${businessId3} for user ${userDataBatch3.user.id}`),
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(
-        `Processed business with ID ${businessId3} for user ${userDataBatch3.user.id}`,
-      ),
-    );
+    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledTimes(3);
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("Migration complete"));
     expect(dynamoUsersDataClient.getUsersWithOutdatedVersion).toHaveBeenCalledTimes(3);
     expect(dynamoUsersDataClient.getUsersWithOutdatedVersion).toHaveBeenCalledWith(
@@ -341,6 +300,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
       dynamoBusinessesDataClient,
       logger,
       isKillSwitchOnTruePath,
+      migrationDataClient,
     );
     const putBusinessesSpy = jest.spyOn(dynamoBusinessesDataClient, "put");
     const putUsersSpy = jest.spyOn(dynamoUsersDataClient, "put");
@@ -351,6 +311,94 @@ describe("User and Business Migration with DynamoDataClient", () => {
     expect(putBusinessesSpy).not.toHaveBeenCalled();
     expect(putUsersSpy).not.toHaveBeenCalled();
     expect(logger.LogInfo).toHaveBeenCalledWith("Migration halted: kill switch is ON");
+  });
+
+  it("returns the unchanged stored record when request-time migration fails", async () => {
+    const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+    jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(outdatedUser);
+    migrationDataClient.migrateAndPut.mockRejectedValueOnce(new Error("KMS unavailable"));
+
+    await expect(dynamoDataClient.get(outdatedUser.user.id)).resolves.toEqual(outdatedUser);
+    expect(dynamoUsersDataClient.put).not.toHaveBeenCalled();
+    expect(dynamoBusinessesDataClient.put).not.toHaveBeenCalled();
+    expect(logger.LogError).toHaveBeenCalledWith(
+      `Request-time migration failed from version ${
+        CURRENT_VERSION - 1
+      } to ${CURRENT_VERSION}: KMS unavailable`,
+    );
+  });
+
+  it("returns the unchanged stored record when the request-time kill switch is on", async () => {
+    const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+    jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(outdatedUser);
+    dynamoDataClient = DynamoDataClient(
+      dynamoUsersDataClient,
+      dynamoBusinessesDataClient,
+      logger,
+      isKillSwitchOnTruePath,
+      migrationDataClient,
+    );
+
+    await expect(dynamoDataClient.get(outdatedUser.user.id)).resolves.toEqual(outdatedUser);
+    expect(migrationDataClient.migrateAndPut).not.toHaveBeenCalled();
+  });
+
+  it("stops the scheduled migration after the first terminal user failure", async () => {
+    const first = generateUserData();
+    const second = generateUserData();
+    jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
+      usersToMigrate: [first, second],
+      nextToken: undefined,
+    });
+    migrationDataClient.migrateAndPut.mockRejectedValueOnce(new Error("AccessDeniedException"));
+
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+
+    expect(result).toEqual({ success: false, error: "AccessDeniedException" });
+    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledTimes(1);
+    expect(logger.LogError).toHaveBeenCalledWith(
+      `Scheduled migration failed for user ${first.user.id} from version ${first.version} to ${CURRENT_VERSION}: AccessDeniedException`,
+    );
+  });
+
+  it("continues scheduled migration after a retryable transaction conflict", async () => {
+    const first = generateUserData();
+    const second = generateUserData();
+    jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
+      usersToMigrate: [first, second],
+      nextToken: undefined,
+    });
+    migrationDataClient.migrateAndPut.mockRejectedValueOnce(new MigrationConflictError());
+
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+
+    expect(result).toEqual({ success: true, migratedCount: 1 });
+    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledTimes(2);
+    expect(logger.LogInfo).toHaveBeenCalledWith(
+      "Skipped migration because the user record changed concurrently",
+    );
+    expect(logger.LogError).not.toHaveBeenCalledWith(
+      expect.stringContaining("Scheduled migration failed"),
+    );
+  });
+
+  it("stops successfully between users when the Lambda time budget is exhausted", async () => {
+    const first = generateUserData();
+    const second = generateUserData();
+    jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
+      usersToMigrate: [first, second],
+      nextToken: undefined,
+    });
+    const canStartNextUser = jest.fn().mockReturnValueOnce(true).mockReturnValueOnce(false);
+
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers({ canStartNextUser });
+
+    expect(result).toEqual({ success: true, migratedCount: 1 });
+    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledTimes(1);
+    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledWith(first);
+    expect(logger.LogInfo).toHaveBeenCalledWith(
+      "Migration paused before Lambda timeout; remaining users will retry",
+    );
   });
 
   it("should call parseUserData when zod_parsing_on feature flag is true", async () => {

@@ -22,7 +22,7 @@ import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { createEmptyFormationFormData, FormationAddress } from "@shared/formationData";
 import { LicenseName, LicenseSearchNameAndAddress } from "@shared/license";
-import { Business, createEmptyUserData, UserData } from "@shared/userData";
+import { Business, createEmptyUserData, CURRENT_VERSION, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
@@ -217,13 +217,15 @@ export const userRouterFactory = (
       .get(requestedUserId)
       .then(async (userData: UserData) => {
         let updatedUserData = userData;
-        updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData)
-          .then((userData) => updateOperatingPhase(userData))
-          .then((userData) => updateRoadmapSidebarCards(userData))
-          .then((userData) => asyncUpdateLicenseStatus(userData))
-          .then((userData) => asyncUpdateXrayStatus(userData));
+        if (userData.version >= CURRENT_VERSION) {
+          updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData)
+            .then((userData) => updateOperatingPhase(userData))
+            .then((userData) => updateRoadmapSidebarCards(userData))
+            .then((userData) => asyncUpdateLicenseStatus(userData))
+            .then((userData) => asyncUpdateXrayStatus(userData));
 
-        await databaseClient.put(updatedUserData);
+          await databaseClient.put(updatedUserData);
+        }
 
         const sanitizedUserData = removeSensitiveData(updatedUserData);
         const status = StatusCodes.OK;

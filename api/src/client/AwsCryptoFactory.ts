@@ -1,16 +1,21 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const AWSCrypto = require("@aws-crypto/client-node");
 import { fromBase64, toBase64 } from "@aws-sdk/util-base64-node";
-import { CryptoClient } from "@domain/types";
-import { NonSharedBuffer } from "node:buffer";
+import { type CryptoClient } from "@domain/types";
+import { type NonSharedBuffer } from "node:buffer";
 import * as crypto from "node:crypto";
 import { TextDecoder } from "node:util";
 
-type Context = {
-  stage: string;
-  purpose: string;
-  origin: string;
-};
+export interface EncryptionContext {
+  readonly stage: string;
+  readonly purpose: string;
+  readonly origin: string;
+}
+
+const contextMatches = (
+  actualContext: Record<string, string>,
+  expectedContext: EncryptionContext,
+): boolean => Object.entries(expectedContext).every(([key, value]) => actualContext[key] === value);
 
 export const cryptoUtils: { pbkdf2: typeof crypto.pbkdf2 } = {
   pbkdf2: (
@@ -27,18 +32,23 @@ export const cryptoUtils: { pbkdf2: typeof crypto.pbkdf2 } = {
 
 export const AWSCryptoFactory = (
   generatorKeyId: string,
-  context: Context,
+  context: EncryptionContext,
   encryptedHashingSalt?: string,
+  decryptOnlyKeyIds: readonly string[] = [],
+  decryptOnlyContexts: readonly EncryptionContext[] = [],
 ): CryptoClient => {
   const { encrypt, decrypt } = AWSCrypto.buildClient(
     AWSCrypto.CommitmentPolicy.REQUIRE_ENCRYPT_REQUIRE_DECRYPT,
   );
-  const keyring = new AWSCrypto.KmsKeyringNode({ generatorKeyId });
+  const encryptKeyring = new AWSCrypto.KmsKeyringNode({ generatorKeyId });
+  const decryptKeyring = new AWSCrypto.KmsKeyringNode({
+    keyIds: [...new Set([generatorKeyId, ...decryptOnlyKeyIds].filter(Boolean))],
+  });
 
   const decoder = new TextDecoder();
 
   const encryptValue = async (plainTextValue: string): Promise<string> => {
-    const { result } = await encrypt(keyring, plainTextValue, {
+    const { result } = await encrypt(encryptKeyring, plainTextValue, {
       encryptionContext: context,
     });
     const base64Value = toBase64(result);
@@ -48,14 +58,17 @@ export const AWSCryptoFactory = (
   const decryptValue = async (encryptedValue: string): Promise<string> => {
     const bufferedValue = fromBase64(encryptedValue);
 
-    const { plaintext, messageHeader } = await decrypt(keyring, bufferedValue);
+    const { plaintext, messageHeader } = await decrypt(decryptKeyring, bufferedValue);
 
     const { encryptionContext } = messageHeader;
 
-    for (const [key, value] of Object.entries(context)) {
-      if (encryptionContext[key] !== value) {
-        throw new Error("Encryption Context does not match expected values");
-      }
+    const acceptedContexts = [context, ...decryptOnlyContexts];
+    if (
+      !acceptedContexts.some((acceptedContext) =>
+        contextMatches(encryptionContext, acceptedContext),
+      )
+    ) {
+      throw new Error("Encryption Context does not match expected values");
     }
 
     const decodedValue = decoder.decode(plaintext);

@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
+import {
+  ExecuteStatementCommand,
+  QueryCommand,
+  type QueryCommandInput,
+} from "@aws-sdk/client-dynamodb";
+import { type DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { Migrations } from "@db/migrations/migrations";
-import { type CryptoClient, UserDataClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { CURRENT_VERSION, UserData } from "@shared/userData";
-import { MigrationClients } from "@db/migrations/types";
+import { type MigrationClients } from "@db/migrations/types";
+import { type CryptoClient, type UserDataClient } from "@domain/types";
+import { type LogWriterType } from "@libs/logWriter";
+import { CURRENT_VERSION, type UserData } from "@shared/userData";
 
 const marshallOptions = {
   // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -24,6 +28,14 @@ const unmarshallOptions = {
 };
 
 export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
+
+export const createUserDataItem = (userData: UserData): Record<string, unknown> => ({
+  userId: userData.user.id,
+  email: userData.user.email,
+  data: userData,
+  version: userData.version,
+});
+
 export const DynamoUserDataClient = (
   db: DynamoDBDocumentClient,
   cryptoClient: CryptoClient,
@@ -31,35 +43,30 @@ export const DynamoUserDataClient = (
   logger: LogWriterType,
   migrationClients?: Omit<MigrationClients, "cryptoClient">,
 ): UserDataClient => {
-  const migrateData = async (data: UserData, logger: LogWriterType): Promise<any> => {
+  const migrateToLatest = async (data: UserData): Promise<UserData> => {
     const logId = logger.GetId();
     const dataVersion = data.version ?? CURRENT_VERSION;
     const migrationsToRun = Migrations.slice(dataVersion);
-    let migratedData = data;
+    let migratedData = structuredClone(data);
     for (const migration of migrationsToRun) {
       try {
         logger.LogInfo(
-          `Database Migration - Id:${logId} - Upgrading ${data.user.id} from ${
-            migratedData.version
-          } to ${Number(migratedData.version) + 1}`,
+          `Database Migration - Id:${logId} - Upgrading from ${migratedData.version} to ${
+            Number(migratedData.version) + 1
+          }`,
         );
         migratedData = await Promise.resolve(
-          migration(migratedData, { cryptoClient, ...migrationClients }),
+          migration(migratedData, { cryptoClient, ...migrationClients, logger }),
         );
       } catch (error) {
         logger.LogError(
-          `Database Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(
-            migratedData,
-          )}`,
+          `Database Migration Error - Id:${logId} - Failed upgrading to ${
+            Number(migratedData.version) + 1
+          } - Error: ${error}`,
         );
+        throw error;
       }
     }
-    return { ...migratedData, version: CURRENT_VERSION };
-  };
-
-  const doMigration = async (data: UserData): Promise<UserData> => {
-    const migratedData = await migrateData(data, logger);
-    await put(migratedData);
     return migratedData;
   };
 
@@ -79,7 +86,7 @@ export const DynamoUserDataClient = (
         if (!result.Items || result.Items.length === 0) {
           return;
         }
-        return doMigration(unmarshall(result.Items[0], unmarshallOptions).data);
+        return unmarshall(result.Items[0], unmarshallOptions).data;
       })
       .catch((error) => {
         console.log(error);
@@ -102,7 +109,7 @@ export const DynamoUserDataClient = (
           logger.LogInfo(`User with ID ${userId} not found in table ${tableName}`);
           throw new Error("Not found");
         }
-        return await doMigration(result.Item.data);
+        return result.Item.data;
       })
       .catch((error) => {
         throw error;
@@ -110,20 +117,14 @@ export const DynamoUserDataClient = (
   };
 
   const put = async (userData: UserData): Promise<UserData> => {
-    const migratedData = await migrateData(userData, logger);
     const params = {
       TableName: tableName,
-      Item: {
-        userId: migratedData.user.id,
-        email: migratedData.user.email,
-        data: migratedData,
-        version: migratedData.version,
-      },
+      Item: createUserDataItem(userData),
     };
     return db
       .send(new PutCommand(params))
       .then(() => {
-        return migratedData;
+        return userData;
       })
       .catch((error) => {
         throw error;
@@ -169,8 +170,7 @@ export const DynamoUserDataClient = (
     const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
     return await Promise.all(
       Items.map(async (object: any): Promise<UserData> => {
-        const data = unmarshall(object).data;
-        return await doMigration(data);
+        return unmarshall(object).data;
       }),
     );
   };
@@ -178,6 +178,7 @@ export const DynamoUserDataClient = (
   return {
     get,
     put,
+    migrateToLatest,
     findByEmail,
     getNeedNewsletterUsers,
     getNeedTaxIdEncryptionUsers,

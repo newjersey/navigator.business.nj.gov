@@ -69,10 +69,14 @@ describe("LambdaStack", () => {
       template.hasResourceProperties("AWS::Lambda::Function", {
         FunctionName: Match.stringLikeRegexp("businessnjgov-api-v2-local-migrateUsersVersion"),
         Runtime: "nodejs22.x",
+        Timeout: 240,
         Environment: {
           Variables: Match.objectLike({
             USERS_TABLE: "users-table-local",
             BUSINESSES_TABLE: "businesses-table-local",
+            AWS_CRYPTO_TAX_ID_HASHING_KEY: Match.anyValue(),
+            AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE: Match.anyValue(),
+            AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT: Match.anyValue(),
           }),
         },
       });

@@ -12,6 +12,17 @@ export const LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY =
   process.env.LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY || "";
 export const AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE =
   process.env.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE || "";
+// Testing deployments omitted both values after the CircleCI-to-GitHub Actions migration.
+export const AWS_CRYPTO_TAX_ID_DECRYPT_ONLY_CONTEXTS =
+  STAGE === "testing"
+    ? [
+        {
+          stage: "",
+          purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+          origin: "",
+        },
+      ]
+    : [];
 export const AWS_CRYPTO_TAX_ID_HASHING_KEY = process.env.AWS_CRYPTO_TAX_ID_HASHING_KEY || "";
 export const AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT =
   process.env.AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT || "";

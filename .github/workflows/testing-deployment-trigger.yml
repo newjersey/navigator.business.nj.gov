@@ -20,6 +20,8 @@ jobs:
     environment: testing
     env:
       AWS_REGION: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}
+      AWS_CRYPTO_CONTEXT_ORIGIN: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}
+      AWS_CRYPTO_CONTEXT_STAGE: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
       VPC_ID: ${{ vars.VPC_ID_AWS_DEV }}
       SUBNET_ID_01: ${{ vars.SUBNET_ID_01_AWS_DEV }}
       SUBNET_ID_02: ${{ vars.SUBNET_ID_02_AWS_DEV }}

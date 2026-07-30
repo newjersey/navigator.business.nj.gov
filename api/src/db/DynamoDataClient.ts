@@ -1,6 +1,13 @@
-import { BusinessesDataClient, DatabaseClient, UserDataClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { Business, CURRENT_VERSION, UserData } from "@shared/userData";
+import {
+  type BusinessesDataClient,
+  type DatabaseClient,
+  MigrationConflictError,
+  type MigrationDataClient,
+  type MigrationRunOptions,
+  type UserDataClient,
+} from "@domain/types";
+import { type LogWriterType } from "@libs/logWriter";
+import { type Business, CURRENT_VERSION, type UserData } from "@shared/userData";
 import { chunk } from "lodash";
 import { parseUserData } from "@db/zodSchema/zodSchemas";
 import { getConfigValue } from "@libs/ssmUtils";
@@ -10,13 +17,18 @@ export const DynamoDataClient = (
   businessesDataClient: BusinessesDataClient,
   logger: LogWriterType,
   isKillSwitchOn: () => Promise<boolean>,
+  migrationDataClient?: MigrationDataClient,
 ): DatabaseClient => {
   const MAX_SAFE_MIGRATION_COUNT = 5000;
-  const migrateOutdatedVersionUsers = async (): Promise<{
+  const migrateOutdatedVersionUsers = async (
+    options?: MigrationRunOptions,
+  ): Promise<{
     success: boolean;
     migratedCount?: number;
     error?: string;
   }> => {
+    const canStartNextUser = options?.canStartNextUser ?? ((): boolean => true);
+
     try {
       let nextToken: string | undefined = undefined;
       let migratedCount = 0;
@@ -46,11 +58,14 @@ export const DynamoDataClient = (
             return { success: true, migratedCount };
           }
 
-          await processBatch(batch, isZodParsingOn);
-          migratedCount += batch.length;
+          const batchResult = await processBatch(batch, isZodParsingOn, canStartNextUser);
+          migratedCount += batchResult.migratedCount;
           logger.LogInfo(
-            `Processed batch of ${batch.length} users. Total migrated so far: ${migratedCount}`,
+            `Completed ${batchResult.migratedCount} migrations in this batch. Total migrated so far: ${migratedCount}`,
           );
+          if (batchResult.stoppedForTime) {
+            return { success: true, migratedCount };
+          }
         }
         nextToken = newNextToken;
       } while (nextToken);
@@ -68,27 +83,71 @@ export const DynamoDataClient = (
   const processBatch = async (
     usersToMigrate: UserData[],
     isZodParsingOn: string,
-  ): Promise<void> => {
-    const results = await Promise.allSettled(
-      usersToMigrate.map(async (user) => {
-        await updateUserAndBusinesses(user);
-        logger.LogInfo(`Migrated user ${user.user.id} to version ${CURRENT_VERSION}`);
-        if (isZodParsingOn === "true") {
-          parseUserData(logger, user);
-        }
-      }),
-    );
+    canStartNextUser: () => boolean,
+  ): Promise<{ migratedCount: number; stoppedForTime: boolean }> => {
+    if (!migrationDataClient) {
+      throw new Error("Migration data client is required for coordinated migrations");
+    }
 
-    for (const [index, result] of results.entries()) {
-      const user = usersToMigrate[index];
-      if (result.status === "rejected") {
-        logger.LogError(`Failed to migrate user ${user.user.id}: ${result.reason}`);
+    let migratedCount = 0;
+    for (const user of usersToMigrate) {
+      if (!canStartNextUser()) {
+        logger.LogInfo("Migration paused before Lambda timeout; remaining users will retry");
+        return { migratedCount, stoppedForTime: true };
       }
+
+      try {
+        const migratedUser = await migrationDataClient.migrateAndPut(user);
+        migratedCount += 1;
+        logger.LogInfo(`Migrated user to version ${CURRENT_VERSION}`);
+        if (isZodParsingOn === "true") {
+          parseUserData(logger, migratedUser);
+        }
+      } catch (error) {
+        if (error instanceof MigrationConflictError) {
+          logger.LogInfo("Skipped migration because the user record changed concurrently");
+          continue;
+        }
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        logger.LogError(
+          `Scheduled migration failed for user ${user.user.id} from version ${user.version} to ${CURRENT_VERSION}: ${errorMessage}`,
+        );
+        throw error;
+      }
+    }
+
+    return { migratedCount, stoppedForTime: false };
+  };
+
+  const migrateForRequest = async (sourceUserData: UserData): Promise<UserData> => {
+    if (sourceUserData.version >= CURRENT_VERSION) {
+      return sourceUserData;
+    }
+
+    if (await isKillSwitchOn()) {
+      logger.LogInfo("Request-time migration skipped: kill switch is ON");
+      return sourceUserData;
+    }
+
+    if (!migrationDataClient) {
+      logger.LogError("Request-time migration failed: migration data client is not configured");
+      return sourceUserData;
+    }
+
+    try {
+      return await migrationDataClient.migrateAndPut(sourceUserData);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      logger.LogError(
+        `Request-time migration failed from version ${sourceUserData.version} to ${CURRENT_VERSION}: ${errorMessage}`,
+      );
+      return sourceUserData;
     }
   };
 
   const get = async (userId: string): Promise<UserData> => {
-    return await userDataClient.get(userId);
+    const sourceUserData = await userDataClient.get(userId);
+    return await migrateForRequest(sourceUserData);
   };
 
   const updateUserAndBusinesses = async (userData: UserData): Promise<void> => {
@@ -126,6 +185,12 @@ export const DynamoDataClient = (
 
   const put = async (userData: UserData): Promise<UserData> => {
     try {
+      if (userData.version < CURRENT_VERSION) {
+        if (!migrationDataClient) {
+          throw new Error("Migration data client is required for coordinated migrations");
+        }
+        return await migrationDataClient.migrateAndPut(userData);
+      }
       await updateUserAndBusinesses(userData);
       return userData;
     } catch (error) {
@@ -136,7 +201,8 @@ export const DynamoDataClient = (
   };
 
   const findByEmail = async (email: string): Promise<UserData | undefined> => {
-    return await userDataClient.findByEmail(email);
+    const sourceUserData = await userDataClient.findByEmail(email);
+    return sourceUserData ? await migrateForRequest(sourceUserData) : undefined;
   };
   const findUserByBusinessName = async (businessName: string): Promise<UserData | undefined> => {
     try {
@@ -146,7 +212,7 @@ export const DynamoDataClient = (
         return undefined;
       }
       const userId = business.userId;
-      const user = await userDataClient.get(userId);
+      const user = await get(userId);
       if (!user) {
         logger.LogInfo(`No user found for business: ${businessName}`);
         return undefined;
@@ -167,9 +233,7 @@ export const DynamoDataClient = (
         logger.LogInfo(`No Businesses Found with prefix: ${prefix}`);
         return [];
       }
-      const users = await Promise.all(
-        businesses.map((business) => userDataClient.get(business.userId)),
-      );
+      const users = await Promise.all(businesses.map((business) => get(business.userId)));
 
       return users as UserData[];
     } catch (error) {
