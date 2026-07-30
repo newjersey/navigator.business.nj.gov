@@ -138,6 +138,14 @@ const ONE_OFF_RULES: readonly InternalRule[] = [
   // The reuse page is a standalone route, not a /pages/[slug] page, but the slug
   // still resolves under that route (dynamicParams), so send it to the canonical URL.
   { source: "/pages/our-software-and-reuse", destination: "/our-software-and-reuse" },
+  // terms & privacy policy
+  { source: "/terms", destination: "/privacy-policy" },
+  { source: "/terms-of-use", destination: "/privacy-policy" },
+  { source: "/privacy", destination: "/privacy-policy" },
+  // The privacy policy is a standalone route, not a /pages/[slug] page, but the
+  // slug still resolves under that route (dynamicParams), so send it to the
+  // canonical URL.
+  { source: "/pages/privacy-policy", destination: "/privacy-policy" },
 ];
 
 /**

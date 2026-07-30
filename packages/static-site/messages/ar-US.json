@@ -182,9 +182,9 @@
         },
         {
           "link": {
-            "label": "المحتوى المنتج",
-            "href": "https://nj.gov/nj/privacy.html",
-            "isInternal": false,
+            "label": "الشروط وسياسة الخصوصية",
+            "href": "/privacy-policy",
+            "isInternal": true,
             "opensInNewTab": false
           }
         },

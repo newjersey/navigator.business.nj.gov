@@ -84,7 +84,11 @@ const PageContent = ({ page }: Props) => {
                 </div>
               </div>
             )}
-            {section.body && <Markdown components={markdownComponents}>{section.body}</Markdown>}
+            {section.body && (
+              <div className="usa-prose">
+                <Markdown components={markdownComponents}>{section.body}</Markdown>
+              </div>
+            )}
             {section.linkText && section.linkUrl && (
               <a href={section.linkUrl} className="usa-button">
                 {section.linkText}

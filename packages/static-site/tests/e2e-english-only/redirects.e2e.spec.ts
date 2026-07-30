@@ -69,6 +69,36 @@ test.describe("Legacy redirects (English-only mode)", () => {
     expect(new URL(page.url()).pathname).toBe("/our-software-and-reuse");
   });
 
+  test("/terms redirects to the privacy policy page", async ({ page }) => {
+    const response = await page.goto("/terms");
+    expect(response?.status()).toBe(200);
+    expect(new URL(page.url()).pathname).toBe("/privacy-policy");
+  });
+
+  test("/terms-of-use redirects to the privacy policy page", async ({ page }) => {
+    const response = await page.goto("/terms-of-use");
+    expect(response?.status()).toBe(200);
+    expect(new URL(page.url()).pathname).toBe("/privacy-policy");
+  });
+
+  test("/privacy redirects to the privacy policy page", async ({ page }) => {
+    const response = await page.goto("/privacy");
+    expect(response?.status()).toBe(200);
+    expect(new URL(page.url()).pathname).toBe("/privacy-policy");
+  });
+
+  test("/privacy-policy renders directly (standalone route, no redirect)", async ({ page }) => {
+    const response = await page.goto("/privacy-policy");
+    expect(response?.status()).toBe(200);
+    expect(new URL(page.url()).pathname).toBe("/privacy-policy");
+  });
+
+  test("the old /pages/privacy-policy URL redirects to the standalone page", async ({ page }) => {
+    const response = await page.goto("/pages/privacy-policy");
+    expect(response?.status()).toBe(200);
+    expect(new URL(page.url()).pathname).toBe("/privacy-policy");
+  });
+
   test("a deliberately skipped legacy path still 404s", async ({ page }) => {
     const response = await page.goto("/search");
     expect(response?.status()).toBe(404);
