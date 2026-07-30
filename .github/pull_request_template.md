@@ -6,9 +6,11 @@
 
 ### Ticket
 
-<!-- Link to ticket in ADO. Append ticket_id to provided URL. -->
+<!-- Link to ticket in ADO. Append ticket_id to the URL for the board that owns it.
+     Board routing is not a clean cutover; run `python3 scripts/fetch_ado_ticket.py <id>`
+     or check scripts/ado-boards.json for the current cutover and exceptions list. -->
 
-This pull request resolves [#0000](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/0000).
+This pull request resolves [#0000](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/0000).
 
 ### Approach
 
