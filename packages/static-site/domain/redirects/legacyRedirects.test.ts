@@ -280,3 +280,40 @@ describe("buildLegacyRedirects — bare /license splits from /license/*", () => 
     );
   });
 });
+
+describe("buildLegacyRedirects — terms & privacy policy", () => {
+  it("maps /terms to the standalone privacy policy page, permanently", () => {
+    const rule = find(buildLegacyRedirects(false), "/terms");
+    expect(rule?.destination).toBe("/privacy-policy");
+    expect(rule?.permanent).toBe(true);
+  });
+
+  it("maps /terms-of-use to the standalone privacy policy page", () => {
+    expect(find(buildLegacyRedirects(false), "/terms-of-use")?.destination).toBe("/privacy-policy");
+  });
+
+  it("maps /privacy to the standalone privacy policy page", () => {
+    expect(find(buildLegacyRedirects(false), "/privacy")?.destination).toBe("/privacy-policy");
+  });
+
+  it("maps the old /pages/[slug] URL to the standalone canonical page, permanently", () => {
+    const rule = find(buildLegacyRedirects(false), "/pages/privacy-policy");
+    expect(rule?.destination).toBe("/privacy-policy");
+    expect(rule?.permanent).toBe(true);
+  });
+
+  it("routes the /es-us Spanish source to the English page when multilingual is off", () => {
+    expect(find(buildLegacyRedirects(false), "/es-us/terms")?.destination).toBe("/privacy-policy");
+  });
+
+  it("routes the /es-us Spanish source to the /es-US page when multilingual is on", () => {
+    expect(find(buildLegacyRedirects(true), "/es-us/terms")?.destination).toBe(
+      "/es-US/privacy-policy",
+    );
+  });
+
+  it("orders the generated Spanish route before the /es-us catch-all", () => {
+    const rules = buildLegacyRedirects(false);
+    expect(indexOf(rules, "/es-us/terms")).toBeLessThan(indexOf(rules, "/es-us/:path*"));
+  });
+});
