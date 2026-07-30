@@ -1,14 +1,34 @@
-import { AttributeValue, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
+import {
+  type AttributeValue,
+  QueryCommand,
+  type QueryCommandInput,
+} from "@aws-sdk/client-dynamodb";
 import {
   DeleteCommand,
-  DynamoDBDocumentClient,
+  type DynamoDBDocumentClient,
   GetCommand,
   PutCommand,
 } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { BusinessesDataClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { Business } from "@shared/userData";
+import { type BusinessesDataClient } from "@domain/types";
+import { type LogWriterType } from "@libs/logWriter";
+import { type Business } from "@shared/userData";
+
+export const createBusinessDataItem = (businessData: Business): Record<string, unknown> => {
+  const businessName = businessData.profileData.businessName;
+  const naicsCode = businessData.profileData.naicsCode;
+  const hasBusinessName = businessName && businessName !== "";
+
+  return {
+    businessId: businessData.id,
+    industry: businessData.profileData.industryId,
+    hashedTaxId: businessData.profileData.hashedTaxId,
+    data: businessData,
+    businessName: businessName === "" ? undefined : businessName,
+    naicsCode: naicsCode === "" ? undefined : naicsCode,
+    businessNamePartition: hasBusinessName ? "businessName" : undefined,
+  };
+};
 
 export const DynamoBusinessDataClient = (
   db: DynamoDBDocumentClient,
@@ -125,20 +145,9 @@ export const DynamoBusinessDataClient = (
   };
 
   const put = async (businessData: Business): Promise<Business> => {
-    const businessName = businessData.profileData.businessName;
-    const naicsCode = businessData.profileData.naicsCode;
-    const hasBusinessName = businessName && businessName !== "";
     const params = {
       TableName: tableName,
-      Item: {
-        businessId: businessData.id,
-        industry: businessData.profileData.industryId,
-        hashedTaxId: businessData.profileData.hashedTaxId,
-        data: businessData,
-        businessName: businessName === "" ? undefined : businessData.profileData.businessName,
-        naicsCode: naicsCode === "" ? undefined : businessData.profileData.naicsCode,
-        businessNamePartition: hasBusinessName ? "businessName" : undefined,
-      },
+      Item: createBusinessDataItem(businessData),
     };
     return db.send(new PutCommand(params)).then(() => {
       return businessData;

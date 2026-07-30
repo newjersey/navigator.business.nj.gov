@@ -27,7 +27,7 @@ import {
   getSecondAnnualFiling,
   getThirdAnnualFiling,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
+import { CURRENT_VERSION, UserData } from "@shared/userData";
 import { generateAnnualFilings, getLastCalledWith } from "@test/helpers";
 import dayjs from "dayjs";
 import { Express } from "express";
@@ -155,6 +155,33 @@ describe("userRouter", () => {
       expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
       expect(response.status).toEqual(StatusCodes.OK);
       expect(response.body).toEqual(userData);
+    });
+
+    it("returns an outdated migration fallback without updating or persisting it", async () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({ hashedTaxId: "some-hashed-tax-id" }),
+      });
+      const outdatedUserData = {
+        ...generateUserDataForBusiness(business),
+        version: CURRENT_VERSION - 1,
+      };
+      stubUnifiedDataClient.get.mockResolvedValue(outdatedUserData);
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+
+      const response = await request(app)
+        .get("/users/123")
+        .set("Authorization", "Bearer user-123-token");
+
+      expect(response.status).toEqual(StatusCodes.OK);
+      expect(response.body.version).toBe(CURRENT_VERSION - 1);
+      expect(
+        response.body.businesses[outdatedUserData.currentBusinessId].profileData.hashedTaxId,
+      ).toBeUndefined();
+      expect(stubUpdateOperatingPhase).not.toHaveBeenCalled();
+      expect(stubUpdateRoadmapSidebarCards).not.toHaveBeenCalled();
+      expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
+      expect(stubXrayRegistrationStatus).not.toHaveBeenCalled();
+      expect(stubUnifiedDataClient.put).not.toHaveBeenCalled();
     });
 
     it("does not return a hashed tax ID to the frontend if present in profileData", async () => {

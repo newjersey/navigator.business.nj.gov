@@ -164,6 +164,7 @@ describe("IamStack", () => {
                 "dynamodb:UpdateItem",
                 "dynamodb:DeleteItem",
                 "dynamodb:PartiQLSelect",
+                "dynamodb:TransactWriteItems",
               ],
               Effect: "Allow",
               Resource: Match.anyValue(),

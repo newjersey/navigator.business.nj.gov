@@ -7,8 +7,8 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import { type CryptoClient, UserDataClient } from "@domain/types";
-import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
+import { type CryptoClient, type UserDataClient } from "@domain/types";
+import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
 import * as sharedUserData from "@shared/userData";
 
 function setupMockSharedUserData(): typeof sharedUserData {
@@ -29,6 +29,8 @@ jest.mock("@db/migrations/migrations", () => {
 const dbConfig = {
   tableName: "users-table-test",
 };
+
+let laterMigrationRan = false;
 
 const makeParams = (data: any): { TableName: string; Item: any } => {
   return {
@@ -53,6 +55,7 @@ describe("DynamoUserDataClient Migrations", () => {
   let logger: LogWriterType;
 
   beforeEach(async () => {
+    laterMigrationRan = false;
     client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
     cryptoClient = {
       encryptValue: jest.fn(),
@@ -64,9 +67,9 @@ describe("DynamoUserDataClient Migrations", () => {
     await insertOldData();
   });
 
-  it("migrates and saves data from initial state", async () => {
-    // before migration
-    expect(await getDbItem("v0-id")).toEqual({
+  it("migrates a cloned initial record without persisting it", async () => {
+    const source = await dynamoUserDataClient.get("v0-id");
+    expect(source).toEqual({
       user: {
         id: "v0-id",
       },
@@ -74,8 +77,7 @@ describe("DynamoUserDataClient Migrations", () => {
       version: 0,
     });
 
-    // get does a migration
-    expect(await dynamoUserDataClient.get("v0-id")).toEqual({
+    expect(await dynamoUserDataClient.migrateToLatest(source)).toEqual({
       user: {
         id: "v0-id",
       },
@@ -84,54 +86,45 @@ describe("DynamoUserDataClient Migrations", () => {
       version: 2,
     });
 
-    // now db field is migrated
     expect(await getDbItem("v0-id")).toEqual({
       user: {
         id: "v0-id",
       },
-      v0FieldRenamed: "some-v0-value",
+      v0Field: "some-v0-value",
+      version: 0,
+    });
+  });
+
+  it("stops at the first failed migration without mutating or stamping the source", async () => {
+    const source = await dynamoUserDataClient.get("failing-v0-id");
+    const original = structuredClone(source);
+
+    await expect(dynamoUserDataClient.migrateToLatest(source)).rejects.toThrow(
+      "v0 migration failed",
+    );
+
+    expect(laterMigrationRan).toBe(false);
+    expect(source).toEqual(original);
+    expect(await getDbItem("failing-v0-id")).toEqual(original);
+  });
+
+  it("migrates data from v1 through the pure migration method", async () => {
+    const source = await dynamoUserDataClient.get("v1-id");
+    expect(await dynamoUserDataClient.migrateToLatest(source)).toEqual({
+      user: {
+        id: "v1-id",
+      },
+      v0FieldRenamed: "some-v1-data",
       newV2Field: "",
       version: 2,
     });
   });
 
-  it("migrates data from v1 state on get", async () => {
-    expect(await getDbItem("v1-id")).toEqual({
-      user: {
-        id: "v1-id",
-      },
-      v0FieldRenamed: "some-v1-data",
-      version: 1,
-    });
-
-    expect(await dynamoUserDataClient.get("v1-id")).toEqual({
-      user: {
-        id: "v1-id",
-      },
-      v0FieldRenamed: "some-v1-data",
-      newV2Field: "",
-      version: 2,
-    });
-  });
-
-  it("migrates data on put", async () => {
+  it("puts the supplied version without running migrations", async () => {
     const v1Data = await getDbItem("v1-id");
-    expect(v1Data).toEqual({
-      user: {
-        id: "v1-id",
-      },
-      v0FieldRenamed: "some-v1-data",
-      version: 1,
-    });
 
-    expect(await dynamoUserDataClient.put(v1Data)).toEqual({
-      user: {
-        id: "v1-id",
-      },
-      v0FieldRenamed: "some-v1-data",
-      newV2Field: "",
-      version: 2,
-    });
+    expect(await dynamoUserDataClient.put(v1Data)).toEqual(v1Data);
+    expect(await getDbItem("v1-id")).toEqual(v1Data);
   });
 
   it("does not migrate data when in most recent schema", async () => {
@@ -145,7 +138,7 @@ describe("DynamoUserDataClient Migrations", () => {
     });
   });
 
-  it("adds current version to inserted data", async () => {
+  it("does not synthesize a version while persisting", async () => {
     const v2Data = {
       user: {
         id: "v2-id",
@@ -157,18 +150,12 @@ describe("DynamoUserDataClient Migrations", () => {
     // @ts-ignore
     await dynamoUserDataClient.put(v2Data);
 
-    expect(await getDbItem("v2-id")).toEqual({
-      user: {
-        id: "v2-id",
-      },
-      v0FieldRenamed: "some-v2-data",
-      newV2Field: "some-value",
-      version: 2,
-    });
+    expect(await getDbItem("v2-id")).toEqual(v2Data);
   });
 
   const insertOldData = async (): Promise<void> => {
     await client.send(new PutCommand(makeParams(v0Data)));
+    await client.send(new PutCommand(makeParams(failingV0Data)));
     await client.send(new PutCommand(makeParams(v1Data)));
     await client.send(new PutCommand(makeParams(v2Data)));
   };
@@ -227,6 +214,14 @@ const v1Data = {
   version: 1,
 };
 
+const failingV0Data = {
+  user: {
+    id: "failing-v0-id",
+  },
+  v0Field: "fail",
+  version: 0,
+};
+
 const v2Data = {
   user: {
     id: "v2-id",
@@ -237,6 +232,10 @@ const v2Data = {
 };
 
 function migrate_v0_to_v1(data: v0): v1 {
+  if (data.v0Field === "fail") {
+    throw new Error("v0 migration failed");
+  }
+
   const { v0Field, ...rest } = data;
   return {
     ...rest,
@@ -246,6 +245,7 @@ function migrate_v0_to_v1(data: v0): v1 {
 }
 
 function migrate_v1_to_v2(data: v1): v2 {
+  laterMigrationRan = true;
   return {
     ...data,
     newV2Field: "",

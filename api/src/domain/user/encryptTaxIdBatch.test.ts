@@ -15,6 +15,7 @@ describe("encryptTaxIdBatch", () => {
     stubUserDataClient = {
       get: jest.fn(),
       put: jest.fn(),
+      migrateToLatest: jest.fn(),
       findByEmail: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedTaxIdEncryptionUsers: jest.fn(),

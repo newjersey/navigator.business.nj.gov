@@ -1,4 +1,4 @@
-import { CryptoClient } from "@domain/types";
+import { type CryptoClient } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
 import { Router } from "express";

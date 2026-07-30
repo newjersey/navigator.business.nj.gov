@@ -233,6 +233,7 @@ export class IamStack extends Stack {
         "dynamodb:UpdateItem",
         "dynamodb:DeleteItem",
         "dynamodb:PartiQLSelect",
+        "dynamodb:TransactWriteItems",
       ],
       resources: [
         `arn:aws:dynamodb:${this.region}:*:table/${USERS_TABLE}-${props.stage}`,

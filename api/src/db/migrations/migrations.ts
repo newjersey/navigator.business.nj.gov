@@ -165,7 +165,7 @@ import { migrate_v161_to_v162 } from "@db/migrations/v162_add_hashed_taxid_to_us
 import { migrate_v162_to_v163 } from "@db/migrations/v163_waste_transport_to_waste_data";
 import { migrate_v163_to_v164 } from "@db/migrations/v164_track_tax_clearance_primary_business";
 import { migrate_v164_to_v165 } from "@db/migrations/v165_add_last_updated_iso_to_xray_registration_data";
-import { MigrationClients } from "@db/migrations/types";
+import { type MigrationClients } from "@db/migrations/types";
 import { migrate_v165_to_v166 } from "@db/migrations/v166_add_roadmap_task_data";
 import { migrate_v166_to_v167 } from "@db/migrations/v167_update_agent_number_or_manual_options";
 import { migrate_v167_to_v168 } from "@db/migrations/v168_add_cigarette_license_data";
@@ -193,6 +193,7 @@ import { migrate_v188_to_v189 } from "@db/migrations/v189_update_env_task_id";
 import { migrate_v189_to_v190 } from "@db/migrations/v190_remove_hidden_fundings_and_certifications";
 import { migrate_v190_to_v191 } from "@db/migrations/v191_rotate_new_kms_keys";
 import { migrate_v191_to_v192 } from "@db/migrations/v192_fix_confirmation_email_sent_typo";
+import { migrate_v192_to_v193 } from "@db/migrations/v193_rotate_stranded_legacy_kms_fields";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -390,6 +391,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v189_to_v190,
   migrate_v190_to_v191,
   migrate_v191_to_v192,
+  migrate_v192_to_v193,
 ];
 
-export { generatev192UserData as CURRENT_GENERATOR } from "@db/migrations/v192_fix_confirmation_email_sent_typo";
+export { generatev193UserData as CURRENT_GENERATOR } from "@db/migrations/v193_rotate_stranded_legacy_kms_fields";

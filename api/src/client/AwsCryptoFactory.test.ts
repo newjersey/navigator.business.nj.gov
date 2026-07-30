@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as AWSCrypto from "@aws-crypto/client-node";
 import { AWSCryptoFactory, cryptoUtils } from "@client/AwsCryptoFactory";
-import { CryptoClient } from "@domain/types";
+import { type CryptoClient } from "@domain/types";
 import { TextEncoder } from "node:util";
 
 type AWSMockContext = {
@@ -13,13 +13,19 @@ type AWSMockContext = {
 type MockAWSCryptoType = {
   encryptValueCalledWith: string;
   decryptValueCalledWith: string;
+  encryptKeyringCalledWith: unknown;
+  decryptKeyringCalledWith: unknown;
+  decryptResult: {
+    error?: Error;
+    encryptionContext: AWSMockContext;
+  };
   optionsCalledWith: string;
   contextCalledWith: any;
   buildClient: (options: string) => {
     encrypt: (cmm: string, plaintext: string, op?: AWSMockContext) => Promise<any>;
     decrypt: (keyring: AWSCrypto.KeyringNode, value: string) => Promise<any>;
   };
-  KmsKeyringNode: () => void;
+  KmsKeyringNode: jest.Mock;
   CommitmentPolicy: any;
 };
 
@@ -35,6 +41,12 @@ describe("AWSCryptoFactory", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
+    mockAWSCrypto.decryptResult.error = undefined;
+    mockAWSCrypto.decryptResult.encryptionContext = {
+      stage: "some-stage",
+      purpose: "some-purpose",
+      origin: "some-origin",
+    };
     client = AWSCryptoFactory(
       "some-key",
       {
@@ -44,6 +56,58 @@ describe("AWSCryptoFactory", () => {
       },
       "some-application-salt",
     );
+  });
+
+  describe("keyrings", () => {
+    it("encrypts with only the current generator key", async () => {
+      await client.encryptValue("2323232");
+
+      expect(mockAWSCrypto.KmsKeyringNode.mock.calls[0][0]).toEqual({
+        generatorKeyId: "some-key",
+      });
+      expect(mockAWSCrypto.encryptKeyringCalledWith).toBe(
+        mockAWSCrypto.KmsKeyringNode.mock.instances[0],
+      );
+    });
+
+    it("decrypts with a strict current and legacy key allowlist", async () => {
+      const clientWithLegacyKey = AWSCryptoFactory(
+        "current-key",
+        {
+          stage: "some-stage",
+          purpose: "some-purpose",
+          origin: "some-origin",
+        },
+        undefined,
+        ["legacy-key"],
+      );
+
+      await clientWithLegacyKey.decryptValue("encrypted-value");
+
+      expect(mockAWSCrypto.KmsKeyringNode.mock.calls[3][0]).toEqual({
+        keyIds: ["current-key", "legacy-key"],
+      });
+      expect(mockAWSCrypto.decryptKeyringCalledWith).toBe(
+        mockAWSCrypto.KmsKeyringNode.mock.instances[3],
+      );
+    });
+
+    it("deduplicates configured decrypt keys", () => {
+      AWSCryptoFactory(
+        "current-key",
+        {
+          stage: "some-stage",
+          purpose: "some-purpose",
+          origin: "some-origin",
+        },
+        undefined,
+        ["", "current-key", "legacy-key", "legacy-key"],
+      );
+
+      expect(mockAWSCrypto.KmsKeyringNode.mock.calls[3][0]).toEqual({
+        keyIds: ["current-key", "legacy-key"],
+      });
+    });
   });
 
   it("calls encrypt with the correct value", async () => {
@@ -64,6 +128,88 @@ describe("AWSCryptoFactory", () => {
     const result = await client.decryptValue("encrypted-value");
     expect(result).toEqual("decrypted-value");
     expect(mockAWSCrypto.decryptValueCalledWith).toEqual("encrypted-value");
+  });
+
+  it.each([
+    ["an unsupported wrapping key", "unencryptedDataKey has not been set"],
+    ["malformed ciphertext", "Invalid ciphertext"],
+    ["missing KMS permissions", "AccessDeniedException"],
+    ["KMS throttling after SDK retries", "ThrottlingException"],
+    ["a KMS timeout after SDK retries", "TimeoutError"],
+  ])("propagates %s failures", async (_description, message) => {
+    mockAWSCrypto.decryptResult.error = new Error(message);
+
+    await expect(client.decryptValue("encrypted-value")).rejects.toThrow(message);
+  });
+
+  it("rejects ciphertext with an unexpected encryption context", async () => {
+    mockAWSCrypto.decryptResult.encryptionContext = {
+      stage: "another-stage",
+      purpose: "some-purpose",
+      origin: "some-origin",
+    };
+
+    await expect(client.decryptValue("encrypted-value")).rejects.toThrow(
+      "Encryption Context does not match expected values",
+    );
+  });
+
+  it("accepts an explicitly configured decrypt-only encryption context", async () => {
+    const clientWithLegacyContext = AWSCryptoFactory(
+      "some-key",
+      {
+        stage: "some-stage",
+        purpose: "some-purpose",
+        origin: "some-origin",
+      },
+      undefined,
+      [],
+      [
+        {
+          stage: "",
+          purpose: "some-purpose",
+          origin: "",
+        },
+      ],
+    );
+    mockAWSCrypto.decryptResult.encryptionContext = {
+      stage: "",
+      purpose: "some-purpose",
+      origin: "",
+    };
+
+    await expect(clientWithLegacyContext.decryptValue("encrypted-value")).resolves.toBe(
+      "decrypted-value",
+    );
+  });
+
+  it("requires every value in a decrypt-only encryption context to match", async () => {
+    const clientWithLegacyContext = AWSCryptoFactory(
+      "some-key",
+      {
+        stage: "some-stage",
+        purpose: "some-purpose",
+        origin: "some-origin",
+      },
+      undefined,
+      [],
+      [
+        {
+          stage: "",
+          purpose: "some-purpose",
+          origin: "",
+        },
+      ],
+    );
+    mockAWSCrypto.decryptResult.encryptionContext = {
+      stage: "",
+      purpose: "another-purpose",
+      origin: "",
+    };
+
+    await expect(clientWithLegacyContext.decryptValue("encrypted-value")).rejects.toThrow(
+      "Encryption Context does not match expected values",
+    );
   });
 
   describe("hashValue", () => {
@@ -156,6 +302,16 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
   return {
     encryptValueCalledWith: "",
     decryptValueCalledWith: "",
+    encryptKeyringCalledWith: undefined,
+    decryptKeyringCalledWith: undefined,
+    decryptResult: {
+      error: undefined,
+      encryptionContext: {
+        stage: "some-stage",
+        purpose: "some-purpose",
+        origin: "some-origin",
+      },
+    },
     optionsCalledWith: "",
     contextCalledWith: undefined,
     CommitmentPolicy: { REQUIRE_ENCRYPT_REQUIRE_DECRYPT: "REQUIRE_ENCRYPT_REQUIRE_DECRYPT" },
@@ -163,6 +319,7 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
       this.optionsCalledWith = options;
       // eslint-disable-next-line unicorn/consistent-function-scoping
       const encrypt = (cmm: string, plaintext: string, op?: AWSMockContext): any => {
+        this.encryptKeyringCalledWith = cmm;
         this.encryptValueCalledWith = plaintext;
         this.contextCalledWith = { ...op };
         return Promise.resolve(plaintext).then((): any => {
@@ -172,23 +329,23 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
       // eslint-disable-next-line unicorn/consistent-function-scoping
       const decrypt = (keyring: AWSCrypto.KeyringNode, value: string): any => {
         const encoder = new TextEncoder();
+        this.decryptKeyringCalledWith = keyring;
         this.decryptValueCalledWith = value;
+        if (this.decryptResult.error) {
+          return Promise.reject(this.decryptResult.error);
+        }
         return Promise.resolve(value).then((): any => {
           return {
             plaintext: encoder.encode("decrypted-value"),
             messageHeader: {
-              encryptionContext: {
-                stage: "some-stage",
-                purpose: "some-purpose",
-                origin: "some-origin",
-              },
+              encryptionContext: this.decryptResult.encryptionContext,
             },
           };
         });
       };
       return { encrypt, decrypt };
     },
-    KmsKeyringNode: function MockKeyRingNode(): any {},
+    KmsKeyringNode: jest.fn(function MockKeyRingNode(): any {}),
   };
 });
 
