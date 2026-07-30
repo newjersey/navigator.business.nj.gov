@@ -3,21 +3,14 @@
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { UpdateQueue } from "@/lib/UpdateQueue";
-import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
-import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
-import {
-  generateBusiness,
-  generatePreferences,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { Business, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { act, render } from "@testing-library/react";
-import { ReactNode } from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -26,18 +19,15 @@ describe("useUpdateTaskProgress", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     setupStatefulUserDataContext();
-    useMockRoadmap({});
   });
 
   const setupHook = (
     business: Business,
   ): {
     queueUpdateTaskProgress: (taskId: string, newValue: TaskProgress) => void;
-    congratulatoryModal: ReactNode;
     updateQueue: UpdateQueue;
   } => {
     const returnVal = {
-      congratulatoryModal: <></>,
       queueUpdateTaskProgress: (): void => {},
     };
     const updateQueueReturnVal = { updateQueue: undefined };
@@ -71,90 +61,6 @@ describe("useUpdateTaskProgress", () => {
     expect(currentBusiness().taskProgress).toEqual({
       "some-id": "COMPLETED",
       "some-other-id": "TO_DO",
-    });
-  });
-
-  describe("congratulatory modal", () => {
-    const planTaskId = "123";
-    const startTaskId = "124";
-
-    const planTask = generateTask({ id: planTaskId, stepNumber: 1 });
-    const startTask = generateTask({ id: startTaskId, stepNumber: 2 });
-
-    const roadmap = generateRoadmap({
-      steps: [
-        generateStep({ stepNumber: 1, section: "PLAN" }),
-        generateStep({ stepNumber: 2, section: "START" }),
-      ],
-      tasks: [planTask, startTask],
-    });
-
-    it("closes all roadmap sections when all sections complete", async () => {
-      const business = generateBusiness({
-        taskProgress: {
-          [planTaskId]: "COMPLETED",
-          [startTaskId]: "TO_DO",
-        },
-        preferences: generatePreferences({ roadmapOpenSections: ["START"] }),
-      });
-
-      setMockRoadmapResponse({
-        roadmap,
-        isSectionCompletedFn: jest
-          .fn()
-          .mockReturnValueOnce(false) // was section prev completed
-          .mockReturnValueOnce(true), // is section now completed
-        currentAndNextSection: () => ({ current: "START", next: undefined }),
-      });
-
-      const { queueUpdateTaskProgress, updateQueue } = setupHook(business);
-      act(() => {
-        return queueUpdateTaskProgress(startTaskId, "COMPLETED");
-      });
-      await act(() => {
-        return updateQueue.update();
-      });
-
-      expect(currentBusiness().taskProgress).toEqual({
-        [planTaskId]: "COMPLETED",
-        [startTaskId]: "COMPLETED",
-      });
-
-      expect(currentBusiness().preferences.roadmapOpenSections).toEqual([]);
-    });
-
-    it("closes PLAN roadmap section when complete", async () => {
-      const business = generateBusiness({
-        taskProgress: {
-          [planTaskId]: "TO_DO",
-          [startTaskId]: "TO_DO",
-        },
-        preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] }),
-      });
-
-      setMockRoadmapResponse({
-        roadmap,
-        isSectionCompletedFn: jest
-          .fn()
-          .mockReturnValueOnce(false) // was section prev completed
-          .mockReturnValueOnce(true), // is section now completed
-        currentAndNextSection: () => ({ current: "PLAN", next: "START" }),
-      });
-
-      const { queueUpdateTaskProgress, updateQueue } = setupHook(business);
-      act(() => {
-        return queueUpdateTaskProgress(planTaskId, "COMPLETED");
-      });
-      await act(() => {
-        return updateQueue.update();
-      });
-
-      expect(currentBusiness().taskProgress).toEqual({
-        [planTaskId]: "COMPLETED",
-        [startTaskId]: "TO_DO",
-      });
-
-      expect(currentBusiness().preferences.roadmapOpenSections).toEqual(["START"]);
     });
   });
 });

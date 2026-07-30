@@ -43,12 +43,18 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Roadmap Tasks Header Text, name: RoadmapTasksHeaderText, widget: string }
+              - { label: Roadmap Tasks Header Text, name: roadmapTasksHeaderText, widget: string }
               - {
-                  label: Roadmap Tasks Header Text (Domestic Employer only),
-                  name: DomesticEmployerRoadmapTasksHeaderText,
+                  label: Roadmap Tasks Header Abbreviated Text,
+                  name: roadmapTasksHeaderAbbreviatedText,
                   widget: string,
                 }
+              - {
+                  label: Roadmap Tasks Header Text (Domestic Employer only),
+                  name: domesticEmployerRoadmapTasksHeaderText,
+                  widget: string,
+                }
+              - { label: Roadmap Tasks Description, name: roadmapTasksDescription, widget: string }
           - label: Dashboard Anytime Action Defaults
             name: dashboardAnytimeActionDefaults
             collapsed: false

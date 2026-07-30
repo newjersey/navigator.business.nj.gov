@@ -45,6 +45,7 @@ import * as HousingRegistrationSearchTask from "../../../content/src/fieldConfig
 import * as LandingPage from "../../../content/src/fieldConfig/landing-page.json";
 import * as LegalMessageDefaults from "../../../content/src/fieldConfig/legal-message-defaults.json";
 import * as LicenseSearchTask from "../../../content/src/fieldConfig/license-search-task.json";
+import * as LockedTasksPrompt from "../../../content/src/fieldConfig/locked-tasks-prompt.json";
 import * as LoginSupportPage from "../../../content/src/fieldConfig/login-support-page.json";
 import * as ManageBusinessVehicles from "../../../content/src/fieldConfig/manage-business-vehicles.json";
 import * as NaicsCode from "../../../content/src/fieldConfig/naics-code.json";
@@ -174,6 +175,7 @@ const merged = JSON.parse(
       CrtkTask,
       LoginSupportPage,
       SelectIndustryTask,
+      LockedTasksPrompt,
     ),
   ),
 );
@@ -260,7 +262,8 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof RemoveBusinessModal &
   typeof CrtkTask &
   typeof LoginSupportPage &
-  typeof SelectIndustryTask;
+  typeof SelectIndustryTask &
+  typeof LockedTasksPrompt;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -346,6 +349,7 @@ export const getMergedConfig = (): ConfigType => {
     LoginSupportPage,
     CrtkTask,
     SelectIndustryTask,
+    LockedTasksPrompt,
   );
 };
 

@@ -10,7 +10,8 @@
     {
       "step": 3,
       "weight": 59,
-      "task": "check-site-requirements"
+      "task": "check-site-requirements",
+      "required": true
     },
     {
       "step": 3,
@@ -31,7 +32,8 @@
       "step": 4,
       "weight": 61,
       "task": "",
-      "licenseTask": "town-mercantile-license"
+      "licenseTask": "town-mercantile-license",
+      "required": true
     }
   ]
 }

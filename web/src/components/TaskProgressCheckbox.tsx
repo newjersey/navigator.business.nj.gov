@@ -6,10 +6,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { getTaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { TaskStatusTaxRegistrationSnackbar } from "@/components/TaskStatusTaxRegistrationSnackbar";
-import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -18,21 +15,19 @@ import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domai
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/compat/router";
-import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 interface Props {
   taskId: string;
-  needsAccount?: boolean;
   disabledTooltipText: string | undefined;
   STORYBOOK_ONLY_currentTaskProgress?: TaskProgress;
+  hideTaskProgressTag?: boolean;
 }
 
 type ModalTypes = "formation" | "formation-unset" | "registered-for-taxes-unset";
 
 export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
-  const { queueUpdateTaskProgress, congratulatoryModal } = useUpdateTaskProgress();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
   const [currentOpenModal, setCurrentOpenModal] = useState<ModalTypes | undefined>(undefined);
   const [taxRegistrationSnackbarIsOpen, setTaxRegistrationSnackbarIsOpen] =
@@ -71,10 +66,6 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const setToNextStatus = (config?: { redirectOnSuccess: boolean }): void => {
     if (!updateQueue) return;
     let redirectOnSuccess = config?.redirectOnSuccess;
-    if (props.needsAccount && isAuthenticated === IsAuthenticated.FALSE) {
-      setShowNeedsAccountModal(true);
-      return;
-    }
     const nextStatus = getNextStatus();
 
     if (isFormationTask(props.taskId)) {
@@ -106,7 +97,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     }
 
     setCurrentOpenModal(undefined);
-    queueUpdateTaskProgress(props.taskId, nextStatus);
+    updateQueue.queueTaskProgress({ [props.taskId]: nextStatus });
     sendAnalytics(nextStatus);
     updateQueue
       .update()
@@ -209,6 +200,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         role="checkbox"
         aria-checked={currentTaskProgress === "COMPLETED"}
         aria-label={`update task status. ${getAdditionalAriaContext()}`}
+        aria-labelledby={props.taskId}
         onClick={isDisabled ? undefined : (): void => setToNextStatus()}
         className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled task-checkbox-base ${styles.hover}`}
         {...(isDisabled ? { disabled: true } : {})}
@@ -229,8 +221,6 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
 
   return (
     <div className={"flex flex-align-start"}>
-      <>{congratulatoryModal}</>
-
       <div className="margin-right-2">
         {isDisabled ? (
           <ArrowTooltip title={props.disabledTooltipText || ""}>
@@ -243,7 +233,9 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         )}
       </div>
 
-      <span className="flex flex-align-start">{taskProgressTagLookup[currentTaskProgress]}</span>
+      {!props.hideTaskProgressTag && (
+        <span className="flex flex-align-start">{taskProgressTagLookup[currentTaskProgress]}</span>
+      )}
 
       <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}

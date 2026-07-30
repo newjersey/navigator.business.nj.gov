@@ -302,10 +302,10 @@ const getIndustryBasedAddOns = (
 };
 
 const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
-  if (!profileData.legalStructureId) {
-    return [];
-  }
   const addOns = [];
+  if (!profileData.legalStructureId && profileData.businessPersona === "STARTING") {
+    addOns.push("public-record-filing");
+  }
   if (profileData.businessPersona === "FOREIGN") {
     if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
       addOns.push("public-record-filing-foreign");
@@ -319,7 +319,7 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
     ) {
       addOns.push("nonprofit-and-corp-foreign");
     }
-  } else {
+  } else if (profileData.legalStructureId) {
     if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
       addOns.push("public-record-filing");
     } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
