@@ -267,7 +267,7 @@ main-text-8: >-
   The [New Jersey Family Leave Act (NJFLA)](https://www.njoag.gov/about/divisions-and-offices/division-on-civil-rights-home/know-the-law/new-jersey-family-leave-act/) is a state law that allows eligible employees to take up to 12 weeks of job-protected leave within a 24-month period for specific family needs. An employee is eligible if:
 
 
-  * They must work for a company or organization with 15 or more employees worldwide, or a state or local government agency
+  * They work for a company or organization with 15 or more employees worldwide, or a state or local government agency
 
   * They have worked for their employer for at least 3 months
 
@@ -316,7 +316,7 @@ main-text-8: >-
 
   * Have worked 1,250 hours in the past 12 months
 
-  * Work at a location with 50 or more employees within 75 miles
+  * Work at a location with 50 or more employees within 75 miles, or a public agency or school of any size
 
   * Have been employed for at least 12 months
 
@@ -403,7 +403,7 @@ main-text-9: >-
 
   * Private employers with 15 or more employees who have worked at least 20 weeks in the current or preceding year (15 employees do not have to be in NJ – can be anywhere)
 
-  * Employer headquarters does no’t have to be in NJ
+  * Employer headquarters does not have to be in NJ
 
 
   **FMLA**
@@ -456,9 +456,9 @@ main-text-9: >-
   **NJFLA**
 
 
-  * Employers are required to provide employees with written guidance concerning employees’ rights and obligations under the NJFLA.  An employer that maintains written guidance to employees concerning employee benefits or leave rights, such as in an employee handbook, must include information concerning leave and employee obligations under the NJFLA in the written guidance. If an employer does not maintain written policies, manuals, or handbooks describing employee  benefits and leave provisions, the employer must provide written guidance to each employee concerning the employee’s rights and obligations under the NJFLA. The employer may provide employees a copy of the Division on Civil Rights’ Fact Sheet and Frequently Asked Questions, available at www.njcivilrights.gov, to provide the required written guidance.
+  * Employers are required to provide employees with written guidance concerning employees’ rights and obligations under the NJFLA.  An employer that maintains written guidance to employees concerning employee benefits or leave rights, such as in an employee handbook, must include information concerning leave and employee obligations under the NJFLA in the written guidance. If an employer does not maintain written policies, manuals, or handbooks describing employee  benefits and leave provisions, the employer must provide written guidance to each employee concerning the employee’s rights and obligations under the NJFLA. The employer may provide employees a copy of the Division on Civil Rights’ Fact Sheet and Frequently Asked Questions, available at [www.njcivilrights.gov,](www.njcivilrights.gov) to provide the required written guidance.
 
-  * Employers covered by the NJFLA must display the official Family Leave Act poster of the Division on Civil Rights, available at www.njcivilrights.gov, in places easily visible to all employees, in accordance with N.J.A.C. 13:8-2.2
+  * Employers covered by the NJFLA must display the official Family Leave Act poster of the Division on Civil Rights, available at[ www.njcivilrights.gov](www.njcivilrights.gov,), in places easily visible to all employees, in accordance with N.J.A.C. 13:8-2.2
 
 
   **FMLA**
@@ -479,7 +479,7 @@ main-text-9: >-
   **TDI/FLI**
 
 
-  * Display the Temporary Disability Insurance poster and the Family Leave Insurance poster in a workplace location where employees can clearly see them
+  * Display the [Temporary Disability Insurance poster](https://www.nj.gov/labor/myleavebenefits/assets/pdfs/PR-1%20(4-19)UI_TDI_poster.pdf) and the [Family Leave Insurance poster](https://www.nj.gov/labor/myleavebenefits/assets/pdfs/NJ_FLI_notice_PR2.pdf) in a workplace location where employees can clearly see them
 
   * Give written notice of these programs when an employee is hired, requests information, or notifies an employer of their need for leave
 
@@ -496,7 +496,7 @@ main-text-9: >-
 
   * When taking leave to care for a family member with a serious health condition or to care for a family member made necessary by an epidemic of a communicable disease, a known or suspected exposure to a communicable disease, or efforts to prevent spread of a communicable disease, employees must provide notice as soon as practicable
 
-  * Employers may require employees to submit certification in connection with their NJFLA leave, which may include certification from a health care professional, public health authority, or school or place of care. The type of certification employers may require depends on the reason for leave, and employers should review public resources, available at www.njcivilrights.gov, for detailed information
+  * Employers may require employees to submit certification in connection with their NJFLA leave, which may include certification from a health care professional, public health authority, or school or place of care. The type of certification employers may require depends on the reason for leave, and employers should review public resources, available at [www.njcivilrights.gov](www.njcivilrights.gov), for detailed information
 
 
   **FMLA**
