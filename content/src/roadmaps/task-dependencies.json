@@ -4,27 +4,16 @@
       "task": "register-for-ein",
       "taskDependencies": [
         "form-business-entity",
-        "form-business-entity-nj",
-        "form-business-entity-foreign",
-        "form-business-entity-llc"
-      ]
-    },
-    {
-      "task": "form-business-entity",
-      "taskDependencies": [
-        "register-for-ein"
+        "form-business-entity-foreign"
       ]
     },
     {
       "task": "register-for-taxes",
       "taskDependencies": [
         "form-business-entity",
-        "form-business-entity-nj",
         "form-business-entity-foreign",
-        "form-business-entity-llc",
         "register-for-ein",
-        "determine-naics-code",
-        "form-business-entity-foreign"
+        "determine-naics-code"
       ]
     },
     {

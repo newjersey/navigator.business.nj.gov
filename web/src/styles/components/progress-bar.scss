@@ -4,13 +4,11 @@ $progress-bar-label-offset: 33px;
 
 .section-progress-bar-row {
   margin-top: 1.5rem;
+  align-items: center;
 }
 
 .section-progress-bar-label {
   font-size: 0.9rem;
-  position: absolute;
-  bottom: 16px;
-  right: $progress-bar-label-offset;
   font-weight: bold;
 
   &--zero {

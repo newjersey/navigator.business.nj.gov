@@ -27,8 +27,6 @@ export class DashboardPage {
   };
 
   clickRoadmapTask = (taskId: string) => {
-    cy.get('[id="plan-header"]').first().click();
-    cy.get('[id="start-header"]').first().click();
     const taskValue = `[data-task="${taskId}"]`;
     cy.get(taskValue).first().click({ force: true });
     cy.url().should("not.contain", "roadmap");
