@@ -1,6 +1,5 @@
 {
   "selfRegistration": {
-    "continueWithoutSaving": "Continue without saving",
     "errorTextGeneric": "Something went wrong. Try again later.",
     "errorTextEmailsNotMatching": "Email addresses must match and be valid.",
     "accountSuccessSnackbarTitleExistingAccount": "Your myNewJersey Account is Linked",
@@ -21,13 +20,14 @@
     "closeButtonText": "Cancel",
     "updatesAndRemindersCheckboxLabel": "I want to receive updates and reminders by email.",
     "newsletterCheckboxLabel": "I want to receive the Business.NJ.gov email newsletter.",
-    "needsAccountModalTitle": "Link with myNewJersey to Save Your Progress",
-    "needsAccountModalButtonText": "Link with myNewJersey",
+    "needsAccountModalTitle": "Do You Want to Save Your Progress?",
+    "needsAccountModalBody": "Create a secure myNewJersey account to save your information, or continue as a guest and we won't save anything.",
+    "needsAccountModalButtonText": "Create My Free Account",
+    "continueExploringButtonText": "Continue Exploring",
     "accountSuccessSnackbarBody": "You can now save your progress, access more features, and edit your business profile.",
     "accountSuccessSnackbarTitle": "Welcome to your Business.NJ.gov account!",
     "errorTextFullNameSpecialCharacter": "Full name may only contain letters, numbers, spaces, and these five characters: , . - ' _",
     "errorTextFullNameStartWithLetter": "Full name must start with a letter.",
-    "needsAccountModalBody": "To use this feature, you need to complete your registration with the State of New Jersey's secure login system, MyNewJersey. This will ensure your privacy, and allow you to come back any time.",
     "phoneNumberFieldLabelOptional": "(Optional)"
   }
 }

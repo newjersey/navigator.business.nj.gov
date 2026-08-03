@@ -16,9 +16,9 @@ import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { UpdateQueue } from "@/lib/UpdateQueue";
 import { authReducer } from "@/lib/auth/AuthContext";
-import { UserDataProvider } from "@/lib/data-hooks/UserDataProvider";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
+import { UserDataProvider } from "@/lib/data-hooks/UserDataProvider";
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import MuiTheme from "@/lib/muiTheme";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
@@ -68,10 +68,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [showNeedsAccountSnackbar, setShowNeedsAccountSnackbar] = useState<boolean>(false);
   const [showNeedsAccountModal, setShowNeedsAccountModal] = useState<boolean>(false);
   const [showRemoveBusinessModal, setShowRemoveBusinessModal] = useState<boolean>(false);
-
-  const [showContinueWithoutSaving, setShowContinueWithoutSaving] = useState<boolean>(false);
-  const [userWantsToContinueWithoutSaving, setUserWantsToContinueWithoutSaving] =
-    useState<boolean>(false);
 
   const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
     isVisible: false,
@@ -271,10 +267,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                                 setRegistrationStatus: setRegistrationStatusInStateAndStorage,
                                 setShowNeedsAccountSnackbar,
                                 setShowNeedsAccountModal: setShowNeedsAccountModalAndSendAnalytics,
-                                showContinueWithoutSaving,
-                                setShowContinueWithoutSaving,
-                                userWantsToContinueWithoutSaving,
-                                setUserWantsToContinueWithoutSaving,
                               }}
                             >
                               <RemoveBusinessContext.Provider

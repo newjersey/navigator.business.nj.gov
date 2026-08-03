@@ -1,17 +1,17 @@
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { UpdateQueue } from "@/lib/UpdateQueue";
+import Profile from "@/pages/profile";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { clickSave, generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
 import { Business, generateUserDataForBusiness, UserData } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
-import Profile from "@/pages/profile";
-import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen, waitFor } from "@testing-library/react";
 import { act } from "react";
@@ -83,10 +83,6 @@ const renderProfileOnContactTab = (business: Business, mockUpdate: jest.Mock): v
       {
         showNeedsAccountModal: false,
         setShowNeedsAccountModal: jest.fn(),
-        showContinueWithoutSaving: false,
-        setShowContinueWithoutSaving: jest.fn(),
-        userWantsToContinueWithoutSaving: false,
-        setUserWantsToContinueWithoutSaving: jest.fn(),
       },
     ),
   );
@@ -250,10 +246,6 @@ describe("profile - govDelivery error handling", () => {
         {
           showNeedsAccountModal: false,
           setShowNeedsAccountModal: jest.fn(),
-          showContinueWithoutSaving: false,
-          setShowContinueWithoutSaving: jest.fn(),
-          userWantsToContinueWithoutSaving: false,
-          setUserWantsToContinueWithoutSaving: jest.fn(),
         },
       ),
     );

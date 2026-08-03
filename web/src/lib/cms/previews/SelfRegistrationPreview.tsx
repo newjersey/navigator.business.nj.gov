@@ -59,10 +59,6 @@ const SelfRegistrationPreview = (props: PreviewProps): ReactElement => {
         setShowNeedsAccountModal: () => {
           setModalOpen(true);
         },
-        showContinueWithoutSaving: true,
-        setShowContinueWithoutSaving: () => {},
-        userWantsToContinueWithoutSaving: true,
-        setUserWantsToContinueWithoutSaving: () => {},
       }}
     >
       <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>

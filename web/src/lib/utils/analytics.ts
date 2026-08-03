@@ -60,7 +60,6 @@ type EventType =
   | "env_help_dep_opened"
   | "env_help_responses_opened"
   | "env_save_progress_prompted"
-  | "env_continue_without_auth"
   | "env_contact_info_engaged"
   | string;
 
@@ -110,7 +109,6 @@ const eventMap: Record<EventType, string> = {
   env_help_dep_opened: "env_help_dep_opened",
   env_help_responses_opened: "env_help_responses_opened",
   env_save_progress_prompted: "env_save_progress_prompted",
-  env_continue_without_auth: "env_continue_without_auth",
   env_contact_info_engaged: "env_contact_info_engaged",
 };
 
@@ -176,7 +174,8 @@ type Clicked =
   | "unlinked_myNJ_account"
   | "get_unlinked_myNJ_account_modal"
   | "link_your_myNJ_account"
-  | "close_NeedsAccountModal";
+  | "close_NeedsAccountModal"
+  | "continue_exploring_button";
 
 type OnSiteSection =
   | "landing_page"
@@ -772,6 +771,16 @@ export default {
             legacy_event_category: "guest_modal",
             legacy_event_label: "close_NeedsAccountModal",
             clicked: "close_NeedsAccountModal",
+            item: "guest_modal",
+          });
+        },
+        continue_exploring: () => {
+          eventRunner.track({
+            event: "account_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "guest_modal",
+            legacy_event_label: "continue_exploring",
+            clicked: "continue_exploring_button",
             item: "guest_modal",
           });
         },
@@ -2976,18 +2985,6 @@ export default {
             legacy_event_action: "mouseover",
             legacy_event_category: "environmental_requirements_contact",
             legacy_event_label: "contact_info_hovered",
-          });
-        },
-      },
-    },
-    gen_guidance_stepper_continue_without_saving: {
-      click: {
-        general_guidance_continue_wo_saving: () => {
-          eventRunner.track({
-            event: "env_continue_without_auth",
-            legacy_event_action: "click",
-            legacy_event_category: "environmental_requirements_save",
-            legacy_event_label: "continue_without_saving_clicked",
           });
         },
       },
