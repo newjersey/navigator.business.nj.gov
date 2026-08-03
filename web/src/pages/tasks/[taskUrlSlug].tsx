@@ -12,13 +12,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { getUrlSlugs } from "@/lib/utils/roadmap-helpers";
-import {
-  businessStructureTaskId,
-  formationTaskId,
-  hasCompletedBusinessStructure,
-  HousingMunicipality,
-  Municipality,
-} from "@businessnjgovnavigator/shared";
+import { formationTaskId, HousingMunicipality, Municipality } from "@businessnjgovnavigator/shared";
 import {
   loadAllHousingMunicipalities,
   loadAllMunicipalities,
@@ -64,9 +58,6 @@ const TaskPage = (props: Props): ReactElement => {
       return undefined;
     }
 
-    const hideNextUrlSlug =
-      props.task.id === businessStructureTaskId && !hasCompletedBusinessStructure(business);
-
     return (
       <div
         className={`flex flex-row ${
@@ -84,7 +75,7 @@ const TaskPage = (props: Props): ReactElement => {
             <span className="margin-left-2"> {Config.taskDefaults.previousTaskButtonText}</span>
           </UnStyledButton>
         )}
-        {nextUrlSlug && !hideNextUrlSlug && (
+        {nextUrlSlug && (
           <UnStyledButton
             dataTestid={"nextUrlSlugButton"}
             onClick={(): void => {

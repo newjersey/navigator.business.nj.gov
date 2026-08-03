@@ -4,8 +4,6 @@ import {
   generateStep,
   generateTask,
   generateTaskLink,
-  operatingPhasesDisplayingBusinessStructurePrompt,
-  operatingPhasesNotDisplayingBusinessStructurePrompt,
   randomPublicFilingLegalType,
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -28,7 +26,6 @@ import {
   LookupTaskAgencyById,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { createEmptyTaskDisplayContent, Task } from "@businessnjgovnavigator/shared/types";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
@@ -457,62 +454,6 @@ describe("task page", () => {
 
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
   });
-
-  it.each(operatingPhasesDisplayingBusinessStructurePrompt)(
-    "hides nextUrlSlug on business structure task when it's not marked as completed for %p operating phase",
-    (operatingPhase) => {
-      setLargeScreen(false);
-      renderPage(
-        generateTask({ id: businessStructureTaskId }),
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase,
-          }),
-          taskProgress: { [businessStructureTaskId]: "TO_DO" },
-        }),
-      );
-      expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();
-    },
-  );
-
-  // These phases never have a business structure task in their roadmap
-  it.each(
-    operatingPhasesNotDisplayingBusinessStructurePrompt.filter(
-      (operatingPhaseId) =>
-        operatingPhaseId !== "DOMESTIC_EMPLOYER" &&
-        operatingPhaseId !== "UP_AND_RUNNING_OWNING" &&
-        operatingPhaseId !== "UP_AND_RUNNING" &&
-        operatingPhaseId !== "GUEST_MODE_OWNING",
-    ),
-  )(
-    "shows nextUrlSlug on business structure task when it's not marked as completed for %p operating phase",
-    (operatingPhase) => {
-      const businessStructureTask = generateTask({
-        id: businessStructureTaskId,
-        urlSlug: "business-structure",
-        stepNumber: 1,
-        required: true,
-      });
-      const nextTask = generateTask({ urlSlug: "next-task", stepNumber: 2, required: true });
-      useMockRoadmap({
-        steps: [generateStep({ stepNumber: 1 }), generateStep({ stepNumber: 2 })],
-        tasks: [businessStructureTask, nextTask],
-      });
-
-      setLargeScreen(false);
-      renderPage(
-        businessStructureTask,
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase,
-          }),
-          taskProgress: { [businessStructureTaskId]: "COMPLETED" },
-        }),
-      );
-
-      expect(screen.getByTestId("nextUrlSlugButton")).toBeInTheDocument();
-    },
-  );
 
   describe("deferred location question", () => {
     const contentWithLocationSection =
