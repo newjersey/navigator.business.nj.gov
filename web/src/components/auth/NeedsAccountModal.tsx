@@ -16,13 +16,8 @@ import { ReactElement, useContext } from "react";
 export const NeedsAccountModal = (): ReactElement => {
   const { business } = useUserData();
   const router = useRouter();
-  const {
-    isAuthenticated,
-    showNeedsAccountModal,
-    showContinueWithoutSaving,
-    setShowNeedsAccountModal,
-    setUserWantsToContinueWithoutSaving,
-  } = useContext(NeedsAccountContext);
+  const { isAuthenticated, showNeedsAccountModal, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
 
@@ -62,19 +57,17 @@ export const NeedsAccountModal = (): ReactElement => {
             <PrimaryButton isColor="primary" isFullWidthOnDesktop onClick={linkToAccountSetup}>
               {Config.selfRegistration.needsAccountModalButtonText}
             </PrimaryButton>
-            {showContinueWithoutSaving && (
-              <SecondaryButton
-                isColor="primary"
-                className={"margin-top-05"}
-                isFullWidthOnDesktop
-                onClick={() => {
-                  setUserWantsToContinueWithoutSaving(true);
-                  setShowNeedsAccountModal(false);
-                }}
-              >
-                {Config.selfRegistration.continueWithoutSaving}
-              </SecondaryButton>
-            )}
+            <SecondaryButton
+              isColor="primary"
+              className={"margin-top-05"}
+              isFullWidthOnDesktop
+              onClick={() => {
+                analytics.event.guest_modal.click.continue_exploring();
+                setShowNeedsAccountModal(false);
+              }}
+            >
+              {Config.selfRegistration.continueExploringButtonText}
+            </SecondaryButton>
           </div>
 
           <hr className="margin-y-3 margin-x-neg-4" />

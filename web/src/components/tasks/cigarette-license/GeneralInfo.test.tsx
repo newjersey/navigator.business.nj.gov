@@ -1,9 +1,9 @@
+import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useMockProfileData } from "@/test/mock/mockUseUserData";
 import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { GeneralInfo } from "@/components/tasks/cigarette-license/GeneralInfo";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
@@ -29,10 +29,6 @@ describe("General Info", () => {
             setShowNeedsAccountSnackbar: jest.fn(),
             registrationStatus: undefined,
             setRegistrationStatus: jest.fn(),
-            showContinueWithoutSaving: false,
-            setShowContinueWithoutSaving: jest.fn(),
-            userWantsToContinueWithoutSaving: false,
-            setUserWantsToContinueWithoutSaving: jest.fn(),
           }}
         >
           <GeneralInfo setStepIndex={mockSetStepIndex} />

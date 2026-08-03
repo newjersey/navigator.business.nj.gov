@@ -80,10 +80,6 @@ const Template = () => {
             setShowNeedsAccountSnackbar: () => {},
             showNeedsAccountModal: false,
             setShowNeedsAccountModal: () => {},
-            showContinueWithoutSaving: false,
-            setShowContinueWithoutSaving: () => {},
-            userWantsToContinueWithoutSaving: false,
-            setUserWantsToContinueWithoutSaving: () => {},
           }}
         >
           <ConfigContext.Provider value={{ config: Config, setOverrides: setConfig }}>
