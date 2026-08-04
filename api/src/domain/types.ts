@@ -71,7 +71,7 @@ export interface MessageData {
   dateCreated: string;
 }
 export interface DatabaseClient {
-  migrateOutdatedVersionUsers: () => Promise<{
+  migrateOutdatedVersionUsers: (options?: MigrationRunOptions) => Promise<{
     success: boolean;
     migratedCount?: number;
     error?: string;
@@ -84,16 +84,32 @@ export interface DatabaseClient {
   findBusinessesByHashedTaxId: (hashedTaxId: string) => Promise<Business[]>;
 }
 
+export interface MigrationRunOptions {
+  readonly canStartNextUser: () => boolean;
+}
+
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
   put: (userData: UserData) => Promise<UserData>;
+  migrateToLatest: (userData: UserData) => Promise<UserData>;
   getNeedNewsletterUsers: () => Promise<UserData[]>;
   getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
   getUsersWithOutdatedVersion: (
     latestVersion: number,
     nextToken?: string,
   ) => Promise<{ usersToMigrate: UserData[]; nextToken?: string }>;
+}
+
+export interface MigrationDataClient {
+  migrateAndPut: (userData: UserData) => Promise<UserData>;
+}
+
+export class MigrationConflictError extends Error {
+  constructor() {
+    super("User data changed during migration");
+    this.name = "MigrationConflictError";
+  }
 }
 
 export interface BusinessesDataClient {

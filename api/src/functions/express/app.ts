@@ -65,6 +65,7 @@ import { WebserviceLicenseStatusProcessorClient } from "@client/webservice/Webse
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoDataClient } from "@db/DynamoDataClient";
+import { DynamoMigrationDataClient } from "@db/DynamoMigrationDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
@@ -80,6 +81,7 @@ import {
   AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
   AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+  AWS_CRYPTO_TAX_ID_DECRYPT_ONLY_CONTEXTS,
   LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   AWS_CRYPTO_TAX_ID_HASHING_KEY,
   BUSINESSES_TABLE,
@@ -310,21 +312,19 @@ const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
 const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
 const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
 
-const LegacyAWSTaxIDEncryptionClient = isLocal
-  ? new MockCryptoClient()
-  : AWSCryptoFactory(LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
-      stage: AWS_CRYPTO_CONTEXT_STAGE,
-      purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-      origin: AWS_CRYPTO_CONTEXT_ORIGIN,
-    });
-
 const AWSTaxIDEncryptionClient = isLocal
   ? new MockCryptoClient()
-  : AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
-      stage: AWS_CRYPTO_CONTEXT_STAGE,
-      purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-      origin: AWS_CRYPTO_CONTEXT_ORIGIN,
-    });
+  : AWSCryptoFactory(
+      AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+      {
+        stage: AWS_CRYPTO_CONTEXT_STAGE,
+        purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+        origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+      },
+      undefined,
+      [LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY],
+      AWS_CRYPTO_TAX_ID_DECRYPT_ONLY_CONTEXTS,
+    );
 
 const AWSTaxIDHashingClient = isLocal
   ? new MockCryptoClient()
@@ -365,16 +365,22 @@ const userDataClient = DynamoUserDataClient(
   USERS_TABLE,
   dataLogger,
   {
-    legacyTaxIdCryptoClient: LegacyAWSTaxIDEncryptionClient,
     newHashingClient: AWSTaxIDHashingClient,
   },
 );
 const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, dataLogger);
+const migrationDataClient = DynamoMigrationDataClient({
+  db: dynamoDb,
+  userDataClient,
+  usersTableName: USERS_TABLE,
+  businessesTableName: BUSINESSES_TABLE,
+});
 const dynamoDataClient = DynamoDataClient(
   userDataClient,
   businessesDataClient,
   dataLogger,
   isKillSwitchOn,
+  migrationDataClient,
 );
 
 const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);

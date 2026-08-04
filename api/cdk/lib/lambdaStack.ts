@@ -339,7 +339,7 @@ export class LambdaStack extends Stack {
       entry: path.join(__dirname, "../../src/functions/migrateUsersVersion/app.ts"),
       handler: "handler",
       runtime: Runtime.NODEJS_22_X,
-      timeout: Duration.seconds(30),
+      timeout: Duration.minutes(4),
       memorySize: 1024,
       ephemeralStorageSize: Size.mebibytes(512),
       ...vpcProps,
@@ -352,6 +352,9 @@ export class LambdaStack extends Stack {
         AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: awsCryptoTaxIdEncryptionKey,
         LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: legacyAwsCryptoTaxIdEncryptionKey,
         AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE: awsCryptoContextTaxIdEncryptionPurpose,
+        AWS_CRYPTO_TAX_ID_HASHING_KEY: awsCryptoTaxIdHashingKey,
+        AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE: awsCryptoContextTaxIdHashingPurpose,
+        AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT: awsCryptoTaxIdHashingSalt,
       },
     });
 
