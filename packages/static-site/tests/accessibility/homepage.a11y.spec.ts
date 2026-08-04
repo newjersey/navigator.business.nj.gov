@@ -43,6 +43,7 @@ const createLocaleAccessibilityTest = ({ locale }: CreateLocaleAccessibilityTest
 
     await page.goto(`/${locale}`);
     await page.getByRole("heading", { level: 1, name: messages.landing.hero.title }).waitFor();
+    await expect(page).toHaveTitle(messages.metadata.title);
 
     const results = await new AxeBuilder({ page }).analyze();
 

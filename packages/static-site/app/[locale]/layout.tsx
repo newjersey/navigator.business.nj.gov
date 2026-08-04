@@ -27,12 +27,12 @@ import { SkipNav } from "@/components/landing/SkipNav";
 import { textDirectionForLocale } from "@/domain/i18n/languages";
 import { ENABLED_LOCALES, hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
-import { SITE_BASE_URL } from "@/domain/siteConfig";
+import { SITE_BASE_URL, SOCIAL_PREVIEW_IMAGE } from "@/domain/siteConfig";
 
 /**
- * Stores the logo path used in metadata icons and social previews.
+ * Stores the logo path used in metadata icons.
  */
-const NJ_LOGO_IMAGE_PATH = "/assets/njwds/dist/img/nj-logo-gray-20.png";
+const NJ_LOGO_IMAGE_PATH = SOCIAL_PREVIEW_IMAGE.url;
 
 /**
  * Public path for the synced NJWDS stylesheet.
@@ -130,20 +130,13 @@ export const generateMetadata = async ({ params }: GenerateMetadataProps): Promi
     openGraph: {
       title: messages.metadata.title,
       description: messages.metadata.description,
-      images: [
-        {
-          url: NJ_LOGO_IMAGE_PATH,
-          width: 144,
-          height: 144,
-          alt: "State of New Jersey logo",
-        },
-      ],
+      images: [SOCIAL_PREVIEW_IMAGE],
     },
     twitter: {
       card: "summary",
       title: messages.metadata.title,
       description: messages.metadata.description,
-      images: [NJ_LOGO_IMAGE_PATH],
+      images: [SOCIAL_PREVIEW_IMAGE.url],
     },
   };
 };

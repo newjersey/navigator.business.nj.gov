@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { loadPageBySlug } from "@/domain/content/loadContent";
-import PrivacyPolicyRoute, { generateMetadata } from "./page";
+import SoftwareAndReuseRoute, { generateMetadata } from "./page";
 
-const page = loadPageBySlug("privacy-policy");
+const page = loadPageBySlug("our-software-and-reuse");
 const { name } = page;
 
 describe("generateMetadata", () => {
@@ -14,14 +14,14 @@ describe("generateMetadata", () => {
     expect(metadata.description).toBe(page["sub-heading-text"]);
     expect(metadata.openGraph?.title).toEqual(metadata.title);
     expect(metadata.twitter?.title).toEqual(metadata.title);
-    expect(metadata.alternates?.canonical).toBe("/privacy-policy");
+    expect(metadata.alternates?.canonical).toBe("/our-software-and-reuse");
   });
 });
 
-describe("PrivacyPolicyRoute", () => {
-  it("renders the privacy policy page for a supported locale", async () => {
+describe("SoftwareAndReuseRoute", () => {
+  it("renders the page for a supported locale", async () => {
     render(
-      await PrivacyPolicyRoute({
+      await SoftwareAndReuseRoute({
         params: Promise.resolve({ locale: "en-US" }),
       }),
     );

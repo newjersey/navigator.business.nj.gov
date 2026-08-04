@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import CategoryPage, { generateStaticParams } from "./page";
+import { getApplicationMessages } from "@/domain/i18n/messages";
+import CategoryPage, { generateMetadata, generateStaticParams } from "./page";
 
 vi.mock("@/domain/categories", () => ({
   CATEGORY_HIERARCHY: {
@@ -18,6 +19,35 @@ vi.mock("@/domain/categories", () => ({
     start: { children: [] },
   },
 }));
+
+describe("generateMetadata", () => {
+  it("brands the title with the category's own title and its subtitle as the description", async () => {
+    const { learn } = getApplicationMessages({ locale: "en-US" });
+    const plan = learn.categories.find((category) => category.key === "plan");
+    if (!plan) {
+      throw new Error("Expected a 'plan' category in real en-US messages");
+    }
+
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ locale: "en-US", category: "plan" }),
+    });
+
+    expect(metadata.title).toEqual({ absolute: `${plan.title} | Business.NJ.gov` });
+    expect(metadata.description).toBe(plan.subtitle);
+    expect(metadata.openGraph?.title).toEqual(metadata.title);
+    expect(metadata.twitter?.title).toEqual(metadata.title);
+    expect(metadata.alternates?.canonical).toBe("/plan");
+  });
+
+  it("falls back to alternates-only metadata for an unknown category", async () => {
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ locale: "en-US", category: "does-not-exist" }),
+    });
+
+    expect(metadata.title).toBeUndefined();
+    expect(metadata.alternates?.canonical).toBe("/does-not-exist");
+  });
+});
 
 describe("generateStaticParams", () => {
   it("returns each category from CATEGORY_HIERARCHY", () => {

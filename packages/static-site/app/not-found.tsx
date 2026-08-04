@@ -1,3 +1,7 @@
+import type { Metadata } from "next";
+
+import { SITE_TITLE_SUFFIX } from "@/domain/siteConfig";
+
 /**
  * Fallback 404 for requests that never reach the `[locale]` segment (paths
  * excluded by the middleware matcher in `proxy.ts`). Every other unmatched
@@ -7,6 +11,11 @@
  * without site chrome, per next-intl's documented pattern for this case:
  * https://next-intl.dev/docs/environments/error-files
  */
+
+export const metadata: Metadata = {
+  title: { absolute: `Page Not Found | ${SITE_TITLE_SUFFIX}` },
+};
+
 const NotFound = () => {
   return (
     <html lang="en">
