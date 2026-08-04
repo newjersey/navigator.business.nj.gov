@@ -57,7 +57,11 @@ process.env = Object.assign(process.env, {
 export default {
   ...sharedConfig,
   displayName: "web",
-  setupFilesAfterEnv: ["./setupTests.js", "<rootDir>/../shared/src/test/setupRandomSeed.ts"],
+  setupFilesAfterEnv: [
+    "<rootDir>/test/setupJestDom.ts",
+    "./setupTests.js",
+    "<rootDir>/../shared/src/test/setupRandomSeed.ts",
+  ],
   testEnvironment: "<rootDir>/test/customJsdomEnvironment.ts",
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
   rootDir: "./",
