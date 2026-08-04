@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
-import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, hasAppLocale, resolveAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
+import { buildPageMetadata } from "@/domain/metadata/pageMetadata";
 
 interface PageParams {
   readonly locale: AppLocale;
@@ -22,9 +23,21 @@ interface Props {
  * @returns Metadata containing canonical and alternate-language links.
  */
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
-  const { category } = await params;
+  const { locale, category } = await params;
+  const pathnameWithoutLocale = `/${category}`;
 
-  return { alternates: buildAlternateLanguages({ pathnameWithoutLocale: `/${category}` }) };
+  const messages = getApplicationMessages({ locale: resolveAppLocale({ locale }) });
+  const categoryMessages = messages.learn.categories.find((content) => content.key === category);
+
+  if (!categoryMessages) {
+    return { alternates: buildAlternateLanguages({ pathnameWithoutLocale }) };
+  }
+
+  return buildPageMetadata({
+    pageTitle: categoryMessages.title,
+    description: categoryMessages.subtitle,
+    pathnameWithoutLocale,
+  });
 };
 
 /**

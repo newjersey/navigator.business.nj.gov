@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { describe, expect, it, vi } from "vitest";
 import { getApplicationMessages } from "@/domain/i18n/messages";
-import ContentPage, { generateStaticParams } from "./page";
+import ContentPage, { generateMetadata, generateStaticParams } from "./page";
 
 vi.mock("@/domain/categories", () => ({
   CATEGORY_HIERARCHY: {
@@ -42,6 +42,35 @@ describe("generateStaticParams", () => {
       { slug: "choose-a-business-structure" },
       { slug: "something-else" },
     ]);
+  });
+});
+
+describe("generateMetadata", () => {
+  it("brands the title with the page's own name and its sub-heading as the description", async () => {
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ locale: "en-US", slug: "create-a-business-plan" }),
+    });
+
+    expect(metadata.title).toEqual({ absolute: "Create a Business Plan | Business.NJ.gov" });
+    expect(metadata.alternates?.canonical).toBe("/pages/create-a-business-plan");
+  });
+
+  it("uses the localized message title for the funding page, not the English-only frontmatter name", async () => {
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ locale: "en-US", slug: "funding" }),
+    });
+
+    expect(metadata.title).toEqual({ absolute: "Funding | Business.NJ.gov" });
+    expect(metadata.description).toBe("Whether you're looking for startup capital...");
+  });
+
+  it("falls back to alternates-only metadata for an unknown slug", async () => {
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ locale: "en-US", slug: "does-not-exist" }),
+    });
+
+    expect(metadata.title).toBeUndefined();
+    expect(metadata.alternates?.canonical).toBe("/pages/does-not-exist");
   });
 });
 

@@ -13,6 +13,7 @@ import PageContent from "@/components/learn/PageContent";
 import { loadPages } from "@/domain/content/loadContent";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
 import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
+import { buildPageMetadata } from "@/domain/metadata/pageMetadata";
 
 /**
  * Slug of the Markdown file backing this page (`content/src/pages/<slug>.md`).
@@ -28,12 +29,21 @@ interface Props {
 }
 
 /**
- * Generates metadata advertising hreflang alternates for the page.
+ * Generates branded, descriptive metadata for the page.
  *
- * @returns Metadata containing canonical and alternate-language links.
+ * @returns Metadata with a title matching the page's `<h1>`, its description, and alternate-language links.
  */
 export const generateMetadata = (): Metadata => {
-  return { alternates: buildAlternateLanguages({ pathnameWithoutLocale: `/${PAGE_SLUG}` }) };
+  const page = loadPages().find((item) => item.slug === PAGE_SLUG);
+  if (!page) {
+    return { alternates: buildAlternateLanguages({ pathnameWithoutLocale: `/${PAGE_SLUG}` }) };
+  }
+
+  return buildPageMetadata({
+    pageTitle: page.name,
+    description: page["sub-heading-text"],
+    pathnameWithoutLocale: `/${PAGE_SLUG}`,
+  });
 };
 
 const PrivacyPolicyRoute = async ({ params }: Props) => {

@@ -1,8 +1,22 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { getLocale } from "next-intl/server";
 import { LocalizedLink } from "@/components/landing/LocalizedLink";
 import { resolveAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
+import { SITE_TITLE_SUFFIX } from "@/domain/siteConfig";
+
+/**
+ * Generates a branded, localized title for the 404 page.
+ *
+ * @returns Metadata with a title matching the page's own `<h1>` in the visitor's locale.
+ */
+export const generateMetadata = async (): Promise<Metadata> => {
+  const locale = resolveAppLocale({ locale: await getLocale() });
+  const { pageNotFound } = getApplicationMessages({ locale });
+
+  return { title: { absolute: `${pageNotFound.title} | ${SITE_TITLE_SUFFIX}` } };
+};
 
 const PageNotFound = async () => {
   const locale = resolveAppLocale({ locale: await getLocale() });

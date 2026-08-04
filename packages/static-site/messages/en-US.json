@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Business.NJ.gov | Plan, Start, and Grow",
-    "description": "Landing page prototype for a Next.js and NJWDS-powered business guidance experience."
+    "description": "Business.NJ.gov is your first stop to plan, start, operate, and grow a business in New Jersey."
   },
   "layout": {
     "skipNavigationLabel": "Skip to main content",
@@ -894,9 +894,11 @@
           "text": "**40,748** - Number of visits to Spanish language content from June 1, 2023, to April 1, 2025"
         }
       ]
-    }
+    },
+    "metaDescription": "See how Business.NJ.gov streamlined licensing, funding, and support for New Jersey businesses from 2020 to 2025."
   },
   "newsletterSignup": {
-    "title": "Subscribe to Business.NJ.gov Updates"
+    "title": "Subscribe to Business.NJ.gov Updates",
+    "metaDescription": "Subscribe to get New Jersey business news, funding opportunities, and program updates from Business.NJ.gov delivered to your inbox."
   }
 }

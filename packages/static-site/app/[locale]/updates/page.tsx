@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { UpdatesPage } from "@/components/learn/UpdatesPage";
-import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
-import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, hasAppLocale, resolveAppLocale } from "@/domain/i18n/locales";
+import { getApplicationMessages } from "@/domain/i18n/messages";
+import { buildPageMetadata } from "@/domain/metadata/pageMetadata";
 
 interface PageParams {
   readonly locale: AppLocale;
@@ -14,12 +15,21 @@ interface Props {
 }
 
 /**
- * Generates metadata advertising hreflang alternates for the updates page.
+ * Generates branded, descriptive metadata for the updates page.
  *
- * @returns Metadata containing canonical and alternate-language links.
+ * @param props Route props provided by Next.js.
+ * @param props.params Async route params including the locale segment.
+ * @returns Metadata with a title matching the page's `<h1>`, its description, and alternate-language links.
  */
-export const generateMetadata = (): Metadata => {
-  return { alternates: buildAlternateLanguages({ pathnameWithoutLocale: "/updates" }) };
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { locale } = await params;
+  const { updates } = getApplicationMessages({ locale: resolveAppLocale({ locale }) });
+
+  return buildPageMetadata({
+    pageTitle: updates.title,
+    description: updates.intro,
+    pathnameWithoutLocale: "/updates",
+  });
 };
 
 const UpdatesRoute = async ({ params }: Props) => {

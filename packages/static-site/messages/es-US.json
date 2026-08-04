@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Business.NJ.gov | Planifique, Comience y Haga Crecer",
-    "description": "Prototipo de página principal para una experiencia de orientación empresarial impulsada por Next.js y NJWDS."
+    "description": "Business.NJ.gov es su primera parada para planificar, iniciar, operar y hacer crecer un negocio en Nueva Jersey."
   },
   "layout": {
     "skipNavigationLabel": "Saltar al contenido principal",
@@ -894,9 +894,11 @@
           "text": "**40,748** - Cantidad de visitas a contenido en español del 1 de junio de 2023 al 1 de abril de 2025"
         }
       ]
-    }
+    },
+    "metaDescription": "Descubra cómo Business.NJ.gov simplificó las licencias, el financiamiento y el apoyo para las empresas de Nueva Jersey de 2020 a 2025."
   },
   "newsletterSignup": {
-    "title": "Subscribe to Business.NJ.gov Updates"
+    "title": "Subscribe to Business.NJ.gov Updates",
+    "metaDescription": "Suscríbase para recibir noticias empresariales de Nueva Jersey, oportunidades de financiamiento y actualizaciones de programas de Business.NJ.gov directamente en su correo electrónico."
   }
 }

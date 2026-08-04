@@ -6,8 +6,13 @@ import ImpactReportRoute, { generateMetadata } from "./page";
 const { impactReport } = getApplicationMessages({ locale: "en-US" });
 
 describe("generateMetadata", () => {
-  it("builds hreflang alternates for /impact-report", () => {
-    const metadata = generateMetadata();
+  it("brands the title with the page's own title and its meta description", async () => {
+    const metadata = await generateMetadata({ params: Promise.resolve({ locale: "en-US" }) });
+
+    expect(metadata.title).toEqual({ absolute: `${impactReport.title} | Business.NJ.gov` });
+    expect(metadata.description).toBe(impactReport.metaDescription);
+    expect(metadata.openGraph?.title).toEqual(metadata.title);
+    expect(metadata.twitter?.title).toEqual(metadata.title);
     expect(metadata.alternates?.canonical).toBe("/impact-report");
   });
 });

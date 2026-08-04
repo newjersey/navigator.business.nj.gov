@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { getApplicationMessages } from "@/domain/i18n/messages";
-import PageNotFound from "./not-found";
+import { SITE_TITLE_SUFFIX } from "@/domain/siteConfig";
+import PageNotFound, { generateMetadata } from "./not-found";
 
 vi.mock("next-intl/server", () => ({
   getLocale: vi.fn(),
@@ -11,6 +12,28 @@ const { getLocale } = await import("next-intl/server");
 
 const enMessages = await getApplicationMessages({ locale: "en-US" });
 const esMessages = await getApplicationMessages({ locale: "es-US" });
+
+describe("generateMetadata", () => {
+  it("builds a branded title matching the 404 page's own h1", async () => {
+    vi.mocked(getLocale).mockResolvedValue("en-US");
+
+    const metadata = await generateMetadata();
+
+    expect(metadata.title).toEqual({
+      absolute: `${enMessages.pageNotFound.title} | ${SITE_TITLE_SUFFIX}`,
+    });
+  });
+
+  it("builds a branded title for es-US", async () => {
+    vi.mocked(getLocale).mockResolvedValue("es-US");
+
+    const metadata = await generateMetadata();
+
+    expect(metadata.title).toEqual({
+      absolute: `${esMessages.pageNotFound.title} | ${SITE_TITLE_SUFFIX}`,
+    });
+  });
+});
 
 describe("PageNotFound", () => {
   it("renders the localized title and description for the resolved locale", async () => {

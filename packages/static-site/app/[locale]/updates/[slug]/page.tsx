@@ -6,6 +6,8 @@ import { loadRecents } from "@/domain/content/loadContent";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
 import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
+import { buildUpdateDescription } from "@/domain/metadata/buildUpdateDescription";
+import { buildPageMetadata } from "@/domain/metadata/pageMetadata";
 
 interface PageParams {
   readonly locale: AppLocale;
@@ -17,16 +19,26 @@ interface Props {
 }
 
 /**
- * Generates metadata advertising hreflang alternates for an update's detail page.
+ * Generates branded, descriptive metadata for an update's detail page.
  *
  * @param props Route props provided by Next.js.
  * @param props.params Async route params including the slug segment.
- * @returns Metadata containing canonical and alternate-language links.
+ * @returns Metadata with a title matching the update's `<h1>` and alternate-language links.
  */
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { slug } = await params;
+  const pathnameWithoutLocale = `/updates/${slug}`;
 
-  return { alternates: buildAlternateLanguages({ pathnameWithoutLocale: `/updates/${slug}` }) };
+  const recent = loadRecents().find((item) => item.slug === slug);
+  if (!recent) {
+    return { alternates: buildAlternateLanguages({ pathnameWithoutLocale }) };
+  }
+
+  return buildPageMetadata({
+    pageTitle: recent.name,
+    description: buildUpdateDescription({ body: recent.body }),
+    pathnameWithoutLocale,
+  });
 };
 
 export const generateStaticParams = () => loadRecents().map((recent) => ({ slug: recent.slug }));
