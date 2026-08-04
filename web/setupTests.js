@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-require("@testing-library/jest-dom");
 import { TextDecoder, TextEncoder } from "util";
 
 process.env.API_BASE_URL = "";
