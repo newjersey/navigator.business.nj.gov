@@ -892,6 +892,8 @@ export interface ImpactReportMessages {
   readonly customerServiceExperience: CustomerServiceExperienceContent;
   /** "Driving Equity and Accessibility" section content. */
   readonly drivingEquity: DrivingEquityContent;
+  /** Page `<meta name="description">` content. */
+  readonly metaDescription: string;
 }
 
 /**
@@ -900,6 +902,8 @@ export interface ImpactReportMessages {
 export interface NewsletterSignupMessages {
   /** Page H1 title. */
   readonly title: string;
+  /** Page `<meta name="description">` content. */
+  readonly metaDescription: string;
 }
 
 /**

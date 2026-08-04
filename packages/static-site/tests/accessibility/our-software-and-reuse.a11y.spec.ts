@@ -4,7 +4,7 @@ import type { BrowserContext, Page } from "playwright";
 import { loadPageBySlug } from "@/domain/content/loadContent";
 import type { AppLocale } from "@/domain/i18n/locales";
 import { ENABLED_LOCALES } from "@/domain/i18n/locales";
-import { LANGUAGE_PROMPT_DISMISSED_COOKIE } from "@/domain/siteConfig";
+import { LANGUAGE_PROMPT_DISMISSED_COOKIE, SITE_TITLE_SUFFIX } from "@/domain/siteConfig";
 
 /**
  * Defines the test context provided by Playwright.
@@ -47,6 +47,7 @@ const createLocaleAccessibilityTest = ({ locale }: CreateLocaleAccessibilityTest
 
     await page.goto(`/${locale}/our-software-and-reuse`);
     await page.getByRole("heading", { level: 1, name: pageName }).waitFor();
+    await expect(page).toHaveTitle(`${pageName} | ${SITE_TITLE_SUFFIX}`);
 
     // `color-contrast` is a pre-existing NJWDS banner/chrome issue present on
     // every page (it also fails the homepage audit) and is outside this page's
