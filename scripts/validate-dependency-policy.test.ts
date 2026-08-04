@@ -5,7 +5,7 @@ import {
   validateManifest,
   validateRepository,
   validateYarnToolchainState,
-} from "./validate-dependency-policy.mjs";
+} from "./validate-dependency-policy.ts";
 
 test("allows exact versions and local dependency protocols", () => {
   assert.equal(isAllowedDependencyVersion("example", "1.2.3"), true);
