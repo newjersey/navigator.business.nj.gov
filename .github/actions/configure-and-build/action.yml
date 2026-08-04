@@ -15,7 +15,7 @@ runs:
     - name: Determine Cypress Version
       shell: bash
       run: |
-        yarn info --json cypress | jq .children.Version > cypress.lock
+        node -p "require('./package.json').devDependencies.cypress" > cypress.lock
 
     - name: Restore Cypress Cache
       uses: actions/cache@v6

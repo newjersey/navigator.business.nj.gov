@@ -10,14 +10,11 @@
   // - config:recommended              Renovate defaults + Dependency Dashboard
   // - :semanticCommits                fix:/chore: prefixes (matches our conventional commits)
   // - :pinVersions                    exact versions for reproducible installs
-  // - group:allNonMajor               catch-all: ungrouped minor+patch land in one PR
-  //                                   (ecosystem rules below override this per-package)
   // - helpers:pinGitHubActionDigests  pin Actions to commit SHAs (supply-chain hardening)
   extends: [
     "config:recommended",
     ":semanticCommits",
     ":pinVersions",
-    "group:allNonMajor",
     "helpers:pinGitHubActionDigests",
   ],
 
@@ -60,10 +57,12 @@
   // Managed elsewhere / intentionally pinned outside Renovate.
   // cimg/node is the CircleCI node image used in BuilderImage.Dockerfile;
   // it tracks .nvmrc manually.
-  ignoreDeps: ["node", "cimg/node", "kill-port", "semantic-release"],
+  // Yarn upgrades must also update yarnPath and the vendored release binary,
+  // which Renovate's packageManager update does not manage.
+  ignoreDeps: ["node", "cimg/node", "kill-port", "semantic-release", "yarn"],
 
-  // Only rebase branches when they actually conflict (less CI churn).
-  rebaseWhen: "conflicted",
+  // Refresh stale dependency branches during the configured off-hours window.
+  rebaseWhen: "behind-base-branch",
 
   packageRules: [
     // Major GitHub Actions bumps are breaking-ish: label + require manual merge.
@@ -82,15 +81,15 @@
       automergeStrategy: "rebase",
     },
 
-    // Auth/CMS surfaces are high-blast-radius: always review by hand.
+    // Auth/CMS surfaces are high-blast-radius: always review by hand. Include
+    // the public Amplify package as well as its scoped implementation packages.
     {
-      matchPackageNames: ["@aws-amplify/core", "@aws-amplify/auth", "decap-cms-app"],
+      matchPackageNames: ["aws-amplify", "@aws-amplify/*", "decap-cms-app"],
       automerge: false,
     },
 
-    // ---- Ecosystem groups (override group:allNonMajor's default groupName) ----
-    // packageRules are applied in order; later rules override earlier ones for the
-    // same field, so the catch-all above is safely overridden here per ecosystem.
+    // ---- Ecosystem groups ----
+    // Dependencies outside these groups receive isolated PRs.
 
     // E2E + audit plugins move together.
     {
@@ -100,7 +99,7 @@
 
     // Jest core + its transformers/types.
     {
-      matchPackageNames: ["@types/jest", "ts-jest", "babel-jest", "@jest/types", "jest*"],
+      matchPackageNames: ["@jest/*", "@types/jest", "ts-jest", "babel-jest", "jest*"],
       groupName: "jest",
     },
 
@@ -132,8 +131,14 @@
     },
 
     { matchPackageNames: ["@testing-library/*"], groupName: "testing-library" },
-    { matchPackageNames: ["@storybook/*"], groupName: "storybook" },
-    { matchPackageNames: ["@aws-amplify/*"], groupName: "aws-amplify" },
+    {
+      matchPackageNames: ["storybook", "@storybook/*", "eslint-plugin-storybook"],
+      groupName: "storybook",
+    },
+    {
+      matchPackageNames: ["aws-amplify", "@aws-amplify/*"],
+      groupName: "aws-amplify",
+    },
     { matchPackageNames: ["@swc/*"], groupName: "swc" },
 
     // MUI + its zero-runtime Pigment engine (same release cadence).

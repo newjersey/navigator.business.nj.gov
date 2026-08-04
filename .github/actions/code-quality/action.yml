@@ -1,9 +1,15 @@
 name: "Code Quality Checks"
-description: "Runs typecheck, prettier, linting, spellcheck, and dependency checks."
+description:
+  "Runs typecheck, prettier, linting, spellcheck, dependency checks, and Storybook build."
 
 runs:
   using: "composite"
   steps:
+    - name: Validate Dependency Policy
+      shell: bash
+      run: |
+        yarn test:dependency-policy
+
     - name: Run Typecheck
       shell: bash
       run: |
@@ -33,3 +39,8 @@ runs:
       shell: bash
       run: |
         yarn dependency-check
+
+    - name: Build Storybook
+      shell: bash
+      run: |
+        yarn workspace @businessnjgovnavigator/web build-storybook
