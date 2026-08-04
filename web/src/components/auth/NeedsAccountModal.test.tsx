@@ -22,28 +22,18 @@ describe("<NeedsAccount Modal />", () => {
   });
 
   const setShowNeedsAccountModal = jest.fn();
-  const setUserWantsToContinueWithoutSaving = jest.fn();
-  const setShowContinueWithoutSaving = jest.fn();
 
   const setupHookWithAuth = ({
     isAuthenticated,
     showNeedsAccountModal,
-    showContinueWithoutSaving,
-    userWantsToContinueWithoutSaving,
   }: {
     isAuthenticated: IsAuthenticated;
     showNeedsAccountModal?: boolean;
-    showContinueWithoutSaving?: boolean;
-    userWantsToContinueWithoutSaving?: boolean;
   }): void => {
     render(
       withNeedsAccountContext(<NeedsAccountModal />, isAuthenticated, {
         showNeedsAccountModal: showNeedsAccountModal ?? true,
-        showContinueWithoutSaving: showContinueWithoutSaving ?? false,
-        userWantsToContinueWithoutSaving: userWantsToContinueWithoutSaving ?? false,
         setShowNeedsAccountModal: setShowNeedsAccountModal,
-        setShowContinueWithoutSaving: setShowContinueWithoutSaving,
-        setUserWantsToContinueWithoutSaving: setUserWantsToContinueWithoutSaving,
       }),
     );
   };
@@ -60,9 +50,15 @@ describe("<NeedsAccount Modal />", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("returns user to previous page when modal is closed", () => {
+  it("hides the modal when close button is clicked", () => {
     setupHookWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
     fireEvent.click(screen.getByLabelText("close"));
+    expect(setShowNeedsAccountModal).toHaveBeenCalledWith(false);
+  });
+
+  it("hides the modal when the continue exploring exploring button is clicked", () => {
+    setupHookWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
+    fireEvent.click(screen.getByText(Config.selfRegistration.continueExploringButtonText));
     expect(setShowNeedsAccountModal).toHaveBeenCalledWith(false);
   });
 
@@ -91,24 +87,5 @@ describe("<NeedsAccount Modal />", () => {
       screen.getByText(markdownToText(Config.selfRegistration.needsAccountModalSubText)),
     );
     expect(mockPush).toHaveBeenCalledWith(ROUTES.login);
-  });
-
-  it("displays the 'continue without saving' button when showContinueWithoutSaving is true", () => {
-    setupHookWithAuth({
-      isAuthenticated: IsAuthenticated.FALSE,
-      showNeedsAccountModal: true,
-      showContinueWithoutSaving: true,
-    });
-    expect(screen.getByText(Config.selfRegistration.continueWithoutSaving)).toBeInTheDocument();
-  });
-
-  it("sets userWantsToContinueWithoutSaving to true when 'continue without saving' is clicked", () => {
-    setupHookWithAuth({
-      isAuthenticated: IsAuthenticated.FALSE,
-      showNeedsAccountModal: true,
-      showContinueWithoutSaving: true,
-    });
-    fireEvent.click(screen.getByText(Config.selfRegistration.continueWithoutSaving));
-    expect(setUserWantsToContinueWithoutSaving).toHaveBeenCalledWith(true);
   });
 });

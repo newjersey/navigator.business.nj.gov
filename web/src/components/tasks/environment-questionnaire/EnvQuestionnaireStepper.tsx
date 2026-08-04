@@ -42,12 +42,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
   const envContext = useContext(EnvRequirementsContext);
   const { updateQueue } = useUserData();
 
-  const {
-    isAuthenticated,
-    setShowNeedsAccountModal,
-    setShowContinueWithoutSaving,
-    userWantsToContinueWithoutSaving,
-  } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
   type EnvRequirementsStepNames =
     | "Instructions"
@@ -155,18 +150,13 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
       categoryName,
     );
 
-    const userNotAuthAndDoesNotWantToSave =
-      envContext.state.stepIndex === 0 &&
-      isAuthenticated === IsAuthenticated.FALSE &&
-      userWantsToContinueWithoutSaving === false;
-
-    if (userNotAuthAndDoesNotWantToSave) {
+    if (envContext.state.stepIndex === 0 && isAuthenticated === IsAuthenticated.FALSE) {
       updateQueue
         ?.queuePreferences({ returnToLink: ROUTES.environmentRequirements })
         .updateInBackground();
-      setShowContinueWithoutSaving(true);
       setShowNeedsAccountModal(true);
     }
+
     envContext.setStepIndex(newStep);
   };
 
@@ -280,25 +270,16 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
           isRightMarginRemoved
           isColor="accent-cooler"
           onClick={() => {
-            if (
-              envContext.state.stepIndex === 0 &&
-              isAuthenticated === IsAuthenticated.FALSE &&
-              userWantsToContinueWithoutSaving === false
-            ) {
+            if (envContext.state.stepIndex === 0 && isAuthenticated === IsAuthenticated.FALSE) {
               updateQueue
                 ?.queuePreferences({ returnToLink: ROUTES.environmentRequirements })
                 .updateInBackground();
-              setShowContinueWithoutSaving(true);
               analytics.event.gen_guidance_stepper_save_modal_displayed.appears.general_guidance_save_modal_displayed();
               setShowNeedsAccountModal(true);
               envContext.setStepIndex(envContext.state.stepIndex + 1);
               return;
             }
             if (envContext.state.stepIndex < 5) {
-              if (userWantsToContinueWithoutSaving === true && envContext.state.stepIndex === 1) {
-                analytics.event.gen_guidance_stepper_continue_without_saving.click.general_guidance_continue_wo_saving();
-              }
-
               envContext.setStepIndex(envContext.state.stepIndex + 1);
             }
             if (envContext.state.stepIndex === 5) {

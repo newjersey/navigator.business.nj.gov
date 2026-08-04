@@ -49,7 +49,6 @@ describe("<EnvRequirements />", () => {
   });
 
   const setShowNeedsAccountModal = jest.fn();
-  const setShowContinueWithoutSaving = jest.fn();
   const existingEmail = "emailInUserData@email.com";
 
   const renderComponent = (environmentData?: Partial<EnvironmentData>): void => {
@@ -75,10 +74,8 @@ describe("<EnvRequirements />", () => {
 
   const renderComponentWithNeedsAccountContext = ({
     isAuthenticated,
-    userWantsToContinueWithoutSaving,
   }: {
     isAuthenticated?: boolean;
-    userWantsToContinueWithoutSaving?: boolean;
   }): void => {
     render(
       withNeedsAccountContext(
@@ -88,8 +85,6 @@ describe("<EnvRequirements />", () => {
         isAuthenticated ? IsAuthenticated.TRUE : IsAuthenticated.FALSE,
         {
           setShowNeedsAccountModal: setShowNeedsAccountModal,
-          setShowContinueWithoutSaving: setShowContinueWithoutSaving,
-          userWantsToContinueWithoutSaving: userWantsToContinueWithoutSaving ?? false,
         },
       ),
     );
@@ -122,22 +117,6 @@ describe("<EnvRequirements />", () => {
           return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
         });
         expect(currentBusiness().preferences.returnToLink).toEqual(ROUTES.environmentRequirements);
-      });
-
-      it("sets showContinueWithoutSaving to true when on the first step, is not authenticated and user hasn't clicked continue without saving", async () => {
-        renderComponentWithNeedsAccountContext({});
-        startQuestionnaire();
-        await waitFor(() => {
-          return expect(setShowContinueWithoutSaving).toHaveBeenCalledWith(true);
-        });
-      });
-
-      it("doesn't open 'Needs Account' modal when continueWithoutSaving is true", async () => {
-        renderComponentWithNeedsAccountContext({ userWantsToContinueWithoutSaving: true });
-        startQuestionnaire();
-        await waitFor(() => {
-          return expect(setShowNeedsAccountModal).not.toHaveBeenCalled();
-        });
       });
     });
 
