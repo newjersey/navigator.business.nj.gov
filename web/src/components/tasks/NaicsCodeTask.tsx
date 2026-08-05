@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { NeedsAccountMiniCallout } from "@/components/NeedsAccountMiniCallout";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { TaskHeader } from "@/components/TaskHeader";
 import { NaicsCodeDisplay } from "@/components/tasks/NaicsCodeDisplay";
@@ -74,6 +75,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
     <div className="min-height-38rem">
       <TaskHeader task={props.task} />
       <UnlockedBy task={props.task} />
+      <NeedsAccountMiniCallout />
       <Content>{preLookupContent}</Content>
       <div className="margin-y-4 bg-base-extra-light padding-3 radius-lg">
         {showInput ? (

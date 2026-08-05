@@ -546,7 +546,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
       <div ref={errorAlertRef} tabIndex={-1} data-testid={`error-alert-focus-container`}>
         {getErrorComponent()}
       </div>
-      <div className="margin-top-3" ref={stepperRef}>
+      <div ref={stepperRef}>
         <HorizontalStepper
           steps={stepStates}
           currentStep={state.stepIndex}
