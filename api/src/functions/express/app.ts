@@ -92,7 +92,6 @@ import {
 import { setupExpress } from "@libs/express";
 import { ConsoleLogWriter, LogWriter } from "@libs/logWriter";
 import { isKillSwitchOn } from "@libs/ssmUtils";
-import bodyParser from "body-parser";
 import { StatusCodes } from "http-status-codes";
 import serverless from "serverless-http";
 import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
@@ -450,8 +449,6 @@ const emergencyTripPermitClient = AbcEmergencyTripPermitClient(
   },
   logger,
 );
-
-app.use(bodyParser.json({ strict: false }));
 
 app.use(
   "/api",

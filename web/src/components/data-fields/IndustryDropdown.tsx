@@ -44,33 +44,33 @@ export const IndustryDropdown = (props: Props): ReactElement => {
   const Industries = getIndustries();
 
   const onIndustryIdChange = (industryId: string | undefined): void => {
-    let cannabisLicenseType = undefined;
+    setProfileData((currentProfileData) => {
+      let cannabisLicenseType = undefined;
 
-    const homeBasedBusiness: boolean | undefined =
-      !isHomeBasedBusinessApplicable(industryId) || nexusLocationInNewJersey(state.profileData)
-        ? false
-        : undefined;
+      const homeBasedBusiness: boolean | undefined =
+        !isHomeBasedBusinessApplicable(industryId) || nexusLocationInNewJersey(currentProfileData)
+          ? false
+          : undefined;
 
-    if (getIsApplicableToFunctionByFieldName("cannabisLicenseType")(industryId)) {
-      const wasCannabisPreviouslyApplicable = getIsApplicableToFunctionByFieldName(
-        "cannabisLicenseType",
-      )(state.profileData.industryId);
-      cannabisLicenseType = wasCannabisPreviouslyApplicable
-        ? state.profileData.cannabisLicenseType
-        : ("CONDITIONAL" as CannabisLicenseType);
-    }
+      if (getIsApplicableToFunctionByFieldName("cannabisLicenseType")(industryId)) {
+        const wasCannabisPreviouslyApplicable = getIsApplicableToFunctionByFieldName(
+          "cannabisLicenseType",
+        )(currentProfileData.industryId);
+        cannabisLicenseType = wasCannabisPreviouslyApplicable
+          ? currentProfileData.cannabisLicenseType
+          : ("CONDITIONAL" as CannabisLicenseType);
+      }
 
-    const newSector = LookupIndustryById(industryId).defaultSectorId;
-
-    setProfileData({
-      ...state.profileData,
-      ...getResetIndustrySpecificData(industryId),
-      homeBasedBusiness,
-      cannabisLicenseType,
-      nonEssentialRadioAnswers: {},
-      industryId: industryId,
-      sectorId: newSector,
-      naicsCode: state.profileData.industryId === industryId ? state.profileData.naicsCode : "",
+      return {
+        ...currentProfileData,
+        ...getResetIndustrySpecificData(industryId),
+        homeBasedBusiness,
+        cannabisLicenseType,
+        nonEssentialRadioAnswers: {},
+        industryId,
+        sectorId: LookupIndustryById(industryId).defaultSectorId,
+        naicsCode: currentProfileData.industryId === industryId ? currentProfileData.naicsCode : "",
+      };
     });
   };
 
