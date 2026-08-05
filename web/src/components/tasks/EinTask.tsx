@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { NeedsAccountMiniCallout } from "@/components/NeedsAccountMiniCallout";
 import { TaskHeader } from "@/components/TaskHeader";
 import { EinDisplay } from "@/components/tasks/EinDisplay";
 import { EinInput } from "@/components/tasks/EinInput";
@@ -63,10 +64,13 @@ export const EinTask = (props: Props): ReactElement => {
   return (
     <div className="min-height-38rem">
       <TaskHeader task={props.task} />
-      <UnlockedBy task={props.task} />
+      <NeedsAccountMiniCallout />
+      {isAuthenticated === IsAuthenticated.TRUE && <UnlockedBy task={props.task} />}
       <Content>{props.task.summaryDescriptionMd}</Content>
+
       <HorizontalLine />
       <Content>{preInputContent}</Content>
+
       <div className="margin-left-3ch margin-top-1">
         <Content>{Config.ein.descriptionText}</Content>
         {showInput && (

@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { NeedsAccountMiniCallout } from "@/components/NeedsAccountMiniCallout";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { TaskHeader } from "@/components/TaskHeader";
@@ -10,7 +11,9 @@ import { NexusFormationFlow } from "@/components/tasks/business-formation/NexusF
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -36,7 +39,7 @@ import {
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { FormationDbaDisplayContent, Task } from "@businessnjgovnavigator/shared/types";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
+import { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
   task: Task | undefined;
@@ -48,6 +51,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const { updateQueue, business, userData } = useUserData();
   const router = useRouter();
   const { Config } = useConfig();
+  const { isAuthenticated } = useContext(NeedsAccountContext);
 
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData(),
@@ -215,7 +219,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       <div className="flex flex-column space-between min-height-38rem">
         <div>
           <TaskHeader task={props.task} />
-          <UnlockedBy task={props.task} />
+          {isAuthenticated === IsAuthenticated.TRUE && <UnlockedBy task={props.task} />}
           <Content>{props.task.contentMd}</Content>
         </div>
         {getModifiedTaskContent(roadmap, props.task, "callToActionLink") &&
@@ -306,20 +310,19 @@ export const BusinessFormation = (props: Props): ReactElement => {
       }}
     >
       <div className="flex flex-column min-height-38rem" data-testid="formation-form">
-        <>
-          <div>
-            <TaskHeader task={props.task} />
-            {stepIndex === 0 && (
-              <>
-                <UnlockedBy task={props.task} dataTestid="dependency-alert" />
-                <div className="margin-bottom-2">
-                  <Content>{getIntro()}</Content>
-                </div>
-              </>
-            )}
-          </div>
-          {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator />}
-        </>
+        <div>
+          <TaskHeader task={props.task} />
+          {stepIndex === 0 && (
+            <>
+              <UnlockedBy task={props.task} dataTestid="dependency-alert" />
+              <div className="margin-bottom-2">
+                <Content>{getIntro()}</Content>
+              </div>
+              <NeedsAccountMiniCallout />
+            </>
+          )}
+        </div>
+        {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator />}
       </div>
     </BusinessFormationContext.Provider>
   );

@@ -1,13 +1,16 @@
+import { NeedsAccountMiniCallout } from "@/components/NeedsAccountMiniCallout";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CannabisPriorityRequirements } from "@/components/tasks/cannabis/CannabisPriorityRequirements";
 import { CannabisPriorityTypes } from "@/components/tasks/cannabis/CannabisPriorityTypes";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { scrollToTop, useMountEffect } from "@/lib/utils/helpers";
 import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   task: Task;
@@ -19,6 +22,7 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
   const [displayFirstTab, setDisplayFirstTab] = useState(true);
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
+  const { isAuthenticated } = useContext(NeedsAccountContext);
 
   useMountEffect(() => {
     if (props.CMS_ONLY_tab === "1") {
@@ -63,7 +67,8 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
         status={business?.taskProgress[props.task.id] ?? "TO_DO"}
       />
       <TaskHeader task={props.task} />
-      <UnlockedBy task={props.task} />
+      <NeedsAccountMiniCallout />
+      {isAuthenticated === IsAuthenticated.TRUE && <UnlockedBy task={props.task} />}
       {displayFirstTab ? (
         <CannabisPriorityTypes
           task={props.task}
