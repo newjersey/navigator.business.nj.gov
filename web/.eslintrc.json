@@ -18,7 +18,6 @@
     "plugin:@next/next/recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended",
     "plugin:unicorn/recommended",
     "prettier"
   ],
@@ -37,7 +36,8 @@
     "@typescript-eslint/eslint-plugin",
     "jsx-a11y",
     "cypress",
-    "testing-library"
+    "testing-library",
+    "react-hooks"
   ],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
@@ -49,6 +49,8 @@
       { "controlComponents": ["Checkbox"], "labelAttributes": ["htmlFor"] }
     ],
     "prefer-template": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error",
     "react/jsx-uses-react": "off",
     "react/prop-types": "off",
     "react/forbid-elements": [
