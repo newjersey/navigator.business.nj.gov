@@ -809,6 +809,8 @@ collections:
               - { label: Back, name: backButtonText, widget: string }
               - { label: Continue Text, name: continueButtonText, widget: string }
               - { label: Mark As Complete, name: "markAsCompleteButtonText", widget: string }
+              - { label: Needs Account Callout, name: "needsAccountCallout", widget: markdown }
+
   - label: Task - Business Name Search
     name: searchBusinessNameTask
     delete: false
