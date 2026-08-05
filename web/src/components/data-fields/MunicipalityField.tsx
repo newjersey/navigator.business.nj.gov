@@ -64,10 +64,10 @@ export const MunicipalityField = (props: Props): ReactElement => {
   };
 
   const onSelect = (value: Municipality | undefined): void => {
-    setProfileData({
-      ...state.profileData,
+    setProfileData((currentProfileData) => ({
+      ...currentProfileData,
       municipality: value,
-    });
+    }));
   };
 
   return (

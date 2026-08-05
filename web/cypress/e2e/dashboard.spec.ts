@@ -149,10 +149,18 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
         cy.get('[aria-label="Industry"]').first().click({ force: true });
         cy.contains("Restaurant").first().click({ force: true });
+        cy.get('[aria-label="Industry"]').should("have.value", "Restaurant");
         cy.get('[aria-label="Location"]').first().click({ force: true });
         cy.contains("Allendale").first().click({ force: true });
+        cy.get('[aria-label="Location"]').should("have.value", "Allendale");
 
+        cy.intercept("POST", "**/api/users").as("saveProfile");
         onProfilePage.clickSaveButton();
+        cy.wait("@saveProfile").then(({ request }) => {
+          const profileData = request.body.businesses[request.body.currentBusinessId].profileData;
+          expect(profileData.industryId).to.equal("restaurant");
+          expect(profileData.municipality.displayName).to.equal("Allendale");
+        });
         cy.url().should("contain", "/dashboard");
 
         // check dashboard
