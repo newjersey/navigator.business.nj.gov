@@ -1,5 +1,6 @@
 import { AutosaveSpinner } from "@/components/AutosaveSpinner";
 import { FieldEntryAlert } from "@/components/FieldEntryAlert";
+import { LockIcon } from "@/components/LockIcon";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
@@ -361,7 +362,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
   const getNextButtonText = (): string => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      return `Register & ${Config.formation.general.initialNextButtonText}`;
+      return `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.formation.general.initialNextButtonText}`;
     } else if (state.stepIndex === 0) {
       return Config.formation.general.initialNextButtonText;
     } else if (state.stepIndex === BusinessFormationStepsConfiguration.length - 1) {
@@ -429,6 +430,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
             dataTestId="next-button"
           >
             {getNextButtonText()}
+            {state.stepIndex === 0 && <LockIcon className="margin-left-1" />}
           </PrimaryButton>
         </ActionBarLayout>
       </CtaContainer>

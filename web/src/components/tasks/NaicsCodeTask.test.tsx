@@ -513,16 +513,22 @@ describe("<NaicsCodeTask />", () => {
       });
     });
 
-    it("prepends register to the next button", async () => {
+    it("prepends the create account prefix to the next button", async () => {
       renderPage();
       expect(
-        screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`),
+        screen.getByText(
+          `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.determineNaicsCode.saveButtonText}`,
+        ),
       ).toBeInTheDocument();
     });
 
     it("opens Needs Account modal on save button click", () => {
       renderPage();
-      fireEvent.click(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`));
+      fireEvent.click(
+        screen.getByText(
+          `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.determineNaicsCode.saveButtonText}`,
+        ),
+      );
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
