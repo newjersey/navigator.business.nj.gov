@@ -18,6 +18,7 @@ import type { ReactNode } from "react";
 import { GoogleTagManager } from "@/components/analytics/GoogleTagManager";
 import { Intercom } from "@/components/analytics/Intercom";
 import { SiteImprove } from "@/components/analytics/SiteImprove";
+import { FeedbackWidget } from "@/components/feedback/FeedbackWidget";
 import { GovBanner } from "@/components/landing/GovBanner";
 import { IdentifierSection } from "@/components/landing/IdentifierSection";
 import { LanguagePromptModal } from "@/components/landing/LanguagePromptModal";
@@ -186,6 +187,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
             languageSwitcher={messages.layout.languageSwitcher}
           />
           <main id={messages.layout.mainContentId}>{children}</main>
+          <FeedbackWidget />
           <SiteFooter
             content={messages.layout.footer}
             mainContentId={messages.layout.mainContentId}
