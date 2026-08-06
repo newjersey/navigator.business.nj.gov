@@ -560,16 +560,26 @@ describe("<NaicsCodeTask />", () => {
     });
 
     describe("guest mode - generic industry", () => {
-      it("opens modal when a user types in NAICS code input field", () => {
+      const renderGenericIndustryPage = (): void => {
         initialBusiness = generateBusiness({
           profileData: generateProfileData({ naicsCode: "", industryId: "generic" }),
         });
         renderPage();
+      };
 
-        fireEvent.change(screen.getByLabelText("Save NAICS Code"), { target: { value: "123456" } });
+      it("locks the NAICS code input field for guest users", () => {
+        renderGenericIndustryPage();
+        expect(screen.getByLabelText("Save NAICS Code")).toHaveAttribute("readonly");
+        expect(screen.getByLabelText("Save NAICS Code")).toHaveAttribute("aria-readonly", "true");
+      });
 
+      it("opens modal when the NAICS code input is clicked, but not on focus alone", () => {
+        renderGenericIndustryPage();
+        fireEvent.focus(screen.getByLabelText("Save NAICS Code"));
+        expect(setShowNeedsAccountModal).not.toHaveBeenCalled();
+
+        fireEvent.click(screen.getByLabelText("Save NAICS Code"));
         expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
-        expect(screen.getByLabelText("Save NAICS Code")).toHaveValue("");
       });
     });
   });

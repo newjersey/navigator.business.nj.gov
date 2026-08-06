@@ -13,6 +13,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { useNeedsAccountLockedField } from "@/lib/data-hooks/useNeedsAccountLockedField";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -28,6 +29,7 @@ interface Props {
 export const TaxInput = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const needsAccountLockedFieldProps = useNeedsAccountLockedField();
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(
     business?.profileData ?? createEmptyProfileData(),
@@ -114,15 +116,6 @@ export const TaxInput = (props: Props): ReactElement => {
     </div>
   );
 
-  const getNeedsAccountModalFunction = (): (() => void) | undefined => {
-    if (isAuthenticated === IsAuthenticated.FALSE) {
-      return () => {
-        return setShowNeedsAccountModal(true);
-      };
-    }
-    return undefined;
-  };
-
   const onSave = (): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setShowNeedsAccountModal(true);
@@ -154,7 +147,7 @@ export const TaxInput = (props: Props): ReactElement => {
                 key={business?.profileData.taxId}
                 dbBusinessTaxId={business?.profileData.taxId}
                 required={isAuthenticated === IsAuthenticated.TRUE}
-                handleChangeOverride={getNeedsAccountModalFunction()}
+                {...needsAccountLockedFieldProps}
               />
               <div className="tablet:margin-top-05 tablet:margin-left-2">
                 <SecondaryButton
