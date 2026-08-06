@@ -29,6 +29,10 @@ const CHANGE_LANGUAGE_EVENT = "changeLanguage";
  * Returns nothing when the build is configured with the widget off, so pages
  * render no placeholder markup at all.
  *
+ * A failed widget load is logged to the console rather than raised: feedback is
+ * supplementary, so it must never take down the page around it. Nothing throws,
+ * so no error boundary is involved.
+ *
  * @returns The widget element, or `null` when disabled.
  * @example
  * ```tsx
@@ -63,7 +67,8 @@ export const FeedbackWidget = () => {
     };
 
     defineCustomElement().catch((error: unknown) => {
-      throw new Error("Failed to load the NJ feedback widget.", { cause: error });
+      // biome-ignore lint/suspicious/noConsole: a failed third-party widget load should surface in the console without breaking the page.
+      console.error("Failed to load the NJ feedback widget.", error);
     });
 
     return () => {
