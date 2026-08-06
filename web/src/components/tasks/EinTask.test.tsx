@@ -202,14 +202,19 @@ describe("<EinTask />", () => {
       });
     });
 
-    it("opens Needs Account modal when the field is edited", async () => {
+    it("locks the EIN field for guest users", () => {
       renderPage();
-      fireEvent.change(screen.getByLabelText("Save your EIN"), {
-        target: { value: "123456789" },
-      });
-      await waitFor(() => {
-        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
-      });
+      expect(screen.getByLabelText("Save your EIN")).toHaveAttribute("readonly");
+      expect(screen.getByLabelText("Save your EIN")).toHaveAttribute("aria-readonly", "true");
+    });
+
+    it("opens Needs Account modal when the EIN field is clicked, but not on focus alone", () => {
+      renderPage();
+      fireEvent.focus(screen.getByLabelText("Save your EIN"));
+      expect(setShowNeedsAccountModal).not.toHaveBeenCalled();
+
+      fireEvent.click(screen.getByLabelText("Save your EIN"));
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
     it("opens Needs Account modal when the save button is clicked", async () => {

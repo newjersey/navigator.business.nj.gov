@@ -33,6 +33,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   handleChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
   onChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  onClick?: () => void;
   onFocus?: () => void;
   error?: boolean;
   validationText?: string;
@@ -188,6 +189,7 @@ export const GenericTextField = forwardRef(
           sx={{ width: 1, ...fieldOptions?.sx }}
           required={props.required}
           type={props.type}
+          onClick={props.onClick}
           onFocus={props.onFocus}
           onKeyDown={props.onKeyDown}
           slotProps={{

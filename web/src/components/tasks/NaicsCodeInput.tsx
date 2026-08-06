@@ -7,6 +7,7 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useNeedsAccountLockedField } from "@/lib/data-hooks/useNeedsAccountLockedField";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
@@ -49,6 +50,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [displayInputState, setDisplayInput] = useState<boolean>(false);
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const needsAccountLockedFieldProps = useNeedsAccountLockedField();
   const displayInput = props.CMS_ONLY_displayInput ?? displayInputState;
   const saveButtonText =
     props.isAuthenticated === IsAuthenticated.FALSE
@@ -71,10 +73,6 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
         return value.length > 0;
       }) ?? [];
   const handleTextInputChange = (value: string): void => {
-    if (isAuthenticated !== IsAuthenticated.TRUE) {
-      setShowNeedsAccountModal(true);
-      return;
-    }
     setNaicsCode(value);
     if (value.length === REQUIRED_LENGTH) {
       if (getNaicsCode(value)) {
@@ -258,6 +256,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                 error={isInvalid !== undefined}
                 handleChange={handleTextInputChange}
                 validationText={errorMessages[isInvalid ?? "length"]}
+                {...needsAccountLockedFieldProps}
               />
             </WithErrorBar>
           </div>
