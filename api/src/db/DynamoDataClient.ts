@@ -5,12 +5,26 @@ import {
   type MigrationDataClient,
   type MigrationRunOptions,
   type UserDataClient,
+  isQuarantinedCiphertextError,
 } from "@domain/types";
 import { type LogWriterType } from "@libs/logWriter";
 import { type Business, CURRENT_VERSION, type UserData } from "@shared/userData";
 import { chunk } from "lodash";
 import { parseUserData } from "@db/zodSchema/zodSchemas";
 import { getConfigValue } from "@libs/ssmUtils";
+
+const migrationSuccess = (
+  migratedCount: number,
+  quarantinedCount: number,
+): {
+  success: true;
+  migratedCount: number;
+  quarantinedCount?: number;
+} => ({
+  success: true,
+  migratedCount,
+  ...(quarantinedCount > 0 ? { quarantinedCount } : {}),
+});
 
 export const DynamoDataClient = (
   userDataClient: UserDataClient,
@@ -25,6 +39,7 @@ export const DynamoDataClient = (
   ): Promise<{
     success: boolean;
     migratedCount?: number;
+    quarantinedCount?: number;
     error?: string;
   }> => {
     const canStartNextUser = options?.canStartNextUser ?? ((): boolean => true);
@@ -32,6 +47,7 @@ export const DynamoDataClient = (
     try {
       let nextToken: string | undefined = undefined;
       let migratedCount = 0;
+      let quarantinedCount = 0;
       const batchSize = 25;
       const isZodParsingOn = await getConfigValue("zod_parsing_on", logger);
 
@@ -39,7 +55,7 @@ export const DynamoDataClient = (
         const killSwitchOn = await isKillSwitchOn();
         if (killSwitchOn) {
           logger.LogInfo(`Migration halted: kill switch is ON`);
-          return { success: true, migratedCount };
+          return migrationSuccess(migratedCount, quarantinedCount);
         }
 
         const { usersToMigrate, nextToken: newNextToken } =
@@ -50,7 +66,7 @@ export const DynamoDataClient = (
             logger.LogInfo(
               `Reached max safe migration count (${MAX_SAFE_MIGRATION_COUNT}), exiting early.`,
             );
-            return { success: true, migratedCount };
+            return migrationSuccess(migratedCount, quarantinedCount);
           }
           const killSwitchBeforeEachBatch = await isKillSwitchOn();
           if (killSwitchBeforeEachBatch) {
@@ -60,19 +76,20 @@ export const DynamoDataClient = (
 
           const batchResult = await processBatch(batch, isZodParsingOn, canStartNextUser);
           migratedCount += batchResult.migratedCount;
+          quarantinedCount += batchResult.quarantinedCount;
           logger.LogInfo(
-            `Completed ${batchResult.migratedCount} migrations in this batch. Total migrated so far: ${migratedCount}`,
+            `Completed ${batchResult.migratedCount} migrations and quarantined ${batchResult.quarantinedCount} users in this batch. Total migrated so far: ${migratedCount}; total quarantined: ${quarantinedCount}`,
           );
           if (batchResult.stoppedForTime) {
-            return { success: true, migratedCount };
+            return migrationSuccess(migratedCount, quarantinedCount);
           }
         }
         nextToken = newNextToken;
       } while (nextToken);
       logger.LogInfo(
-        `Migration complete. Migrated ${migratedCount} users. Current version: ${CURRENT_VERSION}`,
+        `Migration complete. Migrated ${migratedCount} users and quarantined ${quarantinedCount}. Current version: ${CURRENT_VERSION}`,
       );
-      return { success: true, migratedCount };
+      return migrationSuccess(migratedCount, quarantinedCount);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.LogError(`MigrateData Failed: ${errorMessage}`);
@@ -84,16 +101,17 @@ export const DynamoDataClient = (
     usersToMigrate: UserData[],
     isZodParsingOn: string,
     canStartNextUser: () => boolean,
-  ): Promise<{ migratedCount: number; stoppedForTime: boolean }> => {
+  ): Promise<{ migratedCount: number; quarantinedCount: number; stoppedForTime: boolean }> => {
     if (!migrationDataClient) {
       throw new Error("Migration data client is required for coordinated migrations");
     }
 
     let migratedCount = 0;
+    let quarantinedCount = 0;
     for (const user of usersToMigrate) {
       if (!canStartNextUser()) {
         logger.LogInfo("Migration paused before Lambda timeout; remaining users will retry");
-        return { migratedCount, stoppedForTime: true };
+        return { migratedCount, quarantinedCount, stoppedForTime: true };
       }
 
       try {
@@ -109,6 +127,13 @@ export const DynamoDataClient = (
           continue;
         }
         const errorMessage = error instanceof Error ? error.message : String(error);
+        if (isQuarantinedCiphertextError(error)) {
+          quarantinedCount += 1;
+          logger.LogError(
+            `Quarantined scheduled migration for user ${user.user.id} from version ${user.version}: ${errorMessage}`,
+          );
+          continue;
+        }
         logger.LogError(
           `Scheduled migration failed for user ${user.user.id} from version ${user.version} to ${CURRENT_VERSION}: ${errorMessage}`,
         );
@@ -116,7 +141,7 @@ export const DynamoDataClient = (
       }
     }
 
-    return { migratedCount, stoppedForTime: false };
+    return { migratedCount, quarantinedCount, stoppedForTime: false };
   };
 
   const migrateForRequest = async (sourceUserData: UserData): Promise<UserData> => {

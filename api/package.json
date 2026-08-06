@@ -34,6 +34,8 @@
   },
   "dependencies": {
     "@aws-crypto/client-node": "4.2.1",
+    "@aws-crypto/material-management-node": "4.2.1",
+    "@aws-crypto/serialize": "4.2.1",
     "@aws-sdk/client-cloudwatch": "3.896.0",
     "@aws-sdk/client-cloudwatch-logs": "3.896.0",
     "@aws-sdk/client-dynamodb": "3.896.0",

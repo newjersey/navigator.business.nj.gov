@@ -3,62 +3,9 @@ import {
   v190BusinessUser,
   v190UserData,
 } from "@db/migrations/v190_remove_hidden_fundings_and_certifications";
-import { randomInt } from "@shared/intHelpers";
+import { rotateKmsField } from "@db/migrations/kms_migration_utils";
 import { type MigrationClients } from "@db/migrations/types";
-
-const decryptField = async (
-  fieldName: string,
-  encryptedValue: string,
-  clients: MigrationClients,
-): Promise<string> => {
-  try {
-    return await clients.cryptoClient.decryptValue(encryptedValue);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`Migration v191 failed to decrypt ${fieldName}: ${message}`, {
-      cause: error,
-    });
-  }
-};
-
-const encryptField = async (
-  fieldName: string,
-  plaintext: string,
-  clients: MigrationClients,
-): Promise<string> => {
-  try {
-    return await clients.cryptoClient.encryptValue(plaintext);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`Migration v191 failed to encrypt ${fieldName}: ${message}`, {
-      cause: error,
-    });
-  }
-};
-
-const reEncryptDeptOfLaborEin = async (
-  encryptedValue: string | undefined,
-  clients: MigrationClients,
-): Promise<string> => {
-  if (encryptedValue === "" || !encryptedValue) return "";
-
-  const fieldName = "profileData.deptOfLaborEin";
-  const plaintext = await decryptField(fieldName, encryptedValue, clients);
-  return await encryptField(fieldName, plaintext, clients);
-};
-
-const reEncryptValue = async (
-  fieldName: string,
-  encryptedValue: string | undefined,
-  clients: MigrationClients,
-): Promise<string | undefined> => {
-  if (!encryptedValue) {
-    return encryptedValue;
-  }
-
-  const plaintext = await decryptField(fieldName, encryptedValue, clients);
-  return await encryptField(fieldName, plaintext, clients);
-};
+import { randomInt } from "@shared/intHelpers";
 
 const hashTaxId = async (plaintext: string, clients: MigrationClients): Promise<string> => {
   if (!clients.newHashingClient) {
@@ -89,20 +36,35 @@ const reEncryptAndHashTaxId = async (
 ): Promise<{
   encryptedTaxId: string | undefined;
   hashedTaxId: string | undefined;
+  wasReset: boolean;
 }> => {
   if (!encryptedTaxId) {
     return {
       encryptedTaxId,
       hashedTaxId: undefined,
+      wasReset: false,
     };
   }
 
   const fieldName = "profileData.encryptedTaxId";
-  const plaintext = await decryptField(fieldName, encryptedTaxId, clients);
+  const result = await rotateKmsField({
+    migrationVersion: 191,
+    fieldName,
+    encryptedValue: encryptedTaxId,
+    clients,
+  });
+  if (result.wasReset) {
+    return {
+      encryptedTaxId: undefined,
+      hashedTaxId: undefined,
+      wasReset: true,
+    };
+  }
 
   return {
-    encryptedTaxId: await encryptField(fieldName, plaintext, clients),
-    hashedTaxId: await hashTaxId(plaintext, clients),
+    encryptedTaxId: result.value,
+    hashedTaxId: await hashTaxId(result.plaintext as string, clients),
+    wasReset: false,
   };
 };
 
@@ -140,41 +102,46 @@ const migrate_v190Business_to_v191Business = async (
   business: v190Business,
   clients: MigrationClients,
 ): Promise<v191Business> => {
-  const { encryptedTaxId, hashedTaxId } = await reEncryptAndHashTaxId(
-    business.profileData.encryptedTaxId,
+  const {
+    encryptedTaxId,
+    hashedTaxId,
+    wasReset: taxIdWasReset,
+  } = await reEncryptAndHashTaxId(business.profileData.encryptedTaxId, clients);
+  const cigaretteTaxId = await rotateKmsField({
+    migrationVersion: 191,
+    fieldName: "cigaretteLicenseData.encryptedTaxId",
+    encryptedValue: business.cigaretteLicenseData?.encryptedTaxId,
     clients,
-  );
-
-  const cigaretteEncryptedTaxId = await reEncryptValue(
-    "cigaretteLicenseData.encryptedTaxId",
-    business.cigaretteLicenseData?.encryptedTaxId,
+  });
+  const taxPin = await rotateKmsField({
+    migrationVersion: 191,
+    fieldName: "profileData.encryptedTaxPin",
+    encryptedValue: business.profileData.encryptedTaxPin,
     clients,
-  );
-
-  const encryptedTaxPin = await reEncryptValue(
-    "profileData.encryptedTaxPin",
-    business.profileData.encryptedTaxPin,
+  });
+  const deptOfLaborEin = await rotateKmsField({
+    migrationVersion: 191,
+    fieldName: "profileData.deptOfLaborEin",
+    encryptedValue: business.profileData.deptOfLaborEin,
     clients,
-  );
-
-  const encryptedDeptOfLaborEin = await reEncryptDeptOfLaborEin(
-    business.profileData.deptOfLaborEin,
-    clients,
-  );
+  });
 
   return {
     ...business,
     profileData: {
       ...business.profileData,
+      taxId: taxIdWasReset ? undefined : business.profileData.taxId,
       encryptedTaxId,
       hashedTaxId,
-      encryptedTaxPin,
-      deptOfLaborEin: encryptedDeptOfLaborEin,
+      taxPin: taxPin.wasReset ? undefined : business.profileData.taxPin,
+      encryptedTaxPin: taxPin.value,
+      deptOfLaborEin: deptOfLaborEin.value ?? "",
     },
     cigaretteLicenseData: business.cigaretteLicenseData
       ? {
           ...business.cigaretteLicenseData,
-          encryptedTaxId: cigaretteEncryptedTaxId,
+          taxId: cigaretteTaxId.wasReset ? undefined : business.cigaretteLicenseData.taxId,
+          encryptedTaxId: cigaretteTaxId.value,
         }
       : business.cigaretteLicenseData,
   };
