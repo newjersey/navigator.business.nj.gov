@@ -396,7 +396,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/material-management-node@npm:^4.2.1":
+"@aws-crypto/material-management-node@npm:4.2.1, @aws-crypto/material-management-node@npm:^4.2.1":
   version: 4.2.1
   resolution: "@aws-crypto/material-management-node@npm:4.2.1"
   dependencies:
@@ -454,7 +454,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/serialize@npm:^4.2.1":
+"@aws-crypto/serialize@npm:4.2.1, @aws-crypto/serialize@npm:^4.2.1":
   version: 4.2.1
   resolution: "@aws-crypto/serialize@npm:4.2.1"
   dependencies:
@@ -4803,6 +4803,8 @@ __metadata:
   resolution: "@businessnjgovnavigator/api@workspace:api"
   dependencies:
     "@aws-crypto/client-node": "npm:4.2.1"
+    "@aws-crypto/material-management-node": "npm:4.2.1"
+    "@aws-crypto/serialize": "npm:4.2.1"
     "@aws-sdk/client-cloudwatch": "npm:3.896.0"
     "@aws-sdk/client-cloudwatch-logs": "npm:3.896.0"
     "@aws-sdk/client-cognito-identity-provider": "npm:3.777.0"
@@ -4927,6 +4929,8 @@ __metadata:
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
     "@aws-crypto/client-node": "npm:4.2.1"
+    "@aws-crypto/material-management-node": "npm:4.2.1"
+    "@aws-crypto/serialize": "npm:4.2.1"
     "@aws-crypto/sha256-browser": "npm:5.2.0"
     "@aws-sdk/client-cloudwatch": "npm:3.896.0"
     "@aws-sdk/client-cloudwatch-logs": "npm:3.896.0"

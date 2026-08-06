@@ -10,7 +10,7 @@ import {
   generatev191UserData,
 } from "@db/migrations/v191_rotate_new_kms_keys";
 import { migrate_v191_to_v192 } from "@db/migrations/v192_fix_confirmation_email_sent_typo";
-import { type CryptoClient } from "@domain/types";
+import { type CryptoClient, ForeignEnvironmentCiphertextError } from "@domain/types";
 
 const makeCryptoClient = (): jest.Mocked<CryptoClient> => ({
   decryptValue: jest.fn(async (value) => `plain:${value}`),
@@ -19,6 +19,33 @@ const makeCryptoClient = (): jest.Mocked<CryptoClient> => ({
 });
 
 describe("migrate_v190_to_v191 hashing", () => {
+  it("resets a foreign tax ID instead of failing the version-190 migration", async () => {
+    const cryptoClient = makeCryptoClient();
+    cryptoClient.decryptValue.mockRejectedValue(new ForeignEnvironmentCiphertextError());
+    const userData = generatev190UserData({
+      businesses: {
+        first: generatev190Business({
+          id: "first",
+          profileData: generatev190ProfileData({
+            taxId: "*********123",
+            hashedTaxId: "foreign-environment-hash",
+            encryptedTaxId: "foreign-tax-id",
+          }),
+        }),
+      },
+    });
+
+    const result = await migrate_v190_to_v191(userData, { cryptoClient });
+
+    expect(result.businesses.first.profileData).toEqual(
+      expect.objectContaining({
+        taxId: undefined,
+        hashedTaxId: undefined,
+        encryptedTaxId: undefined,
+      }),
+    );
+  });
+
   it("retries hashing up to three total attempts", async () => {
     const cryptoClient = makeCryptoClient();
     const hashingClient = makeCryptoClient();
