@@ -395,18 +395,6 @@ export interface BroughtToYouByContent {
 }
 
 /**
- * Localized content for the feedback bar.
- */
-export interface FeedbackBarContent {
-  /** Question text displayed to the user. */
-  readonly question: string;
-  /** Label for the affirmative button. */
-  readonly yesLabel: string;
-  /** Label for the negative button. */
-  readonly noLabel: string;
-}
-
-/**
  * All localized content needed to render the landing page.
  */
 export interface LandingPageContent {
@@ -422,8 +410,6 @@ export interface LandingPageContent {
   readonly support: SupportSectionContent;
   /** Brought to You By section content. */
   readonly broughtToYouBy: BroughtToYouByContent;
-  /** Feedback bar content. */
-  readonly feedbackBar: FeedbackBarContent;
 }
 
 /**

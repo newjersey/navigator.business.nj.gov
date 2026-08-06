@@ -456,11 +456,6 @@
           }
         }
       ]
-    },
-    "feedbackBar": {
-      "question": "¿Encontró lo que buscaba en esta página?",
-      "yesLabel": "Sí",
-      "noLabel": "No"
     }
   },
   "learn": {

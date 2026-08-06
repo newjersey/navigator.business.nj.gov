@@ -88,7 +88,6 @@ const LocalizedLandingPage = async ({ params }: LocalizedPageProps) => {
       <WhatsNewSection content={messages.landing.whatsNew} recents={recents} />
       <SupportSection content={messages.landing.support} />
       <BroughtToYouBySection content={messages.landing.broughtToYouBy} />
-      {/* <FeedbackBar content={messages.landing.feedbackBar} /> */}
       {
         // biome-ignore lint/style/noProcessEnv: NEXT_PUBLIC_ vars are inlined at build time.
         process.env.NEXT_PUBLIC_SURVEY_MONKEY_ENABLED === "true" && (
