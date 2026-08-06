@@ -8,7 +8,12 @@ import {
 } from "@db/migrations/v192_fix_confirmation_email_sent_typo";
 import { migrate_v192_to_v193 } from "@db/migrations/v193_rotate_stranded_legacy_kms_fields";
 import { type MigrationClients } from "@db/migrations/types";
-import { type CryptoClient } from "@domain/types";
+import {
+  type CryptoClient,
+  ForeignEnvironmentCiphertextError,
+  QuarantinedCiphertextError,
+  isQuarantinedCiphertextError,
+} from "@domain/types";
 
 const makeCryptoClient = (): jest.Mocked<CryptoClient> => ({
   decryptValue: jest.fn(async (value) => `plain:${value}`),
@@ -101,6 +106,89 @@ describe("migrate_v192_to_v193", () => {
     expect(result.businesses.first.profileData.encryptedTaxId).toBeUndefined();
     expect(result.businesses.first.profileData.encryptedTaxPin).toBeUndefined();
     expect(result.businesses.first.profileData.deptOfLaborEin).toBe("");
+  });
+
+  it("resets foreign-environment values and their related derived fields", async () => {
+    cryptoClient.decryptValue.mockRejectedValue(new ForeignEnvironmentCiphertextError());
+    const taxClearanceData = {
+      ...generatev192TaxClearanceCertificateData({
+        taxId: "*********123",
+        taxPin: "****",
+      }),
+      encryptedTaxId: "foreign-clearance-tax-id",
+      encryptedTaxPin: "foreign-clearance-tax-pin",
+    } as v192TaxClearanceCertificateData & {
+      encryptedTaxId: string;
+      encryptedTaxPin: string;
+    };
+    const userData = generatev192UserData({
+      businesses: {
+        first: generatev192Business({
+          id: "first",
+          profileData: generatev192ProfileData({
+            taxId: "*********123",
+            hashedTaxId: "source-environment-hash",
+            encryptedTaxId: "foreign-profile-tax-id",
+            taxPin: "****",
+            encryptedTaxPin: "foreign-profile-tax-pin",
+            deptOfLaborEin: "foreign-dol-ein",
+          }),
+          cigaretteLicenseData: generatev192CigaretteLicenseData({
+            taxId: "*********123",
+            encryptedTaxId: "foreign-cigarette-tax-id",
+          }),
+          taxClearanceCertificateData: taxClearanceData,
+        }),
+      },
+    });
+
+    const result = await migrate_v192_to_v193(userData, clients);
+    const business = result.businesses.first;
+
+    expect(business.profileData).toEqual(
+      expect.objectContaining({
+        taxId: undefined,
+        hashedTaxId: undefined,
+        encryptedTaxId: undefined,
+        taxPin: undefined,
+        encryptedTaxPin: undefined,
+        deptOfLaborEin: "",
+      }),
+    );
+    expect(business.cigaretteLicenseData).toEqual(
+      expect.objectContaining({ taxId: undefined, encryptedTaxId: undefined }),
+    );
+    expect(business.taxClearanceCertificateData).toEqual(
+      expect.objectContaining({
+        taxId: undefined,
+        encryptedTaxId: undefined,
+        taxPin: undefined,
+        encryptedTaxPin: undefined,
+      }),
+    );
+    expect(cryptoClient.encryptValue).not.toHaveBeenCalled();
+  });
+
+  it("preserves quarantinable errors through migration context", async () => {
+    cryptoClient.decryptValue.mockRejectedValue(
+      new QuarantinedCiphertextError("Ciphertext wrapping key is not accepted"),
+    );
+    const userData = generatev192UserData({
+      businesses: {
+        first: generatev192Business({
+          profileData: generatev192ProfileData({ encryptedTaxId: "unknown-key-value" }),
+        }),
+      },
+    });
+
+    let thrownError: unknown;
+    try {
+      await migrate_v192_to_v193(userData, clients);
+    } catch (error) {
+      thrownError = error;
+    }
+
+    expect(isQuarantinedCiphertextError(thrownError)).toBe(true);
   });
 
   it.each([
