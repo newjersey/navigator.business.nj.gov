@@ -246,14 +246,22 @@ describe("<TaxTask />", () => {
       });
     });
 
-    it("prepends register to the Save button", async () => {
+    it("prepends the create account prefix to the Save button", async () => {
       renderPage();
-      expect(screen.getByText(`Register & ${Config.taxId.saveButtonText}`)).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.taxId.saveButtonText}`,
+        ),
+      ).toBeInTheDocument();
     });
 
     it("opens Needs Account modal on save button click", async () => {
       renderPage();
-      fireEvent.click(screen.getByText(`Register & ${Config.taxId.saveButtonText}`));
+      fireEvent.click(
+        screen.getByText(
+          `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.taxId.saveButtonText}`,
+        ),
+      );
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });

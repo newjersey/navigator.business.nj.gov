@@ -173,7 +173,7 @@ describe("<BusinessFormationPaginator />", () => {
   });
 
   describe("when in guest mode", () => {
-    const guestModeNextButtonText = `Register & ${Config.formation.general.initialNextButtonText}`;
+    const guestModeNextButtonText = `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.formation.general.initialNextButtonText}`;
     let setShowNeedsAccountModal: jest.Mock;
 
     beforeEach(() => {
