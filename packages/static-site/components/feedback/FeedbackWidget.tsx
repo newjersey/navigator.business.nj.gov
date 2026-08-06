@@ -24,22 +24,40 @@ import { installMockFeedbackTransport } from "@/domain/feedback/mockFeedbackTran
 const CHANGE_LANGUAGE_EVENT = "changeLanguage";
 
 /**
+ * Describes props accepted by the feedback widget component.
+ *
+ * This type defines a stable shape for related data.
+ */
+export interface FeedbackWidgetProps {
+  /** Accessible name for the landmark wrapping the widget. */
+  readonly ariaLabel: string;
+}
+
+/**
  * Renders the feedback widget for the active locale.
  *
  * Returns nothing when the build is configured with the widget off, so pages
  * render no placeholder markup at all.
  *
+ * The widget renders its own prompt text as a bare `<span>`, and it mounts
+ * between the main landmark and the footer. Wrapping it in a labelled
+ * `<section>` keeps that text inside a landmark, which axe's `region` rule
+ * requires. A `<section>` only counts as a landmark once it has an accessible
+ * name, so the label is required rather than optional.
+ *
  * A failed widget load is logged to the console rather than raised: feedback is
  * supplementary, so it must never take down the page around it. Nothing throws,
  * so no error boundary is involved.
  *
- * @returns The widget element, or `null` when disabled.
+ * @param props Feedback widget props.
+ * @param props.ariaLabel Accessible name for the wrapping landmark.
+ * @returns The widget landmark, or `null` when disabled.
  * @example
  * ```tsx
- * <FeedbackWidget />
+ * <FeedbackWidget ariaLabel="Page feedback" />
  * ```
  */
-export const FeedbackWidget = () => {
+export const FeedbackWidget = ({ ariaLabel }: FeedbackWidgetProps) => {
   const locale = useLocale();
   const mode = readFeedbackWidgetMode();
   const isEnabled = mode !== "off";
@@ -94,5 +112,9 @@ export const FeedbackWidget = () => {
     return null;
   }
 
-  return <feedback-widget />;
+  return (
+    <section aria-label={ariaLabel}>
+      <feedback-widget />
+    </section>
+  );
 };

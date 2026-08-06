@@ -187,7 +187,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
             languageSwitcher={messages.layout.languageSwitcher}
           />
           <main id={messages.layout.mainContentId}>{children}</main>
-          <FeedbackWidget />
+          <FeedbackWidget ariaLabel={messages.layout.feedbackAriaLabel} />
           <SiteFooter
             content={messages.layout.footer}
             mainContentId={messages.layout.mainContentId}

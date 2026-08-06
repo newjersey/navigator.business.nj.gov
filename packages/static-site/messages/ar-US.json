@@ -6,6 +6,7 @@
   "layout": {
     "skipNavigationLabel": "مؤقت المنتج لاحقا سيتم",
     "mainContentId": "main-content",
+    "feedbackAriaLabel": "ملاحظات حول الصفحة",
     "banner": {
       "sectionAriaLabel": "عربي هذا في",
       "stateSealAlt": "اتجاه من عربي حذفه",

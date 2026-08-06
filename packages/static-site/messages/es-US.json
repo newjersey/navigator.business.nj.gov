@@ -6,6 +6,7 @@
   "layout": {
     "skipNavigationLabel": "Saltar al contenido principal",
     "mainContentId": "main-content",
+    "feedbackAriaLabel": "Comentarios sobre la página",
     "banner": {
       "sectionAriaLabel": "Sitio web oficial del gobierno",
       "stateSealAlt": "Sello del estado de New Jersey",

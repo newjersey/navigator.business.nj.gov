@@ -276,6 +276,8 @@ export interface LayoutContent {
   readonly skipNavigationLabel: string;
   /** Element ID used for main-content anchor navigation. */
   readonly mainContentId: string;
+  /** Accessible name for the landmark wrapping the feedback widget. */
+  readonly feedbackAriaLabel: string;
   /** Banner section content. */
   readonly banner: LayoutBannerContent;
   /** Header section content. */

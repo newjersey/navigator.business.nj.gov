@@ -6,6 +6,7 @@
   "layout": {
     "skipNavigationLabel": "Skip to main content",
     "mainContentId": "main-content",
+    "feedbackAriaLabel": "Page feedback",
     "banner": {
       "sectionAriaLabel": "Official government website",
       "stateSealAlt": "New Jersey state seal",
