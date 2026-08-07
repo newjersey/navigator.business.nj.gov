@@ -1,9 +1,8 @@
 import { OnboardingFlow } from "@/components/onboarding/OnboardingFlows";
 import { Business, LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { FlowType, Page } from "@businessnjgovnavigator/shared/types";
 import { QUERY_PARAMS_VALUES } from "../domain-logic/routes";
-import { getFlow, templateEval } from "./helpers";
+import { getFlow } from "./helpers";
 
 export const mapFlowQueryToPersona: Record<QUERY_PARAMS_VALUES["flow"], FlowType> = {
   starting: "STARTING",
@@ -33,13 +32,6 @@ export const pageQueryParamIsValid = (
   const requestedPageIsInRange = page <= onboardingFlows[flow].pages.length && page > 0;
 
   return hasAnsweredBusinessPersona && requestedPageIsInRange;
-};
-
-export const evalHeaderStepsTemplate = (page: Page): string => {
-  const Config = getMergedConfig();
-  return templateEval(Config.onboardingDefaults.stepXTemplate, {
-    currentPage: page.current.toString(),
-  });
 };
 
 export const getAnimation = (page: Page): string => {

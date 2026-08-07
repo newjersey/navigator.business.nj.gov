@@ -283,7 +283,7 @@ export const industryIdsWithRequiredEssentialQuestion: string[] = getIndustries(
   .filter((industry) => industryHasRequiredUndefinedEssentialQuestion(industry.id))
   .map((industry) => industry.id);
 
-export const composeOnBoardingTitle = (step: string, pageTitle?: string): string => {
+export const composeOnBoardingTitle = (pageTitle?: string): string => {
   const Config = getMergedConfig();
   if (pageTitle === undefined) {
     const pageTitleDefault = modifyContent({
@@ -294,9 +294,9 @@ export const composeOnBoardingTitle = (step: string, pageTitle?: string): string
         additional: "additional",
       },
     });
-    // return `${pageTitleDefault} ${step}`;
-    return `${[pageTitleDefault, step].join(" ")}`;
+    // return `${pageTitleDefault}`;
+    return `${pageTitleDefault}`;
   }
-  // return `${pageTitle} ${step}`;
-  return `${[pageTitle, step].join(" ")}`;
+  // return `${pageTitle}`;
+  return `${pageTitle}`;
 };
