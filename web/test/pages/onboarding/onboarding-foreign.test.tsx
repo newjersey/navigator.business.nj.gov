@@ -1,5 +1,4 @@
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { templateEval } from "@/lib/utils/helpers";
 import { randomHomeBasedIndustry } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -8,7 +7,6 @@ import {
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import {
-  composeOnBoardingTitle,
   industryIdsWithRequiredEssentialQuestion,
   industryIdsWithSingleRequiredEssentialQuestion,
   mockEmptyApiSignups,
@@ -56,22 +54,6 @@ describe("onboarding - foreign business", () => {
     jest.useFakeTimers();
   });
 
-  describe("page headers", () => {
-    it("uses special template eval for step 1 label", () => {
-      renderPage({});
-      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
-      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
-    });
-
-    it("uses special template eval for step 2 label", () => {
-      const userData = generateTestUserData({ businessPersona: "FOREIGN" });
-      useMockRouter({ isReady: true, query: { page: "2" } });
-      renderPage({ userData });
-      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "2" });
-      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
-    });
-  });
-
   describe("page 2", () => {
     let userData: UserData;
 
@@ -97,7 +79,7 @@ describe("onboarding - foreign business", () => {
         screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.NEXUS),
       ).toBeInTheDocument();
 
-      await page.visitStep(3);
+      await page.visitOnboardingPage(3);
       expect(currentBusiness().profileData.foreignBusinessTypeIds).toEqual([
         "employeeOrContractorInNJ",
       ]);
@@ -165,13 +147,13 @@ describe("onboarding - foreign business", () => {
       expect(currentBusiness().profileData.foreignBusinessTypeIds).toEqual(["transactionsInNJ"]);
     });
 
-    it("prevents user from moving past Step 2 if no foreign business type checked", async () => {
+    it("prevents user from moving past the second onboarding page if no foreign business type checked", async () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
 
       page.clickNext();
       await waitFor(() => {
-        expect(screen.getByTestId("step-2")).toBeInTheDocument();
+        expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
       });
       expect(
         screen.getByText(
@@ -180,14 +162,14 @@ describe("onboarding - foreign business", () => {
       ).toBeInTheDocument();
     });
 
-    it("prevents user from moving past Step 2 if you check a foreign business type and uncheck it leaving no foreign business type checked", async () => {
+    it("prevents user from moving past the second onboarding page if you check a foreign business type and uncheck it leaving no foreign business type checked", async () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
       page.checkByLabelText(transactionsInNJ);
       page.checkByLabelText(transactionsInNJ);
       page.clickNext();
       await waitFor(() => {
-        expect(screen.getByTestId("step-2")).toBeInTheDocument();
+        expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
       });
       expect(
         screen.getByText(
@@ -196,7 +178,7 @@ describe("onboarding - foreign business", () => {
       ).toBeInTheDocument();
     });
 
-    it("allows user to move past Step 2 if you have made a selection", async () => {
+    it("allows user to move past the second onboarding page if you have made a selection", async () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
       page.checkByLabelText(transactionsInNJ);
@@ -266,7 +248,7 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("page-3-header")).not.toBeInTheDocument();
     });
 
     it("sets operating phase to GUEST_MODE_WITH_BUSINESS_STRUCTURE to prevent prompt", async () => {
@@ -301,7 +283,7 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("page-3-header")).not.toBeInTheDocument();
     });
 
     it("sets operating phase to GUEST_MODE_WITH_BUSINESS_STRUCTURE to prevent prompt", async () => {
@@ -323,7 +305,7 @@ describe("onboarding - foreign business", () => {
     });
   });
 
-  describe("Nexus - step 3", () => {
+  describe("Nexus - third onboarding page", () => {
     let userData: UserData;
 
     beforeEach(() => {
@@ -333,12 +315,6 @@ describe("onboarding - foreign business", () => {
         foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
       });
       useMockRouter({ isReady: true, query: { page: "3" } });
-    });
-
-    it("displays step 3", () => {
-      renderPage({ userData });
-      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" });
-      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
     });
 
     it("displays industry question", async () => {
@@ -374,18 +350,18 @@ describe("onboarding - foreign business", () => {
       });
     });
 
-    it("prevents user from moving past Step 3 if you have not selected an industry", async () => {
+    it("prevents user from moving past the third onboarding page if you have not selected an industry", async () => {
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
       page.clickNext();
 
-      expect(screen.getByTestId("step-3")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
+      expect(screen.getByTestId("page-3-header")).toBeInTheDocument();
+      expect(screen.queryByTestId("page-4-header")).not.toBeInTheDocument();
       expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
     });
 
     it.each(industryIdsWithSingleRequiredEssentialQuestion)(
-      "prevents user from moving to Step 4 when %s is selected as industry, but essential question is not answered",
+      "prevents user from moving to the fourth onboarding page when %s is selected as industry, but essential question is not answered",
       async (industryId) => {
         const userData = generateTestUserData({
           businessPersona: "FOREIGN",
@@ -396,8 +372,8 @@ describe("onboarding - foreign business", () => {
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
         page.clickNext();
-        expect(screen.getByTestId("step-3")).toBeInTheDocument();
-        expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
+        expect(screen.getByTestId("page-3-header")).toBeInTheDocument();
+        expect(screen.queryByTestId("page-4-header")).not.toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
         expect(
           screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
@@ -406,7 +382,7 @@ describe("onboarding - foreign business", () => {
     );
 
     it.each([industryIdsWithSingleRequiredEssentialQuestion])(
-      "allows user to move past Step 3 when you have selected an industry %s and answered the essential question",
+      "allows user to move past the third onboarding page when you have selected an industry %s and answered the essential question",
       async (industryId) => {
         const userData = generateTestUserData({
           businessPersona: "FOREIGN",
@@ -438,7 +414,7 @@ describe("onboarding - foreign business", () => {
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
         page.clickNext();
-        expect(screen.getByTestId("step-3")).toBeInTheDocument();
+        expect(screen.getByTestId("page-3-header")).toBeInTheDocument();
         expect(
           screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
         ).toBeInTheDocument();
@@ -451,7 +427,7 @@ describe("onboarding - foreign business", () => {
 
     const employmentAgencyIndustryId = "employment-agency";
 
-    it("prevents user from moving to Step 4 when employment agency is selected as industry, but essential question is not answered", async () => {
+    it("prevents user from moving to the fourth onboarding page when employment agency is selected as industry, but essential question is not answered", async () => {
       const userData = generateTestUserData({
         businessPersona: "FOREIGN",
         foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
@@ -461,15 +437,15 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
       page.clickNext();
-      expect(screen.getByTestId("step-3")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
+      expect(screen.getByTestId("page-3-header")).toBeInTheDocument();
+      expect(screen.queryByTestId("page-4-header")).not.toBeInTheDocument();
       expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
       expect(
         screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
       ).toBeInTheDocument();
     });
 
-    it("allows user to move past Step 3 when you have selected an industry employment agency and answered the essential question", async () => {
+    it("allows user to move past the third onboarding page when you have selected an industry employment agency and answered the essential question", async () => {
       const userData = generateTestUserData({
         businessPersona: "FOREIGN",
         foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
@@ -497,7 +473,7 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
       page.clickNext();
-      expect(screen.getByTestId("step-3")).toBeInTheDocument();
+      expect(screen.getByTestId("page-3-header")).toBeInTheDocument();
       expect(
         screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
       ).toBeInTheDocument();
@@ -508,7 +484,7 @@ describe("onboarding - foreign business", () => {
     });
   });
 
-  describe("Nexus - final step", () => {
+  describe("Nexus - final page", () => {
     it("keeps operating phase set to GUEST_MODE", async () => {
       const userData = generateTestUserData({
         operatingPhase: OperatingPhaseId.GUEST_MODE,

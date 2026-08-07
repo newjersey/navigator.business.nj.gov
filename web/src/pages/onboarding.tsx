@@ -39,7 +39,6 @@ import {
 } from "@/lib/utils/analytics-helpers";
 import { getFlow, scrollToTop } from "@/lib/utils/helpers";
 import {
-  evalHeaderStepsTemplate,
   flowQueryParamIsValid,
   getAnimation,
   getTimeout,
@@ -318,9 +317,9 @@ const OnboardingPage = (props: Props): ReactElement => {
     setProfileData(newProfileData);
     setCurrentFlow(flowType);
 
-    /* The logic below used to skip the first step of onboarding for STARTING businesses,
+    /* The logic below used to skip the first page of onboarding for STARTING businesses,
     it has been temporarily commented out because it is incompatible with our current AB
-    test to skip the second onboarding step.
+    test to skip the second onboarding page.
 
     if (flowType === "OWNING") {
       setPage({ current: 1, previous: 1 });
@@ -341,8 +340,8 @@ const OnboardingPage = (props: Props): ReactElement => {
     setRegistrationDimension("Onboarded Guest");
 
     isAdditionalBusiness
-      ? analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding()
-      : analytics.event.onboarding_last_step.submit.finish_onboarding();
+      ? analytics.event.onboarding_last_page_save_additional_business_button.click.finish_additional_business_onboarding()
+      : analytics.event.onboarding_last_page.submit.finish_onboarding();
 
     updateQueue.queueBusiness({
       ...updateQueue.currentBusiness(),
@@ -502,9 +501,9 @@ const OnboardingPage = (props: Props): ReactElement => {
     return (
       <div
         className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1"
-        data-testid={`step-${page.current.toString()}`}
+        data-testid={`page-${page.current.toString()}-header`}
       >
-        <h1 ref={headerRef}>{`${[pageTitle, evalHeaderStepsTemplate(page)].join(" ")}`}</h1>
+        <h1 ref={headerRef}>{`${pageTitle}`}</h1>
       </div>
     );
   };
@@ -522,7 +521,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          <NextSeo title={getNextSeoTitle(`${pageTitle} ${evalHeaderStepsTemplate(page)}`)} />
+          <NextSeo title={getNextSeoTitle(`${pageTitle}`)} />
           <PageSkeleton
             showNavBar
             previousBusinessId={previousBusiness?.id}

@@ -1,6 +1,5 @@
 import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { templateEval } from "@/lib/utils/helpers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -65,18 +64,18 @@ describe("onboarding - shared", () => {
   it("routes to the first onboarding question when they have not answered the first question", async () => {
     useMockRouter({ isReady: true, query: { page: "3" } });
     renderPage({});
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
+    expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
   });
 
   it.each(["business-persona-starting", "business-persona-foreign"])(
-    "allows %s to move past Step 1",
+    "allows %s to move past the first onboarding page",
     async (radioOption: string) => {
       const { page } = renderPage({ userData: generateExperienceAUserData() });
 
       page.chooseRadio(radioOption);
       fireEvent.click(screen.getByTestId("next"));
       await waitFor(() => {
-        expect(screen.getByTestId("step-2")).toBeInTheDocument();
+        expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
       });
     },
   );
@@ -96,25 +95,25 @@ describe("onboarding - shared", () => {
         user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
       }),
     });
-    expect(screen.getByTestId("step-2")).toBeInTheDocument();
+    expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
   });
 
   it("displays page one when a user goes to /onboarding", async () => {
     mockRouter.mockQuery.mockReturnValue({});
     renderPage({});
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
+    expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
   });
 
   it("pushes to page one when a user visits a page number above the valid page range", async () => {
     useMockRouter({ isReady: true, query: { page: "6" } });
     renderPage({});
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
+    expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
   });
 
   it("pushes to page one when a user visits a page number below the valid page range", async () => {
     useMockRouter({ isReady: true, query: { page: "0" } });
     renderPage({});
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
+    expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
   });
 
   it("autocompletes onboarding and routes to dashboard page when industry WITHOUT essential question is set by using industry query string", async () => {
@@ -155,7 +154,7 @@ describe("onboarding - shared", () => {
     const industry = randomElementFromArray(industriesWithSingleEssentialQuestion).id;
     useMockRouter({ isReady: true, query: { industry } });
     const { page } = renderPage({ userData: generateExperienceAUserData() });
-    expect(screen.getByTestId("step-2")).toBeInTheDocument();
+    expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
     page.chooseEssentialQuestionRadio(industry, 0);
     page.clickNext();
     await waitFor(() => {
@@ -167,10 +166,10 @@ describe("onboarding - shared", () => {
   it("routes to the first page when using industry query string is invalid", async () => {
     useMockRouter({ isReady: true, query: { industry: "something-nonexistent" } });
     renderPage({});
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
+    expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
   });
 
-  it("updates locally for each step", async () => {
+  it("updates locally for each page", async () => {
     const business = generateBusiness({
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
@@ -182,32 +181,32 @@ describe("onboarding - shared", () => {
     const numberOfPages = onboardingFlows.STARTING.pages.length;
 
     for (let pageNumber = 2; pageNumber < numberOfPages; pageNumber += 1) {
-      await page.visitStep(pageNumber);
+      await page.visitOnboardingPage(pageNumber);
       expect(getLastCalledWithConfig().local).toEqual(true);
     }
   });
 
-  it("prevents user from moving after Step 1 if you have not selected whether you own a business", async () => {
+  it("prevents user from moving past the first onboarding page if you have not selected whether you own a business", async () => {
     const { page } = renderPage({});
     page.clickNext();
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
+    expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
     expect(screen.getByTestId("banner-alert-REQUIRED_EXISTING_BUSINESS")).toBeInTheDocument();
   });
 
-  it("allows user to move past Step 1 if you have selected whether you own a business", async () => {
+  it("allows user to move past the first onboarding page if you have selected whether you own a business", async () => {
     const { page } = renderPage({ userData: generateExperienceAUserData() });
     page.chooseRadio("business-persona-starting");
-    await page.visitStep(2);
-    expect(screen.getByTestId("step-2")).toBeInTheDocument();
+    await page.visitOnboardingPage(2);
+    expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
   });
 
   it("is able to go back", async () => {
     const { page } = renderPage({ userData: generateExperienceAUserData() });
     page.chooseRadio("business-persona-starting");
-    await page.visitStep(2);
-    expect(screen.getByTestId("step-2")).toBeInTheDocument();
+    await page.visitOnboardingPage(2);
+    expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
     page.clickBack();
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
+    expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
   });
 
   it("resets non-shared information when switching from starting flow to owning flow", async () => {
@@ -222,15 +221,13 @@ describe("onboarding - shared", () => {
     });
 
     page.chooseRadio("business-persona-starting");
-    await page.visitStep(2);
+    await page.visitOnboardingPage(2);
     page.selectByValue("Industry", "e-commerce");
     page.clickBack();
 
-    const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
-
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
+    expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
     expect(screen.getByTestId("business-persona-owning")).toBeInTheDocument();
-    expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
+    expect(screen.getByText(composeOnBoardingTitle())).toBeInTheDocument();
     page.chooseRadio("business-persona-owning");
     page.clickNext();
     await waitFor(() => {
@@ -265,21 +262,21 @@ describe("onboarding - shared", () => {
     });
 
     page.chooseRadio("business-persona-starting");
-    await page.visitStep(2);
+    await page.visitOnboardingPage(2);
     page.selectByValue("Industry", "e-commerce");
     page.clickBack();
 
-    await page.visitStep(2);
+    await page.visitOnboardingPage(2);
     expect(currentBusiness().profileData.industryId).toEqual("e-commerce");
   });
 
-  // This suite is skipped because routing between steps has been disabled for the duration of the AB test
+  // This suite is skipped because routing between pages has been disabled for the duration of the AB test
   describe.skip("when query parameter sets onboarding flow", () => {
-    it("routes user to step 2 when query parameter exists and value is starting", async () => {
+    it("routes user to the second onboarding page when query parameter exists and value is starting", async () => {
       useMockRouter({ isReady: true, query: { flow: "starting" } });
       const { page } = renderPage({ userData: generateExperienceAUserData() });
 
-      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
       page.selectByText("Industry", "All Other Businesses");
       page.clickNext();
       await waitFor(() => {
@@ -289,24 +286,24 @@ describe("onboarding - shared", () => {
       expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
     });
 
-    it("routes user to step 2 when query parameter exists and value is out-of-state", async () => {
+    it("routes user to the second onboarding page when query parameter exists and value is out-of-state", async () => {
       useMockRouter({ isReady: true, query: { flow: "out-of-state" } });
       const { page } = renderPage({ userData: generateExperienceAUserData() });
 
-      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
       const { employeeOrContractorInNJ } =
         Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent;
 
       page.checkByLabelText(employeeOrContractorInNJ);
-      await page.visitStep(3);
+      await page.visitOnboardingPage(3);
       expect(currentBusiness().profileData.businessPersona).toEqual("FOREIGN");
     });
 
-    it("routes user to step 1 with up-and-running business selected when up-and-running query parameter exists", async () => {
+    it("routes user to the first onboarding page with up-and-running business selected when up-and-running query parameter exists", async () => {
       useMockRouter({ isReady: true, query: { flow: "up-and-running" } });
       const { page } = renderPage({});
 
-      expect(screen.getByTestId("step-1")).toBeInTheDocument();
+      expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
       page.selectByValue("Sector", "clean-energy");
       page.clickNext();
       await waitFor(() => {

@@ -555,7 +555,6 @@ collections:
                   widget: string,
                 }
               - { label: Back Button Test, name: backButtonText, widget: string }
-              - { label: Step X Template, name: stepXTemplate, widget: string }
               - {
                   label: Error Text - Minimum Numeric Field,
                   name: errorTextMinimumNumericField,

@@ -1548,7 +1548,7 @@ export default {
         },
       },
     },
-    onboarding_last_step: {
+    onboarding_last_page: {
       submit: {
         finish_onboarding: () => {
           eventRunner.track({
@@ -1561,7 +1561,7 @@ export default {
         },
       },
     },
-    onboarding_last_step_save_additional_business_button: {
+    onboarding_last_page_save_additional_business_button: {
       click: {
         finish_additional_business_onboarding: () => {
           eventRunner.track({
