@@ -214,7 +214,11 @@ describe("<EinTask />", () => {
 
     it("opens Needs Account modal when the save button is clicked", async () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.ein.saveButtonText));
+      fireEvent.click(
+        screen.getByText(
+          `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.ein.saveButtonText}`,
+        ),
+      );
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });

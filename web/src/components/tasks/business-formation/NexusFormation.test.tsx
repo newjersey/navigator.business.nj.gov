@@ -493,7 +493,7 @@ describe("<NexusFormationFlow />", () => {
       });
 
       describe("when in guest mode", () => {
-        const guestModeNextButtonText = `Register & ${Config.formation.general.initialNextButtonText}`;
+        const guestModeNextButtonText = `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.formation.general.initialNextButtonText}`;
         let setShowNeedsAccountModal: jest.Mock;
 
         beforeEach(() => {
@@ -506,7 +506,7 @@ describe("<NexusFormationFlow />", () => {
           });
         });
 
-        it("prepends register to the next button on first step", async () => {
+        it("prepends the create account prefix to the next button on first step", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           expect(screen.getByText(guestModeNextButtonText)).toBeInTheDocument();

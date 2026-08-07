@@ -111,7 +111,7 @@ export const DbaFormationPaginator = (): ReactElement => {
   const ForwardButton = (): ReactElement => {
     const getForwardButtonText = (): string => {
       if (isAuthenticated === IsAuthenticated.FALSE && !isDba) {
-        return `Register & ${Config.formation.general.initialNextButtonText}`;
+        return `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.formation.general.initialNextButtonText}`;
       } else {
         return Config.formation.general.initialNextNexusButtonText;
       }

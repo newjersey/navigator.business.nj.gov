@@ -1,4 +1,5 @@
 import { GenericTextField } from "@/components/GenericTextField";
+import { LockIcon } from "@/components/LockIcon";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -25,6 +26,11 @@ export const EinInput = (props: Props): ReactElement => {
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { business, updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
+
+  const saveButtonText =
+    props.isAuthenticated === IsAuthenticated.FALSE
+      ? `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.ein.saveButtonText}`
+      : Config.ein.saveButtonText;
 
   useMountEffectWhenDefined(() => {
     if (!business) return;
@@ -91,7 +97,10 @@ export const EinInput = (props: Props): ReactElement => {
           isSubmitButton={true}
           isRightMarginRemoved={true}
         >
-          <span className="padding-x-3 no-wrap">{Config.ein.saveButtonText}</span>
+          <span className="padding-x-3 no-wrap flex flex-align-center">
+            {saveButtonText}
+            <LockIcon className="margin-left-05" />
+          </span>
         </SecondaryButton>
       </div>
     </div>

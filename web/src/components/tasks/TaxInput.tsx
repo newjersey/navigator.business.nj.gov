@@ -1,6 +1,7 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
+import { LockIcon } from "@/components/LockIcon";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
@@ -47,7 +48,7 @@ export const TaxInput = (props: Props): ReactElement => {
 
   const saveButtonText =
     isAuthenticated === IsAuthenticated.FALSE
-      ? `Register & ${Config.taxId.saveButtonText}`
+      ? `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.taxId.saveButtonText}`
       : Config.taxId.saveButtonText;
 
   useEffect(() => {
@@ -166,6 +167,7 @@ export const TaxInput = (props: Props): ReactElement => {
                   isFullWidthOnDesktop={!isTabletAndUp}
                 >
                   {saveButtonText}
+                  <LockIcon className="margin-left-05" />
                 </SecondaryButton>
               </div>
             </>

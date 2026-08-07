@@ -19,6 +19,7 @@
     "formNameText": "Form",
     "defaultCallToActionText": "Start Application",
     "unlockedByPlural": "Before starting this task, we recommend you take a look at:",
-    "needsAccountCallout": "To complete this task, you will need to [create an account](/account-setup)."
+    "needsAccountCallout": "To complete this task, you will need to [create an account](/account-setup).",
+    "ctaPrefixForGuestUsers": "Create an Account to"
   }
 }
