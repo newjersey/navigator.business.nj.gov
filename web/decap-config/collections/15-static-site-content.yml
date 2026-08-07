@@ -9,15 +9,15 @@ collections:
     label: "Tropical Storm Ida"
     folder: "content/src/tropical-storm-ida"
     summary: "{{name}}"
-    identifier_field: "{{slug}}"
+    identifier_field: "slug"
     slug: "{{slug}}"
-    delete: false
-    create: false
+    delete: true
+    create: true
     editor:
       preview: false
     fields:
       - { label: "Name", name: "name", widget: "string", required: true }
-      - { label: "Slug", name: "slug", widget: "no-space", required: true }
+      - { label: "Slug", name: "slug", widget: "write-once-read-only-no-space", required: true }
       - { label: "Date", name: "date", widget: "string", required: false, hint: "YYYY-MM-DD" }
       - label: "Topics"
         name: "topics"
@@ -42,16 +42,16 @@ collections:
     label: "COVIDs"
     folder: "content/src/covids"
     summary: "{{name}}"
-    identifier_field: "{{slug}}"
+    identifier_field: "slug"
     slug: "{{slug}}"
-    delete: false
+    delete: true
     sortable_fields: ["name", "section", "date"]
-    create: false
+    create: true
     editor:
       preview: false
     fields:
       - { label: "Name", name: "name", widget: "string", required: true }
-      - { label: "Slug", name: "slug", widget: "no-space", required: true }
+      - { label: "Slug", name: "slug", widget: "write-once-read-only-no-space", required: true }
       - label: "Topic"
         name: "section"
         widget: "select"
@@ -99,19 +99,20 @@ collections:
     label: "Recents"
     folder: "content/src/recents"
     summary: "{{name}}"
-    identifier_field: "{{slug}}"
+    identifier_field: "slug"
     slug: "{{slug}}"
-    delete: false
+    delete: true
     sortable_fields: ["name", "date", "topics", "status"]
-    create: false
+    create: true
     editor:
       preview: false
     fields:
       - { label: "Name", name: "name", widget: "string", required: true }
-      - { label: "Slug", name: "slug", widget: "no-space", required: true }
+      - { label: "Slug", name: "slug", widget: "write-once-read-only-no-space", required: true }
       - label: "Status"
         name: "status"
         widget: "select"
+        default: "Draft"
         required: false
         hint:
           "Only Published updates appear on the site. Imported from Webflow's draft/archived state;
@@ -181,11 +182,11 @@ collections:
     label: "FAQs"
     folder: "content/src/faqs"
     summary: "{{name}}"
-    identifier_field: "{{slug}}"
+    identifier_field: "slug"
     slug: "{{slug}}"
-    delete: false
+    delete: true
     sortable_fields: ["name", "category", "sub-category"]
-    create: false
+    create: true
     editor:
       preview: false
     fields:
@@ -193,7 +194,7 @@ collections:
       - {
           label: "Slug",
           name: "slug",
-          widget: "no-space",
+          widget: "write-once-read-only-no-space",
           required: true,
           hint: "URL-friendly identifier (alphanumeric, no spaces or special characters)",
         }
@@ -230,11 +231,11 @@ collections:
     format: "json"
     extension: "json"
     summary: "{{name}}"
-    identifier_field: "{{slug}}"
+    identifier_field: "slug"
     slug: "{{slug}}"
-    delete: false
+    delete: true
     sortable_fields: ["name"]
-    create: false
+    create: true
     editor:
       preview: false
     fields:
@@ -242,7 +243,7 @@ collections:
       - {
           label: "Slug",
           name: "slug",
-          widget: "no-space",
+          widget: "write-once-read-only-no-space",
           required: true,
           hint: "URL-friendly identifier (alphanumeric, no spaces or special characters)",
         }
@@ -253,11 +254,11 @@ collections:
     format: "json"
     extension: "json"
     summary: "{{name}}"
-    identifier_field: "{{slug}}"
+    identifier_field: "slug"
     slug: "{{slug}}"
-    delete: false
+    delete: true
     sortable_fields: ["name"]
-    create: false
+    create: true
     editor:
       preview: false
     fields:
@@ -265,7 +266,7 @@ collections:
       - {
           label: "Slug",
           name: "slug",
-          widget: "no-space",
+          widget: "write-once-read-only-no-space",
           required: true,
           hint: "URL-friendly identifier (alphanumeric, no spaces or special characters)",
         }
@@ -302,16 +303,16 @@ collections:
     label: "Pages"
     folder: "content/src/pages"
     summary: "{{name}}"
-    identifier_field: "{{slug}}"
+    identifier_field: "slug"
     slug: "{{slug}}"
-    delete: false
+    delete: true
     sortable_fields: ["name", "category"]
-    create: false
+    create: true
     editor:
       preview: false
     fields:
       - { label: "Name", name: "name", widget: "string", required: true }
-      - { label: "Slug", name: "slug", widget: "no-space", required: true }
+      - { label: "Slug", name: "slug", widget: "write-once-read-only-no-space", required: true }
       - label: "Category"
         name: "category"
         widget: "relation"
