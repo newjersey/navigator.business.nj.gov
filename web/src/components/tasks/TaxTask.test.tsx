@@ -263,10 +263,24 @@ describe("<TaxTask />", () => {
       ).not.toBeInTheDocument();
     });
 
-    it("opens Needs Account modal when trying to enter tax input data, and does not show inline errors or update userData", async () => {
+    it("locks the tax input for guest users", () => {
       renderPage();
-      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "1" } });
-      fireEvent.blur(screen.getByLabelText("Tax id"));
+      expect(screen.getByLabelText("Tax id")).toHaveAttribute("readonly");
+      expect(screen.getByLabelText("Tax id")).toHaveAttribute("aria-readonly", "true");
+    });
+
+    it("opens Needs Account modal when the tax input is clicked, but not on focus alone", () => {
+      renderPage();
+      fireEvent.focus(screen.getByLabelText("Tax id"));
+      expect(setShowNeedsAccountModal).not.toHaveBeenCalled();
+
+      fireEvent.click(screen.getByLabelText("Tax id"));
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+    });
+
+    it("does not show inline errors or update userData when the locked tax input is used", async () => {
+      renderPage();
+      fireEvent.click(screen.getByLabelText("Tax id"));
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });

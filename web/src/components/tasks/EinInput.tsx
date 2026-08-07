@@ -3,6 +3,7 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useNeedsAccountLockedField } from "@/lib/data-hooks/useNeedsAccountLockedField";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
@@ -23,6 +24,7 @@ export const EinInput = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [employerId, setEmployerId] = useState<string>("");
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const needsAccountLockedFieldProps = useNeedsAccountLockedField();
   const { business, updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
@@ -32,10 +34,6 @@ export const EinInput = (props: Props): ReactElement => {
   }, business);
 
   const handleChange = (value: string): void => {
-    if (isAuthenticated === IsAuthenticated.FALSE) {
-      setShowNeedsAccountModal(true);
-      return;
-    }
     setEmployerId(value);
   };
 
@@ -82,6 +80,7 @@ export const EinInput = (props: Props): ReactElement => {
         value={employerId}
         inputWidth="full"
         ariaLabel="Save your EIN"
+        {...needsAccountLockedFieldProps}
       />
       <div className="mobile-lg:margin-left-1 mobile-lg:margin-top-05">
         <SecondaryButton
