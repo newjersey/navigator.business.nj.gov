@@ -101,20 +101,6 @@ export class MonitoringStack extends Stack {
       defaultValue: 0,
     });
 
-    const dataMigrationMetricFilter = new logs.MetricFilter(
-      this,
-      "DataMigrationErrorMetricFilter",
-      {
-        logGroup: dataMigrationLogGroup,
-        filterName: `dataMigrationErrorCount-${props.stage}`,
-        filterPattern: logs.FilterPattern.literal("Dynamo User Migration Error"),
-        metricNamespace: "BFS/Navigator",
-        metricName: `dataMigrationErrorCount`,
-        metricValue: "1",
-        defaultValue: 0,
-      },
-    );
-
     const migrationFailureMetric = new cloudwatch.Metric({
       namespace: "AWS/Lambda",
       metricName: "Errors",
@@ -271,35 +257,6 @@ export class MonitoringStack extends Stack {
 
       selfRegAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
-      const dataMigrationTopic = new sns.Topic(this, "DataMigrationErrorTopic", {
-        topicName: `bfs-navigator-${props.stage}-data-migration-errors`,
-      });
-
-      new sns.Subscription(this, "DataMigrationSubscription", {
-        topic: dataMigrationTopic,
-        protocol: sns.SubscriptionProtocol.HTTPS,
-        endpoint: "https://global.sns-api.chatbot.amazonaws.com",
-      });
-
-      const dataMigrationMetric = dataMigrationMetricFilter.metric({
-        statistic: "Sum",
-        period: Duration.seconds(120),
-      });
-      dataMigrationTopic.applyRemovalPolicy(RemovalPolicy.RETAIN);
-
-      const dataMigrationAlarm = new cloudwatch.Alarm(this, "DataMigrationErrorAlarm", {
-        alarmName: `${props.stage}-bfs-navigator-data-migration-errors`,
-        metric: dataMigrationMetric,
-        threshold: 1,
-        evaluationPeriods: 1,
-        datapointsToAlarm: 1,
-        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
-        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
-      });
-
-      dataMigrationAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(dataMigrationTopic));
-      dataMigrationAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
-
       const navigatorApiErrorTopic = new sns.Topic(this, "NavigatorApiErrorTopic", {
         topicName: `bfs-navigator-errors-${props.stage}`,
       });
@@ -309,6 +266,37 @@ export class MonitoringStack extends Stack {
         protocol: sns.SubscriptionProtocol.HTTPS,
         endpoint: "https://global.sns-api.chatbot.amazonaws.com",
       });
+
+      const businessWriteErrorMetricFilter = new logs.MetricFilter(
+        this,
+        "BusinessWriteErrorMetricFilter",
+        {
+          logGroup: dataMigrationLogGroup,
+          filterName: `businessWriteErrorCount-${props.stage}`,
+          filterPattern: logs.FilterPattern.literal("Error processing business with ID"),
+          metricNamespace: "BFS/Navigator",
+          metricName: "businessWriteErrorCount",
+          metricValue: "1",
+          defaultValue: 0,
+        },
+      );
+
+      const businessWriteErrorAlarm = new cloudwatch.Alarm(this, "BusinessWriteErrorAlarm", {
+        alarmName: `${props.stage}-bfs-navigator-business-write-errors`,
+        metric: businessWriteErrorMetricFilter.metric({
+          statistic: "Sum",
+          period: Duration.seconds(120),
+        }),
+        threshold: 1,
+        evaluationPeriods: 1,
+        datapointsToAlarm: 1,
+        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+      });
+
+      businessWriteErrorAlarm.addAlarmAction(
+        new cloudwatch_actions.SnsAction(navigatorApiErrorTopic),
+      );
 
       const nicUsaApiErrorMetric = nicUsaApiErrorMetricFilter.metric({
         statistic: "Sum",

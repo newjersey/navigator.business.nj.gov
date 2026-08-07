@@ -1,3 +1,4 @@
+import { parseUserData } from "@db/zodSchema/zodSchemas";
 import {
   type BusinessesDataClient,
   DatabaseThrottlingError,
@@ -14,10 +15,9 @@ import {
   toDatabaseThrottlingError,
 } from "@db/DynamoDbErrors";
 import { type LogWriterType } from "@libs/logWriter";
+import { getConfigValue } from "@libs/ssmUtils";
 import { type Business, CURRENT_VERSION, type UserData } from "@shared/userData";
 import { chunk } from "lodash";
-import { parseUserData } from "@db/zodSchema/zodSchemas";
-import { getConfigValue } from "@libs/ssmUtils";
 
 const migrationSuccess = (
   migratedCount: number,
@@ -230,6 +230,7 @@ export const DynamoDataClient = (
       logger.LogInfo(`Processed user ${updatedUserData.user.id} in the user data table`);
 
       if (updatedUserData.businesses && Object.keys(updatedUserData.businesses).length > 0) {
+        const failedBusinessIds: string[] = [];
         for (const businessId in updatedUserData.businesses) {
           const businessData = updatedUserData.businesses[businessId];
           logger.LogInfo(`Updated business ${businessId} for user ${updatedUserData.user.id}`);
@@ -251,7 +252,11 @@ export const DynamoDataClient = (
             logger.LogError(
               `Error processing business with ID ${businessId} for user ${updatedUserData.user.id}: ${error}`,
             );
+            failedBusinessIds.push(businessId);
           }
+        }
+        if (failedBusinessIds.length > 0) {
+          throw new Error(`Failed to process businesses with IDs: ${failedBusinessIds.join(", ")}`);
         }
       } else {
         logger.LogInfo(`No businesses found for user ${updatedUserData.user.id}`);
