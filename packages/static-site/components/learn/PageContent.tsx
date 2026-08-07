@@ -90,7 +90,7 @@ const PageContent = ({ page }: Props) => {
               </div>
             )}
             {section.linkText && section.linkUrl && (
-              <a href={section.linkUrl} className="usa-button">
+              <a href={section.linkUrl} className="usa-button margin-top-105">
                 {section.linkText}
                 {section.linkUrl.startsWith("http") && (
                   <svg className="usa-icon" aria-hidden="true" focusable="false">
