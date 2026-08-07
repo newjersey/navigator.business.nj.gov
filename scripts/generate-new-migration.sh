@@ -72,7 +72,7 @@ ZOD_SCHEMA_FILE="$PROJECT_ROOT/api/src/db/zodSchema/zodSchemas.ts"
 ZOD_SCHEMA_TEST_FILE="$PROJECT_ROOT/api/src/db/zodSchema/zodSchemas.test.ts"
 PRINT_USER_SCHEMA_FILE="$PROJECT_ROOT/api/scripts/printUserZodSchema.ts"
 GENERATE_USER_SCHEMA_FILE="$PROJECT_ROOT/api/scripts/generateUserSchemaFile.ts"
-USER_SCHEMA_GENERATOR_FILE="$PROJECT_ROOT/api/src/domain/userSchemaGenerator.ts"
+USER_SCHEMA_GENERATOR_FILE="$PROJECT_ROOT/api/scripts/userSchemaCompiler.ts"
 
 echo "Updating Zod schema imports and schema version numbers"
 sedi "s/${MOST_RECENT_FILENAME_NO_EXT}/v${NEW_VERSION_NUMBER}_${NEW_FILENAME}/g" \

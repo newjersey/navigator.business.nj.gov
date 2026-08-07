@@ -8,6 +8,7 @@ import {
   type DatabaseClient,
   MigrationConflictError,
   type MigrationDataClient,
+  QuarantinedCiphertextError,
   type UserDataClient,
   type CryptoClient,
 } from "@domain/types";
@@ -181,7 +182,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
     await dynamoDataClient.migrateOutdatedVersionUsers();
 
     expect(logSpy).toHaveBeenCalledWith(
-      `Migration complete. Migrated 0 users. Current version: ${CURRENT_VERSION}`,
+      `Migration complete. Migrated 0 users and quarantined 0. Current version: ${CURRENT_VERSION}`,
     );
   });
 
@@ -379,6 +380,28 @@ describe("User and Business Migration with DynamoDataClient", () => {
     );
     expect(logger.LogError).not.toHaveBeenCalledWith(
       expect.stringContaining("Scheduled migration failed"),
+    );
+  });
+
+  it("quarantines a record-level ciphertext failure and continues the batch", async () => {
+    const first = generateUserData();
+    const second = generateUserData();
+    jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
+      usersToMigrate: [first, second],
+      nextToken: undefined,
+    });
+    migrationDataClient.migrateAndPut.mockRejectedValueOnce(
+      new Error("Migration v194 failed", {
+        cause: new QuarantinedCiphertextError("Ciphertext wrapping key is not accepted"),
+      }),
+    );
+
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+
+    expect(result).toEqual({ success: true, migratedCount: 1, quarantinedCount: 1 });
+    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledTimes(2);
+    expect(logger.LogError).toHaveBeenCalledWith(
+      expect.stringContaining(`Quarantined scheduled migration for user ${first.user.id}`),
     );
   });
 

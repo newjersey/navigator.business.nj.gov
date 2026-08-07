@@ -15,7 +15,7 @@ import path from "node:path";
 
 const migrationFilePath = path.resolve(
   __dirname,
-  "../src/db/migrations/v193_rotate_stranded_legacy_kms_fields.ts",
+  "../src/db/migrations/v194_rotate_or_reset_foreign_kms_fields.ts",
 );
 
 const tsconfigPath = path.resolve(__dirname, "../tsconfig.json");

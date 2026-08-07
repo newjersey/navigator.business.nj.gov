@@ -4,6 +4,8 @@ export const BUSINESSES_TABLE = process.env.BUSINESSES_TABLE || "businesses-tabl
 export const MESSAGES_TABLE = process.env.MESSAGES_TABLE || "messages-table-local";
 export const DYNAMO_OFFLINE_PORT = Number.parseInt(process.env.DYNAMO_PORT || "8000");
 export const STAGE = process.env.STAGE || "local";
+export const AWS_CRYPTO_TAX_ID_FOREIGN_ENVIRONMENT_POLICY =
+  STAGE === "local" ? undefined : STAGE === "prod" ? "quarantine" : "reset";
 
 export const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
 export const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
