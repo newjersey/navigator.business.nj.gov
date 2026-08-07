@@ -3,7 +3,6 @@
     "additionalBusinessFinalNextButtonText": "Save Additional Business",
     "returnToPreviousBusiness": "Return to ${previousBusiness}",
     "errorTextMinimumNumericField": "Must be ${length} digits long.",
-    "stepXTemplate": "(Step ${currentPage})",
     "backButtonText": "Back",
     "finalNextButtonText": "Show My Guide",
     "pageTitle": "Tell Us About Your ${Additional} Business",

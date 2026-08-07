@@ -39,7 +39,6 @@ import {
 } from "@/lib/utils/analytics-helpers";
 import { getFlow, scrollToTop } from "@/lib/utils/helpers";
 import {
-  evalHeaderStepsTemplate,
   flowQueryParamIsValid,
   getAnimation,
   getTimeout,
@@ -504,7 +503,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1"
         data-testid={`step-${page.current.toString()}`}
       >
-        <h1 ref={headerRef}>{`${[pageTitle, evalHeaderStepsTemplate(page)].join(" ")}`}</h1>
+        <h1 ref={headerRef}>{`${pageTitle}`}</h1>
       </div>
     );
   };
@@ -522,7 +521,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          <NextSeo title={getNextSeoTitle(`${pageTitle} ${evalHeaderStepsTemplate(page)}`)} />
+          <NextSeo title={getNextSeoTitle(`${pageTitle}`)} />
           <PageSkeleton
             showNavBar
             previousBusinessId={previousBusiness?.id}

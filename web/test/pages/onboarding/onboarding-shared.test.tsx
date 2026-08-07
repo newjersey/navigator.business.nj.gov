@@ -1,6 +1,5 @@
 import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { templateEval } from "@/lib/utils/helpers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -226,11 +225,9 @@ describe("onboarding - shared", () => {
     page.selectByValue("Industry", "e-commerce");
     page.clickBack();
 
-    const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
-
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
     expect(screen.getByTestId("business-persona-owning")).toBeInTheDocument();
-    expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
+    expect(screen.getByText(composeOnBoardingTitle())).toBeInTheDocument();
     page.chooseRadio("business-persona-owning");
     page.clickNext();
     await waitFor(() => {

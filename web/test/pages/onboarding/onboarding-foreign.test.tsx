@@ -1,5 +1,4 @@
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { templateEval } from "@/lib/utils/helpers";
 import { randomHomeBasedIndustry } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -8,7 +7,6 @@ import {
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import {
-  composeOnBoardingTitle,
   industryIdsWithRequiredEssentialQuestion,
   industryIdsWithSingleRequiredEssentialQuestion,
   mockEmptyApiSignups,
@@ -54,22 +52,6 @@ describe("onboarding - foreign business", () => {
     mockEmptyApiSignups();
     setupStatefulUserDataContext();
     jest.useFakeTimers();
-  });
-
-  describe("page headers", () => {
-    it("uses special template eval for step 1 label", () => {
-      renderPage({});
-      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
-      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
-    });
-
-    it("uses special template eval for step 2 label", () => {
-      const userData = generateTestUserData({ businessPersona: "FOREIGN" });
-      useMockRouter({ isReady: true, query: { page: "2" } });
-      renderPage({ userData });
-      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "2" });
-      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
-    });
   });
 
   describe("page 2", () => {
@@ -333,12 +315,6 @@ describe("onboarding - foreign business", () => {
         foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
       });
       useMockRouter({ isReady: true, query: { page: "3" } });
-    });
-
-    it("displays step 3", () => {
-      renderPage({ userData });
-      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" });
-      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
     });
 
     it("displays industry question", async () => {
