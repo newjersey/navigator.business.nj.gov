@@ -1,12 +1,7 @@
 import * as api from "@/lib/api-client/apiClient";
-import { templateEval } from "@/lib/utils/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import {
-  composeOnBoardingTitle,
-  mockEmptyApiSignups,
-  renderPage,
-} from "@/test/pages/onboarding/helpers-onboarding";
+import { mockEmptyApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   createEmptyUserData,
   generateMunicipality,
@@ -59,13 +54,6 @@ describe("onboarding - owning a business", () => {
   });
 
   describe("page 1", () => {
-    it("uses standard template eval for step label", () => {
-      renderPage({});
-      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
-
-      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
-    });
-
     it("displays the sector dropdown after radio selected", () => {
       const { page } = renderPage({});
       expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
@@ -73,7 +61,7 @@ describe("onboarding - owning a business", () => {
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
     });
 
-    it("does not allow OWNING user persona to move past Step 1 if user has not entered a sector", async () => {
+    it("does not allow OWNING user persona to move past the first onboarding page if user has not entered a sector", async () => {
       const { page } = renderPage({ userData: undefined });
       page.chooseRadio("business-persona-owning");
       fireEvent.click(screen.getByTestId("next"));
@@ -83,7 +71,7 @@ describe("onboarding - owning a business", () => {
         ).toBeInTheDocument();
       });
       expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
-      expect(screen.getByTestId("step-1")).toBeInTheDocument();
+      expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
     });
 
     it("updates operating phase when user changes their business persona", async () => {
@@ -103,7 +91,7 @@ describe("onboarding - owning a business", () => {
       });
     });
 
-    it("allows user to move past Step 1 if you have entered a sector", async () => {
+    it("allows user to move past the first onboarding page if you have entered a sector", async () => {
       const userData = generateTestUserData({ sectorId: undefined });
       useMockRouter({ isReady: true, query: { page: "1" } });
       const { page } = renderPage({ userData });

@@ -77,7 +77,7 @@ describe("onboarding - starting a business", () => {
       useMockRouter({ isReady: true, query: { page: "1" } });
       const { page } = renderPage({ userData });
 
-      expect(screen.getByTestId("step-1")).toBeInTheDocument();
+      expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
 
       page.chooseRadio("business-persona-starting");
       page.clickNext();
@@ -90,7 +90,7 @@ describe("onboarding - starting a business", () => {
       });
     });
 
-    it("shows 'Show My Guide' button on Step 1 instead of 'Next' for ExperienceB", async () => {
+    it("shows 'Show My Guide' button on the first onboarding page instead of 'Next' for ExperienceB", async () => {
       const business = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -109,16 +109,16 @@ describe("onboarding - starting a business", () => {
       expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
     });
 
-    it("prevents user from moving after Step 2 if you have not selected an industry", async () => {
+    it("prevents user from moving after the second onboarding page if you have not selected an industry", async () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
       page.clickNext();
-      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
       expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
     });
 
-    it("allows user to move past Step 2 if you have selected an industry", async () => {
+    it("allows user to move past the second onboarding page if you have selected an industry", async () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
@@ -133,7 +133,7 @@ describe("onboarding - starting a business", () => {
     });
 
     it.each(industryIdsWithSingleRequiredEssentialQuestion)(
-      "prevents user from moving to Step 3 when %s is selected as industry, but essential question is not answered",
+      "prevents user from moving to the third onboarding page when %s is selected as industry, but essential question is not answered",
       async (industryId) => {
         const userData = generateTestUserData({
           industryId: industryId,
@@ -143,7 +143,7 @@ describe("onboarding - starting a business", () => {
         const { page } = renderPage({ userData });
 
         page.clickNext();
-        expect(screen.getByTestId("step-2")).toBeInTheDocument();
+        expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
         expect(
           screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
@@ -152,7 +152,7 @@ describe("onboarding - starting a business", () => {
     );
 
     it.each(industryIdsWithSingleRequiredEssentialQuestion)(
-      "allows user to move past Step 2 when you have selected an industry %s and answered the essential question",
+      "allows user to move past the second onboarding page when you have selected an industry %s and answered the essential question",
       async (industryId) => {
         const userData = generateTestUserData({
           industryId: industryId,
@@ -183,7 +183,7 @@ describe("onboarding - starting a business", () => {
         const { page } = renderPage({ userData });
 
         page.clickNext();
-        expect(screen.getByTestId("step-2")).toBeInTheDocument();
+        expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
         expect(
           screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
         ).toBeInTheDocument();
@@ -196,7 +196,7 @@ describe("onboarding - starting a business", () => {
 
     const employmentAgencyIndustryId = "employment-agency";
 
-    it("prevents user from moving to Step 3 when employment agency is selected as industry, but essential question is not answered", async () => {
+    it("prevents user from moving to the third onboarding page when employment agency is selected as industry, but essential question is not answered", async () => {
       const userData = generateTestUserData({
         industryId: employmentAgencyIndustryId,
         ...emptyIndustrySpecificData,
@@ -205,14 +205,14 @@ describe("onboarding - starting a business", () => {
       const { page } = renderPage({ userData });
 
       page.clickNext();
-      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
       expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
       expect(
         screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
       ).toBeInTheDocument();
     });
 
-    it("allows user to move past Step 2 when you have selected an industry employment agency and answered the essential question", async () => {
+    it("allows user to move past the second onboarding page when you have selected an industry employment agency and answered the essential question", async () => {
       const userData = generateTestUserData({
         industryId: employmentAgencyIndustryId,
         ...emptyIndustrySpecificData,
@@ -239,7 +239,7 @@ describe("onboarding - starting a business", () => {
       const { page } = renderPage({ userData });
 
       page.clickNext();
-      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
       expect(
         screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0],
       ).toBeInTheDocument();
@@ -253,16 +253,16 @@ describe("onboarding - starting a business", () => {
   it("changes url pathname every time a user goes to a different page", async () => {
     const userData = generateTestUserData({});
     const { page } = renderPage({ userData });
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
+    expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
     page.chooseRadio("business-persona-starting");
 
-    await page.visitStep(2);
+    await page.visitOnboardingPage(2);
     expect(mockRouter.mockPush).toHaveBeenCalledWith(
       expect.objectContaining({ query: expect.objectContaining({ page: 2 }) }),
       undefined,
       { shallow: true },
     );
-    expect(screen.getByTestId("step-2")).toBeInTheDocument();
+    expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
   });
 
   it("shows correct next-button text on each page", async () => {
@@ -276,7 +276,7 @@ describe("onboarding - starting a business", () => {
       page1.queryByText(Config.onboardingDefaults.finalNextButtonText),
     ).not.toBeInTheDocument();
 
-    await page.visitStep(2);
+    await page.visitOnboardingPage(2);
     const page2 = within(screen.getByTestId("page-2-form"));
     expect(page2.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
     expect(page2.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
@@ -306,7 +306,7 @@ describe("onboarding - starting a business", () => {
       ),
     ).toBeChecked();
 
-    await page.visitStep(2);
+    await page.visitOnboardingPage(2);
     expect(page.getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
   });
 
@@ -316,7 +316,7 @@ describe("onboarding - starting a business", () => {
     const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-starting");
-    await page.visitStep(2);
+    await page.visitOnboardingPage(2);
     expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
 
     page.selectByValue("Industry", "e-commerce");
@@ -358,11 +358,11 @@ describe("onboarding - starting a business", () => {
   it("removes required fields error when user goes back", async () => {
     const { page } = renderPage({});
     page.chooseRadio("business-persona-foreign");
-    await page.visitStep(2);
+    await page.visitOnboardingPage(2);
     act(() => {
       return page.clickNext();
     });
-    expect(screen.getByTestId("step-2")).toBeInTheDocument();
+    expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
     expect(screen.getByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).toBeInTheDocument();
     page.clickBack();
     expect(

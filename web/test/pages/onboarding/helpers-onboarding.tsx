@@ -84,7 +84,7 @@ export type PageHelpers = {
   getFullNameValue: () => string;
   getEmailValue: () => string;
   getConfirmEmailValue: () => string;
-  visitStep: (step: number) => Promise<void>;
+  visitOnboardingPage: (pageNumber: number) => Promise<void>;
   chooseEssentialQuestionRadio: (industryId: string, indexOfDataChoice: number) => void;
 };
 
@@ -166,13 +166,13 @@ export const createPageHelpers = (): PageHelpers => {
     )?.value;
   };
 
-  const visitStep = async (step: number): Promise<void> => {
+  const visitOnboardingPage = async (pageNumber: number): Promise<void> => {
     clickNext();
-    const currentStep = step - 1;
+    const currentPage = pageNumber - 1;
     await waitForElementToBeRemoved(() => {
-      return screen.getByTestId(`step-${currentStep}`);
+      return screen.getByTestId(`page-${currentPage}-header`);
     });
-    expect(screen.getByTestId(`step-${step}`)).toBeInTheDocument();
+    expect(screen.getByTestId(`page-${pageNumber}-header`)).toBeInTheDocument();
   };
 
   const checkByLabelText = (label: string): void => {
@@ -217,7 +217,7 @@ export const createPageHelpers = (): PageHelpers => {
     getFullNameValue,
     getEmailValue,
     getConfirmEmailValue,
-    visitStep,
+    visitOnboardingPage,
     checkByLabelText,
     chooseEssentialQuestionRadio,
   };
@@ -283,7 +283,7 @@ export const industryIdsWithRequiredEssentialQuestion: string[] = getIndustries(
   .filter((industry) => industryHasRequiredUndefinedEssentialQuestion(industry.id))
   .map((industry) => industry.id);
 
-export const composeOnBoardingTitle = (step: string, pageTitle?: string): string => {
+export const composeOnBoardingTitle = (pageTitle?: string): string => {
   const Config = getMergedConfig();
   if (pageTitle === undefined) {
     const pageTitleDefault = modifyContent({
@@ -294,9 +294,7 @@ export const composeOnBoardingTitle = (step: string, pageTitle?: string): string
         additional: "additional",
       },
     });
-    // return `${pageTitleDefault} ${step}`;
-    return `${[pageTitleDefault, step].join(" ")}`;
+    return `${pageTitleDefault}`;
   }
-  // return `${pageTitle} ${step}`;
-  return `${[pageTitle, step].join(" ")}`;
+  return `${pageTitle}`;
 };
