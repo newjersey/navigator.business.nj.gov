@@ -182,7 +182,7 @@
     "@types/seedrandom": "3.0.8",
     "@types/simple-oauth2": "5.0.8",
     "@types/supertest": "6.0.3",
-    "@types/uuid": "10.0.0",
+    "@types/uuid": "11.0.0",
     "@types/xml2js": "0.4.14",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
