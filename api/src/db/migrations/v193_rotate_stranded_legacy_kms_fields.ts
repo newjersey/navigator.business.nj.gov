@@ -3,37 +3,9 @@ import type {
   v192BusinessUser,
   v192UserData,
 } from "@db/migrations/v192_fix_confirmation_email_sent_typo";
-import { randomInt } from "@shared/intHelpers";
+import { rotateKmsField } from "@db/migrations/kms_migration_utils";
 import { type MigrationClients } from "@db/migrations/types";
-
-const rotateField = async (
-  fieldName: string,
-  encryptedValue: string | undefined,
-  clients: MigrationClients,
-): Promise<string | undefined> => {
-  if (!encryptedValue) {
-    return encryptedValue;
-  }
-
-  let plaintext: string;
-  try {
-    plaintext = await clients.cryptoClient.decryptValue(encryptedValue);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`Migration v193 failed to decrypt ${fieldName}: ${message}`, {
-      cause: error,
-    });
-  }
-
-  try {
-    return await clients.cryptoClient.encryptValue(plaintext);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`Migration v193 failed to encrypt ${fieldName}: ${message}`, {
-      cause: error,
-    });
-  }
-};
+import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v192_to_v193 = async (
   userData: v192UserData,
@@ -74,65 +46,81 @@ const migrate_v192Business_to_v193Business = async (
   business: v192Business,
   clients: MigrationClients,
 ): Promise<v193Business> => {
-  const encryptedTaxId = await rotateField(
-    "profileData.encryptedTaxId",
-    business.profileData.encryptedTaxId,
+  const taxId = await rotateKmsField({
+    migrationVersion: 193,
+    fieldName: "profileData.encryptedTaxId",
+    encryptedValue: business.profileData.encryptedTaxId,
     clients,
-  );
+  });
 
-  const cigaretteEncryptedTaxId = await rotateField(
-    "cigaretteLicenseData.encryptedTaxId",
-    business.cigaretteLicenseData?.encryptedTaxId,
+  const cigaretteTaxId = await rotateKmsField({
+    migrationVersion: 193,
+    fieldName: "cigaretteLicenseData.encryptedTaxId",
+    encryptedValue: business.cigaretteLicenseData?.encryptedTaxId,
     clients,
-  );
+  });
 
-  const encryptedTaxPin = await rotateField(
-    "profileData.encryptedTaxPin",
-    business.profileData.encryptedTaxPin,
+  const taxPin = await rotateKmsField({
+    migrationVersion: 193,
+    fieldName: "profileData.encryptedTaxPin",
+    encryptedValue: business.profileData.encryptedTaxPin,
     clients,
-  );
+  });
 
-  const encryptedDeptOfLaborEin = await rotateField(
-    "profileData.deptOfLaborEin",
-    business.profileData.deptOfLaborEin,
+  const deptOfLaborEin = await rotateKmsField({
+    migrationVersion: 193,
+    fieldName: "profileData.deptOfLaborEin",
+    encryptedValue: business.profileData.deptOfLaborEin,
     clients,
-  );
+  });
 
   // These fields exist in stored records but were omitted from the v191/v192 type tree.
   const legacyTaxClearance = business.taxClearanceCertificateData as
     | (typeof business.taxClearanceCertificateData & LegacyTaxClearanceCertificateData)
     | undefined;
-  const taxClearanceEncryptedTaxId = await rotateField(
-    "taxClearanceCertificateData.encryptedTaxId",
-    legacyTaxClearance?.encryptedTaxId,
+  const taxClearanceTaxId = await rotateKmsField({
+    migrationVersion: 193,
+    fieldName: "taxClearanceCertificateData.encryptedTaxId",
+    encryptedValue: legacyTaxClearance?.encryptedTaxId,
     clients,
-  );
-  const taxClearanceEncryptedTaxPin = await rotateField(
-    "taxClearanceCertificateData.encryptedTaxPin",
-    legacyTaxClearance?.encryptedTaxPin,
+  });
+  const taxClearanceTaxPin = await rotateKmsField({
+    migrationVersion: 193,
+    fieldName: "taxClearanceCertificateData.encryptedTaxPin",
+    encryptedValue: legacyTaxClearance?.encryptedTaxPin,
     clients,
-  );
+  });
 
   return {
     ...business,
     version: 193,
     profileData: {
       ...business.profileData,
-      encryptedTaxId,
-      encryptedTaxPin,
-      deptOfLaborEin: encryptedDeptOfLaborEin ?? "",
+      taxId: taxId.wasReset ? undefined : business.profileData.taxId,
+      hashedTaxId: taxId.wasReset ? undefined : business.profileData.hashedTaxId,
+      encryptedTaxId: taxId.value,
+      taxPin: taxPin.wasReset ? undefined : business.profileData.taxPin,
+      encryptedTaxPin: taxPin.value,
+      deptOfLaborEin: deptOfLaborEin.value ?? "",
     },
     taxClearanceCertificateData: business.taxClearanceCertificateData
       ? {
           ...business.taxClearanceCertificateData,
-          encryptedTaxId: taxClearanceEncryptedTaxId,
-          encryptedTaxPin: taxClearanceEncryptedTaxPin,
+          taxId: taxClearanceTaxId.wasReset
+            ? undefined
+            : business.taxClearanceCertificateData.taxId,
+          encryptedTaxId: taxClearanceTaxId.value,
+          taxPin: taxClearanceTaxPin.wasReset
+            ? undefined
+            : business.taxClearanceCertificateData.taxPin,
+          encryptedTaxPin: taxClearanceTaxPin.value,
         }
       : business.taxClearanceCertificateData,
     cigaretteLicenseData: business.cigaretteLicenseData
       ? {
           ...business.cigaretteLicenseData,
-          encryptedTaxId: cigaretteEncryptedTaxId,
+          taxId: cigaretteTaxId.wasReset ? undefined : business.cigaretteLicenseData.taxId,
+          encryptedTaxId: cigaretteTaxId.value,
         }
       : business.cigaretteLicenseData,
   };

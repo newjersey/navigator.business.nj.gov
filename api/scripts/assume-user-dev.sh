@@ -87,8 +87,22 @@ if [ "$(jq '.Items | length' "$DEV_DATA_BACKUP_FILE")" -eq 0 ]; then
 fi
 
 echo "Updating dev user..."
-PROD_ITEM=$(jq -c '.Items[0]' "$TEMP_PROD_DATA")
-PROD_ITEM_WITH_DEV_UUID=$(echo "$PROD_ITEM" | jq --arg uuid "$DEV_UUID" '.userId.S = $uuid')
+SANITIZED_PROD_DATA=$(jq -c '
+  .Items[0]
+  | .data.M.businesses.M |= with_entries(
+      .value.M.profileData.M |= (
+        del(.taxId, .hashedTaxId, .encryptedTaxId, .taxPin, .encryptedTaxPin)
+        | .deptOfLaborEin = {"S": ""}
+      )
+      | if .value.M.cigaretteLicenseData.M? then
+          .value.M.cigaretteLicenseData.M |= del(.taxId, .encryptedTaxId)
+        else . end
+      | if .value.M.taxClearanceCertificateData.M? then
+          .value.M.taxClearanceCertificateData.M |=
+            del(.taxId, .encryptedTaxId, .taxPin, .encryptedTaxPin)
+        else . end
+    )
+' "$TEMP_PROD_DATA")
 
 # `aws dynamodb put-item` replaces the entire object,
 # whereas update-item only updates specific properties.
@@ -101,7 +115,7 @@ aws dynamodb update-item \
   --key '{"userId": {"S": "'$DEV_UUID'"}}' \
   --update-expression "SET #data = :data" \
   --expression-attribute-names '{"#data": "data"}' \
-  --expression-attribute-values "$(jq -c '{":data": .Items[0].data}' "$TEMP_PROD_DATA")"
+  --expression-attribute-values "$(jq -cn --argjson item "$SANITIZED_PROD_DATA" '{":data": $item.data}')"
 
-echo "Successfully updated dev user with production data."
+echo "Successfully updated dev user with production data and reset protected identifiers."
 echo "Backup of original dev data saved to: $DEV_DATA_BACKUP_FILE"

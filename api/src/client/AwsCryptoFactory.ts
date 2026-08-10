@@ -1,15 +1,18 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const AWSCrypto = require("@aws-crypto/client-node");
 import { fromBase64, toBase64 } from "@aws-sdk/util-base64-node";
+import {
+  type EncryptionContext,
+  type ForeignEnvironmentPolicy,
+  validateCiphertextMetadata,
+} from "@client/CiphertextMetadata";
 import { type CryptoClient } from "@domain/types";
 import { type NonSharedBuffer } from "node:buffer";
 import * as crypto from "node:crypto";
 import { TextDecoder } from "node:util";
 
-export interface EncryptionContext {
-  readonly stage: string;
-  readonly purpose: string;
-  readonly origin: string;
+export interface AWSCryptoFactoryOptions {
+  readonly foreignEnvironmentPolicy?: ForeignEnvironmentPolicy;
 }
 
 const contextMatches = (
@@ -36,14 +39,14 @@ export const AWSCryptoFactory = (
   encryptedHashingSalt?: string,
   decryptOnlyKeyIds: readonly string[] = [],
   decryptOnlyContexts: readonly EncryptionContext[] = [],
+  options: AWSCryptoFactoryOptions = {},
 ): CryptoClient => {
   const { encrypt, decrypt } = AWSCrypto.buildClient(
     AWSCrypto.CommitmentPolicy.REQUIRE_ENCRYPT_REQUIRE_DECRYPT,
   );
   const encryptKeyring = new AWSCrypto.KmsKeyringNode({ generatorKeyId });
-  const decryptKeyring = new AWSCrypto.KmsKeyringNode({
-    keyIds: [...new Set([generatorKeyId, ...decryptOnlyKeyIds].filter(Boolean))],
-  });
+  const allowedKeyIds = [...new Set([generatorKeyId, ...decryptOnlyKeyIds].filter(Boolean))];
+  const decryptKeyring = new AWSCrypto.KmsKeyringNode({ keyIds: allowedKeyIds });
 
   const decoder = new TextDecoder();
 
@@ -56,13 +59,21 @@ export const AWSCryptoFactory = (
   };
 
   const decryptValue = async (encryptedValue: string): Promise<string> => {
+    const acceptedContexts = [context, ...decryptOnlyContexts];
+    if (options.foreignEnvironmentPolicy) {
+      validateCiphertextMetadata(encryptedValue, {
+        allowedKeyIds,
+        acceptedContexts,
+        foreignEnvironmentPolicy: options.foreignEnvironmentPolicy,
+      });
+    }
+
     const bufferedValue = fromBase64(encryptedValue);
 
     const { plaintext, messageHeader } = await decrypt(decryptKeyring, bufferedValue);
 
     const { encryptionContext } = messageHeader;
 
-    const acceptedContexts = [context, ...decryptOnlyContexts];
     if (
       !acceptedContexts.some((acceptedContext) =>
         contextMatches(encryptionContext, acceptedContext),
