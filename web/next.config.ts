@@ -1,13 +1,16 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-const CopyPlugin = require("copy-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
-module.exports = withBundleAnalyzer({
-  productionBrowserSourceMaps: ["testing", "dev"].includes(process.env.STAGE),
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  productionBrowserSourceMaps: ["testing", "dev"].includes(process.env.STAGE ?? ""),
   reactCompiler: true,
+  turbopack: {
+    rules: {
+      "*.md": {
+        loaders: ["raw-loader"],
+        as: "*.js",
+      },
+    },
+  },
   env: {
     AB_TESTING_EXPERIENCE_B_PERCENTAGE: process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE,
     ALTERNATE_LANDING_PAGE_URL: process.env.ALTERNATE_LANDING_PAGE_URL ?? "",
@@ -45,52 +48,6 @@ module.exports = withBundleAnalyzer({
     FEATURE_NAICS_INDUSTRY_DETECTION: process.env.FEATURE_NAICS_INDUSTRY_DETECTION ?? "false",
   },
   staticPageGenerationTimeout: 120,
-  webpack: (config) => {
-    config.module.rules.push(
-      {
-        test: /\.md$/,
-        use: "raw-loader",
-      },
-      {
-        test: /\.(ts)x?$/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: true,
-              experimentalWatchApi: true,
-              onlyCompileBundledFiles: true,
-            },
-          },
-        ],
-      },
-    );
-
-    config.plugins.push(
-      new CleanWebpackPlugin({
-        dry: false,
-        cleanOnceBeforeBuildPatterns: ["../public/vendor"],
-        dangerouslyAllowCleanPatternsOutsideProject: true,
-      }),
-    );
-
-    config.plugins.push(
-      new CopyPlugin({
-        patterns: [
-          {
-            from: "../node_modules/@newjersey/njwds/dist/img",
-            to: "../public/vendor/img",
-          },
-          {
-            from: "../node_modules/@newjersey/njwds/dist/js",
-            to: "../public/vendor/js",
-          },
-        ],
-      }),
-    );
-
-    return config;
-  },
   experimental: {
     largePageDataBytes: 4.096 * 1024 * 1024,
   },
@@ -103,4 +60,6 @@ module.exports = withBundleAnalyzer({
       },
     ];
   },
-});
+};
+
+export default nextConfig;

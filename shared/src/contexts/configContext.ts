@@ -1,87 +1,87 @@
-import * as AbcEmergencyTripPermit from "../../../content/src/fieldConfig/abc-emergency-trip-permit.json";
-import * as AccountSetup from "../../../content/src/fieldConfig/account-setup-page.json";
-import * as anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults from "../../../content/src/fieldConfig/anytime-action-reinstatement-and-license-calendar-event-status-defaults.json";
-import * as AutosaveDefaults from "../../../content/src/fieldConfig/autosave-defaults.json";
-import * as BetaBar from "../../../content/src/fieldConfig/beta-bar.json";
-import * as BusinessFormation from "../../../content/src/fieldConfig/business-formation.json";
-import * as BusinessStructurePrompt from "../../../content/src/fieldConfig/business-structure-prompt.json";
-import * as BusinessStructureTask from "../../../content/src/fieldConfig/business-structure-task.json";
-import * as CalloutDefaults from "../../../content/src/fieldConfig/callout-defaults.json";
-import * as CannabisLicenseAnnualTab2 from "../../../content/src/fieldConfig/cannabis-license-annual-tab2.json";
-import * as CannabisLicenseConditionalTab2 from "../../../content/src/fieldConfig/cannabis-license-conditional-tab2.json";
-import * as CannabisLicenseEligibilityModal from "../../../content/src/fieldConfig/cannabis-license-eligibility-modal.json";
-import * as CannabisLicenseTab1 from "../../../content/src/fieldConfig/cannabis-license-tab1.json";
-import * as CannabisPriorityStatusTab1 from "../../../content/src/fieldConfig/cannabis-priority-status-tab1.json";
-import * as CannabisPriorityStatusTab2 from "../../../content/src/fieldConfig/cannabis-priority-status-tab2.json";
-import * as CheckAccountEmailPage from "../../../content/src/fieldConfig/check-account-email-page.json";
-import * as CigaretteLicenseConfirmation from "../../../content/src/fieldConfig/cigarette-license-confirmation.json";
-import * as CigaretteLicenseShared from "../../../content/src/fieldConfig/cigarette-license-shared.json";
-import * as CigaretteLicenseStep1 from "../../../content/src/fieldConfig/cigarette-license-step1.json";
-import * as CigaretteLicenseStep2 from "../../../content/src/fieldConfig/cigarette-license-step2.json";
-import * as CigaretteLicenseStep3 from "../../../content/src/fieldConfig/cigarette-license-step3.json";
-import * as CigaretteLicenseStep4 from "../../../content/src/fieldConfig/cigarette-license-step4.json";
-import * as CrtkTask from "../../../content/src/fieldConfig/crtk.json";
-import * as DashboardCalendar from "../../../content/src/fieldConfig/dashboard-calendar.json";
-import * as DashboardDefaults from "../../../content/src/fieldConfig/dashboard-defaults.json";
-import * as DashboardModals from "../../../content/src/fieldConfig/dashboard-modals.json";
-import * as DashboardSnackbars from "../../../content/src/fieldConfig/dashboard-snackbars.json";
-import * as DashboardTabs from "../../../content/src/fieldConfig/dashboard-tabs.json";
-import * as DeferredLocation from "../../../content/src/fieldConfig/deferred-location.json";
-import * as Ein from "../../../content/src/fieldConfig/ein.json";
-import * as ElevatorRegistration from "../../../content/src/fieldConfig/elevator-registration.json";
-import * as EmployerRates from "../../../content/src/fieldConfig/employer-rates.json";
-import * as EnvironmentQuestionnaire from "../../../content/src/fieldConfig/env-questionnaire.json";
-import * as FilingDefaults from "../../../content/src/fieldConfig/filing-defaults.json";
-import * as Footer from "../../../content/src/fieldConfig/footer.json";
-import * as FormationDataDeletionModal from "../../../content/src/fieldConfig/formation-date-deletion-modal.json";
-import * as FormationDateModal from "../../../content/src/fieldConfig/formation-date-modal.json";
-import * as FormationInterimSuccessPage from "../../../content/src/fieldConfig/formation-interim-success-page.json";
-import * as FormationSuccessPage from "../../../content/src/fieldConfig/formation-success-page.json";
-import * as FundingDefaults from "../../../content/src/fieldConfig/funding-defaults.json";
-import * as SiteWideErrorMessages from "../../../content/src/fieldConfig/global-errors-defaults.json";
-import * as GovernmentContracting from "../../../content/src/fieldConfig/government-contracting.json";
-import * as HeaderDefaults from "../../../content/src/fieldConfig/header-defaults.json";
-import * as HousingRegistrationSearchTask from "../../../content/src/fieldConfig/housing-registration.json";
-import * as LandingPage from "../../../content/src/fieldConfig/landing-page.json";
-import * as LegalMessageDefaults from "../../../content/src/fieldConfig/legal-message-defaults.json";
-import * as LicenseSearchTask from "../../../content/src/fieldConfig/license-search-task.json";
-import * as LockedTasksPrompt from "../../../content/src/fieldConfig/locked-tasks-prompt.json";
-import * as LoginSupportPage from "../../../content/src/fieldConfig/login-support-page.json";
-import * as ManageBusinessVehicles from "../../../content/src/fieldConfig/manage-business-vehicles.json";
-import * as NaicsCode from "../../../content/src/fieldConfig/naics-code.json";
-import * as NavigationDefaults from "../../../content/src/fieldConfig/navigation-defaults.json";
-import * as NexusDbaFormation from "../../../content/src/fieldConfig/nexus-dba-formation.json";
-import * as NexusNameSearch from "../../../content/src/fieldConfig/nexus-name-search.json";
-import * as FundingsOnboarding from "../../../content/src/fieldConfig/njeda-fundings-onboarding.json";
-import * as OnboardingDefaults from "../../../content/src/fieldConfig/onboarding-defaults.json";
-import * as PageNotFoundError from "../../../content/src/fieldConfig/page-not-found-error.json";
-import * as PassengerTransportCdl from "../../../content/src/fieldConfig/passenger-transport-cdl-tab1.json";
-import * as PassengerTransportCdl2 from "../../../content/src/fieldConfig/passenger-transport-cdl-tab2.json";
-import * as Profile from "../../../content/src/fieldConfig/profile.json";
-import * as RegisteredForTaxesModal from "../../../content/src/fieldConfig/registered-for-taxes-modal.json";
-import * as RemoveBusinessModal from "../../../content/src/fieldConfig/remove-business-modal.json";
-import * as SearchBusinessNameTask from "../../../content/src/fieldConfig/search-business-name-task.json";
-import * as SectionHeaders from "../../../content/src/fieldConfig/section-headers.json";
-import * as SelectIndustryTask from "../../../content/src/fieldConfig/select-industry-task.json";
-import * as SelfRegistration from "../../../content/src/fieldConfig/self-registration.json";
-import * as SkipToMainContent from "../../../content/src/fieldConfig/skip-to-main-content.json";
-import * as StarterKits from "../../../content/src/fieldConfig/starter-kits.json";
-import * as TaskDefaults from "../../../content/src/fieldConfig/task-defaults.json";
-import * as TaskProgressCard from "../../../content/src/fieldConfig/task-progress-card.json";
-import * as TaskProgress from "../../../content/src/fieldConfig/task-progress.json";
-import * as TaxAccess from "../../../content/src/fieldConfig/tax-access.json";
-import * as TaxCalendar from "../../../content/src/fieldConfig/tax-calendar.json";
-import * as TaxClearanceCertificateDownload from "../../../content/src/fieldConfig/tax-clearance-certificate-download.json";
-import * as TaxClearanceCertificateShared from "../../../content/src/fieldConfig/tax-clearance-certificate-shared.json";
-import * as TaxClearanceCertificateStep1 from "../../../content/src/fieldConfig/tax-clearance-certificate-step1.json";
-import * as TaxClearanceCertificateStep2 from "../../../content/src/fieldConfig/tax-clearance-certificate-step2.json";
-import * as TaxClearanceCertificateStep3 from "../../../content/src/fieldConfig/tax-clearance-certificate-step3.json";
-import * as TaxId from "../../../content/src/fieldConfig/tax-id.json";
-import * as UnsupportedNavigatorUserPage from "../../../content/src/fieldConfig/unsupported-navigator-user-page.json";
-import * as XrayRegistration from "../../../content/src/fieldConfig/xray-registration.json";
-import * as XrayRenewal from "../../../content/src/fieldConfig/xray-renewal.json";
-import * as CalloutAlerts from "../../../content/src/mappings/callout-alerts.json";
-import * as PageMetadata from "../../../content/src/page-metadata/page-metadata.json";
+import AbcEmergencyTripPermit from "../../../content/src/fieldConfig/abc-emergency-trip-permit.json";
+import AccountSetup from "../../../content/src/fieldConfig/account-setup-page.json";
+import anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults from "../../../content/src/fieldConfig/anytime-action-reinstatement-and-license-calendar-event-status-defaults.json";
+import AutosaveDefaults from "../../../content/src/fieldConfig/autosave-defaults.json";
+import BetaBar from "../../../content/src/fieldConfig/beta-bar.json";
+import BusinessFormation from "../../../content/src/fieldConfig/business-formation.json";
+import BusinessStructurePrompt from "../../../content/src/fieldConfig/business-structure-prompt.json";
+import BusinessStructureTask from "../../../content/src/fieldConfig/business-structure-task.json";
+import CalloutDefaults from "../../../content/src/fieldConfig/callout-defaults.json";
+import CannabisLicenseAnnualTab2 from "../../../content/src/fieldConfig/cannabis-license-annual-tab2.json";
+import CannabisLicenseConditionalTab2 from "../../../content/src/fieldConfig/cannabis-license-conditional-tab2.json";
+import CannabisLicenseEligibilityModal from "../../../content/src/fieldConfig/cannabis-license-eligibility-modal.json";
+import CannabisLicenseTab1 from "../../../content/src/fieldConfig/cannabis-license-tab1.json";
+import CannabisPriorityStatusTab1 from "../../../content/src/fieldConfig/cannabis-priority-status-tab1.json";
+import CannabisPriorityStatusTab2 from "../../../content/src/fieldConfig/cannabis-priority-status-tab2.json";
+import CheckAccountEmailPage from "../../../content/src/fieldConfig/check-account-email-page.json";
+import CigaretteLicenseConfirmation from "../../../content/src/fieldConfig/cigarette-license-confirmation.json";
+import CigaretteLicenseShared from "../../../content/src/fieldConfig/cigarette-license-shared.json";
+import CigaretteLicenseStep1 from "../../../content/src/fieldConfig/cigarette-license-step1.json";
+import CigaretteLicenseStep2 from "../../../content/src/fieldConfig/cigarette-license-step2.json";
+import CigaretteLicenseStep3 from "../../../content/src/fieldConfig/cigarette-license-step3.json";
+import CigaretteLicenseStep4 from "../../../content/src/fieldConfig/cigarette-license-step4.json";
+import CrtkTask from "../../../content/src/fieldConfig/crtk.json";
+import DashboardCalendar from "../../../content/src/fieldConfig/dashboard-calendar.json";
+import DashboardDefaults from "../../../content/src/fieldConfig/dashboard-defaults.json";
+import DashboardModals from "../../../content/src/fieldConfig/dashboard-modals.json";
+import DashboardSnackbars from "../../../content/src/fieldConfig/dashboard-snackbars.json";
+import DashboardTabs from "../../../content/src/fieldConfig/dashboard-tabs.json";
+import DeferredLocation from "../../../content/src/fieldConfig/deferred-location.json";
+import Ein from "../../../content/src/fieldConfig/ein.json";
+import ElevatorRegistration from "../../../content/src/fieldConfig/elevator-registration.json";
+import EmployerRates from "../../../content/src/fieldConfig/employer-rates.json";
+import EnvironmentQuestionnaire from "../../../content/src/fieldConfig/env-questionnaire.json";
+import FilingDefaults from "../../../content/src/fieldConfig/filing-defaults.json";
+import Footer from "../../../content/src/fieldConfig/footer.json";
+import FormationDataDeletionModal from "../../../content/src/fieldConfig/formation-date-deletion-modal.json";
+import FormationDateModal from "../../../content/src/fieldConfig/formation-date-modal.json";
+import FormationInterimSuccessPage from "../../../content/src/fieldConfig/formation-interim-success-page.json";
+import FormationSuccessPage from "../../../content/src/fieldConfig/formation-success-page.json";
+import FundingDefaults from "../../../content/src/fieldConfig/funding-defaults.json";
+import SiteWideErrorMessages from "../../../content/src/fieldConfig/global-errors-defaults.json";
+import GovernmentContracting from "../../../content/src/fieldConfig/government-contracting.json";
+import HeaderDefaults from "../../../content/src/fieldConfig/header-defaults.json";
+import HousingRegistrationSearchTask from "../../../content/src/fieldConfig/housing-registration.json";
+import LandingPage from "../../../content/src/fieldConfig/landing-page.json";
+import LegalMessageDefaults from "../../../content/src/fieldConfig/legal-message-defaults.json";
+import LicenseSearchTask from "../../../content/src/fieldConfig/license-search-task.json";
+import LockedTasksPrompt from "../../../content/src/fieldConfig/locked-tasks-prompt.json";
+import LoginSupportPage from "../../../content/src/fieldConfig/login-support-page.json";
+import ManageBusinessVehicles from "../../../content/src/fieldConfig/manage-business-vehicles.json";
+import NaicsCode from "../../../content/src/fieldConfig/naics-code.json";
+import NavigationDefaults from "../../../content/src/fieldConfig/navigation-defaults.json";
+import NexusDbaFormation from "../../../content/src/fieldConfig/nexus-dba-formation.json";
+import NexusNameSearch from "../../../content/src/fieldConfig/nexus-name-search.json";
+import FundingsOnboarding from "../../../content/src/fieldConfig/njeda-fundings-onboarding.json";
+import OnboardingDefaults from "../../../content/src/fieldConfig/onboarding-defaults.json";
+import PageNotFoundError from "../../../content/src/fieldConfig/page-not-found-error.json";
+import PassengerTransportCdl from "../../../content/src/fieldConfig/passenger-transport-cdl-tab1.json";
+import PassengerTransportCdl2 from "../../../content/src/fieldConfig/passenger-transport-cdl-tab2.json";
+import Profile from "../../../content/src/fieldConfig/profile.json";
+import RegisteredForTaxesModal from "../../../content/src/fieldConfig/registered-for-taxes-modal.json";
+import RemoveBusinessModal from "../../../content/src/fieldConfig/remove-business-modal.json";
+import SearchBusinessNameTask from "../../../content/src/fieldConfig/search-business-name-task.json";
+import SectionHeaders from "../../../content/src/fieldConfig/section-headers.json";
+import SelectIndustryTask from "../../../content/src/fieldConfig/select-industry-task.json";
+import SelfRegistration from "../../../content/src/fieldConfig/self-registration.json";
+import SkipToMainContent from "../../../content/src/fieldConfig/skip-to-main-content.json";
+import StarterKits from "../../../content/src/fieldConfig/starter-kits.json";
+import TaskDefaults from "../../../content/src/fieldConfig/task-defaults.json";
+import TaskProgressCard from "../../../content/src/fieldConfig/task-progress-card.json";
+import TaskProgress from "../../../content/src/fieldConfig/task-progress.json";
+import TaxAccess from "../../../content/src/fieldConfig/tax-access.json";
+import TaxCalendar from "../../../content/src/fieldConfig/tax-calendar.json";
+import TaxClearanceCertificateDownload from "../../../content/src/fieldConfig/tax-clearance-certificate-download.json";
+import TaxClearanceCertificateShared from "../../../content/src/fieldConfig/tax-clearance-certificate-shared.json";
+import TaxClearanceCertificateStep1 from "../../../content/src/fieldConfig/tax-clearance-certificate-step1.json";
+import TaxClearanceCertificateStep2 from "../../../content/src/fieldConfig/tax-clearance-certificate-step2.json";
+import TaxClearanceCertificateStep3 from "../../../content/src/fieldConfig/tax-clearance-certificate-step3.json";
+import TaxId from "../../../content/src/fieldConfig/tax-id.json";
+import UnsupportedNavigatorUserPage from "../../../content/src/fieldConfig/unsupported-navigator-user-page.json";
+import XrayRegistration from "../../../content/src/fieldConfig/xray-registration.json";
+import XrayRenewal from "../../../content/src/fieldConfig/xray-renewal.json";
+import CalloutAlerts from "../../../content/src/mappings/callout-alerts.json";
+import PageMetadata from "../../../content/src/page-metadata/page-metadata.json";
 
 import { merge } from "lodash";
 import { createContext } from "react";
@@ -89,6 +89,7 @@ import { createContext } from "react";
 const merged = JSON.parse(
   JSON.stringify(
     merge(
+      {},
       LegalMessageDefaults,
       PassengerTransportCdl,
       PassengerTransportCdl2,
@@ -267,6 +268,7 @@ export type ConfigType = typeof LegalMessageDefaults &
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
+    {},
     LegalMessageDefaults,
     PassengerTransportCdl,
     PassengerTransportCdl2,
@@ -308,6 +310,7 @@ export const getMergedConfig = (): ConfigType => {
     FormationInterimSuccessPage,
     FormationSuccessPage,
     PageNotFoundError,
+    SiteWideErrorMessages,
     DeferredLocation,
     DashboardSnackbars,
     DashboardModals,
@@ -317,6 +320,7 @@ export const getMergedConfig = (): ConfigType => {
     TaxAccess,
     AccountSetup,
     BusinessStructureTask,
+    BusinessStructurePrompt,
     NavigationDefaults,
     PageMetadata,
     DashboardDefaults,
@@ -345,6 +349,7 @@ export const getMergedConfig = (): ConfigType => {
     AbcEmergencyTripPermit,
     FilingDefaults,
     FormationDataDeletionModal,
+    EmployerRates,
     RemoveBusinessModal,
     LoginSupportPage,
     CrtkTask,
