@@ -810,6 +810,14 @@ collections:
               - { label: Continue Text, name: continueButtonText, widget: string }
               - { label: Mark As Complete, name: "markAsCompleteButtonText", widget: string }
               - { label: Needs Account Callout, name: "needsAccountCallout", widget: markdown }
+              - {
+                  label: CTA Prefix for Guest Users,
+                  name: "ctaPrefixForGuestUsers",
+                  hint:
+                    "This text appears before the call to action button text (e.g. 'Save' or
+                    'Continue Forming My Business') for users that aren't logged in.",
+                  widget: string,
+                }
 
   - label: Task - Business Name Search
     name: searchBusinessNameTask
