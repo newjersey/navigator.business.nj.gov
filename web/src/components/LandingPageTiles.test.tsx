@@ -1,11 +1,16 @@
 import { getStartingBusinessTileSet, LandingPageTiles } from "@/components/LandingPageTiles";
+import { navigateToUrl } from "@/lib/utils/navigation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/utils/navigation", () => ({
+  navigateToUrl: jest.fn(),
+}));
 
 const Config = getMergedConfig();
+const mockNavigateToUrl = navigateToUrl as jest.MockedFunction<typeof navigateToUrl>;
 
 describe("<LandingPageTiles />", () => {
   let startingBusinessTileSet: ReturnType<typeof getStartingBusinessTileSet>;
@@ -13,11 +18,6 @@ describe("<LandingPageTiles />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
-    Object.defineProperty(window, "location", {
-      value: { href: "" },
-      writable: true,
-      configurable: true,
-    });
     startingBusinessTileSet = getStartingBusinessTileSet(Config.landingPage);
   });
 
@@ -26,7 +26,7 @@ describe("<LandingPageTiles />", () => {
 
     fireEvent.click(screen.getByText(Config.landingPage.landingPageFundingTile));
 
-    expect(window.location.href).toBe(Config.landingPage.landingPageFundingLink);
+    expect(mockNavigateToUrl).toHaveBeenCalledWith(Config.landingPage.landingPageFundingLink);
   });
 
   it("routes user to starting section when the start business a business button is clicked", async () => {
@@ -42,6 +42,8 @@ describe("<LandingPageTiles />", () => {
 
     fireEvent.click(screen.getByText(Config.landingPage.landingPageBusinessStructureTile));
 
-    expect(window.location.href).toBe(Config.landingPage.landingPageBusinessStructureLink);
+    expect(mockNavigateToUrl).toHaveBeenCalledWith(
+      Config.landingPage.landingPageBusinessStructureLink,
+    );
   });
 });

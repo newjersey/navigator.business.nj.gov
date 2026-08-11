@@ -1,5 +1,6 @@
 import { LandingPageActionTile } from "@/components/LandingPageActionTile";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
+import { navigateToUrl } from "@/lib/utils/navigation";
 import { ActionTile } from "@businessnjgovnavigator/shared/types";
 import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { useRouter } from "next/compat/router";
@@ -82,7 +83,7 @@ export const LandingPageTiles = ({ tiles }: LandingPageTilesProps): ReactElement
     dataTestId: tile.dataTestId,
     onClick: (): void => {
       if (tile.externalUrl) {
-        window.location.href = tile.externalUrl;
+        navigateToUrl(tile.externalUrl);
       } else {
         setFlowAndRouteUser(tile.flow);
       }

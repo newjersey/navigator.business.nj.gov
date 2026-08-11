@@ -17,15 +17,15 @@ export const migrate_v22_to_v23 = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v23UserData => {
-  const userData = {
-    ...v22Data,
+  const { onboardingData, ...userData } = v22Data;
+
+  return {
+    ...userData,
     profileData: {
-      ...v22Data.onboardingData,
+      ...onboardingData,
     },
     version: 23,
   };
-
-  return userData;
 };
 
 // ---------------- v23 types ----------------

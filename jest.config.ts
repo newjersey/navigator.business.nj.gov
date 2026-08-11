@@ -1,3 +1,5 @@
+/** @jest-config-loader ts-node */
+
 import sharedConfig from "./jest.shared";
 
 /** @type {import('jest').Config} */

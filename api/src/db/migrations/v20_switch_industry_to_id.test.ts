@@ -31,6 +31,6 @@ describe("migrate_v19_to_v20", () => {
     const v20 = migrate_v19_to_v20(v19);
 
     expect(v20.onboardingData.industryId).toEqual("restaurant");
-    expect(v20.onboardingData).not.toContain("industry");
+    expect(v20.onboardingData).not.toHaveProperty("industry");
   });
 });

@@ -31,6 +31,6 @@ describe("migrate_v22_to_v23", () => {
     const v23 = migrate_v22_to_v23(v22);
 
     expect(v23.profileData.businessName).toBeDefined();
-    expect(v23).not.toContain("onboardingData");
+    expect(v23).not.toHaveProperty("onboardingData");
   });
 });

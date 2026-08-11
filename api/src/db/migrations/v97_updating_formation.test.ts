@@ -69,16 +69,16 @@ describe("migrate_v96_to_v97", () => {
 
       it("renames businessAddress fields", () => {
         expect(v97.formationData.formationFormData.addressCity).toEqual(undefined);
-        expect(v97.formationData.formationFormData).not.toContain("businessAddressCity");
+        expect(v97.formationData.formationFormData).not.toHaveProperty("businessAddressCity");
         expect(v97.formationData.formationFormData.addressMunicipality).toEqual(
           businessAddressCity,
         );
         expect(v97.formationData.formationFormData.addressLine1).toEqual(businessAddressLine1);
-        expect(v97.formationData.formationFormData).not.toContain("businessAddressLine1");
+        expect(v97.formationData.formationFormData).not.toHaveProperty("businessAddressLine1");
         expect(v97.formationData.formationFormData.addressLine2).toEqual(businessAddressLine2);
-        expect(v97.formationData.formationFormData).not.toContain("businessAddressLine2");
+        expect(v97.formationData.formationFormData).not.toHaveProperty("businessAddressLine2");
         expect(v97.formationData.formationFormData.addressZipCode).toEqual(businessAddressZipCode);
-        expect(v97.formationData.formationFormData).not.toContain("businessAddressZipCode");
+        expect(v97.formationData.formationFormData).not.toHaveProperty("businessAddressZipCode");
       });
 
       it("adds addressCountry field", () => {
@@ -86,7 +86,7 @@ describe("migrate_v96_to_v97", () => {
       });
 
       it("converts the businessAddressState 'New Jersey' string field to a StateObject", () => {
-        expect(v97.formationData.formationFormData).not.toContain("businessAddressState");
+        expect(v97.formationData.formationFormData).not.toHaveProperty("businessAddressState");
         expect(v97.formationData.formationFormData.addressState).toEqual({
           name: "New Jersey",
           shortCode: "NJ",
