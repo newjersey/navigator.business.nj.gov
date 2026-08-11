@@ -1,18 +1,18 @@
 {
   "determineNaicsCode": {
-    "naicsLink": "[www.census.gov/naics/](https://www.census.gov/naics/)",
-    "industryUpdatedSnackbarHeading": "Your industry has been updated",
-    "industryUpdatedSnackbarBody": "Based on your NAICS code, your industry has been changed to ${industryName}. Your roadmap has been updated.",
-    "successMessage": "NAICS code ${code} has been saved.",
-    "invalidValidationErrorText": "Your NAICS code is invalid",
-    "missingNAICSCodePlaceholder": "(You have not saved a NAICS Code yet)",
-    "hasSavedCodeHeader": "Your NAICS Code",
-    "findCodeHeader": "Find Your NAICS Code",
-    "findCodeBodyText": "Use the resource below to search and find your NAICS code. ",
-    "lengthValidationErrorText": "Your NAICS code must be 6 digits",
     "ariaLabelText": "your NAICS code",
+    "findCodeBodyText": "Use the resource below to search and find your NAICS code.",
+    "findCodeHeader": "Find Your NAICS Code",
+    "hasSavedCodeHeader": "Your NAICS Code",
+    "industryUpdatedSnackbarBody": "Based on your NAICS code, your industry has been changed to ${industryName}. Your roadmap has been updated.",
+    "industryUpdatedSnackbarHeading": "Your industry has been updated",
+    "invalidValidationErrorText": "Your NAICS code is invalid",
+    "lengthValidationErrorText": "Your NAICS code must be 6 digits",
+    "missingNAICSCodePlaceholder": "(You have not saved a NAICS Code yet)",
     "naicsDescriptionURL": "https://www.naics.com/naics-code-description/?v=2022&code=${code}",
+    "naicsLink": "[www.census.gov/naics/](https://www.census.gov/naics/)",
     "saveButtonText": "Save NAICS Code",
+    "successMessage": "NAICS code ${code} has been saved.",
     "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n\nBegin by searching for a service or product you provide."
   }
 }
