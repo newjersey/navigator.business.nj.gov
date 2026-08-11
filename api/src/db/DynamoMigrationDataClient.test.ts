@@ -144,20 +144,24 @@ describe("DynamoMigrationDataClient", () => {
     });
   });
 
-  it("does not overwrite an outdated record that changed during a submitted migration", async () => {
+  it("retries submitted stale data against a source-version fallback record", async () => {
     const submittedUserData = generateOutdatedUser();
     const latestUserData = {
       ...submittedUserData,
       lastUpdatedISO: "2026-08-11T18:04:00.000Z",
     };
     userDataClient.get.mockResolvedValueOnce(latestUserData);
-    send.mockRejectedValueOnce(migrationConflict);
+    send.mockRejectedValueOnce(migrationConflict).mockResolvedValueOnce({});
 
-    await expect(makeClient().migrateAndPutSubmittedUser(submittedUserData)).rejects.toBeInstanceOf(
-      MigrationConflictError,
-    );
+    const result = await makeClient().migrateAndPutSubmittedUser(submittedUserData);
 
-    expect(send).toHaveBeenCalledTimes(1);
+    expect(result).toEqual(migrateUser(submittedUserData));
+    expect(send).toHaveBeenCalledTimes(2);
+    const retryCommand = send.mock.calls[1][0] as TransactWriteCommand;
+    expect(retryCommand.input.TransactItems?.[0].Put).toMatchObject({
+      ConditionExpression: "#data = :sourceData",
+      ExpressionAttributeValues: { ":sourceData": latestUserData },
+    });
   });
 
   it("does not overwrite a record newer than the submitted migration output", async () => {
