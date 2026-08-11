@@ -6,6 +6,7 @@ import {
 import {
   CryptoClient,
   DatabaseClient,
+  DatabaseThrottlingError,
   MigrationConflictError,
   TimeStampBusinessSearch,
   UpdateLicenseStatus,
@@ -337,6 +338,18 @@ export const userRouterFactory = (
             }ms`,
           );
           res.status(status).json({ error: "STALE_USER_DATA" });
+          return;
+        }
+
+        if (error instanceof DatabaseThrottlingError) {
+          const status = StatusCodes.SERVICE_UNAVAILABLE;
+          res.setHeader("Retry-After", "30");
+          logger.LogInfo(
+            `[END] ${method} ${endpoint} - status: ${status}, reason: database throttled, operation: ${error.context.operation}, itemSizeBucket: ${error.context.itemSizeBucket}, transactionItemCount: ${error.context.transactionItemCount ?? "unknown"}, userId: ${postedUserBodyId}, duration: ${
+              Date.now() - requestStart
+            }ms`,
+          );
+          res.status(status).json({ error: "DATABASE_THROTTLED" });
           return;
         }
 

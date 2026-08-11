@@ -4,6 +4,11 @@ import {
   type TransactWriteCommandInput,
 } from "@aws-sdk/lib-dynamodb";
 import { createBusinessDataItem } from "@db/DynamoBusinessDataClient";
+import {
+  getDynamoDbItemSizeBucket,
+  isDynamoDbThrottlingError,
+  toDatabaseThrottlingError,
+} from "@db/DynamoDbErrors";
 import { createUserDataItem } from "@db/DynamoUserDataClient";
 import {
   MigrationConflictError,
@@ -107,6 +112,13 @@ export const DynamoMigrationDataClient = ({
     } catch (error) {
       if (isMigrationConflict(error)) {
         throw new MigrationConflictError();
+      }
+      if (isDynamoDbThrottlingError(error)) {
+        throw toDatabaseThrottlingError(error, {
+          operation: "migration-transaction",
+          itemSizeBucket: getDynamoDbItemSizeBucket(createUserDataItem(migratedUserData)),
+          transactionItemCount: transactItems.length,
+        });
       }
       const message = error instanceof Error ? error.message : String(error);
       throw new Error(`Atomic migration transaction failed: ${message}`, { cause: error });

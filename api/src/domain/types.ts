@@ -114,6 +114,30 @@ export class MigrationConflictError extends Error {
   }
 }
 
+export type DatabaseWriteOperation = "migration-transaction" | "put-business" | "put-user";
+export type DatabaseItemSizeBucket =
+  | "under-100-kb"
+  | "100-199-kb"
+  | "200-299-kb"
+  | "300-399-kb"
+  | "400-kb-or-more";
+
+export interface DatabaseThrottlingContext {
+  readonly operation: DatabaseWriteOperation;
+  readonly itemSizeBucket: DatabaseItemSizeBucket;
+  readonly transactionItemCount?: number;
+}
+
+export class DatabaseThrottlingError extends Error {
+  readonly context: DatabaseThrottlingContext;
+
+  constructor(context: DatabaseThrottlingContext, options?: ErrorOptions) {
+    super("Database write capacity is temporarily unavailable", options);
+    this.name = "DatabaseThrottlingError";
+    this.context = context;
+  }
+}
+
 export interface BusinessesDataClient {
   get: (businessId: string) => Promise<Business>;
   put: (businessData: Business) => Promise<Business>;
