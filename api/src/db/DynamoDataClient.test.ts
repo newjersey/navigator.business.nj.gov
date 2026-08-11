@@ -352,6 +352,27 @@ describe("User and Business Migration with DynamoDataClient", () => {
     );
   });
 
+  it.each(["Ciphertext wrapping key is not accepted", "Ciphertext header is malformed"])(
+    "returns the stored record without a generic error for quarantined ciphertext: %s",
+    async (quarantineReason) => {
+      const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+      jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(outdatedUser);
+      migrationDataClient.migrateAndPut.mockRejectedValueOnce(
+        new Error("Migration v193 failed", {
+          cause: new QuarantinedCiphertextError(quarantineReason),
+        }),
+      );
+
+      await expect(dynamoDataClient.get(outdatedUser.user.id)).resolves.toEqual(outdatedUser);
+      expect(logger.LogInfo).toHaveBeenCalledWith(
+        expect.stringContaining("Quarantined request-time migration"),
+      );
+      expect(logger.LogError).not.toHaveBeenCalledWith(
+        expect.stringContaining("Request-time migration failed"),
+      );
+    },
+  );
+
   it("uses submitted-user migration for an outdated write", async () => {
     const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
     const migratedUser = { ...outdatedUser, version: CURRENT_VERSION };
@@ -427,27 +448,33 @@ describe("User and Business Migration with DynamoDataClient", () => {
     );
   });
 
-  it("quarantines a record-level ciphertext failure and continues the batch", async () => {
-    const first = generateUserData();
-    const second = generateUserData();
-    jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
-      usersToMigrate: [first, second],
-      nextToken: undefined,
-    });
-    migrationDataClient.migrateAndPut.mockRejectedValueOnce(
-      new Error("Migration v193 failed", {
-        cause: new QuarantinedCiphertextError("Ciphertext wrapping key is not accepted"),
-      }),
-    );
+  it.each(["Ciphertext wrapping key is not accepted", "Ciphertext header is malformed"])(
+    "quarantines a record-level ciphertext failure without a generic error: %s",
+    async (quarantineReason) => {
+      const first = generateUserData();
+      const second = generateUserData();
+      jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
+        usersToMigrate: [first, second],
+        nextToken: undefined,
+      });
+      migrationDataClient.migrateAndPut.mockRejectedValueOnce(
+        new Error("Migration v193 failed", {
+          cause: new QuarantinedCiphertextError(quarantineReason),
+        }),
+      );
 
-    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+      const result = await dynamoDataClient.migrateOutdatedVersionUsers();
 
-    expect(result).toEqual({ success: true, migratedCount: 1, quarantinedCount: 1 });
-    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledTimes(2);
-    expect(logger.LogError).toHaveBeenCalledWith(
-      expect.stringContaining(`Quarantined scheduled migration for user ${first.user.id}`),
-    );
-  });
+      expect(result).toEqual({ success: true, migratedCount: 1, quarantinedCount: 1 });
+      expect(migrationDataClient.migrateAndPut).toHaveBeenCalledTimes(2);
+      expect(logger.LogInfo).toHaveBeenCalledWith(
+        expect.stringContaining(`Quarantined scheduled migration for user ${first.user.id}`),
+      );
+      expect(logger.LogError).not.toHaveBeenCalledWith(
+        expect.stringContaining("Quarantined scheduled migration"),
+      );
+    },
+  );
 
   it("stops successfully between users when the Lambda time budget is exhausted", async () => {
     const first = generateUserData();

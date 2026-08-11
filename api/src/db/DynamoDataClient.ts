@@ -129,7 +129,7 @@ export const DynamoDataClient = (
         const errorMessage = error instanceof Error ? error.message : String(error);
         if (isQuarantinedCiphertextError(error)) {
           quarantinedCount += 1;
-          logger.LogError(
+          logger.LogInfo(
             `Quarantined scheduled migration for user ${user.user.id} from version ${user.version}: ${errorMessage}`,
           );
           continue;
@@ -177,6 +177,13 @@ export const DynamoDataClient = (
       }
 
       const errorMessage = error instanceof Error ? error.message : String(error);
+      if (isQuarantinedCiphertextError(error)) {
+        logger.LogInfo(
+          `Quarantined request-time migration from version ${sourceUserData.version} to ${CURRENT_VERSION}; returning the stored record: ${errorMessage}`,
+        );
+        return sourceUserData;
+      }
+
       logger.LogError(
         `Request-time migration failed from version ${sourceUserData.version} to ${CURRENT_VERSION}: ${errorMessage}`,
       );
