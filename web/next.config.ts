@@ -1,6 +1,17 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
+  outputFileTracingRoot: path.resolve(import.meta.dirname, ".."),
+  // Turbopack misses these module-sync conditional exports when tracing Axios.
+  outputFileTracingIncludes: {
+    "/*": [
+      "../node_modules/async-function/**/*",
+      "../node_modules/async-generator-function/**/*",
+      "../node_modules/generator-function/**/*",
+    ],
+  },
   productionBrowserSourceMaps: ["testing", "dev"].includes(process.env.STAGE ?? ""),
   reactCompiler: true,
   turbopack: {

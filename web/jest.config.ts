@@ -64,6 +64,7 @@ export default {
     "<rootDir>/../shared/src/test/setupRandomSeed.ts",
   ],
   testEnvironment: "<rootDir>/test/customJsdomEnvironment.ts",
+  modulePathIgnorePatterns: ["<rootDir>/.next/"],
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
   rootDir: "./",
   moduleDirectories: ["node_modules", "<rootDir>"],
