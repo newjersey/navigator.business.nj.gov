@@ -1,3 +1,11 @@
+## [2026.17.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.17.0...v2026.17.1) (2026-08-11)
+
+
+### Bug Fixes
+
+* bound DynamoDB throttling and migration retry pressure ([2d8bf3d](https://github.com/newjersey/navigator.business.nj.gov/commit/2d8bf3d77a10499a049fdf6d76c441298f583db8))
+* reconcile stale migration writes ([5b7753a](https://github.com/newjersey/navigator.business.nj.gov/commit/5b7753aa841b575f93ba8ac6b7044101b5aff91c))
+
 # [2026.17.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.16.2...v2026.17.0) (2026-08-11)
 
 
