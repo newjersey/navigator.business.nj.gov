@@ -48,13 +48,19 @@ const businessPut = (
   },
 });
 
+interface PutMigratedUserProps {
+  readonly conditionExpression: string;
+  readonly expectedUserData: UserData;
+  readonly migratedUserData: UserData;
+}
+
 export const DynamoMigrationDataClient = ({
   db,
   userDataClient,
   usersTableName,
   businessesTableName,
 }: DynamoMigrationDataClientProps): MigrationDataClient => {
-  const migrateAndPut = async (sourceUserData: UserData): Promise<UserData> => {
+  const migrate = async (sourceUserData: UserData): Promise<UserData> => {
     const sourceBusinessCount = Object.keys(sourceUserData.businesses ?? {}).length;
     if (sourceBusinessCount > MAX_TRANSACTION_BUSINESSES) {
       throw new Error(
@@ -70,17 +76,26 @@ export const DynamoMigrationDataClient = ({
       );
     }
 
+    return migratedUserData;
+  };
+
+  const putMigratedUser = async ({
+    conditionExpression,
+    expectedUserData,
+    migratedUserData,
+  }: PutMigratedUserProps): Promise<void> => {
+    const migratedBusinesses = Object.values(migratedUserData.businesses);
     const transactItems: NonNullable<TransactWriteCommandInput["TransactItems"]> = [
       {
         Put: {
           TableName: usersTableName,
           Item: createUserDataItem(migratedUserData),
-          ConditionExpression: "attribute_not_exists(#data) OR #data = :sourceData",
+          ConditionExpression: conditionExpression,
           ExpressionAttributeNames: {
             "#data": "data",
           },
           ExpressionAttributeValues: {
-            ":sourceData": sourceUserData,
+            ":sourceData": expectedUserData,
           },
         },
       },
@@ -96,9 +111,46 @@ export const DynamoMigrationDataClient = ({
       const message = error instanceof Error ? error.message : String(error);
       throw new Error(`Atomic migration transaction failed: ${message}`, { cause: error });
     }
+  };
 
+  const migrateAndPut = async (sourceUserData: UserData): Promise<UserData> => {
+    const migratedUserData = await migrate(sourceUserData);
+    await putMigratedUser({
+      conditionExpression: "attribute_not_exists(#data) OR #data = :sourceData",
+      expectedUserData: sourceUserData,
+      migratedUserData,
+    });
     return migratedUserData;
   };
 
-  return { migrateAndPut };
+  const migrateAndPutSubmittedUser = async (submittedUserData: UserData): Promise<UserData> => {
+    const migratedUserData = await migrate(submittedUserData);
+
+    try {
+      await putMigratedUser({
+        conditionExpression: "attribute_not_exists(#data) OR #data = :sourceData",
+        expectedUserData: submittedUserData,
+        migratedUserData,
+      });
+      return migratedUserData;
+    } catch (error) {
+      if (!(error instanceof MigrationConflictError)) {
+        throw error;
+      }
+    }
+
+    const latestUserData = await userDataClient.get(submittedUserData.user.id);
+    if (latestUserData.version !== migratedUserData.version) {
+      throw new MigrationConflictError();
+    }
+
+    await putMigratedUser({
+      conditionExpression: "#data = :sourceData",
+      expectedUserData: latestUserData,
+      migratedUserData,
+    });
+    return migratedUserData;
+  };
+
+  return { migrateAndPut, migrateAndPutSubmittedUser };
 };

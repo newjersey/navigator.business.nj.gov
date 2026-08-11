@@ -109,6 +109,10 @@ describe("User and Business Migration with DynamoDataClient", () => {
         ...input,
         version: CURRENT_VERSION,
       })),
+      migrateAndPutSubmittedUser: jest.fn(async (input) => ({
+        ...input,
+        version: CURRENT_VERSION,
+      })),
     };
 
     dynamoDataClient = DynamoDataClient(
@@ -326,6 +330,46 @@ describe("User and Business Migration with DynamoDataClient", () => {
       `Request-time migration failed from version ${
         CURRENT_VERSION - 1
       } to ${CURRENT_VERSION}: KMS unavailable`,
+    );
+  });
+
+  it("returns the latest stored record when request-time migration conflicts", async () => {
+    const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+    const migratedUser = { ...outdatedUser, version: CURRENT_VERSION };
+    jest
+      .spyOn(dynamoUsersDataClient, "get")
+      .mockResolvedValueOnce(outdatedUser)
+      .mockResolvedValueOnce(migratedUser);
+    migrationDataClient.migrateAndPut.mockRejectedValueOnce(new MigrationConflictError());
+
+    await expect(dynamoDataClient.get(outdatedUser.user.id)).resolves.toEqual(migratedUser);
+    expect(dynamoUsersDataClient.get).toHaveBeenCalledTimes(2);
+    expect(logger.LogInfo).toHaveBeenCalledWith(
+      "Request-time migration conflicted; returning the latest stored user record",
+    );
+    expect(logger.LogError).not.toHaveBeenCalledWith(
+      expect.stringContaining("User data changed during migration"),
+    );
+  });
+
+  it("uses submitted-user migration for an outdated write", async () => {
+    const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+    const migratedUser = { ...outdatedUser, version: CURRENT_VERSION };
+    migrationDataClient.migrateAndPutSubmittedUser.mockResolvedValueOnce(migratedUser);
+
+    await expect(dynamoDataClient.put(outdatedUser)).resolves.toEqual(migratedUser);
+    expect(migrationDataClient.migrateAndPutSubmittedUser).toHaveBeenCalledWith(outdatedUser);
+    expect(migrationDataClient.migrateAndPut).not.toHaveBeenCalled();
+  });
+
+  it("propagates submitted-user migration conflicts without logging them as errors", async () => {
+    const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+    const conflict = new MigrationConflictError();
+    migrationDataClient.migrateAndPutSubmittedUser.mockRejectedValueOnce(conflict);
+
+    await expect(dynamoDataClient.put(outdatedUser)).rejects.toBe(conflict);
+    expect(logger.LogError).not.toHaveBeenCalledWith(
+      expect.stringContaining("User data changed during migration"),
     );
   });
 
