@@ -77,7 +77,7 @@ describe("DynamoMigrationDataClient", () => {
       businessesTableName,
     });
 
-  it("writes the user and every business in one conditional transaction", async () => {
+  it("writes the user and every business when the user is unchanged or does not exist", async () => {
     const source = generateOutdatedUser();
 
     const result = await makeClient().migrateAndPut(source);
@@ -88,7 +88,7 @@ describe("DynamoMigrationDataClient", () => {
     expect(command.input.TransactItems).toHaveLength(3);
     expect(command.input.TransactItems?.[0].Put).toMatchObject({
       TableName: usersTableName,
-      ConditionExpression: "#data = :sourceData",
+      ConditionExpression: "attribute_not_exists(#data) OR #data = :sourceData",
       ExpressionAttributeValues: { ":sourceData": source },
       Item: { userId: source.user.id, version: CURRENT_VERSION },
     });

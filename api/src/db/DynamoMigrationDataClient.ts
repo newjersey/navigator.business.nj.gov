@@ -75,7 +75,7 @@ export const DynamoMigrationDataClient = ({
         Put: {
           TableName: usersTableName,
           Item: createUserDataItem(migratedUserData),
-          ConditionExpression: "#data = :sourceData",
+          ConditionExpression: "attribute_not_exists(#data) OR #data = :sourceData",
           ExpressionAttributeNames: {
             "#data": "data",
           },

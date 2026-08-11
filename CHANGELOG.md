@@ -1,3 +1,55 @@
+# [2026.17.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.16.2...v2026.17.0) (2026-08-11)
+
+
+### Bug Fixes
+
+* [AB#17957](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17957) repair stranded KMS ciphertext ([8927910](https://github.com/newjersey/navigator.business.nj.gov/commit/8927910666016499ebca5da83dd0f5ec69d60955))
+* [AB#17959](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17959) stop hiding next task button on business structure ([350208a](https://github.com/newjersey/navigator.business.nj.gov/commit/350208a80584910b06376604c72c0e40b7fe448e))
+* add explicit cypress install to setup script ([6fdf6d9](https://github.com/newjersey/navigator.business.nj.gov/commit/6fdf6d9239bb87418dbef5cc4da79647a45a6282))
+* decap component fixes post-React 19 upgrade ([918dc20](https://github.com/newjersey/navigator.business.nj.gov/commit/918dc20e2aeccb969f897f4a831069afe7f0513f))
+* decap import changes for ESM support ([a2268c9](https://github.com/newjersey/navigator.business.nj.gov/commit/a2268c9b2a4e97e9ce2d80eab2423ab869a3e91d))
+* deploy fixes for pnpm@11 ([3529a61](https://github.com/newjersey/navigator.business.nj.gov/commit/3529a6170665ecf352fca8b3e921f676cc342c05))
+* **deps:** update all non-major dependencies ([beed0a0](https://github.com/newjersey/navigator.business.nj.gov/commit/beed0a0afaaf6f98cfb04028dc5b17cc48a473cb))
+* **deps:** update dependency axios to v1.18.0 [security] ([163edd2](https://github.com/newjersey/navigator.business.nj.gov/commit/163edd21f4aaf1d5eb879a69f67cefd00347a7ba))
+* **deps:** update dependency body-parser to v1.20.6 [security] ([17b9b1f](https://github.com/newjersey/navigator.business.nj.gov/commit/17b9b1fcd141871d3e339e4a3c20c25caa41180e))
+* **deps:** update dependency express to v5 ([eb3f0dc](https://github.com/newjersey/navigator.business.nj.gov/commit/eb3f0dcd05e19560696b7cdb89271e0dc0344fd1))
+* **deps:** update dependency focus-trap-react to v12 ([d3752e7](https://github.com/newjersey/navigator.business.nj.gov/commit/d3752e72c6127d0c79585bf57d462856a3c99ff4))
+* **deps:** update dependency js-yaml to v4.3.0 [security] ([715c9c9](https://github.com/newjersey/navigator.business.nj.gov/commit/715c9c933dd072e70b60bfb34c89baff31895026))
+* **deps:** update dependency js-yaml to v4.3.1 [security] ([7cffca7](https://github.com/newjersey/navigator.business.nj.gov/commit/7cffca7d196c8d79e81918527d64e31f2f97525a))
+* **deps:** update dependency next to v16.2.11 [security] ([3b28f9e](https://github.com/newjersey/navigator.business.nj.gov/commit/3b28f9e43c648116502f0bcc9d766c2f56622420))
+* **deps:** update dependency next to v16.2.11 [security] ([0f12a69](https://github.com/newjersey/navigator.business.nj.gov/commit/0f12a69a0b30d4da703b24651b3d4d3a0271f7e1))
+* **deps:** update dependency serverless-http to v4 ([322e737](https://github.com/newjersey/navigator.business.nj.gov/commit/322e737e2023b2ccc7b1884d65e262a57c84a005))
+* derive CMS type from decap-cms-app instead of decap-cms-core ([01c61aa](https://github.com/newjersey/navigator.business.nj.gov/commit/01c61aa1438c2e7a4a475d262182b9435bf3ff88))
+* docker should include correct Turbopack build artifacts ([1c73c65](https://github.com/newjersey/navigator.business.nj.gov/commit/1c73c65af4716c777fee658dba981a3f0f24782e))
+* flaky cypress test from swallowed click ([1be18fb](https://github.com/newjersey/navigator.business.nj.gov/commit/1be18fb380ae66bcfb622bdf57021a3bcd72e3d1))
+* force redeploy of content ([b5518d5](https://github.com/newjersey/navigator.business.nj.gov/commit/b5518d52787eaa4d95ca5ba6ee8b9aef7a67e3ff))
+* issues with user signup and migrations ([b046fe3](https://github.com/newjersey/navigator.business.nj.gov/commit/b046fe362213f9b77de10f8fc273181b8b1ea9b7))
+* nextjs doesn't support TS7 yet ([7199869](https://github.com/newjersey/navigator.business.nj.gov/commit/71998693f7a41fe4d630cd8f432b62e53c311c74))
+* unit and e2e test fixes ([3d22b02](https://github.com/newjersey/navigator.business.nj.gov/commit/3d22b02098f313e242deecf15cca683e764f25d6))
+
+
+### Features
+
+* [AB#16176](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/16176) add React compiler support ([e623287](https://github.com/newjersey/navigator.business.nj.gov/commit/e623287ced12cdbd316a3fd568a2bd195ca61974))
+* [AB#16176](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/16176) add Turbopack support ([b4fb7e0](https://github.com/newjersey/navigator.business.nj.gov/commit/b4fb7e0dbe15c0deb4da618c88e66cdb0c7e3575))
+* [AB#16176](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/16176) upgrade to React 19 ([9bb18b9](https://github.com/newjersey/navigator.business.nj.gov/commit/9bb18b99fab0b2c05ab29d278b1b67d76edabc19))
+* [AB#16176](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/16176) upgrade to swr v2 ([4297180](https://github.com/newjersey/navigator.business.nj.gov/commit/4297180194be9328b670246bd3a2f5b395187e44))
+* [AB#17854](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17854) consolidate roadmap sections ([b66731f](https://github.com/newjersey/navigator.business.nj.gov/commit/b66731fa620860e14fcf9229ab58baa22bde6949)), closes [AB#17921](https://github.com/AB/issues/17921)
+* [AB#17865](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17865) add terms and privacy policy page ([084ba7e](https://github.com/newjersey/navigator.business.nj.gov/commit/084ba7eb3d3410fdb4c7998fc7d804a96cb80ff3))
+* [AB#17867](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17867) add continue exploring option to all login modals ([49b2a76](https://github.com/newjersey/navigator.business.nj.gov/commit/49b2a7676617dcebf9b2b65119799cfbfb00b470))
+* [AB#17878](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17878) static site: add our software and reuse page ([bcb3ddf](https://github.com/newjersey/navigator.business.nj.gov/commit/bcb3ddf36183267861b5964b36ca6ba6f9806146))
+* [AB#17912](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17912) add /newsletter-signup page with GovDelivery embed ([2c9aa17](https://github.com/newjersey/navigator.business.nj.gov/commit/2c9aa17aee4c7085af6aa73365f7887d0f4ac8e5))
+* [AB#17939](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17939) 'Get Started' dropdown directs users to onboarding ([1f4cc6c](https://github.com/newjersey/navigator.business.nj.gov/commit/1f4cc6cb641c8d3701df7e2b8e21520b13aea74e))
+* [AB#17956](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17956) link ADO tickets to the correct board ([d00d833](https://github.com/newjersey/navigator.business.nj.gov/commit/d00d8339c2308515c8b44720ae92395cad28d0a2))
+* [AB#17960](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17960) add lock icons to CTAs of locked tasks ([2dec5b7](https://github.com/newjersey/navigator.business.nj.gov/commit/2dec5b7f314cfff5d5c07fd785ed5a454ac738ed))
+* [AB#17961](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17961) add callout to create an account on locked task pages ([95204e0](https://github.com/newjersey/navigator.business.nj.gov/commit/95204e0c1ee1e206b92402dbd4f00029fe2eb0ec))
+* [AB#17975](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17975) add descriptive page titles ([5cd1ded](https://github.com/newjersey/navigator.business.nj.gov/commit/5cd1ded25d8a9d9b4be1227ada53e09faa81fd3f))
+* [AB#17980](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17980) open account modal when user clicks locked tax text field ([21f4ce1](https://github.com/newjersey/navigator.business.nj.gov/commit/21f4ce1827c0920fbfe3f082a3e68eefeeecd7e4))
+* add independent static site release pipeline ([dbeeadc](https://github.com/newjersey/navigator.business.nj.gov/commit/dbeeadc78ac9e7b88fe99d52538afb73ca7a205e))
+* add SiteImprove analytics ([3fd9096](https://github.com/newjersey/navigator.business.nj.gov/commit/3fd9096c2a0d08630c10f2fdf0d9351a63680c50))
+* improve clear-ports script ([feab199](https://github.com/newjersey/navigator.business.nj.gov/commit/feab199d6f0ff7447b771cd5ae9961fea0f1ce7c))
+* make static site content editable in Decap ([9dfe678](https://github.com/newjersey/navigator.business.nj.gov/commit/9dfe6782ded15e9f43abddc7cd9c20b7955d0755))
+
 ## [2026.16.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.16.1...v2026.16.2) (2026-07-30)
 
 

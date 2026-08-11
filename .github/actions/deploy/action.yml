@@ -28,3 +28,35 @@ runs:
         aws ecs update-service --cluster bfs_container_cluster \
           --service ${{ inputs.service_name }} --region "$AWS_REGION" \
           --force-new-deployment
+
+    - name: Verify Staging ECS Deployment
+      if: ${{ inputs.stage == 'staging' }}
+      shell: bash
+      run: |
+        if aws ecs wait services-stable --cluster bfs_container_cluster \
+          --services ${{ inputs.service_name }} --region "$AWS_REGION"; then
+          echo "ECS service reached a stable state."
+          exit 0
+        fi
+
+        echo "ECS service did not reach a stable state." >&2
+        aws ecs describe-services --cluster bfs_container_cluster \
+          --services ${{ inputs.service_name }} --region "$AWS_REGION" \
+          --query 'services[0].{
+            status:status,
+            desiredCount:desiredCount,
+            runningCount:runningCount,
+            pendingCount:pendingCount,
+            deployments:deployments[*].{
+              id:id,
+              status:status,
+              rolloutState:rolloutState,
+              rolloutStateReason:rolloutStateReason,
+              desiredCount:desiredCount,
+              runningCount:runningCount,
+              pendingCount:pendingCount,
+              failedTasks:failedTasks
+            },
+            recentEvents:events[0:10]
+          }'
+        exit 1
