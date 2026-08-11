@@ -1,3 +1,10 @@
+## [2026.17.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.17.1...v2026.17.2) (2026-08-11)
+
+
+### Bug Fixes
+
+* better sending of HTTP 409 errors from backend ([09290a4](https://github.com/newjersey/navigator.business.nj.gov/commit/09290a444b6c2fd712d08c3567184a132497786d))
+
 ## [2026.17.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.17.0...v2026.17.1) (2026-08-11)
 
 
