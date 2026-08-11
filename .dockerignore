@@ -2,9 +2,13 @@
 !.yarn/releases
 !.yarn/plugins
 .git
+node_modules
+**/node_modules
 .next
 **/.next
 # WebApp.Dockerfile packages the Next.js build generated before docker build.
+# Keep these rules after the node_modules exclusions because Turbopack emits
+# runtime package aliases under web/.next/node_modules.
 !web/.next
 !web/.next/**
 coverage
@@ -13,7 +17,5 @@ test-results
 **/test-results
 playwright-report
 **/playwright-report
-node_modules
-**/node_modules
 .DS_Store
 **/.DS_Store
