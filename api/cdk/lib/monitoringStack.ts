@@ -349,6 +349,51 @@ export class MonitoringStack extends Stack {
       apiErrorAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
       apiErrorAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
+      const dynamoDbWriteThrottleMetric = new cloudwatch.MathExpression({
+        expression: "users + businesses",
+        usingMetrics: {
+          users: new cloudwatch.Metric({
+            namespace: "AWS/DynamoDB",
+            metricName: "WriteThrottleEvents",
+            statistic: "Sum",
+            period: Duration.minutes(5),
+            dimensionsMap: {
+              TableName: `${USERS_TABLE}-${props.stage}`,
+            },
+          }),
+          businesses: new cloudwatch.Metric({
+            namespace: "AWS/DynamoDB",
+            metricName: "WriteThrottleEvents",
+            statistic: "Sum",
+            period: Duration.minutes(5),
+            dimensionsMap: {
+              TableName: `${BUSINESSES_TABLE}-${props.stage}`,
+            },
+          }),
+        },
+        period: Duration.minutes(5),
+        label: "DynamoDB write throttle events",
+      });
+
+      const dynamoDbWriteThrottleAlarm = new cloudwatch.Alarm(this, "DynamoDbWriteThrottleAlarm", {
+        alarmName: `${props.stage}-bfs-navigator-dynamodb-write-throttles`,
+        metric: dynamoDbWriteThrottleMetric,
+        threshold: 5,
+        evaluationPeriods: 1,
+        datapointsToAlarm: 1,
+        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+        alarmDescription:
+          "Triggered when sustained write throttling affects Navigator DynamoDB tables.",
+      });
+      dynamoDbWriteThrottleAlarm.addAlarmAction(
+        new cloudwatch_actions.SnsAction(navigatorApiErrorTopic),
+      );
+      dynamoDbWriteThrottleAlarm.addOkAction(
+        new cloudwatch_actions.SnsAction(navigatorApiErrorTopic),
+      );
+      dynamoDbWriteThrottleAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
       const dynamoDbUsersLatencyMetric = new cloudwatch.Metric({
         namespace: "AWS/DynamoDB",
         metricName: "SuccessfulRequestLatency",

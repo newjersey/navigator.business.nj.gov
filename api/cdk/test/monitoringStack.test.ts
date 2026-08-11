@@ -85,4 +85,61 @@ describe("MonitoringStack migration alarm", () => {
       },
     ]);
   });
+
+  it("alerts on sustained write throttling across Navigator tables", () => {
+    const app = new App();
+    const stack = new MonitoringStack(app, "TestMonitoringStack", { stage: "local" });
+    const alarms = Template.fromStack(stack).findResources("AWS::CloudWatch::Alarm", {
+      Properties: {
+        AlarmName: "local-bfs-navigator-dynamodb-write-throttles",
+      },
+    });
+    const alarm = Object.values(alarms)[0].Properties;
+
+    expect(alarm).toMatchObject({
+      Threshold: 5,
+      EvaluationPeriods: 1,
+      DatapointsToAlarm: 1,
+      ComparisonOperator: "GreaterThanOrEqualToThreshold",
+      TreatMissingData: "notBreaching",
+      Metrics: expect.arrayContaining([
+        expect.objectContaining({
+          Expression: "users + businesses",
+          Label: "DynamoDB write throttle events",
+          ReturnData: true,
+        }),
+        expect.objectContaining({
+          Id: "users",
+          MetricStat: {
+            Metric: {
+              Namespace: "AWS/DynamoDB",
+              MetricName: "WriteThrottleEvents",
+              Dimensions: [{ Name: "TableName", Value: "users-table-local" }],
+            },
+            Period: 300,
+            Stat: "Sum",
+          },
+          ReturnData: false,
+        }),
+        expect.objectContaining({
+          Id: "businesses",
+          MetricStat: {
+            Metric: {
+              Namespace: "AWS/DynamoDB",
+              MetricName: "WriteThrottleEvents",
+              Dimensions: [{ Name: "TableName", Value: "businesses-table-local" }],
+            },
+            Period: 300,
+            Stat: "Sum",
+          },
+          ReturnData: false,
+        }),
+      ]),
+    });
+    expect(alarm.AlarmActions).toEqual([
+      {
+        Ref: expect.stringContaining("NavigatorApiErrorTopic"),
+      },
+    ]);
+  });
 });
