@@ -1,6 +1,7 @@
 import { type DynamoDBDocumentClient, TransactWriteCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoMigrationDataClient } from "@db/DynamoMigrationDataClient";
 import {
+  DatabaseThrottlingError,
   MigrationConflictError,
   type MigrationDataClient,
   type UserDataClient,
@@ -203,6 +204,39 @@ describe("DynamoMigrationDataClient", () => {
     await expect(makeClient().migrateAndPut(generateOutdatedUser())).rejects.toBeInstanceOf(
       MigrationConflictError,
     );
+  });
+
+  it.each(["ThrottlingError", "ProvisionedThroughputExceeded"])(
+    "classifies a %s transaction cancellation as database throttling",
+    async (cancellationCode) => {
+      send.mockRejectedValueOnce({
+        name: "TransactionCanceledException",
+        CancellationReasons: [{ Code: "None" }, { Code: cancellationCode }],
+      });
+
+      const result = makeClient().migrateAndPut(generateOutdatedUser());
+
+      await expect(result).rejects.toBeInstanceOf(DatabaseThrottlingError);
+      await expect(result).rejects.toMatchObject({
+        context: {
+          operation: "migration-transaction",
+          itemSizeBucket: "under-100-kb",
+          transactionItemCount: 3,
+        },
+      });
+    },
+  );
+
+  it("classifies a direct throughput exception as database throttling", async () => {
+    send.mockRejectedValueOnce({ name: "ProvisionedThroughputExceededException" });
+
+    await expect(makeClient().migrateAndPut(generateOutdatedUser())).rejects.toMatchObject({
+      name: "DatabaseThrottlingError",
+      context: {
+        operation: "migration-transaction",
+        transactionItemCount: 3,
+      },
+    });
   });
 
   it("rejects users that exceed DynamoDB's 100-item transaction limit", async () => {

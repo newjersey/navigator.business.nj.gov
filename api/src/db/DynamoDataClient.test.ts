@@ -5,6 +5,7 @@ import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import {
   type BusinessesDataClient,
+  DatabaseThrottlingError,
   type DatabaseClient,
   MigrationConflictError,
   type MigrationDataClient,
@@ -333,6 +334,26 @@ describe("User and Business Migration with DynamoDataClient", () => {
     );
   });
 
+  it("returns the stored record without a generic error when request-time migration is throttled", async () => {
+    const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+    jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(outdatedUser);
+    migrationDataClient.migrateAndPut.mockRejectedValueOnce(
+      new DatabaseThrottlingError({
+        operation: "migration-transaction",
+        itemSizeBucket: "300-399-kb",
+        transactionItemCount: 2,
+      }),
+    );
+
+    await expect(dynamoDataClient.get(outdatedUser.user.id)).resolves.toEqual(outdatedUser);
+    expect(logger.LogInfo).toHaveBeenCalledWith(
+      expect.stringContaining("Request-time migration paused after DynamoDB throttling"),
+    );
+    expect(logger.LogError).not.toHaveBeenCalledWith(
+      expect.stringContaining("Request-time migration failed"),
+    );
+  });
+
   it("returns the latest stored record when request-time migration conflicts", async () => {
     const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
     const migratedUser = { ...outdatedUser, version: CURRENT_VERSION };
@@ -427,6 +448,31 @@ describe("User and Business Migration with DynamoDataClient", () => {
     );
   });
 
+  it("pauses the scheduled migration after the first post-retry throttle", async () => {
+    const first = generateUserData();
+    const second = generateUserData();
+    jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
+      usersToMigrate: [first, second],
+      nextToken: undefined,
+    });
+    migrationDataClient.migrateAndPut.mockRejectedValueOnce(
+      new DatabaseThrottlingError({
+        operation: "migration-transaction",
+        itemSizeBucket: "300-399-kb",
+        transactionItemCount: 2,
+      }),
+    );
+
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+
+    expect(result).toEqual({ success: true, migratedCount: 0 });
+    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledTimes(1);
+    expect(logger.LogInfo).toHaveBeenCalledWith(
+      expect.stringContaining("Migration paused after DynamoDB throttling"),
+    );
+    expect(logger.LogError).not.toHaveBeenCalled();
+  });
+
   it("continues scheduled migration after a retryable transaction conflict", async () => {
     const first = generateUserData();
     const second = generateUserData();
@@ -493,6 +539,23 @@ describe("User and Business Migration with DynamoDataClient", () => {
     expect(logger.LogInfo).toHaveBeenCalledWith(
       "Migration paused before Lambda timeout; remaining users will retry",
     );
+  });
+
+  it("propagates a direct user write throttle without duplicate error logging", async () => {
+    const currentUser = { ...generateUserData(), version: CURRENT_VERSION };
+    jest.spyOn(dynamoUsersDataClient, "put").mockRejectedValueOnce({
+      name: "ProvisionedThroughputExceededException",
+    });
+
+    await expect(dynamoDataClient.put(currentUser)).rejects.toMatchObject({
+      name: "DatabaseThrottlingError",
+      context: {
+        operation: "put-user",
+        itemSizeBucket: "under-100-kb",
+      },
+    });
+    expect(logger.LogError).not.toHaveBeenCalled();
+    expect(dynamoBusinessesDataClient.put).not.toHaveBeenCalled();
   });
 
   it("should call parseUserData when zod_parsing_on feature flag is true", async () => {

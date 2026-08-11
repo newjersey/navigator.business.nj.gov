@@ -1,5 +1,6 @@
 import {
   type BusinessesDataClient,
+  DatabaseThrottlingError,
   type DatabaseClient,
   MigrationConflictError,
   type MigrationDataClient,
@@ -7,6 +8,11 @@ import {
   type UserDataClient,
   isQuarantinedCiphertextError,
 } from "@domain/types";
+import {
+  getDynamoDbItemSizeBucket,
+  isDynamoDbThrottlingError,
+  toDatabaseThrottlingError,
+} from "@db/DynamoDbErrors";
 import { type LogWriterType } from "@libs/logWriter";
 import { type Business, CURRENT_VERSION, type UserData } from "@shared/userData";
 import { chunk } from "lodash";
@@ -80,7 +86,7 @@ export const DynamoDataClient = (
           logger.LogInfo(
             `Completed ${batchResult.migratedCount} migrations and quarantined ${batchResult.quarantinedCount} users in this batch. Total migrated so far: ${migratedCount}; total quarantined: ${quarantinedCount}`,
           );
-          if (batchResult.stoppedForTime) {
+          if (batchResult.stoppedForTime || batchResult.stoppedForThrottling) {
             return migrationSuccess(migratedCount, quarantinedCount);
           }
         }
@@ -101,7 +107,12 @@ export const DynamoDataClient = (
     usersToMigrate: UserData[],
     isZodParsingOn: string,
     canStartNextUser: () => boolean,
-  ): Promise<{ migratedCount: number; quarantinedCount: number; stoppedForTime: boolean }> => {
+  ): Promise<{
+    migratedCount: number;
+    quarantinedCount: number;
+    stoppedForTime: boolean;
+    stoppedForThrottling?: boolean;
+  }> => {
     if (!migrationDataClient) {
       throw new Error("Migration data client is required for coordinated migrations");
     }
@@ -125,6 +136,17 @@ export const DynamoDataClient = (
         if (error instanceof MigrationConflictError) {
           logger.LogInfo("Skipped migration because the user record changed concurrently");
           continue;
+        }
+        if (error instanceof DatabaseThrottlingError) {
+          logger.LogInfo(
+            `Migration paused after DynamoDB throttling; operation=${error.context.operation}, itemSizeBucket=${error.context.itemSizeBucket}, transactionItemCount=${error.context.transactionItemCount ?? "unknown"}; remaining users will retry`,
+          );
+          return {
+            migratedCount,
+            quarantinedCount,
+            stoppedForTime: false,
+            stoppedForThrottling: true,
+          };
         }
         const errorMessage = error instanceof Error ? error.message : String(error);
         if (isQuarantinedCiphertextError(error)) {
@@ -177,6 +199,12 @@ export const DynamoDataClient = (
       }
 
       const errorMessage = error instanceof Error ? error.message : String(error);
+      if (error instanceof DatabaseThrottlingError) {
+        logger.LogInfo(
+          `Request-time migration paused after DynamoDB throttling; operation=${error.context.operation}, itemSizeBucket=${error.context.itemSizeBucket}, transactionItemCount=${error.context.transactionItemCount ?? "unknown"}; returning the stored record`,
+        );
+        return sourceUserData;
+      }
       if (isQuarantinedCiphertextError(error)) {
         logger.LogInfo(
           `Quarantined request-time migration from version ${sourceUserData.version} to ${CURRENT_VERSION}; returning the stored record: ${errorMessage}`,
@@ -214,6 +242,12 @@ export const DynamoDataClient = (
               `Processed business with ID ${businessId} for user ${updatedUserData.user.id}`,
             );
           } catch (error) {
+            if (isDynamoDbThrottlingError(error)) {
+              throw toDatabaseThrottlingError(error, {
+                operation: "put-business",
+                itemSizeBucket: getDynamoDbItemSizeBucket(businessData),
+              });
+            }
             logger.LogError(
               `Error processing business with ID ${businessId} for user ${updatedUserData.user.id}: ${error}`,
             );
@@ -223,6 +257,15 @@ export const DynamoDataClient = (
         logger.LogInfo(`No businesses found for user ${updatedUserData.user.id}`);
       }
     } catch (error) {
+      if (error instanceof DatabaseThrottlingError) {
+        throw error;
+      }
+      if (isDynamoDbThrottlingError(error)) {
+        throw toDatabaseThrottlingError(error, {
+          operation: "put-user",
+          itemSizeBucket: getDynamoDbItemSizeBucket(userData),
+        });
+      }
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.LogError(`Failed to process user ${userData.user.id}: ${errorMessage}`);
       throw new Error(errorMessage);
@@ -240,7 +283,7 @@ export const DynamoDataClient = (
       await updateUserAndBusinesses(userData);
       return userData;
     } catch (error) {
-      if (error instanceof MigrationConflictError) {
+      if (error instanceof MigrationConflictError || error instanceof DatabaseThrottlingError) {
         throw error;
       }
 

@@ -2,6 +2,7 @@ import { userRouterFactory } from "@api/userRouter";
 import {
   CryptoClient,
   DatabaseClient,
+  DatabaseThrottlingError,
   MigrationConflictError,
   TimeStampBusinessSearch,
 } from "@domain/types";
@@ -1271,6 +1272,27 @@ describe("userRouter", () => {
 
       expect(response.status).toEqual(StatusCodes.CONFLICT);
       expect(response.body).toEqual({ error: "STALE_USER_DATA" });
+    });
+
+    it("returns SERVICE UNAVAILABLE with retry guidance when the database write is throttled", async () => {
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const userData = generateUserData({ user: generateUser({ id: "123" }) });
+
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
+      stubUnifiedDataClient.put.mockRejectedValue(
+        new DatabaseThrottlingError({
+          operation: "put-user",
+          itemSizeBucket: "300-399-kb",
+        }),
+      );
+      const response = await request(app)
+        .post(`/users`)
+        .send(userData)
+        .set("Authorization", "Bearer user-123-token");
+
+      expect(response.status).toEqual(StatusCodes.SERVICE_UNAVAILABLE);
+      expect(response.headers["retry-after"]).toBe("30");
+      expect(response.body).toEqual({ error: "DATABASE_THROTTLED" });
     });
 
     describe("govDeliveryCommCloudClient", () => {
