@@ -152,7 +152,10 @@ export const DynamoMigrationDataClient = ({
     }
 
     const latestUserData = await userDataClient.get(submittedUserData.user.id);
-    if (latestUserData.version !== migratedUserData.version) {
+    const canReconcileLatestVersion =
+      latestUserData.version === submittedUserData.version ||
+      latestUserData.version === migratedUserData.version;
+    if (!canReconcileLatestVersion) {
       throw new MigrationConflictError();
     }
 
