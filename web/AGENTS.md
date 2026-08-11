@@ -5,7 +5,7 @@ Next.js 16 frontend with Material-UI, SCSS, and AWS Amplify auth.
 ## Commands
 
 ```bash
-yarn dev            # Next.js dev server on port 3000 (webpack mode)
+yarn dev            # Next.js dev server on port 3000 (Turbopack mode)
 yarn build          # Production build
 yarn test           # Jest + React Testing Library
 yarn test:watch
