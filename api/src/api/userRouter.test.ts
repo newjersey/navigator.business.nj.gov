@@ -1,5 +1,10 @@
 import { userRouterFactory } from "@api/userRouter";
-import { CryptoClient, DatabaseClient, TimeStampBusinessSearch } from "@domain/types";
+import {
+  CryptoClient,
+  DatabaseClient,
+  MigrationConflictError,
+  TimeStampBusinessSearch,
+} from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
@@ -1251,6 +1256,21 @@ describe("userRouter", () => {
 
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(response.body).toEqual({ error: "error" });
+    });
+
+    it("returns CONFLICT when stale user data loses a migration race", async () => {
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const userData = generateUserData({ user: generateUser({ id: "123" }) });
+
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
+      stubUnifiedDataClient.put.mockRejectedValue(new MigrationConflictError());
+      const response = await request(app)
+        .post(`/users`)
+        .send(userData)
+        .set("Authorization", "Bearer user-123-token");
+
+      expect(response.status).toEqual(StatusCodes.CONFLICT);
+      expect(response.body).toEqual({ error: "STALE_USER_DATA" });
     });
 
     describe("govDeliveryCommCloudClient", () => {

@@ -162,6 +162,20 @@ export const DynamoDataClient = (
     try {
       return await migrationDataClient.migrateAndPut(sourceUserData);
     } catch (error) {
+      if (error instanceof MigrationConflictError) {
+        logger.LogInfo(
+          "Request-time migration conflicted; returning the latest stored user record",
+        );
+        try {
+          return await userDataClient.get(sourceUserData.user.id);
+        } catch (refetchError) {
+          const refetchErrorMessage =
+            refetchError instanceof Error ? refetchError.message : String(refetchError);
+          logger.LogError(`Request-time migration conflict refetch failed: ${refetchErrorMessage}`);
+          return sourceUserData;
+        }
+      }
+
       const errorMessage = error instanceof Error ? error.message : String(error);
       logger.LogError(
         `Request-time migration failed from version ${sourceUserData.version} to ${CURRENT_VERSION}: ${errorMessage}`,
@@ -214,11 +228,15 @@ export const DynamoDataClient = (
         if (!migrationDataClient) {
           throw new Error("Migration data client is required for coordinated migrations");
         }
-        return await migrationDataClient.migrateAndPut(userData);
+        return await migrationDataClient.migrateAndPutSubmittedUser(userData);
       }
       await updateUserAndBusinesses(userData);
       return userData;
     } catch (error) {
+      if (error instanceof MigrationConflictError) {
+        throw error;
+      }
+
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.LogError(`Failed to update user ${userData.user.id}: ${errorMessage}`);
       throw new Error(errorMessage);

@@ -6,6 +6,7 @@ import {
 import {
   CryptoClient,
   DatabaseClient,
+  MigrationConflictError,
   TimeStampBusinessSearch,
   UpdateLicenseStatus,
   UpdateOperatingPhase,
@@ -328,6 +329,17 @@ export const userRouterFactory = (
         );
       })
       .catch((error: Error) => {
+        if (error instanceof MigrationConflictError) {
+          const status = StatusCodes.CONFLICT;
+          logger.LogInfo(
+            `[END] ${method} ${endpoint} - status: ${status}, reason: stale user data, userId: ${postedUserBodyId}, duration: ${
+              Date.now() - requestStart
+            }ms`,
+          );
+          res.status(status).json({ error: "STALE_USER_DATA" });
+          return;
+        }
+
         const status = StatusCodes.INTERNAL_SERVER_ERROR;
         logger.LogError(
           `${method} ${endpoint} - Unknown error: ${

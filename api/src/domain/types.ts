@@ -104,6 +104,7 @@ export interface UserDataClient {
 
 export interface MigrationDataClient {
   migrateAndPut: (userData: UserData) => Promise<UserData>;
+  migrateAndPutSubmittedUser: (userData: UserData) => Promise<UserData>;
 }
 
 export class MigrationConflictError extends Error {
