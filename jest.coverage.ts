@@ -1,3 +1,5 @@
+/** @jest-config-loader ts-node */
+
 import defaultConfig from "./jest.config";
 
 /** @type {import('jest').Config} */

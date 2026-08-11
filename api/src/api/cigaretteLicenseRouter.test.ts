@@ -36,9 +36,6 @@ describe("cigaretteLicenseRouter", () => {
   let stubCigaretteLicenseClient: jest.Mocked<CigaretteLicenseClient>;
   let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
   let stubCryptoClient: jest.Mocked<CryptoClient>;
-  jest.mock("node:crypto", () => ({
-    randomUUID: (): string => "fake-uuid-value",
-  }));
 
   beforeEach(async () => {
     jest.resetAllMocks();

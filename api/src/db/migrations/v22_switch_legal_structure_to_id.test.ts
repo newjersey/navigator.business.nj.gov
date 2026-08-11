@@ -33,6 +33,6 @@ describe("migrate_v21_to_v22", () => {
     const v22 = migrate_v21_to_v22(v21);
 
     expect(v22.onboardingData.legalStructureId).toEqual("limited-liability-company");
-    expect(v22.onboardingData).not.toContain("legalStructure");
+    expect(v22.onboardingData).not.toHaveProperty("legalStructure");
   });
 });

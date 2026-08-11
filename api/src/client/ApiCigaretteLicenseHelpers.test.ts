@@ -12,19 +12,20 @@ import {
   generateUser,
   generateUserData,
 } from "@shared/test";
-import { randomUUID } from "node:crypto";
+import crypto from "node:crypto";
 
-jest.mock("node:crypto", () => ({
-  randomUUID: jest.fn(),
-}));
-
-const mockRandomUUID = randomUUID as jest.MockedFunction<typeof randomUUID>;
-const mockUniqueId = "test-uuid-123-456-789";
+const mockUniqueId = "12345678-1234-1234-1234-123456789abc";
 
 describe("ApiCigaretteLicenseHelpers", () => {
+  let mockRandomUUID: jest.SpiedFunction<typeof crypto.randomUUID>;
+
   beforeEach(() => {
     jest.clearAllMocks();
-    mockRandomUUID.mockReturnValue(mockUniqueId);
+    mockRandomUUID = jest.spyOn(crypto, "randomUUID").mockReturnValue(mockUniqueId);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   describe("makePostBody", () => {
