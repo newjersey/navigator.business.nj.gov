@@ -1,6 +1,7 @@
 import { Content, ExternalLink } from "@/components/Content";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { GenericTextField } from "@/components/GenericTextField";
+import { LockIcon } from "@/components/LockIcon";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -54,7 +55,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const displayInput = props.CMS_ONLY_displayInput ?? displayInputState;
   const saveButtonText =
     props.isAuthenticated === IsAuthenticated.FALSE
-      ? `Register & ${Config.determineNaicsCode.saveButtonText}`
+      ? `${Config.taskDefaults.ctaPrefixForGuestUsers} ${Config.determineNaicsCode.saveButtonText}`
       : Config.determineNaicsCode.saveButtonText;
 
   const getDescriptions = (codes: string[]): NaicsCodeObject[] => {
@@ -268,6 +269,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
           <div className="flex flex-row margin-left-auto">
             <SecondaryButton isColor="primary" onClick={saveNaicsCode} isLoading={isLoading}>
               {saveButtonText}
+              <LockIcon className="margin-left-05" />
             </SecondaryButton>
           </div>
         </>

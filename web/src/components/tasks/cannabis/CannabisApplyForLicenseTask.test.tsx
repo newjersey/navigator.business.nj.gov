@@ -211,7 +211,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
       renderPage(task, business);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
-      expect(screen).not.toContain("Do this first");
+      expect(screen.queryByText("Do this first")).not.toBeInTheDocument();
     });
 
     it("taskProgress remains to-do when View Requirements is clicked", () => {

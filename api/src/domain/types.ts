@@ -74,6 +74,7 @@ export interface DatabaseClient {
   migrateOutdatedVersionUsers: (options?: MigrationRunOptions) => Promise<{
     success: boolean;
     migratedCount?: number;
+    quarantinedCount?: number;
     error?: string;
   }>;
   get: (userId: string) => Promise<UserData>;
@@ -103,12 +104,37 @@ export interface UserDataClient {
 
 export interface MigrationDataClient {
   migrateAndPut: (userData: UserData) => Promise<UserData>;
+  migrateAndPutSubmittedUser: (userData: UserData) => Promise<UserData>;
 }
 
 export class MigrationConflictError extends Error {
   constructor() {
     super("User data changed during migration");
     this.name = "MigrationConflictError";
+  }
+}
+
+export type DatabaseWriteOperation = "migration-transaction" | "put-business" | "put-user";
+export type DatabaseItemSizeBucket =
+  | "under-100-kb"
+  | "100-199-kb"
+  | "200-299-kb"
+  | "300-399-kb"
+  | "400-kb-or-more";
+
+export interface DatabaseThrottlingContext {
+  readonly operation: DatabaseWriteOperation;
+  readonly itemSizeBucket: DatabaseItemSizeBucket;
+  readonly transactionItemCount?: number;
+}
+
+export class DatabaseThrottlingError extends Error {
+  readonly context: DatabaseThrottlingContext;
+
+  constructor(context: DatabaseThrottlingContext, options?: ErrorOptions) {
+    super("Database write capacity is temporarily unavailable", options);
+    this.name = "DatabaseThrottlingError";
+    this.context = context;
   }
 }
 
@@ -178,6 +204,35 @@ export interface CryptoClient {
   decryptValue: (valueToBeDecrypted: string) => Promise<string>;
   hashValue: (valueToBeHashed: string, _iterationsOverride?: number) => Promise<string>;
 }
+
+export class ForeignEnvironmentCiphertextError extends Error {
+  constructor() {
+    super("Ciphertext belongs to a foreign environment");
+    this.name = "ForeignEnvironmentCiphertextError";
+  }
+}
+
+export class QuarantinedCiphertextError extends Error {
+  constructor(message: string, options?: ErrorOptions) {
+    super(message, options);
+    this.name = "QuarantinedCiphertextError";
+  }
+}
+
+export const isQuarantinedCiphertextError = (error: unknown): boolean => {
+  let current = error;
+  const visited = new Set<unknown>();
+
+  while (current instanceof Error && !visited.has(current)) {
+    if (current instanceof QuarantinedCiphertextError) {
+      return true;
+    }
+    visited.add(current);
+    current = current.cause;
+  }
+
+  return false;
+};
 
 export interface TimeStampBusinessSearch {
   search: (businessName: string) => Promise<NameAvailability>;

@@ -49,6 +49,12 @@ export class MonitoringStack extends Stack {
       `/aws/lambda/businessnjgov-api-v2-${props.stage}-express`,
     );
 
+    const migrateUsersVersionLogGroup = logs.LogGroup.fromLogGroupName(
+      this,
+      "MigrateUsersVersionLogGroup",
+      `/aws/lambda/businessnjgov-api-v2-${props.stage}-migrateUsersVersion`,
+    );
+
     if (props.stage === "dev") {
       new logs.LogGroup(this, "ApiLogLocalGroup", {
         logGroupName: `/${NAVIGATOR_WEBSERVICE}/local/ApiLogs`,
@@ -175,6 +181,40 @@ export class MonitoringStack extends Stack {
     const shouldCreateMonitoringResources = props.stage !== "content" && props.stage !== "testing";
 
     if (shouldCreateMonitoringResources) {
+      const quarantinedMigrationMetricFilter = new logs.MetricFilter(
+        this,
+        "QuarantinedMigrationMetricFilter",
+        {
+          logGroup: migrateUsersVersionLogGroup,
+          filterName: `quarantinedMigrationCount-${props.stage}`,
+          filterPattern: logs.FilterPattern.literal('"Quarantined scheduled migration"'),
+          metricNamespace: "BFS/Navigator",
+          metricName: `quarantinedMigrationCount-${props.stage}`,
+          metricValue: "1",
+          defaultValue: 0,
+        },
+      );
+      const quarantinedMigrationMetric = quarantinedMigrationMetricFilter.metric({
+        statistic: "Sum",
+        period: Duration.seconds(120),
+      });
+      const quarantinedMigrationAlarm = new cloudwatch.Alarm(this, "QuarantinedMigrationAlarm", {
+        alarmName: `${props.stage}-bfs-navigator-quarantined-migration-users`,
+        metric: quarantinedMigrationMetric,
+        threshold: 1,
+        evaluationPeriods: 1,
+        datapointsToAlarm: 1,
+        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+        alarmDescription:
+          "Triggered when a user record is quarantined during KMS migration and requires manual review.",
+      });
+
+      quarantinedMigrationAlarm.addAlarmAction(
+        new cloudwatch_actions.SnsAction(migrateUserVersionErrorTopic),
+      );
+      quarantinedMigrationAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
       const selfRegErrorMetricFilter = new logs.MetricFilter(this, "SelfRegErrorMetricFilter", {
         logGroup: expressLogGroup,
         filterName: `myNJSelfRegErrorCount-${props.stage}`,
@@ -296,6 +336,51 @@ export class MonitoringStack extends Stack {
 
       apiErrorAlarm.addAlarmAction(new cloudwatch_actions.SnsAction(navigatorApiErrorTopic));
       apiErrorAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
+      const dynamoDbWriteThrottleMetric = new cloudwatch.MathExpression({
+        expression: "users + businesses",
+        usingMetrics: {
+          users: new cloudwatch.Metric({
+            namespace: "AWS/DynamoDB",
+            metricName: "WriteThrottleEvents",
+            statistic: "Sum",
+            period: Duration.minutes(5),
+            dimensionsMap: {
+              TableName: `${USERS_TABLE}-${props.stage}`,
+            },
+          }),
+          businesses: new cloudwatch.Metric({
+            namespace: "AWS/DynamoDB",
+            metricName: "WriteThrottleEvents",
+            statistic: "Sum",
+            period: Duration.minutes(5),
+            dimensionsMap: {
+              TableName: `${BUSINESSES_TABLE}-${props.stage}`,
+            },
+          }),
+        },
+        period: Duration.minutes(5),
+        label: "DynamoDB write throttle events",
+      });
+
+      const dynamoDbWriteThrottleAlarm = new cloudwatch.Alarm(this, "DynamoDbWriteThrottleAlarm", {
+        alarmName: `${props.stage}-bfs-navigator-dynamodb-write-throttles`,
+        metric: dynamoDbWriteThrottleMetric,
+        threshold: 5,
+        evaluationPeriods: 1,
+        datapointsToAlarm: 1,
+        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+        treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+        alarmDescription:
+          "Triggered when sustained write throttling affects Navigator DynamoDB tables.",
+      });
+      dynamoDbWriteThrottleAlarm.addAlarmAction(
+        new cloudwatch_actions.SnsAction(navigatorApiErrorTopic),
+      );
+      dynamoDbWriteThrottleAlarm.addOkAction(
+        new cloudwatch_actions.SnsAction(navigatorApiErrorTopic),
+      );
+      dynamoDbWriteThrottleAlarm.applyRemovalPolicy(RemovalPolicy.RETAIN);
 
       const dynamoDbUsersLatencyMetric = new cloudwatch.Metric({
         namespace: "AWS/DynamoDB",

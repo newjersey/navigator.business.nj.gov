@@ -26,12 +26,10 @@ import {
 import { UserData } from "@shared/userData";
 import axios from "axios";
 import { StatusCodes } from "http-status-codes";
+import crypto from "node:crypto";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
-jest.mock("node:crypto", () => ({
-  randomUUID: (): string => "fake-uuid-value",
-}));
 jest.mock("@libs/ssmUtils", () => ({
   getConfigValue: jest.fn(),
   isKillSwitchOn: jest.fn(),
@@ -72,6 +70,7 @@ describe("CigaretteLicenseClient", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
+    jest.spyOn(crypto, "randomUUID").mockReturnValue("12345678-1234-1234-1234-123456789abc");
     client = ApiCigaretteLicenseClient(mockEmailClient, DummyLogWriter);
     mockGetConfigValue.mockImplementation((param) => {
       return Promise.resolve(mockValues[param] || "");
@@ -97,7 +96,7 @@ describe("CigaretteLicenseClient", () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   describe("prepare-payment", () => {

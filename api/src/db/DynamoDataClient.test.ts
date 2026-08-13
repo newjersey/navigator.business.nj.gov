@@ -5,9 +5,11 @@ import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import {
   type BusinessesDataClient,
+  DatabaseThrottlingError,
   type DatabaseClient,
   MigrationConflictError,
   type MigrationDataClient,
+  QuarantinedCiphertextError,
   type UserDataClient,
   type CryptoClient,
 } from "@domain/types";
@@ -108,6 +110,10 @@ describe("User and Business Migration with DynamoDataClient", () => {
         ...input,
         version: CURRENT_VERSION,
       })),
+      migrateAndPutSubmittedUser: jest.fn(async (input) => ({
+        ...input,
+        version: CURRENT_VERSION,
+      })),
     };
 
     dynamoDataClient = DynamoDataClient(
@@ -181,7 +187,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
     await dynamoDataClient.migrateOutdatedVersionUsers();
 
     expect(logSpy).toHaveBeenCalledWith(
-      `Migration complete. Migrated 0 users. Current version: ${CURRENT_VERSION}`,
+      `Migration complete. Migrated 0 users and quarantined 0. Current version: ${CURRENT_VERSION}`,
     );
   });
 
@@ -328,6 +334,87 @@ describe("User and Business Migration with DynamoDataClient", () => {
     );
   });
 
+  it("returns the stored record without a generic error when request-time migration is throttled", async () => {
+    const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+    jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(outdatedUser);
+    migrationDataClient.migrateAndPut.mockRejectedValueOnce(
+      new DatabaseThrottlingError({
+        operation: "migration-transaction",
+        itemSizeBucket: "300-399-kb",
+        transactionItemCount: 2,
+      }),
+    );
+
+    await expect(dynamoDataClient.get(outdatedUser.user.id)).resolves.toEqual(outdatedUser);
+    expect(logger.LogInfo).toHaveBeenCalledWith(
+      expect.stringContaining("Request-time migration paused after DynamoDB throttling"),
+    );
+    expect(logger.LogError).not.toHaveBeenCalledWith(
+      expect.stringContaining("Request-time migration failed"),
+    );
+  });
+
+  it("returns the latest stored record when request-time migration conflicts", async () => {
+    const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+    const migratedUser = { ...outdatedUser, version: CURRENT_VERSION };
+    jest
+      .spyOn(dynamoUsersDataClient, "get")
+      .mockResolvedValueOnce(outdatedUser)
+      .mockResolvedValueOnce(migratedUser);
+    migrationDataClient.migrateAndPut.mockRejectedValueOnce(new MigrationConflictError());
+
+    await expect(dynamoDataClient.get(outdatedUser.user.id)).resolves.toEqual(migratedUser);
+    expect(dynamoUsersDataClient.get).toHaveBeenCalledTimes(2);
+    expect(logger.LogInfo).toHaveBeenCalledWith(
+      "Request-time migration conflicted; returning the latest stored user record",
+    );
+    expect(logger.LogError).not.toHaveBeenCalledWith(
+      expect.stringContaining("User data changed during migration"),
+    );
+  });
+
+  it.each(["Ciphertext wrapping key is not accepted", "Ciphertext header is malformed"])(
+    "returns the stored record without a generic error for quarantined ciphertext: %s",
+    async (quarantineReason) => {
+      const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+      jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(outdatedUser);
+      migrationDataClient.migrateAndPut.mockRejectedValueOnce(
+        new Error("Migration v193 failed", {
+          cause: new QuarantinedCiphertextError(quarantineReason),
+        }),
+      );
+
+      await expect(dynamoDataClient.get(outdatedUser.user.id)).resolves.toEqual(outdatedUser);
+      expect(logger.LogInfo).toHaveBeenCalledWith(
+        expect.stringContaining("Quarantined request-time migration"),
+      );
+      expect(logger.LogError).not.toHaveBeenCalledWith(
+        expect.stringContaining("Request-time migration failed"),
+      );
+    },
+  );
+
+  it("uses submitted-user migration for an outdated write", async () => {
+    const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+    const migratedUser = { ...outdatedUser, version: CURRENT_VERSION };
+    migrationDataClient.migrateAndPutSubmittedUser.mockResolvedValueOnce(migratedUser);
+
+    await expect(dynamoDataClient.put(outdatedUser)).resolves.toEqual(migratedUser);
+    expect(migrationDataClient.migrateAndPutSubmittedUser).toHaveBeenCalledWith(outdatedUser);
+    expect(migrationDataClient.migrateAndPut).not.toHaveBeenCalled();
+  });
+
+  it("propagates submitted-user migration conflicts without logging them as errors", async () => {
+    const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
+    const conflict = new MigrationConflictError();
+    migrationDataClient.migrateAndPutSubmittedUser.mockRejectedValueOnce(conflict);
+
+    await expect(dynamoDataClient.put(outdatedUser)).rejects.toBe(conflict);
+    expect(logger.LogError).not.toHaveBeenCalledWith(
+      expect.stringContaining("User data changed during migration"),
+    );
+  });
+
   it("returns the unchanged stored record when the request-time kill switch is on", async () => {
     const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
     jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(outdatedUser);
@@ -361,6 +448,31 @@ describe("User and Business Migration with DynamoDataClient", () => {
     );
   });
 
+  it("pauses the scheduled migration after the first post-retry throttle", async () => {
+    const first = generateUserData();
+    const second = generateUserData();
+    jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
+      usersToMigrate: [first, second],
+      nextToken: undefined,
+    });
+    migrationDataClient.migrateAndPut.mockRejectedValueOnce(
+      new DatabaseThrottlingError({
+        operation: "migration-transaction",
+        itemSizeBucket: "300-399-kb",
+        transactionItemCount: 2,
+      }),
+    );
+
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+
+    expect(result).toEqual({ success: true, migratedCount: 0 });
+    expect(migrationDataClient.migrateAndPut).toHaveBeenCalledTimes(1);
+    expect(logger.LogInfo).toHaveBeenCalledWith(
+      expect.stringContaining("Migration paused after DynamoDB throttling"),
+    );
+    expect(logger.LogError).not.toHaveBeenCalled();
+  });
+
   it("continues scheduled migration after a retryable transaction conflict", async () => {
     const first = generateUserData();
     const second = generateUserData();
@@ -382,6 +494,34 @@ describe("User and Business Migration with DynamoDataClient", () => {
     );
   });
 
+  it.each(["Ciphertext wrapping key is not accepted", "Ciphertext header is malformed"])(
+    "quarantines a record-level ciphertext failure without a generic error: %s",
+    async (quarantineReason) => {
+      const first = generateUserData();
+      const second = generateUserData();
+      jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
+        usersToMigrate: [first, second],
+        nextToken: undefined,
+      });
+      migrationDataClient.migrateAndPut.mockRejectedValueOnce(
+        new Error("Migration v193 failed", {
+          cause: new QuarantinedCiphertextError(quarantineReason),
+        }),
+      );
+
+      const result = await dynamoDataClient.migrateOutdatedVersionUsers();
+
+      expect(result).toEqual({ success: true, migratedCount: 1, quarantinedCount: 1 });
+      expect(migrationDataClient.migrateAndPut).toHaveBeenCalledTimes(2);
+      expect(logger.LogInfo).toHaveBeenCalledWith(
+        expect.stringContaining(`Quarantined scheduled migration for user ${first.user.id}`),
+      );
+      expect(logger.LogError).not.toHaveBeenCalledWith(
+        expect.stringContaining("Quarantined scheduled migration"),
+      );
+    },
+  );
+
   it("stops successfully between users when the Lambda time budget is exhausted", async () => {
     const first = generateUserData();
     const second = generateUserData();
@@ -399,6 +539,23 @@ describe("User and Business Migration with DynamoDataClient", () => {
     expect(logger.LogInfo).toHaveBeenCalledWith(
       "Migration paused before Lambda timeout; remaining users will retry",
     );
+  });
+
+  it("propagates a direct user write throttle without duplicate error logging", async () => {
+    const currentUser = { ...generateUserData(), version: CURRENT_VERSION };
+    jest.spyOn(dynamoUsersDataClient, "put").mockRejectedValueOnce({
+      name: "ProvisionedThroughputExceededException",
+    });
+
+    await expect(dynamoDataClient.put(currentUser)).rejects.toMatchObject({
+      name: "DatabaseThrottlingError",
+      context: {
+        operation: "put-user",
+        itemSizeBucket: "under-100-kb",
+      },
+    });
+    expect(logger.LogError).not.toHaveBeenCalled();
+    expect(dynamoBusinessesDataClient.put).not.toHaveBeenCalled();
   });
 
   it("should call parseUserData when zod_parsing_on feature flag is true", async () => {

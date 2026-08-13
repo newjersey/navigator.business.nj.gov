@@ -3,20 +3,16 @@ import fs from "fs";
 
 jest.mock("fs");
 jest.mock("process", () => ({ cwd: (): string => "/test" }));
-jest.mock(
-  "@/lib/cms/CollectionMap.json",
-  () => ({
-    "test-task": { Tasks: "tasks" },
-    task1: { Tasks: "tasks" },
-    task2: { Tasks: "tasks" },
-    "dead-task": { Tasks: "tasks" },
-    filing1: { Filings: "filings" },
-    fundings: { Fundings: "funding-opportunities" },
-    certifications: { Certifications: "certification-opportunities" },
-    "test-mapping": { Mappings: "mappings" },
-  }),
-  { virtual: true },
-);
+jest.mock("@/lib/cms/CollectionMap.json", () => ({
+  "test-task": { Tasks: "tasks" },
+  task1: { Tasks: "tasks" },
+  task2: { Tasks: "tasks" },
+  "dead-task": { Tasks: "tasks" },
+  filing1: { Filings: "filings" },
+  fundings: { Fundings: "funding-opportunities" },
+  certifications: { Certifications: "certification-opportunities" },
+  "test-mapping": { Mappings: "mappings" },
+}));
 
 const mockReaddirSync = fs.readdirSync as jest.Mock;
 const mockReadFileSync = fs.readFileSync as jest.Mock;

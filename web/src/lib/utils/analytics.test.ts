@@ -10,23 +10,9 @@ jest.mock("@/lib/utils/analytics-base", () => ({
 const mockAnalyticsBase = analyticsBase as jest.Mocked<typeof analyticsBase>;
 
 describe("analytics", () => {
-  const originalWindowLocation = window.location;
-
   beforeEach(() => {
     jest.resetAllMocks();
-    Object.defineProperty(window, "location", {
-      configurable: true,
-      enumerable: true,
-      value: new URL(window.location.href),
-    });
-  });
-
-  afterEach(() => {
-    Object.defineProperty(window, "location", {
-      configurable: true,
-      enumerable: true,
-      value: originalWindowLocation,
-    });
+    window.history.replaceState({}, "", "/");
   });
 
   describe("should call sendEvent", () => {
@@ -62,7 +48,7 @@ describe("analytics", () => {
 
     describe("on_site_sections, on_task_id, and hostname based on location", () => {
       it("should be landing_page", () => {
-        window.location.href = "https://localhost";
+        window.history.replaceState({}, "", "/");
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event_category: "account_clicks",
@@ -73,7 +59,7 @@ describe("analytics", () => {
       });
 
       it("should be onboarding_screen", () => {
-        window.location.href = "https://localhost/onboarding";
+        window.history.replaceState({}, "", "/onboarding");
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event_category: "account_clicks",
@@ -84,7 +70,7 @@ describe("analytics", () => {
       });
 
       it("should be dashboard_page", () => {
-        window.location.href = "https://localhost/dashboard";
+        window.history.replaceState({}, "", "/dashboard");
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event_category: "account_clicks",
@@ -95,7 +81,7 @@ describe("analytics", () => {
       });
 
       it("should be profile_screen", () => {
-        window.location.href = "https://localhost/profile";
+        window.history.replaceState({}, "", "/profile");
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event_category: "account_clicks",
@@ -106,7 +92,7 @@ describe("analytics", () => {
       });
 
       it("should be generic_task_screen", () => {
-        window.location.href = "https://localhost/tasks/evaluate-your-location";
+        window.history.replaceState({}, "", "/tasks/evaluate-your-location");
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event_category: "account_clicks",
@@ -118,7 +104,7 @@ describe("analytics", () => {
       });
 
       it("should be business_formation_task", () => {
-        window.location.href = "https://localhost/tasks/form-business-entity";
+        window.history.replaceState({}, "", "/tasks/form-business-entity");
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event_category: "account_clicks",
@@ -130,7 +116,7 @@ describe("analytics", () => {
       });
 
       it("should be cannabis_task", () => {
-        window.location.href = "https://localhost/tasks/conditional-permit-cannabis";
+        window.history.replaceState({}, "", "/tasks/conditional-permit-cannabis");
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event_category: "account_clicks",
@@ -142,7 +128,7 @@ describe("analytics", () => {
       });
 
       it("should be generic_filing_screen", () => {
-        window.location.href = "https://localhost/filings/annual-report";
+        window.history.replaceState({}, "", "/filings/annual-report");
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event_category: "account_clicks",
@@ -153,7 +139,7 @@ describe("analytics", () => {
       });
 
       it("should hide querystring for on_task_tab parsing", () => {
-        window.location.href = "https://localhost/tasks/conditional-permit-cannabis?foo=bar";
+        window.history.replaceState({}, "", "/tasks/conditional-permit-cannabis?foo=bar");
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event_category: "account_clicks",

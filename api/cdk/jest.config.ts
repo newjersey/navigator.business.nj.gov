@@ -1,3 +1,5 @@
+/** @jest-config-loader ts-node */
+
 // eslint-disable-next-line no-restricted-imports
 import sharedConfig from "../../jest.shared";
 

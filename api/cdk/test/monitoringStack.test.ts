@@ -38,4 +38,108 @@ describe("MonitoringStack migration alarm", () => {
       ]),
     );
   });
+
+  it("alerts operators without activating the kill switch when a user is quarantined", () => {
+    const app = new App();
+    const stack = new MonitoringStack(app, "TestMonitoringStack", { stage: "local" });
+    const template = Template.fromStack(stack);
+    const metricFilters = template.findResources("AWS::Logs::MetricFilter", {
+      Properties: {
+        FilterName: "quarantinedMigrationCount-local",
+        LogGroupName: "/aws/lambda/businessnjgov-api-v2-local-migrateUsersVersion",
+      },
+    });
+    const metricFilter = Object.values(metricFilters)[0].Properties;
+    const alarms = template.findResources("AWS::CloudWatch::Alarm", {
+      Properties: {
+        AlarmName: "local-bfs-navigator-quarantined-migration-users",
+      },
+    });
+    const alarm = Object.values(alarms)[0].Properties;
+
+    expect(metricFilter).toMatchObject({
+      FilterPattern: '"Quarantined scheduled migration"',
+      MetricTransformations: [
+        {
+          DefaultValue: 0,
+          MetricName: "quarantinedMigrationCount-local",
+          MetricNamespace: "BFS/Navigator",
+          MetricValue: "1",
+        },
+      ],
+    });
+    expect(alarm).toMatchObject({
+      Namespace: "BFS/Navigator",
+      MetricName: "quarantinedMigrationCount-local",
+      Statistic: "Sum",
+      Period: 120,
+      Threshold: 1,
+      EvaluationPeriods: 1,
+      DatapointsToAlarm: 1,
+      ComparisonOperator: "GreaterThanOrEqualToThreshold",
+      TreatMissingData: "notBreaching",
+    });
+    expect(alarm.AlarmActions).toEqual([
+      {
+        Ref: expect.stringContaining("MigrateUserVersionErrorTopic"),
+      },
+    ]);
+  });
+
+  it("alerts on sustained write throttling across Navigator tables", () => {
+    const app = new App();
+    const stack = new MonitoringStack(app, "TestMonitoringStack", { stage: "local" });
+    const alarms = Template.fromStack(stack).findResources("AWS::CloudWatch::Alarm", {
+      Properties: {
+        AlarmName: "local-bfs-navigator-dynamodb-write-throttles",
+      },
+    });
+    const alarm = Object.values(alarms)[0].Properties;
+
+    expect(alarm).toMatchObject({
+      Threshold: 5,
+      EvaluationPeriods: 1,
+      DatapointsToAlarm: 1,
+      ComparisonOperator: "GreaterThanOrEqualToThreshold",
+      TreatMissingData: "notBreaching",
+      Metrics: expect.arrayContaining([
+        expect.objectContaining({
+          Expression: "users + businesses",
+          Label: "DynamoDB write throttle events",
+          ReturnData: true,
+        }),
+        expect.objectContaining({
+          Id: "users",
+          MetricStat: {
+            Metric: {
+              Namespace: "AWS/DynamoDB",
+              MetricName: "WriteThrottleEvents",
+              Dimensions: [{ Name: "TableName", Value: "users-table-local" }],
+            },
+            Period: 300,
+            Stat: "Sum",
+          },
+          ReturnData: false,
+        }),
+        expect.objectContaining({
+          Id: "businesses",
+          MetricStat: {
+            Metric: {
+              Namespace: "AWS/DynamoDB",
+              MetricName: "WriteThrottleEvents",
+              Dimensions: [{ Name: "TableName", Value: "businesses-table-local" }],
+            },
+            Period: 300,
+            Stat: "Sum",
+          },
+          ReturnData: false,
+        }),
+      ]),
+    });
+    expect(alarm.AlarmActions).toEqual([
+      {
+        Ref: expect.stringContaining("NavigatorApiErrorTopic"),
+      },
+    ]);
+  });
 });

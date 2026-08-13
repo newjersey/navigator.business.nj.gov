@@ -1,12 +1,44 @@
+import { type ForeignEnvironmentPolicy } from "@client/CiphertextMetadata";
+
+interface ForeignEnvironmentPolicyConfig {
+  readonly stage: string;
+  readonly cryptoContextStage: string;
+}
+
+const resetCryptoContextStageByStage: Readonly<Record<string, string>> = {
+  dev: "dev",
+  testing: "dev",
+  content: "dev",
+  staging: "staging",
+};
+
+export const resolveForeignEnvironmentPolicy = ({
+  stage,
+  cryptoContextStage,
+}: ForeignEnvironmentPolicyConfig): ForeignEnvironmentPolicy | undefined => {
+  if (stage === "local" || !cryptoContextStage) {
+    return undefined;
+  }
+
+  if (stage === "prod") {
+    return "quarantine";
+  }
+
+  return resetCryptoContextStageByStage[stage] === cryptoContextStage ? "reset" : undefined;
+};
+
 export const IS_DOCKER = process.env.IS_DOCKER === "true" || false;
 export const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 export const BUSINESSES_TABLE = process.env.BUSINESSES_TABLE || "businesses-table-local";
 export const MESSAGES_TABLE = process.env.MESSAGES_TABLE || "messages-table-local";
 export const DYNAMO_OFFLINE_PORT = Number.parseInt(process.env.DYNAMO_PORT || "8000");
 export const STAGE = process.env.STAGE || "local";
-
 export const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
 export const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
+export const AWS_CRYPTO_TAX_ID_FOREIGN_ENVIRONMENT_POLICY = resolveForeignEnvironmentPolicy({
+  stage: STAGE,
+  cryptoContextStage: AWS_CRYPTO_CONTEXT_STAGE,
+});
 export const AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY = process.env.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY || "";
 export const LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY =
   process.env.LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY || "";
