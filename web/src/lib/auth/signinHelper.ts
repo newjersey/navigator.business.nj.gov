@@ -7,7 +7,6 @@ import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { UpdateQueue } from "@/lib/UpdateQueue";
 import analytics from "@/lib/utils/analytics";
 import {
-  setABExperienceDimension,
   setAnalyticsDimensions,
   setOnLoadDimensions,
   setRegistrationDimension,
@@ -123,7 +122,6 @@ export const onGuestSignIn = async ({
     type: "LOGIN_GUEST",
     activeUser: activeUser,
   });
-  setABExperienceDimension(emptyUser.abExperience, true);
   if (encounteredMyNjLinkingError) {
     accountLinkingErrorStorage.setEncounteredMyNjLinkingError(encounteredMyNjLinkingError);
   }

@@ -97,7 +97,7 @@ describe("onboarding - additional business", () => {
     const emptyBusiness = createEmptyBusiness({ userId: userId });
     const initialBusiness = generateBusiness({ userId: userId });
     const initialData = generateUserDataForBusiness(initialBusiness, {
-      user: generateUser({ id: userId, abExperience: "ExperienceA" }),
+      user: generateUser({ id: userId }),
     });
     expect(Object.keys(initialData.businesses)).toHaveLength(1);
 

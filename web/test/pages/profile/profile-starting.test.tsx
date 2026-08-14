@@ -45,7 +45,6 @@ import {
   OperatingPhaseId,
   OperatingPhases,
   randomElementFromArray,
-  selectIndustryTaskId,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
@@ -110,14 +109,12 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 const initialFeatureEmployerRatesEnv = process.env.FEATURE_EMPLOYER_RATES;
-const initialABTestingExperienceBPercentage = process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE;
 
 describe("profile - starting business", () => {
   let businessFromSetup: Business;
 
   beforeEach(() => {
     jest.resetAllMocks();
-    process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE = "0";
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();
@@ -135,7 +132,6 @@ describe("profile - starting business", () => {
 
   afterEach(() => {
     process.env.FEATURE_EMPLOYER_RATES = initialFeatureEmployerRatesEnv;
-    process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE = initialABTestingExperienceBPercentage;
   });
 
   describe("locks fields when formation getFiling success", () => {
@@ -374,7 +370,6 @@ describe("profile - starting business", () => {
       taskProgress: {
         [einTaskId]: "COMPLETED",
         [naicsCodeTaskId]: "TO_DO",
-        [selectIndustryTaskId]: "COMPLETED",
       },
       taskItemChecklist: {},
     });

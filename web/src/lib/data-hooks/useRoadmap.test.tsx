@@ -52,11 +52,7 @@ describe("useRoadmap", () => {
     useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED", roadmapTaskData });
     mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     setupHook();
-    expect(mockBuildUserRoadmap).toHaveBeenCalledWith(
-      profileData,
-      roadmapTaskData,
-      expect.stringMatching(/^Experience[AB]$/),
-    );
+    expect(mockBuildUserRoadmap).toHaveBeenCalledWith(profileData, roadmapTaskData);
   });
 
   it("doesn't rebuild roadmap when there are steps and tasks", () => {
