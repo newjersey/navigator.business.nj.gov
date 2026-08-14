@@ -231,11 +231,7 @@ export const UserDataProvider = ({
       const newProfileData = newUserData.businesses[newUserData.currentBusinessId].profileData;
       const roadmapTaskData = newUserData.businesses[newUserData.currentBusinessId].roadmapTaskData;
       setAnalyticsDimensions(newUserData);
-      const newRoadmap = await buildUserRoadmap(
-        newProfileData,
-        roadmapTaskData,
-        newUserData.user.abExperience || "ExperienceA",
-      );
+      const newRoadmap = await buildUserRoadmap(newProfileData, roadmapTaskData);
       if (ownerUserIdRef.current === newUserData.user.id) {
         setRoadmap(newRoadmap);
       }

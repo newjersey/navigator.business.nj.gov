@@ -14,5 +14,3 @@ export const einTaskId = "register-for-ein";
 export const businessStructureTaskId = "business-structure";
 
 export const naicsCodeTaskId = "determine-naics-code";
-
-export const selectIndustryTaskId = "select-industry";

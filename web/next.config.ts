@@ -12,7 +12,6 @@ const nextConfig: NextConfig = {
     },
   },
   env: {
-    AB_TESTING_EXPERIENCE_B_PERCENTAGE: process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE,
     ALTERNATE_LANDING_PAGE_URL: process.env.ALTERNATE_LANDING_PAGE_URL ?? "",
     API_BASE_URL: process.env.API_BASE_URL,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,

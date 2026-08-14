@@ -3,7 +3,6 @@ import { getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import analytics, { DimensionQueueFactory, Questions } from "@/lib/utils/analytics";
 import { camelCaseToSnakeCase } from "@/lib/utils/cases-helpers";
 import {
-  ABExperience,
   BusinessPersona,
   ForeignBusinessType,
   IndustrySpecificData,
@@ -23,8 +22,7 @@ type RegistrationProgress =
 
 export const setOnLoadDimensions = (userData: UserData): void => {
   setAnalyticsDimensions(userData, true);
-  setUserId(userData.user.id, true);
-  setABExperienceDimension(userData.user.abExperience);
+  setUserId(userData.user.id);
 };
 
 export const setRegistrationDimension = (
@@ -32,15 +30,6 @@ export const setRegistrationDimension = (
   queue = false,
 ): DimensionQueueFactory => {
   const updateQueue = analytics.dimensions.registrationStatus(status);
-  !queue && updateQueue.update();
-  return updateQueue;
-};
-
-export const setABExperienceDimension = (
-  value: ABExperience,
-  queue = false,
-): DimensionQueueFactory => {
-  const updateQueue = analytics.dimensions.abExperience(value);
   !queue && updateQueue.update();
   return updateQueue;
 };

@@ -63,8 +63,7 @@ const isBusinessUser = (value: unknown, expectedUserId: string): boolean => {
     typeof value.userTesting === "boolean" &&
     typeof value.receiveUpdatesAndReminders === "boolean" &&
     typeof value.accountCreationSource === "string" &&
-    typeof value.contactSharingWithAccountCreationPartner === "boolean" &&
-    (value.abExperience === "ExperienceA" || value.abExperience === "ExperienceB")
+    typeof value.contactSharingWithAccountCreationPartner === "boolean"
   );
 };
 

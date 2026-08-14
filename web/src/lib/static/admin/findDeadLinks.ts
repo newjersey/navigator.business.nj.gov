@@ -475,7 +475,6 @@ const COLLECTION_ROUTE_MAP: Record<string, string> = {
   "Tasks - Municipal": "/tasks",
   "Tasks - NAICS Code": "/tasks",
   "Tasks - Passenger Transport CDL": "/tasks",
-  "Tasks - Select Industry": "/tasks",
   "Tasks - Tax ID": "/tasks",
   "License Tasks (Navigator with Webflow mappings)": "/tasks",
   "Raffle Bingo Steps": "/tasks",

@@ -87,7 +87,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [page, setPage] = useState<Page>({ current: 1, previous: 1 });
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [error, setError] = useState<ProfileError | undefined>(undefined);
-  const { updateQueue, createUpdateQueue, hasCompletedFetch, userData } = useUserData();
+  const { updateQueue, createUpdateQueue, hasCompletedFetch } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
   const errorRef = useRef<HTMLDivElement>(null);
@@ -148,16 +148,11 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     };
 
-    if (userData?.user.abExperience === "ExperienceB") {
-      removePageFromFlow("industry-page", "STARTING");
-      removePageFromFlow("industry-page-without-nonprofit", "STARTING");
-    }
-
     removeNexusSpecificPages();
     removeNonProfitForDomesticEmployer();
 
     return onboardingFlows;
-  }, [profileData, userData]);
+  }, [profileData]);
 
   const routeToPage = useCallback(
     async (page: number): Promise<boolean> => {
@@ -270,10 +265,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           setProfileData(newProfileData);
           localUpdateQueue?.queueProfileData(newProfileData);
 
-          if (
-            hasEssentialQuestion(queryIndustryId) &&
-            userData?.user.abExperience !== "ExperienceB"
-          ) {
+          if (hasEssentialQuestion(queryIndustryId)) {
             setPage({ current: 2, previous: 1 });
           } else {
             await completeOnboarding(newProfileData, localUpdateQueue);

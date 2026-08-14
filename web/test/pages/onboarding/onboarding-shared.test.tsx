@@ -38,12 +38,12 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 const Config = getMergedConfig();
 
-const generateExperienceAUserData = (
+const generateUserData = (
   businessOverrides?: Partial<ReturnType<typeof generateBusiness>>,
 ): UserData => {
   const business = generateBusiness(businessOverrides ?? {});
   return generateUserDataForBusiness(business, {
-    user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+    user: generateUser({ id: business.userId }),
   });
 };
 
@@ -70,7 +70,7 @@ describe("onboarding - shared", () => {
   it.each(["business-persona-starting", "business-persona-foreign"])(
     "allows %s to move past the first onboarding page",
     async (radioOption: string) => {
-      const { page } = renderPage({ userData: generateExperienceAUserData() });
+      const { page } = renderPage({ userData: generateUserData() });
 
       page.chooseRadio(radioOption);
       fireEvent.click(screen.getByTestId("next"));
@@ -92,7 +92,7 @@ describe("onboarding - shared", () => {
 
     renderPage({
       userData: generateUserDataForBusiness(business, {
-        user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+        user: generateUser({ id: business.userId }),
       }),
     });
     expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
@@ -153,7 +153,7 @@ describe("onboarding - shared", () => {
   it("routes to the onboarding industry page when industry WITH essential question is set by using industry query string", async () => {
     const industry = randomElementFromArray(industriesWithSingleEssentialQuestion).id;
     useMockRouter({ isReady: true, query: { industry } });
-    const { page } = renderPage({ userData: generateExperienceAUserData() });
+    const { page } = renderPage({ userData: generateUserData() });
     expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
     page.chooseEssentialQuestionRadio(industry, 0);
     page.clickNext();
@@ -175,7 +175,7 @@ describe("onboarding - shared", () => {
     });
     const { page } = renderPage({
       userData: generateUserDataForBusiness(business, {
-        user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+        user: generateUser({ id: business.userId }),
       }),
     });
     const numberOfPages = onboardingFlows.STARTING.pages.length;
@@ -194,14 +194,14 @@ describe("onboarding - shared", () => {
   });
 
   it("allows user to move past the first onboarding page if you have selected whether you own a business", async () => {
-    const { page } = renderPage({ userData: generateExperienceAUserData() });
+    const { page } = renderPage({ userData: generateUserData() });
     page.chooseRadio("business-persona-starting");
     await page.visitOnboardingPage(2);
     expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
   });
 
   it("is able to go back", async () => {
-    const { page } = renderPage({ userData: generateExperienceAUserData() });
+    const { page } = renderPage({ userData: generateUserData() });
     page.chooseRadio("business-persona-starting");
     await page.visitOnboardingPage(2);
     expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
@@ -216,7 +216,7 @@ describe("onboarding - shared", () => {
     });
     const { page } = renderPage({
       userData: generateUserDataForBusiness(business, {
-        user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+        user: generateUser({ id: business.userId }),
       }),
     });
 
@@ -257,7 +257,7 @@ describe("onboarding - shared", () => {
     });
     const { page } = renderPage({
       userData: generateUserDataForBusiness(business, {
-        user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+        user: generateUser({ id: business.userId }),
       }),
     });
 
@@ -274,7 +274,7 @@ describe("onboarding - shared", () => {
   describe.skip("when query parameter sets onboarding flow", () => {
     it("routes user to the second onboarding page when query parameter exists and value is starting", async () => {
       useMockRouter({ isReady: true, query: { flow: "starting" } });
-      const { page } = renderPage({ userData: generateExperienceAUserData() });
+      const { page } = renderPage({ userData: generateUserData() });
 
       expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
       page.selectByText("Industry", "All Other Businesses");
@@ -288,7 +288,7 @@ describe("onboarding - shared", () => {
 
     it("routes user to the second onboarding page when query parameter exists and value is out-of-state", async () => {
       useMockRouter({ isReady: true, query: { flow: "out-of-state" } });
-      const { page } = renderPage({ userData: generateExperienceAUserData() });
+      const { page } = renderPage({ userData: generateUserData() });
 
       expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
       const { employeeOrContractorInNJ } =
