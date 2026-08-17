@@ -7,6 +7,8 @@ sub-heading-text: Registering your business is a key part of getting up and runn
 meta-data: How do I register a business in New Jersey? We are here to help with resources on employer IDs, taxes and DBAs. Learn More.
 main-link-text: How to Register
 main-text-1: "The steps required to register your business may vary depending on the business structure and industry. Most businesses can expect to:\_\n\n* Search for Available Business Names\n* Obtain an Employer Identification Number (EIN) from the IRS\n* Form Your Business\n* Register for New Jersey Tax and Employer Purposes\n\nLearn more about these steps below. \n\nIf you are an out-of-state business, you can use our [Out-of-State registration guide](http://business.nj.gov/pages/out-of-state-business-registration)."
+link-text-1: Register Your Business
+link-url-1: https://account.business.nj.gov/onboarding
 heading-2: Search Available Business Names Based on Business Structure
 main-text-2: "Your business name is the name you will use to represent your business.\n\n**If you are an LLC, C-Corp, S-Corp, LP, or LLP,** you should check if your business name is available with the New Jersey Department of Treasury. If your name is available, you will reserve your name when you submit your business formation documents. You will need your business Certificate of Formation to officially register your business name.\_\n\n**If you are a sole proprietor or a general partnership**, and you do not want to use your personal name as your business name, you can register a business name at your local county clerk’s office."
 link-text-2: Check If Your Business Name Is Available
