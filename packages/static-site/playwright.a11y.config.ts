@@ -24,8 +24,12 @@ const playwrightAccessibilityConfig = defineConfig({
   },
   webServer: {
     command: "pnpm dev --port 3000",
-    // biome-ignore lint/style/noProcessEnv: playwright webServer inherits the host env and reads CI flag.
-    env: { ...process.env, NEXT_PUBLIC_MULTILINGUAL_ENABLED: "true" },
+    env: {
+      // biome-ignore lint/style/noProcessEnv: playwright webServer inherits the host env and reads CI flag.
+      ...process.env,
+      NEXT_PUBLIC_MULTILINGUAL_ENABLED: "true",
+      NEXT_PUBLIC_FEEDBACK_WIDGET_MODE: "mock",
+    },
     // biome-ignore lint/style/noProcessEnv: reuse existing server locally; always restart in CI.
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

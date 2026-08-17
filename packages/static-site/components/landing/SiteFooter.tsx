@@ -7,6 +7,7 @@
 
 import Image from "next/image";
 
+import { FeedbackWidget } from "@/components/feedback/FeedbackWidget";
 import type { LandingSocialLink, LayoutFooterContent } from "@/domain/content/messageTypes";
 import { LocalizedLink } from "./LocalizedLink";
 
@@ -23,6 +24,8 @@ const SITE_LOGO_PATH = "/img/business.NJ.gov-logo.svg";
 export interface SiteFooterProps {
   /** Localized footer content. */
   readonly content: LayoutFooterContent;
+  /** Accessible name for the feedback widget landmark. */
+  readonly feedbackAriaLabel: string;
   /** Main-content ID used by the return-to-top anchor. */
   readonly mainContentId: string;
 }
@@ -81,12 +84,13 @@ const renderFooterSocialLink = ({ socialLink, index }: RenderFooterSocialLinkPar
  * <SiteFooter content={landing.footer} mainContentId={landing.mainContentId} />
  * ```
  */
-export const SiteFooter = ({ content, mainContentId }: SiteFooterProps) => {
+export const SiteFooter = ({ content, feedbackAriaLabel, mainContentId }: SiteFooterProps) => {
   return (
     <footer className="usa-footer">
       <div className="grid-container usa-footer__return-to-top">
         <a href={`#${mainContentId}`}>{content.returnToTopLabel}</a>
       </div>
+      <FeedbackWidget ariaLabel={feedbackAriaLabel} />
       <div className="usa-footer__secondary-section">
         <div className="grid-container">
           <div className="grid-row grid-gap">

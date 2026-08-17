@@ -1,0 +1,24 @@
+:root {
+  /* variables derived from the NJWDS .grid-container */
+  --grid-container-max-width: 64rem;
+  --grid-container-padding: 1rem;
+  --grid-container-padding-wide: 2rem;
+  --grid-container-breakpoint: 64em;
+}
+
+feedback-widget .feedback-container {
+  padding-inline: max(
+    var(--grid-container-padding),
+    calc((100% - var(--grid-container-max-width)) / 2 + var(--grid-container-padding))
+  );
+}
+
+/* matches the value of --grid-container-breakpoint */
+@media (min-width: 64em) {
+  feedback-widget .feedback-container {
+    padding-inline: max(
+      var(--grid-container-padding-wide),
+      calc((100% - var(--grid-container-max-width)) / 2 + var(--grid-container-padding-wide))
+    );
+  }
+}

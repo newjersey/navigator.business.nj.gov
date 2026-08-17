@@ -80,6 +80,7 @@
   },
   "dependencies": {
     "@businessnjgovnavigator/content-types": "file:../content-types",
+    "@newjersey/feedback-widget": "0.7.1",
     "@newjersey/njwds": "2.9.1",
     "@trussworks/react-uswds": "11.2.0",
     "gray-matter": "4.0.3",
