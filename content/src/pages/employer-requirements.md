@@ -324,7 +324,7 @@ main-text-8: >-
   #### **TDI/FLI Job Protection**[](https://www.nj.gov/labor/wageandhour/assets/PDFs/Employer%20Poster%20Packet/AD-289%20(4-22).pdf)
 
 
-  TDI/FLI job protection covers eligible employees who receive TDI/FLI benefits from the State or a private plan during their leave, and their leave is not already covered under NJFLA or FMLA. 
+  TDI/FLI job protection covers eligible employees who receive TDI/FLI benefits from the State or a private plan during their leave, and their leave is not already covered under NJFLA. 
 
 
   There are no minimum employer size requirements or work history requirements to be eligible for TDI/FLI benefits. Eligibility for benefits is based on recent earnings.
@@ -390,7 +390,7 @@ main-text-9: >-
   The New Jersey Family Leave Act (NJFLA) generally entitles certain employees to take up to 12 weeks of family leave in a 24-month period without losing their jobs.
 
 
-  TDI/FLI job protection covers eligible employees who receive TDI/FLI benefits from the State or a private plan during their leave, and their leave is not already covered under NJFLA or FMLA. 
+  TDI/FLI job protection covers eligible employees who receive TDI/FLI benefits from the State or a private plan during their leave, and their leave is not already covered under NJFLA. 
 
 
   ### Do I Qualify to Provide Protected Leave?
@@ -415,7 +415,7 @@ main-text-9: >-
   **TDI/FLI Job Protection**
 
 
-  * If your employee is receiving TDI/FLI benefits through the State or a private plan and leave is not covered under NJFLA or FMLA
+  * If your employee is receiving TDI/FLI benefits through the State or a private plan and leave is not covered under NJFLA
 
 
   ### What Does FMLA and NJFLA Protect?
