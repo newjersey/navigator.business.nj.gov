@@ -43,6 +43,7 @@ runs:
           -f packages/static-site/Dockerfile . \
           --build-arg NEXT_PUBLIC_WEB_BASE_URL="${NEXT_PUBLIC_WEB_BASE_URL:-}" \
           --build-arg NEXT_PUBLIC_MULTILINGUAL_ENABLED="${NEXT_PUBLIC_MULTILINGUAL_ENABLED:-}" \
+          --build-arg NEXT_PUBLIC_FEEDBACK_WIDGET_MODE="${NEXT_PUBLIC_FEEDBACK_WIDGET_MODE:-}" \
           -t "$image_repo:$image_name-$IMAGE_VERSION" \
           -t "$image_repo:$image_name" \
           -t "$image_repo:$image_name-latest" \

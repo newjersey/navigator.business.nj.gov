@@ -11,6 +11,9 @@ importers:
       '@businessnjgovnavigator/content-types':
         specifier: file:../content-types
         version: file:../content-types
+      '@newjersey/feedback-widget':
+        specifier: 0.7.1
+        version: 0.7.1
       '@newjersey/njwds':
         specifier: 2.9.1
         version: 2.9.1
@@ -853,6 +856,9 @@ packages:
     peerDependencies:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
+
+  '@newjersey/feedback-widget@0.7.1':
+    resolution: {integrity: sha512-FRjYxGE7bOFhhVmU0CEP0hDJOLE3f6TDyf2/er2otniS7CZDA2mmJKZmaNWP2rSmmkDrOc3mC1SpZTUFDZrdWw==}
 
   '@newjersey/njwds@2.9.1':
     resolution: {integrity: sha512-zTfHA1nV6V/yxaIPlXrz9UVPzI+T/RWMgp61xwdHaZu7/eEvKWbvDvTTNtIF4TMIsKOuP6SOELG/mZdvQ5nkCQ==}
@@ -3087,6 +3093,8 @@ snapshots:
       '@emnapi/runtime': 1.11.1
       '@tybys/wasm-util': 0.10.3
     optional: true
+
+  '@newjersey/feedback-widget@0.7.1': {}
 
   '@newjersey/njwds@2.9.1':
     dependencies:
