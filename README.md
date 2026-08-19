@@ -320,10 +320,10 @@ the frontend when we request user data. Sometimes we'll be changing the data str
 the database to be able to account for and understand this.
 
 We solve this by using **document versioning** and running **migrations** on individual documents as
-we retrieve them from storage. The documents are stored with a schema version number (which is
-stripped before sending to the frontend). On a `GET` request for a document, if its version is
-out-of-date with the most recent, we run a series of migrations on it to map the data to the current
-structure. We then save that new document in the current version, and return it to the frontend.
+we retrieve them from storage. The documents are stored with a schema version number. On a `GET`
+request for a document, if its version is out-of-date with the most recent, we run a series of
+migrations on it to map the data to the current structure. We then save that new document in the
+current version and return it to the frontend. We call these **rolling** or **request-time migrations**.
 
 Reasons for this approach:
 
@@ -332,38 +332,76 @@ Reasons for this approach:
 
 Notes about this approach:
 
-- in the database itself, various documents will be structured differently, as they will only be
-  migrated when they are accessed. This isn't a concern if the documents are only ever accessed
-  through the DB client layer, which performs the migrations as it accesses them
+- in the database itself, various documents may be structured differently until they are migrated.
+  This isn't a concern if the documents are only ever accessed through the DB client layer, which
+  performs the migrations as it accesses them
+- every migration file contains the complete `UserData` type tree for that version, preserving the
+  input and output types of historical migrations as the current types change
+- migration `vN` to `vN+1` must be at index `N` in the `Migrations` array. Do not skip versions
+- There are three separately-maintained representations of the user data schema that we are responsible for keeping in sync:
+  - Current application types are defined in `shared/src/userData.ts` and related modules in `shared`.
+  - Versioned migration types are defined in `api/src/db/migrations/v{N}_*.ts`.
+  - The current runtime validator is defined in `api/src/db/zodSchema/zodSchemas.ts`.
+
+Aside from request-time migrations, we also have a Lambda (`api/src/functions/migrateUsersVersion/app.ts`) that can run on a schedule to migrate users automatically. Its schedule is managed in `api/cdk/lib/lambdaStack.ts`. It also has a "kill switch" in SSM Parameter Store that stops all attempts to auto-migrate users if the Lambda ever encounters an error. Because the Lambda runs regularly, we should expect that, over time, all users eventually get upgraded to the latest version. If a non-zero percentage of users on an older version stops decreasing over time, that is a sign that the kill switch was turned on, stopping the automatic migrations.
 
 #### Adding a new migration
 
 If you want to change the structure of the `UserData` object, there is a helper script that creates
-and updates most of the relevant code at `./scripts/generate-new-migration.sh`. It takes the
-following actions:
+and updates most of the relevant code. First, make the intended changes to the current types and
+factories in `shared`. Then run the script from the repository root:
+
+```bash
+bash scripts/generate-new-migration.sh
+```
+
+It takes the following actions:
 
 1. **Creates a new file** in `./api/src/db/migrations` and names it
-   `v{X}_{migration_description}.ts` where `{X}` is replaced by the next successive version and
+   `v{N}_{migration_description}.ts` where `{N}` is replaced by the next successive version and
    `{migration_description}` is a snake-cased name describing the data being changed in the
-   migration. The`{migration_description}` is prompted by the script and input by the user when
-   running `generate-new-migration.sh`.
+   migration. The `{migration_description}` is prompted by the script and input by the user.
 
-2. **Creates a new type** in the file and names it `v{X}UserData`, which defines the new structure
+2. **Copies the previous version’s type definitions** into the file and renames it `v{N}UserData`, which defines the new structure
    of your new `UserData` type.
 
 3. **Creates a migration function** in the file with type signature
-   `(v{X-1}UserData) => v{X}UserData`, which defines the way that the previous version of the object
+   `(v{N-1}UserData) => v{N}UserData`, which defines the way that the previous version of the object
    should be mapped to the new structure.
    - **Note:** `generate-new-migration.sh` currently only copies the previous migration function.
      _You must write your own updated migration function_. You should also test it to verify
      transformations are executed properly.
 
 4. **Adds the migration function to the list** of functions in
-   `./api/src/db/migrations/migrations.ts`. This array should be ordered by ascending version
-   number.
+   `./api/src/db/migrations/migrations.ts`. This array should be ordered by ascending version number.
+   The array index is used to select migrations, so migration `v{N-1}` to `v{N}` must be at index
+   `{N-1}`.
 
-5. **Changes the types** in `types.ts` for `UserData` (and `factories` and anywhere else needed) to
-   reflect the newest version of the type to the rest of the code.
+5. **Updates version references** in `CURRENT_VERSION`, the Zod schema and its tests, and
+   `printUserZodSchema.ts`, `generateUserSchemaFile.ts`, and `userSchemaCompiler.ts`. It then
+   regenerates `api/src/domain/userSchema.generated.ts`, which contains the latest migration type
+   expanded into a TypeScript interface string for the user-schema API endpoint.
+   - **Note:** The script updates version numbers and references, but it does not update the shape of
+     the Zod schema to match `v{N}UserData`. You will have to make that change manually.
+
+Make sure that after running the script, you:
+
+- edit the new migration's versioned type definitions and test-data generator functions so they match the current types in `shared/src/userData.ts` and related shared modules
+- update `api/src/db/zodSchema/zodSchemas.ts` to match the new persisted shape
+- add focused tests for the migration's transformation
+
+Finally, run the relevant tests and TypeScript checks:
+
+```bash
+yarn workspace @businessnjgovnavigator/api print:user-schema:diff
+yarn workspace @businessnjgovnavigator/api generate:user-schema
+yarn workspace @businessnjgovnavigator/api test
+yarn typecheck
+```
+
+A migration is complete when its focused tests pass, the full migration chain reaches
+`CURRENT_VERSION`, migrated data has the same expected shape as newly generated current-version
+data, and the latest Zod schema accepts representative migrated data.
 
 ## Ports
 
