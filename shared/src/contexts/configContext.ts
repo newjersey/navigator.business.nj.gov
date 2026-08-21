@@ -62,7 +62,6 @@ import RegisteredForTaxesModal from "../../../content/src/fieldConfig/registered
 import RemoveBusinessModal from "../../../content/src/fieldConfig/remove-business-modal.json";
 import SearchBusinessNameTask from "../../../content/src/fieldConfig/search-business-name-task.json";
 import SectionHeaders from "../../../content/src/fieldConfig/section-headers.json";
-import SelectIndustryTask from "../../../content/src/fieldConfig/select-industry-task.json";
 import SelfRegistration from "../../../content/src/fieldConfig/self-registration.json";
 import SkipToMainContent from "../../../content/src/fieldConfig/skip-to-main-content.json";
 import StarterKits from "../../../content/src/fieldConfig/starter-kits.json";
@@ -175,7 +174,6 @@ const merged = JSON.parse(
       RemoveBusinessModal,
       CrtkTask,
       LoginSupportPage,
-      SelectIndustryTask,
       LockedTasksPrompt,
     ),
   ),
@@ -263,7 +261,6 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof RemoveBusinessModal &
   typeof CrtkTask &
   typeof LoginSupportPage &
-  typeof SelectIndustryTask &
   typeof LockedTasksPrompt;
 
 export const getMergedConfig = (): ConfigType => {
@@ -353,7 +350,6 @@ export const getMergedConfig = (): ConfigType => {
     RemoveBusinessModal,
     LoginSupportPage,
     CrtkTask,
-    SelectIndustryTask,
     LockedTasksPrompt,
   );
 };

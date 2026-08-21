@@ -73,7 +73,6 @@ describe("analytics-helpers", () => {
       mockAnalytic.dimensions.subPersona = jest.fn();
       mockAnalytic.dimensions.phase = jest.fn().mockReturnValue(mockDimensionQueue);
       mockAnalytic.dimensions.userId = jest.fn().mockReturnValue(mockDimensionQueue);
-      mockAnalytic.dimensions.abExperience = jest.fn().mockReturnValue(mockDimensionQueue);
       mockAnalytic.dimensions.update = jest.fn();
 
       const userData = generateUserData({});
@@ -100,7 +99,6 @@ describe("analytics-helpers", () => {
         currentBusiness.profileData.naicsCode,
       );
       expect(mockAnalytic.dimensions.userId).toHaveBeenCalledWith(userData.user.id);
-      expect(mockAnalytic.dimensions.abExperience).toHaveBeenCalledWith(userData.user.abExperience);
       expect(mockUpdate).toHaveBeenCalledTimes(1);
     });
   });

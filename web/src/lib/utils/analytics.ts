@@ -448,7 +448,6 @@ interface GTMUserData {
   home_based_business?: boolean;
   persona?: string;
   current_registration_status?: string;
-  ab_experience?: string;
   naics_code?: string;
   current_phase?: string | null;
   sub_persona?: string;
@@ -501,10 +500,6 @@ export class DimensionQueueFactory {
 
   registrationStatus(current_registration_status?: string) {
     return this.queue({ current_registration_status });
-  }
-
-  abExperience(ab_experience?: string) {
-    return this.queue({ ab_experience });
   }
 
   naicsCode(naics_code: string) {
@@ -3099,30 +3094,6 @@ export default {
             legacy_event_label: "open_live_chat",
             click_text: "open_live_chat",
             clicked_to: "live_chat_widget",
-          });
-        },
-      },
-    },
-    select_industry_task: {
-      click: {
-        open_live_chat: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "select_industry_task",
-            legacy_event_label: "open_live_chat",
-            click_text: "open_live_chat",
-            clicked_to: "live_chat_widget",
-          });
-        },
-      },
-      submit: {
-        select_industry: () => {
-          eventRunner.track({
-            event: "form_submits",
-            legacy_event_category: "select_industry_task",
-            legacy_event_action: "submit",
-            legacy_event_label: "select_industry",
           });
         },
       },

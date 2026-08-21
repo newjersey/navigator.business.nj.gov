@@ -49,7 +49,7 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
     onboardingFormProgress: "UNSTARTED",
   });
   return generateUserDataForBusiness(business, {
-    user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+    user: generateUser({ id: business.userId }),
   });
 };
 
@@ -63,52 +63,6 @@ describe("onboarding - starting a business", () => {
   });
 
   describe("page 2", () => {
-    it("skips page 2 and continues immediately to the dashboard when userData.user.abExperience is set to ExperienceB", async () => {
-      const business = generateBusiness({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          industryId: undefined,
-        }),
-        onboardingFormProgress: "UNSTARTED",
-      });
-      const userData = generateUserDataForBusiness(business, {
-        user: generateUser({ id: business.userId, abExperience: "ExperienceB" }),
-      });
-      useMockRouter({ isReady: true, query: { page: "1" } });
-      const { page } = renderPage({ userData });
-
-      expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
-
-      page.chooseRadio("business-persona-starting");
-      page.clickNext();
-
-      await waitFor(() => {
-        expect(mockPush).toHaveBeenCalledWith({
-          pathname: ROUTES.dashboard,
-          query: { [QUERIES.fromOnboarding]: "true" },
-        });
-      });
-    });
-
-    it("shows 'Show My Guide' button on the first onboarding page instead of 'Next' for ExperienceB", async () => {
-      const business = generateBusiness({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          industryId: undefined,
-        }),
-        onboardingFormProgress: "UNSTARTED",
-      });
-      const userData = generateUserDataForBusiness(business, {
-        user: generateUser({ id: business.userId, abExperience: "ExperienceB" }),
-      });
-      useMockRouter({ isReady: true, query: { page: "1" } });
-      renderPage({ userData });
-
-      const page1 = within(screen.getByTestId("page-1-form"));
-      expect(page1.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
-      expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    });
-
     it("prevents user from moving after the second onboarding page if you have not selected an industry", async () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
@@ -292,7 +246,7 @@ describe("onboarding - starting a business", () => {
       }),
     });
     const userData = generateUserData({
-      user: generateUser({ id: business.userId, abExperience: "ExperienceA" }),
+      user: generateUser({ id: business.userId }),
       currentBusinessId: "12345",
       businesses: {
         "12345": business,
@@ -311,7 +265,7 @@ describe("onboarding - starting a business", () => {
   });
 
   it("updates the user data after each form page", async () => {
-    const initialUserData = createEmptyUserData(createEmptyUser({ abExperience: "ExperienceA" }));
+    const initialUserData = createEmptyUserData(createEmptyUser());
     const businessId = initialUserData.currentBusinessId;
     const { page } = renderPage({ userData: initialUserData });
 

@@ -194,6 +194,7 @@ import { migrate_v189_to_v190 } from "@db/migrations/v190_remove_hidden_fundings
 import { migrate_v190_to_v191 } from "@db/migrations/v191_rotate_new_kms_keys";
 import { migrate_v191_to_v192 } from "@db/migrations/v192_fix_confirmation_email_sent_typo";
 import { migrate_v192_to_v193 } from "@db/migrations/v193_rotate_stranded_legacy_kms_fields";
+import { migrate_v193_to_v194 } from "@db/migrations/v194_remove_ab_experience";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
@@ -392,6 +393,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v190_to_v191,
   migrate_v191_to_v192,
   migrate_v192_to_v193,
+  migrate_v193_to_v194,
 ];
 
-export { generatev193UserData as CURRENT_GENERATOR } from "@db/migrations/v193_rotate_stranded_legacy_kms_fields";
+export { generatev194UserData as CURRENT_GENERATOR } from "@db/migrations/v194_remove_ab_experience";

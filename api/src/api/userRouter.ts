@@ -17,7 +17,6 @@ import {
 import { encryptFieldsFactory } from "@domain/user/encryptFieldsFactory";
 import type { LogWriterType } from "@libs/logWriter";
 import { NameAvailability } from "@shared/businessNameSearch";
-import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { determineIfNexusDbaNameNeeded } from "@shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
@@ -447,7 +446,6 @@ export const userRouterFactory = (
       receiveNewsletter: true,
       userTesting: true,
       receiveUpdatesAndReminders: true,
-      abExperience: decideABExperience(),
       accountCreationSource: "Test Source",
       contactSharingWithAccountCreationPartner: true,
     });

@@ -8,13 +8,11 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
-  ABExperience,
   BusinessPersona,
   einTaskId,
   generateBusiness,
   generateMunicipality,
   generateProfileData,
-  generateUser,
   generateUserDataForBusiness,
   OperatingPhases,
   ProfileData,
@@ -44,14 +42,12 @@ export const renderPage = ({
   business,
   isAuthenticated,
   setShowNeedsAccountModal,
-  abExperience,
 }: {
   municipalities?: Municipality[];
   business?: Business;
   isAuthenticated?: IsAuthenticated;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setShowNeedsAccountModal?: jest.Mock<any, any, any>;
-  abExperience?: ABExperience;
 }): void => {
   const genericTown = generateMunicipality({ displayName: "GenericTown" });
   const profileDataMunicipality = business && business.profileData.municipality;
@@ -71,11 +67,7 @@ export const renderPage = ({
       }),
     });
 
-  const userData = abExperience
-    ? generateUserDataForBusiness(initialBusiness, {
-        user: generateUser({ id: initialBusiness.userId, abExperience }),
-      })
-    : generateUserDataForBusiness(initialBusiness);
+  const userData = generateUserDataForBusiness(initialBusiness);
 
   render(
     withNeedsAccountContext(
