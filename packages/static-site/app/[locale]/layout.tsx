@@ -5,6 +5,7 @@
  * injects NJWDS assets, and builds localized metadata.
  */
 
+import "@/app/footer.css";
 import "@/app/funding.css";
 import "@/app/globals.css";
 import "@/app/header.css";
@@ -188,6 +189,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
           <main id={messages.layout.mainContentId}>{children}</main>
           <SiteFooter
             content={messages.layout.footer}
+            feedbackAriaLabel={messages.layout.feedbackAriaLabel}
             mainContentId={messages.layout.mainContentId}
           />
           <IdentifierSection content={messages.layout.identifier} />

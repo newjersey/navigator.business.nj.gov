@@ -276,6 +276,8 @@ export interface LayoutContent {
   readonly skipNavigationLabel: string;
   /** Element ID used for main-content anchor navigation. */
   readonly mainContentId: string;
+  /** Accessible name for the landmark wrapping the feedback widget. */
+  readonly feedbackAriaLabel: string;
   /** Banner section content. */
   readonly banner: LayoutBannerContent;
   /** Header section content. */
@@ -395,18 +397,6 @@ export interface BroughtToYouByContent {
 }
 
 /**
- * Localized content for the feedback bar.
- */
-export interface FeedbackBarContent {
-  /** Question text displayed to the user. */
-  readonly question: string;
-  /** Label for the affirmative button. */
-  readonly yesLabel: string;
-  /** Label for the negative button. */
-  readonly noLabel: string;
-}
-
-/**
  * All localized content needed to render the landing page.
  */
 export interface LandingPageContent {
@@ -422,8 +412,6 @@ export interface LandingPageContent {
   readonly support: SupportSectionContent;
   /** Brought to You By section content. */
   readonly broughtToYouBy: BroughtToYouByContent;
-  /** Feedback bar content. */
-  readonly feedbackBar: FeedbackBarContent;
 }
 
 /**
