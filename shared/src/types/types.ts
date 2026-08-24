@@ -1,6 +1,6 @@
 import type { Reducer } from "react";
 import { BusinessUser } from "../businessUser";
-import { getMergedConfig } from "../contexts/configContext";
+import { getMergedConfig } from "../contexts";
 import { EmergencyTripPermitApplicationInfo } from "../emergencyTripPermit";
 import {
   FieldsForErrorHandling,
@@ -25,7 +25,8 @@ export type ProfileError =
   | "REQUIRED_ESSENTIAL_QUESTION"
   | "REQUIRED_EXISTING_BUSINESS"
   | "REQUIRED_FOREIGN_BUSINESS_TYPE"
-  | "REQUIRED_REVIEW_INFO_BELOW";
+  | "REQUIRED_REVIEW_INFO_BELOW"
+  | "REQUIRED_SELECT_INTENT";
 
 export type OnboardingErrors = ProfileError;
 

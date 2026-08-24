@@ -6,6 +6,7 @@ import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelD
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { FlowType, OnboardingErrors } from "@businessnjgovnavigator/shared/types";
 import { ReactNode } from "react";
+import { StartingBusinessSwitchPage } from "@/components/data-fields/StartingBusinessSwitchPage";
 
 type OnboardingPage = {
   component: ReactNode;
@@ -38,6 +39,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
   STARTING: {
     pages: [
       {
+        name: "persona-page",
         component: (
           <>
             <BusinessPersonaQuestion<OnboardingErrors>
@@ -49,16 +51,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
       },
       {
         name: "industry-page",
-        component: (
-          <>
-            <FieldLabelOnboarding fieldName="industryId" />
-            <Industry<OnboardingErrors>
-              essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
-              errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]}
-              onboardingFieldLabel
-            />
-          </>
-        ),
+        component: <StartingBusinessSwitchPage />,
       },
       {
         name: "industry-page-without-nonprofit",

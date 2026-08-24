@@ -21,6 +21,7 @@ export type BusinessUser = {
   readonly phoneNumber?: string;
   readonly myNJUserKey?: string;
   readonly intercomHash?: string;
+  readonly onboardedAsLearningUser?: boolean;
 };
 
 export const emptyBusinessUser: BusinessUser = {
@@ -36,10 +37,14 @@ export const emptyBusinessUser: BusinessUser = {
   phoneNumber: undefined,
   myNJUserKey: undefined,
   intercomHash: undefined,
+  onboardedAsLearningUser: undefined,
 };
 
-export const createEmptyUser = (): BusinessUser => {
-  return { ...emptyBusinessUser };
+export const createEmptyUser = (overrides?: Partial<BusinessUser>): BusinessUser => {
+  return {
+    ...emptyBusinessUser,
+    ...overrides,
+  };
 };
 
 export type ExternalStatus = {

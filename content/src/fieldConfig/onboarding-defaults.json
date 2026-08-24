@@ -7,6 +7,16 @@
     "finalNextButtonText": "Show My Guide",
     "pageTitle": "Tell Us About Your ${Additional} Business",
     "errorTextMinimumRangeNumericField": "Must be between ${min} and ${max} digits long.",
-    "nextButtonText": "Next"
+    "nextButtonText": "Next",
+    "startingBusinessIntent": {
+      "default": {
+        "header": "What Would You Like To Do Next?",
+        "radioButtonReadyHeaderText": "I'm ready to start my business",
+        "radioButtonReadyText": "Create an account to form, register, and start your business.",
+        "radioButtonLearningHeaderText": "I want to learn more first",
+        "radioButtonLearningText": "Review our step-by-step guide to opening a business in New Jersey."
+      }
+    }
   }
+
 }
