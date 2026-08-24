@@ -565,6 +565,37 @@ collections:
                   name: errorTextMinimumRangeNumericField,
                   widget: string,
                 }
+          - label: Starting Business Intent
+            name: startingBusinessIntent
+            collapsed: true
+            widget: object
+            fields:
+              - label: Default
+                name: "default"
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: "Header", name: "header", widget: "string" }
+                  - {
+                      label: "Radio Button Ready Header Text",
+                      name: "radioButtonReadyHeaderText",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Radio Button Ready Text",
+                      name: "radioButtonReadyText",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Radio Button Learning Header Text",
+                      name: "radioButtonLearningHeaderText",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Radio Button Learning Text",
+                      name: "radioButtonLearningText",
+                      widget: "string",
+                    }
   - label: Page Footer
     name: footer
     delete: false
@@ -2826,6 +2857,7 @@ collections:
                       name: essentialQuestionAlertText,
                       widget: string,
                     }
+                  - { label: Select Intent Alert Text, name: selectIntentAlertText, widget: string }
                   - { label: Save Button Text, name: saveButtonText, widget: string }
                   - { label: Back Button Text, name: backButtonText, widget: string }
                   - { label: Info Tab Title, name: profileTabInfoTitle, widget: string }

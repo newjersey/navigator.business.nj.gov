@@ -340,4 +340,119 @@ describe("onboarding - starting a business", () => {
       expect(industryPageWithoutNonprofitQuestion).toBeDefined();
     });
   });
+
+  describe("intent selection flow", () => {
+    it("does not use intent selection page if feature flag is false", async () => {
+      process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "false";
+      const initialUserData = createEmptyUserData(createEmptyUser());
+      const { page } = renderPage({ userData: initialUserData });
+
+      page.chooseRadio("business-persona-starting");
+      await page.visitOnboardingPage(2);
+      expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
+      expect(
+        screen.getByRole("heading", {
+          name: "Industry",
+        }),
+      ).toBeInTheDocument();
+    });
+
+    it("does not use intent selection page if feature flag is true and user has myNJkey", async () => {
+      process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
+      const initialUserData = createEmptyUserData(createEmptyUser({ myNJUserKey: "my-nj-key" }));
+      const { page } = renderPage({ userData: initialUserData });
+
+      page.chooseRadio("business-persona-starting");
+      await page.visitOnboardingPage(2);
+      expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
+      expect(
+        screen.getByRole("heading", {
+          name: "Industry",
+        }),
+      ).toBeInTheDocument();
+    });
+
+    it("uses intent selection page if feature flag is true and user has no myNJkey", async () => {
+      process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
+      const initialUserData = createEmptyUserData(createEmptyUser());
+      const { page } = renderPage({ userData: initialUserData });
+
+      page.chooseRadio("business-persona-starting");
+      await page.visitOnboardingPage(2);
+      expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
+      expect(
+        screen.queryByRole("heading", {
+          name: "Industry",
+        }),
+      ).not.toBeInTheDocument();
+    });
+
+    describe("intent selection page", () => {
+      beforeEach(() => {
+        process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
+      });
+
+      it("shows error alert if you try to advance without choosing an intent", async () => {
+        const initialUserData = createEmptyUserData(createEmptyUser());
+        const { page } = renderPage({ userData: initialUserData });
+
+        page.chooseRadio("business-persona-starting");
+        await page.visitOnboardingPage(2);
+
+        expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
+        expect(screen.getByTestId("starting-ready-business")).toBeInTheDocument();
+        expect(screen.getByTestId("starting-learning-business")).toBeInTheDocument();
+        expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+
+        page.clickNext();
+        expect(screen.getByRole("alert")).toBeInTheDocument();
+      });
+
+      it("removes alert if an intent is chosen", async () => {
+        const initialUserData = createEmptyUserData(createEmptyUser());
+        const { page } = renderPage({ userData: initialUserData });
+
+        page.chooseRadio("business-persona-starting");
+        await page.visitOnboardingPage(2);
+
+        expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+
+        page.clickNext();
+        expect(screen.getByRole("alert")).toBeInTheDocument();
+
+        page.chooseRadio("starting-ready-business");
+        expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+      });
+
+      it("updates userData with learning value", async () => {
+        const initialUserData = createEmptyUserData(createEmptyUser());
+        const { page } = renderPage({ userData: initialUserData });
+
+        page.chooseRadio("business-persona-starting");
+        await page.visitOnboardingPage(2);
+
+        page.chooseRadio("starting-learning-business");
+
+        page.clickNext();
+        await waitFor(() => {
+          expect(currentUserData().user.onboardedAsLearningUser).toEqual(true);
+        });
+      });
+
+      it("updates userData with starting value", async () => {
+        const initialUserData = createEmptyUserData(createEmptyUser());
+        const { page } = renderPage({ userData: initialUserData });
+
+        page.chooseRadio("business-persona-starting");
+        await page.visitOnboardingPage(2);
+
+        page.chooseRadio("starting-ready-business");
+
+        page.clickNext();
+        await waitFor(() => {
+          expect(currentUserData().user.onboardedAsLearningUser).toEqual(false);
+        });
+      });
+    });
+  });
 });

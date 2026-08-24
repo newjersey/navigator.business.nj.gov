@@ -1,3 +1,11 @@
+@use "../sass-files/variables";
+
 .margin-left-3ch {
   margin-left: 1.9rem;
+}
+
+.max-width-half {
+  @media (min-width: variables.$sm) {
+    max-width: 50%;
+  }
 }
