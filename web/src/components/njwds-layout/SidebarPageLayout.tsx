@@ -13,6 +13,7 @@ export interface SidebarPageLayoutProps {
   belowBoxComponent?: React.ReactNode;
   titleOverColumns?: React.ReactNode;
   nonWrappingLeftColumn?: boolean;
+  showBackButton?: boolean;
 }
 
 export const SidebarPageLayout = ({
@@ -24,6 +25,7 @@ export const SidebarPageLayout = ({
   belowBoxComponent,
   titleOverColumns,
   nonWrappingLeftColumn,
+  showBackButton = true,
 }: SidebarPageLayoutProps): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const { Config } = useConfig();
@@ -32,7 +34,7 @@ export const SidebarPageLayout = ({
     <>
       <div className={`usa-section padding-top-0 desktop:padding-top-6`}>
         <div className="grid-container-widescreen desktop:padding-x-7">
-          {isLargeScreen && (
+          {showBackButton && isLargeScreen && (
             <>
               <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
               {titleOverColumns}
@@ -50,7 +52,7 @@ export const SidebarPageLayout = ({
               </nav>
             )}
             <div className={nonWrappingLeftColumn ? "fg1" : "desktop:grid-col-9"}>
-              {!isLargeScreen && (
+              {showBackButton && !isLargeScreen && (
                 <div>
                   <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
                   {titleOverColumns}
