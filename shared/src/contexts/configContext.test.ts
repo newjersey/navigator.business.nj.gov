@@ -10,6 +10,10 @@ describe("getMergedConfig", () => {
     expect(config.businessStructurePrompt.buttonText).toBeDefined();
     expect(config.employerRates.quarterOneLabel).toBe("Jan-Mar.");
     expect(config.lockedTasksPrompt.buttonText).toBe("Create an Account");
+    expect(config.learnPages.steps[0]).toEqual({
+      id: "business-structure",
+      name: "Select Your Business Structure",
+    });
   });
 
   it("returns an independent configuration for each call", () => {

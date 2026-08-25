@@ -43,6 +43,7 @@ import GovernmentContracting from "../../../content/src/fieldConfig/government-c
 import HeaderDefaults from "../../../content/src/fieldConfig/header-defaults.json";
 import HousingRegistrationSearchTask from "../../../content/src/fieldConfig/housing-registration.json";
 import LandingPage from "../../../content/src/fieldConfig/landing-page.json";
+import LearnPages from "../../../content/src/fieldConfig/learn-pages.json";
 import LegalMessageDefaults from "../../../content/src/fieldConfig/legal-message-defaults.json";
 import LicenseSearchTask from "../../../content/src/fieldConfig/license-search-task.json";
 import LockedTasksPrompt from "../../../content/src/fieldConfig/locked-tasks-prompt.json";
@@ -157,6 +158,7 @@ const merged = JSON.parse(
       CheckAccountEmailPage,
       LicenseSearchTask,
       LandingPage,
+      LearnPages,
       FundingsOnboarding,
       TaxClearanceCertificateStep1,
       TaxClearanceCertificateStep2,
@@ -245,6 +247,7 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof EnvironmentQuestionnaire &
   typeof LicenseSearchTask &
   typeof LandingPage &
+  typeof LearnPages &
   typeof ManageBusinessVehicles &
   typeof FundingsOnboarding &
   typeof TaxClearanceCertificateStep1 &
@@ -333,6 +336,7 @@ export const getMergedConfig = (): ConfigType => {
     CheckAccountEmailPage,
     LicenseSearchTask,
     LandingPage,
+    LearnPages,
     FundingsOnboarding,
     FundingsOnboarding,
     TaxClearanceCertificateStep1,
