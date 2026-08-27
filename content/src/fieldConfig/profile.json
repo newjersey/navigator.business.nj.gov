@@ -485,6 +485,7 @@
       "successTextBody": "Based on your answers, you may see updates to your Business.NJ.gov account experience.",
       "escapeModalQuestion": "Would you like to save your changes before leaving?",
       "essentialQuestionAlertText": "Complete all required fields.",
+      "selectIntentAlertText": "Please make a selection.",
       "typesOfNotificationsSubText": "Select the types of updates that matter most to your business.",
       "formationDocFileTitle": "Official Formation Document",
       "filterCertificationsAndFundingSubText": "Answer a few questions to find State certifications and funding programs in your For You section.",

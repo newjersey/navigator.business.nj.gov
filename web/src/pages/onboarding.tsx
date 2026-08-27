@@ -103,6 +103,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     REQUIRED_EXISTING_BUSINESS: configFields.businessPersona.default.errorTextRequired,
     REQUIRED_FOREIGN_BUSINESS_TYPE: configFields.foreignBusinessTypeIds.default.errorTextRequired,
     REQUIRED_REVIEW_INFO_BELOW: Config.profileDefaults.default.errorDefaultTextBody,
+    REQUIRED_SELECT_INTENT: Config.profileDefaults.default.selectIntentAlertText,
   };
 
   const {

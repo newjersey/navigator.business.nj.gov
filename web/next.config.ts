@@ -45,6 +45,8 @@ const nextConfig: NextConfig = {
       process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH ?? "false",
     FEATURE_EMPLOYER_RATES: process.env.FEATURE_EMPLOYER_RATES ?? "false",
     FEATURE_NAICS_INDUSTRY_DETECTION: process.env.FEATURE_NAICS_INDUSTRY_DETECTION ?? "false",
+    FEATURE_ENABLE_INTENT_SELECTION_FLOW:
+      process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW ?? "false",
   },
   staticPageGenerationTimeout: 120,
   experimental: {
