@@ -197,7 +197,7 @@ ul.usa-card-group {
 }
 
 div.usa-card__container {
-  margin-inline: 0;
+  margin-inline: 0.75rem;
 }
 
 /* The header's full-width bottom border already divides the header from the
