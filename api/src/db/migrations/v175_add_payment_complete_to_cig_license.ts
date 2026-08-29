@@ -1,30 +1,34 @@
-import { randomInt } from "@shared/intHelpers";
 import { v174Business, v174UserData } from "@db/migrations/v174_add_public_works_contractor";
+import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v174_to_v175 = (userData: v174UserData): v175UserData => {
-  return {
-    ...userData,
-    businesses: Object.fromEntries(
-      Object.values(userData.businesses)
-        .map((business: v174Business) => migrate_v174Business_to_v175Business(business))
-        .map((currBusiness: v175Business) => [currBusiness.id, currBusiness]),
-    ),
-    version: 175,
-  };
+  const updatedUserData = structuredClone(userData) as v175UserData;
+  const updatedBusinesss = Object.fromEntries(
+    Object.values(userData.businesses)
+      .map((business: v174Business) => migrate_v174Business_to_v175Business(business))
+      .map((currBusiness: v175Business) => [currBusiness.id, currBusiness]),
+  );
+
+  updatedUserData.businesses = updatedBusinesss;
+  updatedUserData.version = 175;
+
+  return updatedUserData;
 };
 
 const migrate_v174Business_to_v175Business = (business: v174Business): v175Business => {
-  return {
-    ...business,
-    version: 175,
-    cigaretteLicenseData: {
-      ...business.cigaretteLicenseData,
-      paymentInfo: {
-        ...business.cigaretteLicenseData?.paymentInfo,
-        paymentComplete: false,
-      },
-    },
-  };
+  const updatedBusiness = structuredClone(business) as v175Business;
+
+  const updatedCigaretteLicenseData = structuredClone(
+    business.cigaretteLicenseData,
+  ) as v175CigaretteLicenseData;
+
+  if (updatedCigaretteLicenseData?.paymentInfo)
+    updatedCigaretteLicenseData.paymentInfo.paymentComplete = false;
+
+  updatedBusiness.version = 175;
+  updatedBusiness.cigaretteLicenseData = updatedCigaretteLicenseData;
+
+  return updatedBusiness;
 };
 
 export interface v175IndustrySpecificData {
