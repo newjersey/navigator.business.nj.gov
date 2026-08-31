@@ -8,6 +8,9 @@ export const NavBarDesktopQuickLinks = (): ReactElement => {
   const { Config } = useConfig();
 
   const sharedMargins = "margin-right-3";
+  // Since migrating the static site off of Webflow,
+  // search is deprecated until we implement a fresh solution.
+  const SHOW_SEARCH = false;
 
   return (
     <div className={"display-flex flex-row flex-align-center"}>
@@ -51,15 +54,17 @@ export const NavBarDesktopQuickLinks = (): ReactElement => {
         </UnStyledButton>
       </div>
 
-      <div className={`${sharedMargins} nav-bar-icon-search-outline`}>
-        <UnStyledButton
-          onClick={(): void => openInNewTab(Config.navigationQuickLinks.navBarSearchLink)}
-          dataTestid={"navbar-search-icon"}
-          ariaLabel={"search-icon"}
-        >
-          <Icon iconName="search" />
-        </UnStyledButton>
-      </div>
+      {SHOW_SEARCH && (
+        <div className={`${sharedMargins} nav-bar-icon-search-outline`}>
+          <UnStyledButton
+            onClick={(): void => openInNewTab(Config.navigationQuickLinks.navBarSearchLink)}
+            dataTestid={"navbar-search-icon"}
+            ariaLabel={"search-icon"}
+          >
+            <Icon iconName="search" />
+          </UnStyledButton>
+        </div>
+      )}
     </div>
   );
 };

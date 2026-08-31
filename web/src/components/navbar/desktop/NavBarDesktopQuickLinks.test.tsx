@@ -18,7 +18,11 @@ describe("<NavBarDesktopQuickLinks />", () => {
     expect(screen.getByText(Config.navigationQuickLinks.navBarOperateText)).toBeInTheDocument();
     expect(screen.getByText(Config.navigationQuickLinks.navBarGrowText)).toBeInTheDocument();
     expect(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)).toBeInTheDocument();
-    expect(screen.getByTestId("navbar-search-icon")).toBeInTheDocument();
+  });
+
+  it("does not render the search icon while search is hidden", () => {
+    render(<NavBarDesktopQuickLinks />);
+    expect(screen.queryByTestId("navbar-search-icon")).not.toBeInTheDocument();
   });
 
   it("renders the plan quick link and redirects correctly", async () => {
@@ -60,17 +64,6 @@ describe("<NavBarDesktopQuickLinks />", () => {
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarUpdatesLink,
-      "_blank",
-      "noopener noreferrer",
-    );
-  });
-
-  it("renders the search quick link and redirects correctly", async () => {
-    render(<NavBarDesktopQuickLinks />);
-    fireEvent.click(screen.getByTestId("navbar-search-icon"));
-
-    expect(window.open).toHaveBeenCalledWith(
-      Config.navigationQuickLinks.navBarSearchLink,
       "_blank",
       "noopener noreferrer",
     );
