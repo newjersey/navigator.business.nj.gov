@@ -39,6 +39,7 @@ env: &integration-env
   AWS_SECRET_ACCESS_KEY: local
   DEV_ONLY_UNLINK_TAX_ID: "false"
   DISABLE_GTM: "true"
+  CSP_MODE: "report-only"
   FEATURE_BUSINESS_FLP: "false"
   FEATURE_CIGARETTE_LICENSE: "true"
   FEATURE_LOGIN_PAGE: "true"
