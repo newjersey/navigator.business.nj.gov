@@ -27,6 +27,10 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
 
   const { Config } = useConfig();
 
+  // Since migrating the static site off of Webflow,
+  // search is deprecated until we implement a fresh solution.
+  const SHOW_SEARCH = false;
+
   return (
     <>
       <button
@@ -74,8 +78,12 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
               <Icon className="font-sans-xl" iconName="close" />
             </button>
 
-            <Search />
-            <hr className="margin-0 margin-x-3 hr-2px" key="middle-break" />
+            {SHOW_SEARCH && (
+              <>
+                <Search />
+                <hr className="margin-0 margin-x-3 hr-2px" key="middle-break" />
+              </>
+            )}
             <Plan />
             <Start />
             <Operate />

@@ -47,7 +47,6 @@ describe("<NavBarDesktop />", () => {
     expect(screen.getByText(Config.navigationQuickLinks.navBarOperateText)).toBeInTheDocument();
     expect(screen.getByText(Config.navigationQuickLinks.navBarGrowText)).toBeInTheDocument();
     expect(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)).toBeInTheDocument();
-    expect(screen.getByTestId("navbar-search-icon")).toBeInTheDocument();
   };
 
   const quickLinksDoNotExist = (): void => {
