@@ -43,6 +43,7 @@ import {
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import { loadAllTasks } from "@businessnjgovnavigator/shared/static/loadTasks";
 import type { License } from "@businessnjgovnavigator/content-types";
+import { validateNoDateObjectsInFrontmatter } from "./validateFrontmatterDates";
 
 // ============================================================================
 // DOMAIN TYPES
@@ -857,6 +858,11 @@ export const main = (): void => {
 
   // Create configuration
   const config = createBuildConfig();
+
+  // Fail fast if any Markdown frontmatter has an unquoted date that YAML
+  // resolved to a native Date (see AB#17994), rather than letting it
+  // surface much later as a downstream serialization failure.
+  validateNoDateObjectsInFrontmatter(path.join(config.rootDir, "src"));
 
   // Execute build (content parsing handled by shared loaders)
   const result = executeBuild(fileSystem, config);

@@ -5,6 +5,26 @@ on:
     types: ["opened", "synchronize"]
 
 jobs:
+  validate-frontmatter-dates:
+    runs-on: ubuntu-latest
+    if: github.base_ref == 'content-repo'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+
+      - name: Install Dependencies
+        run: yarn install --immutable --mode skip-build
+
+      - name: Check for unquoted dates in content frontmatter
+        run: yarn workspace @businessnjgovnavigator/content validate-frontmatter-dates
+
   spellcheck:
     runs-on: ubuntu-latest
     if: github.base_ref == 'content-repo'

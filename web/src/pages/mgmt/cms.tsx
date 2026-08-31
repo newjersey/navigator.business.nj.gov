@@ -7,6 +7,7 @@ import { default as MiniCallout } from "@/lib/cms/editors/mini-callout";
 import Note from "@/lib/cms/editors/note";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { WriteOnceReadOnlyNoSpaceControl } from "@/lib/cms/fields/writeoncereadonlynospacefield";
+import { recentsFrontmatterFormat } from "@/lib/cms/formatters/recentsFrontmatterFormat";
 import { applyTheme } from "@/lib/cms/helpers/applyTheme";
 import CannabisEligibilityModalPreview from "@/lib/cms/previews/CannabisEligibilityModalPreview";
 import CannabisLicensePreview from "@/lib/cms/previews/CannabisLicensePreview";
@@ -110,6 +111,11 @@ const CMS = dynamic(
             lineWidth: -1,
           }),
       });
+      // Parses/serializes frontmatter with the same gray-matter engine the site's
+      // build-time content loader uses, so this collection can't produce an
+      // unquoted date-like scalar that the loader would read back as a `Date`
+      // and fail Next.js's static export (AB#17994).
+      CMS.registerCustomFormat("recents-frontmatter", "md", recentsFrontmatterFormat);
 
       registerPreview(CMS, "tasks", TaskPreview);
       registerPreview(CMS, "license-tasks", TaskPreview);
