@@ -10,6 +10,7 @@
     "clean": "rimraf lib",
     "dev": "yarn build",
     "test": "vitest run",
+    "validate-frontmatter-dates": "tsx -r tsconfig-paths/register ./validateFrontmatterDates.ts",
     "prettier": "prettier --write . --ignore-path=../.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=../.eslintignore",
     "spellcheck": "cspell '**/*.md' '**/*.json' '*.ts' '!*.test.ts' --config ../cspell.json --no-progress"
