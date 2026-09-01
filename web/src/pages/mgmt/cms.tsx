@@ -7,6 +7,7 @@ import { default as MiniCallout } from "@/lib/cms/editors/mini-callout";
 import Note from "@/lib/cms/editors/note";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { WriteOnceReadOnlyNoSpaceControl } from "@/lib/cms/fields/writeoncereadonlynospacefield";
+import { recentsFrontmatterFormat } from "@/lib/cms/formatters/recentsFrontmatterFormat";
 import { applyTheme } from "@/lib/cms/helpers/applyTheme";
 import CannabisEligibilityModalPreview from "@/lib/cms/previews/CannabisEligibilityModalPreview";
 import CannabisLicensePreview from "@/lib/cms/previews/CannabisLicensePreview";
@@ -110,6 +111,9 @@ const CMS = dynamic(
             lineWidth: -1,
           }),
       });
+      // Keeps the Recents collection's frontmatter parsing/serialization
+      // consistent with the build-time content loader that reads it back.
+      CMS.registerCustomFormat("recents-frontmatter", "md", recentsFrontmatterFormat);
 
       registerPreview(CMS, "tasks", TaskPreview);
       registerPreview(CMS, "license-tasks", TaskPreview);

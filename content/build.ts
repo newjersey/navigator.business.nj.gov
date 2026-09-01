@@ -43,6 +43,7 @@ import {
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import { loadAllTasks } from "@businessnjgovnavigator/shared/static/loadTasks";
 import type { License } from "@businessnjgovnavigator/content-types";
+import { validateNoDateObjectsInFrontmatter } from "./validateFrontmatterDates";
 
 // ============================================================================
 // DOMAIN TYPES
@@ -857,6 +858,11 @@ export const main = (): void => {
 
   // Create configuration
   const config = createBuildConfig();
+
+  // Fail fast on frontmatter that YAML resolved to a native Date instead
+  // of a string, rather than letting it surface later as a serialization
+  // failure downstream.
+  validateNoDateObjectsInFrontmatter(path.join(config.rootDir, "src"));
 
   // Execute build (content parsing handled by shared loaders)
   const result = executeBuild(fileSystem, config);

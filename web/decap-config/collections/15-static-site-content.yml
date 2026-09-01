@@ -98,6 +98,7 @@ collections:
   - name: "recents"
     label: "Recents"
     folder: "content/src/recents"
+    format: "recents-frontmatter"
     summary: "{{name}}"
     identifier_field: "slug"
     slug: "{{slug}}"
