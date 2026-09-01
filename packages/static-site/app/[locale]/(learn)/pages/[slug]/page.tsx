@@ -3,6 +3,10 @@ import { notFound } from "next/navigation";
 import { PageSwitchComponent } from "@/components/learn/PageSwitchComponent";
 import { resolvePageTitle } from "@/components/learn/resolvePageTitle";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
+import {
+  HOUSING_DEVELOPER_RESOURCES_SLUG,
+  isHousingDeveloperResourcesEnabled,
+} from "@/domain/content/housingDeveloperResourcesFlag";
 import { loadPages } from "@/domain/content/loadContent";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
 import { type AppLocale, hasAppLocale, resolveAppLocale } from "@/domain/i18n/locales";
@@ -19,6 +23,16 @@ interface Props {
 }
 
 /**
+ * Checks whether a slug is disabled by its own feature flag.
+ *
+ * A slug can exist in content but still be unreachable when its flag is off
+ * — used to 404 the direct route even though `dynamicParams` would otherwise
+ * let Next.js render an un-generated slug on demand.
+ */
+const isSlugFlaggedOff = (slug: string): boolean =>
+  slug === HOUSING_DEVELOPER_RESOURCES_SLUG && !isHousingDeveloperResourcesEnabled();
+
+/**
  * Generates branded, descriptive metadata for a content page.
  *
  * @param props Route props provided by Next.js.
@@ -28,6 +42,10 @@ interface Props {
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { locale, slug } = await params;
   const pathnameWithoutLocale = `/pages/${slug}`;
+
+  if (isSlugFlaggedOff(slug)) {
+    return { alternates: buildAlternateLanguages({ pathnameWithoutLocale }) };
+  }
 
   const page = loadPages().find((item) => item.slug === slug);
   if (!page) {
@@ -52,6 +70,10 @@ const ContentPage = async ({ params }: Props) => {
   const { locale, slug } = await params;
 
   if (!hasAppLocale(locale)) {
+    notFound();
+  }
+
+  if (isSlugFlaggedOff(slug)) {
     notFound();
   }
 

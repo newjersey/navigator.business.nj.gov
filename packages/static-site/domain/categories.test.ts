@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { PageItem } from "@/domain/content/types";
-import { buildCategoryHierarchy } from "./categories";
+import { buildCategoryHierarchy, filterFlaggedPages } from "./categories";
 
 const page = (slug: string, category?: string): PageItem => ({
   name: slug,
@@ -53,5 +53,34 @@ describe("buildCategoryHierarchy", () => {
     ]);
 
     expect(Object.keys(result)).toEqual(["plan", "start", "operate", "grow"]);
+  });
+});
+
+describe("filterFlaggedPages", () => {
+  it("keeps the housing developer resources page when the flag is enabled", () => {
+    const pages = [page("funding", "grow"), page("housing-developer-resources", "grow")];
+
+    const result = filterFlaggedPages(pages, { housingDeveloperResourcesEnabled: true });
+
+    expect(result.map((it) => it.slug)).toEqual(["funding", "housing-developer-resources"]);
+  });
+
+  it("removes the housing developer resources page when the flag is disabled", () => {
+    const pages = [page("funding", "grow"), page("housing-developer-resources", "grow")];
+
+    const result = filterFlaggedPages(pages, { housingDeveloperResourcesEnabled: false });
+
+    expect(result.map((it) => it.slug)).toEqual(["funding"]);
+  });
+
+  it("leaves every other page untouched when the flag is disabled", () => {
+    const pages = [
+      page("create-a-business-plan", "plan"),
+      page("housing-developer-resources", "grow"),
+    ];
+
+    const result = filterFlaggedPages(pages, { housingDeveloperResourcesEnabled: false });
+
+    expect(result).toEqual([page("create-a-business-plan", "plan")]);
   });
 });
