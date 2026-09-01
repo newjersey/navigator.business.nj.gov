@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import ContentPage, { generateMetadata, generateStaticParams } from "./page";
 
@@ -27,6 +27,12 @@ vi.mock("@/domain/content/loadContent", () => ({
       category: "grow",
       "sub-heading-text": "Whether you're looking for startup capital...",
     },
+    {
+      slug: "housing-developer-resources",
+      name: "Housing Developer Resources",
+      category: "grow",
+      "sub-heading-text": "Explore state funding programs available to housing developers...",
+    },
   ],
   loadIndustries: () => [],
   loadFundings: () => [],
@@ -46,6 +52,10 @@ describe("generateStaticParams", () => {
 });
 
 describe("generateMetadata", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
   it("brands the title with the page's own name and its sub-heading as the description", async () => {
     const metadata = await generateMetadata({
       params: Promise.resolve({ locale: "en-US", slug: "create-a-business-plan" }),
@@ -62,6 +72,19 @@ describe("generateMetadata", () => {
 
     expect(metadata.title).toEqual({ absolute: "Funding | Business.NJ.gov" });
     expect(metadata.description).toBe("Whether you're looking for startup capital...");
+  });
+
+  it("uses the localized message title for the housing developer resources page, not the English-only frontmatter name", async () => {
+    vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "true");
+
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ locale: "en-US", slug: "housing-developer-resources" }),
+    });
+
+    expect(metadata.title).toEqual({ absolute: "Housing Developer Resources | Business.NJ.gov" });
+    expect(metadata.description).toBe(
+      "Explore state funding programs available to housing developers...",
+    );
   });
 
   it("falls back to alternates-only metadata for an unknown slug", async () => {
@@ -119,5 +142,57 @@ describe("ContentPage — funding slug", () => {
       </NextIntlClientProvider>,
     );
     expect(screen.getByRole("heading", { level: 1, name: "Funding" })).toBeInTheDocument();
+  });
+});
+
+describe("ContentPage — housing-developer-resources slug", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it("renders FundingPageContent with the housing developer resources title", async () => {
+    vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "true");
+
+    const page = await ContentPage({
+      params: Promise.resolve({
+        locale: "en-US",
+        slug: "housing-developer-resources",
+      }),
+    });
+    render(
+      <NextIntlClientProvider locale="en-US" messages={getApplicationMessages({ locale: "en-US" })}>
+        {page}
+      </NextIntlClientProvider>,
+    );
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Housing Developer Resources" }),
+    ).toBeInTheDocument();
+  });
+});
+
+describe("ContentPage — housing-developer-resources slug, flag disabled", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it("404s the direct route even though the slug exists in content", async () => {
+    vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "false");
+
+    await expect(
+      ContentPage({
+        params: Promise.resolve({ locale: "en-US", slug: "housing-developer-resources" }),
+      }),
+    ).rejects.toThrow();
+  });
+
+  it("falls back to alternates-only metadata instead of the real page title", async () => {
+    vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "false");
+
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ locale: "en-US", slug: "housing-developer-resources" }),
+    });
+
+    expect(metadata.title).toBeUndefined();
+    expect(metadata.alternates?.canonical).toBe("/pages/housing-developer-resources");
   });
 });

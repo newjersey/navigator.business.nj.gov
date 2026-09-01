@@ -108,4 +108,6 @@ export type Funding = {
   readonly maxEmployeesRequired: number | undefined;
   /** Whether this funding is a priority/featured opportunity. */
   readonly priority: boolean | undefined;
+  /** Whether this funding should appear on the Housing Developer Resources page. */
+  readonly housingDeveloperResource: boolean | undefined;
 };

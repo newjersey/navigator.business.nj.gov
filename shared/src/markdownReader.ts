@@ -236,6 +236,7 @@ type FundingGrayMatter = {
   priority: boolean | undefined;
   minEmployeesRequired: number | undefined;
   maxEmployeesRequired: number | undefined;
+  housingDeveloperResource: boolean | undefined;
 };
 
 type CertificationGrayMatter = {

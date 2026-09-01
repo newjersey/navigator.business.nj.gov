@@ -27,6 +27,17 @@ describe("resolvePageTitle", () => {
     );
   });
 
+  it("uses the locale-specific message title for the housing developer resources page", () => {
+    const page = loadPageBySlug("housing-developer-resources");
+
+    expect(resolvePageTitle({ page, messages: getApplicationMessages({ locale: "en-US" }) })).toBe(
+      "Housing Developer Resources",
+    );
+    expect(resolvePageTitle({ page, messages: getApplicationMessages({ locale: "es-US" }) })).toBe(
+      "Recursos para Desarrolladores de Vivienda",
+    );
+  });
+
   it("falls back to the page's own name for every other slug", () => {
     const page = loadPageBySlug("government-contracting");
 

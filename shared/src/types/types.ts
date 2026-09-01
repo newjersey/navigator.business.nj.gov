@@ -127,6 +127,7 @@ export type Funding = {
   minEmployeesRequired: number | undefined;
   maxEmployeesRequired: number | undefined;
   priority: boolean | undefined;
+  housingDeveloperResource: boolean | undefined;
 };
 
 export type Certification = {
