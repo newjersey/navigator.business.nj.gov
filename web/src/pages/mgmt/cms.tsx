@@ -111,10 +111,8 @@ const CMS = dynamic(
             lineWidth: -1,
           }),
       });
-      // Parses/serializes frontmatter with the same gray-matter engine the site's
-      // build-time content loader uses, so this collection can't produce an
-      // unquoted date-like scalar that the loader would read back as a `Date`
-      // and fail Next.js's static export (AB#17994).
+      // Keeps the Recents collection's frontmatter parsing/serialization
+      // consistent with the build-time content loader that reads it back.
       CMS.registerCustomFormat("recents-frontmatter", "md", recentsFrontmatterFormat);
 
       registerPreview(CMS, "tasks", TaskPreview);

@@ -859,9 +859,9 @@ export const main = (): void => {
   // Create configuration
   const config = createBuildConfig();
 
-  // Fail fast if any Markdown frontmatter has an unquoted date that YAML
-  // resolved to a native Date (see AB#17994), rather than letting it
-  // surface much later as a downstream serialization failure.
+  // Fail fast on frontmatter that YAML resolved to a native Date instead
+  // of a string, rather than letting it surface later as a serialization
+  // failure downstream.
   validateNoDateObjectsInFrontmatter(path.join(config.rootDir, "src"));
 
   // Execute build (content parsing handled by shared loaders)

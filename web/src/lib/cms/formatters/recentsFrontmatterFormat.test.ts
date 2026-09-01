@@ -13,14 +13,11 @@ describe("recentsFrontmatterFormat", () => {
         date: "2025-09-03",
       });
 
-      // js-yaml quotes the value (style may be single or double) precisely
-      // because it would otherwise resolve to a timestamp; that quoting is
-      // the fix for AB#17994.
+      // js-yaml quotes the value (style may be single or double) because
+      // it would otherwise resolve to a timestamp.
       expect(file).toMatch(/date: ["']2025-09-03["']/);
 
-      // Read the output back with the exact parser the site's build-time
-      // content loader uses (`loadAllRecents`), to guard against the bug
-      // this formatter exists to prevent.
+      // Read it back with the same parser the build-time content loader uses.
       const { data } = matter(file);
       expect(typeof data.date).toBe("string");
       expect(data.date).not.toBeInstanceOf(Date);
