@@ -1,3 +1,19 @@
+# [2026.18.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.17.2...v2026.18.0) (2026-09-02)
+
+
+### Bug Fixes
+
+* **deps:** update jest ([fcb7300](https://github.com/newjersey/navigator.business.nj.gov/commit/fcb73000d824a70b5fe135dc568a3169b7cf8a97))
+* throw errors while updating businesses and add an alarm ([85a56ff](https://github.com/newjersey/navigator.business.nj.gov/commit/85a56ff9bcf45faf168541084356a461a390fed1))
+
+
+### Features
+
+* [AB#17904](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17904) add feedback widget to static site ([98d2443](https://github.com/newjersey/navigator.business.nj.gov/commit/98d2443d65744b4d41f43c31c44bf62f127d6cff))
+* [AB#17928](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17928) add register your business button ([cfda287](https://github.com/newjersey/navigator.business.nj.gov/commit/cfda28745629b92841424bf5a7e85d654ea3c6a1))
+* [AB#17963](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17963) remove step numbers from onboarding pages ([bca29d8](https://github.com/newjersey/navigator.business.nj.gov/commit/bca29d8af0b18d3003d1a5b2928b8fc7d919c731))
+* Claude Code CloudWatch log analysis skill [ci skip] ([8429015](https://github.com/newjersey/navigator.business.nj.gov/commit/842901503db6f2abe271ad453a8c9bfc685c96aa))
+
 ## [2026.17.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.17.1...v2026.17.2) (2026-08-11)
 
 
