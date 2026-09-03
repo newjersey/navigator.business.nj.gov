@@ -245,6 +245,13 @@ collections:
         name: "priority"
         widget: "boolean"
         required: false
+      - label: "Show on Housing Developer Resources page"
+        name: "housingDeveloperResource"
+        widget: "boolean"
+        required: false
+        hint:
+          "Also displays this funding opportunity as a program card on
+          business.nj.gov/housing-developer-resources"
 
   - name: "archived-funding-opportunities"
     label: "Fund Opps - Archived"

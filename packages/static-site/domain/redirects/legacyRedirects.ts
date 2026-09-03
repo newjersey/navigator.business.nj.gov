@@ -28,6 +28,15 @@ interface InternalRule {
 
 const LEGACY_SPANISH_PREFIX = "/es-us";
 const APP_SPANISH_LOCALE_PREFIX = "/es-US";
+const HOUSING_DEVELOPER_RESOURCES_LEGACY_SOURCE = "/housing-developer-resources";
+
+/** Input for {@link buildLegacyRedirects}. */
+export interface BuildLegacyRedirectsParams {
+  /** Whether `NEXT_PUBLIC_MULTILINGUAL_ENABLED` is on. */
+  readonly multilingualEnabled: boolean;
+  /** Whether `NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED` is on. */
+  readonly housingDeveloperResourcesEnabled: boolean;
+}
 
 /**
  * Prefix and section rules. Aggregate rules drop the slug; /recent preserves it.
@@ -47,6 +56,7 @@ const PREFIX_RULES: readonly InternalRule[] = [
   { source: "/license/:slug*", destination: "/pages/licensing-and-certification-guide" },
   { source: "/funding", destination: "/pages/funding" },
   { source: "/funding/:slug*", destination: "/pages/funding" },
+  { source: "/housing-developer-resources", destination: "/pages/housing-developer-resources" },
   { source: "/starter-kits/:slug*", destination: "/pages/starter-kits" },
 ];
 
@@ -214,14 +224,28 @@ const spanishCatchAll = (multilingualEnabled: boolean): LegacyRedirect[] => {
 };
 
 /**
- * Builds the full legacy redirect table for the given multilingual flag state.
+ * Builds the full legacy redirect table for the given flag state.
  *
- * @param multilingualEnabled Whether `NEXT_PUBLIC_MULTILINGUAL_ENABLED` is on.
+ * When `housingDeveloperResourcesEnabled` is off, the `/housing-developer-resources`
+ * rule (and its `/es-us` twin) is omitted so the legacy Webflow URL 404s along
+ * with the page it would otherwise redirect to.
+ *
+ * @param params Flag state controlling which rules are emitted.
+ * @param params.multilingualEnabled Whether `NEXT_PUBLIC_MULTILINGUAL_ENABLED` is on.
+ * @param params.housingDeveloperResourcesEnabled Whether
+ *   `NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED` is on.
  * @returns Every English rule with its Spanish route, all permanent (Next.js
  *   emits a 308 HTTP status code).
  */
-export const buildLegacyRedirects = (multilingualEnabled: boolean): LegacyRedirect[] => {
-  const withSpanishRoutes = [...PREFIX_RULES, ...ONE_OFF_RULES, ...EXTERNAL_ONE_OFF_RULES].flatMap(
+export const buildLegacyRedirects = ({
+  multilingualEnabled,
+  housingDeveloperResourcesEnabled,
+}: BuildLegacyRedirectsParams): LegacyRedirect[] => {
+  const prefixRules = housingDeveloperResourcesEnabled
+    ? PREFIX_RULES
+    : PREFIX_RULES.filter((rule) => rule.source !== HOUSING_DEVELOPER_RESOURCES_LEGACY_SOURCE);
+
+  const withSpanishRoutes = [...prefixRules, ...ONE_OFF_RULES, ...EXTERNAL_ONE_OFF_RULES].flatMap(
     (rule) => withSpanishRoute(rule, multilingualEnabled),
   );
   const localeSpecific = LOCALE_SPECIFIC_ONE_OFF_RULES.map(

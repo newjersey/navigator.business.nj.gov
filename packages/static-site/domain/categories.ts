@@ -4,6 +4,10 @@
  * Slugs are derived from CMS page content by grouping on the `category` field.
  */
 
+import {
+  HOUSING_DEVELOPER_RESOURCES_SLUG,
+  isHousingDeveloperResourcesEnabled,
+} from "@/domain/content/housingDeveloperResourcesFlag";
 import { loadPages } from "@/domain/content/loadContent";
 import type { PageItem } from "@/domain/content/types";
 
@@ -28,4 +32,33 @@ export const buildCategoryHierarchy = (
   return result;
 };
 
-export const CATEGORY_HIERARCHY = buildCategoryHierarchy(loadPages());
+/** Input for {@link filterFlaggedPages}. */
+export interface FilterFlaggedPagesParams {
+  /** Whether `NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED` is on. */
+  readonly housingDeveloperResourcesEnabled: boolean;
+}
+
+/**
+ * Removes pages gated by a disabled feature flag before building the
+ * category hierarchy, so a disabled page never appears in navigation,
+ * `generateStaticParams`, or the sitemap.
+ *
+ * @param pages Every page loaded from content.
+ * @param params Flag state controlling which pages are kept.
+ * @param params.housingDeveloperResourcesEnabled Whether the Housing
+ *   Developer Resources page is enabled for this build.
+ * @returns `pages` with any disabled flag-gated pages removed.
+ */
+export const filterFlaggedPages = (
+  pages: PageItem[],
+  { housingDeveloperResourcesEnabled }: FilterFlaggedPagesParams,
+): PageItem[] => {
+  if (housingDeveloperResourcesEnabled) return pages;
+  return pages.filter((page) => page.slug !== HOUSING_DEVELOPER_RESOURCES_SLUG);
+};
+
+export const CATEGORY_HIERARCHY = buildCategoryHierarchy(
+  filterFlaggedPages(loadPages(), {
+    housingDeveloperResourcesEnabled: isHousingDeveloperResourcesEnabled(),
+  }),
+);
