@@ -23,7 +23,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
     environment: prod-hold
     steps:
       - run: echo "Awaiting approval for production release."

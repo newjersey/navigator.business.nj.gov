@@ -85,17 +85,8 @@ jobs:
         with:
           image_tag: ${{ needs.resolve-image-tag.outputs.image_tag }}
 
-  production-hold:
-    needs: deploy-staging
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    environment: prod-hold
-    steps:
-      - run: echo "Awaiting approval for static site production release."
-
   deploy-production:
-    needs: [resolve-image-tag, production-hold]
+    needs: [resolve-image-tag, deploy-staging]
     runs-on: ubuntu-latest
     permissions:
       contents: read
