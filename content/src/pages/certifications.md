@@ -10,14 +10,14 @@ main-text-1: |-
 
   ### Learn How to Apply to be a Small, Minority, Woman, or Veteran-owned Business Enterprise (SMWVBE)
 
-  Applying for certifications can help your business find funding and qualify for government contracting opportunities. [This video helps you learn about the online forms required to apply on the Uniform Certification Services (UCS)](https://www.youtube.com/watch?v=M7siVXBkU8M). The UCS is the online application service for applying for State certifications, like Minority/Women-Owned Business Enterprise (M/WBE).
+  Applying for certifications can help your business find funding and qualify for government contracting opportunities. [This video helps you learn about the online forms required to apply on the Uniform Certification Services (UCS)](https://www.youtube.com/watch?v=RiW9_VpFHAc). The UCS is the online application service for applying for State certifications, like Minority/Women-Owned Business Enterprise (M/WBE).
 
   **Important Timestamps:**
 
-  * 3:03 Learn what documents will be required with the application
-  * 3:40 Create a Uniform Certification Service account
-  * 4:23 Walk through the application process
-  * 11:09 Check your application status
+  * 2:20 Learn what documents will be required with the application
+  * 2:46 Create a Uniform Certification Service account
+  * 4:05 Walk through the application process
+  * 10:00 Check your application status
 heading-2: Minority/Woman Owned Business or Enterprise (M/WBE) Certification
 main-text-2: |-
   A minority and/or woman-owned business or enterprise (M/WBE) can get certified with the State of New Jersey. While the New Jersey state government does not give special consideration to vendors that hold M/WBE certifications, some local government contracts do give special consideration.
