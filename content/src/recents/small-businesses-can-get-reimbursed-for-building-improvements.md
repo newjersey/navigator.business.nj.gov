@@ -1,12 +1,12 @@
 ---
 name: Small Businesses Can Get Reimbursed for Building Improvements
 slug: small-businesses-can-get-reimbursed-for-building-improvements
-status: Published
-date: "2025-09-03"
+status: Archived
+date: '2025-09-03'
 topics: Grants and Resources
-source: https://www.njeda.gov/small-business-improvement-grant/
+source: 'https://www.njeda.gov/small-business-improvement-grant/'
 cta-text: Apply Now
-cta-link: https://www.njeda.gov/small-business-improvement-grant/
+cta-link: 'https://www.njeda.gov/small-business-improvement-grant/'
 agency: NJ Economic Development Authority
 webflowId: 68b857061991807af0707f2d
 ---
