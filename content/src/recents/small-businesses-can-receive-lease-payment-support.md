@@ -1,12 +1,12 @@
 ---
 name: Small Businesses Can Receive Lease Payment Support
 slug: small-businesses-can-receive-lease-payment-support
-status: Published
-date: "2025-09-03"
+status: Archived
+date: '2025-09-03'
 topics: Grants and Resources
-source: https://www.njeda.gov/small-business-lease-grant-program/
+source: 'https://www.njeda.gov/small-business-lease-grant-program/'
 cta-text: Apply Now
-cta-link: https://www.njeda.gov/small-business-lease-grant-program/
+cta-link: 'https://www.njeda.gov/small-business-lease-grant-program/'
 webflowId: 68b8573b4145c160a052c33e
 ---
 
