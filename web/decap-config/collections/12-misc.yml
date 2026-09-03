@@ -3497,3 +3497,39 @@ collections:
             fields:
               - { label: Prompt Text, name: promptText, widget: markdown }
               - { label: Button Text, name: buttonText, widget: string }
+  - name: "learn-pages"
+    label: "Learn Pages"
+    delete: false
+    create: false
+    files:
+      - label: "Learn Pages"
+        name: "learn-pages"
+        file: "content/src/fieldConfig/learn-pages.json"
+        editor:
+          preview: false
+        fields:
+          - label: Learn Pages
+            name: learnPages
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Steps Header, name: stepsHeader, widget: string }
+              - { label: Step Label, name: stepText, widget: string }
+              - { label: Previous Step Text, name: previousStepText, widget: string }
+              - { label: Next Step Text, name: nextStepText, widget: string }
+              - { label: Placeholder Content, name: placeholderContent, widget: string }
+              - { label: Account Button Heading, name: accountButtonHeading, widget: string }
+              - { label: Account Button Text, name: accountButtonText, widget: string }
+              - label: Steps
+                name: steps
+                widget: list
+                collapsed: false
+                summary: "{{fields.name}}"
+                fields:
+                  - {
+                      label: ID,
+                      name: id,
+                      widget: write-once-read-only-no-space,
+                      hint: "Changing this value changes the learn page URL.",
+                    }
+                  - { label: Name, name: name, widget: string }

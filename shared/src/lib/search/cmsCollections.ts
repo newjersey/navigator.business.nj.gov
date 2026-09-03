@@ -107,6 +107,7 @@ export const cmsCollections = [
       "Navigator Unsupported User Page",
       "Autosave",
       "Formation Date Deletion Modal",
+      "Learn Pages",
     ],
   },
   {

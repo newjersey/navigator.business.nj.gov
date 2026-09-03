@@ -1017,6 +1017,20 @@ export default {
         },
       },
     },
+    learn_page: {
+      click: {
+        account_setup: (current_step_id: string) => {
+          eventRunner.track({
+            event: "account_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "learn_page",
+            legacy_event_label: "go_to_account_setup",
+            on_task_id: current_step_id,
+            clicked_to: "/account-setup/",
+          });
+        },
+      },
+    },
     task_primary_call_to_action: {
       click: {
         open_external_website: (

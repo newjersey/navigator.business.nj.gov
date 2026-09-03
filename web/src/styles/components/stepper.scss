@@ -1,8 +1,7 @@
 @use "../sass-files/variables";
 
-.vertical-step-indicator {
-  .usa-step-indicator--counters .usa-step-indicator__segment,
-  .usa-step-indicator--counters-smaller .usa-step-indicator__segment {
+.learn-step-indicator {
+  .usa-step-indicator--counters .usa-step-indicator__segment {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
@@ -46,22 +45,13 @@
       0 0 0 0 #fff !important;
   }
 
-  .vertical-bar {
-    width: 0.25rem;
-    position: absolute;
-    height: 0rem;
-    z-index: 90;
-    background-color: variables.$cool-lighter;
-    left: 18px;
-  }
-
-  .vertical-bar-smaller {
-    width: 0.25rem;
-    position: absolute;
-    height: 0rem;
-    z-index: 90;
-    background-color: variables.$cool-lighter;
-    left: 14px;
+  &.learn-step-indicator--active {
+    .usa-step-indicator--counters .usa-step-indicator__segment-smaller:before {
+      color: variables.$accent-cool-darker !important;
+      box-shadow:
+        inset 0 0 0 0.15rem variables.$accent-cool-darker,
+        0 0 0 0 #fff !important;
+    }
   }
 }
 

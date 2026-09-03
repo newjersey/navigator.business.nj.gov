@@ -1,0 +1,19 @@
+{
+  "learnPages": {
+    "stepsHeader": "Steps",
+    "stepText": "Step",
+    "previousStepText": "Previous Step",
+    "nextStepText": "Next Step",
+    "placeholderContent": "Content goes here!",
+    "accountButtonHeading": "Ready to start your business?",
+    "accountButtonText": "Open A Free Account",
+    "steps": [
+      { "id": "business-structure", "name": "Select Your Business Structure" },
+      { "id": "form-business", "name": "Form Your Business" },
+      { "id": "find-naics", "name": "Find Your Industry Classification Code" },
+      { "id": "get-ein", "name": "Get Your Employer Identification Number (EIN)" },
+      { "id": "register-taxes", "name": "Register Your Business to Pay State Taxes" },
+      { "id": "open-account", "name": "Open Your Business.NJ.gov Account" }
+    ]
+  }
+}
