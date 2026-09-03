@@ -1,12 +1,12 @@
 ---
 name: Hospitality Businesses Can Apply for Liquor License Reimbursement Grants
 slug: hospitality-businesses-can-apply-for-liquor-license-reimbursement-grants
-status: Published
-date: "2025-12-17"
+status: Archived
+date: '2025-12-17'
 topics: Grants and Resources
-source: https://www.njeda.gov/small-business-liquor-license-grant/
+source: 'https://www.njeda.gov/small-business-liquor-license-grant/'
 cta-text: Apply Now
-cta-link: https://www.njeda.gov/small-business-liquor-license-grant/
+cta-link: 'https://www.njeda.gov/small-business-liquor-license-grant/'
 agency: NJ Economic Development Authority
 webflowId: 694333d6022886bdf10c2d17
 ---
