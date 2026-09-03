@@ -7,8 +7,8 @@
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 
+import { SurveyMonkey } from "@/components/analytics/SurveyMonkey";
 import { BroughtToYouBySection } from "@/components/landing/BroughtToYouBySection";
 import { CtaBannerSection } from "@/components/landing/CtaBannerSection";
 import { HeroSection } from "@/components/landing/HeroSection";
@@ -88,16 +88,7 @@ const LocalizedLandingPage = async ({ params }: LocalizedPageProps) => {
       <WhatsNewSection content={messages.landing.whatsNew} recents={recents} />
       <SupportSection content={messages.landing.support} />
       <BroughtToYouBySection content={messages.landing.broughtToYouBy} />
-      {
-        // biome-ignore lint/style/noProcessEnv: NEXT_PUBLIC_ vars are inlined at build time.
-        process.env.NEXT_PUBLIC_SURVEY_MONKEY_ENABLED === "true" && (
-          <Script
-            id="smcx-sdk"
-            src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd_2Fl0hAvWCD8cNdKnWc8kt0IafoTskhMiZ5h9m_2FJavuow.js"
-            strategy="afterInteractive"
-          />
-        )
-      }
+      <SurveyMonkey />
     </>
   );
 };
