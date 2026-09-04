@@ -95,7 +95,7 @@
     "unist-util-visit": "5.1.0"
   },
   "devDependencies": {
-    "@babel/core": "7.29.6",
+    "@babel/core": "7.29.7",
     "@cypress-audit/lighthouse": "1.4.2",
     "@cypress-audit/pa11y": "1.4.2",
     "@jest/types": "30.4.1",
@@ -134,7 +134,7 @@
     "airtable": "0.12.2",
     "axe-core": "4.11.1",
     "babel-jest": "30.4.1",
-    "babel-loader": "10.0.0",
+    "babel-loader": "10.1.1",
     "babel-plugin-react-compiler": "1.0.0",
     "cross-env": "10.1.0",
     "cspell": "9.8.0",
