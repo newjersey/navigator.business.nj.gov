@@ -14,7 +14,7 @@
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore"
   },
   "devDependencies": {
-    "@jest/globals": "30.4.1",
+    "@jest/globals": "30.5.1",
     "@types/jest": "30.0.0",
     "@types/node": "24.13.3",
     "@typescript-eslint/eslint-plugin": "7.18.0",
@@ -27,10 +27,10 @@
     "eslint-plugin-jest": "27.9.0",
     "eslint-plugin-jest-formatting": "3.1.0",
     "eslint-plugin-unicorn": "51.0.1",
-    "jest": "30.4.2",
+    "jest": "30.5.1",
     "prettier": "3.8.3",
     "prettier-plugin-organize-imports": "4.3.0",
-    "ts-jest": "29.4.9",
+    "ts-jest": "29.4.12",
     "ts-node": "10.9.2",
     "typescript": "5.9.3"
   },
