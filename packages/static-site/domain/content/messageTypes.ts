@@ -104,6 +104,8 @@ export interface LayoutHeaderContent {
   readonly secondaryLinks: readonly ContentLink[];
   /** Form action destination for the header search form. */
   readonly searchAction: string;
+  /** Accessible label for the search region landmark. */
+  readonly searchRegionLabel: string;
   /** Accessible label for the search input. */
   readonly searchInputLabel: string;
   /** Alt text for the search submit icon. */
@@ -895,6 +897,60 @@ export interface NewsletterSignupMessages {
 }
 
 /**
+ * Localized content for the search results page.
+ */
+export interface SearchPageMessages {
+  /** Page H1 title, and the `<title>`/metadata title. */
+  readonly title: string;
+  /** Page `<meta name="description">` content. */
+  readonly metaDescription: string;
+  /** Heading shown above results, with a `{query}` placeholder for the searched term. */
+  readonly resultsHeading: string;
+  /** Heading for the content-type facet sidebar. */
+  readonly filterHeading: string;
+  /** Maps a `data-pagefind-filter` `type` value (e.g. "Learn page") to its user-facing facet label. */
+  readonly typeLabels: Record<string, string>;
+  /** Label for the button that clears every active facet. */
+  readonly filterReset: string;
+  /** Label introducing the active-filters chip bar. */
+  readonly filteringByLabel: string;
+  /** Template for one chip's remove-button accessible label, with a `{filter}` placeholder. */
+  readonly filterRemoveLabel: string;
+  /** Result-count template shown when no facet narrows the result set, with `{start}`/`{end}`/`{total}` placeholders. */
+  readonly resultCountShowing: string;
+  /** Result-count template shown when a facet narrows the result set, with `{start}`/`{end}`/`{filtered}`/`{total}` placeholders. */
+  readonly resultCountFiltered: string;
+  /** Result-count template shown when a facet narrows the result set to zero, with a `{total}` placeholder. */
+  readonly resultCountFilteredEmpty: string;
+  /** Accessible label for the Previous pagination control. */
+  readonly paginationPrevious: string;
+  /** Accessible label for the Next pagination control. */
+  readonly paginationNext: string;
+  /** Accessible label for the pagination nav region. */
+  readonly paginationLabel: string;
+  /** Template for one page-number button's accessible label, with a `{page}` placeholder. */
+  readonly paginationPageLabel: string;
+  /** Message shown while a search is in flight. */
+  readonly loadingLabel: string;
+  /** Heading shown when the page loads with no search term. */
+  readonly noQueryTitle: string;
+  /** Body copy shown when the page loads with no search term. */
+  readonly noQueryBody: string;
+  /** Heading shown when a search term returns no matches. */
+  readonly zeroResultsTitle: string;
+  /** Body copy shown when a search term returns no matches. */
+  readonly zeroResultsBody: string;
+  /** Message shown when the search runtime fails to load or run. */
+  readonly errorMessage: string;
+  /** Fallback message shown inside a `<noscript>` block. */
+  readonly noScriptMessage: string;
+  /** Explanatory note shown on a Funding-program result, which does not link anywhere. */
+  readonly fundingResultNote: string;
+  /** Label for the CTA linking a Funding-program result to the general funding listing. */
+  readonly fundingResultCtaLabel: string;
+}
+
+/**
  * Complete localized message payload for one locale.
  */
 export interface ApplicationMessages {
@@ -918,4 +974,6 @@ export interface ApplicationMessages {
   readonly impactReport: ImpactReportMessages;
   /** Newsletter signup page content strings. */
   readonly newsletterSignup: NewsletterSignupMessages;
+  /** Search results page content strings. */
+  readonly search: SearchPageMessages;
 }

@@ -69,7 +69,7 @@ const PageContent = ({ page }: Props) => {
   }
 
   return (
-    <article>
+    <article data-pagefind-body data-pagefind-filter="type:Learn page">
       <h1>{page.name}</h1>
       {page["sub-heading-text"] && <p className="usa-intro">{page["sub-heading-text"]}</p>}
       {sections.map((section) => (

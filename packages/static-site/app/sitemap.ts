@@ -9,9 +9,9 @@
 
 import type { MetadataRoute } from "next";
 
-import { CATEGORY_HIERARCHY } from "@/domain/categories";
 import { addLocalePrefix } from "@/domain/i18n/localePath";
 import { ENABLED_LOCALES } from "@/domain/i18n/locales";
+import { collectRoutePathnames } from "@/domain/routes/collectRoutePathnames";
 import { SITE_BASE_URL } from "@/domain/siteConfig";
 
 /**
@@ -42,27 +42,6 @@ const buildSitemapEntry = (pathnameWithoutLocale: string): MetadataRoute.Sitemap
     url: toAbsoluteUrl(pathnameWithoutLocale, "en-US"),
     alternates: { languages },
   };
-};
-
-/**
- * Lists every unprefixed pathname the site exposes.
- *
- * @returns Unprefixed pathnames for the home, learn, category, and content pages.
- */
-const collectRoutePathnames = (): readonly string[] => {
-  const categoryPathnames = Object.keys(CATEGORY_HIERARCHY).map((category) => `/${category}`);
-  const contentPathnames = Object.values(CATEGORY_HIERARCHY).flatMap((category) => {
-    return category.children.map((page) => `/pages/${page.slug}`);
-  });
-
-  return [
-    "/",
-    "/learn",
-    "/our-software-and-reuse",
-    "/privacy-policy",
-    ...categoryPathnames,
-    ...contentPathnames,
-  ];
 };
 
 /**
