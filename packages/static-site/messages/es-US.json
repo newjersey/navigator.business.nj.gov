@@ -601,6 +601,12 @@
     "cardEligibilityHeading": "Elegibilidad",
     "cardBenefitsHeading": "Beneficios"
   },
+  "housingDeveloperResources": {
+    "title": "Recursos para Desarrolladores de Vivienda",
+    "ctaHeading": "Encuentre el financiamiento adecuado para su proyecto de vivienda",
+    "ctaBody": "Responda solo unas pocas preguntas y encontraremos programas para los que podría ser elegible.",
+    "ctaButton": "Crear cuenta"
+  },
   "licensingGuide": {
     "title": "Guía de Licencias y Certificaciones",
     "ctaHeading": "¡Obtenga su Guía de Registro!",

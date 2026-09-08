@@ -313,6 +313,7 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     priority: false,
     minEmployeesRequired: undefined,
     maxEmployeesRequired: undefined,
+    housingDeveloperResource: false,
     ...overrides,
   };
 };

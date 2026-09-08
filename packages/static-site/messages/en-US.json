@@ -601,6 +601,12 @@
     "cardEligibilityHeading": "Eligibility",
     "cardBenefitsHeading": "Benefits"
   },
+  "housingDeveloperResources": {
+    "title": "Housing Developer Resources",
+    "ctaHeading": "Find Funding Fit for Your Housing Project",
+    "ctaBody": "Answer just a few questions, and we'll find programs you may be eligible for.",
+    "ctaButton": "Create Account"
+  },
   "licensingGuide": {
     "title": "Licensing and Certification Guide",
     "ctaHeading": "Get Your Registration Guide!",

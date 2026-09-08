@@ -567,6 +567,22 @@ export interface FundingPageMessages {
 }
 
 /**
+ * Localized content unique to the Housing Developer Resources page. Merged
+ * onto `FundingPageMessages` so the page can reuse `FundingPageContent`'s
+ * filter, pagination, and card labels while overriding only its title and CTA.
+ */
+export interface HousingDeveloperResourcesPageMessages {
+  /** Page H1 title. */
+  readonly title: string;
+  /** Heading inside the CTA box. */
+  readonly ctaHeading: string;
+  /** Body text inside the CTA box. */
+  readonly ctaBody: string;
+  /** Label for the CTA button. */
+  readonly ctaButton: string;
+}
+
+/**
  * Localized content for the Licensing and Certification Guide page.
  */
 export interface LicensingGuidePageMessages {
@@ -908,6 +924,8 @@ export interface ApplicationMessages {
   readonly learn: LearnPageContent;
   /** Funding page content strings. */
   readonly funding: FundingPageMessages;
+  /** Housing Developer Resources page content strings. */
+  readonly housingDeveloperResources: HousingDeveloperResourcesPageMessages;
   /** Licensing & Certification Guide page content strings. */
   readonly licensingGuide: LicensingGuidePageMessages;
   /** Updates page content strings. */
