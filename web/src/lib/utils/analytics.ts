@@ -346,6 +346,35 @@ export interface GTMEventData {
   status?: string;
 }
 
+type GTMCustomEventTypes = "onboarding" | "onboarding_form_submission" | "form_validation_error";
+
+type EventData = {
+  event_name: string;
+  event_type: GTMCustomEventTypes;
+  on_page_url?: string;
+};
+
+type OnboardingEventData = EventData & {
+  onboarding_step_number: number;
+  funnel_name: string;
+  form_name: string;
+  step_name: string;
+  steps_total?: number;
+  flow_name?: string;
+};
+
+type RadioButtonSubmissionEventData = EventData & {
+  form_name: string;
+  selection_value: string;
+  onboarding_step_number?: number;
+};
+
+type FormValidationError = EventData & {
+  form_name: string;
+  error_type: string;
+  error_message: string;
+};
+
 const getSiteSectionFromUrl = (
   url: URL,
   calendar_view?: "NONE" | "LIST" | "FULL",
@@ -433,6 +462,13 @@ class GTMTracker {
 
     events.map((event) => {
       analytics.sendEvent(event);
+    });
+  }
+
+  custom_event_track(data: EventData): void {
+    analytics.sendEvent({
+      event: "custom_analytics_event",
+      ...data,
     });
   }
 }
@@ -540,6 +576,73 @@ export default {
   },
   dimensions: dimensionRunner,
   event: {
+    onboarding: {
+      persona_page_view: () => {
+        const event: OnboardingEventData = {
+          event_name: "onboarding_step_view",
+          event_type: "onboarding",
+          form_name: "onboarding_business_status",
+          funnel_name: "business_onboarding",
+          onboarding_step_number: 1,
+          step_name: "Business Status",
+        };
+        eventRunner.custom_event_track(event);
+      },
+      business_intent_page_view: () => {
+        const event: OnboardingEventData = {
+          event_name: "onboarding_step_view",
+          event_type: "onboarding",
+          form_name: "onboarding_business_intent",
+          funnel_name: "business_onboarding",
+          onboarding_step_number: 2,
+          step_name: "What Would You Like To Do Next?",
+          steps_total: 2,
+        };
+        eventRunner.custom_event_track(event);
+      },
+      business_persona_selection_submit: (selection_value: string) => {
+        const event: RadioButtonSubmissionEventData = {
+          event_name: "onboarding_step_submit",
+          event_type: "onboarding_form_submission",
+          form_name: "onboarding_business_status",
+          onboarding_step_number: 1,
+          selection_value,
+        };
+        eventRunner.custom_event_track(event);
+      },
+      business_intent_selection_submit: (selection_value: string) => {
+        const event: RadioButtonSubmissionEventData = {
+          event_name: "onboarding_step_submit",
+          event_type: "onboarding_form_submission",
+          form_name: "onboarding_business_intent",
+          onboarding_step_number: 2,
+          selection_value,
+        };
+        eventRunner.custom_event_track(event);
+      },
+      error: {
+        select_business_status: (error_message: string) => {
+          const event: FormValidationError = {
+            event_name: "onboarding_no_business_status_selected",
+            event_type: "form_validation_error",
+            form_name: "onboarding_business_status",
+            error_type: "no_selection",
+            error_message,
+          };
+          eventRunner.custom_event_track(event);
+        },
+        select_business_intent: (error_message: string) => {
+          const event: FormValidationError = {
+            event_name: "onboarding_no_business_intent_selected",
+            event_type: "form_validation_error",
+            form_name: "onboarding_business_intent",
+            error_type: "no_selection",
+            error_message,
+          };
+          eventRunner.custom_event_track(event);
+        },
+      },
+    },
     landing_page: {
       arrive: {
         get_unlinked_myNJ_account: () => {
@@ -553,20 +656,6 @@ export default {
         },
       },
     },
-    landing_page_hero_log_in: {
-      click: {
-        go_to_myNJ_login: () => {
-          eventRunner.track({
-            event: "account_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "landing_page_hero_log_in",
-            legacy_event_label: "go_to_myNJ_login",
-            clicked: "go_to_myNJ_login",
-            item: "landing_page_hero_log_in",
-          });
-        },
-      },
-    },
     landing_page_hero_get_started: {
       click: {
         go_to_onboarding: () => {
@@ -576,90 +665,6 @@ export default {
             legacy_event_category: "landing_page_hero_get_started",
             legacy_event_label: "go_to_onboarding",
             click_text: "hero_get_started",
-            clicked_to: "/onboarding",
-          });
-        },
-      },
-    },
-    landing_page_get_my_registration_guide_tile: {
-      click: {
-        go_to_onboarding: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "landing_page_get_my_registration_guide_tile",
-            legacy_event_label: "go_to_onboarding",
-            click_text: "get_my_registration_guide_tile",
-            clicked_to: "/onboarding",
-          });
-        },
-      },
-    },
-    landing_page_file_and_pay_my_taxes_tile: {
-      click: {
-        go_to_onboarding: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "landing_page_file_and_pay_my_taxes_tile",
-            legacy_event_label: "go_to_onboarding",
-            click_text: "file_and_pay_my_taxes_tile",
-            clicked_to: "/onboarding",
-          });
-        },
-      },
-    },
-    landing_page_im_an_out_of_business_tile: {
-      click: {
-        go_to_onboarding: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "landing_page_im_an_out_of_business_tile",
-            legacy_event_label: "go_to_onboarding",
-            click_text: "im_an_out_of_business_tile",
-            clicked_to: "/onboarding",
-          });
-        },
-      },
-    },
-    landing_page_find_funding_for_my_business_tile: {
-      click: {
-        go_to_onboarding: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "landing_page_find_funding_for_my_business_tile",
-            legacy_event_label: "go_to_onboarding",
-            click_text: "find_funding_for_my_business_tile",
-            clicked_to: "/onboarding",
-          });
-        },
-      },
-    },
-    landing_page_im_starting_a_nj_business_tile: {
-      click: {
-        go_to_onboarding: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "landing_page_im_starting_a_nj_business_tile",
-            legacy_event_label: "go_to_onboarding",
-            click_text: "im_starting_a_nj_business_tile",
-            clicked_to: "/onboarding",
-          });
-        },
-      },
-    },
-    landing_page_im_running_a_nj_business_tile: {
-      click: {
-        go_to_onboarding: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "landing_page_im_running_a_nj_business_tile",
-            legacy_event_label: "go_to_onboarding",
-            click_text: "im_running_a_nj_business_tile",
             clicked_to: "/onboarding",
           });
         },
@@ -693,8 +698,6 @@ export default {
         },
       },
     },
-    // update all these events with the legacy_event* fields
-
     landing_page_second_get_started: {
       click: {
         go_to_onboarding: () => {
@@ -804,17 +807,6 @@ export default {
             item: "guest_menu",
           });
         },
-        go_to_myNJ_login: () => {
-          eventRunner.track({
-            event: "account_clicks",
-            legacy_event_action: "click",
-
-            legacy_event_category: "guest_menu",
-            legacy_event_label: "go_to_myNJ_login",
-            clicked: "go_to_myNJ_login",
-            item: "guest_menu",
-          });
-        },
       },
     },
     roadmap_dashboard: {
@@ -872,19 +864,6 @@ export default {
             legacy_event_label: "log_out",
             clicked: "log_out",
             item: "roadmap_logout_button",
-          });
-        },
-      },
-    },
-    roadmap_profile_edit_button: {
-      click: {
-        go_to_profile_screen: () => {
-          eventRunner.track({
-            event: "navigation_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "roadmap_profile_edit_button",
-            legacy_event_label: "go_to_profile_screen",
-            clicked: "go_to_profile_screen",
           });
         },
       },

@@ -50,7 +50,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         ),
       },
       {
-        name: "industry-page",
+        name: "business-intent",
         component: <StartingBusinessSwitchPage />,
       },
       {

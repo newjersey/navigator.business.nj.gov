@@ -3,11 +3,9 @@
 
 import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 
 describe("Guest Dashboard [feature] [all] [group2]", () => {
-  const industry = LookupIndustryById("cosmetology");
   const legalStructureId = "limited-liability-company";
 
   beforeEach(() => {
@@ -16,9 +14,7 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
       return window.sessionStorage.clear();
     });
     cy.visit("/onboarding");
-    completeNewBusinessOnboarding({
-      industry,
-    });
+    completeNewBusinessOnboarding();
   });
 
   it("enters user info and shows the dashboard", () => {
@@ -32,9 +28,7 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     completeBusinessStructureTask({ legalStructureId });
 
     // go to regular task (non-auth-blocked)
-    cy.get('[data-task="cosmetology-license"]').first().click({ force: true });
-    cy.get(`[data-industry='${industry.id}']`).should("not.exist");
-    cy.get('[data-task-id="cosmetology-license"]').should("exist");
+    cy.get('[data-task="determine-naics-code"]').first().click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
     cy.get('[data-testid="needs-account-alert"]').should("not.exist");
 
@@ -42,13 +36,6 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.log("go back to dashboard");
     cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
     cy.get('[data-testid="needs-account-alert"]').should("not.exist");
-
-    // go to auth blocked task
-    cy.get('[data-task="apply-for-shop-license"]').first().click({ force: true });
-    cy.get('[data-task-id="apply-for-shop-license"]').should("exist");
-    cy.get('[data-testid="self-reg-modal"]').should("be.visible");
-    cy.get('[aria-label="close"]').first().click({ force: true });
-    cy.get('[data-testid="self-reg-modal"]').should("not.exist");
 
     // go back to dashboard
     cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
@@ -60,14 +47,6 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
 
     cy.get('input[aria-label="Business name"]').clear();
     cy.get('input[aria-label="Business name"]').type("Applebee's");
-    cy.get('[data-testid="self-reg-modal"]').should("not.exist");
-
-    cy.get(`[data-testid="numbers"]`).first().click({ force: true });
-    cy.get('input[aria-label="Employer id"]').clear();
-    cy.get('input[aria-label="Employer id"]').type("123456789");
-    cy.get('[data-testid="self-reg-modal"]').should("be.visible");
-
-    cy.get('[aria-label="close"]').first().click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
   });
 });

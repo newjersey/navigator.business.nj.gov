@@ -199,12 +199,20 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
   });
 };
 
-export const sendOnboardingOnSubmitEvents = (
-  newProfileData: ProfileData,
-  pageName?: string,
-): void => {
+export const sendOnboardingOnSubmitEvents = (userData: UserData, pageName?: string): void => {
+  const newProfileData = userData.businesses[userData.currentBusinessId].profileData;
   if (pageName === "industry-page" && newProfileData.industryId) {
     sendEssentialQuestionEvents(newProfileData);
+  }
+
+  if (pageName === "persona-page" && newProfileData.businessPersona) {
+    analytics.event.onboarding.business_persona_selection_submit(newProfileData.businessPersona);
+  }
+
+  if (pageName === "business-intent" && userData.user.onboardedAsLearningUser !== undefined) {
+    analytics.event.onboarding.business_intent_selection_submit(
+      userData.user.onboardedAsLearningUser ? "learning" : "ready",
+    );
   }
 };
 interface UserDataSyncReport {

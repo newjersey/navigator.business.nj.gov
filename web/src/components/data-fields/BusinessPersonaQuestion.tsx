@@ -10,7 +10,8 @@ import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
+import analytics from "@/lib/utils/analytics";
 
 export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
@@ -41,6 +42,10 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
       persona: state.flow,
       fieldName: "businessPersona",
     });
+
+  useEffect(() => {
+    analytics.event.onboarding.persona_page_view();
+  }, []);
 
   return (
     <>

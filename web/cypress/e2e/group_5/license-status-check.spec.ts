@@ -3,6 +3,7 @@ import {
   fillOutLicenseStatusCheckForm,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { onOnboardingPageStartingBusiness } from "../../support/page_objects/onboardingPageNew";
+import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
 describe("License Status Check [feature] [all] [group5]", () => {
   let checkStatusFormData: {
     businessName: string;
@@ -24,8 +25,13 @@ describe("License Status Check [feature] [all] [group5]", () => {
     onOnboardingPageStartingBusiness.clickNext();
 
     cy.url().should("include", "onboarding?page=2");
-    onOnboardingPageStartingBusiness.selectIndustryDropdown("cosmetology");
+    onOnboardingPageStartingBusiness.selectBusinessIntentRadio("true");
     onOnboardingPageStartingBusiness.clickNext();
+    cy.url().should("include", "dashboard");
+
+    cy.visit("/profile");
+    onProfilePage.selectIndustry("cosmetology");
+    onProfilePage.getSaveButton().first().click();
 
     cy.url().should("include", "dashboard");
 

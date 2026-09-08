@@ -1,194 +1,41 @@
-import {
-  carServiceOptions,
-  CarServiceType,
-  getIndustries,
-  PropertyLeaseType,
-  randomInt,
-  ResidentialConstructionType,
-} from "@businessnjgovnavigator/shared";
-import {
-  completeEmploymentAgencyOnboarding,
-  randomElementFromArray,
-  setMobileViewport,
-} from "../../support/helpers/helpers";
+import { setMobileViewport } from "../../support/helpers/helpers";
 import { onOnboardingPageStartingBusiness } from "../../support/page_objects/onboardingPageNew";
 
-const industries = getIndustries();
-
-describe("Onboarding for all industries when starting a business [feature] [all] [group1]", () => {
+describe("Onboarding  when starting a business [feature] [all] [group1]", () => {
   describe("Desktop", () => {
     beforeEach(() => {
       cy.loginByCognitoApi();
     });
 
-    for (const industry of industries) {
-      it(`Onboarding for ${industry.name}`, () => {
-        cy.url().should("include", "onboarding?page=1");
-        onOnboardingPageStartingBusiness.selectBusinessPersonaRadio("STARTING");
-        onOnboardingPageStartingBusiness.getBusinessPersonaRadio("STARTING").should("be.checked");
-        onOnboardingPageStartingBusiness.clickNext();
+    it("Onboards learning business", () => {
+      cy.url().should("include", "onboarding?page=1");
+      onOnboardingPageStartingBusiness.selectBusinessPersonaRadio("STARTING");
+      onOnboardingPageStartingBusiness.getBusinessPersonaRadio("STARTING").should("be.checked");
+      onOnboardingPageStartingBusiness.clickNext();
 
-        cy.url().should("include", "onboarding?page=2");
-        onOnboardingPageStartingBusiness.selectIndustryDropdown(industry.id);
+      cy.url().should("include", "onboarding?page=2");
 
-        const carService = industry.industryOnboardingQuestions.isCarServiceApplicable
-          ? randomElementFromArray([...carServiceOptions])
-          : undefined;
+      onOnboardingPageStartingBusiness.selectBusinessIntentRadio("true");
+      onOnboardingPageStartingBusiness.getBusinessIntentRadio("true").should("be.checked");
 
-        if (carService === undefined) {
-          onOnboardingPageStartingBusiness.getCarServiceRadio().should("not.exist");
-        } else {
-          onOnboardingPageStartingBusiness.selectCarServiceRadio(carService);
-          onOnboardingPageStartingBusiness.getCarServiceRadio(carService).should("be.checked");
+      onOnboardingPageStartingBusiness.clickNext();
+      cy.url().should("include", "dashboard");
+    });
 
-          const otherValues = carServiceOptions.filter(
-            (value: CarServiceType) => value !== carService,
-          );
-          for (const value of otherValues) {
-            onOnboardingPageStartingBusiness.getCarServiceRadio(value).should("not.be.checked");
-          }
-        }
-        const isChildcareForSixOrMore = industry.industryOnboardingQuestions.isChildcareForSixOrMore
-          ? Boolean(randomInt() % 2)
-          : undefined;
+    it("Onboards ready to start business", () => {
+      cy.url().should("include", "onboarding?page=1");
+      onOnboardingPageStartingBusiness.selectBusinessPersonaRadio("STARTING");
+      onOnboardingPageStartingBusiness.getBusinessPersonaRadio("STARTING").should("be.checked");
+      onOnboardingPageStartingBusiness.clickNext();
 
-        if (isChildcareForSixOrMore === undefined) {
-          onOnboardingPageStartingBusiness.getChildcareRadio().should("not.exist");
-        } else {
-          onOnboardingPageStartingBusiness.selectChildcareRadio(isChildcareForSixOrMore);
-          onOnboardingPageStartingBusiness
-            .getChildcareRadio(isChildcareForSixOrMore)
-            .should("be.checked");
-          onOnboardingPageStartingBusiness
-            .getChildcareRadio(!isChildcareForSixOrMore)
-            .should("not.be.checked");
-        }
+      cy.url().should("include", "onboarding?page=2");
 
-        const petCareHousing = industry.industryOnboardingQuestions.isPetCareHousingApplicable
-          ? Boolean(randomInt() % 2)
-          : undefined;
+      onOnboardingPageStartingBusiness.selectBusinessIntentRadio("false");
+      onOnboardingPageStartingBusiness.getBusinessIntentRadio("false").should("be.checked");
 
-        if (petCareHousing === undefined) {
-          onOnboardingPageStartingBusiness.getPetCareHousingRadio().should("not.exist");
-        } else {
-          onOnboardingPageStartingBusiness.selectPetCareHousingRadio(petCareHousing);
-          onOnboardingPageStartingBusiness
-            .getPetCareHousingRadio(petCareHousing)
-            .should("be.checked");
-          onOnboardingPageStartingBusiness
-            .getPetCareHousingRadio(!petCareHousing)
-            .should("not.be.checked");
-        }
-
-        const willSellPetCareItems = industry.industryOnboardingQuestions.willSellPetCareItems
-          ? Boolean(randomInt() % 2)
-          : undefined;
-
-        if (willSellPetCareItems === undefined) {
-          onOnboardingPageStartingBusiness.getWillSellPetcareItemsRadio().should("not.exist");
-        } else {
-          onOnboardingPageStartingBusiness.selectWillSellPetcareItemsRadio(willSellPetCareItems);
-          onOnboardingPageStartingBusiness
-            .getWillSellPetcareItemsRadio(willSellPetCareItems)
-            .should("be.checked");
-          onOnboardingPageStartingBusiness
-            .getWillSellPetcareItemsRadio(!willSellPetCareItems)
-            .should("not.be.checked");
-        }
-
-        const residentialConstructionTypeApplicable = industry.industryOnboardingQuestions
-          .isConstructionTypeApplicable
-          ? Boolean(randomInt() % 2)
-          : undefined;
-
-        if (residentialConstructionTypeApplicable === undefined) {
-          onOnboardingPageStartingBusiness.getConstructionTypeItemsRadio().should("not.exist");
-        } else {
-          const constructionType = residentialConstructionTypeApplicable
-            ? "RESIDENTIAL"
-            : "COMMERCIAL_OR_INDUSTRIAL";
-          onOnboardingPageStartingBusiness.selectConstructionTypeRadio(constructionType);
-          onOnboardingPageStartingBusiness
-            .getConstructionTypeItemsRadio(constructionType)
-            .should("be.checked");
-          if (constructionType === "RESIDENTIAL") {
-            onOnboardingPageStartingBusiness.getResidentialConstructionTypeRadio().should("exist");
-            const residentialConstructionChoices = [
-              "NEW_HOME_CONSTRUCTION",
-              "HOME_RENOVATIONS",
-              "BOTH",
-            ] as ResidentialConstructionType[];
-            const randomAnswerIndex = Math.floor(Math.random() * 3);
-            const residentialConstructionTypeOption =
-              residentialConstructionChoices[randomAnswerIndex];
-
-            onOnboardingPageStartingBusiness.selectResidentialConstructionTypeRadio(
-              residentialConstructionTypeOption,
-            );
-            onOnboardingPageStartingBusiness
-              .getResidentialConstructionTypeItemsRadio(residentialConstructionTypeOption)
-              .should("be.checked");
-          } else {
-            onOnboardingPageStartingBusiness
-              .getResidentialConstructionTypeRadio()
-              .should("not.exist");
-
-            const selectValue = Boolean(randomInt() % 2);
-            onOnboardingPageStartingBusiness
-              .getCommercialConstructionTypeItemsRadio(selectValue)
-              .should("exist");
-            onOnboardingPageStartingBusiness.selectCommercialConstructionTypeItemsRadio(
-              selectValue,
-            );
-            onOnboardingPageStartingBusiness
-              .getCommercialConstructionTypeItemsRadio(selectValue)
-              .should("be.checked");
-          }
-        }
-
-        const propertyLeaseTypeChoices = [
-          "SHORT_TERM_RENTAL",
-          "LONG_TERM_RENTAL",
-          "BOTH",
-        ] as PropertyLeaseType[];
-
-        const propertyLeaseTypeApplicable = industry.industryOnboardingQuestions
-          .whatIsPropertyLeaseType
-          ? propertyLeaseTypeChoices[Math.floor(Math.random() * 3)]
-          : undefined;
-
-        if (propertyLeaseTypeApplicable === undefined) {
-          onOnboardingPageStartingBusiness.getPropertyLeaseTypeRadio().should("not.exist");
-        } else {
-          onOnboardingPageStartingBusiness.selectLongTermPropertyLeaseTypeRadio(
-            propertyLeaseTypeApplicable,
-          );
-          onOnboardingPageStartingBusiness
-            .getPropertyLeaseTypeRadio(propertyLeaseTypeApplicable)
-            .should("be.checked");
-          const randomAnswer = Boolean(randomInt() % 2);
-          if (propertyLeaseTypeApplicable === "SHORT_TERM_RENTAL") {
-            onOnboardingPageStartingBusiness
-              .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
-              .should("not.exist");
-          } else {
-            onOnboardingPageStartingBusiness
-              .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
-              .should("exist");
-
-            onOnboardingPageStartingBusiness.selectThreeOrMoreRentalUnitsRadio(randomAnswer);
-            onOnboardingPageStartingBusiness
-              .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
-              .should("be.checked");
-          }
-        }
-
-        completeEmploymentAgencyOnboarding(industry);
-
-        onOnboardingPageStartingBusiness.clickShowMyGuide();
-        cy.url().should("include", "dashboard");
-      });
-    }
+      onOnboardingPageStartingBusiness.clickNext();
+      cy.url().should("include", "dashboard");
+    });
   });
 
   describe("Mobile", () => {
@@ -197,14 +44,31 @@ describe("Onboarding for all industries when starting a business [feature] [all]
       cy.loginByCognitoApi();
     });
 
-    it("Onboarding for All Other Businesses", () => {
+    it("Onboarding for learning", () => {
       cy.url().should("include", "onboarding?page=1");
       onOnboardingPageStartingBusiness.selectBusinessPersonaRadio("STARTING");
       onOnboardingPageStartingBusiness.getBusinessPersonaRadio("STARTING").should("be.checked");
       onOnboardingPageStartingBusiness.clickNext();
 
       cy.url().should("include", "onboarding?page=2");
-      onOnboardingPageStartingBusiness.selectIndustryDropdown("generic");
+
+      onOnboardingPageStartingBusiness.selectBusinessIntentRadio("true");
+      onOnboardingPageStartingBusiness.getBusinessIntentRadio("true").should("be.checked");
+
+      onOnboardingPageStartingBusiness.clickNext();
+      cy.url().should("include", "dashboard");
+    });
+
+    it("Onboarding for ready to start", () => {
+      cy.url().should("include", "onboarding?page=1");
+      onOnboardingPageStartingBusiness.selectBusinessPersonaRadio("STARTING");
+      onOnboardingPageStartingBusiness.getBusinessPersonaRadio("STARTING").should("be.checked");
+      onOnboardingPageStartingBusiness.clickNext();
+
+      cy.url().should("include", "onboarding?page=2");
+
+      onOnboardingPageStartingBusiness.selectBusinessIntentRadio("false");
+      onOnboardingPageStartingBusiness.getBusinessIntentRadio("false").should("be.checked");
 
       onOnboardingPageStartingBusiness.clickNext();
       cy.url().should("include", "dashboard");

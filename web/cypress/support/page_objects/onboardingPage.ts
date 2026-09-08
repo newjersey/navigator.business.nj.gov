@@ -16,6 +16,10 @@ export class OnboardingPage {
     return cy.get(`input[name="business-persona"][value="${radio}"]`);
   }
 
+  getBusinessIntent(radio: string) {
+    return cy.get(`input[name="learning-business-question"][value="${radio}"]`);
+  }
+
   getForeignBusinessCheckbox(value: string) {
     return cy.get(`input[name="foreign-business-type"][value="${value}"]`);
   }
@@ -183,6 +187,10 @@ export class OnboardingPage {
 
   selectBusinessPersona(radio: string) {
     this.getBusinessPersona(radio).check();
+  }
+
+  selectBusinessIntent(radio: string) {
+    this.getBusinessIntent(radio).check();
   }
 
   checkForeignBusinessType(value: string) {
