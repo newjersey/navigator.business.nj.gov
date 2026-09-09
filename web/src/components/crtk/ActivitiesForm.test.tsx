@@ -16,7 +16,9 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ sendCrtkActivitiesEmail: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  sendCrtkActivitiesEmail: jest.fn(),
+}));
 const mockApi = api as jest.Mocked<typeof api>;
 
 const mockOnSearchAgain = jest.fn();
@@ -79,7 +81,7 @@ describe("ActivitiesForm", () => {
         email: userData.user.email,
         businessName: currentBusiness?.crtkData?.crtkBusinessDetails?.businessName,
         businessStatus: currentBusiness?.profileData.businessPersona,
-        businessAddress: currentBusiness?.crtkData?.crtkBusinessDetails?.addressLine1,
+        businessAddress: `${currentBusiness?.crtkData?.crtkBusinessDetails?.addressLine1}, ${currentBusiness?.crtkData?.crtkBusinessDetails?.city} ${currentBusiness?.crtkData?.crtkBusinessDetails?.addressZipCode}`,
         industry: currentBusiness?.profileData.industryId,
         ein: currentBusiness?.crtkData?.crtkBusinessDetails?.ein,
         naicsCode: validNaicsCode,
