@@ -472,7 +472,12 @@ app.use(
 
 app.use(
   "/api/external",
-  externalEndpointRouterFactory(dynamoDataClient, addGovDeliveryNewsletter, logger),
+  externalEndpointRouterFactory(
+    dynamoDataClient,
+    addGovDeliveryNewsletter,
+    govDeliveryNewsletterClient,
+    logger,
+  ),
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch, logger));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, dynamoDataClient, logger));

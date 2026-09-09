@@ -8,8 +8,9 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getNaicsCode, validateEmail } from "@/lib/utils/helpers";
+import { getNaicsCode } from "@/lib/utils/helpers";
 import { CrtkEmailMetadata } from "@businessnjgovnavigator/shared/crtk";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
 import { ReactElement, useState } from "react";
 
 interface Props {

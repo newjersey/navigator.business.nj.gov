@@ -45,6 +45,7 @@ runs:
           --build-arg NEXT_PUBLIC_MULTILINGUAL_ENABLED="${NEXT_PUBLIC_MULTILINGUAL_ENABLED:-}" \
           --build-arg NEXT_PUBLIC_FEEDBACK_WIDGET_MODE="${NEXT_PUBLIC_FEEDBACK_WIDGET_MODE:-}" \
           --build-arg NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED="${NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED:-}" \
+          --build-arg NEXT_PUBLIC_API_BASE_URL="${NEXT_PUBLIC_API_BASE_URL:-}" \
           -t "$image_repo:$image_name-$IMAGE_VERSION" \
           -t "$image_repo:$image_name" \
           -t "$image_repo:$image_name-latest" \

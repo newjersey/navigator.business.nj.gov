@@ -7,7 +7,7 @@ import {
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import { templateEval, validateEmail } from "@/lib/utils/helpers";
+import { templateEval } from "@/lib/utils/helpers";
 import {
   FieldsForErrorHandling,
   FormationFields,
@@ -28,6 +28,7 @@ import {
   SIGNER_NAME_MAX_CHAR,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
 import { FormationFieldErrorState } from "@businessnjgovnavigator/shared/types";
 
 export const onlyHasErrorIfEmpty: FormationFields[] = [

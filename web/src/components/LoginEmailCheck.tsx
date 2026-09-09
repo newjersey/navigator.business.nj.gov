@@ -9,7 +9,7 @@ import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { validateEmail } from "@/lib/utils/helpers";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
 import { InputLabel } from "@mui/material";
 import { useRouter } from "next/compat/router";
 
