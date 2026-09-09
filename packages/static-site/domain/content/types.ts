@@ -25,6 +25,9 @@ export type {
   TaxFilingMethod,
 } from "@businessnjgovnavigator/content-types";
 
+/** Highest numeric suffix `PageItem`'s indexed section fields (`heading-N`, `main-text-N`, etc.) are scanned up to. */
+export const MAX_PAGE_SECTION_INDEX = 11;
+
 /** A static page managed in the CMS with structured heading/text sections. */
 export interface PageItem {
   /** Display name of the page. */
@@ -47,7 +50,14 @@ export interface PageItem {
   "main-link-text"?: string;
   /** Slug of the parent page (used for breadcrumb navigation). */
   "primary-page"?: string;
-  /** Dynamic heading and text section fields (heading-N, main-text-N, etc.). */
+  /**
+   * Dynamic heading and text section fields (heading-N, main-text-N, etc.).
+   *
+   * The plastic-ban-law page additionally reads two indexed fields, parsed
+   * in `PlasticBanPage.tsx`: `collapsible-N` (`open` | `closed`, marks
+   * section N as a collapsible accordion) and `contents-label-N` (lists
+   * section N in that page's Contents rail under this label).
+   */
   [key: string]: string | undefined;
 }
 

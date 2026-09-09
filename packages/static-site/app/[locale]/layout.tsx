@@ -11,6 +11,7 @@ import "@/app/globals.css";
 import "@/app/header.css";
 import "@/app/impact-report.css";
 import "@/app/landing.css";
+import "@/app/plastic-ban-law.css";
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
