@@ -1,7 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { getAllStarterKitUrls } from "@/lib/utils/starterKits";
+
+const SCRIPT_DIRECTORY = path.dirname(fileURLToPath(import.meta.url));
 
 // Always the production hostname, regardless of which stage builds this file. Non-prod
 // hostnames (dev/testing/staging) are gated behind Basic Auth and must never be published in a
@@ -36,10 +39,12 @@ const generateSitemap = async (): Promise<void> => {
       .join("")}
   </urlset>`;
 
-  await fs.writeFile(path.join(__dirname, "..", "..", "public", "sitemap.xml"), sitemap);
+  await fs.writeFile(path.join(SCRIPT_DIRECTORY, "..", "..", "public", "sitemap.xml"), sitemap);
 };
 
-generateSitemap().catch((error: unknown) => {
+try {
+  await generateSitemap();
+} catch (error: unknown) {
   console.error("Failed to generate sitemap.xml", error);
   process.exitCode = 1;
-});
+}

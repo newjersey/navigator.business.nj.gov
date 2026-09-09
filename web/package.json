@@ -25,7 +25,7 @@
     "prepare:deploy": "next export",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
-    "sitemap": "yarn dlx tsx src/scripts/generateSitemap.ts",
+    "sitemap": "yarn dlx tsx src/scripts/generateSitemap.mts",
     "snapshot:update": "jest --updateSnapshot",
     "spellcheck": "cspell '**/*.md' '**/*.yml' 'src/**/*.json' 'src/**/*.{ts,tsx}' '!**/*.test.{ts,tsx}' --config ../cspell.json --no-progress",
     "start": "next start",
