@@ -4,6 +4,7 @@ import path from "node:path";
 import { getAllStarterKitUrls } from "@/lib/utils/starterKits";
 
 const generateSitemap = (): void => {
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL ?? "http://localhost:3000";
   const urls = [{ loc: "/", changefreq: "monthly", priority: "1.0" }];
 
   for (const pathObject of getAllStarterKitUrls()) {
@@ -22,7 +23,7 @@ const generateSitemap = (): void => {
       .map(
         (url) => `
       <url>
-        <loc>${`https://navigator.business.nj.gov${url.loc}`}</loc>
+        <loc>${`${baseUrl}${url.loc}`}</loc>
         <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
         <changefreq>${url.changefreq}</changefreq>
         <priority>${url.priority}</priority>
