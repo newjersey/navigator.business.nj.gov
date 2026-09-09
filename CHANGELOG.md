@@ -1,3 +1,26 @@
+# [2026.19.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.18.0...v2026.19.0) (2026-09-09)
+
+
+### Bug Fixes
+
+* [AB#17899](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17899) improve spacing on static site cards ([d114fc2](https://github.com/newjersey/navigator.business.nj.gov/commit/d114fc276217f5b52f953090818bfeba3d4082e6))
+* [AB#17904](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17904) add missing env vars for feedback widget in workflows ([a594068](https://github.com/newjersey/navigator.business.nj.gov/commit/a594068b1500739765be4078cfe58de7a05963be))
+* [AB#17910](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17910) race condition for injecting Intercom ([fff9d8b](https://github.com/newjersey/navigator.business.nj.gov/commit/fff9d8b1e04121bf78feff72d07bb9e71fca1b83))
+* [AB#17953](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17953) hide search links in account nav bar ([b2ff1e9](https://github.com/newjersey/navigator.business.nj.gov/commit/b2ff1e95bfb6e417a1fd0ad5665770b09f8fa44e))
+* [AB#17994](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17994) keep Decap dates as strings ([5f4418e](https://github.com/newjersey/navigator.business.nj.gov/commit/5f4418ef7dfbe131cbc9a65972f7421a85b34a00))
+* [AB#17996](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17996) update broken youtube link and related copy ([07a8aa5](https://github.com/newjersey/navigator.business.nj.gov/commit/07a8aa5d3b9e79443eac50626f170c6eb9faeafc))
+
+
+### Features
+
+* [AB#16176](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/16176) Dockerfile improvements ([fa42d3b](https://github.com/newjersey/navigator.business.nj.gov/commit/fa42d3ba525e21ee3ef16adda29dad472055182d))
+* [AB#17816](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17816) hide survey monkey prompt on smaller screen widths ([af7f30a](https://github.com/newjersey/navigator.business.nj.gov/commit/af7f30a38d051c3a342a0c7d9e06a8d38dd4f69d))
+* [AB#17925](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17925) remove ab experience property from userData ([8526753](https://github.com/newjersey/navigator.business.nj.gov/commit/8526753bd217ee64c8becfad75229bb083cddc7b))
+* [AB#17964](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17964) Replace Starting Step 2 industry selection with intent selection ([5524c87](https://github.com/newjersey/navigator.business.nj.gov/commit/5524c87741f195b62fcb935de6b6bc2338817182))
+* [AB#17965](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17965) page skeleton for learning version of tasks ([5fdb4e1](https://github.com/newjersey/navigator.business.nj.gov/commit/5fdb4e12dee8e1739655898604fc9b8c4dfbf5cc))
+* [AB#17984](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17984) remove prod hold from static site release pipeline ([1a4bb86](https://github.com/newjersey/navigator.business.nj.gov/commit/1a4bb86c5d1aa19abeeb7e588e6882015329b489))
+* [AB#17993](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17993) create housing developer resources page ([30d6581](https://github.com/newjersey/navigator.business.nj.gov/commit/30d658121db7e7ea695034b182f642955c92b0ef))
+
 # [2026.18.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.17.2...v2026.18.0) (2026-09-02)
 
 
