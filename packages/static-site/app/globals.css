@@ -196,7 +196,16 @@ ul.usa-card-group {
   margin-inline: -0.75rem;
 }
 
+/* USWDS gives every card container an inline margin as half of the card-group
+   gutter, offset by the group's own negative margin above. Cards outside a
+   group have no negative-margin ancestor to offset, so the margin just insets
+   them from the surrounding layout for no reason — reset it there and restore
+   it only for cards that are actually laid out in a group. */
 div.usa-card__container {
+  margin-inline: 0;
+}
+
+.usa-card-group div.usa-card__container {
   margin-inline: 0.75rem;
 }
 

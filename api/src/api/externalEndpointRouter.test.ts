@@ -1,9 +1,10 @@
 import { externalEndpointRouterFactory } from "@api/externalEndpointRouter";
-import { AddNewsletter, DatabaseClient } from "@domain/types";
+import { AddNewsletter, DatabaseClient, NewsletterClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { generateUser, generateUserData } from "@shared/test";
 import { Express } from "express";
+import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
 import request from "supertest";
 
@@ -37,6 +38,7 @@ describe("externalEndpointRouter", () => {
   let app: Express;
   let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
   let stubAddNewsletter: jest.MockedFunction<AddNewsletter>;
+  let stubNewsletterClient: jest.Mocked<NewsletterClient>;
 
   beforeEach(async () => {
     stubDynamoDataClient = {
@@ -49,8 +51,18 @@ describe("externalEndpointRouter", () => {
       findBusinessesByHashedTaxId: jest.fn(),
     };
     stubAddNewsletter = jest.fn();
+    stubNewsletterClient = {
+      add: jest.fn(),
+    };
     app = setupExpress(false);
-    app.use(externalEndpointRouterFactory(stubDynamoDataClient, stubAddNewsletter, DummyLogWriter));
+    app.use(
+      externalEndpointRouterFactory(
+        stubDynamoDataClient,
+        stubAddNewsletter,
+        stubNewsletterClient,
+        DummyLogWriter,
+      ),
+    );
     jest.spyOn(DummyLogWriter, "LogInfo").mockImplementation(() => {});
     jest.spyOn(DummyLogWriter, "LogError").mockImplementation(() => {});
   });
@@ -124,6 +136,69 @@ describe("externalEndpointRouter", () => {
         expect(stubAddNewsletter).not.toHaveBeenCalled();
         expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
           expect.stringContaining("no update to newsletter preferences needed for userId"),
+        );
+      });
+    });
+
+    describe("newsletter/subscribe", () => {
+      it("subscribes a valid email and returns the client's response", async () => {
+        stubNewsletterClient.add.mockResolvedValue({ success: true, status: "SUCCESS" });
+
+        const response = await request(app)
+          .post("/newsletter/subscribe")
+          .send({ email: "user@example.com" });
+
+        expect(stubNewsletterClient.add).toHaveBeenCalledWith("user@example.com");
+        expect(response.status).toEqual(StatusCodes.OK);
+        expect(response.body).toEqual({ success: true, status: "SUCCESS" });
+        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+          expect.stringContaining("newsletter subscribe result: SUCCESS"),
+        );
+      });
+
+      it("passes through a failure response from the newsletter client", async () => {
+        stubNewsletterClient.add.mockResolvedValue({ success: false, status: "EMAIL_ERROR" });
+
+        const response = await request(app)
+          .post("/newsletter/subscribe")
+          .send({ email: "user@example.com" });
+
+        expect(response.status).toEqual(StatusCodes.OK);
+        expect(response.body).toEqual({ success: false, status: "EMAIL_ERROR" });
+        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+          expect.stringContaining("newsletter subscribe result: EMAIL_ERROR"),
+        );
+      });
+
+      it("rejects a malformed email without calling the newsletter client", async () => {
+        const response = await request(app)
+          .post("/newsletter/subscribe")
+          .send({ email: "not-an-email" });
+
+        expect(response.status).toEqual(StatusCodes.BAD_REQUEST);
+        expect(stubNewsletterClient.add).not.toHaveBeenCalled();
+        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+          expect.stringContaining("rejected invalid email"),
+        );
+      });
+
+      it("rejects a missing email without calling the newsletter client", async () => {
+        const response = await request(app).post("/newsletter/subscribe").send({});
+
+        expect(response.status).toEqual(StatusCodes.BAD_REQUEST);
+        expect(stubNewsletterClient.add).not.toHaveBeenCalled();
+        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+          expect.stringContaining("rejected invalid email"),
+        );
+      });
+
+      it("rejects a non-string email without calling the newsletter client", async () => {
+        const response = await request(app).post("/newsletter/subscribe").send({ email: 12345 });
+
+        expect(response.status).toEqual(StatusCodes.BAD_REQUEST);
+        expect(stubNewsletterClient.add).not.toHaveBeenCalled();
+        expect(DummyLogWriter.LogInfo).toHaveBeenCalledWith(
+          expect.stringContaining("rejected invalid email"),
         );
       });
     });

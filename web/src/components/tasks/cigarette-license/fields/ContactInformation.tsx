@@ -5,7 +5,8 @@ import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { getPhoneNumberFormat, validateEmail } from "@/lib/utils/helpers";
+import { getPhoneNumberFormat } from "@/lib/utils/helpers";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
 import { ReactElement, useContext } from "react";
 
 interface Props {
