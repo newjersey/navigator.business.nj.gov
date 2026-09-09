@@ -26,7 +26,7 @@ export const GovDeliveryNewsletterClient = (
   const add = (email: string): Promise<NewsletterResponse> => {
     const url = `${config.baseUrl}/api/add_script_subscription`;
     config.logWriter.LogInfo(
-      `NewsletterResponse - GovDelivery - Id:${logId} - Request Sent. url: ${url}. email: ${email}`,
+      `NewsletterResponse - GovDelivery - Id:${logId} - Request Sent. url: ${url}`,
     );
     return axios
       .get(url, {

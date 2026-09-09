@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 import type { UpdatesPageMessages } from "@/domain/content/messageTypes";
 import type { RecentItem } from "@/domain/content/types";
+import NewsletterSubscribeForm from "./NewsletterSubscribeForm";
 import Pagination from "./Pagination";
 import { renderResultCount } from "./renderResultCount";
 import UpdatesCard from "./UpdatesCard";
@@ -489,6 +490,8 @@ const UpdatesPageContent = ({ messages, recents }: Props) => {
         <h1>{messages.title}</h1>
         <p className="usa-intro">{messages.intro}</p>
       </div>
+
+      <NewsletterSubscribeForm messages={messages} />
 
       <FilterSidebar
         messages={messages}

@@ -12,12 +12,9 @@ import {
   getFullNameErrorVariant,
   isFullNameValid,
 } from "@/lib/domain-logic/isFullNameValid";
-import {
-  getPhoneNumberFormat,
-  validateEmail,
-  validateOptionalPhoneNumber,
-} from "@/lib/utils/helpers";
+import { getPhoneNumberFormat, validateOptionalPhoneNumber } from "@/lib/utils/helpers";
 import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useEffect, useRef, useState } from "react";
 
