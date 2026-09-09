@@ -43,6 +43,19 @@ p a,
   text-decoration: underline;
 }
 
+/* A Markdown link to a YouTube `/embed/` URL renders as an inline player (see
+   components/learn/pageMarkdown.tsx). An `iframe` has no intrinsic aspect
+   ratio and would otherwise fall back to the HTML default 300x150, so the
+   player's shape is set here; `max-width` keeps it from stretching the full
+   width of a `.layout-wide` column. */
+.usa-prose iframe.video-embed {
+  aspect-ratio: 16 / 9;
+  border: 0;
+  display: block;
+  max-width: 40rem;
+  width: 100%;
+}
+
 /* Keep the visited state on-brand instead of the browser default purple,
    matching .brought-to-you-by__agency:visited in landing.css. */
 .page-not-found__home-link:visited {

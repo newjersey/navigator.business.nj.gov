@@ -47,7 +47,14 @@ export interface PageItem {
   "main-link-text"?: string;
   /** Slug of the parent page (used for breadcrumb navigation). */
   "primary-page"?: string;
-  /** Dynamic heading and text section fields (heading-N, main-text-N, etc.). */
+  /**
+   * Dynamic heading and text section fields (heading-N, main-text-N, etc.).
+   *
+   * The plastic-ban-law page additionally reads two indexed fields via
+   * `parsePlasticBanSections.ts`: `collapsible-N` (`open` | `closed`, marks
+   * section N as a collapsible accordion) and `contents-label-N` (lists
+   * section N in that page's Contents rail under this label).
+   */
   [key: string]: string | undefined;
 }
 
