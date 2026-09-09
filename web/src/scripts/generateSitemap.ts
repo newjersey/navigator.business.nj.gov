@@ -3,8 +3,12 @@ import path from "node:path";
 
 import { getAllStarterKitUrls } from "@/lib/utils/starterKits";
 
-const generateSitemap = (): void => {
-  const baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL ?? "http://localhost:3000";
+// Always the production hostname, regardless of which stage builds this file. Non-prod
+// hostnames (dev/testing/staging) are gated behind Basic Auth and must never be published in a
+// sitemap for search engines to index.
+const PRODUCTION_BASE_URL = "https://account.business.nj.gov";
+
+const generateSitemap = async (): Promise<void> => {
   const urls = [{ loc: "/", changefreq: "monthly", priority: "1.0" }];
 
   for (const pathObject of getAllStarterKitUrls()) {
@@ -23,7 +27,7 @@ const generateSitemap = (): void => {
       .map(
         (url) => `
       <url>
-        <loc>${`${baseUrl}${url.loc}`}</loc>
+        <loc>${`${PRODUCTION_BASE_URL}${url.loc}`}</loc>
         <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
         <changefreq>${url.changefreq}</changefreq>
         <priority>${url.priority}</priority>
@@ -32,7 +36,10 @@ const generateSitemap = (): void => {
       .join("")}
   </urlset>`;
 
-  fs.writeFile(path.join(__dirname, "..", "..", "public", "sitemap.xml"), sitemap);
+  await fs.writeFile(path.join(__dirname, "..", "..", "public", "sitemap.xml"), sitemap);
 };
 
-generateSitemap();
+generateSitemap().catch((error: unknown) => {
+  console.error("Failed to generate sitemap.xml", error);
+  process.exitCode = 1;
+});
