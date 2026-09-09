@@ -24,6 +24,12 @@ const BASIC_AUTH_REALM = "Business.NJ.gov";
 const localeProxy = createMiddleware(routing);
 
 /**
+ * Path of the generated sitemap, which must still enforce Basic Auth on protected
+ * deployments but must never be rewritten by locale middleware.
+ */
+const SITEMAP_PATHNAME = "/sitemap.xml";
+
+/**
  * Reads runtime environment values supplied by ECS.
  */
 const getRuntimeEnvironmentValue = (name: string): string | undefined => {
@@ -66,10 +72,15 @@ const createUnauthorizedResponse = (): NextResponse => {
 
 /**
  * Applies Basic Auth for protected deployments before locale routing.
+ *
+ * The sitemap is excluded from locale routing (it has no locale prefix) but must still pass
+ * Basic Auth, since a protected deployment's URLs must never be exposed to search engines.
  */
 const proxy = (request: NextRequest): NextResponse => {
+  const isSitemapRequest = request.nextUrl.pathname === SITEMAP_PATHNAME;
+
   if (!isBasicAuthEnabled()) {
-    return localeProxy(request);
+    return isSitemapRequest ? NextResponse.next() : localeProxy(request);
   }
 
   const credentials = getBasicAuthCredentials();
@@ -87,7 +98,7 @@ const proxy = (request: NextRequest): NextResponse => {
     return createUnauthorizedResponse();
   }
 
-  return localeProxy(request);
+  return isSitemapRequest ? NextResponse.next() : localeProxy(request);
 };
 
 /**
@@ -98,8 +109,11 @@ export default proxy;
 /**
  * Declares which routes should pass through locale middleware.
  *
- * The matcher excludes API routes, health checks, framework assets, and file requests.
+ * The matcher excludes API routes, health checks, framework assets, and file requests, with an
+ * explicit exception for the sitemap so it still passes through Basic Auth on protected
+ * deployments. Next.js statically analyzes this export at build time, so the sitemap path must
+ * be a literal string here rather than a reference to `SITEMAP_PATHNAME`.
  */
 export const config = {
-  matcher: ["/((?!api|healthz|_next|_vercel|.*\\..*).*)"],
+  matcher: ["/((?!api|healthz|_next|_vercel|.*\\..*).*)", "/sitemap.xml"],
 };

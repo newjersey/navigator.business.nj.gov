@@ -1,3 +1,10 @@
+## [2026.19.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.19.0...v2026.19.1) (2026-09-09)
+
+
+### Bug Fixes
+
+* address issues with sitemap base domain ([07acbc0](https://github.com/newjersey/navigator.business.nj.gov/commit/07acbc0392733b40769b89ae66f64d89a940ff33))
+
 # [2026.19.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.18.0...v2026.19.0) (2026-09-09)
 
 
