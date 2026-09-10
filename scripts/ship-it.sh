@@ -27,4 +27,4 @@ function print_success {
 }
 
 # run tests, feature tests, and push
- yarn test  && git push "$@" && print_success
+ pnpm test  && git push "$@" && print_success

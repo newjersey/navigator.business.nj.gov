@@ -130,10 +130,16 @@ jobs:
         }},${{ secrets.COGNITO_IDENTITY_POOL_ID_CONTENT }}"
     steps:
       - uses: actions/checkout@v7
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: package.json
+          run_install: false
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
       - name: Download Build Workspace
         uses: actions/download-artifact@v8
         with:

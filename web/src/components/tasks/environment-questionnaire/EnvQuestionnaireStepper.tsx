@@ -45,12 +45,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
   type EnvRequirementsStepNames =
-    | "Instructions"
-    | "Air"
-    | "Land"
-    | "Waste"
-    | "Drinking Water"
-    | "Wastewater";
+    "Instructions" | "Air" | "Land" | "Waste" | "Drinking Water" | "Wastewater";
 
   const EnvRequirementsConfiguration: {
     name: EnvRequirementsStepNames;

@@ -162,10 +162,7 @@ export type v142CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type v142CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type v142ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
 export type v142ResidentialConstructionType =
-  | "NEW_HOME_CONSTRUCTION"
-  | "HOME_RENOVATIONS"
-  | "BOTH"
-  | undefined;
+  "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export type v142EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
 export type v142EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
 

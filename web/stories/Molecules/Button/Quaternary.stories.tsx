@@ -1,6 +1,6 @@
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof SecondaryButton> = {
   title: "Molecules/Button/Quaternary",

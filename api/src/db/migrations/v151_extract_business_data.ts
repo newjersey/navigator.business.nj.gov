@@ -167,10 +167,7 @@ export type v151CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type v151CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type v151ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
 export type v151ResidentialConstructionType =
-  | "NEW_HOME_CONSTRUCTION"
-  | "HOME_RENOVATIONS"
-  | "BOTH"
-  | undefined;
+  "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export type v151EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
 export type v151EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
 
@@ -570,11 +567,7 @@ export type v151WasteData = {
 };
 
 export type v151WasteQuestionnaireFieldIds =
-  | "hazardousMedicalWaste"
-  | "compostWaste"
-  | "treatProcessWaste"
-  | "constructionDebris"
-  | "noWaste";
+  "hazardousMedicalWaste" | "compostWaste" | "treatProcessWaste" | "constructionDebris" | "noWaste";
 
 export type v151WasteQuestionnaireData = Record<v151WasteQuestionnaireFieldIds, boolean>;
 

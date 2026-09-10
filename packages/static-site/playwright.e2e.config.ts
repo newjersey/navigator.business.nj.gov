@@ -23,6 +23,13 @@ process.env.NEXT_PUBLIC_MULTILINGUAL_ENABLED = "true";
 const playwrightE2eConfig = defineConfig({
   testDir: "./tests/e2e",
   timeout: 120_000,
+  // biome-ignore lint/style/noProcessEnv: reads the CI flag, same as Playwright's own scaffolded default.
+  retries: process.env.CI ? 2 : 0,
+  // Distinct from the a11y/e2e-english-only configs' output directories so running all three
+  // suites in the same working directory can't have one suite's report/traces/screenshots
+  // overwrite another's.
+  outputDir: "test-results/e2e",
+  reporter: [["html", { outputFolder: "playwright-report/e2e", open: "never" }]],
   use: {
     baseURL: SERVER_URL,
     headless: true,

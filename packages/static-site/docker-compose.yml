@@ -3,6 +3,17 @@ services:
     build:
       context: ../..
       dockerfile: packages/static-site/Dockerfile.dev
+    # Joining the single root pnpm workspace means any filtered `pnpm install`
+    # run against this image also installs the *root* project's own
+    # dependencies (pnpm always installs the root importer regardless of
+    # `--filter` scope — verified empirically, there is no install-time flag
+    # that skips it). Root's devDependencies include `puppeteer@9.1.1`
+    # (transitively, via `@cypress-audit/lighthouse`/`pa11y`), which has no
+    # published linux/arm64 Chromium build and crashes the install outright
+    # on native Apple Silicon Docker hosts. Pin amd64 (works via
+    # emulation/Rosetta on Colima/Docker Desktop) so the install succeeds
+    # regardless of host architecture.
+    platform: linux/amd64
     container_name: static-site
     image: businessnjgovnavigator-static-site:dev
     command: pnpm dev --hostname 0.0.0.0 --port 3000
@@ -18,18 +29,27 @@ services:
     tmpfs:
       - /tmp
     volumes:
-      - ./app:/app/app
-      - ./components:/app/components
-      - ./domain:/app/domain
-      - ./messages:/app/messages
-      - ./public:/app/public
-      - ./scripts:/app/scripts
-      - ./next.config.ts:/app/next.config.ts
-      - ./proxy.ts:/app/proxy.ts
-      - ./proxyAuth.ts:/app/proxyAuth.ts
-      - ./tsconfig.json:/app/tsconfig.json
-      - ../../content:/content
-      - static_site_next:/app/.next
+      - ./app:/app/packages/static-site/app
+      - ./components:/app/packages/static-site/components
+      - ./domain:/app/packages/static-site/domain
+      - ./messages:/app/packages/static-site/messages
+      - ./public:/app/packages/static-site/public
+      - ./scripts:/app/packages/static-site/scripts
+      - ./next.config.ts:/app/packages/static-site/next.config.ts
+      - ./proxy.ts:/app/packages/static-site/proxy.ts
+      - ./proxyAuth.ts:/app/packages/static-site/proxyAuth.ts
+      - ./tsconfig.json:/app/packages/static-site/tsconfig.json
+      # Mount only the `content` subdirectories the app actually reads
+      # (`content/lib`, `content/src` — see loadContent.ts), not the whole
+      # `content` package. Mounting the whole directory would also expose
+      # its `package.json` at `/app/content`, which pnpm would then discover
+      # as a live workspace member (since `content` is one of the root
+      # `pnpm-workspace.yaml`'s package globs) — and `content` declares a
+      # real `@businessnjgovnavigator/shared: workspace:*` dependency that
+      # isn't present in this image, breaking pnpm's dev-time lockfile check.
+      - ../../content/lib:/app/content/lib
+      - ../../content/src:/app/content/src
+      - static_site_next:/app/packages/static-site/.next
 
 networks:
   static_site_network:

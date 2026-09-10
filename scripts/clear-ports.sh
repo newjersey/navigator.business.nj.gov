@@ -100,37 +100,37 @@ else
 fi
 
 # Navigator or static-site web server
-yarn exec kill-port 3000
+pnpm exec kill-port 3000
 
 # Feature-test web server
-yarn exec kill-port 3001
+pnpm exec kill-port 3001
 
 # Feature-test API
-yarn exec kill-port 5001
+pnpm exec kill-port 5001
 
 # Local Navigator API
-yarn exec kill-port 5002
+pnpm exec kill-port 5002
 
 # Legacy serverless-offline Lambda runtime
-yarn exec kill-port 5050
+pnpm exec kill-port 5050
 
 # Feature-test Lambda runtime
-yarn exec kill-port 5051
+pnpm exec kill-port 5051
 
 # Storybook
-yarn exec kill-port 6006
+pnpm exec kill-port 6006
 
 # Local DynamoDB
-yarn exec kill-port 8000
+pnpm exec kill-port 8000
 
 # DynamoDB Admin or feature-test DynamoDB
-yarn exec kill-port 8001
+pnpm exec kill-port 8001
 
 # Decap CMS proxy
-yarn exec kill-port 8081
+pnpm exec kill-port 8081
 
 # Local WireMock
-yarn exec kill-port 9000
+pnpm exec kill-port 9000
 
 # Feature-test WireMock
-yarn exec kill-port 9001
+pnpm exec kill-port 9001

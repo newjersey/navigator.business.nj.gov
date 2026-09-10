@@ -51,12 +51,7 @@ export type v14Municipality = {
 };
 
 type v14Industry =
-  | "restaurant"
-  | "e-commerce"
-  | "home-contractor"
-  | "cosmetology"
-  | "cleaning-aid"
-  | "generic";
+  "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "cleaning-aid" | "generic";
 type v14LegalStructure =
   | "sole-proprietorship"
   | "general-partnership"

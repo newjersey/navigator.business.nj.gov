@@ -5,15 +5,15 @@ Next.js 16 frontend with Material-UI, SCSS, and AWS Amplify auth.
 ## Commands
 
 ```bash
-yarn dev            # Next.js dev server on port 3000 (Turbopack mode)
-yarn build          # Production build
-yarn test           # Jest + React Testing Library
-yarn test:watch
-yarn typecheck
-yarn lint
-yarn storybook      # Component development on port 6006
-yarn cypress:run    # Headless E2E tests (requires services running)
-yarn cypress:run:ci # Cypress E2E tests in CI mode
+pnpm dev            # Next.js dev server on port 3000 (Turbopack mode)
+pnpm build          # Production build
+pnpm test           # Jest + React Testing Library
+pnpm test:watch
+pnpm typecheck
+pnpm lint
+pnpm storybook      # Component development on port 6006
+pnpm cypress:run    # Headless E2E tests (requires services running)
+pnpm cypress:run:ci # Cypress E2E tests in CI mode
 ```
 
 ## Before Writing New Code
@@ -62,7 +62,7 @@ Content is compiled by the `content/` package and consumed as a library.
 ## E2E Tests
 
 Cypress tests in `cypress/` use real data and real APIs. They require Docker
-services (`yarn services:up`) and a running dev server.
+services (`pnpm services:up`) and a running dev server.
 
 ## Module Aliases
 

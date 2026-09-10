@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import UpdateDetail from "@/components/learn/UpdateDetail";
 import { loadRecents } from "@/domain/content/loadContent";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
-import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, isLocaleEnabled } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { buildUpdateDescription } from "@/domain/metadata/buildUpdateDescription";
 import { buildPageMetadata } from "@/domain/metadata/pageMetadata";
@@ -46,7 +46,7 @@ export const generateStaticParams = () => loadRecents().map((recent) => ({ slug:
 const UpdateDetailRoute = async ({ params }: Props) => {
   const { locale, slug } = await params;
 
-  if (!hasAppLocale(locale)) {
+  if (!isLocaleEnabled(locale)) {
     notFound();
   }
 

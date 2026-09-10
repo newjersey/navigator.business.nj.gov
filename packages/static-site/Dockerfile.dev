@@ -1,4 +1,4 @@
-FROM node:26-alpine
+FROM node:24.18.0-alpine
 
 LABEL org.opencontainers.image.title="Business.NJ.gov static site development"
 LABEL org.opencontainers.image.description="Development container for the Business.NJ.gov Next.js static site"
@@ -13,14 +13,27 @@ RUN corepack enable
 
 WORKDIR /app
 
-COPY packages/content-types /content-types
-COPY packages/static-site/package.json packages/static-site/pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
-RUN pnpm exec tsc --build /content-types/tsconfig.json
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY packages/content-types/package.json packages/content-types/package.json
+COPY packages/static-site/package.json packages/static-site/package.json
 
-COPY packages/static-site .
-COPY content/lib /content/lib
-COPY content/src /content/src
+# `--filter @businessnjgovnavigator/static-site...` resolves static-site's real
+# workspace dependency closure (content-types only); the rest of the root
+# workspace's manifests aren't needed for this image.
+RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
+  pnpm install --frozen-lockfile --filter @businessnjgovnavigator/static-site...
+
+COPY packages/content-types packages/content-types
+RUN pnpm --filter @businessnjgovnavigator/content-types run build
+
+COPY packages/static-site packages/static-site
+COPY content/lib content/lib
+COPY content/src content/src
+
+# Next's dev server (Turbopack) now auto-detects the monorepo root via the
+# single root `pnpm-lock.yaml`, so it needs to run from the package's real
+# nested path under the workspace root, not a flattened standalone directory.
+WORKDIR /app/packages/static-site
 
 EXPOSE 4000
 

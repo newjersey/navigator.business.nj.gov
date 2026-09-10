@@ -154,10 +154,7 @@ export type v133CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type v133CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type v133ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
 export type v133ResidentialConstructionType =
-  | "NEW_HOME_CONSTRUCTION"
-  | "HOME_RENOVATIONS"
-  | "BOTH"
-  | undefined;
+  "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 
 type v133ForeignBusinessTypeId =
   | "employeeOrContractorInNJ"

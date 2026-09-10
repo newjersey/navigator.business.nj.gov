@@ -2,10 +2,10 @@ import { ActiveUser } from "@/lib/auth/AuthContext";
 import { AccountLinkingErrorStorageFactory } from "@/lib/storage/AccountLinkingErrorStorage";
 import { ResourcesConfig } from "@aws-amplify/core";
 import { Sha256 } from "@aws-crypto/sha256-browser";
-import { HttpRequest } from "@aws-sdk/protocol-http";
 import { S3RequestPresigner } from "@aws-sdk/s3-request-presigner";
-import { parseUrl } from "@aws-sdk/url-parser";
 import { formatUrl } from "@aws-sdk/util-format-url";
+import { HttpRequest } from "@smithy/protocol-http";
+import { parseUrl } from "@smithy/url-parser";
 import { Amplify } from "aws-amplify";
 import {
   CredentialsAndIdentityId,

@@ -80,7 +80,9 @@ export default {
     "@businessnjgovnavigator/shared/(.*)": "<rootDir>/../shared/lib/shared/src/$1",
     "@businessnjgovnavigator/content/(.*)": "<rootDir>/../content/src/$1",
   },
-  transformIgnorePatterns: [`/node_modules/(?!(${esmModulePattern}))`],
+  // See jest.shared.ts for why this can't be the usual `/node_modules/(?!(...))/`
+  // pattern under pnpm's `.pnpm/<name>@<version>/` store layout.
+  transformIgnorePatterns: [`node_modules/\\.pnpm/(?!(${esmModulePattern})@)`],
   transform: {
     "\\.md$": "<rootDir>/test/jest-raw-loader.js",
     "\\.m?[jt]sx?$": [

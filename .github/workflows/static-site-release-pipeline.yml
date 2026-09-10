@@ -51,7 +51,6 @@ jobs:
       NEXT_PUBLIC_FEEDBACK_WIDGET_MODE: ${{ vars.NEXT_PUBLIC_FEEDBACK_WIDGET_MODE }}
       NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED:
         ${{ vars.NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED }}
-      NEXT_PUBLIC_WEB_BASE_URL: ${{ vars.WEB_BASE_URL_STAGING }}
       SG_ID: ${{ vars.SG_ID_AWS_STAGING }}
       STAGE: ${{ vars.STAGE_STAGING }}
       SUBNET_ID_01: ${{ vars.SUBNET_ID_01_AWS_STAGING }}
@@ -62,25 +61,30 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v7
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: package.json
+          run_install: false
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Dependencies
         shell: bash
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       # The static site Dockerfile copies content/lib into the build, and
       # content/lib is generated rather than committed.
       - name: Build Content
         shell: bash
-        run: yarn workspace @businessnjgovnavigator/content build
-
-      - name: Build Content Types
-        shell: bash
-        run: yarn workspace @businessnjgovnavigator/content-types build
+        run:
+          pnpm --filter @businessnjgovnavigator/content-types run build && pnpm --filter
+          @businessnjgovnavigator/content run build
 
       - name: Deploy Static Site
         uses: ./.github/actions/deploy-static-site
@@ -99,13 +103,10 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
       AWS_REGION: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN }}
-      BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
-      BASIC_AUTH_USERNAME: ${{ vars.BASIC_AUTH_USERNAME }}
       NEXT_PUBLIC_MULTILINGUAL_ENABLED: ${{ vars.NEXT_PUBLIC_MULTILINGUAL_ENABLED }}
       NEXT_PUBLIC_FEEDBACK_WIDGET_MODE: ${{ vars.NEXT_PUBLIC_FEEDBACK_WIDGET_MODE }}
       NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED:
         ${{ vars.NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED }}
-      NEXT_PUBLIC_WEB_BASE_URL: ${{ vars.WEB_BASE_URL_PROD }}
       SG_ID: ${{ vars.SG_ID_AWS_PROD }}
       STAGE: ${{ vars.STAGE_PROD }}
       SUBNET_ID_01: ${{ vars.SUBNET_ID_01_AWS_PROD }}
@@ -116,25 +117,30 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v7
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: package.json
+          run_install: false
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Dependencies
         shell: bash
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       # The static site Dockerfile copies content/lib into the build, and
       # content/lib is generated rather than committed.
       - name: Build Content
         shell: bash
-        run: yarn workspace @businessnjgovnavigator/content build
-
-      - name: Build Content Types
-        shell: bash
-        run: yarn workspace @businessnjgovnavigator/content-types build
+        run:
+          pnpm --filter @businessnjgovnavigator/content-types run build && pnpm --filter
+          @businessnjgovnavigator/content run build
 
       - name: Deploy Static Site
         uses: ./.github/actions/deploy-static-site

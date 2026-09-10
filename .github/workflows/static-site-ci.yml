@@ -4,12 +4,22 @@ on:
   pull_request:
     paths:
       - "packages/static-site/**"
+      - "packages/content-types/**"
+      - "content/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
       - ".github/workflows/static-site-ci.yml"
   push:
     branches:
       - main
     paths:
       - "packages/static-site/**"
+      - "packages/content-types/**"
+      - "content/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
       - ".github/workflows/static-site-ci.yml"
   workflow_dispatch:
 
@@ -24,7 +34,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
         with:
-          package_json_file: packages/static-site/package.json
+          package_json_file: package.json
           run_install: false
 
       - name: Setup Node.js
@@ -32,17 +42,16 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: pnpm
-          cache-dependency-path: packages/static-site/pnpm-lock.yaml
-
-      - name: Build content-types
-        working-directory: packages/content-types
-        run: |
-          pnpm install
-          pnpm build
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
-        working-directory: packages/static-site
         run: pnpm install --frozen-lockfile
+
+      - name: Build content-types
+        run: pnpm --filter @businessnjgovnavigator/content-types run build
+
+      - name: Build content
+        run: pnpm --filter @businessnjgovnavigator/content run build
 
       - name: Run lint
         working-directory: packages/static-site
@@ -59,3 +68,49 @@ jobs:
       - name: Build application
         working-directory: packages/static-site
         run: pnpm build
+
+      - name: Install Playwright Chromium
+        working-directory: packages/static-site
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run accessibility tests
+        working-directory: packages/static-site
+        run: pnpm test:accessibility
+
+      - name: Upload accessibility test report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: static-site-playwright-accessibility-report
+          path: |
+            packages/static-site/playwright-report/accessibility
+            packages/static-site/test-results/accessibility
+          retention-days: 7
+
+      - name: Run multilingual E2E tests
+        working-directory: packages/static-site
+        run: pnpm test:e2e
+
+      - name: Upload multilingual E2E test report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: static-site-playwright-e2e-report
+          path: |
+            packages/static-site/playwright-report/e2e
+            packages/static-site/test-results/e2e
+          retention-days: 7
+
+      - name: Run English-only E2E tests
+        working-directory: packages/static-site
+        run: pnpm test:e2e:english-only
+
+      - name: Upload English-only E2E test report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: static-site-playwright-e2e-english-only-report
+          path: |
+            packages/static-site/playwright-report/e2e-english-only
+            packages/static-site/test-results/e2e-english-only
+          retention-days: 7

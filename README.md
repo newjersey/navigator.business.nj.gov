@@ -30,9 +30,9 @@ for CI/CD.
 
 ## Development
 
-You will need Node.js (with Yarn installed via `npm` or `corepack`) installed for primary
-development. Additionally, for running the server in local development mode, you will need Python
-(for the AWS CLI and some of our scripts) installed (details below).
+You will need Node.js (with pnpm activated via `corepack`) installed for primary development.
+Additionally, for running the server in local development mode, you will need Python (for the AWS
+CLI and some of our scripts) installed (details below).
 
 We recommend using WSL2 if developing on Windows.
 
@@ -55,7 +55,9 @@ For pair programming, we recommend Visual Studio Code with the Live Share extens
 - [AWS CLI](https://aws.amazon.com/cli/)
 - [Python 3.12+](https://www.python.org/downloads/) (managed automatically via
   [uv](https://docs.astral.sh/uv/))
-- [yarn](https://yarnpkg.com/)
+- [pnpm](https://pnpm.io/) (activated automatically via Corepack from the version pinned in root
+  `package.json`'s `packageManager` field; run `corepack enable` once if Corepack isn't already
+  active)
 - [wget](https://www.gnu.org/software/wget/)
 - [Java JDK](https://www.oracle.com/java/technologies/downloads/)
 
@@ -73,7 +75,7 @@ aws configure
 ```
 
 Clone the code and navigate to the root of this repository. There is an installation script that
-will install all required development tools, yarn packages, and execute a yarn build.
+will install all required development tools, pnpm packages, and execute a pnpm build.
 
 ```shell
 source scripts/install.sh
@@ -127,7 +129,7 @@ Before you can run locally, you will need to:
 - do an initial build (skip if you ran `install.sh`)
 
   ```shell
-  yarn build
+  pnpm build
   ```
 
 ### Run tests
@@ -136,10 +138,10 @@ We use Jest for our TypeScript-based unit tests across our projects.
 
 ```shell
 # Run all unit tests
-yarn test
+pnpm test
 
 # Run a single unit test or file, rerunning if files change
-yarn test <path to test file> -t "<part of test name>" --watch
+pnpm test <path to test file> -t "<part of test name>" --watch
 ```
 
 We use Cypress for end-to-end (e2e) testing. You can run these tests locally as follows. Since some
@@ -148,7 +150,7 @@ application** to test against.
 
 ```shell
 # Terminal window 1
-yarn start:dev
+pnpm start:dev
 ```
 
 ```shell
@@ -162,20 +164,20 @@ values used can be reproduced by finding the log output line containing
 indicated environment variable, as in:
 
 ```shell
-RANDOM_SEED=<random seed from failure log> yarn test <path to test file> -t "<part of test name>"
+RANDOM_SEED=<random seed from failure log> pnpm test <path to test file> -t "<part of test name>"
 CYPRESS_RANDOM_SEED=<random seed from failure log> ./scripts/local-feature-tests.sh
 ```
 
 To run all tests with code coverage:
 
 ```shell
-yarn test:coverage
+pnpm test:coverage
 ```
 
 We use Python's `unittest` for our Python tests. Run all Python unit tests with:
 
 ```shell
-yarn test:python
+pnpm test:python
 ```
 
 ### Running locally
@@ -194,13 +196,13 @@ required technologies by running `source scripts/install.sh` from the root direc
 1. Build the application
 
    ```shell
-   yarn build # This happens in the install.sh script as well.
+   pnpm build # This happens in the install.sh script as well.
    ```
 
 2. Launch all the services
 
    ```shell
-   yarn start:dev
+   pnpm start:dev
    ```
 
 3. Open the application in your browser. The frontend is available at
@@ -210,7 +212,7 @@ required technologies by running `source scripts/install.sh` from the root direc
    you need to stop the Docker containers manually, run:
 
    ```shell
-   yarn services:down
+   pnpm services:down
    ```
 
 ### Deploying
@@ -228,15 +230,15 @@ development environment for commits to the main branch.
 
 The frontend code lives in `./web`.
 
-When running locally, the `./scripts/start-web.sh` will execute `npm run dev` for local
-hot-refreshing of Next.js. In production, we run `npm run build` which will execute `next build` and
+When running locally, the `./scripts/start-web.sh` will execute `pnpm dev` for local
+hot-refreshing of Next.js. In production, we run `pnpm build` which will execute `next build` and
 `next export`. This allows Next.js to build all our pages and pre-render what it can. The export
 puts the final files in `./web/out` directory, which is served via a Docker Container.
 
 ### Styles
 
 We depend on the compiled version of [NJ Web Design Standards](https://github.com/newjersey/njwds),
-which is included via `npm` and then imports these styles into our code (which is configured via a
+which is included via `pnpm` and then imports these styles into our code (which is configured via a
 line in `_app.tsx`).
 
 ### Environment variables

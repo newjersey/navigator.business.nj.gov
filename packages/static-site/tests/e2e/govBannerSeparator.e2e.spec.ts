@@ -27,6 +27,10 @@ test.describe("gov banner separator", () => {
   test("renders the separator on the inline-end edge under LTR", async ({ page }) => {
     await page.setViewportSize({ width: 1200, height: 900 });
     await page.goto("/learn");
+    // The NJWDS bundle that initializes this banner's markup attaches
+    // asynchronously after navigation; the language-switcher trigger (from
+    // the same bundle) is a reliable readiness signal that it has run.
+    await page.locator("nav.usa-language button.usa-language__link").waitFor();
 
     const items = page.locator(SEPARATOR_ITEMS);
     await expect(items.first()).toBeVisible();

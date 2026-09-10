@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import * as radioHelpers from "./radioHelpers";
 
 const meta: Meta<typeof radioHelpers.renderRadioButton> = {

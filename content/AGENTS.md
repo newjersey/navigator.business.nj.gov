@@ -10,10 +10,10 @@ the compiled package exports.
 ## Commands
 
 ```bash
-yarn build          # Compile all content to lib/
-yarn test           # Vitest (NOT Jest; don't use Jest APIs here)
-yarn spellcheck     # cSpell validation
-yarn prettier
+pnpm build          # Compile all content to lib/
+pnpm test           # Vitest (NOT Jest; don't use Jest APIs here)
+pnpm spellcheck     # cSpell validation
+pnpm prettier
 ```
 
 ## Test Runner: Vitest
@@ -40,22 +40,22 @@ Source content lives in `src/[type]/` directories. Examples:
 1. Add a `.md` or `.yaml` file to the appropriate `src/[type]/` directory
 2. Frontmatter fields are typed; check the corresponding type definition before
    adding new fields
-3. Run `yarn build` and `yarn test` to validate
-4. Run `yarn spellcheck`; add domain-specific terms to `cspell.json` at the repo root if needed
+3. Run `pnpm build` and `pnpm test` to validate
+4. Run `pnpm spellcheck`; add domain-specific terms to `cspell.json` at the repo root if needed
 
 ## Synced Content
 
 Fundings and licenses can be synced from external sources:
 
-- Webflow: `yarn webflow:run-sync` (from `web/`)
-- Airtable: `yarn airtable:dump` (from `web/`)
+- Webflow: `pnpm webflow:run-sync` (from `web/`)
+- Airtable: `pnpm airtable:dump` (from `web/`)
 
 Do not hand-edit files that are managed by these sync scripts.
 
 ## Content Integrity Tests
 
 ```bash
-yarn workspace @businessnjgovnavigator/api cms-integrity-tests
+pnpm --filter @businessnjgovnavigator/api run cms-integrity-tests
 ```
 
 Validates cross-references between content entries and field config.

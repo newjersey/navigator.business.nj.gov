@@ -3,7 +3,7 @@ import {
   generateAnytimeActionLicenseReinstatement,
   generateAnytimeActionTask,
 } from "@/test/factories";
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof AnytimeActionSearch> = {
   title: "Molecules/AnytimeAction",

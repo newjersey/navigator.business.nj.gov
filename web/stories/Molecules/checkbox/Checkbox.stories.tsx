@@ -1,5 +1,5 @@
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const Template = () => {
   return (

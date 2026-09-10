@@ -12,7 +12,7 @@ runs:
     - name: Build Storybook
       shell: bash
       run: |
-        yarn workspace @businessnjgovnavigator/web build-storybook -o .storybook/build
+        pnpm --filter @businessnjgovnavigator/web run build-storybook
 
     - name: Upload Storybook to S3
       shell: bash

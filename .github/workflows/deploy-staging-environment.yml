@@ -116,11 +116,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v7
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: package.json
+          run_install: false
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Deploy to Staging
         uses: ./.github/actions/deploy

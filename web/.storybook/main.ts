@@ -1,17 +1,17 @@
-// This file has been automatically migrated to valid ESM format by Storybook.
 import { dirname, join, resolve } from "path";
 import { fileURLToPath } from "url";
 import { createRequire } from "module";
+import type { StorybookConfig } from "@storybook/nextjs-vite";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const require = createRequire(import.meta.url);
 
-function getAbsolutePath(value) {
+function getAbsolutePath(value: string): string {
   return dirname(require.resolve(join(value, "package.json")));
 }
 
-export default {
+const config: StorybookConfig = {
   stories: ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
@@ -54,9 +54,7 @@ export default {
     ];
     return config;
   },
-  features: {
-    emotionAlias: false,
-    interactionsDebugger: true,
-  },
   staticDirs: ["../public"],
 };
+
+export default config;

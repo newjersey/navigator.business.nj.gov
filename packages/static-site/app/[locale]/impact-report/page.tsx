@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ImpactReportPage } from "@/components/impactReport/ImpactReportPage";
-import { type AppLocale, hasAppLocale, resolveAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, isLocaleEnabled, resolveAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { buildPageMetadata } from "@/domain/metadata/pageMetadata";
 
@@ -35,7 +35,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 const ImpactReportRoute = async ({ params }: Props) => {
   const { locale } = await params;
 
-  if (!hasAppLocale(locale)) {
+  if (!isLocaleEnabled(locale)) {
     notFound();
   }
 

@@ -12,7 +12,7 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "@aws-sdk/protocol-http" },
+      to: { path: "@smithy/protocol-http" },
     },
     {
       from: {},
@@ -20,7 +20,7 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "@aws-sdk/url-parser" },
+      to: { path: "@smithy/url-parser" },
     },
     {
       from: {},
@@ -73,10 +73,6 @@ module.exports = {
     {
       from: {},
       to: { path: "@mui/x-date-pickers" },
-    },
-    {
-      from: {},
-      to: { path: "@storybook/react" },
     },
     {
       from: {},
@@ -189,10 +185,6 @@ module.exports = {
     {
       from: {},
       to: { path: "react-dom/test-utils" },
-    },
-    {
-      from: {},
-      to: { path: "react-transition-group" },
     },
     {
       from: {},

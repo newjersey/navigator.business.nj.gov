@@ -718,14 +718,12 @@ export const findDeadContextualInfo = async (): Promise<string[]> => {
   const filenames = getFilenames();
   const contents = getContents(filenames);
   for (const contextualInfo of filenames.contextualInfos) {
-    if (
-      !(
-        (await isReferencedInAMarkdown(contextualInfo, contents.tasks)) ||
-        (await isReferencedInAMarkdown(contextualInfo, contents.displayContents)) ||
-        (await isReferencedInAMarkdown(contextualInfo, contents.contextualInfos)) ||
-        (await isReferencedInConfig(contextualInfo, contents.fieldConfigs))
-      )
-    ) {
+    if (!(
+      (await isReferencedInAMarkdown(contextualInfo, contents.tasks)) ||
+      (await isReferencedInAMarkdown(contextualInfo, contents.displayContents)) ||
+      (await isReferencedInAMarkdown(contextualInfo, contents.contextualInfos)) ||
+      (await isReferencedInConfig(contextualInfo, contents.fieldConfigs))
+    )) {
       deadContextualInfos.push(contextualInfo);
     }
   }

@@ -129,8 +129,7 @@ export interface EmergencyTripPermitSubmitErrorResponse {
 }
 
 export type EmergencyTripPermitSubmitResponse =
-  | EmergencyTripPermitSubmitSuccessResponse
-  | EmergencyTripPermitSubmitErrorResponse;
+  EmergencyTripPermitSubmitSuccessResponse | EmergencyTripPermitSubmitErrorResponse;
 
 export type EmergencyTripPermitFieldNames = keyof EmergencyTripPermitApplicationInfo;
 export type EmergencyTripPermitUserEnteredFieldNames = Exclude<

@@ -12,7 +12,7 @@ import { notFound } from "next/navigation";
 
 import { LanguageSwitcher } from "@/components/landing/LanguageSwitcher";
 import type { LanguageDescriptor } from "@/domain/i18n/languages";
-import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, isLocaleEnabled } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 
 /** Upper bound on synthetic options, generous enough to exercise scrolling. */
@@ -82,7 +82,7 @@ const LanguageSwitcherHarnessPage = async ({ params, searchParams }: HarnessPage
 
   const { locale } = await params;
 
-  if (!hasAppLocale(locale)) {
+  if (!isLocaleEnabled(locale)) {
     notFound();
   }
 

@@ -68,9 +68,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   );
 
   const calendarEvents: (
-    | LicenseCalendarEvent
-    | TaxFilingCalendarEvent
-    | XrayRegistrationCalendarEvent
+    LicenseCalendarEvent | TaxFilingCalendarEvent | XrayRegistrationCalendarEvent
   )[] = thisMonthXrayRenewalEvent
     ? [...thisMonthFilings, ...thisMonthLicenseEvents, thisMonthXrayRenewalEvent]
     : [...thisMonthFilings, ...thisMonthLicenseEvents];

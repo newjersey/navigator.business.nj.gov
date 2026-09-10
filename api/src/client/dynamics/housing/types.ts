@@ -52,9 +52,7 @@ export type HousingRegistrationRequestLookupResponse = {
 };
 
 export type HousingRegistrationLookupStatus =
-  | "SUCCESSFUL"
-  | "NO REGISTRATIONS FOUND"
-  | "NO PROPERTY INTERESTS FOUND";
+  "SUCCESSFUL" | "NO REGISTRATIONS FOUND" | "NO PROPERTY INTERESTS FOUND";
 
 export type HousingRegistrationRequestResponseInfo = (
   address: string,

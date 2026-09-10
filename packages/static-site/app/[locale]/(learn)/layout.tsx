@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { LearnSideNav } from "@/components/learn/LearnSideNav";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
-import { hasAppLocale } from "@/domain/i18n/locales";
+import { isLocaleEnabled } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 
 /**
@@ -25,7 +25,7 @@ interface PageLayoutProps {
 const PageLayout = async ({ children, params }: PageLayoutProps) => {
   const { locale } = await params;
 
-  if (!hasAppLocale(locale)) {
+  if (!isLocaleEnabled(locale)) {
     notFound();
   }
 

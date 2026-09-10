@@ -178,10 +178,7 @@ export type v179CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type v179CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type v179ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
 export type v179ResidentialConstructionType =
-  | "NEW_HOME_CONSTRUCTION"
-  | "HOME_RENOVATIONS"
-  | "BOTH"
-  | undefined;
+  "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export type v179EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
 export type v179EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
 
@@ -590,10 +587,7 @@ export type v179QuestionnaireData = {
 };
 
 export type v179AirFieldIds =
-  | "emitPollutants"
-  | "emitEmissions"
-  | "constructionActivities"
-  | "noAir";
+  "emitPollutants" | "emitEmissions" | "constructionActivities" | "noAir";
 
 export type v179AirData = Record<v179AirFieldIds, boolean>;
 
@@ -617,11 +611,7 @@ export type v179WasteFieldIds =
 export type v179WasteData = Record<v179WasteFieldIds, boolean>;
 
 export type v179DrinkingWaterFieldIds =
-  | "ownWell"
-  | "combinedWellCapacity"
-  | "wellDrilled"
-  | "potableWater"
-  | "noDrinkingWater";
+  "ownWell" | "combinedWellCapacity" | "wellDrilled" | "potableWater" | "noDrinkingWater";
 
 export type v179DrinkingWaterData = Record<v179DrinkingWaterFieldIds, boolean>;
 

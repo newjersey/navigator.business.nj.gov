@@ -12,7 +12,9 @@ export default {
   ...sharedConfig,
   ...require("jest-dynalite/jest-preset"),
   ...require("ts-jest/jest-preset"),
-  transformIgnorePatterns: ["/node_modules/(?!(uuid))"],
+  // See jest.shared.ts for why this can't be the usual `/node_modules/(?!(uuid))/`
+  // pattern under pnpm's `.pnpm/<name>@<version>/` store layout.
+  transformIgnorePatterns: ["node_modules/\\.pnpm/(?!(uuid)@)"],
   transform: {
     "^.+\\.tsx?$": "ts-jest",
     "^.+\\.m?jsx?$": "@swc/jest",

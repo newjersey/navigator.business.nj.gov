@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const AWSCrypto = require("@aws-crypto/client-node");
-import { fromBase64, toBase64 } from "@aws-sdk/util-base64-node";
+import { fromBase64, toBase64 } from "@smithy/util-base64";
 import {
   type EncryptionContext,
   type ForeignEnvironmentPolicy,

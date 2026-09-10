@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ReactElement } from "react";
 
 const Template = () => {

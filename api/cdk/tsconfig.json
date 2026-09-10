@@ -3,12 +3,14 @@
     "target": "ES2022",
     "module": "commonjs",
     "moduleResolution": "Node",
+    "ignoreDeprecations": "6.0",
     "strict": true,
     "noEmit": false,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["jest", "node"]
   },
   "include": ["lib/**/*.ts", "bin/**/*.ts", "test/**/*.ts"],
   "exclude": ["node_modules", "cdk.out", "dist"]

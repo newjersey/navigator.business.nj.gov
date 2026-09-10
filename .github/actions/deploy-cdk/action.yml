@@ -7,7 +7,7 @@ runs:
     - name: Clear CDK Context
       shell: bash
       run: |
-        yarn workspace @businessnjgovnavigator/api-cdk cdk context --clear
+        pnpm --filter @businessnjgovnavigator/api-cdk run cdk context --clear
 
     - name: CDK Bootstrap
       shell: bash
@@ -28,7 +28,7 @@ runs:
           exit 1
         fi
 
-        yarn workspace @businessnjgovnavigator/api-cdk cdk bootstrap aws://$AWS_ACCOUNT_ID/us-east-1 \
+        pnpm --filter @businessnjgovnavigator/api-cdk run cdk bootstrap aws://$AWS_ACCOUNT_ID/us-east-1 \
           --bootstrap-bucket-name cdk-biz-nj-assets-$AWS_ACCOUNT_ID-us-east-1 \
           --qualifier biz-nj \
           "${trust_args[@]}" \
@@ -56,7 +56,7 @@ runs:
           stacks+=("BackupStack-${STAGE}")
         fi
 
-        yarn workspace @businessnjgovnavigator/api-cdk cdk deploy \
+        pnpm --filter @businessnjgovnavigator/api-cdk run cdk deploy \
           "${stacks[@]}" \
           --qualifier biz-nj \
           --verbose \

@@ -45,21 +45,13 @@
     labels: ["security", "renovate"],
   },
 
-  // Don't scan Yarn's internal cache.
-  ignorePaths: [".yarn"],
-
-  // Dedupe to the highest compatible version after updates (Yarn).
-  postUpdateOptions: ["yarnDedupeHighest"],
-
   // Refresh lockfiles on a cadence even when no dep update is pending.
   lockFileMaintenance: { enabled: true },
 
   // Managed elsewhere / intentionally pinned outside Renovate.
   // cimg/node is the CircleCI node image used in BuilderImage.Dockerfile;
   // it tracks .nvmrc manually.
-  // Yarn upgrades must also update yarnPath and the vendored release binary,
-  // which Renovate's packageManager update does not manage.
-  ignoreDeps: ["node", "cimg/node", "kill-port", "semantic-release", "yarn"],
+  ignoreDeps: ["node", "cimg/node", "kill-port", "semantic-release"],
 
   // Refresh stale dependency branches during the configured off-hours window.
   rebaseWhen: "behind-base-branch",
@@ -233,15 +225,6 @@
       matchManagers: ["pip_requirements"],
       automerge: true,
       ignoreTests: true,
-    },
-
-    // Static-site is a separate pnpm workspace with its own lockfile. Its deps
-    // often skew from the yarn workspaces. The branch prefix + label keep pnpm
-    // updates visually distinct in the PR list.
-    {
-      matchFileNames: ["packages/static-site/**"],
-      additionalBranchPrefix: "static-site-",
-      addLabels: ["static-site"],
     },
   ],
 }

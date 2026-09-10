@@ -34,12 +34,10 @@ export const RegulatedBusinessDynamicsBusinessIdsAndNamesClient = (
 
         if (response.data.value.length === 0) throw new Error(NO_ADDRESS_MATCH_ERROR);
 
-        return response.data.value.map(
-          (idObj: BusinessIdResponse): BusinessIdAndName => ({
-            name: idObj.name,
-            businessId: idObj.accountid,
-          }),
-        );
+        return response.data.value.map((idObj: BusinessIdResponse): BusinessIdAndName => ({
+          name: idObj.name,
+          businessId: idObj.accountid,
+        }));
       })
       .catch((error: AxiosError) => {
         if (error.message === NO_ADDRESS_MATCH_ERROR) throw error;

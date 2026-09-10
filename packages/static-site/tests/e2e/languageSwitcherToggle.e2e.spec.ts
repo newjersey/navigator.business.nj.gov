@@ -14,6 +14,11 @@ const SUBMENU = "#language-switcher-submenu";
 test.describe("language switcher open/close", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/learn");
+    // The NJWDS language-selector script attaches the trigger's ARIA
+    // attributes asynchronously after navigation; without waiting for it,
+    // the very first assertion in a cold page load can race the script and
+    // read the trigger before it's interactive.
+    await page.locator(TRIGGER).waitFor();
   });
 
   test("opens the dropdown when the trigger is clicked", async ({ page }) => {

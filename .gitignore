@@ -4,12 +4,12 @@ web/next-env.d.ts
 
 # dependencies
 web/node_modules
-/.pnp
-.pnp.js
-.yarn/cache
-.yarn/install-state.gz
 
-.yarn-cache
+# Yarn is no longer used anywhere in this repo, but ignore any leftover
+# local .yarn/ state (cache, install-state) so it's never accidentally
+# tracked.
+.yarn/
+
 api/lib
 
 # scripts
@@ -35,8 +35,6 @@ web/build
 
 # debug
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 .idea/
 
@@ -102,7 +100,7 @@ web/fundings.csv
 .venv/
 **/__pycache__/
 
-# yaml file generated from yarn build
+# yaml file generated from the CMS config build (pnpm run decap:build-config)
 web/public/mgmt/config.yml
 web/src/lib/cms/CollectionMap.json
 

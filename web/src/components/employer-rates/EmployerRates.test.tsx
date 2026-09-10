@@ -377,7 +377,7 @@ describe("EmployerRates", () => {
       expect(await screen.findByRole("alert")).toBeInTheDocument();
       expect(screen.getByTestId("serverError")).toBeInTheDocument();
 
-      user.clear(textbox);
+      await user.clear(textbox);
       const toType = "1".repeat(DOL_EIN_CHARACTERS - 1);
       await user.type(textbox, toType);
       await user.tab();
@@ -471,7 +471,7 @@ describe("EmployerRates", () => {
 
       expect(await screen.findByRole("alert")).toBeInTheDocument();
       expect(screen.getByTestId("noAccountError")).toBeInTheDocument();
-      user.clear(textbox);
+      await user.clear(textbox);
       const toType = "1".repeat(DOL_EIN_CHARACTERS - 1);
       await user.type(textbox, toType);
       await user.tab();

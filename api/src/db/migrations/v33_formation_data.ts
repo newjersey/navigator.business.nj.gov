@@ -74,10 +74,7 @@ type v33TaxFilingData = {
 };
 
 type v33EntityIdStatus =
-  | "UNKNOWN"
-  | "EXISTS_AND_REGISTERED"
-  | "EXISTS_NOT_REGISTERED"
-  | "NOT_FOUND";
+  "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
 
 type v33TaxFiling = {
   identifier: string;

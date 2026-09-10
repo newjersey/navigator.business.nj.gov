@@ -76,8 +76,7 @@ const migrate_v192Business_to_v193Business = async (
 
   // These fields exist in stored records but were omitted from the v191/v192 type tree.
   const legacyTaxClearance = business.taxClearanceCertificateData as
-    | (typeof business.taxClearanceCertificateData & LegacyTaxClearanceCertificateData)
-    | undefined;
+    (typeof business.taxClearanceCertificateData & LegacyTaxClearanceCertificateData) | undefined;
   const taxClearanceTaxId = await rotateKmsField({
     migrationVersion: 193,
     fieldName: "taxClearanceCertificateData.encryptedTaxId",
@@ -280,10 +279,7 @@ export type v193CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type v193CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type v193ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
 export type v193ResidentialConstructionType =
-  | "NEW_HOME_CONSTRUCTION"
-  | "HOME_RENOVATIONS"
-  | "BOTH"
-  | undefined;
+  "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export type v193EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
 export type v193EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
 
@@ -696,10 +692,7 @@ export type v193QuestionnaireData = {
 };
 
 export type v193AirFieldIds =
-  | "emitPollutants"
-  | "emitEmissions"
-  | "constructionActivities"
-  | "noAir";
+  "emitPollutants" | "emitEmissions" | "constructionActivities" | "noAir";
 
 export type v193AirData = Record<v193AirFieldIds, boolean>;
 
@@ -723,11 +716,7 @@ export type v193WasteFieldIds =
 export type v193WasteData = Record<v193WasteFieldIds, boolean>;
 
 export type v193DrinkingWaterFieldIds =
-  | "ownWell"
-  | "combinedWellCapacity"
-  | "wellDrilled"
-  | "potableWater"
-  | "noDrinkingWater";
+  "ownWell" | "combinedWellCapacity" | "wellDrilled" | "potableWater" | "noDrinkingWater";
 
 export type v193DrinkingWaterData = Record<v193DrinkingWaterFieldIds, boolean>;
 

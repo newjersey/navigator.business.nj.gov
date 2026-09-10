@@ -116,11 +116,7 @@ export class MigrationConflictError extends Error {
 
 export type DatabaseWriteOperation = "migration-transaction" | "put-business" | "put-user";
 export type DatabaseItemSizeBucket =
-  | "under-100-kb"
-  | "100-199-kb"
-  | "200-299-kb"
-  | "300-399-kb"
-  | "400-kb-or-more";
+  "under-100-kb" | "100-199-kb" | "200-299-kb" | "300-399-kb" | "400-kb-or-more";
 
 export interface DatabaseThrottlingContext {
   readonly operation: DatabaseWriteOperation;

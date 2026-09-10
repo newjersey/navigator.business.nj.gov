@@ -26,7 +26,7 @@ import { SiteFooter } from "@/components/landing/SiteFooter";
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { SkipNav } from "@/components/landing/SkipNav";
 import { textDirectionForLocale } from "@/domain/i18n/languages";
-import { ENABLED_LOCALES, hasAppLocale } from "@/domain/i18n/locales";
+import { ENABLED_LOCALES, isLocaleEnabled } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { SITE_BASE_URL, SOCIAL_PREVIEW_IMAGE } from "@/domain/siteConfig";
 
@@ -113,7 +113,7 @@ export const generateStaticParams = () => {
 export const generateMetadata = async ({ params }: GenerateMetadataProps): Promise<Metadata> => {
   const { locale } = await params;
 
-  if (!hasAppLocale(locale)) {
+  if (!isLocaleEnabled(locale)) {
     notFound();
   }
 
@@ -162,7 +162,7 @@ export const generateMetadata = async ({ params }: GenerateMetadataProps): Promi
 const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
   const { locale } = await params;
 
-  if (!hasAppLocale(locale)) {
+  if (!isLocaleEnabled(locale)) {
     notFound();
   }
 

@@ -53,7 +53,7 @@ export const FileInput = ({
   onChange,
 }: Props): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const fileInput = require("../../../../node_modules/@uswds/uswds/packages/usa-file-input/src");
+  const fileInput = require("@uswds/uswds/js/usa-file-input");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const size = maxFileSize?.maxSizeInMegabytes
     ? maxFileSize.maxSizeInMegabytes * BYTES_IN_A_MB

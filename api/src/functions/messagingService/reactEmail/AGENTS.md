@@ -7,15 +7,15 @@ The messaging service Lambda reads generated templates from
 ## Commands
 
 ```bash
-yarn dev:email      # Preview app on localhost:3001
-yarn build          # Render templates to static HTML and text
+pnpm dev:email      # Preview app on localhost:3001
+pnpm build          # Render templates to static HTML and text
 ```
 
 From the repo root, use the workspace name:
 
 ```bash
-yarn workspace @businessnjgovnavigator/react-email build
-yarn workspace @businessnjgovnavigator/react-email dev:email
+pnpm --filter @businessnjgovnavigator/react-email run build
+pnpm --filter @businessnjgovnavigator/react-email run dev:email
 ```
 
 ## Adding or Changing Emails

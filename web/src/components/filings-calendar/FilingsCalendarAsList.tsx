@@ -54,9 +54,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
   );
 
   const calendarEvents: (
-    | LicenseCalendarEvent
-    | TaxFilingCalendarEvent
-    | XrayRegistrationCalendarEvent
+    LicenseCalendarEvent | TaxFilingCalendarEvent | XrayRegistrationCalendarEvent
   )[] = xrayRenewalCalendarEvent
     ? [...taxFilings, ...licenseCalendarEvents, xrayRenewalCalendarEvent]
     : [...taxFilings, ...licenseCalendarEvents];

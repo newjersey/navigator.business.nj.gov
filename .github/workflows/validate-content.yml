@@ -13,17 +13,24 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v7
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: package.json
+          run_install: false
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Dependencies
-        run: yarn install --immutable --mode skip-build
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Check for unquoted dates in content frontmatter
-        run: yarn workspace @businessnjgovnavigator/content validate-frontmatter-dates
+        run: pnpm --filter @businessnjgovnavigator/content run validate-frontmatter-dates
 
   spellcheck:
     runs-on: ubuntu-latest
@@ -33,14 +40,21 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v7
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: package.json
+          run_install: false
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Dependencies
-        run: yarn install --immutable --mode skip-build
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Run Spell Checker
         id: spellcheck
@@ -48,7 +62,7 @@ jobs:
         run: |
           set +e  # Temporarily disable errexit to be able to capture the exit code
           set -o pipefail
-          yarn spellcheck 2>&1 | tee spellcheck-output.txt
+          pnpm spellcheck 2>&1 | tee spellcheck-output.txt
           EXIT_CODE=$?
           set -e
           echo "exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT

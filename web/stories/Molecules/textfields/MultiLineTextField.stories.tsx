@@ -8,7 +8,7 @@ import {
   getMergedConfig,
 } from "@businessnjgovnavigator/shared/contexts";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 
 const Template = () => {

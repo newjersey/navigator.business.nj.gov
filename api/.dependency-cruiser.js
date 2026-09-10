@@ -40,7 +40,7 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "@aws-sdk/util-base64-node" },
+      to: { path: "@smithy/util-base64" },
     },
     {
       from: {},
@@ -101,6 +101,10 @@ module.exports = {
     {
       from: { path: "src/functions/messagingService/reactEmail" },
       to: { path: "@react-email/render" },
+    },
+    {
+      from: { path: "src/functions/messagingService/reactEmail" },
+      to: { path: "react" },
     },
     {
       from: { path: "src/functions/messagingService/reactEmail" },

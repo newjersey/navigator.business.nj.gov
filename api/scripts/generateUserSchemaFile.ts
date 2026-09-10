@@ -2,7 +2,7 @@
  * Generates the cached TypeScript interface for the current user data schema
  * and writes it to `src/domain/userSchema.generated.ts`.
  *
- * Run via: yarn workspace @businessnjgovnavigator/api generate:user-schema
+ * Run via: pnpm --filter @businessnjgovnavigator/api run generate:user-schema
  *
  * This file is called by:
  * - `prebuild` / `prestart` package.json hooks (ensures the file exists before compile/serve)
@@ -25,7 +25,7 @@ const outputPath = path.resolve(__dirname, "../src/domain/userSchema.generated.t
 const source = generateTsSourceFromCompiler(migrationFilePath, tsconfigPath);
 
 const fileContent = [
-  "// This file is auto-generated. Run `yarn workspace @businessnjgovnavigator/api generate:user-schema` to update.",
+  "// This file is auto-generated. Run `pnpm --filter @businessnjgovnavigator/api run generate:user-schema` to update.",
   "// Do not edit manually.",
   "",
   `export const userSchemaTs = \`${source}\`;`,

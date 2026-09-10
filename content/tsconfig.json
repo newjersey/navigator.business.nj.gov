@@ -4,6 +4,7 @@
     "lib": ["ES2020"],
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "ignoreDeprecations": "6.0",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,

@@ -70,10 +70,7 @@ export type v27TaxFilingData = {
 };
 
 export type v27EntityIdStatus =
-  | "UNKNOWN"
-  | "EXISTS_AND_REGISTERED"
-  | "EXISTS_NOT_REGISTERED"
-  | "NOT_FOUND";
+  "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
 
 export type v27TaxFiling = {
   identifier: string;
