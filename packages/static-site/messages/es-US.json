@@ -66,6 +66,7 @@
       ],
       "secondaryLinks": [],
       "searchAction": "/search",
+      "searchRegionLabel": "Sección de búsqueda",
       "searchInputLabel": "Buscar en el sitio",
       "searchSubmitIconAlt": "Buscar",
       "logInLabel": "Iniciar sesión",
@@ -902,5 +903,35 @@
   "newsletterSignup": {
     "title": "Subscribe to Business.NJ.gov Updates",
     "metaDescription": "Suscríbase para recibir noticias empresariales de Nueva Jersey, oportunidades de financiamiento y actualizaciones de programas de Business.NJ.gov directamente en su correo electrónico."
+  },
+  "search": {
+    "title": "Buscar",
+    "metaDescription": "Busque en Business.NJ.gov páginas de Aprender, Actualizaciones y programas de Financiamiento.",
+    "resultsHeading": "Resultados de búsqueda para \"{query}\"",
+    "filterHeading": "Filtrar por tipo",
+    "typeLabels": {
+      "Learn page": "Páginas de Aprender",
+      "Update": "Actualizaciones",
+      "Funding program": "Programas de financiamiento"
+    },
+    "filterReset": "Restablecer filtros",
+    "filteringByLabel": "Filtrando por:",
+    "filterRemoveLabel": "Quitar el filtro {filter}",
+    "resultCountShowing": "Mostrando <bold>{start}–{end}</bold> de {total} resultados",
+    "resultCountFiltered": "Mostrando <bold>{start}–{end}</bold> de {filtered} resultados (de {total} en total)",
+    "resultCountFilteredEmpty": "0 resultados coincidentes (de {total} en total)",
+    "paginationPrevious": "Anterior",
+    "paginationNext": "Siguiente",
+    "paginationLabel": "Paginación",
+    "paginationPageLabel": "Página {page}",
+    "loadingLabel": "Buscando…",
+    "noQueryTitle": "Ingrese un término de búsqueda",
+    "noQueryBody": "Use la barra de búsqueda arriba para encontrar páginas de Aprender, Actualizaciones y programas de Financiamiento.",
+    "zeroResultsTitle": "No se encontraron resultados",
+    "zeroResultsBody": "Intente un término de búsqueda diferente, o elimine un filtro a continuación.",
+    "errorMessage": "Se produjo un error al cargar los resultados de búsqueda. Intente de nuevo.",
+    "noScriptMessage": "La búsqueda requiere que JavaScript esté habilitado en su navegador.",
+    "fundingResultNote": "Los programas de financiamiento no tienen enlace directo desde los resultados de búsqueda.",
+    "fundingResultCtaLabel": "Ver todos los programas de financiamiento"
   }
 }

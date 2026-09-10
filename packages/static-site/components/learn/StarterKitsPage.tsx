@@ -26,7 +26,7 @@ export const StarterKitsPage = async ({ page, locale }: Props) => {
   const starterKitsContent = messages.learn.starterKits;
 
   return (
-    <article>
+    <article data-pagefind-body data-pagefind-filter="type:Learn page">
       <h1>{page.name}</h1>
       {page["sub-heading-text"] && <p className="usa-intro">{page["sub-heading-text"]}</p>}
 

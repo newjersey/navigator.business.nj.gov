@@ -66,6 +66,7 @@
       ],
       "secondaryLinks": [],
       "searchAction": "/search",
+      "searchRegionLabel": "Search component",
       "searchInputLabel": "Search site",
       "searchSubmitIconAlt": "Search",
       "logInLabel": "Log In",
@@ -902,5 +903,35 @@
   "newsletterSignup": {
     "title": "Subscribe to Business.NJ.gov Updates",
     "metaDescription": "Subscribe to get New Jersey business news, funding opportunities, and program updates from Business.NJ.gov delivered to your inbox."
+  },
+  "search": {
+    "title": "Search",
+    "metaDescription": "Search Business.NJ.gov for Learn pages, Updates, and Funding programs.",
+    "resultsHeading": "Search results for \"{query}\"",
+    "filterHeading": "Filter by type",
+    "typeLabels": {
+      "Learn page": "Learn pages",
+      "Update": "Updates",
+      "Funding program": "Funding programs"
+    },
+    "filterReset": "Reset filters",
+    "filteringByLabel": "Filtering by:",
+    "filterRemoveLabel": "Remove {filter} filter",
+    "resultCountShowing": "Showing <bold>{start}–{end}</bold> of {total} results",
+    "resultCountFiltered": "Showing <bold>{start}–{end}</bold> of {filtered} results (of {total} total)",
+    "resultCountFilteredEmpty": "0 matching results (of {total} total)",
+    "paginationPrevious": "Previous",
+    "paginationNext": "Next",
+    "paginationLabel": "Pagination",
+    "paginationPageLabel": "Page {page}",
+    "loadingLabel": "Searching…",
+    "noQueryTitle": "Enter a search term",
+    "noQueryBody": "Use the search bar above to find Learn pages, Updates, and Funding programs.",
+    "zeroResultsTitle": "No results found",
+    "zeroResultsBody": "Try a different search term, or remove a filter below.",
+    "errorMessage": "Something went wrong loading search results. Please try again.",
+    "noScriptMessage": "Search requires JavaScript to be enabled in your browser.",
+    "fundingResultNote": "Funding programs aren't linked directly from search results.",
+    "fundingResultCtaLabel": "View all funding programs"
   }
 }

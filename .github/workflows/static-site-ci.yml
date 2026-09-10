@@ -34,6 +34,17 @@ jobs:
           cache: pnpm
           cache-dependency-path: packages/static-site/pnpm-lock.yaml
 
+      - name: Install root dependencies
+        run: yarn install --immutable
+
+      # The static site's postbuild step boots the real app and fetches
+      # every indexable page over HTTP, including pages that read
+      # content/lib at request time (Funding programs, the licensing guide,
+      # starter kits). content/lib is generated, not committed, so it must
+      # be built here or those requests 500 with ENOENT.
+      - name: Build Content
+        run: yarn workspace @businessnjgovnavigator/content build
+
       - name: Build content-types
         working-directory: packages/content-types
         run: |

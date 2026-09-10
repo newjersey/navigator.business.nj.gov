@@ -17,6 +17,7 @@
     "dev": "next dev -p 4000",
     "prebuild": "pnpm sync:njwds-assets",
     "build": "next build",
+    "postbuild": "tsx scripts/buildPagefindIndex.ts",
     "prestart": "pnpm sync:njwds-assets",
     "start": "next start",
     "clean": "rimraf .next coverage",
@@ -38,7 +39,8 @@
     "test:e2e": "playwright test --config=playwright.e2e.config.ts",
     "pretest:e2e:english-only": "pnpm sync:njwds-assets",
     "test:e2e:english-only": "playwright test --config=playwright.e2e.english-only.config.ts",
-    "test:e2e:all": "pnpm test:e2e && pnpm test:e2e:english-only"
+    "test:e2e:search": "playwright test --config=playwright.e2e.search.config.ts",
+    "test:e2e:all": "pnpm test:e2e && pnpm test:e2e:english-only && pnpm test:e2e:search"
   },
   "keywords": [],
   "author": {
@@ -67,6 +69,7 @@
     "husky": "9.1.7",
     "jsdom": "29.1.1",
     "lint-staged": "17.2.0",
+    "pagefind": "1.5.2",
     "playwright": "1.62.0",
     "playwright-core": "1.62.0",
     "rimraf": "6.1.3",
