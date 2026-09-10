@@ -66,11 +66,9 @@ For pair programming, we recommend Visual Studio Code with the Live Share extens
 
 ### Pre-flight
 
-You will then setup your AWS credentials:
+You will then set up your AWS credentials. See [Set up AWS CLI with SSO](https://newjersey.github.io/innovation-engineering/guides/development/aws-sso/) for step by step guide.
 
-```shell
-aws configure
-```
+SSO sessions expire. Run `aws sso login` to log back in.
 
 Clone the code and navigate to the root of this repository. There is an installation script that
 will install all required development tools, yarn packages, and execute a yarn build.
