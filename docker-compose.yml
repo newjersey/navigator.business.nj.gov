@@ -15,9 +15,12 @@ services:
     depends_on:
       - dynamodb-local
     volumes:
-      - ~/.aws/credentials:/root/.aws/credentials:ro
       - ./api/users-dynamodb-schema.json:/users-dynamodb-schema.json:ro
       - ./api/businesses-dynamodb-schema.json:/businesses-dynamodb-schema.json:ro
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_REGION=us-east-1
     entrypoint: ""
     command: |
       bash -c "
