@@ -69,14 +69,19 @@ export const ActivitiesForm = (props: Props): ReactElement => {
     }
   };
 
+  const crtkFullAddress =
+    `${business?.crtkData?.crtkBusinessDetails?.addressLine1}, ${business?.crtkData?.crtkBusinessDetails?.city} ${business?.crtkData?.crtkBusinessDetails?.addressZipCode}` ||
+    "N/A";
+
   const confirmSend = async (): Promise<void> => {
     props.setError(false);
+
     const emailDetails: CrtkEmailMetadata = {
       username: userData?.user.name || "N/A",
       email: email,
       businessName: business?.crtkData?.crtkBusinessDetails?.businessName || "N/A",
       businessStatus: business?.profileData.businessPersona || "N/A",
-      businessAddress: business?.crtkData?.crtkBusinessDetails?.addressLine1 || "N/A",
+      businessAddress: crtkFullAddress,
       industry: business?.profileData.industryId || "N/A",
       ein: business?.crtkData?.crtkBusinessDetails?.ein || "N/A",
       naicsCode: naicsCode || "N/A",
@@ -133,7 +138,7 @@ export const ActivitiesForm = (props: Props): ReactElement => {
           {business?.crtkData?.crtkBusinessDetails?.businessName || "N/A"}
         </div>
         <div className="text-bold margin-top-1">{Config?.crtkTask?.businessStreetAddressLabel}</div>
-        <div>{business?.crtkData?.crtkBusinessDetails?.addressLine1 || "N/A"}</div>
+        <div>{crtkFullAddress || "N/A"}</div>
         <div className="text-bold margin-top-1">{Config?.crtkTask?.einLabel}</div>
         <div>{business?.crtkData?.crtkBusinessDetails?.ein || "N/A"}</div>
         <div className="margin-top-1">
