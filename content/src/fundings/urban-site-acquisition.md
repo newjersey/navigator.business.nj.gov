@@ -29,6 +29,7 @@ sector:
   - construction
   - real-estate
 publishStageArchive: ""
+priority: false
 housingDeveloperResource: true
 ---
 ## Eligibility
