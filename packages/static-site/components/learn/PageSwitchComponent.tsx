@@ -3,6 +3,7 @@ import { FundingPage } from "@/components/learn/FundingPage";
 import { HousingDeveloperResourcesPage } from "@/components/learn/HousingDeveloperResourcesPage";
 import { LicensingGuidePage } from "@/components/learn/LicensingGuidePage";
 import PageContent from "@/components/learn/PageContent";
+import { PlasticBanPage } from "@/components/learn/PlasticBanPage";
 import { StarterKitsPage } from "@/components/learn/StarterKitsPage";
 import type { PageItem } from "@/domain/content/types";
 import type { AppLocale } from "@/domain/i18n/locales";
@@ -22,6 +23,8 @@ export const PageSwitchComponent = ({ page, locale }: Props): ReactElement => {
       return <StarterKitsPage page={page} locale={locale} />;
     case "licensing-and-certification-guide":
       return <LicensingGuidePage page={page} locale={locale} />;
+    case "plastic-ban-law":
+      return <PlasticBanPage page={page} locale={locale} />;
     default:
       return <PageContent page={page} />;
   }

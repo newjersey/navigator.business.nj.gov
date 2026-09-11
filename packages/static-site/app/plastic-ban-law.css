@@ -1,0 +1,38 @@
+/* NJWDS's `.usa-in-page-nav-container main` sizing rule targets a `main`
+   child, but the learn shell already owns the page's single `<main>`
+   landmark, so this page's body column is an `<article>` and needs the
+   sizing rule re-declared here. `min-width: 0` lets the flex item shrink
+   below its content's min-content size, which the pyramid image and long
+   inline links would otherwise blow out. */
+.plastic-ban-law-page__body {
+  min-width: 0;
+  width: 100%;
+}
+
+/* Jump links shouldn't land flush against the viewport edge. The site header
+   is not sticky, so a small offset suffices. */
+.plastic-ban-law-page section[id] {
+  scroll-margin-top: 1rem;
+}
+
+/* Markdown images carry no intrinsic sizing. */
+.plastic-ban-law-page .usa-prose img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.plastic-ban-law-page .usa-accordion__button {
+  background-color: transparent;
+}
+
+/* NJWDS's compiled `.usa-accordion__heading` rule collapses the wrapping <h2>
+   to font-size: 1rem / line-height: 1 so the button reads as a button, not a
+   heading. This page's plain (non-collapsible) section headings are bare,
+   unstyled <h2> elements, so `revert` undoes NJWDS's override back to the
+   browser's native h2 rendering instead of guessing a pixel value, keeping
+   collapsible and plain section headings visually identical. */
+.plastic-ban-law-page .usa-accordion__heading {
+  font-size: revert;
+  line-height: revert;
+}
