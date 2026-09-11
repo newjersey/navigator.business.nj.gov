@@ -261,9 +261,7 @@ export const RegisteredAgent = (): ReactElement => {
     event: React.ChangeEvent<{ name?: string; value: unknown }>,
   ): void => {
     const selectedAgentType = event.target.value as
-      | "MYSELF"
-      | "AUTHORIZED_REP"
-      | "PROFESSIONAL_SERVICE";
+      "MYSELF" | "AUTHORIZED_REP" | "PROFESSIONAL_SERVICE";
 
     resetAgentFieldsInteraction();
     setFormationFormData((previousFormationData) => {

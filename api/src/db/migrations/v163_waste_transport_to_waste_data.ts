@@ -194,10 +194,7 @@ export type v163CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type v163CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type v163ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
 export type v163ResidentialConstructionType =
-  | "NEW_HOME_CONSTRUCTION"
-  | "HOME_RENOVATIONS"
-  | "BOTH"
-  | undefined;
+  "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export type v163EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
 export type v163EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
 
@@ -596,9 +593,7 @@ export type v163EnvironmentData = {
 
 export type v163MediaArea = keyof v163EnvironmentData;
 export type v163QuestionnaireFieldIds =
-  | v163WasteQuestionnaireFieldIds
-  | v163LandQuestionnaireFieldIds
-  | v163AirQuestionnaireFieldIds;
+  v163WasteQuestionnaireFieldIds | v163LandQuestionnaireFieldIds | v163AirQuestionnaireFieldIds;
 export type v163Questionnaire = Record<v163QuestionnaireFieldIds, boolean>;
 export type v163QuestionnaireConfig = Record<v163QuestionnaireFieldIds, string>;
 
@@ -637,10 +632,7 @@ export type v163AirData = {
 };
 
 export type v163AirQuestionnaireFieldIds =
-  | "emitPollutants"
-  | "emitEmissions"
-  | "constructionActivities"
-  | "noAir";
+  "emitPollutants" | "emitEmissions" | "constructionActivities" | "noAir";
 
 export type v163AirQuestionnaireData = Record<v163AirQuestionnaireFieldIds, boolean>;
 

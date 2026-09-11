@@ -143,10 +143,7 @@ export type v157CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type v157CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type v157ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
 export type v157ResidentialConstructionType =
-  | "NEW_HOME_CONSTRUCTION"
-  | "HOME_RENOVATIONS"
-  | "BOTH"
-  | undefined;
+  "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export type v157EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
 export type v157EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
 
@@ -575,9 +572,7 @@ export type v157EnvironmentData = {
 
 export type v157MediaArea = keyof v157EnvironmentData;
 export type v157QuestionnaireFieldIds =
-  | v157WasteQuestionnaireFieldIds
-  | v157LandQuestionnaireFieldIds
-  | v157AirQuestionnaireFieldIds;
+  v157WasteQuestionnaireFieldIds | v157LandQuestionnaireFieldIds | v157AirQuestionnaireFieldIds;
 export type v157Questionnaire = Record<v157QuestionnaireFieldIds, boolean>;
 export type v157QuestionnaireConfig = Record<v157QuestionnaireFieldIds, string>;
 
@@ -587,11 +582,7 @@ export type v157WasteData = {
 };
 
 export type v157WasteQuestionnaireFieldIds =
-  | "hazardousMedicalWaste"
-  | "compostWaste"
-  | "treatProcessWaste"
-  | "constructionDebris"
-  | "noWaste";
+  "hazardousMedicalWaste" | "compostWaste" | "treatProcessWaste" | "constructionDebris" | "noWaste";
 
 export type v157WasteQuestionnaireData = Record<v157WasteQuestionnaireFieldIds, boolean>;
 
@@ -615,10 +606,7 @@ export type v157AirData = {
 };
 
 export type v157AirQuestionnaireFieldIds =
-  | "emitPollutants"
-  | "emitEmissions"
-  | "constructionActivities"
-  | "noAir";
+  "emitPollutants" | "emitEmissions" | "constructionActivities" | "noAir";
 
 export type v157AirQuestionnaireData = Record<v157AirQuestionnaireFieldIds, boolean>;
 

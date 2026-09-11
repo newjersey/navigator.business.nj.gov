@@ -180,10 +180,7 @@ export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
 export type ResidentialConstructionType =
-  | "NEW_HOME_CONSTRUCTION"
-  | "HOME_RENOVATIONS"
-  | "BOTH"
-  | undefined;
+  "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export type EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
 export type EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
 export type PropertyLeaseType = "SHORT_TERM_RENTAL" | "LONG_TERM_RENTAL" | "BOTH" | undefined;

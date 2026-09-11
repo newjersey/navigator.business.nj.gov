@@ -12,6 +12,12 @@ const SERVER_URL = "http://127.0.0.1:3101";
 const playwrightEnglishOnlyConfig = defineConfig({
   testDir: "./tests/e2e-english-only",
   timeout: 120_000,
+  // biome-ignore lint/style/noProcessEnv: reads the CI flag, same as Playwright's own scaffolded default.
+  retries: process.env.CI ? 2 : 0,
+  // Distinct from the a11y/e2e configs' output directories so running all three suites in the
+  // same working directory can't have one suite's report/traces/screenshots overwrite another's.
+  outputDir: "test-results/e2e-english-only",
+  reporter: [["html", { outputFolder: "playwright-report/e2e-english-only", open: "never" }]],
   use: {
     baseURL: SERVER_URL,
     headless: true,

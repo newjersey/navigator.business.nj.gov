@@ -349,7 +349,7 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
   };
 });
 
-jest.mock("@aws-sdk/util-base64-node", (): MockAWSBase64 => {
+jest.mock("@smithy/util-base64", (): MockAWSBase64 => {
   return {
     fromBase64: function mockFromBase64(value: string): string {
       return value;

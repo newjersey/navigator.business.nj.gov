@@ -42,7 +42,7 @@ The standard deployment path is the existing CDK deployment workflow:
    That action clears CDK context, bootstraps, imports prerequisite stacks, and runs:
 
    ```shell
-   yarn workspace @businessnjgovnavigator/api-cdk cdk deploy --all --qualifier biz-nj --verbose --region us-east-1
+   pnpm --filter @businessnjgovnavigator/api-cdk exec cdk deploy --all --qualifier biz-nj --verbose --region us-east-1
    ```
 
 3. CDK deploys `ApiStack-${STAGE}`, which creates:
@@ -56,10 +56,10 @@ The standard deployment path is the existing CDK deployment workflow:
 For local verification before deploy, run:
 
 ```shell
-yarn workspace @businessnjgovnavigator/api-cdk test apiStack.test.ts --runInBand
-yarn test api/src/functions/apiGatewayLoadBalancerProxy/app.test.ts --selectProjects api --runInBand
-yarn workspace @businessnjgovnavigator/api-cdk build
-yarn workspace @businessnjgovnavigator/api typecheck
+pnpm --filter @businessnjgovnavigator/api-cdk run test apiStack.test.ts --runInBand
+pnpm test api/src/functions/apiGatewayLoadBalancerProxy/app.test.ts --selectProjects api --runInBand
+pnpm --filter @businessnjgovnavigator/api-cdk run build
+pnpm --filter @businessnjgovnavigator/api run typecheck
 ```
 
 After deployment, verify the CloudFormation outputs from `ApiStack-${STAGE}`:

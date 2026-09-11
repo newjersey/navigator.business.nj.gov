@@ -12,7 +12,7 @@ import { notFound } from "next/navigation";
 import PageContent from "@/components/learn/PageContent";
 import { loadPages } from "@/domain/content/loadContent";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
-import { type AppLocale, hasAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, isLocaleEnabled } from "@/domain/i18n/locales";
 import { buildPageMetadata } from "@/domain/metadata/pageMetadata";
 
 /**
@@ -49,7 +49,7 @@ export const generateMetadata = (): Metadata => {
 const SoftwareAndReuseRoute = async ({ params }: Props) => {
   const { locale } = await params;
 
-  if (!hasAppLocale(locale)) {
+  if (!isLocaleEnabled(locale)) {
     notFound();
   }
 

@@ -115,10 +115,7 @@ export type v32TaxFilingData = {
 };
 
 export type v32EntityIdStatus =
-  | "UNKNOWN"
-  | "EXISTS_AND_REGISTERED"
-  | "EXISTS_NOT_REGISTERED"
-  | "NOT_FOUND";
+  "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
 
 export type v32TaxFiling = {
   identifier: string;

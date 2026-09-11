@@ -20,7 +20,8 @@ RUN apt-get update && \
 # Tools/Dependencies needed for Browsers
 RUN apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2t64 libxtst6 xauth xvfb libu2f-udev
 
-# Install Yarn via Corepack
+# Corepack activates whichever package manager root package.json's
+# `packageManager` field pins (pnpm, not Yarn) the first time it's invoked.
 RUN corepack enable
 
 # Install Browsers.

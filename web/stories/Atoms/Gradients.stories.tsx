@@ -1,5 +1,5 @@
 import { Heading } from "@/components/njwds-extended/Heading";
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const Template = () => {
   const renderGradient = (gradientName: string) => (

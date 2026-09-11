@@ -15,11 +15,7 @@ export type QuestionnaireData = {
 export type MediaArea = keyof QuestionnaireData;
 
 export type QuestionnaireFieldIds =
-  | AirFieldIds
-  | LandFieldIds
-  | WasteFieldIds
-  | DrinkingWaterFieldIds
-  | WasteWaterFieldIds;
+  AirFieldIds | LandFieldIds | WasteFieldIds | DrinkingWaterFieldIds | WasteWaterFieldIds;
 export type Questionnaire = Record<QuestionnaireFieldIds, boolean>;
 export type QuestionnaireConfig = Record<QuestionnaireFieldIds, string>;
 
@@ -47,11 +43,7 @@ export type WasteFieldIds =
 export type WasteData = Record<WasteFieldIds, boolean>;
 
 export type DrinkingWaterFieldIds =
-  | "ownWell"
-  | "combinedWellCapacity"
-  | "wellDrilled"
-  | "potableWater"
-  | "noDrinkingWater";
+  "ownWell" | "combinedWellCapacity" | "wellDrilled" | "potableWater" | "noDrinkingWater";
 
 export type DrinkingWaterData = Record<DrinkingWaterFieldIds, boolean>;
 

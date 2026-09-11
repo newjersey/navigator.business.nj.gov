@@ -14,7 +14,7 @@ describe("<ProgressBar />", () => {
 
   it("sets aria-valuenow to the percentage", () => {
     render(<ProgressBar label="Profile completion" percentage={42} />);
-    expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "42");
+    expect(screen.getByRole("progressbar")).toHaveValue(42);
   });
 
   it("sets aria-valuemax to 100", () => {
@@ -24,6 +24,6 @@ describe("<ProgressBar />", () => {
 
   it("defaults aria-valuenow to 0 when no percentage given", () => {
     render(<ProgressBar label="Profile completion" />);
-    expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
+    expect(screen.getByRole("progressbar")).toHaveValue(0);
   });
 });

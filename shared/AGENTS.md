@@ -8,10 +8,10 @@ If something is only used in one package, keep it there; don't add it here.
 ## Commands
 
 ```bash
-yarn build          # TypeScript compilation (required before downstream packages see changes)
-yarn test           # Jest
-yarn typecheck
-yarn lint
+pnpm build          # TypeScript compilation (required before downstream packages see changes)
+pnpm test           # Jest
+pnpm typecheck
+pnpm lint
 ```
 
 ## Before Adding Something New
@@ -31,11 +31,11 @@ operating phases, personas, and more
 
 Changes to types here affect **both `web` and `api`**. After any change:
 
-1. Run `yarn workspace @businessnjgovnavigator/shared build`; downstream
+1. Run `pnpm --filter @businessnjgovnavigator/shared run build`; downstream
    packages won't pick up changes until this completes
-2. Run `yarn typecheck` from the **repo root** to catch breakage across all packages
+2. Run `pnpm typecheck` from the **repo root** to catch breakage across all packages
 3. If you changed user data types, also run
-   `yarn workspace @businessnjgovnavigator/api generate:user-schema`
+   `pnpm --filter @businessnjgovnavigator/api run generate:user-schema`
 
 ## Exports
 

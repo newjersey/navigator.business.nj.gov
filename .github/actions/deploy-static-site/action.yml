@@ -41,7 +41,6 @@ runs:
 
         docker buildx build --platform linux/amd64 \
           -f packages/static-site/Dockerfile . \
-          --build-arg NEXT_PUBLIC_WEB_BASE_URL="${NEXT_PUBLIC_WEB_BASE_URL:-}" \
           --build-arg NEXT_PUBLIC_MULTILINGUAL_ENABLED="${NEXT_PUBLIC_MULTILINGUAL_ENABLED:-}" \
           --build-arg NEXT_PUBLIC_FEEDBACK_WIDGET_MODE="${NEXT_PUBLIC_FEEDBACK_WIDGET_MODE:-}" \
           --build-arg NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED="${NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED:-}" \
@@ -58,7 +57,7 @@ runs:
       shell: bash
       run: |
         echo "Deploying static site ECS service stack: StaticSiteServiceStack-${STAGE}"
-        STATIC_SITE_INFRA_ONLY=true yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteServiceStack-${STAGE}" \
+        STATIC_SITE_INFRA_ONLY=true pnpm --filter @businessnjgovnavigator/api-cdk run cdk deploy "StaticSiteServiceStack-${STAGE}" \
           --qualifier biz-nj \
           --verbose \
           --region us-east-1 \

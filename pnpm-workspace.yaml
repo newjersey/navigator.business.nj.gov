@@ -1,0 +1,109 @@
+packages:
+  - api
+  - api/cdk
+  - api/src/functions/messagingService/reactEmail
+  - content
+  - packages/content-types
+  - packages/static-site
+  - shared
+  - web
+
+# Packages resolve from `npm` unless declared otherwise; no custom registries
+# are configured. See `.npmrc` for auth/registry-adjacent settings (the only
+# settings pnpm still reads from `.npmrc`).
+
+autoInstallPeers: false
+
+# `content` and `shared` have a declared dependency cycle in their
+# package.json files, but it isn't a real build-blocking cycle: `content`
+# resolves `shared` via raw TypeScript source (a tsconfig/vitest path
+# alias), not `shared`'s compiled output, so `content build` doesn't need
+# `shared` pre-built. `shared build` does need `content build`'s output on
+# disk first, which the root `build` script's explicit `--filter` ordering
+# guarantees. Without this setting, `pnpm -r` commands (`lint`, `typecheck`,
+# `spellcheck`, `clean`, `dependency-check`) refuse to run at all
+# (`ERR_PNPM_TASK_CYCLE`), even though none of them have a real ordering
+# requirement between these two packages.
+ignoreWorkspaceCycles: true
+
+# `strictPeerDependencies` is left at its default (`false`). `decap-cms-app`
+# bundles a legacy React 16-era widget stack (`react-scroll-sync`,
+# `react-redux@4`, `react-transition-group@1`, and others) whose peer
+# ranges can't satisfy this repo's React 19 versions, and there is no
+# version we control that resolves them. Enabling `strictPeerDependencies`
+# makes `pnpm install` fail outright on these packages
+# (`ERR_PNPM_PEER_DEP_ISSUES`), with no `peerDependencyRules` escape hatch
+# allowed by policy. The warnings stay visible via `pnpm peers check`; this
+# setting only keeps them non-fatal.
+#
+# `decap-cms-lib-util` and `decap-cms-lib-widgets` below are pinned to the
+# last version each published before a `catalog:`-protocol dependency
+# specifier broke every version since (`ERR_PNPM_SPEC_NOT_SUPPORTED_BY_ANY_RESOLVER`),
+# a packaging defect in `decap-cms-app`, not a version we chose. `trim@0.0.1`
+# is a real, still-reachable ReDoS (GHSA-9zwn-8p6q-jf6h) with no upstream fix
+# in that dependency chain; pinned to `trim`'s own final release, which
+# removes the vulnerable regex entirely.
+overrides:
+  decap-cms-lib-util: 3.8.0 # last release before the broken catalog: specifier; revisit when decap-cms-app updates
+  decap-cms-lib-widgets: 3.4.0 # same defect as decap-cms-lib-util, different sibling package
+  trim@0.0.1: 1.0.1 # GHSA-9zwn-8p6q-jf6h ReDoS fix; trim's own final release
+
+# Only these packages' install/build scripts are allowed to run. Everything
+# else with an unreviewed build script fails the install
+# (ERR_PNPM_IGNORED_BUILDS) rather than running silently. `false` entries are
+# packages pnpm flagged as unreviewed whose scripts are just deprecation
+# banners/telemetry, not something the package needs to function.
+allowBuilds:
+  "@parcel/watcher": true
+  "@swc/core": true
+  esbuild: true
+  sharp: true
+  cypress: true # downloads the Cypress test binary; required for cypress:* scripts
+  leveldown: true # compiles native LevelDB bindings; required by jest-dynalite
+  puppeteer: true # downloads Chromium; required by @cypress-audit/lighthouse & pa11y
+  unrs-resolver: true # selects a native resolver binary; required by its consumers
+  aws-sdk: false # v2 SDK's postinstall only prints an end-of-support notice
+  core-js-pure: false # postinstall is an OpenCollective funding banner only
+
+# pnpm-managed: entries below are written automatically by `pnpm install`
+# for any dependency published inside its default `minimumReleaseAge`
+# window (24h) that we've nonetheless accepted (we never overrode
+# `minimumReleaseAge`/`minimumReleaseAgeStrict`, so this is pnpm's own
+# transparency record of "fresh" releases let through, not a manually
+# curated allowlist). Safe to let this list grow/change on future installs;
+# do not hand-edit it.
+minimumReleaseAgeExclude:
+  - "@aws-sdk/checksums@3.1001.0"
+  - "@aws-sdk/client-cloudwatch-logs@3.1129.0"
+  - "@aws-sdk/client-cloudwatch@3.1129.0"
+  - "@aws-sdk/client-cognito-identity-provider@3.1129.0"
+  - "@aws-sdk/client-dynamodb@3.1129.0"
+  - "@aws-sdk/client-lambda@3.1129.0"
+  - "@aws-sdk/client-s3@3.1129.0"
+  - "@aws-sdk/client-ses@3.1129.0"
+  - "@aws-sdk/client-sns@3.1129.0"
+  - "@aws-sdk/client-ssm@3.1129.0"
+  - "@aws-sdk/core@3.978.0"
+  - "@aws-sdk/credential-provider-env@3.972.71"
+  - "@aws-sdk/credential-provider-http@3.972.73"
+  - "@aws-sdk/credential-provider-ini@3.973.16"
+  - "@aws-sdk/credential-provider-login@3.972.78"
+  - "@aws-sdk/credential-provider-node@3.972.83"
+  - "@aws-sdk/credential-provider-process@3.972.71"
+  - "@aws-sdk/credential-provider-sso@3.973.15"
+  - "@aws-sdk/credential-provider-web-identity@3.972.77"
+  - "@aws-sdk/dynamodb-codec@3.973.45"
+  - "@aws-sdk/lib-dynamodb@3.1129.0"
+  - "@aws-sdk/middleware-sdk-s3@3.972.76"
+  - "@aws-sdk/nested-clients@3.997.45"
+  - "@aws-sdk/s3-request-presigner@3.1129.0"
+  - "@aws-sdk/token-providers@3.1129.0"
+  - "@aws-sdk/util-format-url@3.972.47"
+  - "@types/node@24.13.4"
+  - "@types/react-dom@19.3.0"
+  - "@types/react@19.3.0"
+  - aws-cdk@2.1141.0
+  - react-dom@19.3.0
+  - react@19.3.0
+  - scheduler@0.28.0
+  - zod@4.6.0

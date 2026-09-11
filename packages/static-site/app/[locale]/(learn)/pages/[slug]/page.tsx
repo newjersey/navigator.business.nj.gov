@@ -9,7 +9,7 @@ import {
 } from "@/domain/content/housingDeveloperResourcesFlag";
 import { loadPages } from "@/domain/content/loadContent";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
-import { type AppLocale, hasAppLocale, resolveAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, isLocaleEnabled, resolveAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { buildPageMetadata } from "@/domain/metadata/pageMetadata";
 
@@ -69,7 +69,7 @@ export const generateStaticParams = () => {
 const ContentPage = async ({ params }: Props) => {
   const { locale, slug } = await params;
 
-  if (!hasAppLocale(locale)) {
+  if (!isLocaleEnabled(locale)) {
     notFound();
   }
 

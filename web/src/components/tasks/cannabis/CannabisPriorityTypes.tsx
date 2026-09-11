@@ -86,9 +86,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
     }
 
     const configLocation = `phrase${priorityStatusArray.length}` as
-      | "phrase1"
-      | "phrase2"
-      | "phrase3";
+      "phrase1" | "phrase2" | "phrase3";
     if (priorityStatusArray.length > 0 && priorityStatusArray.length < 4) {
       setEligibilityPhrase(
         templateEval(Config.cannabisPriorityStatus[configLocation], priorityStatusesAsIndexMap),

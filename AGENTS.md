@@ -5,22 +5,34 @@ it. `AGENTS.md` is read by Codex; `CLAUDE.md` is read by Claude Code.
 
 ## Project Shape
 
-Business.NJ.gov Navigator is a TypeScript monorepo managed with Yarn 4
-workspaces. See `.nvmrc` for the required Node version.
+Business.NJ.gov Navigator is a TypeScript monorepo managed with pnpm
+workspaces. See `.nvmrc` for the required Node version and root
+`package.json`'s `packageManager` field for the required pnpm version
+(installed automatically via Corepack).
 
-| Package                                          | Purpose                                                                                                |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `shared/`                                        | Domain types, shared utilities, and cross-package domain logic                                         |
-| `content/`                                       | Markdown/YAML/JSON content build system                                                                |
-| `api/`                                           | Express backend deployed as AWS Lambda functions                                                       |
-| `api/cdk/`                                       | AWS CDK infrastructure for the backend                                                                 |
-| `api/src/functions/messagingService/reactEmail/` | React Email templates compiled to static HTML/text                                                     |
-| `web/`                                           | Next.js frontend using MUI, SCSS, and Amplify auth                                                     |
-| `packages/content-types/`                        | Shared TypeScript content type definitions used by `content/` and `web`                                |
-| `packages/static-site/`                          | Static Next.js site (App Router, next-intl i18n, Biome, Vitest, Playwright a11y) — uses pnpm, not yarn |
+| Package                                          | Purpose                                                                          |
+| ------------------------------------------------ | -------------------------------------------------------------------------------- |
+| `shared/`                                        | Domain types, shared utilities, and cross-package domain logic                   |
+| `content/`                                       | Markdown/YAML/JSON content build system                                          |
+| `api/`                                           | Express backend deployed as AWS Lambda functions                                 |
+| `api/cdk/`                                       | AWS CDK infrastructure for the backend                                           |
+| `api/src/functions/messagingService/reactEmail/` | React Email templates compiled to static HTML/text                               |
+| `web/`                                           | Next.js frontend using MUI, SCSS, and Amplify auth                               |
+| `packages/content-types/`                        | Shared TypeScript content type definitions used by `content/` and `web`          |
+| `packages/static-site/`                          | Static Next.js site (App Router, next-intl i18n, Biome, Vitest, Playwright a11y) |
 
-Build order is `shared` -> `content` -> `api` / `api-cdk` / `react-email` /
-`web`.
+All eight packages above are members of the single root `pnpm-workspace.yaml`.
+`packages/static-site` still differs from the rest of the repo in its lint/
+format and test tooling (Biome instead of ESLint/Prettier, Vitest instead of
+Jest) — see `packages/static-site/AGENTS.md` — but it installs, builds, and
+resolves dependencies through the same root pnpm workspace and lockfile as
+everything else.
+
+Build order is `content-types` -> `content` -> `shared` -> (`api`, `api-cdk`,
+`react-email`, `web` together) -> `static-site`. The root `build` script
+runs these stages explicitly in this order (not generic `pnpm -r`) because
+`shared build` requires `content build`'s compiled output to already exist on
+disk.
 
 ## Working Rules
 
@@ -69,39 +81,41 @@ package-local command.
 
 ```bash
 # Environment
-yarn verify:node
-yarn services:up
-yarn services:down
+pnpm verify:node
+pnpm services:up
+pnpm services:down
 
 # Development
-yarn start:dev
+pnpm start:dev
 
 # Build and quality
-yarn build
-yarn build:clean
-yarn lint
-yarn typecheck
-yarn prettier:check
+pnpm build
+pnpm build:clean
+pnpm lint
+pnpm typecheck
+pnpm prettier:check
 
 # Tests
-yarn test                  # Root Jest suite
-yarn test:ci               # Root Jest suite in CI mode
-yarn test:watch            # Root Jest suite in watch mode
-yarn test:python           # Python script tests
-yarn workspace @businessnjgovnavigator/content test
+pnpm test                  # Root Jest suite
+pnpm test:ci               # Root Jest suite in CI mode
+pnpm test:watch            # Root Jest suite in watch mode
+pnpm test:python           # Python script tests
+pnpm test:content          # content Vitest suite
+pnpm test:static-site      # static-site Vitest suite
+pnpm test:browser          # static-site Playwright accessibility + E2E suites
 
 # Workspace-specific examples
-yarn workspace @businessnjgovnavigator/api test
-yarn workspace @businessnjgovnavigator/api-cdk test
-yarn workspace @businessnjgovnavigator/react-email build
-yarn workspace @businessnjgovnavigator/web test
-yarn workspace @businessnjgovnavigator/shared test
+pnpm --filter @businessnjgovnavigator/api run test
+pnpm --filter @businessnjgovnavigator/api-cdk run test
+pnpm --filter @businessnjgovnavigator/react-email run build
+pnpm --filter @businessnjgovnavigator/web run test
+pnpm --filter @businessnjgovnavigator/shared run test
 ```
 
 ## Repo-Specific Guardrails
 
 - The Decap CMS config at `web/public/mgmt/config.yml` is generated. Edit
-  source fragments and run `yarn decap:build-config`; do not hand-edit the
+  source fragments and run `pnpm decap:build-config`; do not hand-edit the
   generated config.
 - Content source files are compiled by `content/` and consumed through
   `@businessnjgovnavigator/content`. Other packages should not import content
@@ -117,7 +131,7 @@ yarn workspace @businessnjgovnavigator/shared test
 
 - The change is minimal, typed, and follows nearby patterns.
 - Relevant unit or package tests were run, or you can state why they were not.
-- `yarn typecheck` or a narrower typecheck was run for TypeScript behavior
+- `pnpm typecheck` or a narrower typecheck was run for TypeScript behavior
   changes.
 - Generated files are updated only through their generator.
 - No unrelated user or branch changes were reverted.

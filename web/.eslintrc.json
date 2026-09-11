@@ -27,8 +27,7 @@
       "jsx": true
     },
     "ecmaVersion": 12,
-    "sourceType": "module",
-    "tsconfigRootDir": "."
+    "sourceType": "module"
   },
   "plugins": [
     "react",

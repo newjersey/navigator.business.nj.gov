@@ -1,6 +1,6 @@
 import { NodeAlgorithmSuite } from "@aws-crypto/material-management-node";
 import { deserializeFactory } from "@aws-crypto/serialize";
-import { fromBase64 } from "@aws-sdk/util-base64-node";
+import { fromBase64 } from "@smithy/util-base64";
 import { ForeignEnvironmentCiphertextError, QuarantinedCiphertextError } from "@domain/types";
 import { TextDecoder } from "node:util";
 

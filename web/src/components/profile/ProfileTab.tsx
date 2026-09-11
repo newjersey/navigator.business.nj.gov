@@ -7,13 +7,7 @@ interface Props {
   activeTab: ProfileTabs;
   setProfileTab: (profileTab: ProfileTabs) => void;
   tabIcon:
-    | "info-outline"
-    | "bar-chart"
-    | "content-paste"
-    | "folder-open"
-    | "edit"
-    | "star"
-    | "profile";
+    "info-outline" | "bar-chart" | "content-paste" | "folder-open" | "edit" | "star" | "profile";
   tabText: string;
   onKeyDown?: (event: React.KeyboardEvent) => void;
 }

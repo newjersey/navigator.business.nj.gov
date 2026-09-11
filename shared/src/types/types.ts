@@ -67,11 +67,7 @@ export type OnboardingStatus = "SUCCESS" | "ERROR";
 export type FormationStepNames = "Name" | "Business" | "Contacts" | "Billing" | "Review";
 export type DbaStepNames = "Business Name" | "DBA Resolution" | "Authorize Business";
 export type EmergencyTripPermitStepNames =
-  | "Instructions"
-  | "Requestor"
-  | "Trip"
-  | "Billing"
-  | "Review";
+  "Instructions" | "Requestor" | "Trip" | "Billing" | "Review";
 
 export type FormationFieldErrorState = {
   field: FieldsForErrorHandling;
@@ -210,11 +206,7 @@ export type FundingType =
   | "tax exemption";
 export type FundingPublishStatus = "Do Not Publish";
 export type FundingStatus =
-  | "rolling application"
-  | "deadline"
-  | "first come, first serve"
-  | "closed"
-  | "opening soon";
+  "rolling application" | "deadline" | "first come, first serve" | "closed" | "opening soon";
 export const FundingStatusOrder: Record<FundingStatus, number> = {
   "rolling application": 2,
   deadline: 0,
@@ -223,12 +215,7 @@ export const FundingStatusOrder: Record<FundingStatus, number> = {
   "opening soon": 4,
 };
 export type FundingProgramFrequency =
-  | "annual"
-  | "ongoing"
-  | "recurring"
-  | "one-time"
-  | "pilot"
-  | "other";
+  "annual" | "ongoing" | "recurring" | "one-time" | "pilot" | "other";
 export type FundingBusinessStage = "early-stage" | "operating" | "both";
 export type FundingHomeBased = "yes" | "no" | "unknown";
 export type FundingPreferenceForOpportunityZone = "yes" | "no";
@@ -482,27 +469,19 @@ export type NaicsCodeObject = {
 export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
 export type ElevatorRegistrationSearchError =
-  | CommunityAffairsSearchError
-  | "NO_ELEVATOR_REGISTRATIONS_FOUND";
+  CommunityAffairsSearchError | "NO_ELEVATOR_REGISTRATIONS_FOUND";
 
 export type HotelMotelRegistrationSearchError =
-  | CommunityAffairsSearchError
-  | "NO_HOTEL_MOTEL_REGISTRATIONS_FOUND";
+  CommunityAffairsSearchError | "NO_HOTEL_MOTEL_REGISTRATIONS_FOUND";
 
 export type MultipleDwellingSearchError =
-  | CommunityAffairsSearchError
-  | "NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND";
+  CommunityAffairsSearchError | "NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND";
 
 export type CommunityAffairsSearchError =
-  | "NO_PROPERTY_INTEREST_FOUND"
-  | "FIELDS_REQUIRED"
-  | "SEARCH_FAILED";
+  "NO_PROPERTY_INTEREST_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
 export type FeedbackRequestModalNames =
-  | "Select Feedback"
-  | "Feature Request"
-  | "Request Submitted"
-  | "Report Issue";
+  "Select Feedback" | "Feature Request" | "Request Submitted" | "Report Issue";
 
 const _profileTabs = [
   "info",
@@ -760,10 +739,7 @@ interface ResetAction {
 }
 
 type FormContextReducerActions<T, FieldError = FieldErrorType> =
-  | ResetAction
-  | ValidationAction<T, FieldError>
-  | RegisterAction<T>
-  | UnRegisterAction<T>;
+  ResetAction | ValidationAction<T, FieldError> | RegisterAction<T> | UnRegisterAction<T>;
 export type FieldStatus<FieldError = FieldErrorType> = {
   invalid: boolean;
   updated?: boolean;

@@ -66,10 +66,7 @@ export type v26TaxFilingData = {
 };
 
 export type v26EntityIdStatus =
-  | "UNKNOWN"
-  | "EXISTS_AND_REGISTERED"
-  | "EXISTS_NOT_REGISTERED"
-  | "NOT_FOUND";
+  "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
 
 export type v26TaxFiling = {
   identifier: string;

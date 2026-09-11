@@ -28,16 +28,13 @@ export type CIGARETTE_PAYMENT_CONFIG_VARS =
   | "cigarette_license_sku";
 
 export type CIGARETTE_EMAIL_CONFIG_VARS =
-  | "cigarette_license_email_confirmation_url"
-  | "cigarette_license_email_confirmation_key";
+  "cigarette_license_email_confirmation_url" | "cigarette_license_email_confirmation_key";
 
 export type ENV_REQ_CONFIG_VARS =
-  | "environment_requirements_email_url"
-  | "environment_requirements_email_key";
+  "environment_requirements_email_url" | "environment_requirements_email_key";
 
 export type USER_MESSAGING_CONFIG_VARS =
-  | "feature_welcome_email_enabled"
-  | "feature_reminder_emails_enabled";
+  "feature_welcome_email_enabled" | "feature_reminder_emails_enabled";
 
 export type CRTK_EMAIL_CONFIG_VARS = "crtk_email_url" | "crtk_email_key";
 

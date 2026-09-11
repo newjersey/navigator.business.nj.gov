@@ -36,9 +36,7 @@ export type ElevatorRegistrationSummary = {
 };
 
 export type ElevatorRegistrationLookupStatus =
-  | "SUCCESSFUL"
-  | "NO REGISTRATIONS FOUND"
-  | "NO PROPERTY INTERESTS FOUND";
+  "SUCCESSFUL" | "NO REGISTRATIONS FOUND" | "NO PROPERTY INTERESTS FOUND";
 
 export type ElevatorRegistrationStatus =
   | "Approved"

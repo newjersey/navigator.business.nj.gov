@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import type { Page } from "playwright";
 import { LANGUAGE_DESCRIPTORS } from "@/domain/i18n/languages";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { LANGUAGE_PROMPT_DISMISSED_COOKIE } from "@/domain/siteConfig";
@@ -13,6 +14,20 @@ import { LANGUAGE_PROMPT_DISMISSED_COOKIE } from "@/domain/siteConfig";
 
 const TRIGGER = "nav.usa-language button.usa-language__link";
 const SUBMENU = "#language-switcher-submenu";
+
+/**
+ * Navigates to a locale-scoped `/learn` page and waits for the language
+ * switcher trigger to attach.
+ *
+ * The NJWDS language-selector script attaches the trigger's ARIA attributes
+ * asynchronously after navigation; without waiting for it, the first
+ * assertion in a cold page load can race the script and read the trigger
+ * before it's interactive.
+ */
+const gotoLearnPage = async (page: Page, path = "/learn"): Promise<void> => {
+  await page.goto(path);
+  await page.locator(TRIGGER).waitFor();
+};
 
 test.describe("language switcher accessibility", () => {
   test.beforeEach(async ({ context }) => {
@@ -29,7 +44,7 @@ test.describe("language switcher accessibility", () => {
   });
 
   test("trigger exposes aria-controls pointing at the submenu", async ({ page }) => {
-    await page.goto("/learn");
+    await gotoLearnPage(page);
 
     const controls = await page.locator(TRIGGER).getAttribute("aria-controls");
     expect(controls).toBe("language-switcher-submenu");
@@ -37,7 +52,7 @@ test.describe("language switcher accessibility", () => {
   });
 
   test("trigger toggles aria-expanded between collapsed and expanded", async ({ page }) => {
-    await page.goto("/learn");
+    await gotoLearnPage(page);
     const trigger = page.locator(TRIGGER);
 
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
@@ -50,7 +65,7 @@ test.describe("language switcher accessibility", () => {
       locale: "en-US",
     }).layout.languageSwitcher;
 
-    await page.goto("/learn");
+    await gotoLearnPage(page);
 
     await expect(page.locator("nav.usa-language")).toHaveAttribute(
       "aria-label",
@@ -61,7 +76,7 @@ test.describe("language switcher accessibility", () => {
   test("each option declares hreflang on the link and lang on its native-name span", async ({
     page,
   }) => {
-    await page.goto("/learn");
+    await gotoLearnPage(page);
     await page.locator(TRIGGER).click();
 
     for (const descriptor of LANGUAGE_DESCRIPTORS) {
@@ -74,7 +89,7 @@ test.describe("language switcher accessibility", () => {
   });
 
   test("orders options alphabetically by native name", async ({ page }) => {
-    await page.goto("/learn");
+    await gotoLearnPage(page);
     await page.locator(TRIGGER).click();
 
     const renderedNatives = await page.locator(`${SUBMENU} a strong`).allTextContents();
@@ -84,7 +99,7 @@ test.describe("language switcher accessibility", () => {
   });
 
   test("marks the active locale option with aria-current", async ({ page }) => {
-    await page.goto("/es-US/learn");
+    await gotoLearnPage(page, "/es-US/learn");
     await page.locator(TRIGGER).click();
 
     const current = page.locator(`${SUBMENU} a[aria-current="true"]`);
@@ -93,7 +108,7 @@ test.describe("language switcher accessibility", () => {
   });
 
   test("open dropdown has no automated WCAG violations", async ({ page }) => {
-    await page.goto("/learn");
+    await gotoLearnPage(page);
     await page.locator(TRIGGER).click();
     await expect(page.locator(SUBMENU)).toBeVisible();
 

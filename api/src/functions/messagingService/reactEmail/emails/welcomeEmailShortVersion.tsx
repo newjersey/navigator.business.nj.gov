@@ -11,9 +11,10 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import type { ReactElement } from "react";
 import { Header } from "../components/Header";
 
-export const WelcomeEmailShortVersion = (): JSX.Element => {
+export const WelcomeEmailShortVersion = (): ReactElement => {
   return (
     <Html lang="en">
       <Head>

@@ -28,7 +28,7 @@ export interface WebflowLicenseCard {
 }
 
 // process.cwd() is the invoking package's own directory ("..", then content/src)
-// when run via `yarn workspace <pkg> build`, but repo root (content/src directly,
+// when run via `pnpm --filter <pkg> run build`, but repo root (content/src directly,
 // no "..") when run via Jest, which never chdirs regardless of which package.json's
 // `test` script triggers it. Only this loader's own test exercises the real
 // filesystem (its siblings all mock fs), so it's the only one that has to resolve

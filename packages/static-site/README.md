@@ -52,8 +52,8 @@ cd navigator.business.nj.gov
 source scripts/install.sh
 ```
 
-The install script sets up root dependencies and also installs/builds `packages/static-site` with
-pnpm.
+The install script installs and builds every workspace package, including `packages/static-site`,
+through the single root `pnpm install` and `pnpm build`.
 
 ## Usage
 
@@ -105,15 +105,12 @@ docker compose up --build
 
 ## Deployments
 
-This package includes two deployment targets.
+This package is deployed to ECS/Fargate via ECR + GitHub Actions:
 
-- ECS/Fargate via ECR + GitHub Actions:
-  - CI workflow: `.github/workflows/static-site-ci.yml`
-  - Deploy action: `.github/actions/deploy-static-site/action.yml`
-  - Infrastructure: `api/cdk/lib/staticSiteRepositoryStack.ts` and
-    `api/cdk/lib/staticSiteServiceStack.ts`
-- AWS Amplify:
-  - Build config: `amplify.yml` at repository root
+- CI workflow: `.github/workflows/static-site-ci.yml`
+- Deploy action: `.github/actions/deploy-static-site/action.yml`
+- Infrastructure: `api/cdk/lib/staticSiteRepositoryStack.ts` and
+  `api/cdk/lib/staticSiteServiceStack.ts`
 
 Static-site ECS deploys run from the existing environment deployment workflows. Non-production
 images are tagged with the Git SHA. Production images are tagged with the root `package.json`

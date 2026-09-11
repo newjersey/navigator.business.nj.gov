@@ -1,9 +1,5 @@
 export type FullNameErrorVariant =
-  | "NO_ERROR"
-  | "MISSING"
-  | "TOO_LONG"
-  | "MUST_START_WITH_LETTER"
-  | "CONTAINS_ILLEGAL_CHAR";
+  "NO_ERROR" | "MISSING" | "TOO_LONG" | "MUST_START_WITH_LETTER" | "CONTAINS_ILLEGAL_CHAR";
 
 export const getFullNameErrorVariant = (name: string | undefined): FullNameErrorVariant => {
   if (!name || name.length === 0) {

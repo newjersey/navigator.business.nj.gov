@@ -15,10 +15,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 
 type RegistrationProgress =
-  | "Not Started"
-  | "Began Onboarding"
-  | "Onboarded Guest"
-  | "Fully Registered";
+  "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
 export const setOnLoadDimensions = (userData: UserData): void => {
   setAnalyticsDimensions(userData, true);

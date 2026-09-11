@@ -57,6 +57,6 @@ The CDK entry file is `bin/app.ts`, which initializes the stacks in dependency o
 
 ### CDK Commands
 
-- `yarn run test` perform the jest unit tests
-- `yarn cdk diff` compare deployed stack with current state
-- `yarn cdk synth` emits the synthesized CloudFormation template
+- `pnpm test` perform the jest unit tests
+- `pnpm cdk diff` compare deployed stack with current state
+- `pnpm cdk synth` emits the synthesized CloudFormation template

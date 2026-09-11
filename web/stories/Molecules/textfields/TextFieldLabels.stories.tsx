@@ -27,7 +27,7 @@ import {
 } from "@businessnjgovnavigator/shared/contexts";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { createEmptyDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 
 const Template = () => {

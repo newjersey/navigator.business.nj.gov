@@ -54,7 +54,7 @@ export function createLambda(stack: Stack, props: LambdaFunctionProps): NodejsFu
   return new NodejsFunction(stack, props.id, {
     functionName: props.functionName,
     runtime: props.runtime ?? Runtime.NODEJS_22_X,
-    depsLockFilePath: path.join(__dirname, "../../../yarn.lock"),
+    depsLockFilePath: path.join(__dirname, "../../../pnpm-lock.yaml"),
     entry: props.entry,
     handler: props.handler,
     vpc: props.vpc,

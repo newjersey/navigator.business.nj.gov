@@ -14,7 +14,7 @@ on:
     - cron: "30 13 * * 1-5"
   workflow_dispatch:
 
-env: &integration-env
+env:
   CHECKOUT_REF: >-
     ${{
       github.event_name == 'pull_request' && github.ref ||
@@ -22,81 +22,6 @@ env: &integration-env
       github.event_name == 'workflow_dispatch' && 'content-repo' ||
       github.ref_name
     }}
-  AWS_REGION: us-east-1
-  IS_OFFLINE: "true"
-  STAGE: local
-  DYNAMODB_ENDPOINT: http://localhost:8000
-  DYNAMO_PORT: "8000"
-  API_BASE_URL: http://localhost:5002
-  CYPRESS_API_BASE_URL: http://localhost:5002
-  USE_FAKE_SELF_REG: "true"
-  REDIRECT_URL: http://localhost:3000/
-  NEXT_PUBLIC_MULTILINGUAL_ENABLED: "true"
-  NEXT_PUBLIC_WEB_BASE_URL: http://localhost:3000
-  USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: "true"
-  ADMIN_PASSWORD: Test1!
-  AWS_ACCESS_KEY_ID: local
-  AWS_SECRET_ACCESS_KEY: local
-  DEV_ONLY_UNLINK_TAX_ID: "false"
-  DISABLE_GTM: "true"
-  FEATURE_BUSINESS_FLP: "false"
-  FEATURE_CIGARETTE_LICENSE: "true"
-  FEATURE_LOGIN_PAGE: "true"
-  FEATURE_USERDATA_ENDPOINT: "true"
-  SKIP_SAVE_DOCUMENTS_TO_S3: "true"
-
-  # Cognito
-  COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
-  COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
-  COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
-
-  # API Gateway
-  API_GATEWAY_CERT_ARN: ${{ vars.API_GATEWAY_CERT_ARN_DEV }}
-
-  # Cypress
-  CYPRESS_TEST_USER_EMAIL: ${{ vars.CYPRESS_TEST_USER_EMAIL }}
-  CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
-  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-  CYPRESS_COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
-  CYPRESS_COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
-  CYPRESS_COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
-
-  # Crypto
-  AWS_CRYPTO_CONTEXT_ORIGIN: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN_DEV }}
-  AWS_CRYPTO_CONTEXT_STAGE: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
-  AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE: ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
-  AWS_CRYPTO_TAX_ID_HASHING_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV }}
-  AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
-    ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}
-  AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV }}
-
-  # Feature flags
-  CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
-  FEATURE_TAX_CLEARANCE_CERTIFICATE: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
-  FEATURE_EMPLOYER_RATES: ${{ vars.FEATURE_EMPLOYER_RATES_DEV }}
-
-  # External services
-  DYNAMICS_FIRE_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}
-  DYNAMICS_FIRE_SAFETY_SECRET: ${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}
-  DYNAMICS_FIRE_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}
-  DYNAMICS_FIRE_SAFETY_URL: ${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}
-
-  DYNAMICS_HOUSING_CLIENT_ID: ${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}
-  DYNAMICS_HOUSING_SECRET: ${{ secrets.DYNAMICS_HOUSING_SECRET }}
-  DYNAMICS_HOUSING_TENANT_ID: ${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}
-  DYNAMICS_HOUSING_URL: ${{ secrets.DYNAMICS_HOUSING_URL }}
-
-  DYNAMICS_LICENSE_STATUS_CLIENT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}
-  DYNAMICS_LICENSE_STATUS_SECRET: ${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}
-  DYNAMICS_LICENSE_STATUS_TENANT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}
-  DYNAMICS_LICENSE_STATUS_URL: ${{ secrets.DYNAMICS_LICENSE_STATUS_URL }}
-
-  TAX_CLEARANCE_CERTIFICATE_PASSWORD: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV }}
-  TAX_CLEARANCE_CERTIFICATE_USER_NAME: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV }}
-  TAX_CLEARANCE_CERTIFICATE_URL: ${{ vars.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
-
-  CMS_OAUTH_CLIENT_ID: ${{vars.CMS_OAUTH_CLIENT_ID}}
-  CMS_OAUTH_CLIENT_SECRET: ${{secrets.CMS_OAUTH_CLIENT_SECRET}}
 
 jobs:
   build:
@@ -110,6 +35,33 @@ jobs:
     permissions:
       contents: read
       id-token: write
+
+    # `configure-and-build`'s `pnpm build` step reruns inside each `integration-group-*` job too
+    # (via `perform-integration-tests`), using that job's own env, not this job's. Any value
+    # `web/next.config.ts`'s build-time `env` block reads (Cognito, `CHECK_DEAD_LINKS`, feature
+    # flags) must therefore be correct here and in the `integration-env` anchor below, not just
+    # one or the other. Only genuinely runtime-only values (crypto keys, Dynamics, tax-clearance
+    # credentials, CMS OAuth, Cypress test-user credentials) belong solely on the five
+    # `integration-group-*` jobs, since only those jobs exercise those code paths.
+    env:
+      AWS_REGION: us-east-1
+      STAGE: local
+      API_BASE_URL: http://localhost:5002
+      REDIRECT_URL: http://localhost:3000/
+      NEXT_PUBLIC_MULTILINGUAL_ENABLED: "true"
+      NEXT_PUBLIC_WEB_BASE_URL: http://localhost:3000
+      USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: "true"
+      DEV_ONLY_UNLINK_TAX_ID: "false"
+      DISABLE_GTM: "true"
+      FEATURE_BUSINESS_FLP: "false"
+      FEATURE_CIGARETTE_LICENSE: "true"
+      FEATURE_LOGIN_PAGE: "true"
+      CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
+      FEATURE_TAX_CLEARANCE_CERTIFICATE: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
+      FEATURE_EMPLOYER_RATES: ${{ vars.FEATURE_EMPLOYER_RATES_DEV }}
+      COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+      COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+      COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
 
     steps:
       - name: Checkout Repository
@@ -157,19 +109,26 @@ jobs:
           name: workspace
           path: .
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: package.json
+          run_install: false
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       - name: Run Unit Tests (Shard ${{ matrix.shard }}/8)
         run: |
           echo "Running shard ${{ matrix.shard }} of 8"
-          yarn test:ci --shard=${{ matrix.shard }}/8
+          pnpm test:ci --shard=${{ matrix.shard }}/8
 
       - name: Upload Jest Test Results
         if: always()
@@ -187,12 +146,120 @@ jobs:
           path: coverage
           retention-days: 7
 
+  content-tests:
+    name: Content Vitest Suite
+    if: *tests_allowed
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.CHECKOUT_REF }}
+      - name: Download workspace artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: workspace
+          path: .
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: package.json
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Content Vitest Suite
+        run: pnpm test:content
+
   integration-group-1:
     name: Integration Tests - Group 1
     needs: build
     runs-on: ubuntu-latest
     if: *tests_allowed
-    env: *integration-env
+    env: &integration-env
+      AWS_REGION: us-east-1
+      IS_OFFLINE: "true"
+      STAGE: local
+      DYNAMODB_ENDPOINT: http://localhost:8000
+      DYNAMO_PORT: "8000"
+      API_BASE_URL: http://localhost:5002
+      CYPRESS_API_BASE_URL: http://localhost:5002
+      USE_FAKE_SELF_REG: "true"
+      REDIRECT_URL: http://localhost:3000/
+      NEXT_PUBLIC_MULTILINGUAL_ENABLED: "true"
+      NEXT_PUBLIC_WEB_BASE_URL: http://localhost:3000
+      USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: "true"
+      ADMIN_PASSWORD: Test1!
+      AWS_ACCESS_KEY_ID: local
+      AWS_SECRET_ACCESS_KEY: local
+      DEV_ONLY_UNLINK_TAX_ID: "false"
+      DISABLE_GTM: "true"
+      FEATURE_BUSINESS_FLP: "false"
+      FEATURE_CIGARETTE_LICENSE: "true"
+      FEATURE_LOGIN_PAGE: "true"
+      FEATURE_USERDATA_ENDPOINT: "true"
+      SKIP_SAVE_DOCUMENTS_TO_S3: "true"
+
+      # Cognito
+      COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+      COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+      COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
+
+      # Cypress
+      CYPRESS_TEST_USER_EMAIL: ${{ vars.CYPRESS_TEST_USER_EMAIL }}
+      CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
+      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      CYPRESS_COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+      CYPRESS_COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID_DEV }}
+      CYPRESS_COGNITO_IDENTITY_POOL_ID: ${{ secrets.COGNITO_IDENTITY_POOL_ID_DEV }}
+
+      # Crypto
+      AWS_CRYPTO_CONTEXT_ORIGIN: ${{ vars.AWS_CRYPTO_CONTEXT_ORIGIN_DEV }}
+      AWS_CRYPTO_CONTEXT_STAGE: ${{ vars.AWS_CRYPTO_CONTEXT_STAGE_DEV }}
+      AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
+        ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
+      AWS_CRYPTO_TAX_ID_HASHING_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_HASHING_KEY_DEV }}
+      AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE:
+        ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE }}
+      AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY: ${{ secrets.AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY_DEV }}
+
+      # Feature flags
+      CHECK_DEAD_LINKS: ${{ vars.CHECK_DEAD_LINKS_DEV }}
+      FEATURE_TAX_CLEARANCE_CERTIFICATE: ${{ vars.FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV }}
+      FEATURE_EMPLOYER_RATES: ${{ vars.FEATURE_EMPLOYER_RATES_DEV }}
+
+      # External services
+      DYNAMICS_FIRE_SAFETY_CLIENT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_CLIENT_ID }}
+      DYNAMICS_FIRE_SAFETY_SECRET: ${{ secrets.DYNAMICS_FIRE_SAFETY_SECRET }}
+      DYNAMICS_FIRE_SAFETY_TENANT_ID: ${{ secrets.DYNAMICS_FIRE_SAFETY_TENANT_ID }}
+      DYNAMICS_FIRE_SAFETY_URL: ${{ secrets.DYNAMICS_FIRE_SAFETY_URL }}
+
+      DYNAMICS_HOUSING_CLIENT_ID: ${{ secrets.DYNAMICS_HOUSING_CLIENT_ID }}
+      DYNAMICS_HOUSING_SECRET: ${{ secrets.DYNAMICS_HOUSING_SECRET }}
+      DYNAMICS_HOUSING_TENANT_ID: ${{ secrets.DYNAMICS_HOUSING_TENANT_ID }}
+      DYNAMICS_HOUSING_URL: ${{ secrets.DYNAMICS_HOUSING_URL }}
+
+      DYNAMICS_LICENSE_STATUS_CLIENT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_CLIENT_ID }}
+      DYNAMICS_LICENSE_STATUS_SECRET: ${{ secrets.DYNAMICS_LICENSE_STATUS_SECRET }}
+      DYNAMICS_LICENSE_STATUS_TENANT_ID: ${{ secrets.DYNAMICS_LICENSE_STATUS_TENANT_ID }}
+      DYNAMICS_LICENSE_STATUS_URL: ${{ secrets.DYNAMICS_LICENSE_STATUS_URL }}
+
+      TAX_CLEARANCE_CERTIFICATE_PASSWORD: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV }}
+      TAX_CLEARANCE_CERTIFICATE_USER_NAME: ${{ secrets.TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV }}
+      TAX_CLEARANCE_CERTIFICATE_URL: ${{ vars.TAX_CLEARANCE_CERTIFICATE_URL_DEV }}
+
+      CMS_OAUTH_CLIENT_ID: ${{vars.CMS_OAUTH_CLIENT_ID}}
+      CMS_OAUTH_CLIENT_SECRET: ${{secrets.CMS_OAUTH_CLIENT_SECRET}}
     steps:
       - uses: actions/checkout@v7
         with:

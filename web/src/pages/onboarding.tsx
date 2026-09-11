@@ -231,8 +231,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
         const querySectorId = router.query[QUERIES.sector] as string | undefined;
         const businessMunicipality = router.query[QUERIES.businessMunicipality] as
-          | string
-          | undefined;
+          string | undefined;
         const queryFlow = router.query[QUERIES.flow] as string;
         const utmSource = router.query[QUERIES.utmSource] as string | undefined;
 

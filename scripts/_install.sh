@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Setup script to setup machine for local development
 
-# Always run from the repo root so that .nvmrc, .venv, yarn.lock, etc. resolve correctly
+# Always run from the repo root so that .nvmrc, .venv, pnpm-lock.yaml, etc. resolve correctly
 cd "${0:a:h:h}"
 
 # Detect privilege escalation method
@@ -371,40 +371,47 @@ nvm install
 
 # ============================================================
 echo ""
-echo "=== [5/7] Package managers (Yarn + pnpm) ==="
+echo "=== [5/7] Package manager (pnpm) ==="
 # ============================================================
 
 corepack enable && echo "Corepack enabled." || { echo "Failed to enable corepack."; exit 1; }
-corepack prepare yarn@latest --activate && echo "Yarn activated." || { echo "Failed to activate Yarn."; exit 1; }
-corepack prepare pnpm@latest --activate && echo "pnpm activated." || { echo "Failed to activate pnpm."; exit 1; }
+corepack prepare pnpm@12.3.4 --activate && echo "pnpm activated." || { echo "Failed to activate pnpm."; exit 1; }
 
 # ============================================================
 echo ""
 echo "=== [6/7] Install dependencies and build ==="
 # ============================================================
 
-yarn install && yarn build || { echo "Root install or build failed."; exit 1; }
-
-# Cypress's postinstall hook normally downloads the binary during `yarn install`,
-# but Yarn 4 disables dependency lifecycle scripts by default (enableScripts: false).
-# Explicitly verify the binary is present to avoid confusing errors later.
-echo "Verifying Cypress binary..."
-yarn cypress install
-
-(
-    cd packages/static-site
-    pnpm install
-    # Playwright drives the static-site accessibility and e2e suites; install the
-    # browsers here (dev/CI only) rather than via a package postinstall, which
-    # would also pull Chromium into production Docker image builds. The headless
-    # shell is a separate download from full Chromium and is what the headless
-    # test runs actually launch.
-    pnpm exec playwright install chromium chromium-headless-shell
-    pnpm build
-) || {
-    echo "Static-site install or build failed."
+pnpm install --frozen-lockfile || {
+    echo "Root dependency install failed. Retry with: pnpm install --frozen-lockfile"
     exit 1
 }
+
+pnpm build || {
+    echo "Root build failed (covers every workspace, including static-site). Retry with: pnpm build"
+    exit 1
+}
+
+# Cypress's postinstall hook normally downloads the binary during install, but
+# pnpm/Corepack also disable dependency lifecycle scripts by default. Explicitly
+# verify the binary is present to avoid confusing errors later.
+echo "Verifying Cypress binary..."
+pnpm exec cypress install || {
+    echo "Cypress binary install failed. Retry with: pnpm exec cypress install"
+    exit 1
+}
+
+# Playwright drives the static-site accessibility and e2e suites; install the
+# browsers here (dev/CI only) rather than via a package postinstall, which
+# would also pull Chromium into production Docker image builds. The headless
+# shell is a separate download from full Chromium and is what the headless
+# test runs actually launch.
+echo "Verifying Playwright browsers for static-site..."
+pnpm --filter @businessnjgovnavigator/static-site exec playwright install chromium chromium-headless-shell || {
+    echo "static-site Playwright browser install failed. Retry with: pnpm --filter @businessnjgovnavigator/static-site exec playwright install chromium chromium-headless-shell"
+    exit 1
+}
+
 echo "Dependencies installed and projects built."
 
 # ============================================================
@@ -412,4 +419,4 @@ echo ""
 echo "=== [7/7] Git hooks (Husky) ==="
 # ============================================================
 
-yarn run prepare && echo "Git hooks installed." || { echo "Failed to install git hooks."; exit 1; }
+pnpm run prepare && echo "Git hooks installed." || { echo "Failed to install git hooks."; exit 1; }

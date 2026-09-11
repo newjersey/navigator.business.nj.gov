@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
-import { type AppLocale, hasAppLocale, resolveAppLocale } from "@/domain/i18n/locales";
+import { type AppLocale, isLocaleEnabled, resolveAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { buildPageMetadata } from "@/domain/metadata/pageMetadata";
 
@@ -53,7 +53,7 @@ export const generateStaticParams = () => {
 const CategoryPage = async ({ params }: Props) => {
   const { locale, category } = await params;
 
-  if (!hasAppLocale(locale)) {
+  if (!isLocaleEnabled(locale)) {
     return notFound();
   }
 

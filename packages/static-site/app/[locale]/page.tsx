@@ -17,7 +17,7 @@ import { SupportSection } from "@/components/landing/SupportSection";
 import { WhatsNewSection } from "@/components/landing/WhatsNewSection";
 import { loadRecents } from "@/domain/content/loadContent";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
-import { hasAppLocale } from "@/domain/i18n/locales";
+import { isLocaleEnabled } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 
 /**
@@ -68,7 +68,7 @@ export const generateMetadata = (): Metadata => {
 const LocalizedLandingPage = async ({ params }: LocalizedPageProps) => {
   const { locale } = await params;
 
-  if (!hasAppLocale(locale)) {
+  if (!isLocaleEnabled(locale)) {
     notFound();
   }
 

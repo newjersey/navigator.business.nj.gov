@@ -6,11 +6,18 @@ runs:
     - name: Checkout
       uses: actions/checkout@v7
 
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v6
+      with:
+        package_json_file: package.json
+        run_install: false
+
     - name: Setup Node.js
       uses: actions/setup-node@v7
       with:
         node-version-file: .nvmrc
-        cache: yarn
+        cache: pnpm
+        cache-dependency-path: pnpm-lock.yaml
 
     - name: Determine Cypress Version
       shell: bash
@@ -25,22 +32,14 @@ runs:
         restore-keys: |
           cypress-cache-
 
-    - name: Restore Yarn Cache
-      uses: actions/cache@v6
-      with:
-        path: .yarn/cache
-        key: yarn-cache-${{ hashFiles('yarn.lock') }}
-        restore-keys: |
-          yarn-cache-
-
     - name: Install Dependencies
       shell: bash
-      run: yarn install --immutable
+      run: pnpm install --frozen-lockfile
 
     - name: Verify Cypress Installation
       shell: bash
-      run: yarn cypress install
+      run: pnpm exec cypress install
 
     - name: Build Application
       shell: bash
-      run: yarn build
+      run: pnpm build

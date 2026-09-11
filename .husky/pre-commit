@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 
-yarn lint:staged
-yarn sync:deps
+pnpm lint:staged
 git add **/package.json package.json

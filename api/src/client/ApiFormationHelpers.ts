@@ -485,18 +485,7 @@ type BusinessType =
 type FormationFields = {
   businessType: BusinessType;
   shortDescription:
-    | "LLC"
-    | "LLP"
-    | "LP"
-    | "DP"
-    | "NP"
-    | "NV"
-    | "NF"
-    | "LF"
-    | "LFC"
-    | "FLC"
-    | "FLP"
-    | "FR";
+    "LLC" | "LLP" | "LP" | "DP" | "NP" | "NV" | "NF" | "LF" | "LFC" | "FLC" | "FLP" | "FR";
 };
 
 const BusinessTypeMap: Record<FormationLegalType | "veteran-nonprofit", FormationFields> = {
