@@ -4843,6 +4843,7 @@ __metadata:
     eslint-plugin-jest-formatting: "npm:3.1.0"
     eslint-plugin-unicorn: "npm:51.0.1"
     express: "npm:5.2.1"
+    gray-matter: "npm:4.0.3"
     helmet: "npm:8.3.0"
     http-status-codes: "npm:2.3.0"
     jest: "npm:30.4.2"
