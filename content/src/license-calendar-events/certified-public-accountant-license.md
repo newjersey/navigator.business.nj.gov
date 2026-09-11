@@ -1,6 +1,6 @@
 ---
 licenseName: ""
-urlSlug: certified-public-accountant
+urlSlug: certified-public-accountant-license
 expirationEventDisplayName: Accountant License Expiration
 renewalEventDisplayName: Accountant License Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
