@@ -53,6 +53,7 @@ export class ProfilePage extends OnboardingPage {
   clickSaveButton() {
     this.getSaveButton().scrollIntoView();
     this.getSaveButton().click();
+    cy.wait(1000);
   }
 
   selectLegalStructure(id: string) {

@@ -16,6 +16,12 @@ class OnboardingSharedElements {
   selectBusinessPersonaRadio(radio: string) {
     this.getBusinessPersonaRadio(radio).check();
   }
+  getBusinessIntentRadio(radio: string) {
+    return cy.get(`input[name="learning-business-question"][value="${radio}"]`);
+  }
+  selectBusinessIntentRadio(radio: string) {
+    this.getBusinessIntentRadio(radio).check();
+  }
   clickNext() {
     cy.get('[data-testid="next"]').first().click({ force: true });
   }

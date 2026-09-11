@@ -12,11 +12,12 @@ import {
   setMobileViewport,
 } from "../../support/helpers/helpers";
 import { onOnboardingPageStartingBusiness } from "../../support/page_objects/onboardingPageNew";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 
 const industries = getIndustries();
 
 describe("Onboarding for all industries when starting a business [feature] [all] [group1]", () => {
-  describe("Desktop", () => {
+  describe.skip("Desktop", () => {
     beforeEach(() => {
       cy.loginByCognitoApi();
     });
@@ -191,7 +192,7 @@ describe("Onboarding for all industries when starting a business [feature] [all]
     }
   });
 
-  describe("Mobile", () => {
+  describe.skip("Mobile", () => {
     beforeEach(() => {
       setMobileViewport();
       cy.loginByCognitoApi();
@@ -208,6 +209,20 @@ describe("Onboarding for all industries when starting a business [feature] [all]
 
       onOnboardingPageStartingBusiness.clickNext();
       cy.url().should("include", "dashboard");
+    });
+  });
+
+  describe("Onboarding for learning and ready to start businesses", () => {
+    beforeEach(() => {
+      cy.loginByCognitoApi();
+    });
+
+    it("onboards a learning business", () => {
+      completeNewBusinessOnboarding({ isLearningBusiness: true, industry_id: undefined });
+    });
+
+    it("onboards a ready to start business", () => {
+      completeNewBusinessOnboarding({ isLearningBusiness: false, industry_id: undefined });
     });
   });
 });

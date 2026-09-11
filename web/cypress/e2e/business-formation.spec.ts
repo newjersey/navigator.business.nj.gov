@@ -9,7 +9,6 @@ import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/s
 import { AdditionalFormation } from "@businessnjgovnavigator/cypress/support/types";
 import {
   FormationFormData,
-  LookupIndustryById,
   randomElementFromArray,
   randomInt,
 } from "@businessnjgovnavigator/shared/";
@@ -26,7 +25,6 @@ describe("Business Formation [feature] [all] [group2]", () => {
   });
 
   it("successfully forms an LLC business", () => {
-    const industry = LookupIndustryById("food-truck");
     const legalStructureId = "limited-liability-company";
     const businessNameSearch = "My Cool Business";
     const businessStartDate = dayjs().add(2, "months").format("MM/DD/YYYY");
@@ -74,7 +72,8 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const paymentType: FormationFormData["paymentType"] = "ACH";
 
     completeNewBusinessOnboarding({
-      industry,
+      industry_id: "food-truck",
+      isLearningBusiness: false,
     });
     completeBusinessStructureTask({ legalStructureId });
 

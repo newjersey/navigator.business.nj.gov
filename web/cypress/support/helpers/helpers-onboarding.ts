@@ -1,8 +1,4 @@
 import { randomElementFromArray } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import {
-  answerIndustrySpecificQuestions,
-  deriveIndustrySpecificAnswers,
-} from "@businessnjgovnavigator/cypress/support/helpers/helpers-industry-specific-questions";
 import { onOnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
 import {
   ExistingOnboardingData,
@@ -15,74 +11,36 @@ import {
   arrayOfSectors,
   LookupSectorTypeById,
 } from "@businessnjgovnavigator/shared/lib/shared/src/sector";
+import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
+import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 
-export const completeNewBusinessOnboarding = ({
-  industry = undefined,
-  liquorLicenseQuestion = undefined,
-  requiresCpa = undefined,
-  providesStaffingService = undefined,
-  certifiedInteriorDesigner = undefined,
-  realEstateAppraisalManagement = undefined,
-  interstateLogistics = undefined,
-  interstateMoving = undefined,
-  carService = undefined,
-  isChildcareForSixOrMore = undefined,
-  willSellPetCareItems = undefined,
-  petCareHousing = undefined,
-  whatIsPropertyLeaseType = undefined,
-  hasThreeOrMoreRentalUnits = undefined,
-  cannabisLicenseType = undefined,
-  constructionType = undefined,
-  residentialConstructionType = undefined,
-  publicWorksContractor = undefined,
-  employmentPersonnelServiceType = undefined,
-  employmentPlacementType = undefined,
-}: Partial<StartingOnboardingData> & Partial<Registration>): void => {
-  if (industry === undefined) {
-    industry = randomElementFromArray(getIndustries()) as Industry;
-  }
+type Props = {
+  isLearningBusiness?: boolean;
+  industry_id?: string;
+};
 
-  const industrySpecificAnswers = deriveIndustrySpecificAnswers(industry, {
-    liquorLicenseQuestion,
-    requiresCpa,
-    providesStaffingService,
-    certifiedInteriorDesigner,
-    realEstateAppraisalManagement,
-    interstateLogistics,
-    interstateMoving,
-    carService,
-    isChildcareForSixOrMore,
-    willSellPetCareItems,
-    petCareHousing,
-    whatIsPropertyLeaseType,
-    hasThreeOrMoreRentalUnits,
-    cannabisLicenseType,
-    constructionType,
-    residentialConstructionType,
-    publicWorksContractor,
-    employmentPersonnelServiceType,
-    employmentPlacementType,
-  });
-
+export const completeNewBusinessOnboarding = (props?: Props): void => {
   cy.url().should("include", "onboarding?page=1");
   onOnboardingPage.selectBusinessPersona("STARTING");
   onOnboardingPage.getBusinessPersona("STARTING").should("be.checked");
   onOnboardingPage.getBusinessPersona("OWNING").should("not.be.checked");
   onOnboardingPage.getBusinessPersona("FOREIGN").should("not.be.checked");
   onOnboardingPage.clickNext();
-
   cy.url().should("include", "onboarding?page=2");
 
-  onOnboardingPage.selectIndustry((industry as Industry).id);
-  onOnboardingPage
-    .getIndustryDropdown()
-    .invoke("prop", "value")
-    .should("contain", (industry as Industry).name);
-
-  answerIndustrySpecificQuestions({ page: onOnboardingPage, ...industrySpecificAnswers });
-
+  const isLearningBusinessSelection = props?.isLearningBusiness
+    ? String(props.isLearningBusiness)
+    : "false";
+  onOnboardingPageStartingBusiness.selectBusinessIntentRadio(isLearningBusinessSelection);
   onOnboardingPage.clickNext();
   cy.url().should("include", `dashboard`);
+
+  if (props?.industry_id) {
+    cy.visit("/profile");
+    onProfilePage.selectIndustry(props.industry_id);
+    onProfilePage.getSaveButton().first().click();
+    cy.url().should("include", `dashboard`);
+  }
 };
 export const completeExistingBusinessOnboarding = ({
   sectorId = randomElementFromArray(arrayOfSectors).id,

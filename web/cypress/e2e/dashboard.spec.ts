@@ -6,7 +6,6 @@ import {
   completeExistingBusinessOnboarding,
   completeNewBusinessOnboarding,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
 
@@ -40,12 +39,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
     describe("Starting a Business", () => {
       it("enters user info and shows the dashboard", () => {
-        const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
 
-        completeNewBusinessOnboarding({
-          industry,
-        });
+        completeNewBusinessOnboarding();
 
         completeBusinessStructureTask({ legalStructureId });
 
@@ -59,14 +55,11 @@ describe("Dashboard [feature] [all] [group2]", () => {
       });
 
       it("displays progress bar, which updates as tasks are completed", () => {
-        const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
         let beforeBusinessStructurePercentage: number;
         let beforeCheckboxPercentage: number;
 
-        completeNewBusinessOnboarding({
-          industry,
-        });
+        completeNewBusinessOnboarding();
 
         cy.get('[data-testid="section-progress-bar"]').should("exist");
 
@@ -110,13 +103,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
       });
 
       it("verifies the task screen and mini-roadmap displays", () => {
-        const industry = LookupIndustryById("cannabis");
         const legalStructureId = "general-partnership";
 
-        completeNewBusinessOnboarding({
-          industry,
-        });
-
+        completeNewBusinessOnboarding({ industry_id: "cannabis" });
         completeBusinessStructureTask({ legalStructureId });
 
         // tasks screen
@@ -134,12 +123,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
       });
 
       it("update the industry and verifies the dashboard tasks are updated", () => {
-        const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
 
-        completeNewBusinessOnboarding({
-          industry,
-        });
+        completeNewBusinessOnboarding();
 
         completeBusinessStructureTask({ legalStructureId });
 
@@ -169,12 +155,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
       });
 
       it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {
-        const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
 
-        completeNewBusinessOnboarding({
-          industry,
-        });
+        completeNewBusinessOnboarding();
 
         completeBusinessStructureTask({ legalStructureId });
 
