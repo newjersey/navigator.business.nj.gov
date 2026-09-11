@@ -2,6 +2,7 @@ import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/s
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onOnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
 import { getMergedConfig } from "@businessnjgovnavigator/shared";
+import { randomNonHomeBasedIndustry } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 
 const Config = getMergedConfig();
 
@@ -14,7 +15,9 @@ describe("Remove Business [feature] [all] [group5]", () => {
 
   it("adds multiple businesses and removes one", () => {
     // Create first business
-    completeNewBusinessOnboarding({});
+    completeNewBusinessOnboarding({
+      industry_id: randomNonHomeBasedIndustry().id,
+    });
     cy.url().should("contain", "/dashboard");
 
     // Verify first business exists

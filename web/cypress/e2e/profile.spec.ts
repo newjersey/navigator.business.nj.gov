@@ -21,9 +21,9 @@ import {
 import {
   Industry,
   arrayOfSectors,
-  employmentPersonnelServiceOptions,
   randomElementFromArray,
   randomInt,
+  employmentPersonnelServiceOptions,
 } from "@businessnjgovnavigator/shared/";
 
 describe("Profile [feature] [all] [group4]", () => {
@@ -40,6 +40,7 @@ describe("Profile [feature] [all] [group4]", () => {
       const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
+      const townDisplayName = "Barnegat";
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
@@ -47,16 +48,15 @@ describe("Profile [feature] [all] [group4]", () => {
         .isEmploymentAndPersonnelTypeApplicable
         ? randomElementFromArray([...employmentPersonnelServiceOptions])
         : undefined;
-      const townDisplayName = "Barnegat";
 
       completeNewBusinessOnboarding({
-        industry,
-        liquorLicenseQuestion,
-        requiresCpa,
-        employmentPersonnelServiceType,
+        industry_id: industry.id,
       });
       updateNewBusinessProfilePage({
         townDisplayName,
+        liquorLicenseQuestion,
+        requiresCpa,
+        employmentPersonnelServiceType,
       });
 
       checkNewBusinessProfilePage({
@@ -93,20 +93,25 @@ describe("Profile [feature] [all] [group4]", () => {
       const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
+      const townDisplayName = "Barnegat";
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
-      const townDisplayName = "Barnegat";
+      const employmentPersonnelServiceType = industry.industryOnboardingQuestions
+        .isEmploymentAndPersonnelTypeApplicable
+        ? randomElementFromArray([...employmentPersonnelServiceOptions])
+        : undefined;
 
       completeNewBusinessOnboarding({
-        industry,
-        liquorLicenseQuestion,
-        requiresCpa,
+        industry_id: industry.id,
       });
 
       updateNewBusinessProfilePage({
         homeBasedQuestion: homeBasedQuestion,
         townDisplayName,
+        liquorLicenseQuestion,
+        requiresCpa,
+        employmentPersonnelServiceType,
       });
 
       checkNewBusinessProfilePage({
@@ -124,19 +129,15 @@ describe("Profile [feature] [all] [group4]", () => {
         }) as Industry[],
       );
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
-      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
-        ? Boolean(randomInt() % 2)
-        : undefined;
       const townDisplayName = "Barnegat";
 
       completeNewBusinessOnboarding({
-        industry,
-        liquorLicenseQuestion,
-        requiresCpa,
+        industry_id: industry.id,
       });
 
       updateNewBusinessProfilePage({
         townDisplayName,
+        liquorLicenseQuestion,
       });
 
       checkNewBusinessProfilePage({
