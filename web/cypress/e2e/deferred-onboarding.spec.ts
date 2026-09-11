@@ -62,9 +62,7 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
 
       describe("when home-based business question does not exist", () => {
         beforeEach(() => {
-          completeNewBusinessOnboarding({
-            industry: randomNonHomeBasedIndustry(),
-          });
+          completeNewBusinessOnboarding();
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         });
 
@@ -73,9 +71,7 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
 
       describe("when we answer No to home-based business question immediately", () => {
         beforeEach(() => {
-          completeNewBusinessOnboarding({
-            industry: randomHomeBasedIndustry(),
-          });
+          completeNewBusinessOnboarding();
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           selectHomeBased(false);
         });
@@ -85,9 +81,7 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
 
       describe("when we answer No to home-based business question after providing location", () => {
         beforeEach(() => {
-          completeNewBusinessOnboarding({
-            industry: randomHomeBasedIndustry(),
-          });
+          completeNewBusinessOnboarding();
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         });
 
@@ -124,7 +118,7 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
   describe("home-based business", () => {
     describe("onboarded as STARTING - applicable industry", () => {
       it("shows and answers home-based-business deferred question", () => {
-        completeNewBusinessOnboarding({ industry: randomHomeBasedIndustry() });
+        completeNewBusinessOnboarding();
         completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         showsAndAnswersHomeBasedBusinessQuestionOnDashboard();
       });
@@ -132,7 +126,7 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
 
     describe("onboarded as STARTING - non-applicable industry", () => {
       it("does not show pre-answered home-based-business deferred question", () => {
-        completeNewBusinessOnboarding({ industry: randomNonHomeBasedIndustry() });
+        completeNewBusinessOnboarding();
         completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         hasNonHomeBasedTasks();
         doesNotShowHomeBasedBusinessQuestionAtAll();

@@ -2,7 +2,7 @@ import {
   completeBusinessStructureTask,
   fillOutLicenseStatusCheckForm,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { onOnboardingPageStartingBusiness } from "../../support/page_objects/onboardingPageNew";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 describe("License Status Check [feature] [all] [group5]", () => {
   let checkStatusFormData: {
     businessName: string;
@@ -19,13 +19,7 @@ describe("License Status Check [feature] [all] [group5]", () => {
   });
   it("shows the Permit Status screen after submitting form for Cosmetology Shop License", () => {
     cy.url().should("include", "onboarding?page=1");
-    onOnboardingPageStartingBusiness.selectBusinessPersonaRadio("STARTING");
-    onOnboardingPageStartingBusiness.getBusinessPersonaRadio("STARTING").should("be.checked");
-    onOnboardingPageStartingBusiness.clickNext();
-
-    cy.url().should("include", "onboarding?page=2");
-    onOnboardingPageStartingBusiness.selectIndustryDropdown("cosmetology");
-    onOnboardingPageStartingBusiness.clickNext();
+    completeNewBusinessOnboarding({ industry_id: "cosmetology", isLearningBusiness: false });
 
     cy.url().should("include", "dashboard");
 

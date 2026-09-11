@@ -222,10 +222,8 @@ export const updateNewBusinessProfilePage = ({
       .invoke("prop", "value")
       .should("contain", legalStructureId);
     onProfilePage.clickSaveButton(); // save because changing legal structure can change fields
-    cy.wait(1000);
     onDashboardPage.clickEditProfileInDropdown();
     cy.url().should("contain", "/profile");
-    cy.wait(1000);
 
     if (businessName) {
       const hasTradeName = LookupLegalStructureById(legalStructureId).hasTradeName;
@@ -274,13 +272,14 @@ export const updateNewBusinessProfilePage = ({
     onProfilePage.getNotes().invoke("prop", "value").should("contain", notes);
   }
 
-  if (liquorLicenseQuestion && !industry) {
+  if (liquorLicenseQuestion !== undefined && !industry) {
     onProfilePage.selectLiquorLicense(liquorLicenseQuestion);
     onProfilePage.getLiquorLicense(liquorLicenseQuestion).should("be.checked");
     onProfilePage.getLiquorLicense(!liquorLicenseQuestion).should("not.be.checked");
   }
 
   onProfilePage.clickSaveButton();
+  cy.wait(1000);
   cy.url().should("contain", "/dashboard");
 };
 export const updateExistingBusinessProfilePage = ({

@@ -5,6 +5,7 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
+  currentUserData,
   getLastCalledWithConfig,
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
@@ -151,6 +152,7 @@ describe("onboarding - shared", () => {
   });
 
   it("routes to the onboarding industry page when industry WITH essential question is set by using industry query string", async () => {
+    process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "false";
     const industry = randomElementFromArray(industriesWithSingleEssentialQuestion).id;
     useMockRouter({ isReady: true, query: { industry } });
     const { page } = renderPage({ userData: generateUserData() });
@@ -209,55 +211,77 @@ describe("onboarding - shared", () => {
     expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
   });
 
-  it("resets non-shared information when switching from starting flow to owning flow", async () => {
+  it.each(["logged in", "logged out"])(
+    "resets non-shared information when switching from starting flow to owning for for %s users",
+    async (status) => {
+      process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
+      const isLoggedIn = status === "logged in";
+      const business = generateBusiness({
+        onboardingFormProgress: "UNSTARTED",
+        profileData: createEmptyProfileData(),
+      });
+      const { page } = renderPage({
+        userData: generateUserDataForBusiness(business, {
+          user: generateUser({
+            id: business.userId,
+            myNJUserKey: isLoggedIn ? "sample-key" : undefined,
+          }),
+        }),
+      });
+
+      page.chooseRadio("business-persona-starting");
+      await page.visitOnboardingPage(2);
+
+      expect(screen.getByTestId("page-2-header")).toBeInTheDocument();
+      if (isLoggedIn) {
+        page.selectByValue("Industry", "e-commerce");
+      } else {
+        page.chooseRadio("starting-learning-business");
+      }
+
+      page.clickBack();
+
+      expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
+      expect(screen.getByTestId("business-persona-owning")).toBeInTheDocument();
+      expect(screen.getByText(composeOnBoardingTitle())).toBeInTheDocument();
+
+      page.chooseRadio("business-persona-owning");
+
+      if (!isLoggedIn) {
+        page.selectByValue("Sector", "retail-trade-and-ecommerce");
+      }
+
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
+      expect(currentBusiness().profileData).toEqual({
+        ...business.profileData,
+        businessPersona: "OWNING",
+        industryId: "generic",
+        homeBasedBusiness: undefined,
+        legalStructureId: undefined,
+        sectorId: "retail-trade-and-ecommerce",
+        municipality: undefined,
+        liquorLicense: false,
+        constructionRenovationPlan: undefined,
+        employerId: undefined,
+        taxId: undefined,
+        notes: "",
+        operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
+      });
+      expect(currentUserData().user.onboardedAsLearningUser).toBe(undefined);
+    },
+  );
+
+  it("does not reset information when re-visiting page 1 but not switching the answer for signed in users", async () => {
     const business = generateBusiness({
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
     const { page } = renderPage({
       userData: generateUserDataForBusiness(business, {
-        user: generateUser({ id: business.userId }),
-      }),
-    });
-
-    page.chooseRadio("business-persona-starting");
-    await page.visitOnboardingPage(2);
-    page.selectByValue("Industry", "e-commerce");
-    page.clickBack();
-
-    expect(screen.getByTestId("page-1-header")).toBeInTheDocument();
-    expect(screen.getByTestId("business-persona-owning")).toBeInTheDocument();
-    expect(screen.getByText(composeOnBoardingTitle())).toBeInTheDocument();
-    page.chooseRadio("business-persona-owning");
-    page.clickNext();
-    await waitFor(() => {
-      expect(mockPush).toHaveBeenCalled();
-    });
-    expect(currentBusiness().profileData).toEqual({
-      ...business.profileData,
-      businessPersona: "OWNING",
-      industryId: "generic",
-      homeBasedBusiness: undefined,
-      legalStructureId: undefined,
-      sectorId: "retail-trade-and-ecommerce",
-      municipality: undefined,
-      liquorLicense: false,
-      constructionRenovationPlan: undefined,
-      employerId: undefined,
-      taxId: undefined,
-      notes: "",
-      operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
-    });
-  });
-
-  it("does not reset information when re-visiting page 1 but not switching the answer", async () => {
-    const business = generateBusiness({
-      onboardingFormProgress: "UNSTARTED",
-      profileData: createEmptyProfileData(),
-    });
-    const { page } = renderPage({
-      userData: generateUserDataForBusiness(business, {
-        user: generateUser({ id: business.userId }),
+        user: generateUser({ id: business.userId, myNJUserKey: "sample-key" }),
       }),
     });
 

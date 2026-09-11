@@ -374,6 +374,7 @@ class OnboardingPageWithElementsNotInProfile extends OnboardingPage {
 
   clickNext() {
     cy.get('[data-testid="next"]').first().click({ force: true });
+    cy.wait(1000);
   }
 }
 
