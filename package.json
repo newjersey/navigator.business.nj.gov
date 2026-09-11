@@ -37,8 +37,7 @@
     "validate:dependencies": "tsx scripts/validate-dependency-policy.ts",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 11.16.0",
     "wipit": "git add -A && git commit -m 'wip [skip ci]' --no-verify",
-    "cms:map": "yarn dlx tsx scripts/generate-collection-map.ts",
-    "cms:check-slugs": "tsx scripts/check-decap-slug-collisions.ts"
+    "cms:map": "yarn dlx tsx scripts/generate-collection-map.ts"
   },
   "dependencies": {
     "@aws-crypto/client-node": "4.2.1",

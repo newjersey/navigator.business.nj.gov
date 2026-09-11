@@ -129,6 +129,40 @@ jobs:
           name: workspace
           path: ./
           retention-days: 3
+
+  cms-slug-check:
+    name: CMS Slug Collision Check
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    concurrency:
+      group: cms-slug-check-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ env.CHECKOUT_REF }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+
+      # `build` doesn't run on content-repo branches
+      # This is a little redundant, but knowingly included
+      - name: Install Dependencies
+        run: yarn install --immutable --mode skip-build
+
+      - name: Build Decap CMS Config
+        run: yarn decap:build-config
+
+      - name: Check CMS Slug Collisions
+        run: yarn workspace @businessnjgovnavigator/api cms-slug-check
+
   unit-tests:
     if: &tests_allowed >
       github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (
