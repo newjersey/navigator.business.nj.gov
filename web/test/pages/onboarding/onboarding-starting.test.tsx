@@ -60,9 +60,10 @@ describe("onboarding - starting a business", () => {
     setupStatefulUserDataContext();
     mockSuccessfulApiSignups();
     jest.useFakeTimers();
+    process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "false";
   });
 
-  describe("page 2", () => {
+  describe("industry page", () => {
     it("prevents user from moving after the second onboarding page if you have not selected an industry", async () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
@@ -389,6 +390,11 @@ describe("onboarding - starting a business", () => {
 
     describe("intent selection page", () => {
       beforeEach(() => {
+        jest.resetAllMocks();
+        useMockRouter({ isReady: true });
+        setupStatefulUserDataContext();
+        mockSuccessfulApiSignups();
+        jest.useFakeTimers();
         process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
       });
 
@@ -451,6 +457,21 @@ describe("onboarding - starting a business", () => {
         page.clickNext();
         await waitFor(() => {
           expect(currentUserData().user.onboardedAsLearningUser).toEqual(false);
+        });
+      });
+
+      it("clears userData with starting value if user goes back to step 1", async () => {
+        const initialUserData = createEmptyUserData(createEmptyUser());
+        const { page } = renderPage({ userData: initialUserData });
+
+        page.chooseRadio("business-persona-starting");
+        await page.visitOnboardingPage(2);
+
+        page.chooseRadio("starting-ready-business");
+
+        page.clickBack();
+        await waitFor(() => {
+          expect(currentUserData().user.onboardedAsLearningUser).toEqual(undefined);
         });
       });
     });

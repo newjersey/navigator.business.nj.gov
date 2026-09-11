@@ -40,7 +40,6 @@ export const completeNewBusinessOnboarding = (props?: Props): void => {
     onProfilePage.selectIndustry(props.industry_id);
     onProfilePage.getSaveButton().first().click();
     cy.url().should("include", `dashboard`);
-    cy.wait(1000);
   }
 };
 export const completeExistingBusinessOnboarding = ({
