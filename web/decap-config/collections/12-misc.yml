@@ -3533,3 +3533,18 @@ collections:
                       hint: "Changing this value changes the learn page URL.",
                     }
                   - { label: Name, name: name, widget: string }
+      - label: "Form Your Business"
+        name: "learn-page-form-business"
+        file: "content/src/fieldConfig/learn-page-form-business.json"
+        editor:
+          preview: true
+        fields:
+          - label: Form Your Business
+            name: learnPageFormBusiness
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Overview Section, name: overview, widget: markdown }
+              - { label: Check Names Section, name: firstSection, widget: markdown }
+              - { label: Form Business Section, name: secondSection, widget: markdown }
+              - { label: More Info Section, name: moreInfo, widget: markdown }
