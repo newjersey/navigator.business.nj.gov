@@ -281,6 +281,7 @@ export const updateNewBusinessProfilePage = ({
   }
 
   onProfilePage.clickSaveButton();
+  cy.wait(1000);
   cy.url().should("contain", "/dashboard");
 };
 export const updateExistingBusinessProfilePage = ({

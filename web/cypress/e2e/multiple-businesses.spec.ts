@@ -71,6 +71,7 @@ describe("Multiple Businesses [feature] [all] [group2]", () => {
     const secondBusinessName = "Second Cypress Business";
 
     completeNewBusinessOnboarding({ industry_id: "e-commerce", isLearningBusiness: true });
+    updateCurrentBusinessName(firstBusinessName, "saveFirstBusiness");
 
     onDashboardPage.getDropdown().click();
     onDashboardPage.getAddBusinessButtonInDropdown().click();

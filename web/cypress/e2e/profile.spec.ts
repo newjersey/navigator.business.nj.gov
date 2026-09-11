@@ -23,6 +23,7 @@ import {
   arrayOfSectors,
   randomElementFromArray,
   randomInt,
+  employmentPersonnelServiceOptions,
 } from "@businessnjgovnavigator/shared/";
 
 describe("Profile [feature] [all] [group4]", () => {
@@ -40,12 +41,22 @@ describe("Profile [feature] [all] [group4]", () => {
         ? Boolean(randomInt() % 2)
         : undefined;
       const townDisplayName = "Barnegat";
+      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
+        ? Boolean(randomInt() % 2)
+        : undefined;
+      const employmentPersonnelServiceType = industry.industryOnboardingQuestions
+        .isEmploymentAndPersonnelTypeApplicable
+        ? randomElementFromArray([...employmentPersonnelServiceOptions])
+        : undefined;
 
       completeNewBusinessOnboarding({
         industry_id: industry.id,
       });
       updateNewBusinessProfilePage({
         townDisplayName,
+        liquorLicenseQuestion,
+        requiresCpa,
+        employmentPersonnelServiceType,
       });
 
       checkNewBusinessProfilePage({
@@ -83,6 +94,13 @@ describe("Profile [feature] [all] [group4]", () => {
         ? Boolean(randomInt() % 2)
         : undefined;
       const townDisplayName = "Barnegat";
+      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
+        ? Boolean(randomInt() % 2)
+        : undefined;
+      const employmentPersonnelServiceType = industry.industryOnboardingQuestions
+        .isEmploymentAndPersonnelTypeApplicable
+        ? randomElementFromArray([...employmentPersonnelServiceOptions])
+        : undefined;
 
       completeNewBusinessOnboarding({
         industry_id: industry.id,
@@ -91,6 +109,9 @@ describe("Profile [feature] [all] [group4]", () => {
       updateNewBusinessProfilePage({
         homeBasedQuestion: homeBasedQuestion,
         townDisplayName,
+        liquorLicenseQuestion,
+        requiresCpa,
+        employmentPersonnelServiceType,
       });
 
       checkNewBusinessProfilePage({
@@ -116,6 +137,7 @@ describe("Profile [feature] [all] [group4]", () => {
 
       updateNewBusinessProfilePage({
         townDisplayName,
+        liquorLicenseQuestion,
       });
 
       checkNewBusinessProfilePage({
