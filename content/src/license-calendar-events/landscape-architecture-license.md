@@ -1,6 +1,6 @@
 ---
 licenseName: ""
-urlSlug: landscape-architecture
+urlSlug: landscape-architecture-license
 expirationEventDisplayName: Landscape Architecture License Expiration
 renewalEventDisplayName: Landscape Architecture License Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to

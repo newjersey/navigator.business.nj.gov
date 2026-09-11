@@ -1,6 +1,6 @@
 ---
 licenseName: Landscape Architecture-Certificate of Authorization
-urlSlug: landscape-architecture
+urlSlug: landscape-architecture-certificate
 expirationEventDisplayName: Certificate of Authorization Expiration
 renewalEventDisplayName: Certificate of Authorization Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
