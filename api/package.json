@@ -27,7 +27,8 @@
     "start:wiremock:with-port": "wiremock --root-dir ./wiremock",
     "test": "jest",
     "typecheck": "tsc --noemit",
-    "cms-integrity-tests": "yarn dlx tsx ./scripts/cms-content-integrity-tests/runCmsIntegrityTests.ts"
+    "cms-integrity-tests": "yarn dlx tsx ./scripts/cms-content-integrity-tests/runCmsIntegrityTests.ts",
+    "cms-slug-check": "tsx ./scripts/cms-content-integrity-tests/runSlugCollisionCheck.ts"
   },
   "engines": {
     "node": ">=24.18.0"
@@ -56,6 +57,7 @@
     "dayjs": "1.11.21",
     "dedent": "1.7.2",
     "express": "5.2.1",
+    "gray-matter": "4.0.3",
     "helmet": "8.3.0",
     "http-status-codes": "2.3.0",
     "jsonwebtoken": "9.0.3",
