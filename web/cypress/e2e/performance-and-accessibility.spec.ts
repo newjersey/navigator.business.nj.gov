@@ -8,9 +8,9 @@ import {
   lighthouseMobileConfig,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
+import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 
 describe("Performance and Accessibility - Landing Page [all] [group2]", () => {
   describe("Desktop", () => {
@@ -58,7 +58,7 @@ describe("Performance and Accessibility - Onboarding [all] [group4]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.selectIndustry("e-commerce");
+        onOnboardingPageStartingBusiness.selectBusinessIntentRadio("true");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -111,12 +111,9 @@ describe.skip("Performance and Accessibility - Roadmap Tasks [all] [group3]", ()
 
   for (const slug of urlSlugs) {
     it(`should pass the audits on ${slug}`, () => {
-      const industry = LookupIndustryById("cosmetology");
       const legalStructureId = "general-partnership";
 
-      completeNewBusinessOnboarding({
-        industry,
-      });
+      completeNewBusinessOnboarding({ isLearningBusiness: true, industry_id: "cosmetology" });
       completeBusinessStructureTask({ legalStructureId });
 
       onDashboardPage.clickRoadmapTask(slug);

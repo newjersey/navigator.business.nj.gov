@@ -36,7 +36,7 @@ describe("Multiple Businesses [feature] [all] [group2]", () => {
   });
 
   it("adds a second business", () => {
-    completeNewBusinessOnboarding({});
+    completeNewBusinessOnboarding();
     cy.url().should("contain", "/dashboard");
 
     onDashboardPage.getDropdown().click();
@@ -70,8 +70,7 @@ describe("Multiple Businesses [feature] [all] [group2]", () => {
     const firstBusinessName = "First Cypress Business";
     const secondBusinessName = "Second Cypress Business";
 
-    completeNewBusinessOnboarding({});
-    updateCurrentBusinessName(firstBusinessName, "saveFirstBusiness");
+    completeNewBusinessOnboarding({ industry_id: "e-commerce", isLearningBusiness: true });
 
     onDashboardPage.getDropdown().click();
     onDashboardPage.getAddBusinessButtonInDropdown().click();
@@ -102,7 +101,7 @@ describe("Multiple Businesses [feature] [all] [group2]", () => {
   });
 
   it("exits out of additional business onboarding without saving", () => {
-    completeNewBusinessOnboarding({});
+    completeNewBusinessOnboarding();
     cy.url().should("contain", "/dashboard");
 
     onDashboardPage.getDropdown().click();
@@ -120,7 +119,7 @@ describe("Multiple Businesses [feature] [all] [group2]", () => {
   });
 
   it("exits out of additional business onboarding without saving when new business is unsupported", () => {
-    completeNewBusinessOnboarding({});
+    completeNewBusinessOnboarding();
     cy.url().should("contain", "/dashboard");
 
     onDashboardPage.getDropdown().click();

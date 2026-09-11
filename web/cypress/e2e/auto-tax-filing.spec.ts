@@ -24,7 +24,10 @@ describe(
     });
 
     it("automatically registers for Gov2Go and retrieves tax events if business name and tax id are provided", () => {
-      completeNewBusinessOnboarding({ industry: randomNonHomeBasedNonDomesticEmployerIndustry() });
+      completeNewBusinessOnboarding({
+        industry_id: randomNonHomeBasedNonDomesticEmployerIndustry().id,
+        isLearningBusiness: false,
+      });
       completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
       onDashboardPage.getDashboardHeader().should("exist");
@@ -52,7 +55,10 @@ describe(
     });
 
     it("does not automatically register for Gov2Go and retrieve tax filing if missing business name", () => {
-      completeNewBusinessOnboarding({ industry: randomNonHomeBasedNonDomesticEmployerIndustry() });
+      completeNewBusinessOnboarding({
+        industry_id: randomNonHomeBasedNonDomesticEmployerIndustry().id,
+        isLearningBusiness: false,
+      });
       completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
       onDashboardPage.getDashboardHeader().should("exist");
@@ -72,12 +78,16 @@ describe(
     });
 
     it("does not automatically register for Gov2Go and retrieve tax filing if missing tax id", () => {
-      completeNewBusinessOnboarding({ industry: randomNonHomeBasedNonDomesticEmployerIndustry() });
+      completeNewBusinessOnboarding({
+        industry_id: randomNonHomeBasedNonDomesticEmployerIndustry().id,
+        isLearningBusiness: false,
+      });
       completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
       onDashboardPage.getDashboardHeader().should("exist");
       cy.visit("/profile");
       cy.get('input[data-testid="businessName"]').type(businessName);
+      onProfilePage.selectIndustry(randomNonHomeBasedNonDomesticEmployerIndustry().id);
       onProfilePage.getSaveButton().first().click();
       openFormationDateModal();
       selectDate("04/2021");
