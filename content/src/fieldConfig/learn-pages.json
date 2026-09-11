@@ -8,7 +8,7 @@
     "accountButtonHeading": "Ready to start your business?",
     "accountButtonText": "Open A Free Account",
     "steps": [
-      { "id": "business-structure", "name": "Select Your Business Structure" },
+      { "id": "business-structure", "name": "Select Your Business Structure"},
       { "id": "form-business", "name": "Form Your Business" },
       { "id": "find-naics", "name": "Find Your Industry Classification Code" },
       { "id": "get-ein", "name": "Get Your Employer Identification Number (EIN)" },

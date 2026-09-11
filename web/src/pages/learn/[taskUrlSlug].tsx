@@ -1,3 +1,4 @@
+import { FormBusiness } from "@/components/learn/FormBusiness";
 import { LearnTaskSidebarPageLayout } from "@/components/LearnTaskSidebarPageLayout";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
@@ -21,6 +22,9 @@ const LearnTaskPage = (props: Props): ReactElement => {
   const router = useRouter();
   const { Config } = useConfig();
   const learnSteps = Config.learnPages.steps;
+  const pageComponents: Record<LearnStep["id"], ReactElement> = {
+    "form-business": <FormBusiness />,
+  };
 
   const getNextAndPreviousButtons = (): ReactElement | undefined => {
     const currentTaskIndex = learnSteps.findIndex((task) => task.id === props.learnStep.id);
@@ -70,8 +74,7 @@ const LearnTaskPage = (props: Props): ReactElement => {
             {`${Config.learnPages.stepText} ${learnSteps.findIndex((step) => step.id === props.learnStep.id) + 1}`}
           </h1>
           <h2>{props.learnStep.name}</h2>
-          <p>{Config.learnPages.placeholderContent}</p>
-
+          {pageComponents[props.learnStep.id]}
           <div className="display-flex flex-justify-end margin-top-2">
             <button
               className="usa-button usa-button--primary display-flex flex-align-center text-left text-normal"
