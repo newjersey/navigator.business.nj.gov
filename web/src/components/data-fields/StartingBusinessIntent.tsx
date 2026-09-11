@@ -1,10 +1,11 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 
 export const StartingBusinessIntent = <T,>(props: FormContextFieldProps<T>): ReactElement => {
   const { Config } = useConfig();
@@ -25,13 +26,17 @@ export const StartingBusinessIntent = <T,>(props: FormContextFieldProps<T>): Rea
     event: React.ChangeEvent<{ name?: string; value: unknown }>,
   ): Promise<void> => {
     setIsValid(true);
-    const value = event.target.value;
+    const value = event.target.value === "true";
     await updateQueue
       ?.queueUser({
-        onboardedAsLearningUser: value === "true",
+        onboardedAsLearningUser: value,
       })
       .update();
   };
+
+  useEffect(() => {
+    analytics.event.onboarding.business_intent_page_view();
+  }, []);
 
   return (
     <div className={"padding-y-5"}>

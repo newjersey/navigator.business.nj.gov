@@ -23,7 +23,7 @@ describe("Automated Accessibilty Testing [feature] [all] [group1]", () => {
       onOnboardingPageStartingBusiness.clickNext();
 
       cy.url().should("include", "onboarding?page=2");
-      onOnboardingPageStartingBusiness.selectIndustryDropdown("generic");
+      onOnboardingPageStartingBusiness.selectBusinessIntentRadio("false");
       cy.checkA11y(undefined, {
         runOnly: {
           type: "tag",
@@ -63,7 +63,7 @@ describe("Automated Accessibilty Testing [feature] [all] [group1]", () => {
       onOnboardingPageStartingBusiness.clickNext();
 
       cy.url().should("include", "onboarding?page=2");
-      onOnboardingPageStartingBusiness.selectIndustryDropdown("generic");
+      onOnboardingPageStartingBusiness.selectBusinessIntentRadio("false");
       cy.checkA11y(undefined, {
         runOnly: {
           type: "tag",

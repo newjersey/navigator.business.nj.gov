@@ -3,6 +3,7 @@ import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
   generateProfileData,
   generateUserData,
+  generateUserDataForBusiness,
   getIndustries,
 } from "@businessnjgovnavigator/shared/";
 import {
@@ -10,6 +11,7 @@ import {
   sendOnboardingOnSubmitEvents,
   setOnLoadDimensions,
 } from "./analytics-helpers";
+import { generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
 
 jest.mock("@/lib/utils/analytics");
 
@@ -106,10 +108,14 @@ describe("analytics-helpers", () => {
   describe("sendOnboardingOnSubmitEvents", () => {
     describe("liquor license", () => {
       it("fires yes_require_liquor_license events", () => {
-        const userData = generateProfileData({
+        const profileData = generateProfileData({
           industryId: randomElementFromArray(liquorLicenseApplicableIndustries).id,
           liquorLicense: true,
         });
+        const business = generateBusinessForProfile({
+          profileData,
+        });
+        const userData = generateUserDataForBusiness(business);
         sendOnboardingOnSubmitEvents(userData, "industry-page");
         expect(mockAnalytic.eventRunner.track).toHaveBeenCalledTimes(1);
         expect(mockAnalytic.eventRunner.track).toHaveBeenCalledWith({
@@ -122,10 +128,15 @@ describe("analytics-helpers", () => {
       });
 
       it("fires no_dont_require_liquor_license event", () => {
-        const userData = generateProfileData({
+        const profileData = generateProfileData({
           industryId: randomElementFromArray(liquorLicenseApplicableIndustries).id,
           liquorLicense: false,
         });
+        const business = generateBusinessForProfile({
+          profileData,
+        });
+        const userData = generateUserDataForBusiness(business);
+
         sendOnboardingOnSubmitEvents(userData, "industry-page");
         expect(mockAnalytic.eventRunner.track).toHaveBeenCalledTimes(1);
         expect(mockAnalytic.eventRunner.track).toHaveBeenCalledWith({
@@ -138,10 +149,15 @@ describe("analytics-helpers", () => {
       });
 
       it("does not fire analytics when page is not the industry-page", () => {
-        const userData = generateProfileData({
+        const profileData = generateProfileData({
           industryId: randomElementFromArray(liquorLicenseApplicableIndustries).id,
           liquorLicense: false,
         });
+        const business = generateBusinessForProfile({
+          profileData,
+        });
+        const userData = generateUserDataForBusiness(business);
+
         sendOnboardingOnSubmitEvents(userData);
         expect(mockAnalytic.eventRunner.track).toHaveBeenCalledTimes(0);
       });

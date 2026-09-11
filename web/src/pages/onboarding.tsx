@@ -166,6 +166,23 @@ const OnboardingPage = (props: Props): ReactElement => {
     setCurrentFlow(getFlow(profileData));
   }, [profileData]);
 
+  useEffect(() => {
+    switch (error) {
+      case "REQUIRED_EXISTING_BUSINESS":
+        analytics.event.onboarding.error.select_business_status(
+          Config.profileDefaults.fields.businessPersona.default.errorTextRequired,
+        );
+        break;
+      case "REQUIRED_SELECT_INTENT":
+        analytics.event.onboarding.error.select_business_intent(
+          Config.profileDefaults.default.selectIntentAlertText,
+        );
+        break;
+      default:
+        break;
+    }
+  }, [Config, error]);
+
   const protectUpdateQueueAgainstRaceCondition = (
     currentUserData: UserData | undefined,
   ): boolean => {
@@ -410,9 +427,8 @@ const OnboardingPage = (props: Props): ReactElement => {
         return;
 
       const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
-      sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
-
       updateQueue.queueProfileData(newProfileData);
+      sendOnboardingOnSubmitEvents(updateQueue.current(), currentPage?.name);
       setAnalyticsDimensions(updateQueue.current());
 
       const isForeignBusinessTypeUnsupported =
@@ -474,6 +490,9 @@ const OnboardingPage = (props: Props): ReactElement => {
         current: previousPage,
         previous: page.current,
       });
+      if (updateQueue?.current().user.onboardedAsLearningUser !== undefined) {
+        updateQueue?.queueUser({ onboardedAsLearningUser: undefined }).update();
+      }
       void routeToPage(previousPage).catch((error: unknown) => {
         console.error("Failed to navigate to the previous onboarding page", error);
       });

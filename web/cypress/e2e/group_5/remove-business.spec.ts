@@ -14,7 +14,7 @@ describe("Remove Business [feature] [all] [group5]", () => {
 
   it("adds multiple businesses and removes one", () => {
     // Create first business
-    completeNewBusinessOnboarding({});
+    completeNewBusinessOnboarding();
     cy.url().should("contain", "/dashboard");
 
     // Verify first business exists

@@ -30,6 +30,26 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { act, screen, waitFor, within } from "@testing-library/react";
+import analytics from "@/lib/utils/analytics";
+
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      onboarding: {
+        business_persona_selection_submit: jest.fn(),
+        business_intent_selection_submit: jest.fn(),
+        persona_page_view: jest.fn(),
+        business_intent_page_view: jest.fn(),
+        error: {
+          select_business_status: jest.fn(),
+          select_business_intent: jest.fn(),
+        },
+      },
+    },
+  };
+}
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -37,7 +57,9 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postGetAnnualFilings: jest.fn(),
 }));
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const Config = getMergedConfig();
 
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
@@ -59,10 +81,12 @@ describe("onboarding - starting a business", () => {
     useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
     mockSuccessfulApiSignups();
+    setupMockAnalytics();
     jest.useFakeTimers();
+    process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "false";
   });
 
-  describe("page 2", () => {
+  describe("industry page", () => {
     it("prevents user from moving after the second onboarding page if you have not selected an industry", async () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
@@ -389,6 +413,12 @@ describe("onboarding - starting a business", () => {
 
     describe("intent selection page", () => {
       beforeEach(() => {
+        jest.resetAllMocks();
+        useMockRouter({ isReady: true });
+        setupStatefulUserDataContext();
+        mockSuccessfulApiSignups();
+        setupMockAnalytics();
+        jest.useFakeTimers();
         process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
       });
 
@@ -406,6 +436,9 @@ describe("onboarding - starting a business", () => {
 
         page.clickNext();
         expect(screen.getByRole("alert")).toBeInTheDocument();
+        expect(mockAnalytics.event.onboarding.error.select_business_intent).toHaveBeenCalledTimes(
+          1,
+        );
       });
 
       it("removes alert if an intent is chosen", async () => {
@@ -422,6 +455,9 @@ describe("onboarding - starting a business", () => {
 
         page.chooseRadio("starting-ready-business");
         expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+        expect(mockAnalytics.event.onboarding.error.select_business_intent).toHaveBeenCalledTimes(
+          1,
+        );
       });
 
       it("updates userData with learning value", async () => {
@@ -431,9 +467,16 @@ describe("onboarding - starting a business", () => {
         page.chooseRadio("business-persona-starting");
         await page.visitOnboardingPage(2);
 
+        expect(
+          mockAnalytics.event.onboarding.business_persona_selection_submit,
+        ).toHaveBeenCalledWith("STARTING");
+
         page.chooseRadio("starting-learning-business");
 
         page.clickNext();
+        expect(
+          mockAnalytics.event.onboarding.business_intent_selection_submit,
+        ).toHaveBeenCalledWith("learning");
         await waitFor(() => {
           expect(currentUserData().user.onboardedAsLearningUser).toEqual(true);
         });
@@ -445,12 +488,36 @@ describe("onboarding - starting a business", () => {
 
         page.chooseRadio("business-persona-starting");
         await page.visitOnboardingPage(2);
+        expect(
+          mockAnalytics.event.onboarding.business_persona_selection_submit,
+        ).toHaveBeenCalledWith("STARTING");
 
         page.chooseRadio("starting-ready-business");
 
         page.clickNext();
+        expect(
+          mockAnalytics.event.onboarding.business_intent_selection_submit,
+        ).toHaveBeenCalledWith("ready");
         await waitFor(() => {
           expect(currentUserData().user.onboardedAsLearningUser).toEqual(false);
+        });
+      });
+
+      it("clears userData with starting value if user goes back to step 1", async () => {
+        const initialUserData = createEmptyUserData(createEmptyUser());
+        const { page } = renderPage({ userData: initialUserData });
+
+        page.chooseRadio("business-persona-starting");
+        await page.visitOnboardingPage(2);
+        expect(
+          mockAnalytics.event.onboarding.business_persona_selection_submit,
+        ).toHaveBeenCalledWith("STARTING");
+
+        page.chooseRadio("starting-ready-business");
+
+        page.clickBack();
+        await waitFor(() => {
+          expect(currentUserData().user.onboardedAsLearningUser).toEqual(undefined);
         });
       });
     });

@@ -97,7 +97,7 @@ describe("onboarding - additional business", () => {
     const emptyBusiness = createEmptyBusiness({ userId: userId });
     const initialBusiness = generateBusiness({ userId: userId });
     const initialData = generateUserDataForBusiness(initialBusiness, {
-      user: generateUser({ id: userId }),
+      user: generateUser({ id: userId, myNJUserKey: "sample-key" }),
     });
     expect(Object.keys(initialData.businesses)).toHaveLength(1);
 
