@@ -1,8 +1,8 @@
-import { validateEmail } from "@/lib/utils/helpers";
 import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitFieldNames,
 } from "@businessnjgovnavigator/shared";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
 import { EmergencyTripPermitFieldErrorState } from "@businessnjgovnavigator/shared/types";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";

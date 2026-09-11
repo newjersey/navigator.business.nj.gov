@@ -39,6 +39,7 @@
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     grid-template-areas:
       "header filter"
+      "subscribe filter"
       "results filter";
     column-gap: 2rem;
     align-items: start;
@@ -46,6 +47,9 @@
 
   .funding-header-col {
     grid-area: header;
+  }
+  .funding-subscribe-col {
+    grid-area: subscribe;
   }
   .funding-filter-col {
     grid-area: filter;
