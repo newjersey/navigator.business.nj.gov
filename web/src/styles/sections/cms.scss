@@ -1,4 +1,20 @@
 .cms {
+  .usa-prose {
+    p,
+    ul,
+    ol,
+    li {
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    ul,
+    ol {
+      padding-left: 3ch;
+    }
+  }
+
   svg.MuiSvgIcon-root {
     display: none;
   }

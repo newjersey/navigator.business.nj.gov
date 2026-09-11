@@ -8,12 +8,13 @@
     "accountButtonHeading": "Ready to start your business?",
     "accountButtonText": "Open A Free Account",
     "steps": [
-      { "id": "business-structure", "name": "Select Your Business Structure" },
+      { "id": "business-structure", "name": "Select Your Business Structure"},
       { "id": "form-business", "name": "Form Your Business" },
       { "id": "find-naics", "name": "Find Your Industry Classification Code" },
       { "id": "get-ein", "name": "Get Your Employer Identification Number (EIN)" },
       { "id": "register-taxes", "name": "Register Your Business to Pay State Taxes" },
       { "id": "open-account", "name": "Open Your Business.NJ.gov Account" }
-    ]
+    ],
+    "formBusinessContent": "In this step, you will be able to create your new business!\n\n This online application will allow you to:\n\n - Register your business name, and\n- Form your business with the New Jersey Division of Revenue and Enterprise Services (DORES) \n\nThis form will take about 5-10 minutes to complete.\n\nAt the end of the process, you will get your Entity ID immediately after payment is received (sometimes referred to as &quot;NJ Corporation Number,&quot; the Entity ID is a 10 digit number used to identify your corporate records."
   }
 }
