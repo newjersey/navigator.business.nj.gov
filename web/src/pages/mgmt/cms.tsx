@@ -42,6 +42,7 @@ import GovernmentContractingAnytimeActionPreview from "@/lib/cms/previews/Govern
 import LargeCalloutPreview from "@/lib/cms/previews/LargeCalloutPreview";
 import LearnFindNaicsPreview from "@/lib/cms/previews/LearnFindNaicsPreview";
 import LearnFormBusinessPreview from "@/lib/cms/previews/LearnFormBusinessPreview";
+import LearnGetEinPreview from "@/lib/cms/previews/LearnGetEinPreview";
 import LegalMessagePreview from "@/lib/cms/previews/LegalMessagePreview";
 import ManageBusinessVehiclesTaskPreview from "@/lib/cms/previews/ManageBusinessVehiclesTaskPreview";
 import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
@@ -232,6 +233,7 @@ const CMS = dynamic(
       registerPreview(CMS, "calloutDefaults", LargeCalloutPreview);
       registerPreview(CMS, "learn-page-find-naics", LearnFindNaicsPreview);
       registerPreview(CMS, "learn-page-form-business", LearnFormBusinessPreview);
+      registerPreview(CMS, "learn-page-get-ein", LearnGetEinPreview);
 
       // decap renders itself into #nc-root, outside the Next tree
       return (): null => null;

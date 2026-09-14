@@ -88,6 +88,23 @@ describe("learn task page", () => {
     expect(screen.getByText("Register for NJ state taxes")).toBeInTheDocument();
   });
 
+  it("renders the EIN overview and callout CMS content", () => {
+    const learnStep = Config.learnPages.steps[3];
+
+    renderWithUserData(<LearnTaskPage learnStep={learnStep} />);
+
+    expect(screen.getByText(Config.learnPageGetEin.overview.split("\n\n")[0])).toBeInTheDocument();
+
+    const calloutHeaders = [
+      ...Config.learnPageGetEin.callouts.matchAll(/headerText="(?<headerText>[^"]*)"/g),
+    ].map((match) => match.groups?.headerText);
+
+    expect(calloutHeaders).toHaveLength(2);
+    for (const headerText of calloutHeaders) {
+      expect(screen.getByText(headerText ?? "")).toBeInTheDocument();
+    }
+  });
+
   it("only renders next navigation for the first step", () => {
     renderWithUserData(<LearnTaskPage learnStep={Config.learnPages.steps[0]} />);
 

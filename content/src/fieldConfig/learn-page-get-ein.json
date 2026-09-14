@@ -1,0 +1,6 @@
+{
+  "learnPageGetEin": {
+    "overview": "The Employer Identification Number (EIN) is like a Social Security Number (SSN) for your business, provided for free by the federal government through the Internal Revenue Service (IRS).\n\nYou will use your EIN on tax filings and business registrations. You need an EIN if you plan to have employees.",
+    "callouts": ":::largeCallout{ showHeader=\"true\" headerText=\"Before getting your EIN\" calloutType=\"informational\" amountIconText=\"\" filingTypeIconText=\"\" frequencyIconText=\"\" phoneIconText=\"\" phoneIconLabel=\"\" emailIconText=\"\" }\n\n- You need to have your business name already registered\n- You must have a business structure decided beforehand\n- You must have a SSN or an Individual Taxpayer Identification Number (ITIN) in order to get the EIN\n\nYou get your EIN directly from the IRS website. Once you complete that process, you can come back to your account and enter the 9-digit number.\n\n:::\n\n:::largeCallout{ showHeader=\"true\" headerText=\"Once you complete the process, you will have:\" calloutType=\"conditional\" amountIconText=\"\" filingTypeIconText=\"\" frequencyIconText=\"\" phoneIconText=\"\" phoneIconLabel=\"\" emailIconText=\"\" }\n\n- An EIN\n- An EIN Certificate (the official document certifying your EIN)\n\n:::"
+  }
+}

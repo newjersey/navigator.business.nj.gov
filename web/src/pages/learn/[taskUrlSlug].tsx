@@ -1,5 +1,6 @@
 import { FindNaics } from "@/components/learn/FindNaics";
 import { FormBusiness } from "@/components/learn/FormBusiness";
+import { GetEin } from "@/components/learn/GetEin";
 import { LearnTaskSidebarPageLayout } from "@/components/LearnTaskSidebarPageLayout";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
@@ -26,6 +27,7 @@ const LearnTaskPage = (props: Props): ReactElement => {
   const pageComponents: Record<LearnStep["id"], ReactElement> = {
     "find-naics": <FindNaics />,
     "form-business": <FormBusiness />,
+    "get-ein": <GetEin />,
   };
 
   const getNextAndPreviousButtons = (): ReactElement | undefined => {

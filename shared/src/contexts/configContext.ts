@@ -45,6 +45,7 @@ import HousingRegistrationSearchTask from "../../../content/src/fieldConfig/hous
 import LandingPage from "../../../content/src/fieldConfig/landing-page.json";
 import learnPageFindNaics from "../../../content/src/fieldConfig/learn-page-find-naics.json";
 import learnPageFormBusiness from "../../../content/src/fieldConfig/learn-page-form-business.json";
+import learnPageGetEin from "../../../content/src/fieldConfig/learn-page-get-ein.json";
 import LearnPages from "../../../content/src/fieldConfig/learn-pages.json";
 
 import LegalMessageDefaults from "../../../content/src/fieldConfig/legal-message-defaults.json";
@@ -164,6 +165,7 @@ const merged = JSON.parse(
       LearnPages,
       learnPageFindNaics,
       learnPageFormBusiness,
+      learnPageGetEin,
       FundingsOnboarding,
       TaxClearanceCertificateStep1,
       TaxClearanceCertificateStep2,
@@ -255,6 +257,7 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof LearnPages &
   typeof learnPageFindNaics &
   typeof learnPageFormBusiness &
+  typeof learnPageGetEin &
   typeof ManageBusinessVehicles &
   typeof FundingsOnboarding &
   typeof TaxClearanceCertificateStep1 &
@@ -346,6 +349,7 @@ export const getMergedConfig = (): ConfigType => {
     LearnPages,
     learnPageFindNaics,
     learnPageFormBusiness,
+    learnPageGetEin,
     FundingsOnboarding,
     FundingsOnboarding,
     TaxClearanceCertificateStep1,
