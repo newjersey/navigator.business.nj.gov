@@ -474,6 +474,9 @@ const OnboardingPage = (props: Props): ReactElement => {
         current: previousPage,
         previous: page.current,
       });
+      if (updateQueue?.current().user.onboardedAsLearningUser !== undefined) {
+        updateQueue?.queueUser({ onboardedAsLearningUser: undefined }).update();
+      }
       void routeToPage(previousPage).catch((error: unknown) => {
         console.error("Failed to navigate to the previous onboarding page", error);
       });
