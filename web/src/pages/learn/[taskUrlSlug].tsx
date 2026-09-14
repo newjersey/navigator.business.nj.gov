@@ -1,3 +1,4 @@
+import { FindNaics } from "@/components/learn/FindNaics";
 import { FormBusiness } from "@/components/learn/FormBusiness";
 import { LearnTaskSidebarPageLayout } from "@/components/LearnTaskSidebarPageLayout";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
@@ -23,6 +24,7 @@ const LearnTaskPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const learnSteps = Config.learnPages.steps;
   const pageComponents: Record<LearnStep["id"], ReactElement> = {
+    "find-naics": <FindNaics />,
     "form-business": <FormBusiness />,
   };
 
