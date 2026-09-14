@@ -3562,3 +3562,16 @@ collections:
             widget: object
             fields:
               - { label: Content, name: content, widget: markdown }
+      - label: "Get Your Employer Identification Number (EIN)"
+        name: "learn-page-get-ein"
+        file: "content/src/fieldConfig/learn-page-get-ein.json"
+        editor:
+          preview: true
+        fields:
+          - label: Get Your Employer Identification Number (EIN)
+            name: learnPageGetEin
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Overview Section, name: overview, widget: markdown }
+              - { label: Callout Boxes, name: callouts, widget: markdown }
