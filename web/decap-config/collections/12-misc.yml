@@ -3550,3 +3550,15 @@ collections:
               - { label: Second Section Header, name: secondSectionHeader, widget: string }
               - { label: Second Section Content, name: secondSection, widget: markdown }
               - { label: More Info Section, name: moreInfo, widget: markdown }
+      - label: "Find Your Industry Classification Code"
+        name: "learn-page-find-naics"
+        file: "content/src/fieldConfig/learn-page-find-naics.json"
+        editor:
+          preview: true
+        fields:
+          - label: Find Your Industry Classification Code
+            name: learnPageFindNaics
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Content, name: content, widget: markdown }

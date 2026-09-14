@@ -77,6 +77,17 @@ describe("learn task page", () => {
     );
   });
 
+  it("renders the Find NAICS CMS content", () => {
+    const learnStep = Config.learnPages.steps[2];
+
+    renderWithUserData(<LearnTaskPage learnStep={learnStep} />);
+
+    expect(
+      screen.getByText(Config.learnPageFindNaics.content.split("\n\n")[0]),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Register for NJ state taxes")).toBeInTheDocument();
+  });
+
   it("only renders next navigation for the first step", () => {
     renderWithUserData(<LearnTaskPage learnStep={Config.learnPages.steps[0]} />);
 

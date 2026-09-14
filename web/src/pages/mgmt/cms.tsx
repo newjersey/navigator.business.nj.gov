@@ -40,6 +40,7 @@ import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePrev
 import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
 import GovernmentContractingAnytimeActionPreview from "@/lib/cms/previews/GovernmentContractingActionTaskPreview";
 import LargeCalloutPreview from "@/lib/cms/previews/LargeCalloutPreview";
+import LearnFindNaicsPreview from "@/lib/cms/previews/LearnFindNaicsPreview";
 import LearnFormBusinessPreview from "@/lib/cms/previews/LearnFormBusinessPreview";
 import LegalMessagePreview from "@/lib/cms/previews/LegalMessagePreview";
 import ManageBusinessVehiclesTaskPreview from "@/lib/cms/previews/ManageBusinessVehiclesTaskPreview";
@@ -229,6 +230,7 @@ const CMS = dynamic(
       registerPreview(CMS, "navigation-defaults", NavBarPreview);
 
       registerPreview(CMS, "calloutDefaults", LargeCalloutPreview);
+      registerPreview(CMS, "learn-page-find-naics", LearnFindNaicsPreview);
       registerPreview(CMS, "learn-page-form-business", LearnFormBusinessPreview);
 
       // decap renders itself into #nc-root, outside the Next tree
