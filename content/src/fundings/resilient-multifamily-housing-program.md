@@ -7,7 +7,7 @@ sidebarCardBodyText: The Resilient Multifamily Housing Program offers
   NJHMFA-overseen loans to storm-proof buildings, aiding Ida recovery and
   climate resilience.
 openDate: ""
-dueDate: ""
+dueDate: 12/31/yyyy
 summaryDescriptionMd: The Resilient Multifamily Housing Program (RMHP) gives
   loans to owners of multifamily buildings. NJHMFA oversees these buildings. The
   loans pay to repair buildings and make them stronger against future storms.
