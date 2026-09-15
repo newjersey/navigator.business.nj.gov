@@ -8,8 +8,8 @@ import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { validateEmail } from "@/lib/utils/helpers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
 import { InputLabel } from "@mui/material";
 import { ReactElement, useContext, useState } from "react";
 

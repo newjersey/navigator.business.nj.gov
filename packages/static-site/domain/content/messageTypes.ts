@@ -700,6 +700,24 @@ export interface UpdatesPageMessages {
   readonly cardReadMore: string;
   /** Fallback label for the detail-page CTA button when the item has no `cta-text`. */
   readonly detailCtaFallback: string;
+  /** Heading above the newsletter subscribe form. */
+  readonly subscribeHeading: string;
+  /** Description above the subscribe form; pairs with subscribeConsentPrefix and subscribePrivacyPolicyLink. */
+  readonly subscribeDescription: string;
+  /** Text preceding the privacy policy link in the subscribe form's consent line. */
+  readonly subscribeConsentPrefix: string;
+  /** Link to the state's data privacy policy, rendered inline in the consent line. */
+  readonly subscribePrivacyPolicyLink: ContentLink;
+  /** Label for the subscribe form's email input. */
+  readonly subscribeEmailLabel: string;
+  /** Text for the subscribe form's submit button. */
+  readonly subscribeButton: string;
+  /** Inline error shown when the entered email fails format validation. */
+  readonly subscribeInvalidEmail: string;
+  /** Confirmation shown after a successful subscribe request. */
+  readonly subscribeSuccess: string;
+  /** Generic error shown when the subscribe request fails or is rejected. */
+  readonly subscribeError: string;
 }
 
 /**

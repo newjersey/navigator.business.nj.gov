@@ -36,6 +36,20 @@ const messages: UpdatesPageMessages = {
   cardUpdatedLabel: "Last Updated",
   cardReadMore: "Read more",
   detailCtaFallback: "Learn More",
+  subscribeHeading: "Sign up",
+  subscribeDescription: "Get the latest news and updates from the State of New Jersey.",
+  subscribeConsentPrefix: "By signing up, you consent to our",
+  subscribePrivacyPolicyLink: {
+    label: "data privacy policy",
+    href: "https://www.nj.gov/nj/privacy.shtml",
+    isInternal: false,
+    opensInNewTab: true,
+  },
+  subscribeEmailLabel: "Email",
+  subscribeButton: "Sign Up",
+  subscribeInvalidEmail: "Enter a valid email address.",
+  subscribeSuccess: "You're subscribed. Watch your inbox for updates.",
+  subscribeError: "Something went wrong. Please try again.",
 };
 
 const makeRecent = (name: string, overrides: Partial<RecentItem> = {}): RecentItem =>

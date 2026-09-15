@@ -665,7 +665,21 @@
     "paginationPageLabel": "Página {page}",
     "cardUpdatedLabel": "Última Actualización",
     "cardReadMore": "Leer más",
-    "detailCtaFallback": "Más Información"
+    "detailCtaFallback": "Más Información",
+    "subscribeHeading": "Regístrese",
+    "subscribeDescription": "Reciba las últimas noticias y actualizaciones del Estado de New Jersey.",
+    "subscribeConsentPrefix": "Al registrarse, usted acepta nuestra",
+    "subscribePrivacyPolicyLink": {
+      "label": "política de privacidad de datos",
+      "href": "https://www.nj.gov/nj/privacy.shtml",
+      "isInternal": false,
+      "opensInNewTab": true
+    },
+    "subscribeEmailLabel": "Correo electrónico",
+    "subscribeButton": "Regístrese",
+    "subscribeInvalidEmail": "Ingrese una dirección de correo electrónico válida.",
+    "subscribeSuccess": "Se ha suscrito. Revise su bandeja de entrada para ver las actualizaciones.",
+    "subscribeError": "Algo salió mal. Por favor, intente de nuevo."
   },
   "pageNotFound": {
     "iconAlt": "Ícono de error 404",
