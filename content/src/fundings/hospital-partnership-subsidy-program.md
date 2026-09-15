@@ -14,7 +14,7 @@ fundingType: loan
 programFrequency: ongoing
 status: rolling application
 agency: []
-agencyContact: "Tanya Hudson-Murray: thudson-murray@njhmfa.gov"
+agencyContact: thudson-murray@njhmfa.gov
 businessStage: both
 employeesRequired: n/a
 homeBased: unknown
