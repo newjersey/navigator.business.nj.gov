@@ -3,14 +3,14 @@
  * their file metadata. Those values are the public URL segment for an entry.
  */
 
+import { loadCmsConfig } from "@businessnjgovnavigator/shared/src/static";
+import { publishSnsMessage } from "@libs/awsSns";
 import matter from "gray-matter";
-import yaml from "js-yaml";
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const CONFIG_FILE = "web/public/mgmt/config.yml";
-const SLUG_FIELDS = ["slug", "urlSlug"] as const; // not standardized and used interchangably
+const SLUG_FIELDS = ["slug", "urlSlug"] as const; // not standardized and used interchangeably
+const SLUG_COLLISION_TITLE = ":warning: CMS Slug Collision";
 
 type SlugField = (typeof SLUG_FIELDS)[number];
 
@@ -33,24 +33,24 @@ interface Declaration {
   readonly value: string;
 }
 
-interface Duplicate {
+interface SlugCollision {
   readonly collection: string;
   readonly declarations: readonly Declaration[];
   readonly slugField: SlugField;
   readonly value: string;
 }
 
-interface Report {
+export interface SlugCollisionReport {
   readonly checkedCount: number;
   readonly collectionCount: number;
-  readonly duplicates: readonly Duplicate[];
+  readonly collisions: readonly SlugCollision[];
 }
 
 const loadCollections = (): CollectionConfig[] => {
-  const parsed = yaml.load(fs.readFileSync(CONFIG_FILE, "utf8")) as {
+  const config = loadCmsConfig(true) as {
     readonly collections?: readonly CollectionConfig[];
   } | null;
-  return [...(parsed?.collections ?? [])];
+  return [...(config?.collections ?? [])];
 };
 
 const isCollectionLabel = (collection: CollectionConfig): boolean =>
@@ -61,22 +61,23 @@ const isFolderCollection = (collection: CollectionConfig): collection is FolderC
 
 const readEntryData = (filePath: string): Record<string, unknown> => {
   const contents = fs.readFileSync(filePath, "utf8");
-  const extension = path.extname(filePath).toLowerCase();
-  if (extension === ".json") {
+  if (path.extname(filePath).toLowerCase() === ".json") {
     return JSON.parse(contents) as Record<string, unknown>;
   }
   // if not json assumes md
   return matter(contents).data;
 };
 
-const readEntries = (folder: string, extension: string): Entry[] =>
-  fs
-    .readdirSync(folder)
-    .filter((name: string) => name.endsWith(`.${extension}`))
-    .map((name: string) => {
-      const location = path.join(folder, name);
-      return { data: readEntryData(location), location };
-    });
+const readEntries = (folder: string, extension: string): Entry[] => {
+  const directory = path.join(process.cwd(), "..", folder);
+  return fs
+    .readdirSync(directory)
+    .filter((name) => name.endsWith(`.${extension}`))
+    .map((name) => ({
+      data: readEntryData(path.join(directory, name)),
+      location: path.join(folder, name),
+    }));
+};
 
 const normalize = (value: unknown): string => String(value).trim().toLowerCase();
 
@@ -91,14 +92,15 @@ const findDuplicates = (
   return new Map([...byValue].filter(([, group]) => group.length > 1));
 };
 
-const checkSlugCollisions = (): Report => {
+export const findSlugCollisions = (): SlugCollisionReport => {
   const collections = loadCollections();
-  const toBeChecked = collections.filter(isFolderCollection);
-  const duplicates: Duplicate[] = [];
+  const toBeChecked = collections.filter((collection): collection is FolderCollection =>
+    isFolderCollection(collection),
+  );
+  const collisions: SlugCollision[] = [];
 
   for (const collection of toBeChecked) {
-    const folder = collection.folder;
-    const entries = readEntries(folder, collection.extension ?? "md");
+    const entries = readEntries(collection.folder, collection.extension ?? "md");
 
     for (const slugField of SLUG_FIELDS) {
       const declarations = entries
@@ -109,7 +111,7 @@ const checkSlugCollisions = (): Report => {
         }));
 
       for (const [value, group] of findDuplicates(declarations)) {
-        duplicates.push({
+        collisions.push({
           collection: collection.name,
           declarations: group,
           slugField,
@@ -122,33 +124,31 @@ const checkSlugCollisions = (): Report => {
   return {
     checkedCount: toBeChecked.length,
     collectionCount: collections.length,
-    duplicates,
+    collisions,
   };
 };
 
-const run = (): void => {
-  const report = checkSlugCollisions();
-
-  for (const duplicate of report.duplicates) {
-    const { collection, declarations, slugField, value } = duplicate;
-    console.log(`\n  ${collection} — ${slugField} "${value}" declared by ${declarations.length}:`);
-    for (const declaration of declarations) {
-      const raw = normalize(declaration.value) === value ? "" : ` (${declaration.value})`;
-      console.log(`      ${declaration.location}${raw}`);
-    }
-  }
-
-  console.log(
-    `\nChecked ${report.checkedCount} collections of ${report.collectionCount} total collections`,
-  );
-  console.log(
-    report.duplicates.length === 0
-      ? "✅ No duplicates"
-      : `❌ ${report.duplicates.length} duplicate slug value(s)`,
-  );
-  process.exitCode = report.duplicates.length === 0 ? 0 : 1;
+const describeCollision = (collision: SlugCollision): string => {
+  const locations = collision.declarations.map((declaration) => `*"${declaration.location}"*`);
+  return `The *"${collision.collection}"* collection has ${collision.declarations.length} entries declaring the same ${collision.slugField} (*"${collision.value}"*): ${locations.join(", ")}. Entries cannot share a slug. Please update update the entries to differentiate.`;
 };
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  run();
-}
+export const logSlugCollisionReport = (report: SlugCollisionReport): void => {
+  console.log(`Checked ${report.checkedCount} of ${report.collectionCount} total collections`);
+  for (const collision of report.collisions) {
+    console.error(describeCollision(collision));
+  }
+};
+
+export const checkSlugCollisions = async (topicArn: string): Promise<boolean> => {
+  console.log("\n Starting Check Slug Collisions");
+
+  const report = findSlugCollisions();
+  logSlugCollisionReport(report);
+
+  for (const collision of report.collisions) {
+    await publishSnsMessage(describeCollision(collision), topicArn, SLUG_COLLISION_TITLE);
+  }
+
+  return report.collisions.length > 0;
+};
