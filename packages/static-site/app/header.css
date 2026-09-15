@@ -9,6 +9,21 @@
   padding-block: 0.625rem;
 }
 
+/* NJWDS's `.usa-accordion` utility (also carried by this `<ul>`, alongside
+   `.usa-nav__primary`) sets `width: 100%`, which ties in specificity with
+   `.usa-nav__primary`'s own `width: auto` and can win on source order. In a
+   row-direction flex container, an explicit `width` becomes the item's used
+   flex-basis, so that `100%` was making the link list claim the whole row
+   before anything else got a share — leaving almost nothing for the search
+   box's `flex: 1` to actually grow into. This descendant selector out-ranks
+   the single-class utility rule regardless of stylesheet order, and
+   `flex: 0 0 auto` pins its basis back to its own content width, not the
+   row's full width. */
+.usa-nav__primary-row .usa-nav__primary {
+  width: auto;
+  flex: 0 0 auto;
+}
+
 .usa-nav__auth-buttons {
   display: flex;
   align-items: center;
@@ -100,6 +115,39 @@
 
 .usa-nav__primary-row > a img {
   display: block;
+}
+
+/* Search and the language switcher render inline with the primary nav links
+   and auth buttons, as direct children of `.usa-nav__primary-row`'s flex
+   row (see `HeaderPrimaryNav.tsx`) rather than in a separate utility area.
+   NJWDS's own `.usa-language` defaults to `width: 100%` for its normal,
+   block-level placement outside a flex row; override that here so it sizes
+   to its own content and sits alongside its siblings instead of claiming
+   the whole row. */
+.usa-nav__primary-row .usa-language {
+  width: auto;
+  padding: 0;
+}
+
+/* The search box grows to fill whatever space is left in the row after
+   every other item (logo, links, language switcher, auth buttons) takes
+   what it needs, rather than sitting at NJWDS's compact intrinsic width.
+   `min-width: 0` is required alongside `flex: 1` here — without it, a flex
+   item's automatic minimum size is its content's natural width, which
+   would stop this from ever shrinking below that on narrower viewports. */
+.usa-nav__primary-row .nj-header-search {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.usa-nav__primary-row .nj-header-search .usa-search {
+  width: 100%;
+}
+
+.usa-nav__primary-row .nj-header-search .usa-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
 }
 
 /* ── End header auth buttons ──────────────────────────────────────────────── */
@@ -268,14 +316,6 @@
 
   .usa-header--extended {
     display: block;
-  }
-
-  /* Languages Dropdown */
-  .usa-nav .usa-nav__secondary {
-    position: static;
-    margin-top: 0;
-    min-width: auto;
-    inset-inline-end: unset;
   }
 }
 

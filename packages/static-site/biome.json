@@ -8,6 +8,7 @@
       "!public/vendor",
       "!public/assets",
       "!public/img",
+      "!public/pagefind",
       "!coverage",
       "!test-results",
       "!playwright-report",

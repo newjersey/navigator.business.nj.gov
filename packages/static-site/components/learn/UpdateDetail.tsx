@@ -12,7 +12,11 @@ const UpdateDetail = ({ recent, messages }: Props) => {
   const ctaLabel = recent["cta-text"] ?? messages.detailCtaFallback;
 
   return (
-    <article className="grid-container usa-section">
+    <article
+      className="grid-container usa-section"
+      data-pagefind-body
+      data-pagefind-filter="type:Update"
+    >
       <h1>{recent.name}</h1>
       <div className="margin-bottom-3">
         {recent.date && (

@@ -36,6 +36,56 @@ interface Props {
   readonly licenses: readonly License[];
 }
 
+interface LicensingFilterSidebarProps {
+  readonly messages: LicensingGuidePageMessages;
+  readonly query: string;
+  readonly showResultsLabel: string;
+  readonly onSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  readonly onShowResults: () => void;
+  readonly onReset: () => void;
+}
+
+const LicensingFilterSidebar = ({
+  messages,
+  query,
+  showResultsLabel,
+  onSearchChange,
+  onShowResults,
+  onReset,
+}: LicensingFilterSidebarProps) => (
+  <aside
+    className="border-1px border-base-lighter padding-3 radius-lg funding-filter-col"
+    data-pagefind-ignore
+  >
+    <h2>{messages.filterHeading}</h2>
+    <div className="margin-y-3" style={{ display: "flow-root" }}>
+      <label className="usa-label text-bold margin-bottom-1" htmlFor="license-search">
+        {messages.filterSearch}
+      </label>
+      <input
+        id="license-search"
+        className="usa-input"
+        type="search"
+        value={query}
+        onChange={onSearchChange}
+      />
+    </div>
+    <hr className="border-base-lighter border-top-1px margin-y-2" />
+    <div className="display-flex flex-justify">
+      <button type="button" className="usa-button width-full" onClick={onShowResults}>
+        {showResultsLabel}
+      </button>
+      <button
+        type="button"
+        className="usa-button usa-button--outline margin-right-0"
+        onClick={onReset}
+      >
+        {messages.filterReset}
+      </button>
+    </div>
+  </aside>
+);
+
 const searchableText = (license: License): string =>
   `${license.name} ${license.summaryDescriptionMd ?? ""}`.toLowerCase();
 
@@ -112,7 +162,11 @@ const LicensingGuidePageContent = ({ messages, page, licenses }: Props) => {
   };
 
   return (
-    <div className="funding-layout layout-wide">
+    <div
+      className="funding-layout layout-wide"
+      data-pagefind-body
+      data-pagefind-filter="type:Learn page"
+    >
       <div className="funding-header-col">
         <h1>{messages.title}</h1>
         {page["sub-heading-text"] && <p className="usa-intro">{page["sub-heading-text"]}</p>}
@@ -126,38 +180,14 @@ const LicensingGuidePageContent = ({ messages, page, licenses }: Props) => {
         </div>
       </div>
 
-      <aside className="border-1px border-base-lighter padding-3 radius-lg funding-filter-col">
-        <h2>{messages.filterHeading}</h2>
-        <div className="margin-y-3" style={{ display: "flow-root" }}>
-          <label className="usa-label text-bold margin-bottom-1" htmlFor="license-search">
-            {messages.filterSearch}
-          </label>
-          <input
-            id="license-search"
-            className="usa-input"
-            type="search"
-            value={query}
-            onChange={handleSearchChange}
-          />
-        </div>
-        <hr className="border-base-lighter border-top-1px margin-y-2" />
-        <div className="display-flex flex-justify">
-          <button
-            type="button"
-            className="usa-button width-full"
-            onClick={() => handlePageChange(1)}
-          >
-            {showResultsLabel}
-          </button>
-          <button
-            type="button"
-            className="usa-button usa-button--outline margin-right-0"
-            onClick={clearSearch}
-          >
-            {messages.filterReset}
-          </button>
-        </div>
-      </aside>
+      <LicensingFilterSidebar
+        messages={messages}
+        query={query}
+        showResultsLabel={showResultsLabel}
+        onSearchChange={handleSearchChange}
+        onShowResults={() => handlePageChange(1)}
+        onReset={clearSearch}
+      />
 
       <section
         ref={resultsRef}
@@ -168,14 +198,24 @@ const LicensingGuidePageContent = ({ messages, page, licenses }: Props) => {
         <FilteringByBar messages={messages} query={query} onRemoveQuery={clearSearch} />
 
         <p className="margin-bottom-2">{resultCount}</p>
-        {pageSlice.map((license) => (
-          <LicenseCard
-            key={license.webflowId ?? license.urlSlug}
-            license={license}
-            messages={messages}
-            query={query}
-          />
-        ))}
+        {/*
+          Every filtered license renders here, not just the current page's
+          slice: the pagefind crawl only ever sees this default (unfiltered,
+          page-1) render, and needs every license's text in the HTML to be
+          searchable. Only the current page's cards are visible; the rest
+          carry the native `hidden` attribute, invisible to sighted and
+          assistive-technology users alike, matching what conditional
+          rendering looked like before.
+        */}
+        {filtered.map((license, index) => {
+          const isOnCurrentPage =
+            index >= pageStartIndex && index < pageStartIndex + ITEMS_PER_PAGE;
+          return (
+            <div key={license.webflowId ?? license.urlSlug} hidden={!isOnCurrentPage}>
+              <LicenseCard license={license} messages={messages} query={query} />
+            </div>
+          );
+        })}
         <Pagination
           messages={messages}
           currentPage={safePage}
