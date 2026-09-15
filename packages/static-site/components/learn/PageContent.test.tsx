@@ -1,8 +1,9 @@
 /** biome-ignore-all lint/complexity/noExcessiveLinesPerFunction: test suite */
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { INTERCOM_LAUNCHER_HREF } from "@/components/learn/pageMarkdown";
 import type { PageItem } from "@/domain/content/types";
-import PageContent, { INTERCOM_LAUNCHER_HREF } from "./PageContent";
+import PageContent from "./PageContent";
 
 const page = (overrides: Partial<PageItem> = {}): PageItem => ({
   name: "Test Page",
@@ -146,5 +147,33 @@ describe("PageContent", () => {
     render(<PageContent page={page({ "main-text-1": "Visit [NJ](https://nj.gov)." })} />);
     const link = screen.getByRole("link", { name: "NJ" });
     expect(link).toHaveAttribute("href", "https://nj.gov");
+  });
+
+  it("renders a YouTube embed link as an inline player, not a link", () => {
+    const { container } = render(
+      <PageContent
+        page={page({
+          "main-text-1": "Watch it: [Overview video](https://www.youtube.com/embed/B96oKulIId4)",
+        })}
+      />,
+    );
+    const iframe = container.querySelector("iframe.video-embed");
+    expect(iframe).toHaveAttribute("src", "https://www.youtube.com/embed/B96oKulIId4");
+    expect(iframe).toHaveAttribute("title", "Overview video");
+    expect(iframe).toHaveAttribute("loading", "lazy");
+    expect(screen.queryByRole("link", { name: "Overview video" })).not.toBeInTheDocument();
+  });
+
+  it("renders a YouTube watch link as a plain anchor, not an embedded player", () => {
+    const { container } = render(
+      <PageContent
+        page={page({
+          "main-text-1": "Watch it: [Overview video](https://www.youtube.com/watch?v=B96oKulIId4)",
+        })}
+      />,
+    );
+    const link = screen.getByRole("link", { name: "Overview video" });
+    expect(link).toHaveAttribute("href", "https://www.youtube.com/watch?v=B96oKulIId4");
+    expect(container.querySelector("iframe")).not.toBeInTheDocument();
   });
 });

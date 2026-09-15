@@ -502,6 +502,8 @@ export interface LearnPageContent {
   readonly cardLinkText: string;
   /** Side navigation content for the learn section. */
   readonly sideNav: LearnSideNav;
+  /** Heading for the curated jump-link rail on content pages that opt into one. */
+  readonly pageContentsHeading: string;
   /** Category metadata keyed to route segments. */
   readonly categories: readonly LearnCategory[];
   /** Shared strings used across category pages. */
