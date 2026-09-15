@@ -5,6 +5,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { scrollToTop } from "@/lib/utils/helpers";
 import React, { ReactElement, useContext } from "react";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   isFinal: boolean;
@@ -47,6 +48,9 @@ export const OnboardingButtonGroup = (props: Props): ReactElement => {
             dataTestId="next"
             isSubmitButton={true}
             isRightMarginRemoved={true}
+            onClick={() => {
+              analytics.event.onboarding.onboarding_next_button_click(getText());
+            }}
           >
             {getText()}
           </PrimaryButton>

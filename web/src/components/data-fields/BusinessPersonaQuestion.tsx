@@ -10,7 +10,8 @@ import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
+import analytics from "@/lib/utils/analytics";
 
 export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
@@ -25,13 +26,17 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
   RegisterForOnSubmit(() => state.profileData.businessPersona !== undefined);
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
     setIsValid(true);
+    const personaValue = event.target.value as BusinessPersona;
+    if (!personaValue) return;
+
+    analytics.event.onboarding.business_persona_radio_select(personaValue);
     setProfileData({
       ...state.profileData,
       operatingPhase:
-        (event.target.value as BusinessPersona) === "OWNING"
+        personaValue === "OWNING"
           ? OperatingPhaseId.GUEST_MODE_OWNING
           : OperatingPhaseId.GUEST_MODE,
-      businessPersona: event.target.value as BusinessPersona,
+      businessPersona: personaValue,
     });
   };
 
@@ -41,6 +46,11 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
       persona: state.flow,
       fieldName: "businessPersona",
     });
+
+  useEffect(() => {
+    analytics.event.onboarding.persona_page_view();
+    analytics.event.onboarding.onboarding_form_start();
+  }, []);
 
   return (
     <>
