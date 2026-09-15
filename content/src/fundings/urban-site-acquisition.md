@@ -1,6 +1,6 @@
 ---
 name: Urban Site Acquisition (USA) Program
-displayName: njra-urban-site-acqusition
+displayName: urban-site-acqusition
 urlSlug: urban-site-acquisition
 id: urban-site-acquisition
 sidebarCardBodyText: USA Program offers short-term loans to help buy property
