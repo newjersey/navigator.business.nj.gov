@@ -1,7 +1,8 @@
 import analytics from "@/lib/utils/analytics";
 import LearnTaskPage, { getStaticPaths, getStaticProps } from "@/pages/learn/[taskUrlSlug]";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
@@ -55,13 +56,15 @@ describe("learn task page", () => {
   it("renders CMS content and navigation for the selected step", () => {
     const learnStep = Config.learnPages.steps[1];
 
-    render(<LearnTaskPage learnStep={learnStep} />);
+    renderWithUserData(<LearnTaskPage learnStep={learnStep} />);
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       `${Config.learnPages.stepText} 2`,
     );
-    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(learnStep.name);
-    expect(screen.getByText(Config.learnPages.placeholderContent)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: learnStep.name })).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.learnPageFormBusiness.overview.split("\n\n")[0]),
+    ).toBeInTheDocument();
     expect(screen.getByText(Config.learnPages.accountButtonHeading)).toBeInTheDocument();
     expect(screen.getByText(Config.learnPages.accountButtonText)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: Config.learnPages.previousStepText })).toHaveAttribute(
@@ -75,7 +78,7 @@ describe("learn task page", () => {
   });
 
   it("only renders next navigation for the first step", () => {
-    render(<LearnTaskPage learnStep={Config.learnPages.steps[0]} />);
+    renderWithUserData(<LearnTaskPage learnStep={Config.learnPages.steps[0]} />);
 
     expect(
       screen.queryByRole("link", { name: Config.learnPages.previousStepText }),
@@ -91,7 +94,7 @@ describe("learn task page", () => {
       return;
     }
 
-    render(<LearnTaskPage learnStep={finalStep} />);
+    renderWithUserData(<LearnTaskPage learnStep={finalStep} />);
 
     expect(
       screen.getByRole("link", { name: Config.learnPages.previousStepText }),
@@ -102,7 +105,7 @@ describe("learn task page", () => {
   });
 
   it("navigates to account setup from the account button", () => {
-    render(<LearnTaskPage learnStep={Config.learnPages.steps[0]} />);
+    renderWithUserData(<LearnTaskPage learnStep={Config.learnPages.steps[0]} />);
 
     fireEvent.click(screen.getByTestId("open-account-button"));
 
