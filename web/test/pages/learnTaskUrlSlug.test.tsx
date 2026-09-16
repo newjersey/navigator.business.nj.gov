@@ -105,6 +105,25 @@ describe("learn task page", () => {
     }
   });
 
+  it("renders the register for taxes overview and callout CMS content", () => {
+    const learnStep = Config.learnPages.steps[4];
+
+    renderWithUserData(<LearnTaskPage learnStep={learnStep} />);
+
+    expect(
+      screen.getByText(Config.learnPageRegisterTaxes.overview.split("\n\n")[0]),
+    ).toBeInTheDocument();
+
+    const calloutHeaders = [
+      ...Config.learnPageRegisterTaxes.callouts.matchAll(/headerText="(?<headerText>[^"]*)"/g),
+    ].map((match) => match.groups?.headerText);
+
+    expect(calloutHeaders).toHaveLength(2);
+    for (const headerText of calloutHeaders) {
+      expect(screen.getByText(headerText ?? "")).toBeInTheDocument();
+    }
+  });
+
   it("only renders next navigation for the first step", () => {
     renderWithUserData(<LearnTaskPage learnStep={Config.learnPages.steps[0]} />);
 

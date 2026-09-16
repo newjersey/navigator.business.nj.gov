@@ -3575,3 +3575,16 @@ collections:
             fields:
               - { label: Overview Section, name: overview, widget: markdown }
               - { label: Callout Boxes, name: callouts, widget: markdown }
+      - label: "Register Your Business to Pay State Taxes"
+        name: "learn-page-register-taxes"
+        file: "content/src/fieldConfig/learn-page-register-taxes.json"
+        editor:
+          preview: true
+        fields:
+          - label: Register Your Business to Pay State Taxes
+            name: learnPageRegisterTaxes
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Overview Section, name: overview, widget: markdown }
+              - { label: Callout Boxes, name: callouts, widget: markdown }
