@@ -12,7 +12,7 @@ const LearnRegisterTaxesPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <RegisterTaxes />
+        <RegisterTaxes heading={config.learnPages.steps[4].name} />
       </div>
     </ConfigContext.Provider>
   );

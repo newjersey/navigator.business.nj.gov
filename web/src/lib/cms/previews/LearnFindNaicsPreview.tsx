@@ -12,7 +12,7 @@ const LearnFindNaicsPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <FindNaics />
+        <FindNaics heading={config.learnPages.steps[2].name} />
       </div>
     </ConfigContext.Provider>
   );

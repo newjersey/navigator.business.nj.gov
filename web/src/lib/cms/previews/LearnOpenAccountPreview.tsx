@@ -1,21 +1,21 @@
-import { GetEin } from "@/components/learn/GetEin";
+import { OpenAccount } from "@/components/learn/OpenAccount";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import { ReactElement } from "react";
 
-const LearnGetEinPreview = (props: PreviewProps): ReactElement => {
+const LearnOpenAccountPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <GetEin heading={config.learnPages.steps[3].name} />
+        <OpenAccount />
       </div>
     </ConfigContext.Provider>
   );
 };
 
-export default LearnGetEinPreview;
+export default LearnOpenAccountPreview;

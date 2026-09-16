@@ -3,11 +3,16 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
 
-export const FormBusiness = (): ReactElement => {
+interface Props {
+  heading: string;
+}
+
+export const FormBusiness = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   return (
     <>
+      <h2>{props.heading}</h2>
       <Content>{Config.learnPageFormBusiness.overview}</Content>
       <br></br>
       <HorizontalLine />

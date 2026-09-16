@@ -124,6 +124,19 @@ describe("learn task page", () => {
     }
   });
 
+  it("renders the open account CMS content", () => {
+    const learnStep = Config.learnPages.steps[5];
+
+    renderWithUserData(<LearnTaskPage learnStep={learnStep} />);
+
+    expect(
+      screen.getByRole("heading", { level: 2, name: Config.learnPageOpenAccount.heading }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.learnPageOpenAccount.content.split("\n\n")[0]),
+    ).toBeInTheDocument();
+  });
+
   it("only renders next navigation for the first step", () => {
     renderWithUserData(<LearnTaskPage learnStep={Config.learnPages.steps[0]} />);
 
