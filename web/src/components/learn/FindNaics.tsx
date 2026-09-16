@@ -5,5 +5,5 @@ import { ReactElement } from "react";
 export const FindNaics = (): ReactElement => {
   const { Config } = useConfig();
 
-  return <Content>{Config.learnPageFindNaics.content}</Content>;
+  return <Content className="margin-bottom-5">{Config.learnPageFindNaics.content}</Content>;
 };

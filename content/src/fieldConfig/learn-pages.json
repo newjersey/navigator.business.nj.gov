@@ -6,7 +6,7 @@
     "nextStepText": "Next Step",
     "placeholderContent": "Content goes here!",
     "accountButtonHeading": "Ready to start your business?",
-    "accountButtonText": "Open A Free Account",
+    "accountButtonText": "Open Your Free Account",
     "steps": [
       { "id": "business-structure", "name": "Select Your Business Structure"},
       { "id": "form-business", "name": "Form Your Business" },
