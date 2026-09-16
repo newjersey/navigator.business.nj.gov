@@ -56,6 +56,7 @@ export const completeBusinessStructureTask = ({
   onBusinessStructurePage.saveLegalStructure();
 
   cy.get('[data-testid="back-to-dashboard"]').click();
+  cy.wait(1000);
   cy.url().should("contain", "/dashboard");
 };
 

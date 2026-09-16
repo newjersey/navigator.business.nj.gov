@@ -3588,3 +3588,16 @@ collections:
             fields:
               - { label: Overview Section, name: overview, widget: markdown }
               - { label: Callout Boxes, name: callouts, widget: markdown }
+      - label: "Open Your Free Account"
+        name: "learn-page-open-account"
+        file: "content/src/fieldConfig/learn-page-open-account.json"
+        editor:
+          preview: true
+        fields:
+          - label: Open Your Free Account
+            name: learnPageOpenAccount
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - { label: Content, name: content, widget: markdown }
