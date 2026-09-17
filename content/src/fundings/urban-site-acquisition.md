@@ -1,6 +1,6 @@
 ---
 name: Urban Site Acquisition (USA) Program
-displayName: urban-site-acqusition
+displayName: urban-site-acquisition
 urlSlug: urban-site-acquisition
 id: urban-site-acquisition
 sidebarCardBodyText: USA Program offers short-term loans to help buy property
@@ -33,6 +33,7 @@ publishStageArchive: ""
 priority: false
 housingDeveloperResource: true
 ---
+
 ## Eligibility
 
 This program requires buying property. Loans can also cover site work and planning costs when buying property. Site work and planning costs cannot be funded alone. Projects must also be in an [NJRA-eligible municipality.](https://njra.us/njra-municipalities/)
