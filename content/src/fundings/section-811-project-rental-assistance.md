@@ -4,7 +4,7 @@ displayName: section-811-project-rental-assistance
 urlSlug: section-811-project-rental-assistance
 id: section-811-project-rental-assistance
 sidebarCardBodyText: Section 811 is a federal program covering the rent gap for
-  extremely low-income adults (18–61) with disabilities in affordable housing.
+  extremely low-income adults with disabilities in affordable housing.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: Section 811 Project Rental Assistance is a federal
@@ -15,11 +15,12 @@ summaryDescriptionMd: Section 811 Project Rental Assistance is a federal
   extremely low income.
 callToActionLink: https://www.nj.gov/dca/hmfa/developers/docs/supportivehousing/sn_811_pro_overview.pdf
 callToActionText: Learn more
-fundingType: tax credit
+fundingType: subsidy
 programFrequency: ongoing
 status: rolling application
 programPurpose: Both
-agency: []
+agency:
+  - njhmfa
 agencyContact: kglover@njhmfa.gov
 businessStage: both
 employeesRequired: n/a
@@ -27,7 +28,9 @@ homeBased: unknown
 certifications: []
 county:
   - All
-sector: []
+sector:
+  - construction
+  - real-estate
 publishStageArchive: ""
 housingDeveloperResource: true
 ---
