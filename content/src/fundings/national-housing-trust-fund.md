@@ -16,7 +16,8 @@ callToActionText: Learn more
 fundingType: loan
 programFrequency: one-time
 status: rolling application
-agency: []
+agency:
+  - njdca
 agencyContact: "kimberly.el-sadek@dca.nj.gov "
 businessStage: both
 employeesRequired: n/a
