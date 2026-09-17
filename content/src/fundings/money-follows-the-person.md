@@ -16,7 +16,8 @@ fundingType: loan
 programFrequency: ongoing
 status: rolling application
 programPurpose: In State
-agency: []
+agency:
+  - njhmfa
 agencyContact: thudson-murray@njhmfa.gov
 businessStage: both
 employeesRequired: n/a
@@ -30,7 +31,9 @@ county:
   - Hudson
   - Monmouth
   - Ocean
-sector: []
+sector:
+  - construction
+  - real-estate
 publishStageArchive: ""
 housingDeveloperResource: true
 ---
