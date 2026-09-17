@@ -17,7 +17,8 @@ fundingType: loan
 programFrequency: recurring
 status: rolling application
 programPurpose: In State
-agency: []
+agency:
+  - njra
 agencyContact: "NJRA Business Development: (609) 278-5773"
 businessStage: both
 employeesRequired: n/a
@@ -34,7 +35,7 @@ housingDeveloperResource: true
 ---
 ## Eligibility
 
-This program requires buying property. Loans can also cover site work and planning costs when buying property. Site work and planning costs cannot be funded alone. Projects must also be in an [NJRA-eligible community.](https://njra.us/njra-municipalities/)
+This program requires buying property. Loans can also cover site work and planning costs when buying property. Site work and planning costs cannot be funded alone. Projects must also be in an [NJRA-eligible municipality.](https://njra.us/njra-municipalities/)
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
