@@ -3,9 +3,9 @@ name: Redevelopment Investment Fund (RIF) Program
 displayName: redevelopment-investment-fund
 urlSlug: redevelopment-investment-fund
 id: redevelopment-investment-fund
-sidebarCardBodyText: The RIF Program offers NJ loans for property purchase,
-  construction, and long-term financing—helping developers lacking funding or
-  bank approval.
+sidebarCardBodyText: The RIF Program offers loans for property purchase,
+  construction, and long-term financing. The program helps developers who need
+  funding.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Redevelopment Investment Fund (RIF) Program gives
@@ -18,7 +18,8 @@ fundingType: loan
 programFrequency: recurring
 status: rolling application
 programPurpose: In State
-agency: []
+agency:
+  - njra
 agencyContact: "NJRA Business Development: (609) 278-5773"
 businessStage: both
 employeesRequired: n/a
