@@ -10,14 +10,15 @@ dueDate: ""
 summaryDescriptionMd: The Federal Low Income Housing Tax Credit (LIHTC) Program
   helps developers pay for affordable rental housing. HMFA awards the tax
   credits to developers. Developers typically sell these credits to investors.
-  Investors then provide money upfront to help build the project.  Investors can
+  Investors then provide money upfront to help build the project. Investors can
   claim the credits over 10 years.
 callToActionLink: https://www.nj.gov/dca/hmfa/developers/lihtc/
 callToActionText: Learn more
 fundingType: tax credit
 programFrequency: ongoing
 status: rolling application
-agency: []
+agency:
+  - njhmfa
 agencyContact: thudson-murray@njhmfa.gov
 businessStage: both
 employeesRequired: n/a
