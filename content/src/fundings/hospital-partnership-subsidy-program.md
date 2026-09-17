@@ -4,16 +4,19 @@ displayName: hospital-partnership-subsidy-program
 urlSlug: hospital-partnership-subsidy-program
 id: hospital-partnership-subsidy-program
 sidebarCardBodyText: The Hospital Partnership Subsidy Program funds affordable,
-  supportive housing near hospitals for frequent healthcare users in NJ.
+  supportive housing near hospitals for frequent healthcare users in New Jersey.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Hospital Partnership Subsidy Program helps hospitals
   and developers build affordable housing near hospitals. The program helps
   people who use hospital services often and need supportive housing.
+callToActionLink: https://www.nj.gov/dca/hmfa/developers/docs/multifamily/Hospital_Pilot_Program_Guidelines.pdf
+callToActionText: Learn more
 fundingType: loan
 programFrequency: ongoing
 status: rolling application
-agency: []
+agency:
+  - njhmfa
 agencyContact: thudson-murray@njhmfa.gov
 businessStage: both
 employeesRequired: n/a
