@@ -14,8 +14,9 @@ fundingType: loan
 programFrequency: ongoing
 status: rolling application
 programPurpose: In State
-agency: []
-agencyContact: Pete Johnson, Director of Lending and Portfolio Management (609) 292-3739
+agency:
+  - njra
+agencyContact: "Pete Johnson, Director of Lending and Portfolio Management: (609) 292-3739"
 businessStage: both
 employeesRequired: n/a
 homeBased: unknown
