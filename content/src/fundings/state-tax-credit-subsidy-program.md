@@ -33,7 +33,7 @@ housingDeveloperResource: true
 ## Eligibility
 
 * The project uses 4% Low-Income Housing Tax Credits and HMFA tax-exempt bond financing
-* The project pays New Jersey prevailing wages if using construction financing
+* The project pays New Jersey [prevailing wage](https://www.nj.gov/labor/wageandhour/prevailing-rates/) if using construction financing
 * The project meets the State Tax Credit Subsidy Program and HMFA Multifamily Underwriting Guidelines and Financing Policy requirements 
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
