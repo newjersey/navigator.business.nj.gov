@@ -4,8 +4,7 @@ displayName: healthy-homes-initiative
 urlSlug: healthy-homes-initiative
 id: healthy-homes-initiative
 sidebarCardBodyText: The NJ Healthy Homes Initiative funds affordable rental
-  housing for Medicaid/FamilyCare recipients, adding to other DCA housing
-  programs.
+  housing for Medicaid/FamilyCare recipients.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The New Jersey Healthy Homes Initiative creates affordable
@@ -16,7 +15,8 @@ callToActionText: Learn more
 fundingType: loan
 programFrequency: one-time
 status: rolling application
-agency: []
+agency:
+  - njdca
 agencyContact: Colleen.Velez@dca.nj.gov
 businessStage: operating
 employeesRequired: n/a
@@ -28,6 +28,7 @@ sector:
   - construction
   - real-estate
 publishStageArchive: ""
+housingDeveloperResource: true
 ---
 ## Eligibility
 
