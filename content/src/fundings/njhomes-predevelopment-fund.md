@@ -4,7 +4,7 @@ displayName: njhomes-predevelopment-fund
 urlSlug: njhomes-predevelopment-fund
 id: njhomes-predevelopment-fund
 sidebarCardBodyText: The NJHOMES Launchpad Predevelopment Fund gives nonprofits
-  0% loans for early-stage costs on small (25-unit or fewer) housing projects.
+  0% loans for early-stage costs on small housing projects.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The NJHOMES Launchpad Predevelopment Fund gives 0%
@@ -15,7 +15,8 @@ callToActionText: https://www.nj.gov/dca/dhcr/offices/njhomes.shtml
 fundingType: loan
 programFrequency: one-time
 status: rolling application
-agency: []
+agency:
+  - njdca
 businessStage: operating
 employeesRequired: yes
 homeBased: unknown
