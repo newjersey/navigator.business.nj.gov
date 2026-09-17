@@ -3,9 +3,8 @@ name: HMFA Revenue Bond Financing
 displayName: revenue-bond-financing
 urlSlug: revenue-bond-financing
 id: revenue-bond-financing
-sidebarCardBodyText: HMFA Revenue Bond Financing issues tax-exempt/taxable
-  bonds, lending proceeds to developers to build or preserve affordable rental
-  housing.
+sidebarCardBodyText: "HMFA Revenue Bond Financing offers tax-exempt or taxable
+  bonds to help pay for multifamily affordable rental housing. "
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: HMFA Revenue Bond Financing offers tax-exempt or taxable
@@ -17,7 +16,8 @@ callToActionText: Learn more
 fundingType: loan
 programFrequency: ongoing
 status: rolling application
-agency: []
+agency:
+  - njhmfa
 agencyContact: thudson-murray@njhmfa.gov
 businessStage: both
 employeesRequired: n/a
@@ -33,7 +33,7 @@ housingDeveloperResource: true
 ---
 ## Eligibility
 
-* The project meets all HMFA Multifamily Underwriting Guidelines and Financing Policy and QAP requirements 
+* The project meets all HMFA Multifamily Underwriting Guidelines and Financing Policy and Qualified Allocation Plan (QAP) requirements 
 * The project involves acquisition, construction, rehabilitation, or preservation of affordable multifamily rental housing
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
