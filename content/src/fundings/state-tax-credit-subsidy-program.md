@@ -15,7 +15,8 @@ callToActionText: Learn more
 fundingType: loan
 programFrequency: annual
 status: rolling application
-agency: []
+agency:
+  - njhmfa
 agencyContact: thudson-murray@njhmfa.gov
 businessStage: operating
 employeesRequired: n/a
