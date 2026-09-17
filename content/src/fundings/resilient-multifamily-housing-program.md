@@ -19,7 +19,8 @@ callToActionText: Learn more
 fundingType: loan
 programFrequency: one-time
 status: deadline
-agency: []
+agency:
+  - njhmfa
 agencyContact: askstaff@njhmfa.gov
 businessStage: operating
 employeesRequired: n/a
@@ -51,7 +52,7 @@ housingDeveloperResource: true
 * The property already has NJHMFA financing (Performance Based Contract Administration properties do not qualify)
 * The property is in good standing with NJHMFA Asset Management
 * The application explains why the project needs the proposed repairs
-* The application includes a project plan (Part 1) and a detailed scope of work (Part 2)
+* The application includes a project plan and a detailed scope of work
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
