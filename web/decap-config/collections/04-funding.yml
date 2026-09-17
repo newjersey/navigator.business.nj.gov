@@ -87,13 +87,14 @@ collections:
         widget: "select"
         options:
           [
-            "tax credit",
-            "loan",
             "grant",
-            "technical assistance",
             "hiring and employee training support",
-            "tax exemption",
             "investment",
+            "loan",
+            "subsidy",
+            "tax credit",
+            "tax exemption",
+            "technical assistance",
           ]
         hint: "Incentive Type"
       - label: "Program Frequency"
@@ -226,7 +227,9 @@ collections:
         widget: "select"
         multiple: false
         required: false
-        options: ["All", "Newark"]
+        # generated with scripts/merge-decap-config.ts from shared/src/static/municipalities.json
+        options: "$generated:municipalities"
+        options_length: 600
       - label: "Funding Amount"
         name: "fundingAmount"
         widget: "select"
