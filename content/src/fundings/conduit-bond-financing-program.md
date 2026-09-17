@@ -16,7 +16,8 @@ callToActionText: Learn more
 fundingType: loan
 programFrequency: ongoing
 status: rolling application
-agency: []
+agency:
+  - njhmfa
 agencyContact: thudson-murray@njhmfa.gov
 businessStage: operating
 employeesRequired: n/a
@@ -36,7 +37,7 @@ housingDeveloperResource: true
 * The project is being developed by a for-profit, nonprofit, or government entity
 * The project can give HMFA the first mortgage on the property
 * The project must use HMFA tax-exempt and/or taxable bond financing along with Low-Income Housing Tax Credits (LIHTC)
-* The project must meet the eligibility criteria of all applicable HMFA programs. This includes the Conduit Bond Financing Program guidelines and QAP 
+* The project must meet the eligibility criteria of all applicable HMFA programs. This includes the Conduit Bond Financing Program guidelines and Qualified Allocation Plan (QAP) 
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
