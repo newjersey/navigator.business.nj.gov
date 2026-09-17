@@ -1,6 +1,7 @@
 import { FindNaics } from "@/components/learn/FindNaics";
 import { FormBusiness } from "@/components/learn/FormBusiness";
 import { GetEin } from "@/components/learn/GetEin";
+import { OpenAccount } from "@/components/learn/OpenAccount";
 import { RegisterTaxes } from "@/components/learn/RegisterTaxes";
 import { LearnTaskSidebarPageLayout } from "@/components/LearnTaskSidebarPageLayout";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
@@ -26,10 +27,11 @@ const LearnTaskPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const learnSteps = Config.learnPages.steps;
   const pageComponents: Record<LearnStep["id"], ReactElement> = {
-    "find-naics": <FindNaics />,
-    "form-business": <FormBusiness />,
-    "get-ein": <GetEin />,
-    "register-taxes": <RegisterTaxes />,
+    "find-naics": <FindNaics heading={props.learnStep.name} />,
+    "form-business": <FormBusiness heading={props.learnStep.name} />,
+    "get-ein": <GetEin heading={props.learnStep.name} />,
+    "open-account": <OpenAccount />,
+    "register-taxes": <RegisterTaxes heading={props.learnStep.name} />,
   };
 
   const getNextAndPreviousButtons = (): ReactElement | undefined => {
@@ -79,7 +81,6 @@ const LearnTaskPage = (props: Props): ReactElement => {
           <h1>
             {`${Config.learnPages.stepText} ${learnSteps.findIndex((step) => step.id === props.learnStep.id) + 1}`}
           </h1>
-          <h2>{props.learnStep.name}</h2>
           {pageComponents[props.learnStep.id]}
           <div className="display-flex flex-justify-end margin-top-2">
             <button

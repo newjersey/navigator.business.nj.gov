@@ -12,7 +12,7 @@ const LearnFormBusinessPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <FormBusiness />
+        <FormBusiness heading={config.learnPages.steps[1].name} />
       </div>
     </ConfigContext.Provider>
   );
