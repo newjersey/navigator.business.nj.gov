@@ -3,9 +3,8 @@ name: State Tax Credit Subsidy Program
 displayName: state-tax-credit-subsidy-program
 urlSlug: state-tax-credit-subsidy-program
 id: state-tax-credit-subsidy-program
-sidebarCardBodyText: The State Tax Credit Subsidy Program funds
-  affordable/workforce housing loans using proceeds from NJ tax credit sales to
-  businesses.
+sidebarCardBodyText: The State Tax Credit Subsidy Program gives loans for
+  affordable and workforce housing.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The State Tax Credit Subsidy Program gives loans for
