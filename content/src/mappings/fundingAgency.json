@@ -1,24 +1,8 @@
 {
   "arrayOfFundingAgencies": [
     {
-      "id": "njeda",
-      "name": "NJ Economic Development Authority"
-    },
-    {
-      "id": "njdol",
-      "name": "NJ Department of Labor"
-    },
-    {
-      "id": "njdot",
-      "name": "NJ Department of Transportation"
-    },
-    {
-      "id": "njdep",
-      "name": "NJ Department of Environmental Protection"
-    },
-    {
-      "id": "nj-treasury",
-      "name": "NJ Department of Treasury"
+      "id": "invest-newark",
+      "name": "Invest Newark"
     },
     {
       "id": "nj-public-utilities",
@@ -29,8 +13,36 @@
       "name": "NJ Business Action Center"
     },
     {
-      "id": "invest-newark",
-      "name": "Invest Newark"
+      "id": "njdca",
+      "name": "NJ Department of Community Affairs"
+    },
+    {
+      "id": "njdep",
+      "name": "NJ Department of Environmental Protection"
+    },
+    {
+      "id": "njdol",
+      "name": "NJ Department of Labor"
+    },
+    {
+      "id": "njdot",
+      "name": "NJ Department of Transportation"
+    },
+    {
+      "id": "nj-treasury",
+      "name": "NJ Department of Treasury"
+    },
+    {
+      "id": "njeda",
+      "name": "NJ Economic Development Authority"
+    },
+    {
+      "id": "njhmfa",
+      "name": "NJ Housing and Mortgage Finance Agency"
+    },
+    {
+      "id": "njra",
+      "name": "NJ Redevelopment Authority"
     }
   ]
 }

@@ -41,3 +41,11 @@ export const LookupMunicipalityByName = (name: string | undefined): Municipality
 };
 
 export const Municipalities: Record<string, MunicipalityDetail> = municipalityJson;
+
+const allMunicipalitiesOption = "All";
+
+export const buildMunicipalityCmsOptions = (records: readonly MunicipalityDetail[]): string[] => {
+  const townNames = new Set(records.map((record) => record.townName));
+
+  return [allMunicipalitiesOption, ...[...townNames].sort()];
+};
