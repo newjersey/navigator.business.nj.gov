@@ -19,7 +19,8 @@ fundingType: loan
 programFrequency: ongoing
 status: rolling application
 programPurpose: In State
-agency: []
+agency:
+  - njra
 agencyContact: "Pete Johnson, Director of Lending and Portfolio Management: (609) 292-3739"
 businessStage: both
 employeesRequired: n/a
@@ -27,7 +28,9 @@ homeBased: unknown
 certifications: []
 county:
   - All
-sector: []
+sector:
+  - construction
+  - real-estate
 publishStageArchive: ""
 municipality: Newark
 housingDeveloperResource: true
