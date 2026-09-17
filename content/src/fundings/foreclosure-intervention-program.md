@@ -9,15 +9,14 @@ openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Foreclosure Intervention Program (FIP) helps nonprofit
   organizations buy and repair vacant or abandoned homes. Developers then sell
-  these homes to low-, moderate-, or middle-income households. The program keeps
-  vacant homes from falling apart or being bought by investors who only want to
-  rent them out.
+  these homes to low-, moderate-, or middle-income households.
 callToActionLink: https://www.nj.gov/dca/hmfa/homebuyers-and-renters/docs/FIP_Guidelines.pdf
 callToActionText: Learn more
 fundingType: grant
 programFrequency: ongoing
 status: rolling application
-agency: []
+agency:
+  - njhmfa
 agencyContact: FIP@njhmfa.gov
 businessStage: both
 employeesRequired: n/a
