@@ -1,4 +1,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import {
+  HOUSING_DEVELOPER_RESOURCES_PATHNAME,
+  HOUSING_DEVELOPER_RESOURCES_SLUG,
+} from "@/domain/content/housingDeveloperResourcesFlag";
 
 describe("sitemap with multilingual disabled", () => {
   afterEach(() => {
@@ -39,5 +43,33 @@ describe("sitemap with multilingual disabled", () => {
         expect(new URL(alternateUrl).origin).toBe("https://business.nj.gov");
       }
     }
+  });
+});
+
+describe("sitemap pathnames for pages with their own route", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  });
+
+  it("lists the housing developer resources page at its own route, not under /pages", async () => {
+    vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "true");
+    vi.resetModules();
+    const sitemapModule = await import("./sitemap");
+    const pathnames = sitemapModule.default().map((entry) => new URL(entry.url).pathname);
+
+    // The default locale is unprefixed under `as-needed` routing.
+    expect(pathnames).toContain(HOUSING_DEVELOPER_RESOURCES_PATHNAME);
+    expect(pathnames).not.toContain(`/pages/${HOUSING_DEVELOPER_RESOURCES_SLUG}`);
+  });
+
+  it("omits the housing developer resources page entirely when its flag is disabled", async () => {
+    vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "false");
+    vi.resetModules();
+    const sitemapModule = await import("./sitemap");
+    const pathnames = sitemapModule.default().map((entry) => new URL(entry.url).pathname);
+
+    expect(pathnames).not.toContain(HOUSING_DEVELOPER_RESOURCES_PATHNAME);
+    expect(pathnames).not.toContain(`/pages/${HOUSING_DEVELOPER_RESOURCES_SLUG}`);
   });
 });

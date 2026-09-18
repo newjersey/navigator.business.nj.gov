@@ -1,11 +1,12 @@
 /**
  * Resolves the correct locale-aware title for a content page.
  *
- * `PageSwitchComponent` renders a message-driven `<h1>` for `funding`,
- * `housing-developer-resources`, and `licensing-and-certification-guide`
- * instead of the page's own `name` frontmatter (which is English-only). This
- * resolver mirrors that same slug switch so a page's metadata title always
- * matches what actually renders as its `<h1>`, in every locale.
+ * Some pages render a message-driven `<h1>` instead of the page's own `name`
+ * frontmatter (which is English-only): `funding` and
+ * `licensing-and-certification-guide` via `PageSwitchComponent`, and
+ * `housing-developer-resources` via its own route. This resolver mirrors those
+ * same slugs so a page's metadata title always matches what actually renders as
+ * its `<h1>`, in every locale.
  */
 
 import type { ApplicationMessages } from "@/domain/content/messageTypes";

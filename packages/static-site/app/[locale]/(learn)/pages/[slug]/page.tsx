@@ -3,11 +3,8 @@ import { notFound } from "next/navigation";
 import { PageSwitchComponent } from "@/components/learn/PageSwitchComponent";
 import { resolvePageTitle } from "@/components/learn/resolvePageTitle";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
-import {
-  HOUSING_DEVELOPER_RESOURCES_SLUG,
-  isHousingDeveloperResourcesEnabled,
-} from "@/domain/content/housingDeveloperResourcesFlag";
 import { loadPages } from "@/domain/content/loadContent";
+import { hasDedicatedRoute } from "@/domain/content/pagePaths";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
 import { type AppLocale, hasAppLocale, resolveAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
@@ -23,16 +20,6 @@ interface Props {
 }
 
 /**
- * Checks whether a slug is disabled by its own feature flag.
- *
- * A slug can exist in content but still be unreachable when its flag is off
- * — used to 404 the direct route even though `dynamicParams` would otherwise
- * let Next.js render an un-generated slug on demand.
- */
-const isSlugFlaggedOff = (slug: string): boolean =>
-  slug === HOUSING_DEVELOPER_RESOURCES_SLUG && !isHousingDeveloperResourcesEnabled();
-
-/**
  * Generates branded, descriptive metadata for a content page.
  *
  * @param props Route props provided by Next.js.
@@ -43,7 +30,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   const { locale, slug } = await params;
   const pathnameWithoutLocale = `/pages/${slug}`;
 
-  if (isSlugFlaggedOff(slug)) {
+  if (hasDedicatedRoute(slug)) {
     return { alternates: buildAlternateLanguages({ pathnameWithoutLocale }) };
   }
 
@@ -63,7 +50,9 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 
 export const generateStaticParams = () => {
   const allChildren = Object.values(CATEGORY_HIERARCHY).flatMap((category) => category.children);
-  return allChildren.map((page) => ({ slug: page.slug }));
+  return allChildren
+    .filter((page) => !hasDedicatedRoute(page.slug))
+    .map((page) => ({ slug: page.slug }));
 };
 
 const ContentPage = async ({ params }: Props) => {
@@ -73,7 +62,10 @@ const ContentPage = async ({ params }: Props) => {
     notFound();
   }
 
-  if (isSlugFlaggedOff(slug)) {
+  // A slug with its own route must not also render here, or the same page would
+  // be reachable at two URLs. `generateStaticParams` leaves it out, but
+  // `dynamicParams` would otherwise let Next.js render it on demand.
+  if (hasDedicatedRoute(slug)) {
     notFound();
   }
 

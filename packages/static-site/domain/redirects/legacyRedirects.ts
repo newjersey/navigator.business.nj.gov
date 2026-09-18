@@ -46,17 +46,26 @@ export interface BuildLegacyRedirectsParams {
  */
 const PREFIX_RULES: readonly InternalRule[] = [
   { source: "/recent", destination: "/updates" },
-  { source: "/recent/disposable-bag-ban", destination: "/pages/plastic-ban-law" },
-  { source: "/recent/state-financial-assistance-programs", destination: "/pages/covid19" },
+  {
+    source: "/recent/disposable-bag-ban",
+    destination: "/pages/plastic-ban-law",
+  },
+  {
+    source: "/recent/state-financial-assistance-programs",
+    destination: "/pages/covid19",
+  },
   { source: "/recent/:slug*", destination: "/updates/:slug*" },
   // Bare /license was the old software-license and credits page; its successor
   // is the reuse page. Deeper /license/* paths are real business-license slugs
   // and stay on the business licensing guide (first-match-wins keeps them split).
   { source: "/license", destination: "/our-software-and-reuse" },
-  { source: "/license/:slug*", destination: "/pages/licensing-and-certification-guide" },
+  {
+    source: "/license/:slug*",
+    destination: "/pages/licensing-and-certification-guide",
+  },
   { source: "/funding", destination: "/pages/funding" },
   { source: "/funding/:slug*", destination: "/pages/funding" },
-  { source: "/housing-developer-resources", destination: "/pages/housing-developer-resources" },
+  { source: "/housing-developer-resources", destination: "/housingprograms" }, // Webflow-era path points at its own canonical URL.
   { source: "/starter-kits/:slug*", destination: "/pages/starter-kits" },
 ];
 
@@ -90,14 +99,20 @@ const ONE_OFF_RULES: readonly InternalRule[] = [
     source: "/covid/small-business-emergency-assistance-grant-program",
     destination: "/pages/covid19",
   },
-  { source: "/covid/state-financial-assistance-programs", destination: "/pages/covid19" },
+  {
+    source: "/covid/state-financial-assistance-programs",
+    destination: "/pages/covid19",
+  },
   {
     source: "/pages/covid-19-required-workplace-health-and-safety-standards",
     destination: "/pages/covid19",
   },
   { source: "/(.*)/articles/3835237(.*)", destination: "/pages/covid19" },
   // plastic ban
-  { source: "/bags/vendorclearinghouse", destination: "/pages/plastic-ban-law" },
+  {
+    source: "/bags/vendorclearinghouse",
+    destination: "/pages/plastic-ban-law",
+  },
   { source: "/plastic-ban-law", destination: "/pages/plastic-ban-law" },
   { source: "/bags/plastic-ban-law", destination: "/pages/plastic-ban-law" },
   { source: "/bags/vendors", destination: "/pages/plastic-ban-law" },
@@ -110,7 +125,10 @@ const ONE_OFF_RULES: readonly InternalRule[] = [
   { source: "/exporting", destination: "/pages/exporting" },
   { source: "/Exporting", destination: "/pages/exporting" },
   // licensing aggregate synonyms
-  { source: "/licensing", destination: "/pages/licensing-and-certification-guide" },
+  {
+    source: "/licensing",
+    destination: "/pages/licensing-and-certification-guide",
+  },
   {
     source: "/licensing-and-certification-guide",
     destination: "/pages/licensing-and-certification-guide",
@@ -125,20 +143,44 @@ const ONE_OFF_RULES: readonly InternalRule[] = [
       "/faqs/how-do-i-contract-with-the-state-as-a-small-business-minority-or-women-owned-business",
     destination: "/pages/mwbe",
   },
-  { source: "/faqs/what-are-new-jerseys-principal-industries", destination: "/pages/starter-kits" },
+  {
+    source: "/faqs/what-are-new-jerseys-principal-industries",
+    destination: "/pages/starter-kits",
+  },
   { source: "/archived/faqs", destination: "/" },
   //Aggregation for "Choose A Business Structure",
-  { source: "/faqs/how-do-i-start-a-nonprofit", destination: "/pages/choose-a-business-structure" },
-  { source: "/pages/c-corporation-c-corp", destination: "/pages/choose-a-business-structure" },
-  { source: "/pages/general-partnership", destination: "/pages/choose-a-business-structure" },
+  {
+    source: "/faqs/how-do-i-start-a-nonprofit",
+    destination: "/pages/choose-a-business-structure",
+  },
+  {
+    source: "/pages/c-corporation-c-corp",
+    destination: "/pages/choose-a-business-structure",
+  },
+  {
+    source: "/pages/general-partnership",
+    destination: "/pages/choose-a-business-structure",
+  },
   {
     source: "/pages/limited-liability-company-llc",
     destination: "/pages/choose-a-business-structure",
   },
-  { source: "/pages/llp-lp", destination: "/pages/choose-a-business-structure" },
-  { source: "/pages/nonprofit", destination: "/pages/choose-a-business-structure" },
-  { source: "/pages/s-corporation-s-corp", destination: "/pages/choose-a-business-structure" },
-  { source: "/pages/sole-proprietorship", destination: "/pages/choose-a-business-structure" },
+  {
+    source: "/pages/llp-lp",
+    destination: "/pages/choose-a-business-structure",
+  },
+  {
+    source: "/pages/nonprofit",
+    destination: "/pages/choose-a-business-structure",
+  },
+  {
+    source: "/pages/s-corporation-s-corp",
+    destination: "/pages/choose-a-business-structure",
+  },
+  {
+    source: "/pages/sole-proprietorship",
+    destination: "/pages/choose-a-business-structure",
+  },
   // miscellaneous
   { source: "/ida/impacted-by-ida", destination: "/updates" },
   {
@@ -147,7 +189,10 @@ const ONE_OFF_RULES: readonly InternalRule[] = [
   },
   // The reuse page is a standalone route, not a /pages/[slug] page, but the slug
   // still resolves under that route (dynamicParams), so send it to the canonical URL.
-  { source: "/pages/our-software-and-reuse", destination: "/our-software-and-reuse" },
+  {
+    source: "/pages/our-software-and-reuse",
+    destination: "/our-software-and-reuse",
+  },
   // terms & privacy policy
   { source: "/terms", destination: "/privacy-policy" },
   { source: "/terms-of-use", destination: "/privacy-policy" },
@@ -219,7 +264,11 @@ const spanishCatchAll = (multilingualEnabled: boolean): LegacyRedirect[] => {
   }
   return [
     { source: LEGACY_SPANISH_PREFIX, destination: "/", permanent: true },
-    { source: `${LEGACY_SPANISH_PREFIX}/:path*`, destination: "/:path*", permanent: true },
+    {
+      source: `${LEGACY_SPANISH_PREFIX}/:path*`,
+      destination: "/:path*",
+      permanent: true,
+    },
   ];
 };
 

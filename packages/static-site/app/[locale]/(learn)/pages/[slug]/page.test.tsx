@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { HOUSING_DEVELOPER_RESOURCES_SLUG } from "@/domain/content/housingDeveloperResourcesFlag";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import ContentPage, { generateMetadata, generateStaticParams } from "./page";
 
@@ -14,6 +15,9 @@ vi.mock("@/domain/categories", () => ({
     },
     start: {
       children: [{ slug: "something-else", name: "Something Else" }],
+    },
+    grow: {
+      children: [{ slug: "housing-developer-resources", name: "Housing Developer Resources" }],
     },
   },
 }));
@@ -40,7 +44,7 @@ vi.mock("@/domain/content/loadContent", () => ({
 }));
 
 describe("generateStaticParams", () => {
-  it("returns one entry per slug in CATEGORY_HIERARCHY", () => {
+  it("returns one entry per slug in CATEGORY_HIERARCHY, skipping slugs with their own route", () => {
     const result = generateStaticParams();
     expect(result).toHaveLength(3);
     expect(result).toEqual([
@@ -72,19 +76,6 @@ describe("generateMetadata", () => {
 
     expect(metadata.title).toEqual({ absolute: "Funding | Business.NJ.gov" });
     expect(metadata.description).toBe("Whether you're looking for startup capital...");
-  });
-
-  it("uses the localized message title for the housing developer resources page, not the English-only frontmatter name", async () => {
-    vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "true");
-
-    const metadata = await generateMetadata({
-      params: Promise.resolve({ locale: "en-US", slug: "housing-developer-resources" }),
-    });
-
-    expect(metadata.title).toEqual({ absolute: "Housing Developer Resources | Business.NJ.gov" });
-    expect(metadata.description).toBe(
-      "Explore state funding programs available to housing developers...",
-    );
   });
 
   it("falls back to alternates-only metadata for an unknown slug", async () => {
@@ -145,54 +136,31 @@ describe("ContentPage — funding slug", () => {
   });
 });
 
-describe("ContentPage — housing-developer-resources slug", () => {
+describe("ContentPage — a slug served by its own route", () => {
   afterEach(() => {
     vi.unstubAllEnvs();
   });
 
-  it("renders FundingPageContent with the housing developer resources title", async () => {
+  it("404s the housing slug here even with its flag enabled, since it lives at its own route", async () => {
     vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "true");
-
-    const page = await ContentPage({
-      params: Promise.resolve({
-        locale: "en-US",
-        slug: "housing-developer-resources",
-      }),
-    });
-    render(
-      <NextIntlClientProvider locale="en-US" messages={getApplicationMessages({ locale: "en-US" })}>
-        {page}
-      </NextIntlClientProvider>,
-    );
-    expect(
-      screen.getByRole("heading", { level: 1, name: "Housing Developer Resources" }),
-    ).toBeInTheDocument();
-  });
-});
-
-describe("ContentPage — housing-developer-resources slug, flag disabled", () => {
-  afterEach(() => {
-    vi.unstubAllEnvs();
-  });
-
-  it("404s the direct route even though the slug exists in content", async () => {
-    vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "false");
 
     await expect(
       ContentPage({
-        params: Promise.resolve({ locale: "en-US", slug: "housing-developer-resources" }),
+        params: Promise.resolve({ locale: "en-US", slug: HOUSING_DEVELOPER_RESOURCES_SLUG }),
       }),
     ).rejects.toThrow();
   });
 
-  it("falls back to alternates-only metadata instead of the real page title", async () => {
-    vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "false");
+  it("omits the housing slug from generateStaticParams so it is never prerendered here", () => {
+    expect(generateStaticParams()).not.toContainEqual({ slug: HOUSING_DEVELOPER_RESOURCES_SLUG });
+  });
 
+  it("returns alternates-only metadata instead of claiming the page title", async () => {
     const metadata = await generateMetadata({
-      params: Promise.resolve({ locale: "en-US", slug: "housing-developer-resources" }),
+      params: Promise.resolve({ locale: "en-US", slug: HOUSING_DEVELOPER_RESOURCES_SLUG }),
     });
 
     expect(metadata.title).toBeUndefined();
-    expect(metadata.alternates?.canonical).toBe("/pages/housing-developer-resources");
+    expect(metadata.alternates?.canonical).toBe(`/pages/${HOUSING_DEVELOPER_RESOURCES_SLUG}`);
   });
 });
