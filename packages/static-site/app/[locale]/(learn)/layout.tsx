@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { LearnSideNav } from "@/components/learn/LearnSideNav";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
+import { resolvePagePathname } from "@/domain/content/pagePaths";
 import { hasAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 
@@ -40,7 +41,7 @@ const PageLayout = async ({ children, params }: PageLayoutProps) => {
         .map((page) => ({
           link: {
             label: page.name,
-            href: `/pages/${page.slug}`,
+            href: resolvePagePathname(page.slug),
             isInternal: true,
             opensInNewTab: false,
           },

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
+import { resolvePagePathname } from "@/domain/content/pagePaths";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
 import { type AppLocale, hasAppLocale, resolveAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
@@ -78,7 +79,7 @@ const CategoryPage = async ({ params }: Props) => {
         {subpages.map((subpage) => (
           <li key={subpage.slug}>
             <strong>
-              <a href={`/pages/${subpage.slug}`}>{subpage.name}</a>
+              <a href={resolvePagePathname(subpage.slug)}>{subpage.name}</a>
             </strong>
             <p>{subpage["sub-heading-text"]}</p>
             <hr className="margin-y-2" />

@@ -4,7 +4,6 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 import { isHousingDeveloperResourcesEnabled } from "./domain/content/housingDeveloperResourcesFlag";
 import { buildLegacyRedirects } from "./domain/redirects/legacyRedirects";
-import { buildVanityRedirects } from "./domain/redirects/vanityRedirects";
 
 const withNextIntl = createNextIntlPlugin("./domain/i18n/request.ts");
 const PACKAGE_ROOT_DIRECTORY = dirname(fileURLToPath(import.meta.url));
@@ -25,13 +24,10 @@ const nextConfig: NextConfig = {
     // NEXT_PUBLIC_* is inlined at build time; the redirect table is baked per build.
     // biome-ignore lint/style/noProcessEnv: build-time flag read, consistent with locales.ts.
     const multilingualEnabled = process.env.NEXT_PUBLIC_MULTILINGUAL_ENABLED === "true";
-    const housingDeveloperResourcesEnabled = isHousingDeveloperResourcesEnabled();
-    // Vanity short links come first: `redirects()` is first-match-wins, and they
-    // must not be shadowed by a broad legacy pattern.
-    return [
-      ...buildVanityRedirects({ housingDeveloperResourcesEnabled }),
-      ...buildLegacyRedirects({ multilingualEnabled, housingDeveloperResourcesEnabled }),
-    ];
+    return buildLegacyRedirects({
+      multilingualEnabled,
+      housingDeveloperResourcesEnabled: isHousingDeveloperResourcesEnabled(),
+    });
   },
 };
 

@@ -10,6 +10,7 @@
 import type { MetadataRoute } from "next";
 
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
+import { resolvePagePathname } from "@/domain/content/pagePaths";
 import { addLocalePrefix } from "@/domain/i18n/localePath";
 import { ENABLED_LOCALES } from "@/domain/i18n/locales";
 import { SITE_BASE_URL } from "@/domain/siteConfig";
@@ -52,7 +53,7 @@ const buildSitemapEntry = (pathnameWithoutLocale: string): MetadataRoute.Sitemap
 const collectRoutePathnames = (): readonly string[] => {
   const categoryPathnames = Object.keys(CATEGORY_HIERARCHY).map((category) => `/${category}`);
   const contentPathnames = Object.values(CATEGORY_HIERARCHY).flatMap((category) => {
-    return category.children.map((page) => `/pages/${page.slug}`);
+    return category.children.map((page) => resolvePagePathname(page.slug));
   });
 
   return [
