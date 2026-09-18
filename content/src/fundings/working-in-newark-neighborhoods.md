@@ -35,6 +35,8 @@ publishStageArchive: ""
 municipality: Newark
 housingDeveloperResource: true
 ---
+## Eligibility
+
 * The project is located within Newark, New Jersey
 * The project aligns with Newark's redevelopment plans
 
