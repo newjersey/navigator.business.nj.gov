@@ -19,6 +19,7 @@ interface Props {
   readonly page: PageItem;
   readonly fundings: readonly Funding[];
   readonly sectors: readonly Sector[];
+  readonly isSectorFilterVisible?: boolean;
 }
 
 interface AppliedFilters {
@@ -432,9 +433,15 @@ interface FundingFilterSidebarProps {
   readonly messages: FundingPageMessages;
   readonly sectors: readonly Sector[];
   readonly filterState: FundingFilterState;
+  readonly isSectorFilterVisible?: boolean;
 }
 
-const FundingFilterSidebar = ({ messages, sectors, filterState }: FundingFilterSidebarProps) => (
+const FundingFilterSidebar = ({
+  messages,
+  sectors,
+  filterState,
+  isSectorFilterVisible,
+}: FundingFilterSidebarProps) => (
   <aside className="border-1px border-base-lighter padding-3 radius-lg funding-filter-col">
     <h2>{messages.filterHeading}</h2>
 
@@ -451,35 +458,39 @@ const FundingFilterSidebar = ({ messages, sectors, filterState }: FundingFilterS
       />
     </div>
 
-    <hr className="border-base-lighter border-top-1px margin-y-2" />
-    <fieldset className="usa-fieldset margin-bottom-2">
-      <legend className="usa-legend text-bold display-flex flex-justify flex-align-center width-full margin-bottom-1">
-        {messages.filterIndustry}
-        <button
-          type="button"
-          className="usa-button usa-button--unstyled font-sans-xs"
-          onClick={filterState.clearPendingIndustries}
-        >
-          {messages.filterClear}
-        </button>
-      </legend>
-      <div className="funding-filter-options">
-        {sectors.map((sector) => (
-          <div key={sector.id} className="usa-checkbox">
-            <input
-              className="usa-checkbox__input"
-              id={`industry-${sector.id}`}
-              type="checkbox"
-              checked={filterState.pendingIndustries.has(sector.id)}
-              onChange={() => filterState.toggleIndustry(sector.id)}
-            />
-            <label className="usa-checkbox__label" htmlFor={`industry-${sector.id}`}>
-              {sector.name}
-            </label>
+    {isSectorFilterVisible && (
+      <>
+        <hr className="border-base-lighter border-top-1px margin-y-2" />
+        <fieldset className="usa-fieldset margin-bottom-2">
+          <legend className="usa-legend text-bold display-flex flex-justify flex-align-center width-full margin-bottom-1">
+            {messages.filterIndustry}
+            <button
+              type="button"
+              className="usa-button usa-button--unstyled font-sans-xs"
+              onClick={filterState.clearPendingIndustries}
+            >
+              {messages.filterClear}
+            </button>
+          </legend>
+          <div className="funding-filter-options">
+            {sectors.map((sector) => (
+              <div key={sector.id} className="usa-checkbox">
+                <input
+                  className="usa-checkbox__input"
+                  id={`industry-${sector.id}`}
+                  type="checkbox"
+                  checked={filterState.pendingIndustries.has(sector.id)}
+                  onChange={() => filterState.toggleIndustry(sector.id)}
+                />
+                <label className="usa-checkbox__label" htmlFor={`industry-${sector.id}`}>
+                  {sector.name}
+                </label>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </fieldset>
+        </fieldset>
+      </>
+    )}
 
     <hr className="border-base-lighter border-top-1px margin-y-2" />
 
@@ -577,13 +588,24 @@ const FundingResultsSection = ({ messages, sectors, filterState }: FundingResult
   </section>
 );
 
-const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
+const FundingPageContent = ({
+  messages,
+  page,
+  fundings,
+  sectors,
+  isSectorFilterVisible,
+}: Props) => {
   const filterState = useFundingFilterState(messages, fundings);
 
   return (
     <div className="funding-layout layout-wide">
       <FundingHeader messages={messages} page={page} />
-      <FundingFilterSidebar messages={messages} sectors={sectors} filterState={filterState} />
+      <FundingFilterSidebar
+        messages={messages}
+        sectors={sectors}
+        filterState={filterState}
+        isSectorFilterVisible={isSectorFilterVisible ?? true}
+      />
       <FundingResultsSection messages={messages} sectors={sectors} filterState={filterState} />
     </div>
   );
