@@ -1,13 +1,16 @@
 ---
-notesMd: >
+notesMd: >-
   (Muni
   draft)[https://docs.google.com/document/d/1Bq_SVgup19nb2W1mlB7JQbzW2SXlBwVJETUEamxmFzE/edit]
 
 
-  Note: This is a draft - needs an industry. This is for nonprofits only.
+  July 2024: This is a draft - needs an industry. This is for nonprofits only.
+
+  --
+
+  September 2026: Don/Micah proposed social services, but that industry hasn't been created yet. Keeping it as a draft.
 licenseName: ""
 id: emergency-shelter-license
-filename: emergency-shelter-license
 displayname: emergency-shelter-license
 urlSlug: emergency-shelter-license
 name: Apply for Your Emergency Shelter License
@@ -22,6 +25,7 @@ callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_rooming/shelter_app_fil
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Rooming and Boarding House Standards
 divisionPhone: (609) 984-1704
+filename: emergency-shelter-license
 ---
 ## Application Requirements
 
