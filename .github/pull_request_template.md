@@ -29,6 +29,8 @@ This pull request resolves [#0000](https://dev.azure.com/NJInnovation/BizX/_work
 - [ ] I have rebased this branch from the latest main branch
 - [ ] I have performed a self-review of my code
 - [ ] My code follows the style guide
+- [ ] I have tested this with a screen reader. All actions can be performed, and all visual information is equivalently available via screen reader.
+- [ ] I have checked this with the [WAVE extension](https://wave.webaim.org/extension/)
 - [ ] I have created and/or updated relevant documentation on the engineering documentation website
 - [ ] I have not used any relative imports
 - [ ] I have pruned any instances of unused code
