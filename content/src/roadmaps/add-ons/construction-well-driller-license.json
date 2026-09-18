@@ -4,8 +4,9 @@
   "roadmapSteps": [
     {
       "step": 4,
-      "weight": 49,
-      "licenseTask": "well-driller-license"
+      "licenseTask": "well-driller-license",
+      "required": true,
+      "weight": 50
     }
   ]
 }
