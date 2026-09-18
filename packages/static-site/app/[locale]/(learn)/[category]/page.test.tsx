@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { HOUSING_DEVELOPER_RESOURCES_PATHNAME } from "@/domain/content/housingDeveloperResourcesFlag";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import CategoryPage, { generateMetadata, generateStaticParams } from "./page";
 
@@ -16,7 +17,9 @@ vi.mock("@/domain/categories", () => ({
         { slug: "hidden-content", name: "Don't display me", hideFromCategoryPage: "true" },
       ],
     },
-    start: { children: [] },
+    start: {
+      children: [{ slug: "housing-developer-resources", name: "Housing Developer Resources" }],
+    },
   },
 }));
 
@@ -72,6 +75,19 @@ describe("CategoryPage", () => {
     expect(screen.getByRole("link", { name: "Choose a Business Structure" })).toHaveAttribute(
       "href",
       "/pages/choose-a-business-structure",
+    );
+  });
+
+  it("links a page with its own route at that route, not under /pages", async () => {
+    render(
+      await CategoryPage({
+        params: Promise.resolve({ locale: "en-US", category: "start" }),
+      }),
+    );
+
+    expect(screen.getByRole("link", { name: "Housing Developer Resources" })).toHaveAttribute(
+      "href",
+      HOUSING_DEVELOPER_RESOURCES_PATHNAME,
     );
   });
 
