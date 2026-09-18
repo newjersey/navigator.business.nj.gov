@@ -34,6 +34,8 @@ sector:
 publishStageArchive: ""
 housingDeveloperResource: true
 ---
+## Eligibility
+
 * The project is not possible without this tax credit
 * The project has a funding gap between total costs and available funding, or will generate a below-market rate of return without the credits
 * The project is located in an eligible area of New Jersey
