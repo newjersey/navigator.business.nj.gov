@@ -47,7 +47,6 @@ Source content lives in `src/[type]/` directories. Examples:
 
 Fundings and licenses can be synced from external sources:
 
-- Webflow: `yarn webflow:run-sync` (from `web/`)
 - Airtable: `yarn airtable:dump` (from `web/`)
 
 Do not hand-edit files that are managed by these sync scripts.
