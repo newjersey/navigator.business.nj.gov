@@ -30,10 +30,13 @@ publishStageArchive: ""
 municipality: null
 housingDeveloperResource: true
 ---
+
+## Eligibility
+
 The local government (municipality) applies for funding, not the developer. The developer and municipality must work together on the application. Projects must also meet these requirements:
 
-* The property is located in an [NJRA-eligible municipality](https://njra.us/njra-municipalities/)
-* The project builds 100%  affordable housing units or repairs existing units
+- The property is located in an [NJRA-eligible municipality](https://njra.us/njra-municipalities/)
+- The project builds 100%  affordable housing units or repairs existing units
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 

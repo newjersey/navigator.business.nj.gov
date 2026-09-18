@@ -34,15 +34,18 @@ sector:
 publishStageArchive: ""
 housingDeveloperResource: true
 ---
-* The project is not possible without this tax credit
-* The project has a funding gap between total costs and available funding, or will generate a below-market rate of return without the credits
-* The project is located in an eligible area of New Jersey
-* The project has not started construction (demolition and site cleanup are allowed)
-* The project can get a temporary certificate of occupancy within 4 years
-* The developer is current on all New Jersey taxes and in good standing
-* The developer must provide at least 20% of total project costs as equity. For projects in Government-Restricted Municipalities (Atlantic City, Trenton, Paterson, Camden, East Orange, or New Brunswick) or Special Mission Non-profit projects, developers must provide at least 10% equity
-* The developer shows at least $10 million in environmental remediation costs for warehouse, distribution, or fulfillment center projects. A Licensed Site Remediation Professional must certify these costs
-* The developer shows real estate operational capacity and financial ability to complete the project. Required documents include, but are not limited to, 3 years of financial statements and a tax clearance certificate
+
+## Eligibility
+
+- The project is not possible without this tax credit
+- The project has a funding gap between total costs and available funding, or will generate a below-market rate of return without the credits
+- The project is located in an eligible area of New Jersey
+- The project has not started construction (demolition and site cleanup are allowed)
+- The project can get a temporary certificate of occupancy within 4 years
+- The developer is current on all New Jersey taxes and in good standing
+- The developer must provide at least 20% of total project costs as equity. For projects in Government-Restricted Municipalities (Atlantic City, Trenton, Paterson, Camden, East Orange, or New Brunswick) or Special Mission Non-profit projects, developers must provide at least 10% equity
+- The developer shows at least $10 million in environmental remediation costs for warehouse, distribution, or fulfillment center projects. A Licensed Site Remediation Professional must certify these costs
+- The developer shows real estate operational capacity and financial ability to complete the project. Required documents include, but are not limited to, 3 years of financial statements and a tax clearance certificate
 
 Residential projects or health care centers must also meet minimum project costs. Residential projects must set aside at least 20% of units as affordable housing for 45 years. All projects must [pay prevailing wage](https://www.nj.gov/labor/wageandhour/prevailing-rates/public-works/) to all workers, including construction and operations. Commercial projects must show they will create economic value for New Jersey. The value must be at least 160% of the tax credit amount, or 125% in distressed areas.
 

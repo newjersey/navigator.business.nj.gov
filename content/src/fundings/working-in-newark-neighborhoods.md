@@ -35,8 +35,11 @@ publishStageArchive: ""
 municipality: Newark
 housingDeveloperResource: true
 ---
-* The project is located within Newark, New Jersey
-* The project aligns with Newark's redevelopment plans
+
+## Eligibility
+
+- The project is located within Newark, New Jersey
+- The project aligns with Newark's redevelopment plans
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
