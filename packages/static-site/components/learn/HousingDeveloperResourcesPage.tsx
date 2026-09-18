@@ -27,6 +27,12 @@ export const HousingDeveloperResourcesPage = ({ page, locale }: Props) => {
   const messages: FundingPageMessages = { ...funding, ...housingDeveloperResources };
 
   return (
-    <FundingPageContent messages={messages} page={page} fundings={fundings} sectors={sectors} />
+    <FundingPageContent
+      messages={messages}
+      page={page}
+      fundings={fundings}
+      sectors={sectors}
+      isSectorFilterVisible={false}
+    />
   );
 };

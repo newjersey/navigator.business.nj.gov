@@ -137,6 +137,47 @@ describe("FundingPageContent static header and layout", () => {
   });
 });
 
+describe("FundingPageContent sector filter visibility", () => {
+  it("renders the industry filter when isSectorFilterVisible is omitted", () => {
+    renderWithIntl(
+      <FundingPageContent messages={messages} page={page} fundings={[]} sectors={sectors} />,
+    );
+    for (const sector of sectors) {
+      expect(screen.getByLabelText(sector.name)).toBeInTheDocument();
+    }
+  });
+
+  it("renders the industry filter when isSectorFilterVisible is true", () => {
+    renderWithIntl(
+      <FundingPageContent
+        messages={messages}
+        page={page}
+        fundings={[]}
+        sectors={sectors}
+        isSectorFilterVisible
+      />,
+    );
+    for (const sector of sectors) {
+      expect(screen.getByLabelText(sector.name)).toBeInTheDocument();
+    }
+  });
+
+  it("hides the industry filter when isSectorFilterVisible is false", () => {
+    renderWithIntl(
+      <FundingPageContent
+        messages={messages}
+        page={page}
+        fundings={[]}
+        sectors={sectors}
+        isSectorFilterVisible={false}
+      />,
+    );
+    for (const sector of sectors) {
+      expect(screen.queryByLabelText(sector.name)).not.toBeInTheDocument();
+    }
+  });
+});
+
 describe("FundingPageContent result count", () => {
   it("renders result count with total fundings", () => {
     const fundings = makeFundings(5);

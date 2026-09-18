@@ -33,7 +33,10 @@ sector:
 publishStageArchive: ""
 housingDeveloperResource: true
 ---
-* The property is located in an [NJRA-eligible municipality](https://njra.us/njra-municipalities/)
+
+## Eligibility
+
+- The property is located in an [NJRA-eligible municipality](https://njra.us/njra-municipalities/)
 
 :::largeCallout{ showHeader="true" headerText="Benefits" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
