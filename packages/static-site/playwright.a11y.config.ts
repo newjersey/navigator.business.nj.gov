@@ -29,6 +29,13 @@ const playwrightAccessibilityConfig = defineConfig({
       ...process.env,
       NEXT_PUBLIC_MULTILINGUAL_ENABLED: "true",
       NEXT_PUBLIC_FEEDBACK_WIDGET_MODE: "mock",
+      // `search.a11y.spec.ts` navigates to `/search`, which 404s (via
+      // `isSearchEnabled()`'s route-level flag gate) unless this is set —
+      // without it that spec hangs waiting for a heading a 404 page never
+      // renders. `pnpm dev` never generates `public/pagefind` itself (map's
+      // standing decision); run a real `pnpm build` first so that spec
+      // exercises a genuine index rather than a 404.
+      NEXT_PUBLIC_SEARCH_ENABLED: "true",
     },
     // biome-ignore lint/style/noProcessEnv: reuse existing server locally; always restart in CI.
     reuseExistingServer: !process.env.CI,

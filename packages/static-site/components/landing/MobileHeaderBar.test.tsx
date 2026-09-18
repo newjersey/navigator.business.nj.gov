@@ -14,6 +14,7 @@ const defaultContent: LayoutHeaderContent = {
   primaryItems: [],
   secondaryLinks: [],
   searchAction: "/search",
+  searchRegionLabel: "Search component",
   searchInputLabel: "Search",
   searchSubmitIconAlt: "Submit search",
   logInLabel: "Log In",

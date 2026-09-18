@@ -158,6 +158,8 @@ interface FundingFilterState {
   readonly pendingFundingTypes: ReadonlySet<FundingType>;
   readonly applied: AppliedFilters;
   readonly pageSlice: readonly Funding[];
+  readonly filteredFundings: readonly Funding[];
+  readonly pageStartIndex: number;
   readonly safePage: number;
   readonly totalPages: number;
   readonly resultsRef: React.RefObject<HTMLElement | null>;
@@ -191,6 +193,8 @@ interface FundingResultsData {
   readonly totalPages: number;
   readonly safePage: number;
   readonly pageSlice: readonly Funding[];
+  readonly filteredFundings: readonly Funding[];
+  readonly pageStartIndex: number;
   readonly resultCount: ReactNode;
   readonly showResultsLabel: string;
 }
@@ -257,7 +261,15 @@ const useFundingResultsData = ({
     String(pendingFilteredCount),
   );
 
-  return { totalPages, safePage, pageSlice, resultCount, showResultsLabel };
+  return {
+    totalPages,
+    safePage,
+    pageSlice,
+    filteredFundings,
+    pageStartIndex,
+    resultCount,
+    showResultsLabel,
+  };
 };
 
 interface FundingFilterActions {
@@ -435,7 +447,10 @@ interface FundingFilterSidebarProps {
 }
 
 const FundingFilterSidebar = ({ messages, sectors, filterState }: FundingFilterSidebarProps) => (
-  <aside className="border-1px border-base-lighter padding-3 radius-lg funding-filter-col">
+  <aside
+    className="border-1px border-base-lighter padding-3 radius-lg funding-filter-col"
+    data-pagefind-ignore
+  >
     <h2>{messages.filterHeading}</h2>
 
     <div className="margin-y-3 funding-search-field">
@@ -559,14 +574,23 @@ const FundingResultsSection = ({ messages, sectors, filterState }: FundingResult
       {filterState.resultCount}
     </p>
 
-    {filterState.pageSlice.map((funding) => (
-      <FundingCard
-        key={funding.id}
-        funding={funding}
-        messages={messages}
-        query={filterState.query}
-      />
-    ))}
+    {/*
+      Every filtered funding renders here, not just the current page's slice:
+      the pagefind crawl only ever sees this default (unfiltered, page-1)
+      render, and needs every program's text in the HTML to be searchable.
+      Only the current page's cards are visible; the rest carry the native
+      `hidden` attribute, invisible to sighted and assistive-technology users
+      alike, matching what conditional rendering looked like before.
+    */}
+    {filterState.filteredFundings.map((funding, index) => {
+      const isOnCurrentPage =
+        index >= filterState.pageStartIndex && index < filterState.pageStartIndex + ITEMS_PER_PAGE;
+      return (
+        <div key={funding.id} hidden={!isOnCurrentPage}>
+          <FundingCard funding={funding} messages={messages} query={filterState.query} />
+        </div>
+      );
+    })}
 
     <Pagination
       messages={messages}
@@ -581,7 +605,11 @@ const FundingPageContent = ({ messages, page, fundings, sectors }: Props) => {
   const filterState = useFundingFilterState(messages, fundings);
 
   return (
-    <div className="funding-layout layout-wide">
+    <div
+      className="funding-layout layout-wide"
+      data-pagefind-body
+      data-pagefind-filter="type:Funding program"
+    >
       <FundingHeader messages={messages} page={page} />
       <FundingFilterSidebar messages={messages} sectors={sectors} filterState={filterState} />
       <FundingResultsSection messages={messages} sectors={sectors} filterState={filterState} />

@@ -6,7 +6,6 @@ import type {
   LayoutLanguageSwitcherContent,
 } from "@/domain/content/messageTypes";
 import { ACCOUNT_APP_URL } from "@/domain/env";
-import { HeaderLanguageSwitcher } from "./HeaderLanguageSwitcher";
 import { HeaderPrimaryNav } from "./HeaderPrimaryNav";
 import { HeaderSecondaryNav } from "./HeaderSecondaryNav";
 import { LocalizedLink } from "./LocalizedLink";
@@ -16,7 +15,7 @@ import { MobileNavDrawer } from "./MobileNavDrawer";
 
 export interface SiteHeaderProps {
   readonly content: LayoutHeaderContent;
-  /** Localized language switcher chrome shown in the utility area. */
+  /** Localized language switcher chrome, rendered inline with the primary nav items. */
   readonly languageSwitcher: LayoutLanguageSwitcherContent;
 }
 
@@ -36,11 +35,8 @@ export const SiteHeader = ({ content, languageSwitcher }: SiteHeaderProps) => {
       <header className="usa-header usa-header--extended border-bottom-1px border-base-lighter">
         <nav aria-label={content.primaryNavigationAriaLabel} className="usa-nav">
           <div className="usa-nav__inner">
-            <HeaderPrimaryNav header={content} />
+            <HeaderPrimaryNav header={content} languageSwitcher={languageSwitcher} />
             <HeaderSecondaryNav header={content} />
-            <div className="usa-nav__secondary nj-inset-inline-end-2">
-              <HeaderLanguageSwitcher content={languageSwitcher} />
-            </div>
           </div>
         </nav>
       </header>

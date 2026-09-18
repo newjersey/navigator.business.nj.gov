@@ -15,9 +15,12 @@ import type {
   HeaderPrimaryLinkItem,
   HeaderPrimarySubmenuItem,
   LayoutHeaderContent,
+  LayoutLanguageSwitcherContent,
 } from "@/domain/content/messageTypes";
 import { ACCOUNT_APP_URL } from "@/domain/env";
 import { HeaderAuthButtons } from "./HeaderAuthButtons";
+import { HeaderLanguageSwitcher } from "./HeaderLanguageSwitcher";
+import { HeaderSearch } from "./HeaderSearch";
 import { LocalizedLink } from "./LocalizedLink";
 
 /**
@@ -34,6 +37,8 @@ const SITE_LOGO_PATH = "/img/business.NJ.gov-logo.svg";
 export interface HeaderPrimaryNavProps {
   /** Header content containing close icon text and primary nav items. */
   readonly header: LayoutHeaderContent;
+  /** Localized language switcher chrome, rendered inline with the primary nav items. */
+  readonly languageSwitcher: LayoutLanguageSwitcherContent;
 }
 
 /**
@@ -129,13 +134,14 @@ const renderHeaderPrimaryLinkItem = ({ item }: RenderHeaderPrimaryLinkItemParams
  *
  * @param props Component props.
  * @param props.header Header content with primary items.
+ * @param props.languageSwitcher Localized language switcher chrome, rendered inline with the primary nav items.
  * @returns Primary navigation markup with close control and item list.
  * @example
  * ```tsx
- * <HeaderPrimaryNav header={landing.header} />
+ * <HeaderPrimaryNav header={landing.header} languageSwitcher={landing.languageSwitcher} />
  * ```
  */
-export const HeaderPrimaryNav = ({ header }: HeaderPrimaryNavProps) => {
+export const HeaderPrimaryNav = ({ header, languageSwitcher }: HeaderPrimaryNavProps) => {
   const [openSubmenuId, setOpenSubmenuId] = useState<string | null>(null);
 
   const toggleSubmenu = (submenuId: string) => {
@@ -218,6 +224,8 @@ export const HeaderPrimaryNav = ({ header }: HeaderPrimaryNavProps) => {
             return renderHeaderPrimaryItem({ item: primaryItem });
           })}
         </ul>
+        <HeaderSearch content={header} />
+        <HeaderLanguageSwitcher content={languageSwitcher} />
         <HeaderAuthButtons
           accountAppUrl={ACCOUNT_APP_URL}
           accountIconAlt={header.accountIconAlt}
