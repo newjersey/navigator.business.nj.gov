@@ -217,6 +217,20 @@ export const userRouterFactory = (
     databaseClient
       .get(requestedUserId)
       .then(async (userData: UserData) => {
+        if (userData.consolidatedInto) {
+          const status = StatusCodes.CONFLICT;
+          logger.LogInfo(
+            `[END] ${method} ${endpoint} - status: ${status}, reason: account consolidated, userId: ${requestedUserId}, duration: ${
+              Date.now() - requestStart
+            }ms`,
+          );
+          res.status(status).json({
+            error: "ACCOUNT_CONSOLIDATED",
+            into: userData.consolidatedInto.userId,
+          });
+          return;
+        }
+
         let updatedUserData = userData;
         if (userData.version >= CURRENT_VERSION) {
           updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData)
@@ -282,6 +296,24 @@ export const userRouterFactory = (
       return;
     }
 
+    const existingUserData: UserData | undefined = (await databaseClient
+      .get(userData.user.id)
+      .catch(() => {})) as UserData | undefined;
+
+    if (existingUserData?.consolidatedInto) {
+      const status = StatusCodes.CONFLICT;
+      logger.LogInfo(
+        `[END] ${method} ${endpoint} - status: ${status}, reason: account consolidated, userId: ${postedUserBodyId}, duration: ${
+          Date.now() - requestStart
+        }ms`,
+      );
+      res.status(status).json({
+        error: "ACCOUNT_CONSOLIDATED",
+        into: existingUserData.consolidatedInto.userId,
+      });
+      return;
+    }
+
     if (await industryHasChanged(userData)) {
       userData = clearTaskItemChecklists(userData);
     }
@@ -294,10 +326,6 @@ export const userRouterFactory = (
     );
     const userDataWithEncryptedFields = await encryptFields(userDataWithUpdatedSidebarCards);
     const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedFields);
-
-    const existingUserData: UserData | undefined = (await databaseClient
-      .get(userData.user.id)
-      .catch(() => {})) as UserData | undefined;
 
     let userDataForSave = userDataWithUpdatedISO;
     if (govDeliveryCommCloudClient) {
