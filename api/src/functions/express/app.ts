@@ -461,6 +461,10 @@ const emergencyTripPermitClient = AbcEmergencyTripPermitClient(
 
 app.use("/api", authRouterFactory(dynamoDataClient, cognitoUserClient, logger));
 
+const messagingServiceClient = AwsMessagingServiceClient({
+  logWriter: logger,
+});
+
 app.use(
   "/api",
   userRouterFactory(
@@ -473,6 +477,7 @@ app.use(
     AWSTaxIDHashingClient,
     timeStampToBusinessSearch,
     logger,
+    messagingServiceClient,
     govDeliveryCommCloudClient,
   ),
 );
@@ -520,10 +525,6 @@ app.use(
   "/api",
   housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient, logger),
 );
-
-const messagingServiceClient = AwsMessagingServiceClient({
-  logWriter: logger,
-});
 
 app.use(
   "/api",
