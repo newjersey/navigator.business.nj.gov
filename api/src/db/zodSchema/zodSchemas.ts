@@ -733,6 +733,7 @@ export const v195BusinessUserSchema: z.ZodType<v195BusinessUser> = z.object({
   accountCreationSource: z.string(),
   contactSharingWithAccountCreationPartner: z.boolean(),
   phoneNumber: z.string().optional(),
+  onboardedAsLearningUser: z.boolean().optional(),
 });
 
 export const v195ProfileDocumentsSchema: z.ZodType<v195ProfileDocuments> = z.object({
