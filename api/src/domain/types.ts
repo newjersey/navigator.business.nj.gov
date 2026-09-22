@@ -437,6 +437,11 @@ export interface MessagingServiceClient {
   health: HealthCheckMethod;
 }
 
+export interface CognitoUserClient {
+  findUsername: (candidateUsernames: string[]) => Promise<string | undefined>;
+  ensureSignInEnabled: (username: string) => Promise<void>;
+}
+
 export interface MessageResponse {
   success: boolean;
   messageId?: string;
