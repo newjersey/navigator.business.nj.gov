@@ -149,7 +149,8 @@ describe("authRouter", () => {
       user: generateUser({ id: "orphan", email: "a@example.com" }),
     });
     stubDatabaseClient.findAllByEmail.mockResolvedValue([userData]);
-    stubCognitoUserClient.findUsername.mockResolvedValue();
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    stubCognitoUserClient.findUsername.mockResolvedValue(undefined);
 
     const response = await request(app).post("/api/auth/resolve").send({ email: "a@example.com" });
 
