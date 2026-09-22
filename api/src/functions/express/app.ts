@@ -1,3 +1,4 @@
+import { authRouterFactory } from "@api/authRouter";
 import { cigaretteLicenseRouterFactory } from "@api/cigaretteLicenseRouter";
 import { crtkEmailRouter } from "@api/crtkEmailRouter";
 import { crtkLookupRouterFactory } from "@api/crtkRouter";
@@ -24,6 +25,7 @@ import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertifi
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { AwsMessagingServiceClient } from "@client/AwsMessagingServiceClient";
 import { CigaretteLicenseEmailClient } from "@client/CigaretteLicenseEmailClient";
+import { CognitoUserClientFactory } from "@client/CognitoUserClient";
 import { CrtkEmailClient } from "@client/CrtkEmailClient";
 import { CrtkLookupClient } from "@client/dep/crtk/CrtkLookupClient";
 import { CrtkSearchClient } from "@client/dep/crtk/CrtkSearchClient";
@@ -386,6 +388,9 @@ const dynamoDataClient = DynamoDataClient(
   migrationDataClient,
 );
 
+const COGNITO_USER_POOL_ID = process.env.COGNITO_USER_POOL_ID || "";
+const cognitoUserClient = CognitoUserClientFactory(COGNITO_USER_POOL_ID, logger);
+
 const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
 const addGovDeliveryNewsletter = addNewsletterFactory(govDeliveryNewsletterClient);
@@ -453,6 +458,8 @@ const emergencyTripPermitClient = AbcEmergencyTripPermitClient(
   },
   logger,
 );
+
+app.use("/api", authRouterFactory(dynamoDataClient, cognitoUserClient, logger));
 
 app.use(
   "/api",
