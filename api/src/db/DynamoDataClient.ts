@@ -302,6 +302,12 @@ export const DynamoDataClient = (
     const sourceUserData = await userDataClient.findByEmail(email);
     return sourceUserData ? await migrateForRequest(sourceUserData) : undefined;
   };
+  // Deliberately skips request-time migration: that path writes, and callers of this
+  // (unauthenticated email resolution) must not write to records they don't own.
+  const findAllByEmail = (email: string): Promise<UserData[]> => {
+    return userDataClient.findAllByEmail(email);
+  };
+
   const findUserByBusinessName = async (businessName: string): Promise<UserData | undefined> => {
     try {
       const business = await businessesDataClient.findByBusinessName(businessName);
@@ -365,6 +371,7 @@ export const DynamoDataClient = (
     get,
     put,
     findByEmail,
+    findAllByEmail,
     findUserByBusinessName,
     findUsersByBusinessNamePrefix,
     findBusinessesByHashedTaxId,

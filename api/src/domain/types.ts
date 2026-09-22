@@ -80,6 +80,7 @@ export interface DatabaseClient {
   get: (userId: string) => Promise<UserData>;
   put: (userData: UserData) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
+  findAllByEmail: (email: string) => Promise<UserData[]>;
   findUserByBusinessName: (businessName: string) => Promise<UserData | undefined>;
   findUsersByBusinessNamePrefix: (prefix: string) => Promise<UserData[]>;
   findBusinessesByHashedTaxId: (hashedTaxId: string) => Promise<Business[]>;
@@ -92,6 +93,7 @@ export interface MigrationRunOptions {
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
+  findAllByEmail: (email: string) => Promise<UserData[]>;
   put: (userData: UserData) => Promise<UserData>;
   migrateToLatest: (userData: UserData) => Promise<UserData>;
   getNeedNewsletterUsers: () => Promise<UserData[]>;

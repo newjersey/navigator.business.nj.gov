@@ -101,6 +101,7 @@ describe("userRouter", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
+      findAllByEmail: jest.fn(),
       findUserByBusinessName: jest.fn(),
       findUsersByBusinessNamePrefix: jest.fn(),
       findBusinessesByHashedTaxId: jest.fn(),

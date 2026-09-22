@@ -57,4 +57,24 @@ describe("DynamoUserDataClient", () => {
 
     expect(await dynamoUserDataClient.findByEmail("email@example.com")).toEqual(userData);
   });
+
+  describe("findAllByEmail", () => {
+    it("returns every user holding the email", async () => {
+      const email = "shared@example.com";
+      const userA = generateUserData({ user: generateUser({ email }) });
+      const userB = generateUserData({ user: generateUser({ email }) });
+      const other = generateUserData({ user: generateUser({ email: "other@example.com" }) });
+      await dynamoUserDataClient.put(userA);
+      await dynamoUserDataClient.put(userB);
+      await dynamoUserDataClient.put(other);
+
+      const results = await dynamoUserDataClient.findAllByEmail(email);
+
+      expect(results.map((it) => it.user.id).sort()).toEqual([userA.user.id, userB.user.id].sort());
+    });
+
+    it("returns an empty array when no user holds the email", async () => {
+      expect(await dynamoUserDataClient.findAllByEmail("nobody@example.com")).toEqual([]);
+    });
+  });
 });

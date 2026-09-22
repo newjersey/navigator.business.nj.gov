@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  type AttributeValue,
   ExecuteStatementCommand,
   QueryCommand,
   type QueryCommandInput,
@@ -94,6 +95,28 @@ export const DynamoUserDataClient = (
       });
   };
 
+  const findAllByEmail = async (email: string): Promise<UserData[]> => {
+    const results: UserData[] = [];
+    let lastEvaluatedKey: Record<string, AttributeValue> | undefined;
+
+    do {
+      const params: QueryCommandInput = {
+        TableName: tableName,
+        IndexName: "EmailIndex",
+        KeyConditionExpression: "email = :email",
+        ExpressionAttributeValues: { ":email": { S: email } },
+        ExclusiveStartKey: lastEvaluatedKey,
+      };
+      const result = await db.send(new QueryCommand(params));
+      for (const item of result.Items ?? []) {
+        results.push(unmarshall(item, unmarshallOptions).data);
+      }
+      lastEvaluatedKey = result.LastEvaluatedKey;
+    } while (lastEvaluatedKey);
+
+    return results;
+  };
+
   const get = async (userId: string): Promise<UserData> => {
     const params = {
       TableName: tableName,
@@ -180,6 +203,7 @@ export const DynamoUserDataClient = (
     put,
     migrateToLatest,
     findByEmail,
+    findAllByEmail,
     getNeedNewsletterUsers,
     getNeedTaxIdEncryptionUsers,
     getUsersWithOutdatedVersion,

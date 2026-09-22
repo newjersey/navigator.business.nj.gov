@@ -67,6 +67,7 @@ describe("DynamoMigrationDataClient", () => {
     userDataClient = {
       get: jest.fn(),
       findByEmail: jest.fn(),
+      findAllByEmail: jest.fn(),
       put: jest.fn(),
       migrateToLatest: jest.fn(async (source) => migrateUser(source)),
       getNeedNewsletterUsers: jest.fn(),
