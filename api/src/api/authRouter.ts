@@ -2,6 +2,7 @@ import { chooseCanonicalAccount } from "@domain/auth/chooseCanonicalAccount";
 import { CognitoUserClient, DatabaseClient } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import { LogWriterType } from "@libs/logWriter";
+import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
@@ -83,6 +84,17 @@ export const authRouterFactory = (
       }
 
       await cognitoUserClient.ensureSignInEnabled(username);
+
+      // Pins the email to this account so a sibling's later activity cannot move it. A
+      // failed claim must not block sign-in; the pick stays deterministic without it.
+      if (!canonical.user.emailSignInClaimedISO) {
+        try {
+          await databaseClient.claimEmailSignIn(canonical.user.id, getCurrentDateISOString());
+        } catch (error: unknown) {
+          const message = error instanceof Error ? error.message : "Unknown error";
+          logger.LogError(`${method} ${endpoint} - failed to claim email sign-in: ${message}`);
+        }
+      }
 
       const status = StatusCodes.OK;
       res.status(status).send({ username });

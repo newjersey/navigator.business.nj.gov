@@ -2,11 +2,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   type AttributeValue,
+  ConditionalCheckFailedException,
   ExecuteStatementCommand,
   QueryCommand,
   type QueryCommandInput,
 } from "@aws-sdk/client-dynamodb";
-import { type DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
+import {
+  type DynamoDBDocumentClient,
+  GetCommand,
+  PutCommand,
+  UpdateCommand,
+} from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { Migrations } from "@db/migrations/migrations";
 import { type MigrationClients } from "@db/migrations/types";
@@ -154,6 +160,33 @@ export const DynamoUserDataClient = (
       });
   };
 
+  // Conditional so the first claim is final and a missing user is never created. Losing
+  // either condition is the expected outcome, not an error.
+  const claimEmailSignIn = async (userId: string, claimedISO: string): Promise<void> => {
+    try {
+      await db.send(
+        new UpdateCommand({
+          TableName: tableName,
+          Key: { userId },
+          UpdateExpression: "SET #data.#user.#claim = :claimedISO",
+          ConditionExpression:
+            "attribute_exists(#data.#user) AND attribute_not_exists(#data.#user.#claim)",
+          ExpressionAttributeNames: {
+            "#data": "data",
+            "#user": "user",
+            "#claim": "emailSignInClaimedISO",
+          },
+          ExpressionAttributeValues: { ":claimedISO": claimedISO },
+        }),
+      );
+    } catch (error) {
+      if (error instanceof ConditionalCheckFailedException) {
+        return;
+      }
+      throw error;
+    }
+  };
+
   const getNeedNewsletterUsers = (): Promise<UserData[]> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["user"].receiveNewsletter = true and (data["user"].externalStatus.newsletter is missing or data["user"].externalStatus.newsletter.success = false)`;
     return search(statement);
@@ -204,6 +237,7 @@ export const DynamoUserDataClient = (
     migrateToLatest,
     findByEmail,
     findAllByEmail,
+    claimEmailSignIn,
     getNeedNewsletterUsers,
     getNeedTaxIdEncryptionUsers,
     getUsersWithOutdatedVersion,

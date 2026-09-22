@@ -81,6 +81,7 @@ export interface DatabaseClient {
   put: (userData: UserData) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
   findAllByEmail: (email: string) => Promise<UserData[]>;
+  claimEmailSignIn: (userId: string, claimedISO: string) => Promise<void>;
   findUserByBusinessName: (businessName: string) => Promise<UserData | undefined>;
   findUsersByBusinessNamePrefix: (prefix: string) => Promise<UserData[]>;
   findBusinessesByHashedTaxId: (hashedTaxId: string) => Promise<Business[]>;
@@ -94,6 +95,7 @@ export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
   findAllByEmail: (email: string) => Promise<UserData[]>;
+  claimEmailSignIn: (userId: string, claimedISO: string) => Promise<void>;
   put: (userData: UserData) => Promise<UserData>;
   migrateToLatest: (userData: UserData) => Promise<UserData>;
   getNeedNewsletterUsers: () => Promise<UserData[]>;

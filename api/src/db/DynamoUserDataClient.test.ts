@@ -77,4 +77,51 @@ describe("DynamoUserDataClient", () => {
       expect(await dynamoUserDataClient.findAllByEmail("nobody@example.com")).toEqual([]);
     });
   });
+
+  describe("claimEmailSignIn", () => {
+    it("sets the claim timestamp when absent", async () => {
+      const userData = generateUserData({ user: generateUser({}) });
+      await dynamoUserDataClient.put(userData);
+
+      await dynamoUserDataClient.claimEmailSignIn(userData.user.id, "2026-09-18T00:00:00.000Z");
+
+      const stored = await dynamoUserDataClient.get(userData.user.id);
+      expect(stored.user.emailSignInClaimedISO).toBe("2026-09-18T00:00:00.000Z");
+    });
+
+    it("leaves the rest of the record untouched", async () => {
+      const userData = generateUserData({ user: generateUser({}) });
+      await dynamoUserDataClient.put(userData);
+
+      await dynamoUserDataClient.claimEmailSignIn(userData.user.id, "2026-09-18T00:00:00.000Z");
+
+      const stored = await dynamoUserDataClient.get(userData.user.id);
+      expect(stored).toEqual({
+        ...userData,
+        user: { ...userData.user, emailSignInClaimedISO: "2026-09-18T00:00:00.000Z" },
+      });
+    });
+
+    it("leaves an existing claim untouched", async () => {
+      const userData = generateUserData({
+        user: generateUser({ emailSignInClaimedISO: "2020-01-01T00:00:00.000Z" }),
+      });
+      await dynamoUserDataClient.put(userData);
+
+      await dynamoUserDataClient.claimEmailSignIn(userData.user.id, "2026-09-18T00:00:00.000Z");
+
+      const stored = await dynamoUserDataClient.get(userData.user.id);
+      expect(stored.user.emailSignInClaimedISO).toBe("2020-01-01T00:00:00.000Z");
+    });
+
+    it("does not create a record when the user does not exist", async () => {
+      const userId = `no-such-user-${randomInt()}`;
+
+      await expect(
+        dynamoUserDataClient.claimEmailSignIn(userId, "2026-09-18T00:00:00.000Z"),
+      ).resolves.toBeUndefined();
+
+      await expect(dynamoUserDataClient.get(userId)).rejects.toEqual(new Error("Not found"));
+    });
+  });
 });

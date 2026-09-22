@@ -19,6 +19,7 @@ describe("authRouter", () => {
       put: jest.fn(),
       findByEmail: jest.fn(),
       findAllByEmail: jest.fn(),
+      claimEmailSignIn: jest.fn(),
       findUserByBusinessName: jest.fn(),
       findUsersByBusinessNamePrefix: jest.fn(),
       findBusinessesByHashedTaxId: jest.fn(),
@@ -156,6 +157,64 @@ describe("authRouter", () => {
 
     expect(response.status).toBe(StatusCodes.NOT_FOUND);
     expect(stubCognitoUserClient.ensureSignInEnabled).not.toHaveBeenCalled();
+  });
+
+  it("claims the email for the canonical account", async () => {
+    const userData = generateUserData({
+      user: generateUser({ id: "legacy-id", email: "a@example.com" }),
+    });
+    stubDatabaseClient.findAllByEmail.mockResolvedValue([userData]);
+    stubCognitoUserClient.findUsername.mockResolvedValue("myNJ_legacy-id");
+
+    await request(app).post("/api/auth/resolve").send({ email: "a@example.com" });
+
+    expect(stubDatabaseClient.claimEmailSignIn).toHaveBeenCalledWith(
+      "legacy-id",
+      expect.any(String),
+    );
+  });
+
+  it("does not re-claim an account that already holds the claim", async () => {
+    const userData = generateUserData({
+      user: generateUser({
+        id: "legacy-id",
+        email: "a@example.com",
+        emailSignInClaimedISO: "2026-01-01T00:00:00.000Z",
+      }),
+    });
+    stubDatabaseClient.findAllByEmail.mockResolvedValue([userData]);
+    stubCognitoUserClient.findUsername.mockResolvedValue("myNJ_legacy-id");
+
+    await request(app).post("/api/auth/resolve").send({ email: "a@example.com" });
+
+    expect(stubDatabaseClient.claimEmailSignIn).not.toHaveBeenCalled();
+  });
+
+  it("does not claim when enabling sign-in fails", async () => {
+    const userData = generateUserData({
+      user: generateUser({ id: "legacy-id", email: "a@example.com" }),
+    });
+    stubDatabaseClient.findAllByEmail.mockResolvedValue([userData]);
+    stubCognitoUserClient.findUsername.mockResolvedValue("myNJ_legacy-id");
+    stubCognitoUserClient.ensureSignInEnabled.mockRejectedValue(new Error("throttled"));
+
+    await request(app).post("/api/auth/resolve").send({ email: "a@example.com" });
+
+    expect(stubDatabaseClient.claimEmailSignIn).not.toHaveBeenCalled();
+  });
+
+  it("still returns the username when the claim write fails", async () => {
+    const userData = generateUserData({
+      user: generateUser({ id: "legacy-id", email: "a@example.com" }),
+    });
+    stubDatabaseClient.findAllByEmail.mockResolvedValue([userData]);
+    stubCognitoUserClient.findUsername.mockResolvedValue("myNJ_legacy-id");
+    stubDatabaseClient.claimEmailSignIn.mockRejectedValue(new Error("throttled"));
+
+    const response = await request(app).post("/api/auth/resolve").send({ email: "a@example.com" });
+
+    expect(response.status).toBe(StatusCodes.OK);
+    expect(response.body).toEqual({ username: "myNJ_legacy-id" });
   });
 
   it("returns 500 when the lookup throws", async () => {

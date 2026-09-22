@@ -308,6 +308,10 @@ export const DynamoDataClient = (
     return userDataClient.findAllByEmail(email);
   };
 
+  const claimEmailSignIn = (userId: string, claimedISO: string): Promise<void> => {
+    return userDataClient.claimEmailSignIn(userId, claimedISO);
+  };
+
   const findUserByBusinessName = async (businessName: string): Promise<UserData | undefined> => {
     try {
       const business = await businessesDataClient.findByBusinessName(businessName);
@@ -372,6 +376,7 @@ export const DynamoDataClient = (
     put,
     findByEmail,
     findAllByEmail,
+    claimEmailSignIn,
     findUserByBusinessName,
     findUsersByBusinessNamePrefix,
     findBusinessesByHashedTaxId,
