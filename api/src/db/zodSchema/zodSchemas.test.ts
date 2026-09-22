@@ -16,6 +16,7 @@ import {
   v195FormationMemberSchema,
   v195MunicipalitySchema,
   v195PreferencesSchema,
+  v195BusinessUserSchema,
   v195QuestionnaireDataSchema,
   v195TaxClearanceCertificateDataSchema,
   v195TaxFilingDataSchema,
@@ -142,6 +143,26 @@ describe("Zod Schema validation", () => {
   describe("schema tests", () => {
     beforeEach(() => {
       jest.restoreAllMocks();
+    });
+
+    it("BusinessUserSchema should preserve onboardedAsLearningUser", () => {
+      const validData = generatev195BusinessUser({ onboardedAsLearningUser: true });
+
+      const result = v195BusinessUserSchema.safeParse(validData);
+
+      expect(result.success).toBe(true);
+      expect(result.data?.onboardedAsLearningUser).toBe(true);
+    });
+
+    it("BusinessUserSchema should reject a non-boolean onboardedAsLearningUser", () => {
+      const invalidData = {
+        ...generatev195BusinessUser({}),
+        onboardedAsLearningUser: "yes",
+      };
+
+      const result = v195BusinessUserSchema.safeParse(invalidData);
+
+      expect(result.success).toBe(false);
     });
 
     it("QuestionnaireDataSchema should pass for valid data", () => {
