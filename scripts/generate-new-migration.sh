@@ -11,8 +11,12 @@ sedi() {
   done
 }
 
-echo "What is the name of the migration file you want to create (excluding version number)?"
-read -r NEW_FILENAME
+if [[ -n "${1:-}" ]]; then
+  NEW_FILENAME="$1"
+else
+  echo "What is the name of the migration file you want to create (excluding version number)?"
+  read -r NEW_FILENAME
+fi
 
 # Normalize to snake_case: lowercase, replace non-alphanumeric runs with underscores, strip leading/trailing underscores
 NEW_FILENAME=$(echo "$NEW_FILENAME" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '_' | sed 's/^_*//;s/_*$//')
@@ -42,15 +46,18 @@ NEW_FILENAME_COMPLETE="v${NEW_VERSION_NUMBER}_${NEW_FILENAME}.ts"
 cp "$MOST_RECENT_FILENAME" "$NEW_FILENAME_COMPLETE"
 echo "New migration created at: api/src/db/migrations/$NEW_FILENAME_COMPLETE"
 
-# Update version numbers inside the new file
-sedi "s/$MOST_RECENT_VERSION_NUMBER/$NEW_VERSION_NUMBER/g" "$NEW_FILENAME_COMPLETE"
-sedi "s/$PREV_VERSION_NUMBER/$MOST_RECENT_VERSION_NUMBER/g" "$NEW_FILENAME_COMPLETE"
+# Update version numbers inside the new file. Anchored on the "v" prefix so that
+# only version identifiers are rewritten, never unrelated numeric literals.
+sedi "s/v$MOST_RECENT_VERSION_NUMBER/v$NEW_VERSION_NUMBER/g" "$NEW_FILENAME_COMPLETE"
+sedi "s/v$PREV_VERSION_NUMBER/v$MOST_RECENT_VERSION_NUMBER/g" "$NEW_FILENAME_COMPLETE"
+sedi "s/version: $MOST_RECENT_VERSION_NUMBER,/version: $NEW_VERSION_NUMBER,/g" "$NEW_FILENAME_COMPLETE"
 
 # Fix the import to point to the previous migration file
-sedi "s|@db/migrations/.*|@db/migrations/$MOST_RECENT_FILENAME_NO_EXT\"|g" "$NEW_FILENAME_COMPLETE"
+sedi "s|@db/migrations/[^\"]*\";|@db/migrations/$MOST_RECENT_FILENAME_NO_EXT\";|g" "$NEW_FILENAME_COMPLETE"
 
-# Update CURRENT_VERSION in userData.ts
-sedi "s/$MOST_RECENT_VERSION_NUMBER/$NEW_VERSION_NUMBER/g" "$PROJECT_ROOT/shared/src/userData.ts"
+# Update CURRENT_VERSION in userData.ts. Targets the assignment rather than the
+# bare number, which would also rewrite any other literal containing it.
+sedi "s/CURRENT_VERSION = $MOST_RECENT_VERSION_NUMBER;/CURRENT_VERSION = $NEW_VERSION_NUMBER;/" "$PROJECT_ROOT/shared/src/userData.ts"
 
 # Add new migration function to migrations.ts
 PREV_MIGRATE_LINE=$(grep -n "migrate_v${PREV_VERSION_NUMBER}_to_v${MOST_RECENT_VERSION_NUMBER}," migrations.ts | cut -d ":" -f 1)
@@ -82,7 +89,7 @@ sedi "s/${MOST_RECENT_FILENAME_NO_EXT}/v${NEW_VERSION_NUMBER}_${NEW_FILENAME}/g"
   "$GENERATE_USER_SCHEMA_FILE" \
   "$USER_SCHEMA_GENERATOR_FILE"
 
-sedi "s/${MOST_RECENT_VERSION_NUMBER}/${NEW_VERSION_NUMBER}/g" \
+sedi "s/v${MOST_RECENT_VERSION_NUMBER}/v${NEW_VERSION_NUMBER}/g" \
   "$ZOD_SCHEMA_FILE" \
   "$ZOD_SCHEMA_TEST_FILE" \
   "$PRINT_USER_SCHEMA_FILE" \
@@ -96,6 +103,13 @@ echo ""
 echo "------------------------------------"
 echo "Migration file created successfully!"
 echo "------------------------------------"
+echo ""
+echo "IMPORTANT: this file was copied from $MOST_RECENT_FILENAME and still contains"
+echo "that migration's transform logic. Review migrate_v${MOST_RECENT_VERSION_NUMBER}_to_v${NEW_VERSION_NUMBER} and every"
+echo "migrate_*_to_* helper below it, and DELETE any transform you are not deliberately"
+echo "re-applying. An inherited transform will rewrite that field on every production"
+echo "record, and the migration tests will not catch it -- they compare field presence,"
+echo "not values."
 echo ""
 echo "Please do the following:"
 echo "   - Make any needed changes to the migration function"

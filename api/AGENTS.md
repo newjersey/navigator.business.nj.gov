@@ -37,6 +37,7 @@ updates the Zod schema files, and regenerates the cached user schema):
 
 ```bash
 bash scripts/generate-new-migration.sh
+bash scripts/generate-new-migration.sh "add email sign in claimed"   # non-interactive
 ```
 
 After running it, you still need to write the actual migration function by hand
@@ -44,6 +45,12 @@ and adjust type definitions to match `userData.ts`.
 
 **Non-obvious rules:**
 
+- The generated file is a **copy of the previous migration**, so it arrives
+  carrying that migration's transform logic, not just its type tree. Review
+  `migrate_v{N-1}_to_v{N}` and every `migrate_*_to_*` helper below it, and delete
+  any transform you are not deliberately re-applying. An inherited transform
+  rewrites that field on every record in `users-table-prod`, and the migration
+  tests will not catch it: they compare field presence, not values.
 - Generator functions must **not** explicitly set optional fields to
   `undefined`; this breaks the migration equality test
 - Migration test assertions: count == `CURRENT_VERSION`, last entry is `migrate_v{N-1}_to_v{N}`, migrated user keys == generated user keys
