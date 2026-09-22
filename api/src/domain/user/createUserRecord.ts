@@ -52,6 +52,8 @@ export const createUserRecord = async ({
     ...userData,
     user: {
       ...userData.user,
+      // EmailIndex is keyed on the raw value and resolution queries it lowercased.
+      email: userData.user.email.toLowerCase().normalize(),
       ...(myNJUserKey ? { myNJUserKey } : {}),
       intercomHash: hashForIntercom(myNJUserKey ?? userData.user.id),
     },

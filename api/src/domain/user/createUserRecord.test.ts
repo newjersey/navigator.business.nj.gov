@@ -63,6 +63,19 @@ describe("createUserRecord", () => {
     expect(result.user.intercomHash).toBe(generateHashedKey("native-sub"));
   });
 
+  it("stores the email lowercased so email resolution can find it", async () => {
+    const userData = generateUserData({ user: generateUser({ email: "Jane@Example.COM" }) });
+
+    const result = await createUserRecord({
+      userData,
+      databaseClient: stubDatabaseClient,
+      messagingServiceClient: stubMessagingServiceClient,
+      logger: DummyLogWriter,
+    });
+
+    expect(result.user.email).toBe("jane@example.com");
+  });
+
   it("stamps the creation and update timestamps", async () => {
     const userData = generateUserData({
       dateCreatedISO: "2000-01-01T00:00:00.000Z",
