@@ -52,6 +52,7 @@ const mockJwt = jwt as jest.Mocked<typeof jwt>;
 const cognitoPayload = ({ id }: { id: string }): any => {
   return {
     sub: "some-sub",
+    "cognito:username": `myNJ_${id}`,
     "custom:myNJUserKey": undefined,
     email: "some-eamail",
     identities: [
@@ -146,6 +147,46 @@ describe("userRouter", () => {
   afterAll(async () => {
     await new Promise((resolve) => {
       return setTimeout(resolve, 500);
+    });
+  });
+
+  describe("getSignedInUserId derivation", () => {
+    it("strips the myNJ_ prefix from the cognito username", async () => {
+      const userData = generateUserData({});
+      const userId = userData.user.id;
+      mockJwt.decode.mockReturnValue({
+        sub: "unrelated-cognito-sub",
+        "cognito:username": `myNJ_${userId}`,
+        email: "test@example.com",
+        identities: undefined,
+      });
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+      const response = await request(app)
+        .get(`/users/${userId}`)
+        .set("Authorization", "Bearer user-123");
+
+      expect(response.status).toBe(StatusCodes.OK);
+      expect(stubUnifiedDataClient.get).toHaveBeenCalledWith(userId);
+    });
+
+    it("uses sub when the username has no myNJ_ prefix", async () => {
+      const userData = generateUserData({});
+      const sub = userData.user.id;
+      mockJwt.decode.mockReturnValue({
+        sub,
+        "cognito:username": sub,
+        email: "test@example.com",
+        identities: undefined,
+      });
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+      const response = await request(app)
+        .get(`/users/${sub}`)
+        .set("Authorization", "Bearer user-123");
+
+      expect(response.status).toBe(StatusCodes.OK);
+      expect(stubUnifiedDataClient.get).toHaveBeenCalledWith(sub);
     });
   });
 

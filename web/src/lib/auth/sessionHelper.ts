@@ -144,18 +144,20 @@ const addCustomFieldToCognito = async (): Promise<CognitoIdPayload> => {
   return newCognitoPayload;
 };
 
-const cognitoPayloadToActiveUser = ({
+const MYNJ_USERNAME_PREFIX = "myNJ_";
+
+export const cognitoPayloadToActiveUser = ({
   cognitoPayload,
   encounteredMyNjLinkingError,
 }: {
   cognitoPayload: CognitoIdPayload;
   encounteredMyNjLinkingError?: boolean | undefined;
 }): ActiveUser => {
-  const myNJIdentityPayload = cognitoPayload.identities?.find((it) => {
-    return it.providerName === "myNJ";
-  });
+  const username = cognitoPayload["cognito:username"];
   return {
-    id: myNJIdentityPayload?.userId || cognitoPayload.sub,
+    id: username?.startsWith(MYNJ_USERNAME_PREFIX)
+      ? username.slice(MYNJ_USERNAME_PREFIX.length)
+      : cognitoPayload.sub,
     email: cognitoPayload.email,
     encounteredMyNjLinkingError,
   };
