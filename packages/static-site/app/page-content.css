@@ -1,0 +1,44 @@
+/* NJWDS's `.usa-in-page-nav-container main` sizing rule targets a `main`
+   child, but the learn shell already owns the page's single `<main>`
+   landmark, so a `PageContent` page that opts into the Contents rail uses an
+   `<article>` body column and needs the sizing rule re-declared here.
+   `min-width: 0` lets the flex item shrink below its content's min-content
+   size, which images and long inline links would otherwise blow out. */
+.page-content__body {
+	min-width: 0;
+	width: 100%;
+}
+
+/* Jump links shouldn't land flush against the viewport edge. The site header
+   is not sticky, so a small offset suffices. */
+.page-content section[id] {
+	scroll-margin-top: 1rem;
+}
+
+/* Markdown images carry no intrinsic sizing. */
+.page-content .usa-prose img {
+	display: block;
+	height: auto;
+	max-width: 100%;
+}
+
+/* NJWDS's default 1rem top/bottom padding reads as excess whitespace around
+   a bare heading (no card chrome around it to justify the room). The `::before`
+   icon centers itself via `background-position: center center` against the
+   button's full height, so shrinking this padding doesn't reposition it. */
+.page-content .usa-accordion__button {
+	background-color: transparent;
+	padding-bottom: 0.5rem;
+	padding-top: 0.5rem;
+}
+
+/* NJWDS's compiled `.usa-accordion__heading` rule collapses the wrapping <h2>
+   to font-size: 1rem / line-height: 1 so the button reads as a button, not a
+   heading. A page's plain (non-collapsible) section headings are bare,
+   unstyled <h2> elements, so `revert` undoes NJWDS's override back to the
+   browser's native h2 rendering instead of guessing a pixel value, keeping
+   collapsible and plain section headings visually identical. */
+.page-content .usa-accordion__heading {
+	font-size: revert;
+	line-height: revert;
+}

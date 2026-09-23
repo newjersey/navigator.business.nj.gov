@@ -60,7 +60,7 @@ const SoftwareAndReuseRoute = async ({ params }: Props) => {
 
   return (
     <div className="grid-container usa-section">
-      <PageContent page={page} />
+      <PageContent locale={locale} page={page} />
     </div>
   );
 };
