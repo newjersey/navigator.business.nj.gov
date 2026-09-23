@@ -1,4 +1,5 @@
 import Markdown from "react-markdown";
+import { Icon } from "@/components/Icon";
 import type { FundingPageMessages } from "@/domain/content/messageTypes";
 import type { Funding } from "@/domain/content/types";
 import { HighlightedText, makeHighlightPlugin } from "./highlightMatches";
@@ -62,6 +63,18 @@ const FundingCard = ({ funding, messages, query = "" }: Props) => {
               </div>
             </div>
           </div>
+        )}
+        {funding.agencyNames && funding.agencyNames.length > 0 && (
+          <p className="margin-top-2 margin-bottom-0 display-flex flex-align-start">
+            <Icon
+              iconName="account_balance"
+              className="text-primary nj-margin-inline-end-05 nj-icon-text-top"
+            />
+            <span>
+              <strong>{messages.cardAgencyLabel}</strong>{" "}
+              <HighlightedText text={funding.agencyNames.join(", ")} query={query} />
+            </span>
+          </p>
         )}
       </div>
     </div>

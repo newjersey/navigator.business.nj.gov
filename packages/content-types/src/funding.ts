@@ -48,6 +48,17 @@ export type FundingCertifications =
   | "disadvantaged-business-enterprise"
   | "emerging-small-business-enterprise";
 
+/**
+ * An agency that issues funding opportunities. A funding's `agency` field holds
+ * ids from this mapping, so the display name has to be looked up by id.
+ */
+export type FundingAgency = {
+  /** Id referenced by a funding's `agency` list. */
+  readonly id: string;
+  /** Agency name displayed to users. */
+  readonly name: string;
+};
+
 /** A funding opportunity available to New Jersey businesses. */
 export type Funding = {
   /** Unique identifier for the funding. */
@@ -70,8 +81,13 @@ export type Funding = {
   readonly contentMd: string;
   /** Category of funding mechanism. */
   readonly fundingType: FundingType;
-  /** Administering agency or agencies. */
+  /** Administering agency or agencies, as ids from the funding agency mapping. */
   readonly agency: string[] | null | undefined;
+  /**
+   * Display names for `agency`, resolved while loading content. Not authored in
+   * the CMS, so it is absent wherever a funding is read without resolving them.
+   */
+  readonly agencyNames?: readonly string[];
   /** Archive status indicating the funding should not be published. */
   readonly publishStageArchive: FundingPublishStatus | null;
   /** Application open date (YYYY-MM-DD). */

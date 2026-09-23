@@ -6,6 +6,7 @@ export type {
   County,
   Filing,
   Funding,
+  FundingAgency,
   FundingBusinessStage,
   FundingCertifications,
   FundingHomeBased,

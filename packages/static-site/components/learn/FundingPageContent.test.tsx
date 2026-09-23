@@ -41,6 +41,7 @@ const messages: FundingPageMessages = {
   cardDueLabel: "Due:",
   cardEligibilityHeading: "Eligibility",
   cardBenefitsHeading: "Benefits",
+  cardAgencyLabel: "Agency:",
 };
 
 const renderWithIntl = (ui: ReactElement) =>
@@ -69,6 +70,7 @@ const makeFunding = (name: string, overrides: Partial<Funding> = {}): Funding =>
     contentMd: `## Eligibility\n\n- Eligible\n\n:::largeCallout{ showHeader="true" headerText="Benefits:" calloutType="conditional" }\n\nBenefit text.\n\n:::`,
     fundingType: "grant",
     agency: [],
+    agencyNames: [],
     publishStageArchive: null,
     openDate: "",
     dueDate: "",
@@ -450,6 +452,22 @@ describe("FundingPageContent free-text search", () => {
     );
 
     await user.type(screen.getByRole("searchbox"), "widget");
+
+    expect(screen.getByText("Alpha")).toBeInTheDocument();
+    expect(screen.queryByText("Beta")).not.toBeInTheDocument();
+  });
+
+  it("matches against the issuing agency name", async () => {
+    const user = userEvent.setup();
+    const fundings = [
+      makeFunding("Alpha", { agencyNames: ["NJ Department of Labor"] }),
+      makeFunding("Beta", { agencyNames: ["Invest Newark"] }),
+    ];
+    renderWithIntl(
+      <FundingPageContent messages={messages} page={page} fundings={fundings} sectors={sectors} />,
+    );
+
+    await user.type(screen.getByRole("searchbox"), "department of labor");
 
     expect(screen.getByText("Alpha")).toBeInTheDocument();
     expect(screen.queryByText("Beta")).not.toBeInTheDocument();

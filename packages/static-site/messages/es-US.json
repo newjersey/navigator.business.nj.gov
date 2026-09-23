@@ -599,7 +599,8 @@
     "paginationPageLabel": "Página {page}",
     "cardDueLabel": "Fecha límite:",
     "cardEligibilityHeading": "Elegibilidad",
-    "cardBenefitsHeading": "Beneficios"
+    "cardBenefitsHeading": "Beneficios",
+    "cardAgencyLabel": "Agencia:"
   },
   "housingDeveloperResources": {
     "title": "Recursos para Desarrolladores de Vivienda",
