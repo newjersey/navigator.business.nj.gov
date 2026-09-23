@@ -20,6 +20,6 @@ export const PageSwitchComponent = ({ page, locale }: Props): ReactElement => {
     case "licensing-and-certification-guide":
       return <LicensingGuidePage page={page} locale={locale} />;
     default:
-      return <PageContent page={page} />;
+      return <PageContent page={page} locale={locale} />;
   }
 };
