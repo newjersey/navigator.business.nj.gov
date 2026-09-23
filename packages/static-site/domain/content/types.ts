@@ -47,7 +47,13 @@ export interface PageItem {
   "main-link-text"?: string;
   /** Slug of the parent page (used for breadcrumb navigation). */
   "primary-page"?: string;
-  /** Dynamic heading and text section fields (heading-N, main-text-N, etc.). */
+  /**
+   * Dynamic heading and text section fields, all parsed in `PageContent.tsx`:
+   * `heading-N`, `main-text-N`, `link-text-N`, `link-url-N`, `tip-N`, plus
+   * two opt-in fields, `collapsible-N` (`open` | `closed`, renders section N
+   * as a collapsible accordion) and `contents-label-N` (lists section N in
+   * the page's Contents rail under this label).
+   */
   [key: string]: string | undefined;
 }
 
