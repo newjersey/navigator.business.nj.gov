@@ -54,7 +54,8 @@ const matchesFilters = (funding: Funding, filters: AppliedFilters): boolean => {
 
 const fundingSearchableText = (funding: Funding): string => {
   const { eligibility, benefits } = parseFundingContent(funding.contentMd ?? "");
-  return `${funding.name} ${eligibility} ${benefits}`.toLowerCase();
+  const agencies = (funding.agencyNames ?? []).join(" ");
+  return `${funding.name} ${agencies} ${eligibility} ${benefits}`.toLowerCase();
 };
 
 const matchesQuery = (searchableText: string, normalizedQuery: string): boolean =>

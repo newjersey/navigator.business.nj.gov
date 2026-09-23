@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { withAgencyNames } from "./fundingAgencyNames";
 import type {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
@@ -9,6 +10,7 @@ import type {
   FaqItem,
   Filing,
   Funding,
+  FundingAgency,
   Industry,
   License,
   LicenseEventType,
@@ -72,6 +74,12 @@ const readContentJson = (filename: string): unknown => {
   return JSON.parse(raw);
 };
 
+const readContentSourceJson = (relativePath: string): unknown => {
+  const filePath = path.join(CONTENT_SRC_DIR, relativePath);
+  const raw = fs.readFileSync(filePath, "utf-8");
+  return JSON.parse(raw);
+};
+
 const readMarkdownDirectory = <T>(subdir: string): T[] => {
   const dir = path.join(CONTENT_SRC_DIR, subdir);
   if (!fs.existsSync(dir)) return [];
@@ -130,10 +138,20 @@ export const loadCertifications = (): Certification[] =>
 export const loadFilings = (): Filing[] =>
   (readContentJson("filings.json") as { filings: Filing[] }).filings;
 
-export const loadFundings = (): Funding[] =>
-  (readContentJson("fundings.json") as { fundings: Funding[] }).fundings.filter(
+export const loadFundingAgencies = (): FundingAgency[] =>
+  (
+    readContentSourceJson("mappings/fundingAgency.json") as {
+      arrayOfFundingAgencies: FundingAgency[];
+    }
+  ).arrayOfFundingAgencies;
+
+export const loadFundings = (): Funding[] => {
+  const fundings = (readContentJson("fundings.json") as { fundings: Funding[] }).fundings.filter(
     (funding) => funding.publishStageArchive !== "Do Not Publish",
   );
+
+  return withAgencyNames({ fundings, fundingAgencies: loadFundingAgencies() });
+};
 
 export const loadLicenseCalendarEvents = (): LicenseEventType[] =>
   (

@@ -564,6 +564,8 @@ export interface FundingPageMessages {
   readonly cardEligibilityHeading: string;
   /** Heading for the benefits callout on a funding card. */
   readonly cardBenefitsHeading: string;
+  /** Prefix label for the issuing agencies listed on a funding card. */
+  readonly cardAgencyLabel: string;
 }
 
 /**

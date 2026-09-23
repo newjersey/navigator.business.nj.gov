@@ -599,7 +599,8 @@
     "paginationPageLabel": "Page {page}",
     "cardDueLabel": "Due:",
     "cardEligibilityHeading": "Eligibility",
-    "cardBenefitsHeading": "Benefits"
+    "cardBenefitsHeading": "Benefits",
+    "cardAgencyLabel": "Agency:"
   },
   "housingDeveloperResources": {
     "title": "Housing Developer Resources",

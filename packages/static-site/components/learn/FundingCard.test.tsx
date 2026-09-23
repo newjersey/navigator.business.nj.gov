@@ -9,6 +9,7 @@ const cardMessages = {
   cardDueLabel: "Due:",
   cardEligibilityHeading: "Eligibility",
   cardBenefitsHeading: "Benefits",
+  cardAgencyLabel: "Agency:",
 } as FundingPageMessages;
 
 const renderCard = (props: Omit<ComponentProps<typeof FundingCard>, "messages">) =>
@@ -27,6 +28,7 @@ const funding = (overrides: Partial<Funding> = {}): Funding =>
     contentMd: `## Eligibility\n\n- Must be NJ registered\n\n:::largeCallout{ showHeader="true" headerText="Benefits:" calloutType="conditional" }\n\nThe benefit is great.\n\n:::`,
     fundingType: "grant",
     agency: ["njeda"],
+    agencyNames: ["NJ Economic Development Authority"],
     publishStageArchive: "",
     openDate: "",
     dueDate: "",
@@ -141,6 +143,40 @@ describe("FundingCard", () => {
     // rather than the plain-text fallback used while actively searching.
     expect(container.querySelector("ul")).not.toBeNull();
     expect(container.querySelector("mark.funding-search-highlight")).toBeNull();
+  });
+});
+
+describe("FundingCard agency line", () => {
+  it("renders the resolved agency name with its label", () => {
+    renderCard({ funding: funding({ agencyNames: ["NJ Department of Labor"] }) });
+    expect(screen.getByText(cardMessages.cardAgencyLabel)).toBeInTheDocument();
+    expect(screen.getByText(/NJ Department of Labor/)).toBeInTheDocument();
+  });
+
+  it("renders multiple agency names comma-separated", () => {
+    renderCard({
+      funding: funding({ agencyNames: ["NJ Department of Labor", "Invest Newark"] }),
+    });
+    expect(screen.getByText(/NJ Department of Labor, Invest Newark/)).toBeInTheDocument();
+  });
+
+  it("renders no agency label when the funding has no resolved agencies", () => {
+    renderCard({ funding: funding({ agencyNames: [] }) });
+    expect(screen.queryByText(cardMessages.cardAgencyLabel)).not.toBeInTheDocument();
+  });
+
+  it("highlights a query match in an agency name", () => {
+    const { container } = renderCard({
+      funding: funding({ agencyNames: ["NJ Department of Labor"] }),
+      query: "labor",
+    });
+    const marks = container.querySelectorAll("mark.funding-search-highlight");
+    expect([...marks].some((m) => m.textContent === "Labor")).toBe(true);
+  });
+
+  it("renders no agency label when agency names were never resolved", () => {
+    renderCard({ funding: funding({ agencyNames: undefined }) });
+    expect(screen.queryByText(cardMessages.cardAgencyLabel)).not.toBeInTheDocument();
   });
 });
 

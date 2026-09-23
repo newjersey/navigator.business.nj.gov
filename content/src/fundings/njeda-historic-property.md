@@ -22,7 +22,7 @@ programFrequency: ongoing
 status: deadline
 programPurpose: In State
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 businessStage: both
 employeesRequired: n/a
