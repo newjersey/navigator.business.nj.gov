@@ -1,3 +1,4 @@
+import { BusinessStructure } from "@/components/learn/BusinessStructure";
 import { FindNaics } from "@/components/learn/FindNaics";
 import { FormBusiness } from "@/components/learn/FormBusiness";
 import { GetEin } from "@/components/learn/GetEin";
@@ -27,6 +28,7 @@ const LearnTaskPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const learnSteps = Config.learnPages.steps;
   const pageComponents: Record<LearnStep["id"], ReactElement> = {
+    "business-structure": <BusinessStructure heading={props.learnStep.name} />,
     "find-naics": <FindNaics heading={props.learnStep.name} />,
     "form-business": <FormBusiness heading={props.learnStep.name} />,
     "get-ein": <GetEin heading={props.learnStep.name} />,

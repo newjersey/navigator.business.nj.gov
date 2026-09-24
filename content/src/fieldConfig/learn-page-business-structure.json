@@ -1,0 +1,306 @@
+{
+  "learnPageBusinessStructure": {
+    "overview": "You need to choose a business structure before you form your business. Your choice affects your taxes, your personal liability, and what forms you are required to file.",
+    "structures": [
+      {
+        "id": "llc",
+        "displayName": "Limited Liability Company (LLC)",
+        "simpleWords": [
+          {
+            "text": "Owners are not personally liable for business debts"
+          },
+          {
+            "text": "A hybrid between a corporation and a partnership"
+          },
+          {
+            "text": "The business does not file separate taxes"
+          },
+          {
+            "text": "Each partner (called a member) includes their profits on their personal tax return"
+          }
+        ],
+        "advantages": [
+          {
+            "text": "Limited personal liability for business debts even if you take part in management"
+          },
+          {
+            "text": "Profit and loss can be allocated differently than ownership interests"
+          },
+          {
+            "text": "The Internal Revenue Service (IRS) rules allow LLCs to choose between being taxed as a partnership or a corporation"
+          }
+        ],
+        "disadvantages": [
+          {
+            "text": "More expensive to create than a partnership or sole proprietorship"
+          },
+          {
+            "text": "State laws for creating LLCs may not reflect the latest federal tax changes"
+          },
+          {
+            "text": "Cannot get venture capital funding"
+          },
+          {
+            "text": "Cannot provide employees with stock options"
+          }
+        ]
+      },
+      {
+        "id": "sole-proprietorship",
+        "displayName": "Sole Proprietorship",
+        "simpleWords": [
+          {
+            "text": "This is the most basic type of business to establish"
+          },
+          {
+            "text": "You are the only owner of the company"
+          },
+          {
+            "text": "You are responsible for its assets and liabilities"
+          }
+        ],
+        "advantages": [
+          {
+            "text": "Simple and inexpensive to create"
+          },
+          {
+            "text": "Report profits or losses on your personal tax return"
+          }
+        ],
+        "disadvantages": [
+          {
+            "text": "Personally liable for business debts"
+          },
+          {
+            "text": "Cannot give/share equity, limiting funding opportunities and potential partners"
+          }
+        ]
+      },
+      {
+        "id": "c-corp",
+        "displayName": "C-Corporation (C-Corp)",
+        "simpleWords": [
+          {
+            "text": "More complex than other business structures"
+          },
+          {
+            "text": "Suggested for larger companies with many employees"
+          },
+          {
+            "text": "Separate entity from those who own it, meaning it can be taxed (or sued) independently from its owners, known as shareholders."
+          },
+          {
+            "text": "They elect a board of directors to oversee major policies and decisions"
+          },
+          {
+            "text": "Appoint officers who carry out the daily operations of the business"
+          }
+        ],
+        "advantages": [
+          {
+            "text": "Limited liability for business debts"
+          },
+          {
+            "text": "Fringe benefits, such as an employer-paid insurance premium, can be deducted as a business expense"
+          },
+          {
+            "text": "Shareholders can split corporate profit among owners and corporation"
+          }
+        ],
+        "disadvantages": [
+          {
+            "text": "More expensive to create than a partnership or sole proprietorship"
+          },
+          {
+            "text": "Paperwork can seem burdensome to some shareholders"
+          },
+          {
+            "text": "Separate taxable entity"
+          }
+        ]
+      },
+      {
+        "id": "s-corp",
+        "displayName": "S-Corporation (S-Corp)",
+        "simpleWords": [
+          {
+            "text": "When you form a corporation, your default tax status is C corp"
+          },
+          {
+            "text": "Then, after you register your business with the state, you can elect to be taxed as an S corp with the IRS by filing Form 2553"
+          },
+          {
+            "text": "Profits and losses pass through to shareholders' personal tax returns instead of being taxed at the business level"
+          },
+          {
+            "text": "S-Corps are limited to 100 shareholders and one class of stock"
+          }
+        ],
+        "advantages": [
+          {
+            "text": "Limited liability for business debts"
+          },
+          {
+            "text": "Shareholders report their share of corporate profit or loss on their personal tax returns"
+          },
+          {
+            "text": "Shareholders can use a corporate loss to offset income from other sources"
+          }
+        ],
+        "disadvantages": [
+          {
+            "text": "Venture capitals aren't willing to fund S-Corps or any other pass-through entity"
+          },
+          {
+            "text": "Income must be allocated to owners according to their ownership interests"
+          }
+        ]
+      },
+      {
+        "id": "general-partnership",
+        "displayName": "General Partnership",
+        "simpleWords": [
+          {
+            "text": "Two or more people sharing ownership of a single business"
+          },
+          {
+            "text": "The partners manage the business and are responsible for all debts and obligations"
+          },
+          {
+            "text": "The details of this agreement should be written out formally to define the roles of each partner"
+          }
+        ],
+        "advantages": [
+          {
+            "text": "Simple and inexpensive to create and operate"
+          },
+          {
+            "text": "Partners report profit or loss on their personal tax returns"
+          }
+        ],
+        "disadvantages": [
+          {
+            "text": "Partners are personally liable for business debts"
+          },
+          {
+            "text": "Owner is personally liable for partners' or employees' actions"
+          }
+        ]
+      },
+      {
+        "id": "nonprofit",
+        "displayName": "Nonprofit",
+        "simpleWords": [
+          {
+            "text": "It is a type of C-Corp"
+          },
+          {
+            "text": "Unlike for-profits companies, they have a mission to benefit the public rather than generating profit, including religious, charitable, educational, scientific, or social welfare causes"
+          },
+          {
+            "text": "Because they serve the public good, it can qualify for tax-exempt status with the IRS"
+          }
+        ],
+        "advantages": [
+          {
+            "text": "Personal liability protection"
+          },
+          {
+            "text": "No federal or state corporate income tax for 501(c)(3) organizations"
+          }
+        ],
+        "disadvantages": [
+          {
+            "text": "Fundraising can be challenging and is impacted by changes in the economy"
+          },
+          {
+            "text": "Members of the board of trustees can't be paid for their service"
+          },
+          {
+            "text": "You must manage a lot of paperwork and record keeping to remain compliant with the IRS and ensure that you are transparent about business operations"
+          }
+        ]
+      },
+      {
+        "id": "lp",
+        "displayName": "Limited Partnership (LP)",
+        "simpleWords": [
+          {
+            "text": "It has both limited and general partners"
+          },
+          {
+            "text": "The general partners own and operate the business"
+          },
+          {
+            "text": "Limited partners invest in the business but have limited liability and limited input in its management"
+          },
+          {
+            "text": "These business types are not usually used for retail or services"
+          }
+        ],
+        "advantages": [
+          {
+            "text": "No mandatory corporate formalities, such as annual meetings or corporate filings"
+          },
+          {
+            "text": "Personal liability of limited partners is limited to capital contributions"
+          },
+          {
+            "text": "Limited partners don’t have to pay self-employment tax as general partners do"
+          }
+        ],
+        "disadvantages": [
+          {
+            "text": "General partners are responsible for their liability as well as the liabilities of any of the limited partners"
+          },
+          {
+            "text": "Limited partners are silent partners and cannot participate in management"
+          },
+          {
+            "text": "Limited partners can lose their status and be held personally responsible for business liabilities if they’re found to be actively involved in the management of the business"
+          }
+        ]
+      },
+      {
+        "id": "llp",
+        "displayName": "Limited Liability Partnership (LLP)",
+        "simpleWords": [
+          {
+            "text": "They are similar to limited partnerships, but in an LLP even the general partners have limited liability"
+          },
+          {
+            "text": "They are not responsible for the malpractice of the other partners"
+          },
+          {
+            "text": "These business types are not usually used for retail or services"
+          }
+        ],
+        "advantages": [
+          {
+            "text": "The personal liability in an LLP is limited to your capital contribution"
+          },
+          {
+            "text": "It is not required to maintain corporate formalities, such as annual meetings or corporate filings"
+          },
+          {
+            "text": "All partners can conduct business for the LLP and participate in management duties"
+          },
+          {
+            "text": "LLPs are pass-through entities, meaning the LLP doesn’t pay taxes for the business entity"
+          },
+          {
+            "text": "Profits are “passed” to the partners and taxed as personal income"
+          }
+        ],
+        "disadvantages": [
+          {
+            "text": "Any partner in the LLP that is actively involved in the management of the business can lose their limited liability status"
+          }
+        ]
+      }
+    ],
+    "simpleWordsHeader": "In Simple Words",
+    "advantagesHeader": "Advantages",
+    "disadvantagesHeader": "Disadvantages"
+  }
+}
