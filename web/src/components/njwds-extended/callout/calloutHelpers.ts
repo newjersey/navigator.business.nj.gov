@@ -10,6 +10,7 @@ export interface LargeCalloutProps extends IconProps {
   calloutType: CalloutTypes;
   showHeader?: string | boolean;
   headerText?: string;
+  fullHeight?: boolean;
 }
 
 export interface MiniCalloutProps {

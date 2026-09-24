@@ -36,7 +36,7 @@ export const LargeCallout = (props: PropsWithChildren<LargeCalloutProps>): React
   if (props.showHeader && headingText) {
     return (
       <div
-        className={`padding-205 radius-md margin-y-2 ${styling.backgroundColor} ${styling.textColor}`}
+        className={`padding-205 radius-md margin-y-2 ${styling.backgroundColor} ${styling.textColor} ${props.fullHeight ? "height-full" : ""}`}
       >
         <span className="text-bold">{headingText}</span>
         {(props.children || (iconItems && iconItems.length > 0)) && (
@@ -50,7 +50,9 @@ export const LargeCallout = (props: PropsWithChildren<LargeCalloutProps>): React
   }
 
   return (
-    <div className={`padding-205 radius-md margin-y-2 ${styling.backgroundColor}`}>
+    <div
+      className={`padding-205 radius-md margin-y-2 ${styling.backgroundColor} ${props.fullHeight ? "height-full" : ""}`}
+    >
       <div className="text-primary-darker">
         <div className="flex">{props.children}</div>
         <IconTextList items={iconItems} />

@@ -39,6 +39,10 @@
   flex: 0 0 50%;
 }
 
+.flex-third {
+  flex: 0 0 33%;
+}
+
 .flex-half-tablet {
   flex: 0 0 100%;
   @media all and (min-width: variables.$md) {

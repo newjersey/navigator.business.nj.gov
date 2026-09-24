@@ -43,6 +43,7 @@ import GovernmentContracting from "../../../content/src/fieldConfig/government-c
 import HeaderDefaults from "../../../content/src/fieldConfig/header-defaults.json";
 import HousingRegistrationSearchTask from "../../../content/src/fieldConfig/housing-registration.json";
 import LandingPage from "../../../content/src/fieldConfig/landing-page.json";
+import learnPageBusinessStructure from "../../../content/src/fieldConfig/learn-page-business-structure.json";
 import learnPageFindNaics from "../../../content/src/fieldConfig/learn-page-find-naics.json";
 import learnPageFormBusiness from "../../../content/src/fieldConfig/learn-page-form-business.json";
 import learnPageGetEin from "../../../content/src/fieldConfig/learn-page-get-ein.json";
@@ -165,6 +166,7 @@ const merged = JSON.parse(
       LicenseSearchTask,
       LandingPage,
       LearnPages,
+      learnPageBusinessStructure,
       learnPageFindNaics,
       learnPageFormBusiness,
       learnPageGetEin,
@@ -259,6 +261,7 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof LicenseSearchTask &
   typeof LandingPage &
   typeof LearnPages &
+  typeof learnPageBusinessStructure &
   typeof learnPageFindNaics &
   typeof learnPageFormBusiness &
   typeof learnPageGetEin &
@@ -353,6 +356,7 @@ export const getMergedConfig = (): ConfigType => {
     LicenseSearchTask,
     LandingPage,
     LearnPages,
+    learnPageBusinessStructure,
     learnPageFindNaics,
     learnPageFormBusiness,
     learnPageGetEin,

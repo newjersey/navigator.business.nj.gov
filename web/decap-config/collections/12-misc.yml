@@ -3601,3 +3601,57 @@ collections:
             fields:
               - { label: Heading, name: heading, widget: string }
               - { label: Content, name: content, widget: markdown }
+      - label: "Business Structure"
+        name: "learn-page-business-structure"
+        file: "content/src/fieldConfig/learn-page-business-structure.json"
+        editor:
+          preview: true
+        fields:
+          - label: Select a Business Structure
+            name: learnPageBusinessStructure
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Overview, name: overview, widget: string }
+              - { label: Simple Words Header, name: simpleWordsHeader, widget: string }
+              - { label: Advantages Header, name: advantagesHeader, widget: string }
+              - { label: Disadvantages Header, name: disadvantagesHeader, widget: string }
+              - label: Structures
+                name: structures
+                widget: list
+                allow_add: false
+                summary: "{{fields.displayName}}"
+                fields:
+                  - label: Display Name
+                    name: displayName
+                    widget: string
+                  - label: Id
+                    name: id
+                    widget: string
+                  - label: Simple Words
+                    name: simpleWords
+                    widget: list
+                    allow_add: true
+                    summary: "{{text}}"
+                    fields:
+                      - label: Text
+                        name: text
+                        widget: string
+                  - label: Advantages
+                    name: advantages
+                    widget: list
+                    allow_add: true
+                    summary: "{{text}}"
+                    fields:
+                      - label: Text
+                        name: text
+                        widget: string
+                  - label: Disadvantages
+                    name: disadvantages
+                    widget: list
+                    allow_add: true
+                    summary: "{{text}}"
+                    fields:
+                      - label: Text
+                        name: text
+                        widget: string
