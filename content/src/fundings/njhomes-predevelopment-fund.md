@@ -10,8 +10,8 @@ dueDate: ""
 summaryDescriptionMd: The NJHOMES Launchpad Predevelopment Fund gives 0%
   interest loans to nonprofit developers. These loans cover early-stage costs
   for small affordable housing projects with 25 or fewer units.
-callToActionLink: Learn more
-callToActionText: https://www.nj.gov/dca/dhcr/offices/njhomes.shtml
+callToActionLink: https://www.nj.gov/dca/dhcr/offices/njhomes.shtml
+callToActionText: Learn more
 fundingType: loan
 programFrequency: one-time
 status: rolling application
