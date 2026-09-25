@@ -1,5 +1,21 @@
 import path from "node:path";
 import type { NextConfig } from "next";
+import {
+  buildCmsContentSecurityPolicy,
+  buildContentSecurityPolicy,
+  parseCspMode,
+} from "./src/lib/csp";
+
+const cspMode = parseCspMode(process.env.CSP_MODE);
+const cspHeaderName =
+  cspMode === "enforce" ? "Content-Security-Policy" : "Content-Security-Policy-Report-Only";
+const cspOptions = {
+  awsRegion: process.env.AWS_REGION,
+  apiBaseUrl: process.env.API_BASE_URL,
+  authDomain: process.env.AUTH_DOMAIN,
+  outageAlertConfigUrl: process.env.OUTAGE_ALERT_CONFIG_URL,
+  isDevelopment: process.env.NODE_ENV === "development",
+};
 
 const nextConfig: NextConfig = {
   output: "standalone",
@@ -69,6 +85,36 @@ const nextConfig: NextConfig = {
         source: "/welcome",
         destination: "/",
         permanent: true,
+      },
+    ];
+  },
+  async headers() {
+    if (cspMode === "disabled") {
+      return [];
+    }
+
+    return [
+      {
+        source: "/mgmt/cms",
+        headers: [
+          {
+            key: cspHeaderName,
+            value: buildCmsContentSecurityPolicy(cspOptions),
+          },
+        ],
+      },
+      {
+        // Excludes /mgmt/cms, which receives its own policy above. Next.js
+        // applies every matching `headers()` entry to a response, so a
+        // route matched by both entries would otherwise receive two
+        // conflicting Content-Security-Policy(-Report-Only) headers.
+        source: "/((?!mgmt/cms$).*)",
+        headers: [
+          {
+            key: cspHeaderName,
+            value: buildContentSecurityPolicy(cspOptions),
+          },
+        ],
       },
     ];
   },
