@@ -18,6 +18,7 @@ export const ROUTES = {
   cigaretteLicense: "/tasks/cigarette-license",
   taxClearanceCertificate: "/actions/tax-clearance-certificate-apply",
   environmentRequirements: "/tasks/environment-requirements",
+  learnFlowLandingPage: "/learn/business-structure",
 };
 
 export interface QUERY_PARAMS_VALUES {

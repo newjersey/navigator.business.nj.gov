@@ -539,6 +539,50 @@ describe("onboarding - starting a business", () => {
           expect(mockAnalytics.event.onboarding.onboarding_form_submit).toHaveBeenCalled();
         });
       });
+
+      it("directs user to learn pages if using learn flow with only 1 business", async () => {
+        const initialUserData = createEmptyUserData(createEmptyUser());
+        const { page } = renderPage({ userData: initialUserData });
+
+        expect(mockAnalytics.event.onboarding.onboarding_form_start).toHaveBeenCalled();
+
+        page.chooseRadio("business-persona-starting");
+        await page.visitOnboardingPage(2);
+        expect(
+          mockAnalytics.event.onboarding.business_persona_selection_submit,
+        ).toHaveBeenCalledWith("STARTING");
+
+        page.chooseRadio("starting-learning-business");
+
+        page.clickNext();
+        await waitFor(() => {
+          expect(mockPush).toHaveBeenCalledWith({
+            pathname: ROUTES.learnFlowLandingPage,
+          });
+        });
+      });
+
+      it("directs user to account setup if using ready flow with only 1 business", async () => {
+        const initialUserData = createEmptyUserData(createEmptyUser());
+        const { page } = renderPage({ userData: initialUserData });
+
+        expect(mockAnalytics.event.onboarding.onboarding_form_start).toHaveBeenCalled();
+
+        page.chooseRadio("business-persona-starting");
+        await page.visitOnboardingPage(2);
+        expect(
+          mockAnalytics.event.onboarding.business_persona_selection_submit,
+        ).toHaveBeenCalledWith("STARTING");
+
+        page.chooseRadio("starting-ready-business");
+
+        page.clickNext();
+        await waitFor(() => {
+          expect(mockPush).toHaveBeenCalledWith({
+            pathname: ROUTES.accountSetup,
+          });
+        });
+      });
     });
   });
 });
