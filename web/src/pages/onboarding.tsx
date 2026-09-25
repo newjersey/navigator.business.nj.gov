@@ -106,6 +106,8 @@ const OnboardingPage = (props: Props): ReactElement => {
     REQUIRED_SELECT_INTENT: Config.profileDefaults.default.selectIntentAlertText,
   };
 
+  const usingIntentSelection = process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW === "true";
+
   const {
     FormFuncWrapper,
     onSubmit,
@@ -376,13 +378,25 @@ const OnboardingPage = (props: Props): ReactElement => {
     updateQueue.queue(newUserData);
     await updateQueue.update();
 
-    router &&
-      (await router.push({
-        pathname: ROUTES.dashboard,
-        query: isAdditionalBusiness
-          ? { [QUERIES.fromAdditionalBusiness]: "true" }
-          : { [QUERIES.fromOnboarding]: "true" },
-      }));
+    if (usingIntentSelection && Object.keys(newUserData.businesses).length === 1) {
+      let destination = ROUTES.accountSetup;
+      if (newUserData.user.onboardedAsLearningUser) {
+        destination = ROUTES.learnFlowLandingPage;
+      }
+
+      router &&
+        (await router.push({
+          pathname: destination,
+        }));
+    } else {
+      router &&
+        (await router.push({
+          pathname: ROUTES.dashboard,
+          query: isAdditionalBusiness
+            ? { [QUERIES.fromAdditionalBusiness]: "true" }
+            : { [QUERIES.fromOnboarding]: "true" },
+        }));
+    }
   };
 
   FormFuncWrapper(
