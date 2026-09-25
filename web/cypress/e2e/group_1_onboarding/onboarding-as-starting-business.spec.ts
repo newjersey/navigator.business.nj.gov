@@ -214,15 +214,19 @@ describe("Onboarding for all industries when starting a business [feature] [all]
 
   describe("Onboarding for learning and ready to start businesses", () => {
     beforeEach(() => {
-      cy.loginByCognitoApi();
+      cy.visit("/onboarding");
     });
 
     it("onboards a learning business", () => {
       completeNewBusinessOnboarding({ isLearningBusiness: true, industry_id: undefined });
+
+      cy.url().should("include", `learn`);
     });
 
     it("onboards a ready to start business", () => {
       completeNewBusinessOnboarding({ isLearningBusiness: false, industry_id: undefined });
+
+      cy.url().should("include", `account-setup`);
     });
   });
 });

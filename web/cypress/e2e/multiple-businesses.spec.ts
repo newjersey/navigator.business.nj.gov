@@ -70,7 +70,7 @@ describe("Multiple Businesses [feature] [all] [group2]", () => {
     const firstBusinessName = "First Cypress Business";
     const secondBusinessName = "Second Cypress Business";
 
-    completeNewBusinessOnboarding({ industry_id: "e-commerce", isLearningBusiness: true });
+    completeNewBusinessOnboarding({ industry_id: "e-commerce", isLearningBusiness: false });
     updateCurrentBusinessName(firstBusinessName, "saveFirstBusiness");
 
     onDashboardPage.getDropdown().click();
