@@ -33,6 +33,8 @@ describe("selfRegRouter", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
+      findAllByEmail: jest.fn(),
+      claimEmailSignIn: jest.fn(),
       findUserByBusinessName: jest.fn(),
       findUsersByBusinessNamePrefix: jest.fn(),
       findBusinessesByHashedTaxId: jest.fn(),

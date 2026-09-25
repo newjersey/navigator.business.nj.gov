@@ -35,6 +35,8 @@ describe("xrayRegistrationRouter", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
+      findAllByEmail: jest.fn(),
+      claimEmailSignIn: jest.fn(),
       migrateOutdatedVersionUsers: jest.fn(),
       findUserByBusinessName: jest.fn(),
       findUsersByBusinessNamePrefix: jest.fn(),

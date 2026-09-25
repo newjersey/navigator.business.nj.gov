@@ -1,11 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  type AttributeValue,
+  ConditionalCheckFailedException,
   ExecuteStatementCommand,
   QueryCommand,
   type QueryCommandInput,
 } from "@aws-sdk/client-dynamodb";
-import { type DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
+import {
+  type DynamoDBDocumentClient,
+  GetCommand,
+  PutCommand,
+  UpdateCommand,
+} from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { Migrations } from "@db/migrations/migrations";
 import { type MigrationClients } from "@db/migrations/types";
@@ -94,6 +101,28 @@ export const DynamoUserDataClient = (
       });
   };
 
+  const findAllByEmail = async (email: string): Promise<UserData[]> => {
+    const results: UserData[] = [];
+    let lastEvaluatedKey: Record<string, AttributeValue> | undefined;
+
+    do {
+      const params: QueryCommandInput = {
+        TableName: tableName,
+        IndexName: "EmailIndex",
+        KeyConditionExpression: "email = :email",
+        ExpressionAttributeValues: { ":email": { S: email } },
+        ExclusiveStartKey: lastEvaluatedKey,
+      };
+      const result = await db.send(new QueryCommand(params));
+      for (const item of result.Items ?? []) {
+        results.push(unmarshall(item, unmarshallOptions).data);
+      }
+      lastEvaluatedKey = result.LastEvaluatedKey;
+    } while (lastEvaluatedKey);
+
+    return results;
+  };
+
   const get = async (userId: string): Promise<UserData> => {
     const params = {
       TableName: tableName,
@@ -129,6 +158,33 @@ export const DynamoUserDataClient = (
       .catch((error) => {
         throw error;
       });
+  };
+
+  // Conditional so the first claim is final and a missing user is never created. Losing
+  // either condition is the expected outcome, not an error.
+  const claimEmailSignIn = async (userId: string, claimedISO: string): Promise<void> => {
+    try {
+      await db.send(
+        new UpdateCommand({
+          TableName: tableName,
+          Key: { userId },
+          UpdateExpression: "SET #data.#user.#claim = :claimedISO",
+          ConditionExpression:
+            "attribute_exists(#data.#user) AND attribute_not_exists(#data.#user.#claim)",
+          ExpressionAttributeNames: {
+            "#data": "data",
+            "#user": "user",
+            "#claim": "emailSignInClaimedISO",
+          },
+          ExpressionAttributeValues: { ":claimedISO": claimedISO },
+        }),
+      );
+    } catch (error) {
+      if (error instanceof ConditionalCheckFailedException) {
+        return;
+      }
+      throw error;
+    }
   };
 
   const getNeedNewsletterUsers = (): Promise<UserData[]> => {
@@ -180,6 +236,8 @@ export const DynamoUserDataClient = (
     put,
     migrateToLatest,
     findByEmail,
+    findAllByEmail,
+    claimEmailSignIn,
     getNeedNewsletterUsers,
     getNeedTaxIdEncryptionUsers,
     getUsersWithOutdatedVersion,

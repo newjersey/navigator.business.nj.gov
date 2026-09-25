@@ -1,12 +1,10 @@
 import { DatabaseClient, MessagingServiceClient, SelfRegClient } from "@domain/types";
+import { createUserRecord } from "@domain/user/createUserRecord";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
-import { getConfigValue } from "@libs/ssmUtils";
 import { UserData } from "@shared/userData";
-import dayjs from "dayjs";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
-import { createHmac } from "node:crypto";
 
 type Mutable<T> = {
   -readonly [P in keyof T]: T[P] extends object ? Mutable<T[P]> : T[P];
@@ -38,30 +36,13 @@ export const selfRegRouterFactory = (
       const selfRegResponse = await (cleanedUserData.user.myNJUserKey
         ? selfRegClient.resume(cleanedUserData.user.myNJUserKey)
         : selfRegClient.grant(cleanedUserData.user));
-      const updatedUserData = await updateMyNJKey(cleanedUserData, selfRegResponse.myNJUserKey);
-
-      const welcomeEmailEnabled =
-        (await getConfigValue("feature_welcome_email_enabled")) === "true";
-      if (welcomeEmailEnabled) {
-        messagingServiceClient
-          .sendMessage(cleanedUserData.user.id, "welcome-email")
-          .then((result) => {
-            if (result.success) {
-              logger.LogInfo(
-                `Welcome message sent successfully for userId: ${cleanedUserData.user.id}, messageId: ${result.messageId}`,
-              );
-            } else {
-              logger.LogError(
-                `Failed to send welcome message for userId: ${cleanedUserData.user.id}: ${result.error}`,
-              );
-            }
-          })
-          .catch((error) => {
-            logger.LogError(
-              `Error sending welcome message for userId: ${cleanedUserData.user.id}: ${error instanceof Error ? error.message : String(error)}`,
-            );
-          });
-      }
+      const updatedUserData = await createUserRecord({
+        userData: cleanedUserData,
+        databaseClient,
+        messagingServiceClient,
+        logger,
+        myNJUserKey: selfRegResponse.myNJUserKey,
+      });
 
       logger.LogInfo(
         `[END] ${method} ${endpoint} - status: ${status}, successfully completed self-registration for user: ${
@@ -86,21 +67,6 @@ export const selfRegRouterFactory = (
       res.status(status).send({ error: message });
     }
   });
-
-  const updateMyNJKey = (userData: UserData, myNJUserKey: string): Promise<UserData> => {
-    const hmac = createHmac("sha256", process.env.INTERCOM_HASH_SECRET || "");
-    const hash = hmac.update(myNJUserKey).digest("hex");
-    return databaseClient.put({
-      ...userData,
-      user: {
-        ...userData.user,
-        myNJUserKey: myNJUserKey,
-        intercomHash: hash,
-      },
-      dateCreatedISO: dayjs().toISOString(),
-      lastUpdatedISO: dayjs().toISOString(),
-    });
-  };
 
   return router;
 };
