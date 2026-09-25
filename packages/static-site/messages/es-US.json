@@ -17,7 +17,7 @@
         "opensInNewTab": true
       },
       "governorIdentityLink": {
-        "label": "Gobernadora Mikie Sherrill • Vicegobernador Dr. Dale G. Caldwell",
+        "label": "Gobernadora Mikie Sherrill",
         "href": "https://nj.gov/governor/",
         "isInternal": false,
         "opensInNewTab": true
@@ -153,7 +153,7 @@
         },
         {
           "link": {
-            "label": "Vicegobernador Dr. Dale G. Caldwell",
+            "label": "Vicegobernador",
             "href": "https://nj.gov/governor/admin/lt/",
             "isInternal": false,
             "opensInNewTab": false
