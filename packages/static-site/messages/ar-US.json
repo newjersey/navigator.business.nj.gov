@@ -17,7 +17,7 @@
         "opensInNewTab": true
       },
       "governorIdentityLink": {
-        "label": "Governor Mikie Sherrill • Lt. Governor Dr. Dale G. Caldwell",
+        "label": "Governor Mikie Sherrill",
         "href": "https://nj.gov/governor/",
         "isInternal": false,
         "opensInNewTab": true
@@ -137,14 +137,6 @@
           "link": {
             "label": "هذا من اليسار",
             "href": "https://nj.gov/governor/admin/about/",
-            "isInternal": false,
-            "opensInNewTab": false
-          }
-        },
-        {
-          "link": {
-            "label": "اليمين سيتم من من لاختبار الكتابة",
-            "href": "https://nj.gov/governor/admin/lt/",
             "isInternal": false,
             "opensInNewTab": false
           }
