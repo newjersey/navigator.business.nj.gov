@@ -106,6 +106,8 @@ const OnboardingPage = (props: Props): ReactElement => {
     REQUIRED_SELECT_INTENT: Config.profileDefaults.default.selectIntentAlertText,
   };
 
+  const usingIntentSelection = process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW === "true";
+
   const {
     FormFuncWrapper,
     onSubmit,
@@ -241,6 +243,19 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
       if (currentBusiness.onboardingFormProgress === "COMPLETED") {
+        if (
+          usingIntentSelection &&
+          currentBusiness.profileData.businessPersona === "STARTING" &&
+          !currentUserData.user.myNJUserKey
+        ) {
+          if (currentUserData.user.onboardedAsLearningUser) {
+            await router.replace(ROUTES.learnFlowLandingPage);
+          } else {
+            await router.replace(ROUTES.accountSetup);
+          }
+          return;
+        }
+
         await router.replace(ROUTES.dashboard);
         return;
       } else {
@@ -286,7 +301,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           if (hasEssentialQuestion(queryIndustryId)) {
             setPage({ current: 2, previous: 1 });
           } else {
-            await completeOnboarding(newProfileData, localUpdateQueue);
+            await completeOnboarding(newProfileData, localUpdateQueue, true);
           }
         } else if (querySectorId && sectorQueryParamIsValid(querySectorId)) {
           const newProfileData: ProfileData = {
@@ -298,7 +313,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
           setProfileData(newProfileData);
           localUpdateQueue?.queueProfileData(newProfileData);
-          await completeOnboarding(newProfileData, localUpdateQueue);
+          await completeOnboarding(newProfileData, localUpdateQueue, true);
         } else if (pageQueryParamIsValid(onboardingFlows, currentBusiness, queryPage)) {
           setPage({ current: queryPage, previous: queryPage - 1 });
         } else if (flowQueryParamIsValid(queryFlow)) {
@@ -344,6 +359,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const completeOnboarding = async (
     newProfileData: ProfileData,
     updateQueue: UpdateQueue | undefined,
+    goToDashboard?: boolean,
   ): Promise<void> => {
     if (!updateQueue) return;
 
@@ -376,13 +392,29 @@ const OnboardingPage = (props: Props): ReactElement => {
     updateQueue.queue(newUserData);
     await updateQueue.update();
 
-    router &&
-      (await router.push({
-        pathname: ROUTES.dashboard,
-        query: isAdditionalBusiness
-          ? { [QUERIES.fromAdditionalBusiness]: "true" }
-          : { [QUERIES.fromOnboarding]: "true" },
-      }));
+    if (
+      usingIntentSelection &&
+      Object.keys(newUserData.businesses).length === 1 &&
+      !goToDashboard
+    ) {
+      let destination = ROUTES.accountSetup;
+      if (newUserData.user.onboardedAsLearningUser) {
+        destination = ROUTES.learnFlowLandingPage;
+      }
+
+      router &&
+        (await router.push({
+          pathname: destination,
+        }));
+    } else {
+      router &&
+        (await router.push({
+          pathname: ROUTES.dashboard,
+          query: isAdditionalBusiness
+            ? { [QUERIES.fromAdditionalBusiness]: "true" }
+            : { [QUERIES.fromOnboarding]: "true" },
+        }));
+    }
   };
 
   FormFuncWrapper(
