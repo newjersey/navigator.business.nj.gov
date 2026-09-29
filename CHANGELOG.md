@@ -1,3 +1,31 @@
+# [2026.21.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.20.0...v2026.21.0) (2026-09-29)
+
+
+### Bug Fixes
+
+* correct sed substitutions in migration generator ([17f5ebd](https://github.com/newjersey/navigator.business.nj.gov/commit/17f5ebd58c4a65c99249c620d5f6f92a8012f360))
+* validate onboardedAsLearningUser in the user zod schema ([8d1d416](https://github.com/newjersey/navigator.business.nj.gov/commit/8d1d416e32b9140f7c1fd02e1079a6b1356f9e9d))
+
+
+### Features
+
+* [AB#17813](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17813) adds slugCollisions script to CI workflows ([ee6ca3b](https://github.com/newjersey/navigator.business.nj.gov/commit/ee6ca3b3644eaf4c395bfbbdbefcfc20bce7e916))
+* [AB#17813](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17813) script to check for CMS collection slug collisions ([a8925c9](https://github.com/newjersey/navigator.business.nj.gov/commit/a8925c968a66028d4c2b58ce4ec7fbc9712f6ccd))
+* [AB#17832](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17832) plastic ban resources page ([58ffd87](https://github.com/newjersey/navigator.business.nj.gov/commit/58ffd871e16a4b7a7a3b952ab14afbeb4533d9fa))
+* [AB#17866](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17866) add newsletter sign-up form to Updates page ([4e8a606](https://github.com/newjersey/navigator.business.nj.gov/commit/4e8a606f40c1bebaf43827d0891d487c47092cf0))
+* [AB#17966](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17966) Add business structure learn page task ([f192e9d](https://github.com/newjersey/navigator.business.nj.gov/commit/f192e9da3c4a75e78b5f1d00fc57189798caf4ac))
+* [AB#17967](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17967) implement form your business learn page ([47f16dc](https://github.com/newjersey/navigator.business.nj.gov/commit/47f16dc755380bae2212ce138c2de2105b0de20d))
+* [AB#17968](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17968) implement learn page for industry classification code ([9c6c495](https://github.com/newjersey/navigator.business.nj.gov/commit/9c6c4957a98f70ac096bb6515b62a7dada58258e))
+* [AB#17969](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17969) implement ein learn page ([f2d4b26](https://github.com/newjersey/navigator.business.nj.gov/commit/f2d4b264244f3aef7cc2ad3c846f5fec0c90d9b1))
+* [AB#17970](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17970) implement register taxes learn page ([aee7e9c](https://github.com/newjersey/navigator.business.nj.gov/commit/aee7e9c4b9bdad3b454d6ab7073c674bd0b7b889))
+* [AB#17971](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17971) implement open your account page ([46497ca](https://github.com/newjersey/navigator.business.nj.gov/commit/46497cadca3984c0830fc7979d2ae07b26fd844a))
+* [AB#17983](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/17983) Analytics tags for onboarding questions ([4a6e836](https://github.com/newjersey/navigator.business.nj.gov/commit/4a6e836cd3304a7645f9348742072780d21f5f00))
+* [BUSGOV-14] add /housingprograms redirect ([7eeab9f](https://github.com/newjersey/navigator.business.nj.gov/commit/7eeab9f12fb80b69431cda575c52e3ce0c1d7713))
+* [BUSGOV-15] updates funding CMS config ([74b83a6](https://github.com/newjersey/navigator.business.nj.gov/commit/74b83a649008610c5f59231c7785c347866577b0))
+* [BUSGOV-16] remove the industry sector filter from housing programs page ([7a98e36](https://github.com/newjersey/navigator.business.nj.gov/commit/7a98e366d439c4eb1a29bee453f5de7370ea176f))
+* [BUSGOV-17] relocate housing developer resources page ([5b93365](https://github.com/newjersey/navigator.business.nj.gov/commit/5b933651a48af65167f40468b48d656e21d7aa69))
+* [BUSGOV-20] add 'agency' label to funding cards ([67905b8](https://github.com/newjersey/navigator.business.nj.gov/commit/67905b86385b5d09dc7e2ffad0ec82ff7cc30314))
+
 # [2026.20.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.19.1...v2026.20.0) (2026-09-15)
 
 
