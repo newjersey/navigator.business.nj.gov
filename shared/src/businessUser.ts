@@ -22,6 +22,7 @@ export type BusinessUser = {
   readonly myNJUserKey?: string;
   readonly intercomHash?: string;
   readonly onboardedAsLearningUser?: boolean;
+  readonly emailSignInClaimedISO?: string;
 };
 
 export const emptyBusinessUser: BusinessUser = {

@@ -25,7 +25,7 @@
  * ```
  */
 
-import { v195UserDataSchema, withNoBase64Check } from "@db/zodSchema/zodSchemas";
+import { v196UserDataSchema, withNoBase64Check } from "@db/zodSchema/zodSchemas";
 import { generateTsSourceFromCompiler } from "./userSchemaCompiler";
 import { generateTsSourceFromZod, generateZodSource } from "./userSchemaGenerator";
 import { highlight } from "cli-highlight";
@@ -34,12 +34,12 @@ import { z } from "zod";
 
 const migrationFilePath = path.resolve(
   __dirname,
-  "../src/db/migrations/v195_add_learning_business_field_to_business_user_data.ts",
+  "../src/db/migrations/v196_add_email_sign_in_claimed.ts",
 );
 
 const tsconfigPath = path.resolve(__dirname, "../tsconfig.json");
 
-const finalZodSchema = withNoBase64Check(v195UserDataSchema);
+const finalZodSchema = withNoBase64Check(v196UserDataSchema);
 const shouldPrintZod = process.argv.includes("--zod");
 const shouldPrintJson = process.argv.includes("--json");
 const shouldPrintTsZod = process.argv.includes("--ts-zod");
@@ -53,10 +53,10 @@ if (modeCount !== 1) {
 }
 
 if (shouldPrintZod) {
-  const source = generateZodSource(v195UserDataSchema);
+  const source = generateZodSource(v196UserDataSchema);
   console.log(highlight(source, { language: "typescript" }));
 } else if (shouldPrintTsZod) {
-  const source = generateTsSourceFromZod(v195UserDataSchema);
+  const source = generateTsSourceFromZod(v196UserDataSchema);
   console.log(highlight(source, { language: "typescript" }));
 } else if (shouldPrintTs) {
   const source = generateTsSourceFromCompiler(migrationFilePath, tsconfigPath);

@@ -19,6 +19,14 @@ export interface UserData {
   readonly versionWhenCreated: number;
   businesses: Record<string, Business>;
   currentBusinessId: string;
+  readonly consolidatedInto?: ConsolidationRecord;
+}
+
+export interface ConsolidationRecord {
+  readonly userId: string;
+  readonly businessIds: string[];
+  readonly documentsCopied: string[];
+  readonly mergedAtISO: string;
 }
 
 export interface Business {
@@ -45,7 +53,7 @@ export interface Business {
   readonly crtkData: CrtkData | undefined;
 }
 
-export const CURRENT_VERSION = 195;
+export const CURRENT_VERSION = 196;
 
 export const createEmptyBusiness = ({
   userId,
