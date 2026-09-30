@@ -105,11 +105,11 @@ link-url-7: "https://business.nj.gov/bags/buyer-sign-in"
 heading-8: Reporting Violations
 contents-label-8: Reporting Violations
 main-text-8: |
-  To report a violation, contact your [county environmental health act agent](https://www.nj.gov/dep/get-past-plastic/docs/ceha-agency-directory.pdf). Reports can be made to the New Jersey Department of Environmental Protection by phone at 1-877-WARN-DEP.
+  To report a violation, contact your [county environmental health act agent](https://dep.nj.gov/enforcement/ceha/). Reports can be made to the New Jersey Department of Environmental Protection by phone at 1-877-WARN-DEP.
 heading-9: Wholesale Manufacturer and Distributor Sign-up
 contents-label-9: Wholesale Manufacturer and Distributor Sign-up
 main-text-9: |
   If you are a business that manufactures or distributes sustainable products that meet the NJ State standards, sign up to have your company added to the list of wholesale vendors.
 link-text-9: Sign Up
-link-url-9: "https://business.nj.gov/bags/vendorclearinghouse"
+link-url-9: "https://business.nj.gov/pages/vendor-clearing-house"
 ---
