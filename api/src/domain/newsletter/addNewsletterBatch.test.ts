@@ -17,6 +17,8 @@ describe("addNewsletterBatch", () => {
       put: jest.fn(),
       migrateToLatest: jest.fn(),
       findByEmail: jest.fn(),
+      findAllByEmail: jest.fn(),
+      claimEmailSignIn: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedTaxIdEncryptionUsers: jest.fn(),
       getUsersWithOutdatedVersion: jest.fn(),

@@ -7,6 +7,7 @@ import {
   CryptoClient,
   DatabaseClient,
   DatabaseThrottlingError,
+  MessagingServiceClient,
   MigrationConflictError,
   TimeStampBusinessSearch,
   UpdateLicenseStatus,
@@ -14,6 +15,7 @@ import {
   UpdateSidebarCards,
   UpdateXrayRegistration,
 } from "@domain/types";
+import { createUserRecord } from "@domain/user/createUserRecord";
 import { encryptFieldsFactory } from "@domain/user/encryptFieldsFactory";
 import type { LogWriterType } from "@libs/logWriter";
 import { NameAvailability } from "@shared/businessNameSearch";
@@ -37,6 +39,7 @@ const getTokenFromHeader = (req: Request): string => {
 
 type CognitoJWTPayload = {
   sub: string;
+  "cognito:username": string;
   "custom:myNJUserKey": string;
   "custom:identityId": string | undefined;
   email: string;
@@ -124,12 +127,15 @@ export const getSignedInUser = (req: Request): CognitoJWTPayload => {
   return jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
 };
 
+const MYNJ_USERNAME_PREFIX = "myNJ_";
+
 export const getSignedInUserId = (req: Request): string => {
   const signedInUser = getSignedInUser(req);
-  const myNJIdentityPayload = signedInUser.identities?.find((it) => {
-    return it.providerName === "myNJ";
-  });
-  return myNJIdentityPayload?.userId || signedInUser.sub;
+  const username = signedInUser["cognito:username"];
+  if (username?.startsWith(MYNJ_USERNAME_PREFIX)) {
+    return username.slice(MYNJ_USERNAME_PREFIX.length);
+  }
+  return signedInUser.sub;
 };
 
 const legalStructureHasChanged = (oldUserData: UserData, newUserData: UserData): boolean => {
@@ -153,6 +159,7 @@ export const userRouterFactory = (
   hashingClient: CryptoClient,
   timeStampBusinessSearch: TimeStampBusinessSearch,
   logger: LogWriterType,
+  messagingServiceClient: MessagingServiceClient,
   govDeliveryCommCloudClient?: GovDeliveryCommCloudClientType,
 ): Router => {
   const router = Router();
@@ -191,6 +198,48 @@ export const userRouterFactory = (
         logger.LogError(`[ERROR] ${method} ${endpoint} - Unknown error`);
       }
       res.status(status).send({ error: "Internal server error." });
+    }
+  });
+
+  router.post("/users/register", async (req, res) => {
+    const userData = req.body as UserData;
+    const signedInUserId = getSignedInUserId(req);
+    const method = req.method;
+    const endpoint = req.originalUrl;
+    const requestStart = Date.now();
+
+    logger.LogInfo(`[START] ${method} ${endpoint} - userId: ${userData.user.id}`);
+
+    if (signedInUserId !== userData.user.id) {
+      const status = StatusCodes.FORBIDDEN;
+      logger.LogInfo(
+        `[END] ${method} ${endpoint} - status: ${status}, reason: signed-in user mismatch, duration: ${
+          Date.now() - requestStart
+        }ms`,
+      );
+      res.status(status).json();
+      return;
+    }
+
+    try {
+      const createdUserData = await createUserRecord({
+        userData,
+        databaseClient,
+        messagingServiceClient,
+        logger,
+      });
+      const status = StatusCodes.OK;
+      res.status(status).json(createdUserData);
+      logger.LogInfo(
+        `[END] ${method} ${endpoint} - status: ${status}, userId: ${createdUserData.user.id}, duration: ${
+          Date.now() - requestStart
+        }ms`,
+      );
+    } catch (error: unknown) {
+      const status = StatusCodes.INTERNAL_SERVER_ERROR;
+      const message = error instanceof Error ? error.message : "Unknown error";
+      logger.LogError(`[ERROR] ${method} ${endpoint} - ${message}`);
+      res.status(status).json({ error: message });
     }
   });
 
