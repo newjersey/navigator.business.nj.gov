@@ -2,7 +2,6 @@
 /* eslint-disable testing-library/await-async-utils */
 
 import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
 
@@ -14,11 +13,10 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.window().then((window) => {
       return window.sessionStorage.clear();
     });
-    cy.visit("/onboarding");
-    completeNewBusinessOnboarding({ industry_id: "cosmetology", isLearningBusiness: false });
   });
 
-  it("enters user info and shows the dashboard", () => {
+  it("enters user info and shows the dashboard if onboarded with query param", () => {
+    cy.visit("/onboarding?industry=cosmetology");
     cy.url().should("contain", "/dashboard");
 
     // check dashboard
