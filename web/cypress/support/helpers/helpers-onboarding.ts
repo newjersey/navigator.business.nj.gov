@@ -34,7 +34,6 @@ export const completeNewBusinessOnboarding = (props?: Props): void => {
     : "false";
   onOnboardingPageStartingBusiness.selectBusinessIntentRadio(isLearningBusinessSelection);
   onOnboardingPage.clickNext();
-  cy.url().should("include", `dashboard`);
 
   if (props?.industry_id) {
     updateNewBusinessProfilePage({ industry: LookupIndustryById(props.industry_id) });

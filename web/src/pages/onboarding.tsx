@@ -243,6 +243,15 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
       if (currentBusiness.onboardingFormProgress === "COMPLETED") {
+        if (usingIntentSelection && !currentUserData.user.myNJUserKey) {
+          if (currentUserData.user.onboardedAsLearningUser) {
+            await router.replace(ROUTES.learnFlowLandingPage);
+          } else {
+            await router.replace(ROUTES.accountSetup);
+          }
+          return;
+        }
+
         await router.replace(ROUTES.dashboard);
         return;
       } else {
@@ -288,7 +297,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           if (hasEssentialQuestion(queryIndustryId)) {
             setPage({ current: 2, previous: 1 });
           } else {
-            await completeOnboarding(newProfileData, localUpdateQueue);
+            await completeOnboarding(newProfileData, localUpdateQueue, true);
           }
         } else if (querySectorId && sectorQueryParamIsValid(querySectorId)) {
           const newProfileData: ProfileData = {
@@ -346,6 +355,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const completeOnboarding = async (
     newProfileData: ProfileData,
     updateQueue: UpdateQueue | undefined,
+    goToDashboard?: boolean,
   ): Promise<void> => {
     if (!updateQueue) return;
 
@@ -378,7 +388,11 @@ const OnboardingPage = (props: Props): ReactElement => {
     updateQueue.queue(newUserData);
     await updateQueue.update();
 
-    if (usingIntentSelection && Object.keys(newUserData.businesses).length === 1) {
+    if (
+      usingIntentSelection &&
+      Object.keys(newUserData.businesses).length === 1 &&
+      !goToDashboard
+    ) {
       let destination = ROUTES.accountSetup;
       if (newUserData.user.onboardedAsLearningUser) {
         destination = ROUTES.learnFlowLandingPage;
