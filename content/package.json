@@ -11,14 +11,17 @@
     "dev": "yarn build",
     "test": "vitest run",
     "validate-frontmatter-dates": "tsx -r tsconfig-paths/register ./validateFrontmatterDates.ts",
-    "prettier": "prettier --write . --ignore-path=../.eslintignore",
-    "prettier:check": "prettier . --check --ignore-path=../.eslintignore",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
     "spellcheck": "cspell '**/*.md' '**/*.json' '*.ts' '!*.test.ts' --config ../cspell.json --no-progress"
   },
   "dependencies": {
     "gray-matter": "4.0.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.15",
     "@businessnjgovnavigator/content-types": "*",
     "@businessnjgovnavigator/shared": "*",
     "@types/node": "24.13.3",
