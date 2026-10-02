@@ -81,6 +81,23 @@ export type FormationFieldErrorState = {
 
 export const profileFieldsFromConfig = getMergedConfig().profileDefaults.fields;
 
+// The subset of the Decap CMS config (web/public/mgmt/config.yml) that search reads.
+export interface CmsConfigField {
+  readonly name: string;
+  readonly label: string;
+  readonly fields?: readonly CmsConfigField[];
+}
+
+export interface CmsConfigCollection {
+  readonly name: string;
+  readonly label: string;
+  readonly files?: readonly CmsConfigField[];
+}
+
+export interface CmsConfig {
+  readonly collections: readonly CmsConfigCollection[];
+}
+
 export type RoadmapDisplayContent = {
   sidebarDisplayContent: Record<string, SidebarCardContent>;
 };
