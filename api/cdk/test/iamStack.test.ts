@@ -1,7 +1,7 @@
 import { API_SERVICE_NAME } from "@businessnjgovnavigator/api/src/libs/constants";
 import { App } from "aws-cdk-lib";
 import { Match, Template } from "aws-cdk-lib/assertions";
-import { IamStack, IamStackProps } from "../lib/iamStack";
+import { IamStack, type IamStackProps } from "../lib/iamStack";
 
 describe("IamStack", () => {
   let app: App;

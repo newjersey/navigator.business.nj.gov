@@ -1,7 +1,7 @@
 import { CfnOutput } from "aws-cdk-lib";
-import * as ecs from "aws-cdk-lib/aws-ecs";
-import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
-import { Construct } from "constructs";
+import type * as ecs from "aws-cdk-lib/aws-ecs";
+import type * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
+import type { Construct } from "constructs";
 import { STATIC_SITE_HOSTNAMES, STATIC_SITE_SERVICE_BASE_NAME } from "./constants";
 
 /** Inputs for creating static-site CloudFormation outputs. */
