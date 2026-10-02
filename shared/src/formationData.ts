@@ -1,8 +1,8 @@
-import { NameAvailability } from "./businessNameSearch";
-import { CountriesShortCodes } from "./countries";
-import { Municipality } from "./municipality";
-import { BusinessPersona } from "./profileData";
-import { StateNames, StateObject } from "./states";
+import type { NameAvailability } from "./businessNameSearch";
+import type { CountriesShortCodes } from "./countries";
+import type { Municipality } from "./municipality";
+import type { BusinessPersona } from "./profileData";
+import type { StateNames, StateObject } from "./states";
 
 export const formationApiDateFormat = "MM/DD/YYYY";
 

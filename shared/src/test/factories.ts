@@ -1,12 +1,16 @@
 import { randomElementFromArray } from "../arrayHelpers";
-import { BusinessUser } from "../businessUser";
-import { TaxFilingCalendarEvent } from "../calendarEvent";
-import { CigaretteLicenseData, EmailConfirmationSubmission } from "../cigaretteLicense";
+import type { BusinessUser } from "../businessUser";
+import type { TaxFilingCalendarEvent } from "../calendarEvent";
+import type { CigaretteLicenseData, EmailConfirmationSubmission } from "../cigaretteLicense";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
-import { EmergencyTripPermitApplicationInfo, getEarliestPermitDate } from "../emergencyTripPermit";
 import {
+  type EmergencyTripPermitApplicationInfo,
+  getEarliestPermitDate,
+} from "../emergencyTripPermit";
+import type { EmployerRatesRequest, EmployerRatesResponse } from "../employerRates";
+import type {
   AirData,
   DrinkingWaterData,
   EnvironmentData,
@@ -15,48 +19,46 @@ import {
   WasteData,
   WasteWaterData,
 } from "../environment";
-
-import { EmployerRatesRequest, EmployerRatesResponse } from "../employerRates";
 import {
   createEmptyFormationFormData,
-  FormationData,
-  FormationLegalType,
-  FormationSubmitResponse,
-  GetFilingResponse,
-  PublicFilingLegalType,
+  type FormationData,
+  type FormationLegalType,
+  type FormationSubmitResponse,
+  type GetFilingResponse,
+  type PublicFilingLegalType,
   publicFilingLegalTypes,
 } from "../formationData";
-import { getIndustries, Industry } from "../industry";
+import { getIndustries, type Industry } from "../industry";
 import { randomInt, randomIntFromInterval } from "../intHelpers";
-import { LegalStructure, LegalStructures } from "../legalStructure";
+import { type LegalStructure, LegalStructures } from "../legalStructure";
 import {
-  LicenseData,
-  LicenseDetails,
-  Licenses,
-  LicenseSearchAddress,
-  LicenseSearchNameAndAddress,
+  type LicenseData,
+  type LicenseDetails,
+  type LicenseSearchAddress,
+  type LicenseSearchNameAndAddress,
+  type LicenseStatusItem,
+  type Licenses,
   licenseStatuses,
-  LicenseStatusItem,
   taskIdLicenseNameMapping,
 } from "../license";
-import { MunicipalityDetail } from "../municipality";
+import type { MunicipalityDetail } from "../municipality";
 import { OperatingPhaseId } from "../operatingPhase";
 import {
-  BusinessPersona,
-  IndustrySpecificData,
+  type BusinessPersona,
+  type IndustrySpecificData,
   maskingCharacter,
-  ProfileData,
+  type ProfileData,
 } from "../profileData";
-import { RoadmapTaskData } from "../roadmapTaskData";
-import { arrayOfSectors, SectorType } from "../sector";
-import { StateObject, arrayOfStateObjects as states } from "../states";
+import type { RoadmapTaskData } from "../roadmapTaskData";
+import { arrayOfSectors, type SectorType } from "../sector";
+import { type StateObject, arrayOfStateObjects as states } from "../states";
 import {
+  type TaxClearanceCertificateData,
   taxClearanceCertificateAgencies,
-  TaxClearanceCertificateData,
 } from "../taxClearanceCertificate";
-import { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
-import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
-import { XrayData, XrayRegistrationStatus } from "../xray";
+import type { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
+import { type Business, CURRENT_VERSION, type Preferences, type UserData } from "../userData";
+import type { XrayData, XrayRegistrationStatus } from "../xray";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (

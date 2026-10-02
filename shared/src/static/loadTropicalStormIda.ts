@@ -1,7 +1,7 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
-import path from "path";
-import { TropicalStormIdaItem } from "../types/types";
+import type { TropicalStormIdaItem } from "../types/types";
 
 const directory = path.join(process.cwd(), "..", "content", "src", "tropical-storm-ida");
 

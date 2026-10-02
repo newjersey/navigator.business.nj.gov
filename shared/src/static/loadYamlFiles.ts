@@ -1,6 +1,6 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import yaml from "js-yaml";
-import path from "path";
 
 // Function to read all YAML files in a directory and parse them
 export const loadYamlFiles = (): Record<string, unknown>[] => {

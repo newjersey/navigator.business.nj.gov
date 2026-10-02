@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { SubCategoryItem } from "../types/types";
+import fs from "node:fs";
+import path from "node:path";
+import type { SubCategoryItem } from "../types/types";
 
 const subCategoriesDirectory = path.join(process.cwd(), "..", "content", "src", "sub-categories");
 

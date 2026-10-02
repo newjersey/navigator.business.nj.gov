@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import {
   loadAllAnytimeActionTasks,
   loadAllAnytimeActionTaskUrlSlugs,
@@ -54,14 +54,11 @@ describe("loadAnytimeActionTasks", () => {
         "---\n" + "category-name: Test Cat\n" + "id: test-cat\n" + "---\n";
 
       mockedFs.readdirSync
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         .mockReturnValueOnce(["opp1.md", "opp2.md"])
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         .mockReturnValueOnce(["fake-category.md"])
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         .mockReturnValueOnce(["fake-category.md"]);
       mockedFs.readFileSync
         .mockReturnValueOnce(anytimeActionTask1)
@@ -146,11 +143,9 @@ describe("loadAnytimeActionTasks", () => {
         "---\n" + "category-name: Test Cat\n" + "id: test-cat\n" + "---\n";
 
       mockedFs.readdirSync
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         .mockReturnValueOnce(["opp1.md", "opp2.md"])
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         .mockReturnValueOnce(["fake-category.md"]);
       mockedFs.readFileSync
         .mockReturnValueOnce(anytimeActionTask1) // read first file in list
