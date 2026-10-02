@@ -288,7 +288,7 @@
     "packages/static-site/**/*.{css,js,json,md,ts,tsx,yaml,yml}": "bash -c 'cd packages/static-site && pnpm lint:fix' --",
     "shared/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
     "api/cdk/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
-    "content/**/*.{js,ts,tsx}": "biome format --write --no-errors-on-unmatched",
+    "content/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
     "!(shared|api|content)/**/*.{js,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
