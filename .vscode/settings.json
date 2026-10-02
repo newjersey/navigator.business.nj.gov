@@ -17,7 +17,7 @@
   "cSpell.enabled": false,
   "cSpell.words": ["businessnjgovnavigator"],
   "editor.codeActionsOnSave": [
-    "source.organizeImports",
+    "source.organizeImports.biome",
     "source.formatDocument",
     "source.fixAll.eslint"
   ],
@@ -26,8 +26,7 @@
   "eslint.workingDirectories": [
     { "directory": "./api", "changeProcessCWD": true },
     { "directory": "./api/cdk", "changeProcessCWD": true },
-    { "directory": "./web", "changeProcessCWD": true },
-    { "directory": "./shared", "changeProcessCWD": true }
+    { "directory": "./web", "changeProcessCWD": true }
   ],
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
