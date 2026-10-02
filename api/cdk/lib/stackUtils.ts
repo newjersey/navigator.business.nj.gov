@@ -90,6 +90,7 @@ export const attachLambdaToResource = (
     : { authorizationType: apigateway.AuthorizationType.NONE };
 
   if (lambda === undefined) {
+    // biome-ignore lint/suspicious/noConsole: tells whoever runs cdk synth/deploy that a resource has no lambda
     console.warn(`No lambda attached for resource: ${resource.path}`);
   } else {
     resource.addMethod("ANY", new apigateway.LambdaIntegration(lambda), methodOptions);
@@ -126,8 +127,6 @@ export const attachLambdaToResource = (
         ],
       },
     );
-  } else {
-    console.debug(`OPTIONS already exists for ${resource.path}, skipping duplicate.`);
   }
 };
 
