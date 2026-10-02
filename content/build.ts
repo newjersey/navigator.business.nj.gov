@@ -29,20 +29,19 @@
 
 import fs from "node:fs";
 import path from "node:path";
-
+import type { License } from "@businessnjgovnavigator/content-types";
+import {
+  loadAllLicenses,
+  type WebflowLicenseCard,
+} from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 import { loadAllAnytimeActionLicenseReinstatements } from "@businessnjgovnavigator/shared/static/loadAnytimeActionLicenseReinstatements";
 import { loadAllAnytimeActionTasks } from "@businessnjgovnavigator/shared/static/loadAnytimeActionTasks";
 import { loadAllCertifications } from "@businessnjgovnavigator/shared/static/loadCertifications";
 import { loadAllFilings } from "@businessnjgovnavigator/shared/static/loadFilings";
 import { loadAllFundings } from "@businessnjgovnavigator/shared/static/loadFundings";
 import { loadAllLicenseCalendarEvents } from "@businessnjgovnavigator/shared/static/loadLicenseCalendarEvents";
-import {
-  loadAllLicenses,
-  type WebflowLicenseCard,
-} from "@businessnjgovnavigator/shared/static/loadAllLicenses";
-import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import { loadAllTasks } from "@businessnjgovnavigator/shared/static/loadTasks";
-import type { License } from "@businessnjgovnavigator/content-types";
+import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import { validateNoDateObjectsInFrontmatter } from "./validateFrontmatterDates";
 
 // ============================================================================

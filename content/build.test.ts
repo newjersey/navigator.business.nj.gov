@@ -1,36 +1,31 @@
-import { describe, it, expect, vi } from "vitest";
-import path from "path";
-import matter from "gray-matter";
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
+import type { WebflowLicenseCard } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 import { loadAllLicenses } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
+import matter from "gray-matter";
+import { describe, expect, it, vi } from "vitest";
 import {
-  type FileSystemPort,
+  applyAgencyWebsiteFallback,
   type BuildConfig,
-  createFileSystemPort,
-  isJsonFile,
-  parseIndustryFile,
-  buildIndustries,
-  buildAndWriteIndustries,
-  buildSectors,
-  buildAndWriteSectors,
   buildAndWriteContent,
-  getContentConfigs,
-  toIndustryNamesById,
-  executeBuild,
+  buildAndWriteIndustries,
+  buildAndWriteSectors,
+  buildIndustries,
+  buildSectors,
   createBuildConfig,
+  createFileSystemPort,
+  deriveSingleAgencyWebsites,
+  executeBuild,
+  FIELDCONFIG_TASK_MAP,
+  type FileSystemPort,
+  getContentConfigs,
+  isJsonFile,
   logBuildResults,
   main,
-  type ChecklistItemEntry,
-  FIELDCONFIG_TASK_MAP,
-  extractChecklistItems,
-  extractItemsFromObject,
-  buildChecklistItemTaskMap,
-  buildAndWriteChecklistItemTasks,
+  parseIndustryFile,
+  toIndustryNamesById,
   toLicenseCard,
-  deriveSingleAgencyWebsites,
-  applyAgencyWebsiteFallback,
 } from "./build";
-import type { WebflowLicenseCard } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 
 // ============================================================================
 // TEST UTILITIES - Mock Ports
