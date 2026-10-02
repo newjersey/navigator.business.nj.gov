@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
+
 import {
   HOUSING_DEVELOPER_RESOURCES_PATHNAME,
   HOUSING_DEVELOPER_RESOURCES_SLUG,
-} from "@/domain/content/housingDeveloperResourcesFlag";
-import { hasDedicatedRoute, resolvePagePathname } from "@/domain/content/pagePaths";
+  hasDedicatedRoute,
+  resolvePagePathname,
+} from "@/domain/content/pagePaths";
 
 describe("resolvePagePathname", () => {
   it("resolves the housing developer resources slug to its dedicated route", () => {
