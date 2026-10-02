@@ -4888,6 +4888,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
+    "@biomejs/biome": "npm:2.5.15"
     "@businessnjgovnavigator/content-types": "npm:*"
     "@businessnjgovnavigator/shared": "npm:*"
     "@types/node": "npm:24.13.3"
