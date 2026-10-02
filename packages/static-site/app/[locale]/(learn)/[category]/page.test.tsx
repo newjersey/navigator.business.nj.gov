@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { HOUSING_DEVELOPER_RESOURCES_PATHNAME } from "@/domain/content/housingDeveloperResourcesFlag";
+import { HOUSING_DEVELOPER_RESOURCES_PATHNAME } from "@/domain/content/pagePaths";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import CategoryPage, { generateMetadata, generateStaticParams } from "./page";
 
