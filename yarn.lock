@@ -4767,6 +4767,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/api-cdk@workspace:api/cdk"
   dependencies:
+    "@biomejs/biome": "npm:2.5.15"
     "@jest/globals": "npm:30.4.1"
     "@types/jest": "npm:30.0.0"
     "@types/node": "npm:24.13.3"
