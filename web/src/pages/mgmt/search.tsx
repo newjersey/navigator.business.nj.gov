@@ -213,7 +213,8 @@ const SearchContentPage = (props: Props): ReactElement => {
     try {
       setGroupedConfigMatches(searchConfig(Config, { term: lowercaseTerm }, props.cmsConfig));
     } catch (error) {
-      updateSearchState({ error: { message: error as string, term: searchState.term } });
+      const message = error instanceof Error ? error.message : String(error);
+      updateSearchState({ error: { message, term: searchState.term } });
       console.error(error);
     }
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm, props.industries, props.addOns));

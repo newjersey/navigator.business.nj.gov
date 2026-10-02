@@ -1,4 +1,4 @@
-import fs from "fs";
+import type fs from "node:fs";
 
 export const mockReadDirectoryReturn = ({
   value,
@@ -8,8 +8,7 @@ export const mockReadDirectoryReturn = ({
   mockedFs: jest.Mocked<typeof fs>;
 }): void => {
   // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+  // @ts-expect-error
   mockedFs.readdirSync.mockReturnValue(value);
 };
 export const mockReadDirectoryReturnOnce = ({
@@ -20,7 +19,6 @@ export const mockReadDirectoryReturnOnce = ({
   mockedFs: jest.Mocked<typeof fs>;
 }): void => {
   // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+  // @ts-expect-error
   mockedFs.readdirSync.mockReturnValueOnce(value);
 };

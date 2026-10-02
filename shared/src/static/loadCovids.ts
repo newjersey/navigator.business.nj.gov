@@ -1,7 +1,7 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
-import path from "path";
-import { CovidItem } from "../types/types";
+import type { CovidItem } from "../types/types";
 
 const covidsDirectory = path.join(process.cwd(), "..", "content", "src", "covids");
 

@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { HousingMunicipality } from "../housing";
+import fs from "node:fs";
+import path from "node:path";
+import type { HousingMunicipality } from "../housing";
 
 const recordsDirectory = path.join(process.cwd(), "../shared/src/static");
 
@@ -19,8 +19,8 @@ export const loadAllHousingMunicipalities = (): HousingMunicipality[] => {
     return Object.values(records).sort((a, b) => {
       return a.name > b.name ? 1 : -1;
     });
-  } catch {
-    throw new Error("Could not retrieve records");
+  } catch (error) {
+    throw new Error("Could not retrieve records", { cause: error });
   }
 };
 

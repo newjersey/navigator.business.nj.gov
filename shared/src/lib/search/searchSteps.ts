@@ -1,6 +1,6 @@
-import { Step } from "../../types";
+import type { Step } from "../../types";
 import { findMatchInLabelledText } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchSteps = (
   steps: Step[],

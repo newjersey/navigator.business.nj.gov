@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { OperateReference } from "../types/types";
+import fs from "node:fs";
+import path from "node:path";
+import type { OperateReference } from "../types/types";
 import { loadCertificationByFileName } from "./loadCertifications";
 import { loadFilingByFileName } from "./loadFilings";
 import { loadFundingByFileName } from "./loadFundings";
@@ -38,7 +38,6 @@ export const loadOperateReferences = (): Record<string, OperateReference> => {
     ...certificationFileContents,
   ];
 
-  // eslint-disable-next-line unicorn/no-array-reduce
   return allContents.reduce(
     (accumulator: Record<string, OperateReference>, current: FileProperties) => {
       accumulator[current.id] = {

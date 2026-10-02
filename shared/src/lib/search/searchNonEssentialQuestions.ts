@@ -1,6 +1,6 @@
-import { NonEssentialQuestion } from "../../types";
+import type { NonEssentialQuestion } from "../../types";
 import { findMatchInLabelledText } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchNonEssentialQuestions = (
   nonEssentialQuestions: NonEssentialQuestion[],

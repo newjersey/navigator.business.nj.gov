@@ -1,6 +1,6 @@
-import { SidebarCardContent } from "../../types";
+import type { SidebarCardContent } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchSidebarCards = (sidebarCards: SidebarCardContent[], term: string): Match[] => {
   const sidebarCardData = getSidebarCardData(sidebarCards);

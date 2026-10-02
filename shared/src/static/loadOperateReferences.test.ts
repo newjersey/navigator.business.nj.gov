@@ -1,5 +1,5 @@
-import fs from "fs";
-import { OperateReference } from "../types/types";
+import fs from "node:fs";
+import type { OperateReference } from "../types/types";
 import { loadOperateReferences } from "./loadOperateReferences";
 import { mockReadDirectoryReturnOnce } from "./mockHelpers";
 

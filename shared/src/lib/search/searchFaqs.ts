@@ -1,6 +1,6 @@
-import { FaqItem } from "../../types";
+import type { FaqItem } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchFaqs = (faqs: FaqItem[], term: string): Match[] => {
   const faqData = getFaqData(faqs);

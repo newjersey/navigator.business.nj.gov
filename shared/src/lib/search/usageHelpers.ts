@@ -1,7 +1,7 @@
 import TaskDependencies from "../../../../content/src/roadmaps/task-dependencies.json";
-import { Industry } from "../../industry";
-import { Match } from "../../lib/search/typesForSearch";
-import { IndustryRoadmap } from "../../types";
+import type { Industry } from "../../industry";
+import type { Match } from "../../lib/search/typesForSearch";
+import type { IndustryRoadmap } from "../../types";
 
 const addTaskDependency = (match: Match, dependency: string): void => {
   if (!match.additionalUsageLocations) {

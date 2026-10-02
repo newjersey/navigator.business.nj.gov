@@ -1,8 +1,5 @@
 export const randomInt = (length = 8): number => {
-  return Math.floor(
-    Math.pow(10, length - 1) +
-      Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1),
-  );
+  return Math.floor(10 ** (length - 1) + Math.random() * (10 ** length - 10 ** (length - 1) - 1));
 };
 
 export const randomIntFromInterval = (min: string, max: string): number => {

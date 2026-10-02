@@ -1,6 +1,6 @@
-import { AnytimeActionTask } from "../../types";
+import type { AnytimeActionTask } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchAnytimeActionTasks = (
   anytimeActionTasks: AnytimeActionTask[],
