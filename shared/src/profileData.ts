@@ -1,5 +1,5 @@
-import { CommunityAffairsAddress } from "./housing";
-import { Municipality } from "./municipality";
+import type { CommunityAffairsAddress } from "./housing";
+import type { Municipality } from "./municipality";
 import { OperatingPhaseId } from "./operatingPhase";
 
 export interface ProfileDocuments {

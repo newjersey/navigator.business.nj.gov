@@ -1,4 +1,4 @@
-import { UserData } from "./userData";
+import type { UserData } from "./userData";
 
 export type TaxClearanceCertificateResponseErrorType =
   | "INELIGIBLE_TAX_CLEARANCE_FORM"

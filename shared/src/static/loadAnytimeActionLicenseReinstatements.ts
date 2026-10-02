@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { AnytimeActionLicenseReinstatement } from "../types/types";
+import fs from "node:fs";
+import path from "node:path";
+import type { AnytimeActionLicenseReinstatement } from "../types/types";
 import { convertAnytimeActionLicenseReinstatementMd } from "../utils/tasksMarkdownReader";
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
 

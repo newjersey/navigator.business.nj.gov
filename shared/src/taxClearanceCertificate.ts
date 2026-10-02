@@ -1,6 +1,6 @@
 import { orderBy } from "lodash";
 import taxClearanceCertificateAgenciesJSON from "../../content/src/mappings/taxClearanceCertificateIssuingAgencies.json";
-import { StateObject } from "./states";
+import type { StateObject } from "./states";
 
 export const taxClearanceCertificateAgencies: TaxClearanceCertificateAgency[] =
   taxClearanceCertificateAgenciesJSON.arrayOfTaxClearanceCertificateIssuingAgencies;

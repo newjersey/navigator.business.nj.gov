@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { convertTaskMd } from "../markdownReader";
 
 export const loadUrlSlugByFilename = (fileName: string, filingsDirectory: string): string => {

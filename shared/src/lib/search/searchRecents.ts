@@ -1,6 +1,6 @@
-import { RecentItem } from "../../types";
+import type { RecentItem } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchRecents = (recents: RecentItem[], term: string): Match[] => {
   return convertFileDataToMatchList(getRecentData(recents), term);

@@ -1,5 +1,5 @@
 import { LookupLegalStructureById } from "../legalStructure";
-import { ProfileData } from "../profileData";
+import type { ProfileData } from "../profileData";
 import { determineForeignBusinessType } from "./businessPersonaHelpers";
 import { nexusLocationInNewJersey } from "./nexusLocationInNewJersey";
 

@@ -1,13 +1,13 @@
 import {
-  Business,
-  BusinessPersona,
-  ForeignBusinessTypeId,
+  type Business,
+  type BusinessPersona,
+  determineForeignBusinessType,
+  type ForeignBusinessTypeId,
+  generateBusiness,
+  generateProfileData,
   NexusBusinessTypeIds,
   RemoteSellerBusinessTypeIds,
   RemoteWorkerBusinessTypeIds,
-  determineForeignBusinessType,
-  generateBusiness,
-  generateProfileData,
 } from "@businessnjgovnavigator/shared/";
 import {
   isDomesticEmployerBusiness,

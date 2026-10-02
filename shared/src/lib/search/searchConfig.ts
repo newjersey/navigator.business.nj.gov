@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { makeSnippet } from "./helpers";
-import { ConfigMatch, GroupedConfigMatch, MatchComparator } from "./typesForSearch";
+import type { ConfigMatch, GroupedConfigMatch, MatchComparator } from "./typesForSearch";
 
 const collectionInfo = new Map<string, string[]>();
 export const searchConfig = (

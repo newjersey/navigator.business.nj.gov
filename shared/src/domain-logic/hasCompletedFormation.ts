@@ -1,4 +1,4 @@
-import { Business } from "../userData";
+import type { Business } from "../userData";
 
 export const hasCompletedFormation = (business: Business | undefined): boolean => {
   if (!business) return false;

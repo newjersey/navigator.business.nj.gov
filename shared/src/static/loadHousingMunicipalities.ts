@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { HousingMunicipality } from "../housing";
+import fs from "node:fs";
+import path from "node:path";
+import type { HousingMunicipality } from "../housing";
 
 const recordsDirectory = path.join(process.cwd(), "../shared/src/static");
 
