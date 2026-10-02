@@ -180,8 +180,14 @@
       }
     },
     {
-      "includes": ["web/**", "api/**", "!api/cdk/**", "content/**"],
+      "includes": ["web/**", "api/**", "!api/cdk/**"],
       "assist": { "enabled": false }
+    },
+    {
+      "includes": ["content/src/**/*.json"],
+      "formatter": {
+        "enabled": false
+      }
     }
   ]
 }
