@@ -1,20 +1,20 @@
+import path from "node:path";
 import {
   API_SERVICE_NAME,
   REMINDER_EMAIL_CONFIG_SET_BASE,
   WELCOME_EMAIL_CONFIG_SET_BASE,
 } from "@businessnjgovnavigator/api/src/libs/constants";
-import { CfnOutput, Duration, Stack, StackProps } from "aws-cdk-lib";
-import * as acm from "aws-cdk-lib/aws-certificatemanager";
+import { CfnOutput, Duration, Stack, type StackProps } from "aws-cdk-lib";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import * as elbv2Targets from "aws-cdk-lib/aws-elasticloadbalancingv2-targets";
-import * as iam from "aws-cdk-lib/aws-iam";
-import { Runtime } from "aws-cdk-lib/aws-lambda";
+import type * as iam from "aws-cdk-lib/aws-iam";
 import type { IFunction } from "aws-cdk-lib/aws-lambda";
-import { Construct } from "constructs";
-import path from "node:path";
+import { Runtime } from "aws-cdk-lib/aws-lambda";
+import type { Construct } from "constructs";
 import {
   applyStandardTags,
   attachLambdaToResource,

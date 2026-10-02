@@ -1,7 +1,7 @@
-import { RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
-import { Construct } from "constructs";
-import * as kms from "aws-cdk-lib/aws-kms";
+import { RemovalPolicy, Stack, type StackProps } from "aws-cdk-lib";
 import * as iam from "aws-cdk-lib/aws-iam";
+import * as kms from "aws-cdk-lib/aws-kms";
+import type { Construct } from "constructs";
 
 export interface EncryptionStackProps extends StackProps {
   stage: string;

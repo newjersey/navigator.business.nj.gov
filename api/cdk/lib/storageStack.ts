@@ -1,7 +1,7 @@
-import { RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
-import * as s3 from "aws-cdk-lib/aws-s3";
+import { RemovalPolicy, Stack, type StackProps } from "aws-cdk-lib";
 import * as iam from "aws-cdk-lib/aws-iam";
-import { Construct } from "constructs";
+import * as s3 from "aws-cdk-lib/aws-s3";
+import type { Construct } from "constructs";
 import { DEV_STAGE, LOWER_STAGES } from "./constants";
 
 export interface StorageStackProps extends StackProps {
@@ -19,7 +19,7 @@ export class StorageStack extends Stack {
 
     const isLowerEnv = LOWER_STAGES.includes(props.stage);
     const removalPolicy = isLowerEnv ? RemovalPolicy.DESTROY : RemovalPolicy.RETAIN;
-    const cognitoPrefix = "${cognito-identity.amazonaws.com:sub}"; // eslint-disable-line no-useless-escape
+    const cognitoPrefix = "${cognito-identity.amazonaws.com:sub}";
 
     const authRole = iam.Role.fromRoleArn(
       this,
