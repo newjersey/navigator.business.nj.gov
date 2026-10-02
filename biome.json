@@ -184,6 +184,16 @@
       "assist": { "enabled": false }
     },
     {
+      "includes": ["content/build.ts", "content/validateFrontmatterDates.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["content/src/**/*.json"],
       "formatter": {
         "enabled": false
