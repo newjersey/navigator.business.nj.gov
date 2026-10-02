@@ -1,7 +1,7 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
-import path from "path";
-import { RecentItem } from "../types/types";
+import type { RecentItem } from "../types/types";
 
 const recentsDirectory = path.join(process.cwd(), "..", "content", "src", "recents");
 

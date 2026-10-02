@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { convertLicenseCalendarEventMd } from "../markdownReader";
-import { LicenseEventType } from "../types/types";
+import type { LicenseEventType } from "../types/types";
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
 
 type PathParameters<P> = { params: P; locale?: string };

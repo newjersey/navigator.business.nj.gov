@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { convertContextualInfoMd } from "../markdownReader";
-import { ContextualInfoFile } from "../types/types";
+import type { ContextualInfoFile } from "../types/types";
 
 const contextualInfoDirectory = path.join(
   process.cwd(),

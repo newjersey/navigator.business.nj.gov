@@ -1,4 +1,4 @@
-import { StateObject } from "./states";
+import type { StateObject } from "./states";
 
 export interface CigaretteLicenseData {
   businessName?: string;
