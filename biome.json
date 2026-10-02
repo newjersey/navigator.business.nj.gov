@@ -181,6 +181,12 @@
           }
         }
       }
+    },
+    {
+      "includes": ["content/src/**/*.json"],
+      "formatter": {
+        "enabled": false
+      }
     }
   ]
 }
