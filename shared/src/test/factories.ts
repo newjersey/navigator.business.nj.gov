@@ -749,7 +749,7 @@ export const generateEmergencyTripPermitApplicationData = (
     payerStateAbbreviation: "NJ",
     payerFirstName: `some-payer-first-name-${randomInt()}`,
     payerLastName: `some-payer-last-name-${randomInt()}`,
-    payerCompanyName: "`some-payer-company-${randomInt()}`",
+    payerCompanyName: `some-payer-company-${randomInt()}`,
     payerCity: `some-payer-city-${randomInt()}`,
     payerEmail: payerEmail,
     payerZipCode: `${randomInt(5)}`,

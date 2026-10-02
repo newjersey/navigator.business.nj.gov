@@ -74,6 +74,7 @@ const dedupeByWebflowId = (licenses: WebflowLicenseCard[]): WebflowLicenseCard[]
       continue;
     }
     if (seen.has(license.webflowId)) {
+      // biome-ignore lint/suspicious/noConsole: build-time content warning for CMS authors; shared has no logger
       console.warn(
         `loadAllLicenses: duplicate webflowId ${license.webflowId} on ${license.filename} — skipping`,
       );

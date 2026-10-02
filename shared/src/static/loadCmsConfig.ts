@@ -1,14 +1,15 @@
 import fs from "node:fs";
 import path from "node:path";
 import * as yaml from "js-yaml";
+import type { CmsConfig } from "../types/types";
 
 const configPath = path.join(process.cwd(), "public", "mgmt", "config.yml");
 const configPathTest = path.join(process.cwd(), "..", "web", "public", "mgmt", "config.yml");
 
-export const loadCmsConfig = (isTest: boolean = false): any => {
+export const loadCmsConfig = (isTest: boolean = false): CmsConfig => {
   let loadPath = configPath;
   if (isTest) {
     loadPath = configPathTest;
   }
-  return yaml.load(fs.readFileSync(loadPath, "utf8"));
+  return yaml.load(fs.readFileSync(loadPath, "utf8")) as CmsConfig;
 };
