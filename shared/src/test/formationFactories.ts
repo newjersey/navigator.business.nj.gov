@@ -143,12 +143,7 @@ export const generateFormationSigner = (
 };
 
 export const randomBusinessSuffix = (legalStructureId: FormationLegalType): BusinessSuffix => {
-  try {
-    return randomElementFromArray(BusinessSuffixMap[legalStructureId]);
-  } catch (error) {
-    console.log(legalStructureId);
-    throw error;
-  }
+  return randomElementFromArray(BusinessSuffixMap[legalStructureId]);
 };
 
 export const generateFormationIncorporator = (
