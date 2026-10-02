@@ -23,6 +23,7 @@ export class CognitoStack extends Stack {
     const metadataXml = metadataFilePath ? fs.readFileSync(metadataFilePath, "utf8") : undefined;
 
     if (!metadataXml) {
+      // biome-ignore lint/suspicious/noConsole: intentional CDK synth/deploy output
       console.warn("No Cognito metadata provided — skipping identity provider creation");
     }
 
