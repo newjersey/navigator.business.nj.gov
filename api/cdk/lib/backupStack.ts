@@ -1,9 +1,9 @@
-import { RemovalPolicy, Stack, StackProps, Duration } from "aws-cdk-lib";
-import * as iam from "aws-cdk-lib/aws-iam";
+import { Duration, RemovalPolicy, Stack, type StackProps } from "aws-cdk-lib";
+import * as backup from "aws-cdk-lib/aws-backup";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import * as events from "aws-cdk-lib/aws-events";
-import * as backup from "aws-cdk-lib/aws-backup";
-import { Construct } from "constructs";
+import type * as iam from "aws-cdk-lib/aws-iam";
+import type { Construct } from "constructs";
 
 export interface BackupStackProps extends StackProps {
   backupRole: iam.IRole;
