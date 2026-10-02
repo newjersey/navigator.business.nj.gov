@@ -1,20 +1,20 @@
+import path from "node:path";
 import * as cdk from "aws-cdk-lib";
-import { Duration, RemovalPolicy, Size, Stack } from "aws-cdk-lib";
+import { Duration, type RemovalPolicy, Size, type Stack } from "aws-cdk-lib";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import {
-  AttributeType,
+  type AttributeType,
   BillingMode,
-  GlobalSecondaryIndexProps,
+  type GlobalSecondaryIndexProps,
   Table,
 } from "aws-cdk-lib/aws-dynamodb";
-import { ISecurityGroup, ISubnet, IVpc } from "aws-cdk-lib/aws-ec2";
-import { Role } from "aws-cdk-lib/aws-iam";
-import { IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
-import { LogLevel, NodejsFunction, NodejsFunctionProps } from "aws-cdk-lib/aws-lambda-nodejs";
+import type { ISecurityGroup, ISubnet, IVpc } from "aws-cdk-lib/aws-ec2";
+import type { Role } from "aws-cdk-lib/aws-iam";
+import { type IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
+import { LogLevel, NodejsFunction, type NodejsFunctionProps } from "aws-cdk-lib/aws-lambda-nodejs";
 import * as logs from "aws-cdk-lib/aws-logs";
 import { ConfigurationSet } from "aws-cdk-lib/aws-ses";
-import { Construct, IConstruct } from "constructs";
-import path from "node:path";
+import type { Construct, IConstruct } from "constructs";
 
 /**
  * Apply standard tags to a given resource.
@@ -80,7 +80,7 @@ export function createLambda(stack: Stack, props: LambdaFunctionProps): NodejsFu
 }
 
 export const attachLambdaToResource = (
-  scope: Construct,
+  _scope: Construct,
   resource: apigateway.IResource,
   lambda?: IFunction,
   authorizer?: apigateway.CognitoUserPoolsAuthorizer,

@@ -1,7 +1,7 @@
-import * as cognito from "aws-cdk-lib/aws-cognito";
 import * as fs from "node:fs";
-import { RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
-import { Construct } from "constructs";
+import { RemovalPolicy, Stack, type StackProps } from "aws-cdk-lib";
+import * as cognito from "aws-cdk-lib/aws-cognito";
+import type { Construct } from "constructs";
 import {
   COGNITO_DOMAIN_NAME,
   COGNITO_USERPOOL_CLIENT_NAME,

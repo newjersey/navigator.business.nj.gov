@@ -1,6 +1,6 @@
-import { Stack, StackProps } from "aws-cdk-lib";
+import { Stack, type StackProps } from "aws-cdk-lib";
 import * as ecs from "aws-cdk-lib/aws-ecs";
-import { Construct } from "constructs";
+import type { Construct } from "constructs";
 import { STATIC_SITE_CLUSTER_NAME, STATIC_SITE_SHARED_RESOURCE_TAG } from "./constants";
 import { applyStandardTags } from "./stackUtils";
 

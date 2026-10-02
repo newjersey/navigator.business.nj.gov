@@ -1,8 +1,8 @@
 import { App } from "aws-cdk-lib";
 import { Match, Template } from "aws-cdk-lib/assertions";
-import { IBucket } from "aws-cdk-lib/aws-s3";
-import { IamStack, IamStackProps } from "../lib/iamStack";
-import { LambdaStack, LambdaStackProps } from "../lib/lambdaStack";
+import type { IBucket } from "aws-cdk-lib/aws-s3";
+import { IamStack, type IamStackProps } from "../lib/iamStack";
+import { LambdaStack, type LambdaStackProps } from "../lib/lambdaStack";
 import { MonitoringStack } from "../lib/monitoringStack";
 
 describe("LambdaStack", () => {

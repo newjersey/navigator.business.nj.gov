@@ -1,13 +1,13 @@
 import { API_SERVICE_NAME } from "@businessnjgovnavigator/api/src/libs/constants";
-import { RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
+import { RemovalPolicy, Stack, type StackProps } from "aws-cdk-lib";
 import * as iam from "aws-cdk-lib/aws-iam";
-import { Construct } from "constructs";
+import type { Construct } from "constructs";
 import {
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
-  LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   BUSINESSES_TABLE,
   DEV_STAGE,
   DOCUMENT_S3_BUCKET_NAME,
+  LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   MESSAGES_TABLE,
   PROD_STAGE,
   STAGING_STAGE,
