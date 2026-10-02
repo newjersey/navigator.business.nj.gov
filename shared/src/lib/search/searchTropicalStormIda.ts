@@ -1,6 +1,6 @@
-import { TropicalStormIdaItem } from "../../types";
+import type { TropicalStormIdaItem } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchTropicalStormIda = (items: TropicalStormIdaItem[], term: string): Match[] => {
   return convertFileDataToMatchList(getTropicalStormIdaData(items), term);

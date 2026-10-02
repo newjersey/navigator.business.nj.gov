@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { loadXrayRenewalCalendarEvent } from "./loadXrayRenewalCalendarEvent";
 import { mockReadDirectoryReturn } from "./mockHelpers";
 

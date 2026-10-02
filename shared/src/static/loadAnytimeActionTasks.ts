@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { AnytimeActionTask } from "../types/types";
+import fs from "node:fs";
+import path from "node:path";
+import type { AnytimeActionTask } from "../types/types";
 import { convertAnytimeActionTaskMd } from "../utils/tasksMarkdownReader";
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
 

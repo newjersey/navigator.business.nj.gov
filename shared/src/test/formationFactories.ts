@@ -1,5 +1,5 @@
 import { randomElementFromArray } from "../arrayHelpers";
-import {
+import type {
   NameAvailability,
   NameAvailabilityResponse,
   NameAvailabilityStatus,
@@ -8,24 +8,24 @@ import { arrayOfCountriesObjects as countries } from "../countries";
 import { getCurrentDate, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import {
-  BusinessSignerTypeMap,
-  BusinessSuffix,
-  BusinessSuffixMap,
-  FormationAddress,
-  FormationFormData,
-  FormationIncorporator,
-  FormationLegalType,
-  FormationMember,
-  FormationSigner,
-  PublicFilingLegalType,
   allFormationLegalTypes,
+  BusinessSignerTypeMap,
+  type BusinessSuffix,
+  BusinessSuffixMap,
   corpLegalStructures,
+  type FormationAddress,
+  type FormationFormData,
+  type FormationIncorporator,
+  type FormationLegalType,
+  type FormationMember,
+  type FormationSigner,
   foreignLegalTypePrefix,
   incorporationLegalStructures,
+  type PublicFilingLegalType,
   publicFilingLegalTypes,
 } from "../formationData";
 import { randomInt, randomIntFromInterval } from "../intHelpers";
-import { Municipality } from "../municipality";
+import type { Municipality } from "../municipality";
 import { arrayOfStateObjects as states } from "../states";
 
 export const generateMunicipality = (overrides: Partial<Municipality>): Municipality => {

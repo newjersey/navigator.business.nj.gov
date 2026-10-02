@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import {
   loadAllAnytimeActionLicenseReinstatements,
   loadAllAnytimeActionLicenseReinstatementsUrlSlugs,
@@ -53,14 +53,11 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
         "---\n";
 
       mockedFs.readdirSync
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         .mockReturnValueOnce(["opp1.md", "opp2.md"])
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         .mockReturnValueOnce(["fake-category.md"])
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         .mockReturnValueOnce(["fake-category.md"]);
       mockedFs.readFileSync
         .mockReturnValueOnce(anytimeActionLicenseReinstatement1)
@@ -144,11 +141,9 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
         "---\n";
 
       mockedFs.readdirSync
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         .mockReturnValueOnce(["opp1.md", "opp2.md"])
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         .mockReturnValueOnce(["fake-category.md"]);
       mockedFs.readFileSync
         .mockReturnValueOnce(anytimeActionLicenseReinstatement1) // read first file in list

@@ -104,7 +104,6 @@ export const findIndustryByNaicsCode = (naicsCode: string): Industry | undefined
   return matches.length === 1 ? matches[0] : undefined;
 };
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export const getIndustries = (props?: { overrideShowDisabledIndustries?: boolean }): Industry[] =>
   orderBy(
     industryJson.industries as Industry[],

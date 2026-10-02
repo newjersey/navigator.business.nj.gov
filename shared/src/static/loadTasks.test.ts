@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { loadAllTaskUrlSlugs, loadTaskByFileName, loadTaskByUrlSlug } from "./loadTasks";
 import { mockReadDirectoryReturnOnce } from "./mockHelpers";
 

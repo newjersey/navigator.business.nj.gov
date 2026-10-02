@@ -1,4 +1,4 @@
-import { Business } from "../userData";
+import type { Business } from "../userData";
 
 export const onboardingCompleted = (business: Business): boolean => {
   return business.onboardingFormProgress === "COMPLETED";

@@ -1,6 +1,6 @@
 import matter from "gray-matter";
-import { LicenseName } from "./license";
-import {
+import type { LicenseName } from "./license";
+import type {
   Certification,
   ContextualInfo,
   County,

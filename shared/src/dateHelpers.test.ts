@@ -11,7 +11,7 @@ import {
 } from "./dateHelpers";
 import { defaultDateFormat } from "./defaultConstants";
 import { randomInt } from "./intHelpers";
-import { LicenseEntity } from "./license";
+import type { LicenseEntity } from "./license";
 
 describe("dateHelpers", () => {
   describe("parseDate", () => {

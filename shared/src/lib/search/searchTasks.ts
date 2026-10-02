@@ -1,13 +1,13 @@
-import { Industry } from "../../industry";
+import type { Industry } from "../../industry";
 import {
   AddAddOnUsage,
   AddIndustryUsage,
   AddTaskDependencyUsage,
 } from "../../lib/search/usageHelpers";
 import { LookupTaskAgencyById } from "../../taskAgency";
-import { IndustryRoadmap, Task } from "../../types";
+import type { IndustryRoadmap, Task } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchTasks = (
   tasks: Task[],
