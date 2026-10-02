@@ -1,12 +1,12 @@
 import { Duration, RemovalPolicy } from "aws-cdk-lib";
 import * as cloudwatch from "aws-cdk-lib/aws-cloudwatch";
 import * as cloudwatchActions from "aws-cdk-lib/aws-cloudwatch-actions";
-import * as ecs from "aws-cdk-lib/aws-ecs";
+import type * as ecs from "aws-cdk-lib/aws-ecs";
 import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import * as events from "aws-cdk-lib/aws-events";
 import * as eventsTargets from "aws-cdk-lib/aws-events-targets";
-import * as sns from "aws-cdk-lib/aws-sns";
-import { Construct } from "constructs";
+import type * as sns from "aws-cdk-lib/aws-sns";
+import type { Construct } from "constructs";
 import { STATIC_SITE_SERVICE_BASE_NAME } from "./constants";
 import { applyStandardTags } from "./stackUtils";
 

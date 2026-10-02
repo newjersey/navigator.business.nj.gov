@@ -1,6 +1,6 @@
-import { RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
+import { RemovalPolicy, Stack, type StackProps } from "aws-cdk-lib";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
-import { Construct } from "constructs";
+import type { Construct } from "constructs";
 import { BUSINESSES_TABLE, MESSAGES_TABLE, USERS_TABLE } from "./constants";
 import { createDynamoDBTable } from "./stackUtils";
 export interface DataStackProps extends StackProps {

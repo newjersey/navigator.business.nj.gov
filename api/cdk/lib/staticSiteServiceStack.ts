@@ -1,4 +1,4 @@
-import { ArnFormat, Duration, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
+import { ArnFormat, Duration, RemovalPolicy, Stack, type StackProps } from "aws-cdk-lib";
 import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecr from "aws-cdk-lib/aws-ecr";
@@ -6,13 +6,14 @@ import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import * as logs from "aws-cdk-lib/aws-logs";
 import * as sns from "aws-cdk-lib/aws-sns";
-import { Construct } from "constructs";
+import type { Construct } from "constructs";
 import {
-  STATIC_SITE_CLUSTER_NAME,
   STATIC_SITE_CERTIFICATE_IDS_BY_STAGE,
+  STATIC_SITE_CLUSTER_NAME,
   STATIC_SITE_HEALTH_CHECK_PATH,
   STATIC_SITE_SERVICE_BASE_NAME,
 } from "./constants";
+import { applyStandardTags } from "./stackUtils";
 import {
   createStaticSiteAlarms,
   createStaticSiteDeploymentFailureRule,
@@ -23,7 +24,6 @@ import {
   createStaticSiteServiceName,
   createStaticSiteTaskDefinition,
 } from "./staticSiteTaskDefinition";
-import { applyStandardTags } from "./stackUtils";
 
 /** Properties for creating the per-stage static-site ECS service stack. */
 export interface StaticSiteServiceStackProps extends StackProps {

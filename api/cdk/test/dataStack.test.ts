@@ -1,6 +1,6 @@
 import { App } from "aws-cdk-lib";
 import { Match, Template } from "aws-cdk-lib/assertions";
-import { DataStack, DataStackProps } from "../lib/dataStack";
+import { DataStack, type DataStackProps } from "../lib/dataStack";
 
 describe("DataStack", () => {
   let app: App;
