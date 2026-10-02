@@ -16,6 +16,8 @@ content
 
 # shared
 shared/lib
+# migrated to Biome; keeps root Prettier/ESLint off it
+shared
 
 # api
 api/jspm_packages
