@@ -16,6 +16,7 @@ import {
   createFileSystemPort,
   deriveSingleAgencyWebsites,
   executeBuild,
+  extractChecklistItems,
   FIELDCONFIG_TASK_MAP,
   type FileSystemPort,
   getContentConfigs,
@@ -366,7 +367,11 @@ describe("Application Layer", () => {
       ];
       const loader = () => mockData;
 
-      const result = buildAndWriteContent(mockFs, config, loader, "test-content", "items");
+      const result = buildAndWriteContent(mockFs, config, {
+        loader,
+        outputFileName: "test-content",
+        dataKey: "items",
+      });
 
       expect(result).toEqual(mockData);
       expect(result).toHaveLength(2);
@@ -735,6 +740,22 @@ describe("Integration Tests", () => {
 // ============================================================================
 // toLicenseCard MAPPER TESTS
 // ============================================================================
+
+describe("extractChecklistItems", () => {
+  it("returns every checklist item's key and trimmed name, in order", () => {
+    const content =
+      "intro\n[]{first-key} First item  \ntext []{second-key}Second item\n[]{} ignored";
+
+    expect(extractChecklistItems(content)).toEqual([
+      { key: "first-key", name: "First item" },
+      { key: "second-key", name: "Second item" },
+    ]);
+  });
+
+  it("returns an empty list when there are no checklist items", () => {
+    expect(extractChecklistItems("no items here")).toEqual([]);
+  });
+});
 
 describe("toLicenseCard", () => {
   it("resolves industry, falling back to webflowIndustry, and maps agency fields", () => {

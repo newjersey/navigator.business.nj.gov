@@ -1,10 +1,7 @@
+import { spawnSync } from "node:child_process";
+import fs from "node:fs";
 import { describe, expect, it } from "vitest";
-
-const { spawnSync } = require("node:child_process");
-
-const fs = require("node:fs");
-
-const cspellConfig = require("../../cspell.json");
+import cspellConfig from "../../cspell.json";
 
 fs.writeFileSync(
   "test/cspell.json",
@@ -33,21 +30,18 @@ describe("CSpell overrides", () => {
   it("does not flag wrapped URLs", () => {
     const result = runCspell("test/wrapped-url.md");
 
-    console.log(result);
-    expect(result.status).toBe(0);
+    expect(result.status, result.combined).toBe(0);
   });
 
   it("does not flag misspellings in `notesMd` front-matter prop", () => {
     const result = runCspell("test/notes-md-misspellings.md");
 
-    console.log(result);
-    expect(result.status).toBe(0);
+    expect(result.status, result.combined).toBe(0);
   });
 
   it("flags misspellings in front-matter props that are not `notesMd`", () => {
     const result = runCspell("test/another-prop-misspellings.md");
 
-    console.log(result);
-    expect(result.status).toBe(1);
+    expect(result.status, result.combined).toBe(1);
   });
 });

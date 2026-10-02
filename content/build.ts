@@ -418,9 +418,8 @@ export type ChecklistItemTaskMap = Record<string, ChecklistItemEntry>;
  */
 export const extractChecklistItems = (content: string): Array<{ key: string; name: string }> => {
   const items: Array<{ key: string; name: string }> = [];
-  let match: RegExpExecArray | null;
   const pattern = new RegExp(CHECKLIST_ITEM_PATTERN.source, "g");
-  while ((match = pattern.exec(content)) !== null) {
+  for (const match of content.matchAll(pattern)) {
     if (match[1]) items.push({ key: match[1], name: match[2].trim() });
   }
   return items;
@@ -538,28 +537,22 @@ export const buildAndWriteChecklistItemTasks = (
  * - {outputFileName}.pretty.json - Pretty-printed for development/debugging
  *
  * @example
- * buildAndWriteContent(
- *   fileSystem,
- *   config,
- *   () => loadAllTasks(false),
- *   "tasks",
- *   "tasks"
- * )
+ * buildAndWriteContent(fileSystem, config, {
+ *   loader: () => loadAllTasks(false),
+ *   outputFileName: "tasks",
+ *   dataKey: "tasks",
+ * })
  * // Outputs: lib/tasks.json and lib/tasks.pretty.json containing { "tasks": [...] }
  *
  * @param fileSystem - File system operations (dependency injection for testability)
  * @param config - Build configuration with rootDir and outputDir
- * @param loader - Function that loads the content from source (e.g., loadAllTasks)
- * @param outputFileName - Base name for output files (without .json extension)
- * @param dataKey - Key name for wrapping the content in output JSON (e.g., "tasks" → { "tasks": [...] })
+ * @param output - What to load and where to write it
  * @returns Loaded content array for statistics/testing
  */
 export const buildAndWriteContent = <T>(
   fileSystem: FileSystemPort,
   config: BuildConfig,
-  loader: () => T[],
-  outputFileName: string,
-  dataKey: string,
+  { loader, outputFileName, dataKey }: ContentOutput<T>,
 ): T[] => {
   const content = loader();
   const wrappedData = { [dataKey]: content };
@@ -585,13 +578,11 @@ export const buildAndWriteIndustries = (
   config: BuildConfig,
 ): unknown[] => {
   const sourceDir = path.join(config.rootDir, "src/roadmaps/industries");
-  return buildAndWriteContent(
-    fileSystem,
-    config,
-    () => buildIndustries(fileSystem, sourceDir),
-    "industry",
-    "industries",
-  );
+  return buildAndWriteContent(fileSystem, config, {
+    loader: () => buildIndustries(fileSystem, sourceDir),
+    outputFileName: "industry",
+    dataKey: "industries",
+  });
 };
 
 /**
@@ -613,13 +604,11 @@ export const buildAndWriteSectors = (
   const sectorsData = JSON.parse(sectorsContent) as { arrayOfSectors: SectorData[] };
   const sectors = sectorsData.arrayOfSectors;
 
-  return buildAndWriteContent(
-    fileSystem,
-    config,
-    () => buildSectors(sectors, industries),
-    "sectors",
-    "sectors",
-  );
+  return buildAndWriteContent(fileSystem, config, {
+    loader: () => buildSectors(sectors, industries),
+    outputFileName: "sectors",
+    dataKey: "sectors",
+  });
 };
 
 /**
@@ -642,13 +631,16 @@ export const buildAndWriteSectors = (
  * // 3. Wrap content as { "tasks": [...] }
  * // 4. Store count in result.tasksCount
  */
-export interface ContentConfig {
+export interface ContentOutput<T> {
   /** Function that loads the content from source (from @businessnjgovnavigator/shared) */
-  loader: () => unknown[];
+  readonly loader: () => T[];
   /** Base filename for output (without .json extension). Example: "tasks" produces tasks.json */
-  outputFileName: string;
+  readonly outputFileName: string;
   /** JSON key for wrapping the content in output files. Example: "tasks" produces { "tasks": [...] } */
-  dataKey: string;
+  readonly dataKey: string;
+}
+
+export interface ContentConfig extends ContentOutput<unknown> {
   /** Key for storing count in BuildResult. Must match a property in BuildResult interface */
   resultKey: keyof BuildResult;
 }
@@ -763,13 +755,7 @@ export const executeBuild = (fileSystem: FileSystemPort, config: BuildConfig): B
 
   // Loop through each content type config and build it
   for (const contentConfig of contentConfigs) {
-    const content = buildAndWriteContent(
-      fileSystem,
-      config,
-      contentConfig.loader,
-      contentConfig.outputFileName,
-      contentConfig.dataKey,
-    );
+    const content = buildAndWriteContent(fileSystem, config, contentConfig);
     result[contentConfig.resultKey] = content.length;
   }
 
