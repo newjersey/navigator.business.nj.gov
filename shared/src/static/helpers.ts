@@ -15,7 +15,7 @@ export const getFileNameByUrlSlug = (currentPath: string, urlSlug: string): stri
     return urlSlug === loadUrlSlugByFilename(fileName, currentPath);
   });
   if (!matchingFileName) {
-    throw `Task with urlSlug ${urlSlug} not found`;
+    throw new Error(`Task with urlSlug ${urlSlug} not found`);
   }
 
   return matchingFileName;

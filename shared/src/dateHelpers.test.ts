@@ -96,13 +96,10 @@ describe("dateHelpers", () => {
 
   describe("isDateAfterCurrentDate", () => {
     it("returns true when date is after current date", () => {
-      // TODO: Fix this test
-      if (dayjs().month() === 11) {
-        console.log("december");
-        if (dayjs().date() === 31) {
-          console.log("nye");
-          return;
-        }
+      // TODO: On Dec 31, getDateInCurrentYear moves "tomorrow" (Jan 1) back to this year's Jan 1,
+      // so isDateAfterCurrentDate returns false. Skip that day until the helper handles year rollover.
+      if (dayjs().month() === 11 && dayjs().date() === 31) {
+        return;
       }
       const value = dayjs().add(1, "day").format(defaultDateFormat);
       expect(isDateAfterCurrentDate(value)).toBe(true);

@@ -176,7 +176,7 @@ export const loadTaskByFileName = (
 };
 
 const loadTaskLinkByFilename = (fileName: string, isTest: boolean = false): TaskLink => {
-  let fileContents;
+  let fileContents: string | undefined;
   try {
     fileContents = fs.readFileSync(path.join(getTasksDirectory(isTest), `${fileName}.md`), "utf8");
   } catch {
