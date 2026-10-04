@@ -9,8 +9,8 @@
   "dependencies": {
     "@react-email/components": "1.0.12",
     "@react-email/render": "2.0.8",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "tsx": "4.23.1"
   },
   "scripts": {
