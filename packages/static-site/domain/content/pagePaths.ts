@@ -11,10 +11,11 @@
  * hierarchy that feeds this resolver — `app/sitemap.ts` lists them directly.
  */
 
-import {
-  HOUSING_DEVELOPER_RESOURCES_PATHNAME,
-  HOUSING_DEVELOPER_RESOURCES_SLUG,
-} from "@/domain/content/housingDeveloperResourcesFlag";
+/** Slug of the Housing Developer Resources page. */
+export const HOUSING_DEVELOPER_RESOURCES_SLUG = "housing-developer-resources";
+
+/** Canonical pathname of the Housing Developer Resources page, without a locale prefix. */
+export const HOUSING_DEVELOPER_RESOURCES_PATHNAME = "/housingprograms";
 
 /** Maps a content slug to the pathname of its dedicated route. */
 const PAGE_PATHNAME_OVERRIDES: Readonly<Record<string, string>> = {
