@@ -4,6 +4,13 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import {
+  formatCategorySummary,
+  formatLinkStatus,
+  generateDeadLinksCsv,
+  LINK_CATEGORY_LABELS,
+  REPORT_BASE_URL,
+} from "@/lib/static/admin/deadLinkReport";
 import { ContentDeadLink, FoundUrl } from "@/lib/static/admin/findDeadLinks";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LinearProgress } from "@mui/material";
@@ -88,7 +95,6 @@ const DeadUrlsPage = (props: Props): ReactElement => {
       .replaceAll('"', "&quot;");
 
   const generateDownloadContent = (results: ContentDeadLink[]): string => {
-    const baseUrl = "https://dev.account.business.nj.gov";
     const totalDead = results.reduce((sum, r) => sum + r.deadUrls.length, 0);
     const grouped = groupByCollection(results);
 
@@ -124,7 +130,8 @@ const DeadUrlsPage = (props: Props): ReactElement => {
 <body>
 <h1>Dead URL Report</h1>
 <div class="summary">
-  <strong>${totalDead}</strong> dead URL${totalDead === 1 ? "" : "s"} across <strong>${results.length}</strong> content item${results.length === 1 ? "" : "s"}<br>
+  <strong>${totalDead}</strong> flagged URL${totalDead === 1 ? "" : "s"} across <strong>${results.length}</strong> content item${results.length === 1 ? "" : "s"}<br>
+  ${escapeHtml(formatCategorySummary(results))}<br>
   Generated: ${new Date().toLocaleString()}
 </div>
 <nav class="toc">
@@ -134,7 +141,7 @@ ${collectionEntries
   .map(([collection, items]) => {
     const deadCount = items.reduce((sum, r) => sum + r.deadUrls.length, 0);
     const anchor = collection.toLowerCase().replaceAll(/[^\da-z]+/g, "-");
-    return `    <li><a href="#${anchor}">${escapeHtml(collection)}</a> — ${items.length} item${items.length === 1 ? "" : "s"}, ${deadCount} dead URL${deadCount === 1 ? "" : "s"}</li>`;
+    return `    <li><a href="#${anchor}">${escapeHtml(collection)}</a> — ${items.length} item${items.length === 1 ? "" : "s"}, ${deadCount} flagged URL${deadCount === 1 ? "" : "s"}</li>`;
   })
   .join("\n")}
   </ul>
@@ -149,16 +156,14 @@ ${collectionEntries
         html += `  <div class="item-header">${escapeHtml(item.displayName)} <span class="status">(${escapeHtml(item.slug)})</span></div>\n`;
         html += `  <div class="item-links">`;
         if (item.cmsEditUrl) {
-          html += `<a href="${baseUrl}${item.cmsEditUrl}" target="_blank">Edit in CMS</a>`;
+          html += `<a href="${REPORT_BASE_URL}${item.cmsEditUrl}" target="_blank">Edit in CMS</a>`;
         }
         if (item.pageUrl) {
-          html += `<a href="${baseUrl}${item.pageUrl}" target="_blank">View Page</a>`;
+          html += `<a href="${REPORT_BASE_URL}${item.pageUrl}" target="_blank">View Page</a>`;
         }
         html += `</div>\n`;
         for (const deadUrl of item.deadUrls) {
-          const status = deadUrl.statusCode
-            ? `${deadUrl.statusCode} ${deadUrl.statusText}`
-            : deadUrl.statusText || "Connection Failed";
+          const status = formatCategorizedStatus(deadUrl);
           html += `  <div class="dead-url">`;
           html += `<code>${escapeHtml(deadUrl.url)}</code> `;
           html += `<span class="status">${escapeHtml(status)}</span><br>`;
@@ -174,18 +179,22 @@ ${collectionEntries
     return html;
   };
 
-  const handleDownloadClick = (): void => {
+  const handleHtmlDownloadClick = (): void => {
     if (!scanStatus?.results) return;
-    const content = generateDownloadContent(scanStatus.results);
-    const blob = new Blob([content], { type: "text/html" });
-    const blobUrl = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = blobUrl;
-    link.download = "dead-urls-report.html";
-    document.body.append(link);
-    link.click();
-    URL.revokeObjectURL(blobUrl);
-    link.remove();
+    downloadFile({
+      content: generateDownloadContent(scanStatus.results),
+      type: "text/html",
+      filename: "dead-urls-report.html",
+    });
+  };
+
+  const handleCsvDownloadClick = (): void => {
+    if (!scanStatus?.results) return;
+    downloadFile({
+      content: generateDeadLinksCsv(scanStatus.results),
+      type: "text/csv;charset=utf-8",
+      filename: "dead-urls-report.csv",
+    });
   };
 
   const progressPercent =
@@ -233,7 +242,8 @@ ${collectionEntries
       {scanStatus?.isComplete && scanStatus.results && (
         <DeadLinkResults
           results={scanStatus.results}
-          onDownload={handleDownloadClick}
+          onDownloadHtml={handleHtmlDownloadClick}
+          onDownloadCsv={handleCsvDownloadClick}
           onRestart={startScan}
         />
       )}
@@ -256,6 +266,29 @@ ${collectionEntries
   );
 };
 
+interface DownloadFile {
+  readonly content: string;
+  readonly type: string;
+  readonly filename: string;
+}
+
+const downloadFile = ({ content, type, filename }: DownloadFile): void => {
+  const blob = new Blob([content], { type });
+  const blobUrl = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = blobUrl;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  URL.revokeObjectURL(blobUrl);
+  link.remove();
+};
+
+const formatCategorizedStatus = (deadUrl: FoundUrl): string =>
+  deadUrl.category
+    ? `${LINK_CATEGORY_LABELS[deadUrl.category]}: ${formatLinkStatus(deadUrl)}`
+    : formatLinkStatus(deadUrl);
+
 const groupByCollection = (results: ContentDeadLink[]): Record<string, ContentDeadLink[]> => {
   const grouped: Record<string, ContentDeadLink[]> = {};
   for (const item of results) {
@@ -268,11 +301,13 @@ const groupByCollection = (results: ContentDeadLink[]): Record<string, ContentDe
 
 const DeadLinkResults = ({
   results,
-  onDownload,
+  onDownloadHtml,
+  onDownloadCsv,
   onRestart,
 }: {
   results: ContentDeadLink[];
-  onDownload: () => void;
+  onDownloadHtml: () => void;
+  onDownloadCsv: () => void;
   onRestart: () => void;
 }): ReactElement => {
   const totalDeadUrls = results.reduce((sum, r) => sum + r.deadUrls.length, 0);
@@ -281,14 +316,20 @@ const DeadLinkResults = ({
   return (
     <div className="margin-top-3">
       <Heading level={2}>
-        Results: {totalDeadUrls} dead URL{totalDeadUrls === 1 ? "" : "s"} across {results.length}{" "}
+        Results: {totalDeadUrls} flagged URL{totalDeadUrls === 1 ? "" : "s"} across {results.length}{" "}
         content item{results.length === 1 ? "" : "s"}
       </Heading>
+      <p>{formatCategorySummary(results)}</p>
 
       <div className="margin-bottom-3">
         <span className="margin-right-2">
-          <PrimaryButton onClick={onDownload} isColor={"primary"}>
-            Download Report
+          <PrimaryButton onClick={onDownloadHtml} isColor={"primary"}>
+            Download HTML Report
+          </PrimaryButton>
+        </span>
+        <span className="margin-right-2">
+          <PrimaryButton onClick={onDownloadCsv} isColor={"primary"}>
+            Download CSV
           </PrimaryButton>
         </span>
         <PrimaryButton onClick={onRestart} isColor={"secondary"}>
@@ -331,10 +372,7 @@ const DeadLinkResults = ({
                       <div>
                         <code className="text-error">{deadUrl.url}</code>{" "}
                         <span className="text-base font-body-2xs">
-                          —{" "}
-                          {deadUrl.statusCode
-                            ? `${deadUrl.statusCode} ${deadUrl.statusText}`
-                            : deadUrl.statusText || "Connection Failed"}
+                          — {formatCategorizedStatus(deadUrl)}
                         </span>
                       </div>
                       <div className="text-base font-body-2xs">
