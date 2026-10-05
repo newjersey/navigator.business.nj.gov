@@ -294,12 +294,15 @@ export const findDeadLicenseTasks = async (): Promise<string[]> => {
   return deadTasks;
 };
 
+export type LinkCategory = "dead" | "inconclusive" | "serverError";
+
 export type FoundUrl = {
   url: string;
   field: string;
   context: string;
   statusCode?: number | null;
   statusText?: string;
+  category?: LinkCategory;
 };
 
 export type ContentDeadLink = {
@@ -563,6 +566,7 @@ type UrlCheckResult = {
   alive: boolean;
   statusCode: number | null;
   statusText: string;
+  category?: LinkCategory;
 };
 
 const STATUS_TEXT: Record<number, string> = {
@@ -586,6 +590,36 @@ const STATUS_TEXT: Record<number, string> = {
 
 const getStatusText = (code: number): string => STATUS_TEXT[code] || `HTTP ${code}`;
 
+// Only statuses that mean the resource is gone count as dead. Everything else (bot walls,
+// rate limits, login pages) says more about the checker than the link.
+const categorizeStatus = (code: number): LinkCategory => {
+  if (code === 404 || code === 410) return "dead";
+  if (code >= 500) return "serverError";
+  return "inconclusive";
+};
+
+const getErrorCode = (error: unknown): string | undefined => {
+  if (!(error instanceof Error)) return undefined;
+  const cause: unknown = error.cause;
+  if (typeof cause === "object" && cause !== null && "code" in cause) {
+    return String(cause.code);
+  }
+  return undefined;
+};
+
+const describeConnectionError = (error: unknown): UrlCheckResult => {
+  if (error instanceof Error && error.name === "AbortError") {
+    return { alive: false, statusCode: null, statusText: "Timed Out", category: "inconclusive" };
+  }
+  const code = getErrorCode(error);
+  return {
+    alive: false,
+    statusCode: null,
+    statusText: code ? `Connection Failed (${code})` : "Connection Failed",
+    category: code === "ENOTFOUND" ? "dead" : "inconclusive",
+  };
+};
+
 const checkUrl = async (url: string): Promise<UrlCheckResult> => {
   try {
     const noRedirectResponse = await fetchWithTimeout(url, "HEAD", false);
@@ -606,9 +640,10 @@ const checkUrl = async (url: string): Promise<UrlCheckResult> => {
       alive: false,
       statusCode: isRedirect ? noRedirectResponse.status : finalStatus,
       statusText,
+      category: categorizeStatus(finalStatus),
     };
-  } catch {
-    return { alive: false, statusCode: null, statusText: "Connection Failed" };
+  } catch (error) {
+    return describeConnectionError(error);
   }
 };
 
@@ -689,6 +724,7 @@ export const findDeadContentLinks = async (
           ...u,
           statusCode: status?.statusCode ?? null,
           statusText: status?.statusText ?? "Unknown",
+          category: status?.category,
         };
       });
     if (deadUrls.length > 0) {

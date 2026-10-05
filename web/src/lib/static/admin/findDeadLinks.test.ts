@@ -1,4 +1,4 @@
-import { findDeadContentLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
+import { findDeadContentLinks, findDeadTasks, FoundUrl } from "@/lib/static/admin/findDeadLinks";
 import fs from "fs";
 
 jest.mock("fs");
@@ -311,5 +311,69 @@ For more information, visit [the resource page](https://dead-context.example.com
     expect(results.length).toBe(1);
     expect(results[0].deadUrls[0].context).toContain("the resource page");
     expect(results[0].deadUrls[0].context).toContain("dead-context.example.com");
+  });
+
+  const scanBodyUrls = async (urls: string[]): Promise<FoundUrl[]> => {
+    setupContentScanMocks([
+      { name: "task1.md", content: `---\nname: T\n---\n\n${urls.join("\n\n")}` },
+    ]);
+    const results = await findDeadContentLinks();
+    return results.flatMap((r) => r.deadUrls);
+  };
+
+  const connectionError = (code: string): TypeError =>
+    new TypeError("fetch failed", { cause: { code } });
+
+  it("reports the underlying connection error code", async () => {
+    (global.fetch as jest.Mock).mockRejectedValue(connectionError("ECONNREFUSED"));
+
+    const [deadUrl] = await scanBodyUrls(["https://refused.example.com"]);
+
+    expect(deadUrl.statusText).toBe("Connection Failed (ECONNREFUSED)");
+    expect(deadUrl.category).toBe("inconclusive");
+  });
+
+  it("categorizes a host that does not resolve as dead", async () => {
+    (global.fetch as jest.Mock).mockRejectedValue(connectionError("ENOTFOUND"));
+
+    const [deadUrl] = await scanBodyUrls(["https://gone.example.com"]);
+
+    expect(deadUrl.statusText).toBe("Connection Failed (ENOTFOUND)");
+    expect(deadUrl.category).toBe("dead");
+  });
+
+  it("reports timeouts as inconclusive", async () => {
+    (global.fetch as jest.Mock).mockRejectedValue(
+      Object.assign(new Error("aborted"), { name: "AbortError" }),
+    );
+
+    const [deadUrl] = await scanBodyUrls(["https://slow.example.com"]);
+
+    expect(deadUrl.statusText).toBe("Timed Out");
+    expect(deadUrl.category).toBe("inconclusive");
+  });
+
+  it("categorizes failures by HTTP status", async () => {
+    const statusByUrl: Record<string, number> = {
+      "https://a.example.com/404": 404,
+      "https://b.example.com/410": 410,
+      "https://c.example.com/403": 403,
+      "https://d.example.com/401": 401,
+      "https://e.example.com/503": 503,
+    };
+    (global.fetch as jest.Mock).mockImplementation((url: string) =>
+      Promise.resolve({ ok: false, status: statusByUrl[url] }),
+    );
+
+    const deadUrls = await scanBodyUrls(Object.keys(statusByUrl));
+    const categoryByUrl = Object.fromEntries(deadUrls.map((u) => [u.url, u.category]));
+
+    expect(categoryByUrl).toEqual({
+      "https://a.example.com/404": "dead",
+      "https://b.example.com/410": "dead",
+      "https://c.example.com/403": "inconclusive",
+      "https://d.example.com/401": "inconclusive",
+      "https://e.example.com/503": "serverError",
+    });
   });
 });
