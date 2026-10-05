@@ -423,4 +423,43 @@ For more information, visit [the resource page](https://dead-context.example.com
     expect(deadUrl.statusText).toBe("Redirect Loop");
     expect(deadUrl.category).toBe("inconclusive");
   });
+
+  describe("when an http URL cannot connect", () => {
+    const httpsRespondsWith = (httpsResponse: object | Error): void => {
+      (global.fetch as jest.Mock).mockImplementation((url: string) => {
+        if (url.startsWith("http://")) return Promise.reject(connectionError("ECONNRESET"));
+        return httpsResponse instanceof Error
+          ? Promise.reject(httpsResponse)
+          : Promise.resolve(httpsResponse);
+      });
+    };
+
+    it("flags the link for an https update when https works", async () => {
+      httpsRespondsWith({ ok: true, status: 200 });
+
+      const [deadUrl] = await scanBodyUrls(["http://insecure.example.com/page"]);
+
+      expect(deadUrl.url).toBe("http://insecure.example.com/page");
+      expect(deadUrl.statusText).toBe("Unreachable over http; works over https");
+      expect(deadUrl.category).toBe("httpsOnly");
+    });
+
+    it("reports the https result when https also fails", async () => {
+      httpsRespondsWith({ ok: false, status: 404 });
+
+      const [deadUrl] = await scanBodyUrls(["http://insecure.example.com/page"]);
+
+      expect(deadUrl.statusText).toBe("Not Found (checked over https)");
+      expect(deadUrl.category).toBe("dead");
+    });
+
+    it("reports the http error when https cannot connect either", async () => {
+      httpsRespondsWith(connectionError("ECONNREFUSED"));
+
+      const [deadUrl] = await scanBodyUrls(["http://insecure.example.com/page"]);
+
+      expect(deadUrl.statusText).toBe("Connection Failed (ECONNRESET)");
+      expect(deadUrl.category).toBe("inconclusive");
+    });
+  });
 });

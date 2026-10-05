@@ -294,7 +294,7 @@ export const findDeadLicenseTasks = async (): Promise<string[]> => {
   return deadTasks;
 };
 
-export type LinkCategory = "dead" | "inconclusive" | "serverError";
+export type LinkCategory = "dead" | "inconclusive" | "serverError" | "httpsOnly";
 
 export type FoundUrl = {
   url: string;
@@ -593,6 +593,7 @@ type UrlCheckResult = {
   statusCode: number | null;
   statusText: string;
   category?: LinkCategory;
+  failedToConnect?: boolean;
 };
 
 const STATUS_TEXT: Record<number, string> = {
@@ -635,7 +636,13 @@ const getErrorCode = (error: unknown): string | undefined => {
 
 const describeConnectionError = (error: unknown): UrlCheckResult => {
   if (error instanceof Error && error.name === "AbortError") {
-    return { alive: false, statusCode: null, statusText: "Timed Out", category: "inconclusive" };
+    return {
+      alive: false,
+      statusCode: null,
+      statusText: "Timed Out",
+      category: "inconclusive",
+      failedToConnect: true,
+    };
   }
   const code = getErrorCode(error);
   return {
@@ -643,10 +650,11 @@ const describeConnectionError = (error: unknown): UrlCheckResult => {
     statusCode: null,
     statusText: code ? `Connection Failed (${code})` : "Connection Failed",
     category: code === "ENOTFOUND" ? "dead" : "inconclusive",
+    failedToConnect: true,
   };
 };
 
-const checkUrl = async (url: string): Promise<UrlCheckResult> => {
+const checkUrlOnce = async (url: string): Promise<UrlCheckResult> => {
   try {
     const head = await fetchFollowingRedirects(url, "HEAD");
     if (head.kind === "response" && head.response.ok) {
@@ -678,6 +686,25 @@ const checkUrl = async (url: string): Promise<UrlCheckResult> => {
   } catch (error) {
     return describeConnectionError(error);
   }
+};
+
+// Some networks block or intercept plain http, which made every http:// link look dead.
+// Retrying over https separates those from links that are actually gone.
+const checkUrl = async (url: string): Promise<UrlCheckResult> => {
+  const result = await checkUrlOnce(url);
+  if (!result.failedToConnect || !url.startsWith("http://")) return result;
+
+  const httpsResult = await checkUrlOnce(url.replace(/^http:/, "https:"));
+  if (httpsResult.alive) {
+    return {
+      alive: false,
+      statusCode: null,
+      statusText: "Unreachable over http; works over https",
+      category: "httpsOnly",
+    };
+  }
+  if (httpsResult.failedToConnect) return result;
+  return { ...httpsResult, statusText: `${httpsResult.statusText} (checked over https)` };
 };
 
 const checkUrlBatch = async (urls: string[]): Promise<Map<string, UrlCheckResult>> => {
