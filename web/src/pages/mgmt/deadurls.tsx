@@ -5,6 +5,7 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { ContentDeadLink, FoundUrl } from "@/lib/static/admin/findDeadLinks";
+import { generateDeadLinksCsv } from "@/lib/static/admin/generateDeadLinksCsv";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LinearProgress } from "@mui/material";
 import { GetServerSidePropsResult } from "next";
@@ -174,18 +175,25 @@ ${collectionEntries
     return html;
   };
 
-  const handleDownloadClick = (): void => {
+  const handleDownloadHtmlClick = (): void => {
     if (!scanStatus?.results) return;
-    const content = generateDownloadContent(scanStatus.results);
-    const blob = new Blob([content], { type: "text/html" });
-    const blobUrl = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = blobUrl;
-    link.download = "dead-urls-report.html";
-    document.body.append(link);
-    link.click();
-    URL.revokeObjectURL(blobUrl);
-    link.remove();
+    downloadFile({
+      content: generateDownloadContent(scanStatus.results),
+      mimeType: "text/html",
+      filename: "dead-urls-report.html",
+    });
+  };
+
+  const handleDownloadCsvClick = (): void => {
+    if (!scanStatus?.results) return;
+    downloadFile({
+      content: generateDeadLinksCsv({
+        results: scanStatus.results,
+        siteOrigin: window.location.origin,
+      }),
+      mimeType: "text/csv;charset=utf-8",
+      filename: "content-hygiene-report.csv",
+    });
   };
 
   const progressPercent =
@@ -233,7 +241,8 @@ ${collectionEntries
       {scanStatus?.isComplete && scanStatus.results && (
         <DeadLinkResults
           results={scanStatus.results}
-          onDownload={handleDownloadClick}
+          onDownloadHtml={handleDownloadHtmlClick}
+          onDownloadCsv={handleDownloadCsvClick}
           onRestart={startScan}
         />
       )}
@@ -256,6 +265,24 @@ ${collectionEntries
   );
 };
 
+interface DownloadFileOptions {
+  readonly content: string;
+  readonly mimeType: string;
+  readonly filename: string;
+}
+
+const downloadFile = ({ content, mimeType, filename }: DownloadFileOptions): void => {
+  const blob = new Blob([content], { type: mimeType });
+  const blobUrl = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = blobUrl;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  URL.revokeObjectURL(blobUrl);
+  link.remove();
+};
+
 const groupByCollection = (results: ContentDeadLink[]): Record<string, ContentDeadLink[]> => {
   const grouped: Record<string, ContentDeadLink[]> = {};
   for (const item of results) {
@@ -268,11 +295,13 @@ const groupByCollection = (results: ContentDeadLink[]): Record<string, ContentDe
 
 const DeadLinkResults = ({
   results,
-  onDownload,
+  onDownloadHtml,
+  onDownloadCsv,
   onRestart,
 }: {
   results: ContentDeadLink[];
-  onDownload: () => void;
+  onDownloadHtml: () => void;
+  onDownloadCsv: () => void;
   onRestart: () => void;
 }): ReactElement => {
   const totalDeadUrls = results.reduce((sum, r) => sum + r.deadUrls.length, 0);
@@ -287,8 +316,13 @@ const DeadLinkResults = ({
 
       <div className="margin-bottom-3">
         <span className="margin-right-2">
-          <PrimaryButton onClick={onDownload} isColor={"primary"}>
-            Download Report
+          <PrimaryButton onClick={onDownloadHtml} isColor={"primary"}>
+            Download HTML
+          </PrimaryButton>
+        </span>
+        <span className="margin-right-2">
+          <PrimaryButton onClick={onDownloadCsv} isColor={"primary"}>
+            Download CSV
           </PrimaryButton>
         </span>
         <PrimaryButton onClick={onRestart} isColor={"secondary"}>
