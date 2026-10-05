@@ -491,4 +491,33 @@ For more information, visit [the resource page](https://dead-context.example.com
     expect(deadUrl.statusText).toBe("Too Many Requests");
     expect(deadUrl.category).toBe("inconclusive");
   });
+
+  it("checks URLs on the same host one at a time while checking hosts in parallel", async () => {
+    const inFlightByHost: Record<string, number> = {};
+    let inFlight = 0;
+    let maxInFlightForOneHost = 0;
+    let maxInFlight = 0;
+    (global.fetch as jest.Mock).mockImplementation(async (url: string) => {
+      const host = new URL(url).hostname.replace(/^www\./, "");
+      inFlightByHost[host] = (inFlightByHost[host] ?? 0) + 1;
+      inFlight++;
+      maxInFlightForOneHost = Math.max(maxInFlightForOneHost, inFlightByHost[host]);
+      maxInFlight = Math.max(maxInFlight, inFlight);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      inFlightByHost[host]--;
+      inFlight--;
+      return { ok: true, status: 200 };
+    });
+
+    await scanBodyUrls([
+      "https://a.example.com/1",
+      "https://www.a.example.com/2",
+      "http://a.example.com/3",
+      "https://b.example.com/1",
+      "https://b.example.com/2",
+    ]);
+
+    expect(maxInFlightForOneHost).toBe(1);
+    expect(maxInFlight).toBe(2);
+  });
 });

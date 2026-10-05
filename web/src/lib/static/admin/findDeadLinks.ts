@@ -728,14 +728,37 @@ const checkUrl = async (url: string): Promise<UrlCheckResult> => {
   return { ...httpsResult, statusText: `${httpsResult.statusText} (checked over https)` };
 };
 
-const checkUrlBatch = async (urls: string[]): Promise<Map<string, UrlCheckResult>> => {
-  const results = new Map<string, UrlCheckResult>();
-  const promises = urls.map(async (url) => {
-    const result = await checkUrl(url);
-    results.set(url, result);
-  });
-  await Promise.all(promises);
-  return results;
+const PARALLEL_HOSTS = 15;
+
+const getHostKey = (url: string): string => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+};
+
+// Hitting one host with many concurrent requests gets us rate limited (429), which hides the
+// real status. Each host's URLs are checked one at a time; different hosts run in parallel.
+const checkUrlsOneAtATimePerHost = async (
+  urls: string[],
+  onChecked: (url: string, result: UrlCheckResult) => void,
+): Promise<void> => {
+  const urlsByHost = new Map<string, string[]>();
+  for (const url of urls) {
+    const host = getHostKey(url);
+    urlsByHost.set(host, [...(urlsByHost.get(host) ?? []), url]);
+  }
+  const hostQueues = [...urlsByHost.values()];
+
+  const checkNextHosts = async (): Promise<void> => {
+    for (let queue = hostQueues.shift(); queue; queue = hostQueues.shift()) {
+      for (const url of queue) {
+        onChecked(url, await checkUrl(url));
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: PARALLEL_HOSTS }, checkNextHosts));
 };
 
 export const findDeadContentLinks = async (
@@ -776,24 +799,18 @@ export const findDeadContentLinks = async (
 
   const urlStatus = new Map<string, UrlCheckResult>();
   let checked = 0;
-  const batchSize = 15;
 
-  for (let i = 0; i < allUniqueUrls.length; i += batchSize) {
-    const batch = allUniqueUrls.slice(i, i + batchSize);
-    const batchResults = await checkUrlBatch(batch);
-    const batchDead: string[] = [];
-    for (const [url, result] of batchResults) {
-      urlStatus.set(url, result);
-      if (!result.alive) batchDead.push(url);
+  await checkUrlsOneAtATimePerHost(allUniqueUrls, (url, result) => {
+    urlStatus.set(url, result);
+    checked++;
+    if (!result.alive) {
+      console.log(`[deadlinks] ${result.statusText}: ${url}`);
     }
-    checked += batch.length;
-    console.log(
-      `[deadlinks] Checked ${checked}/${allUniqueUrls.length} URLs${
-        batchDead.length > 0 ? ` — dead in batch: ${batchDead.join(", ")}` : ""
-      }`,
-    );
+    if (checked % 50 === 0 || checked === allUniqueUrls.length) {
+      console.log(`[deadlinks] Checked ${checked}/${allUniqueUrls.length} URLs`);
+    }
     onProgress?.(checked, allUniqueUrls.length);
-  }
+  });
 
   const results: ContentDeadLink[] = [];
   for (const { filePath, slug, foundUrls } of fileData) {
