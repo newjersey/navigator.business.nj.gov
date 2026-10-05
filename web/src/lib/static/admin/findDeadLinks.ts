@@ -564,6 +564,27 @@ const fetchWithTimeout = async (url: string, method: string): Promise<HttpRespon
   }
 };
 
+const MAX_RATE_LIMIT_RETRIES = 2;
+const DEFAULT_RETRY_AFTER_SECONDS = 5;
+const MAX_RETRY_AFTER_SECONDS = 30;
+
+// Retry-After may also be an HTTP date; those fall back to the default wait.
+const getRetryDelayMs = (response: HttpResponse): number => {
+  const header = response.headers.get("retry-after");
+  const seconds = header === null ? Number.NaN : Number(header);
+  const delay = Number.isFinite(seconds) && seconds >= 0 ? seconds : DEFAULT_RETRY_AFTER_SECONDS;
+  return Math.min(delay, MAX_RETRY_AFTER_SECONDS) * 1000;
+};
+
+const fetchRetryingRateLimits = async (url: string, method: string): Promise<HttpResponse> => {
+  let response = await fetchWithTimeout(url, method);
+  for (let retry = 0; retry < MAX_RATE_LIMIT_RETRIES && response.status === 429; retry++) {
+    await new Promise((resolve) => setTimeout(resolve, getRetryDelayMs(response)));
+    response = await fetchWithTimeout(url, method);
+  }
+  return response;
+};
+
 const MAX_REDIRECTS = 10;
 
 type FetchOutcome =
@@ -578,7 +599,7 @@ const fetchFollowingRedirects = async (url: string, method: string): Promise<Fet
   let currentUrl = url;
   let firstRedirect: { status: number; location: string } | undefined;
   for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
-    const response = await fetchWithTimeout(currentUrl, method);
+    const response = await fetchRetryingRateLimits(currentUrl, method);
     const isRedirect = response.status >= 300 && response.status < 400;
     const location = isRedirect ? response.headers.get("location") : null;
     if (!location) return { kind: "response", response, firstRedirect };

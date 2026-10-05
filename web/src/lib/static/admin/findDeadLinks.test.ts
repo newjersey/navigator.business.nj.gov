@@ -462,4 +462,33 @@ For more information, visit [the resource page](https://dead-context.example.com
       expect(deadUrl.category).toBe("inconclusive");
     });
   });
+
+  const rateLimited = {
+    ok: false,
+    status: 429,
+    headers: { get: (name: string): string | null => (name === "retry-after" ? "0" : null) },
+  };
+
+  it("retries rate-limited requests to find the real status", async () => {
+    let getRequests = 0;
+    (global.fetch as jest.Mock).mockImplementation((_url: string, init: RequestInit) => {
+      if (init.method === "HEAD") return Promise.resolve({ ok: false, status: 405 });
+      getRequests++;
+      return Promise.resolve(getRequests === 1 ? rateLimited : { ok: false, status: 404 });
+    });
+
+    const [deadUrl] = await scanBodyUrls(["https://busy.example.com/page"]);
+
+    expect(deadUrl.statusText).toBe("Not Found");
+    expect(deadUrl.category).toBe("dead");
+  });
+
+  it("reports persistent rate limiting as inconclusive", async () => {
+    (global.fetch as jest.Mock).mockResolvedValue(rateLimited);
+
+    const [deadUrl] = await scanBodyUrls(["https://busy.example.com/page"]);
+
+    expect(deadUrl.statusText).toBe("Too Many Requests");
+    expect(deadUrl.category).toBe("inconclusive");
+  });
 });
