@@ -376,4 +376,51 @@ For more information, visit [the resource page](https://dead-context.example.com
       "https://e.example.com/503": "serverError",
     });
   });
+
+  const redirectTo = (location: string, status = 301): object => ({
+    ok: false,
+    status,
+    headers: { get: (name: string): string | null => (name === "location" ? location : null) },
+  });
+
+  it("follows redirects and reports where the chain ended", async () => {
+    (global.fetch as jest.Mock).mockImplementation((url: string) =>
+      Promise.resolve(
+        url === "https://old.example.com/page"
+          ? redirectTo("https://new.example.com/page")
+          : { ok: false, status: 404 },
+      ),
+    );
+
+    const [deadUrl] = await scanBodyUrls(["https://old.example.com/page"]);
+
+    expect(deadUrl.statusCode).toBe(301);
+    expect(deadUrl.statusText).toBe(
+      "Moved Permanently → 404 Not Found (https://new.example.com/page)",
+    );
+    expect(deadUrl.category).toBe("dead");
+  });
+
+  it("resolves relative redirect locations against the current URL", async () => {
+    (global.fetch as jest.Mock).mockImplementation((url: string) =>
+      Promise.resolve(
+        url === "https://site.example.com/old"
+          ? redirectTo("/new", 302)
+          : { ok: url === "https://site.example.com/new", status: 200 },
+      ),
+    );
+
+    expect(await scanBodyUrls(["https://site.example.com/old"])).toEqual([]);
+  });
+
+  it("reports redirect loops as inconclusive", async () => {
+    (global.fetch as jest.Mock).mockResolvedValue(
+      redirectTo("https://loop.example.com/login", 302),
+    );
+
+    const [deadUrl] = await scanBodyUrls(["https://loop.example.com/login"]);
+
+    expect(deadUrl.statusText).toBe("Redirect Loop");
+    expect(deadUrl.category).toBe("inconclusive");
+  });
 });

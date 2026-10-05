@@ -543,23 +543,49 @@ const collectContentFiles = (): { filePath: string; slug: string }[] => {
 const BROWSER_UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
-const fetchWithTimeout = async (
-  url: string,
-  method: string,
-  followRedirects = true,
-): Promise<{ ok: boolean; status: number; headers: { get(name: string): string | null } }> => {
+type HttpResponse = {
+  ok: boolean;
+  status: number;
+  headers: { get(name: string): string | null };
+};
+
+const fetchWithTimeout = async (url: string, method: string): Promise<HttpResponse> => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10_000);
   try {
     return await fetch(url, {
       method,
-      redirect: followRedirects ? "follow" : "manual",
+      redirect: "manual",
       signal: controller.signal,
       headers: { "User-Agent": BROWSER_UA },
     });
   } finally {
     clearTimeout(timeout);
   }
+};
+
+const MAX_REDIRECTS = 10;
+
+type FetchOutcome =
+  | {
+      kind: "response";
+      response: HttpResponse;
+      firstRedirect?: { status: number; location: string };
+    }
+  | { kind: "redirectLoop" };
+
+const fetchFollowingRedirects = async (url: string, method: string): Promise<FetchOutcome> => {
+  let currentUrl = url;
+  let firstRedirect: { status: number; location: string } | undefined;
+  for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
+    const response = await fetchWithTimeout(currentUrl, method);
+    const isRedirect = response.status >= 300 && response.status < 400;
+    const location = isRedirect ? response.headers.get("location") : null;
+    if (!location) return { kind: "response", response, firstRedirect };
+    currentUrl = new URL(location, currentUrl).toString();
+    firstRedirect ??= { status: response.status, location: currentUrl };
+  }
+  return { kind: "redirectLoop" };
 };
 
 type UrlCheckResult = {
@@ -622,23 +648,30 @@ const describeConnectionError = (error: unknown): UrlCheckResult => {
 
 const checkUrl = async (url: string): Promise<UrlCheckResult> => {
   try {
-    const noRedirectResponse = await fetchWithTimeout(url, "HEAD", false);
-    const isRedirect = noRedirectResponse.status >= 300 && noRedirectResponse.status < 400;
-    const redirectLocation = isRedirect ? noRedirectResponse.headers.get("location") || "" : "";
+    const head = await fetchFollowingRedirects(url, "HEAD");
+    if (head.kind === "response" && head.response.ok) {
+      return { alive: true, statusCode: head.response.status, statusText: "OK" };
+    }
+    const get = await fetchFollowingRedirects(url, "GET");
+    if (get.kind === "redirectLoop") {
+      return {
+        alive: false,
+        statusCode: null,
+        statusText: "Redirect Loop",
+        category: "inconclusive",
+      };
+    }
+    const { response, firstRedirect } = get;
+    if (response.ok) return { alive: true, statusCode: response.status, statusText: "OK" };
 
-    const headResponse = await fetchWithTimeout(url, "HEAD");
-    if (headResponse.ok) return { alive: true, statusCode: headResponse.status, statusText: "OK" };
-    const getResponse = await fetchWithTimeout(url, "GET");
-    if (getResponse.ok) return { alive: true, statusCode: getResponse.status, statusText: "OK" };
-
-    const finalStatus = getResponse.status;
-    const statusText = isRedirect
-      ? `${getStatusText(noRedirectResponse.status)} → ${finalStatus} ${getStatusText(finalStatus)}${redirectLocation ? ` (${redirectLocation})` : ""}`
+    const finalStatus = response.status;
+    const statusText = firstRedirect
+      ? `${getStatusText(firstRedirect.status)} → ${finalStatus} ${getStatusText(finalStatus)} (${firstRedirect.location})`
       : getStatusText(finalStatus);
 
     return {
       alive: false,
-      statusCode: isRedirect ? noRedirectResponse.status : finalStatus,
+      statusCode: firstRedirect ? firstRedirect.status : finalStatus,
       statusText,
       category: categorizeStatus(finalStatus),
     };
