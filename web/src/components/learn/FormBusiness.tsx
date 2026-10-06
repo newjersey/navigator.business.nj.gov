@@ -10,21 +10,29 @@ interface Props {
 export const FormBusiness = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
+  const h2Override = ({ children }: { children: string[] }): ReactElement => (
+    <h2 className="text-secondary-darker" style={{ marginTop: "1rem" }}>
+      {children}
+    </h2>
+  );
+
   return (
     <>
-      <h2>{props.heading}</h2>
+      <h2 className="text-secondary-darker">{props.heading}</h2>
       <Content>{Config.learnPageFormBusiness.overview}</Content>
       <br></br>
       <HorizontalLine />
-      <h3>{Config.learnPageFormBusiness.firstSectionHeader}</h3>
+      <h3 className="text-accent-cool-darker">{Config.learnPageFormBusiness.firstSectionHeader}</h3>
       <Content>{Config.learnPageFormBusiness.firstSection}</Content>
       <br></br>
       <HorizontalLine />
-      <h3>{Config.learnPageFormBusiness.secondSectionHeader}</h3>
+      <h3 className="text-accent-cool-darker">
+        {Config.learnPageFormBusiness.secondSectionHeader}
+      </h3>
       <Content>{Config.learnPageFormBusiness.secondSection}</Content>
       <br></br>
       <HorizontalLine />
-      <Content>{Config.learnPageFormBusiness.moreInfo}</Content>
+      <Content overrides={{ h2: h2Override }}>{Config.learnPageFormBusiness.moreInfo}</Content>
     </>
   );
 };
