@@ -104,16 +104,34 @@ const setupContentScanMocks = (files: { name: string; content: string }[]): void
   });
 };
 
+const generateResponse = (status: number): unknown => ({
+  ok: status >= 200 && status < 300,
+  status,
+  headers: { get: (): string | null => null },
+  body: null,
+});
+
+// Requests to one host are spaced apart, so timers must advance for scans to finish.
+const scanContentLinks = async (
+  onProgress?: (checked: number, total: number) => void,
+): ReturnType<typeof findDeadContentLinks> => {
+  const scan = findDeadContentLinks({ onProgress });
+  await jest.runAllTimersAsync();
+  return scan;
+};
+
 describe("findDeadContentLinks", () => {
   let consoleLogSpy: jest.SpyInstance<void, Parameters<typeof console.log>>;
 
   beforeEach(() => {
     jest.resetAllMocks();
+    jest.useFakeTimers();
     global.fetch = jest.fn();
     consoleLogSpy = jest.spyOn(console, "log").mockImplementation(() => {});
   });
 
   afterEach(() => {
+    jest.useRealTimers();
     consoleLogSpy.mockRestore();
     jest.restoreAllMocks();
   });
@@ -132,12 +150,12 @@ Also check https://another-dead.example.com/resource for details.
 
     (global.fetch as jest.Mock).mockImplementation((url: string) => {
       if (url === "https://alive-link.example.com") {
-        return Promise.resolve({ ok: true, status: 200 });
+        return Promise.resolve(generateResponse(200));
       }
-      return Promise.resolve({ ok: false, status: 404 });
+      return Promise.resolve(generateResponse(404));
     });
 
-    const results = await findDeadContentLinks();
+    const results = await scanContentLinks();
 
     expect(results.length).toBe(1);
     const result = results[0];
@@ -172,10 +190,10 @@ But https://real-dead.example.com is broken.
     setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
 
     (global.fetch as jest.Mock).mockImplementation(() => {
-      return Promise.resolve({ ok: false, status: 404 });
+      return Promise.resolve(generateResponse(404));
     });
 
-    const results = await findDeadContentLinks();
+    const results = await scanContentLinks();
 
     expect(results.length).toBe(1);
     expect(results[0].deadUrls).toHaveLength(1);
@@ -191,18 +209,25 @@ callToActionLink: https://head-blocked.example.com
 
     setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
 
-    let callCount = 0;
-    (global.fetch as jest.Mock).mockImplementation(() => {
-      callCount++;
-      if (callCount === 1) {
-        return Promise.resolve({ ok: false, status: 403 });
-      }
-      return Promise.resolve({ ok: true, status: 200 });
-    });
+    const fetchUrl = global.fetch as jest.Mock;
+    fetchUrl
+      .mockResolvedValueOnce(generateResponse(403))
+      .mockResolvedValueOnce(generateResponse(200));
 
-    const results = await findDeadContentLinks();
+    const results = await scanContentLinks();
+
     expect(results).toHaveLength(0);
-    expect(global.fetch).toHaveBeenCalledTimes(2);
+    expect(fetchUrl).toHaveBeenCalledTimes(2);
+    expect(fetchUrl).toHaveBeenNthCalledWith(
+      1,
+      "https://head-blocked.example.com",
+      expect.objectContaining({ method: "HEAD" }),
+    );
+    expect(fetchUrl).toHaveBeenNthCalledWith(
+      2,
+      "https://head-blocked.example.com",
+      expect.objectContaining({ method: "GET" }),
+    );
   });
 
   it("calls onProgress callback during URL checking", async () => {
@@ -216,10 +241,10 @@ Also https://example.com/2 here.
 
     setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
 
-    (global.fetch as jest.Mock).mockResolvedValue({ ok: true, status: 200 });
+    (global.fetch as jest.Mock).mockResolvedValue(generateResponse(200));
 
     const progressCalls: [number, number][] = [];
-    await findDeadContentLinks((checked, total) => {
+    await scanContentLinks((checked, total) => {
       progressCalls.push([checked, total]);
     });
 
@@ -241,12 +266,12 @@ Also https://example.com/2 here.
 
     (global.fetch as jest.Mock).mockImplementation((url: string) => {
       if (url === "https://alive-json.example.com") {
-        return Promise.resolve({ ok: true, status: 200 });
+        return Promise.resolve(generateResponse(200));
       }
-      return Promise.resolve({ ok: false, status: 404 });
+      return Promise.resolve(generateResponse(404));
     });
 
-    const results = await findDeadContentLinks();
+    const results = await scanContentLinks();
 
     expect(results.length).toBe(1);
     expect(results[0].deadUrls).toHaveLength(1);
@@ -264,9 +289,9 @@ Download the [MW-562 form](https://www.nj.gov/labor/wageandhour/assets/PDFs/MW-5
 
     setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
 
-    (global.fetch as jest.Mock).mockResolvedValue({ ok: false, status: 404 });
+    (global.fetch as jest.Mock).mockResolvedValue(generateResponse(404));
 
-    const results = await findDeadContentLinks();
+    const results = await scanContentLinks();
 
     expect(results.length).toBe(1);
     expect(results[0].deadUrls[0].url).toBe(
@@ -285,9 +310,9 @@ An eligibility map can be found here:
 
     setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
 
-    (global.fetch as jest.Mock).mockResolvedValue({ ok: false, status: 404 });
+    (global.fetch as jest.Mock).mockResolvedValue(generateResponse(404));
 
-    const results = await findDeadContentLinks();
+    const results = await scanContentLinks();
 
     expect(results.length).toBe(1);
     expect(results[0].deadUrls).toHaveLength(1);
@@ -304,12 +329,62 @@ For more information, visit [the resource page](https://dead-context.example.com
 
     setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
 
-    (global.fetch as jest.Mock).mockResolvedValue({ ok: false, status: 404 });
+    (global.fetch as jest.Mock).mockResolvedValue(generateResponse(404));
 
-    const results = await findDeadContentLinks();
+    const results = await scanContentLinks();
 
     expect(results.length).toBe(1);
     expect(results[0].deadUrls[0].context).toContain("the resource page");
     expect(results[0].deadUrls[0].context).toContain("dead-context.example.com");
+  });
+
+  it("reports the final 429 and attempt count for a redirect to a rate-limited page", async () => {
+    const mdContent = `---
+name: Rate limited
+callToActionLink: https://njeda.gov/example/
+---
+`;
+
+    setupContentScanMocks([{ name: "task1.md", content: mdContent }]);
+
+    (global.fetch as jest.Mock).mockImplementation((url: string) =>
+      Promise.resolve(
+        url === "https://njeda.gov/example/"
+          ? {
+              ok: false,
+              status: 301,
+              headers: {
+                get: (name: string): string | null =>
+                  name === "location" ? "https://www.njeda.gov/example/" : null,
+              },
+              body: null,
+            }
+          : {
+              ok: false,
+              status: 429,
+              headers: {
+                get: (name: string): string | null => (name === "retry-after" ? "1" : null),
+              },
+              body: null,
+            },
+      ),
+    );
+
+    const results = await scanContentLinks();
+
+    expect(results).toHaveLength(1);
+    expect(results[0].deadUrls[0]).toMatchObject({
+      statusCode: 429,
+      attemptCount: 3,
+      failureReason: "rate-limit-exhausted",
+      finalUrl: "https://www.njeda.gov/example/",
+      redirects: [
+        {
+          fromUrl: "https://njeda.gov/example/",
+          statusCode: 301,
+          toUrl: "https://www.njeda.gov/example/",
+        },
+      ],
+    });
   });
 });

@@ -1,4 +1,4 @@
-import type { ContentDeadLink } from "@/lib/static/admin/findDeadLinks";
+import type { ContentDeadLink, UrlRedirect } from "@/lib/static/admin/deadLinkTypes";
 
 /** Inputs for exporting completed scan findings as a spreadsheet-friendly CSV. */
 export interface DeadLinksCsvOptions {
@@ -22,6 +22,9 @@ const COLUMN_HEADERS = [
   "Field",
   "HTTP status code",
   "Status text",
+  "Attempt count",
+  "Final URL",
+  "Redirect chain",
   "Context",
 ];
 
@@ -33,6 +36,9 @@ const toRepositoryPath = (filePath: string): string => {
   const sourceIndex = filePath.lastIndexOf(CONTENT_SOURCE_DIRECTORY);
   return sourceIndex === -1 ? filePath : filePath.slice(sourceIndex);
 };
+
+const formatRedirect = (redirect: UrlRedirect): string =>
+  `${redirect.statusCode}: ${redirect.fromUrl} → ${redirect.toUrl}`;
 
 const toAbsoluteUrl = (relativeUrl: string, siteOrigin: string): string =>
   relativeUrl === "" ? "" : new URL(relativeUrl, siteOrigin).href;
@@ -56,6 +62,9 @@ export const generateDeadLinksCsv = ({ results, siteOrigin }: DeadLinksCsvOption
         deadUrl.field,
         deadUrl.statusCode?.toString() ?? "",
         deadUrl.statusText ?? "",
+        deadUrl.attemptCount?.toString() ?? "",
+        deadUrl.finalUrl ?? "",
+        deadUrl.redirects?.map(formatRedirect).join("; ") ?? "",
         deadUrl.context,
       ]),
     ),
