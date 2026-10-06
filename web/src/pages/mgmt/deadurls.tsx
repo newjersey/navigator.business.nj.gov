@@ -4,7 +4,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { ContentDeadLink, FoundUrl } from "@/lib/static/admin/findDeadLinks";
+import type { ContentDeadLink, FoundUrl } from "@/lib/static/admin/deadLinkTypes";
 import { generateDeadLinksCsv } from "@/lib/static/admin/generateDeadLinksCsv";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LinearProgress } from "@mui/material";
@@ -17,6 +17,10 @@ interface Props {
 }
 
 type ScanStatus = {
+  scanId: string;
+  startedAt: string;
+  completedAt: string | null;
+  logTruncated: boolean;
   checkedUrls: number;
   totalUrls: number;
   isComplete: boolean;
@@ -31,6 +35,8 @@ const DeadUrlsPage = (props: Props): ReactElement => {
   const [isScanning, setIsScanning] = useState<boolean>(false);
   const [scanStatus, setScanStatus] = useState<ScanStatus | null>(null);
   const [startError, setStartError] = useState<string | null>(null);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [isDownloadingLog, setIsDownloadingLog] = useState<boolean>(false);
   const pollingRef = useRef<NodeJS.Timeout | null>(null);
   const config = getMergedConfig();
 
@@ -64,6 +70,7 @@ const DeadUrlsPage = (props: Props): ReactElement => {
 
   const startScan = async (): Promise<void> => {
     setStartError(null);
+    setDownloadError(null);
     setIsScanning(true);
     setScanStatus(null);
     try {
@@ -163,6 +170,10 @@ ${collectionEntries
           html += `  <div class="dead-url">`;
           html += `<code>${escapeHtml(deadUrl.url)}</code> `;
           html += `<span class="status">${escapeHtml(status)}</span><br>`;
+          const redirectSummary = getRedirectSummary(deadUrl);
+          if (redirectSummary) {
+            html += `<span class="status">Redirects: ${escapeHtml(redirectSummary)}</span><br>`;
+          }
           html += `<span class="field">Field: <strong>${escapeHtml(deadUrl.field)}</strong></span>`;
           html += ` &middot; <span class="context">${escapeHtml(deadUrl.context)}</span>`;
           html += `</div>\n`;
@@ -195,6 +206,45 @@ ${collectionEntries
       filename: "content-hygiene-report.csv",
     });
   };
+
+  const handleDownloadDebugLogClick = async (): Promise<void> => {
+    if (!scanStatus || isDownloadingLog) return;
+
+    const { scanId } = scanStatus;
+    setDownloadError(null);
+    setIsDownloadingLog(true);
+
+    try {
+      const res = await fetch(`/api/mgmt/deadlinks/log?scanId=${encodeURIComponent(scanId)}`);
+      if (!res.ok) {
+        setDownloadError(DEBUG_LOG_DOWNLOAD_ERROR);
+        return;
+      }
+
+      downloadFile({
+        content: await res.text(),
+        mimeType: "application/x-ndjson;charset=utf-8",
+        filename: `content-hygiene-debug-${scanId}.jsonl`,
+      });
+    } catch {
+      setDownloadError(DEBUG_LOG_DOWNLOAD_ERROR);
+    } finally {
+      setIsDownloadingLog(false);
+    }
+  };
+
+  const debugLogDownloadButton = scanStatus ? (
+    <span className="margin-right-2">
+      <PrimaryButton
+        onClick={handleDownloadDebugLogClick}
+        isColor={"primary"}
+        isLoading={isDownloadingLog}
+        dataTestId="download-debug-log"
+      >
+        {DEBUG_LOG_BUTTON_TEXT}
+      </PrimaryButton>
+    </span>
+  ) : null;
 
   const progressPercent =
     scanStatus && scanStatus.totalUrls > 0
@@ -238,11 +288,24 @@ ${collectionEntries
 
       {scanStatus?.error && <p className="text-error margin-top-2">Error: {scanStatus.error}</p>}
 
+      {scanStatus && (isScanning || scanStatus.error) && (
+        <div className="margin-top-2">{debugLogDownloadButton}</div>
+      )}
+
+      {scanStatus?.logTruncated && <p className="margin-top-2">{DEBUG_LOG_TRUNCATED_TEXT}</p>}
+
+      {downloadError && (
+        <p role="alert" className="text-error margin-top-2">
+          {downloadError}
+        </p>
+      )}
+
       {scanStatus?.isComplete && scanStatus.results && (
         <DeadLinkResults
           results={scanStatus.results}
           onDownloadHtml={handleDownloadHtmlClick}
           onDownloadCsv={handleDownloadCsvClick}
+          debugLogDownloadButton={debugLogDownloadButton}
           onRestart={startScan}
         />
       )}
@@ -264,6 +327,15 @@ ${collectionEntries
     </PageSkeleton>
   );
 };
+
+const DEBUG_LOG_BUTTON_TEXT = "Download debug log (JSONL)";
+const DEBUG_LOG_DOWNLOAD_ERROR = "The debug log could not be downloaded. Try again.";
+const DEBUG_LOG_TRUNCATED_TEXT = "The debug log reached its size limit. Some activity was omitted.";
+
+const getRedirectSummary = (deadUrl: FoundUrl): string =>
+  (deadUrl.redirects ?? [])
+    .map((redirect) => `${redirect.statusCode}: ${redirect.fromUrl} → ${redirect.toUrl}`)
+    .join("; ");
 
 interface DownloadFileOptions {
   readonly content: string;
@@ -297,11 +369,13 @@ const DeadLinkResults = ({
   results,
   onDownloadHtml,
   onDownloadCsv,
+  debugLogDownloadButton,
   onRestart,
 }: {
   results: ContentDeadLink[];
   onDownloadHtml: () => void;
   onDownloadCsv: () => void;
+  debugLogDownloadButton: ReactElement | null;
   onRestart: () => void;
 }): ReactElement => {
   const totalDeadUrls = results.reduce((sum, r) => sum + r.deadUrls.length, 0);
@@ -325,6 +399,7 @@ const DeadLinkResults = ({
             Download CSV
           </PrimaryButton>
         </span>
+        {debugLogDownloadButton}
         <PrimaryButton onClick={onRestart} isColor={"secondary"}>
           Run Again
         </PrimaryButton>
@@ -371,6 +446,11 @@ const DeadLinkResults = ({
                             : deadUrl.statusText || "Connection Failed"}
                         </span>
                       </div>
+                      {deadUrl.redirects && deadUrl.redirects.length > 0 && (
+                        <div className="text-base font-body-2xs">
+                          Redirects: {getRedirectSummary(deadUrl)}
+                        </div>
+                      )}
                       <div className="text-base font-body-2xs">
                         Field: <strong>{deadUrl.field}</strong>
                         {" · "}
