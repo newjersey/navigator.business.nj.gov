@@ -7,6 +7,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse): void
     return;
   }
 
+  if (process.env.CHECK_DEAD_LINKS !== "true") {
+    res.status(403).json({ error: "Dead link checking is disabled" });
+    return;
+  }
+
   const job = getJobState();
 
   if (!job) {
@@ -14,7 +19,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse): void
     return;
   }
 
+  res.setHeader("Cache-Control", "no-store");
   res.status(200).json({
+    scanId: job.scanId,
+    startedAt: job.startedAt,
+    completedAt: job.completedAt,
+    logTruncated: job.debugLog.droppedEvents > 0,
     checkedUrls: job.checkedUrls,
     totalUrls: job.totalUrls,
     isComplete: job.isComplete,

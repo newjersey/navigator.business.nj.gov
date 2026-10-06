@@ -4,7 +4,7 @@ import { generateDeadLinksCsv } from "@/lib/static/admin/generateDeadLinksCsv";
 const siteOrigin = "https://example.test";
 
 const HEADER =
-  '"Collection","Content name","Slug","File path","Page URL","CMS edit URL","Dead URL","Field","HTTP status code","Status text","Context"';
+  '"Collection","Content name","Slug","File path","Page URL","CMS edit URL","Dead URL","Field","HTTP status code","Status text","Attempt count","Final URL","Redirect chain","Context"';
 
 const generateDeadUrl = (overrides: Partial<FoundUrl>): FoundUrl => ({
   url: "https://dead.example.com",
@@ -50,8 +50,8 @@ describe("generateDeadLinksCsv", () => {
 
     expect(generateCsv(results)).toEqual([
       HEADER,
-      '"Tasks - All","Register LLC","register-llc","content/src/roadmaps/tasks/register-llc.md","https://example.test/tasks/register-llc","https://example.test/mgmt/cms#/collections/tasks/entries/register-llc","https://one.example.com","body","404","Not Found","first"',
-      '"Tasks - All","Register LLC","register-llc","content/src/roadmaps/tasks/register-llc.md","https://example.test/tasks/register-llc","https://example.test/mgmt/cms#/collections/tasks/entries/register-llc","https://two.example.com","summary","404","Not Found","second"',
+      '"Tasks - All","Register LLC","register-llc","content/src/roadmaps/tasks/register-llc.md","https://example.test/tasks/register-llc","https://example.test/mgmt/cms#/collections/tasks/entries/register-llc","https://one.example.com","body","404","Not Found","","","","first"',
+      '"Tasks - All","Register LLC","register-llc","content/src/roadmaps/tasks/register-llc.md","https://example.test/tasks/register-llc","https://example.test/mgmt/cms#/collections/tasks/entries/register-llc","https://two.example.com","summary","404","Not Found","","","","second"',
     ]);
   });
 
@@ -105,5 +105,27 @@ describe("generateDeadLinksCsv", () => {
     const results = [generateDeadLink({ deadUrls: [deadUrl] })];
 
     expect(generateCsv(results)[1]).toContain('"body","","Timeout",');
+  });
+
+  it("writes the attempt count, final URL, and redirect chain for a rate-limited redirect", () => {
+    const deadUrl = generateDeadUrl({
+      url: "http://njeda.gov/example/",
+      statusCode: 429,
+      statusText: "Too Many Requests — failed after 3 attempts",
+      attemptCount: 3,
+      finalUrl: "https://www.njeda.gov/example/",
+      redirects: [
+        {
+          fromUrl: "http://njeda.gov/example/",
+          statusCode: 301,
+          toUrl: "https://www.njeda.gov/example/",
+        },
+      ],
+    });
+    const results = [generateDeadLink({ deadUrls: [deadUrl] })];
+
+    expect(generateCsv(results)[1]).toContain(
+      '"429","Too Many Requests — failed after 3 attempts","3","https://www.njeda.gov/example/","301: http://njeda.gov/example/ → https://www.njeda.gov/example/",',
+    );
   });
 });

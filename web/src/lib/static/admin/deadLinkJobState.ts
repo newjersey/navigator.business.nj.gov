@@ -1,6 +1,11 @@
-import { ContentDeadLink } from "@/lib/static/admin/findDeadLinks";
+import type { DeadLinkDebugLog } from "@/lib/static/admin/deadLinkDebugLog";
+import type { ContentDeadLink } from "@/lib/static/admin/deadLinkTypes";
 
 export type JobState = {
+  scanId: string;
+  startedAt: string;
+  completedAt: string | null;
+  debugLog: DeadLinkDebugLog;
   checkedUrls: number;
   totalUrls: number;
   isComplete: boolean;

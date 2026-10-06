@@ -1,5 +1,8 @@
 import cmsMapJson from "@/lib/cms/CollectionMap.json";
 import { AddOn, TaskModification } from "@/lib/roadmap/roadmapBuilder";
+import { createContentLinkChecker } from "@/lib/static/admin/contentLinkChecker";
+import type { DeadLinkLogEvent } from "@/lib/static/admin/deadLinkDebugLog";
+import type { ContentDeadLink, FoundUrl, UrlCheckResult } from "@/lib/static/admin/deadLinkTypes";
 import { loadTaskDependenciesFile } from "@businessnjgovnavigator/shared/static";
 import { CMSMap, IndustryRoadmap, TaskDependencies } from "@businessnjgovnavigator/shared/types";
 import fs from "fs";
@@ -294,23 +297,7 @@ export const findDeadLicenseTasks = async (): Promise<string[]> => {
   return deadTasks;
 };
 
-export type FoundUrl = {
-  url: string;
-  field: string;
-  context: string;
-  statusCode?: number | null;
-  statusText?: string;
-};
-
-export type ContentDeadLink = {
-  file: string;
-  slug: string;
-  displayName: string;
-  collection: string;
-  cmsEditUrl: string;
-  pageUrl: string;
-  deadUrls: FoundUrl[];
-};
+export type { ContentDeadLink, FoundUrl } from "@/lib/static/admin/deadLinkTypes";
 
 const CONTENT_DIRS_TO_SCAN = [
   "anytime-action-categories",
@@ -537,94 +524,15 @@ const collectContentFiles = (): { filePath: string; slug: string }[] => {
   return files;
 };
 
-const BROWSER_UA =
-  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+export interface FindDeadContentLinksOptions {
+  readonly onProgress?: (checkedUrls: number, totalUrls: number) => void;
+  readonly onEvent?: (event: DeadLinkLogEvent) => void;
+}
 
-const fetchWithTimeout = async (
-  url: string,
-  method: string,
-  followRedirects = true,
-): Promise<{ ok: boolean; status: number; headers: { get(name: string): string | null } }> => {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10_000);
-  try {
-    return await fetch(url, {
-      method,
-      redirect: followRedirects ? "follow" : "manual",
-      signal: controller.signal,
-      headers: { "User-Agent": BROWSER_UA },
-    });
-  } finally {
-    clearTimeout(timeout);
-  }
-};
-
-type UrlCheckResult = {
-  alive: boolean;
-  statusCode: number | null;
-  statusText: string;
-};
-
-const STATUS_TEXT: Record<number, string> = {
-  301: "Moved Permanently",
-  302: "Found",
-  308: "Permanent Redirect",
-  400: "Bad Request",
-  401: "Unauthorized",
-  403: "Forbidden",
-  404: "Not Found",
-  405: "Method Not Allowed",
-  410: "Gone",
-  429: "Too Many Requests",
-  500: "Internal Server Error",
-  502: "Bad Gateway",
-  503: "Service Unavailable",
-  521: "Web Server Is Down",
-  522: "Connection Timed Out",
-  523: "Origin Is Unreachable",
-};
-
-const getStatusText = (code: number): string => STATUS_TEXT[code] || `HTTP ${code}`;
-
-const checkUrl = async (url: string): Promise<UrlCheckResult> => {
-  try {
-    const noRedirectResponse = await fetchWithTimeout(url, "HEAD", false);
-    const isRedirect = noRedirectResponse.status >= 300 && noRedirectResponse.status < 400;
-    const redirectLocation = isRedirect ? noRedirectResponse.headers.get("location") || "" : "";
-
-    const headResponse = await fetchWithTimeout(url, "HEAD");
-    if (headResponse.ok) return { alive: true, statusCode: headResponse.status, statusText: "OK" };
-    const getResponse = await fetchWithTimeout(url, "GET");
-    if (getResponse.ok) return { alive: true, statusCode: getResponse.status, statusText: "OK" };
-
-    const finalStatus = getResponse.status;
-    const statusText = isRedirect
-      ? `${getStatusText(noRedirectResponse.status)} → ${finalStatus} ${getStatusText(finalStatus)}${redirectLocation ? ` (${redirectLocation})` : ""}`
-      : getStatusText(finalStatus);
-
-    return {
-      alive: false,
-      statusCode: isRedirect ? noRedirectResponse.status : finalStatus,
-      statusText,
-    };
-  } catch {
-    return { alive: false, statusCode: null, statusText: "Connection Failed" };
-  }
-};
-
-const checkUrlBatch = async (urls: string[]): Promise<Map<string, UrlCheckResult>> => {
-  const results = new Map<string, UrlCheckResult>();
-  const promises = urls.map(async (url) => {
-    const result = await checkUrl(url);
-    results.set(url, result);
-  });
-  await Promise.all(promises);
-  return results;
-};
-
-export const findDeadContentLinks = async (
-  onProgress?: (checkedUrls: number, totalUrls: number) => void,
-): Promise<ContentDeadLink[]> => {
+export const findDeadContentLinks = async ({
+  onProgress,
+  onEvent,
+}: FindDeadContentLinksOptions = {}): Promise<ContentDeadLink[]> => {
   const files = collectContentFiles();
   console.log(`[deadlinks] Found ${files.length} content files to scan`);
 
@@ -658,26 +566,40 @@ export const findDeadContentLinks = async (
       `(skipped ${skippedTemplate} template, ${skippedFalsePositive} false positive)`,
   );
 
+  const checker = createContentLinkChecker({
+    fetch: (url, options) => fetch(url, options),
+    onEvent,
+  });
   const urlStatus = new Map<string, UrlCheckResult>();
   let checked = 0;
-  const batchSize = 15;
 
-  for (let i = 0; i < allUniqueUrls.length; i += batchSize) {
-    const batch = allUniqueUrls.slice(i, i + batchSize);
-    const batchResults = await checkUrlBatch(batch);
-    const batchDead: string[] = [];
-    for (const [url, result] of batchResults) {
-      urlStatus.set(url, result);
-      if (!result.alive) batchDead.push(url);
+  onEvent?.({ event: "urls_collected", fileCount: files.length, totalUrls: allUniqueUrls.length });
+  onProgress?.(0, allUniqueUrls.length);
+
+  const checkContentUrl = async (url: string): Promise<void> => {
+    const result = await checker.checkUrl(url);
+    urlStatus.set(url, result);
+    checked++;
+
+    onEvent?.({
+      event: "url_finalized",
+      originalUrl: url,
+      url: result.finalUrl,
+      attempt: result.attemptCount,
+      statusCode: result.statusCode,
+      alive: result.alive,
+      failureReason: result.failureReason,
+    });
+    if (!result.alive) {
+      console.log(
+        `[deadlinks] Dead (${checked}/${allUniqueUrls.length}): ${url} — ${result.statusCode ?? ""} ${result.statusText}`,
+      );
     }
-    checked += batch.length;
-    console.log(
-      `[deadlinks] Checked ${checked}/${allUniqueUrls.length} URLs${
-        batchDead.length > 0 ? ` — dead in batch: ${batchDead.join(", ")}` : ""
-      }`,
-    );
     onProgress?.(checked, allUniqueUrls.length);
-  }
+  };
+
+  // The checker's scheduler limits how many requests are actually in flight.
+  await Promise.all(allUniqueUrls.map(checkContentUrl));
 
   const results: ContentDeadLink[] = [];
   for (const { filePath, slug, foundUrls } of fileData) {
@@ -689,6 +611,10 @@ export const findDeadContentLinks = async (
           ...u,
           statusCode: status?.statusCode ?? null,
           statusText: status?.statusText ?? "Unknown",
+          attemptCount: status?.attemptCount,
+          finalUrl: status?.finalUrl,
+          redirects: status?.redirects,
+          failureReason: status?.failureReason,
         };
       });
     if (deadUrls.length > 0) {
