@@ -11,7 +11,7 @@ export const FindNaics = (props: Props): ReactElement => {
 
   return (
     <>
-      <h2>{props.heading}</h2>
+      <h2 className="text-secondary-darker">{props.heading}</h2>
       <Content className="margin-bottom-5">{Config.learnPageFindNaics.content}</Content>
     </>
   );

@@ -11,7 +11,7 @@ export const GetEin = (props: Props): ReactElement => {
 
   return (
     <div>
-      <h2>{props.heading}</h2>
+      <h2 className="text-secondary-darker">{props.heading}</h2>
       <Content>{Config.learnPageGetEin.overview}</Content>
       <Content>{Config.learnPageGetEin.callouts}</Content>
     </div>

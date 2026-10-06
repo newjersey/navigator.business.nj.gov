@@ -83,7 +83,7 @@ const LearnTaskPage = (props: Props): ReactElement => {
           <h1>
             {`${Config.learnPages.stepText} ${learnSteps.findIndex((step) => step.id === props.learnStep.id) + 1}`}
           </h1>
-          {pageComponents[props.learnStep.id]}
+          <div className="margin-right-1">{pageComponents[props.learnStep.id]}</div>
           <div className="display-flex flex-justify-end margin-top-2">
             <button
               className="usa-button usa-button--primary display-flex flex-align-center text-left text-normal"

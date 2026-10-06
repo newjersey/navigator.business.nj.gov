@@ -60,9 +60,9 @@ export const SidebarPageLayout = ({
                 </div>
               )}
               <div
-                className={
+                className={`margin-1 margin-top-4 ${
                   outlineBox ? "border-1px border-base-light usa-prose padding-4 radius-lg" : ""
-                }
+                }`}
               >
                 {children}
               </div>
