@@ -1,3 +1,19 @@
+# [2026.22.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.21.0...v2026.22.0) (2026-10-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v1.20.0 [security] ([0dd0080](https://github.com/newjersey/navigator.business.nj.gov/commit/0dd0080aebb001b650d86aaf443b2716fa2184bd))
+* **deps:** update dependency js-yaml to v4.3.2 [security] ([70d27ed](https://github.com/newjersey/navigator.business.nj.gov/commit/70d27ed5b89e4b051355586d8e0e574ed62165eb))
+* **deps:** update dependency next to v16.3.6 [security] ([7b3eb61](https://github.com/newjersey/navigator.business.nj.gov/commit/7b3eb610a7498e7635c962644e4ddbbb8f056985))
+* **deps:** update dependency next to v16.3.6 [security] ([ac02baf](https://github.com/newjersey/navigator.business.nj.gov/commit/ac02bafa60f5723b14689294834f1bd6149a34d0))
+
+
+### Features
+
+* add debug logging to content hygiene tool ([e75a908](https://github.com/newjersey/navigator.business.nj.gov/commit/e75a90871ab7be799513adfccc731b56a3bf0579))
+* download CSV from content hygiene report ([8c58f11](https://github.com/newjersey/navigator.business.nj.gov/commit/8c58f11551cf70ba9dd33ed0e1d1e6d044790bf4))
+
 # [2026.21.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.20.0...v2026.21.0) (2026-09-29)
 
 
