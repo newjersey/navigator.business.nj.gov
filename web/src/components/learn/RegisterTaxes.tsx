@@ -11,7 +11,7 @@ export const RegisterTaxes = (props: Props): ReactElement => {
 
   return (
     <div>
-      <h2>{props.heading}</h2>
+      <h2 className="text-secondary-darker">{props.heading}</h2>
       <Content>{Config.learnPageRegisterTaxes.overview}</Content>
       <Content className="margin-top-4">{Config.learnPageRegisterTaxes.callouts}</Content>
     </div>
