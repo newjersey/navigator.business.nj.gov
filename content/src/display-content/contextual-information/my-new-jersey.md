@@ -4,7 +4,7 @@ id: my-new-jersey
 displayname: my-new-jersey
 ---
 
-You need a myNewJersey account to log in to [Business.NJ.gov](/).
+You need a myNewJersey account to log in to Business.NJ.gov.
 
 &nbsp;
 
