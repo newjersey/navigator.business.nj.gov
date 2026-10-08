@@ -31,6 +31,7 @@ export const webBuildEnvironmentVariableNames = [
   "STAGE",
   "USE_BASIC_AUTH",
   "USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH",
+  "FEATURE_ENABLE_INTENT_SELECTION_FLOW",
 ] as const;
 
 interface BuildEnvironment {
