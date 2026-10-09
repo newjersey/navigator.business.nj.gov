@@ -1,28 +1,29 @@
 import * as cdk from "aws-cdk-lib";
 import * as dotenv from "dotenv";
 import { ApiStack } from "../lib/apiStack";
-import { DataStack } from "../lib/dataStack";
-import { IamStack } from "../lib/iamStack";
-import { LambdaStack } from "../lib/lambdaStack";
-import { StorageStack } from "../lib/storageStack";
+import { BackupStack } from "../lib/backupStack";
 import { CognitoStack } from "../lib/cognitoStack";
-import { EncryptionStack } from "../lib/encryptionStack";
-import { StaticSiteClusterStack } from "../lib/staticSiteClusterStack";
-import { StaticSiteRepositoryStack } from "../lib/staticSiteRepositoryStack";
-import { StaticSiteServiceStack } from "../lib/staticSiteServiceStack";
 import {
   BUSINESSES_TABLE,
   CONTENT_STAGE,
   DEV_STAGE,
   LOCAL_STAGE,
+  MESSAGES_TABLE,
   PROD_STAGE,
   STAGING_STAGE,
   TESTING_STAGE,
   USERS_TABLE,
-  MESSAGES_TABLE,
 } from "../lib/constants";
-import { BackupStack } from "../lib/backupStack";
+import { DataStack } from "../lib/dataStack";
+import { EncryptionStack } from "../lib/encryptionStack";
+import { IamStack } from "../lib/iamStack";
+import { LambdaStack } from "../lib/lambdaStack";
 import { MonitoringStack } from "../lib/monitoringStack";
+import { StaticSiteClusterStack } from "../lib/staticSiteClusterStack";
+import { StaticSiteRepositoryStack } from "../lib/staticSiteRepositoryStack";
+import { StaticSiteServiceStack } from "../lib/staticSiteServiceStack";
+import { StorageStack } from "../lib/storageStack";
+
 dotenv.config({ path: "../.env" });
 
 const app = new cdk.App();

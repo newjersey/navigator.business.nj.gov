@@ -1,9 +1,9 @@
 import { Duration } from "aws-cdk-lib";
-import * as ecr from "aws-cdk-lib/aws-ecr";
+import type * as ecr from "aws-cdk-lib/aws-ecr";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as iam from "aws-cdk-lib/aws-iam";
-import * as logs from "aws-cdk-lib/aws-logs";
-import { Construct } from "constructs";
+import type * as logs from "aws-cdk-lib/aws-logs";
+import type { Construct } from "constructs";
 import {
   CONTENT_STAGE,
   DEV_STAGE,

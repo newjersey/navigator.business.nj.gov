@@ -1,15 +1,22 @@
+import path from "node:path";
 import { API_SERVICE_NAME } from "@businessnjgovnavigator/api/src/libs/constants";
-import { Duration, Size, Stack, StackProps } from "aws-cdk-lib";
-import { ISecurityGroup, ISubnet, IVpc, SecurityGroup, Subnet, Vpc } from "aws-cdk-lib/aws-ec2";
+import { Duration, Size, Stack, type StackProps } from "aws-cdk-lib";
+import {
+  type ISecurityGroup,
+  type ISubnet,
+  type IVpc,
+  SecurityGroup,
+  Subnet,
+  Vpc,
+} from "aws-cdk-lib/aws-ec2";
 import * as events from "aws-cdk-lib/aws-events";
 import * as targets from "aws-cdk-lib/aws-events-targets";
-import * as iam from "aws-cdk-lib/aws-iam";
-import { IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
-import { IBucket } from "aws-cdk-lib/aws-s3";
-import * as sns from "aws-cdk-lib/aws-sns";
+import type * as iam from "aws-cdk-lib/aws-iam";
+import { type IFunction, Runtime } from "aws-cdk-lib/aws-lambda";
+import type { IBucket } from "aws-cdk-lib/aws-s3";
+import type * as sns from "aws-cdk-lib/aws-sns";
 import * as subs from "aws-cdk-lib/aws-sns-subscriptions";
-import { Construct } from "constructs";
-import path from "node:path";
+import type { Construct } from "constructs";
 import {
   BUSINESSES_TABLE,
   CONTENT_STAGE,

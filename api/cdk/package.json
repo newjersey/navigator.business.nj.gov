@@ -8,12 +8,13 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
-    "lint:fix": "eslint . --ext .ts,.tsx --max-warnings 0 --fix",
-    "prettier": "prettier --write . --ignore-path=./.eslintignore",
-    "prettier:check": "prettier . --check --ignore-path=./.eslintignore"
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "format:check": "biome format ."
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.15",
     "@jest/globals": "30.4.1",
     "@types/jest": "30.0.0",
     "@types/node": "24.13.3",
