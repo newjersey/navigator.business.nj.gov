@@ -1,0 +1,186 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["@newjersey/biome-config/biome"],
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": [
+      "**",
+      "!**/.yarn/*",
+      "!package-lock.json",
+      "!pnpm-lock.yaml",
+      "!yarn.lock",
+      "!bun.lockb",
+      "!.claude",
+      "!packages/static-site",
+      "!packages/content-types",
+      "!scripts",
+      "!web/stories",
+      "!web/cypress/support",
+      "!web/cypress/plugins",
+      "!api/wiremock/__files/tax-clearance-success.json",
+      "!**/public",
+      "!**/*.svg",
+      "!**/*.min.js",
+      "!**/*.html"
+    ]
+  },
+  "overrides": [
+    {
+      "includes": ["shared/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": {
+              "level": "error",
+              "options": {
+                "filenameCases": ["camelCase"]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["api/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": {
+              "level": "error",
+              "options": {
+                "filenameCases": ["camelCase", "PascalCase"]
+              }
+            },
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["./**", "../**"],
+                    "message": "Use path-alias imports instead of relative imports."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["api/src/db/migrations/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": {
+              "level": "error",
+              "options": {
+                "filenameCases": ["snake_case"]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "api/cdk/**",
+        "api/scripts/**",
+        "api/src/functions/messagingService/reactEmail/**"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["web/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": {
+              "level": "error",
+              "options": {
+                "filenameCases": ["kebab-case", "camelCase", "PascalCase"]
+              }
+            }
+          },
+          "correctness": {
+            "noRestrictedElements": {
+              "level": "error",
+              "options": {
+                "elements": {
+                  "h5": "Use h1-h4; h5 and h6 are not part of the design system.",
+                  "h6": "Use h1-h4; h5 and h6 are not part of the design system."
+                }
+              }
+            },
+            "useExhaustiveDependencies": {
+              "level": "error",
+              "options": {
+                "reportUnnecessaryDependencies": false
+              }
+            },
+            "noBeforeInteractiveScriptOutsideDocument": "error",
+            "noNextAsyncClientComponent": "error"
+          },
+          "a11y": {
+            "noLabelWithoutControl": {
+              "level": "error",
+              "options": {
+                "inputComponents": ["Checkbox"]
+              }
+            },
+            "noNoninteractiveElementInteractions": "error"
+          },
+          "performance": {
+            "noImgElement": "off",
+            "noSyncScripts": "error"
+          },
+          "suspicious": {
+            "noUnknownAttribute": "error"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["shared/**", "api/**", "web/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noNamespace": "error",
+            "noSubstr": "error",
+            "useAsConstAssertion": "error",
+            "useCollapsedIf": "error",
+            "useExplicitLengthCheck": "error",
+            "useForOf": "error",
+            "useNumberNamespace": "error",
+            "useThrowNewError": "error",
+            "useTrimStartEnd": "error"
+          },
+          "suspicious": {
+            "noEmptySource": "error",
+            "useErrorMessage": "error",
+            "useNumberToFixedDigitsArgument": "error"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["shared/**/*.test.*", "api/**/*.test.*", "web/**/*.test.*"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "useExpect": "error"
+          }
+        }
+      }
+    }
+  ]
+}
