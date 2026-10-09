@@ -1,4 +1,4 @@
-import { MunicipalityDetail } from "../municipality";
+import type { MunicipalityDetail } from "../municipality";
 
 export const fetchMunicipalityById = async (id: string): Promise<MunicipalityDetail> => {
   const file = await import(`../static/municipalities.json`);

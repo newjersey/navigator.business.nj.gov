@@ -1,6 +1,6 @@
-import { Filing } from "../../types";
+import type { Filing } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
   const filingData = getFilingData(filings);

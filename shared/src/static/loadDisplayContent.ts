@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { getMarkdown } from "../markdownReader";
-import {
+import type {
   FormationDbaContent,
   FormationDbaDisplayContent,
   RoadmapDisplayContent,
@@ -14,7 +14,6 @@ const displayContentDirectory = path.join(process.cwd(), "..", "content", "src",
 export const loadRoadmapSideBarDisplayContent = (): RoadmapDisplayContent => {
   const fileNames = fs.readdirSync(path.join(displayContentDirectory, "roadmap-sidebar-cards"));
 
-  // eslint-disable-next-line unicorn/no-array-reduce
   const sideBarDisplayContent = fileNames.reduce(
     (accumulator, current) => {
       const fileContents: string = fs.readFileSync(

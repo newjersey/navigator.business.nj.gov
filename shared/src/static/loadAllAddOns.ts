@@ -1,5 +1,5 @@
-import path from "path";
-import { IndustryRoadmap } from "../types/types";
+import path from "node:path";
+import type { IndustryRoadmap } from "../types/types";
 import { loadJsonFiles } from "./helpers";
 
 const addOnsDirectory = path.join(process.cwd(), "..", "content", "src", "roadmaps", "add-ons");

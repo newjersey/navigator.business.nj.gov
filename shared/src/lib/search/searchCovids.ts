@@ -1,6 +1,6 @@
-import { CovidItem } from "../../types";
+import type { CovidItem } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchCovids = (covids: CovidItem[], term: string): Match[] => {
   return convertFileDataToMatchList(getCovidData(covids), term);

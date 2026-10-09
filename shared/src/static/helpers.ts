@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { convertTaskMd } from "../markdownReader";
 
 export const loadUrlSlugByFilename = (fileName: string, filingsDirectory: string): string => {
@@ -15,7 +15,7 @@ export const getFileNameByUrlSlug = (currentPath: string, urlSlug: string): stri
     return urlSlug === loadUrlSlugByFilename(fileName, currentPath);
   });
   if (!matchingFileName) {
-    throw `Task with urlSlug ${urlSlug} not found`;
+    throw new Error(`Task with urlSlug ${urlSlug} not found`);
   }
 
   return matchingFileName;

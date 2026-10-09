@@ -1,6 +1,6 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
-import path from "path";
 
 export interface WebflowLicenseCard {
   id: string;
@@ -74,6 +74,7 @@ const dedupeByWebflowId = (licenses: WebflowLicenseCard[]): WebflowLicenseCard[]
       continue;
     }
     if (seen.has(license.webflowId)) {
+      // biome-ignore lint/suspicious/noConsole: build-time content warning for CMS authors; shared has no logger
       console.warn(
         `loadAllLicenses: duplicate webflowId ${license.webflowId} on ${license.filename} — skipping`,
       );

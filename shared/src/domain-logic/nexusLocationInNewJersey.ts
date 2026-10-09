@@ -1,4 +1,4 @@
-import { ProfileData } from "../profileData";
+import type { ProfileData } from "../profileData";
 import { determineForeignBusinessType } from "./businessPersonaHelpers";
 
 export const nexusLocationInNewJersey = (profileData: ProfileData): boolean | undefined => {

@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { convertFilingMd } from "../markdownReader";
-import { Filing } from "../types/types";
+import type { Filing } from "../types/types";
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
 
 type PathParameters<P> = { params: P; locale?: string };

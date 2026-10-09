@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { Step } from "../types";
+import fs from "node:fs";
+import path from "node:path";
+import type { Step } from "../types";
 
 const stepsJsonPathTest = path.join(
   process.cwd(),

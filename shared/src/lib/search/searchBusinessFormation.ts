@@ -1,6 +1,6 @@
-import { TaskWithoutLinks } from "../../types";
+import type { TaskWithoutLinks } from "../../types";
 import { convertFileDataToMatchList } from "../search/helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchBusinessFormation = (tasks: TaskWithoutLinks[], term: string): Match[] => {
   const businessFormationData = getBusinessFormationData(tasks);
