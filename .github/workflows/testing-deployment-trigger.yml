@@ -27,6 +27,7 @@ jobs:
       SUBNET_ID_02: ${{ vars.SUBNET_ID_02_AWS_DEV }}
       SG_ID: ${{ vars.SG_ID_AWS_DEV }}
       STAGE: ${{ vars.STAGE_TESTING }}
+      CSP_MODE: "report-only"
       MYNJ_PROFILE_LINK: ${{ vars.MYNJ_PROFILE_LINK_SHARED }}
       AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE:
         ${{ vars.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE }}
