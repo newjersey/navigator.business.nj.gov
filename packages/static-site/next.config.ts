@@ -2,7 +2,7 @@ import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
-import { isHousingDeveloperResourcesEnabled } from "./domain/content/housingDeveloperResourcesFlag";
+import { disabledPagePathnames } from "./domain/content/pageAccessFlags";
 import { buildLegacyRedirects } from "./domain/redirects/legacyRedirects";
 
 const withNextIntl = createNextIntlPlugin("./domain/i18n/request.ts");
@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
     const multilingualEnabled = process.env.NEXT_PUBLIC_MULTILINGUAL_ENABLED === "true";
     return buildLegacyRedirects({
       multilingualEnabled,
-      housingDeveloperResourcesEnabled: isHousingDeveloperResourcesEnabled(),
+      disabledPagePathnames: disabledPagePathnames(),
     });
   },
 };
