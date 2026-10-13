@@ -51,6 +51,13 @@ const LearnTaskPage = (props: Props): ReactElement => {
           <Link
             className="usa-button usa-button--unstyled width-auto font-weight-inherit font-size-inherit"
             href={`/learn/${previousTask.id}`}
+            onClick={() => {
+              analytics.event.learn_page.click.step_nav_click(
+                "previous",
+                learnSteps.findIndex((task) => task.id === props.learnStep.id) + 1,
+                learnSteps.findIndex((task) => task.id === previousTask.id) + 1,
+              );
+            }}
           >
             <span className="display-flex flex-row flex-justify-center flex-align-center">
               <Icon className="usa-icon--size-4" iconName="navigate_before" />
@@ -62,6 +69,13 @@ const LearnTaskPage = (props: Props): ReactElement => {
           <Link
             className="usa-button usa-button--unstyled width-auto font-weight-inherit font-size-inherit"
             href={`/learn/${nextTask.id}`}
+            onClick={() => {
+              analytics.event.learn_page.click.step_nav_click(
+                "next",
+                learnSteps.findIndex((task) => task.id === props.learnStep.id) + 1,
+                learnSteps.findIndex((task) => task.id === nextTask.id) + 1,
+              );
+            }}
           >
             <span className="display-flex flex-row flex-justify-center flex-align-center">
               <span className="margin-right-2">{Config.learnPages.nextStepText}</span>
@@ -90,7 +104,10 @@ const LearnTaskPage = (props: Props): ReactElement => {
               data-testid="open-account-button"
               type="button"
               onClick={(): void => {
-                analytics.event.learn_page.click.account_setup(props.learnStep.id);
+                analytics.event.learn_page.click.account_setup(
+                  learnSteps.find((step) => step.id === props.learnStep.id)?.name || "",
+                  Config.learnPages.accountButtonHeading,
+                );
                 router && router.push("/account-setup/");
               }}
             >

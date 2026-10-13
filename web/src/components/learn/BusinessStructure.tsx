@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
+import analytics from "@/lib/utils/analytics";
 import { FormControl, MenuItem, Select, useMediaQuery } from "@mui/material";
 import React, { ReactElement } from "react";
 
@@ -33,6 +34,10 @@ export const BusinessStructure = (props: Props): ReactElement => {
           value={structureId}
           onChange={(event): void => {
             setStructureId(event.target.value);
+            analytics.event.learn_page.click.dropdown_select(
+              "business_structure",
+              event.target.value,
+            );
           }}
         >
           {dropdownOptions.map(({ id, displayName }) => {

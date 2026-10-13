@@ -3,9 +3,9 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import React, { ReactElement, useContext } from "react";
-import analytics from "@/lib/utils/analytics";
 
 interface Props {
   isFinal: boolean;

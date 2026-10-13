@@ -32,7 +32,7 @@ export const LockedTasksPrompt = (props: Props): ReactElement => {
               onClick={(): void => {
                 if (router) {
                   analytics.event.create_account_prompt.click.create_account_prompt_button();
-                  router.push(`/account-setup`);
+                  router.push("/account-setup");
                 }
               }}
             >

@@ -351,40 +351,67 @@ type GTMCustomEventTypes =
   | "onboarding_form_submission"
   | "form_validation_error"
   | "cta_click"
+  | "side_nav_click"
+  | "step_nav_click"
   | "radio_button_selection"
   | "form_start"
-  | "form_submission";
+  | "form_submission"
+  | "dropdown_select";
+
+type FlowNames = "pre_login_learning_journey";
 
 type EventData = {
   event_name: string;
   event_type: GTMCustomEventTypes;
   on_page_url?: string;
+  flow_name?: FlowNames;
 };
 
 type OnboardingEventData = EventData & {
+  event_type: "onboarding";
   onboarding_step_number: number;
   funnel_name: string;
   form_name: string;
   step_name: string;
   steps_total?: number;
-  flow_name?: string;
 };
 
 type RadioButtonSubmissionEventData = EventData & {
   form_name: string;
   selection_value: string;
-  onboarding_step_number?: number;
+};
+
+type OnboardingRadioButtonSubmissionEventData = RadioButtonSubmissionEventData & {
+  onboarding_step_number: number;
 };
 
 type FormValidationError = EventData & {
+  event_type: "form_validation_error";
   form_name: string;
   error_type: string;
   error_message: string;
 };
 
 type CtaClickEventData = EventData & {
+  event_type: "cta_click";
   click_text: string;
   cta_location: string;
+  page_name?: string;
+};
+
+type SideNavClickEventData = EventData & {
+  event_type: "side_nav_click";
+  current_step_number: number;
+  target_step_number: number;
+  target_step_name: string;
+};
+
+type StepNavigationClickEventData = EventData & {
+  event_type: "step_nav_click";
+  direction: "next" | "previous";
+  current_step_number: number;
+  target_step_number: number;
+  flow_name: "pre_login_learning_journey";
 };
 
 type RadioButtonSelectionEventData = EventData & {
@@ -393,11 +420,19 @@ type RadioButtonSelectionEventData = EventData & {
   onboarding_step_number?: number;
 };
 
+type DropdownSelectionEventData = EventData & {
+  event_type: "dropdown_select";
+  field_name: string;
+  value: string;
+};
+
 type FormStartEventData = EventData & {
+  event_type: "form_start";
   form_name: string;
 };
 
 type FormSubmitEventData = EventData & {
+  event_type: "form_submission";
   form_name: string;
 };
 
@@ -653,7 +688,7 @@ export default {
         eventRunner.custom_event_track(event);
       },
       business_persona_selection_submit: (selection_value: string) => {
-        const event: RadioButtonSubmissionEventData = {
+        const event: OnboardingRadioButtonSubmissionEventData = {
           event_name: "onboarding_step_submit",
           event_type: "onboarding_form_submission",
           form_name: "onboarding_business_status",
@@ -673,7 +708,7 @@ export default {
         eventRunner.custom_event_track(event);
       },
       business_intent_selection_submit: (selection_value: string) => {
-        const event: RadioButtonSubmissionEventData = {
+        const event: OnboardingRadioButtonSubmissionEventData = {
           event_name: "onboarding_step_submit",
           event_type: "onboarding_form_submission",
           form_name: "onboarding_business_intent",
@@ -1069,15 +1104,54 @@ export default {
     },
     learn_page: {
       click: {
-        account_setup: (current_step_id: string) => {
-          eventRunner.track({
-            event: "account_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "learn_page",
-            legacy_event_label: "go_to_account_setup",
-            on_task_id: current_step_id,
-            clicked_to: "/account-setup/",
-          });
+        account_setup: (current_step_name: string, click_text: string) => {
+          const event: CtaClickEventData = {
+            event_name: "learn_page_cta_click",
+            event_type: "cta_click",
+            click_text: click_text,
+            cta_location: "/account-setup",
+            page_name: current_step_name,
+          };
+          eventRunner.custom_event_track(event);
+        },
+        side_nav_click: (
+          current_step_number: number,
+          target_step_number: number,
+          target_step_name: string,
+        ) => {
+          const event: SideNavClickEventData = {
+            event_name: "learn_page_side_nav_click",
+            event_type: "side_nav_click",
+            current_step_number: current_step_number,
+            target_step_number: target_step_number,
+            target_step_name: target_step_name,
+          };
+          eventRunner.custom_event_track(event);
+        },
+        dropdown_select: (field_name: string, value: string) => {
+          const event: DropdownSelectionEventData = {
+            event_name: "dropdown_select",
+            event_type: "dropdown_select",
+            field_name: field_name,
+            value: value,
+            flow_name: "pre_login_learning_journey",
+          };
+          eventRunner.custom_event_track(event);
+        },
+        step_nav_click: (
+          direction: "next" | "previous",
+          currentStepNumber: number,
+          targetStepNumber: number,
+        ) => {
+          const event: StepNavigationClickEventData = {
+            event_name: "step_navigation_click",
+            event_type: "step_nav_click",
+            direction: direction,
+            current_step_number: currentStepNumber,
+            target_step_number: targetStepNumber,
+            flow_name: "pre_login_learning_journey",
+          };
+          eventRunner.custom_event_track(event);
         },
       },
     },
