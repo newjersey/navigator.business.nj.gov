@@ -1,3 +1,18 @@
+# [2026.23.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.22.0...v2026.23.0) (2026-10-13)
+
+
+### Bug Fixes
+
+* [AB#18014](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18014) Add intent selection flow to web build variables ([da10295](https://github.com/newjersey/navigator.business.nj.gov/commit/da102954b3b6c52c466703ddc744ae8e149e38de))
+* [AB#18047](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18047) Change order of business intent options ([e7add49](https://github.com/newjersey/navigator.business.nj.gov/commit/e7add49f1c0b4f5a3217923133b4b75e27afe2a7))
+* adjust styling for learn pages ([ef9e66b](https://github.com/newjersey/navigator.business.nj.gov/commit/ef9e66bfc9cb8959898e8ba342e9df4b3f812305))
+
+
+### Features
+
+* [AB#18014](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18014) Add user routing for business intent flow ([d2f54a5](https://github.com/newjersey/navigator.business.nj.gov/commit/d2f54a5b46ea0d36f916369f61f9e28e8a1863d5))
+* remove self-referential biz.nj.gov link ([c8e7fb9](https://github.com/newjersey/navigator.business.nj.gov/commit/c8e7fb94583bff87383604145202e32a34d5aeb4))
+
 # [2026.22.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.21.0...v2026.22.0) (2026-10-06)
 
 
