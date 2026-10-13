@@ -52,26 +52,6 @@ export const StartingBusinessIntent = <T,>(props: FormContextFieldProps<T>): Rea
             <FormControlLabel
               style={{ alignItems: "center" }}
               labelPlacement="end"
-              data-testid="starting-ready-business"
-              value={false}
-              control={<Radio color="primary" />}
-              label={
-                <>
-                  <div className={"text-bold"}>
-                    {
-                      Config.onboardingDefaults.startingBusinessIntent.default
-                        .radioButtonReadyHeaderText
-                    }
-                  </div>
-                  {Config.onboardingDefaults.startingBusinessIntent.default.radioButtonReadyText}
-                </>
-              }
-            />
-          </div>
-          <div className={"max-width-half"}>
-            <FormControlLabel
-              style={{ alignItems: "center" }}
-              labelPlacement="end"
               data-testid="starting-learning-business"
               value={true}
               control={<Radio color="primary" />}
@@ -84,6 +64,26 @@ export const StartingBusinessIntent = <T,>(props: FormContextFieldProps<T>): Rea
                     }
                   </div>
                   {Config.onboardingDefaults.startingBusinessIntent.default.radioButtonLearningText}
+                </>
+              }
+            />
+          </div>
+          <div className={"max-width-half"}>
+            <FormControlLabel
+              style={{ alignItems: "center" }}
+              labelPlacement="end"
+              data-testid="starting-ready-business"
+              value={false}
+              control={<Radio color="primary" />}
+              label={
+                <>
+                  <div className={"text-bold"}>
+                    {
+                      Config.onboardingDefaults.startingBusinessIntent.default
+                        .radioButtonReadyHeaderText
+                    }
+                  </div>
+                  {Config.onboardingDefaults.startingBusinessIntent.default.radioButtonReadyText}
                 </>
               }
             />
