@@ -61,11 +61,11 @@ export class IamStack extends Stack {
             },
             StringLike: {
               "token.actions.githubusercontent.com:sub": [
-                "repo:newjersey/permits.nj.gov:ref:refs/heads/main",
-                "repo:newjersey/permits.nj.gov:environment:testing",
-                "repo:newjersey/permits.nj.gov:environment:dev",
-                "repo:newjersey/permits.nj.gov:environment:staging",
-                "repo:newjersey/permits.nj.gov:environment:prod",
+                "repo:newjersey/app.permits.nj.gov:ref:refs/heads/main",
+                "repo:newjersey/app.permits.nj.gov:environment:testing",
+                "repo:newjersey/app.permits.nj.gov:environment:dev",
+                "repo:newjersey/app.permits.nj.gov:environment:staging",
+                "repo:newjersey/app.permits.nj.gov:environment:prod",
                 "repo:newjersey/business-data-warehouse-cdk:ref:refs/heads/main",
                 "repo:newjersey/business-data-warehouse-cdk:environment:dev",
                 "repo:newjersey/business-data-warehouse-cdk:environment:staging",
@@ -341,7 +341,7 @@ export class IamStack extends Stack {
       const permitsDeployRole = new iam.Role(this, "PermitsDeployRole", {
         roleName: `njbfs-permits-deploy-${props.stage}`,
         assumedBy: new iam.ArnPrincipal(githubRoleArn),
-        description: `Deploy role for Permits.nj.gov repo`,
+        description: `Deploy role for app.permits.nj.gov repo`,
       });
 
       const warehouseDeployRole = new iam.Role(this, "WarehouseDeployRole", {
