@@ -2,12 +2,22 @@ import analytics from "@/lib/utils/analytics";
 import LearnTaskPage, { getStaticPaths, getStaticProps } from "@/pages/learn/[taskUrlSlug]";
 import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared";
+import * as materialUi from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
 import { GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 
+function mockMaterialUI(): typeof materialUi {
+  return {
+    ...jest.requireActual("@mui/material"),
+    useMediaQuery: jest.fn(),
+  };
+}
+
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/utils/analytics", () => ({
   __esModule: true,
   default: {
@@ -15,6 +25,8 @@ jest.mock("@/lib/utils/analytics", () => ({
       learn_page: {
         click: {
           account_setup: jest.fn(),
+          side_nav_click: jest.fn(),
+          step_nav_click: jest.fn(),
         },
       },
     },
@@ -29,20 +41,6 @@ jest.mock("@/components/njwds/Icon", () => ({
 jest.mock("@/components/njwds-layout/PageSkeleton", () => ({
   PageSkeleton: ({ children }: { children: ReactNode }): ReactNode => children,
 }));
-jest.mock("@/components/LearnTaskSidebarPageLayout", () => ({
-  LearnTaskSidebarPageLayout: ({
-    belowBoxComponent,
-    children,
-  }: {
-    belowBoxComponent: ReactNode;
-    children: ReactNode;
-  }): ReactNode => (
-    <>
-      {children}
-      {belowBoxComponent}
-    </>
-  ),
-}));
 
 const Config = getMergedConfig();
 const mockPush = jest.fn();
@@ -51,6 +49,7 @@ describe("learn task page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     (useRouter as jest.Mock).mockReturnValue({ push: mockPush });
+    (useMediaQuery as jest.Mock).mockReturnValue(true);
   });
 
   it("renders CMS content and navigation for the selected step", () => {
@@ -75,6 +74,51 @@ describe("learn task page", () => {
       "href",
       `/learn/${Config.learnPages.steps[2].id}`,
     );
+  });
+
+  it("sends analytics events when clicking links in sidebar nav", () => {
+    const learnStepThree = Config.learnPages.steps[2];
+
+    renderWithUserData(<LearnTaskPage learnStep={learnStepThree} />);
+
+    const sideNavLinkToStepOne = screen.getByRole("link", {
+      name: `Step 1 ${Config.learnPages.steps[0].name}`,
+    });
+    expect(sideNavLinkToStepOne).toBeInTheDocument();
+
+    sideNavLinkToStepOne.click();
+
+    expect(analytics.event.learn_page.click.side_nav_click).toHaveBeenCalledWith(
+      3,
+      1,
+      Config.learnPages.steps[0].name,
+    );
+  });
+
+  it("sends an analytics event when clicking Previous Step link", () => {
+    const learnStepThree = Config.learnPages.steps[2];
+
+    renderWithUserData(<LearnTaskPage learnStep={learnStepThree} />);
+
+    const stepNavLinkPrevious = screen.getByRole("link", {
+      name: Config.learnPages.previousStepText,
+    });
+    expect(stepNavLinkPrevious).toBeInTheDocument();
+    stepNavLinkPrevious.click();
+    expect(analytics.event.learn_page.click.step_nav_click).toHaveBeenCalledWith("previous", 3, 2);
+  });
+
+  it("sends an analytics event when clicking Next Step link", () => {
+    const learnStepThree = Config.learnPages.steps[2];
+
+    renderWithUserData(<LearnTaskPage learnStep={learnStepThree} />);
+
+    const stepNavLinkNext = screen.getByRole("link", {
+      name: Config.learnPages.nextStepText,
+    });
+    expect(stepNavLinkNext).toBeInTheDocument();
+    stepNavLinkNext.click();
+    expect(analytics.event.learn_page.click.step_nav_click).toHaveBeenCalledWith("next", 3, 4);
   });
 
   it("renders the Find NAICS CMS content", () => {
@@ -170,7 +214,8 @@ describe("learn task page", () => {
     fireEvent.click(screen.getByTestId("open-account-button"));
 
     expect(analytics.event.learn_page.click.account_setup).toHaveBeenCalledWith(
-      Config.learnPages.steps[0].id,
+      Config.learnPages.steps[0].name,
+      Config.learnPages.accountButtonHeading,
     );
     expect(mockPush).toHaveBeenCalledWith("/account-setup/");
   });

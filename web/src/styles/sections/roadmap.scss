@@ -13,6 +13,7 @@
   }
 
   .learn-mini-roadmap-step:not(:last-child)::after {
+    content: "";
     background-color: variables.$cool-lighter;
     bottom: -12px;
     left: 14px;
