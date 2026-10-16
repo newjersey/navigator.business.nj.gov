@@ -124,11 +124,18 @@ jobs:
       - name: Run Code Quality Checks
         uses: ./.github/actions/code-quality
 
-      - name: Upload Workspace Artifacts
+      - name: Upload Build Outputs
         uses: actions/upload-artifact@v7
         with:
-          name: workspace
-          path: ./
+          name: build-outputs
+          path: |
+            api/src/domain/userSchema.generated.ts
+            api/src/functions/messagingService/email-templates/
+            content/lib/
+            packages/content-types/lib/
+            shared/lib/
+            web/public/mgmt/config.yml
+            web/src/lib/cms/CollectionMap.json
           retention-days: 3
 
   cms-slug-check:
@@ -186,10 +193,10 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
-      - name: Download workspace artifact
+      - name: Download build outputs
         uses: actions/download-artifact@v8
         with:
-          name: workspace
+          name: build-outputs
           path: .
 
       - name: Set up Node.js
@@ -234,7 +241,7 @@ jobs:
           ref: ${{ env.CHECKOUT_REF }}
       - uses: actions/download-artifact@v8
         with:
-          name: workspace
+          name: build-outputs
           path: .
       - uses: ./.github/actions/perform-integration-tests
         with:
@@ -254,7 +261,7 @@ jobs:
           ref: ${{ env.CHECKOUT_REF }}
       - uses: actions/download-artifact@v8
         with:
-          name: workspace
+          name: build-outputs
           path: .
       - uses: ./.github/actions/perform-integration-tests
         with:
@@ -274,7 +281,7 @@ jobs:
           ref: ${{ env.CHECKOUT_REF }}
       - uses: actions/download-artifact@v8
         with:
-          name: workspace
+          name: build-outputs
           path: .
       - uses: ./.github/actions/perform-integration-tests
         with:
@@ -294,7 +301,7 @@ jobs:
           ref: ${{ env.CHECKOUT_REF }}
       - uses: actions/download-artifact@v8
         with:
-          name: workspace
+          name: build-outputs
           path: .
       - uses: ./.github/actions/perform-integration-tests
         with:
@@ -314,7 +321,7 @@ jobs:
           ref: ${{ env.CHECKOUT_REF }}
       - uses: actions/download-artifact@v8
         with:
-          name: workspace
+          name: build-outputs
           path: .
       - uses: ./.github/actions/perform-integration-tests
         with:
