@@ -1,6 +1,6 @@
-import { Duration, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
+import { Duration, RemovalPolicy, Stack, type StackProps } from "aws-cdk-lib";
 import * as ecr from "aws-cdk-lib/aws-ecr";
-import { Construct } from "constructs";
+import type { Construct } from "constructs";
 import { STATIC_SITE_SERVICE_BASE_NAME, STATIC_SITE_SHARED_RESOURCE_TAG } from "./constants";
 import { applyStandardTags } from "./stackUtils";
 

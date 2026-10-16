@@ -12,6 +12,8 @@ src/setupTests.js
 src/teardownTests.js
 # Large file with binary/hex contents
 wiremock/__files/tax-clearance-success.json
+# api/cdk is linted by Biome
+cdk/
 cdk/lib/**/*.js
 cdk/bin/**/*.js
 cdk/cdk.out/
