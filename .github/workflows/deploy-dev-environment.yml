@@ -137,12 +137,6 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: yarn
-      - name: Download Build Workspace
-        uses: actions/download-artifact@v8
-        with:
-          name: workspace
-          path: .
-
       - name: Deploy Dev Environment
         uses: ./.github/actions/deploy
         with:
