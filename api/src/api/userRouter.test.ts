@@ -3,11 +3,13 @@ import {
   CryptoClient,
   DatabaseClient,
   DatabaseThrottlingError,
+  MessagingServiceClient,
   MigrationConflictError,
   TimeStampBusinessSearch,
 } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
+import { CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
@@ -48,10 +50,19 @@ jest.mock("jsonwebtoken", () => {
 });
 const mockJwt = jwt as jest.Mocked<typeof jwt>;
 
+jest.mock("@libs/ssmUtils", () => ({
+  ...jest.requireActual("@libs/ssmUtils"),
+  getConfigValue: jest.fn(),
+}));
+const mockGetConfigValue = getConfigValue as jest.MockedFunction<
+  (paramName: CONFIG_VARS) => Promise<string>
+>;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const cognitoPayload = ({ id }: { id: string }): any => {
   return {
     sub: "some-sub",
+    "cognito:username": `myNJ_${id}`,
     "custom:myNJUserKey": undefined,
     email: "some-eamail",
     identities: [
@@ -93,6 +104,7 @@ describe("userRouter", () => {
   let stubCryptoEncryptionClient: jest.Mocked<CryptoClient>;
   let stubCryptoHashingClient: jest.Mocked<CryptoClient>;
   let stubTimeStampBusinessSearch: jest.Mocked<TimeStampBusinessSearch>;
+  let stubMessagingServiceClient: jest.Mocked<MessagingServiceClient>;
 
   beforeEach(async () => {
     stubUnifiedDataClient = {
@@ -100,6 +112,8 @@ describe("userRouter", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
+      findAllByEmail: jest.fn(),
+      claimEmailSignIn: jest.fn(),
       findUserByBusinessName: jest.fn(),
       findUsersByBusinessNamePrefix: jest.fn(),
       findBusinessesByHashedTaxId: jest.fn(),
@@ -127,6 +141,7 @@ describe("userRouter", () => {
     stubTimeStampBusinessSearch = {
       search: jest.fn(),
     };
+    stubMessagingServiceClient = { sendMessage: jest.fn(), health: jest.fn() };
     app = setupExpress(false);
     app.use(
       userRouterFactory(
@@ -139,6 +154,7 @@ describe("userRouter", () => {
         stubCryptoHashingClient,
         stubTimeStampBusinessSearch,
         DummyLogWriter,
+        stubMessagingServiceClient,
       ),
     );
   });
@@ -146,6 +162,108 @@ describe("userRouter", () => {
   afterAll(async () => {
     await new Promise((resolve) => {
       return setTimeout(resolve, 500);
+    });
+  });
+
+  describe("POST /users/register", () => {
+    beforeEach(() => {
+      mockGetConfigValue.mockResolvedValue("false");
+    });
+
+    it("creates the record for the authenticated user", async () => {
+      const userData = generateUserData({ user: generateUser({ id: "native-sub" }) });
+      mockJwt.decode.mockReturnValue({
+        sub: "native-sub",
+        "cognito:username": "native-sub",
+        email: userData.user.email,
+        identities: undefined,
+      });
+      stubUnifiedDataClient.put.mockImplementation(async (userData) => userData);
+
+      const response = await request(app)
+        .post("/users/register")
+        .set("Authorization", "Bearer user-123")
+        .send(userData);
+
+      expect(response.status).toBe(StatusCodes.OK);
+      expect(response.body.user.id).toBe("native-sub");
+      expect(stubUnifiedDataClient.put).toHaveBeenCalledTimes(1);
+    });
+
+    it("returns 403 when the body id does not match the token", async () => {
+      const userData = generateUserData({ user: generateUser({ id: "someone-else" }) });
+      mockJwt.decode.mockReturnValue({
+        sub: "native-sub",
+        "cognito:username": "native-sub",
+        email: userData.user.email,
+        identities: undefined,
+      });
+
+      const response = await request(app)
+        .post("/users/register")
+        .set("Authorization", "Bearer user-123")
+        .send(userData);
+
+      expect(response.status).toBe(StatusCodes.FORBIDDEN);
+      expect(stubUnifiedDataClient.put).not.toHaveBeenCalled();
+    });
+
+    it("returns 500 when the record cannot be saved", async () => {
+      const userData = generateUserData({ user: generateUser({ id: "native-sub" }) });
+      mockJwt.decode.mockReturnValue({
+        sub: "native-sub",
+        "cognito:username": "native-sub",
+        email: userData.user.email,
+        identities: undefined,
+      });
+      stubUnifiedDataClient.put.mockRejectedValue(new Error("write failed"));
+
+      const response = await request(app)
+        .post("/users/register")
+        .set("Authorization", "Bearer user-123")
+        .send(userData);
+
+      expect(response.status).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+    });
+  });
+
+  describe("getSignedInUserId derivation", () => {
+    it("strips the myNJ_ prefix from the cognito username", async () => {
+      const userData = generateUserData({});
+      const userId = userData.user.id;
+      mockJwt.decode.mockReturnValue({
+        sub: "unrelated-cognito-sub",
+        "cognito:username": `myNJ_${userId}`,
+        email: "test@example.com",
+        identities: undefined,
+      });
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+      const response = await request(app)
+        .get(`/users/${userId}`)
+        .set("Authorization", "Bearer user-123");
+
+      expect(response.status).toBe(StatusCodes.OK);
+      expect(stubUnifiedDataClient.get).toHaveBeenCalledWith(userId);
+    });
+
+    it("uses sub when the username has no myNJ_ prefix", async () => {
+      const userData = generateUserData({});
+      const sub = userData.user.id;
+      mockJwt.decode.mockReturnValue({
+        sub,
+        "cognito:username": sub,
+        email: "test@example.com",
+        identities: undefined,
+      });
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+      const response = await request(app)
+        .get(`/users/${sub}`)
+        .set("Authorization", "Bearer user-123");
+
+      expect(response.status).toBe(StatusCodes.OK);
+      expect(stubUnifiedDataClient.get).toHaveBeenCalledWith(sub);
     });
   });
 
@@ -1321,6 +1439,7 @@ describe("userRouter", () => {
             stubCryptoHashingClient,
             stubTimeStampBusinessSearch,
             DummyLogWriter,
+            stubMessagingServiceClient,
             mockGovDeliveryClient,
           ),
         );
