@@ -1,36 +1,32 @@
-import { describe, it, expect, vi } from "vitest";
-import path from "path";
-import matter from "gray-matter";
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
+import type { WebflowLicenseCard } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 import { loadAllLicenses } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
+import matter from "gray-matter";
+import { describe, expect, it, vi } from "vitest";
 import {
-  type FileSystemPort,
+  applyAgencyWebsiteFallback,
   type BuildConfig,
-  createFileSystemPort,
-  isJsonFile,
-  parseIndustryFile,
-  buildIndustries,
-  buildAndWriteIndustries,
-  buildSectors,
-  buildAndWriteSectors,
   buildAndWriteContent,
-  getContentConfigs,
-  toIndustryNamesById,
-  executeBuild,
+  buildAndWriteIndustries,
+  buildAndWriteSectors,
+  buildIndustries,
+  buildSectors,
   createBuildConfig,
+  createFileSystemPort,
+  deriveSingleAgencyWebsites,
+  executeBuild,
+  extractChecklistItems,
+  FIELDCONFIG_TASK_MAP,
+  type FileSystemPort,
+  getContentConfigs,
+  isJsonFile,
   logBuildResults,
   main,
-  type ChecklistItemEntry,
-  FIELDCONFIG_TASK_MAP,
-  extractChecklistItems,
-  extractItemsFromObject,
-  buildChecklistItemTaskMap,
-  buildAndWriteChecklistItemTasks,
+  parseIndustryFile,
+  toIndustryNamesById,
   toLicenseCard,
-  deriveSingleAgencyWebsites,
-  applyAgencyWebsiteFallback,
 } from "./build";
-import type { WebflowLicenseCard } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 
 // ============================================================================
 // TEST UTILITIES - Mock Ports
@@ -371,7 +367,11 @@ describe("Application Layer", () => {
       ];
       const loader = () => mockData;
 
-      const result = buildAndWriteContent(mockFs, config, loader, "test-content", "items");
+      const result = buildAndWriteContent(mockFs, config, {
+        loader,
+        outputFileName: "test-content",
+        dataKey: "items",
+      });
 
       expect(result).toEqual(mockData);
       expect(result).toHaveLength(2);
@@ -740,6 +740,22 @@ describe("Integration Tests", () => {
 // ============================================================================
 // toLicenseCard MAPPER TESTS
 // ============================================================================
+
+describe("extractChecklistItems", () => {
+  it("returns every checklist item's key and trimmed name, in order", () => {
+    const content =
+      "intro\n[]{first-key} First item  \ntext []{second-key}Second item\n[]{} ignored";
+
+    expect(extractChecklistItems(content)).toEqual([
+      { key: "first-key", name: "First item" },
+      { key: "second-key", name: "Second item" },
+    ]);
+  });
+
+  it("returns an empty list when there are no checklist items", () => {
+    expect(extractChecklistItems("no items here")).toEqual([]);
+  });
+});
 
 describe("toLicenseCard", () => {
   it("resolves industry, falling back to webflowIndustry, and maps agency fields", () => {
