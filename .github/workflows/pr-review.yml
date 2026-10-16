@@ -31,7 +31,9 @@ jobs:
       - name: Format PR title with ADO links
         id: format-title
         shell: bash
-        run: python3 self/scripts/generate_ado_link.py "${{ github.event.pull_request.title }}"
+        run: python3 self/scripts/generate_ado_link.py "$PR_TITLE"
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
 
       - name: Find existing pickaroo comment
         id: find-comment
