@@ -1,6 +1,7 @@
 import { Heading } from "@/components/njwds-extended/Heading";
 import { LearnMiniRoadmapTask } from "@/components/roadmap/LearnMiniRoadmapTask";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import { ReactElement } from "react";
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 
 export const LearnMiniRoadmap = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const learnSteps = Config.learnPages.steps;
 
   return (
     <>
@@ -24,7 +26,14 @@ export const LearnMiniRoadmap = (props: Props): ReactElement => {
               <LearnMiniRoadmapTask
                 task={task}
                 active={task.id === props.activeTaskId}
-                onTaskClick={props.onTaskClick}
+                onTaskClick={() => {
+                  props.onTaskClick?.();
+                  analytics.event.learn_page.click.side_nav_click(
+                    learnSteps.findIndex((t) => t.id === props.activeTaskId) + 1,
+                    learnSteps.findIndex((t) => t.id === task.id) + 1,
+                    task.name,
+                  );
+                }}
                 stepNumber={index + 1}
               />
             </div>
