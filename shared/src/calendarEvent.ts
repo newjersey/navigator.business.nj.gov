@@ -1,4 +1,4 @@
-import { LicenseName } from "./license";
+import type { LicenseName } from "./license";
 
 export type CalendarEvent = {
   readonly dueDate: string; // YYYY-MM-DD

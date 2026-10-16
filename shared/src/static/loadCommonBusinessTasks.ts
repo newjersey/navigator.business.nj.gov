@@ -1,4 +1,4 @@
-import { AnytimeActionTask } from "../types";
+import type { AnytimeActionTask } from "../types";
 import { loadAnytimeActionTasksByFileName } from "./loadAnytimeActionTasks";
 
 export const loadCommonBusinessTasks = (): AnytimeActionTask[] => {

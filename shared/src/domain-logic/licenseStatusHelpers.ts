@@ -1,10 +1,10 @@
 import {
-  LicenseName,
-  LicenseStatus,
-  LicenseStatusItem,
+  type LicenseName,
+  type LicenseStatus,
+  type LicenseStatusItem,
   taskIdLicenseNameMapping,
 } from "../license";
-import { Business, TaskProgress } from "../userData";
+import type { Business, TaskProgress } from "../userData";
 
 export const getNonLicenseTasks = (business: Business): Record<string, TaskProgress> =>
   Object.fromEntries(
@@ -34,7 +34,7 @@ export const getLicenseTasksProgress = (
       continue;
     }
     let taskStatus: TaskProgress = "TO_DO";
-    if (licenseStatusResult[licenseName]!.licenseStatus === "ACTIVE") {
+    if (licenseStatusResult[licenseName]?.licenseStatus === "ACTIVE") {
       taskStatus = "COMPLETED";
     }
     licenseTasksProgress[taskId] = taskStatus;

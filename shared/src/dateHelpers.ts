@@ -1,9 +1,9 @@
-import dayjs, { Dayjs } from "dayjs";
+import dayjs, { type Dayjs } from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
-import { LicenseEntity } from "./license";
+import type { LicenseEntity } from "./license";
 
 export type DateObject = Dayjs;
 

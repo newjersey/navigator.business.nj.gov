@@ -1,15 +1,20 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import type { CmsConfig, CmsConfigField } from "../../types/types";
 import { makeSnippet } from "./helpers";
-import { ConfigMatch, GroupedConfigMatch, MatchComparator } from "./typesForSearch";
+import type { ConfigMatch, GroupedConfigMatch, MatchComparator } from "./typesForSearch";
 
 const collectionInfo = new Map<string, string[]>();
+type JsonObject = Readonly<Record<string, unknown>>;
+
+const isJsonObject = (value: unknown): value is JsonObject =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
+
 export const searchConfig = (
-  object: any,
+  object: unknown,
   matchComparator: MatchComparator,
-  cmsConfig: any,
+  cmsConfig: CmsConfig,
 ): GroupedConfigMatch[] => {
-  const configMatches = searchObject(object.default, matchComparator, [], []).map((it) => {
+  const configDefaults = isJsonObject(object) ? object.default : undefined;
+  const configMatches = searchObject(configDefaults, matchComparator, [], []).map((it) => {
     const cmsPath = findCmsConfigPath(cmsConfig, it.keyPath);
     return {
       value: makeSnippet(it.value, matchComparator),
@@ -37,19 +42,20 @@ const groupByCMSFile = (configMatches: ConfigMatch[]): GroupedConfigMatch[] => {
 };
 
 const searchObject = (
-  object: any,
+  object: unknown,
   matchComparator: MatchComparator,
   matches: JsonMatch[],
   keyPaths: string[],
 ): JsonMatch[] => {
-  if (typeof object === "object" && object !== null && !Array.isArray(object)) {
+  let found = matches;
+  if (isJsonObject(object)) {
     for (const key of Object.keys(object)) {
       const value = object[key];
       if (typeof value === "string") {
         if (matchComparator.term) {
           if (value.toLowerCase().includes(matchComparator.term)) {
-            matches = [
-              ...matches,
+            found = [
+              ...found,
               {
                 value: value,
                 keyPath: [...keyPaths, key],
@@ -61,8 +67,8 @@ const searchObject = (
           const contextualInfoFileNames = regexMatches.map((match) => match[1]);
           if (contextualInfoFileNames.length > 0) {
             for (const contextualInfoFileName of contextualInfoFileNames) {
-              matches = [
-                ...matches,
+              found = [
+                ...found,
                 {
                   value: contextualInfoFileName,
                   keyPath: [...keyPaths, key],
@@ -71,18 +77,15 @@ const searchObject = (
             }
           }
         }
-      } else if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-        matches = searchObject(value, matchComparator, matches, [...keyPaths, key]);
+      } else if (isJsonObject(value)) {
+        found = searchObject(value, matchComparator, found, [...keyPaths, key]);
       }
     }
-
-    return matches;
-  } else {
-    return matches;
   }
+  return found;
 };
 
-const findCmsConfigPath = (cmsConfig: any, keyPath: string[]): string[] => {
+const findCmsConfigPath = (cmsConfig: CmsConfig, keyPath: string[]): string[] => {
   const matchingFiles = findFilesInCmsConfig(cmsConfig, keyPath[0]);
 
   for (const fileMatch of matchingFiles) {
@@ -94,17 +97,19 @@ const findCmsConfigPath = (cmsConfig: any, keyPath: string[]): string[] => {
     }
   }
 
-  throw `NO MATCHING CMS PATH FOR ${keyPath.toString()} (possibly missing in the CMS but exists in the JSON files)`;
+  throw new Error(
+    `NO MATCHING CMS PATH FOR ${keyPath.toString()} (possibly missing in the CMS but exists in the JSON files)`,
+  );
 };
 
-const findFilesInCmsConfig = (cmsConfig: any, key: string): FileMatch[] => {
+const findFilesInCmsConfig = (cmsConfig: CmsConfig, key: string): FileMatch[] => {
   const matchingFiles: FileMatch[] = [];
 
   for (const collection of cmsConfig.collections) {
     if (!collection.files) continue;
-    const foundFiles = collection.files.filter((fileEntry: any) => {
+    const foundFiles = collection.files.filter((fileEntry) => {
       if (!fileEntry.fields) return false;
-      return fileEntry.fields.find((field: any) => field.name === key);
+      return fileEntry.fields.find((field) => field.name === key);
     });
     if (foundFiles.length > 0) {
       for (const foundFile of foundFiles) {
@@ -118,7 +123,7 @@ const findFilesInCmsConfig = (cmsConfig: any, key: string): FileMatch[] => {
   }
 
   if (matchingFiles.length === 0) {
-    throw `DID NOT FIND CMS FILE FOR ${key}`;
+    throw new Error(`DID NOT FIND CMS FILE FOR ${key}`);
   }
 
   return matchingFiles;
@@ -128,7 +133,7 @@ export const getCollectionInfo = (): Map<string, string[]> => {
   return collectionInfo;
 };
 const buildCmsConfigPath = (
-  cmsConfigFile: any,
+  cmsConfigFile: CmsConfigField,
   keyPath: string[],
   cmsLabelPath: string[],
 ): string[] => {
@@ -136,7 +141,7 @@ const buildCmsConfigPath = (
     return cmsLabelPath;
   }
 
-  const foundField = cmsConfigFile.fields?.find((it: any) => it.name === keyPath[0]);
+  const foundField = cmsConfigFile.fields?.find((it) => it.name === keyPath[0]);
   if (!foundField) {
     return cmsLabelPath;
   }
@@ -153,5 +158,5 @@ type JsonMatch = {
 
 type FileMatch = {
   labelPathForCmsConfigFile: string[];
-  cmsConfigFile: any;
+  cmsConfigFile: CmsConfigField;
 };

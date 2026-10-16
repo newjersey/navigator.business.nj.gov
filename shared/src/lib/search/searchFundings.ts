@@ -1,7 +1,7 @@
 import { LookupFundingAgencyById } from "../../fundingAgency";
-import { Funding } from "../../types";
+import type { Funding } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchFundings = (fundings: Funding[], term: string): Match[] => {
   const fundingData = getFundingData(fundings);

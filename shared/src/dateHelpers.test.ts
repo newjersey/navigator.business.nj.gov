@@ -11,7 +11,7 @@ import {
 } from "./dateHelpers";
 import { defaultDateFormat } from "./defaultConstants";
 import { randomInt } from "./intHelpers";
-import { LicenseEntity } from "./license";
+import type { LicenseEntity } from "./license";
 
 describe("dateHelpers", () => {
   describe("parseDate", () => {
@@ -97,12 +97,8 @@ describe("dateHelpers", () => {
   describe("isDateAfterCurrentDate", () => {
     it("returns true when date is after current date", () => {
       // TODO: Fix this test
-      if (dayjs().month() === 11) {
-        console.log("december");
-        if (dayjs().date() === 31) {
-          console.log("nye");
-          return;
-        }
+      if (dayjs().month() === 11 && dayjs().date() === 31) {
+        return;
       }
       const value = dayjs().add(1, "day").format(defaultDateFormat);
       expect(isDateAfterCurrentDate(value)).toBe(true);

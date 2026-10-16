@@ -1,7 +1,7 @@
 import { LookupFundingAgencyById } from "../../fundingAgency";
-import { Certification } from "../../types";
+import type { Certification } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchCertifications = (certifications: Certification[], term: string): Match[] => {
   const certificationData = getCertificationData(certifications);

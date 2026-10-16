@@ -1,3 +1,5 @@
+import { merge } from "lodash";
+import { createContext } from "react";
 import AbcEmergencyTripPermit from "../../../content/src/fieldConfig/abc-emergency-trip-permit.json";
 import AccountSetup from "../../../content/src/fieldConfig/account-setup-page.json";
 import anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults from "../../../content/src/fieldConfig/anytime-action-reinstatement-and-license-calendar-event-status-defaults.json";
@@ -50,7 +52,6 @@ import learnPageGetEin from "../../../content/src/fieldConfig/learn-page-get-ein
 import learnPageOpenAccount from "../../../content/src/fieldConfig/learn-page-open-account.json";
 import learnPageRegisterTaxes from "../../../content/src/fieldConfig/learn-page-register-taxes.json";
 import LearnPages from "../../../content/src/fieldConfig/learn-pages.json";
-
 import LegalMessageDefaults from "../../../content/src/fieldConfig/legal-message-defaults.json";
 import LicenseSearchTask from "../../../content/src/fieldConfig/license-search-task.json";
 import LockedTasksPrompt from "../../../content/src/fieldConfig/locked-tasks-prompt.json";
@@ -74,8 +75,8 @@ import SelfRegistration from "../../../content/src/fieldConfig/self-registration
 import SkipToMainContent from "../../../content/src/fieldConfig/skip-to-main-content.json";
 import StarterKits from "../../../content/src/fieldConfig/starter-kits.json";
 import TaskDefaults from "../../../content/src/fieldConfig/task-defaults.json";
-import TaskProgressCard from "../../../content/src/fieldConfig/task-progress-card.json";
 import TaskProgress from "../../../content/src/fieldConfig/task-progress.json";
+import TaskProgressCard from "../../../content/src/fieldConfig/task-progress-card.json";
 import TaxAccess from "../../../content/src/fieldConfig/tax-access.json";
 import TaxCalendar from "../../../content/src/fieldConfig/tax-calendar.json";
 import TaxClearanceCertificateDownload from "../../../content/src/fieldConfig/tax-clearance-certificate-download.json";
@@ -89,9 +90,6 @@ import XrayRegistration from "../../../content/src/fieldConfig/xray-registration
 import XrayRenewal from "../../../content/src/fieldConfig/xray-renewal.json";
 import CalloutAlerts from "../../../content/src/mappings/callout-alerts.json";
 import PageMetadata from "../../../content/src/page-metadata/page-metadata.json";
-
-import { merge } from "lodash";
-import { createContext } from "react";
 
 const merged = JSON.parse(
   JSON.stringify(
