@@ -1,14 +1,14 @@
 {
   "businessStructureTask": {
-    "uncompletedTooltip": "Select and then save to complete this task.",
-    "completedTooltip": "This task is complete. You can edit your business structure selection below.",
-    "uncompletedRoadmapTooltip": "Complete this task to mark it done.",
-    "completedRoadmapTooltip": "This task is complete.",
-    "infoCallout": ":::miniCallout{ calloutType=\"informational\" hideIcon=\"true\" }\n\n**You need to pick a business structure before forming your business.**\n\nBusiness structure impacts who is responsible for debts and what rules you must follow.\n\nYou can change your business structure up until the “Register Your Business” step.\n\n:::",
+    "infoCallout": ":::miniCallout{ calloutType=\"informational\" hideIcon=\"true\"}\n**You need to choose a business structure before you form your business.** \\\nYour choice affects your taxes, your personal liability, and what forms you are required to file.\n:::",
+    "successMessageNextStep": "You can now [check available names and form your business](/tasks/form-business-entity).",
+    "successMessage": "**${legalStructure}** is saved.",
     "saveButton": "Save Business Structure",
+    "uncompletedTooltip": "Select and then save to complete this task.",
+    "completedRoadmapTooltip": "This task is complete.",
     "completedHeader": "Your business structure:",
     "ariaLabelText": "your business structure",
-    "successMessage": "**${legalStructure}** is saved.",
-    "successMessageNextStep": "You can now [check available names and form your business](/tasks/form-business-entity)."
+    "completedTooltip": "This task is complete. You can edit your business structure selection below.",
+    "uncompletedRoadmapTooltip": "Complete this task to mark it done."
   }
 }
