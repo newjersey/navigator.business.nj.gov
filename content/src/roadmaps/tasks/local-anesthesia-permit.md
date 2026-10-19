@@ -18,7 +18,7 @@ summaryDescriptionMd: >-
 notesMd: >-
   LLM assisted:
   https://docs.google.com/document/d/1a4QD1VvRF-LmVgJiDZML05mkK-GfCBPpyap9Aw8SZ5I/edit?tab=t.0
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Eligibility Criteria

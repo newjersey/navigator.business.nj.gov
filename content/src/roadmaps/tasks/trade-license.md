@@ -13,7 +13,7 @@ industryId: home-contractor
 summaryDescriptionMd: >-
   Ensure you, your employees, or subcontractors have any required trade
   license(s).
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## License/Permit by Role

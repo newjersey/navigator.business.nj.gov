@@ -15,7 +15,7 @@ summaryDescriptionMd: >-
   offering caregiving services. The State keeps a registry of all individuals
   who have completed their [education and training
   programs](https://www.njconsumeraffairs.gov/nur/Pages/default.aspx).
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Application Requirements

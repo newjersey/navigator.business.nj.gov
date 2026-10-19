@@ -12,7 +12,7 @@ agencyId: nj-motor-vehicle
 summaryDescriptionMd: >-
   You need to get a commercial vehicle registration before you can legally
   operate your business.
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Application Requirements

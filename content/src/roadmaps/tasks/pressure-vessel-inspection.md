@@ -27,7 +27,7 @@ notesMd: >-
 
 
   5.12.25: In SME review
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Pressure Vessels That Need Inspection

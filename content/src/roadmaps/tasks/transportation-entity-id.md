@@ -20,7 +20,7 @@ summaryDescriptionMd: >-
 
   * Licenses and permits related to operating a motor vehicle industry business
 formName: BA-8
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Eligibility Criteria

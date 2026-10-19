@@ -298,7 +298,7 @@ collections:
                 }
 
   - name: "tasks"
-    label: "Tasks - All (option to map to Webflow/static site)"
+    label: "Tasks - All (option to map to static site)"
     folder: "content/src/roadmaps/tasks"
     summary: "{{displayname}} - {{name}}"
     identifier_field: "{{id}}"
@@ -329,17 +329,17 @@ collections:
           required: false,
         }
       - {
-          label: "Sync to Webflow",
-          name: "syncToWebflow",
+          label: "Sync to Static Site",
+          name: "syncToStaticSite",
           widget: "boolean",
           required: false,
           default: false,
-          hint: "You must provide a 'Webflow Name' if this is selected",
+          hint: "You must provide a 'Static Site name' if this is selected",
         }
       - {
-          label: "Webflow Name",
-          hint: Required if "Sync to Webflow" is selected,
-          name: "webflowName",
+          label: "Static Site Name",
+          hint: Required if "Sync to Static Site" is selected,
+          name: "staticSiteName",
           widget: "string",
           required: false,
         }

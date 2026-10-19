@@ -17,7 +17,7 @@ summaryDescriptionMd: >-
 notesMd: >-
   LLM-assisted (sort of -- heavy revisions made) Planning Doc:
   https://docs.google.com/document/d/1yoHDEM7vMXgHyWt9CmHKB6Uloz7lFQ_6B3h8jKfc4JU/edit
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Application Requirements

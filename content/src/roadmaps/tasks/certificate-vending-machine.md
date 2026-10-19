@@ -13,7 +13,7 @@ summaryDescriptionMd: >-
   department of health for every county where you plan to have a vending
   machine. Not all locations will have requirements, if you plan to sell fresh
   food, such as a salad, those are more likely to have a requirement.
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }

@@ -16,7 +16,7 @@ summaryDescriptionMd: All staff in your pharmacy need to be licensed.
 notesMd: >-
   Working doc:
   https://docs.google.com/document/d/1lDbyNSS_owxK0fXlOGQgGgFtx6HK24UpBfhnhl7LTPE/edit?tab=t.0
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Licensing Requirements

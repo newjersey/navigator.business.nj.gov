@@ -49,7 +49,7 @@ summaryDescriptionMd: >-
   chemical transport trucks
 
 
-  :::largeCallout{ showHeader="true" headerText="Keep in mind:" 
+  :::largeCallout{ showHeader="true" headerText="Keep in mind:"
   calloutType="informational" amountIconText="" filingTypeIconText=""
   frequencyIconText="" phoneIconText="" emailIconText="" }
 
@@ -68,7 +68,7 @@ summaryDescriptionMd: >-
 
   :::
 formName: BA-208C
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 &nbsp;
