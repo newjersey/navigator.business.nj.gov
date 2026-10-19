@@ -14,7 +14,7 @@ summaryDescriptionMd: >-
   You can only practice as an architect once you pass the Architect’s
   Registration Exam (ARE) and are approved by the New Jersey Board of
   Architects.
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Eligibility Criteria

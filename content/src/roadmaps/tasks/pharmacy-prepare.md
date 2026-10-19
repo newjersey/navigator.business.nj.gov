@@ -14,7 +14,7 @@ agencyAdditionalContext: Board of Pharmacy
 summaryDescriptionMd: >-
   The State regulates pharmacies for the safety of customers and employees and
   has released a handbook specifically to help guide pharmacies on State rules.
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Handbook Contents

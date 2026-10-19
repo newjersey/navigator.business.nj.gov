@@ -19,7 +19,7 @@ notesMd: >-
   [Muni planning
   doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQoW2uKYE/edit?usp=sharing)
 industryId: ""
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Application Requirements
