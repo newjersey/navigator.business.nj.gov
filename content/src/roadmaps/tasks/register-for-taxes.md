@@ -16,14 +16,24 @@ summaryDescriptionMd: >-
   :::
 urlSlug: tax-registration
 displayname: tax-registration
-name: Register Your Business for State Taxes and Employer Purposes
+name: Register Your Business to Pay State Taxes
 id: register-for-taxes
 callToActionLink: ""
-callToActionText: Test
+callToActionText: ""
 agencyId: nj-revenue-enterprise-services
 formName: NJ-Reg
 needsAccount: true
 ---
+This registration is required to do business in New Jersey. If you don't register, you won't be able to pay your State taxes on time. This can lead to penalties and fees in addition to what you owe.
+
+We will redirect you to the right webpage to register. After you register, save your 12-digit NJ Tax ID in your BusinessNJ account. This will show you State grants, loans, and certifications you may qualify for.
+
+**Common taxes you may need to pay** 
+
+* **Income Tax**: collected on your business’s net income and profits
+* **Sales and Use Tax:** paid for the sale of taxable goods and services
+* **Payroll Taxes and Wage Withholding:** held on your payroll (if you have employees)
+
 ## Application Requirements
 
 *  `Entity ID|entity-id-contextual-link` (not required for general partnership or sole proprietorship)
