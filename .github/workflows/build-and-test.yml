@@ -205,8 +205,41 @@ jobs:
           node-version-file: .nvmrc
           cache: yarn
 
+      - name: Restore node_modules Cache
+        id: node-modules-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+            api/node_modules
+            api/cdk/node_modules
+            api/src/functions/messagingService/reactEmail/node_modules
+            content/node_modules
+            packages/content-types/node_modules
+            shared/node_modules
+            web/node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            node-modules-${{ runner.os }}-
+
       - name: Install Dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
+
+      - name: Save node_modules Cache
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            node_modules
+            api/node_modules
+            api/cdk/node_modules
+            api/src/functions/messagingService/reactEmail/node_modules
+            content/node_modules
+            packages/content-types/node_modules
+            shared/node_modules
+            web/node_modules
+          key: ${{ steps.node-modules-cache.outputs.cache-primary-key }}
 
       - name: Run Unit Tests (Shard ${{ matrix.shard }}/8)
         run: |
@@ -239,10 +272,6 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
-      - uses: actions/download-artifact@v8
-        with:
-          name: build-outputs
-          path: .
       - uses: ./.github/actions/perform-integration-tests
         with:
           suite: group1
@@ -259,10 +288,6 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
-      - uses: actions/download-artifact@v8
-        with:
-          name: build-outputs
-          path: .
       - uses: ./.github/actions/perform-integration-tests
         with:
           suite: group2
@@ -279,10 +304,6 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
-      - uses: actions/download-artifact@v8
-        with:
-          name: build-outputs
-          path: .
       - uses: ./.github/actions/perform-integration-tests
         with:
           suite: group3
@@ -299,10 +320,6 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
-      - uses: actions/download-artifact@v8
-        with:
-          name: build-outputs
-          path: .
       - uses: ./.github/actions/perform-integration-tests
         with:
           suite: group4
@@ -319,10 +336,6 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ env.CHECKOUT_REF }}
-      - uses: actions/download-artifact@v8
-        with:
-          name: build-outputs
-          path: .
       - uses: ./.github/actions/perform-integration-tests
         with:
           suite: group5
