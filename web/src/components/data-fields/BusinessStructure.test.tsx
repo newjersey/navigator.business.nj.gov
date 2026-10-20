@@ -7,7 +7,6 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  LookupLegalStructureById,
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
@@ -84,6 +83,6 @@ describe("<BusinessStructure />", () => {
       }),
     );
     expect(screen.queryByTestId("not-entered")).not.toBeInTheDocument();
-    expect(screen.getByText(LookupLegalStructureById("c-corporation").name)).toBeInTheDocument();
+    expect(screen.getByText(configForField.optionLabels["c-corporation"])).toBeInTheDocument();
   });
 });

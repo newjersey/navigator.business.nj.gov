@@ -16,7 +16,6 @@ import {
   generateMunicipality,
   generateProfileData,
   getCurrentDateFormatted,
-  LookupLegalStructureById,
   OperatingPhaseId,
   ProfileData,
   TaxFilingData,
@@ -595,7 +594,9 @@ describe("profile-foreign", () => {
         expect(
           screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header),
         ).toBeInTheDocument();
-        expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
+        const labels: Readonly<Record<string, string>> =
+          Config.profileDefaults.fields.legalStructureId.default.optionLabels;
+        expect(screen.getByText(labels[legalStructure])).toBeInTheDocument();
         expect(
           screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText),
         ).not.toBeInTheDocument();

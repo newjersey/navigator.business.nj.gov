@@ -58,6 +58,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUnsavedChangesGuard } from "@/lib/data-hooks/useUnsavedChangesGuard";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -510,7 +511,7 @@ const ProfilePage = (props: Props): ReactElement => {
           noLabel
           locked={shouldLockFormationFields}
           lockedValueFormatter={(legalStructureId): string =>
-            LookupLegalStructureById(legalStructureId).name
+            getLegalStructureDisplayName({ config: Config, legalStructureId })
           }
         >
           <BusinessStructure />
@@ -739,7 +740,7 @@ const ProfilePage = (props: Props): ReactElement => {
           noLabel
           locked={shouldLockFormationFields}
           lockedValueFormatter={(legalStructureId): string =>
-            LookupLegalStructureById(legalStructureId).name
+            getLegalStructureDisplayName({ config: Config, legalStructureId })
           }
         >
           <BusinessStructure />

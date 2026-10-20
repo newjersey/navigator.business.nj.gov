@@ -15,11 +15,8 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import {
-  generateFormationFormData,
-  generateProfileData,
-  LookupLegalStructureById,
-} from "@businessnjgovnavigator/shared/";
+import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
+import { generateFormationFormData, generateProfileData } from "@businessnjgovnavigator/shared/";
 import {
   ConfigContext,
   ConfigType,
@@ -144,7 +141,7 @@ const Template = () => {
                   noLabel={true}
                   locked
                   lockedValueFormatter={(legalStructureId): string =>
-                    LookupLegalStructureById(legalStructureId).name
+                    getLegalStructureDisplayName({ config: Config, legalStructureId })
                   }
                 >
                   <BusinessStructure />

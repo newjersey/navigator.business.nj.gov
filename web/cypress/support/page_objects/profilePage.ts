@@ -1,6 +1,5 @@
 import { OnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
 import { typeTaxId } from "@businessnjgovnavigator/cypress/support/helpers/helpers-form";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 
 export class ProfilePage extends OnboardingPage {
@@ -57,9 +56,8 @@ export class ProfilePage extends OnboardingPage {
   }
 
   selectLegalStructure(id: string) {
-    const legalStructureName = LookupLegalStructureById(id).name;
     this.getLegalStructure().click();
-    cy.get('[role="listbox"]').contains(legalStructureName).click({ force: true });
+    cy.get('[role="listbox"]').find(`[data-testid="${id}"]`).click({ force: true });
   }
 
   typeTaxId(taxId: string) {

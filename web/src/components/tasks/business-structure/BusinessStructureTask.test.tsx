@@ -12,7 +12,6 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import {
   generateBusiness,
   generateFormationData,
@@ -26,6 +25,8 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server.node";
 
 const Config = getMergedConfig();
+const legalStructureLabels: Readonly<Record<string, string>> =
+  Config.profileDefaults.fields.legalStructureId.default.optionLabels;
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -119,7 +120,7 @@ describe("<BusinessStructureTask />", () => {
     });
     renderTask(business);
     const successMessage = templateEval(Config.businessStructureTask.successMessage, {
-      legalStructure: legalStructure.name,
+      legalStructure: legalStructureLabels[legalStructure.id],
     });
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("success-alert")).toContainHTML(
@@ -164,7 +165,7 @@ describe("<BusinessStructureTask />", () => {
     fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
 
     expect(currentBusiness().profileData.legalStructureId).toEqual("limited-liability-company");
-    const name = LookupLegalStructureById("limited-liability-company").name;
+    const name = legalStructureLabels["limited-liability-company"];
     await waitFor(() => {
       expect(screen.getByTestId("success-alert")).toHaveTextContent(name);
     });
@@ -187,7 +188,9 @@ describe("<BusinessStructureTask />", () => {
     fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
 
     await waitFor(() => {
-      expect(screen.getByTestId("success-alert")).toHaveTextContent(legalStructure.name);
+      expect(screen.getByTestId("success-alert")).toHaveTextContent(
+        legalStructureLabels[legalStructure.id],
+      );
     });
     expect(currentBusiness().profileData.legalStructureId).toEqual(legalStructure.id);
   });

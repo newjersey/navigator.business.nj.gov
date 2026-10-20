@@ -10,6 +10,7 @@ import { ReactElement } from "react";
 const BusinessStructurePreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
+  const isRadioOptionsPreview = props.entry.toJS().slug === "business-structure-radio-options";
 
   const task = generateTask({
     name: "Name is controlled by Task Metadata",
@@ -23,9 +24,22 @@ const BusinessStructurePreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <BusinessStructureTask task={task} CMS_ONLY_fakeBusiness={generateBusiness({})} />
-        <hr className="margin-y-6" />
-        <BusinessStructureTask task={task} CMS_ONLY_fakeBusiness={missingLegalStructure} />
+        {!isRadioOptionsPreview && (
+          <>
+            <BusinessStructureTask
+              task={task}
+              CMS_ONLY_fakeBusiness={generateBusiness({})}
+              CMS_ONLY_hideUnlockedBy
+            />
+            <hr className="margin-y-6" />
+          </>
+        )}
+        <BusinessStructureTask
+          task={task}
+          CMS_ONLY_fakeBusiness={missingLegalStructure}
+          CMS_ONLY_expandOtherStructures
+          CMS_ONLY_hideUnlockedBy
+        />
       </div>
     </ConfigContext.Provider>
   );
