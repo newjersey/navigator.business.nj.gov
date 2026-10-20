@@ -21,6 +21,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -31,7 +32,6 @@ import {
 } from "@/lib/utils/helpers";
 import { Business, hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Task } from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
@@ -40,6 +40,8 @@ import { ReactElement, useEffect, useRef, useState } from "react";
 interface Props {
   task: Task;
   CMS_ONLY_fakeBusiness?: Business;
+  CMS_ONLY_expandOtherStructures?: boolean;
+  CMS_ONLY_hideUnlockedBy?: boolean;
 }
 
 export const BusinessStructureTask = (props: Props): ReactElement => {
@@ -150,7 +152,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   return (
     <div data-testid={"business-structure-task"}>
       <TaskHeader task={props.task} tooltipText={getTaskProgressTooltip()} />
-      <UnlockedBy task={props.task} />
+      {!props.CMS_ONLY_hideUnlockedBy && <UnlockedBy task={props.task} />}
       <Content className="margin-bottom-3">{Config.businessStructureTask.infoCallout}</Content>
       {showRadioQuestion && (
         <div className="margin-bottom-6">
@@ -165,7 +167,11 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
                 onBack: (): void => {},
               }}
             >
-              <LegalStructureRadio taskId={props.task.id} ref={whenErrorScrollToRef} />
+              <LegalStructureRadio
+                taskId={props.task.id}
+                CMS_ONLY_expandOtherStructures={props.CMS_ONLY_expandOtherStructures}
+                ref={whenErrorScrollToRef}
+              />
             </ProfileDataContext.Provider>
           </DataFormErrorMapContext.Provider>
         </div>
@@ -180,8 +186,10 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             >
               <Content>
                 {templateEval(Config.businessStructureTask.successMessage, {
-                  legalStructure: LookupLegalStructureById(business.profileData.legalStructureId)
-                    .name,
+                  legalStructure: getLegalStructureDisplayName({
+                    config: Config,
+                    legalStructureId: business.profileData.legalStructureId,
+                  }),
                 })}
               </Content>
               {canEdit() ? (

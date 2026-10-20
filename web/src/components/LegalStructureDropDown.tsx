@@ -4,11 +4,8 @@ import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import {
-  LegalStructure,
-  LegalStructures,
-  LookupLegalStructureById,
-} from "@businessnjgovnavigator/shared";
+import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
+import { LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
 import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
@@ -40,7 +37,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,
     (legalStructure: LegalStructure) => {
-      return legalStructure.name;
+      return getLegalStructureDisplayName({ config: Config, legalStructureId: legalStructure.id });
     },
   );
 
@@ -55,14 +52,14 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
   };
 
   const renderOption = (legalStructureId: string): ReactElement => {
+    const label = getLegalStructureDisplayName({ config: Config, legalStructureId });
+
     return (
       <div className="padding-top-1 padding-bottom-1">
         {state.profileData.legalStructureId === legalStructureId ? (
-          <MenuOptionSelected>{LookupLegalStructureById(legalStructureId).name}</MenuOptionSelected>
+          <MenuOptionSelected>{label}</MenuOptionSelected>
         ) : (
-          <MenuOptionUnselected>
-            {LookupLegalStructureById(legalStructureId).name}
-          </MenuOptionUnselected>
+          <MenuOptionUnselected>{label}</MenuOptionUnselected>
         )}
       </div>
     );
@@ -73,7 +70,9 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
       return <></>;
     }
 
-    return <>{LookupLegalStructureById(value as string).name}</>;
+    return (
+      <>{getLegalStructureDisplayName({ config: Config, legalStructureId: value as string })}</>
+    );
   };
 
   return (

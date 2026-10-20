@@ -316,6 +316,16 @@
           "editText": "Edit",
           "addText": "Add",
           "notEnteredText": "Not entered",
+          "optionLabels": {
+            "general-partnership": "General Partnership",
+            "c-corporation": "Corporation (C designation)",
+            "limited-liability-company": "Limited Liability Company (LLC)",
+            "limited-liability-partnership": "Limited Liability Partnership (LLP)",
+            "limited-partnership": "Limited Partnership (LP)",
+            "s-corporation": "Corporation (and optional S Corp tax designation)",
+            "sole-proprietorship": "Sole Proprietorship",
+            "nonprofit": "Nonprofit"
+          },
           "optionContent": {
             "general-partnership": "In a general partnership, 2 or more people share ownership of a single business. `Learn about general partnerships.|general-partnership`\n",
             "c-corporation": "C corporations are complex. Larger companies with many employees usually are C corps. `Learn more about C Corps.|c-corporation`",
