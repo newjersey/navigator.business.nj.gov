@@ -309,23 +309,6 @@
       },
       "legalStructureId": {
         "default": {
-          "header": "Business Structure",
-          "headerContextualInfo": "business-structure-learn-more",
-          "description": "",
-          "errorTextRequired": "Select a business structure.",
-          "editText": "Edit",
-          "addText": "Add",
-          "notEnteredText": "Not entered",
-          "optionLabels": {
-            "general-partnership": "General Partnership",
-            "c-corporation": "Corporation (C designation)",
-            "limited-liability-company": "Limited Liability Company (LLC)",
-            "limited-liability-partnership": "Limited Liability Partnership (LLP)",
-            "limited-partnership": "Limited Partnership (LP)",
-            "s-corporation": "Corporation (and optional S Corp tax designation)",
-            "sole-proprietorship": "Sole Proprietorship",
-            "nonprofit": "Nonprofit"
-          },
           "optionContent": {
             "general-partnership": "In a general partnership, 2 or more people share ownership of a single business. `Learn about general partnerships.|general-partnership`\n",
             "c-corporation": "C corporations are complex. Larger companies with many employees usually are C corps. `Learn more about C Corps.|c-corporation`",
@@ -335,7 +318,24 @@
             "s-corporation": "An S corp is a tax status. You do not register an S corp with the State. You register a corporation, then elect S corp status with the IRS. `Learn more about S Corps.|s-corp-business`",
             "sole-proprietorship": "A sole proprietorship has one owner who is responsible for all debts and liabilities. `Learn more about sole proprietorships.|sole-proprietorship`",
             "nonprofit": "Nonprofits have a mission to benefit the public rather than generating profit. `Learn about nonprofits.|nonprofit`"
-          }
+          },
+          "headerContextualInfo": "business-structure-learn-more",
+          "header": "Business Structure",
+          "addText": "Add",
+          "notEnteredText": "Not entered",
+          "optionLabels": {
+            "general-partnership": "General Partnership",
+            "c-corporation": "C-Corporation (C Corps)",
+            "limited-liability-company": "Limited Liability Company (LLC)",
+            "limited-liability-partnership": "Limited Liability Partnership (LLP)",
+            "limited-partnership": "Limited Partnership (LP)",
+            "s-corporation": "S-Corporation (S Corp)",
+            "sole-proprietorship": "Sole Proprietorship",
+            "nonprofit": "Nonprofit"
+          },
+          "errorTextRequired": "Select a business structure.",
+          "editText": "Edit",
+          "description": ""
         }
       },
       "deptOfLaborEin": {
@@ -486,26 +486,25 @@
       "escapeModalEscape": "Keep Editing",
       "escapeModalBody": "You've made changes to your profile that haven't been saved. If you leave this page now, those changes will be lost.",
       "notificationIncompleteTasksLabel": "Incomplete tasks and general reminders",
+      "newsletterUnsubscribeError": "We were unable to unsubscribe you from the newsletter. Your changes were not saved. Please try again.",
       "notificationNewsletterLabel": "Business.NJ.gov Newsletter",
       "standingDocFileTitle": "Certificate of Good Standing",
       "errorErrorAlertOneField": "field",
       "securityMattersHeading": "Your Security Matters:",
+      "selectIntentAlertText": "Please make a selection.",
       "profileTabDocsTitle": "Reference Documents",
       "profilePageTitlePrefix": "Profile For",
       "successTextBody": "Based on your answers, you may see updates to your Business.NJ.gov account experience.",
       "escapeModalQuestion": "Would you like to save your changes before leaving?",
       "essentialQuestionAlertText": "Complete all required fields.",
-      "selectIntentAlertText": "Please make a selection.",
       "typesOfNotificationsSubText": "Select the types of updates that matter most to your business.",
       "formationDocFileTitle": "Official Formation Document",
       "filterCertificationsAndFundingSubText": "Answer a few questions to find State certifications and funding programs in your For You section.",
       "contactInformationHeading": "Your Contact Information",
       "notificationIncompleteTasksDescription": "Stay on track with helpful nudges when you leave something unfinished.",
       "errorTextBody": "Review your information in the ${fieldText} marked below.",
-      "notificationNewsletterDescription": "Get updates on the latest State news that could impact your business.",
       "newsletterSubscribeError": "We were unable to subscribe you to the newsletter. Your changes were not saved. Please try again.",
-      "newsletterUnsubscribeError": "We were unable to unsubscribe you from the newsletter. Your changes were not saved. Please try again.",
-      "newsletterEmailUpdateError": "We were unable to update your newsletter subscription with your new email. Your changes were not saved. Please try again.",
+      "notificationNewsletterDescription": "Get updates on the latest State news that could impact your business.",
       "yourProfileHelpsWithRecommendationsCallout": ":::miniCallout{ calloutType=\"informational\"  }\n**Your profile helps us make recommendations for your business.**\n:::",
       "annualReportDeadlineHeader": "Add Your Annual Report Deadline",
       "escapeModalHeader": "Save Changes",
@@ -513,6 +512,7 @@
       "profileTabNumbersTitle": "Reference Numbers",
       "profileTabNoteTitle": "Notes",
       "locationBasedRequirementsHeader": "Identify Location-Based Requirements",
+      "newsletterEmailUpdateError": "We were unable to update your newsletter subscription with your new email. Your changes were not saved. Please try again.",
       "saveButtonText": "Save",
       "profileTabSlugs": {
         "info": "business-information",
