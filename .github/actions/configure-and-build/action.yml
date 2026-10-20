@@ -3,9 +3,6 @@ description: Runs bootstrap-code and builds the project
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v7
-
     - name: Setup Node.js
       uses: actions/setup-node@v7
       with:
@@ -25,17 +22,42 @@ runs:
         restore-keys: |
           cypress-cache-
 
-    - name: Restore Yarn Cache
-      uses: actions/cache@v6
+    - name: Restore node_modules Cache
+      id: node-modules-cache
+      uses: actions/cache/restore@v4
       with:
-        path: .yarn/cache
-        key: yarn-cache-${{ hashFiles('yarn.lock') }}
+        path: |
+          node_modules
+          api/node_modules
+          api/cdk/node_modules
+          api/src/functions/messagingService/reactEmail/node_modules
+          content/node_modules
+          packages/content-types/node_modules
+          shared/node_modules
+          web/node_modules
+        key: node-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
         restore-keys: |
-          yarn-cache-
+          node-modules-${{ runner.os }}-
 
     - name: Install Dependencies
+      if: steps.node-modules-cache.outputs.cache-hit != 'true'
       shell: bash
       run: yarn install --immutable
+
+    - name: Save node_modules Cache
+      if: steps.node-modules-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: |
+          node_modules
+          api/node_modules
+          api/cdk/node_modules
+          api/src/functions/messagingService/reactEmail/node_modules
+          content/node_modules
+          packages/content-types/node_modules
+          shared/node_modules
+          web/node_modules
+        key: ${{ steps.node-modules-cache.outputs.cache-primary-key }}
 
     - name: Verify Cypress Installation
       shell: bash
