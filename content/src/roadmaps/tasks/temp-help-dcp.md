@@ -40,7 +40,7 @@ notesMd: >+
 
 
 industryId: ""
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 &nbsp;

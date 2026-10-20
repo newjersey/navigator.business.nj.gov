@@ -15,7 +15,7 @@ summaryDescriptionMd: >-
   In order to become a member, you may apply to take the State Bar Exam, or you
   may apply for admission to the State Bar by transferring your Uniform Bar
   Examination (UBE) Score.
-syncToWebflow: true
+syncToStaticSite: true
 agencyWebsite: "https://www.njbarexams.org/home"
 ---
 

@@ -62,7 +62,7 @@ summaryDescriptionMd: >-
   someone other than the intended business owner
 notesMd: ""
 formName: OS/SS-UTA
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Application Requirements

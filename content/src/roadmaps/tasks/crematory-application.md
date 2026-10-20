@@ -18,7 +18,7 @@ summaryDescriptionMd: >-
 notesMd: >-
   Planning doc:
   https://docs.google.com/document/d/1l7IGO9m13_f2Mkn5OoVfyJD8eeFlidLqhCFQuRQoWMY/edit?tab=t.0#heading=h.gjdgxs
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Application Requirements

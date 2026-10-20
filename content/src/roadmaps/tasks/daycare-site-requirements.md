@@ -20,7 +20,7 @@ summaryDescriptionMd: >-
   You can schedule a free preliminary inspection with DCF's Office of Licensing
   at (877) 667-9845.
 notesMd: ""
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## DCF Requirements

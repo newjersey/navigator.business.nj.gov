@@ -361,7 +361,11 @@ const extractUrlsFromText = (text: string, fieldName: string): FoundUrl[] => {
     const url = node.url;
     if (/^https?:\/\//.test(url) && !seen.has(url)) {
       seen.add(url);
-      results.push({ url, field: fieldName, context: getContextSnippet(text, url) });
+      results.push({
+        url,
+        field: fieldName,
+        context: getContextSnippet(text, url),
+      });
     }
   });
 
@@ -379,7 +383,11 @@ const extractUrlsFromText = (text: string, fieldName: string): FoundUrl[] => {
     }
     if (isSubstringOfKnown) continue;
     seen.add(url);
-    results.push({ url, field: fieldName, context: getContextSnippet(text, url) });
+    results.push({
+      url,
+      field: fieldName,
+      context: getContextSnippet(text, url),
+    });
   }
 
   return results;
@@ -452,7 +460,7 @@ const getCmsCollectionLabel = (slug: string): string => {
 
 const COLLECTION_ROUTE_MAP: Record<string, string> = {
   "Tasks - ABC": "/tasks",
-  "Tasks - All (option to map to Webflow/static site)": "/tasks",
+  "Tasks - All (option to map to static site)": "/tasks",
   "Tasks - Business Structure": "/tasks",
   "Tasks - Cannabis License": "/tasks",
   "Tasks - Cannabis Priority Status": "/tasks",
@@ -573,7 +581,11 @@ export const findDeadContentLinks = async ({
   const urlStatus = new Map<string, UrlCheckResult>();
   let checked = 0;
 
-  onEvent?.({ event: "urls_collected", fileCount: files.length, totalUrls: allUniqueUrls.length });
+  onEvent?.({
+    event: "urls_collected",
+    fileCount: files.length,
+    totalUrls: allUniqueUrls.length,
+  });
   onProgress?.(0, allUniqueUrls.length);
 
   const checkContentUrl = async (url: string): Promise<void> => {

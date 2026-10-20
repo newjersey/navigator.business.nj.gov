@@ -21,7 +21,7 @@ export interface WebflowLicenseCard {
   licenseCertificationClassification: string;
   summaryDescriptionMd?: string;
   contentMd: string;
-  syncToWebflow?: boolean | string;
+  syncToStaticSite?: boolean | string;
   formName?: string;
   webflowIndustry?: string;
   [key: string]: unknown;
@@ -91,7 +91,7 @@ export const loadAllLicenses = (): WebflowLicenseCard[] => {
     ...loadDirectory(licenseTasksDirectory),
     ...loadDirectory(municipalDirectory),
     ...loadDirectory(tasksAllDirectory).filter(
-      (license) => license.syncToWebflow === true || license.syncToWebflow === "true",
+      (license) => license.syncToStaticSite === true || license.syncToStaticSite === "true",
     ),
   ];
   return dedupeByWebflowId(combined);

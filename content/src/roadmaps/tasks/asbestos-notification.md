@@ -29,7 +29,7 @@ summaryDescriptionMd: >-
   the scope changes, such as placing the project on hold or taking it off hold,
   you may have to submit an updated form or payment.
 notesMd: >-
-  8.8.25: Internal review complete, making edits and republishing 
+  8.8.25: Internal review complete, making edits and republishing
 
 
   6.25.25: Added exempted activities section, waiting for async SME review
@@ -48,7 +48,7 @@ notesMd: >-
 
   Draft Document:
   https://docs.google.com/document/d/16SDcwVjI4j_6HXntd3eatGnL3Hh8TjP2BTamIKMiBIs/edit?tab=t.0
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Asbestos Work That Does Not Require Notification

@@ -1,7 +1,7 @@
+import { loadAllLicenses as loadAllLicensesShared } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import { loadAllLicenses as loadAllLicensesShared } from "@businessnjgovnavigator/shared/static/loadAllLicenses";
 
 const webflowLicenseDir = path.resolve(`${__dirname}/../../../content/src/webflow-licenses`);
 
@@ -31,7 +31,7 @@ export interface LicenseData {
   licenseCertificationClassification: string;
   summaryDescriptionMd?: string;
   contentMd: string;
-  syncToWebflow?: boolean | string;
+  syncToStaticSite?: boolean | string;
   formName?: string;
   webflowIndustry?: string;
   [key: string]: unknown;
@@ -83,7 +83,7 @@ export const loadAllNavigatorLicenses = (): LicenseData[] => {
       const fullPath = path.join(tasksAllDir, `${fileName}`);
       return loadLicenseByPath(fileName, fullPath);
     })
-    .filter((license) => license.syncToWebflow === true || license.syncToWebflow === "true");
+    .filter((license) => license.syncToStaticSite === true || license.syncToStaticSite === "true");
 
   return [...navigatorLicenses, ...municipalLicenses, ...tasksAllLicenses];
 };

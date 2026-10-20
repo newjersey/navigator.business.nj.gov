@@ -28,7 +28,7 @@ summaryDescriptionMd: >-
   Carrier Safety Administration (FMCSA) list of process agent
   companies.](https://www.fmcsa.dot.gov/registration/process-agents)
 required: true
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Application Requirements
