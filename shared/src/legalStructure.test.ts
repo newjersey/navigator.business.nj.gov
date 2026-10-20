@@ -1,3 +1,4 @@
+import { getMergedConfig } from "./contexts/configContext";
 import { LegalStructures, LookupLegalStructureById } from "./legalStructure";
 
 describe("Legal Structure Tests", () => {
@@ -5,15 +6,17 @@ describe("Legal Structure Tests", () => {
     expect(LegalStructures.length).toBeGreaterThan(0);
   });
 
-  for (const index of LegalStructures) {
-    it(`${index.id} has an id`, () => {
-      expect(index.id.length).toBeGreaterThan(0);
-    });
+  it("has a CMS label for every legal structure", () => {
+    const labels: Readonly<Record<string, string>> =
+      getMergedConfig().profileDefaults.fields.legalStructureId.default.optionLabels;
 
-    it(`${index.id} has a name`, () => {
-      expect(index.name.length).toBeGreaterThan(0);
-    });
-  }
+    expect(Object.keys(labels).sort()).toEqual(
+      LegalStructures.map((structure) => structure.id).sort(),
+    );
+    for (const structure of LegalStructures) {
+      expect(labels[structure.id].trim()).not.toBe("");
+    }
+  });
 
   describe("Lookup By Id", () => {
     it("returns empty object when invalid id is supplied", () => {

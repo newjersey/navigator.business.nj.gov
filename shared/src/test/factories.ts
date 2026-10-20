@@ -474,7 +474,7 @@ export const generateEmailConfirmationSubmission = (
 ): EmailConfirmationSubmission => {
   return {
     businessName: `some-business-name-${randomInt()}`,
-    businessType: randomLegalStructure().name,
+    businessType: randomLegalStructure().id,
     responsibleOwnerName: `some-owner-name-${randomInt()}`,
     tradeName: `some-trade-name-${randomInt()}`,
     taxId: maskingCharacter.repeat(7) + randomInt(12).toString().slice(-5),

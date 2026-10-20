@@ -8,12 +8,9 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
+import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import {
-  LegalStructure,
-  LegalStructures,
-  LookupLegalStructureById,
-} from "@businessnjgovnavigator/shared";
+import { LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import {
@@ -30,6 +27,7 @@ import React, { ForwardedRef, forwardRef, ReactElement, useContext } from "react
 
 interface Props {
   taskId: string;
+  CMS_ONLY_expandOtherStructures?: boolean;
 }
 
 const LegalStructureRadio = forwardRef(
@@ -64,14 +62,14 @@ const LegalStructureRadio = forwardRef(
     const commonLegalStructuresOrdered: LegalStructure[] = orderBy(
       commonLegalStructures,
       (legalStructure: LegalStructure) => {
-        return legalStructure.onboardingOrder;
+        return legalStructure.orderWeight;
       },
     );
 
     const otherLegalStructuresOrdered: LegalStructure[] = orderBy(
       otherLegalStructures,
       (legalStructure: LegalStructure) => {
-        return legalStructure.onboardingOrder;
+        return legalStructure.orderWeight;
       },
     );
 
@@ -120,7 +118,7 @@ const LegalStructureRadio = forwardRef(
     const makeLabel = (legalStructureId: string): ReactElement => {
       return (
         <div data-value={legalStructureId} className={"text-bold"}>
-          {LookupLegalStructureById(legalStructureId).name}
+          {getLegalStructureDisplayName({ config: Config, legalStructureId })}
         </div>
       );
     };
@@ -162,7 +160,7 @@ const LegalStructureRadio = forwardRef(
             </AccordionDetails>
           </Accordion>
           <div className="margin-top-3 margin-bottom-1">
-            <Accordion>
+            <Accordion defaultExpanded={props.CMS_ONLY_expandOtherStructures}>
               <AccordionSummary
                 expandIcon={
                   <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />
