@@ -309,13 +309,6 @@
       },
       "legalStructureId": {
         "default": {
-          "header": "Business Structure",
-          "headerContextualInfo": "business-structure-learn-more",
-          "description": "",
-          "errorTextRequired": "Select a business structure.",
-          "editText": "Edit",
-          "addText": "Add",
-          "notEnteredText": "Not entered",
           "optionContent": {
             "general-partnership": "Two or more people share ownership of a single business. `Learn about general partnerships.|general-partnership`",
             "c-corporation": "\n\nMore complex. Larger companies with many employees. `Learn more about C Corps.|c-corporation`",
@@ -325,7 +318,24 @@
             "s-corporation": "Similar to a C-Corp but the business is not taxed separately from the owners. `Learn more about S Corps.|s-corp-business`",
             "sole-proprietorship": "Has one owner who is responsible for all debts & liabilities. `Learn more about sole proprietorships.|sole-proprietorship`",
             "nonprofit": "Has a mission to benefit the public rather than generating profit. `Learn about nonprofits.|nonprofit`"
-          }
+          },
+          "headerContextualInfo": "business-structure-learn-more",
+          "header": "Business Structure",
+          "addText": "Add",
+          "notEnteredText": "Not entered",
+          "optionLabels": {
+            "c-corporation": "C-Corporation (C Corp)",
+            "s-corporation": "S-Corporation (S Corp)",
+            "limited-liability-company": "Limited Liability Company (LLC)",
+            "sole-proprietorship": "Sole Proprietorship",
+            "general-partnership": "General Partnership",
+            "nonprofit": "Nonprofit",
+            "limited-liability-partnership": "Limited Liability Partnership (LLP)",
+            "limited-partnership": "Limited Partnership (LP)"
+          },
+          "errorTextRequired": "Select a business structure.",
+          "editText": "Edit",
+          "description": ""
         }
       },
       "deptOfLaborEin": {
