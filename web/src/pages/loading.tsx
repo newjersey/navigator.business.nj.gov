@@ -1,10 +1,13 @@
 import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
+import * as api from "@/lib/api-client/apiClient";
+import { ensureProfileNJUserRecord } from "@/lib/auth/profileNjFirstLogin";
 import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { onboardingCompleted } from "@businessnjgovnavigator/shared/";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/compat/router";
@@ -17,6 +20,7 @@ const LoadingPage = (): ReactElement => {
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);
   const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
+  const profileNJLoginEnabled = process.env.FEATURE_PROFILE_NJ_LOGIN === "true";
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
@@ -36,12 +40,26 @@ const LoadingPage = (): ReactElement => {
     if (!router?.isReady) {
       return;
     }
+
+    const logInReturningUser = async (): Promise<void> => {
+      const currentUser = await getActiveUser();
+      await ensureProfileNJUserRecord(currentUser, {
+        getUserData: api.getUserData,
+        postUserData: api.postUserData,
+        getGuestUserData: () => UserDataStorageFactory().getCurrentUserData(),
+      });
+      dispatch({ type: "LOGIN", activeUser: currentUser });
+    };
+
     if (router.query[QUERIES.code]) {
-      getActiveUser().then((currentUser) => {
-        dispatch({ type: "LOGIN", activeUser: currentUser });
+      logInReturningUser().catch((error: unknown) => {
+        console.error("Failed to complete sign-in", error);
+        setShowError(true);
       });
     } else if (router?.asPath?.includes(signInSamlError)) {
       analytics.event.landing_page.arrive.get_unlinked_myNJ_account();
+      setShowError(true);
+    } else if (profileNJLoginEnabled && router.query.error) {
       setShowError(true);
     } else {
       if (loginPageEnabled) {
@@ -50,7 +68,7 @@ const LoadingPage = (): ReactElement => {
         triggerSignIn();
       }
     }
-  }, [router, dispatch, loginPageEnabled]);
+  }, [router, dispatch, loginPageEnabled, profileNJLoginEnabled]);
 
   useMountEffectWhenDefined(() => {
     if (!updateQueue) return;
