@@ -4,6 +4,13 @@ import { HttpRequest } from "@aws-sdk/protocol-http";
 import { S3RequestPresigner } from "@aws-sdk/s3-request-presigner";
 import { parseUrl } from "@aws-sdk/url-parser";
 import { formatUrl } from "@aws-sdk/util-format-url";
+import {
+  getSignInProvider,
+  MYNJ_PROVIDER_NAME,
+  PROFILE_NJ_PROVIDER_NAME,
+  resolveSignedInUserId,
+  type SignedInUserClaims,
+} from "@businessnjgovnavigator/shared/signedInUser";
 import { Amplify } from "aws-amplify";
 import {
   type CredentialsAndIdentityId,
@@ -31,6 +38,7 @@ type CognitoIdPayload = {
   token_use: string;
   "custom:myNJUserKey": string;
   "custom:identityId": string | undefined;
+  "custom:profileNJResidentId"?: string;
   identities: CognitoIdentityPayload[] | undefined;
 };
 
@@ -83,15 +91,21 @@ export const triggerSignOut = async (): Promise<void> => {
   await signOut();
 };
 
-export const triggerSignIn = async (): Promise<void> => {
-  // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-  // @ts-ignore
+const signInWithProvider = async (providerName: string): Promise<void> => {
   configureAmplify();
   await signInWithRedirect({
     provider: {
-      custom: "myNJ",
+      custom: providerName,
     },
   });
+};
+
+export const triggerSignIn = async (): Promise<void> => {
+  await signInWithProvider(MYNJ_PROVIDER_NAME);
+};
+
+export const triggerProfileNJSignIn = async (): Promise<void> => {
+  await signInWithProvider(PROFILE_NJ_PROVIDER_NAME);
 };
 
 export const getSignedS3Link = async (value: string, expires?: number): Promise<string> => {
@@ -150,12 +164,11 @@ const cognitoPayloadToActiveUser = ({
   cognitoPayload: CognitoIdPayload;
   encounteredMyNjLinkingError?: boolean | undefined;
 }): ActiveUser => {
-  const myNJIdentityPayload = cognitoPayload.identities?.find((it) => {
-    return it.providerName === "myNJ";
-  });
+  const claims: SignedInUserClaims = cognitoPayload;
   return {
-    id: myNJIdentityPayload?.userId || cognitoPayload.sub,
+    id: resolveSignedInUserId(claims),
     email: cognitoPayload.email,
     encounteredMyNjLinkingError,
+    signInProvider: getSignInProvider(claims),
   };
 };
