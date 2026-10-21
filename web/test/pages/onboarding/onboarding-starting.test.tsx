@@ -17,6 +17,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { act, screen, waitFor, within } from "@testing-library/react";
 import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import * as mockRouter from "@/test/mock/mockRouter";
@@ -404,7 +405,10 @@ describe("onboarding - starting a business", () => {
     it("uses intent selection page if feature flag is true and user has no myNJkey", async () => {
       process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
       const initialUserData = createEmptyUserData(createEmptyUser());
-      const { page } = renderPage({ userData: initialUserData });
+      const { page } = renderPage({
+        userData: initialUserData,
+        isAuthenticated: IsAuthenticated.FALSE,
+      });
 
       page.chooseRadio("business-persona-starting");
       await page.visitOnboardingPage(2);
@@ -429,7 +433,10 @@ describe("onboarding - starting a business", () => {
 
       it("shows error alert if you try to advance without choosing an intent", async () => {
         const initialUserData = createEmptyUserData(createEmptyUser());
-        const { page } = renderPage({ userData: initialUserData });
+        const { page } = renderPage({
+          userData: initialUserData,
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
 
         page.chooseRadio("business-persona-starting");
         await page.visitOnboardingPage(2);
@@ -448,7 +455,10 @@ describe("onboarding - starting a business", () => {
 
       it("removes alert if an intent is chosen", async () => {
         const initialUserData = createEmptyUserData(createEmptyUser());
-        const { page } = renderPage({ userData: initialUserData });
+        const { page } = renderPage({
+          userData: initialUserData,
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
 
         page.chooseRadio("business-persona-starting");
         await page.visitOnboardingPage(2);
@@ -467,7 +477,10 @@ describe("onboarding - starting a business", () => {
 
       it("updates userData with learning value", async () => {
         const initialUserData = createEmptyUserData(createEmptyUser());
-        const { page } = renderPage({ userData: initialUserData });
+        const { page } = renderPage({
+          userData: initialUserData,
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
 
         page.chooseRadio("business-persona-starting");
         await page.visitOnboardingPage(2);
@@ -486,7 +499,10 @@ describe("onboarding - starting a business", () => {
 
       it("updates userData with starting value", async () => {
         const initialUserData = createEmptyUserData(createEmptyUser());
-        const { page } = renderPage({ userData: initialUserData });
+        const { page } = renderPage({
+          userData: initialUserData,
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
 
         page.chooseRadio("business-persona-starting");
         await page.visitOnboardingPage(2);
@@ -504,7 +520,10 @@ describe("onboarding - starting a business", () => {
 
       it("clears userData with starting value if user goes back to step 1", async () => {
         const initialUserData = createEmptyUserData(createEmptyUser());
-        const { page } = renderPage({ userData: initialUserData });
+        const { page } = renderPage({
+          userData: initialUserData,
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
 
         page.chooseRadio("business-persona-starting");
         await page.visitOnboardingPage(2);
@@ -522,7 +541,10 @@ describe("onboarding - starting a business", () => {
 
       it("sends form_start and form_submitted analytics events", async () => {
         const initialUserData = createEmptyUserData(createEmptyUser());
-        const { page } = renderPage({ userData: initialUserData });
+        const { page } = renderPage({
+          userData: initialUserData,
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
 
         expect(mockAnalytics.event.onboarding.onboarding_form_start).toHaveBeenCalled();
 
@@ -542,7 +564,10 @@ describe("onboarding - starting a business", () => {
 
       it("directs user to learn pages if using learn flow with only 1 business", async () => {
         const initialUserData = createEmptyUserData(createEmptyUser());
-        const { page } = renderPage({ userData: initialUserData });
+        const { page } = renderPage({
+          userData: initialUserData,
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
 
         expect(mockAnalytics.event.onboarding.onboarding_form_start).toHaveBeenCalled();
 
@@ -564,7 +589,10 @@ describe("onboarding - starting a business", () => {
 
       it("directs user to account setup if using ready flow with only 1 business", async () => {
         const initialUserData = createEmptyUserData(createEmptyUser());
-        const { page } = renderPage({ userData: initialUserData });
+        const { page } = renderPage({
+          userData: initialUserData,
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
 
         expect(mockAnalytics.event.onboarding.onboarding_form_start).toHaveBeenCalled();
 
