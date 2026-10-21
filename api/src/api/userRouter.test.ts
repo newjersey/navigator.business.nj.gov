@@ -1421,6 +1421,22 @@ describe("userRouter", () => {
         expect(stubUnifiedDataClient.put).toHaveBeenCalledTimes(1);
       });
 
+      it("still subscribes a myNJ user whose first record is created by POST", async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        stubUnifiedDataClient.get.mockRejectedValue(new Error("Not found"));
+        stubUnifiedDataClient.put.mockImplementation((userData) => Promise.resolve(userData));
+        const newUser = generateUserData({
+          user: generateUser({ id: "123", receiveNewsletter: true, email: "mynj@example.com" }),
+        });
+
+        await request(appWithGovDelivery)
+          .post("/users")
+          .send(newUser)
+          .set("Authorization", "Bearer user-123-token");
+
+        expect(mockGovDeliveryClient.subscribe).toHaveBeenCalledWith("mynj@example.com");
+      });
+
       it("subscribes when an existing record turns on the newsletter", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
         stubUnifiedDataClient.put.mockImplementation((userData) => Promise.resolve(userData));

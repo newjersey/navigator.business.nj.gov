@@ -304,9 +304,13 @@ export const userRouterFactory = (
       .catch(() => {})) as UserData | undefined;
 
     let userDataForSave = userDataWithUpdatedISO;
-    // New accounts subscribe at account setup (POST /external/newsletter), and the
-    // newsletter retry job covers failures, so creating a record never syncs.
-    if (govDeliveryCommCloudClient && existingUserData) {
+    // A ProfileNJ user's first record is created here after they already opted in
+    // at account setup (POST /external/newsletter); syncing again would subscribe
+    // the ProfileNJ email a second time, and a GovDelivery failure would discard
+    // their guest data. myNJ creations keep syncing as before.
+    const isProfileNJRecordCreation =
+      !existingUserData && getSignInProvider(getSignedInUser(req)) === PROFILE_NJ_PROVIDER_NAME;
+    if (govDeliveryCommCloudClient && !isProfileNJRecordCreation) {
       const syncResult = await syncNewsletterSubscription(
         existingUserData,
         userDataWithUpdatedISO,
