@@ -39,7 +39,10 @@ jest.mock("@/lib/auth/sessionHelper", () => ({
   triggerSignIn: jest.fn(),
   getActiveUser: jest.fn(),
 }));
-jest.mock("@/lib/auth/profileNjFirstLogin", () => ({ ensureProfileNJUserRecord: jest.fn() }));
+jest.mock("@/lib/auth/profileNjFirstLogin", () => ({
+  ensureProfileNJUserRecord: jest.fn(),
+  createProfileNJFirstLoginDependencies: jest.fn(),
+}));
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -163,6 +166,13 @@ describe("loading page", () => {
 
     it("ensures the ProfileNJ user's record exists before logging in", async () => {
       mockProfileNJFirstLogin.ensureProfileNJUserRecord.mockResolvedValue();
+      const dependencies = {
+        getUserData: jest.fn(),
+        postUserData: jest.fn(),
+        getGuestUserData: jest.fn(),
+        removeGuestUserData: jest.fn(),
+      };
+      mockProfileNJFirstLogin.createProfileNJFirstLoginDependencies.mockReturnValue(dependencies);
       const dispatch = jest.fn();
 
       render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE, dispatch }));
@@ -172,11 +182,7 @@ describe("loading page", () => {
       });
       expect(mockProfileNJFirstLogin.ensureProfileNJUserRecord).toHaveBeenCalledWith(
         activeUser,
-        expect.objectContaining({
-          getUserData: expect.any(Function),
-          postUserData: expect.any(Function),
-          getGuestUserData: expect.any(Function),
-        }),
+        dependencies,
       );
       expect(
         mockProfileNJFirstLogin.ensureProfileNJUserRecord.mock.invocationCallOrder[0],
