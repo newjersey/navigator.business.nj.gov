@@ -36,6 +36,19 @@ describe("login-profile-nj page", () => {
     });
   });
 
+  it("logs the error when starting the ProfileNJ sign-in fails", async () => {
+    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    const failure = new Error("redirect failed");
+    mockSession.triggerProfileNJSignIn.mockRejectedValue(failure);
+
+    render(<LoginProfileNJPage />);
+
+    await waitFor(() => {
+      expect(consoleErrorSpy).toHaveBeenCalledWith("Failed to start ProfileNJ sign-in", failure);
+    });
+    consoleErrorSpy.mockRestore();
+  });
+
   it("is not found when the flag is unset", () => {
     delete process.env.FEATURE_PROFILE_NJ_LOGIN;
     expect(getStaticProps()).toEqual({ notFound: true });
