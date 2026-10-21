@@ -340,8 +340,19 @@ describe("onboarding - shared", () => {
   });
 
   describe("signed-in user without a myNJ key (ProfileNJ)", () => {
+    const originalProfileNJFlag = process.env.FEATURE_PROFILE_NJ_LOGIN;
+
     beforeEach(() => {
       process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
+      process.env.FEATURE_PROFILE_NJ_LOGIN = "true";
+    });
+
+    afterEach(() => {
+      if (originalProfileNJFlag === undefined) {
+        delete process.env.FEATURE_PROFILE_NJ_LOGIN;
+      } else {
+        process.env.FEATURE_PROFILE_NJ_LOGIN = originalProfileNJFlag;
+      }
     });
 
     it("shows the industry question instead of the guest intent page", async () => {
