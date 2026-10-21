@@ -12,6 +12,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
@@ -227,6 +228,7 @@ describe("onboarding - shared", () => {
             myNJUserKey: isLoggedIn ? "sample-key" : undefined,
           }),
         }),
+        isAuthenticated: isLoggedIn ? IsAuthenticated.TRUE : IsAuthenticated.FALSE,
       });
 
       page.chooseRadio("business-persona-starting");
@@ -334,6 +336,51 @@ describe("onboarding - shared", () => {
         expect(mockPush).toHaveBeenCalled();
       });
       expect(currentBusiness().profileData.businessPersona).toEqual("OWNING");
+    });
+  });
+
+  describe("signed-in user without a myNJ key (ProfileNJ)", () => {
+    beforeEach(() => {
+      process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
+    });
+
+    it("shows the industry question instead of the guest intent page", async () => {
+      const business = generateBusiness({
+        onboardingFormProgress: "UNSTARTED",
+        profileData: createEmptyProfileData(),
+      });
+      const { page } = renderPage({
+        userData: generateUserDataForBusiness(business, {
+          user: generateUser({ id: business.userId, myNJUserKey: undefined }),
+        }),
+        isAuthenticated: IsAuthenticated.TRUE,
+      });
+
+      page.chooseRadio("business-persona-starting");
+      await page.visitOnboardingPage(2);
+
+      expect(screen.queryByTestId("starting-learning-business")).not.toBeInTheDocument();
+      expect(screen.getByLabelText("Industry")).toBeInTheDocument();
+    });
+
+    it("is not sent back to account setup after completing onboarding", async () => {
+      const replace = jest.fn().mockResolvedValue(true);
+      useMockRouter({ isReady: true, replace });
+      const business = generateBusiness({
+        onboardingFormProgress: "COMPLETED",
+        profileData: generateProfileData({ businessPersona: "STARTING" }),
+      });
+      renderPage({
+        userData: generateUserDataForBusiness(business, {
+          user: generateUser({ id: business.userId, myNJUserKey: undefined }),
+        }),
+        isAuthenticated: IsAuthenticated.TRUE,
+      });
+
+      await waitFor(() => {
+        expect(replace).toHaveBeenCalledWith(ROUTES.dashboard);
+      });
+      expect(replace).not.toHaveBeenCalledWith(ROUTES.accountSetup);
     });
   });
 });
