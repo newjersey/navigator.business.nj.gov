@@ -1,3 +1,10 @@
+## [2026.24.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.24.0...v2026.24.1) (2026-10-21)
+
+
+### Bug Fixes
+
+* spellcheck fix ([726a919](https://github.com/newjersey/navigator.business.nj.gov/commit/726a919f447f6ac1921dda23f39217041e2897a2))
+
 # [2026.24.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.23.0...v2026.24.0) (2026-10-21)
 
 
