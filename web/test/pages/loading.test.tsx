@@ -1,3 +1,4 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generatePreferences,
@@ -6,7 +7,8 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { render, screen, waitFor } from "@testing-library/react";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { triggerSignIn } from "@/lib/auth/sessionHelper";
+import * as profileNJFirstLogin from "@/lib/auth/profileNjFirstLogin";
+import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -25,13 +27,19 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 
+const Config = getMergedConfig();
+
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
+jest.mock("@/lib/auth/sessionHelper", () => ({
+  triggerSignIn: jest.fn(),
+  getActiveUser: jest.fn(),
+}));
+jest.mock("@/lib/auth/profileNjFirstLogin", () => ({ ensureProfileNJUserRecord: jest.fn() }));
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -48,6 +56,8 @@ function setupMockAnalytics(): typeof analytics {
 }
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
+const mockProfileNJFirstLogin = profileNJFirstLogin as jest.Mocked<typeof profileNJFirstLogin>;
+const mockGetActiveUser = getActiveUser as jest.MockedFunction<typeof getActiveUser>;
 
 describe("loading page", () => {
   beforeEach(() => {
@@ -136,5 +146,96 @@ describe("loading page", () => {
 
     render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
     expect(triggerSignIn).toHaveBeenCalled();
+  });
+
+  describe("returning from a sign-in with a code", () => {
+    const activeUser = {
+      id: "r-1",
+      email: "jane@example.com",
+      signInProvider: "ProfileNJ" as const,
+    };
+
+    beforeEach(() => {
+      setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
+      useMockRouter({ isReady: true, query: { code: "x" } });
+      mockGetActiveUser.mockResolvedValue(activeUser);
+    });
+
+    it("ensures the ProfileNJ user's record exists before logging in", async () => {
+      mockProfileNJFirstLogin.ensureProfileNJUserRecord.mockResolvedValue();
+      const dispatch = jest.fn();
+
+      render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE, dispatch }));
+
+      await waitFor(() => {
+        expect(dispatch).toHaveBeenCalledWith({ type: "LOGIN", activeUser });
+      });
+      expect(mockProfileNJFirstLogin.ensureProfileNJUserRecord).toHaveBeenCalledWith(
+        activeUser,
+        expect.objectContaining({
+          getUserData: expect.any(Function),
+          postUserData: expect.any(Function),
+          getGuestUserData: expect.any(Function),
+        }),
+      );
+      expect(
+        mockProfileNJFirstLogin.ensureProfileNJUserRecord.mock.invocationCallOrder[0],
+      ).toBeLessThan(dispatch.mock.invocationCallOrder[0]);
+    });
+
+    it("shows the error state and does not log in when saving the first record fails", async () => {
+      const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+      mockProfileNJFirstLogin.ensureProfileNJUserRecord.mockRejectedValue(500);
+      const dispatch = jest.fn();
+
+      render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE, dispatch }));
+
+      expect(await screen.findByText(Config.loginSupportPage.havingTrouble)).toBeInTheDocument();
+      expect(dispatch).not.toHaveBeenCalled();
+      expect(consoleErrorSpy).toHaveBeenCalledWith("Failed to complete sign-in", 500);
+      consoleErrorSpy.mockRestore();
+    });
+  });
+
+  describe("returning from a sign-in with an error", () => {
+    const originalFlag = process.env.FEATURE_PROFILE_NJ_LOGIN;
+
+    afterEach(() => {
+      if (originalFlag === undefined) {
+        delete process.env.FEATURE_PROFILE_NJ_LOGIN;
+      } else {
+        process.env.FEATURE_PROFILE_NJ_LOGIN = originalFlag;
+      }
+    });
+
+    beforeEach(() => {
+      setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
+      useMockRouter({
+        isReady: true,
+        query: { error: "access_denied", error_description: "denied" },
+        asPath: "/loading?error=access_denied&error_description=denied",
+      });
+    });
+
+    const renderWithErrorQuery = (): void => {
+      render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
+    };
+
+    it("shows the error state instead of redirecting when the ProfileNJ flag is on", async () => {
+      process.env.FEATURE_PROFILE_NJ_LOGIN = "true";
+      renderWithErrorQuery();
+
+      expect(await screen.findByText(Config.loginSupportPage.havingTrouble)).toBeInTheDocument();
+      expect(mockPush).not.toHaveBeenCalledWith(ROUTES.login);
+    });
+
+    it("still redirects to login when the ProfileNJ flag is off", async () => {
+      process.env.FEATURE_PROFILE_NJ_LOGIN = "false";
+      renderWithErrorQuery();
+
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalledWith(ROUTES.login);
+      });
+    });
   });
 });
