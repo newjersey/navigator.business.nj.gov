@@ -74,6 +74,7 @@ describe("profileNjFirstLogin", () => {
         getUserData: jest.fn().mockResolvedValue(generateUserData({})),
         postUserData: jest.fn().mockImplementation((userData) => Promise.resolve(userData)),
         getGuestUserData: jest.fn().mockReturnValue(undefined),
+        removeGuestUserData: jest.fn(),
         ...overrides,
       } as jest.Mocked<ProfileNJFirstLoginDependencies>;
     };
@@ -126,6 +127,48 @@ describe("profileNjFirstLogin", () => {
           email: profileNJUser.email,
         }),
       );
+    });
+
+    it("removes the guest's browser-storage entry after saving", async () => {
+      const dependencies = createDependencies({
+        getUserData: jest.fn().mockRejectedValue(404),
+        getGuestUserData: jest.fn().mockReturnValue(guestWithAbandonedMyNJSignup()),
+      });
+
+      await ensureProfileNJUserRecord(profileNJUser, dependencies);
+
+      expect(dependencies.removeGuestUserData).toHaveBeenCalledWith("guest-id");
+    });
+
+    it("keeps the guest's browser-storage entry when saving fails", async () => {
+      const dependencies = createDependencies({
+        getUserData: jest.fn().mockRejectedValue(404),
+        postUserData: jest.fn().mockRejectedValue(502),
+        getGuestUserData: jest.fn().mockReturnValue(guestWithAbandonedMyNJSignup()),
+      });
+
+      await expect(ensureProfileNJUserRecord(profileNJUser, dependencies)).rejects.toEqual(502);
+      expect(dependencies.removeGuestUserData).not.toHaveBeenCalled();
+    });
+
+    it("removes nothing when there was no guest data", async () => {
+      const dependencies = createDependencies({ getUserData: jest.fn().mockRejectedValue(404) });
+
+      await ensureProfileNJUserRecord(profileNJUser, dependencies);
+
+      expect(dependencies.removeGuestUserData).not.toHaveBeenCalled();
+    });
+
+    it("saves only once when both login paths run at the same time for one user", async () => {
+      const dependencies = createDependencies({ getUserData: jest.fn().mockRejectedValue(404) });
+
+      await Promise.all([
+        ensureProfileNJUserRecord(profileNJUser, dependencies),
+        ensureProfileNJUserRecord(profileNJUser, dependencies),
+      ]);
+
+      expect(dependencies.getUserData).toHaveBeenCalledTimes(1);
+      expect(dependencies.postUserData).toHaveBeenCalledTimes(1);
     });
 
     it("rethrows other errors without saving", async () => {
