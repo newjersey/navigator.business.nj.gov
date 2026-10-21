@@ -1,6 +1,10 @@
 import { NeedsAccountContextType } from "@/contexts/needsAccountContext";
 import * as api from "@/lib/api-client/apiClient";
 import { ActiveUser, AuthAction } from "@/lib/auth/AuthContext";
+import {
+  createProfileNJFirstLoginDependencies,
+  ensureProfileNJUserRecord,
+} from "@/lib/auth/profileNjFirstLogin";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { AccountLinkingErrorStorageFactory } from "@/lib/storage/AccountLinkingErrorStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
@@ -19,6 +23,7 @@ import { triggerSignOut } from "./sessionHelper";
 
 export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> => {
   const user = await session.getActiveUser();
+  await ensureProfileNJUserRecord(user, createProfileNJFirstLoginDependencies());
   dispatch({
     type: "LOGIN",
     activeUser: user,
