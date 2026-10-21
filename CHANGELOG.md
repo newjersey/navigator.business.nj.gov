@@ -1,3 +1,17 @@
+# [2026.24.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.23.0...v2026.24.0) (2026-10-21)
+
+
+### Bug Fixes
+
+* pass PR title to ADO link script via env var ([0020eb5](https://github.com/newjersey/navigator.business.nj.gov/commit/0020eb57b0ba722c396b7a2d2a9ae4b0564a4c61))
+* remove feature flag page ([60d1e8a](https://github.com/newjersey/navigator.business.nj.gov/commit/60d1e8a1a0ebf6b8d3b950327670760ec648ee0b))
+
+
+### Features
+
+* [AB#18007](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18007) add analytics for learn pages ([b724daf](https://github.com/newjersey/navigator.business.nj.gov/commit/b724dafc8c00485265957cd73a7bea1b61844cfc))
+* [AB#18054](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18054) make business structure task options editable in the cms ([1b24672](https://github.com/newjersey/navigator.business.nj.gov/commit/1b24672b8ae395350a9138b8df1f6a585de2c54b))
+
 # [2026.23.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.22.0...v2026.23.0) (2026-10-13)
 
 
