@@ -24,6 +24,11 @@ import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusines
 import { createEmptyFormationFormData, type FormationAddress } from "@shared/formationData";
 import type { LicenseName, LicenseSearchNameAndAddress } from "@shared/license";
 import {
+  getSignInProvider,
+  PROFILE_NJ_PROVIDER_NAME,
+  resolveSignedInUserId,
+} from "@shared/signedInUser";
+import {
   type Business,
   CURRENT_VERSION,
   createEmptyUserData,
@@ -44,6 +49,7 @@ type CognitoJWTPayload = {
   sub: string;
   "custom:myNJUserKey": string;
   "custom:identityId": string | undefined;
+  "custom:profileNJResidentId"?: string;
   email: string;
   identities: CognitoIdentityPayload[] | undefined;
 };
@@ -130,11 +136,7 @@ export const getSignedInUser = (req: Request): CognitoJWTPayload => {
 };
 
 export const getSignedInUserId = (req: Request): string => {
-  const signedInUser = getSignedInUser(req);
-  const myNJIdentityPayload = signedInUser.identities?.find((it) => {
-    return it.providerName === "myNJ";
-  });
-  return myNJIdentityPayload?.userId || signedInUser.sub;
+  return resolveSignedInUserId(getSignedInUser(req));
 };
 
 const legalStructureHasChanged = (oldUserData: UserData, newUserData: UserData): boolean => {
@@ -258,7 +260,9 @@ export const userRouterFactory = ({
       })
       .catch((error: Error) => {
         if (error.message === "Not found") {
-          if (["dev", "local"].includes(process.env.STAGE || "")) {
+          const isProfileNJUser =
+            getSignInProvider(getSignedInUser(req)) === PROFILE_NJ_PROVIDER_NAME;
+          if (["dev", "local"].includes(process.env.STAGE || "") && !isProfileNJUser) {
             logger.LogInfo(
               `${method} ${endpoint} - user not found, creating empty user, userId: ${requestedUserId}`,
             );
@@ -318,7 +322,9 @@ export const userRouterFactory = ({
       .catch(() => {})) as UserData | undefined;
 
     let userDataForSave = userDataWithUpdatedISO;
-    if (govDeliveryCommCloudClient) {
+    // New accounts subscribe at account setup (POST /external/newsletter), and the
+    // newsletter retry job covers failures, so creating a record never syncs.
+    if (govDeliveryCommCloudClient && existingUserData) {
       const syncResult = await syncNewsletterSubscription(
         existingUserData,
         userDataWithUpdatedISO,
