@@ -61,3 +61,11 @@ export const COGNITO_USERPOOL_NAME = "businessnjgov-navigator-userpool";
 export const COGNITO_DOMAIN_NAME = "businessnjgov-navigator";
 export const COGNITO_USERPOOL_CLIENT_NAME = "businessnjgov-navigator_app_client";
 export const COGNITO_USERPOOL_WEBCLIENT_NAME = "businessnjgov-navigator-clientWeb";
+
+// Environments whose user pool federates with ProfileNJ. Custom attributes can't
+// be removed from a pool, so a stage stays on this list once deployed.
+export const PROFILE_NJ_STAGES: readonly string[] = [DEV_STAGE];
+// api-cdk doesn't depend on shared; these must match shared/src/signedInUser.ts.
+export const PROFILE_NJ_PROVIDER_NAME = "ProfileNJ";
+export const PROFILE_NJ_RESIDENT_ID_ATTRIBUTE_NAME = "profileNJResidentId";
+export const PROFILE_NJ_RESIDENT_ID_CLAIM = "https://login.nj.gov/claims/resident_id";
