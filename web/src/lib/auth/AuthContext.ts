@@ -1,3 +1,4 @@
+import { SignInProvider } from "@businessnjgovnavigator/shared/signedInUser";
 import { Dispatch, Reducer } from "react";
 
 export type UserActionType = "LOGIN" | "LOGOUT" | "LOGIN_GUEST";
@@ -12,6 +13,7 @@ export interface ActiveUser {
   id: string;
   email: string;
   encounteredMyNjLinkingError?: boolean | undefined;
+  signInProvider?: SignInProvider | undefined;
 }
 
 export interface AuthState {
