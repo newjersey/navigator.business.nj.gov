@@ -1,7 +1,7 @@
 ---
 summaryDescriptionMd: >-
-  :::note
-   This screen guides your next steps. It does not submit your information for registration.
+  :::note 
+   Your EIN will not be submitted to any external entity. It is only saved here for your future reference.
   :::
 
 
