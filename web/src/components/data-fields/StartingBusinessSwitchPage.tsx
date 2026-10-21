@@ -1,5 +1,7 @@
 import { OnboardingErrors } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
+import { AuthContext } from "@/contexts/authContext";
+import { hasNavigatorAccount } from "@/lib/auth/hasNavigatorAccount";
 import { StartingBusinessIntent } from "@/components/data-fields/StartingBusinessIntent";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { Industry } from "@/components/data-fields/Industry";
@@ -11,8 +13,9 @@ export const StartingBusinessSwitchPage = (): ReactElement => {
   const businessUser = useUserData().userData?.user;
   const { Config } = useConfig();
   const enableIntentSelection = process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW === "true";
-  const userHasMyNJKey = !!businessUser?.myNJUserKey;
-  const shouldSeeBusinessIntentPage = enableIntentSelection && !userHasMyNJKey;
+  const { state } = useContext(AuthContext);
+  const shouldSeeBusinessIntentPage =
+    enableIntentSelection && !hasNavigatorAccount(businessUser, state.isAuthenticated);
   if (shouldSeeBusinessIntentPage) {
     return (
       <>
