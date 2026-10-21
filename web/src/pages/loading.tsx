@@ -4,12 +4,13 @@ import { useRouter } from "next/compat/router";
 import { type ReactElement, useContext, useEffect, useState } from "react";
 import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
-import * as api from "@/lib/api-client/apiClient";
-import { ensureProfileNJUserRecord } from "@/lib/auth/profileNjFirstLogin";
+import {
+  createProfileNJFirstLoginDependencies,
+  ensureProfileNJUserRecord,
+} from "@/lib/auth/profileNjFirstLogin";
 import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 
@@ -43,11 +44,7 @@ const LoadingPage = (): ReactElement => {
 
     const logInReturningUser = async (): Promise<void> => {
       const currentUser = await getActiveUser();
-      await ensureProfileNJUserRecord(currentUser, {
-        getUserData: api.getUserData,
-        postUserData: api.postUserData,
-        getGuestUserData: () => UserDataStorageFactory().getCurrentUserData(),
-      });
+      await ensureProfileNJUserRecord(currentUser, createProfileNJFirstLoginDependencies());
       dispatch({ type: "LOGIN", activeUser: currentUser });
     };
 
