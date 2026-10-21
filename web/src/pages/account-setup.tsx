@@ -12,6 +12,7 @@ import {
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { triggerProfileNJSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -69,6 +70,10 @@ const AccountSetupPage = (): ReactElement => {
       }
 
       await updateQueue.queue(userDataWithUser).update();
+      if (process.env.FEATURE_PROFILE_NJ_LOGIN === "true") {
+        await triggerProfileNJSignIn();
+        return;
+      }
       analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
       onSelfRegister({ router, updateQueue, userData: userDataWithUser, setRegistrationStatus });
     },

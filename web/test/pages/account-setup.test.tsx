@@ -1,5 +1,6 @@
 import * as api from "@/lib/api-client/apiClient";
 import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
+import * as session from "@/lib/auth/sessionHelper";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -45,6 +46,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   postNewsletter: jest.fn(),
 }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));
+jest.mock("@/lib/auth/sessionHelper", () => ({ triggerProfileNJSignIn: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -52,6 +54,7 @@ jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
 const mockApi = api as jest.Mocked<typeof api>;
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
+const mockSession = session as jest.Mocked<typeof session>;
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("Account Setup page", () => {
@@ -353,5 +356,71 @@ describe("Account Setup page", () => {
     expect(
       mockAnalytics.event.guest_snackbar.click.go_to_NavigatorAccount_setup,
     ).toHaveBeenCalled();
+  });
+
+  describe("with the ProfileNJ login flag on", () => {
+    const originalFlag = process.env.FEATURE_PROFILE_NJ_LOGIN;
+
+    beforeEach(() => {
+      process.env.FEATURE_PROFILE_NJ_LOGIN = "true";
+      mockSession.triggerProfileNJSignIn.mockResolvedValue();
+    });
+
+    afterEach(() => {
+      if (originalFlag === undefined) {
+        delete process.env.FEATURE_PROFILE_NJ_LOGIN;
+      } else {
+        process.env.FEATURE_PROFILE_NJ_LOGIN = originalFlag;
+      }
+    });
+
+    const submitValidForm = (page: PageHelpers): void => {
+      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+      act(() => {
+        return clickSubmit();
+      });
+    };
+
+    it("hands off to ProfileNJ instead of self-registering", async () => {
+      const { page } = renderPage({ isAuthenticated: IsAuthenticated.FALSE });
+      submitValidForm(page);
+
+      await waitFor(() => {
+        expect(mockSession.triggerProfileNJSignIn).toHaveBeenCalledTimes(1);
+      });
+      expect(mockSigninHelper.onSelfRegister).not.toHaveBeenCalled();
+    });
+
+    it("saves the submitted user before redirecting to ProfileNJ", async () => {
+      let userAtRedirect: UserData["user"] | undefined;
+      mockSession.triggerProfileNJSignIn.mockImplementation(() => {
+        userAtRedirect = currentUserData().user;
+        return Promise.resolve();
+      });
+      const { page } = renderPage({ isAuthenticated: IsAuthenticated.FALSE });
+      submitValidForm(page);
+
+      await waitFor(() => {
+        expect(mockSession.triggerProfileNJSignIn).toHaveBeenCalled();
+      });
+      expect(userAtRedirect).toEqual(
+        expect.objectContaining({ name: "My Name", email: "email@example.com" }),
+      );
+    });
+
+    it("still subscribes to the newsletter before redirecting", async () => {
+      const { page } = renderPage({ isAuthenticated: IsAuthenticated.FALSE });
+      submitValidForm(page);
+
+      await waitFor(() => {
+        expect(mockSession.triggerProfileNJSignIn).toHaveBeenCalled();
+      });
+      expect(mockApi.postNewsletter).toHaveBeenCalledTimes(1);
+      expect(mockApi.postNewsletter.mock.invocationCallOrder[0]).toBeLessThan(
+        mockSession.triggerProfileNJSignIn.mock.invocationCallOrder[0],
+      );
+    });
   });
 });
