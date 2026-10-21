@@ -22,7 +22,7 @@ summaryDescriptionMd: >-
   Use the [self-assessment
   tool](https://www.fmcsa.dot.gov/registration/do-i-need-usdot-number) to
   determine if you must complete this task.
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Application Requirements

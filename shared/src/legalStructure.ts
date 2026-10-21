@@ -1,11 +1,10 @@
 export interface LegalStructure {
   readonly id: string;
-  readonly name: string;
   readonly abbreviation: string;
   readonly requiresPublicFiling: boolean;
   readonly hasTradeName: boolean;
   readonly isCommon: boolean;
-  readonly onboardingOrder: number;
+  readonly orderWeight: number;
   readonly elementsToDisplay: Set<ElementsToDisplay>;
 }
 type ElementsToDisplay =
@@ -24,11 +23,10 @@ export const LookupLegalStructureById = (id: string | undefined): LegalStructure
       return x.id === id;
     }) ?? {
       id: "",
-      name: "",
       abbreviation: "",
       requiresPublicFiling: false,
       hasTradeName: false,
-      onboardingOrder: 0,
+      orderWeight: 0,
       elementsToDisplay: new Set<ElementsToDisplay>(["entityId", "formationDate"]),
       isCommon: false,
     }
@@ -38,31 +36,28 @@ export const LookupLegalStructureById = (id: string | undefined): LegalStructure
 export const LegalStructures: LegalStructure[] = [
   {
     id: "sole-proprietorship",
-    name: "Sole Proprietorship",
     abbreviation: "SP",
     requiresPublicFiling: false,
-    onboardingOrder: 30,
+    orderWeight: 30,
     hasTradeName: true,
     elementsToDisplay: new Set(["taxIdDisclaimer", "responsibleOwnerName"]),
     isCommon: true,
   },
   {
     id: "general-partnership",
-    name: "General Partnership",
     abbreviation: "GP",
     requiresPublicFiling: false,
     hasTradeName: true,
-    onboardingOrder: 20,
+    orderWeight: 20,
     elementsToDisplay: new Set(["taxIdDisclaimer", "responsibleOwnerName"]),
     isCommon: false,
   },
   {
     id: "limited-partnership",
-    name: "Limited Partnership (LP)",
     abbreviation: "LP",
     requiresPublicFiling: true,
     hasTradeName: false,
-    onboardingOrder: 70,
+    orderWeight: 70,
     elementsToDisplay: new Set([
       "businessName",
       "nexusBusinessElements",
@@ -75,11 +70,10 @@ export const LegalStructures: LegalStructure[] = [
   },
   {
     id: "limited-liability-partnership",
-    name: "Limited Liability Partnership (LLP)",
     abbreviation: "LLP",
     requiresPublicFiling: true,
     hasTradeName: false,
-    onboardingOrder: 60,
+    orderWeight: 60,
     elementsToDisplay: new Set([
       "businessName",
       "nexusBusinessElements",
@@ -92,11 +86,10 @@ export const LegalStructures: LegalStructure[] = [
   },
   {
     id: "limited-liability-company",
-    name: "Limited Liability Company (LLC)",
     abbreviation: "LLC",
     requiresPublicFiling: true,
     hasTradeName: false,
-    onboardingOrder: 10,
+    orderWeight: 10,
     elementsToDisplay: new Set([
       "businessName",
       "nexusBusinessElements",
@@ -109,11 +102,10 @@ export const LegalStructures: LegalStructure[] = [
   },
   {
     id: "c-corporation",
-    name: "Corporation (C designation)",
     abbreviation: "C Corp",
     requiresPublicFiling: true,
     hasTradeName: false,
-    onboardingOrder: 40,
+    orderWeight: 40,
     elementsToDisplay: new Set([
       "businessName",
       "nexusBusinessElements",
@@ -126,11 +118,10 @@ export const LegalStructures: LegalStructure[] = [
   },
   {
     id: "nonprofit",
-    name: "Nonprofit",
     abbreviation: "NP",
     requiresPublicFiling: true,
     hasTradeName: false,
-    onboardingOrder: 45,
+    orderWeight: 45,
     elementsToDisplay: new Set([
       "businessName",
       "nexusBusinessElements",
@@ -143,11 +134,10 @@ export const LegalStructures: LegalStructure[] = [
   },
   {
     id: "s-corporation",
-    name: "Corporation (and optional S Corp tax designation)",
     abbreviation: "S Corp",
     requiresPublicFiling: true,
     hasTradeName: false,
-    onboardingOrder: 50,
+    orderWeight: 50,
     elementsToDisplay: new Set([
       "businessName",
       "nexusBusinessElements",

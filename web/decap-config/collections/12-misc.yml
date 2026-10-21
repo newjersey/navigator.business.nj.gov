@@ -1517,7 +1517,7 @@ collections:
                                   widget: "markdown",
                                   required: false,
                                 }
-                  - label: Legal Structure
+                  - label: Business Structure
                     name: legalStructureId
                     collapsed: true
                     widget: object
@@ -1553,47 +1553,6 @@ collections:
                           - { label: "Edit Text", name: "editText", widget: "string" }
                           - { label: "Add Text", name: "addText", widget: "string" }
                           - { label: "Not Entered Text", name: "notEnteredText", widget: "string" }
-                          - label: Option Content
-                            name: optionContent
-                            collapsed: false
-                            widget: object
-                            fields:
-                              - {
-                                  label: "limited-liability-company",
-                                  name: "limited-liability-company",
-                                  widget: "markdown",
-                                }
-                              - {
-                                  label: "general-partnership",
-                                  name: "general-partnership",
-                                  widget: "markdown",
-                                }
-                              - {
-                                  label: "sole-proprietorship",
-                                  name: "sole-proprietorship",
-                                  widget: "markdown",
-                                }
-                              - {
-                                  label: "c-corporation",
-                                  name: "c-corporation",
-                                  widget: "markdown",
-                                }
-                              - { label: "nonprofit", name: "nonprofit", widget: "markdown" }
-                              - {
-                                  label: "s-corporation",
-                                  name: "s-corporation",
-                                  widget: "markdown",
-                                }
-                              - {
-                                  label: "limited-liability-partnership",
-                                  name: "limited-liability-partnership",
-                                  widget: "markdown",
-                                }
-                              - {
-                                  label: "limited-partnership",
-                                  name: "limited-partnership",
-                                  widget: "markdown",
-                                }
                   - label: Municipality
                     name: "municipality"
                     collapsed: true

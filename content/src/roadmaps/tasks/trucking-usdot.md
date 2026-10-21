@@ -12,7 +12,7 @@ agencyAdditionalContext: U.S. Department of Transportation
 summaryDescriptionMd: >-
   Any commercial vehicle crossing state lines must register with the U.S.
   Department of Transportation (USDoT) to obtain a registration number.
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 :::infoAlert

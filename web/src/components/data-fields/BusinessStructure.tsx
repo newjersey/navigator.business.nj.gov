@@ -3,11 +3,11 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 export const BusinessStructure = (): ReactElement => {
@@ -58,7 +58,10 @@ export const BusinessStructure = (): ReactElement => {
       </div>
       {state.profileData.legalStructureId && (
         <div data-testid="legal-structure">
-          {LookupLegalStructureById(state.profileData.legalStructureId).name}
+          {getLegalStructureDisplayName({
+            config: Config,
+            legalStructureId: state.profileData.legalStructureId,
+          })}
         </div>
       )}
       {!state.profileData.legalStructureId && (

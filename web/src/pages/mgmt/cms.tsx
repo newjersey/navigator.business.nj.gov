@@ -198,6 +198,7 @@ const CMS = dynamic(
       registerPreview(CMS, "ein-input-section", EinInputPreview);
       registerPreview(CMS, "tax-input-section", TaxInputPreview);
       registerPreview(CMS, "business-structure-selection", BusinessStructurePreview);
+      registerPreview(CMS, "business-structure-radio-options", BusinessStructurePreview);
 
       // ----- Cannabis License -----
       registerPreview(CMS, "cannabis-eligibility-modal", CannabisEligibilityModalPreview);
