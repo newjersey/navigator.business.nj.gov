@@ -8,6 +8,10 @@ import {
   COGNITO_USERPOOL_NAME,
   COGNITO_USERPOOL_WEBCLIENT_NAME,
   PROD_STAGE,
+  PROFILE_NJ_PROVIDER_NAME,
+  PROFILE_NJ_RESIDENT_ID_ATTRIBUTE_NAME,
+  PROFILE_NJ_RESIDENT_ID_CLAIM,
+  PROFILE_NJ_STAGES,
 } from "./constants";
 
 export interface CognitoStackProps extends StackProps {
@@ -15,6 +19,36 @@ export interface CognitoStackProps extends StackProps {
   authRoleArn: string;
   unAuthRoleArn: string;
 }
+
+interface ProfileNJOidcConfig {
+  readonly client_id: string;
+  readonly client_secret: string;
+  readonly issuer: string;
+}
+
+const isProfileNJOidcConfig = (value: unknown): value is ProfileNJOidcConfig => {
+  if (typeof value !== "object" || value === null) return false;
+  const config = value as Record<string, unknown>;
+  return ["client_id", "client_secret", "issuer"].every(
+    (key) => typeof config[key] === "string" && config[key] !== "",
+  );
+};
+
+// A ProfileNJ stage must never deploy without its config: dropping the provider
+// would also drop the custom attribute from the template, which Cognito rejects.
+const readProfileNJOidcConfig = (): ProfileNJOidcConfig => {
+  const configFilePath = process.env.PROFILE_NJ_OIDC_CONFIG_FILE;
+  if (!configFilePath) {
+    throw new Error("PROFILE_NJ_OIDC_CONFIG_FILE is required for ProfileNJ stages");
+  }
+  const parsed: unknown = JSON.parse(fs.readFileSync(configFilePath, "utf8"));
+  if (!isProfileNJOidcConfig(parsed)) {
+    throw new Error(
+      "PROFILE_NJ_OIDC_CONFIG_FILE must contain non-empty client_id, client_secret and issuer",
+    );
+  }
+  return parsed;
+};
 
 export class CognitoStack extends Stack {
   constructor(scope: Construct, id: string, props: CognitoStackProps) {
@@ -25,6 +59,10 @@ export class CognitoStack extends Stack {
     if (!metadataXml) {
       console.warn("No Cognito metadata provided — skipping identity provider creation");
     }
+
+    const profileNJConfig = PROFILE_NJ_STAGES.includes(props.stage)
+      ? readProfileNJOidcConfig()
+      : undefined;
 
     const webClientName =
       props.stage === PROD_STAGE
@@ -137,6 +175,21 @@ export class CognitoStack extends Stack {
             minLength: "1",
           },
         },
+        ...(profileNJConfig
+          ? [
+              {
+                attributeDataType: "String",
+                developerOnlyAttribute: false,
+                mutable: true,
+                name: PROFILE_NJ_RESIDENT_ID_ATTRIBUTE_NAME,
+                required: false,
+                stringAttributeConstraints: {
+                  maxLength: "256",
+                  minLength: "1",
+                },
+              },
+            ]
+          : []),
       ],
     });
     userPool.applyRemovalPolicy(RemovalPolicy.RETAIN);
@@ -184,10 +237,35 @@ export class CognitoStack extends Stack {
     );
 
     myNJidentityProvider.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
+    const profileNJIdentityProvider = profileNJConfig
+      ? new cognito.CfnUserPoolIdentityProvider(this, "ProfileNJIdentityProvider", {
+          userPoolId: userPool.ref,
+          providerName: PROFILE_NJ_PROVIDER_NAME,
+          providerType: "OIDC",
+          providerDetails: {
+            client_id: profileNJConfig.client_id,
+            client_secret: profileNJConfig.client_secret,
+            oidc_issuer: profileNJConfig.issuer,
+            authorize_scopes: "openid email profile",
+            attributes_request_method: "GET",
+          },
+          attributeMapping: {
+            email: "email",
+            email_verified: "email_verified",
+            [`custom:${PROFILE_NJ_RESIDENT_ID_ATTRIBUTE_NAME}`]: PROFILE_NJ_RESIDENT_ID_CLAIM,
+          },
+        })
+      : undefined;
+    profileNJIdentityProvider?.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
     const userpoolWebClient = new cognito.CfnUserPoolClient(this, "UserPoolWebClient", {
       clientName: webClientName,
       userPoolId: userPool.ref,
-      supportedIdentityProviders: [myNJidentityProvider.providerName],
+      supportedIdentityProviders: [
+        myNJidentityProvider.providerName,
+        ...(profileNJIdentityProvider ? [profileNJIdentityProvider.providerName] : []),
+      ],
       callbackUrLs: callbackUrls,
       logoutUrLs: callbackUrls,
       allowedOAuthFlowsUserPoolClient: true,
@@ -204,6 +282,9 @@ export class CognitoStack extends Stack {
     });
 
     userpoolWebClient.applyRemovalPolicy(RemovalPolicy.RETAIN);
+    if (profileNJIdentityProvider) {
+      userpoolWebClient.addDependency(profileNJIdentityProvider);
+    }
 
     const identityPool = new cognito.CfnIdentityPool(this, "IdentityPool", {
       identityPoolName: `${COGNITO_USERPOOL_NAME}-${props.stage}`,

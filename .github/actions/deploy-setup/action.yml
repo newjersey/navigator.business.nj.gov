@@ -22,6 +22,14 @@ runs:
           s3://nj-bfs-all-accounts-config-files/${{ inputs.stage }}-cognito-metadata.xml \
           ${{ github.workspace }}/cognito-metadata.xml
 
+    - name: Fetch ProfileNJ OIDC Config
+      if: ${{ inputs.stage == 'dev' }}
+      shell: bash
+      run: |
+        aws s3 cp \
+          s3://nj-bfs-all-accounts-config-files/${{ inputs.stage }}-profilenj-oidc.json \
+          ${{ github.workspace }}/profilenj-oidc.json
+
     - name: Debug metadata env path
       shell: bash
       run: |
@@ -31,3 +39,5 @@ runs:
       uses: ./.github/actions/deploy-cdk
       env:
         COGNITO_METADATA_FILE: ${{ github.workspace }}/cognito-metadata.xml
+        # Only read for stages in PROFILE_NJ_STAGES (api/cdk/lib/constants.ts).
+        PROFILE_NJ_OIDC_CONFIG_FILE: ${{ github.workspace }}/profilenj-oidc.json
