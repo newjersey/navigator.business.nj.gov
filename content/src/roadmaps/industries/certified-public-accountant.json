@@ -24,14 +24,14 @@
       "step": 2,
       "weight": 30,
       "task": "register-for-ein",
-      "required": false,
+      "required": true,
       "licenseTask": ""
     },
     {
       "step": 2,
       "weight": 31,
       "task": "register-for-taxes",
-      "required": false,
+      "required": true,
       "licenseTask": ""
     },
     {
