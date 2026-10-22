@@ -95,8 +95,10 @@ export const loadAllLicenseTasks = (): Task[] => {
 };
 
 export const loadAllRaffleBingoSteps = (): Task[] => {
-  const licenseFileNames = fs.readdirSync(getLicenseDirectory());
-  return licenseFileNames.map((fileName) => loadTaskByFileName(fileName, getLicenseDirectory()));
+  const raffleBingoStepFileNames = fs.readdirSync(getRaffleBingoStepsDirectory());
+  return raffleBingoStepFileNames.map((fileName) =>
+    loadTaskByFileName(fileName, getRaffleBingoStepsDirectory()),
+  );
 };
 
 export const loadAllMunicipalTasks = (): Task[] => {
