@@ -1,5 +1,10 @@
-import fs from "node:fs";
-import { loadAllTaskUrlSlugs, loadTaskByFileName, loadTaskByUrlSlug } from "./loadTasks";
+import fs from "fs";
+import {
+  loadAllRaffleBingoSteps,
+  loadAllTaskUrlSlugs,
+  loadTaskByFileName,
+  loadTaskByUrlSlug,
+} from "./loadTasks";
 import { mockReadDirectoryReturnOnce } from "./mockHelpers";
 
 jest.mock("fs");
@@ -13,6 +18,33 @@ describe("loadTasks", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     mockedFs = fs as jest.Mocked<typeof fs>;
+  });
+
+  describe("loadAllRaffleBingoSteps", () => {
+    it("loads steps from the raffle bingo directory", () => {
+      const stepMd =
+        "---\n" +
+        'id: "raffle-step"\n' +
+        'name: "Raffle Step"\n' +
+        'urlSlug: "raffle-step"\n' +
+        "---\n";
+
+      mockReadDirectoryReturnOnce({ value: ["raffle-step.md"], mockedFs });
+      mockedFs.readFileSync
+        .mockReturnValueOnce(stepMd)
+        .mockReturnValueOnce(JSON.stringify({ dependencies: [] }));
+
+      expect(loadAllRaffleBingoSteps()).toEqual([
+        expect.objectContaining({ id: "raffle-step", filename: "raffle-step" }),
+      ]);
+      expect(mockedFs.readdirSync).toHaveBeenCalledWith(
+        expect.stringContaining("/content/src/roadmaps/raffle-bingo-steps"),
+      );
+      expect(mockedFs.readFileSync).toHaveBeenCalledWith(
+        expect.stringContaining("/content/src/roadmaps/raffle-bingo-steps/raffle-step.md"),
+        "utf8",
+      );
+    });
   });
 
   describe("loadTaskByFileName", () => {
