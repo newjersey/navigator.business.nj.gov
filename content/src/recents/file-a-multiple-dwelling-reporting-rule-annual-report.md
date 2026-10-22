@@ -4,7 +4,7 @@ slug: file-a-multiple-dwelling-reporting-rule-annual-report
 status: Draft
 date: 2026-10-09T
 topics: Rules and Regulations
-source: ''
+source: '[NJ Division of Civil Rights](https://mdrr.njcivilrights.gov/)'
 cta-text: File My Annual MDRR Report
 cta-link: 'https://mdrr.njcivilrights.gov/'
 ---
@@ -37,15 +37,3 @@ Use the MDRR Tenant/Applicant Inquiry Form to collect and record race and ethnic
 ### How to File the MDRR Annual Report
 
 File the annual report online. If you are creating a new account, you must enter a 4-digit PIN, which you can find in a notice DCR sends via email or standard mail each December. If you did not receive a notice, contact DCR’s MDRR unit at (609) 376-3295 or email DCRMDRR@NJCivilRights.gov.
-
-**Once completed, you will have:**
-
-A filed annual report.
-
-**What happens if I don’t file a report?**
-
-If you don’t file your report online by the deadline, you’ll have to pay a late filing or penalty fee.
-
-**Agency:** NJ Division of Civil Rights
-
-**Contact:** (609) 376-3295 or DCRMDRR@NJCivilRights.gov
