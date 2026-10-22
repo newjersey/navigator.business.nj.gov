@@ -1955,6 +1955,17 @@ collections:
                               name: "hideButtonTextMobile",
                               widget: "string",
                             }
+                  - label: Department of Labor EIN
+                    name: deptOfLaborEin
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: default
+                        widget: object
+                        fields:
+                          - { label: Show Button Text, name: showButtonText, widget: string }
+                          - { label: Hide Button Text, name: hideButtonText, widget: string }
                   - label: Entity ID
                     name: entityId
                     collapsed: true
@@ -2882,6 +2893,7 @@ collections:
                     }
                   - { label: Docs Tab Title, name: profileTabDocsTitle, widget: string }
                   - { label: Notes Tab Title, name: profileTabNoteTitle, widget: string }
+                  - { label: Invalid Email Error, name: errorTextEmail, widget: string }
                   - {
                       label: Personalize Tasks Title,
                       name: profileTabPersonalizeYourTasksTitle,
