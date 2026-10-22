@@ -13,11 +13,11 @@
     "build": "tsc --build",
     "clean": "rimraf lib",
     "dev": "yarn build",
-    "lint": "eslint . --max-warnings 0",
-    "lint:fix": "eslint . --max-warnings 0 --fix",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
     "snapshot:update": "jest --updateSnapshot",
-    "prettier": "prettier --write . --ignore-path=./.eslintignore",
-    "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
     "spellcheck": "cspell 'src/**/*.ts' '!**/*.test.ts' --config ../cspell.json --no-progress",
     "test": "jest",
     "typecheck": "tsc --noemit"
@@ -32,6 +32,7 @@
     "uuid": "14.0.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.15",
     "@jest/types": "30.4.1",
     "@types/jest": "30.0.0",
     "@types/node": "24.13.3",

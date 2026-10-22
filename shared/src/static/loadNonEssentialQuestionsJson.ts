@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { NonEssentialQuestion } from "../types";
+import fs from "node:fs";
+import path from "node:path";
+import type { NonEssentialQuestion } from "../types";
 
 const NonEssentialQuestionsJsonPathTest = path.join(
   process.cwd(),

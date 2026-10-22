@@ -1,6 +1,6 @@
-import { PageItem } from "../../types";
+import type { PageItem } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchPages = (pages: PageItem[], term: string): Match[] => {
   const pageData = getPageData(pages);

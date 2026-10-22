@@ -180,7 +180,7 @@
       }
     },
     {
-      "includes": ["web/**", "api/**", "shared/**", "content/**"],
+      "includes": ["web/**", "api/**", "content/**"],
       "assist": { "enabled": false }
     }
   ]

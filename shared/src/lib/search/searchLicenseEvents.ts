@@ -1,6 +1,6 @@
-import { LicenseEventType } from "../../types";
+import type { LicenseEventType } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchLicenseEvents = (licenseEvents: LicenseEventType[], term: string): Match[] => {
   const licenseEventData = getLicenseEventData(licenseEvents);

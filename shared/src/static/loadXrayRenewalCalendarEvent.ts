@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { convertXrayRenewalCalendarEventMd } from "../markdownReader";
-import { XrayRenewalCalendarEventType } from "../types/types";
+import type { XrayRenewalCalendarEventType } from "../types/types";
 
 export type XrayRenewalCalendarEventUrlSlugParameter = {
   xrayRenewalCalendarEventUrlSlug: string;
