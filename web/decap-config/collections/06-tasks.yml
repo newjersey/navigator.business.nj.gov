@@ -298,7 +298,7 @@ collections:
                 }
 
   - name: "tasks"
-    label: "Tasks - All (option to map to Webflow/static site)"
+    label: "Tasks - All (option to map to static site)"
     folder: "content/src/roadmaps/tasks"
     summary: "{{displayname}} - {{name}}"
     identifier_field: "{{id}}"
@@ -329,17 +329,17 @@ collections:
           required: false,
         }
       - {
-          label: "Sync to Webflow",
-          name: "syncToWebflow",
+          label: "Sync to Static Site",
+          name: "syncToStaticSite",
           widget: "boolean",
           required: false,
           default: false,
-          hint: "You must provide a 'Webflow Name' if this is selected",
+          hint: "You must provide a 'Static Site name' if this is selected",
         }
       - {
-          label: "Webflow Name",
-          hint: Required if "Sync to Webflow" is selected,
-          name: "webflowName",
+          label: "Static Site Name",
+          hint: Required if "Sync to Static Site" is selected,
+          name: "staticSiteName",
           widget: "string",
           required: false,
         }
@@ -2522,6 +2522,92 @@ collections:
     delete: false
     create: false
     files:
+      - label: "Business Structure Radio Option Copy"
+        name: "business-structure-radio-options"
+        file: "content/src/fieldConfig/profile.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            widget: object
+            fields:
+              - label: Fields
+                name: fields
+                widget: object
+                fields:
+                  - label: Business Structure
+                    name: legalStructureId
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: default
+                        widget: object
+                        fields:
+                          - label: Radio Option Labels
+                            name: optionLabels
+                            widget: object
+                            fields:
+                              - {
+                                  label: Limited Liability Company (LLC),
+                                  name: limited-liability-company,
+                                  widget: string,
+                                }
+                              - {
+                                  label: General Partnership,
+                                  name: general-partnership,
+                                  widget: string,
+                                }
+                              - {
+                                  label: Sole Proprietorship,
+                                  name: sole-proprietorship,
+                                  widget: string,
+                                }
+                              - { label: C Corporation, name: c-corporation, widget: string }
+                              - { label: Nonprofit, name: nonprofit, widget: string }
+                              - { label: S Corporation, name: s-corporation, widget: string }
+                              - {
+                                  label: Limited Liability Partnership (LLP),
+                                  name: limited-liability-partnership,
+                                  widget: string,
+                                }
+                              - {
+                                  label: Limited Partnership (LP),
+                                  name: limited-partnership,
+                                  widget: string,
+                                }
+                          - label: Radio Option Descriptions
+                            name: optionContent
+                            widget: object
+                            fields:
+                              - {
+                                  label: Limited Liability Company (LLC),
+                                  name: limited-liability-company,
+                                  widget: markdown,
+                                }
+                              - {
+                                  label: General Partnership,
+                                  name: general-partnership,
+                                  widget: markdown,
+                                }
+                              - {
+                                  label: Sole Proprietorship,
+                                  name: sole-proprietorship,
+                                  widget: markdown,
+                                }
+                              - { label: C Corporation, name: c-corporation, widget: markdown }
+                              - { label: Nonprofit, name: nonprofit, widget: markdown }
+                              - { label: S Corporation, name: s-corporation, widget: markdown }
+                              - {
+                                  label: Limited Liability Partnership (LLP),
+                                  name: limited-liability-partnership,
+                                  widget: markdown,
+                                }
+                              - {
+                                  label: Limited Partnership (LP),
+                                  name: limited-partnership,
+                                  widget: markdown,
+                                }
       - label: "Business Structure Selection Component"
         name: "business-structure-selection"
         file: content/src/fieldConfig/business-structure-task.json

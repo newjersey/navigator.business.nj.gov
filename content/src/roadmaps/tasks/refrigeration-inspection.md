@@ -31,7 +31,7 @@ notesMd: >-
 
   Note: Drafting in the CMS prior to internal review in order to show the SME in
   a call on 5.8.25
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Refrigeration Systems That Need Inspection

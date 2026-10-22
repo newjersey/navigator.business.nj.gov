@@ -4,7 +4,7 @@ type TestGlobalThis = {
   testRandomSeeds: Map<string, string>;
 };
 
-beforeEach(function () {
+beforeEach(() => {
   const currentTestName = expect.getState().currentTestName;
   if (currentTestName === undefined) {
     throw new Error("expect.getState().currentTestName is undefined");

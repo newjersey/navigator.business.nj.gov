@@ -35,7 +35,7 @@ summaryDescriptionMd: >-
 notesMd: "https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/6751\n\nPlanning doc: https://docs.google.com/document/d/1MdJ66sV4W0PRiySHYoXzpE62F43H3YHvMK1wYczHW70/edit?tab=t.0\n\n\\---\n\nSME feedback, **From:**\_Friedmann, Brian \\[TREAS] [Brian.Friedmann@treas.nj.gov](mailto:Brian.Friedmann@treas.nj.gov)\\\n**Sent:**\_Tuesday, November 26, 2024 2:55 PM\\\n\\\n1.\_\_\_\_\_\_\_\_‘Tobacco products’ must be replaced with ‘cigarettes’ throughout the document.\n\nThis license is for rolled cigarettes only.\_ Other tobacco products do not require this license to be sold.\n\n2.\_\_\_\_\_\_\_The manufacturer representative line should have ‘if applicable’ added to the end and ‘address of machine location’ removed.\n\nBoth this and the supplier information are only needed if applicable to the license type selected at the top of the application.\n\n3.\_\_\_\_\_\_\_If needed there should be a bullet for vending machine license which states what information is needed.\n\n4.\_\_\_\_\_\_\_Under “once completed…”, it should be changed to say “A printed license will be sent directly to your business location.”\n\n\n\n\\===\n\nFurther feedback received by Jaime and Kellie on 10 Dec 2024 (see planning doc)"
 industryId: ""
 formName: ""
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ---

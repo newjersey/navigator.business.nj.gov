@@ -1,7 +1,7 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
-import path from "path";
-import { PageItem } from "../types/types";
+import type { PageItem } from "../types/types";
 
 const pagesDirectory = path.join(process.cwd(), "..", "content", "src", "pages");
 

@@ -20,7 +20,7 @@ summaryDescriptionMd: >-
   application is complete.
 callToActionLink: ""
 callToActionText: ""
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }

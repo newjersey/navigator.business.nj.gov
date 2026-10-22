@@ -3,7 +3,7 @@ import industryJson from "../../content/lib/industry.json";
 import {
   findIndustryByNaicsCode,
   getIndustries,
-  Industry,
+  type Industry,
   isIndustryIdGeneric,
   LookupIndustryById,
 } from "./industry";
@@ -140,7 +140,7 @@ describe("Industry Tests", () => {
 
     it("returns the matching industry for an unambiguous code", () => {
       const autoBodyRepair = LookupIndustryById("auto-body-repair");
-      const code = autoBodyRepair.naicsCodes!.replaceAll(/\s/g, "").split(",")[0];
+      const code = autoBodyRepair.naicsCodes?.replaceAll(/\s/g, "").split(",")[0];
       const result = findIndustryByNaicsCode(code);
       expect(result?.id).toEqual("auto-body-repair");
     });
@@ -156,7 +156,7 @@ describe("Industry Tests", () => {
       expect(generic.naicsCodes).toBeFalsy();
       // A code unique to a specific industry should return that industry, not generic
       const autoBodyRepair = LookupIndustryById("auto-body-repair");
-      const code = autoBodyRepair.naicsCodes!.replaceAll(/\s/g, "").split(",")[0];
+      const code = autoBodyRepair.naicsCodes?.replaceAll(/\s/g, "").split(",")[0];
       const result = findIndustryByNaicsCode(code);
       expect(result?.id).not.toEqual("generic");
     });

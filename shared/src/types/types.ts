@@ -1,17 +1,17 @@
 import type { Reducer } from "react";
-import { BusinessUser } from "../businessUser";
+import type { BusinessUser } from "../businessUser";
 import { getMergedConfig } from "../contexts";
-import { EmergencyTripPermitApplicationInfo } from "../emergencyTripPermit";
-import {
+import type { EmergencyTripPermitApplicationInfo } from "../emergencyTripPermit";
+import type {
   FieldsForErrorHandling,
   FormationAddress,
   FormationMember,
   FormationSigner,
 } from "../formationData";
-import { AddOn, TaskModification } from "../industry";
-import { LicenseName, LicenseTaskId } from "../license";
-import { BusinessPersona, IndustrySpecificData, ProfileData } from "../profileData";
-import { SectionType, UserData } from "../userData";
+import type { AddOn, TaskModification } from "../industry";
+import type { LicenseName, LicenseTaskId } from "../license";
+import type { BusinessPersona, IndustrySpecificData, ProfileData } from "../profileData";
+import type { SectionType, UserData } from "../userData";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
@@ -80,6 +80,23 @@ export type FormationFieldErrorState = {
 };
 
 export const profileFieldsFromConfig = getMergedConfig().profileDefaults.fields;
+
+// The subset of the Decap CMS config (web/public/mgmt/config.yml) that search reads.
+export interface CmsConfigField {
+  readonly name: string;
+  readonly label: string;
+  readonly fields?: readonly CmsConfigField[];
+}
+
+export interface CmsConfigCollection {
+  readonly name: string;
+  readonly label: string;
+  readonly files?: readonly CmsConfigField[];
+}
+
+export interface CmsConfig {
+  readonly collections: readonly CmsConfigCollection[];
+}
 
 export type RoadmapDisplayContent = {
   sidebarDisplayContent: Record<string, SidebarCardContent>;
@@ -283,7 +300,8 @@ export type County =
   | "Warren";
 
 export interface FormationSignedAddress
-  extends FormationMember, Partial<Omit<FormationSigner, "name">> {}
+  extends FormationMember,
+    Partial<Omit<FormationSigner, "name">> {}
 
 export type FormationDbaContent = {
   DbaResolution: TaskWithoutLinks;
@@ -786,7 +804,6 @@ export interface FormContextType<T, FieldError = FieldErrorType> {
   >;
 }
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export type FormContextFieldProps<K = FieldErrorType> = { errorTypes?: K[] };
 
 export type ProfileContentField = Exclude<

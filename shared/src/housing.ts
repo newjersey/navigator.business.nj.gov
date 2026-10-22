@@ -1,4 +1,4 @@
-import { Municipality } from "./municipality";
+import type { Municipality } from "./municipality";
 
 export type HousingPropertyInterestDetails = {
   createdOn: string;

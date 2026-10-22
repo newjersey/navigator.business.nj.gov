@@ -20,7 +20,7 @@ summaryDescriptionMd: >-
 notesMd: >-
   [Muni planning
   doc](https://docs.google.com/document/d/1yNGtzwQuNN0_mH5fguWruu_9BgJ5v25BegkQAv4xC1g/edit)
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ---

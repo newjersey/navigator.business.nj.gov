@@ -1,4 +1,4 @@
-import { Business, UserData } from "../userData";
+import type { Business, UserData } from "../userData";
 
 export const getBusinessById = ({
   userData,

@@ -1,6 +1,6 @@
-import { CategoryItem } from "../../types";
+import type { CategoryItem } from "../../types";
 import { convertFileDataToMatchList } from "./helpers";
-import { FileData, Match } from "./typesForSearch";
+import type { FileData, Match } from "./typesForSearch";
 
 export const searchCategories = (categories: CategoryItem[], term: string): Match[] => {
   const categoryData = getCategoryData(categories);

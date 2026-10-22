@@ -1,6 +1,6 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
-import path from "path";
 
 export interface WebflowLicenseCard {
   id: string;
@@ -21,7 +21,7 @@ export interface WebflowLicenseCard {
   licenseCertificationClassification: string;
   summaryDescriptionMd?: string;
   contentMd: string;
-  syncToWebflow?: boolean | string;
+  syncToStaticSite?: boolean | string;
   formName?: string;
   webflowIndustry?: string;
   [key: string]: unknown;
@@ -74,6 +74,7 @@ const dedupeByWebflowId = (licenses: WebflowLicenseCard[]): WebflowLicenseCard[]
       continue;
     }
     if (seen.has(license.webflowId)) {
+      // biome-ignore lint/suspicious/noConsole: build-time content warning for CMS authors; shared has no logger
       console.warn(
         `loadAllLicenses: duplicate webflowId ${license.webflowId} on ${license.filename} — skipping`,
       );
@@ -91,7 +92,7 @@ export const loadAllLicenses = (): WebflowLicenseCard[] => {
     ...loadDirectory(licenseTasksDirectory),
     ...loadDirectory(municipalDirectory),
     ...loadDirectory(tasksAllDirectory).filter(
-      (license) => license.syncToWebflow === true || license.syncToWebflow === "true",
+      (license) => license.syncToStaticSite === true || license.syncToStaticSite === "true",
     ),
   ];
   return dedupeByWebflowId(combined);

@@ -1,8 +1,8 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
-import path from "path";
-import { LicenseName } from "../license";
-import {
+import type { LicenseName } from "../license";
+import type {
   AnytimeActionCategoryMapping,
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
@@ -63,7 +63,7 @@ export const convertAnytimeActionCategoryMd = (
 
   return {
     categoryName: matterResult.data["category-name"],
-    id: matterResult.data["id"],
+    id: matterResult.data.id,
   };
 };
 

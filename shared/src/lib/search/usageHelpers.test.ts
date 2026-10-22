@@ -1,5 +1,5 @@
-import { IndustryRoadmap } from "../../types";
-import { Match } from "./typesForSearch";
+import type { IndustryRoadmap } from "../../types";
+import type { Match } from "./typesForSearch";
 import {
   AddAddOnUsage,
   AddIndustryUsage,

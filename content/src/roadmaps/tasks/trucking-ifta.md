@@ -29,7 +29,7 @@ summaryDescriptionMd: >-
   they are based
 notesMd: ""
 formName: IFTA-1
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 &nbsp;

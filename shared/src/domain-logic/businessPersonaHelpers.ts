@@ -1,6 +1,6 @@
 import { intersection } from "lodash";
-import { ForeignBusinessTypeId, ProfileData } from "../profileData";
-import { Business } from "../userData";
+import type { ForeignBusinessTypeId, ProfileData } from "../profileData";
+import type { Business } from "../userData";
 
 export const isRemoteWorkerOrSellerBusiness = (business?: Business | undefined): boolean => {
   if (!business) return false;
@@ -10,13 +10,13 @@ export const isRemoteWorkerOrSellerBusiness = (business?: Business | undefined):
 export const isRemoteWorkerOrSellerProfileData = (
   profileData?: ProfileData | undefined,
 ): boolean => {
-  if (!profileData || profileData.businessPersona !== "FOREIGN") return false;
+  if (profileData?.businessPersona !== "FOREIGN") return false;
   const foreignBusinessType = determineForeignBusinessType(profileData.foreignBusinessTypeIds);
   return foreignBusinessType === "REMOTE_SELLER" || foreignBusinessType === "REMOTE_WORKER";
 };
 
 export const isNexusBusiness = (business?: Business | undefined): boolean => {
-  if (!business || business.profileData.businessPersona !== "FOREIGN") return false;
+  if (business?.profileData.businessPersona !== "FOREIGN") return false;
   return determineForeignBusinessType(business.profileData.foreignBusinessTypeIds) === "NEXUS";
 };
 

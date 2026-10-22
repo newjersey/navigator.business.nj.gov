@@ -32,7 +32,7 @@ notesMd: >-
   4.21: SME approved, publishing task
 
   4.18: Revisions made with guidance from Jess
-syncToWebflow: true
+syncToStaticSite: true
 ---
 
 ## Boilers That Need Inspection
