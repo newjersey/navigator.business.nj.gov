@@ -2,6 +2,12 @@ name: "Deploy Content Environment"
 
 on:
   workflow_call:
+    inputs:
+      ref:
+        description: "Git ref to check out and deploy. Defaults to the caller's ref."
+        type: string
+        required: false
+        default: ""
 
 concurrency:
   group: deploy-content
@@ -119,6 +125,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: ${{ inputs.ref }}
           fetch-depth: 0
 
       - uses: actions/setup-node@v7
