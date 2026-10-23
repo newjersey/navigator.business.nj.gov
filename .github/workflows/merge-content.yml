@@ -39,6 +39,8 @@ jobs:
   deploy-content:
     needs: merge-content
     uses: newjersey/navigator.business.nj.gov/.github/workflows/deploy-content-environment.yml@main
+    with:
+      ref: content-repo
     secrets: inherit
     permissions:
       contents: read
