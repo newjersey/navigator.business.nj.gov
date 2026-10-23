@@ -144,5 +144,6 @@ jobs:
         with:
           service_name: bfs-navigator-content
           stage: content
+          ref: ${{ inputs.ref }}
       - name: Deploy Static Site
         uses: ./.github/actions/deploy-static-site
