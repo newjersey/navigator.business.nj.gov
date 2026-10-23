@@ -1,5 +1,7 @@
 {
   "learnPageFormBusiness": {
+    "nameAvailabilityImageAlt": "Example screen for checking if a business name is available",
+    "businessDetailsImageAlt": "Example form for entering business details including name, structure, and effective date",
     "overview": "In this step, you will be able to create your new business!\n\n This online application will allow you to:\n\n - Register your business name, and\n- Form your business with the New Jersey Division of Revenue and Enterprise Services (DORES) \n\nThis form will take about 5-10 minutes to complete.\n\nAt the end of the process, you will get your Entity ID immediately after payment is received (sometimes referred to as &quot;NJ Corporation Number,&quot; the Entity ID is a 10 digit number used to identify your corporate records.",
     "firstSectionHeader": "First, you will check the availability and register the name of your business",
     "firstSection": "Our tool will allow you to check if your preferred business name is available. If it is, you can register it and move to the next steps and start forming your business!",
