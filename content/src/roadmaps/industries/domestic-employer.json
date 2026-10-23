@@ -13,7 +13,7 @@
       "step": 1,
       "weight": 6,
       "task": "register-for-ein-domestic-employer",
-      "required": false
+      "required": true
     },
     {
       "step": 1,
