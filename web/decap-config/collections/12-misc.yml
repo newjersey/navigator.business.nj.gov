@@ -3518,8 +3518,18 @@ collections:
               - { label: Overview Section, name: overview, widget: markdown }
               - { label: First Section Header, name: firstSectionHeader, widget: string }
               - { label: First Section Content, name: firstSection, widget: markdown }
+              - {
+                  label: Business Name Availability Screenshot Alt Text,
+                  name: nameAvailabilityImageAlt,
+                  widget: string,
+                }
               - { label: Second Section Header, name: secondSectionHeader, widget: string }
               - { label: Second Section Content, name: secondSection, widget: markdown }
+              - {
+                  label: Business Details Screenshot Alt Text,
+                  name: businessDetailsImageAlt,
+                  widget: string,
+                }
               - { label: More Info Section, name: moreInfo, widget: markdown }
       - label: "Find Your Industry Classification Code"
         name: "learn-page-find-naics"
@@ -3533,6 +3543,7 @@ collections:
             widget: object
             fields:
               - { label: Content, name: content, widget: markdown }
+              - { label: Screenshot Alt Text, name: imageAlt, widget: string }
       - label: "Get Your Employer Identification Number (EIN)"
         name: "learn-page-get-ein"
         file: "content/src/fieldConfig/learn-page-get-ein.json"
@@ -3545,6 +3556,7 @@ collections:
             widget: object
             fields:
               - { label: Overview Section, name: overview, widget: markdown }
+              - { label: Screenshot Alt Text, name: imageAlt, widget: string }
               - { label: Callout Boxes, name: callouts, widget: markdown }
       - label: "Register Your Business to Pay State Taxes"
         name: "learn-page-register-taxes"
@@ -3558,6 +3570,7 @@ collections:
             widget: object
             fields:
               - { label: Overview Section, name: overview, widget: markdown }
+              - { label: Screenshot Alt Text, name: imageAlt, widget: string }
               - { label: Callout Boxes, name: callouts, widget: markdown }
       - label: "Open Your Free Account"
         name: "learn-page-open-account"

@@ -21,17 +21,39 @@ export const FormBusiness = (props: Props): ReactElement => {
       <h2 className="text-secondary-darker">{props.heading}</h2>
       <Content>{Config.learnPageFormBusiness.overview}</Content>
       <br></br>
-      <HorizontalLine />
-      <h3 className="text-accent-cool-darker">{Config.learnPageFormBusiness.firstSectionHeader}</h3>
-      <Content>{Config.learnPageFormBusiness.firstSection}</Content>
+      <div className="grid-row grid-gap-4 flex-align-start">
+        <div className="grid-col-12 tablet:grid-col-5">
+          <img
+            className="width-100"
+            src="/img/learn-business-name-availability.png"
+            alt={Config.learnPageFormBusiness.nameAvailabilityImageAlt}
+          />
+        </div>
+        <div className="grid-col-12 tablet:grid-col-7">
+          <h3 className="text-accent-cool-darker">
+            {Config.learnPageFormBusiness.firstSectionHeader}
+          </h3>
+          <Content>{Config.learnPageFormBusiness.firstSection}</Content>
+        </div>
+      </div>
       <br></br>
       <HorizontalLine />
-      <h3 className="text-accent-cool-darker">
-        {Config.learnPageFormBusiness.secondSectionHeader}
-      </h3>
-      <Content>{Config.learnPageFormBusiness.secondSection}</Content>
+      <div className="grid-row grid-gap-2 flex-align-start">
+        <div className="grid-col-12 tablet:grid-col-7">
+          <h3 className="text-accent-cool-darker">
+            {Config.learnPageFormBusiness.secondSectionHeader}
+          </h3>
+          <Content>{Config.learnPageFormBusiness.secondSection}</Content>
+        </div>
+        <div className="grid-col-12 tablet:grid-col-5">
+          <img
+            className="width-100"
+            src="/img/learn-business-details.png"
+            alt={Config.learnPageFormBusiness.businessDetailsImageAlt}
+          />
+        </div>
+      </div>
       <br></br>
-      <HorizontalLine />
       <Content overrides={{ h2: h2Override }}>{Config.learnPageFormBusiness.moreInfo}</Content>
     </>
   );
