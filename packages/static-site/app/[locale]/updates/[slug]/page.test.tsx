@@ -1,16 +1,25 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
-import { loadRecents } from "@/domain/content/loadContent";
+import { describe, expect, it, vi } from "vitest";
+import type { RecentItem } from "@/domain/content/types";
 import { buildUpdateDescription } from "@/domain/metadata/buildUpdateDescription";
 import UpdateDetailRoute, { generateMetadata } from "./page";
 
-const recent = loadRecents().find(
-  (item) => item.slug === "drought-warning-in-effect-voluntary-water-reduction-urged",
-);
+const recent: RecentItem = {
+  name: "Fixture Update",
+  slug: "fixture-update",
+  date: "2022-08-12",
+  topics: "Rules and Regulations",
+  status: "Published",
+  body: "A **fixture** paragraph describing the update, with a [link](https://example.com) to more details.\n\nA second paragraph.",
+};
 
-if (!recent) {
-  throw new Error("Expected fixture update to exist in content/src/recents");
-}
+vi.mock("@/domain/content/loadContent", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/domain/content/loadContent")>();
+  return {
+    ...actual,
+    loadRecents: () => [recent],
+  };
+});
 
 describe("generateMetadata", () => {
   it("builds a branded title matching the update's own name", async () => {
