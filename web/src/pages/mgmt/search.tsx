@@ -352,14 +352,15 @@ const SearchContentPage = (props: Props): ReactElement => {
   };
 
   const taskCollection = {
-    "Tasks - All": taskMatches,
+    "Tasks - All (option to map to static site)": taskMatches,
     "License Tasks (Navigator with Webflow mappings)": licenseTaskMatches,
     "Tasks - Municipal": municipalTaskMatches,
+    "Raffle Bingo Steps": raffleBingoStepMatches,
     "Webflow Licenses": webflowLicenseMatches,
   };
 
   const envCollection = {
-    "Env Comp - Config": envTaskMatches,
+    "Environmental Requirements - Config": envTaskMatches,
   };
 
   const certCollection = {
@@ -487,6 +488,10 @@ const SearchContentPage = (props: Props): ReactElement => {
       />
       <MatchCollection
         matchedCollections={{ "Login Support Page": [] }}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={{ "Spell Check Exceptions": [] }}
         groupedConfigMatches={groupedConfigMatches}
       />
       <MatchCollection

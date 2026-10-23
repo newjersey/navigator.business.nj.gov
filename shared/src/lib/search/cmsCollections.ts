@@ -4,12 +4,12 @@ export const cmsCollections = [
     children: ["Biz Form - Config", "Biz Form - DBA Tasks", "Nexus"],
   },
   {
-    label: "🌲 ENVIRONMENTAL COMPLIANCE",
-    children: ["Env Comp - Config"],
+    label: "🌲 ENVIRONMENTAL REQUIREMENTS",
+    children: ["Environmental Requirements - Config"],
   },
   {
     label: "🟧 CERTIFICATION OPPS",
-    children: ["Cert Opps - Content", "Cert Opps - Archive"],
+    children: ["Cert Opps - Content", "Cert Opps - Archived"],
   },
   {
     label: "🟨 FUNDING OPPS",
@@ -28,7 +28,7 @@ export const cmsCollections = [
     label: "🟦 TASKS",
     children: [
       "Tasks - Config",
-      "Tasks - All",
+      "Tasks - All (option to map to static site)",
       "License Tasks (Navigator with Webflow mappings)",
       "Raffle Bingo Steps",
       "Webflow Licenses",
@@ -40,16 +40,21 @@ export const cmsCollections = [
       "Tasks - Municipal",
       "Tasks - NAICS Code",
       "Tasks - Business Structure",
+      "Tasks - Passenger Transport CDL",
+      "Tasks - Manage Business Vehicles",
+      "Tasks - ABC",
+      "CRTK",
       "Xray",
     ],
   },
   {
     label: "📅 CALENDAR",
     children: [
-      "Tax Access Modal Config",
+      "Tax Access Config",
       "Consumer Affairs License Expiration / Renewal Events",
       "Taxes Filings - All",
       "Xray Renewal Calendar Event",
+      "Xray Renewal Config",
     ],
   },
   {
@@ -60,9 +65,10 @@ export const cmsCollections = [
     label: "🟧 ANYTIME ACTIONS",
     children: [
       "Anytime Action Categories",
-      "Anytime Action Tasks",
+      "Anytime Actions Tasks",
       "Anytime Action With Consumer Affairs License Integrations (Reinstatements)",
       "Tax Clearance Anytime Action",
+      "Government Contracting",
     ],
   },
   {
@@ -76,7 +82,6 @@ export const cmsCollections = [
       "Starter Kits",
       "Callout Defaults",
       "Dropdown Mappings",
-      "General Config",
       "Landing Pages",
       "License Search Task",
       "Profile Page",
@@ -107,7 +112,9 @@ export const cmsCollections = [
       "Navigator Unsupported User Page",
       "Autosave",
       "Formation Date Deletion Modal",
+      "Remove Business Modal",
       "Learn Pages",
+      "Locked Tasks Prompt",
     ],
   },
   {
@@ -115,7 +122,19 @@ export const cmsCollections = [
     children: ["Login Support Page"],
   },
   {
-    label: "💻 STATIC SITE CONTENT",
-    children: ["Categories", "COVIDs", "FAQs", "Pages", "Recents", "Tropical Storm Ida"],
+    label: "📖 SPELLCHECK DICTIONARY",
+    children: ["Spell Check Exceptions"],
+  },
+  {
+    label: "💻 Static Site Content",
+    children: [
+      "Categories",
+      "COVIDs",
+      "FAQs",
+      "Pages",
+      "Recents",
+      "Sub-Categories",
+      "Tropical Storm Ida",
+    ],
   },
 ];
