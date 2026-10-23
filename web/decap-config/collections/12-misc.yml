@@ -3486,6 +3486,13 @@ collections:
             fields:
               - { label: Steps Header, name: stepsHeader, widget: string }
               - { label: Step Label, name: stepText, widget: string }
+              - {
+                  label: Step Counter Text,
+                  name: stepCounterText,
+                  widget: string,
+                  hint:
+                    "Use ${currentStep} and ${totalSteps} for the current and total step numbers.",
+                }
               - { label: Previous Step Text, name: previousStepText, widget: string }
               - { label: Next Step Text, name: nextStepText, widget: string }
               - { label: Placeholder Content, name: placeholderContent, widget: string }
