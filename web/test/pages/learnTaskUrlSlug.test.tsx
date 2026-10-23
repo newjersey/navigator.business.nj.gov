@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@businessnjgovnavigator/shared";
 import type * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 import type { GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
@@ -81,7 +81,8 @@ describe("learn task page", () => {
 
     renderWithUserData(<LearnTaskPage learnStep={learnStepThree} />);
 
-    const sideNavLinkToStepOne = screen.getByRole("link", {
+    const desktopSidebar = screen.getByRole("navigation", { name: "Secondary" });
+    const sideNavLinkToStepOne = within(desktopSidebar).getByRole("link", {
       name: `Step 1 ${Config.learnPages.steps[0].name}`,
     });
     expect(sideNavLinkToStepOne).toBeInTheDocument();

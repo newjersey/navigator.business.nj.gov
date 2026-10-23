@@ -2,6 +2,7 @@
   "learnPages": {
     "stepsHeader": "Steps",
     "stepText": "Step",
+    "stepCounterText": "Step ${currentStep} of ${totalSteps}",
     "previousStepText": "Previous Step",
     "nextStepText": "Next Step",
     "placeholderContent": "Content goes here!",
