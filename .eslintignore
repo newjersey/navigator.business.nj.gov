@@ -34,6 +34,8 @@ api/dist/
 api/cdk.context.json
 api/node_modules
 api/cdk/**/*.js
+# migrated to Biome; keeps root Prettier/ESLint off it
+api/cdk
 api/cdk/lib/**/*.js
 api/cdk/bin/**/*.js
 api/cdk/test/**/*.js

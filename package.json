@@ -287,7 +287,16 @@
   "lint-staged": {
     "packages/static-site/**/*.{css,js,json,md,ts,tsx,yaml,yml}": "bash -c 'cd packages/static-site && pnpm lint:fix' --",
     "shared/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
-    "!(shared)/**/*.{js,ts,tsx}": [
+    "api/cdk/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
+    "!(shared|api)/**/*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "api/!(cdk)/**/*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "api/*.{js,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ],

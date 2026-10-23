@@ -25,7 +25,6 @@
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.workingDirectories": [
     { "directory": "./api", "changeProcessCWD": true },
-    { "directory": "./api/cdk", "changeProcessCWD": true },
     { "directory": "./web", "changeProcessCWD": true }
   ],
   "explorer.fileNesting.enabled": true,
