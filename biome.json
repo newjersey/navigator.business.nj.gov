@@ -25,6 +25,11 @@
       "!**/*.html"
     ]
   },
+  "markdown": {
+    "parser": { "frontmatter": true },
+    "formatter": { "enabled": false },
+    "linter": { "enabled": false }
+  },
   "overrides": [
     {
       "includes": ["shared/**"],
@@ -173,7 +178,7 @@
       "includes": ["shared/**/*.test.*", "api/**/*.test.*", "web/**/*.test.*"],
       "linter": {
         "rules": {
-          "nursery": {
+          "suspicious": {
             "useExpect": "error"
           }
         }
