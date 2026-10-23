@@ -207,8 +207,13 @@
       groupName: "react-email",
     },
 
-    // Biome formatter/linter (used by static-site and root).
-    { matchPackageNames: ["@biomejs/*"], groupName: "biome" },
+    // Biome formatter/linter and the shared org config it extends. Releases can
+    // change rule behavior or reject existing config, so review by hand.
+    {
+      matchPackageNames: ["@biomejs/*", "@newjersey/biome-config"],
+      groupName: "biome",
+      automerge: false,
+    },
 
     // Vitest test runner; split from Vite since they release independently.
     { matchPackageNames: ["vitest", "@vitest/*"], groupName: "vitest" },
