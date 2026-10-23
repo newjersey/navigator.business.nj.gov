@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { HOUSING_DEVELOPER_RESOURCES_PATHNAME } from "@/domain/content/housingDeveloperResourcesFlag";
+import { HOUSING_DEVELOPER_RESOURCES_PATHNAME } from "@/domain/content/pagePaths";
 import { buildLegacyRedirects, type LegacyRedirect } from "./legacyRedirects";
 
 const find = (rules: LegacyRedirect[], source: string): LegacyRedirect | undefined =>
@@ -13,7 +13,6 @@ describe("buildLegacyRedirects — starter-kit slugs land on the real page", () 
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/starter-kits/:slug*",
     );
@@ -23,7 +22,6 @@ describe("buildLegacyRedirects — starter-kit slugs land on the real page", () 
   it("never sends a starter-kit source to a destination that re-matches it (no loop)", () => {
     for (const rule of buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     })) {
       if (rule.source.startsWith("/starter-kits")) {
         expect(rule.destination).not.toBe("/starter-kits");
@@ -36,7 +34,6 @@ describe("buildLegacyRedirects — /recent topic-page one-offs win over the pref
   it("routes /recent/disposable-bag-ban to the plastic-ban page, before the /recent prefix", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     expect(find(rules, "/recent/disposable-bag-ban")?.destination).toBe("/pages/plastic-ban-law");
     expect(indexOf(rules, "/recent/disposable-bag-ban")).toBeLessThan(
@@ -47,7 +44,6 @@ describe("buildLegacyRedirects — /recent topic-page one-offs win over the pref
   it("routes /recent/state-financial-assistance-programs to the covid19 page, before the prefix", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     expect(find(rules, "/recent/state-financial-assistance-programs")?.destination).toBe(
       "/pages/covid19",
@@ -63,7 +59,6 @@ describe("buildLegacyRedirects — content-gap one-offs", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/pages/covid-19-required-workplace-health-and-safety-standards",
     );
@@ -74,7 +69,6 @@ describe("buildLegacyRedirects — content-gap one-offs", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/pages/transferring-or-exiting-your-business",
     );
@@ -88,7 +82,6 @@ describe("buildLegacyRedirects — /page/* singular-prefix one-offs", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: false,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/page/impactreport",
       )?.destination,
@@ -100,7 +93,6 @@ describe("buildLegacyRedirects — /page/* singular-prefix one-offs", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: false,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/page/trucking",
       )?.destination,
@@ -110,7 +102,6 @@ describe("buildLegacyRedirects — /page/* singular-prefix one-offs", () => {
   it("auto-generates the /es-us twins to the English page when the flag is OFF", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     expect(find(rules, "/es-us/page/impactreport")?.destination).toBe("/impact-report");
     expect(find(rules, "/es-us/page/trucking")?.destination).toBe("/pages/starter-kits");
@@ -119,7 +110,6 @@ describe("buildLegacyRedirects — /page/* singular-prefix one-offs", () => {
   it("auto-generates the /es-us twins to the /es-US page when the flag is ON", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: true,
-      housingDeveloperResourcesEnabled: true,
     });
     expect(find(rules, "/es-us/page/impactreport")?.destination).toBe("/es-US/impact-report");
     expect(find(rules, "/es-us/page/trucking")?.destination).toBe("/es-US/pages/starter-kits");
@@ -128,7 +118,6 @@ describe("buildLegacyRedirects — /page/* singular-prefix one-offs", () => {
   it("emits exactly one rule per /es-us/page source (no hand-written duplicate)", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     for (const source of ["/es-us/page/impactreport", "/es-us/page/trucking"]) {
       expect(rules.filter((r) => r.source === source)).toHaveLength(1);
@@ -140,7 +129,6 @@ describe("buildLegacyRedirects — prefix rules", () => {
   it("aggregates English /license/* to the licensing guide with a permanent 308", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     const rule = find(rules, "/license/:slug*");
     expect(rule).toEqual({
@@ -154,7 +142,6 @@ describe("buildLegacyRedirects — prefix rules", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/recent/:slug*",
     );
@@ -165,7 +152,6 @@ describe("buildLegacyRedirects — prefix rules", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/funding/:slug*",
     );
@@ -176,7 +162,6 @@ describe("buildLegacyRedirects — prefix rules", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/housing-developer-resources",
     );
@@ -186,7 +171,6 @@ describe("buildLegacyRedirects — prefix rules", () => {
   it("every rule uses permanent: true (308) and never sets statusCode", () => {
     for (const rule of buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     })) {
       expect(rule.permanent).toBe(true);
       expect(rule).not.toHaveProperty("statusCode");
@@ -199,7 +183,6 @@ describe("buildLegacyRedirects — Spanish routes (flag OFF)", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us/license/:slug*",
     );
@@ -210,7 +193,6 @@ describe("buildLegacyRedirects — Spanish routes (flag OFF)", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us/recent/:slug*",
     );
@@ -221,7 +203,6 @@ describe("buildLegacyRedirects — Spanish routes (flag OFF)", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us/housing-developer-resources",
     );
@@ -234,7 +215,6 @@ describe("buildLegacyRedirects — Spanish routes (flag ON)", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: true,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us/license/:slug*",
     );
@@ -245,7 +225,6 @@ describe("buildLegacyRedirects — Spanish routes (flag ON)", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: true,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us/recent/:slug*",
     );
@@ -256,7 +235,6 @@ describe("buildLegacyRedirects — Spanish routes (flag ON)", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: true,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us/housing-developer-resources",
     );
@@ -269,7 +247,6 @@ describe("buildLegacyRedirects — blanket /es-us catch-all", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us/:path*",
     );
@@ -281,7 +258,6 @@ describe("buildLegacyRedirects — blanket /es-us catch-all", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: true,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us/:path*",
     );
@@ -292,7 +268,6 @@ describe("buildLegacyRedirects — blanket /es-us catch-all", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us",
     );
@@ -304,7 +279,6 @@ describe("buildLegacyRedirects — blanket /es-us catch-all", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: true,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us",
     );
@@ -314,7 +288,6 @@ describe("buildLegacyRedirects — blanket /es-us catch-all", () => {
   it("orders the catch-all after every specific /es-us rule so specifics win", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     const catchAllIndex = rules.findIndex((r) => r.source === "/es-us/:path*");
     const lastSpecificIndex = rules.findLastIndex(
@@ -328,7 +301,6 @@ describe("buildLegacyRedirects — one-off internal rules", () => {
   it("maps /category/grow to the /grow hub with a Spanish route", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     expect(find(rules, "/category/grow")?.destination).toBe("/grow");
     expect(find(rules, "/es-us/category/grow")?.destination).toBe("/grow");
@@ -337,7 +309,6 @@ describe("buildLegacyRedirects — one-off internal rules", () => {
   it("maps the whole covid cluster to /pages/covid19", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     for (const source of ["/covid", "/covid19", "/reopen", "/covid-19", "/covid-faqs"]) {
       expect(find(rules, source)?.destination).toBe("/pages/covid19");
@@ -347,7 +318,6 @@ describe("buildLegacyRedirects — one-off internal rules", () => {
   it("maps the lone /es/pages/funding legacy row to the funding page (no generated Spanish route)", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     expect(find(rules, "/es/pages/funding")?.destination).toBe("/pages/funding");
   });
@@ -359,7 +329,6 @@ describe("buildLegacyRedirects — starter-kit slugs", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: false,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/starter-kits/:slug*",
       )?.destination,
@@ -371,7 +340,6 @@ describe("buildLegacyRedirects — starter-kit slugs", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: true,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/es-us/starter-kits/:slug*",
       )?.destination,
@@ -384,11 +352,62 @@ describe("buildLegacyRedirects — one-off external rules", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: true,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/es-us/panel",
     );
     expect(rule?.destination).toBe("https://forms.business.nj.gov/panel/");
+  });
+});
+
+describe("buildLegacyRedirects — page access flag filtering", () => {
+  it("excludes the English redirect for a disabled page pathname", () => {
+    const rules = buildLegacyRedirects({
+      multilingualEnabled: false,
+      disabledPagePathnames: [HOUSING_DEVELOPER_RESOURCES_PATHNAME],
+    });
+    expect(find(rules, "/housing-developer-resources")).toBeUndefined();
+  });
+
+  it("excludes the generated Spanish route for a disabled page pathname", () => {
+    const rules = buildLegacyRedirects({
+      multilingualEnabled: false,
+      disabledPagePathnames: [HOUSING_DEVELOPER_RESOURCES_PATHNAME],
+    });
+    expect(find(rules, "/es-us/housing-developer-resources")).toBeUndefined();
+  });
+
+  it("keeps unrelated redirects when a page pathname is disabled", () => {
+    const rules = buildLegacyRedirects({
+      multilingualEnabled: false,
+      disabledPagePathnames: [HOUSING_DEVELOPER_RESOURCES_PATHNAME],
+    });
+    expect(find(rules, "/funding")).toBeDefined();
+    expect(find(rules, "/license/:slug*")).toBeDefined();
+  });
+
+  it("excludes a one-off rule and its Spanish route when its destination pathname is disabled", () => {
+    const rules = buildLegacyRedirects({
+      multilingualEnabled: false,
+      disabledPagePathnames: ["/impact-report"],
+    });
+    expect(find(rules, "/impact")).toBeUndefined();
+    expect(find(rules, "/es-us/impact")).toBeUndefined();
+  });
+
+  it("excludes a locale-specific one-off rule when its destination pathname is disabled", () => {
+    const rules = buildLegacyRedirects({
+      multilingualEnabled: false,
+      disabledPagePathnames: ["/pages/funding"],
+    });
+    expect(find(rules, "/es/pages/funding")).toBeUndefined();
+  });
+
+  it("emits the redirect normally when no pathnames are disabled", () => {
+    const rule = find(
+      buildLegacyRedirects({ multilingualEnabled: false, disabledPagePathnames: [] }),
+      "/housing-developer-resources",
+    );
+    expect(rule?.destination).toBe(HOUSING_DEVELOPER_RESOURCES_PATHNAME);
   });
 });
 
@@ -398,7 +417,6 @@ describe("buildLegacyRedirects — impact report", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: false,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/impact",
       )?.destination,
@@ -411,7 +429,6 @@ describe("buildLegacyRedirects — our software and reuse", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/pages/our-software-and-reuse",
     );
@@ -424,7 +441,6 @@ describe("buildLegacyRedirects — our software and reuse", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: false,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/es-us/pages/our-software-and-reuse",
       )?.destination,
@@ -436,7 +452,6 @@ describe("buildLegacyRedirects — our software and reuse", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: true,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/es-us/pages/our-software-and-reuse",
       )?.destination,
@@ -446,7 +461,6 @@ describe("buildLegacyRedirects — our software and reuse", () => {
   it("orders the generated Spanish route before the /es-us catch-all", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     expect(indexOf(rules, "/es-us/pages/our-software-and-reuse")).toBeLessThan(
       indexOf(rules, "/es-us/:path*"),
@@ -459,7 +473,6 @@ describe("buildLegacyRedirects — bare /license splits from /license/*", () => 
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/license",
     );
@@ -472,7 +485,6 @@ describe("buildLegacyRedirects — bare /license splits from /license/*", () => 
       find(
         buildLegacyRedirects({
           multilingualEnabled: false,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/license/:slug*",
       )?.destination,
@@ -482,7 +494,6 @@ describe("buildLegacyRedirects — bare /license splits from /license/*", () => 
   it("orders the bare /license before /license/:slug* so first-match-wins keeps them split", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     expect(indexOf(rules, "/license")).toBeLessThan(indexOf(rules, "/license/:slug*"));
   });
@@ -492,7 +503,6 @@ describe("buildLegacyRedirects — bare /license splits from /license/*", () => 
       find(
         buildLegacyRedirects({
           multilingualEnabled: false,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/es-us/license",
       )?.destination,
@@ -504,7 +514,6 @@ describe("buildLegacyRedirects — bare /license splits from /license/*", () => 
       find(
         buildLegacyRedirects({
           multilingualEnabled: true,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/es-us/license",
       )?.destination,
@@ -517,7 +526,6 @@ describe("buildLegacyRedirects — terms & privacy policy", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/terms",
     );
@@ -530,7 +538,6 @@ describe("buildLegacyRedirects — terms & privacy policy", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: false,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/terms-of-use",
       )?.destination,
@@ -542,7 +549,6 @@ describe("buildLegacyRedirects — terms & privacy policy", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: false,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/privacy",
       )?.destination,
@@ -553,7 +559,6 @@ describe("buildLegacyRedirects — terms & privacy policy", () => {
     const rule = find(
       buildLegacyRedirects({
         multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: true,
       }),
       "/pages/privacy-policy",
     );
@@ -566,7 +571,6 @@ describe("buildLegacyRedirects — terms & privacy policy", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: false,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/es-us/terms",
       )?.destination,
@@ -578,7 +582,6 @@ describe("buildLegacyRedirects — terms & privacy policy", () => {
       find(
         buildLegacyRedirects({
           multilingualEnabled: true,
-          housingDeveloperResourcesEnabled: true,
         }),
         "/es-us/terms",
       )?.destination,
@@ -588,41 +591,7 @@ describe("buildLegacyRedirects — terms & privacy policy", () => {
   it("orders the generated Spanish route before the /es-us catch-all", () => {
     const rules = buildLegacyRedirects({
       multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: true,
     });
     expect(indexOf(rules, "/es-us/terms")).toBeLessThan(indexOf(rules, "/es-us/:path*"));
-  });
-});
-
-describe("buildLegacyRedirects — housing developer resources flag", () => {
-  it("omits the /housing-developer-resources rule when the flag is disabled", () => {
-    const rule = find(
-      buildLegacyRedirects({
-        multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: false,
-      }),
-      "/housing-developer-resources",
-    );
-    expect(rule).toBeUndefined();
-  });
-
-  it("omits the /es-us/housing-developer-resources rule when the flag is disabled", () => {
-    const rule = find(
-      buildLegacyRedirects({
-        multilingualEnabled: false,
-        housingDeveloperResourcesEnabled: false,
-      }),
-      "/es-us/housing-developer-resources",
-    );
-    expect(rule).toBeUndefined();
-  });
-
-  it("leaves every other rule intact when the flag is disabled", () => {
-    const rules = buildLegacyRedirects({
-      multilingualEnabled: false,
-      housingDeveloperResourcesEnabled: false,
-    });
-    expect(find(rules, "/funding/:slug*")?.destination).toBe("/pages/funding");
-    expect(find(rules, "/license")?.destination).toBe("/our-software-and-reuse");
   });
 });

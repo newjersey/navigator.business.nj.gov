@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { HOUSING_DEVELOPER_RESOURCES_SLUG } from "@/domain/content/housingDeveloperResourcesFlag";
+import { HOUSING_DEVELOPER_RESOURCES_SLUG } from "@/domain/content/pagePaths";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import ContentPage, { generateMetadata, generateStaticParams } from "./page";
 
@@ -141,9 +141,7 @@ describe("ContentPage — a slug served by its own route", () => {
     vi.unstubAllEnvs();
   });
 
-  it("404s the housing slug here even with its flag enabled, since it lives at its own route", async () => {
-    vi.stubEnv("NEXT_PUBLIC_HOUSING_DEVELOPER_RESOURCES_ENABLED", "true");
-
+  it("404s the housing slug since it lives at its own route", async () => {
     await expect(
       ContentPage({
         params: Promise.resolve({ locale: "en-US", slug: HOUSING_DEVELOPER_RESOURCES_SLUG }),

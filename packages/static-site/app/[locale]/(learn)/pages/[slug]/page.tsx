@@ -4,6 +4,7 @@ import { PageSwitchComponent } from "@/components/learn/PageSwitchComponent";
 import { resolvePageTitle } from "@/components/learn/resolvePageTitle";
 import { CATEGORY_HIERARCHY } from "@/domain/categories";
 import { loadPages } from "@/domain/content/loadContent";
+import { isPageDisabled } from "@/domain/content/pageAccessFlags";
 import { hasDedicatedRoute } from "@/domain/content/pagePaths";
 import { buildAlternateLanguages } from "@/domain/i18n/alternateLanguages";
 import { type AppLocale, hasAppLocale, resolveAppLocale } from "@/domain/i18n/locales";
@@ -65,7 +66,7 @@ const ContentPage = async ({ params }: Props) => {
   // A slug with its own route must not also render here, or the same page would
   // be reachable at two URLs. `generateStaticParams` leaves it out, but
   // `dynamicParams` would otherwise let Next.js render it on demand.
-  if (hasDedicatedRoute(slug)) {
+  if (hasDedicatedRoute(slug) || isPageDisabled(slug)) {
     notFound();
   }
 

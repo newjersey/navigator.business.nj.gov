@@ -1,6 +1,44 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { PageItem } from "@/domain/content/types";
-import { buildCategoryHierarchy, filterFlaggedPages } from "./categories";
+import { buildCategoryHierarchy } from "./categories";
+
+describe("CATEGORY_HIERARCHY — filters disabled pages", () => {
+  beforeEach(() => {
+    vi.resetModules();
+  });
+
+  afterEach(() => {
+    vi.resetModules();
+  });
+
+  it("excludes a page whose slug is returned by disabledPageSlugs", async () => {
+    vi.doMock("@/domain/content/pageAccessFlags", () => ({
+      disabledPageSlugs: () => ["hidden-page"],
+    }));
+    vi.doMock("@/domain/content/loadContent", () => ({
+      loadPages: () => [
+        { name: "Hidden Page", slug: "hidden-page", category: "plan" },
+        { name: "Visible Page", slug: "visible-page", category: "plan" },
+      ],
+    }));
+    const { CATEGORY_HIERARCHY } = await import("./categories");
+    expect(CATEGORY_HIERARCHY.plan.children.map((p) => p.slug)).toEqual(["visible-page"]);
+  });
+
+  it("includes all pages when no slugs are disabled", async () => {
+    vi.doMock("@/domain/content/pageAccessFlags", () => ({
+      disabledPageSlugs: () => [],
+    }));
+    vi.doMock("@/domain/content/loadContent", () => ({
+      loadPages: () => [
+        { name: "Page A", slug: "page-a", category: "plan" },
+        { name: "Page B", slug: "page-b", category: "plan" },
+      ],
+    }));
+    const { CATEGORY_HIERARCHY } = await import("./categories");
+    expect(CATEGORY_HIERARCHY.plan.children.map((p) => p.slug)).toEqual(["page-a", "page-b"]);
+  });
+});
 
 const page = (slug: string, category?: string): PageItem => ({
   name: slug,
@@ -53,34 +91,5 @@ describe("buildCategoryHierarchy", () => {
     ]);
 
     expect(Object.keys(result)).toEqual(["plan", "start", "operate", "grow"]);
-  });
-});
-
-describe("filterFlaggedPages", () => {
-  it("keeps the housing developer resources page when the flag is enabled", () => {
-    const pages = [page("funding", "grow"), page("housing-developer-resources", "grow")];
-
-    const result = filterFlaggedPages(pages, { housingDeveloperResourcesEnabled: true });
-
-    expect(result.map((it) => it.slug)).toEqual(["funding", "housing-developer-resources"]);
-  });
-
-  it("removes the housing developer resources page when the flag is disabled", () => {
-    const pages = [page("funding", "grow"), page("housing-developer-resources", "grow")];
-
-    const result = filterFlaggedPages(pages, { housingDeveloperResourcesEnabled: false });
-
-    expect(result.map((it) => it.slug)).toEqual(["funding"]);
-  });
-
-  it("leaves every other page untouched when the flag is disabled", () => {
-    const pages = [
-      page("create-a-business-plan", "plan"),
-      page("housing-developer-resources", "grow"),
-    ];
-
-    const result = filterFlaggedPages(pages, { housingDeveloperResourcesEnabled: false });
-
-    expect(result).toEqual([page("create-a-business-plan", "plan")]);
   });
 });
