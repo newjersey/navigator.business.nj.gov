@@ -19,6 +19,7 @@ const mockJwt = jwt as jest.Mocked<typeof jwt>;
 const cognitoPayload = ({ id }: { id: string }): any => {
   return {
     sub: "some-sub",
+    "cognito:username": `myNJ_${id}`,
     "custom:myNJUserKey": undefined,
     email: "some-eamail",
     identities: [
@@ -46,6 +47,8 @@ describe("externalEndpointRouter", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
+      findAllByEmail: jest.fn(),
+      claimEmailSignIn: jest.fn(),
       findUserByBusinessName: jest.fn(),
       findUsersByBusinessNamePrefix: jest.fn(),
       findBusinessesByHashedTaxId: jest.fn(),

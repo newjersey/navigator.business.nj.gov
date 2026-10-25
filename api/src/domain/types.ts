@@ -80,6 +80,8 @@ export interface DatabaseClient {
   get: (userId: string) => Promise<UserData>;
   put: (userData: UserData) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
+  findAllByEmail: (email: string) => Promise<UserData[]>;
+  claimEmailSignIn: (userId: string, claimedISO: string) => Promise<void>;
   findUserByBusinessName: (businessName: string) => Promise<UserData | undefined>;
   findUsersByBusinessNamePrefix: (prefix: string) => Promise<UserData[]>;
   findBusinessesByHashedTaxId: (hashedTaxId: string) => Promise<Business[]>;
@@ -92,6 +94,8 @@ export interface MigrationRunOptions {
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
+  findAllByEmail: (email: string) => Promise<UserData[]>;
+  claimEmailSignIn: (userId: string, claimedISO: string) => Promise<void>;
   put: (userData: UserData) => Promise<UserData>;
   migrateToLatest: (userData: UserData) => Promise<UserData>;
   getNeedNewsletterUsers: () => Promise<UserData[]>;
@@ -433,6 +437,11 @@ export interface MessagingServiceClient {
     messageType: string,
   ) => Promise<{ success: boolean; messageId?: string; error?: string }>;
   health: HealthCheckMethod;
+}
+
+export interface CognitoUserClient {
+  findUsername: (candidateUsernames: string[]) => Promise<string | undefined>;
+  ensureSignInEnabled: (username: string) => Promise<void>;
 }
 
 export interface MessageResponse {
