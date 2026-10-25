@@ -15,7 +15,7 @@ import path from "node:path";
 
 const migrationFilePath = path.resolve(
   __dirname,
-  "../src/db/migrations/v195_add_learning_business_field_to_business_user_data.ts",
+  "../src/db/migrations/v196_add_email_sign_in_claimed.ts",
 );
 
 const tsconfigPath = path.resolve(__dirname, "../tsconfig.json");
