@@ -1,7 +1,7 @@
 ---
 name: Project Developers and Others Can Apply for NJ Permitting Dashboard Pilot by May 21
 slug: project-developers-and-others-can-apply-for-nj-permitting-dashboard-pilot-by-may-21
-status: Published
+status: Draft
 date: '2026-05-01'
 topics: Grants and Resources
 source: 'https://permits.nj.gov'
