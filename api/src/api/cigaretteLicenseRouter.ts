@@ -1,4 +1,3 @@
-import { ExpressRequestBody } from "@api/types";
 import { type CryptoClient, DatabaseClient, CigaretteLicenseClient } from "@domain/types";
 import { getSignedInUserId } from "@api/userRouter";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
@@ -12,7 +11,7 @@ import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { UserData } from "@shared/userData";
-import { Router } from "express";
+import { Request, Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 interface CigaretteLicensePreparePaymentBody {
@@ -30,7 +29,10 @@ export const cigaretteLicenseRouterFactory = (
 
   router.post(
     "/cigarette-license/prepare-payment",
-    async (req: ExpressRequestBody<CigaretteLicensePreparePaymentBody>, res) => {
+    async (
+      req: Request<Record<string, string>, unknown, CigaretteLicensePreparePaymentBody>,
+      res,
+    ) => {
       const { userData, returnUrl } = req.body;
       const method = req.method;
       const endpoint = req.originalUrl;
@@ -40,6 +42,17 @@ export const cigaretteLicenseRouterFactory = (
       logger.LogInfo(
         `[START] ${method} ${endpoint} - Received cigarette license prepare-payment request for userId: ${userId}`,
       );
+
+      if (getSignedInUserId(req) !== userId) {
+        const status = StatusCodes.FORBIDDEN;
+        logger.LogInfo(
+          `[END] ${method} ${endpoint} - status: ${status}, reason: signed-in user mismatch, duration: ${getDurationMs(
+            requestStart,
+          )}ms`,
+        );
+        res.status(status).json();
+        return;
+      }
 
       try {
         const paymentResponse: PreparePaymentResponse = await cigaretteLicenseClient.preparePayment(
