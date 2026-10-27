@@ -80,6 +80,7 @@ describe("cigaretteLicenseRouter", () => {
 
     beforeEach(() => {
       userData = generateUserData({});
+      fakeSignedInUserId.mockReturnValue(userData.user.id);
     });
 
     it("sends posted user data to cigaretteLicense client and returns updated user data with payment response", async () => {
@@ -152,6 +153,19 @@ describe("cigaretteLicenseRouter", () => {
       });
 
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+      expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
+    });
+
+    it("returns FORBIDDEN without preparing payment or saving when the posted user is not the signed-in user", async () => {
+      fakeSignedInUserId.mockReturnValue("some-other-user-id");
+
+      const response = await request(app).post("/cigarette-license/prepare-payment").send({
+        userData: userData,
+        returnUrl: "some-url",
+      });
+
+      expect(response.status).toEqual(StatusCodes.FORBIDDEN);
+      expect(stubCigaretteLicenseClient.preparePayment).not.toHaveBeenCalled();
       expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
     });
   });
@@ -290,6 +304,7 @@ describe("cigaretteLicenseRouter", () => {
 
     beforeEach(() => {
       userData = generateUserData({});
+      fakeSignedInUserId.mockReturnValue(userData.user.id);
     });
 
     it("sends posted user data email-confirmation and returns updated user data with email confirmation", async () => {

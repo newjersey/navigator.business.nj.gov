@@ -1,68 +1,32 @@
 import { externalEndpointRouterFactory } from "@api/externalEndpointRouter";
-import { AddNewsletter, DatabaseClient, NewsletterClient } from "@domain/types";
+import { AddNewsletter, NewsletterClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { generateUser, generateUserData } from "@shared/test";
 import { Express } from "express";
 import { StatusCodes } from "http-status-codes";
-import jwt from "jsonwebtoken";
 import request from "supertest";
 
-jest.mock("jsonwebtoken", () => {
-  return {
-    decode: jest.fn(),
-  };
-});
-const mockJwt = jwt as jest.Mocked<typeof jwt>;
+const encodeTokenSegment = (value: object): string => {
+  return Buffer.from(JSON.stringify(value)).toString("base64url");
+};
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const cognitoPayload = ({ id }: { id: string }): any => {
-  return {
-    sub: "some-sub",
-    "custom:myNJUserKey": undefined,
-    email: "some-eamail",
-    identities: [
-      {
-        dateCreated: "some-date",
-        issuer: "some-issuer",
-        primary: "some-primary",
-        providerName: "myNJ",
-        providerType: "some-provider-type",
-        userId: id,
-      },
-    ],
-  };
+const createUnsignedToken = (claims: Record<string, unknown>): string => {
+  return `${encodeTokenSegment({ alg: "none", typ: "JWT" })}.${encodeTokenSegment(claims)}.`;
 };
 
 describe("externalEndpointRouter", () => {
   let app: Express;
-  let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
   let stubAddNewsletter: jest.MockedFunction<AddNewsletter>;
   let stubNewsletterClient: jest.Mocked<NewsletterClient>;
 
   beforeEach(async () => {
-    stubDynamoDataClient = {
-      migrateOutdatedVersionUsers: jest.fn(),
-      get: jest.fn(),
-      put: jest.fn(),
-      findByEmail: jest.fn(),
-      findUserByBusinessName: jest.fn(),
-      findUsersByBusinessNamePrefix: jest.fn(),
-      findBusinessesByHashedTaxId: jest.fn(),
-    };
     stubAddNewsletter = jest.fn();
     stubNewsletterClient = {
       add: jest.fn(),
     };
     app = setupExpress(false);
-    app.use(
-      externalEndpointRouterFactory(
-        stubDynamoDataClient,
-        stubAddNewsletter,
-        stubNewsletterClient,
-        DummyLogWriter,
-      ),
-    );
+    app.use(externalEndpointRouterFactory(stubAddNewsletter, stubNewsletterClient, DummyLogWriter));
     jest.spyOn(DummyLogWriter, "LogInfo").mockImplementation(() => {});
     jest.spyOn(DummyLogWriter, "LogError").mockImplementation(() => {});
   });
@@ -100,27 +64,46 @@ describe("externalEndpointRouter", () => {
         expect(stubAddNewsletter).not.toHaveBeenCalled();
       });
 
-      it("adds to newsletter and does not update the db if the user is unauthenticated", async () => {
-        const userData = generateUserData({
-          user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
-        });
-        await request(app).post(`/newsletter`).send(userData);
-        expect(stubAddNewsletter).toHaveBeenCalled();
-        expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
-      });
-
-      it("adds to newsletter and updates the db if the user is authenticated", async () => {
+      it("returns the newsletter result to an anonymous caller", async () => {
         const userData = generateUserData({
           user: generateUser({ id: "123", externalStatus: {}, receiveNewsletter: true }),
         });
-        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        stubDynamoDataClient.put.mockResolvedValue(userData);
-        await request(app)
+        const newsletterResult = generateUserData({
+          user: generateUser({
+            id: "123",
+            externalStatus: { newsletter: { status: "SUCCESS" } },
+            receiveNewsletter: true,
+          }),
+        });
+        stubAddNewsletter.mockResolvedValue(newsletterResult);
+
+        const response = await request(app).post(`/newsletter`).send(userData);
+
+        expect(stubAddNewsletter).toHaveBeenCalledWith(userData);
+        expect(response.status).toEqual(StatusCodes.OK);
+        expect(response.body).toEqual(newsletterResult);
+      });
+
+      it("responds the same way when the request carries a token claiming the user's identity", async () => {
+        const userData = generateUserData({
+          user: generateUser({ id: "123", externalStatus: {}, receiveNewsletter: true }),
+        });
+        const newsletterResult = generateUserData({
+          user: generateUser({
+            id: "123",
+            externalStatus: { newsletter: { status: "SUCCESS" } },
+            receiveNewsletter: true,
+          }),
+        });
+        stubAddNewsletter.mockResolvedValue(newsletterResult);
+
+        const response = await request(app)
           .post(`/newsletter`)
           .send(userData)
-          .set("Authorization", "Bearer user-123-token");
-        expect(stubAddNewsletter).toHaveBeenCalled();
-        expect(stubDynamoDataClient.put).toHaveBeenCalled();
+          .set("Authorization", `Bearer ${createUnsignedToken({ sub: "123" })}`);
+
+        expect(response.status).toEqual(StatusCodes.OK);
+        expect(response.body).toEqual(newsletterResult);
       });
 
       it("logs no update needed and does not call addNewsletter when no update is needed", async () => {

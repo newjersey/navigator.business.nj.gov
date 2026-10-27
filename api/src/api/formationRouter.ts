@@ -1,4 +1,3 @@
-import { ExpressRequestBody } from "@api/types";
 import { getSignedInUser, getSignedInUserId } from "@api/userRouter";
 import { saveFileFromUrl } from "@domain/s3Writer";
 import { DatabaseClient, FormationClient } from "@domain/types";
@@ -10,7 +9,7 @@ import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import { ProfileDocuments } from "@shared/profileData";
 import { UserData } from "@shared/userData";
-import { Router } from "express";
+import { Request, Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 type FormationPostBody = {
@@ -27,47 +26,61 @@ export const formationRouterFactory = (
 ): Router => {
   const router = Router();
 
-  router.post("/formation", async (req: ExpressRequestBody<FormationPostBody>, res) => {
-    const { userData, returnUrl, foreignGoodStandingFile } = req.body;
-    const method = req.method;
-    const endpoint = req.originalUrl;
-    const requestStart = Date.now();
-    const userId = userData.user.id;
+  router.post(
+    "/formation",
+    async (req: Request<Record<string, string>, unknown, FormationPostBody>, res) => {
+      const { userData, returnUrl, foreignGoodStandingFile } = req.body;
+      const method = req.method;
+      const endpoint = req.originalUrl;
+      const requestStart = Date.now();
+      const userId = userData.user.id;
 
-    logger.LogInfo(
-      `[START] ${method} ${endpoint} - Received formation request for userId: ${userId}`,
-    );
+      logger.LogInfo(
+        `[START] ${method} ${endpoint} - Received formation request for userId: ${userId}`,
+      );
 
-    formationClient
-      .form(userData, returnUrl, foreignGoodStandingFile)
-      .then(async (formationResponse: FormationSubmitResponse) => {
-        const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
-          ...business,
-          formationData: {
-            ...business.formationData,
-            formationResponse: formationResponse,
-          },
-        }));
-        await databaseClient.put(userDataWithResponse);
-        const status = StatusCodes.OK;
-        res.status(status).json(userDataWithResponse);
+      if (getSignedInUserId(req) !== userId) {
+        const status = StatusCodes.FORBIDDEN;
         logger.LogInfo(
-          `[END] ${method} ${endpoint} - status: ${status}, userId: ${userId}, duration: ${getDurationMs(
-            requestStart,
-          )}ms`,
-        );
-      })
-      .catch(async () => {
-        await databaseClient.put(userData);
-        const status = StatusCodes.INTERNAL_SERVER_ERROR;
-        logger.LogError(
-          `${method} ${endpoint} - Failed to submit formation: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+          `[END] ${method} ${endpoint} - status: ${status}, reason: signed-in user mismatch, duration: ${getDurationMs(
             requestStart,
           )}ms`,
         );
         res.status(status).json();
-      });
-  });
+        return;
+      }
+
+      formationClient
+        .form(userData, returnUrl, foreignGoodStandingFile)
+        .then(async (formationResponse: FormationSubmitResponse) => {
+          const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
+            ...business,
+            formationData: {
+              ...business.formationData,
+              formationResponse: formationResponse,
+            },
+          }));
+          await databaseClient.put(userDataWithResponse);
+          const status = StatusCodes.OK;
+          res.status(status).json(userDataWithResponse);
+          logger.LogInfo(
+            `[END] ${method} ${endpoint} - status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+              requestStart,
+            )}ms`,
+          );
+        })
+        .catch(async () => {
+          await databaseClient.put(userData);
+          const status = StatusCodes.INTERNAL_SERVER_ERROR;
+          logger.LogError(
+            `${method} ${endpoint} - Failed to submit formation: status: ${status}, userId: ${userId}, duration: ${getDurationMs(
+              requestStart,
+            )}ms`,
+          );
+          res.status(status).json();
+        });
+    },
+  );
 
   router.get("/completed-filing", async (req, res) => {
     const signedInUser = getSignedInUser(req);

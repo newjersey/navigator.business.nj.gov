@@ -1,6 +1,5 @@
-import { getSignedInUserId } from "@api/userRouter";
 import { shouldAddToNewsletter } from "@domain/newsletter/shouldAddToNewsletter";
-import { AddNewsletter, DatabaseClient, NewsletterClient } from "@domain/types";
+import { AddNewsletter, NewsletterClient } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
 import { validateEmail } from "@shared/stringHelpers";
@@ -9,7 +8,6 @@ import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export const externalEndpointRouterFactory = (
-  databaseClient: DatabaseClient,
   addNewsletter: AddNewsletter,
   newsletterClient: NewsletterClient,
   logger: LogWriterType,
@@ -25,30 +23,9 @@ export const externalEndpointRouterFactory = (
     logger.LogInfo(
       `[START] ${method} ${endpoint} - Received request to update newsletter preferences for userId: ${userId}`,
     );
-    let isAnonymous;
-    try {
-      isAnonymous = getSignedInUserId(req) !== userId;
-    } catch {
-      isAnonymous = true;
-    }
 
     if (shouldAddToNewsletter(userData)) {
       userData = await addNewsletter(userData);
-      if (!isAnonymous) {
-        try {
-          userData = await databaseClient.put(userData);
-        } catch (error) {
-          const status = StatusCodes.INTERNAL_SERVER_ERROR;
-          const message = error instanceof Error ? error.message : "Unexpected error";
-          logger.LogError(
-            `${method} ${endpoint} - Failed to update user: ${message}, status: ${status}, userId: ${userId}, duration: ${getDurationMs(
-              requestStart,
-            )}ms`,
-          );
-          res.status(status).json({ error: message });
-          return;
-        }
-      }
       logger.LogInfo(
         `[END] ${method} ${endpoint} - status: ${
           StatusCodes.OK

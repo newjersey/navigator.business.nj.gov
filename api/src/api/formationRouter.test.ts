@@ -93,6 +93,7 @@ describe("formationRouter", () => {
       stubFormationClient.form.mockResolvedValue(formationResponse);
 
       const userData = generateUserData({});
+      fakeSignedInUserId.mockReturnValue(userData.user.id);
       const foreignGoodStandingFile = generateInputFile({});
       const response = await request(app).post(`/formation`).send({
         userData: userData,
@@ -123,6 +124,7 @@ describe("formationRouter", () => {
       stubFormationClient.form.mockResolvedValue(formationResponse);
 
       const userData = generateUserData({});
+      fakeSignedInUserId.mockReturnValue(userData.user.id);
       await request(app).post(`/formation`).send({
         userData: userData,
         returnUrl: "some-url",
@@ -143,12 +145,27 @@ describe("formationRouter", () => {
       stubFormationClient.form.mockRejectedValue({});
 
       const userData = generateUserData({});
+      fakeSignedInUserId.mockReturnValue(userData.user.id);
       await request(app).post(`/formation`).send({
         userData: userData,
         returnUrl: "some-url",
       });
 
       expect(stubDynamoDataClient.put).toHaveBeenCalledWith(userData);
+    });
+
+    it("returns FORBIDDEN without forming or saving when the posted user is not the signed-in user", async () => {
+      const userData = generateUserData({});
+      fakeSignedInUserId.mockReturnValue("some-other-user-id");
+
+      const response = await request(app).post(`/formation`).send({
+        userData: userData,
+        returnUrl: "some-url",
+      });
+
+      expect(response.status).toEqual(StatusCodes.FORBIDDEN);
+      expect(stubFormationClient.form).not.toHaveBeenCalled();
+      expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
     });
   });
 
