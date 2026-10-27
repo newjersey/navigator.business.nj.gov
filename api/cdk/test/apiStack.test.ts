@@ -45,6 +45,92 @@ const createImportedLambda = (props: CreateImportedLambdaProps): lambda.IFunctio
   );
 };
 
+interface CloudFormationReference {
+  readonly Ref?: string;
+  readonly "Fn::GetAtt"?: readonly string[];
+}
+
+interface ApiGatewayResourceProperties {
+  readonly ParentId: CloudFormationReference;
+  readonly PathPart: string;
+}
+
+interface ApiGatewayMethodProperties {
+  readonly HttpMethod: string;
+  readonly AuthorizationType: string;
+  readonly ResourceId: CloudFormationReference;
+}
+
+/** Routes whose methods are reachable without a Cognito token. Add to this list deliberately. */
+const PUBLIC_ROUTES = [
+  "/",
+  "/api",
+  "/api/cms",
+  "/api/cms/{proxy+}",
+  "/api/external",
+  "/api/external/{proxy+}",
+  "/api/guest",
+  "/api/guest/{proxy+}",
+  "/api/mgmt",
+  "/api/mgmt/{proxy+}",
+  "/api/self-reg",
+  "/api/users/emailCheck",
+  "/health",
+  "/health/{proxy+}",
+];
+
+const COGNITO_ROUTES = ["/{proxy+}", "/api/users"];
+
+/** Public route that only exists when `FEATURE_USERDATA_ENDPOINT` is "true". */
+const USER_SCHEMA_ROUTE = "/api/user-schema";
+
+const getExpectedAuthorizationTypes = (publicRoutes: string[]): Record<string, string> => {
+  return Object.fromEntries([
+    ...publicRoutes.map((route) => {
+      return [route, "NONE"];
+    }),
+    ...COGNITO_ROUTES.map((route) => {
+      return [route, "COGNITO_USER_POOLS"];
+    }),
+  ]);
+};
+
+const resolveResourcePath = (
+  resourceId: CloudFormationReference,
+  resources: Record<string, ApiGatewayResourceProperties>,
+): string => {
+  if (resourceId.Ref === undefined) {
+    return "/";
+  }
+  const resource = resources[resourceId.Ref];
+  const parentPath = resolveResourcePath(resource.ParentId, resources);
+  return parentPath === "/" ? `/${resource.PathPart}` : `${parentPath}/${resource.PathPart}`;
+};
+
+const getAuthorizationTypesByRoute = (
+  template: Template,
+  httpMethod: string,
+): Record<string, string> => {
+  const resources = Object.fromEntries(
+    Object.entries(template.findResources("AWS::ApiGateway::Resource")).map(
+      ([logicalId, resource]) => {
+        return [logicalId, resource.Properties as ApiGatewayResourceProperties];
+      },
+    ),
+  );
+  const methods = Object.values(
+    template.findResources("AWS::ApiGateway::Method", { Properties: { HttpMethod: httpMethod } }),
+  ).map((method) => {
+    return method.Properties as ApiGatewayMethodProperties;
+  });
+
+  return Object.fromEntries(
+    methods.map((method) => {
+      return [resolveResourcePath(method.ResourceId, resources), method.AuthorizationType];
+    }),
+  );
+};
+
 const createApiStackTemplate = (stage: string): TestApiStackTemplate => {
   const app = new App();
   const dependencyStack = new Stack(app, `${stage}ApiStackDependencies`, {
@@ -77,6 +163,7 @@ describe("ApiStack", () => {
     process.env.SUBNET_ID_01 = "subnet-11111111111111111";
     process.env.SUBNET_ID_02 = "subnet-22222222222222222";
     process.env.VPC_ID = "vpc-1234567890abcdef0";
+    delete process.env.FEATURE_USERDATA_ENDPOINT;
   });
 
   afterEach(() => {
@@ -92,6 +179,33 @@ describe("ApiStack", () => {
     });
     template.resourceCountIs("AWS::ApiGatewayV2::Api", 0);
     template.resourceCountIs("AWS::ApiGatewayV2::Stage", 0);
+  });
+
+  test("requires Cognito authorization on every route not explicitly listed as public", () => {
+    const { template } = createApiStackTemplate("dev");
+
+    expect(getAuthorizationTypesByRoute(template, "ANY")).toEqual(
+      getExpectedAuthorizationTypes(PUBLIC_ROUTES),
+    );
+  });
+
+  test("leaves the user schema route public when the user data endpoint is enabled", () => {
+    process.env.FEATURE_USERDATA_ENDPOINT = "true";
+    const { template } = createApiStackTemplate("dev");
+
+    expect(getAuthorizationTypesByRoute(template, "ANY")).toEqual(
+      getExpectedAuthorizationTypes([...PUBLIC_ROUTES, USER_SCHEMA_ROUTE]),
+    );
+  });
+
+  test("leaves CORS preflight unauthenticated on every route", () => {
+    const { template } = createApiStackTemplate("dev");
+
+    const optionsAuthorizationTypes = getAuthorizationTypesByRoute(template, "OPTIONS");
+    expect(Object.keys(optionsAuthorizationTypes).sort()).toEqual(
+      [...PUBLIC_ROUTES, ...COGNITO_ROUTES].sort(),
+    );
+    expect(new Set(Object.values(optionsAuthorizationTypes))).toEqual(new Set(["NONE"]));
   });
 
   test("creates an internal HTTPS API load balancer", () => {
