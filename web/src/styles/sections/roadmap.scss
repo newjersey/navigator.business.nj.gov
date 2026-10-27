@@ -34,3 +34,24 @@
     font-weight: 700 !important;
   }
 }
+
+.learn-form-business-callout-icon {
+  width: 3rem;
+  height: 3rem;
+  background-color: currentColor;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+
+  &--conditional {
+    mask-image: url("/img/learn-registered-agent.svg");
+  }
+
+  &--informational {
+    mask-image: url("/img/learn-billing-information.svg");
+  }
+
+  &--quickReference {
+    mask-image: url("/img/learn-offline-registration.svg");
+  }
+}

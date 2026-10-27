@@ -1,11 +1,27 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import {
+  CalloutTypes,
+  LargeCalloutProps,
+} from "@/components/njwds-extended/callout/calloutHelpers";
+import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
 
 interface Props {
   heading: string;
 }
+
+interface LearnCalloutProps extends Omit<LargeCalloutProps, "calloutType"> {
+  children: string[];
+  calloutType?: CalloutTypes;
+}
+
+const CALLOUT_ICON_CLASSES: Partial<Record<CalloutTypes, string>> = {
+  conditional: "learn-form-business-callout-icon--conditional",
+  informational: "learn-form-business-callout-icon--informational",
+  quickReference: "learn-form-business-callout-icon--quickReference",
+};
 
 export const FormBusiness = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -15,6 +31,37 @@ export const FormBusiness = (props: Props): ReactElement => {
       {children}
     </h2>
   );
+
+  const largeCalloutOverride = (calloutProps: LearnCalloutProps): ReactElement => {
+    const { children, headerText, calloutType = "conditional", ...remainingProps } = calloutProps;
+    const iconClass = CALLOUT_ICON_CLASSES[calloutType];
+
+    if (!headerText || !iconClass) {
+      return (
+        <LargeCallout {...remainingProps} calloutType={calloutType} headerText={headerText}>
+          {children}
+        </LargeCallout>
+      );
+    }
+
+    return (
+      <LargeCallout {...remainingProps} calloutType={calloutType} showHeader={false}>
+        <div className="grid-row grid-gap-2 flex-align-start width-100">
+          <div className="grid-col-12 tablet:grid-col-3">
+            <div className="display-inline-block text-secondary-darker">
+              <span className="display-block text-bold">{headerText}</span>
+              <span
+                className={`learn-form-business-callout-icon ${iconClass} display-none tablet:display-block margin-x-auto margin-top-1`}
+                aria-hidden="true"
+                data-testid="form-business-callout-icon"
+              />
+            </div>
+          </div>
+          <div className="grid-col-12 tablet:grid-col-9 text-base-darkest">{children}</div>
+        </div>
+      </LargeCallout>
+    );
+  };
 
   return (
     <>
@@ -54,7 +101,9 @@ export const FormBusiness = (props: Props): ReactElement => {
         </div>
       </div>
       <br></br>
-      <Content overrides={{ h2: h2Override }}>{Config.learnPageFormBusiness.moreInfo}</Content>
+      <Content overrides={{ h2: h2Override, largeCallout: largeCalloutOverride }}>
+        {Config.learnPageFormBusiness.moreInfo}
+      </Content>
     </>
   );
 };
