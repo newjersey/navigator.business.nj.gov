@@ -1,3 +1,4 @@
+import { deflateSync, gzipSync } from "node:zlib";
 import { setupExpress } from "@libs/express";
 import { ErrorRequestHandler } from "express";
 import request from "supertest";
@@ -37,6 +38,64 @@ describe("setupExpress", () => {
       body: { business: { name: "Navigator LLC" } },
       query: { filters: { status: "active" } },
     });
+  });
+
+  it("parses gzip-compressed JSON request bodies", async () => {
+    const app = setupExpress(false, false);
+    app.post("/echo", (req, res) => {
+      res.json(req.body);
+    });
+    const body = { businessName: "Navigator LLC" };
+    const pendingRequest = request(app)
+      .post("/echo")
+      .set("Content-Type", "application/json")
+      .set("Content-Encoding", "gzip");
+
+    pendingRequest.write(gzipSync(JSON.stringify(body)));
+    const response = await pendingRequest;
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(body);
+  });
+
+  it("parses gzip-compressed extended form request bodies", async () => {
+    const app = setupExpress(false, false);
+    app.post("/echo", (req, res) => {
+      res.json(req.body);
+    });
+    const pendingRequest = request(app)
+      .post("/echo")
+      .set("Content-Type", "application/x-www-form-urlencoded")
+      .set("Content-Encoding", "gzip");
+
+    pendingRequest.write(gzipSync("business%5Bname%5D=Navigator%20LLC"));
+    const response = await pendingRequest;
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({ business: { name: "Navigator LLC" } });
+  });
+
+  it("continues serving requests after trailing bytes on a deflate-compressed body", async () => {
+    const app = setupExpress(false, false);
+    app.post("/echo", (req, res) => {
+      res.json(req.body);
+    });
+    const body = { businessName: "Navigator LLC" };
+    const pendingRequest = request(app)
+      .post("/echo")
+      .set("Content-Type", "application/json")
+      .set("Content-Encoding", "deflate");
+
+    // Send raw bytes so Supertest does not JSON-serialize the compressed buffer.
+    pendingRequest.write(deflateSync(JSON.stringify(body)));
+    pendingRequest.write(Buffer.from("invalid trailing data"));
+    const response = await pendingRequest;
+    const subsequentResponse = await request(app).post("/echo").send(body);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(body);
+    expect(subsequentResponse.status).toBe(200);
+    expect(subsequentResponse.body).toEqual(body);
   });
 
   it("preserves an empty object for requests without a parsed body", async () => {
