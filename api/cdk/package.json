@@ -14,7 +14,7 @@
     "format:check": "biome format ."
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.15",
+    "@biomejs/biome": "2.6.3",
     "@jest/globals": "30.4.1",
     "@types/jest": "30.0.0",
     "@types/node": "24.13.3",
