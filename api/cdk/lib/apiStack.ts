@@ -177,7 +177,7 @@ export class ApiStack extends Stack {
 
     const authorizer = this.createCognitoAuthorizer(props.stage);
     this.setupRootRoutes(expressLambda!, authorizer);
-    this.setupApiRoutes(expressLambda!, githubLambda);
+    this.setupApiRoutes(expressLambda!, authorizer, githubLambda);
 
     this.configureCustomDomain(props.stage);
     this.configureApiLoadBalancer(props.stage, props.lambdaRole);
@@ -237,7 +237,11 @@ export class ApiStack extends Stack {
     attachLambdaToResource(this, proxy, lambda);
   }
 
-  private setupApiRoutes(expressLambda: IFunction, githubLambda?: IFunction) {
+  private setupApiRoutes(
+    expressLambda: IFunction,
+    authorizer: apigateway.CognitoUserPoolsAuthorizer,
+    githubLambda?: IFunction,
+  ) {
     const api = this.restApi.root.addResource("api");
     attachLambdaToResource(this, api, expressLambda);
 
@@ -264,7 +268,7 @@ export class ApiStack extends Stack {
     }
 
     const users = api.addResource("users");
-    attachLambdaToResource(this, users, expressLambda);
+    attachLambdaToResource(this, users, expressLambda, authorizer);
 
     const email = users.addResource("emailCheck");
     attachLambdaToResource(this, email, expressLambda);
