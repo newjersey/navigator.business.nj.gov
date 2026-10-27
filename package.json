@@ -309,6 +309,7 @@
   },
   "packageManager": "yarn@4.18.0",
   "resolutions": {
+    "body-parser": "2.4.0",
     "trim@0.0.1": "1.0.1",
     "postcss": "8.5.23",
     "glob-parent": "6.0.2",
