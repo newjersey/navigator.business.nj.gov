@@ -1,3 +1,26 @@
+# [2026.25.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.24.1...v2026.25.0) (2026-10-27)
+
+
+### Bug Fixes
+
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) resolve remaining biome violations in api/cdk ([18189f9](https://github.com/newjersey/navigator.business.nj.gov/commit/18189f9c301dfd68308cdf0eac332b6f8041335d))
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) resolve remaining biome violations in content ([451ca32](https://github.com/newjersey/navigator.business.nj.gov/commit/451ca32a6390ae6ef05eac888bad6ac1031c9b97))
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) resolve remaining biome violations in shared ([0420859](https://github.com/newjersey/navigator.business.nj.gov/commit/0420859a863a2bda5614e59cf1fdb6cb47541707))
+* [AB#18060](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18060) ensure accounting and domestic employer roadmap have essential tasks ([3310efd](https://github.com/newjersey/navigator.business.nj.gov/commit/3310efd6ce4810cf6541f6d965294c1365775e31))
+* [AB#18065](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18065) restore CMS search links and raffle results ([e581eb0](https://github.com/newjersey/navigator.business.nj.gov/commit/e581eb00821cbdabf695256aa77457d65bd2c8eb))
+* deploy content-repo from merge-content workflow ([16e465e](https://github.com/newjersey/navigator.business.nj.gov/commit/16e465ef1e11921347aadc2de27772ad5eff2f82))
+* **deps:** update dependency next to v16.4.1 [security] ([15ee779](https://github.com/newjersey/navigator.business.nj.gov/commit/15ee779477bdeca1e3ab08735b48b44e4100f3f9))
+* **deps:** update dependency next to v16.4.1 [security] ([b2dbbe1](https://github.com/newjersey/navigator.business.nj.gov/commit/b2dbbe11b34a3069b871634947345519fd2c60fc))
+* **deps:** update dependency zod to v4.6.6 [security] ([b84c31d](https://github.com/newjersey/navigator.business.nj.gov/commit/b84c31d14933f7feb379395ef284d12ed9b07eee))
+* flaky unit tests and import issues ([ee67fd9](https://github.com/newjersey/navigator.business.nj.gov/commit/ee67fd9fc7481a1a4ea12be829f6bb8e12361636))
+* keep content-repo checked out in deploy ([c15738d](https://github.com/newjersey/navigator.business.nj.gov/commit/c15738d7f65e971769561e008f48d94a378a9097))
+* update API request handling ([2c9e261](https://github.com/newjersey/navigator.business.nj.gov/commit/2c9e26152f20486b40ab15ee64145db8c7dbd369))
+
+
+### Features
+
+* [AB#18062](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18062) add example images throughout learn pages ([ce3d005](https://github.com/newjersey/navigator.business.nj.gov/commit/ce3d005d9477166ab2ef7ca1d302cb34c88b2755))
+
 ## [2026.24.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.24.0...v2026.24.1) (2026-10-21)
 
 

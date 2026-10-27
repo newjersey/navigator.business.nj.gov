@@ -179,6 +179,18 @@ describe("learn task page", () => {
     expect(
       screen.getByText(Config.learnPageOpenAccount.content.split("\n\n")[0]),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: Config.learnPageOpenAccount.testimonialHeading,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`“${Config.learnPageOpenAccount.testimonialQuote}”`),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`— ${Config.learnPageOpenAccount.testimonialAttribution}`),
+    ).toBeInTheDocument();
   });
 
   it("only renders next navigation for the first step", () => {

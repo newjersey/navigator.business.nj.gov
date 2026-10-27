@@ -3585,6 +3585,9 @@ collections:
             fields:
               - { label: Heading, name: heading, widget: string }
               - { label: Content, name: content, widget: markdown }
+              - { label: Testimonial Heading, name: testimonialHeading, widget: string }
+              - { label: Testimonial Quote, name: testimonialQuote, widget: text }
+              - { label: Testimonial Attribution, name: testimonialAttribution, widget: string }
       - label: "Business Structure"
         name: "learn-page-business-structure"
         file: "content/src/fieldConfig/learn-page-business-structure.json"

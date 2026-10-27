@@ -1,0 +1,54 @@
+@use "../sass-files/variables";
+
+.open-account-testimonial {
+  &__content {
+    align-items: center;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(10rem, 17rem) 1fr;
+    margin: 0;
+  }
+
+  &__image {
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
+
+  &__quote {
+    border-left: 0.25rem solid variables.$accent-semi-cool-700;
+    font-size: 1.125rem;
+    font-style: italic;
+    font-weight: 600;
+    margin: 0;
+    padding: 1rem 0 1rem 2rem;
+  }
+
+  &__quote p {
+    margin: 0 0 1rem;
+  }
+
+  &__quote footer {
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  @media (max-width: variables.$sm) {
+    &__content {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    &__image {
+      justify-self: center;
+      width: 17rem;
+    }
+
+    &__quote {
+      border-left: 0;
+      border-top: 0.25rem solid variables.$accent-semi-cool-700;
+      padding: 1rem 0 0;
+    }
+  }
+}
