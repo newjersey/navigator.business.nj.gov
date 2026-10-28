@@ -21,7 +21,7 @@
     "gray-matter": "4.0.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.15",
+    "@biomejs/biome": "2.6.3",
     "@businessnjgovnavigator/content-types": "*",
     "@businessnjgovnavigator/shared": "*",
     "@types/node": "24.13.3",
