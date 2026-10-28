@@ -12,9 +12,12 @@ export const getResetIndustrySpecificData = (
   const industry = LookupIndustryById(industryId);
   return EssentialQuestions.filter((eQ) => {
     return eQ.shouldBeResetWhenIndustryChanges && !eQ.isQuestionApplicableToIndustry(industry);
-  }).reduce((reducer, eQ) => {
-    return { ...reducer, [eQ.fieldName]: emptyIndustrySpecificData[eQ.fieldName] };
-  }, {} as Partial<IndustrySpecificData>);
+  }).reduce(
+    (reducer, eQ) => {
+      return { ...reducer, [eQ.fieldName]: emptyIndustrySpecificData[eQ.fieldName] };
+    },
+    {} as Partial<IndustrySpecificData>,
+  );
 };
 
 export const getIsApplicableToFunctionByFieldName = (
