@@ -42,7 +42,12 @@ api/cdk/test/**/*.js
 
 api/src/functions/messagingService/email-templates/
 
+# root Biome config: Biome owns it (Prettier adds trailing commas to .jsonc)
+biome.jsonc
+
 # web
+# migrated to Biome; keeps root Prettier/ESLint off it
+web
 web/.next
 amplify
 *.md

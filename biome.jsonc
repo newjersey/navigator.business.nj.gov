@@ -25,11 +25,14 @@
       "!**/*.html"
     ]
   },
+  // Decap writes content Markdown without hooks; Prettier keeps Markdown for now.
   "markdown": {
     "parser": { "frontmatter": true },
     "formatter": { "enabled": false },
     "linter": { "enabled": false }
   },
+  // yarn build runs decap:build-config, which runs prettier -w on web/decap-config; Biome moves YAML in a later PR.
+  "yaml": { "formatter": { "enabled": false } },
   "overrides": [
     {
       "includes": ["shared/**"],
@@ -96,6 +99,8 @@
       "linter": {
         "rules": {
           "style": {
+            // api's path aliases don't cover these dirs:
+            // cdk and reactEmail have their own tsconfig; scripts import each other.
             "noRestrictedImports": "off"
           }
         }
@@ -185,7 +190,19 @@
       }
     },
     {
-      "includes": ["web/**", "api/**", "!api/cdk/**"],
+      "includes": ["web/**/*.scss"],
+      "linter": {
+        "rules": {
+          // !important is how web overrides USWDS/MUI specificity
+          "complexity": { "noImportantStyles": "off" },
+          // ignores whether selectors set the same property; fixing reorders the cascade
+          "style": { "noDescendingSpecificity": "off" }
+        }
+      }
+    },
+    // VS Code organizeImports: Biome's and TS's sorters fight over alias order in unmigrated workspaces.
+    {
+      "includes": ["api/**", "!api/cdk/**"],
       "assist": { "enabled": false }
     },
     {
@@ -193,15 +210,85 @@
       "linter": {
         "rules": {
           "suspicious": {
+            // CLI build scripts report progress to stdout
             "noConsole": "off"
           }
         }
       }
     },
+    // Decap re-serializes these on save.
     {
       "includes": ["content/src/**/*.json"],
       "formatter": {
         "enabled": false
+      }
+    },
+    // Deferred to AB#18076 (noFloatingPromises), AB#18077 (useExhaustiveDependencies), and AB#18078 (noComponentHookFactories); decided when ESLint is removed.
+    {
+      "includes": ["web/**"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "useExhaustiveDependencies": {
+              "level": "warn",
+              "options": { "reportUnnecessaryDependencies": false }
+            },
+            "noComponentHookFactories": "warn"
+          },
+          "nursery": { "noFloatingPromises": "warn" }
+        }
+      }
+    },
+    // temporary: drained by the web rule PRs.
+    {
+      "includes": ["web/**"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useButtonType": "warn",
+            "noAriaHiddenOnFocusable": "warn",
+            "noRedundantRoles": "warn",
+            "useSemanticElements": "warn",
+            "useAriaPropsSupportedByRole": "warn",
+            "useValidAriaRole": "warn",
+            "noLabelWithoutControl": {
+              "level": "warn",
+              "options": { "inputComponents": ["Checkbox"] }
+            },
+            "useValidAriaValues": "warn",
+            "useValidAnchor": "warn",
+            "noStaticElementInteractions": "warn",
+            "noNoninteractiveElementInteractions": "warn"
+          },
+          "suspicious": {
+            "noConsole": "warn",
+            "noExplicitAny": "warn",
+            "noArrayIndexKey": "warn",
+            "noNonNullAssertedOptionalChain": "warn",
+            "useIterableCallbackReturn": "warn",
+            "noImplicitAnyLet": "warn",
+            "noAssignInExpressions": "warn",
+            "noShadowRestrictedNames": "warn",
+            "noRedeclare": "warn",
+            "useExpect": "warn"
+          },
+          "style": {
+            "noCommonJs": "warn",
+            "useThrowOnlyError": "warn",
+            "noParameterAssign": "warn",
+            "useFilenamingConvention": {
+              "level": "warn",
+              "options": { "filenameCases": ["kebab-case", "camelCase", "PascalCase"] }
+            }
+          },
+          "correctness": {
+            "useHookAtTopLevel": "warn",
+            "noVoidTypeReturn": "warn",
+            "noUnreachable": "warn"
+          },
+          "complexity": { "useMaxParams": "warn" },
+          "security": { "noDangerouslySetInnerHtml": "warn" }
+        }
       }
     }
   ]
