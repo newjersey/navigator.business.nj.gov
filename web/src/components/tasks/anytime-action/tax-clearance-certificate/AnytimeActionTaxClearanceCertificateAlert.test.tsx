@@ -1,9 +1,9 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { AnytimeActionTaxClearanceCertificateAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateAlert";
-import analytics from "@/lib/utils/analytics";
-import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
+import type { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, screen } from "@testing-library/react";
+import { AnytimeActionTaxClearanceCertificateAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateAlert";
+import analytics from "@/lib/utils/analytics";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 const Config = getMergedConfig();
 

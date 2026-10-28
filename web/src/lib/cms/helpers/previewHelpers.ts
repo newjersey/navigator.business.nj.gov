@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export type PreviewProps = {
   entry?: any;
   window: Window;

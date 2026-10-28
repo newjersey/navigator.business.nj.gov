@@ -1,3 +1,12 @@
+import {
+  type Business,
+  generateBusiness,
+  generateProfileData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { EinTask } from "@/components/tasks/EinTask";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { templateEval } from "@/lib/utils/helpers";
@@ -10,15 +19,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  generateBusiness,
-  generateProfileData,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

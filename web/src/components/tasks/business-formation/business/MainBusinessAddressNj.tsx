@@ -1,3 +1,4 @@
+import { type ReactElement, useContext, useState } from "react";
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { Content } from "@/components/Content";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
@@ -6,15 +7,14 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { StateDropdown } from "@/components/StateDropdown";
-import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { ReactElement, useContext, useState } from "react";
 
 export const MainBusinessAddressNj = (): ReactElement => {
   const { Config } = useConfig();

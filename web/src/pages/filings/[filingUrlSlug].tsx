@@ -1,33 +1,32 @@
+import {
+  defaultDateFormat,
+  parseDateWithFormat,
+  type TaxFilingCalendarEvent,
+} from "@businessnjgovnavigator/shared";
+import {
+  type FilingUrlSlugParameter,
+  loadAllFilingUrlSlugs,
+  loadFilingByUrlSlug,
+} from "@businessnjgovnavigator/shared/static";
+import type { Filing, TaxFilingMethod } from "@businessnjgovnavigator/shared/types";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import type { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
+import type { ReactElement } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content, ExternalLink } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { Tag } from "@/components/njwds-extended/Tag";
+import { Icon } from "@/components/njwds/Icon";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { Tag } from "@/components/njwds-extended/Tag";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { Icon } from "@/components/njwds/Icon";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { sortCalendarEventsEarliestToLatest } from "@/lib/domain-logic/filterCalendarEvents";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-
-import {
-  defaultDateFormat,
-  parseDateWithFormat,
-  TaxFilingCalendarEvent,
-} from "@businessnjgovnavigator/shared";
-import {
-  FilingUrlSlugParameter,
-  loadAllFilingUrlSlugs,
-  loadFilingByUrlSlug,
-} from "@businessnjgovnavigator/shared/static";
-import { Filing, TaxFilingMethod } from "@businessnjgovnavigator/shared/types";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { GetStaticPathsResult, GetStaticPropsResult } from "next";
-import { NextSeo } from "next-seo";
-import { ReactElement } from "react";
 
 interface Props {
   filing: Filing;

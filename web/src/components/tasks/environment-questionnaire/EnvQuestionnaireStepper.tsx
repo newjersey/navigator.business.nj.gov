@@ -1,24 +1,4 @@
-import { Content } from "@/components/Content";
-import { Alert } from "@/components/njwds-extended/Alert";
-import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import {
-  mediaAreaToNotApplicableOption,
-  mediaAreaToStepNumber,
-  stepNumberToMediaArea,
-} from "@/components/tasks/environment-questionnaire/helpers";
-import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
-
-import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ROUTES } from "@/lib/domain-logic/routes";
-import { MediaQueries } from "@/lib/PageSizes";
-import analytics from "@/lib/utils/analytics";
-import { scrollToTop, templateEval } from "@/lib/utils/helpers";
-import {
+import type {
   MediaArea,
   Questionnaire,
   QuestionnaireConfig,
@@ -34,7 +14,26 @@ import {
   Link,
   useMediaQuery,
 } from "@mui/material";
-import { ChangeEvent, ReactElement, ReactNode, useContext } from "react";
+import { type ChangeEvent, type ReactElement, type ReactNode, useContext } from "react";
+import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import {
+  mediaAreaToNotApplicableOption,
+  mediaAreaToStepNumber,
+  stepNumberToMediaArea,
+} from "@/components/tasks/environment-questionnaire/helpers";
+import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
+import { MediaQueries } from "@/lib/PageSizes";
+import analytics from "@/lib/utils/analytics";
+import { scrollToTop, templateEval } from "@/lib/utils/helpers";
 
 export const EnvQuestionnaireStepper = (): ReactElement => {
   const { Config } = useConfig();

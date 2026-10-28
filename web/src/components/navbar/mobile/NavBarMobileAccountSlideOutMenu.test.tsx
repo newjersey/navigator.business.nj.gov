@@ -1,7 +1,7 @@
-import { NavBarMobileAccountSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileAccountSlideOutMenu";
-import analytics from "@/lib/utils/analytics";
 import { MenuItem } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { NavBarMobileAccountSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileAccountSlideOutMenu";
+import analytics from "@/lib/utils/analytics";
 
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 

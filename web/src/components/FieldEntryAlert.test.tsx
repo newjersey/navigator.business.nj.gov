@@ -1,9 +1,9 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { AlertVariants } from "@/components/njwds-extended/Alert";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
-import { fireEvent, screen, waitFor, within } from "@testing-library/react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 

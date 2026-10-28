@@ -1,13 +1,7 @@
-import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { templateEval } from "@/lib/utils/helpers";
-import { withAuth } from "@/test/helpers/helpers-renderers";
-import { useMockRouter } from "@/test/mock/mockRouter";
-import { useMockBusiness, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { generateUser } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import type { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import {
   generateBusiness,
   generateProfileData,
@@ -15,6 +9,12 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
+import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { templateEval } from "@/lib/utils/helpers";
+import { withAuth } from "@/test/helpers/helpers-renderers";
+import { useMockRouter } from "@/test/mock/mockRouter";
+import { useMockBusiness, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 
 const Config = getMergedConfig();
 

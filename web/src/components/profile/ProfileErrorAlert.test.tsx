@@ -1,7 +1,7 @@
-import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
-import { templateEval } from "@/lib/utils/helpers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { render, screen, within } from "@testing-library/react";
+import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
+import { templateEval } from "@/lib/utils/helpers";
 
 const Config = getMergedConfig();
 

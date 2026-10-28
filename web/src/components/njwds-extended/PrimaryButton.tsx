@@ -1,5 +1,5 @@
-import { GenericButton, GenericButtonProps } from "@/components/njwds-extended/GenericButton";
-import { forwardRef, ReactElement, Ref } from "react";
+import { forwardRef, type ReactElement, type Ref } from "react";
+import { GenericButton, type GenericButtonProps } from "@/components/njwds-extended/GenericButton";
 
 export type PrimaryButtonColors =
   | "primary"

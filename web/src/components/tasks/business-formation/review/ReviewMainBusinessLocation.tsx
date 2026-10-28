@@ -1,9 +1,9 @@
+import { type ReactElement, useContext } from "react";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getAddressCity, getAddressCountry, getAddressState } from "@/lib/utils/formation-helpers";
-import { ReactElement, useContext } from "react";
 
 export const ReviewMainBusinessLocation = (): ReactElement => {
   const { Config } = useConfig();

@@ -1,5 +1,5 @@
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { LookupSectorTypeById } from "@businessnjgovnavigator/shared/sector";
 
 export const hasNonEssentialQuestions = (profileData: ProfileData): boolean => {

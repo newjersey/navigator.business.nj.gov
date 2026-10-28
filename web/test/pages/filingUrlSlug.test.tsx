@@ -1,6 +1,3 @@
-import FilingPage from "@/pages/filings/[filingUrlSlug]";
-import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   defaultDateFormat,
   generateProfileData,
@@ -10,10 +7,13 @@ import {
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { Filing, taxFilingMethod } from "@businessnjgovnavigator/shared/types";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { type Filing, taxFilingMethod } from "@businessnjgovnavigator/shared/types";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 import dayjs from "dayjs";
+import FilingPage from "@/pages/filings/[filingUrlSlug]";
+import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 const Config = getMergedConfig();

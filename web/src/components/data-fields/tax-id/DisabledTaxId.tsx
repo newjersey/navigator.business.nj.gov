@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { useMediaQuery } from "@mui/material";
+import { type ReactElement, type ReactNode, useContext, useEffect, useMemo, useState } from "react";
 import { type ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptValue } from "@/lib/api-client/apiClient";
@@ -7,8 +7,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, ReactNode, useContext, useEffect, useMemo, useState } from "react";
 
 type Props = {
   template?: (props: { children: ReactNode }) => ReactElement;

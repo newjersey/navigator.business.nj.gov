@@ -1,8 +1,9 @@
-/* eslint-disable unicorn/filename-case */
-
-import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
-import { TextFieldProps } from "@mui/material";
-import { ReactElement } from "react";
+import type { TextFieldProps } from "@mui/material";
+import type { ReactElement } from "react";
+import {
+  ProfileDataField,
+  type ProfileDataFieldProps,
+} from "@/components/data-fields/ProfileDataField";
 
 interface Props extends Omit<ProfileDataFieldProps, "fieldName" | "inputWidth"> {
   fieldOptions?: TextFieldProps;

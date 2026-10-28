@@ -1,8 +1,8 @@
-import { Icon } from "@/components/njwds/Icon";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { CircularProgress } from "@mui/material";
 import dayjs from "dayjs";
-import { ReactElement, useEffect, useState } from "react";
+import { type ReactElement, useEffect, useState } from "react";
+import { Icon } from "@/components/njwds/Icon";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 
 interface Props {
   saveEveryXSeconds: number;
@@ -38,7 +38,6 @@ export const AutosaveSpinner = (props: Props): ReactElement => {
         clearTimeout(timeout);
       };
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -63,7 +62,6 @@ export const AutosaveSpinner = (props: Props): ReactElement => {
         setSavingSpinnerState("HIDDEN");
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savingSpinnerClock]);
 
   useEffect(() => {
@@ -76,7 +74,6 @@ export const AutosaveSpinner = (props: Props): ReactElement => {
         props.saveDataFunction();
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.hasDataChanged, props.saveDataFunction]);
 
   switch (savingSpinnerState) {

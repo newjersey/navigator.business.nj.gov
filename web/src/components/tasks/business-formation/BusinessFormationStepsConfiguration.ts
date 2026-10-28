@@ -1,4 +1,4 @@
-import { FormationStepNames } from "@businessnjgovnavigator/shared/types";
+import type { FormationStepNames } from "@businessnjgovnavigator/shared/types";
 
 export const BusinessFormationStepsConfiguration: {
   name: FormationStepNames;

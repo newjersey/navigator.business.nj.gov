@@ -1,10 +1,10 @@
+import type { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
+import { type ChangeEvent, type ReactElement, type ReactNode, useContext } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { FormationRadio } from "@/components/tasks/business-formation/business/FormationRadio";
 import { FormationTextArea } from "@/components/tasks/business-formation/business/FormationTextArea";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
-import { ChangeEvent, ReactElement, ReactNode, useContext } from "react";
 
 export const NonprofitProvisions = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
@@ -69,7 +69,6 @@ export const NonprofitProvisions = (): ReactElement => {
           });
           setFieldsInteracted([fieldName]);
         }}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         title={(Config.formation.fields as any)[fieldName].body}
       />
     );

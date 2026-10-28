@@ -1,12 +1,12 @@
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
-import {
+import type {
   CalloutTypes,
   LargeCalloutProps,
 } from "@/components/njwds-extended/callout/calloutHelpers";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 interface Props {
   heading: string;

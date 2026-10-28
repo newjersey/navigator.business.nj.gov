@@ -1,3 +1,4 @@
+import { type ReactElement, useContext } from "react";
 import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
 import {
   displayAltHomeBasedBusinessDescription,
@@ -7,7 +8,6 @@ import {
 } from "@/components/profile/profileDisplayLogicHelpers";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ReactElement, useContext } from "react";
 
 export const LocationBasedNonEssentialQuestions = (): ReactElement => {
   const { business } = useUserData();

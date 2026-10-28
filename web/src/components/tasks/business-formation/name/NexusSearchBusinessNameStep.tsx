@@ -1,3 +1,4 @@
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { NexusAvailable } from "@/components/tasks/business-formation/name/NexusAvailable";
@@ -5,7 +6,6 @@ import { NexusUnavailable } from "@/components/tasks/business-formation/name/Nex
 import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext } from "react";
 
 export const NexusSearchBusinessNameStep = (): ReactElement => {
   const { Config } = useConfig();

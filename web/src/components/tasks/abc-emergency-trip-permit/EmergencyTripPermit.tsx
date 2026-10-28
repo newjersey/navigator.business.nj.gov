@@ -1,8 +1,21 @@
+import {
+  type EmergencyTripPermitApplicationInfo,
+  type EmergencyTripPermitFieldNames,
+  generateNewEmergencyTripPermitData,
+} from "@businessnjgovnavigator/shared";
+import {
+  type EmergencyTripPermitFieldErrorState,
+  FieldStateActionKind,
+  type ReducedFieldStates,
+  type StepperStep,
+} from "@businessnjgovnavigator/shared/types";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext, useState } from "react";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { getErrorStateForEmergencyTripPermitField } from "@/components/tasks/abc-emergency-trip-permit/fields/getErrorStateForEmergencyTripPermitField";
 import { EmergencyTripPermitSteps } from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitSteps";
@@ -11,25 +24,12 @@ import {
   EmergencyTripPermitStepsConfiguration,
   isStepComplete,
 } from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitStepsConfiguration";
-import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { postEmergencyTripPermitApplication } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
-import {
-  EmergencyTripPermitApplicationInfo,
-  EmergencyTripPermitFieldNames,
-  generateNewEmergencyTripPermitData,
-} from "@businessnjgovnavigator/shared";
-import {
-  EmergencyTripPermitFieldErrorState,
-  FieldStateActionKind,
-  ReducedFieldStates,
-  StepperStep,
-} from "@businessnjgovnavigator/shared/types";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext, useState } from "react";
 
 export const EmergencyTripPermit = (): ReactElement => {
   const { Config } = useConfig();

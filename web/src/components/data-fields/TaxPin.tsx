@@ -1,14 +1,14 @@
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { InputAdornment, useMediaQuery } from "@mui/material";
+import { type ReactElement, useContext, useState } from "react";
 import { NumericField } from "@/components/data-fields/NumericField";
-import { ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
+import { type ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptValue } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { InputAdornment, useMediaQuery } from "@mui/material";
-import { ReactElement, useContext, useState } from "react";
 
 export interface Props {
   handleChangeOverride?: (value: string) => void;

@@ -1,7 +1,7 @@
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useContext } from "react";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useContext } from "react";
 
 export interface Props {
   fieldName: ProfileContentField;

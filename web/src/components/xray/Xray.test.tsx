@@ -1,8 +1,3 @@
-import { Xray } from "@/components/xray/Xray";
-import * as api from "@/lib/api-client/apiClient";
-import analytics from "@/lib/utils/analytics";
-import { generateTask, generateXrayRenewalCalendarEvent } from "@/test/factories";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import {
@@ -12,10 +7,15 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { Task, XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
+import type { Task, XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
 import type { Business } from "@businessnjgovnavigator/shared/userData";
 import type { XrayData } from "@businessnjgovnavigator/shared/xray";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { Xray } from "@/components/xray/Xray";
+import * as api from "@/lib/api-client/apiClient";
+import analytics from "@/lib/utils/analytics";
+import { generateTask, generateXrayRenewalCalendarEvent } from "@/test/factories";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   checkXrayRegistrationStatus: jest.fn(),

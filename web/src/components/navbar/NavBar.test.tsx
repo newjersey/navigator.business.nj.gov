@@ -1,8 +1,8 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { render, screen } from "@testing-library/react";
 import { NavBar } from "@/components/navbar/NavBar";
 import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { render, screen } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 

@@ -1,7 +1,7 @@
-import { LearnMiniRoadmap } from "@/components/roadmap/LearnMiniRoadmap";
-import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared";
 import { screen } from "@testing-library/react";
+import { LearnMiniRoadmap } from "@/components/roadmap/LearnMiniRoadmap";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 const Config = getMergedConfig();
 

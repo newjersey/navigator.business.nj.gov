@@ -1,9 +1,9 @@
-import { ContactInformationTab } from "@/components/profile/ContactInformationTab";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { ContactInformationTab } from "@/components/profile/ContactInformationTab";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 

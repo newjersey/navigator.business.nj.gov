@@ -1,4 +1,5 @@
-import React, { Component, createRef, ReactElement } from "react";
+import type React from "react";
+import { Component, createRef, type ReactElement } from "react";
 
 type WriteOnceReadOnlyNoSpaceProps = {
   onChange: (e: string) => void;

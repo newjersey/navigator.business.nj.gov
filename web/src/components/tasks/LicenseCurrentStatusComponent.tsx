@@ -1,19 +1,19 @@
-import { ChecklistTag } from "@/components/ChecklistTag";
-import { HorizontalLine } from "@/components/HorizontalLine";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { Icon } from "@/components/njwds/Icon";
-import { LicenseStatusHeader } from "@/components/tasks/LicenseStatusHeader";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import {
-  LicenseData,
-  LicenseName,
+  type LicenseData,
+  type LicenseName,
+  type LicenseStatusItem,
   licenseSearchDateFormat,
-  LicenseStatusItem,
 } from "@businessnjgovnavigator/shared/license";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { ChecklistTag } from "@/components/ChecklistTag";
+import { HorizontalLine } from "@/components/HorizontalLine";
+import { Icon } from "@/components/njwds/Icon";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { LicenseStatusHeader } from "@/components/tasks/LicenseStatusHeader";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 
 interface Props {
   licenseData?: LicenseData;

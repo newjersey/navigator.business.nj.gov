@@ -1,8 +1,11 @@
+import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import type { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { BusinessFormationStepsConfiguration } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
@@ -15,9 +18,6 @@ import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, templateEval, useMountEffect } from "@/lib/utils/helpers";
-import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement, useContext } from "react";
 
 export const NexusFormationFlow = (): ReactElement => {
   const { business } = useUserData();

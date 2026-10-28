@@ -1,9 +1,9 @@
+import type { FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
+import { type ReactElement, useContext } from "react";
 import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
 import { AddressContext } from "@/contexts/addressContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
-import { FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   onValidation: () => void;

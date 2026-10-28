@@ -1,6 +1,6 @@
+import type { ReactElement, ReactNode } from "react";
 import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { ReactElement, ReactNode } from "react";
 
 interface Props {
   isOpen: boolean;

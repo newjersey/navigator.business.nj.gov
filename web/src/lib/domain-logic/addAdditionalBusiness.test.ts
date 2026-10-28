@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
-import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { CURRENT_VERSION } from "@businessnjgovnavigator/shared/userData";
+import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness";
 
 describe("addAdditionalBusiness", () => {
   it("adds a new empty business to a userData", () => {

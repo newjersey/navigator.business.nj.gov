@@ -1,6 +1,6 @@
+import type { AcceptedFileType, InputFile } from "@businessnjgovnavigator/shared";
+import { type ReactElement, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { flipObject, templateEval } from "@/lib/utils/helpers";
-import { AcceptedFileType, InputFile } from "@businessnjgovnavigator/shared";
-import { ReactElement, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface Props {
   acceptedFileTypes?: {
@@ -52,7 +52,6 @@ export const FileInput = ({
   value,
   onChange,
 }: Props): ReactElement => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const fileInput = require("../../../../node_modules/@uswds/uswds/packages/usa-file-input/src");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const size = maxFileSize?.maxSizeInMegabytes
@@ -81,8 +80,7 @@ export const FileInput = ({
       const uploadedFile = e.target.files[0];
       const reader = new FileReader();
 
-      // eslint-disable-next-line unicorn/prefer-add-event-listener
-      reader.onload = function (event: ProgressEvent<FileReader>): void {
+      reader.onload = (event: ProgressEvent<FileReader>): void => {
         if (!event.target?.result) {
           return;
         }
@@ -138,7 +136,7 @@ export const FileInput = ({
     if (typeof fileInput.on === "function" && typeof fileInput.off === "function") {
       fileInput.on(fileInputElement); // initialize USWDS fileInput component
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const addPreviouslyUploadedFile = (): void => {
     const fileInputElement = fileInputRef.current;
@@ -154,7 +152,6 @@ export const FileInput = ({
         dT.items.add(file);
         fileInputElement.files = dT.files;
         // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         fileInputElement.dispatchEvent(new Event("change", { target: { files: [file] } }));
       }
@@ -163,7 +160,7 @@ export const FileInput = ({
 
   useEffect(() => {
     addPreviouslyUploadedFile();
-  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
     <>

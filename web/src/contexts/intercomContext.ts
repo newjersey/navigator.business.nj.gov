@@ -1,5 +1,5 @@
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import type { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
+import type { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { createContext } from "react";
 
 export interface IntercomContextType {

@@ -1,11 +1,18 @@
-/* eslint-disable @next/next/next-script-for-ga */
 // organize-imports-ignore
-import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
-import { IntercomScript } from "@/components/IntercomScript";
-import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 
+import type {
+  BusinessPersona,
+  OperatingPhaseId,
+  RegistrationStatus,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
+import { StyledEngineProvider, ThemeProvider } from "@mui/material";
+import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
+import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { RemoveBusinessModal } from "@/components/dashboard/RemoveBusinessModal";
+import { IntercomScript } from "@/components/IntercomScript";
 import { AuthContext, initialState } from "@/contexts/authContext";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { IntercomContext } from "@/contexts/intercomContext";
@@ -14,7 +21,6 @@ import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
-import { UpdateQueue } from "@/lib/UpdateQueue";
 import { authReducer } from "@/lib/auth/AuthContext";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
@@ -22,26 +28,19 @@ import { UserDataProvider } from "@/lib/data-hooks/UserDataProvider";
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import MuiTheme from "@/lib/muiTheme";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
+import type { UpdateQueue } from "@/lib/UpdateQueue";
 import analytics, { GTM_ID } from "@/lib/utils/analytics";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import {
-  BusinessPersona,
-  OperatingPhaseId,
-  RegistrationStatus,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
-import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
 import { Hub, type HubCapsule } from "aws-amplify/utils";
-import { DefaultSeo } from "next-seo";
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import { useRouter } from "next/compat/router";
 import Head from "next/head";
 import Script from "next/script";
-import { ReactElement, useEffect, useReducer, useState } from "react";
-import { Cache, SWRConfig } from "swr";
+import { DefaultSeo } from "next-seo";
+import { type ReactElement, useEffect, useReducer, useState } from "react";
+import { type Cache, SWRConfig } from "swr";
 import "../styles/main.scss";
 
 const createSWRCache = (): Cache<unknown> => new Map();
@@ -142,7 +141,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   Hub.listen("auth", listener);
 
   useMountEffectWhenDefined(() => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setOnLoadDimensions(updateQueue!.current());
   }, updateQueue?.current);
 

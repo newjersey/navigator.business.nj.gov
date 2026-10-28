@@ -1,6 +1,6 @@
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 export const EmptyCalendar = (): ReactElement => {
   const { Config } = useConfig();

@@ -1,5 +1,24 @@
+import {
+  createEmptyUser,
+  createEmptyUserData,
+  generateMunicipality,
+  generateProfileData,
+  generateUserData,
+  LookupIndustryById,
+  type ProfileData,
+  type UserData,
+} from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  generateBusiness,
+  generateUser,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import { act, screen, waitFor, within } from "@testing-library/react";
 import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -12,25 +31,6 @@ import {
   mockSuccessfulApiSignups,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import {
-  createEmptyUser,
-  createEmptyUserData,
-  generateMunicipality,
-  generateProfileData,
-  generateUserData,
-  LookupIndustryById,
-  ProfileData,
-  UserData,
-} from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
-import {
-  generateBusiness,
-  generateUser,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
-import { act, screen, waitFor, within } from "@testing-library/react";
-import analytics from "@/lib/utils/analytics";
 
 function setupMockAnalytics(): typeof analytics {
   return {

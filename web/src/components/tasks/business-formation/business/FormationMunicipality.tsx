@@ -1,9 +1,9 @@
+import type { Municipality } from "@businessnjgovnavigator/shared/";
+import { type ReactElement, useContext } from "react";
 import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { Municipality } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext } from "react";
 
 export const FormationMunicipality = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);

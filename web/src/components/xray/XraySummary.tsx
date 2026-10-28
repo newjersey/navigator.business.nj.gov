@@ -1,17 +1,16 @@
-import { HorizontalLine } from "@/components/HorizontalLine";
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
-import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
-import { XrayStatusHeader } from "@/components/xray/XrayStatusHeader";
-
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { templateEval } from "@/lib/utils/helpers";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import type { XrayData, XrayRegistrationStatus } from "@businessnjgovnavigator/shared/xray";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { HorizontalLine } from "@/components/HorizontalLine";
+import { Icon } from "@/components/njwds/Icon";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
+import { XrayStatusHeader } from "@/components/xray/XrayStatusHeader";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { templateEval } from "@/lib/utils/helpers";
 
 interface Props {
   xrayRegistrationData: XrayData;

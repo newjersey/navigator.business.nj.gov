@@ -1,13 +1,14 @@
+import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
+import { isUndefined } from "lodash";
+import type React from "react";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
-import { isUndefined } from "lodash";
-import React, { ReactElement } from "react";
 
 interface Content {
   dataTestId: string;
@@ -37,7 +38,7 @@ export const PassengerTransportCdlResult = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const handleEditClick = (): void => {
-    updateQueue?.queueTaskProgress({ ["passenger-transport-cdl"]: "TO_DO" });
+    updateQueue?.queueTaskProgress({ "passenger-transport-cdl": "TO_DO" });
     props.setSchoolBusRadioValue(business?.roadmapTaskData?.passengerTransportSchoolBus);
     props.setPassengersRadioValue(
       business?.roadmapTaskData?.passengerTransportSixteenOrMorePassengers,

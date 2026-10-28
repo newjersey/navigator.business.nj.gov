@@ -1,9 +1,9 @@
-import { Heading } from "@/components/njwds-extended/Heading";
-import { PrimaryButton, PrimaryButtonColors } from "@/components/njwds-extended/PrimaryButton";
-import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { PrimaryButton, type PrimaryButtonColors } from "@/components/njwds-extended/PrimaryButton";
+import { MediaQueries } from "@/lib/PageSizes";
 
 interface Props {
   borderColor: string;

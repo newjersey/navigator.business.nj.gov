@@ -1,13 +1,12 @@
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { loadXrayRenewalCalendarEvent } from "@businessnjgovnavigator/shared/static";
+import type { XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
+import type { GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
+import type { ReactElement } from "react";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { Xray } from "@/components/xray/Xray";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { loadXrayRenewalCalendarEvent } from "@businessnjgovnavigator/shared/static";
-import { XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
-
-import { GetStaticPropsResult } from "next";
-import { NextSeo } from "next-seo";
-import { ReactElement } from "react";
 
 interface Props {
   renewal: XrayRenewalCalendarEventType;

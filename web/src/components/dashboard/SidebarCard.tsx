@@ -1,10 +1,10 @@
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
+import type { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { SidebarCardFormationNudge } from "@/components/dashboard/SidebarCardFormationNudge";
 import { SidebarCardFundingNudge } from "@/components/dashboard/SidebarCardFundingNudge";
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { rswitch } from "@/lib/utils/helpers";
-import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
-import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 type Props = {
   card: SidebarCardContent;

@@ -1,9 +1,9 @@
+import type { ReactElement } from "react";
 import {
   SidebarPageLayout,
-  SidebarPageLayoutProps,
+  type SidebarPageLayoutProps,
 } from "@/components/njwds-layout/SidebarPageLayout";
 import { LearnMiniRoadmap } from "@/components/roadmap/LearnMiniRoadmap";
-import { ReactElement } from "react";
 
 interface Props extends Omit<SidebarPageLayoutProps, "navChildren"> {
   taskId: string | undefined;

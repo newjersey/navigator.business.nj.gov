@@ -1,3 +1,7 @@
+import type * as types from "@businessnjgovnavigator/shared/types";
+import { useMediaQuery } from "@mui/material";
+import Link from "next/link";
+import { type ReactElement, type ReactNode, useContext } from "react";
 import { Content } from "@/components/Content";
 import { taskIdsWithLicenseSearchEnabled } from "@/components/TaskPageSwitchComponent";
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
@@ -7,10 +11,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import * as types from "@businessnjgovnavigator/shared/types";
-import { useMediaQuery } from "@mui/material";
-import Link from "next/link";
-import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   task: types.Task;

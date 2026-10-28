@@ -1,5 +1,7 @@
+import type { RegistrationStatus } from "@businessnjgovnavigator/shared/";
+import { type ReactElement, useContext, useEffect } from "react";
 import { Content } from "@/components/Content";
-import { AlertVariant } from "@/components/njwds-extended/Alert";
+import type { AlertVariant } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { AuthContext } from "@/contexts/authContext";
@@ -7,8 +9,6 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext, useEffect } from "react";
 
 export const RegistrationStatusSnackbar = (): ReactElement => {
   const { isAuthenticated, registrationStatus, setRegistrationStatus } =

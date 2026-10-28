@@ -1,26 +1,26 @@
-import * as api from "@/lib/api-client/apiClient";
-import { AuthAction } from "@/lib/auth/AuthContext";
-import * as session from "@/lib/auth/sessionHelper";
-import {
-  onGuestSignIn,
-  onSelfRegister,
-  onSignIn,
-  onSignOut,
-  SelfRegRouter,
-} from "@/lib/auth/signinHelper";
-import { ROUTES } from "@/lib/domain-logic/routes";
-import * as AccountLinkingErrorStorage from "@/lib/storage/AccountLinkingErrorStorage";
-import * as UserDataStorage from "@/lib/storage/UserDataStorage";
-import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
-import { generateActiveUser } from "@/test/factories";
-import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
-import { generateUser, generateUserData, UserData } from "@businessnjgovnavigator/shared";
+import { generateUser, generateUserData, type UserData } from "@businessnjgovnavigator/shared";
 import {
   generateBusiness,
   generatePreferences,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { waitFor } from "@testing-library/react";
+import * as api from "@/lib/api-client/apiClient";
+import type { AuthAction } from "@/lib/auth/AuthContext";
+import * as session from "@/lib/auth/sessionHelper";
+import {
+  onGuestSignIn,
+  onSelfRegister,
+  onSignIn,
+  onSignOut,
+  type SelfRegRouter,
+} from "@/lib/auth/signinHelper";
+import { ROUTES } from "@/lib/domain-logic/routes";
+import * as AccountLinkingErrorStorage from "@/lib/storage/AccountLinkingErrorStorage";
+import * as UserDataStorage from "@/lib/storage/UserDataStorage";
+import { type UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
+import { generateActiveUser } from "@/test/factories";
+import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
 
 const mockGetCurrentUserData = jest.fn();
 const mockDelete = jest.fn();

@@ -1,5 +1,5 @@
+import type { ReactElement, ReactNode } from "react";
 import { Icon } from "@/components/njwds/Icon";
-import { ReactElement, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;

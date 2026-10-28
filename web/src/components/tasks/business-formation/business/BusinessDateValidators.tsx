@@ -1,12 +1,12 @@
 import {
   defaultDateDelimiter,
   defaultDateFormat,
-  FormationLegalType,
+  type FormationLegalType,
   getCurrentDateInNewJersey,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import dayjs from "dayjs";
+import type dayjs from "dayjs";
 
 export const isDateValid = (value?: string): boolean => {
   if (!value) return false;

@@ -1,3 +1,5 @@
+import { Checkbox } from "@mui/material";
+import { type ChangeEvent, type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -6,9 +8,6 @@ import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-
-import { Checkbox } from "@mui/material";
-import { ChangeEvent, ReactElement, useContext } from "react";
 
 interface Props {
   CMS_ONLY_show_error?: boolean;
@@ -54,7 +53,7 @@ export const CigaretteSignatures = (props: Props): ReactElement => {
             <GenericTextField
               inputWidth="full"
               value={state.signerName || ""}
-              onValidation={(fieldName, invalid) => setIsSignerNameValid(!invalid)}
+              onValidation={(_fieldName, invalid) => setIsSignerNameValid(!invalid)}
               error={props.CMS_ONLY_show_error || isSignerNameValid}
               validationText={Config.cigaretteLicenseStep4.signerNameErrorText}
               handleChange={(val) => handleChange(val, "signerName")}
@@ -75,7 +74,7 @@ export const CigaretteSignatures = (props: Props): ReactElement => {
             <GenericTextField
               inputWidth="full"
               value={state.signerRelationship || ""}
-              onValidation={(fieldName, invalid) => setIsSignerRelationshipValid(!invalid)}
+              onValidation={(_fieldName, invalid) => setIsSignerRelationshipValid(!invalid)}
               error={props.CMS_ONLY_show_error || isSignerRelationshipValid}
               validationText={Config.cigaretteLicenseStep4.signerRelationshipErrorText}
               handleChange={(val) => handleChange(val, "signerRelationship")}

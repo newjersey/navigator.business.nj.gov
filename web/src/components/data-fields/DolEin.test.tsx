@@ -1,13 +1,16 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { screen } from "@testing-library/react";
-import { DolEin } from "@/components/data-fields/DolEin";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { generateProfileData } from "@businessnjgovnavigator/shared/test/factories";
-import { formatDolEin } from "@/lib/domain-logic/formatDolEin";
-import userEvent from "@testing-library/user-event";
-import * as api from "@/lib/api-client/apiClient";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  createEmptyProfileData,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
+import { generateProfileData } from "@businessnjgovnavigator/shared/test/factories";
+import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { DolEin } from "@/components/data-fields/DolEin";
+import * as api from "@/lib/api-client/apiClient";
+import { formatDolEin } from "@/lib/domain-logic/formatDolEin";
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   decryptValue: jest.fn(),

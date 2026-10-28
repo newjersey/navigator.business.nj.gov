@@ -1,5 +1,5 @@
-import { Heading } from "@/components/njwds-extended/Heading";
 import { render, screen } from "@testing-library/react";
+import { Heading } from "@/components/njwds-extended/Heading";
 
 describe("Heading component", () => {
   const sampleHeadingText = "Hello, navigator!";

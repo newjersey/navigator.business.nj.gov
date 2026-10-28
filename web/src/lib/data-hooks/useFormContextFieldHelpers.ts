@@ -1,10 +1,10 @@
-import { useMountEffect } from "@/lib/utils/helpers";
 import {
-  FieldErrorType,
+  type FieldErrorType,
   FieldStateActionKind,
-  FormContextType,
+  type FormContextType,
 } from "@businessnjgovnavigator/shared/types";
-import { Context, useContext, useEffect, useMemo } from "react";
+import { type Context, useContext, useEffect, useMemo } from "react";
+import { useMountEffect } from "@/lib/utils/helpers";
 
 const debug = false;
 
@@ -19,16 +19,12 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
 } => {
   if (!context) {
     return {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      RegisterForOnSubmit: (isValidFunc: () => boolean): void => {},
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      setIsValid: (isValid: boolean): void => {},
+      RegisterForOnSubmit: (_isValidFunc: () => boolean): void => {},
+      setIsValid: (_isValid: boolean): void => {},
       isFormFieldInvalid: false,
     };
   }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { runValidations, fieldStates, reducer } = useContext(context);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const RegisterForOnSubmit = (
     isValidFunc: () => boolean,
     preventRefreshWhenUnmounted?: boolean,
@@ -58,7 +54,6 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
           type: FieldStateActionKind.VALIDATION,
           payload: { field: fieldName, invalid: !isValidFunc(), errorTypes },
         });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [runValidations]);
   };
 
@@ -70,14 +65,9 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
     });
   };
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const isFormFieldInvalid = useMemo(
-    () => {
-      return fieldStates[fieldName].invalid === true;
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [fieldStates[fieldName].invalid],
-  );
+  const isFormFieldInvalid = useMemo(() => {
+    return fieldStates[fieldName].invalid === true;
+  }, [fieldStates[fieldName].invalid]);
 
   return {
     RegisterForOnSubmit,

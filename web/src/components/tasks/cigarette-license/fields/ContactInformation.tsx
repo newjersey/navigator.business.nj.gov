@@ -1,3 +1,5 @@
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -6,8 +8,6 @@ import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getPhoneNumberFormat } from "@/lib/utils/helpers";
-import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   CMS_ONLY_show_error?: boolean;
@@ -53,7 +53,7 @@ export const ContactInformation = (props: Props): ReactElement => {
             <GenericTextField
               fieldName="contactName"
               handleChange={(val) => handleChange(val, "contactName")}
-              onValidation={(fieldName, invalid) => setIsContactNameValid(!invalid)}
+              onValidation={(_fieldName, invalid) => setIsContactNameValid(!invalid)}
               error={props.CMS_ONLY_show_error || isContactNameValid}
               validationText={Config.cigaretteLicenseStep2.fields.contactName.errorRequiredText}
               required={true}
@@ -70,7 +70,7 @@ export const ContactInformation = (props: Props): ReactElement => {
             <GenericTextField
               fieldName="contactPhoneNumber"
               handleChange={(val) => handleChange(val, "contactPhoneNumber")}
-              onValidation={(fieldName, invalid) => setIsContactPhoneNumberValid(!invalid)}
+              onValidation={(_fieldName, invalid) => setIsContactPhoneNumberValid(!invalid)}
               error={props.CMS_ONLY_show_error || isContactPhoneNumberValid}
               validationText={
                 Config.cigaretteLicenseStep2.fields.contactPhoneNumber.errorRequiredText
@@ -100,7 +100,7 @@ export const ContactInformation = (props: Props): ReactElement => {
           <GenericTextField
             fieldName="contactEmail"
             handleChange={(val) => handleChange(val, "contactEmail")}
-            onValidation={(fieldName, invalid) => setIsContactEmailValid(!invalid)}
+            onValidation={(_fieldName, invalid) => setIsContactEmailValid(!invalid)}
             additionalValidationIsValid={validateEmail}
             error={props.CMS_ONLY_show_error || isContactEmailValid}
             validationText={Config.cigaretteLicenseStep2.fields.contactEmail.errorRequiredText}

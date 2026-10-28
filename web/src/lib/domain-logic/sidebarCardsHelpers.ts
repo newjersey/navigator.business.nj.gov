@@ -1,16 +1,16 @@
-import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { arrayOfOwnershipTypes } from "@businessnjgovnavigator/shared/ownership";
 import {
-  Certification,
-  County,
+  type Certification,
+  type County,
   defaultMarkdownDateFormat,
-  Funding,
+  type Funding,
   FundingStatusOrder,
-  SidebarCardContent,
+  type SidebarCardContent,
 } from "@businessnjgovnavigator/shared/types";
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 
 export const sortCertifications = (certifications: Certification[]): Certification[] => {
   return certifications.sort((a, b) => {
@@ -156,7 +156,7 @@ export const filterFundings = ({
     if (
       business.profileData.existingEmployees &&
       it.employeesRequired &&
-      Number.parseInt(business.profileData.existingEmployees) === 0 &&
+      Number.parseInt(business.profileData.existingEmployees, 10) === 0 &&
       it.employeesRequired !== "n/a"
     ) {
       return false;
@@ -193,7 +193,7 @@ export const filterFundings = ({
       if (
         it.maxEmployeesRequired &&
         business.profileData.existingEmployees &&
-        Number.parseInt(business.profileData.existingEmployees) > it.maxEmployeesRequired
+        Number.parseInt(business.profileData.existingEmployees, 10) > it.maxEmployeesRequired
       ) {
         return false;
       }
@@ -201,7 +201,7 @@ export const filterFundings = ({
       if (
         it.minEmployeesRequired &&
         business.profileData.existingEmployees &&
-        Number.parseInt(business.profileData.existingEmployees) < it.minEmployeesRequired
+        Number.parseInt(business.profileData.existingEmployees, 10) < it.minEmployeesRequired
       ) {
         return false;
       }
@@ -225,7 +225,7 @@ export const filterCertifications = ({
     let allowedCertification = true;
 
     if (
-      !!it.applicableOwnershipTypes &&
+      it.applicableOwnershipTypes &&
       it.applicableOwnershipTypes.length > 0 &&
       business.profileData.ownershipTypeIds.length > 0
     ) {

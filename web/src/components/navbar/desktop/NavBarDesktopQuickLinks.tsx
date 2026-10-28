@@ -1,8 +1,8 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import type { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { openInNewTab } from "@/lib/utils/helpers";
-import { ReactElement } from "react";
 
 export const NavBarDesktopQuickLinks = (): ReactElement => {
   const { Config } = useConfig();

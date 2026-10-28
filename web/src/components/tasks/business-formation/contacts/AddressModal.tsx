@@ -1,4 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import type {
+  FormationIncorporator,
+  FormationMember,
+  StateObject,
+} from "@businessnjgovnavigator/shared";
+import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { type ReactElement, useEffect, useState } from "react";
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
@@ -9,14 +16,6 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval } from "@/lib/utils/helpers";
-import {
-  FormationIncorporator,
-  FormationMember,
-  StateObject,
-} from "@businessnjgovnavigator/shared";
-import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import { ReactElement, useEffect, useState } from "react";
 
 interface DisplayContent {
   modalTitle: string;
@@ -90,7 +89,6 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
         label = params.labelWhenMissing;
       } else if (isTooLong) {
         label = templateEval(Config.formation.general.maximumLengthErrorText, {
-          // // eslint-disable-next-line @typescript-eslint/no-explicit-any
           field: (Config.formation.addressModal as any)[params.dataField].label,
           maxLen: params.maxLen.toString(),
         });
@@ -169,7 +167,6 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       setAddressData({ ...props.addressData[props.index] });
       setAddressErrorMap(createAddressErrorMap(false));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
 
   const checkBoxCheck = (checked: boolean): void => {
@@ -254,7 +251,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
         </div>
         <div data-testid={`${props.fieldName}-address-modal`}>
           <WithErrorBar
-            hasError={!!addressErrorMap["addressName"].invalid}
+            hasError={!!addressErrorMap.addressName.invalid}
             type="ALWAYS"
             className="margin-bottom-2"
           >
@@ -269,9 +266,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                   return { ...prevAddressData, name: value };
                 });
               }}
-              error={addressErrorMap["addressName"].invalid}
+              error={addressErrorMap.addressName.invalid}
               onValidation={onValidation}
-              validationText={addressErrorMap["addressName"].label}
+              validationText={addressErrorMap.addressName.label}
               fieldName="addressName"
               required
               autoComplete="name"
@@ -294,7 +291,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             <div className={"padding-top-2"} />
           )}
           <WithErrorBar
-            hasError={!!addressErrorMap["addressLine1"].invalid}
+            hasError={!!addressErrorMap.addressLine1.invalid}
             type="ALWAYS"
             className="margin-bottom-2"
           >
@@ -310,16 +307,16 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                   return { ...prevAddressData, addressLine1: value };
                 });
               }}
-              error={addressErrorMap["addressLine1"].invalid}
+              error={addressErrorMap.addressLine1.invalid}
               onValidation={onValidation}
               autoComplete="address-line1"
-              validationText={addressErrorMap["addressLine1"].label}
+              validationText={addressErrorMap.addressLine1.label}
               disabled={shouldBeDisabled("addressLine1")}
               required
             />
           </WithErrorBar>
           <WithErrorBar
-            hasError={!!addressErrorMap["addressLine2"].invalid}
+            hasError={!!addressErrorMap.addressLine2.invalid}
             type="ALWAYS"
             className="margin-bottom-2"
           >
@@ -331,8 +328,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               inputWidth="full"
               fieldName="addressLine2"
               value={addressData.addressLine2}
-              error={addressErrorMap["addressLine2"].invalid}
-              validationText={addressErrorMap["addressLine2"].label}
+              error={addressErrorMap.addressLine2.invalid}
+              validationText={addressErrorMap.addressLine2.label}
               onValidation={onValidation}
               disabled={useDefaultAddress}
               autoComplete="address-line2"
@@ -345,18 +342,15 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           </WithErrorBar>
           <WithErrorBar
             hasError={
-              !!addressErrorMap["addressCity"].invalid ||
-              !!addressErrorMap["addressState"].invalid ||
-              !!addressErrorMap["addressZipCode"].invalid
+              !!addressErrorMap.addressCity.invalid ||
+              !!addressErrorMap.addressState.invalid ||
+              !!addressErrorMap.addressZipCode.invalid
             }
             type="DESKTOP-ONLY"
           >
             <div className="grid-row grid-gap-1">
               <div className="grid-col-12 tablet:grid-col-6">
-                <WithErrorBar
-                  hasError={!!addressErrorMap["addressCity"].invalid}
-                  type="MOBILE-ONLY"
-                >
+                <WithErrorBar hasError={!!addressErrorMap.addressCity.invalid} type="MOBILE-ONLY">
                   <strong>
                     <ModifiedContent>
                       {Config.formation.addressModal.addressCity.label}
@@ -374,17 +368,17 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                         return { ...prevAddressData, addressCity: value };
                       });
                     }}
-                    error={addressErrorMap["addressCity"].invalid}
+                    error={addressErrorMap.addressCity.invalid}
                     onValidation={onValidation}
-                    validationText={addressErrorMap["addressCity"].label}
+                    validationText={addressErrorMap.addressCity.label}
                   />
                 </WithErrorBar>
               </div>
               <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
                 <WithErrorBar
                   hasError={
-                    !!addressErrorMap["addressState"].invalid ||
-                    !!addressErrorMap["addressZipCode"].invalid
+                    !!addressErrorMap.addressState.invalid ||
+                    !!addressErrorMap.addressZipCode.invalid
                   }
                   type="MOBILE-ONLY"
                 >
@@ -398,13 +392,13 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                       <StateDropdown
                         fieldName="addressState"
                         value={addressData.addressState?.name ?? ""}
-                        validationText={addressErrorMap["addressState"].label}
+                        validationText={addressErrorMap.addressState.label}
                         onSelect={(value: StateObject | undefined): void => {
                           setAddressData((prevAddressData) => {
                             return { ...prevAddressData, addressState: value };
                           });
                         }}
-                        error={addressErrorMap["addressState"].invalid}
+                        error={addressErrorMap.addressState.invalid}
                         autoComplete
                         disabled={shouldBeDisabled("addressState")}
                         onValidation={onValidation}
@@ -426,14 +420,14 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                         disabled={shouldBeDisabled("addressZipCode")}
                         fieldName={"addressZipCode"}
                         autoComplete="postal-code"
-                        error={addressErrorMap["addressZipCode"].invalid}
+                        error={addressErrorMap.addressZipCode.invalid}
                         handleChange={(value: string): void => {
                           setAddressData((prevAddressData) => {
                             return { ...prevAddressData, addressZipCode: value };
                           });
                         }}
                         value={addressData.addressZipCode}
-                        validationText={addressErrorMap["addressZipCode"].label}
+                        validationText={addressErrorMap.addressZipCode.label}
                         onValidation={onValidation}
                         required
                       />

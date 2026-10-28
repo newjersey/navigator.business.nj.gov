@@ -1,6 +1,3 @@
-/* eslint-disable cypress/no-unnecessary-waiting */
-/* eslint-disable testing-library/await-async-utils */
-
 import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
   completeExistingBusinessOnboarding,
@@ -22,7 +19,6 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.viewport(size[0], size[1]);
       } else {
         // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         cy.viewport(size);
       }

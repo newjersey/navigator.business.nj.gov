@@ -1,10 +1,10 @@
+import type { Certification } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { CertificationElement } from "@/pages/certification/[certificationUrlSlug]";
-import { Certification } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 const CertificationsPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);

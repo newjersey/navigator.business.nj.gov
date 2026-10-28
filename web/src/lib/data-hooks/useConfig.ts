@@ -1,4 +1,4 @@
-import { ConfigContext, ConfigType } from "@businessnjgovnavigator/shared";
+import { ConfigContext, type ConfigType } from "@businessnjgovnavigator/shared";
 import { useContext } from "react";
 
 export const useConfig = (): { Config: ConfigType } => {

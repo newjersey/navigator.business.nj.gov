@@ -1,5 +1,5 @@
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
-import { ReactElement } from "react";
 
 interface Props {
   text: string;

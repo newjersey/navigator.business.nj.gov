@@ -1,3 +1,4 @@
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
@@ -10,7 +11,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;

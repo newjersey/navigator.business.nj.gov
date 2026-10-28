@@ -1,9 +1,10 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import type { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import type React from "react";
+import { type ReactElement, useEffect, useState } from "react";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
-import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 

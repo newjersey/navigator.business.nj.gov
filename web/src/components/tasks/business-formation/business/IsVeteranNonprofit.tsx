@@ -1,7 +1,7 @@
+import { type ReactElement, useContext } from "react";
 import { FormationRadio } from "@/components/tasks/business-formation/business/FormationRadio";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext } from "react";
 
 export const IsVeteranNonprofit = (): ReactElement => {
   const { Config } = useConfig();

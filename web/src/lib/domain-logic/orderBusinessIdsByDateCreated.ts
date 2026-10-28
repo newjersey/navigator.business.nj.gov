@@ -1,4 +1,4 @@
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
 
 export const orderBusinessIdsByDateCreated = (userData: UserData): string[] => {
   return Object.keys(userData.businesses).sort((id1, id2) =>

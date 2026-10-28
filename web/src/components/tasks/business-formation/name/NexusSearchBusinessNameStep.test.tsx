@@ -1,25 +1,25 @@
+import {
+  castPublicFilingLegalTypeToFormationType,
+  type FormationData,
+  generateBusiness,
+  generateFormationFormData,
+  type ProfileData,
+  type PublicFilingLegalType,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { generateBusinessNameAvailability } from "@businessnjgovnavigator/shared/test";
+import type * as materialUi from "@mui/material";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import analytics from "@/lib/utils/analytics";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
-  FormationPageHelpers,
+  type FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { dbaInputField } from "@/test/helpers/helpersSearchBusinessName";
 import { currentBusiness, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
-import {
-  castPublicFilingLegalTypeToFormationType,
-  FormationData,
-  generateBusiness,
-  generateFormationFormData,
-  ProfileData,
-  PublicFilingLegalType,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { generateBusinessNameAvailability } from "@businessnjgovnavigator/shared/test";
-import * as materialUi from "@mui/material";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

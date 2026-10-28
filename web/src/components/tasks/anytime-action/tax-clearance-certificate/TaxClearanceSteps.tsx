@@ -1,3 +1,6 @@
+import type { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
+import type { StepperStep } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useContext, useEffect, useState } from "react";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { AnytimeActionTaxClearanceCertificateAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateAlert";
 import { isAnyRequiredFieldEmpty } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
@@ -12,9 +15,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
-import { StepperStep } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useContext, useEffect, useState } from "react";
 
 interface Props {
   certificatePdfBlob?: Blob;

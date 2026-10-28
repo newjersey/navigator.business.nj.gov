@@ -1,8 +1,8 @@
-import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
-import { CigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import type { CigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { LookupMunicipalityByName } from "@businessnjgovnavigator/shared/municipality";
-import { StateObject } from "@businessnjgovnavigator/shared/states";
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import type { StateObject } from "@businessnjgovnavigator/shared/states";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
 
 export const getInitialTaxId = (business: Business | undefined): string => {
   return business?.cigaretteLicenseData?.taxId || business?.profileData.taxId || "";

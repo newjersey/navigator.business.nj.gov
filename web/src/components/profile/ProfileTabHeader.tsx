@@ -1,8 +1,8 @@
+import type { ProfileTabs } from "@businessnjgovnavigator/shared/types";
+import { forwardRef, type ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileTabSubText } from "@/components/profile/ProfileTabSubText";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, forwardRef } from "react";
 
 interface Props {
   tab: ProfileTabs;

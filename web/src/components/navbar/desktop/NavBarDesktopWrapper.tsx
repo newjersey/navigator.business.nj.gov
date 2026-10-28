@@ -1,6 +1,6 @@
+import type { ReactElement, ReactNode } from "react";
 import { OutageAlertBar } from "@/components/OutageAlertBar";
 import { NAVBAR_WRAPPER_DESKTOP_ID } from "@/lib/utils/helpers";
-import { ReactElement, ReactNode } from "react";
 
 interface NavBarDesktopWrapperProps {
   children: ReactNode;

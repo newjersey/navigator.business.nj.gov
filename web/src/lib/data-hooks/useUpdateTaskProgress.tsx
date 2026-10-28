@@ -1,5 +1,5 @@
+import type { TaskProgress } from "@businessnjgovnavigator/shared";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { TaskProgress } from "@businessnjgovnavigator/shared";
 
 export const useUpdateTaskProgress = (): {
   queueUpdateTaskProgress: (taskId: string, newValue: TaskProgress) => void;

@@ -1,18 +1,18 @@
-import { HorizontalLine } from "@/components/HorizontalLine";
-import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { toProperCase } from "@businessnjgovnavigator/shared";
 import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import {
+import type {
   ElevatorSafetyAddress,
   ElevatorSafetyRegistrationSummary,
 } from "@businessnjgovnavigator/shared/elevatorSafety";
-import { Task } from "@businessnjgovnavigator/shared/types";
+import type { Task } from "@businessnjgovnavigator/shared/types";
 import { Box } from "@mui/material";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { HorizontalLine } from "@/components/HorizontalLine";
+import { Icon } from "@/components/njwds/Icon";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 
 interface Props {
   task: Task;

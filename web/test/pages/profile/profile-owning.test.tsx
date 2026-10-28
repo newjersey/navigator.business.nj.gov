@@ -1,18 +1,7 @@
-/* eslint-disable jest/expect-expect */
-import * as api from "@/lib/api-client/apiClient";
-import { ROUTES } from "@/lib/domain-logic/routes";
-import { templateEval } from "@/lib/utils/helpers";
-import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
-import * as mockRouter from "@/test/mock/mockRouter";
-import { useMockRouter } from "@/test/mock/mockRouter";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
-  currentBusiness,
-  currentUserData,
-  setupStatefulUserDataContext,
-} from "@/test/mock/withStatefulUserData";
-import {
-  Business,
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+  type Business,
   defaultDateFormat,
   emptyAddressData,
   generateFormationData,
@@ -23,13 +12,24 @@ import {
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   randomInt,
-  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
-  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
 } from "@businessnjgovnavigator/shared";
+import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateTaxFilingData, randomLegalStructure } from "@businessnjgovnavigator/shared/test";
-
-import analytics from "@/lib/utils/analytics";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
+import * as api from "@/lib/api-client/apiClient";
+import { ROUTES } from "@/lib/domain-logic/routes";
+import type analytics from "@/lib/utils/analytics";
+import { templateEval } from "@/lib/utils/helpers";
+import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
+import * as mockRouter from "@/test/mock/mockRouter";
+import { useMockRouter } from "@/test/mock/mockRouter";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import {
+  currentBusiness,
+  currentUserData,
+  setupStatefulUserDataContext,
+} from "@/test/mock/withStatefulUserData";
 import {
   chooseRadio,
   chooseTab,
@@ -49,8 +49,6 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
-import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
 const Config = getMergedConfig();

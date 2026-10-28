@@ -1,5 +1,5 @@
-import { Alert } from "@/components/njwds-extended/Alert";
 import { render, screen } from "@testing-library/react";
+import { Alert } from "@/components/njwds-extended/Alert";
 
 describe("Alert", () => {
   it("warning with heading displays correctly", () => {

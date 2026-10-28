@@ -1,6 +1,6 @@
+import type { ReactElement } from "react";
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { ReactElement } from "react";
 
 export type ShowHideStatus = "text-view" | "password-view";
 

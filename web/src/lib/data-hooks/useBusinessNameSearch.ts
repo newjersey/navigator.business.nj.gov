@@ -1,11 +1,11 @@
+import type { NameAvailability } from "@businessnjgovnavigator/shared/";
+import type { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
+import { type FormEvent, useContext, useState } from "react";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { NameAvailability } from "@businessnjgovnavigator/shared/";
-import { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
-import { FormEvent, useContext, useState } from "react";
 
 export const useBusinessNameSearch = ({
   isBusinessFormation,

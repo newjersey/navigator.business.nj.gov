@@ -1,4 +1,14 @@
-import { SidebarCardsList, SidebarCardsListProps } from "@/components/dashboard/SidebarCardsList";
+import { generateUser, OperatingPhaseId, OperatingPhases } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileData";
+import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
+import type * as materialUi from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import { render, screen } from "@testing-library/react";
+import {
+  SidebarCardsList,
+  type SidebarCardsListProps,
+} from "@/components/dashboard/SidebarCardsList";
 import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { removeMarkdownFormatting } from "@/lib/utils/helpers";
 import {
@@ -7,13 +17,6 @@ import {
   generateSidebarCardContent,
 } from "@/test/factories";
 import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
-import { OperatingPhaseId, OperatingPhases, generateUser } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileData";
-import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
-import * as materialUi from "@mui/material";
-import { useMediaQuery } from "@mui/material";
-import { render, screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

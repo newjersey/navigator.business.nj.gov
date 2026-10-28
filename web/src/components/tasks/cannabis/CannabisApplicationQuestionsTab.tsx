@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
@@ -7,8 +8,7 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { MicrobusinessRadioQuestion } from "@/components/tasks/cannabis/MicrobusinessRadioQuestion";
 import { PriorityStatusCheckboxes } from "@/components/tasks/cannabis/PriorityStatusCheckboxes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { ReactElement } from "react";
+import type { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
 
 interface Props {
   onNextTab: () => void;

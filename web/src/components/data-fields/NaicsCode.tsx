@@ -1,3 +1,6 @@
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { type ReactElement, useContext, useMemo } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { Icon } from "@/components/njwds/Icon";
@@ -8,9 +11,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement, useContext, useMemo } from "react";
 
 export const NaicsCode = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);

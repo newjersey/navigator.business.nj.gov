@@ -1,18 +1,17 @@
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { LicenseElement } from "@/components/tasks/license-calendar-event/LicenseCalendarEventElement";
-import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-
-import { LicenseEventSubtype } from "@businessnjgovnavigator/shared";
+import type { LicenseEventSubtype } from "@businessnjgovnavigator/shared";
 import {
-  LicenseCalendarEventUrlSlugParameter,
+  type LicenseCalendarEventUrlSlugParameter,
   loadAllLicenseCalendarEventUrlSlugs,
   loadLicenseCalendarEventByUrlSlug,
 } from "@businessnjgovnavigator/shared/static";
-import { LicenseEventType } from "@businessnjgovnavigator/shared/types";
-import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import type { LicenseEventType } from "@businessnjgovnavigator/shared/types";
+import type { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { LicenseElement } from "@/components/tasks/license-calendar-event/LicenseCalendarEventElement";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 
 interface Props {
   license: LicenseEventType;

@@ -1,3 +1,7 @@
+import { generateUserData } from "@businessnjgovnavigator/shared/";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
@@ -6,10 +10,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateUserData } from "@businessnjgovnavigator/shared/";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

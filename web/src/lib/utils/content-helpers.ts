@@ -8,7 +8,7 @@ export const convertTextToMarkdownBold = (text: string): string => {
 };
 
 export const removeContextualInfoFormatting = (sentence: string): string => {
-  return sentence.replaceAll(/`([^`|]+)\|[^`]+`/g, (match, firstText) => {
+  return sentence.replaceAll(/`([^`|]+)\|[^`]+`/g, (_match, firstText) => {
     return firstText.trim();
   });
 };

@@ -1,14 +1,14 @@
+import { useMediaQuery } from "@mui/material";
+import type { ReactElement } from "react";
 import { SecondaryButton } from "@/components//njwds-extended/SecondaryButton";
 import { Roadmap } from "@/components/dashboard/Roadmap";
-import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { templateEval } from "@/lib/utils/helpers";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement } from "react";
 
 export const HideableTasks = (): ReactElement => {
   const { updateQueue, business } = useUserData();

@@ -1,9 +1,9 @@
+import { formationTaskId } from "@businessnjgovnavigator/shared";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { type ReactElement, type ReactNode, useContext } from "react";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { formationTaskId } from "@businessnjgovnavigator/shared";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement, ReactNode, useContext } from "react";
 
 export const NexusBusinessNameField = (): ReactElement => {
   const { Config } = useConfig();

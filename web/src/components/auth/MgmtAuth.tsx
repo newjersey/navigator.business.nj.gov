@@ -1,6 +1,6 @@
-import * as apiClient from "@/lib/api-client/apiClient";
 import { TextField } from "@mui/material";
-import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
+import { type ChangeEvent, type KeyboardEvent, type ReactElement, useState } from "react";
+import * as apiClient from "@/lib/api-client/apiClient";
 
 interface Props {
   password: string;

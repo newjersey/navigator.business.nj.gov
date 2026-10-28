@@ -1,5 +1,5 @@
-import { getErrorStateForEmergencyTripPermitField } from "@/components/tasks/abc-emergency-trip-permit/fields/getErrorStateForEmergencyTripPermitField";
 import { generateEmergencyTripPermitApplicationData } from "@businessnjgovnavigator/shared/test";
+import { getErrorStateForEmergencyTripPermitField } from "@/components/tasks/abc-emergency-trip-permit/fields/getErrorStateForEmergencyTripPermitField";
 
 describe("getErrorStateForEmergencyTripPermitField", () => {
   describe("Empty field behavior", () => {

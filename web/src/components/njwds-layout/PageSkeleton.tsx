@@ -1,15 +1,16 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { useRouter } from "next/compat/router";
+import type React from "react";
+import { type ReactElement, useContext, useMemo } from "react";
 import { BetaBar } from "@/components/BetaBar";
 import { LegalMessage } from "@/components/LegalMessage";
-import { PageFooter } from "@/components/PageFooter";
-import { SkipToMainContent } from "@/components/SkipToMainContent";
 import { NavBar } from "@/components/navbar/NavBar";
 import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { Banner } from "@/components/njwds/Banner";
+import { PageFooter } from "@/components/PageFooter";
+import { SkipToMainContent } from "@/components/SkipToMainContent";
 import { AuthContext } from "@/contexts/authContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { useRouter } from "next/compat/router";
-import React, { ReactElement, useContext, useMemo } from "react";
 
 interface Props {
   children: React.ReactNode;

@@ -1,20 +1,20 @@
-import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressLockedFields";
-import { generateAddress } from "@/test/factories";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
 import {
   emptyFormationAddressData,
-  FormationAddress,
-  Municipality,
+  type FormationAddress,
+  type Municipality,
 } from "@businessnjgovnavigator/shared/";
 import {
   generateFormationData,
   generateFormationFormData,
   generateMunicipality,
 } from "@businessnjgovnavigator/shared/test";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen, within } from "@testing-library/react";
+import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressLockedFields";
+import { generateAddress } from "@/test/factories";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

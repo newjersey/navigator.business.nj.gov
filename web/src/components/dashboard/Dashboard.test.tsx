@@ -1,3 +1,30 @@
+import {
+  type Business,
+  defaultDateFormat,
+  generateBusiness,
+  generatePreferences,
+  generateProfileData,
+  generateTaxFilingCalendarEvent,
+  generateTaxFilingData,
+  generateUserDataForBusiness,
+  getCurrentDate,
+  getIndustries,
+  OperatingPhases,
+  randomElementFromArray,
+} from "@businessnjgovnavigator/shared";
+import { type OperatingPhase, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+  LicenseEventType,
+  OperateReference,
+  RoadmapDisplayContent,
+  SidebarCardContent,
+} from "@businessnjgovnavigator/shared/types";
+import type * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Dashboard } from "@/components/dashboard/Dashboard";
 import {
   generateAnytimeActionTask,
@@ -14,33 +41,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  defaultDateFormat,
-  generateBusiness,
-  generatePreferences,
-  generateProfileData,
-  generateTaxFilingCalendarEvent,
-  generateTaxFilingData,
-  generateUserDataForBusiness,
-  getCurrentDate,
-  getIndustries,
-  OperatingPhases,
-  randomElementFromArray,
-} from "@businessnjgovnavigator/shared";
-import { OperatingPhase, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  AnytimeActionLicenseReinstatement,
-  AnytimeActionTask,
-  LicenseEventType,
-  OperateReference,
-  RoadmapDisplayContent,
-  SidebarCardContent,
-} from "@businessnjgovnavigator/shared/types";
-import * as materialUi from "@mui/material";
-import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

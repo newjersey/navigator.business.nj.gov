@@ -1,15 +1,15 @@
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { Heading } from "@/components/njwds-extended/Heading";
+import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationChooseDocuments } from "@/components/tasks/business-formation/billing/FormationChooseDocuments";
 import { FormationChooseNotifications } from "@/components/tasks/business-formation/billing/FormationChooseNotifications";
 import { PaymentTypeTable } from "@/components/tasks/business-formation/billing/PaymentTypeTable";
-import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { getPhoneNumberFormat } from "@/lib/utils/helpers";
-import { ReactElement } from "react";
 
 export const BillingStep = (): ReactElement => {
   const { Config } = useConfig();

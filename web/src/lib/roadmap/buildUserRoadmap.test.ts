@@ -1,8 +1,3 @@
-import * as getNonEssentialAddOnModule from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
-import { generateRoadmap, generateTask } from "@/test/factories";
-import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
 import {
   generateMunicipality,
   generateMunicipalityDetail,
@@ -17,8 +12,13 @@ import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-lo
 import {
   createEmptyProfileData,
   emptyIndustrySpecificData,
-  ProfileData,
+  type ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
+import * as getNonEssentialAddOnModule from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
+import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
+import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
+import { generateRoadmap, generateTask } from "@/test/factories";
+import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({
   getNonEssentialQuestionAddOnWhenYes: jest.fn(),

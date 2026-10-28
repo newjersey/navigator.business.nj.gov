@@ -1,11 +1,11 @@
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import { generateBusiness } from "@businessnjgovnavigator/shared/test";
+import { type ReactElement, useState } from "react";
 import { RemoveBusinessModal } from "@/components/dashboard/RemoveBusinessModal";
 import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement, useState } from "react";
-import { generateBusiness } from "@businessnjgovnavigator/shared/test";
 
 const RemoveBusinessModalPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

@@ -1,3 +1,16 @@
+import { type Business, generateUser, generateUserData } from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId, type ProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  generateBusiness,
+  generateMunicipality,
+  generatePreferences,
+  generateProfileData,
+} from "@businessnjgovnavigator/shared/test";
+import type {
+  Certification,
+  Funding,
+  SidebarCardContent,
+} from "@businessnjgovnavigator/shared/types";
 import {
   filterCertifications,
   filterFundings,
@@ -13,15 +26,6 @@ import {
   generateSidebarCardContent,
   randomFundingCertification,
 } from "@/test/factories";
-import { Business, generateUser, generateUserData } from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId, ProfileData } from "@businessnjgovnavigator/shared/";
-import {
-  generateBusiness,
-  generateMunicipality,
-  generatePreferences,
-  generateProfileData,
-} from "@businessnjgovnavigator/shared/test";
-import { Certification, Funding, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
 
 describe("sidebarCard Helpers", () => {
   describe("sortCertifications", () => {

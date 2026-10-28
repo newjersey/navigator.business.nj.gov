@@ -1,4 +1,4 @@
-import { KeysOfType, Roadmap, Task } from "@businessnjgovnavigator/shared/types";
+import type { KeysOfType, Roadmap, Task } from "@businessnjgovnavigator/shared/types";
 
 export const getTaskFromRoadmap = (
   roadmap: Roadmap | undefined,

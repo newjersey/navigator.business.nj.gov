@@ -1,12 +1,20 @@
-import { Content } from "@/components/Content";
-import { TaskHeader } from "@/components/TaskHeader";
+import type {
+  HousingAddress,
+  HousingRegistrationRequestLookupResponse,
+} from "@businessnjgovnavigator/shared";
+import type { HotelMotelRegistrationSearchError, Task } from "@businessnjgovnavigator/shared/types";
+import { Box, Tab, Tabs } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext, useState } from "react";
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
+import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Icon } from "@/components/njwds/Icon";
 import { getTabId, getTabPanelId, TabPanel } from "@/components/TabPanel";
+import { TaskHeader } from "@/components/TaskHeader";
 import { CheckHousingRegistrationStatus } from "@/components/tasks/CheckHousingRegistrationStatus";
 import { HousingRegistrationStatusSummary } from "@/components/tasks/HousingRegistrationStatusSummary";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -16,13 +24,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-import {
-  HousingAddress,
-  HousingRegistrationRequestLookupResponse,
-} from "@businessnjgovnavigator/shared";
-import { HotelMotelRegistrationSearchError, Task } from "@businessnjgovnavigator/shared/types";
-import { Box, Tab, Tabs } from "@mui/material";
-import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {
   task: Task;
@@ -45,7 +46,7 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
   const { municipalities } = useContext(HousingMunicipalitiesContext);
   const { Config } = useConfig();
 
-  const onSelectTab = (event: React.SyntheticEvent, newValue: number): void => {
+  const onSelectTab = (_event: React.SyntheticEvent, newValue: number): void => {
     setTabIndex(newValue);
   };
 

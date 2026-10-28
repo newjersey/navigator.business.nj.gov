@@ -1,15 +1,15 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { MediaQueries } from "@/lib/PageSizes";
-import analytics from "@/lib/utils/analytics";
 import {
   ClickAwayListener,
   Tooltip,
+  type TooltipProps,
   tooltipClasses,
-  TooltipProps,
   useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { ReactElement, useState } from "react";
+import { type ReactElement, useState } from "react";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { MediaQueries } from "@/lib/PageSizes";
+import analytics from "@/lib/utils/analytics";
 
 const NavigatorTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />

@@ -1,12 +1,12 @@
+import type { Opportunity } from "@businessnjgovnavigator/shared/types";
+import { truncate } from "lodash";
+import { useRouter } from "next/compat/router";
+import type { ReactElement } from "react";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { capitalizeEachWord } from "@/lib/utils/cases-helpers";
-import { Opportunity } from "@businessnjgovnavigator/shared/types";
-import { truncate } from "lodash";
-import { useRouter } from "next/compat/router";
-import { ReactElement } from "react";
 
 interface Props {
   opportunity: Opportunity;

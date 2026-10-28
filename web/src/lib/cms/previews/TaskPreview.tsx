@@ -1,9 +1,3 @@
-import { Icon } from "@/components/njwds/Icon";
-import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
-import { usePageData } from "@/lib/cms/helpers/usePageData";
-import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateRoadmap } from "@/test/factories";
 import { getIndustries } from "@businessnjgovnavigator/shared/industry";
 import {
   generateBusiness,
@@ -12,10 +6,16 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import {
   createEmptyTaskDisplayContent,
-  TaskWithLicenseTaskId,
+  type TaskWithLicenseTaskId,
 } from "@businessnjgovnavigator/shared/types";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { ReactElement, useState } from "react";
+import { type ReactElement, useState } from "react";
+import { Icon } from "@/components/njwds/Icon";
+import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePageData } from "@/lib/cms/helpers/usePageData";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import { generateRoadmap } from "@/test/factories";
 
 const TaskPreview = (props: PreviewProps): ReactElement => {
   const [isOpenRoadmaps, setIsOpenRoadmaps] = useState<boolean>(false);

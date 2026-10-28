@@ -1,21 +1,22 @@
-/* eslint-disable jest/expect-expect */
-import * as mockRouter from "@/test/mock/mockRouter";
-import { useMockRouter } from "@/test/mock/mockRouter";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
-  Business,
+  type Business,
   generateBusiness,
   generateFormationData,
   generateFormationFormData,
   generateMunicipality,
   generateProfileData,
   getMergedConfig,
-  Municipality,
+  type Municipality,
   OperatingPhaseId,
 } from "@businessnjgovnavigator/shared";
-
+import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import * as mockRouter from "@/test/mock/mockRouter";
+import { useMockRouter } from "@/test/mock/mockRouter";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
   chooseTab,
   clickSave,
@@ -24,9 +25,6 @@ import {
   getBusinessProfileInputFieldName,
   renderPage,
 } from "@/test/pages/profile/profile-helpers";
-import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");

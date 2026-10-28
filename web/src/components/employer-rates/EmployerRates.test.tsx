@@ -1,4 +1,3 @@
-import { EmployerRates } from "@/components/employer-rates/EmployerRates";
 import {
   DOL_EIN_CHARACTERS,
   generateBusiness,
@@ -9,17 +8,18 @@ import {
   getCurrentDate,
   getMergedConfig,
   OperatingPhaseId,
-  ProfileData,
-  UserData,
+  type ProfileData,
+  type UserData,
 } from "@businessnjgovnavigator/shared";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createTheme, ThemeProvider } from "@mui/material";
-import * as api from "@/lib/api-client/apiClient";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { DOL_EIN_CHARACTERS_WITH_FORMATTING } from "@/components/data-fields/DolEin";
+import { EmployerRates } from "@/components/employer-rates/EmployerRates";
+import * as api from "@/lib/api-client/apiClient";
 import { getEmployerAccessQuarterlyDropdownOptions } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 jest.mock("@businessnjgovnavigator/shared/dateHelpers", () => {
   const actual = jest.requireActual("@businessnjgovnavigator/shared/dateHelpers");

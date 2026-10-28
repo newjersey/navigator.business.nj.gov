@@ -1,4 +1,4 @@
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
 
 export const switchCurrentBusiness = (
   userData: UserData,

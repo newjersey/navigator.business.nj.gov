@@ -1,12 +1,19 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import {
+  BusinessSignerTypeMap,
+  createEmptyFormationSigner,
+  type FormationSigner,
+  type SignerTitle,
+} from "@businessnjgovnavigator/shared";
+import { Checkbox, FormHelperText, MenuItem, Select, useMediaQuery } from "@mui/material";
+import { type ChangeEvent, type ReactElement, type ReactNode, useContext, useMemo } from "react";
 import { Content } from "@/components/Content";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { Icon } from "@/components/njwds/Icon";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
 import {
   createSignedEmptyFormationObject,
   needsSignerTypeFunc,
@@ -17,14 +24,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
 import { templateEval, useMountEffect } from "@/lib/utils/helpers";
-import {
-  BusinessSignerTypeMap,
-  createEmptyFormationSigner,
-  FormationSigner,
-  SignerTitle,
-} from "@businessnjgovnavigator/shared";
-import { Checkbox, FormHelperText, MenuItem, Select, useMediaQuery } from "@mui/material";
-import { ChangeEvent, ReactElement, ReactNode, useContext, useMemo } from "react";
 
 export const Signatures = (): ReactElement => {
   const FIELD_NAME = "signers";
@@ -44,7 +43,6 @@ export const Signatures = (): ReactElement => {
     const legalType = state.formationFormData.legalType;
     const overriddenLegalTypes = Object.keys(Config.formation.fields.signers.overrides ?? {});
     if (overriddenLegalTypes.includes(legalType)) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return (Config.formation.fields.signers.overrides as any)[legalType].description;
     }
     return Config.formation.fields.signers.description;
@@ -371,7 +369,7 @@ export const Signatures = (): ReactElement => {
 
         {(state.formationFormData.signers ?? [])
           .slice(1)
-          .map((it: FormationSigner, _index: number) => {
+          .map((_it: FormationSigner, _index: number) => {
             const index = _index + 1;
             return (
               <div key={`signature-${index}`}>

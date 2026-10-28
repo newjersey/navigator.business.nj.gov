@@ -1,9 +1,9 @@
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
+import type { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
-import { ReactElement } from "react";
 
 export const DbaUnavailable = (props: UnavailableProps): ReactElement => {
   const { Config } = useConfig();

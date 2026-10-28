@@ -1,3 +1,10 @@
+import { formationTaskId, generateProfileData } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
+import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
+import type { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { SidebarCardFormationNudge } from "@/components/dashboard/SidebarCardFormationNudge";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { generateRoadmap, generateSidebarCardContent } from "@/test/factories";
@@ -8,13 +15,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { formationTaskId, generateProfileData } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
-import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
-import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

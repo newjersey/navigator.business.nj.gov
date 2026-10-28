@@ -1,6 +1,3 @@
-/* eslint-disable cypress/no-unnecessary-waiting */
-/* eslint-disable testing-library/await-async-utils */
-
 import {
   clickDeferredSaveButton,
   completeBusinessStructureTask,

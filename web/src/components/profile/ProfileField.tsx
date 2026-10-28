@@ -1,11 +1,11 @@
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement, ReactNode } from "react";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { ProfileLockedField } from "@/components/profile/ProfileLockedField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, ReactNode } from "react";
 
 interface Props {
   boldAltDescription?: boolean;

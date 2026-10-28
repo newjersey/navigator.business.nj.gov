@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-
 const Airtable = require("airtable");
-const fs = require("fs");
+const fs = require("node:fs");
 
 // requires these env vars to be set!
 const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
@@ -58,9 +55,7 @@ const airtableToOpportunity = async (airtableOpp) => {
     industry: airtableOpp["Filter: Industry"]
       ? await Promise.all(airtableOpp["Filter: Industry"].map(getIndustryById))
       : [],
-    agency: airtableOpp["Agency"]
-      ? await Promise.all(airtableOpp["Agency"].map(getAgencyById))
-      : [],
+    agency: airtableOpp.Agency ? await Promise.all(airtableOpp.Agency.map(getAgencyById)) : [],
     openDate: airtableOpp["Open Date"] ?? "",
     dueDate: airtableOpp["Due Date"] ?? "",
     status: convertStatus(airtableOpp["Filter: Status (open// closed// ...)"]),
@@ -294,7 +289,7 @@ const airtableSelectAll = () => {
 
 const getIndustryById = (industryId) => {
   return new Promise((resolve, reject) => {
-    base("Industry").find(industryId, function (err, record) {
+    base("Industry").find(industryId, (err, record) => {
       if (err) {
         console.error(err);
         reject(err);
@@ -307,7 +302,7 @@ const getIndustryById = (industryId) => {
 
 const getAgencyById = (agencyId) => {
   return new Promise((resolve, reject) => {
-    base("Agency").find(agencyId, function (err, record) {
+    base("Agency").find(agencyId, (err, record) => {
       if (err) {
         console.error(err);
         reject(err);

@@ -1,3 +1,5 @@
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -10,8 +12,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext } from "react";
 
 export const NeedsAccountModal = (): ReactElement => {
   const { business } = useUserData();

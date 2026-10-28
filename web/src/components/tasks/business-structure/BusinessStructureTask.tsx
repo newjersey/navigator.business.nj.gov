@@ -1,5 +1,15 @@
+import { type Business, hasCompletedFormation } from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import {
+  createEmptyProfileData,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { useMediaQuery } from "@mui/material";
+import { type ReactElement, useEffect, useRef, useState } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -7,11 +17,10 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Icon } from "@/components/njwds/Icon";
 import { TaskHeader } from "@/components/TaskHeader";
+import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -30,12 +39,6 @@ import {
   templateEval,
   useMountEffectWhenDefined,
 } from "@/lib/utils/helpers";
-import { Business, hasCompletedFormation } from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   task: Task;
@@ -70,7 +73,6 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
         queueUpdateTaskProgress(props.task.id, "TO_DO");
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateQueue]);
 
   useMountEffectWhenDefined(() => {

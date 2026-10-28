@@ -1,8 +1,8 @@
+import type { ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { LearnMiniRoadmapTask } from "@/components/roadmap/LearnMiniRoadmapTask";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { ReactElement } from "react";
 
 interface Props {
   activeTaskId?: string | undefined;

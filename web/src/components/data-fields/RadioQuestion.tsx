@@ -1,3 +1,11 @@
+import type { ProfileData } from "@businessnjgovnavigator/shared/index";
+import type {
+  ProfileContentField,
+  profileFieldsFromConfig,
+} from "@businessnjgovnavigator/shared/types";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext } from "react";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -9,10 +17,6 @@ import {
   capitalizeFirstLetter,
   kebabSnakeSentenceToCamelCase,
 } from "@/lib/utils/cases-helpers";
-import { ProfileData } from "@businessnjgovnavigator/shared/index";
-import { ProfileContentField, profileFieldsFromConfig } from "@businessnjgovnavigator/shared/types";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
 
 type ProfileDataTypes = ProfileData[keyof ProfileData];
 
@@ -46,7 +50,6 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
 
   const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
     const value = props.choices.find((val) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return val.toString() === (event.target.value as any).toString();
     }) as T;
     setProfileData({

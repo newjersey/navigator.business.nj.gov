@@ -1,9 +1,9 @@
+import type { FormationStepNames } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, type ReactNode, useContext } from "react";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { ReviewSection } from "@/components/tasks/review-screen-components/ReviewSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { scrollToTop } from "@/lib/utils/helpers";
-import { FormationStepNames } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   stepName: FormationStepNames;

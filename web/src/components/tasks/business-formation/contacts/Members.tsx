@@ -1,13 +1,13 @@
+import {
+  corpLegalStructures,
+  createEmptyFormationMember,
+  type FormationMember,
+} from "@businessnjgovnavigator/shared";
+import { type ReactElement, useContext } from "react";
 import { Addresses } from "@/components/tasks/business-formation/contacts/Addresses";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getConfigFieldByLegalStructure } from "@/lib/utils/helpers";
-import {
-  corpLegalStructures,
-  createEmptyFormationMember,
-  FormationMember,
-} from "@businessnjgovnavigator/shared";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   hasError: boolean;

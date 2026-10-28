@@ -1,3 +1,5 @@
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { BusinessName } from "@/components/tasks/business-formation/name/BusinessName";
@@ -5,8 +7,6 @@ import { SubmittedFormToReserveName } from "@/components/tasks/business-formatio
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { ReactElement, useContext } from "react";
 
 export const BusinessNameStep = (): ReactElement => {
   const { Config } = useConfig();
@@ -16,7 +16,7 @@ export const BusinessNameStep = (): ReactElement => {
     _: React.ChangeEvent<HTMLInputElement>,
     value: string,
   ): void => {
-    const boolValue = value === "true" ? true : false;
+    const boolValue = value === "true";
     setFormationFormData((prev) => ({
       ...prev,
       checkNameReservation: boolValue,

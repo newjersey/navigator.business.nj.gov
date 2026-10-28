@@ -1,3 +1,12 @@
+import { emptyCigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { type ReactElement, useState } from "react";
+import { SUPPLIER_NAMES } from "@/components/tasks/cigarette-license/fields/CigaretteSupplierDropdown";
 import { SalesInfo } from "@/components/tasks/cigarette-license/SalesInfo";
 import { AddressContext } from "@/contexts/addressContext";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
@@ -7,18 +16,7 @@ import {
 } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { emptyCigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
-import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
-import { render, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-
-import { SUPPLIER_NAMES } from "@/components/tasks/cigarette-license/fields/CigaretteSupplierDropdown";
-import { ReactElement, useState } from "react";
 
 const Config = getMergedConfig();
 

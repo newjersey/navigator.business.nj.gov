@@ -1,3 +1,5 @@
+import type { FormationFields, InFormInBylaws } from "@businessnjgovnavigator/shared";
+import { Fragment, type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { ExpandCollapseString } from "@/components/ExpandCollapseString";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
@@ -5,8 +7,6 @@ import { ReviewNotEntered } from "@/components/tasks/review-screen-components/Re
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FormationFields, InFormInBylaws } from "@businessnjgovnavigator/shared";
-import { Fragment, ReactElement, useContext } from "react";
 
 export const ReviewNonprofitProvisions = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
@@ -32,7 +32,6 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
       }
     })();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const bodyText = ((Config.formation.fields as any)[fieldName] as any).body;
 
     return (

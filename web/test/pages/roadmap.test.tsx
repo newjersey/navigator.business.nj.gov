@@ -1,9 +1,9 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import RoadmapPage from "@/pages/roadmap";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 

@@ -1,7 +1,7 @@
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
-import { ReactElement } from "react";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 
 interface Props {
   label: string;

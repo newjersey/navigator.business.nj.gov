@@ -1,12 +1,12 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { Industry } from "@businessnjgovnavigator/shared/industry";
+import type { Roadmap } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Card } from "@/components/starter-kits/Card";
 import { StepSection } from "@/components/starter-kits/StepSection";
 import analytics from "@/lib/utils/analytics";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { Industry } from "@businessnjgovnavigator/shared/industry";
-import { Roadmap } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface StarterKitsBodyProps {
   heroTitle: string;

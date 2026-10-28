@@ -1,5 +1,5 @@
 import type { EnvironmentContext, JestEnvironmentConfig } from "@jest/environment";
-import { Circus } from "@jest/types";
+import type { Circus } from "@jest/types";
 import JSDOMEnvironment from "jest-environment-jsdom";
 
 class CustomJSDOMEnvironment extends JSDOMEnvironment {

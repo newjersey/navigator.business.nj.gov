@@ -1,3 +1,11 @@
+import {
+  type Business,
+  type FormationFormData,
+  getCurrentBusiness,
+} from "@businessnjgovnavigator/shared";
+import type { FormationStepNames, StepperStep } from "@businessnjgovnavigator/shared/types";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, type ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { AutosaveSpinner } from "@/components/AutosaveSpinner";
 import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { LockIcon } from "@/components/LockIcon";
@@ -31,10 +39,6 @@ import {
   scrollToTopOfElement,
   useMountEffect,
 } from "@/lib/utils/helpers";
-import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
-import { FormationStepNames, StepperStep } from "@businessnjgovnavigator/shared/types";
-import { useRouter } from "next/compat/router";
-import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
 export const BusinessFormationPaginator = (): ReactElement => {
   const { updateQueue, business } = useUserData();
@@ -516,7 +520,6 @@ export const BusinessFormationPaginator = (): ReactElement => {
           configFieldName = getConfigFieldByLegalStructure(state.formationFormData.legalType);
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const label = (Config.formation.fields as any)[configFieldName].label;
         return {
           name: configFieldName,

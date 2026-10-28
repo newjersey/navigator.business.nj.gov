@@ -1,9 +1,9 @@
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { type ReactElement, useContext } from "react";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   setPage: (page: { current: number; previous: number }) => void;

@@ -1,5 +1,5 @@
+import type { ReactElement, ReactNode } from "react";
 import { NumericField } from "@/components/data-fields/NumericField";
-import { ReactElement, ReactNode } from "react";
 
 interface Props {
   children?: ReactNode;

@@ -1,3 +1,11 @@
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
+import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import type {
+  Certification,
+  Funding,
+  SidebarCardContent,
+} from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { SidebarCardsList } from "@/components/dashboard/SidebarCardsList";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
@@ -8,10 +16,6 @@ import {
   sortCertifications,
   sortFundingsForUser,
 } from "@/lib/domain-logic/sidebarCardsHelpers";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
-import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { Certification, Funding, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props {
   sidebarDisplayContent: Record<string, SidebarCardContent>;

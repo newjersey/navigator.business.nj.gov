@@ -1,9 +1,3 @@
-import { BusinessActivities } from "@/components/crtk/BusinessActivities";
-import { generateCrtkData } from "@/test/factories";
-import {
-  setupStatefulUserDataContext,
-  WithStatefulUserData,
-} from "@/test/mock/withStatefulUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
@@ -11,6 +5,12 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { BusinessActivities } from "@/components/crtk/BusinessActivities";
+import { generateCrtkData } from "@/test/factories";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

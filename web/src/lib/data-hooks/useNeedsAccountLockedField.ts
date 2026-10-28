@@ -1,6 +1,6 @@
+import { type KeyboardEvent, useContext } from "react";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { KeyboardEvent, useContext } from "react";
 
 /**
  * Locks a text field for guest users so interacting with it opens the Needs Account modal.

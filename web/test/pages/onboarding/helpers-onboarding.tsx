@@ -1,5 +1,24 @@
+import {
+  createEmptyUserData,
+  type DateObject,
+  emptyIndustrySpecificData,
+  generateUser,
+  getIndustries,
+  industrySpecificDataChoices,
+  type Municipality,
+  type UserData,
+} from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { createTheme, ThemeProvider } from "@mui/material";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitForElementToBeRemoved,
+  within,
+} from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import type { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   EssentialQuestions,
   getEssentialQuestion,
@@ -11,25 +30,6 @@ import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import {
-  DateObject,
-  Municipality,
-  UserData,
-  createEmptyUserData,
-  emptyIndustrySpecificData,
-  generateUser,
-  getIndustries,
-  industrySpecificDataChoices,
-} from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { ThemeProvider, createTheme } from "@mui/material";
-import {
-  fireEvent,
-  render,
-  screen,
-  waitForElementToBeRemoved,
-  within,
-} from "@testing-library/react";
 
 const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();

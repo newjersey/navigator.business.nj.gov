@@ -1,7 +1,7 @@
+import type { LicenseCalendarEvent } from "@businessnjgovnavigator/shared/";
+import type { LicenseEventType } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { CalendarEventItem } from "@/components/filings-calendar/CalendarEventItem";
-import { LicenseCalendarEvent } from "@businessnjgovnavigator/shared/";
-import { LicenseEventType } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props {
   LicenseCalendarEvent: LicenseCalendarEvent;

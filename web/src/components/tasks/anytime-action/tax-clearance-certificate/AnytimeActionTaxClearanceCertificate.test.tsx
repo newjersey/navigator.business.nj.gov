@@ -1,17 +1,3 @@
-import { AnytimeActionTaxClearanceCertificate } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate";
-import * as api from "@/lib/api-client/apiClient";
-import { formatAddress } from "@/lib/domain-logic/formatAddress";
-import { generateAnytimeActionTask } from "@/test/factories";
-import {
-  fillText,
-  getInputElementByLabel,
-  selectComboboxValueByTextClick,
-} from "@/test/helpers/helpers-testing-library-selectors";
-import {
-  currentBusiness,
-  setupStatefulUserDataContext,
-  WithStatefulUserData,
-} from "@/test/mock/withStatefulUserData";
 import {
   createEmptyFormationFormData,
   emptyProfileData,
@@ -28,17 +14,31 @@ import {
   getTaxClearanceCertificateAgencies,
   LookupTaxClearanceCertificateAgenciesById,
   randomElementFromArray,
-  StateObject,
-  TaxClearanceCertificateData,
-  TaxClearanceCertificateResponse,
-  TaxClearanceCertificateResponseErrorType,
+  type StateObject,
+  type TaxClearanceCertificateData,
+  type TaxClearanceCertificateResponse,
+  type TaxClearanceCertificateResponseErrorType,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
-import * as materialUi from "@mui/material";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import type * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { AnytimeActionTaxClearanceCertificate } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate";
+import * as api from "@/lib/api-client/apiClient";
+import { formatAddress } from "@/lib/domain-logic/formatAddress";
+import { generateAnytimeActionTask } from "@/test/factories";
+import {
+  fillText,
+  getInputElementByLabel,
+  selectComboboxValueByTextClick,
+} from "@/test/helpers/helpers-testing-library-selectors";
+import {
+  currentBusiness,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   postTaxClearanceCertificate: jest.fn(),
@@ -1144,7 +1144,6 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
 
   it("renders the page to download the certificate when the API post request is successful", async () => {
     const pdfUrl = "blob:http://test-url";
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const mockCreateObjectURL = jest.fn((_) => pdfUrl); // `_` is mean to be unused
     window.URL.createObjectURL = mockCreateObjectURL;
     mockApi.postTaxClearanceCertificate.mockResolvedValue({

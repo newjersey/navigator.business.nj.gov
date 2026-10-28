@@ -1,33 +1,33 @@
-/* eslint-disable jest/expect-expect */
-import { ROUTES } from "@/lib/domain-logic/routes";
-import { allLegalStructuresOfType, randomHomeBasedIndustry } from "@/test/factories";
-import { markdownToText } from "@/test/helpers/helpers-utilities";
-import * as mockRouter from "@/test/mock/mockRouter";
-import { useMockRouter } from "@/test/mock/mockRouter";
-import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
-  Business,
+  type Business,
   defaultDateFormat,
   emptyAddressData,
   emptyIndustrySpecificData,
-  ForeignBusinessTypeId,
-  FormationData,
+  type ForeignBusinessTypeId,
+  type FormationData,
   generateFormationFormData,
   generateMunicipality,
   generateProfileData,
   getCurrentDateFormatted,
   OperatingPhaseId,
-  ProfileData,
-  TaxFilingData,
+  type ProfileData,
+  type TaxFilingData,
 } from "@businessnjgovnavigator/shared";
+import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateFormationData,
   generateTaxFilingData,
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
-
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
+import { ROUTES } from "@/lib/domain-logic/routes";
+import { allLegalStructuresOfType, randomHomeBasedIndustry } from "@/test/factories";
+import { markdownToText } from "@/test/helpers/helpers-utilities";
+import * as mockRouter from "@/test/mock/mockRouter";
+import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { industryIdsWithSingleRequiredEssentialQuestion } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   chooseTab,
@@ -39,8 +39,6 @@ import {
   removeLocationAndSave,
   renderPage,
 } from "@/test/pages/profile/profile-helpers";
-import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
-import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 

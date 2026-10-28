@@ -1,5 +1,5 @@
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs, { type Dayjs } from "dayjs";
 
 export interface EmployerRatesQuarterObject {
   label: string;

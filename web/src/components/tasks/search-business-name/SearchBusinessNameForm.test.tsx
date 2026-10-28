@@ -1,7 +1,16 @@
+import {
+  castPublicFilingLegalTypeToFormationType,
+  generateBusiness,
+  generateFormationFormData,
+  type ProfileData,
+  type PublicFilingLegalType,
+} from "@businessnjgovnavigator/shared";
+import type * as materialUi from "@mui/material";
+import { fireEvent, screen, within } from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
-  FormationPageHelpers,
+  type FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
@@ -14,15 +23,6 @@ import {
   searchAndReject,
   searchButton,
 } from "@/test/helpers/helpersSearchBusinessName";
-import {
-  castPublicFilingLegalTypeToFormationType,
-  generateBusiness,
-  generateFormationFormData,
-  ProfileData,
-  PublicFilingLegalType,
-} from "@businessnjgovnavigator/shared";
-import * as materialUi from "@mui/material";
-import { fireEvent, screen, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

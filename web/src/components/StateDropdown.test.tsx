@@ -1,5 +1,5 @@
-import { StateDropdown } from "@/components/StateDropdown";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { StateDropdown } from "@/components/StateDropdown";
 
 describe("<StateDropdown />", () => {
   beforeEach(() => {});

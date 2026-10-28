@@ -1,3 +1,7 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
+import { InputLabel } from "@mui/material";
+import { type ReactElement, useContext, useState } from "react";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
@@ -8,10 +12,6 @@ import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
-import { InputLabel } from "@mui/material";
-import { ReactElement, useContext, useState } from "react";
 
 export const PersonalizedSupport = (): ReactElement => {
   const envContext = useContext(EnvRequirementsContext);

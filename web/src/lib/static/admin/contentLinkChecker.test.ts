@@ -1,6 +1,6 @@
 import {
   CONTENT_LINK_CHECK_SETTINGS,
-  ContentLinkResponse,
+  type ContentLinkResponse,
   createContentLinkChecker,
   getRetryAfterDelayMs,
 } from "@/lib/static/admin/contentLinkChecker";

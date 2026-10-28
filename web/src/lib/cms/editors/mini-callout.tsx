@@ -24,7 +24,6 @@ export default {
     },
   ],
 
-  // eslint-disable-next-line unicorn/better-regex
   pattern: /:::miniCallout[^:::]*?:::/gs,
   collapsed: false,
   summary: "{{fields.title}}",
@@ -39,7 +38,6 @@ export default {
     const [calloutBlock] = match;
 
     // Everything inside the first {} we see we consider callout parameters; everything after is the body.
-    // eslint-disable-next-line unicorn/better-regex
     const calloutParseMatcher = /{(?<parameters>[^}]+)}[^\n]*\n(?<body>[^:::{}]*)/gms;
     const calloutMatch = calloutParseMatcher.exec(calloutBlock);
 

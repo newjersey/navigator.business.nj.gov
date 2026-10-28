@@ -1,4 +1,3 @@
-/* eslint-disable cypress/no-unnecessary-waiting */
 import {
   clickModalSaveButton,
   completeBusinessStructureTask,
@@ -7,8 +6,8 @@ import {
   selectDate,
   selectLocation,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { typeTaxId } from "@businessnjgovnavigator/cypress/support/helpers/helpers-form";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { randomNonHomeBasedNonDomesticEmployerIndustry } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";

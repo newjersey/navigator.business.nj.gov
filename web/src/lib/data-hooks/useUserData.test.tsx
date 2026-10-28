@@ -1,36 +1,36 @@
-import { AuthContext } from "@/contexts/authContext";
-import { IntercomContext, IntercomContextType } from "@/contexts/intercomContext";
-import { RoadmapContext } from "@/contexts/roadmapContext";
-import { UpdateQueueContext } from "@/contexts/updateQueueContext";
-import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
-import * as api from "@/lib/api-client/apiClient";
-import { AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
-import { UserDataProvider } from "@/lib/data-hooks/UserDataProvider";
-import { useUserData, UseUserDataResponse } from "@/lib/data-hooks/useUserData";
-import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
-import { BrowserStorage } from "@/lib/storage/BrowserStorage";
-import { UserDataStorage, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { UpdateQueue } from "@/lib/UpdateQueue";
-import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
-import { generateRoadmap } from "@/test/factories";
 import {
   generateBusiness,
   generateProfileData,
   generateUser,
   generateUserData,
-  UserData,
+  type UserData,
 } from "@businessnjgovnavigator/shared";
-import { UserDataError } from "@businessnjgovnavigator/shared/types";
+import type { UserDataError } from "@businessnjgovnavigator/shared/types";
 import { act, render, renderHook, waitFor } from "@testing-library/react";
 import {
-  Dispatch,
-  PropsWithChildren,
-  ReactElement,
-  SetStateAction,
+  type Dispatch,
+  type PropsWithChildren,
+  type ReactElement,
+  type SetStateAction,
   useCallback,
   useState,
 } from "react";
-import { Cache, SWRConfig } from "swr";
+import { type Cache, SWRConfig } from "swr";
+import { AuthContext } from "@/contexts/authContext";
+import { IntercomContext, type IntercomContextType } from "@/contexts/intercomContext";
+import { RoadmapContext } from "@/contexts/roadmapContext";
+import { UpdateQueueContext } from "@/contexts/updateQueueContext";
+import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
+import * as api from "@/lib/api-client/apiClient";
+import { type AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
+import { UserDataProvider } from "@/lib/data-hooks/UserDataProvider";
+import { type UseUserDataResponse, useUserData } from "@/lib/data-hooks/useUserData";
+import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
+import type { BrowserStorage } from "@/lib/storage/BrowserStorage";
+import { type UserDataStorage, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
+import type { UpdateQueue } from "@/lib/UpdateQueue";
+import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
+import { generateRoadmap } from "@/test/factories";
 
 jest.mock("@/lib/utils/analytics-helpers", () => ({
   reportUserDataSync: jest.fn(),

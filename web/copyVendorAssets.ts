@@ -20,7 +20,6 @@ const copyVendorAssets = async (): Promise<void> => {
 };
 
 // tsx transpiles scripts in this workspace to CommonJS, which does not support top-level await.
-// eslint-disable-next-line unicorn/prefer-top-level-await
 copyVendorAssets().catch((error: unknown) => {
   console.error("Failed to copy NJWDS vendor assets.", error);
   process.exitCode = 1;

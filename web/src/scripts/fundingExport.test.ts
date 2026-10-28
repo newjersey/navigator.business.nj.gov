@@ -1,6 +1,6 @@
-import fs from "fs";
+import fs from "node:fs";
 import matter from "gray-matter";
-import { exportFundings, loadAllFundings, Funding } from "./fundingExport";
+import { exportFundings, type Funding, loadAllFundings } from "./fundingExport";
 
 jest.mock("fs");
 jest.mock("gray-matter");

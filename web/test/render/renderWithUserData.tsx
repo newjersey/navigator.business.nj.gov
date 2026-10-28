@@ -1,8 +1,8 @@
-import { UserDataContext, UseUserDataResponse } from "@/contexts/userDataContext";
-import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { render, RenderResult } from "@testing-library/react";
-import { ReactElement } from "react";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
+import { type RenderResult, render } from "@testing-library/react";
+import type { ReactElement } from "react";
+import { UserDataContext, type UseUserDataResponse } from "@/contexts/userDataContext";
+import { type UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
 
 const createDefaultUserDataContext = (): UseUserDataResponse => {
   return {

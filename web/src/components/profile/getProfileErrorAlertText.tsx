@@ -1,5 +1,5 @@
-import { templateEval } from "@/lib/utils/helpers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { templateEval } from "@/lib/utils/helpers";
 
 export const getProfileErrorAlertText = (numOfErrors: number): string => {
   const Config = getMergedConfig();

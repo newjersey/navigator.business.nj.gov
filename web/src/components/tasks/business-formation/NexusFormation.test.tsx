@@ -1,23 +1,5 @@
-/* eslint-disable  @typescript-eslint/no-non-null-assertion */
-
-import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
-import { LookupDbaStepIndexByName } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
-import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
-import * as api from "@/lib/api-client/apiClient";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import analytics from "@/lib/utils/analytics";
-import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
 import {
-  FormationPageHelpers,
-  generateFormationProfileData,
-  mockApiResponse,
-  preparePage,
-  useSetupInitialMocks,
-} from "@/test/helpers/helpers-formation";
-import { fillText, searchAndGetValue } from "@/test/helpers/helpersSearchBusinessName";
-import { currentBusiness } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
+  type Business,
   defaultDateFormat,
   generateBusiness,
   generateFormationData,
@@ -26,9 +8,25 @@ import {
   getCurrentDate,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { FormationDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
-import * as materialUi from "@mui/material";
+import type { FormationDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
+import type * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import { LookupDbaStepIndexByName } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
+import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
+import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import analytics from "@/lib/utils/analytics";
+import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
+import {
+  type FormationPageHelpers,
+  generateFormationProfileData,
+  mockApiResponse,
+  preparePage,
+  useSetupInitialMocks,
+} from "@/test/helpers/helpers-formation";
+import { fillText, searchAndGetValue } from "@/test/helpers/helpersSearchBusinessName";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 
 const Config = getMergedConfig();
 

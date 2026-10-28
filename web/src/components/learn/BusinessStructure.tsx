@@ -1,10 +1,10 @@
+import { FormControl, MenuItem, Select, useMediaQuery } from "@mui/material";
+import React, { type ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import { FormControl, MenuItem, Select, useMediaQuery } from "@mui/material";
-import React, { ReactElement } from "react";
 
 interface Props {
   heading: string;

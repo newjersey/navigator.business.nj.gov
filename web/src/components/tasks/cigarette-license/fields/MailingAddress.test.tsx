@@ -1,4 +1,12 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import {
+  type CigaretteLicenseData,
+  emptyCigaretteLicenseData,
+} from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { generateBusiness } from "@businessnjgovnavigator/shared/test/factories";
+import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { type ReactElement, useState } from "react";
 import { MailingAddress } from "@/components/tasks/cigarette-license/fields/MailingAddress";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import {
@@ -7,15 +15,7 @@ import {
 } from "@/contexts/dataFormErrorMapContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { fillTextUserEvent } from "@/test/helpers/helpers-testing-library-selectors";
-import {
-  CigaretteLicenseData,
-  emptyCigaretteLicenseData,
-} from "@businessnjgovnavigator/shared/cigaretteLicense";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { generateBusiness } from "@businessnjgovnavigator/shared/test/factories";
-import { screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { ReactElement, useState } from "react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 const Config = getMergedConfig();
 

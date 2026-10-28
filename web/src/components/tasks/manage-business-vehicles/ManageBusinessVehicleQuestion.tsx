@@ -1,3 +1,5 @@
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import React from "react";
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -6,8 +8,6 @@ import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React from "react";
 
 interface Props {
   taskId: string;

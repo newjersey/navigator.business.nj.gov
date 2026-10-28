@@ -1,8 +1,8 @@
+import { type ReactElement, useContext, useState } from "react";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { FormationRadio } from "@/components/tasks/business-formation/business/FormationRadio";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext, useState } from "react";
 
 export const WillPracticeLaw = (): ReactElement => {
   const { Config } = useConfig();

@@ -1,8 +1,8 @@
+import type { ReactElement } from "react";
 import { NumericField } from "@/components/data-fields/NumericField";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { templateEval } from "@/lib/utils/helpers";
-import { ReactElement } from "react";
 
 interface Props {
   handleChangeOverride?: (value: string) => void;

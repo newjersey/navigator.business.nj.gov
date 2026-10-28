@@ -1,14 +1,14 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { type ReactNode, useReducer } from "react";
 import { AuthContext, initialState } from "@/contexts/authContext";
 import { authReducer } from "@/lib/auth/AuthContext";
 import * as session from "@/lib/auth/sessionHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import LoginPage from "@/pages/login";
 import { generateActiveUser } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
-import { useReducer, type ReactNode } from "react";
-import analytics from "@/lib/utils/analytics";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 function setupMockAnalytics(): typeof analytics {
   return {

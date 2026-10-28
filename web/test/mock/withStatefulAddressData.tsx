@@ -1,3 +1,5 @@
+import type { FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
+import { type ReactElement, type ReactNode, useState } from "react";
 import { AddressContext } from "@/contexts/addressContext";
 import {
   createDataFormErrorMap,
@@ -5,8 +7,6 @@ import {
 } from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
-import { ReactElement, ReactNode, useState } from "react";
 
 export const WithStatefulAddressData = ({
   children,

@@ -1,5 +1,8 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext } from "react";
 import { Icon } from "@/components/njwds/Icon";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -8,9 +11,6 @@ import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitl
 import { removeBusiness } from "@/lib/domain-logic/removeBusiness";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   previousBusiness: Business | undefined;

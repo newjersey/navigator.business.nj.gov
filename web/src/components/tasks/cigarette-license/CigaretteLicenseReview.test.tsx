@@ -1,3 +1,14 @@
+import { emptyCigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { type ReactElement, useState } from "react";
 import { CigaretteLicenseReview } from "@/components/tasks/cigarette-license/CigaretteLicenseReview";
 import { AddressContext } from "@/contexts/addressContext";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
@@ -8,17 +19,6 @@ import {
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { emptyCigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
-import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
-import {
-  generateBusiness,
-  generateProfileData,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { ReactElement, useState } from "react";
 
 describe("<CigaretteLicenseReview />", () => {
   const mockSetStepIndex = jest.fn();

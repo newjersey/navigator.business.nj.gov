@@ -1,16 +1,16 @@
-import { ProfileTab } from "@/components/profile/ProfileTab";
-import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   isNexusBusiness,
   isOwningBusiness,
   isStartingBusiness,
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, useContext, useRef } from "react";
+import type { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import type { ProfileTabs } from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { type ReactElement, useContext, useRef } from "react";
+import { ProfileTab } from "@/components/profile/ProfileTab";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 
 const infoTab = "info";
 const contactTab = "contact";

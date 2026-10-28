@@ -1,12 +1,11 @@
-/* eslint-disable unicorn/filename-case */
-import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
-import { PrimaryButton, PrimaryButtonColors } from "@/components/njwds-extended/PrimaryButton";
-import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import type { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
+import { PrimaryButton, type PrimaryButtonColors } from "@/components/njwds-extended/PrimaryButton";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
-import { ReactElement } from "react";
 
 interface Props {
   link: string;

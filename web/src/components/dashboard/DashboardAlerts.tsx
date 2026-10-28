@@ -1,8 +1,8 @@
+import type { ReactElement } from "react";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAlert";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { getTaskStatusUpdatedMessage } from "@/lib/utils/helpers";
-import { ReactElement } from "react";
 
 export const DashboardAlerts = (): ReactElement => {
   const { Config } = useConfig();

@@ -1,9 +1,9 @@
-import * as api from "@/lib/api-client/apiClient";
-import SearchContentPage from "@/pages/mgmt/search";
-import { generateFormationDbaContent, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import { ConfigContext, type ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared";
 import type { CmsConfig } from "@businessnjgovnavigator/shared/types";
 import { fireEvent, render, screen } from "@testing-library/react";
+import * as api from "@/lib/api-client/apiClient";
+import SearchContentPage from "@/pages/mgmt/search";
+import { generateFormationDbaContent, generateXrayRenewalCalendarEvent } from "@/test/factories";
 
 jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;

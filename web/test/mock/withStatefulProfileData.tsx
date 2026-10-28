@@ -1,3 +1,5 @@
+import type { ProfileData } from "@businessnjgovnavigator/shared/";
+import { type ReactElement, type ReactNode, useEffect, useState } from "react";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -6,8 +8,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { getFlow } from "@/lib/utils/helpers";
 import { statefulDataHelpers } from "@/test/mock/withStatefulData";
-import { ProfileData } from "@businessnjgovnavigator/shared/";
-import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 const updateSpy = jest.fn();
 
@@ -41,7 +41,6 @@ export const WithStatefulProfileData = ({
   children: ReactNode;
   initialData: ProfileData;
 }): ReactElement => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [genericData, setGenericData] = useState<ProfileData>(initialData);
 
   useEffect(() => {

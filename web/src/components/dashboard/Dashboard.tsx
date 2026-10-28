@@ -1,28 +1,10 @@
-import { PersonalizeMyTasksButton } from "@/components/PersonalizeMyTasksButton";
-import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { AnytimeActionContainer } from "@/components/dashboard/AnytimeActionContainer";
-import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
-import { ElevatorViolationsCard } from "@/components/dashboard/ElevatorViolationsCard";
-import { HideableTasks } from "@/components/dashboard/HideableTasks";
-import { Roadmap } from "@/components/dashboard/Roadmap";
-import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
-import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
-import { getAnytimeActionsFromNonEssentialQuestions } from "@/components/dashboard/anytimeActionsBuilder";
-import {
-  getPersonalizeTaskButtonTabValue,
-  getRoadmapHeadingText,
-} from "@/components/dashboard/dashboardHelpers";
-import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { MediaQueries } from "@/lib/PageSizes";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import {
   isDomesticEmployerBusiness,
   isNexusBusiness,
   isStartingBusiness,
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import {
+import type {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
   Certification,
@@ -33,7 +15,25 @@ import {
   XrayRenewalCalendarEventType,
 } from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { AnytimeActionContainer } from "@/components/dashboard/AnytimeActionContainer";
+import { getAnytimeActionsFromNonEssentialQuestions } from "@/components/dashboard/anytimeActionsBuilder";
+import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
+import {
+  getPersonalizeTaskButtonTabValue,
+  getRoadmapHeadingText,
+} from "@/components/dashboard/dashboardHelpers";
+import { ElevatorViolationsCard } from "@/components/dashboard/ElevatorViolationsCard";
+import { HideableTasks } from "@/components/dashboard/HideableTasks";
+import { Roadmap } from "@/components/dashboard/Roadmap";
+import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
+import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
+import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { PersonalizeMyTasksButton } from "@/components/PersonalizeMyTasksButton";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 
 interface Props {
   anytimeActionTasks: AnytimeActionTask[];

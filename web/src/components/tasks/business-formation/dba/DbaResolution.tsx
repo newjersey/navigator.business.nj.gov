@@ -1,7 +1,7 @@
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { ReactElement, useContext } from "react";
 
 export const DbaResolution = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);

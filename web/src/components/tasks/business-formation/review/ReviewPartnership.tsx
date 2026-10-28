@@ -1,9 +1,9 @@
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext } from "react";
 
 export const ReviewPartnership = (): ReactElement => {
   const { Config } = useConfig();

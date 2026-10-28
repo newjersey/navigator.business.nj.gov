@@ -1,9 +1,13 @@
+import { type BusinessUser, createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
+import type { OnboardingErrors } from "@businessnjgovnavigator/shared/types";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext, useEffect, useRef, useState } from "react";
 import { Content } from "@/components/Content";
 import { AccountSetupForm } from "@/components/data-fields/AccountSetupForm";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { AuthContext } from "@/contexts/authContext";
 import {
   createDataFormErrorMap,
@@ -20,10 +24,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { BusinessUser, createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
-import { OnboardingErrors } from "@businessnjgovnavigator/shared/types";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 const AccountSetupPage = (): ReactElement => {
   usePageWithNeedsAccountSnackbar();
@@ -93,7 +93,6 @@ const AccountSetupPage = (): ReactElement => {
   }, [router]);
 
   // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-  /* eslint-disable @typescript-eslint/ban-ts-comment */
   const parseAndSendAnalyticsEvent = (source: string): void => {
     const possibleAnalyticsEvents = Object.keys(analytics.event);
 

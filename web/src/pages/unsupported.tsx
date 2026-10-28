@@ -1,15 +1,15 @@
+import { getBusinessById } from "@businessnjgovnavigator/shared/domain-logic/getBusinessById";
+import { useRouter } from "next/compat/router";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
-import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPreviousBusinessBar";
+import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES } from "@/lib/domain-logic/routes";
-import { getBusinessById } from "@businessnjgovnavigator/shared/domain-logic/getBusinessById";
-import { useRouter } from "next/compat/router";
-import { ReactElement } from "react";
 
 const UnsupportedPage = (): ReactElement => {
   const { Config } = useConfig();

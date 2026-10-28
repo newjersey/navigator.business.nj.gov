@@ -1,23 +1,23 @@
-import { LoadingPageComponent } from "@/components/LoadingPageComponent";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { LicenseNameTaskIdMapping } from "@businessnjgovnavigator/shared/";
 import {
   generateLicenseDetails,
   getCurrentDate,
-  LicenseStatus,
+  type LicenseStatus,
+  type LicenseTaskId,
   licenseStatuses,
-  LicenseTaskId,
-  TaskProgress,
+  type TaskProgress,
 } from "@businessnjgovnavigator/shared/index";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useEffect, useState } from "react";
+import { type ReactElement, useEffect, useState } from "react";
+import { LoadingPageComponent } from "@/components/LoadingPageComponent";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 
 const ModifyBusinessPage = (): ReactElement => {
   const router = useRouter();
@@ -136,7 +136,7 @@ const ModifyBusinessPage = (): ReactElement => {
               <PrimaryButton
                 isColor="primary"
                 onClick={() => {
-                  if (!!licenseStatus && !!licenseName && !!business) {
+                  if (licenseStatus && licenseName && business) {
                     updateQueue?.queueBusiness({
                       ...business,
                       taskProgress: {

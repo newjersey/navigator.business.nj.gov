@@ -1,11 +1,11 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useEffect, useRef, useState } from "react";
 import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
 import { ProfileField } from "@/components/profile/ProfileField";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import analytics from "@/lib/utils/analytics";
+import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
 
 export const NonEssentialQuestionForPersonas = (props: {
   questionId: ProfileContentField;

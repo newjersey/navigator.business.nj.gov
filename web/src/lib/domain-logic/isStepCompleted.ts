@@ -1,5 +1,5 @@
-import { Roadmap, Step } from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import type { Roadmap, Step } from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
 
 export const isStepCompleted = (
   roadmap: Roadmap | undefined,

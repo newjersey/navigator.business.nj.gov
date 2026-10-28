@@ -1,3 +1,11 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  type OperatingPhase,
+  OperatingPhases,
+} from "@businessnjgovnavigator/shared/operatingPhase";
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { generateProfileData } from "@businessnjgovnavigator/shared/test";
+import { render, screen } from "@testing-library/react";
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
 import {
   createDataFormErrorMap,
@@ -7,14 +15,9 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getFlow } from "@/lib/utils/helpers";
 import { randomHomeBasedIndustry, randomNonHomeBasedIndustry } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { OperatingPhase, OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { generateProfileData } from "@businessnjgovnavigator/shared/test";
-import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 

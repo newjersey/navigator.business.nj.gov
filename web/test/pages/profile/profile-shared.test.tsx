@@ -1,4 +1,29 @@
-/* eslint-disable jest/expect-expect */
+import {
+  type Business,
+  type BusinessPersona,
+  businessPersonas,
+  DOL_EIN_CHARACTERS,
+  type ForeignBusinessTypeId,
+  generateBusiness,
+  generateMunicipality,
+  generateProfileData,
+  type Industry,
+  type OperatingPhase,
+  OperatingPhases,
+  type ProfileData,
+  randomInt,
+} from "@businessnjgovnavigator/shared";
+import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  filterRandomIndustry,
+  generateFormationData,
+  generateTaxFilingData,
+} from "@businessnjgovnavigator/shared/test";
+import type { ProfileTabs } from "@businessnjgovnavigator/shared/types";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { act } from "react";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES } from "@/lib/domain-logic/routes";
@@ -31,32 +56,6 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
-import {
-  Business,
-  BusinessPersona,
-  businessPersonas,
-  DOL_EIN_CHARACTERS,
-  ForeignBusinessTypeId,
-  generateBusiness,
-  generateMunicipality,
-  generateProfileData,
-  Industry,
-  OperatingPhase,
-  OperatingPhases,
-  ProfileData,
-  randomInt,
-} from "@businessnjgovnavigator/shared";
-import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  filterRandomIndustry,
-  generateFormationData,
-  generateTaxFilingData,
-} from "@businessnjgovnavigator/shared/test";
-import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { act } from "react";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;

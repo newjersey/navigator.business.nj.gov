@@ -1,12 +1,12 @@
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import type { TaskWithLicenseTaskId } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
 import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { TaskWithLicenseTaskId } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 const CigaretteLicensePreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

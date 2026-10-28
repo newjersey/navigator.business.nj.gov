@@ -1,10 +1,11 @@
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import {
+  type CarServiceType,
   carServiceOptions,
-  CarServiceType,
   getIndustries,
-  PropertyLeaseType,
+  type PropertyLeaseType,
+  type ResidentialConstructionType,
   randomInt,
-  ResidentialConstructionType,
 } from "@businessnjgovnavigator/shared";
 import {
   completeEmploymentAgencyOnboarding,
@@ -12,7 +13,6 @@ import {
   setMobileViewport,
 } from "../../support/helpers/helpers";
 import { onOnboardingPageStartingBusiness } from "../../support/page_objects/onboardingPageNew";
-import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 
 const industries = getIndustries();
 

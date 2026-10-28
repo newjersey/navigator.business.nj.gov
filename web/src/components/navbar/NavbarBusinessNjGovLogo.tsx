@@ -1,8 +1,8 @@
+import { useRouter } from "next/compat/router";
+import type { ReactElement } from "react";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { useRouter } from "next/compat/router";
-import { ReactElement } from "react";
 
 interface Props {
   useSmall?: boolean;

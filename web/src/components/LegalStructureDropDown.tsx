@@ -1,3 +1,14 @@
+import { type LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
+import type { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
+import {
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  Select,
+  type SelectChangeEvent,
+} from "@mui/material";
+import { orderBy } from "lodash";
+import { type ReactElement, type ReactNode, useContext } from "react";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
@@ -5,11 +16,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
-import { LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
-import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
-import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { orderBy } from "lodash";
-import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
   disabled?: boolean;

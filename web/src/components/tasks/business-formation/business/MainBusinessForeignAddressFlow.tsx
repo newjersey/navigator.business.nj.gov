@@ -1,3 +1,10 @@
+import {
+  createEmptyFormationAddress,
+  type FormationAddress,
+  type FormationBusinessLocationType,
+} from "@businessnjgovnavigator/shared/";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { type ReactElement, useContext } from "react";
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { MainBusinessAddressIntl } from "@/components/tasks/business-formation/business/MainBusinessAddressIntl";
@@ -6,13 +13,6 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffect } from "@/lib/utils/helpers";
-import {
-  createEmptyFormationAddress,
-  FormationAddress,
-  FormationBusinessLocationType,
-} from "@businessnjgovnavigator/shared/";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { ReactElement, useContext } from "react";
 
 export const MainBusinessForeignAddressFlow = (): ReactElement => {
   type FlowBusinessLocationType = Exclude<FormationBusinessLocationType, "NJ">;

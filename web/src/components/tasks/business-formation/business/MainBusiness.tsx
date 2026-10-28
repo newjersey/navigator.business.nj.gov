@@ -1,3 +1,7 @@
+import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
+import { type ReactElement, useContext, useMemo } from "react";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
+import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
 import { ForeignCertificate } from "@/components/tasks/business-formation/business/ForeignCertificate";
 import { ForeignStateOfFormation } from "@/components/tasks/business-formation/business/ForeignStateOfFormation";
@@ -6,15 +10,11 @@ import { IsVeteranNonprofit } from "@/components/tasks/business-formation/busine
 import { NonprofitProvisions } from "@/components/tasks/business-formation/business/NonprofitProvisions";
 import { SuffixDropdown } from "@/components/tasks/business-formation/business/SuffixDropdown";
 import { WillPracticeLaw } from "@/components/tasks/business-formation/business/WillPracticeLaw";
-import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
-import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext, useMemo } from "react";
 
 export const MainBusiness = (): ReactElement => {
   const { Config } = useConfig();

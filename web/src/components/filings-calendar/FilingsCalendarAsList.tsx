@@ -1,3 +1,17 @@
+import type {
+  LicenseCalendarEvent,
+  TaxFilingCalendarEvent,
+  XrayRegistrationCalendarEvent,
+} from "@businessnjgovnavigator/shared";
+import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
+import type {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { type ReactElement, useEffect, useState } from "react";
 import { Content } from "@/components/Content";
 import { CalendarEventItem } from "@/components/filings-calendar/CalendarEventItem";
 import { LicenseEvent } from "@/components/filings-calendar/LicenseEvent";
@@ -7,20 +21,6 @@ import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCa
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 import { getXrayRenewalEvent } from "@/lib/domain-logic/getXrayRenewalEvent";
 import { groupBy } from "@/lib/utils/helpers";
-import {
-  LicenseCalendarEvent,
-  TaxFilingCalendarEvent,
-  XrayRegistrationCalendarEvent,
-} from "@businessnjgovnavigator/shared";
-import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
-import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
-import {
-  LicenseEventType,
-  OperateReference,
-  XrayRenewalCalendarEventType,
-} from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, useEffect, useState } from "react";
 
 const LIST_VIEW_MORE_INCREMENT = 5;
 
@@ -43,14 +43,14 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
 
   const licenseCalendarEvents = getLicenseCalendarEvents(
     props.business?.licenseData,
-    Number.parseInt(props.activeYear),
+    Number.parseInt(props.activeYear, 10),
   );
 
   const taxFilings = props.business.taxFilingData.filings ?? [];
 
   const xrayRenewalCalendarEvent = getXrayRenewalEvent(
     props.business?.xrayRegistrationData,
-    Number.parseInt(props.activeYear),
+    Number.parseInt(props.activeYear, 10),
   );
 
   const calendarEvents: (

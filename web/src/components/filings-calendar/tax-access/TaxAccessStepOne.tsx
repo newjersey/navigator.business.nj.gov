@@ -1,3 +1,8 @@
+import {
+  createEmptyProfileData,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
+import { type ReactElement, useState } from "react";
 import { Content } from "@/components/Content";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { TaxAccessBody } from "@/components/filings-calendar/tax-access/TaxAccessBody";
@@ -7,7 +12,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import {
   DataFormErrorMapContext,
-  DataFormErrorMapFields,
+  type DataFormErrorMapFields,
 } from "@/contexts/dataFormErrorMapContext";
 import { createReducedFieldStates } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -15,8 +20,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { ReactElement, useState } from "react";
 
 interface Props {
   moveToNextStep: () => void;

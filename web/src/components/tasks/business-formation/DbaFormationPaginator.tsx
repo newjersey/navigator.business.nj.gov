@@ -1,3 +1,6 @@
+import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/";
+import type { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
+import { type ReactElement, type ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
@@ -13,9 +16,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
-import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/";
-import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
 export const DbaFormationPaginator = (): ReactElement => {
   const { business, updateQueue } = useUserData();

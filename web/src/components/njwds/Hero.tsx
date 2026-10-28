@@ -1,6 +1,9 @@
+import { useMediaQuery } from "@mui/material";
+import { useRouter } from "next/compat/router";
+import type { ReactElement } from "react";
 import {
-  getStartingBusinessTileSet,
   getExistingBusinessTileSet,
+  getStartingBusinessTileSet,
   LandingPageTiles,
 } from "@/components/LandingPageTiles";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -9,9 +12,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import { useMediaQuery } from "@mui/material";
-import { useRouter } from "next/compat/router";
-import { ReactElement } from "react";
 
 export const Hero = (): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);

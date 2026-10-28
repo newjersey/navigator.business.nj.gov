@@ -1,5 +1,3 @@
-/* eslint-disable cypress/no-unnecessary-waiting */
-
 import { deriveIndustrySpecificAnswers } from "@businessnjgovnavigator/cypress/support/helpers/helpers-industry-specific-questions";
 import {
   completeExistingBusinessOnboarding,
@@ -19,11 +17,11 @@ import {
   randomNonHomeBasedNonDomesticEmployerIndustry,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import {
-  Industry,
   arrayOfSectors,
+  employmentPersonnelServiceOptions,
+  type Industry,
   randomElementFromArray,
   randomInt,
-  employmentPersonnelServiceOptions,
 } from "@businessnjgovnavigator/shared/";
 
 describe("Profile [feature] [all] [group4]", () => {

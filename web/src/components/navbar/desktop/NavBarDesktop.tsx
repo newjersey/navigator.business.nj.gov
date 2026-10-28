@@ -1,12 +1,15 @@
+import { getCurrentBusiness, type UserData } from "@businessnjgovnavigator/shared/index";
+import type React from "react";
+import { type ReactElement, useEffect, useRef, useState } from "react";
 import { ButtonIcon } from "@/components/ButtonIcon";
-import { NavBarLoginButton } from "@/components/navbar/NavBarLoginButton";
-import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { NavBarDesktopDropDown } from "@/components/navbar/desktop/NavBarDesktopDropDown";
 import { NavBarDesktopHomeLogo } from "@/components/navbar/desktop/NavBarDesktopHomeLogo";
 import { NavBarDesktopQuickLinks } from "@/components/navbar/desktop/NavBarDesktopQuickLinks";
 import { NavBarVerticalLineDivider } from "@/components/navbar/desktop/NavBarDesktopVerticalLineDivider";
 import { NavBarDesktopWrapper } from "@/components/navbar/desktop/NavBarDesktopWrapper";
 import { NavBarLogoOnlyDesktop } from "@/components/navbar/desktop/NavBarLogoOnlyDesktop";
+import { NavBarLoginButton } from "@/components/navbar/NavBarLoginButton";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import {
   AddBusinessItem,
   GetStartedMenuItem,
@@ -21,8 +24,6 @@ import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessIdsByDateCreated";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import { UserData, getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   previousBusinessId?: string | undefined;
@@ -36,7 +37,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   const business = props.userData ? getCurrentBusiness(props.userData) : undefined;
   const { Config } = useConfig();
 
-  const [open, setOpen] = useState(props.CMS_PREVIEW_ONLY_SHOW_MENU ? true : false);
+  const [open, setOpen] = useState(!!props.CMS_PREVIEW_ONLY_SHOW_MENU);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
 
   const handleClose = (

@@ -1,3 +1,21 @@
+import {
+  type BusinessPersona,
+  einTaskId,
+  generateBusiness,
+  generateMunicipality,
+  generateProfileData,
+  generateUserDataForBusiness,
+  OperatingPhases,
+  type ProfileData,
+  type TaskProgress,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
+import type { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import type { ProfileTabs } from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import Profile from "@/pages/profile";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
@@ -7,24 +25,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  BusinessPersona,
-  einTaskId,
-  generateBusiness,
-  generateMunicipality,
-  generateProfileData,
-  generateUserDataForBusiness,
-  OperatingPhases,
-  ProfileData,
-  TaskProgress,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { Municipality } from "@businessnjgovnavigator/shared/municipality";
-import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -46,7 +46,6 @@ export const renderPage = ({
   municipalities?: Municipality[];
   business?: Business;
   isAuthenticated?: IsAuthenticated;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setShowNeedsAccountModal?: jest.Mock<any, any, any>;
 }): void => {
   const genericTown = generateMunicipality({ displayName: "GenericTown" });

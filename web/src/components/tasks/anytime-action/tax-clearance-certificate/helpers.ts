@@ -1,7 +1,7 @@
 import { LookupMunicipalityByName } from "@businessnjgovnavigator/shared/municipality";
-import { StateObject } from "@businessnjgovnavigator/shared/states";
-import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import type { StateObject } from "@businessnjgovnavigator/shared/states";
+import type { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
 
 export const getInitialTaxId = (business: Business | undefined): string => {
   return business?.taxClearanceCertificateData?.taxId || business?.profileData.taxId || "";

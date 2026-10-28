@@ -1,10 +1,10 @@
+import { FormControl } from "@mui/material";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { FileInput } from "@/components/njwds-extended/FileInput";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FormControl } from "@mui/material";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   hasError: boolean;

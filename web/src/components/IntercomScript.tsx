@@ -1,9 +1,9 @@
-import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import type { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
+import type { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
+import type { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 
 import Script from "next/script";
-import { ReactElement, useEffect } from "react";
+import { type ReactElement, useEffect } from "react";
 
 export const IntercomScript = ({
   user,

@@ -1,13 +1,13 @@
 import {
   createEmptyFormationFormData,
-  FieldsForErrorHandling,
-  FormationFormData,
-  InputFile,
-  NameAvailability,
+  type FieldsForErrorHandling,
+  type FormationFormData,
+  type InputFile,
+  type NameAvailability,
 } from "@businessnjgovnavigator/shared";
 import {
   createEmptyDbaDisplayContent,
-  FormationDbaContent,
+  type FormationDbaContent,
 } from "@businessnjgovnavigator/shared/types";
 import { createContext } from "react";
 

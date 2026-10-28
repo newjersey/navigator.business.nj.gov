@@ -1,6 +1,6 @@
+import { type ReactElement, useContext } from "react";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { ReactElement, useContext } from "react";
 
 type Props = {
   className?: string;

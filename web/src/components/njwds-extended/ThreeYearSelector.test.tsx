@@ -1,8 +1,8 @@
-import { ThreeYearSelector } from "@/components/njwds-extended/ThreeYearSelector";
-import * as shared from "@businessnjgovnavigator/shared";
+import type * as shared from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { Dayjs } from "dayjs";
+import type { Dayjs } from "dayjs";
+import { ThreeYearSelector } from "@/components/njwds-extended/ThreeYearSelector";
 
 function mockShared(): typeof shared {
   return {

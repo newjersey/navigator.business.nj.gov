@@ -1,5 +1,5 @@
-import { ExpandCollapseString } from "@/components/ExpandCollapseString";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { ExpandCollapseString } from "@/components/ExpandCollapseString";
 
 describe("<ExpandCollapseString />", () => {
   let clientHeight: number;

@@ -1,5 +1,5 @@
+import type { ReactElement, ReactNode } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { ReactElement, ReactNode } from "react";
 
 interface Props {
   header: string;

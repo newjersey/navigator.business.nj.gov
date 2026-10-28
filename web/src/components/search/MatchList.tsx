@@ -1,9 +1,10 @@
+import type { Match } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
+import type { CMSMap } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useEffect, useState } from "react";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { UsagesList } from "@/components/search/UsagesList";
 import cmsMapJson from "@/lib/cms/CollectionMap.json";
-import { Match } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
-import { CMSMap } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useEffect, useState } from "react";
+
 interface Props {
   matches: Match[];
   collectionLabel: string;

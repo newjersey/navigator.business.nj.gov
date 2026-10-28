@@ -1,10 +1,10 @@
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import { type ReactElement, useState } from "react";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import NJEDAFundingsOnboardingPage from "@/pages/njeda";
 import { generateFunding } from "@/test/factories";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement, useState } from "react";
 
 const NjedaPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

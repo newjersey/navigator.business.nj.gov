@@ -1,15 +1,15 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
-import {
-  DataFormErrorMapContext,
-  createDataFormErrorMap,
-} from "@/contexts/dataFormErrorMapContext";
-import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { fillTextUserEvent } from "@/test/helpers/helpers-testing-library-selectors";
 import { generateCigaretteLicenseData } from "@businessnjgovnavigator/shared";
 import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { screen } from "@testing-library/react";
-import { ReactElement, useState } from "react";
+import { type ReactElement, useState } from "react";
+import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { fillTextUserEvent } from "@/test/helpers/helpers-testing-library-selectors";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { CigaretteSignatures } from "./CigaretteSignatures";
 
 const Config = getMergedConfig();

@@ -1,3 +1,15 @@
+import { modifyCurrentBusiness, type UserData } from "@businessnjgovnavigator/shared/";
+import {
+  type ReactElement,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import useSWR from "swr";
 import { AuthContext } from "@/contexts/authContext";
 import { IntercomContext } from "@/contexts/intercomContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
@@ -8,22 +20,10 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { isLicenseDataFromDatabaseDataMoreRecent } from "@/lib/domain-logic/isLicenseDataFromDatabaseDataMoreRecent";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { UserDataStorage, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
+import { type UserDataStorage, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
+import { type UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { reportUserDataSync, setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { licenseDataModifyingFunction } from "@/lib/utils/licenseStatus";
-import { modifyCurrentBusiness, UserData } from "@businessnjgovnavigator/shared/";
-import {
-  ReactElement,
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import useSWR from "swr";
 
 const USER_DATA_RESOURCE = "user-data";
 

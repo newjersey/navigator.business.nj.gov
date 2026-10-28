@@ -1,10 +1,16 @@
-import { NeedsAccountContextType } from "@/contexts/needsAccountContext";
+import {
+  createEmptyUser,
+  getCurrentBusiness,
+  type UserData,
+} from "@businessnjgovnavigator/shared/";
+import type { Dispatch } from "react";
+import type { NeedsAccountContextType } from "@/contexts/needsAccountContext";
 import * as api from "@/lib/api-client/apiClient";
-import { ActiveUser, AuthAction } from "@/lib/auth/AuthContext";
+import type { ActiveUser, AuthAction } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { AccountLinkingErrorStorageFactory } from "@/lib/storage/AccountLinkingErrorStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { UpdateQueue } from "@/lib/UpdateQueue";
+import type { UpdateQueue } from "@/lib/UpdateQueue";
 import analytics from "@/lib/utils/analytics";
 import {
   setAnalyticsDimensions,
@@ -12,8 +18,6 @@ import {
   setRegistrationDimension,
   setUserId,
 } from "@/lib/utils/analytics-helpers";
-import { UserData, createEmptyUser, getCurrentBusiness } from "@businessnjgovnavigator/shared/";
-import { Dispatch } from "react";
 import * as session from "./sessionHelper";
 import { triggerSignOut } from "./sessionHelper";
 

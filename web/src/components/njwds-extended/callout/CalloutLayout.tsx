@@ -1,6 +1,9 @@
-import { CalloutStyling, IconTextProps } from "@/components/njwds-extended/callout/calloutHelpers";
-import { IconTextList } from "@/components/njwds-extended/callout/CalloutIcons";
 import type { ReactElement, ReactNode } from "react";
+import { IconTextList } from "@/components/njwds-extended/callout/CalloutIcons";
+import type {
+  CalloutStyling,
+  IconTextProps,
+} from "@/components/njwds-extended/callout/calloutHelpers";
 
 export interface CalloutLayoutProps {
   styling: CalloutStyling;

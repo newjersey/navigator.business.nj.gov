@@ -1,5 +1,5 @@
 import {
-  CigaretteLicenseData,
+  type CigaretteLicenseData,
   emptyCigaretteLicenseData,
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { createContext } from "react";

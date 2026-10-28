@@ -1,8 +1,8 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { CongratulatoryModal } from "@/components/CongratulatoryModal";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -20,7 +20,7 @@ describe("<CongratulatoryModal />", () => {
     );
 
     const link = screen.queryByText(
-      `${Config.sectionHeaders["START"]} ${Config.dashboardDefaults.congratulatoryModalLinkText}`,
+      `${Config.sectionHeaders.START} ${Config.dashboardDefaults.congratulatoryModalLinkText}`,
     );
     expect(link).toBeInTheDocument();
     fireEvent.click(link as HTMLElement);
@@ -33,7 +33,7 @@ describe("<CongratulatoryModal />", () => {
     );
 
     const link = screen.queryByText(
-      `${Config.sectionHeaders["START"]} ${Config.dashboardDefaults.congratulatoryModalLinkText}`,
+      `${Config.sectionHeaders.START} ${Config.dashboardDefaults.congratulatoryModalLinkText}`,
     );
     expect(link).not.toBeInTheDocument();
   });

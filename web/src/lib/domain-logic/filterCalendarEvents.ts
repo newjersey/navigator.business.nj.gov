@@ -1,5 +1,5 @@
 import {
-  CalendarEvent,
+  type CalendarEvent,
   defaultDateFormat,
   getCurrentDate,
   getJanOfYear,

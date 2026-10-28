@@ -1,23 +1,26 @@
-import { createFormContext, createReducedFieldStates } from "@/contexts/formContext";
 import {
-  BusinessUser,
-  EmergencyTripPermitApplicationInfo,
+  type BusinessUser,
+  type EmergencyTripPermitApplicationInfo,
   emptyBusinessUser,
   emptyFormationAddressData,
   emptyProfileData,
   emptyRoadmapTaskData,
   emptyTaxClearanceCertificateData,
-  FormationAddress,
+  type FormationAddress,
   generateNewEmergencyTripPermitData,
-  ProfileData,
-  RoadmapTaskData,
-  TaxClearanceCertificateData,
+  type ProfileData,
+  type RoadmapTaskData,
+  type TaxClearanceCertificateData,
 } from "@businessnjgovnavigator/shared";
 import {
-  CigaretteLicenseData,
+  type CigaretteLicenseData,
   emptyCigaretteLicenseData,
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
-import { profileFieldsFromConfig, ReducedFieldStates } from "@businessnjgovnavigator/shared/types";
+import {
+  profileFieldsFromConfig,
+  type ReducedFieldStates,
+} from "@businessnjgovnavigator/shared/types";
+import { createFormContext, createReducedFieldStates } from "@/contexts/formContext";
 
 export type DataFormErrorMapFields =
   | keyof ProfileData

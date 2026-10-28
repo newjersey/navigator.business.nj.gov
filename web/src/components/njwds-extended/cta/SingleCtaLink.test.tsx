@@ -1,8 +1,8 @@
+import { fireEvent, render, screen } from "@testing-library/react";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
   return {

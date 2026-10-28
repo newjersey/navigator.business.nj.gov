@@ -1,5 +1,5 @@
 import {
-  Business,
+  type Business,
   LookupIndustryById,
   LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared";

@@ -1,5 +1,5 @@
+import type { ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { ReactElement } from "react";
 
 export const Card = (props: {
   iconFilename: string;

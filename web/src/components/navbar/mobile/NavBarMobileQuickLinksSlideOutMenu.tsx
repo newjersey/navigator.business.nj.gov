@@ -1,3 +1,6 @@
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import { type ReactElement, useState } from "react";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import {
   Grow,
@@ -10,9 +13,6 @@ import {
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
-import { ReactElement, useState } from "react";
 
 export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);

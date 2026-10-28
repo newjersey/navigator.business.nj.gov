@@ -1,3 +1,8 @@
+import type { FormationBusinessLocationType } from "@businessnjgovnavigator/shared";
+import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
+import type { StateObject } from "@businessnjgovnavigator/shared/states";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { type ReactElement, useContext } from "react";
 import { IntlAddress } from "@/components/data-fields/address/IntlAddress";
 import { NewJerseyAddress } from "@/components/data-fields/address/NewJerseyAddress";
 import { UnitedStatesAddress } from "@/components/data-fields/address/UnitedStatesAddress";
@@ -9,11 +14,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { FormationBusinessLocationType } from "@businessnjgovnavigator/shared";
-import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
-import { StateObject } from "@businessnjgovnavigator/shared/states";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { ReactElement, useContext } from "react";
 
 export const ProfileAddress = (): ReactElement => {
   const { Config } = useConfig();

@@ -1,10 +1,10 @@
+import type { StateObject } from "@businessnjgovnavigator/shared/";
+import { type ReactElement, useContext } from "react";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { StateObject } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext } from "react";
 
 export const ForeignStateOfFormation = (): ReactElement => {
   const FIELD = "foreignStateOfFormation";

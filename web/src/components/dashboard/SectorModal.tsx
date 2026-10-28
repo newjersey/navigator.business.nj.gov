@@ -1,3 +1,7 @@
+import { createEmptyProfileData, type ProfileData } from "@businessnjgovnavigator/shared/";
+import { FieldStateActionKind } from "@businessnjgovnavigator/shared/types";
+import { FormControl } from "@mui/material";
+import { type ReactElement, useState } from "react";
 import { Content } from "@/components/Content";
 import { Sectors } from "@/components/data-fields/Sectors";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
@@ -12,10 +16,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
-import { FieldStateActionKind } from "@businessnjgovnavigator/shared/types";
-import { FormControl } from "@mui/material";
-import { ReactElement, useState } from "react";
 
 interface Props {
   open: boolean;

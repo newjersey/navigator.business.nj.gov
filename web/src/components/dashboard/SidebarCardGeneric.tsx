@@ -1,11 +1,11 @@
+import type { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
 import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
-import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 import { ModifiedContent } from "../ModifiedContent";
 
 type Props = {

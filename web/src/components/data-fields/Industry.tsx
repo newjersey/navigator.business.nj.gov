@@ -1,3 +1,6 @@
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, type ReactNode, useContext } from "react";
 import { EmploymentAgency } from "@/components/data-fields/EmploymentAgency";
 import { EssentialQuestionField } from "@/components/data-fields/EssentialQuestionField";
 import { HomeContractor } from "@/components/data-fields/HomeContractor";
@@ -6,12 +9,8 @@ import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { EssentialQuestion, EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
+import { type EssentialQuestion, EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
   essentialQuestionErrorTypes?: T[];

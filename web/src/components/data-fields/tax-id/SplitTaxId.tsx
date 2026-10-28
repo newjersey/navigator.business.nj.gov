@@ -1,12 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { useMediaQuery } from "@mui/material";
+import { type ReactElement, useContext, useRef, useState } from "react";
+import type { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import {
   TaxIdFormContext,
   taxIdFormContextErrorMap,
 } from "@/components/data-fields/tax-id/TaxIdFormContext";
 import { GenericTextField } from "@/components/GenericTextField";
-import { ShowHideStatus } from "@/components/ShowHideToggleButton";
+import type { ShowHideStatus } from "@/components/ShowHideToggleButton";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -15,9 +16,6 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { MediaQueries } from "@/lib/PageSizes";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, useContext, useRef, useState } from "react";
 
 interface Props
   extends Omit<
@@ -57,7 +55,7 @@ export const SplitTaxId = ({
   RegisterForOnSubmit(
     () =>
       isValid() &&
-      (additionalValidationIsValid && !!state.profileData.taxId
+      (additionalValidationIsValid && state.profileData.taxId
         ? additionalValidationIsValid(state.profileData.taxId)
         : true),
   );
@@ -117,7 +115,7 @@ export const SplitTaxId = ({
             handleChange={(value): void => {
               handleChange(value, "taxId");
             }}
-            onValidation={(fieldName: string, invalid: boolean): void => setIsValid(!invalid)}
+            onValidation={(_fieldName: string, invalid: boolean): void => setIsValid(!invalid)}
             disabled={props.taxIdDisplayStatus === "password-view"}
             type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
             allowMasking={true}
@@ -139,7 +137,7 @@ export const SplitTaxId = ({
             handleChange={(value): void => {
               handleChange(value, "taxIdLocation");
             }}
-            onValidation={(fieldName: string, invalid: boolean): void => setIsValid(!invalid)}
+            onValidation={(_fieldName: string, invalid: boolean): void => setIsValid(!invalid)}
             disabled={props.taxIdDisplayStatus === "password-view"}
             type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
             allowMasking={true}

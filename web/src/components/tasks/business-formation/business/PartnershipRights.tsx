@@ -1,10 +1,10 @@
+import type { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
+import { type ReactElement, type ReactNode, useContext } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { FormationRadio } from "@/components/tasks/business-formation/business/FormationRadio";
 import { FormationTextArea } from "@/components/tasks/business-formation/business/FormationTextArea";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
-import { ReactElement, ReactNode, useContext } from "react";
 
 export const PartnershipRights = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);

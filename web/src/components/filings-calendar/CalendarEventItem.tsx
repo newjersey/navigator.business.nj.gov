@@ -1,10 +1,10 @@
-import { Tag } from "@/components/njwds-extended/Tag";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import analytics from "@/lib/utils/analytics";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import Link from "next/link";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { Tag } from "@/components/njwds-extended/Tag";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   urlSlug: string;

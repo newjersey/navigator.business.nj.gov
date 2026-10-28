@@ -1,20 +1,20 @@
-import { NavBarVariant } from "@/components/navbar/NavBarTypes";
-import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
-import { generateRoadmap, generateTask } from "@/test/factories";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
-  Business,
+  type Business,
   generateBusiness,
   generateProfileData,
   generateUserData,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
-import { MouseEvent, ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
+import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
+import { generateRoadmap, generateTask } from "@/test/factories";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 
 const Config = getMergedConfig();
 

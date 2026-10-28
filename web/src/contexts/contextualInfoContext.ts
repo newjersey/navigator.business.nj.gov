@@ -1,5 +1,5 @@
-import { ContextualInfo } from "@businessnjgovnavigator/shared/types";
-import { createContext, Dispatch, SetStateAction } from "react";
+import type { ContextualInfo } from "@businessnjgovnavigator/shared/types";
+import { createContext, type Dispatch, type SetStateAction } from "react";
 
 export interface ContextualInfoContextType {
   contextualInfo: ContextualInfo;

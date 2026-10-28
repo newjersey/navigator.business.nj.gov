@@ -1,8 +1,8 @@
-import { CalendarButtonDropdown } from "@/components/njwds-extended/CalendarButtonDropdown";
-import { Icon } from "@/components/njwds/Icon";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { IconButton } from "@mui/material";
-import { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
+import { Icon } from "@/components/njwds/Icon";
+import { CalendarButtonDropdown } from "@/components/njwds-extended/CalendarButtonDropdown";
 
 const colors = {
   active: "usa-button",
@@ -17,9 +17,9 @@ type Props = {
 };
 export const ThreeYearSelector = (props: Props): ReactElement => {
   const getColors = (year: string): string | undefined => {
-    if (year === props.activeYear) return colors["active"];
-    if (year === getCurrentDate().year().toString()) return colors["current"];
-    return colors["unselected"];
+    if (year === props.activeYear) return colors.active;
+    if (year === getCurrentDate().year().toString()) return colors.current;
+    return colors.unselected;
   };
 
   return (
@@ -47,12 +47,10 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
         hideDivider
         name="year-selector"
         dropdownClassName="padding-x-05 bg-transparent"
-        /* eslint-disable @typescript-eslint/no-explicit-any */
         wrapper={(props: {
           children: ReactNode;
           className?: string;
           [key: string]: any;
-          /* eslint-enable @typescript-eslint/no-explicit-any */
         }): ReactElement => (
           <div
             {...props}

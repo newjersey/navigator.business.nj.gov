@@ -1,5 +1,5 @@
-import { getJobState } from "@/lib/static/admin/deadLinkJobState";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getJobState } from "@/lib/static/admin/deadLinkJobState";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse): void {
   if (req.method !== "GET") {

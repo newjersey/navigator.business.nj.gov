@@ -1,10 +1,10 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { UnlockingAlert } from "@/components/tasks/UnlockingAlert";
 import { UnlockingAlertDakotaFormation } from "@/components/tasks/UnlockingAlertDakotaFormation";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props {
   dataTestid?: string;

@@ -1,5 +1,5 @@
 import { useRouter } from "next/compat/router";
-import { Router } from "next/router";
+import type { Router } from "next/router";
 
 type RouterEventHandler = (...args: unknown[]) => void;
 

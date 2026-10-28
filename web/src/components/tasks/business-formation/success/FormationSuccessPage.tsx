@@ -1,3 +1,5 @@
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { DocumentTile } from "@/components/DocumentTile";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -5,8 +7,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement } from "react";
 
 interface Props {
   business: Business;

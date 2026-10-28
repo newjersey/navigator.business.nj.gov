@@ -1,10 +1,14 @@
+import type { Roadmap, Task } from "@businessnjgovnavigator/shared/types";
+import {
+  type SectionType,
+  sectionNames,
+  type TaskProgress,
+} from "@businessnjgovnavigator/shared/userData";
+import { useContext, useMemo } from "react";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { Roadmap, Task } from "@businessnjgovnavigator/shared/types";
-import { SectionType, TaskProgress, sectionNames } from "@businessnjgovnavigator/shared/userData";
-import { useContext, useMemo } from "react";
 
 export type CurrentAndNextSection = { current: SectionType; next: SectionType | undefined };
 

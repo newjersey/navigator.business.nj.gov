@@ -1,9 +1,9 @@
-import {
+import type {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitFieldNames,
 } from "@businessnjgovnavigator/shared";
 import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
-import { EmergencyTripPermitFieldErrorState } from "@businessnjgovnavigator/shared/types";
+import type { EmergencyTripPermitFieldErrorState } from "@businessnjgovnavigator/shared/types";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 
@@ -58,7 +58,7 @@ export const getErrorStateForEmergencyTripPermitField = (
 
   if (fieldName === "permitStartTime" && value && value !== true && value !== "") {
     dayjs.extend(timezone);
-    const permitDate = dayjs(state["permitDate"]);
+    const permitDate = dayjs(state.permitDate);
     const timeParts = value.split(":");
     const permitDateTime = permitDate
       .tz("America/New_York")

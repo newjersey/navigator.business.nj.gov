@@ -1,3 +1,25 @@
+import {
+  type CannabisLicenseType,
+  getIndustries,
+  type Industry,
+  LookupIndustryById,
+} from "@businessnjgovnavigator/shared";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
+import {
+  Autocomplete,
+  createFilterOptions,
+  type FilterOptionsState,
+  TextField,
+} from "@mui/material";
+import {
+  type ChangeEvent,
+  type FocusEvent,
+  type ReactElement,
+  type ReactNode,
+  useContext,
+  useState,
+} from "react";
 import { Content } from "@/components/Content";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
@@ -11,16 +33,7 @@ import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { templateEval } from "@/lib/utils/helpers";
 import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
-import {
-  CannabisLicenseType,
-  Industry,
-  LookupIndustryById,
-  getIndustries,
-} from "@businessnjgovnavigator/shared";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
-import { Autocomplete, FilterOptionsState, TextField, createFilterOptions } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, ReactNode, useContext, useState } from "react";
+
 interface Props {
   handleChange?: () => void;
   onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
@@ -45,7 +58,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
   const onIndustryIdChange = (industryId: string | undefined): void => {
     setProfileData((currentProfileData) => {
-      let cannabisLicenseType = undefined;
+      let cannabisLicenseType;
 
       const homeBasedBusiness: boolean | undefined =
         !isHomeBasedBusinessApplicable(industryId) || nexusLocationInNewJersey(currentProfileData)
@@ -81,7 +94,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     setSearchText(event.target.value.trimEnd());
   };
 
-  const handleIndustry = (event: ChangeEvent<unknown>, value: Industry | null): void => {
+  const handleIndustry = (_event: ChangeEvent<unknown>, value: Industry | null): void => {
     props.handleChange && props.handleChange();
     onIndustryIdChange(value?.id);
     setSearchText(value ? value.name : "");

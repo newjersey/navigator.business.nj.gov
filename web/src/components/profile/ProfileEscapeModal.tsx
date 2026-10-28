@@ -1,7 +1,7 @@
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { ModalThreeButton } from "@/components/ModalThreeButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 interface Props {
   isOpen: boolean;

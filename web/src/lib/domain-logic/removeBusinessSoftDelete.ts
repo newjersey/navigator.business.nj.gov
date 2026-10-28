@@ -1,4 +1,4 @@
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 
 export const removeBusinessSoftDelete = ({
   userData,

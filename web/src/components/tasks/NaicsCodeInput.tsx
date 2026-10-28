@@ -1,3 +1,12 @@
+import {
+  type Business,
+  findIndustryByNaicsCode,
+  LookupIndustryById,
+} from "@businessnjgovnavigator/shared";
+import type { NaicsCodeObject, Task } from "@businessnjgovnavigator/shared/types";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext, useMemo, useState } from "react";
 import { Content, ExternalLink } from "@/components/Content";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { GenericTextField } from "@/components/GenericTextField";
@@ -13,14 +22,6 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { getNaicsCode, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import {
-  Business,
-  findIndustryByNaicsCode,
-  LookupIndustryById,
-} from "@businessnjgovnavigator/shared";
-import { NaicsCodeObject, Task } from "@businessnjgovnavigator/shared/types";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext, useMemo, useState } from "react";
 
 interface Props {
   onSave: (changedIndustryName?: string) => void;

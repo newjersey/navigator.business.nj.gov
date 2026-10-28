@@ -1,5 +1,5 @@
-import { UpdateQueue } from "@/lib/UpdateQueue";
 import { createContext } from "react";
+import type { UpdateQueue } from "@/lib/UpdateQueue";
 
 export interface UpdateQueueContextType {
   updateQueue: UpdateQueue | undefined;

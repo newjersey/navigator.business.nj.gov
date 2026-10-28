@@ -1,3 +1,8 @@
+import type { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
+import type { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { type ReactElement, useContext, useState } from "react";
 import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
@@ -5,16 +10,11 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import {
-  FullNameErrorVariant,
+  type FullNameErrorVariant,
   getFullNameErrorVariant,
   isFullNameValid,
 } from "@/lib/domain-logic/isFullNameValid";
 import { getPhoneNumberFormat, validateOptionalPhoneNumber } from "@/lib/utils/helpers";
-import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
-import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
-import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import { ReactElement, useContext, useState } from "react";
 
 interface Props extends FormContextFieldProps {
   user: BusinessUser;

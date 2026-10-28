@@ -1,7 +1,11 @@
-import { OnboardingFlow } from "@/components/onboarding/OnboardingFlows";
-import { Business, LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
-import { FlowType, Page } from "@businessnjgovnavigator/shared/types";
-import { QUERY_PARAMS_VALUES } from "../domain-logic/routes";
+import {
+  type Business,
+  LookupIndustryById,
+  LookupSectorTypeById,
+} from "@businessnjgovnavigator/shared";
+import type { FlowType, Page } from "@businessnjgovnavigator/shared/types";
+import type { OnboardingFlow } from "@/components/onboarding/OnboardingFlows";
+import type { QUERY_PARAMS_VALUES } from "../domain-logic/routes";
 import { getFlow } from "./helpers";
 
 export const mapFlowQueryToPersona: Record<QUERY_PARAMS_VALUES["flow"], FlowType> = {

@@ -1,7 +1,7 @@
-import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
-import { UpdateQueue } from "@/lib/UpdateQueue";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
+import type { UpdateQueue } from "@/lib/UpdateQueue";
 
 const displayBusinessName = (profileData: ProfileData): boolean => {
   const hasBusinessName = LookupLegalStructureById(

@@ -1,9 +1,9 @@
-import { createFormContext, createReducedFieldStates } from "@/contexts/formContext";
 import {
   emptyTaxClearanceCertificateData,
-  TaxClearanceCertificateData,
+  type TaxClearanceCertificateData,
 } from "@businessnjgovnavigator/shared";
 import { createContext } from "react";
+import { createFormContext, createReducedFieldStates } from "@/contexts/formContext";
 
 interface TaxClearanceCertificateDataContextType {
   state: TaxClearanceCertificateData;

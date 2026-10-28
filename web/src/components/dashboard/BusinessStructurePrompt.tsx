@@ -1,13 +1,13 @@
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
+import { useMediaQuery } from "@mui/material";
+import { useRouter } from "next/compat/router";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
-import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
-import { useMediaQuery } from "@mui/material";
-import { useRouter } from "next/compat/router";
-import { ReactElement } from "react";
 
 interface Props {
   isCTAButtonHidden?: boolean;

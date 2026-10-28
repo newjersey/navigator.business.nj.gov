@@ -1,17 +1,17 @@
-import LicenseCalendarEventPage from "@/pages/license-calendar-event/[licenseCalendarEventUrlSlug]";
-import { generateLicenseEvent } from "@/test/factories";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   generateLicenseDetails,
   getCurrentDate,
-  LicenseEventSubtype,
+  type LicenseEventSubtype,
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
-import { LicenseEventType } from "@businessnjgovnavigator/shared/types";
+import type { LicenseEventType } from "@businessnjgovnavigator/shared/types";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
+import LicenseCalendarEventPage from "@/pages/license-calendar-event/[licenseCalendarEventUrlSlug]";
+import { generateLicenseEvent } from "@/test/factories";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 

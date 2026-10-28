@@ -1,18 +1,6 @@
-import { Content } from "@/components/Content";
-import { WithErrorBar } from "@/components/WithErrorBar";
-import { Alert } from "@/components/njwds-extended/Alert";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { Icon } from "@/components/njwds/Icon";
-import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
-import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
-import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
-import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
+import { type LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import {
   Accordion,
   AccordionDetails,
@@ -23,7 +11,20 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { orderBy } from "lodash";
-import React, { ForwardedRef, forwardRef, ReactElement, useContext } from "react";
+import type React from "react";
+import { type ForwardedRef, forwardRef, type ReactElement, useContext } from "react";
+import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { WithErrorBar } from "@/components/WithErrorBar";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
+import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 
 interface Props {
   taskId: string;

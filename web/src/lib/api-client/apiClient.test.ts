@@ -1,4 +1,3 @@
-import { generateInputFile } from "@/test/factories";
 import {
   generateEmployerRatesRequestData,
   generateEmployerRatesResponse,
@@ -10,6 +9,7 @@ import {
   generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import axios from "axios";
+import { generateInputFile } from "@/test/factories";
 import {
   checkEmployerRates,
   checkLicenseStatus,

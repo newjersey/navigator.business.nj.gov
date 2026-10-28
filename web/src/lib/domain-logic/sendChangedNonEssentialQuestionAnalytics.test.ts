@@ -1,8 +1,8 @@
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { generateProfileData } from "@businessnjgovnavigator/shared/test/factories";
 import { getNonEssentialQuestionText } from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { sendChangedNonEssentialQuestionAnalytics } from "@/lib/domain-logic/sendChangedNonEssentialQuestionAnalytics";
 import analytics from "@/lib/utils/analytics";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { generateProfileData } from "@businessnjgovnavigator/shared/test/factories";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
   getNonEssentialQuestionText: jest.fn(),

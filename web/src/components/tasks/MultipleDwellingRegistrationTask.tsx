@@ -1,9 +1,17 @@
+import type {
+  HousingAddress,
+  HousingRegistrationRequestLookupResponse,
+} from "@businessnjgovnavigator/shared";
+import type { MultipleDwellingSearchError, Task } from "@businessnjgovnavigator/shared/types";
+import { Box, Tab, Tabs } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext, useState } from "react";
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Icon } from "@/components/njwds/Icon";
 import { getTabId, getTabPanelId, TabPanel } from "@/components/TabPanel";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CheckHousingRegistrationStatus } from "@/components/tasks/CheckHousingRegistrationStatus";
@@ -15,13 +23,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-import {
-  HousingAddress,
-  HousingRegistrationRequestLookupResponse,
-} from "@businessnjgovnavigator/shared";
-import { MultipleDwellingSearchError, Task } from "@businessnjgovnavigator/shared/types";
-import { Box, Tab, Tabs } from "@mui/material";
-import React, { ReactElement, useContext, useState } from "react";
 import { CtaContainer } from "../njwds-extended/cta/CtaContainer";
 
 interface Props {
@@ -45,7 +46,7 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
   const { municipalities } = useContext(HousingMunicipalitiesContext);
   const { Config } = useConfig();
 
-  const onSelectTab = (event: React.SyntheticEvent, newValue: number): void => {
+  const onSelectTab = (_event: React.SyntheticEvent, newValue: number): void => {
     setTabIndex(newValue);
   };
 

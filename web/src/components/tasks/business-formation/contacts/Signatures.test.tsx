@@ -1,19 +1,18 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
-import { templateEval } from "@/lib/utils/helpers";
-import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
-import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   BusinessSignerTypeMap,
   castPublicFilingLegalTypeToFormationType,
-  FormationLegalType,
+  type FormationLegalType,
   generateFormationFormData,
   generateFormationSigner,
-  PublicFilingLegalType,
+  type PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
+import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
+import { templateEval } from "@/lib/utils/helpers";
+import { type FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 
 function mockMaterialUI(): typeof materialUi {
   return {

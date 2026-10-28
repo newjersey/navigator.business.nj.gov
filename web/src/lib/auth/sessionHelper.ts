@@ -1,6 +1,4 @@
-import { ActiveUser } from "@/lib/auth/AuthContext";
-import { AccountLinkingErrorStorageFactory } from "@/lib/storage/AccountLinkingErrorStorage";
-import { ResourcesConfig } from "@aws-amplify/core";
+import type { ResourcesConfig } from "@aws-amplify/core";
 import { Sha256 } from "@aws-crypto/sha256-browser";
 import { HttpRequest } from "@aws-sdk/protocol-http";
 import { S3RequestPresigner } from "@aws-sdk/s3-request-presigner";
@@ -8,14 +6,16 @@ import { parseUrl } from "@aws-sdk/url-parser";
 import { formatUrl } from "@aws-sdk/util-format-url";
 import { Amplify } from "aws-amplify";
 import {
-  CredentialsAndIdentityId,
+  type CredentialsAndIdentityId,
   fetchAuthSession,
-  JWT,
+  type JWT,
   signInWithRedirect,
   signOut,
+  type UpdateUserAttributesInput,
   updateUserAttributes,
-  UpdateUserAttributesInput,
 } from "aws-amplify/auth";
+import type { ActiveUser } from "@/lib/auth/AuthContext";
+import { AccountLinkingErrorStorageFactory } from "@/lib/storage/AccountLinkingErrorStorage";
 
 type CognitoIdPayload = {
   aud: string;
@@ -85,7 +85,6 @@ export const triggerSignOut = async (): Promise<void> => {
 
 export const triggerSignIn = async (): Promise<void> => {
   // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   configureAmplify();
   await signInWithRedirect({

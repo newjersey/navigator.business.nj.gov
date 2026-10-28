@@ -1,9 +1,9 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { IndustryDropdown } from "@/components/data-fields/IndustryDropdown";
-import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, screen, within } from "@testing-library/react";
+import { IndustryDropdown } from "@/components/data-fields/IndustryDropdown";
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 describe("Industry Dropdown", () => {
   it("displays the Generic Industry as the last item in the dropdown list", () => {

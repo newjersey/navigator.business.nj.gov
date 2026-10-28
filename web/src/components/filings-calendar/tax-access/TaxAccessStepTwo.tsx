@@ -1,3 +1,13 @@
+import {
+  type Business,
+  createEmptyProfileData,
+  LookupLegalStructureById,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared";
+import { isOwningBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { FieldStateActionKind } from "@businessnjgovnavigator/shared/types";
+import { Backdrop, CircularProgress } from "@mui/material";
+import { type ReactElement, useState } from "react";
 import { Content } from "@/components/Content";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
@@ -11,7 +21,7 @@ import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMo
 import { WithErrorBar } from "@/components/WithErrorBar";
 import {
   DataFormErrorMapContext,
-  DataFormErrorMapFields,
+  type DataFormErrorMapFields,
 } from "@/contexts/dataFormErrorMapContext";
 import { createReducedFieldStates } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -22,16 +32,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { gov2GovTaxFiling } from "@/lib/taxation/helpers";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import {
-  Business,
-  createEmptyProfileData,
-  LookupLegalStructureById,
-  ProfileData,
-} from "@businessnjgovnavigator/shared";
-import { isOwningBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { FieldStateActionKind } from "@businessnjgovnavigator/shared/types";
-import { Backdrop, CircularProgress } from "@mui/material";
-import { ReactElement, useState } from "react";
 
 interface Props {
   onSuccess: () => void;

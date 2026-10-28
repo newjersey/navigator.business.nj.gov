@@ -1,9 +1,9 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { screen } from "@testing-library/react";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { generateTask } from "@/test/factories";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { screen } from "@testing-library/react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 const Config = getMergedConfig();
 

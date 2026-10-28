@@ -1,15 +1,15 @@
-import * as useUserModule from "@/lib/data-hooks/useUserData";
-import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
-import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import {
   generateProfileData,
   generateUserData,
   generateUserDataForBusiness,
-  ProfileData,
+  type ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test";
-import { UserDataError } from "@businessnjgovnavigator/shared/types";
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import type { UserDataError } from "@businessnjgovnavigator/shared/types";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import type { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
+import * as useUserModule from "@/lib/data-hooks/useUserData";
+import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 

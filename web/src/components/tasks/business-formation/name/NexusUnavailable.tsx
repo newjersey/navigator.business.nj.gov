@@ -1,13 +1,13 @@
+import type { ReactElement } from "react";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { DbaNameSearch } from "@/components/tasks/business-formation/name/DbaNameSearch";
-import { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
+import type { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
-import { ReactElement } from "react";
 
 export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
   const { Config } = useConfig();

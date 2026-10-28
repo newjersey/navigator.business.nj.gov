@@ -1,8 +1,8 @@
+import type { InputFile } from "@businessnjgovnavigator/shared/formationData";
+import type { ReactElement } from "react";
 import { ReviewNotEntered } from "@/components/tasks/review-screen-components/ReviewNotEntered";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { InputFile } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement } from "react";
 
 interface Props {
   foreignGoodStandingFile: InputFile | undefined;

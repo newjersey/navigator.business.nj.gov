@@ -1,7 +1,10 @@
-import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
+import type { ReactElement } from "react";
+import {
+  ProfileDataField,
+  type ProfileDataFieldProps,
+} from "@/components/data-fields/ProfileDataField";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
-import { ReactElement } from "react";
 
 interface NumericFieldProps {
   maxLength: number;

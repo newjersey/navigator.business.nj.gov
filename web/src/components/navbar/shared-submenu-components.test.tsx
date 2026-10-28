@@ -1,3 +1,12 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
+import { MenuList } from "@mui/material";
+import { fireEvent, screen, render as testingLibraryRender, waitFor } from "@testing-library/react";
+import type { ReactElement, ReactNode } from "react";
 import {
   AddBusinessItem,
   GetStartedMenuItem,
@@ -20,15 +29,6 @@ import analytics from "@/lib/utils/analytics";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  generateBusiness,
-  generateProfileData,
-  generateUserData,
-} from "@businessnjgovnavigator/shared/test";
-import { MenuList } from "@mui/material";
-import { fireEvent, render as testingLibraryRender, screen, waitFor } from "@testing-library/react";
-import { ReactElement, ReactNode } from "react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -206,8 +206,8 @@ describe("shared-submenu-components", () => {
       const userData = generateUserData({
         currentBusinessId: "biz-1",
         businesses: {
-          ["biz-1"]: generateBusiness({ id: "biz-1" }),
-          ["biz-2"]: generateBusiness({ id: "biz-2" }),
+          "biz-1": generateBusiness({ id: "biz-1" }),
+          "biz-2": generateBusiness({ id: "biz-2" }),
         },
       });
       render(

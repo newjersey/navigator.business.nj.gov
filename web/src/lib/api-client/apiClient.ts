@@ -1,28 +1,28 @@
+import {
+  type CrtkBusinessDetails,
+  type CrtkEmailMetadata,
+  type ElevatorSafetyRegistrationSummary,
+  type EmergencyTripPermitApplicationInfo,
+  type EmergencyTripPermitSubmitResponse,
+  type EmployerRatesRequest,
+  type EmployerRatesResponse,
+  type EnvironmentRequirementsEmailMetaData,
+  type FacilityDetails,
+  getCurrentBusiness,
+  type HousingRegistrationRequestLookupResponse,
+  type InputFile,
+  type LicenseSearchNameAndAddress,
+  type NameAvailability,
+  type PreparePaymentResponse,
+  type PropertyInterestType,
+  type TaxClearanceCertificateResponse,
+  type UnlinkTaxIdResponse,
+  type UserData,
+} from "@businessnjgovnavigator/shared";
+import type { SelfRegResponse } from "@businessnjgovnavigator/shared/types";
+import axios, { type AxiosError, type AxiosRequestConfig } from "axios";
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
-import {
-  CrtkBusinessDetails,
-  CrtkEmailMetadata,
-  ElevatorSafetyRegistrationSummary,
-  EmergencyTripPermitApplicationInfo,
-  EmergencyTripPermitSubmitResponse,
-  EmployerRatesRequest,
-  EmployerRatesResponse,
-  EnvironmentRequirementsEmailMetaData,
-  FacilityDetails,
-  getCurrentBusiness,
-  HousingRegistrationRequestLookupResponse,
-  InputFile,
-  LicenseSearchNameAndAddress,
-  NameAvailability,
-  PreparePaymentResponse,
-  PropertyInterestType,
-  TaxClearanceCertificateResponse,
-  UnlinkTaxIdResponse,
-  UserData,
-} from "@businessnjgovnavigator/shared";
-import { SelfRegResponse } from "@businessnjgovnavigator/shared/types";
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
 

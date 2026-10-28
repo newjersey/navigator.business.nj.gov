@@ -1,8 +1,8 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
-import { generateAnytimeActionTask } from "@/test/factories";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, screen } from "@testing-library/react";
+import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
+import { generateAnytimeActionTask } from "@/test/factories";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 const Config = getMergedConfig();
 

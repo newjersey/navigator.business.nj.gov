@@ -1,3 +1,5 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { fireEvent, render, screen } from "@testing-library/react";
 import {
   OPPORTUNITY_CARD_MAX_BODY_CHARS,
   OpportunityCard,
@@ -6,8 +8,6 @@ import analytics from "@/lib/utils/analytics";
 import { generateOpportunity } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { fireEvent, render, screen } from "@testing-library/react";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());

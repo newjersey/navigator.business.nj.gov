@@ -1,6 +1,6 @@
+import type { ReactElement, RefObject } from "react";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, RefObject } from "react";
 import { LargeCallout } from "../njwds-extended/callout/LargeCallout";
 
 interface Props {

@@ -1,3 +1,6 @@
+import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { type ReactElement, useContext, useEffect, useMemo, useState } from "react";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -6,9 +9,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
-import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 export const BusinessStructure = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);

@@ -1,3 +1,5 @@
+import { useMediaQuery } from "@mui/material";
+import type { ReactElement } from "react";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { EmergencyTripPermitCountryDropdown } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitCountryDropdown";
@@ -7,8 +9,6 @@ import { EmergencyTripPermitTextFieldEntry } from "@/components/tasks/abc-emerge
 import { EmergencyTripPermitTimePicker } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitTimePicker";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement } from "react";
 
 export const TripStep = (): ReactElement => {
   const { Config } = useConfig();

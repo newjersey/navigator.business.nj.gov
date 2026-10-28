@@ -1,10 +1,10 @@
 import {
   emptyIndustrySpecificData,
-  Industry,
-  IndustrySpecificData,
+  type Industry,
+  type IndustrySpecificData,
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 
 export const getResetIndustrySpecificData = (
   industryId: string | undefined,
@@ -24,7 +24,6 @@ export const getIsApplicableToFunctionByFieldName = (
   fieldName: ProfileContentField,
 ): ((industryId: string | undefined) => boolean) => {
   return (industryId: string | undefined): boolean => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return EssentialQuestions.find((eQ) => {
       return eQ.fieldName === fieldName;
     })!.isQuestionApplicableToIndustry(LookupIndustryById(industryId));

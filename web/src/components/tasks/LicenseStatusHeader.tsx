@@ -1,9 +1,9 @@
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { LicenseStatus } from "@businessnjgovnavigator/shared/license";
+import type { LicenseStatus } from "@businessnjgovnavigator/shared/license";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 
 interface Props {
   licenseStatus: LicenseStatus;
@@ -48,11 +48,11 @@ export const LicenseStatusHeader = (props: Props): ReactElement => {
 
   const getPermitColorScheme = (): PermitColorScheme => {
     if (props.licenseStatus === "ACTIVE") {
-      return permitColorScheme["activePermit"];
+      return permitColorScheme.activePermit;
     } else if (isPending(props.licenseStatus)) {
-      return permitColorScheme["pendingPermit"];
+      return permitColorScheme.pendingPermit;
     } else {
-      return permitColorScheme["inactivePermit"];
+      return permitColorScheme.inactivePermit;
     }
   };
 

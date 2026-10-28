@@ -1,8 +1,8 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { NavbarBusinessNjGovLogo } from "@/components/navbar/NavbarBusinessNjGovLogo";
 import analytics from "@/lib/utils/analytics";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());

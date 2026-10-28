@@ -1,3 +1,7 @@
+import type { PaymentType } from "@businessnjgovnavigator/shared/";
+import { FormHelperText, Radio } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext, useEffect, useState } from "react";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -5,9 +9,6 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { getDollarValue } from "@/lib/utils/formatters";
-import { PaymentType } from "@businessnjgovnavigator/shared/";
-import { FormHelperText, Radio } from "@mui/material";
-import React, { ReactElement, useContext, useEffect, useState } from "react";
 
 export const PaymentTypeTable = (): ReactElement => {
   const fieldName = "paymentType";
@@ -59,7 +60,6 @@ export const PaymentTypeTable = (): ReactElement => {
         return a + b;
       }, 0),
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     state.formationFormData.certificateOfStanding,
     state.formationFormData.paymentType,

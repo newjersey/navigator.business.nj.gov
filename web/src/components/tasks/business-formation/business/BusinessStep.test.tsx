@@ -1,6 +1,31 @@
+import {
+  businessStructureTaskId,
+  castPublicFilingLegalTypeToFormationType,
+  defaultDateFormat,
+  type FormationFormData,
+  generateBusiness,
+  generateFormationFormData,
+  generateMunicipality,
+  getCurrentDate,
+  getCurrentDateFormatted,
+  getCurrentDateInNewJersey,
+  type ProfileData,
+  type PublicFilingLegalType,
+  randomElementFromArray,
+  randomPublicFilingLegalType,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  corpLegalStructures,
+  publicFilingLegalTypes,
+} from "@businessnjgovnavigator/shared/formationData";
+import { defaultDisplayDateFormat } from "@businessnjgovnavigator/shared/types";
+import type * as materialUi from "@mui/material";
+import { fireEvent, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { generateFormationDbaContent, generateTask } from "@/test/factories";
 import {
-  FormationPageHelpers,
+  type FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
@@ -9,33 +34,6 @@ import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
-import {
-  businessStructureTaskId,
-  castPublicFilingLegalTypeToFormationType,
-  defaultDateFormat,
-  FormationFormData,
-  generateBusiness,
-  generateFormationFormData,
-  generateMunicipality,
-  getCurrentDate,
-  getCurrentDateFormatted,
-  getCurrentDateInNewJersey,
-  ProfileData,
-  PublicFilingLegalType,
-  randomElementFromArray,
-  randomPublicFilingLegalType,
-} from "@businessnjgovnavigator/shared";
-
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  corpLegalStructures,
-  publicFilingLegalTypes,
-} from "@businessnjgovnavigator/shared/formationData";
-import { defaultDisplayDateFormat } from "@businessnjgovnavigator/shared/types";
-import * as materialUi from "@mui/material";
-import { fireEvent, screen, within } from "@testing-library/react";
-
-import userEvent from "@testing-library/user-event";
 
 function mockMaterialUI(): typeof materialUi {
   return {

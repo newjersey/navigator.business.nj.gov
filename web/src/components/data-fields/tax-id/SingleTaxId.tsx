@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { InputAdornment, useMediaQuery } from "@mui/material";
+import { type ReactElement, useContext } from "react";
+import type { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { GenericTextField } from "@/components/GenericTextField";
-import { ShowHideStatus } from "@/components/ShowHideToggleButton";
-import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
+import type { ShowHideStatus } from "@/components/ShowHideToggleButton";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { MediaQueries } from "@/lib/PageSizes";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
-import { InputAdornment, useMediaQuery } from "@mui/material";
-import { ReactElement, useContext } from "react";
+import { MediaQueries } from "@/lib/PageSizes";
 
 interface Props
   extends Omit<

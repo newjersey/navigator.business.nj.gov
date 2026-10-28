@@ -1,11 +1,11 @@
-import { PageCircularIndicator } from "@/components/PageCircularIndicator";
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext, useEffect } from "react";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext, useEffect } from "react";
 
 const RoadmapPage = (): ReactElement => {
   const { state } = useContext(AuthContext);

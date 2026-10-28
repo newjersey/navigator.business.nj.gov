@@ -1,16 +1,16 @@
+import { NextSeo } from "next-seo";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { configureAmplify, triggerSignOut } from "@/lib/auth/sessionHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { NextSeo } from "next-seo";
-import { ReactElement, useContext } from "react";
 
 const LoginSupportPage = (): ReactElement => {
   const { Config } = useConfig();

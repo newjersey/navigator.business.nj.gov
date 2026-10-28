@@ -1,7 +1,7 @@
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 interface Props {
   value: boolean | undefined;

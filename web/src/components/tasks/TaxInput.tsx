@@ -1,10 +1,17 @@
+import {
+  createEmptyProfileData,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { useMediaQuery } from "@mui/material";
+import { type ReactElement, type ReactNode, useContext, useEffect, useState } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { LockIcon } from "@/components/LockIcon";
+import { Icon } from "@/components/njwds/Icon";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { Icon } from "@/components/njwds/Icon";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -18,10 +25,6 @@ import { useNeedsAccountLockedField } from "@/lib/data-hooks/useNeedsAccountLock
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
 
 interface Props {
   task: Task;

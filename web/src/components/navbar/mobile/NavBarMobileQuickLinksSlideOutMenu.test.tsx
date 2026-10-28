@@ -1,7 +1,7 @@
-import { NavBarMobileQuickLinksSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu";
-import analytics from "@/lib/utils/analytics";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { NavBarMobileQuickLinksSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu";
+import analytics from "@/lib/utils/analytics";
 
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 

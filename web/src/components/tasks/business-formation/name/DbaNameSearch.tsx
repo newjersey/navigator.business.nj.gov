@@ -1,3 +1,4 @@
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { DbaAvailable } from "@/components/tasks/business-formation/name/DbaAvailable";
@@ -8,7 +9,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { ReactElement, useContext } from "react";
 
 export const DbaNameSearch = (): ReactElement => {
   const { Config } = useConfig();

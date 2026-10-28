@@ -1,8 +1,7 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import yaml from "js-yaml";
-import path from "path";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getNetlifyConfig = (): any => {
   const cmsConfig = fs.readFileSync(
     path.join(process.cwd(), "public", "mgmt", "config.yml"),

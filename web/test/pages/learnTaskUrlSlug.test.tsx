@@ -1,13 +1,13 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared";
+import type * as materialUi from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import { fireEvent, screen } from "@testing-library/react";
+import type { GetStaticPropsContext } from "next";
+import { useRouter } from "next/router";
+import type { ReactNode } from "react";
 import analytics from "@/lib/utils/analytics";
 import LearnTaskPage, { getStaticPaths, getStaticProps } from "@/pages/learn/[taskUrlSlug]";
 import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared";
-import * as materialUi from "@mui/material";
-import { useMediaQuery } from "@mui/material";
-import { fireEvent, screen } from "@testing-library/react";
-import { GetStaticPropsContext } from "next";
-import { useRouter } from "next/router";
-import { ReactNode } from "react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

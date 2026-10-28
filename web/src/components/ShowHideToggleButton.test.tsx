@@ -1,5 +1,5 @@
-import { ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 
 const showText = "show";
 const hideText = "hide";

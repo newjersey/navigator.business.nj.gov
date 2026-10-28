@@ -1,17 +1,17 @@
-import { NavBarVariant } from "@/components/navbar/NavBarTypes";
-import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
-import { randomPublicFilingLegalStructure } from "@/test/factories";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generateProfileData,
   generateUserData,
 } from "@businessnjgovnavigator/shared/test";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
+import { randomPublicFilingLegalStructure } from "@/test/factories";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 
 const Config = getMergedConfig();
 

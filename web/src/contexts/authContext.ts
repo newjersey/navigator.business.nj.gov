@@ -1,5 +1,5 @@
-import { AuthContextType, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createContext } from "react";
+import { type AuthContextType, IsAuthenticated } from "@/lib/auth/AuthContext";
 
 export const initialState = {
   activeUser: undefined,

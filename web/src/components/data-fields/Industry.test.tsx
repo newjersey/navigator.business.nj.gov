@@ -1,3 +1,18 @@
+import {
+  filterRandomIndustry,
+  generateProfileData,
+  randomIndustry,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  createEmptyProfileData,
+  emptyIndustrySpecificData,
+  industrySpecificDataChoices,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
+import { fireEvent, render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { renderToStaticMarkup } from "react-dom/server.node";
 import { Content } from "@/components/Content";
 import { Industry } from "@/components/data-fields/Industry";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
@@ -9,21 +24,6 @@ import {
 } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import {
-  filterRandomIndustry,
-  generateProfileData,
-  randomIndustry,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  createEmptyProfileData,
-  emptyIndustrySpecificData,
-  industrySpecificDataChoices,
-  ProfileData,
-} from "@businessnjgovnavigator/shared/profileData";
-import { fireEvent, render, screen, within } from "@testing-library/react";
-import { renderToStaticMarkup } from "react-dom/server.node";
-import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -111,10 +111,8 @@ describe("<Industry />", () => {
       businessPersonas.map((persona) => {
         const choices = industrySpecificDataChoices[el.fieldName];
         const flowConfig = Config.profileDefaults.fields;
-        const fieldContent = Config.profileDefaults.fields[
-          el.fieldName as keyof typeof flowConfig
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ].default as any;
+        const fieldContent = Config.profileDefaults.fields[el.fieldName as keyof typeof flowConfig]
+          .default as any;
 
         const chooseRadioWithContent = (div: HTMLElement, choice: string): void => {
           fireEvent.click(

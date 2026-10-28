@@ -1,4 +1,4 @@
-import { FieldsForErrorHandling } from "@businessnjgovnavigator/shared/formationData";
+import type { FieldsForErrorHandling } from "@businessnjgovnavigator/shared/formationData";
 import { invert } from "lodash";
 
 export const UNKNOWN_API_ERROR_FIELD = "UNKNOWN_API_ERROR_FIELD";

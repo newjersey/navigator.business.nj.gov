@@ -1,3 +1,19 @@
+import {
+  type Business,
+  formationTaskId,
+  generateBusiness,
+  generateUserDataForBusiness,
+  type TaskProgress,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  generateFormationData,
+  generateGetFilingResponse,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { TaskHeader } from "@/components/TaskHeader";
 import { generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -6,23 +22,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  formationTaskId,
-  generateBusiness,
-  generateUserDataForBusiness,
-  TaskProgress,
-} from "@businessnjgovnavigator/shared";
-
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  generateFormationData,
-  generateGetFilingResponse,
-  generateUserData,
-} from "@businessnjgovnavigator/shared/test";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
