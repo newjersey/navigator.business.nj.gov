@@ -264,7 +264,6 @@
             "noConsole": "warn",
             "noExplicitAny": "warn",
             "noArrayIndexKey": "warn",
-            "noNonNullAssertedOptionalChain": "warn",
             "useIterableCallbackReturn": "warn",
             "noImplicitAnyLet": "warn",
             "noAssignInExpressions": "warn",
@@ -283,6 +282,7 @@
           },
           "correctness": {
             "useHookAtTopLevel": "warn",
+            "noUnknownProperty": "warn",
             "noVoidTypeReturn": "warn",
             "noUnreachable": "warn"
           },
