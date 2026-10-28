@@ -244,22 +244,6 @@
       "includes": ["web/**"],
       "linter": {
         "rules": {
-          "a11y": {
-            "useButtonType": "warn",
-            "noAriaHiddenOnFocusable": "warn",
-            "noRedundantRoles": "warn",
-            "useSemanticElements": "warn",
-            "useAriaPropsSupportedByRole": "warn",
-            "useValidAriaRole": "warn",
-            "noLabelWithoutControl": {
-              "level": "warn",
-              "options": { "inputComponents": ["Checkbox"] }
-            },
-            "useValidAriaValues": "warn",
-            "useValidAnchor": "warn",
-            "noStaticElementInteractions": "warn",
-            "noNoninteractiveElementInteractions": "warn"
-          },
           "suspicious": {
             "noConsole": "warn",
             "noExplicitAny": "warn",

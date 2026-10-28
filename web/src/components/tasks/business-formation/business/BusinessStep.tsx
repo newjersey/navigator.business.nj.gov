@@ -27,7 +27,7 @@ export const BusinessStep = (): ReactElement => {
     if (state.formationFormData.legalType !== "limited-partnership") return null;
     return (
       <>
-        <hr className="margin-y-3" aria-hidden={true} />
+        <hr className="margin-y-3" role="presentation" />
         <ScrollableFormFieldWrapper fieldName="combinedInvestment">
           <BusinessFormationTextBox
             maxChars={400}
@@ -37,7 +37,7 @@ export const BusinessStep = (): ReactElement => {
             contentMd={Config.formation.fields.combinedInvestment.body}
           />
         </ScrollableFormFieldWrapper>
-        <hr className="margin-y-3" aria-hidden={true} />
+        <hr className="margin-y-3" role="presentation" />
         <ScrollableFormFieldWrapper fieldName="withdrawals">
           <BusinessFormationTextBox
             maxChars={400}
@@ -47,9 +47,9 @@ export const BusinessStep = (): ReactElement => {
             contentMd={Config.formation.fields.withdrawals.body}
           />
         </ScrollableFormFieldWrapper>
-        <hr className="margin-y-3" aria-hidden={true} />
+        <hr className="margin-y-3" role="presentation" />
         <PartnershipRights />
-        <hr className="margin-y-3" aria-hidden={true} />
+        <hr className="margin-y-3" role="presentation" />
         <ScrollableFormFieldWrapper fieldName="dissolution">
           <BusinessFormationTextBox
             maxChars={400}
@@ -65,7 +65,7 @@ export const BusinessStep = (): ReactElement => {
 
   const businessPurposeSection = (): ReactElement => (
     <>
-      <hr className="margin-y-3" aria-hidden={true} key={"business-line-2"} />
+      <hr className="margin-y-3" role="presentation" key={"business-line-2"} />
       <ScrollableFormFieldWrapper fieldName="businessPurpose">
         <BusinessFormationTextBox
           maxChars={300}
@@ -78,7 +78,7 @@ export const BusinessStep = (): ReactElement => {
           isUnderline
         />
       </ScrollableFormFieldWrapper>
-      <hr className="margin-y-3" aria-hidden={true} key={"business-line-3"} />
+      <hr className="margin-y-3" role="presentation" key={"business-line-3"} />
     </>
   );
 

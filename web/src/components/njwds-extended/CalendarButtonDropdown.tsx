@@ -110,6 +110,7 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
           />
         </div>
       </UnStyledButton>
+      {/* biome-ignore lint/a11y/useValidAriaRole: undefined removes MUI Popper's default role="tooltip" from this menu */}
       <Popper
         open={open}
         anchorEl={anchorRef.current}

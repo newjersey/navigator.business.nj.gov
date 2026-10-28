@@ -44,7 +44,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
 
   return (
     <>
-      {!props.hideTopBorder && <hr className="bg-cool-lighter" aria-hidden={true} />}
+      {!props.hideTopBorder && <hr className="bg-cool-lighter" role="presentation" />}
 
       <div
         data-testid={props.opportunity.id}

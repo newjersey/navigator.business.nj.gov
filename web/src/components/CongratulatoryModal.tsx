@@ -73,12 +73,10 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
             {!hideLink && (
               <>
                 {Config.dashboardDefaults.congratulatoryModalBody}{" "}
-                <span
-                  role={"button"}
-                  tabIndex={0}
+                <button
+                  type="button"
                   onClick={(): void => onClickComplete()}
-                  onKeyDown={(): void => onClickComplete()}
-                  className="text-underline"
+                  className="clear-button text-white text-underline"
                   style={{
                     fontWeight: 700,
                     fontSize: "20px",
@@ -88,7 +86,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
                   }}
                 >
                   {publicName} {Config.dashboardDefaults.congratulatoryModalLinkText}
-                </span>
+                </button>
               </>
             )}
           </div>

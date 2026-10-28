@@ -37,6 +37,7 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
     <ClickAwayListener onClickAway={props.handleClose}>
       <div>
         <button
+          type="button"
           data-testid="nav-bar-desktop-dropdown-button"
           className="border-2px border-solid radius-pill border-base-lighter bg-white-transparent"
           ref={props.anchorRef}
@@ -54,6 +55,7 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
           </div>
         </button>
 
+        {/* biome-ignore lint/a11y/useValidAriaRole: undefined removes MUI Popper's default role="tooltip" from this menu */}
         <Popper
           open={props.open}
           anchorEl={props.anchorRef.current}

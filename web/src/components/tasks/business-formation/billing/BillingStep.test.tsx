@@ -171,10 +171,10 @@ describe("Formation - BillingStep", () => {
         const expectedTotal = officialFormationCost + standingCost;
 
         expect(
-          screen.getByRole("generic", { name: composeTotalAria(expectedTotal) }),
+          screen.getByRole("cell", { name: composeTotalAria(expectedTotal) }),
         ).toHaveTextContent(getDollarValue(expectedTotal));
         expect(
-          screen.getByRole("generic", { name: composeSubTotalAria(expectedTotal) }),
+          screen.getByRole("cell", { name: composeSubTotalAria(expectedTotal) }),
         ).toHaveTextContent(getDollarValue(expectedTotal));
       });
     }
@@ -202,10 +202,10 @@ describe("Formation - BillingStep", () => {
         const expectedTotal = officialFormationCost + standingCost;
 
         expect(
-          screen.getByRole("generic", { name: composeSubTotalAria(expectedTotal) }),
+          screen.getByRole("cell", { name: composeSubTotalAria(expectedTotal) }),
         ).toHaveTextContent(expectedTotal.toString());
         expect(
-          screen.getByRole("generic", { name: composeTotalAria(expectedTotal) }),
+          screen.getByRole("cell", { name: composeTotalAria(expectedTotal) }),
         ).toHaveTextContent(expectedTotal.toString());
       });
     }
@@ -244,17 +244,17 @@ describe("Formation - BillingStep", () => {
     );
 
     expect(
-      screen.getByRole("generic", { name: composeSubTotalAria(officialFormationCost) }),
+      screen.getByRole("cell", { name: composeSubTotalAria(officialFormationCost) }),
     ).toHaveTextContent(officialFormationCost.toString());
     page.selectCheckboxByTestId("certificateOfStanding");
     expect(
-      screen.getByRole("generic", {
+      screen.getByRole("cell", {
         name: composeSubTotalAria(officialFormationCost + certificateStandingCost),
       }),
     ).toHaveTextContent((officialFormationCost + certificateStandingCost).toString());
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
     expect(
-      screen.getByRole("generic", {
+      screen.getByRole("cell", {
         name: composeSubTotalAria(
           officialFormationCost + certificateStandingCost + certifiedCopyCost,
         ),
@@ -263,7 +263,7 @@ describe("Formation - BillingStep", () => {
       (officialFormationCost + certificateStandingCost + certifiedCopyCost).toString(),
     );
     expect(
-      screen.getByRole("generic", {
+      screen.getByRole("cell", {
         name: composeTotalAria(officialFormationCost + certificateStandingCost + certifiedCopyCost),
       }),
     ).toHaveTextContent(
@@ -272,23 +272,23 @@ describe("Formation - BillingStep", () => {
     page.selectCheckboxByTestId("certificateOfStanding");
     const finalTotal = officialFormationCost + certifiedCopyCost;
 
-    expect(
-      screen.getByRole("generic", { name: composeSubTotalAria(finalTotal) }),
-    ).toHaveTextContent(finalTotal.toString());
-    expect(screen.getByRole("generic", { name: composeTotalAria(finalTotal) })).toHaveTextContent(
+    expect(screen.getByRole("cell", { name: composeSubTotalAria(finalTotal) })).toHaveTextContent(
+      finalTotal.toString(),
+    );
+    expect(screen.getByRole("cell", { name: composeTotalAria(finalTotal) })).toHaveTextContent(
       finalTotal.toString(),
     );
 
     fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     expect(
-      screen.getByRole("generic", {
+      screen.getByRole("cell", {
         name: composeTotalAria(finalTotal + ccInitialCost + ccExtraCost),
       }),
     ).toHaveTextContent((finalTotal + ccInitialCost + ccExtraCost).toString());
     fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.achLabel));
     const numberOfDocuments = 2;
     expect(
-      screen.getByRole("generic", {
+      screen.getByRole("cell", {
         name: composeTotalAria(finalTotal + achCost * numberOfDocuments),
       }),
     ).toHaveTextContent((finalTotal + achCost * numberOfDocuments).toString());

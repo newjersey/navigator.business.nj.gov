@@ -66,7 +66,6 @@ export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
         <HorizontalLine />
         <Accordion onChange={() => {}}>
           <AccordionSummary
-            aria-controls=""
             expandIcon={
               <Icon className={"usa-icon--size-3 text-base-light"} iconName="expand_more" />
             }

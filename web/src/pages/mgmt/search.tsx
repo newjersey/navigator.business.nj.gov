@@ -423,7 +423,11 @@ const SearchContentPage = (props: Props): ReactElement => {
           htmlInput: { id: "search" },
         }}
       />
-      <button onClick={onSearchSubmit} className="usa-button margin-top-2 margin-bottom-4">
+      <button
+        type="button"
+        onClick={onSearchSubmit}
+        className="usa-button margin-top-2 margin-bottom-4"
+      >
         Submit
       </button>
       {noMatches() && <div>No matches.</div>}

@@ -4,11 +4,12 @@ import type { ReactElement } from "react";
 export const LandingPageActionTile = (props: ActionTile): ReactElement => {
   return (
     <button
+      type="button"
       className={"landing-page-secondary-tile usa-button"}
       data-testid={props.dataTestId}
       onClick={props.onClick}
     >
-      <img src={props.imgPath} alt="" role="presentation" />
+      <img src={props.imgPath} alt="" />
       {props.tileText}
     </button>
   );

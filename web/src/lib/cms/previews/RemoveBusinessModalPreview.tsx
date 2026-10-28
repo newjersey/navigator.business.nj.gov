@@ -23,7 +23,9 @@ const RemoveBusinessModalPreview = (props: PreviewProps): ReactElement => {
           },
         }}
       >
-        <button onClick={() => setShowRemoveBusinessModal(true)}>toggle modal</button>
+        <button type="button" onClick={() => setShowRemoveBusinessModal(true)}>
+          toggle modal
+        </button>
         <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
           <RemoveBusinessModal CMS_ONLY_fakeBusiness={generateBusiness({})} />
         </div>

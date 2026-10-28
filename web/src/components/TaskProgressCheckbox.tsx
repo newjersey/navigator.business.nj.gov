@@ -195,6 +195,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const Checkbox = (): ReactNode => {
     const styles = getStyles();
     return (
+      // biome-ignore lint/a11y/useSemanticElements: a native checkbox input cannot hold the styled status icon this control renders
       <button
         data-testid="change-task-progress-checkbox"
         role="checkbox"
