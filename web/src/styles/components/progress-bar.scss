@@ -37,9 +37,7 @@ $progress-bar-label-offset: 33px;
       variables.$accent-semi-cool-400 50%,
       variables.$success-light 94%
     );
-  background-size:
-    calc(100% - var(--progress, 0%)) 100%,
-    100% 100%;
+  background-size: calc(100% - var(--progress, 0%)) 100%, 100% 100%;
   background-position: right, left;
   background-repeat: no-repeat;
   height: 10px;
