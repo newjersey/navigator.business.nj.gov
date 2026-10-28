@@ -289,7 +289,8 @@
     "shared/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
     "api/cdk/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
     "content/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
-    "!(shared|api|content)/**/*.{js,ts,tsx}": [
+    "web/**/*.{js,ts,tsx,scss}": "biome format --write --no-errors-on-unmatched",
+    "!(shared|api|content|web)/**/*.{js,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ],
@@ -305,7 +306,7 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{css,md,scss,yml,yaml}": "prettier --write"
+    "*.{css,md,yml,yaml}": "prettier --write"
   },
   "packageManager": "yarn@4.18.0",
   "resolutions": {
