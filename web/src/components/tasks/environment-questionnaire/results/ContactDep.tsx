@@ -19,6 +19,8 @@ export const ContactDep = (): ReactElement => {
     });
 
     return (
+      // biome-ignore lint/a11y/noStaticElementInteractions: onMouseEnter is an analytics hook, not a user interaction
+      // biome-ignore lint/a11y/noNoninteractiveElementInteractions: onMouseEnter is an analytics hook, not a user interaction
       <div
         onMouseEnter={
           analytics.event.gen_guidance_stepper_contact_info_engagement.mouseover

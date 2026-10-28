@@ -6,11 +6,7 @@ describe("ProfileSubSection Component", () => {
   const defaultProps = {
     heading: "Test Heading",
     subText: "Test SubText",
-    children: (
-      <div role="region" aria-label="content area">
-        Test Children
-      </div>
-    ),
+    children: <section aria-label="content area">Test Children</section>,
   };
 
   it("renders heading correctly", () => {

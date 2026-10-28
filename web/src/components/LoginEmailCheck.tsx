@@ -106,7 +106,7 @@ export const LoginEmailCheck = (): ReactElement => {
               >
                 <hr
                   className="flex-fill margin-0 display-none tablet:display-block"
-                  aria-hidden="true"
+                  role="presentation"
                   style={{ border: "none", borderTop: "1px solid #dfe1e2", height: "0" }}
                 />
                 <span className="display-block padding-y-1 text-base-dark tablet:flex-shrink-0 tablet:padding-y-0">
@@ -114,7 +114,7 @@ export const LoginEmailCheck = (): ReactElement => {
                 </span>
                 <hr
                   className="flex-fill margin-0 display-none tablet:display-block"
-                  aria-hidden="true"
+                  role="presentation"
                   style={{ border: "none", borderTop: "1px solid #dfe1e2", height: "0" }}
                 />
               </div>

@@ -20,6 +20,7 @@ export const NexusBusinessNameField = (): ReactElement => {
     return (
       <div>
         <div className="flex">
+          {/* biome-ignore lint/a11y/useSemanticElements: A real h3 picks up global styles with the !important keyword. This gets styled as body text while remaining semantically correct */}
           <div role="heading" aria-level={3} className="text-bold margin-bottom-05">
             {contentFromConfig.outOfStateNameHeader}
           </div>
@@ -38,6 +39,7 @@ export const NexusBusinessNameField = (): ReactElement => {
     return (
       <div>
         <div className="flex flex-row flex-align-center">
+          {/* biome-ignore lint/a11y/useSemanticElements: A real h3 picks up global styles with the !important keyword. This gets styled as body text while remaining semantically correct */}
           <div role="heading" aria-level={3} className="text-bold margin-bottom-05">
             {contentFromConfig.outOfStateNameHeader}
           </div>

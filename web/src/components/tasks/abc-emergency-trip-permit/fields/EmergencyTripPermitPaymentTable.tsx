@@ -56,9 +56,7 @@ export const EmergencyTripPermitPaymentTable = (): ReactElement => {
             </div>
           </td>
           <td colSpan={1}>
-            <div className="text-align-right text-bold" aria-label="Subtotal">
-              {getDollarValue(30)}
-            </div>
+            <div className="text-align-right text-bold">{getDollarValue(30)}</div>
           </td>
         </tr>
       </tfoot>

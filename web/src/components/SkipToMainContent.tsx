@@ -7,6 +7,7 @@ export const SkipToMainContent = (): ReactElement => {
 
   return (
     <div>
+      {/* biome-ignore lint/a11y/useValidAnchor: a skip link must be an in-page link; onClick only records analytics */}
       <a
         className="skip-link"
         data-testid="skip-main-content"

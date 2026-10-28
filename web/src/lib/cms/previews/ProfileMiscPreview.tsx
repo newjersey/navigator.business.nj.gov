@@ -28,7 +28,9 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <Heading level={2}>Escape Modal:</Heading>
         <div ref={ref} style={{ pointerEvents: "all" }}>
-          <button onClick={(): void => setModalOpen(true)}>Open Modal</button>
+          <button type="button" onClick={(): void => setModalOpen(true)}>
+            Open Modal
+          </button>
         </div>
         <ProfileEscapeModal
           isOpen={modalOpen}

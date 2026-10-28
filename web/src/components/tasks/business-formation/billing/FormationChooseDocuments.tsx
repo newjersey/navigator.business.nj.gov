@@ -64,14 +64,14 @@ export const FormationChooseDocuments = (): ReactElement => {
 
   return (
     <div className={`margin-top-3`}>
-      <table className="business-formation-table business-formation-document" role="table">
+      <table className="business-formation-table business-formation-document">
         <thead>
           <tr>
-            <th scope="col" role="columnheader" className="text-bold">
+            <th scope="col" className="text-bold">
               {Config.formation.fields.paymentType.serviceColumnLabel}
             </th>
             <th></th>
-            <th scope="col" role="columnheader" className="text-bold">
+            <th scope="col" className="text-bold">
               {costColumnHeader}
             </th>
           </tr>
@@ -181,10 +181,9 @@ export const FormationChooseDocuments = (): ReactElement => {
                   ? "text-primary-dark text-bold"
                   : ""
               }
+              aria-label={`${costColumnHeader} ${getDollarValue(certifiedCopyCost)}`}
             >
-              <div aria-label={`${costColumnHeader} ${getDollarValue(certifiedCopyCost)}`}>
-                {getDollarValue(certifiedCopyCost)}
-              </div>
+              <div>{getDollarValue(certifiedCopyCost)}</div>
             </td>
           </tr>
         </tbody>
@@ -198,13 +197,11 @@ export const FormationChooseDocuments = (): ReactElement => {
               </div>
             </td>
             <td colSpan={1}></td>
-            <td colSpan={1}>
-              <div
-                className="text-align-right text-bold"
-                aria-label={`${Config.formation.fields.paymentType.costSubtotalLabel} ${getDollarValue(totalCost)}`}
-              >
-                {getDollarValue(totalCost)}
-              </div>
+            <td
+              colSpan={1}
+              aria-label={`${Config.formation.fields.paymentType.costSubtotalLabel} ${getDollarValue(totalCost)}`}
+            >
+              <div className="text-align-right text-bold">{getDollarValue(totalCost)}</div>
             </td>
           </tr>
         </tfoot>

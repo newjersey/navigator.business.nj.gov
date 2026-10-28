@@ -184,12 +184,11 @@ export const PaymentTypeTable = (): ReactElement => {
                   </span>
                 </div>
               </td>
-              <td colSpan={1}>
-                <div
-                  className="text-align-right text-bold"
-                  data-testid="something"
-                  aria-label={`${Config.formation.fields.paymentType.costTotalLabel} ${getDollarValue(totalCost)}`}
-                >
+              <td
+                colSpan={1}
+                aria-label={`${Config.formation.fields.paymentType.costTotalLabel} ${getDollarValue(totalCost)}`}
+              >
+                <div className="text-align-right text-bold" data-testid="something">
                   {getDollarValue(totalCost)}
                 </div>
               </td>

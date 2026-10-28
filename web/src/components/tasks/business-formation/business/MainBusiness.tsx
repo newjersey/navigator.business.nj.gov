@@ -88,7 +88,7 @@ export const MainBusiness = (): ReactElement => {
 
           {isForeignCorporationOrNonprofit(state.formationFormData.legalType) && (
             <ScrollableFormFieldWrapper fieldName="foreignGoodStandingFile">
-              <hr className="margin-bottom-2 margin-top-3" aria-hidden={true} />
+              <hr className="margin-bottom-2 margin-top-3" role="presentation" />
               <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
             </ScrollableFormFieldWrapper>
           )}
@@ -123,7 +123,7 @@ export const MainBusiness = (): ReactElement => {
           </div>
         </div>
       )}
-      <hr className="margin-y-3" aria-hidden={true} key={"business-line-1"} />
+      <hr className="margin-y-3" role="presentation" key={"business-line-1"} />
     </div>
   );
 };

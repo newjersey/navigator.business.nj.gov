@@ -67,7 +67,7 @@ export const ProfileField = (props: Props): ReactElement => {
         </div>
       </ScrollableFormFieldWrapper>
 
-      {!props.hideLine && <hr aria-hidden={true} />}
+      {!props.hideLine && <hr role="presentation" />}
     </>
   );
 };

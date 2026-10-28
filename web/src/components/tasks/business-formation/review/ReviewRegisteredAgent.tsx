@@ -14,7 +14,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
       state.formationFormData.agentType === "AUTHORIZED_REP" ||
       (state.formationFormData.agentType === "PROFESSIONAL_SERVICE" &&
         state.formationFormData.showManualEntry === true) ? (
-        <div role="region" aria-label="Manual agent entry review">
+        <section aria-label="Manual agent entry review">
           <ReviewLineItem
             label={Config.formation.fields.agentName.label}
             value={state.formationFormData.agentName}
@@ -47,17 +47,17 @@ export const ReviewRegisteredAgent = (): ReactElement => {
             label={Config.formation.fields.agentOfficeAddressZipCode.label}
             value={state.formationFormData.agentOfficeAddressZipCode}
           />
-        </div>
+        </section>
       ) : (
         state.formationFormData.agentType === "PROFESSIONAL_SERVICE" &&
         state.formationFormData.showManualEntry === false && (
-          <div role="region" aria-label="Professional service agent review">
+          <section aria-label="Professional service agent review">
             <ReviewLineItem
               label={Config.formation.fields.agentNumber.label}
               value={state.formationFormData.agentNumber}
               marginOverride="margin-top-0"
             />
-          </div>
+          </section>
         )
       )}
     </ReviewSubSection>

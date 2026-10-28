@@ -65,8 +65,10 @@ const SelfRegistrationPreview = (props: PreviewProps): ReactElement => {
       <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
         <DataFormErrorMapContext.Provider value={formContextState}>
           <div className="cms disable-position-for-cms" ref={ref} style={{ margin: 40 }}>
-            <button onClick={() => setModalOpen(false)}>open needs account modal</button>
-            <button onClick={() => nextRegistrationStatus()}>
+            <button type="button" onClick={() => setModalOpen(false)}>
+              open needs account modal
+            </button>
+            <button type="button" onClick={() => nextRegistrationStatus()}>
               change registration status, currently: {currentRegistrationStatus}
             </button>
             <NeedsAccountModal />

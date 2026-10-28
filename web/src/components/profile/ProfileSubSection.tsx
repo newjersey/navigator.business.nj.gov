@@ -20,7 +20,11 @@ export const ProfileSubSection = (props: Props): ReactElement => {
       </div>
       {props.children}
       {!props.hideDivider && (
-        <hr data-testid="profile-sub-section-divider" className="margin-top-4" aria-hidden={true} />
+        <hr
+          data-testid="profile-sub-section-divider"
+          className="margin-top-4"
+          role="presentation"
+        />
       )}
     </>
   );
