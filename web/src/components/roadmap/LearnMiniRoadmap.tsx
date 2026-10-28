@@ -7,6 +7,7 @@ import { ReactElement } from "react";
 interface Props {
   activeTaskId?: string | undefined;
   onTaskClick?: () => void;
+  hideHeader?: boolean;
 }
 
 export const LearnMiniRoadmap = (props: Props): ReactElement => {
@@ -15,9 +16,11 @@ export const LearnMiniRoadmap = (props: Props): ReactElement => {
 
   return (
     <>
-      <Heading level={3} className="flex flex-align-center margin-0-override padding-bottom-1">
-        {Config.learnPages.stepsHeader}
-      </Heading>
+      {!props.hideHeader && (
+        <Heading level={3} className="flex flex-align-center margin-0-override padding-bottom-1">
+          {Config.learnPages.stepsHeader}
+        </Heading>
+      )}
 
       <div className="learn-mini-roadmap-steps">
         {Config.learnPages.steps.map((task, index) => {

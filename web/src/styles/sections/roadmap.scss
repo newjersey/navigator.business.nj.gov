@@ -6,6 +6,50 @@
     linear-gradient(-135deg, white 25px, transparent 20px);
 }
 
+.learn-mobile-roadmap {
+  border-bottom: 1px solid variables.$base-lighter;
+
+  @media (min-width: variables.$lg) {
+    display: none;
+  }
+
+  &__summary {
+    align-items: center;
+    background-color: variables.$accent-cool-lightest;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0.75rem 1.5rem;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid variables.$accent-cool-darker;
+      outline-offset: -2px;
+    }
+  }
+
+  &__chevron {
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  &__title {
+    color: variables.$accent-cool-darkest;
+  }
+
+  &[open] &__chevron {
+    transform: rotate(180deg);
+  }
+
+  &__nav {
+    padding: 0.75rem 1.5rem 1rem;
+  }
+}
+
 .learn-mini-roadmap-steps {
   .learn-mini-roadmap-step {
     isolation: isolate;
