@@ -289,7 +289,7 @@
     "shared/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
     "api/cdk/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
     "content/**/*.{js,ts,tsx}": "biome check --write --no-errors-on-unmatched",
-    "web/**/*.{js,ts,tsx,scss}": "biome format --write --no-errors-on-unmatched",
+    "web/**/*.{js,ts,tsx,scss}": "biome check --write --no-errors-on-unmatched",
     "!(shared|api|content|web)/**/*.{js,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
