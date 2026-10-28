@@ -1,7 +1,7 @@
-import { Content } from "@/components/Content";
-import { Alert, AlertProps } from "@/components/njwds-extended/Alert";
 import { useRouter } from "next/compat/router";
-import { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
+import { Content } from "@/components/Content";
+import { Alert, type AlertProps } from "@/components/njwds-extended/Alert";
 
 interface Props {
   alertMessage: string;

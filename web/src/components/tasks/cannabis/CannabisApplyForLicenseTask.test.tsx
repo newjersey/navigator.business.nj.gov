@@ -1,3 +1,13 @@
+import {
+  type Business,
+  generateBusiness,
+  generateProfileData,
+  generateUserData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
@@ -5,21 +15,11 @@ import { generateTask, generateTaskLink } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  generateBusiness,
-  generateProfileData,
-  generateUserData,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
 

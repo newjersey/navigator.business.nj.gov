@@ -1,3 +1,9 @@
+import { emptyRoadmapTaskData, type Industry } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/index";
+import type { Roadmap } from "@businessnjgovnavigator/shared/types";
+import type { GetStaticPathsResult } from "next";
+import type { ReactElement } from "react";
 import { NavBar } from "@/components/navbar/NavBar";
 import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
@@ -11,14 +17,8 @@ import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import {
   getAllStarterKitUrls,
   STARTER_KITS_GENERIC_SLUG,
-  StarterKitsUrl,
+  type StarterKitsUrl,
 } from "@/lib/utils/starterKits";
-import { emptyRoadmapTaskData, Industry } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/index";
-import { Roadmap } from "@businessnjgovnavigator/shared/types";
-import type { GetStaticPathsResult } from "next";
-import type { ReactElement } from "react";
 
 interface Props {
   noAuth: boolean;

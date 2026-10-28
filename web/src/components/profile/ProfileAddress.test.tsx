@@ -1,14 +1,10 @@
-import { ProfileAddress } from "@/components/profile/ProfileAddress";
-import { generateAddress } from "@/test/factories";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   createEmptyFormationFormData,
   emptyAddressData,
   emptyFormationAddressData,
 } from "@businessnjgovnavigator/shared/formationData";
-import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import type { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import {
   generateBusiness,
   generateFormationData,
@@ -16,9 +12,13 @@ import {
   generateMunicipality,
   generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";
+import { ProfileAddress } from "@/components/profile/ProfileAddress";
+import { generateAddress } from "@/test/factories";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
 
 const Config = getMergedConfig();
 

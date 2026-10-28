@@ -1,4 +1,4 @@
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
 import dayjs from "dayjs";
 
 export const isLicenseDataFromDatabaseDataMoreRecent = ({

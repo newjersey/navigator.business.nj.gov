@@ -1,17 +1,17 @@
-import analytics from "@/lib/utils/analytics";
-import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
   generateProfileData,
   generateUserData,
   generateUserDataForBusiness,
   getIndustries,
 } from "@businessnjgovnavigator/shared/";
+import analytics from "@/lib/utils/analytics";
+import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
+import { generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
 import {
   reportUserDataSync,
   sendOnboardingOnSubmitEvents,
   setOnLoadDimensions,
 } from "./analytics-helpers";
-import { generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
 
 jest.mock("@/lib/utils/analytics");
 

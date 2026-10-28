@@ -1,3 +1,5 @@
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useState } from "react";
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
@@ -5,8 +7,6 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useState } from "react";
 
 interface Props {
   taskUrlSlug: string;

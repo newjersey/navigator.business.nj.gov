@@ -1,10 +1,10 @@
+import { useRouter } from "next/compat/router";
+import type { ReactNode } from "react";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { removeBusiness } from "@/lib/domain-logic/removeBusiness";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import { useRouter } from "next/compat/router";
-import { ReactNode } from "react";
 
 interface Props {
   linkText: string;

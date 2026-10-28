@@ -1,9 +1,9 @@
-import { applyTheme } from "@/lib/cms/helpers/applyTheme";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import fs from "node:fs";
+import path from "node:path";
 import { render, waitFor } from "@testing-library/react";
-import fs from "fs";
-import path from "path";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { applyTheme } from "@/lib/cms/helpers/applyTheme";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 
 jest.mock("@/lib/api-client/apiClient");
 jest.mock("@/lib/auth/sessionHelper");
@@ -97,7 +97,6 @@ describe("cms previews", () => {
   // Slug-driven previews render nothing when no branch matches, so an empty render
   // means the slug no longer lines up with the preview's branches.
   it.each(slugDrivenCases)("renders $fileName for slug $slug", async ({ fileName, slug }) => {
-    // eslint-disable-next-line testing-library/render-result-naming-convention
     const container = await renderPreview(fileName, slug);
     expect(container.textContent?.length).toBeGreaterThan(0);
   });

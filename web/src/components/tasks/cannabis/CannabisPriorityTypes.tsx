@@ -1,3 +1,7 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { Checkbox, FormControlLabel } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useEffect, useState } from "react";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
@@ -7,13 +11,10 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   noneOfTheAbovePriorityId,
-  PriorityType,
+  type PriorityType,
   priorityTypesObj,
 } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { templateEval, useMountEffect } from "@/lib/utils/helpers";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { Checkbox, FormControlLabel } from "@mui/material";
-import React, { ReactElement, useEffect, useState } from "react";
 
 const priorityTypes = [
   ...priorityTypesObj.minorityOrWomen,

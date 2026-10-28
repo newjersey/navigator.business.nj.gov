@@ -1,15 +1,18 @@
+import type {
+  FieldsForErrorHandling,
+  FormationFields,
+} from "@businessnjgovnavigator/shared/formationData";
+import type {
+  FormationFieldErrorState,
+  FormationStepNames,
+} from "@businessnjgovnavigator/shared/types";
+import { useContext, useMemo } from "react";
 import { getErrorStateForFormationField } from "@/components/tasks/business-formation/getErrorStateForFormationField";
 import { getApiField } from "@/components/tasks/business-formation/getFieldForApiField";
 import { getStepForField } from "@/components/tasks/business-formation/getStepForField";
 import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  FieldsForErrorHandling,
-  FormationFields,
-} from "@businessnjgovnavigator/shared/formationData";
-import { FormationFieldErrorState, FormationStepNames } from "@businessnjgovnavigator/shared/types";
-import { useContext, useMemo } from "react";
 
 type FormationErrorsResponse = {
   allCurrentErrorsForStep: (

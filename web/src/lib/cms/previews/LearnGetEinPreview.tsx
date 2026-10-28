@@ -1,9 +1,9 @@
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import type { ReactElement } from "react";
 import { GetEin } from "@/components/learn/GetEin";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement } from "react";
 
 const LearnGetEinPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

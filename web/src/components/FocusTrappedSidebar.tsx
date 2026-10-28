@@ -1,6 +1,7 @@
-import { onEscape, useMountEffect } from "@/lib/utils/helpers";
 import FocusTrap from "focus-trap-react";
-import React, { ReactElement, useEffect, useState } from "react";
+import type React from "react";
+import { type ReactElement, useEffect, useState } from "react";
+import { onEscape, useMountEffect } from "@/lib/utils/helpers";
 
 interface Props {
   children: React.ReactNode;

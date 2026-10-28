@@ -1,3 +1,8 @@
+import { convertTaskMd } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { generateUserData } from "@businessnjgovnavigator/shared/test";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { RaffleBingoPaginator } from "@/components/tasks/RaffleBingoPaginator";
 import { getTaskStatusUpdatedMessage } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
@@ -5,11 +10,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { convertTaskMd } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { generateUserData } from "@businessnjgovnavigator/shared/test";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

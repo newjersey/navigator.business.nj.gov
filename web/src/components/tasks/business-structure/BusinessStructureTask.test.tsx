@@ -1,3 +1,16 @@
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  generateBusiness,
+  generateFormationData,
+  generateProfileData,
+  generateUserDataForBusiness,
+  randomLegalStructure,
+} from "@businessnjgovnavigator/shared/test";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server.node";
 import { Content } from "@/components/Content";
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { templateEval } from "@/lib/utils/helpers";
@@ -10,19 +23,6 @@ import {
   triggerQueueUpdate,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  generateBusiness,
-  generateFormationData,
-  generateProfileData,
-  generateUserDataForBusiness,
-  randomLegalStructure,
-} from "@businessnjgovnavigator/shared/test";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { renderToStaticMarkup } from "react-dom/server.node";
 
 const Config = getMergedConfig();
 const legalStructureLabels: Readonly<Record<string, string>> =

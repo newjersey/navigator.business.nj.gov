@@ -1,19 +1,19 @@
+import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
+import { type ReactElement, type RefObject, useContext } from "react";
 import { Content } from "@/components/Content";
 import { DateOfFormation } from "@/components/data-fields/DateOfFormation";
 import { CertificationsAndFundingNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/CertificationsAndFundingNonEssentialQuestions";
 import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
-import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { hasNonEssentialQuestions } from "@/lib/utils/non-essential-questions-helpers";
-import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { Accordion, AccordionDetails, AccordionSummary, Avatar } from "@mui/material";
-import { ReactElement, RefObject, useContext } from "react";
 
 interface Props {
   fieldErrors?: string[];

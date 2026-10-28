@@ -1,10 +1,9 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { LoginEmailCheck } from "@/components/LoginEmailCheck";
 import * as api from "@/lib/api-client/apiClient";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-
-import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
 

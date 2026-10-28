@@ -1,8 +1,8 @@
-import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { render, screen, waitFor } from "@testing-library/react";
-import { useRouter } from "next/compat/router";
-import { NextRouter } from "next/router";
 import userEvent from "@testing-library/user-event";
+import { useRouter } from "next/compat/router";
+import type { NextRouter } from "next/router";
+import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 
 jest.mock("next/compat/router");
 

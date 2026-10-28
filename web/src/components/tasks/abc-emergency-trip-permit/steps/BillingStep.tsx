@@ -1,3 +1,5 @@
+import { Checkbox, FormControlLabel, FormGroup, useMediaQuery } from "@mui/material";
+import { type ReactElement, useContext, useState } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { EmergencyTripPermitCountryDropdown } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitCountryDropdown";
 import { EmergencyTripPermitPaymentTable } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitPaymentTable";
@@ -7,8 +9,6 @@ import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContex
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import { templateEval } from "@/lib/utils/helpers";
-import { Checkbox, FormControlLabel, FormGroup, useMediaQuery } from "@mui/material";
-import { ReactElement, useContext, useState } from "react";
 
 export const BillingStep = (): ReactElement => {
   const { Config } = useConfig();

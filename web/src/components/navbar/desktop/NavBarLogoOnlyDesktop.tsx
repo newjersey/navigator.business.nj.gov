@@ -1,9 +1,9 @@
+import type { ReactElement } from "react";
+import { NavBarDesktopWrapper } from "@/components/navbar/desktop/NavBarDesktopWrapper";
 import { NavBarDashboardLink } from "@/components/navbar/NavBarDashboardLink";
 import { NavBarVerticalLine } from "@/components/navbar/NavBarVerticalLine";
 import { NavbarBusinessNjGovLogo } from "@/components/navbar/NavbarBusinessNjGovLogo";
-import { NavBarDesktopWrapper } from "@/components/navbar/desktop/NavBarDesktopWrapper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 interface Props {
   logoType: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO";

@@ -1,20 +1,4 @@
-import { PageCircularIndicator } from "@/components/PageCircularIndicator";
-import { Dashboard } from "@/components/dashboard/Dashboard";
-import { DashboardAlerts } from "@/components/dashboard/DashboardAlerts";
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import { MediaQueries } from "@/lib/PageSizes";
-import * as api from "@/lib/api-client/apiClient";
-import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { ROUTES } from "@/lib/domain-logic/routes";
-
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-
-import { Municipality, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { type Municipality, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import {
   loadAllAnytimeActionLicenseReinstatements,
   loadAllAnytimeActionTasks,
@@ -22,12 +6,12 @@ import {
   loadAllFundings,
   loadAllLicenseCalendarEvents,
   loadAllMunicipalities,
+  loadCommonBusinessTasks,
   loadOperateReferences,
   loadRoadmapSideBarDisplayContent,
   loadXrayRenewalCalendarEvent,
-  loadCommonBusinessTasks,
 } from "@businessnjgovnavigator/shared/static";
-import {
+import type {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
   Certification,
@@ -38,10 +22,24 @@ import {
   XrayRenewalCalendarEventType,
 } from "@businessnjgovnavigator/shared/types";
 import { useMediaQuery } from "@mui/material";
-import { GetStaticPropsResult } from "next";
-import { NextSeo } from "next-seo";
+import type { GetStaticPropsResult } from "next";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useState } from "react";
+import { NextSeo } from "next-seo";
+import { type ReactElement, useState } from "react";
+import { Dashboard } from "@/components/dashboard/Dashboard";
+import { DashboardAlerts } from "@/components/dashboard/DashboardAlerts";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { PageCircularIndicator } from "@/components/PageCircularIndicator";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
+import * as api from "@/lib/api-client/apiClient";
+import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import { ROUTES } from "@/lib/domain-logic/routes";
+import { MediaQueries } from "@/lib/PageSizes";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 
 interface Props {
   displayContent: RoadmapDisplayContent;

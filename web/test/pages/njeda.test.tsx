@@ -1,3 +1,14 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import type { Funding } from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import NJEDAFundingsOnboardingPage from "@/pages/njeda";
 import { generateFunding } from "@/test/factories";
@@ -7,17 +18,6 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { selectByValue } from "@/test/pages/profile/profile-helpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  generateBusiness,
-  generateProfileData,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
-import { Funding } from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

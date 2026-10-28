@@ -1,3 +1,13 @@
+import {
+  emptyIndustrySpecificData,
+  generateProfileData,
+  OperatingPhaseId,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { randomHomeBasedIndustry } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -12,16 +22,6 @@ import {
   mockEmptyApiSignups,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import {
-  emptyIndustrySpecificData,
-  generateProfileData,
-  OperatingPhaseId,
-  ProfileData,
-} from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

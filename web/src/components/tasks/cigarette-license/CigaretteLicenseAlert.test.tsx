@@ -1,9 +1,9 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
+import type { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 describe("CigaretteLicenseAlert", () => {
   const Config = getMergedConfig();

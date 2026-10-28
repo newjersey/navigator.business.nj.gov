@@ -1,7 +1,38 @@
-/* eslint-disable jest/expect-expect */
+import {
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+  type Business,
+  businessPersonas,
+  createEmptyBusiness,
+  einTaskId,
+  emptyAddressData,
+  emptyIndustrySpecificData,
+  formationTaskId,
+  generateGetFilingResponse,
+  generateMunicipality,
+  generateOwningProfileData,
+  generateProfileData,
+  generateStartingProfileData,
+  LegalStructures,
+  LookupIndustryById,
+  modifyCurrentBusiness,
+  naicsCodeTaskId,
+  OperatingPhaseId,
+  OperatingPhases,
+  randomElementFromArray,
+  type UserData,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  generateFormationData,
+  generateFormationFormData,
+  generateTaxFilingData,
+} from "@businessnjgovnavigator/shared/test";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import type analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import {
   allLegalStructuresOfType,
@@ -25,36 +56,6 @@ import {
   industryIdsWithSingleRequiredEssentialQuestion,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
-  Business,
-  businessPersonas,
-  createEmptyBusiness,
-  einTaskId,
-  emptyAddressData,
-  emptyIndustrySpecificData,
-  formationTaskId,
-  generateGetFilingResponse,
-  generateMunicipality,
-  generateOwningProfileData,
-  generateProfileData,
-  generateStartingProfileData,
-  LegalStructures,
-  LookupIndustryById,
-  modifyCurrentBusiness,
-  naicsCodeTaskId,
-  OperatingPhaseId,
-  OperatingPhases,
-  randomElementFromArray,
-  UserData,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  generateFormationData,
-  generateFormationFormData,
-  generateTaxFilingData,
-} from "@businessnjgovnavigator/shared/test";
-
-import analytics from "@/lib/utils/analytics";
-import {
   chooseRadio,
   chooseTab,
   clickBack,
@@ -76,11 +77,6 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
-import {
-  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
-  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
-} from "@businessnjgovnavigator/shared";
-import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 

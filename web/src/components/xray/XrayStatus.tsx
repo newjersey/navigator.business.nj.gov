@@ -1,8 +1,3 @@
-import { Alert } from "@/components/njwds-extended/Alert";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import analytics from "@/lib/utils/analytics";
 import type { FacilityDetails, XraySearchError } from "@businessnjgovnavigator/shared/";
 import { TextField } from "@mui/material";
 import {
@@ -14,6 +9,11 @@ import {
   useRef,
   useState,
 } from "react";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 
 const numberTextFieldSx = {
   "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":

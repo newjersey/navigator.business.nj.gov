@@ -1,18 +1,24 @@
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import {
+  Autocomplete,
+  type AutocompleteRenderInputParams,
+  type AutocompleteRenderOptionState,
+  Checkbox,
+  TextField,
+} from "@mui/material";
+import {
+  type HTMLAttributes,
+  type Key,
+  type ReactElement,
+  type SyntheticEvent,
+  useContext,
+} from "react";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import {
-  Autocomplete,
-  AutocompleteRenderInputParams,
-  AutocompleteRenderOptionState,
-  Checkbox,
-  TextField,
-} from "@mui/material";
-import { HTMLAttributes, Key, ReactElement, SyntheticEvent, useContext } from "react";
 
 const SUPPLIERS = [
   { licenseNumber: 501, name: "A TRENK, INC" },

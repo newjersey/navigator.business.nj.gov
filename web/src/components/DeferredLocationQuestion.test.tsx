@@ -1,3 +1,13 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import {
+  generateBusiness,
+  generateMunicipality,
+  generateProfileData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import analytics from "@/lib/utils/analytics";
@@ -9,16 +19,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { Municipality } from "@businessnjgovnavigator/shared/municipality";
-import {
-  generateBusiness,
-  generateMunicipality,
-  generateProfileData,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
   return {

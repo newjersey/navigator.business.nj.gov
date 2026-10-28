@@ -1,8 +1,8 @@
-import { Heading } from "@/components/njwds-extended/Heading";
-import { Icon } from "@/components/njwds/Icon";
-import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { ReactElement, ReactNode, useState } from "react";
+import { type ReactElement, type ReactNode, useState } from "react";
+import { Icon } from "@/components/njwds/Icon";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
 
 interface Props {
   title: string;

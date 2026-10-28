@@ -1,6 +1,6 @@
-import analytics from "@/lib/utils/analytics";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import analytics from "@/lib/utils/analytics";
 
 export const sendChangedNonEssentialQuestionAnalytics = (
   prevProfileData: ProfileData,
@@ -25,14 +25,14 @@ export const sendChangedNonEssentialQuestionAnalytics = (
 
   if (
     didNonEssentialQuestionAnswerChange(
-      prevProfileData.nonEssentialRadioAnswers["carnivalRideOwningBusiness"],
-      newProfileData.nonEssentialRadioAnswers["carnivalRideOwningBusiness"],
+      prevProfileData.nonEssentialRadioAnswers.carnivalRideOwningBusiness,
+      newProfileData.nonEssentialRadioAnswers.carnivalRideOwningBusiness,
     )
   ) {
     analytics.event.non_essential_question_set.view.non_essential_question_set(
       "carnivalRideOwningBusiness",
       getNonEssentialQuestionAnswer(
-        newProfileData.nonEssentialRadioAnswers["carnivalRideOwningBusiness"],
+        newProfileData.nonEssentialRadioAnswers.carnivalRideOwningBusiness,
       ),
     );
   }
@@ -51,14 +51,14 @@ export const sendChangedNonEssentialQuestionAnalytics = (
 
   if (
     didNonEssentialQuestionAnswerChange(
-      prevProfileData.nonEssentialRadioAnswers["travelingCircusOrCarnivalOwningBusiness"],
-      newProfileData.nonEssentialRadioAnswers["travelingCircusOrCarnivalOwningBusiness"],
+      prevProfileData.nonEssentialRadioAnswers.travelingCircusOrCarnivalOwningBusiness,
+      newProfileData.nonEssentialRadioAnswers.travelingCircusOrCarnivalOwningBusiness,
     )
   ) {
     analytics.event.non_essential_question_set.view.non_essential_question_set(
       "travelingCircusOrCarnivalOwningBusiness",
       getNonEssentialQuestionAnswer(
-        newProfileData.nonEssentialRadioAnswers["travelingCircusOrCarnivalOwningBusiness"],
+        newProfileData.nonEssentialRadioAnswers.travelingCircusOrCarnivalOwningBusiness,
       ),
     );
   }
@@ -101,13 +101,13 @@ export const sendChangedNonEssentialQuestionAnalytics = (
 
   if (
     didNonEssentialQuestionAnswerChange(
-      prevProfileData.nonEssentialRadioAnswers["vacantPropertyOwner"],
-      newProfileData.nonEssentialRadioAnswers["vacantPropertyOwner"],
+      prevProfileData.nonEssentialRadioAnswers.vacantPropertyOwner,
+      newProfileData.nonEssentialRadioAnswers.vacantPropertyOwner,
     )
   ) {
     analytics.event.non_essential_question_set.view.non_essential_question_set(
       "vacantPropertyOwner",
-      getNonEssentialQuestionAnswer(newProfileData.nonEssentialRadioAnswers["vacantPropertyOwner"]),
+      getNonEssentialQuestionAnswer(newProfileData.nonEssentialRadioAnswers.vacantPropertyOwner),
     );
   }
 };

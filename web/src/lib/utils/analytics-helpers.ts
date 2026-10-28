@@ -1,18 +1,17 @@
-/* eslint-disable no-prototype-builtins */
-import { getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
-import analytics, { DimensionQueueFactory, Questions } from "@/lib/utils/analytics";
-import { camelCaseToSnakeCase } from "@/lib/utils/cases-helpers";
 import {
-  BusinessPersona,
-  ForeignBusinessType,
-  IndustrySpecificData,
+  type BusinessPersona,
+  determineForeignBusinessType,
+  type ForeignBusinessType,
+  getCurrentBusiness,
+  type IndustrySpecificData,
   LookupOperatingPhaseById,
   OperatingPhaseId,
-  ProfileData,
-  UserData,
-  determineForeignBusinessType,
-  getCurrentBusiness,
+  type ProfileData,
+  type UserData,
 } from "@businessnjgovnavigator/shared";
+import { getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
+import analytics, { type DimensionQueueFactory, type Questions } from "@/lib/utils/analytics";
+import { camelCaseToSnakeCase } from "@/lib/utils/cases-helpers";
 
 type RegistrationProgress =
   | "Not Started"

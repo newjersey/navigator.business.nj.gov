@@ -1,9 +1,9 @@
+import { useMediaQuery } from "@mui/material";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { ReviewNotEntered } from "@/components/tasks/review-screen-components/ReviewNotEntered";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement } from "react";
 
 interface Props {
   label: string;

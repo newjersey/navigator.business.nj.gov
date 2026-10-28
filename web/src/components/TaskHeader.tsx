@@ -1,3 +1,6 @@
+import { isFormationTask, type TaskProgress } from "@businessnjgovnavigator/shared";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
@@ -8,9 +11,6 @@ import {
   getModifiedTaskBooleanUndefined,
   getModifiedTaskContent,
 } from "@/lib/utils/roadmap-helpers";
-import { isFormationTask, TaskProgress } from "@businessnjgovnavigator/shared";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props {
   task: Task;

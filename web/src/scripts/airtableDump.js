@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-
 const Airtable = require("airtable");
-const fs = require("fs");
+const fs = require("node:fs");
 
 // requires these env vars to be set!
 const airtableApiKey = process.env.AIRTABLE_API_KEY || "";

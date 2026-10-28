@@ -1,12 +1,12 @@
 import {
-  FieldErrorType,
+  type FieldErrorType,
   FieldStateActionKind,
-  FieldStatus,
-  FormContextReducer,
-  FormContextType,
-  ReducedFieldStates,
+  type FieldStatus,
+  type FormContextReducer,
+  type FormContextType,
+  type ReducedFieldStates,
 } from "@businessnjgovnavigator/shared/types";
-import { FormEvent, useCallback, useEffect, useReducer, useState } from "react";
+import { type FormEvent, useCallback, useEffect, useReducer, useState } from "react";
 
 const debug = false;
 
@@ -152,8 +152,6 @@ export const useFormContextHelper = <
         setSubmitted(false);
         stagingTab && setStagingTab(undefined);
       }
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fieldStates, submitted, stagingTab]);
   };
 

@@ -1,13 +1,13 @@
+import type { Certification, Funding } from "@businessnjgovnavigator/shared/types";
+import { Tab, Tabs } from "@mui/material";
+import * as React from "react";
+import { type ReactElement, type ReactNode, useEffect } from "react";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { getTabId, getTabPanelId, TabPanel } from "@/components/TabPanel";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { templateEval } from "@/lib/utils/helpers";
-import { Certification, Funding } from "@businessnjgovnavigator/shared/types";
-import { Tab, Tabs } from "@mui/material";
-import * as React from "react";
-import { ReactElement, ReactNode, useEffect } from "react";
 
 interface Props {
   firstTab: ReactElement;
@@ -25,7 +25,7 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
   const [tabIndex, setTabIndex] = React.useState(DASHBOARD_TAB);
   const { Config } = useConfig();
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number): void => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number): void => {
     setTabIndex(Number(newValue));
   };
 

@@ -1,5 +1,5 @@
+import type { ReactElement, ReactNode } from "react";
 import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
-import { ReactElement, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;

@@ -1,3 +1,11 @@
+import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import type {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { FilingsCalendarSingleGrid } from "@/components/filings-calendar/FilingsCalendarSingleGrid";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -5,14 +13,6 @@ import {
   isCalendarMonthLessThanCurrentMonth,
   sortFilterCalendarEventsWithinAYear,
 } from "@/lib/domain-logic/filterCalendarEvents";
-import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import {
-  LicenseEventType,
-  OperateReference,
-  XrayRenewalCalendarEventType,
-} from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement } from "react";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;

@@ -1,12 +1,12 @@
+import type { FlowType, OnboardingErrors } from "@businessnjgovnavigator/shared/types";
+import type { ReactNode } from "react";
 import { BusinessPersonaQuestion } from "@/components/data-fields/BusinessPersonaQuestion";
 import { ForeignBusinessTypeField } from "@/components/data-fields/ForeignBusinessTypeField";
 import { Industry } from "@/components/data-fields/Industry";
 import { Sectors } from "@/components/data-fields/Sectors";
+import { StartingBusinessSwitchPage } from "@/components/data-fields/StartingBusinessSwitchPage";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
-import { FlowType, OnboardingErrors } from "@businessnjgovnavigator/shared/types";
-import { ReactNode } from "react";
-import { StartingBusinessSwitchPage } from "@/components/data-fields/StartingBusinessSwitchPage";
 
 type OnboardingPage = {
   component: ReactNode;

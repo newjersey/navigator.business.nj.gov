@@ -1,3 +1,5 @@
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useContext } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
@@ -6,8 +8,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { convertTextToMarkdownBold } from "@/lib/utils/content-helpers";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   fieldName: ProfileContentField;

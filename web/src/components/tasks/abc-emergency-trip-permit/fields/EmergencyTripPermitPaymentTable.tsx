@@ -1,8 +1,8 @@
+import type { ReactElement } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getDollarValue } from "@/lib/utils/formatters";
-import { ReactElement } from "react";
 
 export const EmergencyTripPermitPaymentTable = (): ReactElement => {
   const { Config } = useConfig();

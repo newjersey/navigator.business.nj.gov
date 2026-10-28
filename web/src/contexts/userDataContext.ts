@@ -1,7 +1,7 @@
-import { UpdateQueue } from "@/lib/UpdateQueue";
-import { UserDataError } from "@businessnjgovnavigator/shared/types";
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import type { UserDataError } from "@businessnjgovnavigator/shared/types";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import { createContext } from "react";
+import type { UpdateQueue } from "@/lib/UpdateQueue";
 
 export interface UseUserDataResponse {
   userData: UserData | undefined;

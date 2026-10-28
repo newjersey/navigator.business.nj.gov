@@ -1,13 +1,13 @@
+import { type ReactElement, useContext } from "react";
 import { CountryDropdown } from "@/components/CountryDropdown";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { formatIntlPostalCode } from "@/lib/domain-logic/formatIntlPostalCode";
-import { ReactElement, useContext } from "react";
 
 export const MainBusinessAddressIntl = (): ReactElement => {
   const { Config } = useConfig();

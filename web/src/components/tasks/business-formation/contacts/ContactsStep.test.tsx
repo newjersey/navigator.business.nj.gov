@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
-import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
 import {
-  FormationFormData,
-  FormationIncorporator,
-  FormationLegalType,
-  FormationMember,
+  type FormationFormData,
+  type FormationIncorporator,
+  type FormationLegalType,
+  type FormationMember,
   generateFormationFormData,
   generateFormationIncorporator,
   generateFormationMember,
@@ -13,8 +10,10 @@ import {
   generateFormationUSAddress,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { screen } from "@testing-library/react";
+import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
+import { type FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
 
 function mockMaterialUI(): typeof materialUi {
   return {

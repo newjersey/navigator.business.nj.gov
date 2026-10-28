@@ -1,11 +1,11 @@
-import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
 import {
-  FieldsForErrorHandling,
-  FormationFields,
-  FormationFormData,
   corpLegalStructures,
+  type FieldsForErrorHandling,
+  type FormationFields,
+  type FormationFormData,
   incorporationLegalStructures,
 } from "@businessnjgovnavigator/shared/formationData";
+import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
 
 export const validatedFieldsForUser = (
   formationFormData: FormationFormData,

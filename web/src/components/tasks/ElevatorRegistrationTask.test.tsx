@@ -1,9 +1,3 @@
-import { ElevatorRegistrationTask } from "@/components/tasks/ElevatorRegistrationTask";
-import { HousingMunicipalitiesContext } from "@/contexts/housingMunicipalitiesContext";
-import * as api from "@/lib/api-client/apiClient";
-import analyticsBase from "@/lib/utils/analytics-base";
-import { generateTask } from "@/test/factories";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { generateUserData } from "@businessnjgovnavigator/shared";
 import {
   generateElevatorSafetyRegistration,
@@ -11,6 +5,12 @@ import {
 } from "@businessnjgovnavigator/shared/elevatorSafety";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { ElevatorRegistrationTask } from "@/components/tasks/ElevatorRegistrationTask";
+import { HousingMunicipalitiesContext } from "@/contexts/housingMunicipalitiesContext";
+import * as api from "@/lib/api-client/apiClient";
+import analyticsBase from "@/lib/utils/analytics-base";
+import { generateTask } from "@/test/factories";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   checkElevatorRegistrationStatus: jest.fn(),

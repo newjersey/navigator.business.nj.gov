@@ -1,4 +1,4 @@
-import { Business } from "@businessnjgovnavigator/shared";
+import type { Business } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   isDomesticEmployerBusiness,
@@ -7,7 +7,7 @@ import {
   isStartingBusiness,
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { hasCompletedBusinessStructure } from "@businessnjgovnavigator/shared/domain-logic/hasCompletedBusinessStructure";
-import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
+import type { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 
 export const getRoadmapHeadingText = (industryId?: string): string => {
   const Config = getMergedConfig();

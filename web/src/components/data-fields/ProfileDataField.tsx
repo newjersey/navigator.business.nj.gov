@@ -1,11 +1,11 @@
-import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import type { OutlinedInputProps, TextFieldProps } from "@mui/material";
+import { type HTMLInputTypeAttribute, type ReactElement, useContext } from "react";
+import { GenericTextField, type GenericTextFieldProps } from "@/components/GenericTextField";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
-import { OutlinedInputProps, TextFieldProps } from "@mui/material";
-import { HTMLInputTypeAttribute, ReactElement, useContext } from "react";
 
 export interface ProfileDataFieldProps<T = unknown>
   extends Omit<GenericTextFieldProps<T>, "fieldName"> {

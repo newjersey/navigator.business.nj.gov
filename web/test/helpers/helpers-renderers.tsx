@@ -1,13 +1,18 @@
+import type { RegistrationStatus } from "@businessnjgovnavigator/shared/";
+import type { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
+import type { Dispatch, ReactElement, SetStateAction } from "react";
 import { AuthContext } from "@/contexts/authContext";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
-import { ActiveUser, AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
-import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
-import { ContextualInfo, Roadmap, UserDataError } from "@businessnjgovnavigator/shared/types";
-import { Dispatch, ReactElement, SetStateAction } from "react";
+import {
+  type ActiveUser,
+  type AuthAction,
+  type AuthState,
+  IsAuthenticated,
+} from "@/lib/auth/AuthContext";
 
 export const withAuth = (
   subject: ReactElement,

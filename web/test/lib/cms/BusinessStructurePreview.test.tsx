@@ -1,8 +1,8 @@
-import { applyTheme } from "@/lib/cms/helpers/applyTheme";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
-import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { render, screen } from "@testing-library/react";
+import { applyTheme } from "@/lib/cms/helpers/applyTheme";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 
 jest.mock("@/lib/api-client/apiClient");
 jest.mock("@/lib/auth/sessionHelper");

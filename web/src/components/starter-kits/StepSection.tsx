@@ -1,9 +1,9 @@
+import type { Roadmap, Task } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { StepInfo } from "@/components/starter-kits/StepInfo";
 import analytics from "@/lib/utils/analytics";
-import { Roadmap, Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props {
   stepsTitle: string;

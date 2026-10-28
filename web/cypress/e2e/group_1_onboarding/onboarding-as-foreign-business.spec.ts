@@ -11,12 +11,12 @@ import {
   onOnboardingPageStartingBusiness,
 } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 import {
-  CarServiceType,
-  Industry,
-  PropertyLeaseType,
-  ResidentialConstructionType,
+  type CarServiceType,
   carServiceOptions,
   getIndustries,
+  type Industry,
+  type PropertyLeaseType,
+  type ResidentialConstructionType,
   randomInt,
 } from "@businessnjgovnavigator/shared";
 

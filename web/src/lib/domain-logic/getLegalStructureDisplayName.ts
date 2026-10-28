@@ -1,4 +1,4 @@
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 
 interface LegalStructureDisplayNameProps {
   readonly config: ConfigType;

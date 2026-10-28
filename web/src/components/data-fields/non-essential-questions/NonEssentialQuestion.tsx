@@ -1,3 +1,6 @@
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext, useEffect, useRef, useState } from "react";
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -5,8 +8,6 @@ import { getNonEssentialQuestionText } from "@/lib/domain-logic/getNonEssentialQ
 import analytics from "@/lib/utils/analytics";
 import { convertTextToMarkdownBold } from "@/lib/utils/content-helpers";
 import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 interface Props {
   essentialQuestionId: string;

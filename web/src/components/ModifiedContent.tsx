@@ -1,5 +1,5 @@
+import type { ReactElement } from "react";
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
-import { ReactElement } from "react";
 
 interface ContentProps {
   children: string;

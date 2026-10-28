@@ -1,8 +1,8 @@
-import { ReviewStep } from "@/components/tasks/abc-emergency-trip-permit/steps/ReviewStep";
-import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
-import { EmergencyTripPermitApplicationInfo } from "@businessnjgovnavigator/shared";
+import type { EmergencyTripPermitApplicationInfo } from "@businessnjgovnavigator/shared";
 import { generateEmergencyTripPermitApplicationData } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
+import { ReviewStep } from "@/components/tasks/abc-emergency-trip-permit/steps/ReviewStep";
+import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 
 describe("Review step", () => {
   describe("Conditional fields", () => {

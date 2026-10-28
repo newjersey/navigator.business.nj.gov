@@ -1,9 +1,9 @@
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { MiniCallout } from "@/components/njwds-extended/callout/MiniCallout";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext } from "react";
 
 export const NeedsAccountMiniCallout = (): ReactElement => {
   const { isAuthenticated } = useContext(NeedsAccountContext);

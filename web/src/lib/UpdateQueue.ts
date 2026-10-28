@@ -1,5 +1,4 @@
-import analytics from "@/lib/utils/analytics";
-import {
+import type {
   Business,
   BusinessUser,
   EnvironmentData,
@@ -13,6 +12,7 @@ import {
   UserData,
   XrayData,
 } from "@businessnjgovnavigator/shared";
+import analytics from "@/lib/utils/analytics";
 
 export interface UpdateQueue {
   queue: (userData: Partial<UserData>) => UpdateQueue;

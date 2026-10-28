@@ -1,17 +1,16 @@
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { AnytimeActionLicenseReinstatementElement } from "@/components/tasks/anytime-action/AnytimeActionLicenseReinstatementElement";
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-
 import {
-  AnytimeActionLicenseReinstatementUrlSlugParameter,
+  type AnytimeActionLicenseReinstatementUrlSlugParameter,
   loadAllAnytimeActionLicenseReinstatementsUrlSlugs,
   loadAnytimeActionLicenseReinstatementsByUrlSlug,
 } from "@businessnjgovnavigator/shared/static";
-import { AnytimeActionLicenseReinstatement } from "@businessnjgovnavigator/shared/types";
-import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import type { AnytimeActionLicenseReinstatement } from "@businessnjgovnavigator/shared/types";
+import type { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { AnytimeActionLicenseReinstatementElement } from "@/components/tasks/anytime-action/AnytimeActionLicenseReinstatementElement";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 
 interface Props {
   anytimeActionLicenseReinstatement: AnytimeActionLicenseReinstatement;

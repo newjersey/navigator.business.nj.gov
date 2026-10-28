@@ -1,10 +1,10 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { ReactElement } from "react";
+import { Icon } from "@/components/njwds/Icon";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement } from "react";
 
 export const ElevatorViolationsCard = (): ReactElement => {
   const config = getMergedConfig();

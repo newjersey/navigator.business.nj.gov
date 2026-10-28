@@ -1,26 +1,25 @@
+import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/";
+import {
+  type FundingUrlSlugParameter,
+  loadAllFundingUrlSlugs,
+  loadFundingByUrlSlug,
+} from "@businessnjgovnavigator/shared/static";
+import type { Funding } from "@businessnjgovnavigator/shared/types";
+import { useMediaQuery } from "@mui/material";
+import type { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { MediaQueries } from "@/lib/PageSizes";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import { MediaQueries } from "@/lib/PageSizes";
 import { templateEval } from "@/lib/utils/helpers";
-
-import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/";
-import {
-  FundingUrlSlugParameter,
-  loadAllFundingUrlSlugs,
-  loadFundingByUrlSlug,
-} from "@businessnjgovnavigator/shared/static";
-import { Funding } from "@businessnjgovnavigator/shared/types";
-import { useMediaQuery } from "@mui/material";
-import { GetStaticPathsResult, GetStaticPropsResult } from "next";
-import { NextSeo } from "next-seo";
-import { ReactElement } from "react";
 
 interface Props {
   funding: Funding;

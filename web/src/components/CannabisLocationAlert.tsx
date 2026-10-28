@@ -1,6 +1,6 @@
+import type { ReactElement } from "react";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 type Props = {
   industryId?: string;

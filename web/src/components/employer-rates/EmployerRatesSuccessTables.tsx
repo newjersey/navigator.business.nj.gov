@@ -1,12 +1,12 @@
-import { ReactElement } from "react";
-import { Heading } from "../njwds-extended/Heading";
-import { EmployerRatesQuarterObject } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { templateEval } from "@/lib/utils/helpers";
-import { Content } from "@/components/Content";
+import type { EmployerRatesResponse } from "@businessnjgovnavigator/shared/employerRates";
+import type { ReactElement } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
-import { EmployerRatesResponse } from "@businessnjgovnavigator/shared/employerRates";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import type { EmployerRatesQuarterObject } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
+import { templateEval } from "@/lib/utils/helpers";
+import { Heading } from "../njwds-extended/Heading";
 
 interface Props {
   response: EmployerRatesResponse;

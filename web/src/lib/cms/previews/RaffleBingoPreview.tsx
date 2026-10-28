@@ -1,10 +1,10 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { RaffleBingoPaginator } from "@/components/tasks/RaffleBingoPaginator";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { rswitch } from "@/lib/utils/helpers";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 const RaffleBingoPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);

@@ -1,9 +1,9 @@
+import { fireEvent, render, screen } from "@testing-library/react";
 import { TaskCtaLinks } from "@/components/TaskCtaLinks";
 import analytics from "@/lib/utils/analytics";
 import * as helpers from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
   return {

@@ -1,3 +1,6 @@
+import type { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
+import { useMediaQuery } from "@mui/material";
+import { type ReactElement, useContext } from "react";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
@@ -5,12 +8,9 @@ import { EmergencyTripPermitReviewField } from "@/components/tasks/abc-emergency
 import { EmergencyTripPermitReviewSection } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitReviewSection";
 import { LookupStepIndexByName } from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitStepsConfiguration";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
-import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useEmergencyTripPermitErrors } from "@/lib/data-hooks/useEmergencyTripPermitErrors";
-import { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, useContext } from "react";
+import { MediaQueries } from "@/lib/PageSizes";
 
 export const ReviewStep = (): ReactElement => {
   const { Config } = useConfig();

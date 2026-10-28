@@ -1,12 +1,12 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { MediaArea } from "@businessnjgovnavigator/shared/environment";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { MediaArea } from "@businessnjgovnavigator/shared/environment";
-import { ReactElement, useContext } from "react";
 
 export const ContactDep = (): ReactElement => {
   const Config = getMergedConfig();

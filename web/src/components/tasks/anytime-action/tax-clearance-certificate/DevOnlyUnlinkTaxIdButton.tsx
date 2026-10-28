@@ -1,11 +1,11 @@
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import * as api from "@/lib/api-client/apiClient";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
+import type {
   TaxClearanceCertificateResponseErrorType,
   UnlinkTaxIdResponse,
 } from "@businessnjgovnavigator/shared";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import * as api from "@/lib/api-client/apiClient";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 
 interface Props {
   setResponseErrorType?: (errorType: TaxClearanceCertificateResponseErrorType | undefined) => void;

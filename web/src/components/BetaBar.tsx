@@ -1,8 +1,8 @@
+import type { ReactElement } from "react";
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { ReactElement } from "react";
 
 export const BetaBar = (): ReactElement => {
   const { Config } = useConfig();

@@ -1,10 +1,10 @@
+import type { SectionType } from "@businessnjgovnavigator/shared";
+import { Dialog, DialogContent, IconButton } from "@mui/material";
+import { useRouter } from "next/compat/router";
+import type { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { SectionType } from "@businessnjgovnavigator/shared";
-import { Dialog, DialogContent, IconButton } from "@mui/material";
-import { useRouter } from "next/compat/router";
-import { ReactElement } from "react";
 
 interface Props {
   nextSectionType: SectionType | undefined;

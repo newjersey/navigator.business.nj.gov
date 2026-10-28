@@ -1,12 +1,12 @@
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { type ReactElement, useContext } from "react";
 import { LockedTasksPrompt } from "@/components/dashboard/LockedTasksPrompt";
-import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   activeTaskId?: string | undefined;

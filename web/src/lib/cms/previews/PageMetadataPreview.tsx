@@ -1,5 +1,5 @@
+import type { ReactElement } from "react";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { ReactElement } from "react";
 
 const PageMetaDataPreview = (): ReactElement => {
   return (

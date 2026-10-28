@@ -1,12 +1,12 @@
+import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
+import { type ReactElement, useContext } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval } from "@/lib/utils/helpers";
-import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
-import { ReactElement, useContext } from "react";
 
 export const DashboardHeader = (): ReactElement => {
   const { state } = useContext(AuthContext);

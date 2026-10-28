@@ -1,3 +1,6 @@
+import { Checkbox } from "@mui/material";
+import type { ReactElement } from "react";
+import { useState } from "react";
 import { Content } from "@/components/Content";
 import { ActivitiesForm } from "@/components/crtk/ActivitiesForm";
 import { Alert } from "@/components/njwds-extended/Alert";
@@ -6,10 +9,6 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval } from "@/lib/utils/helpers";
-
-import { Checkbox } from "@mui/material";
-import { useState } from "react";
-import { ReactElement } from "react";
 
 interface Props {
   onSearchAgain: () => void;

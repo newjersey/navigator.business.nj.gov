@@ -1,8 +1,8 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { getStartingBusinessTileSet, LandingPageTiles } from "@/components/LandingPageTiles";
 import { navigateToUrl } from "@/lib/utils/navigation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/navigation", () => ({

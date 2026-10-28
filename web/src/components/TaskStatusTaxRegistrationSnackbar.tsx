@@ -1,7 +1,7 @@
+import type { ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 interface Props {
   isOpen: boolean;

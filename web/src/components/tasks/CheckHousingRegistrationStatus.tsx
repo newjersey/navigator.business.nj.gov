@@ -1,21 +1,21 @@
-import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
-import { Alert } from "@/components/njwds-extended/Alert";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { Content } from "@/components/Content";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
-  HousingAddress,
-  HousingMunicipality,
-  Municipality,
+  type HousingAddress,
+  type HousingMunicipality,
+  type Municipality,
   toProperCase,
 } from "@businessnjgovnavigator/shared";
-import {
+import type {
   HotelMotelRegistrationSearchError,
   MultipleDwellingSearchError,
 } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
-import { ChangeEvent, FormEvent, ReactElement, useEffect, useState } from "react";
+import { type ChangeEvent, type FormEvent, type ReactElement, useEffect, useState } from "react";
+import { Content } from "@/components/Content";
+import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 
 interface Props {
   onSubmit: (address: HousingAddress) => void;
@@ -68,8 +68,6 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
     if (communityAffairsAddress?.municipality) {
       setSelectedMunicipality(communityAffairsAddress.municipality);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {

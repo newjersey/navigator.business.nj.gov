@@ -1,6 +1,6 @@
+import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { getAnytimeActionsFromNonEssentialQuestions } from "@/components/dashboard/anytimeActionsBuilder";
 import { generateAnytimeActionTask } from "@/test/factories";
-import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 
 const anytimeActionsTasks = [
   generateAnytimeActionTask({ filename: "anytime-action-1" }),

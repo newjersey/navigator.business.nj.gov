@@ -1,14 +1,14 @@
-import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
-import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
-import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generateFormationData,
   generateGetFilingResponse,
 } from "@businessnjgovnavigator/shared/test";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 
 const FormationSuccessPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

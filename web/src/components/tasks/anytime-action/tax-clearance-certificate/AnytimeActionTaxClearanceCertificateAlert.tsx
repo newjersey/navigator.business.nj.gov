@@ -1,3 +1,6 @@
+import type { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
@@ -5,9 +8,6 @@ import { DevOnlyUnlinkTaxIdButton } from "@/components/tasks/anytime-action/tax-
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import analytics from "@/lib/utils/analytics";
-import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props {
   fieldErrors: string[];
@@ -35,7 +35,6 @@ export const AnytimeActionTaxClearanceCertificateAlert = (props: Props): ReactEl
 
   const getLabel = (field: string): string => {
     // Necessary because Config.formation.fields defaults to type 'any'
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const formationLabel = Config.formation.fields[field]?.label;
 

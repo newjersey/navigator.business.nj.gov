@@ -1,3 +1,9 @@
+import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
+import type { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
+import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
+import { type ChangeEvent, type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
@@ -5,12 +11,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
-import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
-import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
-import { ChangeEvent, ReactElement, useContext } from "react";
 
 const allForeignBusinessTypeIdsOrdered = [
   "employeeOrContractorInNJ",

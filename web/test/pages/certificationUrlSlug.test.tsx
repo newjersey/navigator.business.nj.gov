@@ -1,7 +1,7 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { screen } from "@testing-library/react";
 import CertificationPage from "@/pages/certification/[certificationUrlSlug]";
 import { generateCertification } from "@/test/factories";
-import { screen } from "@testing-library/react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 describe("certification page", () => {
   it("shows the certification details", () => {

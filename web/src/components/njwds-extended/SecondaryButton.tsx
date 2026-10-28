@@ -1,5 +1,5 @@
-import { GenericButton, GenericButtonProps } from "@/components/njwds-extended/GenericButton";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { GenericButton, type GenericButtonProps } from "@/components/njwds-extended/GenericButton";
 
 type OmitGenericButtonProps = Omit<
   GenericButtonProps,

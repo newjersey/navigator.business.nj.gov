@@ -1,10 +1,10 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
-import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
-import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
 import analytics from "@/lib/utils/analytics";
+import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 const renderNonEssentialQuestionsHelpers = (questionId: ProfileContentField): void => {
   const initialProfileData = generateProfileData({});

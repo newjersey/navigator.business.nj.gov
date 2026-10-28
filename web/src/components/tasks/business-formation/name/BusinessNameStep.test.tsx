@@ -1,24 +1,24 @@
+import {
+  createEmptyFormationFormData,
+  type FormationLegalType,
+  foreignLegalTypePrefix,
+  generateBusiness,
+  generateBusinessNameAvailability,
+  generateFormationFormData,
+  type NameAvailability,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type * as materialUi from "@mui/material";
+import { screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import analytics from "@/lib/utils/analytics";
 import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
 import {
-  FormationPageHelpers,
+  type FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import {
-  createEmptyFormationFormData,
-  foreignLegalTypePrefix,
-  FormationLegalType,
-  generateBusiness,
-  generateBusinessNameAvailability,
-  generateFormationFormData,
-  NameAvailability,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import * as materialUi from "@mui/material";
-import { screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 function mockMaterialUI(): typeof materialUi {
   return {

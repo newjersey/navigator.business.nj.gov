@@ -1,6 +1,6 @@
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { RegistrationStatus } from "@businessnjgovnavigator/shared/businessUser";
+import type { RegistrationStatus } from "@businessnjgovnavigator/shared/businessUser";
 import { createContext } from "react";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 
 export interface NeedsAccountContextType {
   isAuthenticated: IsAuthenticated;

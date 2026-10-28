@@ -1,6 +1,6 @@
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import type { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
 import { getNonEssentialQuestionAnytimeActions } from "@/lib/domain-logic/getNonEssentialQuestionAnytimeActions";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
 
 export const getAnytimeActionsFromNonEssentialQuestions = (
   profileData: ProfileData | undefined,

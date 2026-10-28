@@ -1,8 +1,8 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { render, screen } from "@testing-library/react";
 import { FormBusiness } from "@/components/learn/FormBusiness";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { render, screen } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));

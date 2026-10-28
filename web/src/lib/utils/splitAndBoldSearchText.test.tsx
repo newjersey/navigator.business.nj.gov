@@ -1,5 +1,5 @@
-import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
 import { render, screen } from "@testing-library/react";
+import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
 
 describe("splitAndBoldSearchText", () => {
   it("properly displays the found text as bold", () => {

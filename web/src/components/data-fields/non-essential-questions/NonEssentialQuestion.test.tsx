@@ -1,16 +1,16 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { NonEssentialQuestion } from "@/components/data-fields/non-essential-questions/NonEssentialQuestion";
-import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
-import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import {
   createEmptyProfileData,
   generateProfileData,
-  ProfileData,
+  type ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, screen, within } from "@testing-library/react";
-import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
+import { NonEssentialQuestion } from "@/components/data-fields/non-essential-questions/NonEssentialQuestion";
+import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
 import analytics from "@/lib/utils/analytics";
+import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
+import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
   getNonEssentialQuestionText: jest.fn(),

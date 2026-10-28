@@ -1,12 +1,12 @@
+import type { GetServerSideProps } from "next";
+import type { ReactElement } from "react";
 import { NavBar } from "@/components/navbar/NavBar";
 import { NavBarVariant } from "@/components/navbar/NavBarTypes";
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { STARTER_KITS_GENERIC_SLUG } from "@/lib/utils/starterKits";
-import { GetServerSideProps } from "next";
-import { ReactElement } from "react";
 
 const StarterKitsRootPage = (): ReactElement => {
   return (

@@ -1,3 +1,15 @@
+import { emptyTaxClearanceCertificateData } from "@businessnjgovnavigator/shared";
+import {
+  emptyFormationAddressData,
+  type FormationAddress,
+} from "@businessnjgovnavigator/shared/formationData";
+import { emptyProfileData, type ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import type { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
+import type {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+} from "@businessnjgovnavigator/shared/types";
+import { type Dispatch, type ReactElement, type SetStateAction, useState } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { getInitialData } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { TaxClearanceSteps } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceSteps";
@@ -12,18 +24,6 @@ import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCerti
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { emptyTaxClearanceCertificateData } from "@businessnjgovnavigator/shared";
-import {
-  emptyFormationAddressData,
-  FormationAddress,
-} from "@businessnjgovnavigator/shared/formationData";
-import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
-import {
-  AnytimeActionLicenseReinstatement,
-  AnytimeActionTask,
-} from "@businessnjgovnavigator/shared/types";
-import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;

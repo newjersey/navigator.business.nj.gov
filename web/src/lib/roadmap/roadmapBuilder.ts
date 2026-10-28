@@ -1,6 +1,6 @@
+import type { SectionType } from "@businessnjgovnavigator/shared";
+import type { IndustryRoadmap, Roadmap } from "@businessnjgovnavigator/shared/types";
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
-import { SectionType } from "@businessnjgovnavigator/shared";
-import { IndustryRoadmap, Roadmap } from "@businessnjgovnavigator/shared/types";
 
 export const buildRoadmap = async ({
   industryId,

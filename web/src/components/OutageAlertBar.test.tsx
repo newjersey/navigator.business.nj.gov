@@ -1,9 +1,9 @@
+import { render, screen, waitFor } from "@testing-library/react";
+import axios from "axios";
 import { OutageAlertBar } from "@/components/OutageAlertBar";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateOutageConfig } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
-import { render, screen, waitFor } from "@testing-library/react";
-import axios from "axios";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;

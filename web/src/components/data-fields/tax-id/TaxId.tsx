@@ -1,4 +1,6 @@
-import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
+import { useMediaQuery } from "@mui/material";
+import { type ReactElement, useContext, useRef, useState } from "react";
+import type { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { SingleTaxId } from "@/components/data-fields/tax-id/SingleTaxId";
 import { SplitTaxId } from "@/components/data-fields/tax-id/SplitTaxId";
 import { type ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
@@ -7,8 +9,6 @@ import { decryptValue } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import { getInitialShowHideStatus, isEncrypted } from "@/lib/utils/encryption";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, useContext, useRef, useState } from "react";
 
 export interface Props
   extends Omit<

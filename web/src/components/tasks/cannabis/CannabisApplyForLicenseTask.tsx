@@ -1,19 +1,19 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { type ReactElement, useState } from "react";
 import { Content } from "@/components/Content";
 import { TaskHeader } from "@/components/TaskHeader";
+import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { CannabisApplicationQuestionsTab } from "@/components/tasks/cannabis/CannabisApplicationQuestionsTab";
 import { CannabisApplicationRequirementsTab } from "@/components/tasks/cannabis/CannabisApplicationRequirementsTab";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
-  PriorityApplicationType,
+  type PriorityApplicationType,
   priorityTypesObj,
 } from "@/lib/domain-logic/cannabisPriorityTypes";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, useState } from "react";
 
 interface Props {
   task: Task;

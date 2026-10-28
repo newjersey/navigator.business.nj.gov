@@ -5,7 +5,6 @@ describe("Landing [feature] [all] [group2]", () => {
   it("calls the landing_page_how_it_works.scroll.how_it_works_seen analytics when scrolled to the how it works section ", () => {
     cy.visit("/");
     onLandingPage.scrollToHowItWorksSection();
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.window()
       .its("dataLayer")
       .wait(5000)
@@ -19,7 +18,6 @@ describe("Landing [feature] [all] [group2]", () => {
   it("calls the landing_page_more_support.scroll.more_support_seen analytics when scrolled to the more support section ", () => {
     cy.visit("/");
     onLandingPage.scrollToMoreSupportSection();
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.window()
       .its("dataLayer")
       .wait(5000)

@@ -1,3 +1,11 @@
+import {
+  generateEmptyEnvironmentQuestionnaireData,
+  type MediaArea,
+  type Questionnaire,
+} from "@businessnjgovnavigator/shared/environment";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { useMediaQuery } from "@mui/material";
+import { type ReactElement, useEffect, useState } from "react";
 import { TaskHeader } from "@/components/TaskHeader";
 import { EnvQuestionnaireStepper } from "@/components/tasks/environment-questionnaire/EnvQuestionnaireStepper";
 import { EnvRequirementsResults } from "@/components/tasks/environment-questionnaire/EnvRequirementsResults";
@@ -7,14 +15,6 @@ import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import {
-  generateEmptyEnvironmentQuestionnaireData,
-  MediaArea,
-  Questionnaire,
-} from "@businessnjgovnavigator/shared/environment";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   task: Task;
@@ -54,7 +54,7 @@ export const EnvRequirements = (props: Props): ReactElement => {
         submitted: stepIndex === 5 ? true : undefined,
       })
       .queueTaskProgress({
-        ["env-requirements"]: "COMPLETED",
+        "env-requirements": "COMPLETED",
       })
       .updateInBackground();
   };
@@ -67,7 +67,7 @@ export const EnvRequirements = (props: Props): ReactElement => {
         submitted: false,
       })
       .queueTaskProgress({
-        ["env-requirements"]: "TO_DO",
+        "env-requirements": "TO_DO",
       })
       .updateInBackground();
   };

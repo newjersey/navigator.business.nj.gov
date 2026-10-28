@@ -1,4 +1,8 @@
+import type { CallToActionHyperlink } from "@businessnjgovnavigator/shared/types";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { type ReactElement, type ReactNode, useState } from "react";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -6,7 +10,6 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PrimaryButtonDropdown } from "@/components/njwds-extended/PrimaryButtonDropdown";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
@@ -14,9 +17,6 @@ import {
   priorityTypesObj,
 } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { openInNewTab, useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { CallToActionHyperlink } from "@businessnjgovnavigator/shared/types";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   onBack: () => void;

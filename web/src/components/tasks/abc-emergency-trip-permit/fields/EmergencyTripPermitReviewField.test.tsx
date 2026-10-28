@@ -1,11 +1,11 @@
-import { EmergencyTripPermitReviewField } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitReviewField";
-import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
-import {
+import type {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitUserEnteredFieldNames,
 } from "@businessnjgovnavigator/shared";
 import { generateEmergencyTripPermitApplicationData } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
+import { EmergencyTripPermitReviewField } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitReviewField";
+import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 
 describe("EmergencyTripPermitReviewField", () => {
   let applicationInfo: EmergencyTripPermitApplicationInfo;

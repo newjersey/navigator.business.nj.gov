@@ -27,8 +27,7 @@ export default defineConfig({
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unused-vars
-      on("before:browser:launch", (browser = {}, launchOptions) => {
+      on("before:browser:launch", (_browser = {}, launchOptions) => {
         prepareAudit(launchOptions);
       });
 

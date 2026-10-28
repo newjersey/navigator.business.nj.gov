@@ -1,16 +1,16 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { LinearProgress } from "@mui/material";
+import type { GetServerSidePropsResult } from "next";
+import { NextSeo } from "next-seo";
+import { type ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import type { ContentDeadLink, FoundUrl } from "@/lib/static/admin/deadLinkTypes";
 import { generateDeadLinksCsv } from "@/lib/static/admin/generateDeadLinksCsv";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { LinearProgress } from "@mui/material";
-import { GetServerSidePropsResult } from "next";
-import { NextSeo } from "next-seo";
-import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
 
 interface Props {
   noAuth: boolean;
@@ -28,8 +28,7 @@ type ScanStatus = {
   error: string | null;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const DeadUrlsPage = (props: Props): ReactElement => {
+const DeadUrlsPage = (_props: Props): ReactElement => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const [isScanning, setIsScanning] = useState<boolean>(false);

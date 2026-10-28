@@ -1,13 +1,13 @@
+import { generateBusiness } from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type * as materialUi from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import { render, screen } from "@testing-library/react";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { generateBusiness } from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import * as materialUi from "@mui/material";
-import { useMediaQuery } from "@mui/material";
-import { render, screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

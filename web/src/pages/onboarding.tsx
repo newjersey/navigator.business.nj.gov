@@ -1,6 +1,42 @@
+import {
+  type Business,
+  businessStructureTaskId,
+  createEmptyProfileData,
+  createEmptyUser,
+  createEmptyUserData,
+  determineForeignBusinessType,
+  emptyProfileData,
+  getCurrentBusiness,
+  isRemoteWorkerOrSellerBusiness,
+  LookupMunicipalityByName,
+  type Municipality,
+  OperatingPhaseId,
+  type ProfileData,
+  type UserData,
+} from "@businessnjgovnavigator/shared";
+import { loadAllMunicipalities } from "@businessnjgovnavigator/shared/static";
+import type {
+  FlowType,
+  OnboardingErrors,
+  Page,
+  ProfileError,
+} from "@businessnjgovnavigator/shared/types";
+import { useMediaQuery } from "@mui/material";
+import type { GetStaticPropsResult } from "next";
+import { useRouter } from "next/compat/router";
+import { NextSeo } from "next-seo";
+import {
+  type ReactElement,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { DevOnlySkipOnboardingButton } from "@/components/onboarding/DevOnlySkipOnboardingButton";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
@@ -25,12 +61,12 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import {
   QUERIES,
-  QUERY_PARAMS_VALUES,
+  type QUERY_PARAMS_VALUES,
   ROUTES,
   routeShallowWithQuery,
 } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
-import { UpdateQueue } from "@/lib/UpdateQueue";
+import type { UpdateQueue } from "@/lib/UpdateQueue";
 import analytics from "@/lib/utils/analytics";
 import {
   sendOnboardingOnSubmitEvents,
@@ -47,34 +83,6 @@ import {
   pageQueryParamIsValid,
   sectorQueryParamIsValid,
 } from "@/lib/utils/onboardingPageHelpers";
-import {
-  Business,
-  businessStructureTaskId,
-  createEmptyProfileData,
-  createEmptyUser,
-  createEmptyUserData,
-  determineForeignBusinessType,
-  emptyProfileData,
-  getCurrentBusiness,
-  isRemoteWorkerOrSellerBusiness,
-  LookupMunicipalityByName,
-  Municipality,
-  OperatingPhaseId,
-  ProfileData,
-  UserData,
-} from "@businessnjgovnavigator/shared";
-import { loadAllMunicipalities } from "@businessnjgovnavigator/shared/static";
-import {
-  FlowType,
-  OnboardingErrors,
-  Page,
-  ProfileError,
-} from "@businessnjgovnavigator/shared/types";
-import { useMediaQuery } from "@mui/material";
-import { GetStaticPropsResult } from "next";
-import { NextSeo } from "next-seo";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
   municipalities: Municipality[];
@@ -326,7 +334,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     })().catch((error: unknown) => {
       console.error("Failed to initialize onboarding", error);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router, state.activeUser, state.isAuthenticated, hasCompletedFetch]);
 
   const setBusinessPersonaAndRouteToPage = async (

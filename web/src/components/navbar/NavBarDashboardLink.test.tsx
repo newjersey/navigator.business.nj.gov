@@ -1,3 +1,11 @@
+import type { Business } from "@businessnjgovnavigator/shared";
+import {
+  generateBusiness,
+  generateUser,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import { createEmptyUserData, type UserData } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { NavBarDashboardLink } from "@/components/navbar/NavBarDashboardLink";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -8,14 +16,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { Business } from "@businessnjgovnavigator/shared";
-import {
-  generateBusiness,
-  generateUser,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
-import { createEmptyUserData, UserData } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());

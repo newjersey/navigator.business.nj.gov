@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { flattenObject } from "@/lib/utils/helpers";
+import fs from "node:fs";
+import path from "node:path";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import fs from "fs";
-import path from "path";
+import { flattenObject } from "@/lib/utils/helpers";
 
 describe("cms", () => {
   describe("config", () => {

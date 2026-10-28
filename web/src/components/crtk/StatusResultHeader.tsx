@@ -1,7 +1,7 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import SearchIcon from "@mui/icons-material/Search";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 
 type StatusType = "FOUND" | "NOT_FOUND";
 

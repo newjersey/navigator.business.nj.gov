@@ -1,16 +1,16 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { NeedsAccountMiniCallout } from "@/components/NeedsAccountMiniCallout";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { TaskHeader } from "@/components/TaskHeader";
+import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { TaxInput } from "@/components/tasks/TaxInput";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   task: Task;

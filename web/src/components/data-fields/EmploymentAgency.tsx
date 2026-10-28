@@ -1,9 +1,9 @@
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement, useContext } from "react";
 
 export const EmploymentAgency = (): ReactElement => {
   const { Config } = useConfig();

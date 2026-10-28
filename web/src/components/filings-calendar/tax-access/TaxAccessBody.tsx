@@ -1,6 +1,6 @@
+import type { ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 interface Props {
   isStepOne: boolean;

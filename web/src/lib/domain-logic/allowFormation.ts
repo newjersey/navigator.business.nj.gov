@@ -1,8 +1,8 @@
 import {
-  BusinessPersona,
+  type BusinessPersona,
   castPublicFilingLegalTypeToFormationType,
-  FormationLegalType,
-  PublicFilingLegalType,
+  type FormationLegalType,
+  type PublicFilingLegalType,
   publicFilingLegalTypes,
 } from "@businessnjgovnavigator/shared";
 

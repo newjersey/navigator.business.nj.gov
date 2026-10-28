@@ -1,9 +1,9 @@
+import type { StepperStep } from "@businessnjgovnavigator/shared/types";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useEffect, useRef, useState } from "react";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { scrollToTopOfElement } from "@/lib/utils/helpers";
-import { StepperStep } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { useRouter } from "next/compat/router";
 
 interface Props {
   steps: StepperStep[];
@@ -44,7 +44,6 @@ export const HorizontalStepper = (props: Props): ReactElement => {
   useEffect(() => {
     setFocusStep(props.currentStep);
     updateStepInUrl(props.currentStep);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.currentStep]);
 
   useEffect(() => {

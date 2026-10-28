@@ -1,6 +1,6 @@
-import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
+import { MediaQueries } from "@/lib/PageSizes";
 
 interface Props {
   hasError: boolean;

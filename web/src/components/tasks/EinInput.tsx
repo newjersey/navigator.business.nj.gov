@@ -1,3 +1,5 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useContext, useState } from "react";
 import { GenericTextField } from "@/components/GenericTextField";
 import { LockIcon } from "@/components/LockIcon";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
@@ -9,8 +11,6 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   task: Task;

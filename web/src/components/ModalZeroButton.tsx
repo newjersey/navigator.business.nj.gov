@@ -1,8 +1,8 @@
-import { Heading } from "@/components/njwds-extended/Heading";
-import { Icon } from "@/components/njwds/Icon";
-import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import { ReactElement, ReactNode, useContext } from "react";
+import { type ReactElement, type ReactNode, useContext } from "react";
+import { Icon } from "@/components/njwds/Icon";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 
 interface Props {
   isOpen: boolean;

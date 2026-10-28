@@ -1,10 +1,10 @@
-import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
+import type { FormationAddress } from "@businessnjgovnavigator/shared/formationData";
+import { type ReactElement, useContext } from "react";
+import { GenericTextField, type GenericTextFieldProps } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { AddressContext } from "@/contexts/addressContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
-import { FormationAddress } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement, useContext } from "react";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "error" | "inputWidth"> {
   fieldName: keyof FormationAddress;

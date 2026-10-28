@@ -1,4 +1,4 @@
-import { FormationAddress } from "@businessnjgovnavigator/shared";
+import type { FormationAddress } from "@businessnjgovnavigator/shared";
 
 export const formatAddress = (address: Partial<FormationAddress>): string => {
   return `${address.addressLine1},${address.addressLine2 ? ` ${address.addressLine2},` : ""} ${

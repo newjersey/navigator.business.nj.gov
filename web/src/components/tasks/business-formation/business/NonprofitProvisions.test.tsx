@@ -1,21 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
+import type { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
+import type * as materialUi from "@mui/material";
+import { screen } from "@testing-library/react";
 import { displayContent } from "@/components/tasks/business-formation/contacts/testHelpers";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import {
-  FormationPageHelpers,
+  type FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { Municipality } from "@businessnjgovnavigator/shared/municipality";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
-import * as materialUi from "@mui/material";
-import { screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

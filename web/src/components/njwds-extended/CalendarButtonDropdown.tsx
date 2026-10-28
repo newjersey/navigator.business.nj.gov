@@ -1,11 +1,11 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
 import { Box, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
-import React, { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
+import type React from "react";
+import { type ReactElement, type ReactNode, useEffect, useRef, useState } from "react";
+import { Icon } from "@/components/njwds/Icon";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 
 type ButtonDropdownOption = {
   text: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props?: Record<string, any>;
   onClick: () => void;
 };
@@ -14,7 +14,6 @@ interface Props {
   children: ReactNode;
   name?: string;
   dropdownOptions: ButtonDropdownOption[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   wrapper?: (props: { children: ReactNode; [key: string]: any }) => ReactElement;
   dropdownClassName?: string;
   horizontal?: boolean;
@@ -59,7 +58,6 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
     ...props
   }: {
     children: ReactNode;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   }): ReactElement => (
     <UnStyledButton isTextBold isSmallerText {...props}>
@@ -76,7 +74,6 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
         className={`${props.horizontal ? "flex flex-row" : ""}`}
         id="menu-list-grow"
         onKeyDown={handleListKeyDown}
-        // eslint-disable-next-line jsx-a11y/aria-role
         role={`${props.horizontal ? "menubar" : "menu"}`}
       >
         {props.dropdownOptions.map((option, i) => {

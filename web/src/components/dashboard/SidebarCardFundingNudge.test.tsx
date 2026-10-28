@@ -1,3 +1,28 @@
+import {
+  type FormationData,
+  type FormationLegalType,
+  getCurrentBusiness,
+  getCurrentDateISOString,
+  OperatingPhaseId,
+  OperatingPhases,
+  type UserData,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
+import {
+  generateBusiness,
+  generateFormationData,
+  generateGetFilingResponse,
+  generatePreferences,
+  generateProfileData,
+  generateTaxFilingData,
+  generateUserDataForBusiness,
+  randomIndustry,
+  randomLegalStructure,
+} from "@businessnjgovnavigator/shared/test";
+import type { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { SidebarCardFundingNudge } from "@/components/dashboard/SidebarCardFundingNudge";
 import * as api from "@/lib/api-client/apiClient";
 import {
@@ -14,31 +39,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  FormationData,
-  FormationLegalType,
-  getCurrentBusiness,
-  getCurrentDateISOString,
-  OperatingPhaseId,
-  OperatingPhases,
-  UserData,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
-import {
-  generateBusiness,
-  generateFormationData,
-  generateGetFilingResponse,
-  generatePreferences,
-  generateProfileData,
-  generateTaxFilingData,
-  generateUserDataForBusiness,
-  randomIndustry,
-  randomLegalStructure,
-} from "@businessnjgovnavigator/shared/test";
-import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

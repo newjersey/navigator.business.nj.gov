@@ -3,7 +3,7 @@ import {
   maskingCharacter,
   modifyCurrentBusiness,
 } from "@businessnjgovnavigator/shared/index";
-import { type UserData } from "@businessnjgovnavigator/shared/userData";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
 
 export const maskTaxId = (taxId: string): string => {
   return taxId.length === 12

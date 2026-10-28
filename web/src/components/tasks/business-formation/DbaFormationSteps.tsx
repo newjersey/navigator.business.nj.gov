@@ -1,9 +1,9 @@
+import type { DbaStepNames } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
+import { DbaFormationStepsConfiguration } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
 import { Authorization } from "@/components/tasks/business-formation/dba/Authorization";
 import { DbaResolution } from "@/components/tasks/business-formation/dba/DbaResolution";
-import { DbaFormationStepsConfiguration } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
 import { NexusSearchBusinessNameStep } from "@/components/tasks/business-formation/name/NexusSearchBusinessNameStep";
-import { DbaStepNames } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 export const DbaFormationSteps: { component: ReactElement; step: DbaStepNames }[] = [
   {

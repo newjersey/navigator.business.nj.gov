@@ -1,13 +1,13 @@
+import type { ReactElement } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
 import { templateEval } from "@/lib/utils/helpers";
-import { ReactElement } from "react";
 
 interface Props {
   onEdit: () => void;

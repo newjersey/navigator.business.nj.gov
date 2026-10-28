@@ -1,21 +1,20 @@
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
+import { InputLabel } from "@mui/material";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext, useState } from "react";
 import { GenericTextField } from "@/components/GenericTextField";
-import { WithErrorBar } from "@/components/WithErrorBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { AuthContext } from "@/contexts/authContext";
 import { postUserEmailCheck } from "@/lib/api-client/apiClient";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
-import { InputLabel } from "@mui/material";
-import { useRouter } from "next/compat/router";
-
-import { useContext, useState, type ReactElement } from "react";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Content } from "./Content";
 
 export const LoginEmailCheck = (): ReactElement => {

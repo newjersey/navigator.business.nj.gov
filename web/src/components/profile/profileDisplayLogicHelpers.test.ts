@@ -1,9 +1,3 @@
-import {
-  displayElevatorQuestion,
-  displayHomedBaseBusinessQuestion,
-  displayPlannedRenovationQuestion,
-  shouldLockMunicipality,
-} from "@/components/profile/profileDisplayLogicHelpers";
 import { NexusBusinessTypeIds } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { getIndustries } from "@businessnjgovnavigator/shared/industry";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
@@ -13,6 +7,12 @@ import {
   generateProfileData,
 } from "@businessnjgovnavigator/shared/test/factories";
 import { createEmptyBusiness } from "@businessnjgovnavigator/shared/userData";
+import {
+  displayElevatorQuestion,
+  displayHomedBaseBusinessQuestion,
+  displayPlannedRenovationQuestion,
+  shouldLockMunicipality,
+} from "@/components/profile/profileDisplayLogicHelpers";
 
 describe("profileDisplayLogicHelpers", () => {
   describe("home based business question", () => {

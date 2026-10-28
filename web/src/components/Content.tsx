@@ -1,27 +1,25 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { FormControlLabel } from "@mui/material";
+import type { CSSProperties, ReactElement, ReactNode } from "react";
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { HorizontalLine } from "@/components/HorizontalLine";
-import { PureMarkdownContent } from "@/components/PureMarkdownContent";
+import { Icon } from "@/components/njwds/Icon";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Heading } from "@/components/njwds-extended/Heading";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { MiniCallout } from "@/components/njwds-extended/callout/MiniCallout";
-import { Icon } from "@/components/njwds/Icon";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
-import { InlineIconType } from "@/lib/cms/types";
+import type { InlineIconType } from "@/lib/cms/types";
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { FormControlLabel } from "@mui/material";
-import { CSSProperties, type ReactElement, type ReactNode } from "react";
 
 interface ContentProps {
   children: string;
   className?: string;
   style?: CSSProperties;
-  overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
+  overrides?: { [key: string]: ({ children }: { children: string[] }) => ReactElement };
   onClick?: (url?: string) => void;
   customComponents?: Record<string, ReactElement>;
   showLaunchIcon?: boolean;

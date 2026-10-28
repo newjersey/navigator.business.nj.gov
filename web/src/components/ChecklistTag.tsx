@@ -1,8 +1,8 @@
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { CheckoffStatus } from "@businessnjgovnavigator/shared/license";
+import type { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { CheckoffStatus } from "@businessnjgovnavigator/shared/license";
-import { ReactElement } from "react";
 
 interface Props {
   status: CheckoffStatus;

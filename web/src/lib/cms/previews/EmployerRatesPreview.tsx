@@ -1,14 +1,14 @@
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import type { ReactElement } from "react";
+import { EmployerRates } from "@/components/employer-rates/EmployerRates";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
 } from "@/contexts/dataFormErrorMapContext";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement } from "react";
-import { EmployerRates } from "@/components/employer-rates/EmployerRates";
 
 const EmployerRatesPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

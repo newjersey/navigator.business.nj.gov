@@ -1,10 +1,10 @@
+import { useMediaQuery } from "@mui/material";
+import type { ReactElement, ReactNode } from "react";
 import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, ReactNode } from "react";
 
 interface Props {
   isOpen: boolean;

@@ -66,7 +66,6 @@ afterEach(function () {
 });
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Cypress {
       mocha: {

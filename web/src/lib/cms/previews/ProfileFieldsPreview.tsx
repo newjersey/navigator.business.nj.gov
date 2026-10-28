@@ -1,3 +1,11 @@
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import {
+  type IndustrySpecificData,
+  industrySpecificDataChoices,
+} from "@businessnjgovnavigator/shared/profileData";
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { BusinessPersonaQuestion } from "@/components/data-fields/BusinessPersonaQuestion";
 import { DateOfFormation } from "@/components/data-fields/DateOfFormation";
@@ -15,8 +23,8 @@ import { Ownership } from "@/components/data-fields/Ownership";
 import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
-import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { TaxPin } from "@/components/data-fields/TaxPin";
+import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -26,19 +34,11 @@ import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
 } from "@/contexts/dataFormErrorMapContext";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
-import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import {
-  IndustrySpecificData,
-  industrySpecificDataChoices,
-} from "@businessnjgovnavigator/shared/profileData";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

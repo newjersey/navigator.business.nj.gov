@@ -1,12 +1,12 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { screen, waitFor } from "@testing-library/react";
+import { type ReactNode, useReducer } from "react";
 import { AuthContext, initialState } from "@/contexts/authContext";
-import { authReducer, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
+import { type AuthState, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as session from "@/lib/auth/sessionHelper";
 import LoginSupportPage from "@/pages/support/login";
 import { generateActiveUser } from "@/test/factories";
-import { ConfigContext, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { screen, waitFor } from "@testing-library/react";
-import { useReducer, type ReactNode } from "react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 jest.mock("@/lib/auth/sessionHelper", () => ({
   getActiveUser: jest.fn(),

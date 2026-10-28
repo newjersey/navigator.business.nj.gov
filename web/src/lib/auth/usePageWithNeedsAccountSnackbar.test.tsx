@@ -1,8 +1,8 @@
+import { render } from "@testing-library/react";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
 import { withAuth, withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { render } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 

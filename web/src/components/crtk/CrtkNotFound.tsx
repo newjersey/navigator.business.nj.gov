@@ -1,13 +1,13 @@
+import { type ReactElement, useState } from "react";
 import { Content } from "@/components/Content";
 import { BusinessActivities } from "@/components/crtk/BusinessActivities";
-import { CrtkFacilityDetails } from "@/components/crtk/CrtkStatus";
+import type { CrtkFacilityDetails } from "@/components/crtk/CrtkStatus";
 import { ModalOneButton } from "@/components/ModalOneButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval } from "@/lib/utils/helpers";
-import { ReactElement, useState } from "react";
 
 interface Props {
   onSearchAgain: () => void;

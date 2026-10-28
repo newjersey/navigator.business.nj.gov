@@ -1,4 +1,5 @@
-import React, { forwardRef, ReactElement, useEffect, useRef, useState } from "react";
+import type React from "react";
+import { forwardRef, type ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   className?: string;
@@ -19,7 +20,6 @@ interface Props {
   isWidthFull?: boolean;
 }
 
-// eslint-disable-next-line react/display-name
 export const UnStyledButton = forwardRef(
   (props: Props, ref?: React.LegacyRef<HTMLButtonElement>): ReactElement => {
     const style = props.isBgTransparent

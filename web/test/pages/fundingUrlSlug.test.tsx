@@ -1,8 +1,8 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import FundingPage from "@/pages/funding/[fundingUrlSlug]";
-import { generateFunding } from "@/test/factories";
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared";
 import { screen } from "@testing-library/react";
+import FundingPage from "@/pages/funding/[fundingUrlSlug]";
+import { generateFunding } from "@/test/factories";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 describe("funding page", () => {
   it("shows the funding details", () => {

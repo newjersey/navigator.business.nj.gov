@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-
 const Airtable = require("airtable");
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 // requires these env vars to be set!
 const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
@@ -46,9 +43,9 @@ const airtableToOpportunity = (airtableOpp) => {
     filename: id,
     urlSlug: id,
     treasuryLink: airtableOpp["Treasury Link"] ?? "",
-    callToActionLink: airtableOpp["CTA"] ?? "",
+    callToActionLink: airtableOpp.CTA ?? "",
     callToActionText: "File and Pay",
-    description: airtableOpp["Description"] ?? "",
+    description: airtableOpp.Description ?? "",
     frequency: airtableOpp["Frequncy of Filing"] ?? "",
     extension: airtableOpp["Extension Y/N"] === "Extension",
     taxRates: airtableOpp["Tax Rates"] ?? "",

@@ -1,6 +1,5 @@
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/explicit-function-return-type
 const removeKey = (key: string, { [key]: _, ...rest }) => rest;
 
 export const removeBusiness = ({

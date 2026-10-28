@@ -1,18 +1,18 @@
+import {
+  type BusinessUser,
+  castPublicFilingLegalTypeToFormationType,
+  type FormationFormData,
+  generateFormationFormData,
+  generateUser,
+  type ProfileData,
+  type PublicFilingLegalType,
+} from "@businessnjgovnavigator/shared";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
-  FormationPageHelpers,
+  type FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
 } from "@/test/helpers/helpers-formation";
-import {
-  BusinessUser,
-  FormationFormData,
-  ProfileData,
-  PublicFilingLegalType,
-  castPublicFilingLegalTypeToFormationType,
-  generateFormationFormData,
-  generateUser,
-} from "@businessnjgovnavigator/shared";
 
 export const displayContent = {
   formationDbaContent: generateFormationDbaContent({}),

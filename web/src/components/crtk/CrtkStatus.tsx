@@ -1,14 +1,8 @@
-import { Content } from "@/components/Content";
-import { Alert } from "@/components/njwds-extended/Alert";
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { templateEval } from "@/lib/utils/helpers";
-import { Task } from "@businessnjgovnavigator/shared/types";
+import type { Task } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
 import {
-  type CSSProperties,
   type ChangeEvent,
+  type CSSProperties,
   type FormEvent,
   type ReactElement,
   type ReactNode,
@@ -16,6 +10,12 @@ import {
   useRef,
   useState,
 } from "react";
+import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { templateEval } from "@/lib/utils/helpers";
 
 export interface CrtkFacilityDetails {
   businessName: string;

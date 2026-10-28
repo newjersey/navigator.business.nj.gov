@@ -1,9 +1,9 @@
-import { Content } from "@/components/Content";
-import { AlertVariant } from "@/components/njwds-extended/Alert";
-import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
-import { QUERIES } from "@/lib/domain-logic/routes";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { type ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { Content } from "@/components/Content";
+import type { AlertVariant } from "@/components/njwds-extended/Alert";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
+import type { QUERIES } from "@/lib/domain-logic/routes";
 
 interface QueryControlledAlertConfig {
   queryKey: QUERIES;

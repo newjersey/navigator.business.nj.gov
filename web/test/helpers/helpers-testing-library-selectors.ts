@@ -1,6 +1,6 @@
-import { fireEvent, MatcherFunction, screen, within } from "@testing-library/react";
+import { fireEvent, type MatcherFunction, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Dayjs } from "dayjs";
+import type { Dayjs } from "dayjs";
 
 export const selectLocationByText = (value: string): void => {
   fireEvent.mouseDown(screen.getByLabelText("Location"));
@@ -57,12 +57,10 @@ type Query = (f: MatcherFunction) => HTMLElement;
 
 export const withMarkup = (query: Query) => {
   return (text: string): HTMLElement => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return query((_content: string, node: any) => {
       const hasText = (node: HTMLElement): boolean => {
         return node.textContent === text;
       };
-      // eslint-disable-next-line testing-library/no-node-access
       const childrenDontHaveText = [...node.children].every((child) => {
         return !hasText(child as HTMLElement);
       });

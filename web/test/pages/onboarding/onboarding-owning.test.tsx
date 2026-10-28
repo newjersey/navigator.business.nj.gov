@@ -1,7 +1,3 @@
-import * as api from "@/lib/api-client/apiClient";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { mockEmptyApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   createEmptyUserData,
   generateMunicipality,
@@ -9,7 +5,7 @@ import {
   generateProfileData,
   generateTaxFilingData,
   OperatingPhaseId,
-  ProfileData,
+  type ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
@@ -17,8 +13,12 @@ import {
   generateUser,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
+import * as api from "@/lib/api-client/apiClient";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import { mockEmptyApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

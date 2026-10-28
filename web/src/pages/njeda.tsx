@@ -1,3 +1,15 @@
+import {
+  createEmptyUser,
+  createEmptyUserData,
+  OperatingPhaseId,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared";
+import { loadAllFundings } from "@businessnjgovnavigator/shared/static";
+import type { Funding } from "@businessnjgovnavigator/shared/types";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import type { GetStaticPropsResult } from "next";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useEffect, useRef, useState } from "react";
 import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { ExistingEmployees } from "@/components/data-fields/ExistingEmployees";
@@ -19,18 +31,6 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { filterFundings, sortFundingsForUser } from "@/lib/domain-logic/sidebarCardsHelpers";
-import {
-  createEmptyUser,
-  createEmptyUserData,
-  OperatingPhaseId,
-  ProfileData,
-} from "@businessnjgovnavigator/shared";
-import { loadAllFundings } from "@businessnjgovnavigator/shared/static";
-import { Funding } from "@businessnjgovnavigator/shared/types";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { GetStaticPropsResult } from "next";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   fundings: Funding[];
@@ -97,7 +97,7 @@ const NJEDAFundingsOnboardingPage = (props: Props): ReactElement => {
     business?.profileData.existingEmployees ?? "",
   );
   const [shouldCloseModal, setShouldCloseModal] = useState<boolean>(
-    props.CMS_PREVIEW_ONLY_OPEN_MODAL === undefined ? false : true,
+    props.CMS_PREVIEW_ONLY_OPEN_MODAL !== undefined,
   );
 
   useEffect(() => {

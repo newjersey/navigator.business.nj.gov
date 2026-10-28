@@ -1,21 +1,21 @@
+import { RemoteWorkerBusinessTypeIds } from "@businessnjgovnavigator/shared";
 import {
-  EmployerRatesResponse,
+  type EmployerRatesResponse,
   getCurrentDate,
   LookupOperatingPhaseById,
 } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext, useState } from "react";
-import { useConfig } from "@/lib/data-hooks/useConfig";
+import { intersection } from "lodash";
+import { type ReactElement, useContext, useState } from "react";
 import { Content } from "@/components/Content";
-import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { EmployerRatesQuestions } from "@/components/employer-rates/EmployerRatesQuestions";
 import { EmployerRatesSuccessResponse } from "@/components/employer-rates/EmployerRatesSuccessResponse";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
-  EmployerRatesQuarterObject,
+  type EmployerRatesQuarterObject,
   getEmployerAccessQuarterlyDropdownOptions,
 } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
-import { EmployerRatesQuestions } from "@/components/employer-rates/EmployerRatesQuestions";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { intersection } from "lodash";
-import { RemoteWorkerBusinessTypeIds } from "@businessnjgovnavigator/shared";
 
 interface Props {
   CMS_ONLY_enable_preview?: boolean;

@@ -1,8 +1,8 @@
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext } from "react";
 
 export const Authorization = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);

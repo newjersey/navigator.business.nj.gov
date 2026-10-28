@@ -1,10 +1,11 @@
+import type { ContextualInfo } from "@businessnjgovnavigator/shared/types";
+import type React from "react";
+import { type ReactElement, useContext, useState } from "react";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextualInfo";
 import analytics from "@/lib/utils/analytics";
-import { ContextualInfo } from "@businessnjgovnavigator/shared/types";
-import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {
   text: string;

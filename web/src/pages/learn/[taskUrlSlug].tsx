@@ -1,21 +1,21 @@
+import { type ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared";
+import type { GetStaticPaths, GetStaticProps } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
+import type { ReactElement } from "react";
+import { LearnTaskSidebarPageLayout } from "@/components/LearnTaskSidebarPageLayout";
 import { BusinessStructure } from "@/components/learn/BusinessStructure";
 import { FindNaics } from "@/components/learn/FindNaics";
 import { FormBusiness } from "@/components/learn/FormBusiness";
 import { GetEin } from "@/components/learn/GetEin";
 import { OpenAccount } from "@/components/learn/OpenAccount";
 import { RegisterTaxes } from "@/components/learn/RegisterTaxes";
-import { LearnTaskSidebarPageLayout } from "@/components/LearnTaskSidebarPageLayout";
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import analytics from "@/lib/utils/analytics";
-import { getMergedConfig, type ConfigType } from "@businessnjgovnavigator/shared";
-import { GetStaticPaths, GetStaticProps } from "next";
-import { NextSeo } from "next-seo";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { ReactElement } from "react";
 
 interface Props {
   learnStep: LearnStep;

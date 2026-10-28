@@ -1,10 +1,10 @@
+import { Checkbox } from "@mui/material";
+import { type ReactElement, useContext, useEffect, useState } from "react";
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getDollarValue } from "@/lib/utils/formatters";
-import { Checkbox } from "@mui/material";
-import { ReactElement, useContext, useEffect, useState } from "react";
 
 export const FormationChooseDocuments = (): ReactElement => {
   const { Config } = useConfig();
@@ -35,7 +35,6 @@ export const FormationChooseDocuments = (): ReactElement => {
       minCost += certifiedCopyCost;
     }
     setTotalCost(minCost);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     state.formationFormData.certificateOfStanding,
     state.formationFormData.certifiedCopyOfFormationDocument,

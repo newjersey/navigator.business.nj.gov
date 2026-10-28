@@ -1,12 +1,12 @@
+import type {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+} from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import {
-  AnytimeActionLicenseReinstatement,
-  AnytimeActionTask,
-} from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;

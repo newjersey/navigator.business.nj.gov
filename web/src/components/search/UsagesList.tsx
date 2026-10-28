@@ -1,10 +1,10 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import {
+import type {
   AdditionalUsageLocations,
   LinkWithDescription,
   Match,
 } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
-import { ReactElement, useState } from "react";
+import { type ReactElement, useState } from "react";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 
 interface Props {
   match: Match;

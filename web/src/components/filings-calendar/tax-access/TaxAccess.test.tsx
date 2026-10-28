@@ -1,3 +1,14 @@
+import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { TaxAccess } from "@/components/filings-calendar/tax-access/TaxAccess";
 import analytics from "@/lib/utils/analytics";
 import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
@@ -7,17 +18,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import {
-  generateBusiness,
-  generateProfileData,
-  generateUserData,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
   return {

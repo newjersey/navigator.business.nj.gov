@@ -1,6 +1,6 @@
+import { EOL } from "node:os";
+import type { Roadmap } from "@businessnjgovnavigator/shared/types";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
-import { Roadmap } from "@businessnjgovnavigator/shared/types";
-import { EOL } from "os";
 
 describe("roadmapBuilder", () => {
   it("uses foreign steps when industry is undefined", async () => {

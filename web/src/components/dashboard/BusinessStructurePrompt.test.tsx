@@ -1,12 +1,12 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
+import { fireEvent, screen } from "@testing-library/react";
 import { BusinessStructurePrompt } from "@/components/dashboard/BusinessStructurePrompt";
 import { generateTask } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
-import { fireEvent, screen } from "@testing-library/react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));

@@ -51,7 +51,6 @@ export default {
   pattern: /(^\**)(.*)`(.*)\|(.*)`(.*?)(\**$)/,
   collapsed: true,
   summary: "{{fields.title}}",
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fromBlock: (match: any): any => {
     return {
       preFormat: match[1],

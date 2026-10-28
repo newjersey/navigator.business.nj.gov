@@ -1,3 +1,7 @@
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { generateProfileData } from "@businessnjgovnavigator/shared/test";
+import { render, screen } from "@testing-library/react";
 import { CertificationsAndFundingNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/CertificationsAndFundingNonEssentialQuestions";
 import {
   createDataFormErrorMap,
@@ -7,10 +11,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getFlow } from "@/lib/utils/helpers";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateBusinessForProfile } from "@/test/pages/profile/profile-helpers";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { generateProfileData } from "@businessnjgovnavigator/shared/test";
-import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 

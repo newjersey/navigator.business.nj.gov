@@ -1,9 +1,10 @@
+import { Checkbox, FormControl, FormControlLabel, FormGroup } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useState } from "react";
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { Checkbox, FormControl, FormControlLabel, FormGroup } from "@mui/material";
-import React, { ReactElement, useState } from "react";
+import type { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
 
 interface Props {
   priorityStatusState: Record<PriorityApplicationType, boolean>;

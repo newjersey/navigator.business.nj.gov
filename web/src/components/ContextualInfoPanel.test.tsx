@@ -1,7 +1,7 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { screen } from "@testing-library/react";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { withContextualInfo } from "@/test/helpers/helpers-renderers";
-import { screen } from "@testing-library/react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 describe("<ContextualInfoPanel />", () => {
   it("is closed when contextual info is empty", () => {

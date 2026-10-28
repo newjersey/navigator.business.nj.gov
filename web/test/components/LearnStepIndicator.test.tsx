@@ -1,5 +1,5 @@
-import { LearnStepIndicator } from "@/components/roadmap/LearnStepIndicator";
 import { render, screen } from "@testing-library/react";
+import { LearnStepIndicator } from "@/components/roadmap/LearnStepIndicator";
 
 describe("LearnStepIndicator", () => {
   it("renders the accessible step number", () => {

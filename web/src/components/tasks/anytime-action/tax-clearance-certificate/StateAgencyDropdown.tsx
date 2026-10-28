@@ -1,3 +1,15 @@
+import {
+  getTaxClearanceCertificateAgencies,
+  LookupTaxClearanceCertificateAgenciesById,
+} from "@businessnjgovnavigator/shared";
+import {
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  Select,
+  type SelectChangeEvent,
+} from "@mui/material";
+import { type ReactElement, type ReactNode, useContext, useState } from "react";
 import { Content } from "@/components/Content";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
@@ -6,12 +18,6 @@ import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import {
-  getTaxClearanceCertificateAgencies,
-  LookupTaxClearanceCertificateAgenciesById,
-} from "@businessnjgovnavigator/shared";
-import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
   preventRefreshWhenUnmounted?: boolean;

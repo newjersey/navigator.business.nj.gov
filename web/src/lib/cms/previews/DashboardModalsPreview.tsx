@@ -1,10 +1,10 @@
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import { type ReactElement, useState } from "react";
 import { CongratulatoryModal } from "@/components/CongratulatoryModal";
 import { SectorModal } from "@/components/dashboard/SectorModal";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement, useState } from "react";
 
 const DashboardModalsPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

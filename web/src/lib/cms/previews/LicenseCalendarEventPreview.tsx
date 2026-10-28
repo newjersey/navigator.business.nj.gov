@@ -1,16 +1,16 @@
-import { LicenseEvent } from "@/components/filings-calendar/LicenseEvent";
-import { LicenseElement } from "@/components/tasks/license-calendar-event/LicenseCalendarEventElement";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
-import { usePageData } from "@/lib/cms/helpers/usePageData";
-import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { LicenseCalendarEvent } from "@businessnjgovnavigator/shared/";
+import type { LicenseCalendarEvent } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
   generateLicenseDetails,
   generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
-import { LicenseEventType } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
+import type { LicenseEventType } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
+import { LicenseEvent } from "@/components/filings-calendar/LicenseEvent";
+import { LicenseElement } from "@/components/tasks/license-calendar-event/LicenseCalendarEventElement";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePageData } from "@/lib/cms/helpers/usePageData";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 
 const LicenseCalendarEventPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);

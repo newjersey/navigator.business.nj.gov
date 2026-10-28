@@ -1,3 +1,11 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { CrtkData } from "@businessnjgovnavigator/shared/crtk";
+import {
+  generateBusiness,
+  generateUser,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { CrtkNotFound } from "@/components/crtk/CrtkNotFound";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateCrtkData } from "@/test/factories";
@@ -5,14 +13,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { CrtkData } from "@businessnjgovnavigator/shared/crtk";
-import {
-  generateBusiness,
-  generateUser,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

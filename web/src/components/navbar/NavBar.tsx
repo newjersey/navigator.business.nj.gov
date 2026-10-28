@@ -1,11 +1,10 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
+import { type ReactElement, useEffect, useState } from "react";
 import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
 import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, useEffect, useState } from "react";
-
 import { NavBarVariant } from "@/components/navbar/NavBarTypes";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 
 type Props = {
   variant: NavBarVariant;

@@ -1,3 +1,5 @@
+import type { StepperStep } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useState } from "react";
 import { Content } from "@/components/Content";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
@@ -6,8 +8,6 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { StepperStep } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useState } from "react";
 
 interface Props {
   anytimeActionHeaderText?: string;

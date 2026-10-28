@@ -1,3 +1,8 @@
+import type CmsType from "decap-cms-app";
+import jsYaml from "js-yaml";
+import type { GetStaticPropsResult } from "next";
+import dynamic from "next/dynamic";
+import type { ReactElement } from "react";
 import CannabisLocationAlert from "@/lib/cms/editors/cannabisLocationAlert";
 import ContextEditor from "@/lib/cms/editors/context-info";
 import IconWidgetEditor from "@/lib/cms/editors/icon";
@@ -9,10 +14,17 @@ import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { WriteOnceReadOnlyNoSpaceControl } from "@/lib/cms/fields/writeoncereadonlynospacefield";
 import { recentsFrontmatterFormat } from "@/lib/cms/formatters/recentsFrontmatterFormat";
 import { applyTheme } from "@/lib/cms/helpers/applyTheme";
+import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
+import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/AnytimeActionLicenseReinstatementPreview";
+import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
+import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTaxClearancePreview";
+import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import CannabisEligibilityModalPreview from "@/lib/cms/previews/CannabisEligibilityModalPreview";
 import CannabisLicensePreview from "@/lib/cms/previews/CannabisLicensePreview";
 import CannabisPriorityStatusPreview from "@/lib/cms/previews/CannabisPriorityStatusPreview";
 import CertificationsPreview from "@/lib/cms/previews/CertificationsPreview";
+import CigaretteLicenseConfirmationPreview from "@/lib/cms/previews/CigaretteLicenseConfirmationPreview";
+import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
 import ContextInfoPreview from "@/lib/cms/previews/ContextInfoPreview";
 import DashboardCalendarPreview from "@/lib/cms/previews/DashboardCalendarPreview";
 import DashboardModalsPreview from "@/lib/cms/previews/DashboardModalsPreview";
@@ -20,20 +32,10 @@ import DashboardSnackbarsPreview from "@/lib/cms/previews/DashboardSnackbarsPrev
 import DashboardTabsPreview from "@/lib/cms/previews/DashboardTabsPreview";
 import DeferredLocationPreview from "@/lib/cms/previews/DeferredLocationPreview";
 import EinInputPreview from "@/lib/cms/previews/EinInputPreview";
-import FilingsPreview from "@/lib/cms/previews/FilingsPreview";
-import LicenseCalendarEventPreview from "@/lib/cms/previews/LicenseCalendarEventPreview";
-import PageMetaDataPreview from "@/lib/cms/previews/PageMetadataPreview";
-
-import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
-import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/AnytimeActionLicenseReinstatementPreview";
-import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
-import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTaxClearancePreview";
-import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
-import CigaretteLicenseConfirmationPreview from "@/lib/cms/previews/CigaretteLicenseConfirmationPreview";
-import CigaretteLicensePreview from "@/lib/cms/previews/CigaretteLicensePreview";
 import LoginEmailCheckPreview from "@/lib/cms/previews/EmailLoginCheckPreview";
 import EmergencyTripPermitPreview from "@/lib/cms/previews/EmergencyTripPermitPreview";
 import EmployerRatesPreview from "@/lib/cms/previews/EmployerRatesPreview";
+import FilingsPreview from "@/lib/cms/previews/FilingsPreview";
 import FormationDateDeletionModalPreview from "@/lib/cms/previews/FormationDateDeletionModalPreview";
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
 import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
@@ -46,12 +48,14 @@ import LearnGetEinPreview from "@/lib/cms/previews/LearnGetEinPreview";
 import LearnOpenAccountPreview from "@/lib/cms/previews/LearnOpenAccountPreview";
 import LearnRegisterTaxesPreview from "@/lib/cms/previews/LearnRegisterTaxesPreview";
 import LegalMessagePreview from "@/lib/cms/previews/LegalMessagePreview";
+import LicenseCalendarEventPreview from "@/lib/cms/previews/LicenseCalendarEventPreview";
 import ManageBusinessVehiclesTaskPreview from "@/lib/cms/previews/ManageBusinessVehiclesTaskPreview";
 import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
 import NexusDbaFormationPreview from "@/lib/cms/previews/NexusDbaFormationPreview";
 import NexusNameSearchPreview from "@/lib/cms/previews/NexusNameSearchPreview";
 import NjedaPreview from "@/lib/cms/previews/NjedaPreview";
+import PageMetaDataPreview from "@/lib/cms/previews/PageMetadataPreview";
 import PageNotFoundPreview from "@/lib/cms/previews/PageNotFoundPreview";
 import PassengerTransportCdlPreview from "@/lib/cms/previews/PassengerTransportCdlPreview";
 import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
@@ -67,12 +71,6 @@ import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import XrayRenewalCalendarEventPreview from "@/lib/cms/previews/XrayRenewalCalendarEventPreview";
 import XrayTaskPreview from "@/lib/cms/previews/XrayTaskPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
-import type CmsType from "decap-cms-app";
-import { GetStaticPropsResult } from "next";
-import dynamic from "next/dynamic";
-import { ReactElement } from "react";
-
-import jsYaml from "js-yaml";
 
 const CMS_CONFIG = {};
 const Loading = ({ error }: { error?: Error | null }): ReactElement => {
@@ -262,7 +260,6 @@ const registerAsCannabisLicensePreview = (CMS: typeof CmsType, names: string[]):
 const registerPreview = (
   CMS: typeof CmsType,
   name: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   preview: (props: any) => ReactElement,
 ): void => {
   CMS.registerPreviewTemplate(name, applyTheme(preview));

@@ -1,14 +1,14 @@
-import fs from "fs";
+import fs from "node:fs";
+import { randomInt } from "@businessnjgovnavigator/shared";
 import matter from "gray-matter";
 import {
-  LicenseData,
+  type LicenseData,
   loadAllLicenses,
   loadAllNavigatorLicenses,
   loadAllNavigatorWebflowLicenses,
   loadNavigatorLicense,
   writeMarkdownString,
 } from "./licenseLoader";
-import { randomInt } from "@businessnjgovnavigator/shared";
 
 jest.mock("fs");
 jest.mock("gray-matter");

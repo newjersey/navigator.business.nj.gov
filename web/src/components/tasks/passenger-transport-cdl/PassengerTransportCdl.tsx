@@ -1,3 +1,6 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { isBoolean } from "lodash";
+import React, { type ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { TaskHeader } from "@/components/TaskHeader";
@@ -10,9 +13,6 @@ import {
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { isBoolean } from "lodash";
-import React, { ReactElement } from "react";
 
 interface Props {
   task: Task;

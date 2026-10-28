@@ -1,13 +1,13 @@
-import { mediaAreaToNotApplicableOption } from "@/components/tasks/environment-questionnaire/helpers";
-import { removeContextualInfoFormatting } from "@/lib/utils/content-helpers";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts/configContext";
-import {
+import type {
   MediaArea,
   Questionnaire,
   QuestionnaireConfig,
   QuestionnaireData,
   QuestionnaireFieldIds,
 } from "@businessnjgovnavigator/shared/environment";
+import { mediaAreaToNotApplicableOption } from "@/components/tasks/environment-questionnaire/helpers";
+import { removeContextualInfoFormatting } from "@/lib/utils/content-helpers";
 
 export const optionsMarkedTrueForMediaArea = (
   questionnaire: Questionnaire,
@@ -49,7 +49,6 @@ export const responsesToString = (questionnaireData: QuestionnaireData): string 
             return `<li>${removeContextualInfoFormatting(option)}</li>`;
           })
           .join("");
-        // eslint-disable-next-line unicorn/prefer-spread
         result = result.concat(
           `<li>${Config.envResultsPage.contactDep[mediaArea].heading}</li><ul>${optionsList}</ul>`,
         );

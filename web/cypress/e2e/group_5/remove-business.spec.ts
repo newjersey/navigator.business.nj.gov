@@ -1,12 +1,10 @@
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { randomNonHomeBasedIndustry } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onOnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
 import { getMergedConfig } from "@businessnjgovnavigator/shared";
-import { randomNonHomeBasedIndustry } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 
 const Config = getMergedConfig();
-
-/* eslint-disable cypress/no-unnecessary-waiting */
 
 describe("Remove Business [feature] [all] [group5]", () => {
   beforeEach(() => {

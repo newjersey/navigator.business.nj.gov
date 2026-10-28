@@ -1,3 +1,6 @@
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useContext, useState } from "react";
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { NeedsAccountMiniCallout } from "@/components/NeedsAccountMiniCallout";
@@ -10,9 +13,6 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   task: Task;

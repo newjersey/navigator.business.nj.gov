@@ -1,5 +1,13 @@
+import {
+  createEmptyUser,
+  type RegistrationStatus,
+} from "@businessnjgovnavigator/shared/businessUser";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/test";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";
-import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
+import { type ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -13,12 +21,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyUser, RegistrationStatus } from "@businessnjgovnavigator/shared/businessUser";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { createPageHelpers, type PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 
 const Config = getMergedConfig();
 

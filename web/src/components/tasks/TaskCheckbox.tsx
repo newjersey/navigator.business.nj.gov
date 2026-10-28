@@ -1,8 +1,9 @@
+import { Checkbox, type CheckboxProps } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext } from "react";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Checkbox, CheckboxProps } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
 
 interface Props {
   checklistItemId: string;

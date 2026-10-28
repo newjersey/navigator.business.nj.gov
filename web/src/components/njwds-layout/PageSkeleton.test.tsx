@@ -1,5 +1,5 @@
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { render, screen } from "@testing-library/react";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 

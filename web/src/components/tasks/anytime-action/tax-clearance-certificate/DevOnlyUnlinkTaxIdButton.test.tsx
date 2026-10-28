@@ -1,7 +1,7 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { DevOnlyUnlinkTaxIdButton } from "@/components/tasks/anytime-action/tax-clearance-certificate/DevOnlyUnlinkTaxIdButton";
-import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
+import type { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
 import { screen } from "@testing-library/react";
+import { DevOnlyUnlinkTaxIdButton } from "@/components/tasks/anytime-action/tax-clearance-certificate/DevOnlyUnlinkTaxIdButton";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 const mockErrorSettor: (errorType: TaxClearanceCertificateResponseErrorType | undefined) => void =
   jest.fn();

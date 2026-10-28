@@ -1,9 +1,9 @@
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 const PageNotFound = (): ReactElement => {
   const { Config } = useConfig();

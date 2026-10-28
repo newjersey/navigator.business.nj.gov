@@ -1,6 +1,6 @@
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import * as api from "@/lib/api-client/apiClient";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
 

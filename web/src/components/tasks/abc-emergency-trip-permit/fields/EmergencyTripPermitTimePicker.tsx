@@ -1,3 +1,8 @@
+import type { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
+import { Autocomplete, FormHelperText, TextField } from "@mui/material";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import { type ChangeEvent, type ReactElement, useContext, useState } from "react";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -7,11 +12,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useEmergencyTripPermitErrors } from "@/lib/data-hooks/useEmergencyTripPermitErrors";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
-import { Autocomplete, FormHelperText, TextField } from "@mui/material";
-import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import { ChangeEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {
   fieldName: EmergencyTripPermitUserEnteredFieldNames;
@@ -67,7 +67,7 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
   dayjs.extend(timezone);
 
   const options = generateAllTimesWithHalfHourIncrement(0, true);
-  const handleChange = (event: ChangeEvent<unknown>, value: FormattedTime | null): void => {
+  const handleChange = (_event: ChangeEvent<unknown>, value: FormattedTime | null): void => {
     context.setApplicationInfo({
       ...context.state.applicationInfo,
       [props.fieldName]: value?.internalTime || "",

@@ -1,3 +1,13 @@
+import {
+  determineForeignBusinessType,
+  fetchMunicipalityById,
+  LookupIndustryById,
+  LookupLegalStructureById,
+  type ProfileData,
+  type RoadmapTaskData,
+} from "@businessnjgovnavigator/shared";
+import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
+import type { Roadmap } from "@businessnjgovnavigator/shared/types";
 import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import {
@@ -8,16 +18,6 @@ import { isInterstateLogisticsApplicable } from "@/lib/domain-logic/isInterstate
 import { isInterstateMovingApplicable } from "@/lib/domain-logic/isInterstateMovingApplicable";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { templateEval } from "@/lib/utils/helpers";
-import {
-  determineForeignBusinessType,
-  fetchMunicipalityById,
-  LookupIndustryById,
-  LookupLegalStructureById,
-  ProfileData,
-  RoadmapTaskData,
-} from "@businessnjgovnavigator/shared";
-import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
-import { Roadmap } from "@businessnjgovnavigator/shared/types";
 
 export const buildUserRoadmap = async (
   profileData: ProfileData,

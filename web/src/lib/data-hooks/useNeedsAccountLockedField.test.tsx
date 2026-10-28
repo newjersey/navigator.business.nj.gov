@@ -1,10 +1,10 @@
+import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { type ReactElement, useState } from "react";
 import { GenericTextField } from "@/components/GenericTextField";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useNeedsAccountLockedField } from "@/lib/data-hooks/useNeedsAccountLockedField";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
-import { fireEvent, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { ReactElement, useState } from "react";
 
 const LockedField = (): ReactElement => {
   const lockedFieldProps = useNeedsAccountLockedField();

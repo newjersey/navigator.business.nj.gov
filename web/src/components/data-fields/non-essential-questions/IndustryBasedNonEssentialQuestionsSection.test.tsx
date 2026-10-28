@@ -1,11 +1,11 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import type { ProfileData } from "@businessnjgovnavigator/shared";
+import { generateProfileData } from "@businessnjgovnavigator/shared/test";
+import { screen } from "@testing-library/react";
 import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { useMockIntersectionObserver } from "@/test/mock/MockIntersectionObserver";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { ProfileData } from "@businessnjgovnavigator/shared";
-import { generateProfileData } from "@businessnjgovnavigator/shared/test";
-import { screen } from "@testing-library/react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 jest.mock("../../../../../shared/lib/content/lib/industry.json", () => ({
   industries: [

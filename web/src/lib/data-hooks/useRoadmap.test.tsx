@@ -1,16 +1,16 @@
+import { generateProfileData, generateRoadmapTaskData } from "@businessnjgovnavigator/shared";
+import type { Roadmap } from "@businessnjgovnavigator/shared/types";
+import type { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
+import { render } from "@testing-library/react";
 import {
-  CurrentAndNextSection,
+  type CurrentAndNextSection,
+  type UseRoadmapReturnValue,
   useRoadmap,
-  UseRoadmapReturnValue,
 } from "@/lib/data-hooks/useRoadmap";
 import * as buildUserRoadmapModule from "@/lib/roadmap/buildUserRoadmap";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { generateProfileData, generateRoadmapTaskData } from "@businessnjgovnavigator/shared";
-import { Roadmap } from "@businessnjgovnavigator/shared/types";
-import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
-import { render } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));

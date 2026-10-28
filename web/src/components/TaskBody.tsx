@@ -1,11 +1,11 @@
+import type { Business } from "@businessnjgovnavigator/shared/";
+import type { Roadmap, Task } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { TaskElement } from "@/components/TaskElement";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { templateEval } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-import { Business } from "@businessnjgovnavigator/shared/";
-import { Roadmap, Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props {
   task: Task;

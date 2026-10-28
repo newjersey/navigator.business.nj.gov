@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import { profileFieldsFromConfig } from "@businessnjgovnavigator/shared/types";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import type { profileFieldsFromConfig } from "@businessnjgovnavigator/shared/types";
 import { merge } from "lodash";
 
 type FieldContent = {
@@ -24,7 +22,7 @@ export const getProfileConfig = (props: {
   onboarding?: boolean;
   persona?: BusinessPersona;
 }): any => {
-  const configForField: ProfileFieldContent = (props.config.profileDefaults as any)["fields"][
+  const configForField: ProfileFieldContent = (props.config.profileDefaults as any).fields[
     props.fieldName
   ];
 

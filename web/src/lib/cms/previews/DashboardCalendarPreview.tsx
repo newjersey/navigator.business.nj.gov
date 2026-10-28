@@ -1,14 +1,3 @@
-import { HideableTasks } from "@/components/dashboard/HideableTasks";
-import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
-import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
-import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import {
-  generateLicenseEvent,
-  generateOperateReference,
-  generateXrayRenewalCalendarEvent,
-} from "@/test/factories";
 import {
   defaultDateFormat,
   generateBusiness,
@@ -24,7 +13,18 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import dayjs from "dayjs";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { HideableTasks } from "@/components/dashboard/HideableTasks";
+import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
+import { Heading } from "@/components/njwds-extended/Heading";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import {
+  generateLicenseEvent,
+  generateOperateReference,
+  generateXrayRenewalCalendarEvent,
+} from "@/test/factories";
 
 const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

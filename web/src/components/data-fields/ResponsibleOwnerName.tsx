@@ -1,5 +1,8 @@
-import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import {
+  ProfileDataField,
+  type ProfileDataFieldProps,
+} from "@/components/data-fields/ProfileDataField";
 
 export const ResponsibleOwnerName = (
   props: Omit<ProfileDataFieldProps, "fieldName">,

@@ -1,8 +1,8 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
-import { generateFormationDbaContent, generateRoadmap, generateTask } from "@/test/factories";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test";
 import { screen } from "@testing-library/react";
+import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
+import { generateFormationDbaContent, generateRoadmap, generateTask } from "@/test/factories";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 describe("TaskPageSwitchComponent", () => {
   const initialFeatureCigaretteLicense = process.env.FEATURE_CIGARETTE_LICENSE;

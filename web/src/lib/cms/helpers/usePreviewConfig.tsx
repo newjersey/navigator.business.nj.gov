@@ -1,7 +1,7 @@
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
-import { ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { type ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { merge } from "lodash";
 import { useEffect, useState } from "react";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 
 export const usePreviewConfig = (
   props: PreviewProps,
@@ -15,7 +15,6 @@ export const usePreviewConfig = (
     setConfig((prevConfig) => {
       return JSON.parse(JSON.stringify(merge(prevConfig, data)));
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataString]);
 
   return { config, setConfig };

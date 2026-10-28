@@ -1,9 +1,9 @@
+import { useRouter } from "next/compat/router";
+import { useContext, useEffect } from "react";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { useRouter } from "next/compat/router";
-import { useContext, useEffect } from "react";
 
 export const usePageWithNeedsAccountSnackbar = (): void => {
   const { isAuthenticated, setShowNeedsAccountSnackbar, showNeedsAccountModal } =

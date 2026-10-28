@@ -1,8 +1,8 @@
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import type { ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement } from "react";
 
 interface Props {
   business?: Business;

@@ -1,3 +1,9 @@
+import type {
+  Certification,
+  Funding,
+  SidebarCardContent,
+} from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { SidebarCard } from "@/components/dashboard/SidebarCard";
@@ -6,8 +12,6 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { openInNewTab } from "@/lib/utils/helpers";
-import { Certification, Funding, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 export interface SidebarCardsListProps {
   sideBarCards: SidebarCardContent[];

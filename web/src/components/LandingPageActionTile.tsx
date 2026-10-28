@@ -1,5 +1,5 @@
-import { ActionTile } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
+import type { ActionTile } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 
 export const LandingPageActionTile = (props: ActionTile): ReactElement => {
   return (

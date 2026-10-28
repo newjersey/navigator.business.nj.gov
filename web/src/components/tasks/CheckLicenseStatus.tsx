@@ -1,18 +1,18 @@
+import {
+  createEmptyLicenseSearchNameAndAddress,
+  type LicenseSearchNameAndAddress,
+  type LicenseTaskId,
+  taskIdLicenseNameMapping,
+} from "@businessnjgovnavigator/shared/";
+import type { LicenseSearchError } from "@businessnjgovnavigator/shared/types";
+import { TextField } from "@mui/material";
+import { type ChangeEvent, type FormEvent, type ReactElement, useState } from "react";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import {
-  createEmptyLicenseSearchNameAndAddress,
-  LicenseSearchNameAndAddress,
-  LicenseTaskId,
-  taskIdLicenseNameMapping,
-} from "@businessnjgovnavigator/shared/";
-import { LicenseSearchError } from "@businessnjgovnavigator/shared/types";
-import { TextField } from "@mui/material";
-import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 
 const numberTextFieldSx = {
   "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":

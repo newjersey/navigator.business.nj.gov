@@ -1,9 +1,9 @@
-import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
 import {
-  FormationFields,
+  type FormationFields,
   generateFormationFormData,
   randomFormationLegalType,
 } from "@businessnjgovnavigator/shared";
+import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
 
 describe("validatedFieldsForUser", () => {
   const validatedFieldsForAllLegalStructures: FormationFields[] = [

@@ -1,13 +1,13 @@
+import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
-import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement } from "react";
 
 const CannabisLicensePreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

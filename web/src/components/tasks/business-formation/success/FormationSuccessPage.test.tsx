@@ -1,12 +1,8 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
-import { generateFormationProfileData } from "@/test/helpers/helpers-formation";
-import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import {
-  FormationLegalType,
-  GetFilingResponse,
-  ProfileData,
+  type FormationLegalType,
+  type GetFilingResponse,
   generateBusiness,
+  type ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
@@ -14,6 +10,10 @@ import {
   generateGetFilingResponse,
 } from "@businessnjgovnavigator/shared/test";
 import { screen } from "@testing-library/react";
+import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
+import { generateFormationProfileData } from "@/test/helpers/helpers-formation";
+import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 jest.mock("@/lib/data-hooks/useDocuments");
 const Config = getMergedConfig();

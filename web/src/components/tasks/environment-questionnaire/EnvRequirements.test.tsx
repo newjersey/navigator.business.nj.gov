@@ -1,3 +1,15 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
+import {
+  generateBusiness,
+  generateEnvironmentData,
+  generateEnvironmentQuestionnaireData,
+  generateProfileData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test/factories";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
+import type * as materialUi from "@mui/material";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { EnvRequirements } from "@/components/tasks/environment-questionnaire/EnvRequirements";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -11,18 +23,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
-import {
-  generateBusiness,
-  generateEnvironmentData,
-  generateEnvironmentQuestionnaireData,
-  generateProfileData,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test/factories";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
-import * as materialUi from "@mui/material";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 

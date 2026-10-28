@@ -1,13 +1,13 @@
+import { formationTaskId } from "@businessnjgovnavigator/shared/";
+import type { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useState } from "react";
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import { formationTaskId } from "@businessnjgovnavigator/shared/";
-import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useState } from "react";
 
 type Props = {
   card: SidebarCardContent;

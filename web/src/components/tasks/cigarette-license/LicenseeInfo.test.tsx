@@ -1,15 +1,3 @@
-import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
-import { AddressContext } from "@/contexts/addressContext";
-import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
-import {
-  createDataFormErrorMap,
-  DataFormErrorMapContext,
-} from "@/contexts/dataFormErrorMapContext";
-import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { fillTextUserEvent } from "@/test/helpers/helpers-testing-library-selectors";
-
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { emptyCigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
@@ -21,11 +9,22 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { ReactElement, useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { type ReactElement, useState } from "react";
+import { LicenseeInfo } from "@/components/tasks/cigarette-license/LicenseeInfo";
+import { AddressContext } from "@/contexts/addressContext";
+import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { fillTextUserEvent } from "@/test/helpers/helpers-testing-library-selectors";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 const Config = getMergedConfig();
 

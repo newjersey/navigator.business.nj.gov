@@ -13,7 +13,6 @@ export default {
   pattern: /:::infoAlert[^:]+:::/g,
   collapsed: false,
   summary: "{{fields.title}}",
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fromBlock: (match: any): { body: string } => {
     const string = match[0];
 

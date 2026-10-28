@@ -1,13 +1,13 @@
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
+import { type ReactElement, useContext } from "react";
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { ExistingEmployees } from "@/components/data-fields/ExistingEmployees";
 import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { Ownership } from "@/components/data-fields/Ownership";
-import { shouldLockMunicipality } from "@/components/profile/profileDisplayLogicHelpers";
 import { ProfileField } from "@/components/profile/ProfileField";
+import { shouldLockMunicipality } from "@/components/profile/profileDisplayLogicHelpers";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
-import { ReactElement, useContext } from "react";
 
 export const CertificationsAndFundingNonEssentialQuestions = (props: {
   showCannabisAlert?: boolean;

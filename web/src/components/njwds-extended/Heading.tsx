@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 type HeadingLevel = 0 | 1 | 2 | 3 | 4;
 /**
@@ -33,19 +33,19 @@ const determineClassNames = (
 
   switch (level) {
     case 1:
-      styleClass = variantClasses["h1"];
+      styleClass = variantClasses.h1;
       break;
     case 2:
-      styleClass = variantClasses["h2"];
+      styleClass = variantClasses.h2;
       break;
     case 3:
-      styleClass = variantClasses["h3"];
+      styleClass = variantClasses.h3;
       break;
     case 4:
-      styleClass = variantClasses["h4"];
+      styleClass = variantClasses.h4;
       break;
     default:
-      styleClass = variantClasses["rawElement"];
+      styleClass = variantClasses.rawElement;
       break;
   }
 

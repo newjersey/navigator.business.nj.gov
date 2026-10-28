@@ -1,13 +1,13 @@
-import { BrowserStorage } from "@/lib/storage/BrowserStorage";
-import { userDataPrefix, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import {
-  BusinessUser,
+  type BusinessUser,
   generateBusiness,
   generateUser,
   generateUserData,
   generateUserDataForBusiness,
-  UserData,
+  type UserData,
 } from "@businessnjgovnavigator/shared";
+import type { BrowserStorage } from "@/lib/storage/BrowserStorage";
+import { UserDataStorageFactory, userDataPrefix } from "@/lib/storage/UserDataStorage";
 
 const legacyUserDataPrefix = "$swrUserData$";
 const registrationStatusKey = "selfRegStatus";

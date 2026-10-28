@@ -1,33 +1,33 @@
-import type { Dispatch, MouseEvent, SetStateAction } from "react";
-import { ReactElement, useContext, useState } from "react";
-import { Heading } from "../njwds-extended/Heading";
-import { Content } from "@/components/Content";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { isUndefined } from "lodash";
-import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { EmployerRatesQuarterDropdown } from "@/components/employer-rates/EmployerRatesQuarterDropdown";
-import {
-  EmployerRatesQuarterObject,
-  getEmployerAccessQuarterlyDropdownOptions,
-} from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
-import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { WithErrorBar } from "@/components/WithErrorBar";
-import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
-import { Alert } from "@/components/njwds-extended/Alert";
-import * as api from "@/lib/api-client/apiClient";
-import { decryptValue } from "@/lib/api-client/apiClient";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   DOL_EIN_CHARACTERS,
-  EmployerRatesRequest,
-  EmployerRatesResponse,
+  type EmployerRatesRequest,
+  type EmployerRatesResponse,
 } from "@businessnjgovnavigator/shared";
+import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { isUndefined } from "lodash";
+import type { Dispatch, MouseEvent, SetStateAction } from "react";
+import { type ReactElement, useContext, useState } from "react";
+import { Content } from "@/components/Content";
 import { DolEin } from "@/components/data-fields/DolEin";
-import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { EmployerRatesQuarterDropdown } from "@/components/employer-rates/EmployerRatesQuarterDropdown";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import * as api from "@/lib/api-client/apiClient";
+import { decryptValue } from "@/lib/api-client/apiClient";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import {
+  type EmployerRatesQuarterObject,
+  getEmployerAccessQuarterlyDropdownOptions,
+} from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
 import { useMountEffect } from "@/lib/utils/helpers";
+import { Heading } from "../njwds-extended/Heading";
 
 interface Props {
   CMS_ONLY_enable_preview?: boolean;
@@ -123,7 +123,7 @@ export const EmployerRatesQuestions = (props: Props): ReactElement => {
     }
 
     let dolEinValue = state.profileData.deptOfLaborEin;
-    if (!!dolEinValue && !isDolEinValid(dolEinValue)) {
+    if (dolEinValue && !isDolEinValid(dolEinValue)) {
       await decryptValue({
         encryptedValue: state.profileData.deptOfLaborEin,
       }).then((value) => {

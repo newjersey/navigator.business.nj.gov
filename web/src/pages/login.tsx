@@ -1,3 +1,7 @@
+import type { GetStaticPropsResult } from "next";
+import { useRouter } from "next/compat/router";
+import type { ReactElement } from "react";
+import { useContext, useEffect } from "react";
 import { LoginEmailCheck } from "@/components/LoginEmailCheck";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { AuthContext } from "@/contexts/authContext";
@@ -5,11 +9,6 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { type GetStaticPropsResult } from "next";
-import { useRouter } from "next/compat/router";
-import { useContext, useEffect } from "react";
-
-import { ReactElement } from "react";
 
 const LoginEmailCheckPage = (): ReactElement => {
   const { state: authState, dispatch } = useContext(AuthContext);

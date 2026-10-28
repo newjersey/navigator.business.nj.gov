@@ -1,11 +1,11 @@
-import { Content } from "@/components/Content";
-import { Alert } from "@/components/njwds-extended/Alert";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import {
+import type {
   CigaretteLicenseData,
   SubmissionError,
 } from "@businessnjgovnavigator/shared/cigaretteLicense";
-import { forwardRef, ReactElement } from "react";
+import { forwardRef, type ReactElement } from "react";
+import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 
 interface Props {
   fieldErrors: string[];

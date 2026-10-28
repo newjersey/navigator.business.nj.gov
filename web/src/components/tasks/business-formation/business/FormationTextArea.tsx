@@ -1,9 +1,9 @@
-import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import type { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
+import { type ReactElement, useContext } from "react";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
+import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   fieldName: FormationTextField;

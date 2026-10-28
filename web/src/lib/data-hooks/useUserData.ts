@@ -1,5 +1,5 @@
-import { UserDataContext, UseUserDataResponse } from "@/contexts/userDataContext";
 import { useContext } from "react";
+import { UserDataContext, type UseUserDataResponse } from "@/contexts/userDataContext";
 
 export const useUserData = (): UseUserDataResponse => {
   const userData = useContext(UserDataContext);

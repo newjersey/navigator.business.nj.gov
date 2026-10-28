@@ -1,7 +1,7 @@
-import { IconTextProps } from "@/components/njwds-extended/callout/calloutHelpers";
-import { Icon } from "@/components/njwds/Icon";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import type { ReactElement, ReactNode } from "react";
+import { Icon } from "@/components/njwds/Icon";
+import type { IconTextProps } from "@/components/njwds-extended/callout/calloutHelpers";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 
 interface IconTextListProps {
   items?: IconTextProps[];

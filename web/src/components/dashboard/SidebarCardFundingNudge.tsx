@@ -1,13 +1,13 @@
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import type { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useState } from "react";
 import { SectorModal } from "@/components/dashboard/SectorModal";
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { gov2GovTaxFiling } from "@/lib/taxation/helpers";
 import analytics from "@/lib/utils/analytics";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { SidebarCardContent } from "@businessnjgovnavigator/shared/types";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useState } from "react";
 
 type Props = {
   card: SidebarCardContent;

@@ -1,3 +1,11 @@
+import type { SectionType } from "@businessnjgovnavigator/shared/";
+import {
+  generateBusiness,
+  generatePreferences,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MiniSectionAccordion } from "@/components/dashboard/MiniSectionAccordion";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -5,14 +13,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { SectionType } from "@businessnjgovnavigator/shared/";
-import {
-  generateBusiness,
-  generatePreferences,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

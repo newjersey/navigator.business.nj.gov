@@ -1,6 +1,3 @@
-/* eslint-disable testing-library/await-async-utils */
-/* eslint-disable cypress/no-unnecessary-waiting */
-
 import {
   completeBusinessStructureTask,
   defaultPa11yThresholds,
@@ -8,9 +5,9 @@ import {
   lighthouseMobileConfig,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
-import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 
 describe("Performance and Accessibility - Landing Page [all] [group2]", () => {
   describe("Desktop", () => {

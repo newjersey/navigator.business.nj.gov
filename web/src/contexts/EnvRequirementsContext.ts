@@ -1,9 +1,10 @@
 import {
   generateEmptyEnvironmentQuestionnaireData,
-  MediaArea,
-  QuestionnaireData,
+  type MediaArea,
+  type QuestionnaireData,
 } from "@businessnjgovnavigator/shared/environment";
-import React, { createContext, FormEvent } from "react";
+import type React from "react";
+import { createContext, type FormEvent } from "react";
 
 interface EnvRequirementsState {
   questionnaireData: QuestionnaireData;

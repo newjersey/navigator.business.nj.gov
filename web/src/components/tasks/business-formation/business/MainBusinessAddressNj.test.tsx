@@ -1,19 +1,19 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
-  FormationPageHelpers,
+  castPublicFilingLegalTypeToFormationType,
+  type FormationFormData,
+  type PublicFilingLegalType,
+} from "@businessnjgovnavigator/shared/formationData";
+import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
+import type * as materialUi from "@mui/material";
+import { fireEvent, screen } from "@testing-library/react";
+import {
+  type FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  castPublicFilingLegalTypeToFormationType,
-  FormationFormData,
-  PublicFilingLegalType,
-} from "@businessnjgovnavigator/shared/formationData";
-import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
-import * as materialUi from "@mui/material";
-import { fireEvent, screen } from "@testing-library/react";
 import { displayContent } from "../contacts/testHelpers";
 
 function mockMaterialUI(): typeof materialUi {
@@ -55,7 +55,6 @@ const getPageHelper = async (
   };
 
   const business = generateBusiness({ profileData, formationData });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (business.profileData as any).municipality = formationData.formationFormData.addressMunicipality;
   const page = preparePage({ business, displayContent });
   await page.stepperClickToBusinessStep();
@@ -139,7 +138,6 @@ describe("<MainBusinessAddressNj />", () => {
         await attemptApiSubmission(page);
 
         expect(screen.getByTestId("alert-error")).toHaveTextContent(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (Config.formation.fields as any)[field].label,
         );
       },

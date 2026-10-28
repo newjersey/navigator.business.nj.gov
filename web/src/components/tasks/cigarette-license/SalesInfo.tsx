@@ -1,16 +1,15 @@
+import { type ReactElement, useContext } from "react";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import analytics from "@/lib/utils/analytics";
-import { ReactElement, useContext } from "react";
-
 import { CigaretteSalesStartDate } from "@/components/tasks/cigarette-license/fields/CigaretteSalesStartDate";
 import { CigaretteSupplierDropdown } from "@/components/tasks/cigarette-license/fields/CigaretteSupplierDropdown";
 import { CigaretteLicenseContext } from "@/contexts/cigaretteLicenseContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   setStepIndex: (step: number) => void;

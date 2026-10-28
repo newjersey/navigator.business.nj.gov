@@ -1,5 +1,12 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { UserDataError } from "@businessnjgovnavigator/shared/types";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { type ReactElement, useMemo, useState } from "react";
+import { type Cache, SWRConfig } from "swr";
 import { AuthContext } from "@/contexts/authContext";
-import { IntercomContext, IntercomContextType } from "@/contexts/intercomContext";
+import { IntercomContext, type IntercomContextType } from "@/contexts/intercomContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
@@ -8,19 +15,12 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { UserDataProvider } from "@/lib/data-hooks/UserDataProvider";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
-import { UserDataStorage, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { UpdateQueue } from "@/lib/UpdateQueue";
+import { type UserDataStorage, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
+import type { UpdateQueue } from "@/lib/UpdateQueue";
 import NJEDAFundingsOnboardingPage from "@/pages/njeda";
 import { generateFunding, generateRoadmap } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { selectByValue } from "@/test/pages/profile/profile-helpers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { UserDataError } from "@businessnjgovnavigator/shared/types";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { ReactElement, useMemo, useState } from "react";
-import { Cache, SWRConfig } from "swr";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({

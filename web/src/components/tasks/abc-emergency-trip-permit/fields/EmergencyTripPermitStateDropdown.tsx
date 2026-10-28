@@ -1,11 +1,11 @@
+import type { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
+import { type ReactElement, useContext } from "react";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useEmergencyTripPermitErrors } from "@/lib/data-hooks/useEmergencyTripPermitErrors";
-import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   fieldName: EmergencyTripPermitUserEnteredFieldNames;

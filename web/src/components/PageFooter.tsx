@@ -1,8 +1,8 @@
+import { useMediaQuery } from "@mui/material";
+import type { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement } from "react";
 
 export const PageFooter = (): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);

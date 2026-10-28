@@ -1,20 +1,20 @@
-import { NaicsCode } from "@/components/data-fields/NaicsCode";
-import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { getFlow } from "@/lib/utils/helpers";
-import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
-  Business,
+  type Business,
   generateBusiness,
   generateProfileData,
   generateTaxFilingData,
   generateUserDataForBusiness,
-  TaxFilingState,
+  type TaxFilingState,
 } from "@businessnjgovnavigator/shared";
 import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
+import { NaicsCode } from "@/components/data-fields/NaicsCode";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { getFlow } from "@/lib/utils/helpers";
+import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();

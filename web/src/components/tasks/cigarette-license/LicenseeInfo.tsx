@@ -1,10 +1,12 @@
+import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { UnitedStatesAddress } from "@/components/data-fields/address/UnitedStatesAddress";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
+import { TradeName } from "@/components/data-fields/TradeName";
 import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
-import { TradeName } from "@/components/data-fields/TradeName";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
@@ -26,8 +28,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
 import analytics from "@/lib/utils/analytics";
 import { shouldLockBusinessAddress } from "@/lib/utils/taskHelpers";
-import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   setStepIndex: (idx: number) => void;

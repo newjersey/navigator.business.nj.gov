@@ -1,11 +1,11 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { MediaArea, Questionnaire } from "@businessnjgovnavigator/shared/environment";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { optionsMarkedTrueForMediaArea } from "@/components/tasks/environment-questionnaire/results/helpers";
 import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 import analytics from "@/lib/utils/analytics";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { MediaArea, Questionnaire } from "@businessnjgovnavigator/shared/environment";
-import { ReactElement, useContext } from "react";
 
 export const SeeYourResponses = (): ReactElement => {
   const Config = getMergedConfig();

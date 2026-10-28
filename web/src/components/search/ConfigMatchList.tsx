@@ -1,7 +1,8 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { getCollectionInfo } from "@businessnjgovnavigator/shared/lib/search/searchConfig";
-import { ConfigMatch } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
-import { ReactElement, useEffect, useState } from "react";
+import type { ConfigMatch } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
+import { type ReactElement, useEffect, useState } from "react";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+
 interface Props {
   matches: ConfigMatch[];
   collectionName: string;

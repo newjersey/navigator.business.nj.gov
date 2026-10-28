@@ -1,14 +1,14 @@
-import { EmployerRatesSuccessTables } from "@/components/employer-rates/EmployerRatesSuccessTables";
-import { Alert } from "@/components/njwds-extended/Alert";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { templateEval } from "@/lib/utils/helpers";
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { ReactElement, useContext } from "react";
-import { EmployerRatesResponse } from "@businessnjgovnavigator/shared/employerRates";
-import { EmployerRatesQuarterObject } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
+import type { EmployerRatesResponse } from "@businessnjgovnavigator/shared/employerRates";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { DolEin } from "@/components/data-fields/DolEin";
+import { EmployerRatesSuccessTables } from "@/components/employer-rates/EmployerRatesSuccessTables";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import type { EmployerRatesQuarterObject } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
+import { templateEval } from "@/lib/utils/helpers";
 
 interface Props {
   resetQuarter: () => void;

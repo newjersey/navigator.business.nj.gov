@@ -1,10 +1,10 @@
+import { type ReactElement, type RefObject, useEffect, useRef } from "react";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { ContactInformationTab } from "@/components/profile/ContactInformationTab";
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { scrollToTopOfElement } from "@/lib/utils/helpers";
-import { ReactElement, RefObject, useEffect, useRef } from "react";
 
 type GovDeliveryErrorType = "SUBSCRIBE_FAILED" | "UNSUBSCRIBE_FAILED" | "EMAIL_UPDATE_FAILED";
 

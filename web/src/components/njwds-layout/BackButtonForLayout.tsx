@@ -1,9 +1,9 @@
+import Link from "next/link";
+import type { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import Link from "next/link";
-import { ReactElement } from "react";
 
 interface Props {
   backButtonText: string;

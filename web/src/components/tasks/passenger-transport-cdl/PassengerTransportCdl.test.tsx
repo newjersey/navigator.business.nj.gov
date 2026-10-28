@@ -1,10 +1,3 @@
-import { PassengerTransportCdl } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdl";
-import { generateTask } from "@/test/factories";
-import {
-  currentBusiness,
-  setupStatefulUserDataContext,
-  WithStatefulUserData,
-} from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
   generateRoadmapTaskData,
@@ -14,6 +7,13 @@ import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { PassengerTransportCdl } from "@/components/tasks/passenger-transport-cdl/PassengerTransportCdl";
+import { generateTask } from "@/test/factories";
+import {
+  currentBusiness,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

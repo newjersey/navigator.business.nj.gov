@@ -1,7 +1,7 @@
-import * as api from "@/lib/api-client/apiClient";
-import DeadUrlsPage from "@/pages/mgmt/deadurls";
-import type { ContentDeadLink } from "@/lib/static/admin/findDeadLinks";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import * as api from "@/lib/api-client/apiClient";
+import type { ContentDeadLink } from "@/lib/static/admin/findDeadLinks";
+import DeadUrlsPage from "@/pages/mgmt/deadurls";
 
 jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
@@ -82,7 +82,6 @@ describe("DeadUrls page", () => {
       new Promise((resolve) => {
         const reader = new FileReader();
         reader.addEventListener("load", () => resolve(String(reader.result)));
-        // eslint-disable-next-line unicorn/prefer-blob-reading-methods
         reader.readAsText(blob);
       });
 

@@ -1,8 +1,7 @@
-import { ProfileDataContext } from "@/contexts/profileDataContext";
 import {
   arrayOfOwnershipTypes,
   LookupOwnershipTypeById,
-  OwnershipType,
+  type OwnershipType,
 } from "@businessnjgovnavigator/shared";
 import {
   Checkbox,
@@ -10,9 +9,10 @@ import {
   ListItemText,
   MenuItem,
   Select,
-  SelectChangeEvent,
+  type SelectChangeEvent,
 } from "@mui/material";
-import { ReactElement, ReactNode, useContext } from "react";
+import { type ReactElement, type ReactNode, useContext } from "react";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 
 export const Ownership = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);

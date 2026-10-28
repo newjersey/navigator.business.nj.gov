@@ -1,18 +1,18 @@
-import { displayContent } from "@/components/tasks/business-formation/contacts/testHelpers";
-import {
-  FormationPageHelpers,
-  generateFormationProfileData,
-  preparePage,
-  useSetupInitialMocks,
-} from "@/test/helpers/helpers-formation";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
+import type {
   FormationFormData,
   FormationLegalType,
 } from "@businessnjgovnavigator/shared/formationData";
 import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { screen } from "@testing-library/react";
+import { displayContent } from "@/components/tasks/business-formation/contacts/testHelpers";
+import {
+  type FormationPageHelpers,
+  generateFormationProfileData,
+  preparePage,
+  useSetupInitialMocks,
+} from "@/test/helpers/helpers-formation";
 
 function mockMaterialUI(): typeof materialUi {
   return {

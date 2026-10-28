@@ -1,9 +1,9 @@
+import { useMediaQuery } from "@mui/material";
+import type { ReactElement } from "react";
 import { ExpandCollapseString } from "@/components/ExpandCollapseString";
 import { ReviewNotEntered } from "@/components/tasks/review-screen-components/ReviewNotEntered";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement } from "react";
 
 interface Props {
   isExpandable?: boolean;

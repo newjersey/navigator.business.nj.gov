@@ -1,6 +1,6 @@
-import { getXrayRenewalEvent } from "@/lib/domain-logic/getXrayRenewalEvent";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { generateXrayRegistrationData } from "@businessnjgovnavigator/shared/test";
+import { getXrayRenewalEvent } from "@/lib/domain-logic/getXrayRenewalEvent";
 
 describe("getXrayRenewalEvent", () => {
   const currentDate = getCurrentDate();

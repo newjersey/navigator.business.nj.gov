@@ -1,9 +1,9 @@
-import { ContactTabPanel } from "@/components/profile/ContactTabPanel";
-import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
-import React from "react";
+import type React from "react";
+import { ContactTabPanel } from "@/components/profile/ContactTabPanel";
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 
 jest.mock("@/components/profile/ProfileTabHeader", () => ({
   ProfileTabHeader: (() => <div data-testid="profile-tab-header" />) as React.FC,

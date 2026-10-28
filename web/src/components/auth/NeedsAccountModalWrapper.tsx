@@ -1,7 +1,7 @@
+import { type ReactElement, type ReactNode, useContext } from "react";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { ReactElement, ReactNode, useContext } from "react";
 
 export const NeedsAccountModalWrapper = (props: {
   children: ReactNode;

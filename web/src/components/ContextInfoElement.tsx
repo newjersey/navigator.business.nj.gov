@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import type React from "react";
+import { forwardRef, type ReactElement } from "react";
 import { Content } from "@/components/Content";
-import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
-import React, { forwardRef, ReactElement } from "react";
+import { Heading } from "@/components/njwds-extended/Heading";
 
-// eslint-disable-next-line react/display-name
 export const ContextInfoElement = forwardRef(
   (
     props: { isVisible: boolean; header: string; markdown: string; close?: () => void },

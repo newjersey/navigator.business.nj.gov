@@ -1,3 +1,19 @@
+import {
+  type Business,
+  defaultDateFormat,
+  formationTaskId,
+  generateBusiness,
+  generateFormationData,
+  generateFormationSubmitResponse,
+  generateProfileData,
+  generateUserDataForBusiness,
+  getCurrentDate,
+  type TaskProgress,
+  taxTaskId,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -11,22 +27,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  defaultDateFormat,
-  formationTaskId,
-  generateBusiness,
-  generateFormationData,
-  generateFormationSubmitResponse,
-  generateProfileData,
-  generateUserDataForBusiness,
-  getCurrentDate,
-  TaskProgress,
-  taxTaskId,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

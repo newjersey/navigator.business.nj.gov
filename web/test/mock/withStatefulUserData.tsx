@@ -1,17 +1,17 @@
+import type { UserData } from "@businessnjgovnavigator/shared/";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, screen } from "@testing-library/react";
+import { type ReactElement, type ReactNode, useContext } from "react";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
-import { UserDataContext, UseUserDataResponse } from "@/contexts/userDataContext";
+import { UserDataContext, type UseUserDataResponse } from "@/contexts/userDataContext";
 import * as useUserModule from "@/lib/data-hooks/useUserData";
-import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
+import { type UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   StatefulDataContext,
   statefulDataHelpers,
   WithStatefulData,
 } from "@/test/mock/withStatefulData";
-import { UserData } from "@businessnjgovnavigator/shared/";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, screen } from "@testing-library/react";
-import { ReactElement, ReactNode, useContext } from "react";
 
 const updateSpy = jest.fn();
 
@@ -77,7 +77,6 @@ const StatefulUserDataProvider = ({ children }: { children: ReactNode }): ReactE
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 
 export const setupStatefulUserDataContext = (): void => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useMockRoadmap({});
   mockUseUserData.mockImplementation(() => {
     const { genericData, update } = useContext(StatefulDataContext);

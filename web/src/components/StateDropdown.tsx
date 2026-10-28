@@ -1,9 +1,15 @@
+import { type StateObject, arrayOfStateObjects as states } from "@businessnjgovnavigator/shared/";
+import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
+import {
+  type ChangeEvent,
+  type FocusEvent,
+  type ReactElement,
+  type ReactNode,
+  useState,
+} from "react";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { StateObject, arrayOfStateObjects as states } from "@businessnjgovnavigator/shared/";
-import { Autocomplete, TextField, createFilterOptions } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   value: string | undefined;
@@ -25,7 +31,7 @@ interface Props {
 export const StateDropdown = (props: Props): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleOnChange = (event: ChangeEvent<unknown>, value: StateObject | null): void => {
+  const handleOnChange = (_event: ChangeEvent<unknown>, value: StateObject | null): void => {
     props.onSelect(value || undefined);
   };
 
@@ -36,7 +42,7 @@ export const StateDropdown = (props: Props): ReactElement => {
     props.onValidation && props.onValidation(props.fieldName, invalid);
   };
 
-  const handleInputChange = (event: ChangeEvent<unknown>, value: string | null): void => {
+  const handleInputChange = (_event: ChangeEvent<unknown>, value: string | null): void => {
     if (value === null || value === "") {
       props.onSelect(undefined);
     } else {

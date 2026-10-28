@@ -1,25 +1,23 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
-
-import { templateEval } from "@/lib/utils/helpers";
 import {
-  FormationPageHelpers,
-  setDesktopScreen,
-  useSetupInitialMocks,
-} from "@/test/helpers/helpers-formation";
-import { currentBusiness } from "@/test/mock/withStatefulUserData";
-import {
-  FormationLegalType,
-  FormationMember,
+  type FormationLegalType,
+  type FormationMember,
   generateFormationMember,
   generateFormationUSAddress,
   generateMunicipality,
   generateUnitedStatesStateDropdownOption,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
+import { templateEval } from "@/lib/utils/helpers";
+import {
+  type FormationPageHelpers,
+  setDesktopScreen,
+  useSetupInitialMocks,
+} from "@/test/helpers/helpers-formation";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -87,7 +85,6 @@ describe("Formation - Members Field", () => {
             ),
           ).toBeInTheDocument();
 
-          // eslint-disable-next-line testing-library/no-node-access
           const tr = nameTd.closest("tr");
 
           if (tr !== null) {
@@ -133,7 +130,6 @@ describe("Formation - Members Field", () => {
           const nameTd = screen.getByText(members[1].name, { exact: false });
           expect(nameTd).toBeInTheDocument();
 
-          // eslint-disable-next-line testing-library/no-node-access
           const tr = nameTd.closest("tr");
 
           if (tr !== null) {

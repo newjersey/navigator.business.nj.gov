@@ -1,3 +1,16 @@
+import {
+  type Business,
+  generateBusiness,
+  generateProfileData,
+  generateTaxFilingData,
+  generateUserDataForBusiness,
+  randomInt,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import type { ReactElement, ReactNode } from "react";
 import { TaxTask } from "@/components/tasks/TaxTask";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { templateEval } from "@/lib/utils/helpers";
@@ -11,24 +24,11 @@ import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulDataFieldFormContext } from "@/test/mock/withStatefulProfileData";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  generateBusiness,
-  generateProfileData,
-  generateTaxFilingData,
-  generateUserDataForBusiness,
-  randomInt,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { ThemeProvider, createTheme } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { ReactElement, ReactNode } from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

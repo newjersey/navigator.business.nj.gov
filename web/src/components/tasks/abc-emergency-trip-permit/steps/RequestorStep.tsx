@@ -1,3 +1,5 @@
+import { useMediaQuery } from "@mui/material";
+import { type ReactElement, useContext } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { EmergencyTripPermitCountryDropdown } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitCountryDropdown";
 import { EmergencyTripPermitStateDropdown } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitStateDropdown";
@@ -5,8 +7,6 @@ import { EmergencyTripPermitTextFieldEntry } from "@/components/tasks/abc-emerge
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, useContext } from "react";
 
 export const RequestorStep = (): ReactElement => {
   const { Config } = useConfig();

@@ -1,12 +1,12 @@
-import { CrtkPage } from "@/components/crtk/CrtkPage";
-import * as api from "@/lib/api-client/apiClient";
-import { generateTask } from "@/test/factories";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { CrtkData } from "@businessnjgovnavigator/shared/crtk";
+import type { CrtkData } from "@businessnjgovnavigator/shared/crtk";
 import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import type { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { CrtkPage } from "@/components/crtk/CrtkPage";
+import * as api from "@/lib/api-client/apiClient";
+import { generateTask } from "@/test/factories";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   searchBusinessInCrtkDB: jest.fn(),

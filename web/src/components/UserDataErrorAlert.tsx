@@ -1,8 +1,8 @@
+import type { UserDataError } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { UserDataError } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 export const UserDataErrorAlert = (): ReactElement => {
   const { error } = useUserData();

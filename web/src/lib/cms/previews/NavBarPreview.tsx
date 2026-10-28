@@ -1,9 +1,3 @@
-import { NavBarVariant } from "@/components/navbar/NavBarTypes";
-import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
-import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
-import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
-import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
@@ -13,7 +7,13 @@ import {
   generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { NavBarDesktop } from "@/components/navbar/desktop/NavBarDesktop";
+import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 
 const NavBarPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
