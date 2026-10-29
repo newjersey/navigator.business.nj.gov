@@ -1,3 +1,5 @@
+import { corpLegalStructures } from "@businessnjgovnavigator/shared/formationData";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
@@ -22,8 +24,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { shouldDisplayAddressSection } from "@/lib/utils/formation-helpers";
 import { isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
-import { corpLegalStructures } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement, useContext } from "react";
 
 export const ReviewStep = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);

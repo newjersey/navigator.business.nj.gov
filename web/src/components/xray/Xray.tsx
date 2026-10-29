@@ -1,17 +1,4 @@
-import { TaskHeader } from "@/components/TaskHeader";
-import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
-import { getTabId, getTabPanelId, TabPanel } from "@/components/TabPanel";
-import { XrayTabOne } from "@/components/xray/XrayTabOne";
-import { XrayTabZero } from "@/components/xray/XrayTabZero";
-
-import * as api from "@/lib/api-client/apiClient";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import analytics from "@/lib/utils/analytics";
-import { openInNewTab } from "@/lib/utils/helpers";
-import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-import { Task, XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
+import type { Task, XrayRenewalCalendarEventType } from "@businessnjgovnavigator/shared/types";
 import type { UserData } from "@businessnjgovnavigator/shared/userData";
 import type {
   FacilityDetails,
@@ -20,7 +7,20 @@ import type {
   XraySearchError,
 } from "@businessnjgovnavigator/shared/xray";
 import { Box, Tab, Tabs } from "@mui/material";
-import React, { ReactElement, ReactNode, useEffect, useState } from "react";
+import type React from "react";
+import { type ReactElement, type ReactNode, useEffect, useState } from "react";
+import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
+import { getTabId, getTabPanelId, TabPanel } from "@/components/TabPanel";
+import { TaskHeader } from "@/components/TaskHeader";
+import { XrayTabOne } from "@/components/xray/XrayTabOne";
+import { XrayTabZero } from "@/components/xray/XrayTabZero";
+import * as api from "@/lib/api-client/apiClient";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
+import { openInNewTab } from "@/lib/utils/helpers";
+import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 
 interface Props {
   task?: Task;
@@ -55,7 +55,7 @@ export const Xray = (props: Props): ReactElement => {
     setTabIndex(APPLICATION_TAB_INDEX);
   };
 
-  const onSelectTab = (event: React.SyntheticEvent, newValue: number): void => {
+  const onSelectTab = (_event: React.SyntheticEvent, newValue: number): void => {
     setTabIndex(newValue);
   };
 

@@ -1,11 +1,11 @@
+import type { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { BillingStep } from "@/components/tasks/abc-emergency-trip-permit/steps/BillingStep";
 import { EmergencyTripPermitStepsConfiguration } from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitStepsConfiguration";
 import { InstructionsStep } from "@/components/tasks/abc-emergency-trip-permit/steps/InstructionsStep";
 import { RequestorStep } from "@/components/tasks/abc-emergency-trip-permit/steps/RequestorStep";
 import { ReviewStep } from "@/components/tasks/abc-emergency-trip-permit/steps/ReviewStep";
 import { TripStep } from "@/components/tasks/abc-emergency-trip-permit/steps/TripStep";
-import { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 export const EmergencyTripPermitSteps: {
   component: ReactElement;

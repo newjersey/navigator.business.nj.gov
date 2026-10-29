@@ -1,16 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {
-  getErrorStateForFormationField,
-  onlyHasErrorIfEmpty,
-  onlyHasErrorIfUndefined,
-} from "@/components/tasks/business-formation/getErrorStateForFormationField";
-import { templateEval } from "@/lib/utils/helpers";
-import { generateInputFile } from "@/test/factories";
-import {
-  FormationFields,
-  FormationLegalType,
+  AGENT_EMAIL_MAX_CHAR,
+  AGENT_NAME_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR,
+  AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR,
+  BUSINESS_ADDRESS_CITY_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  CONTACT_FIRST_NAME_MAX_CHAR,
+  CONTACT_LAST_NAME_MAX_CHAR,
   defaultDateFormat,
+  type FormationFields,
+  type FormationLegalType,
   generateBusinessNameAvailability,
   generateFormationFormData,
   generateFormationIncorporator,
@@ -21,17 +21,16 @@ import {
   getCurrentDateFormatted,
   publicFilingLegalTypes,
   randomElementFromArray,
-  AGENT_EMAIL_MAX_CHAR,
-  AGENT_NAME_MAX_CHAR,
-  AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR,
-  AGENT_OFFICE_ADDRESS_LINE_1_MAX_CHAR,
-  AGENT_OFFICE_ADDRESS_LINE_2_MAX_CHAR,
-  BUSINESS_ADDRESS_CITY_MAX_CHAR,
-  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
-  CONTACT_FIRST_NAME_MAX_CHAR,
-  CONTACT_LAST_NAME_MAX_CHAR,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  getErrorStateForFormationField,
+  onlyHasErrorIfEmpty,
+  onlyHasErrorIfUndefined,
+} from "@/components/tasks/business-formation/getErrorStateForFormationField";
+import { templateEval } from "@/lib/utils/helpers";
+import { generateInputFile } from "@/test/factories";
+
 const Config = getMergedConfig();
 
 describe("getErrorStateForField", () => {

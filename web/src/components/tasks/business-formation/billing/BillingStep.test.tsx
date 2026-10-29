@@ -1,26 +1,24 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import {
+  type BusinessUser,
+  type FormationFormData,
+  type FormationLegalType,
+  generateBusiness,
+  generateFormationFormData,
+  generateUser,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { FormationDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
+import type * as materialUi from "@mui/material";
+import { fireEvent, screen } from "@testing-library/react";
 import { getDollarValue } from "@/lib/utils/formatters";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
-  FormationPageHelpers,
+  type FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import {
-  BusinessUser,
-  FormationFormData,
-  FormationLegalType,
-  generateBusiness,
-  generateFormationFormData,
-  generateUser,
-  ProfileData,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { FormationDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
-import * as materialUi from "@mui/material";
-import { fireEvent, screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -81,7 +79,6 @@ describe("Formation - BillingStep", () => {
       lastVisitedPageIndex: 0,
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
-    // eslint-disable-next-line testing-library/render-result-naming-convention
     const page = preparePage({
       business: generateBusiness({
         profileData,
@@ -165,8 +162,12 @@ describe("Formation - BillingStep", () => {
         );
         const officialFormationCost = Number.parseInt(
           Config.formation.fields.officialFormationDocument.cost,
+          10,
         );
-        const standingCost = Number.parseInt(Config.formation.fields.certificateOfStanding.cost);
+        const standingCost = Number.parseInt(
+          Config.formation.fields.certificateOfStanding.cost,
+          10,
+        );
         const expectedTotal = officialFormationCost + standingCost;
 
         expect(
@@ -192,9 +193,11 @@ describe("Formation - BillingStep", () => {
 
         const officialFormationCost = Number.parseInt(
           Config.formation.fields.officialFormationDocument.cost,
+          10,
         );
         const standingCost = Number.parseInt(
           (Config.formation.fields.certificateOfStanding.overrides as any)[legalStructureId].cost,
+          10,
         );
         const expectedTotal = officialFormationCost + standingCost;
 
@@ -211,12 +214,15 @@ describe("Formation - BillingStep", () => {
   it("updates total and subtotals correctly", async () => {
     const officialFormationCost = Number.parseInt(
       Config.formation.fields.officialFormationDocument.cost,
+      10,
     );
     const certifiedCopyCost = Number.parseInt(
       Config.formation.fields.certifiedCopyOfFormationDocument.cost,
+      10,
     );
     const certificateStandingCost = Number.parseInt(
       Config.formation.fields.certificateOfStanding.cost,
+      10,
     );
 
     const ccInitialCost = Number.parseFloat(

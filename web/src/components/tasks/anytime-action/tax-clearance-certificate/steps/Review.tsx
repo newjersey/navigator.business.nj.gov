@@ -1,3 +1,10 @@
+import {
+  convertSignedByteArrayToUnsigned,
+  LookupTaxClearanceCertificateAgenciesById,
+  type TaxClearanceCertificateData,
+  type TaxClearanceCertificateResponseErrorType,
+} from "@businessnjgovnavigator/shared";
+import { type ReactElement, useState } from "react";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -16,13 +23,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
-import {
-  convertSignedByteArrayToUnsigned,
-  LookupTaxClearanceCertificateAgenciesById,
-  TaxClearanceCertificateData,
-  TaxClearanceCertificateResponseErrorType,
-} from "@businessnjgovnavigator/shared";
-import { ReactElement, useState } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
@@ -43,9 +43,9 @@ export const Review = (props: Props): ReactElement => {
 
   const isAddressComplete = Boolean(
     business?.taxClearanceCertificateData?.addressLine1 &&
-    business?.taxClearanceCertificateData?.addressCity &&
-    business?.taxClearanceCertificateData?.addressState &&
-    business?.taxClearanceCertificateData?.addressZipCode,
+      business?.taxClearanceCertificateData?.addressCity &&
+      business?.taxClearanceCertificateData?.addressState &&
+      business?.taxClearanceCertificateData?.addressZipCode,
   );
 
   let addressValue = "";

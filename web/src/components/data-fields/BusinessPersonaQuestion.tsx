@@ -1,3 +1,10 @@
+import type { BusinessPersona } from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext, useEffect } from "react";
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
@@ -5,12 +12,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { BusinessPersona } from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext, useEffect } from "react";
 import analytics from "@/lib/utils/analytics";
 
 export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): ReactElement => {

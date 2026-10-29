@@ -1,5 +1,5 @@
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { renderHook } from "@testing-library/react";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 
 describe("useMountEffectWhenDefined", () => {
   interface Props {

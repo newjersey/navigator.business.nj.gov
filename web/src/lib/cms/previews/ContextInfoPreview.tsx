@@ -1,8 +1,8 @@
+import type { ContextualInfo } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { ContextInfoElement } from "@/components/ContextInfoElement";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { ContextualInfo } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 const ContextInfoPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);

@@ -1,10 +1,10 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
-import { ReactElement, ReactNode } from "react";
-import { Content } from "@/components/Content";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { EmployerRatesQuarterObject } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
+import type { ReactElement, ReactNode } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import type { EmployerRatesQuarterObject } from "@/lib/domain-logic/getEmployerAccessQuarterlyDropdownOptions";
 
 interface Props {
   dropdownOptions: EmployerRatesQuarterObject[];

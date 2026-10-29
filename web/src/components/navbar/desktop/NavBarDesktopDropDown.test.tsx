@@ -1,7 +1,7 @@
-import { NavBarDesktopDropDown } from "@/components/navbar/desktop/NavBarDesktopDropDown";
-import analytics from "@/lib/utils/analytics";
 import MenuItem from "@mui/material/MenuItem";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { NavBarDesktopDropDown } from "@/components/navbar/desktop/NavBarDesktopDropDown";
+import analytics from "@/lib/utils/analytics";
 
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 

@@ -1,8 +1,8 @@
 import {
   BusinessSignerTypeMap,
-  FormationIncorporator,
-  FormationLegalType,
-  FormationSigner,
+  type FormationIncorporator,
+  type FormationLegalType,
+  type FormationSigner,
 } from "@businessnjgovnavigator/shared/formationData";
 
 export const needsSignerTypeFunc = (legalType: FormationLegalType): boolean => {

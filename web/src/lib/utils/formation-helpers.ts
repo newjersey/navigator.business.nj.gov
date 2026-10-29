@@ -2,7 +2,7 @@ import {
   arrayOfCountriesObjects,
   foreignCorpLegalStructures,
 } from "@businessnjgovnavigator/shared";
-import { FormationFormData } from "@businessnjgovnavigator/shared/";
+import type { FormationFormData } from "@businessnjgovnavigator/shared/";
 
 export const getAddressCity = (formationFormData: FormationFormData): string | undefined => {
   return formationFormData.businessLocationType === "NJ"

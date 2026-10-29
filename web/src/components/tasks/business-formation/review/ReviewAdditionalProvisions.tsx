@@ -1,8 +1,8 @@
+import { type ReactElement, useContext } from "react";
 import { ExpandCollapseString } from "@/components/ExpandCollapseString";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext } from "react";
 
 export const ReviewAdditionalProvisions = (): ReactElement => {
   const { Config } = useConfig();

@@ -1,7 +1,10 @@
+import type {
+  AddressFields,
+  FieldsForAddressErrorHandling,
+} from "@businessnjgovnavigator/shared/types";
+import { useContext } from "react";
 import { getErrorStateForAddressField } from "@/components/profile/getErrorStateForAddressField";
 import { AddressContext } from "@/contexts/addressContext";
-import { AddressFields, FieldsForAddressErrorHandling } from "@businessnjgovnavigator/shared/types";
-import { useContext } from "react";
 
 type AddressErrorsResponse = {
   doesFieldHaveError: (field: FieldsForAddressErrorHandling) => boolean;

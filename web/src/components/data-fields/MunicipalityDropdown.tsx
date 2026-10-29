@@ -1,10 +1,16 @@
+import type { Municipality } from "@businessnjgovnavigator/shared";
+import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
+import {
+  type ChangeEvent,
+  type FocusEvent,
+  type ReactElement,
+  type ReactNode,
+  useState,
+} from "react";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
-import { Municipality } from "@businessnjgovnavigator/shared";
-import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   fieldName: string;
@@ -30,7 +36,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
     setSearchText(event.target.value);
   };
 
-  const handleMunicipality = (event: ChangeEvent<unknown>, value: Municipality | null): void => {
+  const handleMunicipality = (_event: ChangeEvent<unknown>, value: Municipality | null): void => {
     props.handleChange && props.handleChange();
     setSearchText(value ? value.displayName : "");
     props.onSelect(value || undefined);

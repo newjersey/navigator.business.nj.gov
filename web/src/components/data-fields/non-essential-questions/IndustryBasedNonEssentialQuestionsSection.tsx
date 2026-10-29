@@ -1,3 +1,5 @@
+import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
+import { type ReactElement, useContext } from "react";
 import { NonEssentialQuestion } from "@/components/data-fields/non-essential-questions/NonEssentialQuestion";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import {
@@ -6,8 +8,6 @@ import {
   getPersonaBasedNonEssentialQuestionsIds,
   hasNonEssentialQuestions,
 } from "@/lib/utils/non-essential-questions-helpers";
-import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
-import { ReactElement, useContext } from "react";
 
 export const IndustryBasedNonEssentialQuestionsSection = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);

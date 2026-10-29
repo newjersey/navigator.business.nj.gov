@@ -1,9 +1,9 @@
+import { type ReactElement, useContext } from "react";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getPhoneNumberFormat } from "@/lib/utils/helpers";
-import { ReactElement, useContext } from "react";
 
 export const ReviewBillingContact = (): ReactElement => {
   const { Config } = useConfig();

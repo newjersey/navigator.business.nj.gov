@@ -1,4 +1,3 @@
-import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 import {
   generateLicenseDetails,
   randomElementFromArray,
@@ -9,6 +8,7 @@ import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstan
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import dayjs from "dayjs";
 import objectSupport from "dayjs/plugin/objectSupport";
+import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 
 dayjs.extend(objectSupport);
 

@@ -1,8 +1,8 @@
-import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { Icon } from "@/components/njwds/Icon";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { Icon } from "@/components/njwds/Icon";
 
 jest.mock("@mui/material", () => mockMaterialUI());
 

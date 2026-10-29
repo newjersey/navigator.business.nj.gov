@@ -1,9 +1,9 @@
+import type * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { screen } from "@testing-library/react";
 import { Task } from "@/components/Task";
 import { generateTask } from "@/test/factories";
 import { renderWithUserData } from "@/test/render/renderWithUserData";
-import * as materialUi from "@mui/material";
-import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

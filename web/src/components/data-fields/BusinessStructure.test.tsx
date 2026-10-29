@@ -1,19 +1,19 @@
-import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
-import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
-import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import {
-  WithStatefulUserData,
-  setupStatefulUserDataContext,
-} from "@/test/mock/withStatefulUserData";
-import {
-  Business,
+  type Business,
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
+import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
+import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

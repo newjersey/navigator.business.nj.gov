@@ -1,18 +1,19 @@
 // Update to accept crtkData prop instead of using mock data
+
+import type { CrtkData } from "@businessnjgovnavigator/shared/crtk";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import dayjs from "dayjs";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { CrtkNotFound } from "@/components/crtk/CrtkNotFound";
-import { CrtkFacilityDetails } from "@/components/crtk/CrtkStatus";
+import type { CrtkFacilityDetails } from "@/components/crtk/CrtkStatus";
 import { StatusResultHeader } from "@/components/crtk/StatusResultHeader";
 import { HorizontalLine } from "@/components/HorizontalLine";
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
-import { CrtkData } from "@businessnjgovnavigator/shared/crtk";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import dayjs from "dayjs";
-import { type ReactElement } from "react";
 
 type StatusType = "FOUND";
 

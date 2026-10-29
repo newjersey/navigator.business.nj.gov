@@ -1,10 +1,10 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { ManageBusinessVehicleResults } from "@/components/tasks/manage-business-vehicles/ManageBusinessVehicleResults";
 import { ManageBusinessVehicles } from "@/components/tasks/manage-business-vehicles/ManageBusinessVehicles";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 const ManageBusinessVehiclesTaskPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);

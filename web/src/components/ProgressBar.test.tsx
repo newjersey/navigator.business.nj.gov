@@ -1,5 +1,5 @@
-import { ProgressBar } from "@/components/ProgressBar";
 import { render, screen } from "@testing-library/react";
+import { ProgressBar } from "@/components/ProgressBar";
 
 describe("<ProgressBar />", () => {
   it("renders with role progressbar", () => {

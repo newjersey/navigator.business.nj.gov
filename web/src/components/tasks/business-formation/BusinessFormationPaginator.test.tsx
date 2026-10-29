@@ -1,3 +1,33 @@
+import {
+  corpLegalStructures,
+  type DateObject,
+  defaultDateFormat,
+  type FormationFormData,
+  type FormationSubmitResponse,
+  generateFormationData,
+  generateFormationForeignAddress,
+  generateFormationUSAddress,
+  generateStartingProfileData,
+  getCurrentDate,
+  type ProfileData,
+  randomInt,
+} from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  generateBusiness,
+  generateFormationFormData,
+  generateFormationSubmitResponse,
+  generateMunicipality,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import type {
+  FormationDbaDisplayContent,
+  FormationStepNames,
+} from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import type * as materialUi from "@mui/material";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import {
   BusinessFormationStepsConfiguration,
@@ -13,7 +43,7 @@ import {
   generateTask,
 } from "@/test/factories";
 import {
-  FormationPageHelpers,
+  type FormationPageHelpers,
   generateFormationProfileData,
   mockApiResponse,
   preparePage,
@@ -26,36 +56,6 @@ import {
   userDataUpdatedNTimes,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  corpLegalStructures,
-  DateObject,
-  defaultDateFormat,
-  FormationFormData,
-  FormationSubmitResponse,
-  generateFormationData,
-  generateFormationForeignAddress,
-  generateFormationUSAddress,
-  generateStartingProfileData,
-  getCurrentDate,
-  ProfileData,
-  randomInt,
-} from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  generateBusiness,
-  generateFormationFormData,
-  generateFormationSubmitResponse,
-  generateMunicipality,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
-import {
-  FormationDbaDisplayContent,
-  FormationStepNames,
-} from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import * as materialUi from "@mui/material";
-import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 interface MockApiErrorTestData {
   formationFormData: FormationFormData;
@@ -1386,7 +1386,7 @@ describe("<BusinessFormationPaginator />", () => {
             paymentType,
           ])(
             "shows error alert and error state on step associated with %o API error",
-            async (testTitle, data) => {
+            async (_testTitle, data) => {
               const { formationFormData, formationResponse, formationStepName, profileData } = data;
 
               filledInBusiness = {
@@ -1436,7 +1436,7 @@ describe("<BusinessFormationPaginator />", () => {
             contactLastName,
             contactPhoneNumber,
             paymentType,
-          ])("shows API error message on step for %o API error", async (testTitle, data) => {
+          ])("shows API error message on step for %o API error", async (_testTitle, data) => {
             const {
               formationFormData,
               formationResponse,
@@ -1465,7 +1465,6 @@ describe("<BusinessFormationPaginator />", () => {
               Config.formation.errorBanner.errorOnStep,
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent(
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               (Config.formation.fields as any)[fieldName as string].label,
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
@@ -1491,7 +1490,7 @@ describe("<BusinessFormationPaginator />", () => {
             contactPhoneNumber,
           ])(
             "removes %o API error on blur when user changes text field",
-            async (testTitle, data) => {
+            async (_testTitle, data) => {
               const {
                 formationFormData,
                 formationResponse,
@@ -1532,7 +1531,7 @@ describe("<BusinessFormationPaginator />", () => {
 
           it.each([paymentType, canCreateLimitedPartner, canGetDistribution, canMakeDistribution])(
             "removes %o API error when user selects radio button",
-            async (testTitle, data) => {
+            async (_testTitle, data) => {
               const {
                 formationFormData,
                 formationResponse,
@@ -1570,7 +1569,7 @@ describe("<BusinessFormationPaginator />", () => {
 
           it.each([businessSuffix])(
             "removes %o API error when user selects from dropdown and then blur",
-            async (testTitle, data) => {
+            async (_testTitle, data) => {
               const { formationFormData, formationResponse, formationStepName, dropDownValue } =
                 data;
               filledInBusiness = {
@@ -1608,7 +1607,7 @@ describe("<BusinessFormationPaginator />", () => {
 
           it.each([businessStartDate])(
             "removes %o API error when user selects from date picker",
-            async (testTitle, data) => {
+            async (_testTitle, data) => {
               const {
                 formationFormData,
                 formationResponse,
@@ -2011,7 +2010,7 @@ describe("<BusinessFormationPaginator />", () => {
             foreignDateOfFormation,
           ])(
             "shows error alert and error state on step associated with %o API error",
-            async (testTitle, data) => {
+            async (_testTitle, data) => {
               const { formationFormData, formationResponse, formationStepName } = data;
 
               filledInBusiness = {
@@ -2050,7 +2049,7 @@ describe("<BusinessFormationPaginator />", () => {
             foreignIntlMainAddressCountry,
             foreignStateOfFormation,
             foreignDateOfFormation,
-          ])("shows API error message on step for %o API error", async (testTitle, data) => {
+          ])("shows API error message on step for %o API error", async (_testTitle, data) => {
             const { formationFormData, formationResponse, formationStepName, fieldName } = data;
             filledInBusiness = {
               ...business,
@@ -2072,7 +2071,6 @@ describe("<BusinessFormationPaginator />", () => {
               Config.formation.errorBanner.errorOnStep,
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent(
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               (Config.formation.fields as any)[fieldName as string].label,
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
@@ -2094,7 +2092,7 @@ describe("<BusinessFormationPaginator />", () => {
             foreignDateOfFormation,
           ])(
             "removes %o API error on blur when user changes text field",
-            async (testTitle, data) => {
+            async (_testTitle, data) => {
               const {
                 formationFormData,
                 formationResponse,

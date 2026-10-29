@@ -1,11 +1,11 @@
+import type { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
+import type { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
+import { useContext } from "react";
 import { getErrorStateForEmergencyTripPermitField } from "@/components/tasks/abc-emergency-trip-permit/fields/getErrorStateForEmergencyTripPermitField";
 import { getStepFromFieldName } from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitStepsConfiguration";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
-import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
-import { EmergencyTripPermitStepNames } from "@businessnjgovnavigator/shared/types";
-import { useContext } from "react";
 
 type EmergencyTripPermitErrorsResponse = {
   doesFieldHaveError: (field: EmergencyTripPermitUserEnteredFieldNames) => boolean;

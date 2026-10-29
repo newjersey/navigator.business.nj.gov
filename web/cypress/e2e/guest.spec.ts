@@ -1,9 +1,6 @@
-/* eslint-disable cypress/no-unnecessary-waiting */
-/* eslint-disable testing-library/await-async-utils */
-
 import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
+import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 
 describe("Guest Dashboard [feature] [all] [group2]", () => {
   const legalStructureId = "limited-liability-company";

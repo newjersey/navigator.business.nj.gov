@@ -1,9 +1,9 @@
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement, RefObject } from "react";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, RefObject } from "react";
 
 interface Props {
   fieldErrors: string[];
@@ -16,7 +16,6 @@ export const ProfileErrorAlert = (props: Props): ReactElement | null => {
 
   const getLabel = (field: string): string => {
     // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const formationLabel = Config.formation.fields[field]?.label;
 

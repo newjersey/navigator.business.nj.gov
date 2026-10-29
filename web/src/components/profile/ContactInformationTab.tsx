@@ -1,3 +1,7 @@
+import type { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { type ReactElement, useEffect, useRef, useState } from "react";
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { HorizontalLine } from "@/components/HorizontalLine";
@@ -8,15 +12,11 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
-  FullNameErrorVariant,
+  type FullNameErrorVariant,
   getFullNameErrorVariant,
   isFullNameValid,
 } from "@/lib/domain-logic/isFullNameValid";
 import { getPhoneNumberFormat, validateOptionalPhoneNumber } from "@/lib/utils/helpers";
-import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
-import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   clearGovDeliveryError: () => void;

@@ -1,3 +1,4 @@
+import { type ReactElement, useState } from "react";
 import { Content } from "@/components/Content";
 import { TaxAccessStepOne } from "@/components/filings-calendar/tax-access/TaxAccessStepOne";
 import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access/TaxAccessStepTwo";
@@ -6,7 +7,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { ReactElement, useState } from "react";
 
 interface Props {
   onSuccess: () => void;

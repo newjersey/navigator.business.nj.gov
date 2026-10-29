@@ -1,3 +1,4 @@
+import { type ReactElement, useContext } from "react";
 import { LockedTasksPrompt } from "@/components/dashboard/LockedTasksPrompt";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Task } from "@/components/Task";
@@ -5,7 +6,6 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ReactElement, useContext } from "react";
 
 export const Roadmap = (): ReactElement => {
   const { roadmap } = useRoadmap();

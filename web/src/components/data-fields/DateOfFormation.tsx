@@ -1,3 +1,15 @@
+import {
+  advancedDateLibrary,
+  type DateObject,
+  defaultDateFormat,
+  getCurrentDate,
+  parseDate,
+  parseDateWithFormat,
+} from "@businessnjgovnavigator/shared";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import React, { type InputHTMLAttributes, type ReactElement, useContext } from "react";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -5,18 +17,6 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import {
-  advancedDateLibrary,
-  DateObject,
-  defaultDateFormat,
-  getCurrentDate,
-  parseDate,
-  parseDateWithFormat,
-} from "@businessnjgovnavigator/shared";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { InputHTMLAttributes, ReactElement, useContext } from "react";
 
 advancedDateLibrary();
 

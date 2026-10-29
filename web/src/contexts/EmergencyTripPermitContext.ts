@@ -1,8 +1,9 @@
 import {
-  EmergencyTripPermitApplicationInfo,
+  type EmergencyTripPermitApplicationInfo,
   generateNewEmergencyTripPermitData,
 } from "@businessnjgovnavigator/shared";
-import React, { createContext, FormEvent } from "react";
+import type React from "react";
+import { createContext, type FormEvent } from "react";
 
 interface EmergencyTripPermitState {
   stepIndex: number;

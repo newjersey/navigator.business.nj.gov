@@ -1,7 +1,7 @@
+import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
+import type { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
-import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
-import { ReactElement } from "react";
 
 interface Props {
   disabled?: boolean;

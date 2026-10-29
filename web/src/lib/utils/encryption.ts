@@ -1,5 +1,5 @@
-import { ShowHideStatus } from "@/components/ShowHideToggleButton";
 import { maskingCharacter } from "@businessnjgovnavigator/shared";
+import type { ShowHideStatus } from "@/components/ShowHideToggleButton";
 
 export const isEncrypted = (
   maskedValue: string | undefined,

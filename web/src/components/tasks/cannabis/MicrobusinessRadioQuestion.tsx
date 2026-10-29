@@ -1,9 +1,10 @@
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import type React from "react";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement } from "react";
 
 export const MicrobusinessRadioQuestion = (): ReactElement => {
   const { updateQueue, business } = useUserData();

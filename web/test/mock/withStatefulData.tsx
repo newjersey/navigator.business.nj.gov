@@ -1,16 +1,12 @@
-/* eslint-disable react/display-name */
-/* eslint-disable react-hooks/rules-of-hooks */
-
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
+import { createContext, type ReactElement, type ReactNode, useEffect, useState } from "react";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
-import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
+import { type UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { isUserData } from "@/lib/utils/helpers";
 import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers/helpers-utilities";
 import { mockEncryptFields } from "@/test/mock/mockEncryptFields";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { createContext, ReactElement, ReactNode, useEffect, useState } from "react";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GenericData = Record<string, any>;
 
 export const statefulDataHelpers = (
@@ -72,7 +68,6 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
       if (genericData && isUserData(genericData as UserData | ProfileData)) {
         updateQueue?.queue(genericData as UserData);
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [genericData]);
 
     return (

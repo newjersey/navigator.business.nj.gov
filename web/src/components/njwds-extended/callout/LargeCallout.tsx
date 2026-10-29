@@ -1,14 +1,14 @@
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
 import type { PropsWithChildren, ReactElement } from "react";
+import { IconTextList } from "@/components/njwds-extended/callout/CalloutIcons";
 
 import {
   CALLOUT_STYLES,
-  CalloutTypes,
+  type CalloutTypes,
   getIconItems,
-  LargeCalloutProps,
+  type LargeCalloutProps,
 } from "@/components/njwds-extended/callout/calloutHelpers";
-import { IconTextList } from "@/components/njwds-extended/callout/CalloutIcons";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 
 const HEADING_TEXT_KEYS: Record<CalloutTypes, keyof ConfigType["calloutDefaults"]> = {
   informational: "informationalHeadingDefaultText",

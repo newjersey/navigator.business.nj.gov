@@ -1,11 +1,11 @@
 import {
   defaultDateFormat,
-  LicenseCalendarEvent,
-  LicenseData,
-  Licenses,
+  type LicenseCalendarEvent,
+  type LicenseData,
+  type Licenses,
   parseDate,
 } from "@businessnjgovnavigator/shared";
-import { LicenseName, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import { type LicenseName, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
 
 export const getLicenseCalendarEvents = (
   licenseData: LicenseData | undefined,

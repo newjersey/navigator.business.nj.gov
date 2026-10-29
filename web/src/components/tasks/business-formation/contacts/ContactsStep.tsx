@@ -1,19 +1,19 @@
+import {
+  corpLegalStructures,
+  createEmptyFormationIncorporator,
+  type FormationIncorporator,
+  incorporationLegalStructures,
+} from "@businessnjgovnavigator/shared/";
+import { type ReactElement, useContext } from "react";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { Addresses } from "@/components/tasks/business-formation/contacts/Addresses";
 import { createSignedEmptyFormationObject } from "@/components/tasks/business-formation/contacts/helpers";
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
 import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import {
-  corpLegalStructures,
-  createEmptyFormationIncorporator,
-  FormationIncorporator,
-  incorporationLegalStructures,
-} from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext } from "react";
 
 export const ContactsStep = (): ReactElement => {
   const { Config } = useConfig();
@@ -28,7 +28,6 @@ export const ContactsStep = (): ReactElement => {
     );
   };
 
-  /* eslint-disable @typescript-eslint/no-explicit-any */
   const getDescription = (field: string): string => {
     const legalType = state.formationFormData.legalType;
     const overriddenLegalTypes = Object.keys(

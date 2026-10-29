@@ -1,11 +1,11 @@
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { TaxInput } from "@/components/tasks/TaxInput";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement } from "react";
 
 const TaxInputPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

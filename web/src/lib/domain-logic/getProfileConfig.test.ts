@@ -1,6 +1,6 @@
-import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { type ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { merge } from "lodash";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 
 const Config = getMergedConfig();
 

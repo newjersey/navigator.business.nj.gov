@@ -1,3 +1,6 @@
+import type { HowToProceedOptions } from "@businessnjgovnavigator/shared/formationData";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -5,9 +8,6 @@ import { BusinessName } from "@/components/tasks/business-formation/name/Busines
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { HowToProceedOptions } from "@businessnjgovnavigator/shared/formationData";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { ReactElement, useContext } from "react";
 
 export const SubmittedFormToReserveName = (): ReactElement => {
   const { Config } = useConfig();

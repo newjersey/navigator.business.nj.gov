@@ -1,3 +1,17 @@
+import {
+  type Business,
+  formationTaskId,
+  generateBusiness,
+  generateMunicipality,
+  generateProfileData,
+  generateUserDataForBusiness,
+  LookupTaskAgencyById,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { createEmptyTaskDisplayContent, type Task } from "@businessnjgovnavigator/shared/types";
+import * as materialUi from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { taskIdsWithLicenseSearchEnabled } from "@/components/TaskPageSwitchComponent";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import {
@@ -16,20 +30,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  formationTaskId,
-  generateBusiness,
-  generateMunicipality,
-  generateProfileData,
-  generateUserDataForBusiness,
-  LookupTaskAgencyById,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { createEmptyTaskDisplayContent, Task } from "@businessnjgovnavigator/shared/types";
-import * as materialUi from "@mui/material";
-import { useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

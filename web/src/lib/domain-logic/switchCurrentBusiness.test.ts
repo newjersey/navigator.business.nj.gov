@@ -1,5 +1,5 @@
-import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shared/test";
+import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 
 describe("switch business", () => {
   it("sets given id to current", () => {

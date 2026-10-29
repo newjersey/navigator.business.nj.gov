@@ -1,10 +1,10 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { FormationBusinessLocationType } from "@businessnjgovnavigator/shared/formationData";
+import { type ReactElement, type ReactNode, useContext } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Icon } from "@/components/njwds/Icon";
 import { AddressContext } from "@/contexts/addressContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { FormationBusinessLocationType } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   businessLocation?: FormationBusinessLocationType;

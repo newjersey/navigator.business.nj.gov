@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import {
   NavBarDashboardLink,
   NavBarPublicDashboardLink,
@@ -5,7 +6,6 @@ import {
 import { NavBarVerticalLine } from "@/components/navbar/NavBarVerticalLine";
 import { NavbarBusinessNjGovLogo } from "@/components/navbar/NavbarBusinessNjGovLogo";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 interface Props {
   previousBusinessId?: string;

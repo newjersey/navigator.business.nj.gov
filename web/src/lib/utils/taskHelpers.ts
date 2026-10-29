@@ -1,4 +1,4 @@
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
 
 export const shouldLockBusinessAddress = (business?: Business): boolean => {
   if (!business) return false;

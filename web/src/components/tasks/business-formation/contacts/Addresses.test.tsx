@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
-import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
-import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
-  FormationLegalType,
+  type FormationLegalType,
   generateFormationIncorporator,
   generateFormationUSAddress,
   generateMunicipality,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
+import { type FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -96,7 +95,6 @@ describe("Formation - Addresses", () => {
             ),
           ).toBeInTheDocument();
 
-          // eslint-disable-next-line testing-library/no-node-access
           const tr = nameTd.closest("tr");
 
           if (tr !== null) {
@@ -163,7 +161,6 @@ describe("Formation - Addresses", () => {
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           const nameTd = screen.getByText(incorporators[1].name, { exact: false });
 
-          // eslint-disable-next-line testing-library/no-node-access
           const tr = nameTd.closest("tr");
 
           if (tr !== null) {
@@ -214,7 +211,6 @@ describe("Formation - Addresses", () => {
           expect(signerErrorText()).toBeInTheDocument();
           const nameTd = screen.getByText(incorporators[0].addressLine1, { exact: false });
 
-          // eslint-disable-next-line testing-library/no-node-access
           const tr = nameTd.closest("tr");
 
           if (tr !== null) {

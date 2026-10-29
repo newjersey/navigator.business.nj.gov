@@ -1,17 +1,4 @@
-import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
-import {
-  cigaretteLicenseConfirmPayment,
-  postCigaretteLicensePreparePayment,
-  postUserData,
-} from "@/lib/api-client/apiClient";
-import { generateTask } from "@/test/factories";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { WithStatefulUserData, currentBusiness } from "@/test/mock/withStatefulUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-
-import { QUERIES } from "@/lib/domain-logic/routes";
-import analytics from "@/lib/utils/analytics";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import {
   generateBusiness,
@@ -20,9 +7,21 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { CigaretteLicense } from "@/components/tasks/cigarette-license/CigaretteLicense";
+import {
+  cigaretteLicenseConfirmPayment,
+  postCigaretteLicensePreparePayment,
+  postUserData,
+} from "@/lib/api-client/apiClient";
+import { QUERIES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
+import { generateTask } from "@/test/factories";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 const Config = getMergedConfig();
 
@@ -479,7 +478,6 @@ describe("<CigaretteLicense />", () => {
         }),
       });
 
-      // eslint-disable-next-line testing-library/no-unnecessary-act
       await act(async () => {
         await renderComponent(business);
       });

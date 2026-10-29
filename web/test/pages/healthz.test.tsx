@@ -1,5 +1,5 @@
-import HealthCheck from "@/pages/healthz";
 import { render, screen } from "@testing-library/react";
+import HealthCheck from "@/pages/healthz";
 
 describe("HealthzPage", () => {
   it("renders correctly", () => {

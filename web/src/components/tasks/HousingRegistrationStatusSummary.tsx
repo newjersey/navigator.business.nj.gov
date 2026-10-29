@@ -1,22 +1,22 @@
-import { HorizontalLine } from "@/components/HorizontalLine";
-import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
-import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Icon } from "@/components/njwds/Icon";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { openInNewTab } from "@/lib/utils/helpers";
 import {
-  HousingAddress,
-  HousingRegistrationRequestLookupResponse,
+  type HousingAddress,
+  type HousingRegistrationRequestLookupResponse,
   parseDate,
   toProperCase,
 } from "@businessnjgovnavigator/shared";
-import { Task } from "@businessnjgovnavigator/shared/types";
+import type { Task } from "@businessnjgovnavigator/shared/types";
 import { Box } from "@mui/material";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { HorizontalLine } from "@/components/HorizontalLine";
+import { Icon } from "@/components/njwds/Icon";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { openInNewTab } from "@/lib/utils/helpers";
 
 interface Props {
   task: Task;

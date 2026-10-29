@@ -1,3 +1,10 @@
+import {
+  type LicenseDetails,
+  type LicenseStatusItem,
+  type LicenseTaskId,
+  taskIdLicenseNameMapping,
+} from "@businessnjgovnavigator/shared/";
+import type { ReactElement } from "react";
 import { ChecklistTag } from "@/components/ChecklistTag";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -6,13 +13,6 @@ import { LicenseStatusHeader } from "@/components/tasks/LicenseStatusHeader";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import {
-  LicenseDetails,
-  LicenseStatusItem,
-  LicenseTaskId,
-  taskIdLicenseNameMapping,
-} from "@businessnjgovnavigator/shared/";
-import type { ReactElement } from "react";
 
 interface Props {
   licenseDetails: LicenseDetails;

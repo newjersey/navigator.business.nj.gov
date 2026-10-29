@@ -1,7 +1,7 @@
+import { type ForwardedRef, forwardRef, type ReactElement, type ReactNode } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
-import { ForwardedRef, forwardRef, ReactElement, ReactNode } from "react";
 
 export interface AlertProps {
   variant: AlertVariant;

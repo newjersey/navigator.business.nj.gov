@@ -1,7 +1,7 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { screen } from "@testing-library/react";
 import { AnytimeActionSwitchComponent } from "@/components/tasks/anytime-action/AnytimeActionSwitchComponent";
 import { generateAnytimeActionTask } from "@/test/factories";
-import { screen } from "@testing-library/react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 describe("AnytimeActionSwitchComponent", () => {
   const initialFeatureTaxClearanceCertificateEnv = process.env.FEATURE_TAX_CLEARANCE_CERTIFICATE;

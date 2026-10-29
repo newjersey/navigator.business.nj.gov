@@ -1,7 +1,7 @@
+import { render, screen } from "@testing-library/react";
 import { Content } from "@/components/Content";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { render, screen } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));

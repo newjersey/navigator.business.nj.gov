@@ -1,8 +1,8 @@
+import { waitFor } from "@testing-library/react";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { getJobState, setJobState } from "@/lib/static/admin/deadLinkJobState";
 import { findDeadContentLinks } from "@/lib/static/admin/findDeadLinks";
 import handler from "@/pages/api/mgmt/deadlinks/start";
-import { waitFor } from "@testing-library/react";
-import type { NextApiRequest, NextApiResponse } from "next";
 
 jest.mock("@/lib/static/admin/findDeadLinks", () => ({ findDeadContentLinks: jest.fn() }));
 const mockFindDeadContentLinks = findDeadContentLinks as jest.Mock;

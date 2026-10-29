@@ -1,17 +1,17 @@
-import { GenericButton } from "@/components/njwds-extended/GenericButton";
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
-import { CallToActionHyperlink } from "@businessnjgovnavigator/shared/types";
+import type { CallToActionHyperlink } from "@businessnjgovnavigator/shared/types";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
 import {
-  KeyboardEvent,
-  ReactElement,
-  ReactNode,
-  SyntheticEvent,
+  type KeyboardEvent,
+  type ReactElement,
+  type ReactNode,
+  type SyntheticEvent,
   useEffect,
   useRef,
   useState,
 } from "react";
+import { Icon } from "@/components/njwds/Icon";
+import { GenericButton } from "@/components/njwds-extended/GenericButton";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 
 interface Props {
   children: ReactNode;

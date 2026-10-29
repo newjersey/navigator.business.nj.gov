@@ -1,5 +1,7 @@
-/* eslint-disable testing-library/no-render-in-lifecycle */
-
+import { generateUserData } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
@@ -12,14 +14,10 @@ import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateUserData } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

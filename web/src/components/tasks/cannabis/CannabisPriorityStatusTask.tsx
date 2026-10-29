@@ -1,16 +1,16 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useContext, useState } from "react";
 import { NeedsAccountMiniCallout } from "@/components/NeedsAccountMiniCallout";
 import { TaskHeader } from "@/components/TaskHeader";
+import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { CannabisPriorityRequirements } from "@/components/tasks/cannabis/CannabisPriorityRequirements";
 import { CannabisPriorityTypes } from "@/components/tasks/cannabis/CannabisPriorityTypes";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { scrollToTop, useMountEffect } from "@/lib/utils/helpers";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   task: Task;

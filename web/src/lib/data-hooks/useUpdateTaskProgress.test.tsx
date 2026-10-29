@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import type { Business, TaskProgress } from "@businessnjgovnavigator/shared/userData";
+import { act, render } from "@testing-library/react";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { UpdateQueue } from "@/lib/UpdateQueue";
+import type { UpdateQueue } from "@/lib/UpdateQueue";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { Business, TaskProgress } from "@businessnjgovnavigator/shared/userData";
-import { act, render } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

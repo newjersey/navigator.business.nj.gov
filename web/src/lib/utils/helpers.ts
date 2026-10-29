@@ -1,19 +1,21 @@
-import NaicsCodes from "@/lib/static/records/naics2022.json";
-import {
+import type {
   BusinessPersona,
   FormationLegalType,
   ProfileData,
   TaskProgress,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import { ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { type ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
-import { FlowType, NaicsCodeObject, OnboardingStatus } from "@businessnjgovnavigator/shared/types";
-
+import type {
+  FlowType,
+  NaicsCodeObject,
+  OnboardingStatus,
+} from "@businessnjgovnavigator/shared/types";
 import { useEffect, useRef } from "react";
+import NaicsCodes from "@/lib/static/records/naics2022.json";
 
 export const useMountEffect = (fun: () => void): void => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   return useEffect(fun, []);
 };
 
@@ -54,7 +56,6 @@ export const useMountEffectWhenDefined = (
       effectOccurred.current = true;
       func();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [func, ...(Array.isArray(thingToBeDefined) ? thingToBeDefined : [thingToBeDefined])]);
 };
 
@@ -134,8 +135,8 @@ const getNavBarHeight = (): number | undefined => {
   const navbarDesktop = document.querySelector(`#${NAVBAR_WRAPPER_DESKTOP_ID}`);
 
   if (navbarDesktop && navbarMobile) {
-    const heightDesktop = Number.parseInt(getComputedStyle(navbarDesktop).height);
-    const heightMobile = Number.parseInt(getComputedStyle(navbarMobile).height);
+    const heightDesktop = Number.parseInt(getComputedStyle(navbarDesktop).height, 10);
+    const heightMobile = Number.parseInt(getComputedStyle(navbarMobile).height, 10);
     if (!Number.isNaN(heightDesktop)) {
       return heightDesktop;
     } else if (!Number.isNaN(heightMobile)) {
@@ -270,9 +271,7 @@ export function isUserData(data: UserData | ProfileData): data is UserData {
   return (data as UserData).user !== undefined;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const flattenObject = (obj: any): any => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const flattened: any = {};
 
   if (typeof obj === "object" && obj !== null && !Array.isArray(obj)) {

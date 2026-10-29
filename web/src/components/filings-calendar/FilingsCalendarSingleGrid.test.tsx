@@ -1,5 +1,4 @@
-import { generateLicenseEvent, generateXrayRenewalCalendarEvent } from "@/test/factories";
-import * as shared from "@businessnjgovnavigator/shared";
+import type * as shared from "@businessnjgovnavigator/shared";
 import {
   defaultDateFormat,
   generateBusiness,
@@ -15,15 +14,16 @@ import {
   generateLicenseData,
   generateXrayRegistrationData,
 } from "@businessnjgovnavigator/shared/test";
-import { OperateReference } from "@businessnjgovnavigator/shared/types";
+import type { OperateReference } from "@businessnjgovnavigator/shared/types";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { Dayjs } from "dayjs";
+import type { Dayjs } from "dayjs";
+import { generateLicenseEvent, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import { FilingsCalendarSingleGrid } from "./FilingsCalendarSingleGrid";
 
 const Config = getMergedConfig();
 const fixedFebruaryDate = parseDateWithFormat(`2024-02-15`, "YYYY-MM-DD");
 const year = fixedFebruaryDate.year().toString();
-const month: number = Number.parseInt(fixedFebruaryDate.month().toString());
+const month: number = Number.parseInt(fixedFebruaryDate.month().toString(), 10);
 
 function mockShared(): typeof shared {
   return {

@@ -1,6 +1,6 @@
+import type { ProfileTabs } from "@businessnjgovnavigator/shared/types";
+import { forwardRef, type ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
-import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, forwardRef } from "react";
 
 interface Props {
   tab: ProfileTabs;

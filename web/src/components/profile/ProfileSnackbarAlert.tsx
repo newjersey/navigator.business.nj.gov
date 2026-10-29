@@ -1,8 +1,8 @@
+import type { OnboardingStatus } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { OnboardingStatusLookup } from "@/lib/utils/helpers";
-import { OnboardingStatus } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props {
   alert: OnboardingStatus;

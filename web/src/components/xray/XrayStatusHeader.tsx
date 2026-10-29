@@ -1,12 +1,12 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import analytics from "@/lib/utils/analytics";
 import type { XrayRegistrationStatus } from "@businessnjgovnavigator/shared/xray";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import router from "next/router";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   xrayRegistrationStatus: XrayRegistrationStatus;

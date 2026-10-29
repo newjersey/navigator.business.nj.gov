@@ -1,5 +1,5 @@
 import { MenuItem } from "@mui/material";
-import { ReactElement, useState } from "react";
+import { type ReactElement, useState } from "react";
 
 interface Props {
   onClick: () => void;

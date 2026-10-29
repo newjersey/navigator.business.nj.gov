@@ -1,14 +1,5 @@
-import { LicenseTask } from "@/components/tasks/LicenseTask";
-import * as api from "@/lib/api-client/apiClient";
-import { generateLicenseTask } from "@/test/factories";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockBusiness, useUndefinedUserData } from "@/test/mock/mockUseUserData";
 import {
-  setupStatefulUserDataContext,
-  WithStatefulUserData,
-} from "@/test/mock/withStatefulUserData";
-import {
-  Business,
+  type Business,
   createEmptyLicenseSearchNameAndAddress,
   generateBusiness,
   generateLicenseData,
@@ -26,6 +17,15 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { LicenseTask } from "@/components/tasks/LicenseTask";
+import * as api from "@/lib/api-client/apiClient";
+import { generateLicenseTask } from "@/test/factories";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockBusiness, useUndefinedUserData } from "@/test/mock/mockUseUserData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 
 window.open = jest.fn();
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

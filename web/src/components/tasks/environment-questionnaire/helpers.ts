@@ -1,4 +1,4 @@
-import { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
+import type { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
 
 export const mediaAreaToNotApplicableOption: Record<MediaArea, QuestionnaireFieldIds> = {
   land: "noLand",

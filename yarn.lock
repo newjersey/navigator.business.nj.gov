@@ -5211,6 +5211,7 @@ __metadata:
     "@aws-sdk/url-parser": "npm:3.374.0"
     "@aws-sdk/util-format-url": "npm:3.893.0"
     "@babel/core": "npm:7.29.6"
+    "@biomejs/biome": "npm:2.6.3"
     "@businessnjgovnavigator/shared": "npm:*"
     "@cypress-audit/lighthouse": "npm:1.4.2"
     "@cypress-audit/pa11y": "npm:1.4.2"

@@ -1,16 +1,16 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { ReactElement } from "react";
+import type { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
 
 interface Props {
   task: Task;

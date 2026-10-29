@@ -1,9 +1,9 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import { CONTENT_LINK_CHECK_SETTINGS } from "@/lib/static/admin/contentLinkChecker";
-import { createDeadLinkDebugLog, DeadLinkLogEvent } from "@/lib/static/admin/deadLinkDebugLog";
-import { getJobState, JobState, setJobState } from "@/lib/static/admin/deadLinkJobState";
+import { createDeadLinkDebugLog, type DeadLinkLogEvent } from "@/lib/static/admin/deadLinkDebugLog";
+import { getJobState, type JobState, setJobState } from "@/lib/static/admin/deadLinkJobState";
 import type { ContentDeadLink } from "@/lib/static/admin/deadLinkTypes";
 import { findDeadContentLinks } from "@/lib/static/admin/findDeadLinks";
-import type { NextApiRequest, NextApiResponse } from "next";
 
 const countDeadUrls = (results: ContentDeadLink[]): number =>
   results.reduce((sum, item) => sum + item.deadUrls.length, 0);

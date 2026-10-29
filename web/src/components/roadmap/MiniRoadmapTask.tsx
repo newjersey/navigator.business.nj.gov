@@ -1,11 +1,11 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import Link from "next/link";
+import { type ReactElement, useContext } from "react";
 import { Icon } from "@/components/njwds/Icon";
 import { taskIdsWithLicenseSearchEnabled } from "@/components/TaskPageSwitchComponent";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import Link from "next/link";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   task: Task;

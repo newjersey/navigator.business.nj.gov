@@ -1,7 +1,12 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { useMediaQuery } from "@mui/material";
+import { useRouter } from "next/compat/router";
+import { NextSeo } from "next-seo";
+import { type ReactElement, useContext, useEffect, useRef, useState } from "react";
 import { LegalMessage } from "@/components/LegalMessage";
+import { Hero } from "@/components/njwds/Hero";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { Hero } from "@/components/njwds/Hero";
 import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -12,11 +17,6 @@ import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { useMediaQuery } from "@mui/material";
-import { NextSeo } from "next-seo";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 const Home = (): ReactElement => {
   const { business, userData, error } = useUserData();

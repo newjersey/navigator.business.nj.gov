@@ -1,3 +1,20 @@
+import {
+  advancedDateLibrary,
+  type DateObject,
+  defaultDateFormat,
+  getCurrentDateInNewJersey,
+  parseDateWithFormat,
+} from "@businessnjgovnavigator/shared";
+import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+import {
+  type ChangeEvent,
+  type InputHTMLAttributes,
+  type ReactElement,
+  useContext,
+  useMemo,
+} from "react";
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import {
   getBusinessStartDateHelperText,
@@ -9,17 +26,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
-import {
-  DateObject,
-  advancedDateLibrary,
-  defaultDateFormat,
-  getCurrentDateInNewJersey,
-  parseDateWithFormat,
-} from "@businessnjgovnavigator/shared";
-import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs from "dayjs";
-import { ChangeEvent, InputHTMLAttributes, ReactElement, useContext, useMemo } from "react";
 
 advancedDateLibrary();
 type Props = {
@@ -66,7 +72,6 @@ export const FormationDate = (props: Props): ReactElement => {
         helperText: Config.formation.fields.foreignDateOfFormation.error,
       },
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [state.formationFormData.legalType],
   );
 

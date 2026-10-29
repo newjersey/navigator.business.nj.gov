@@ -1,3 +1,19 @@
+import {
+  type Business,
+  generateBusiness,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { generatePreferences, generateProfileData } from "@businessnjgovnavigator/shared/test";
+import type {
+  Certification,
+  Funding,
+  RoadmapDisplayContent,
+  SidebarCardContent,
+} from "@businessnjgovnavigator/shared/types";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import {
   generateCertification,
@@ -12,22 +28,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  generateBusiness,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { generatePreferences, generateProfileData } from "@businessnjgovnavigator/shared/test";
-import {
-  Certification,
-  Funding,
-  RoadmapDisplayContent,
-  SidebarCardContent,
-} from "@businessnjgovnavigator/shared/types";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

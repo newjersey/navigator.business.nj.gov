@@ -1,7 +1,7 @@
+import type { ReactElement } from "react";
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
 
 interface Props {
   analyticsEvent: () => void;

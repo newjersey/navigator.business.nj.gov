@@ -1,5 +1,5 @@
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
-import { FlowType } from "@businessnjgovnavigator/shared/types";
+import { createEmptyProfileData, type ProfileData } from "@businessnjgovnavigator/shared";
+import type { FlowType } from "@businessnjgovnavigator/shared/types";
 import { createContext } from "react";
 
 interface ProfileDataState {

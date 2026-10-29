@@ -1,3 +1,6 @@
+import { createEmptyProfileData, type ProfileData } from "@businessnjgovnavigator/shared";
+import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
+import { type ReactElement, useState } from "react";
 import { Content } from "@/components/Content";
 import { DateOfFormation } from "@/components/data-fields/DateOfFormation";
 import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
@@ -13,9 +16,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
-import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
-import { ReactElement, useState } from "react";
 
 interface Props {
   isOpen: boolean;

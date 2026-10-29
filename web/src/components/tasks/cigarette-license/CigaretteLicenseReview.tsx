@@ -1,5 +1,10 @@
+import type { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext, useState } from "react";
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { Icon } from "@/components/njwds/Icon";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -7,7 +12,6 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Icon } from "@/components/njwds/Icon";
 import { CigaretteSignatures } from "@/components/tasks/cigarette-license/CigaretteSignatures";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { ReviewSection } from "@/components/tasks/review-screen-components/ReviewSection";
@@ -23,10 +27,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTopOfElement } from "@/lib/utils/helpers";
-import { SubmissionError } from "@businessnjgovnavigator/shared/cigaretteLicense";
-import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;

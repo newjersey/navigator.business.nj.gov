@@ -1,5 +1,5 @@
+import type { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
-import { ReactElement } from "react";
 
 interface Props {
   text: string;

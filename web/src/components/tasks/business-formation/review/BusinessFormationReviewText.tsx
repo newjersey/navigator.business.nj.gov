@@ -1,8 +1,8 @@
+import type { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
+import { type ReactElement, useContext } from "react";
 import { ReviewText } from "@/components/tasks/review-screen-components/ReviewText";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
-import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   fieldName: FormationTextField;

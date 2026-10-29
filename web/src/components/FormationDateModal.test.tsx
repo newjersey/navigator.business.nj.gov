@@ -1,3 +1,16 @@
+import {
+  type Business,
+  defaultDateFormat,
+  generateBusiness,
+  generateMunicipality,
+  generateProfileData,
+  generateUserDataForBusiness,
+  getCurrentDate,
+  randomInt,
+} from "@businessnjgovnavigator/shared";
+import type { ProfileData } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { selectDate, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
@@ -7,19 +20,6 @@ import {
   triggerQueueUpdate,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  defaultDateFormat,
-  generateBusiness,
-  generateMunicipality,
-  generateProfileData,
-  generateUserDataForBusiness,
-  getCurrentDate,
-  randomInt,
-} from "@businessnjgovnavigator/shared";
-import { ProfileData } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

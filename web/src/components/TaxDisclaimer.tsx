@@ -1,7 +1,7 @@
+import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { ReactElement } from "react";
 
 interface Props {
   legalStructureId?: string;

@@ -1,10 +1,10 @@
 import {
   emptyIndustrySpecificData,
-  Industry,
-  IndustrySpecificData,
+  type Industry,
+  type IndustrySpecificData,
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
-import { ProfileContentField } from "@businessnjgovnavigator/shared/types";
+import type { ProfileContentField } from "@businessnjgovnavigator/shared/types";
 
 export const getResetIndustrySpecificData = (
   industryId: string | undefined,
@@ -12,16 +12,18 @@ export const getResetIndustrySpecificData = (
   const industry = LookupIndustryById(industryId);
   return EssentialQuestions.filter((eQ) => {
     return eQ.shouldBeResetWhenIndustryChanges && !eQ.isQuestionApplicableToIndustry(industry);
-  }).reduce((reducer, eQ) => {
-    return { ...reducer, [eQ.fieldName]: emptyIndustrySpecificData[eQ.fieldName] };
-  }, {} as Partial<IndustrySpecificData>);
+  }).reduce(
+    (reducer, eQ) => {
+      return { ...reducer, [eQ.fieldName]: emptyIndustrySpecificData[eQ.fieldName] };
+    },
+    {} as Partial<IndustrySpecificData>,
+  );
 };
 
 export const getIsApplicableToFunctionByFieldName = (
   fieldName: ProfileContentField,
 ): ((industryId: string | undefined) => boolean) => {
   return (industryId: string | undefined): boolean => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return EssentialQuestions.find((eQ) => {
       return eQ.fieldName === fieldName;
     })!.isQuestionApplicableToIndustry(LookupIndustryById(industryId));

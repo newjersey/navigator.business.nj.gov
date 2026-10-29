@@ -1,4 +1,3 @@
-/* eslint-disable cypress/no-unnecessary-waiting */
 import {
   generateFormationMember,
   generateFormationSigner,
@@ -6,9 +5,9 @@ import {
 } from "@businessnjgovnavigator/cypress/support/helpers/factories";
 import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
-import { AdditionalFormation } from "@businessnjgovnavigator/cypress/support/types";
+import type { AdditionalFormation } from "@businessnjgovnavigator/cypress/support/types";
 import {
-  FormationFormData,
+  type FormationFormData,
   randomElementFromArray,
   randomInt,
 } from "@businessnjgovnavigator/shared/";

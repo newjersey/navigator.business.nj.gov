@@ -1,14 +1,14 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { GetServerSidePropsResult } from "next";
+import { NextSeo } from "next-seo";
+import { type ReactElement, useState } from "react";
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { findDeadLicenseTasks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { GetServerSidePropsResult } from "next";
-import { NextSeo } from "next-seo";
-import { ReactElement, useState } from "react";
 
 interface Props {
   deadTasks: string[];

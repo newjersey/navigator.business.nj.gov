@@ -1,3 +1,19 @@
+import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
+import {
+  generateBusiness,
+  generatePreferences,
+  generateProfileData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import type {
+  RoadmapDisplayContent,
+  SidebarCardContent,
+} from "@businessnjgovnavigator/shared/types";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import type * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { render, screen, waitFor } from "@testing-library/react";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import DashboardPage from "@/pages/dashboard";
 import { generateSidebarCardContent, generateXrayRenewalCalendarEvent } from "@/test/factories";
@@ -10,19 +26,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
-import {
-  generateBusiness,
-  generatePreferences,
-  generateProfileData,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared/test";
-import { RoadmapDisplayContent, SidebarCardContent } from "@businessnjgovnavigator/shared/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import * as materialUi from "@mui/material";
-import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { render, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

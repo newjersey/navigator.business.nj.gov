@@ -1,14 +1,14 @@
 import {
-  getInitialData,
-  isAnyRequiredFieldEmpty,
-} from "@/components/tasks/cigarette-license/helpers";
-import {
   generateBusiness,
   generateCigaretteLicenseData,
   generateProfileData,
   generateUser,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
+import {
+  getInitialData,
+  isAnyRequiredFieldEmpty,
+} from "@/components/tasks/cigarette-license/helpers";
 
 describe("getInitialData", () => {
   it("should prioritize cigaretteLicenseData over other sources", () => {

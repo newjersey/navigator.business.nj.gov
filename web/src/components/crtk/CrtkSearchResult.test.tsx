@@ -1,13 +1,13 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { CrtkSearchResult } from "@/components/crtk/CrtkSearchResult";
-import type { CrtkData } from "@/components/crtk/crtkTypes";
 import {
   ConfigContext,
-  ConfigType,
+  type ConfigType,
   getMergedConfig,
 } from "@businessnjgovnavigator/shared/contexts";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { CrtkSearchResult } from "@/components/crtk/CrtkSearchResult";
+import type { CrtkData } from "@/components/crtk/crtkTypes";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 const Config = getMergedConfig();
 

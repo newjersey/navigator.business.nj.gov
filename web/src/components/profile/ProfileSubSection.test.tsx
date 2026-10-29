@@ -1,6 +1,6 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
-import { ProfileSubSection } from "@/components/profile/ProfileSubSection";
 import { screen } from "@testing-library/react";
+import { ProfileSubSection } from "@/components/profile/ProfileSubSection";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 describe("ProfileSubSection Component", () => {
   const defaultProps = {

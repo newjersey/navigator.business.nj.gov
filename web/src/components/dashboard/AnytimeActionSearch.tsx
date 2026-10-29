@@ -1,12 +1,4 @@
-import { Content } from "@/components/Content";
-import { AnytimeActionSearchElement } from "@/components/dashboard/AnytimeActionSearchElement";
-import { MediaQueries } from "@/lib/PageSizes";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ROUTES } from "@/lib/domain-logic/routes";
-import analytics from "@/lib/utils/analytics";
-import { templateEval } from "@/lib/utils/helpers";
-import {
+import type {
   AnytimeActionCategory,
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
@@ -14,7 +6,15 @@ import {
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
 import { orderBy } from "lodash";
 import { useRouter } from "next/compat/router";
-import { type ReactElement, ReactNode, useState } from "react";
+import { type ReactElement, type ReactNode, useState } from "react";
+import { Content } from "@/components/Content";
+import { AnytimeActionSearchElement } from "@/components/dashboard/AnytimeActionSearchElement";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
+import { MediaQueries } from "@/lib/PageSizes";
+import analytics from "@/lib/utils/analytics";
+import { templateEval } from "@/lib/utils/helpers";
 
 interface Props {
   anytimeActionTasks: AnytimeActionTask[];
@@ -238,7 +238,7 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
               />
             );
           }}
-          onInputChange={(event, newInputValue) => {
+          onInputChange={(_event, newInputValue) => {
             setInputValue(newInputValue);
           }}
           inputValue={inputValue}
@@ -281,7 +281,7 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
               );
             });
           }}
-          onChange={(event, value) => {
+          onChange={(_event, value) => {
             if (value !== null) {
               handleAnytimeActionClick(value);
             }
@@ -303,7 +303,6 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
 
             return (
               // must fix for keyboard
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
               <li
                 data-testid={`${option.filename}-option`}
                 {..._props}

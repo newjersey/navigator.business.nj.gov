@@ -1,5 +1,5 @@
+import { generateProfileData, type ProfileDocuments } from "@businessnjgovnavigator/shared/";
 import * as useDocumentsModule from "@/lib/data-hooks/useDocuments";
-import { generateProfileData, ProfileDocuments } from "@businessnjgovnavigator/shared/";
 
 const mockUseDocuments = (useDocumentsModule as jest.Mocked<typeof useDocumentsModule>)
   .useDocuments;

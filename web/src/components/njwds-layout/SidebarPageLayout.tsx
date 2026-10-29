@@ -1,8 +1,9 @@
+import { useMediaQuery } from "@mui/material";
+import type React from "react";
+import type { ReactElement } from "react";
 import { BackButtonForLayout } from "@/components/njwds-layout/BackButtonForLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
-import React, { ReactElement } from "react";
 
 export interface SidebarPageLayoutProps {
   children: React.ReactNode;

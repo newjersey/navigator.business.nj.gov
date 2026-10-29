@@ -1,9 +1,9 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { screen } from "@testing-library/react";
 import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { withAuth } from "@/test/helpers/helpers-renderers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { screen } from "@testing-library/react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 const Config = getMergedConfig();
 

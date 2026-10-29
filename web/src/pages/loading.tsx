@@ -1,3 +1,7 @@
+import { onboardingCompleted } from "@businessnjgovnavigator/shared/";
+import type { GetStaticPropsResult } from "next";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext, useEffect, useState } from "react";
 import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
 import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
@@ -5,10 +9,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { onboardingCompleted } from "@businessnjgovnavigator/shared/";
-import { GetStaticPropsResult } from "next";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext, useEffect, useState } from "react";
 
 export const signInSamlError = "Name+ID+value+was+not+found+in+SAML";
 

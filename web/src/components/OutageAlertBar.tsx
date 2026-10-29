@@ -1,9 +1,9 @@
+import type { OutageAlertType, OutageConfig } from "@businessnjgovnavigator/shared/types";
+import axios from "axios";
+import { type ReactElement, useContext, useState } from "react";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { OutageAlertType, OutageConfig } from "@businessnjgovnavigator/shared/types";
-import axios from "axios";
-import { ReactElement, useContext, useState } from "react";
 
 export const OutageAlertBar = (): ReactElement => {
   const { state } = useContext(AuthContext);

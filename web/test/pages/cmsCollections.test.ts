@@ -1,7 +1,7 @@
+import fs from "node:fs";
+import path from "node:path";
 import { cmsCollections } from "@businessnjgovnavigator/shared/lib/search/cmsCollections";
-import fs from "fs";
 import yaml from "js-yaml";
-import path from "path";
 
 interface CmsCollection {
   readonly label: string;

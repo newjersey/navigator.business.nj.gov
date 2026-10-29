@@ -1,15 +1,13 @@
-import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
+import type { FormationTextField } from "@businessnjgovnavigator/shared/";
+import { type ReactElement, useContext } from "react";
+import { GenericTextField, type GenericTextFieldProps } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { FormationTextField } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext } from "react";
 
-export interface Props extends Omit<
-  GenericTextFieldProps,
-  "value" | "fieldName" | "error" | "inputWidth"
-> {
+export interface Props
+  extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
   fieldName: FormationTextField;
   label?: string;
   secondaryLabel?: string;

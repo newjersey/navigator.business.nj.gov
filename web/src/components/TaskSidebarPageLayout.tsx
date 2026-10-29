@@ -1,10 +1,10 @@
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import {
   SidebarPageLayout,
-  SidebarPageLayoutProps,
+  type SidebarPageLayoutProps,
 } from "@/components/njwds-layout/SidebarPageLayout";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props extends Omit<SidebarPageLayoutProps, "navChildren"> {
   task?: Task | undefined;

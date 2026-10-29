@@ -1,3 +1,15 @@
+import {
+  LookupSectorTypeById,
+  type SectorType,
+  arrayOfSectors as sectors,
+} from "@businessnjgovnavigator/shared";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
+import type { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
+import { Autocomplete, TextField } from "@mui/material";
+import { orderBy } from "lodash";
+import type React from "react";
+import { type ChangeEvent, type ReactElement, useContext, useState } from "react";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
@@ -5,17 +17,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import {
-  LookupSectorTypeById,
-  SectorType,
-  arrayOfSectors as sectors,
-} from "@businessnjgovnavigator/shared";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
-import { FormContextFieldProps } from "@businessnjgovnavigator/shared/types";
-import { Autocomplete, TextField } from "@mui/material";
-import { orderBy } from "lodash";
-import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
   isSectorModal?: boolean;
@@ -48,7 +49,7 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
   };
 
   const handleSectorSelect = (
-    event: React.SyntheticEvent<Element, Event>,
+    _event: React.SyntheticEvent<Element, Event>,
     value: SectorType | null,
   ): void => {
     if (!value) {

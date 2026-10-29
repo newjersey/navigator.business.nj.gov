@@ -1,7 +1,7 @@
+import type { ReactElement, ReactNode } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, ReactNode } from "react";
 
 interface Props {
   headingText: string;

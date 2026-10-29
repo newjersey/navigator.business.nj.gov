@@ -1,5 +1,5 @@
+import type { ReactElement, ReactNode } from "react";
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
-import { ReactElement, ReactNode } from "react";
 
 interface Props {
   children?: ReactNode;

@@ -1,11 +1,11 @@
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import type { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { GovernmentContractingElement } from "@/components/tasks/anytime-action/government-contracting/GovernmentContractingElement";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { AnytimeActionTask } from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 const GovernmentContractingAnytimeActionPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

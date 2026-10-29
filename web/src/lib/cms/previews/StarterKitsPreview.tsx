@@ -1,12 +1,12 @@
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import { getIndustries, type Industry } from "@businessnjgovnavigator/shared/industry";
+import type { ReactElement } from "react";
 import { StarterKitsBody } from "@/components/starter-kits/StarterKitsBody";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { insertIndustryContent, insertRoadmapSteps } from "@/lib/domain-logic/starterKits";
 import { generateRoadmap } from "@/test/factories";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { getIndustries, Industry } from "@businessnjgovnavigator/shared/industry";
-import { ReactElement } from "react";
 
 const StarterKitsPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

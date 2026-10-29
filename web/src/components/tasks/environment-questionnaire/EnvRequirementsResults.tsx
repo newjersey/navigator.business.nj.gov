@@ -1,3 +1,5 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
@@ -7,8 +9,6 @@ import { PersonalizedSupport } from "@/components/tasks/environment-questionnair
 import { SeeYourResponses } from "@/components/tasks/environment-questionnaire/results/SeeYourResponses";
 import { EnvRequirementsContext } from "@/contexts/EnvRequirementsContext";
 import analytics from "@/lib/utils/analytics";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement, useContext } from "react";
 
 export const EnvRequirementsResults = (): ReactElement => {
   const envContext = useContext(EnvRequirementsContext);

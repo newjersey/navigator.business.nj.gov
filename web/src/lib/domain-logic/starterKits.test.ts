@@ -1,6 +1,6 @@
+import { emptyProfileData, getIndustries, type ProfileData } from "@businessnjgovnavigator/shared";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { createStarterKitProfileData } from "@/lib/domain-logic/starterKits";
-import { emptyProfileData, getIndustries, type ProfileData } from "@businessnjgovnavigator/shared";
 
 describe("starter Kits", () => {
   const combineObjectsKeepingTruthyValues = (obj1: ProfileData, obj2: ProfileData): ProfileData => {
@@ -21,7 +21,7 @@ describe("starter Kits", () => {
     let result: Partial<ProfileData> = {};
     for (const key in obj) {
       const typedKey = key as keyof ProfileData;
-      if (Object.prototype.hasOwnProperty.call(obj, typedKey) && obj[typedKey]) {
+      if (Object.hasOwn(obj, typedKey) && obj[typedKey]) {
         result = {
           ...result,
           [typedKey]: obj[typedKey],

@@ -1,7 +1,7 @@
-import { SkipToMainContent } from "@/components/SkipToMainContent";
-import analytics from "@/lib/utils/analytics";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { SkipToMainContent } from "@/components/SkipToMainContent";
+import analytics from "@/lib/utils/analytics";
 
 const Config = getMergedConfig();
 

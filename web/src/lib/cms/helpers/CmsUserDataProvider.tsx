@@ -1,7 +1,7 @@
-import { UserDataContext, UseUserDataResponse } from "@/contexts/userDataContext";
-import { UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, ReactNode, useMemo } from "react";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
+import { type ReactElement, type ReactNode, useMemo } from "react";
+import { UserDataContext, type UseUserDataResponse } from "@/contexts/userDataContext";
+import { type UpdateQueue, UpdateQueueFactory } from "@/lib/UpdateQueue";
 
 interface CmsUserDataProviderProps {
   readonly children: ReactNode;

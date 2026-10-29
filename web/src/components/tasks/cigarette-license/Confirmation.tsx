@@ -1,3 +1,10 @@
+import {
+  type CigaretteLicenseData,
+  emptyCigaretteLicenseData,
+} from "@businessnjgovnavigator/shared/cigaretteLicense";
+import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import { type ReactElement, useEffect, useRef, useState } from "react";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -9,13 +16,6 @@ import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { isTradeNameLegalStructureApplicable } from "@/lib/domain-logic/isTradeNameLegalStructureApplicable";
 import analytics from "@/lib/utils/analytics";
-import {
-  CigaretteLicenseData,
-  emptyCigaretteLicenseData,
-} from "@businessnjgovnavigator/shared/cigaretteLicense";
-import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   business: Business;

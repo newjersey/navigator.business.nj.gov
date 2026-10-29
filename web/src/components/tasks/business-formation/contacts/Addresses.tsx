@@ -1,20 +1,21 @@
-import { Content } from "@/components/Content";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
-import { AddressModal } from "@/components/tasks/business-formation/contacts/AddressModal";
-import { WithErrorBar } from "@/components/WithErrorBar";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { formatAddress } from "@/lib/domain-logic/formatAddress";
-import {
+import type {
   FormationFields,
   FormationIncorporator,
   FormationMember,
 } from "@businessnjgovnavigator/shared/";
 import { Checkbox } from "@mui/material";
-import React, { ChangeEvent, Fragment, ReactElement, ReactNode, useState } from "react";
+import type React from "react";
+import { type ChangeEvent, Fragment, type ReactElement, type ReactNode, useState } from "react";
+import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { AddressModal } from "@/components/tasks/business-formation/contacts/AddressModal";
+import { WithErrorBar } from "@/components/WithErrorBar";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
+import { formatAddress } from "@/lib/domain-logic/formatAddress";
 
 interface DisplayContent {
   header: string;

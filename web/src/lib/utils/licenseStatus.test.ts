@@ -1,8 +1,4 @@
 import {
-  getLicenseStatusResultsFromLicenses,
-  licenseDataModifyingFunction,
-} from "@/lib/utils/licenseStatus";
-import {
   generateBusiness,
   generateLicenseData,
   generateLicenseDetails,
@@ -10,6 +6,10 @@ import {
   randomElementFromArray,
   taskIdLicenseNameMapping,
 } from "@businessnjgovnavigator/shared/";
+import {
+  getLicenseStatusResultsFromLicenses,
+  licenseDataModifyingFunction,
+} from "@/lib/utils/licenseStatus";
 
 const licenseNames = Object.values(taskIdLicenseNameMapping);
 

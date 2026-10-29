@@ -1,3 +1,7 @@
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
+import { useMediaQuery } from "@mui/material";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext, useState } from "react";
 import { Content } from "@/components/Content";
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
@@ -14,10 +18,6 @@ import { extractConfig } from "@/lib/domain-logic/extractConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
-import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
-import { useMediaQuery } from "@mui/material";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   isReviewStep?: boolean;

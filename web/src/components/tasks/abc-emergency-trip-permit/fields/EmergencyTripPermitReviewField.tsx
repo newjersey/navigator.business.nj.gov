@@ -1,10 +1,10 @@
+import type { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
+import { useMediaQuery } from "@mui/material";
+import { type ReactElement, useContext } from "react";
 import { getFormattedTimeFromInternalTime } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitTimePicker";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
-import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, useContext } from "react";
 
 export interface Props {
   fieldName: EmergencyTripPermitUserEnteredFieldNames;

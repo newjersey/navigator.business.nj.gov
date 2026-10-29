@@ -1,5 +1,5 @@
-import { XrayRegistrationCalendarEvent } from "@businessnjgovnavigator/shared/calendarEvent";
-import { XrayData } from "@businessnjgovnavigator/shared/xray";
+import type { XrayRegistrationCalendarEvent } from "@businessnjgovnavigator/shared/calendarEvent";
+import type { XrayData } from "@businessnjgovnavigator/shared/xray";
 import dayjs from "dayjs";
 
 export const getXrayRenewalEvent = (

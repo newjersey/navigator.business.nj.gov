@@ -1,24 +1,22 @@
-import { Content } from "@/components/Content";
-import { HorizontalLine } from "@/components/HorizontalLine";
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
-import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-
-import { templateEval } from "@/lib/utils/helpers";
 import {
-  CertificationUrlSlugParameter,
+  type CertificationUrlSlugParameter,
   loadAllCertificationUrlSlugs,
   loadCertificationByUrlSlug,
 } from "@businessnjgovnavigator/shared/static";
-import { Certification } from "@businessnjgovnavigator/shared/types";
-
-import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import type { Certification } from "@businessnjgovnavigator/shared/types";
+import type { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { Content } from "@/components/Content";
+import { HorizontalLine } from "@/components/HorizontalLine";
+import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import { templateEval } from "@/lib/utils/helpers";
 
 interface Props {
   certification: Certification;

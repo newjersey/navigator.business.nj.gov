@@ -1,3 +1,5 @@
+import type { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
+import { type ReactElement, useContext, useState } from "react";
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
@@ -6,8 +8,6 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   maxChars: number;

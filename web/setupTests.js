@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-import { TextDecoder, TextEncoder } from "util";
+import { TextDecoder, TextEncoder } from "node:util";
 
 process.env.API_BASE_URL = "";
 process.env.REDIRECT_URL = "http://www.example.com";
@@ -50,19 +49,15 @@ window.gtm = jest.fn();
 
 window.matchMedia =
   window.matchMedia ||
-  function () {
-    return {
-      matches: false,
-      media: "",
-      addListener: function () {},
-      removeListener: function () {},
-      addEventListener: function () {},
-      removeEventListener: function () {},
-      dispatchEvent: function () {
-        return false;
-      },
-    };
-  };
+  (() => ({
+    matches: false,
+    media: "",
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  }));
 
 jest.setTimeout(10000);
 

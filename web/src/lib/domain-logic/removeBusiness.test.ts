@@ -1,5 +1,5 @@
-import { removeBusiness } from "@/lib/domain-logic/removeBusiness";
 import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shared/test";
+import { removeBusiness } from "@/lib/domain-logic/removeBusiness";
 
 describe("remove business", () => {
   it("removes a business from userData by ID when not current", () => {

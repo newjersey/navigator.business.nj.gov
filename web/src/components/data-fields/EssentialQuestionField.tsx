@@ -1,3 +1,12 @@
+import {
+  type IndustrySpecificData,
+  industrySpecificDataChoices,
+} from "@businessnjgovnavigator/shared";
+import type {
+  FormContextFieldProps,
+  ProfileContentField,
+} from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useContext } from "react";
 import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
@@ -6,10 +15,7 @@ import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { EssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
-import { IndustrySpecificData, industrySpecificDataChoices } from "@businessnjgovnavigator/shared";
-import { FormContextFieldProps, ProfileContentField } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useContext } from "react";
+import type { EssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 
 interface Props<T> extends FormContextFieldProps<T> {
   essentialQuestion: EssentialQuestion;

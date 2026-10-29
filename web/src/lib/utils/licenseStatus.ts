@@ -1,11 +1,11 @@
 import {
-  Business,
+  type Business,
   getLicenseTasksProgress,
   getNonLicenseTasks,
-  LicenseName,
-  Licenses,
-  LicenseStatusResults,
-  UserData,
+  type LicenseName,
+  type LicenseStatusResults,
+  type Licenses,
+  type UserData,
 } from "@businessnjgovnavigator/shared/";
 
 export const getLicenseStatusResultsFromLicenses = (licenses: Licenses): LicenseStatusResults => {

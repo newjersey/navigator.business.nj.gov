@@ -1,7 +1,11 @@
+import type {
+  FacilityDetails,
+  XrayData,
+  XraySearchError,
+} from "@businessnjgovnavigator/shared/xray";
+import type { ReactNode } from "react";
 import { XrayStatus } from "@/components/xray/XrayStatus";
 import { XraySummary } from "@/components/xray/XraySummary";
-import { FacilityDetails, XrayData, XraySearchError } from "@businessnjgovnavigator/shared/xray";
-import { ReactNode } from "react";
 
 interface Props {
   xrayRegistrationData: XrayData | undefined;

@@ -1,4 +1,7 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
+import { fireEvent, screen } from "@testing-library/react";
+import type { ReactElement } from "react";
 import {
   createDataFormErrorMap,
   DataFormErrorMapContext,
@@ -7,10 +10,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { withNeedsAccountContext, withUserDataError } from "@/test/helpers/helpers-renderers";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { TaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
-import { fireEvent, screen } from "@testing-library/react";
-import { ReactElement } from "react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 import { TaxClearanceSteps } from "./TaxClearanceSteps";
 
 jest.mock("@/lib/data-hooks/useConfig");

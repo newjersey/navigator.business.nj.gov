@@ -1,6 +1,6 @@
-import { LearnStepIndicator } from "@/components/roadmap/LearnStepIndicator";
 import Link from "next/link";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { LearnStepIndicator } from "@/components/roadmap/LearnStepIndicator";
 
 interface Props {
   task: { id: string; name: string };

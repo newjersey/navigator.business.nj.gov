@@ -1,6 +1,10 @@
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext } from "react";
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { NavMenuItem } from "@/components/navbar/NavMenuItem";
 import { AuthContext } from "@/contexts/authContext";
+import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -12,10 +16,6 @@ import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext } from "react";
-import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 
 export const LoginMenuItem = (): ReactElement => {
   const { Config } = useConfig();

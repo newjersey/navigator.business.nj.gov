@@ -11,7 +11,6 @@ describe("unusedContent page [feature] [all] [group3]", () => {
     });
 
     it("allows the user to login", () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       cy.get('input[data-testid="mgmt-password-field"]').clear();
       cy.get('input[data-testid="mgmt-password-field"]').type(Cypress.env("ADMIN_PASSWORD"));
       cy.get('button[data-testid="mgmt-submit-button"]').click();
@@ -32,7 +31,6 @@ describe("unusedContent page [feature] [all] [group3]", () => {
     });
 
     it("allows the user to login", () => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       cy.get('input[data-testid="mgmt-password-field"]').clear();
       cy.get('input[data-testid="mgmt-password-field"]').type(Cypress.env("ADMIN_PASSWORD"));
       cy.get('button[data-testid="mgmt-submit-button"]').click();

@@ -1,7 +1,5 @@
-import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { Industry } from "@businessnjgovnavigator/shared/industry";
+import type { Industry } from "@businessnjgovnavigator/shared/industry";
 import {
   filterRandomIndustry,
   generateBusiness,
@@ -9,6 +7,8 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
+import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 const Config = getMergedConfig();
 

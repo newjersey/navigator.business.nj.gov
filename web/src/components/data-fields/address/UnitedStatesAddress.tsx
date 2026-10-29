@@ -1,3 +1,6 @@
+import type { StateObject } from "@businessnjgovnavigator/shared/states";
+import type { FormContextType } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useContext } from "react";
 import { AddressLines1And2 } from "@/components/data-fields/address/AddressLines1And2";
 import { AddressTextField } from "@/components/data-fields/address/AddressTextField";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
@@ -5,12 +8,9 @@ import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { AddressContext } from "@/contexts/addressContext";
-import { DataFormErrorMap } from "@/contexts/dataFormErrorMapContext";
+import type { DataFormErrorMap } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { StateObject } from "@businessnjgovnavigator/shared/states";
-import { FormContextType } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   onValidation: () => void;
@@ -25,14 +25,11 @@ export const UnitedStatesAddress = (props: Props): ReactElement => {
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useAddressErrors();
   const { state, setAddressData } = useContext(AddressContext);
 
-  const isAddressLine1Invalid =
-    props.dataFormErrorMap?.fieldStates?.["addressLine1"]?.invalid ?? false;
-  const isAddressCityInvalid =
-    props.dataFormErrorMap?.fieldStates?.["addressCity"]?.invalid ?? false;
-  const isAddressStateInvalid =
-    props.dataFormErrorMap?.fieldStates?.["addressState"]?.invalid ?? false;
+  const isAddressLine1Invalid = props.dataFormErrorMap?.fieldStates?.addressLine1?.invalid ?? false;
+  const isAddressCityInvalid = props.dataFormErrorMap?.fieldStates?.addressCity?.invalid ?? false;
+  const isAddressStateInvalid = props.dataFormErrorMap?.fieldStates?.addressState?.invalid ?? false;
   const isAddressZipCodeInvalid =
-    props.dataFormErrorMap?.fieldStates?.["addressZipCode"]?.invalid ?? false;
+    props.dataFormErrorMap?.fieldStates?.addressZipCode?.invalid ?? false;
 
   return (
     <>

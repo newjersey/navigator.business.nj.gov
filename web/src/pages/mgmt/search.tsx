@@ -1,18 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { MgmtAuth } from "@/components/auth/MgmtAuth";
-import { Alert } from "@/components/njwds-extended/Alert";
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { MatchCollection } from "@/components/search/MatchCollection";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
+import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
 import DomesticEmployerSteps from "@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
-import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
-import { getIndustries, Industry } from "@businessnjgovnavigator/shared/industry";
+import { getIndustries, type Industry } from "@businessnjgovnavigator/shared/industry";
 import {
   searchAnytimeActionLicenseReinstatements,
   searchCategories,
@@ -37,7 +27,7 @@ import { searchSteps } from "@businessnjgovnavigator/shared/lib/search/searchSte
 import { searchTasks } from "@businessnjgovnavigator/shared/lib/search/searchTasks";
 import { searchTaxFilings } from "@businessnjgovnavigator/shared/lib/search/searchTaxFilings";
 import { searchWebflowLicenses } from "@businessnjgovnavigator/shared/lib/search/searchWebflowLicenses";
-import {
+import type {
   GroupedConfigMatch,
   Match,
 } from "@businessnjgovnavigator/shared/lib/search/typesForSearch";
@@ -48,58 +38,66 @@ import {
   loadAllArchivedCertifications,
   loadAllArchivedContextualInfo,
   loadAllCategories,
-  loadAllCovids,
   loadAllCertifications,
   loadAllContextualInfo,
+  loadAllCovids,
   loadAllEnvironmentTasks,
   loadAllFaqs,
-  loadAllPages,
-  loadAllRecents,
-  loadAllTropicalStormIda,
   loadAllFilings,
   loadAllFundings,
   loadAllLicenseCalendarEvents,
   loadAllLicenseTasks,
   loadAllMunicipalTasks,
   loadAllPageMetadata,
+  loadAllPages,
   loadAllRaffleBingoSteps,
+  loadAllRecents,
   loadAllTasksOnly,
+  loadAllTropicalStormIda,
   loadAllWebflowLicenses,
   loadCmsConfig,
   loadFormationDbaContent,
   loadRoadmapSideBarDisplayContent,
   loadXrayRenewalCalendarEvent,
 } from "@businessnjgovnavigator/shared/static";
-import {
+import type {
   AnytimeActionLicenseReinstatement,
   AnytimeActionTask,
   CategoryItem,
-  CovidItem,
   Certification,
   ContextualInfoFile,
+  CovidItem,
   FaqItem,
   Filing,
-  PageItem,
-  RecentItem,
-  TropicalStormIdaItem,
   FormationDbaDisplayContent,
   Funding,
   IndustryRoadmap,
   LicenseEventType,
   NonEssentialQuestion,
+  PageItem,
   PageMetadata,
+  RecentItem,
   RoadmapDisplayContent,
   SidebarCardContent,
   Step,
   Task,
   TaskWithoutLinks,
+  TropicalStormIdaItem,
   WebflowLicense,
   XrayRenewalCalendarEventType,
 } from "@businessnjgovnavigator/shared/types";
 import { TextField } from "@mui/material";
-import { GetStaticPropsResult } from "next";
+import type { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
+import { type ChangeEvent, type KeyboardEvent, type ReactElement, useState } from "react";
+import { MgmtAuth } from "@/components/auth/MgmtAuth";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { MatchCollection } from "@/components/search/MatchCollection";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 
 interface Props {
   netlifyConfig: any;

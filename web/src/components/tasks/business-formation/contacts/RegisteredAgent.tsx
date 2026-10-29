@@ -1,3 +1,7 @@
+import type { FormationFields } from "@businessnjgovnavigator/shared/formationData";
+import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { ModifiedContent } from "@/components/ModifiedContent";
@@ -10,9 +14,6 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
-import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
 
 const RegisteredAgentInfoCallout = (): ReactElement => {
   const { Config } = useConfig();

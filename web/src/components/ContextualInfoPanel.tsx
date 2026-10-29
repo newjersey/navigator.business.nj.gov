@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { ContextualInfo } from "@businessnjgovnavigator/shared/types";
+import { type ReactElement, useContext } from "react";
 import { ContextInfoElement } from "@/components/ContextInfoElement";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import analytics from "@/lib/utils/analytics";
-import { ContextualInfo } from "@businessnjgovnavigator/shared/types";
-import { ReactElement, useContext } from "react";
 
 export const ContextualInfoPanel = (): ReactElement => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);

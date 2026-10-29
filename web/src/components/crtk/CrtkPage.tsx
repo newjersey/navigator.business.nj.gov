@@ -1,12 +1,12 @@
+import type { CrtkData } from "@businessnjgovnavigator/shared/crtk";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import { Box } from "@mui/material";
+import { type ReactElement, useEffect, useState } from "react";
 import { CrtkSearchResult } from "@/components/crtk/CrtkSearchResult";
-import { CrtkFacilityDetails, CrtkStatus } from "@/components/crtk/CrtkStatus";
+import { type CrtkFacilityDetails, CrtkStatus } from "@/components/crtk/CrtkStatus";
 import { TaskHeader } from "@/components/TaskHeader";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { CrtkData } from "@businessnjgovnavigator/shared/crtk";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { Box } from "@mui/material";
-import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   task: Task;

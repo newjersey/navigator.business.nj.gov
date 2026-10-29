@@ -1,3 +1,25 @@
+import {
+  type CigaretteLicenseData,
+  emptyCigaretteLicenseData,
+  type SubmissionError,
+} from "@businessnjgovnavigator/shared/cigaretteLicense";
+import {
+  emptyFormationAddressData,
+  type FormationAddress,
+} from "@businessnjgovnavigator/shared/formationData";
+import { emptyProfileData, type ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import type { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
+import { useRouter } from "next/compat/router";
+import {
+  type Dispatch,
+  type ReactElement,
+  type SetStateAction,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CigaretteLicenseAlert } from "@/components/tasks/cigarette-license/CigaretteLicenseAlert";
@@ -27,28 +49,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import {
-  CigaretteLicenseData,
-  emptyCigaretteLicenseData,
-  SubmissionError,
-} from "@businessnjgovnavigator/shared/cigaretteLicense";
-import {
-  emptyFormationAddressData,
-  FormationAddress,
-} from "@businessnjgovnavigator/shared/formationData";
-import { emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
-import { useRouter } from "next/compat/router";
-import {
-  Dispatch,
-  ReactElement,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
 
 type Props = {
   task: Task;
@@ -63,8 +63,9 @@ export const CigaretteLicense = (props: Props): ReactElement => {
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const router = useRouter();
   const [submissionError, setSubmissionError] = useState<SubmissionError>(undefined);
-  const { getInvalidFieldIds, state: formContextState } =
-    useFormContextHelper(createDataFormErrorMap());
+  const { getInvalidFieldIds, state: formContextState } = useFormContextHelper(
+    createDataFormErrorMap(),
+  );
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
   const [profileData, setProfileData] = useState<ProfileData>(emptyProfileData);
@@ -201,7 +202,6 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     if (checkQueryValue(router, QUERIES.completePayment, "success")) {
       handlePaymentSuccess();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   const setProfile: Dispatch<SetStateAction<ProfileData>> = (action) => {

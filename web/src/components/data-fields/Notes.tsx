@@ -1,5 +1,5 @@
+import type { ReactElement } from "react";
 import { ProfileDataField } from "@/components/data-fields/ProfileDataField";
-import { ReactElement } from "react";
 
 interface Props {
   handleChangeOverride?: (value: string) => void;

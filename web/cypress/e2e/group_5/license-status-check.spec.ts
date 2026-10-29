@@ -3,6 +3,7 @@ import {
   fillOutLicenseStatusCheckForm,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+
 describe("License Status Check [feature] [all] [group5]", () => {
   let checkStatusFormData: {
     businessName: string;

@@ -1,19 +1,19 @@
-import { HideableTasks } from "@/components/dashboard/HideableTasks";
-import { templateEval } from "@/lib/utils/helpers";
-import { generateTask } from "@/test/factories";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import {
-  WithStatefulUserData,
-  setupStatefulUserDataContext,
-} from "@/test/mock/withStatefulUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
   generatePreferences,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import type { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { HideableTasks } from "@/components/dashboard/HideableTasks";
+import { templateEval } from "@/lib/utils/helpers";
+import { generateTask } from "@/test/factories";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

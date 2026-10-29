@@ -1,3 +1,17 @@
+import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
+import { getMergedConfig, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/index";
+import {
+  generateLicenseData,
+  generateLicenseDetails,
+  generateProfileData,
+} from "@businessnjgovnavigator/shared/test";
+import type {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+} from "@businessnjgovnavigator/shared/types";
+import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { AnytimeActionSearch } from "@/components/dashboard/AnytimeActionSearch";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -6,21 +20,6 @@ import {
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
-import {
-  generateLicenseData,
-  generateLicenseDetails,
-  generateProfileData,
-} from "@businessnjgovnavigator/shared/test";
-import {
-  AnytimeActionLicenseReinstatement,
-  AnytimeActionTask,
-} from "@businessnjgovnavigator/shared/types";
-import { fireEvent, render, screen } from "@testing-library/react";
-
-import { AnytimeActionSearch } from "@/components/dashboard/AnytimeActionSearch";
-import { getMergedConfig, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/index";
-import userEvent from "@testing-library/user-event";
 
 function setupMockAnalytics(): typeof analytics {
   return {

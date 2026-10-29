@@ -1,6 +1,24 @@
+import {
+  formationTaskId,
+  type HousingMunicipality,
+  type Municipality,
+} from "@businessnjgovnavigator/shared";
+import {
+  loadAllHousingMunicipalities,
+  loadAllMunicipalities,
+  loadAllTaskUrlSlugs,
+  loadFormationDbaContent,
+  loadTaskByUrlSlug,
+  type TaskUrlSlugParameter,
+} from "@businessnjgovnavigator/shared/static";
+import type { FormationDbaDisplayContent, Task } from "@businessnjgovnavigator/shared/types";
+import type { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { useRouter } from "next/compat/router";
+import { NextSeo } from "next-seo";
+import { type ReactElement, useMemo } from "react";
+import { Icon } from "@/components/njwds/Icon";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { Icon } from "@/components/njwds/Icon";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
@@ -12,20 +30,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { getUrlSlugs } from "@/lib/utils/roadmap-helpers";
-import { formationTaskId, HousingMunicipality, Municipality } from "@businessnjgovnavigator/shared";
-import {
-  loadAllHousingMunicipalities,
-  loadAllMunicipalities,
-  loadAllTaskUrlSlugs,
-  loadFormationDbaContent,
-  loadTaskByUrlSlug,
-  TaskUrlSlugParameter,
-} from "@businessnjgovnavigator/shared/static";
-import { FormationDbaDisplayContent, Task } from "@businessnjgovnavigator/shared/types";
-import { GetStaticPathsResult, GetStaticPropsResult } from "next";
-import { NextSeo } from "next-seo";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useMemo } from "react";
 
 interface Props {
   task: Task;

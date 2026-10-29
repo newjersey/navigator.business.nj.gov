@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/filename-case */
 import { BrowserStorageFactory } from "@/lib/storage/BrowserStorage";
 
 interface AccountLinkingErrorStorage {

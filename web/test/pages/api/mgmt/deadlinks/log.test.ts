@@ -1,7 +1,7 @@
-import { createDeadLinkDebugLog } from "@/lib/static/admin/deadLinkDebugLog";
-import { JobState, setJobState } from "@/lib/static/admin/deadLinkJobState";
-import handler from "@/pages/api/mgmt/deadlinks/log";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { createDeadLinkDebugLog } from "@/lib/static/admin/deadLinkDebugLog";
+import { type JobState, setJobState } from "@/lib/static/admin/deadLinkJobState";
+import handler from "@/pages/api/mgmt/deadlinks/log";
 
 interface MockResponse {
   readonly res: NextApiResponse;

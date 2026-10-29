@@ -1,19 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {
-  isBusinessStartDateValid,
-  isDateValid,
-} from "@/components/tasks/business-formation/business/BusinessDateValidators";
-import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
-import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
-import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import { templateEval } from "@/lib/utils/helpers";
-import {
-  FieldsForErrorHandling,
-  FormationFields,
-  FormationFormData,
-  InputFile,
-  NameAvailability,
   AGENT_EMAIL_MAX_CHAR,
   AGENT_NAME_MAX_CHAR,
   AGENT_OFFICE_ADDRESS_CITY_MAX_CHAR,
@@ -25,11 +10,24 @@ import {
   BUSINESS_ADDRESS_PROVINCE_MAX_CHAR,
   CONTACT_FIRST_NAME_MAX_CHAR,
   CONTACT_LAST_NAME_MAX_CHAR,
+  type FieldsForErrorHandling,
+  type FormationFields,
+  type FormationFormData,
+  type InputFile,
+  type NameAvailability,
   SIGNER_NAME_MAX_CHAR,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
-import { FormationFieldErrorState } from "@businessnjgovnavigator/shared/types";
+import type { FormationFieldErrorState } from "@businessnjgovnavigator/shared/types";
+import {
+  isBusinessStartDateValid,
+  isDateValid,
+} from "@/components/tasks/business-formation/business/BusinessDateValidators";
+import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
+import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
+import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
+import { templateEval } from "@/lib/utils/helpers";
 
 export const onlyHasErrorIfEmpty: FormationFields[] = [
   "contactPhoneNumber",

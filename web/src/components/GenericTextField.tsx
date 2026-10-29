@@ -1,30 +1,28 @@
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { OutlinedInputProps, TextField, TextFieldProps } from "@mui/material";
-
-import {
+import type {
   FieldErrorType,
   FormContextFieldProps,
   FormContextType,
 } from "@businessnjgovnavigator/shared/types";
+import { type OutlinedInputProps, TextField, type TextFieldProps } from "@mui/material";
 import {
-  ChangeEvent,
-  Context,
-  FocusEvent,
+  type ChangeEvent,
+  type Context,
+  type FocusEvent,
+  type ForwardedRef,
   forwardRef,
-  ForwardedRef,
-  HTMLInputTypeAttribute,
-  InputHTMLAttributes,
-  ReactElement,
+  type HTMLInputTypeAttribute,
+  type InputHTMLAttributes,
+  type ReactElement,
   useMemo,
 } from "react";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 
 export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFieldProps<T> {
   fieldName: string;
   inputWidth?: "full" | "default" | "reduced";
   fieldOptions?: TextFieldProps;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formContext?: Context<FormContextType<any>>;
   onValidation?: (fieldName: string, invalid: boolean, value?: string) => void;
   additionalValidationIsValid?: (value: string) => boolean;
@@ -55,7 +53,6 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   preventRefreshWhenUnmounted?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
 export const GenericTextField = forwardRef(
   <T,>(props: GenericTextFieldProps<T>, ref: ForwardedRef<HTMLDivElement>): ReactElement => {
     const widthStyling =

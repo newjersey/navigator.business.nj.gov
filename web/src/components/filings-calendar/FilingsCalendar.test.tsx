@@ -1,3 +1,34 @@
+import {
+  type Business,
+  defaultDateFormat,
+  generateBusiness,
+  generateLicenseDetails,
+  generateTaxFilingCalendarEvent,
+  generateUserDataForBusiness,
+  OperatingPhases,
+  randomInt,
+  type TaxFilingCalendarEvent,
+} from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import * as getCurrentDateModule from "@businessnjgovnavigator/shared/dateHelpers";
+import {
+  generateLicenseData,
+  generatePreferences,
+  generateProfileData,
+  generateTaxFilingData,
+  generateXrayRegistrationData,
+  randomLegalStructure,
+} from "@businessnjgovnavigator/shared/test";
+import type {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@businessnjgovnavigator/shared/types";
+import type * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { fireEvent, render, screen, within } from "@testing-library/react";
+import dayjs, { type Dayjs } from "dayjs";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -15,37 +46,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  defaultDateFormat,
-  generateBusiness,
-  generateLicenseDetails,
-  generateTaxFilingCalendarEvent,
-  generateUserDataForBusiness,
-  OperatingPhases,
-  randomInt,
-  TaxFilingCalendarEvent,
-} from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import * as getCurrentDateModule from "@businessnjgovnavigator/shared/dateHelpers";
-import {
-  generateLicenseData,
-  generatePreferences,
-  generateProfileData,
-  generateTaxFilingData,
-  generateXrayRegistrationData,
-  randomLegalStructure,
-} from "@businessnjgovnavigator/shared/test";
-import {
-  LicenseEventType,
-  OperateReference,
-  XrayRenewalCalendarEventType,
-} from "@businessnjgovnavigator/shared/types";
-import * as materialUi from "@mui/material";
-import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, within } from "@testing-library/react";
-import dayjs, { Dayjs } from "dayjs";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -245,18 +245,15 @@ describe("<FilingsCalendar />", () => {
     renderFilingsCalendar(operateReferences, business);
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     const dateElement = within(
-      /* eslint-disable testing-library/no-node-access */
-
       screen.getByText(recentDueDate.format("MMMM D, YYYY"), { exact: false })
         .parentElement as HTMLElement,
     );
-    /* eslint-enable testing-library/no-node-access */
 
     expect(
-      dateElement.getByText(operateReferences["whatever"].name, { exact: false }),
+      dateElement.getByText(operateReferences.whatever.name, { exact: false }),
     ).toBeInTheDocument();
     expect(
-      dateElement.getByText(operateReferences["whatever2"].name, { exact: false }),
+      dateElement.getByText(operateReferences.whatever2.name, { exact: false }),
     ).toBeInTheDocument();
   });
 

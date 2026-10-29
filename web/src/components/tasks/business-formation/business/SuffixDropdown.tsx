@@ -1,22 +1,28 @@
+import {
+  type BusinessSuffix,
+  BusinessSuffixMap,
+  type CorpBusinessSuffix,
+  type ForeignCorpBusinessSuffix,
+  type ForeignCorpWillPracticeLawBusinessSuffix,
+  foreignCorpWillPracticeLawBusinessSuffix,
+  type LlcBusinessSuffix,
+  type LlpBusinessSuffix,
+  type LpBusinessSuffix,
+  type NonprofitBusinessSuffix,
+} from "@businessnjgovnavigator/shared/";
+import {
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  Select,
+  type SelectChangeEvent,
+} from "@mui/material";
+import { type ReactElement, type ReactNode, useContext } from "react";
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
-import {
-  BusinessSuffix,
-  BusinessSuffixMap,
-  CorpBusinessSuffix,
-  ForeignCorpBusinessSuffix,
-  foreignCorpWillPracticeLawBusinessSuffix,
-  ForeignCorpWillPracticeLawBusinessSuffix,
-  LlcBusinessSuffix,
-  LlpBusinessSuffix,
-  LpBusinessSuffix,
-  NonprofitBusinessSuffix,
-} from "@businessnjgovnavigator/shared/";
-import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { ReactElement, ReactNode, useContext } from "react";
 
 interface MySelectDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
   "data-testid"?: string;

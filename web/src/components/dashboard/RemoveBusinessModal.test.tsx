@@ -1,11 +1,11 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { RemoveBusinessModal } from "./RemoveBusinessModal";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { withAuth, withRemoveBusinessContext } from "@/test/helpers/helpers-renderers";
-import { removeBusinessSoftDelete } from "@/lib/domain-logic/removeBusinessSoftDelete";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { useRouter } from "next/compat/router";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { removeBusinessSoftDelete } from "@/lib/domain-logic/removeBusinessSoftDelete";
+import { withAuth, withRemoveBusinessContext } from "@/test/helpers/helpers-renderers";
+import { RemoveBusinessModal } from "./RemoveBusinessModal";
 
 jest.mock("@/lib/data-hooks/useUserData");
 jest.mock("@/lib/domain-logic/removeBusinessSoftDelete", () => ({

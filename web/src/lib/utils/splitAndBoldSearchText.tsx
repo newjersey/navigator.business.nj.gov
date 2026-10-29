@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 export const splitAndBoldSearchText = (displayText: string, searchText: string): ReactElement => {
   const index = displayText.toLowerCase().indexOf(searchText.toLowerCase());

@@ -1,5 +1,5 @@
 import { convertContextualInfoMd } from "@businessnjgovnavigator/shared";
-import { ContextualInfo } from "@businessnjgovnavigator/shared/types";
+import type { ContextualInfo } from "@businessnjgovnavigator/shared/types";
 
 export const fetchContextualInfo = async (id: string): Promise<ContextualInfo> => {
   try {

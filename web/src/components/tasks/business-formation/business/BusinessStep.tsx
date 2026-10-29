@@ -1,13 +1,13 @@
+import { Fragment, type ReactElement, useContext, useMemo } from "react";
+import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
+import { BusinessFormationTextBox } from "@/components/tasks/business-formation/BusinessFormationTextBox";
 import { AdditionalProvisions } from "@/components/tasks/business-formation/business/AdditionalProvisions";
 import { MainBusiness } from "@/components/tasks/business-formation/business/MainBusiness";
 import { MainBusinessAddressNj } from "@/components/tasks/business-formation/business/MainBusinessAddressNj";
 import { MainBusinessForeignAddressFlow } from "@/components/tasks/business-formation/business/MainBusinessForeignAddressFlow";
 import { PartnershipRights } from "@/components/tasks/business-formation/business/PartnershipRights";
-import { BusinessFormationTextBox } from "@/components/tasks/business-formation/BusinessFormationTextBox";
-import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { Fragment, ReactElement, useContext, useMemo } from "react";
 
 export const BusinessStep = (): ReactElement => {
   const { Config } = useConfig();

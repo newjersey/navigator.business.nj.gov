@@ -1,14 +1,15 @@
-import React, { ReactElement } from "react";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Heading } from "@/components/njwds-extended/Heading";
-import { WithErrorBar } from "@/components/WithErrorBar";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import type React from "react";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
-import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { scrollToTop } from "@/lib/utils/helpers";
 
 interface Props {

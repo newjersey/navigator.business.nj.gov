@@ -1,3 +1,42 @@
+import {
+  type Business,
+  type BusinessPersona,
+  createEmptyProfileData,
+  determineForeignBusinessType,
+  einTaskId,
+  emptyFormationAddressData,
+  type ForeignBusinessType,
+  type FormationAddress,
+  formationTaskId,
+  hasCompletedFormation,
+  LookupLegalStructureById,
+  type Municipality,
+  naicsCodeTaskId,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { loadAllMunicipalities } from "@businessnjgovnavigator/shared/static";
+import {
+  type OnboardingStatus,
+  type ProfileTabs,
+  profileTabs,
+} from "@businessnjgovnavigator/shared/types";
+import deepEqual from "fast-deep-equal/es6/react";
+import type { GetStaticPropsResult } from "next";
+import { useRouter } from "next/compat/router";
+import { NextSeo } from "next-seo";
+import {
+  type ReactElement,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
 import { DateOfFormation } from "@/components/data-fields/DateOfFormation";
@@ -8,33 +47,33 @@ import { Industry } from "@/components/data-fields/Industry";
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
 import { NexusBusinessNameField } from "@/components/data-fields/NexusBusinessNameField";
 import { NexusDBANameField } from "@/components/data-fields/NexusDBANameField";
+import { Notes } from "@/components/data-fields/Notes";
 import { CertificationsAndFundingNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/CertificationsAndFundingNonEssentialQuestions";
 import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import { LocationBasedNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/LocationBasedNonEssentialQuestions";
 import { NonEssentialQuestionForPersonas } from "@/components/data-fields/non-essential-questions/nonEssentialQuestionsHelpers";
-import { Notes } from "@/components/data-fields/Notes";
 import { RaffleBingoGamesQuestion } from "@/components/data-fields/RaffleBingoGamesQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
-import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
-import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { TaxPin } from "@/components/data-fields/TaxPin";
 import { TradeName } from "@/components/data-fields/TradeName";
-import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
+import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
+import { TaxId } from "@/components/data-fields/tax-id/TaxId";
+import { EmployerRates } from "@/components/employer-rates/EmployerRates";
 import { FormationDateDeletionModal } from "@/components/FormationDateDeletionModal";
+import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { ContactTabPanel } from "@/components/profile/ContactTabPanel";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { getProfileErrorAlertText } from "@/components/profile/getProfileErrorAlertText";
 import { PersonalizeYourTasksTab } from "@/components/profile/PersonalizeYourTasksTab";
 import { ProfileAddress } from "@/components/profile/ProfileAddress";
-import { displayAltHomeBasedBusinessDescription } from "@/components/profile/profileDisplayLogicHelpers";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
@@ -45,6 +84,7 @@ import { ProfileSubSection } from "@/components/profile/ProfileSubSection";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
 import { ProfileTabPanel } from "@/components/profile/ProfileTabPanel";
+import { displayAltHomeBasedBusinessDescription } from "@/components/profile/profileDisplayLogicHelpers";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AddressContext } from "@/contexts/addressContext";
@@ -58,14 +98,12 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUnsavedChangesGuard } from "@/lib/data-hooks/useUnsavedChangesGuard";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-
-import { EmployerRates } from "@/components/employer-rates/EmployerRates";
 import { sendChangedNonEssentialQuestionAnalytics } from "@/lib/domain-logic/sendChangedNonEssentialQuestionAnalytics";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -74,41 +112,6 @@ import {
   useMountEffectWhenDefined,
   useScrollToPathAnchor,
 } from "@/lib/utils/helpers";
-import {
-  Business,
-  BusinessPersona,
-  createEmptyProfileData,
-  determineForeignBusinessType,
-  einTaskId,
-  emptyFormationAddressData,
-  ForeignBusinessType,
-  FormationAddress,
-  formationTaskId,
-  hasCompletedFormation,
-  LookupLegalStructureById,
-  Municipality,
-  naicsCodeTaskId,
-  ProfileData,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { formatDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { loadAllMunicipalities } from "@businessnjgovnavigator/shared/static";
-import { OnboardingStatus, ProfileTabs, profileTabs } from "@businessnjgovnavigator/shared/types";
-import deepEqual from "fast-deep-equal/es6/react";
-import { GetStaticPropsResult } from "next";
-import { NextSeo } from "next-seo";
-import { useRouter } from "next/compat/router";
-import {
-  ReactElement,
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
 
 interface Props {
   municipalities: Municipality[];
@@ -225,7 +228,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const showEscapeModal = escapeModalOpen || isBlocked;
 
-  /* eslint-disable @typescript-eslint/no-explicit-any */
   const redirect = (
     params?: { [key: string]: any },
     routerType = router!.push,
@@ -233,7 +235,6 @@ const ProfilePage = (props: Props): ReactElement => {
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
-  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   useScrollToPathAnchor();
 

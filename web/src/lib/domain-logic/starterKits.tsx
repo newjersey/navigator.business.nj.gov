@@ -1,7 +1,10 @@
+import type { Industry } from "@businessnjgovnavigator/shared/industry";
+import {
+  createEmptyProfileData,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
 import { getEssentialQuestion, hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
-import { Industry } from "@businessnjgovnavigator/shared/industry";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 
 export const insertRoadmapSteps = (content: string, roadMapsStepsLength: number): string => {
   return modifyContent({

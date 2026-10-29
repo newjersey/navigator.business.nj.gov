@@ -1,9 +1,9 @@
-import {
+import type {
   FieldErrorType,
   FormContextType,
   ReducedFieldStates,
 } from "@businessnjgovnavigator/shared/types";
-import { Context, createContext } from "react";
+import { type Context, createContext } from "react";
 
 export const createReducedFieldStates = <
   K extends string | number | symbol,

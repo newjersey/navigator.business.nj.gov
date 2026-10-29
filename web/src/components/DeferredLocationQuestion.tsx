@@ -1,14 +1,14 @@
+import type { Business } from "@businessnjgovnavigator/shared/userData";
+import type { ReactElement, ReactNode } from "react";
 import { Content } from "@/components/Content";
-import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
+import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
-import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, ReactNode } from "react";
 
 interface Props {
   innerContent: string;

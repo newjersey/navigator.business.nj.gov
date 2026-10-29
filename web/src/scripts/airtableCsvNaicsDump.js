@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-
-const fs = require("fs");
+const fs = require("node:fs");
 
 const outPath = `${process.cwd()}/lib/static/records/naics2022.json`;
 const inPath = `${process.cwd()}/lib/static/records/6digit.csv`;
@@ -24,15 +21,15 @@ const DigitRangeToArray = (value) => {
     return [value];
   }
   if (!value.includes("-")) {
-    return [Number.parseInt(value)];
+    return [Number.parseInt(value, 10)];
   }
   const values = value.split("-").map((value) => {
-    return Number.parseInt(value);
+    return Number.parseInt(value, 10);
   });
   if (values.length !== 2) {
     return;
   }
-  return Array.from({ length: values[1] + 1 - values[0] }, (v, k) => {
+  return Array.from({ length: values[1] + 1 - values[0] }, (_v, k) => {
     return k + values[0];
   });
 };

@@ -1,7 +1,7 @@
+import type { TaskProgress } from "@businessnjgovnavigator/shared";
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { ReactElement } from "react";
 import { Tag } from "@/components/njwds-extended/Tag";
-import { TaskProgress } from "@businessnjgovnavigator/shared";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { ReactElement } from "react";
 
 export const getTaskProgressTagLookup = (
   Config: ConfigType,

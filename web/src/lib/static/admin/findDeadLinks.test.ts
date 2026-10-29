@@ -1,5 +1,5 @@
+import fs from "node:fs";
 import { findDeadContentLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
-import fs from "fs";
 
 jest.mock("fs");
 jest.mock("process", () => ({ cwd: (): string => "/test" }));

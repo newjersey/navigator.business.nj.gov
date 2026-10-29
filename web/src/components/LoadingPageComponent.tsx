@@ -1,13 +1,13 @@
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { configureAmplify, triggerSignOut } from "@/lib/auth/sessionHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   hasError?: boolean;

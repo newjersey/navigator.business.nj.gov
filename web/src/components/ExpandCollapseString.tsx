@@ -1,6 +1,6 @@
 import {
-  CSSProperties,
-  ReactElement,
+  type CSSProperties,
+  type ReactElement,
   useCallback,
   useEffect,
   useId,

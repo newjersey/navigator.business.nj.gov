@@ -1,3 +1,6 @@
+import type { StateObject } from "@businessnjgovnavigator/shared/states";
+import { Checkbox, FormControlLabel, useMediaQuery } from "@mui/material";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { StateDropdown } from "@/components/StateDropdown";
@@ -9,9 +12,6 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
 import { MediaQueries } from "@/lib/PageSizes";
-import { StateObject } from "@businessnjgovnavigator/shared/states";
-import { Checkbox, FormControlLabel, useMediaQuery } from "@mui/material";
-import { ReactElement, useContext } from "react";
 
 const MAX_CHAR_ADDRESS_FIELD = 35;
 

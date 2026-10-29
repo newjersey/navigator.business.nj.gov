@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-import {
+import type {
   LegacyEventAction,
   LegacyEventApiName,
   LegacyEventCategory,
@@ -9,8 +8,7 @@ import analytics from "./analytics-base";
 
 export const GTM_ID = process.env.GOOGLE_TAG_MANAGER_ID;
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Nothing {}
+type Nothing = {};
 type Union<T, U> = T | (U & Nothing);
 
 type EventType =
@@ -513,8 +511,8 @@ class GTMTracker {
     if (questions && Object.keys(questions).length > 0) {
       for (const [key, value] of Object.entries(questions)) {
         const event = createEvent(dataLessQuestions);
-        event[`question`] = key;
-        event[`response`] = value;
+        event.question = key;
+        event.response = value;
         events.push(event);
       }
     } else {
@@ -625,7 +623,7 @@ const dimensionRunner = new DimensionQueueFactory(analytics.userUpdate);
 
 export default {
   eventRunner,
-  pageview: (path: string, name?: string, section_name?: string) => {
+  pageview: (path: string, _name?: string, section_name?: string) => {
     const page_name = document.title;
     analytics.sendEvent({
       event: "screen_view",

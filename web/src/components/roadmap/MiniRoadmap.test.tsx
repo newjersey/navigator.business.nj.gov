@@ -1,12 +1,12 @@
+import { render, screen } from "@testing-library/react";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateTask } from "@/test/factories";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
-import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

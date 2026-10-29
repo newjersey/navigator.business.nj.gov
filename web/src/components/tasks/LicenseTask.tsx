@@ -1,10 +1,24 @@
+import {
+  type LicenseDetails,
+  type LicenseName,
+  type LicenseSearchNameAndAddress,
+  taskIdLicenseNameMapping,
+  type UserData,
+} from "@businessnjgovnavigator/shared/";
+import type {
+  LicenseSearchError,
+  TaskWithLicenseTaskId,
+} from "@businessnjgovnavigator/shared/types";
+import { Box, Tab, Tabs } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useEffect, useRef, useState } from "react";
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Icon } from "@/components/njwds/Icon";
 import { getTabId, getTabPanelId, TabPanel } from "@/components/TabPanel";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CheckLicenseStatus } from "@/components/tasks/CheckLicenseStatus";
@@ -17,16 +31,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-import {
-  LicenseName,
-  LicenseDetails,
-  LicenseSearchNameAndAddress,
-  taskIdLicenseNameMapping,
-  UserData,
-} from "@businessnjgovnavigator/shared/";
-import { LicenseSearchError, TaskWithLicenseTaskId } from "@businessnjgovnavigator/shared/types";
-import { Box, Tab, Tabs } from "@mui/material";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   task: TaskWithLicenseTaskId;
@@ -94,7 +98,7 @@ export const LicenseTask = (props: Props): ReactElement => {
     }
   }, [business, businessLicenseSnapshot, licenseNameForTask]);
 
-  const onSelectTab = (event: React.SyntheticEvent, newValue: number): void => {
+  const onSelectTab = (_event: React.SyntheticEvent, newValue: number): void => {
     if (newValue === APPLICATION_TAB_INDEX) {
       analytics.event.task_tab_start_application.click.view_application_tab();
     } else if (newValue === STATUS_TAB_INDEX) {

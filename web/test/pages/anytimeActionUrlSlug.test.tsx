@@ -1,7 +1,7 @@
-import { renderWithUserData } from "@/test/render/renderWithUserData";
+import { screen } from "@testing-library/react";
 import AnytimeActionTaskPage from "@/pages/actions/[anytimeActionTaskUrlSlug]";
 import { generateAnytimeActionTask } from "@/test/factories";
-import { screen } from "@testing-library/react";
+import { renderWithUserData } from "@/test/render/renderWithUserData";
 
 describe("anytime action page", () => {
   it("shows the anytime action details", () => {

@@ -1,8 +1,10 @@
+import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
+import { type ReactElement, useContext, useState } from "react";
 import { UnitedStatesAddress } from "@/components/data-fields/address/UnitedStatesAddress";
 import { BusinessName } from "@/components/data-fields/BusinessName";
+import { TaxPin } from "@/components/data-fields/TaxPin";
 import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
-import { TaxPin } from "@/components/data-fields/TaxPin";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
@@ -13,12 +15,12 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressLockedFields";
 import { ProfileField } from "@/components/profile/ProfileField";
+import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import {
   getInitialTaxId,
   getInitialTaxPin,
 } from "@/components/tasks/anytime-action/tax-clearance-certificate/helpers";
 import { StateAgencyDropdown } from "@/components/tasks/anytime-action/tax-clearance-certificate/StateAgencyDropdown";
-import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -27,8 +29,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { shouldLockBusinessAddress } from "@/lib/utils/taskHelpers";
-import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
-import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;

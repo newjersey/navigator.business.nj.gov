@@ -1,5 +1,5 @@
-import { Roadmap } from "@businessnjgovnavigator/shared/types";
-import { SectionType } from "@businessnjgovnavigator/shared/userData";
+import type { Roadmap } from "@businessnjgovnavigator/shared/types";
+import type { SectionType } from "@businessnjgovnavigator/shared/userData";
 import { cloneDeep } from "lodash";
 
 export const roadmapWithSectionSpecificTasks = (

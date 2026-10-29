@@ -1,13 +1,13 @@
+import type { RegistrationStatus } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { render, screen } from "@testing-library/react";
 import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
-import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
+import { type ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateActiveUser } from "@/test/factories";
 import { withAuth, withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 

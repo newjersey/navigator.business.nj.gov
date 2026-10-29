@@ -1,4 +1,4 @@
-import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
+import type { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
 
 export interface UnavailableProps {
   submittedName: string;

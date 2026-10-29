@@ -1,13 +1,13 @@
-import { Heading } from "@/components/njwds-extended/Heading";
+import type { SectionType } from "@businessnjgovnavigator/shared";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import type { ReactElement, ReactNode } from "react";
 import { Icon } from "@/components/njwds/Icon";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ProgressBar } from "@/components/ProgressBar";
 import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { SectionType } from "@businessnjgovnavigator/shared";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { ReactElement, ReactNode } from "react";
 
 interface SectionAccordionCardProps {
   sectionType: SectionType;

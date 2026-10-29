@@ -1,5 +1,6 @@
 import { CircularProgress } from "@mui/material";
-import React, { forwardRef, ReactElement, Ref, useEffect, useRef, useState } from "react";
+import type React from "react";
+import { forwardRef, type ReactElement, type Ref, useEffect, useRef, useState } from "react";
 
 export interface GenericButtonProps {
   children?: React.ReactNode;

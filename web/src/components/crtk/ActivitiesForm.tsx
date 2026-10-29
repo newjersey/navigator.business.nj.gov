@@ -1,3 +1,6 @@
+import type { CrtkEmailMetadata } from "@businessnjgovnavigator/shared/crtk";
+import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
+import { type ReactElement, useState } from "react";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
@@ -9,9 +12,6 @@ import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsCode } from "@/lib/utils/helpers";
-import { CrtkEmailMetadata } from "@businessnjgovnavigator/shared/crtk";
-import { validateEmail } from "@businessnjgovnavigator/shared/stringHelpers";
-import { ReactElement, useState } from "react";
 
 interface Props {
   onSearchAgain: () => void;
@@ -61,7 +61,7 @@ export const ActivitiesForm = (props: Props): ReactElement => {
     } else {
       setMaterialsError(false);
     }
-    return errorsFields.length > 0 ? true : false;
+    return errorsFields.length > 0;
   };
 
   const onSubmit = async (): Promise<void> => {

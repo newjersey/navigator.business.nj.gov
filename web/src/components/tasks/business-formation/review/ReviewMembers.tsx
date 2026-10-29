@@ -1,9 +1,9 @@
+import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
+import { type ReactElement, useContext } from "react";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext } from "react";
 
 export const ReviewMembers = (): ReactElement => {
   const { Config } = useConfig();

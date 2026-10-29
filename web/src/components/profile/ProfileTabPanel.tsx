@@ -1,3 +1,6 @@
+import { useMediaQuery } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { BackButtonForLayout } from "@/components/njwds-layout/BackButtonForLayout";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
@@ -5,8 +8,6 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
 
 export interface ProfileTabPanelProps {
   children: React.ReactNode;

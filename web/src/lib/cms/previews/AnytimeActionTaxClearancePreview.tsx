@@ -1,13 +1,13 @@
+import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
+import { emptyTaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
+import type { ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { AnytimeActionTaxClearanceCertificate } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificate";
 import { AnytimeActionTaxClearanceCertificateAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateAlert";
-import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateAnytimeActionTask } from "@/test/factories";
-import { ConfigContext } from "@businessnjgovnavigator/shared/contexts";
-import { emptyTaxClearanceCertificateData } from "@businessnjgovnavigator/shared/taxClearanceCertificate";
-import { ReactElement } from "react";
 
 const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);

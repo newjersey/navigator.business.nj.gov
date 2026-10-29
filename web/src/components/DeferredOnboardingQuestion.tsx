@@ -1,3 +1,8 @@
+import {
+  createEmptyProfileData,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
+import { type ReactElement, type ReactNode, useEffect, useState } from "react";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import {
   createDataFormErrorMap,
@@ -8,8 +13,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getFlow } from "@/lib/utils/helpers";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 interface Props {
   children: ReactNode;

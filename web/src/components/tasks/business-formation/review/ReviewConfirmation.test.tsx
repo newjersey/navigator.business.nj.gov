@@ -1,12 +1,12 @@
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
 import {
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 

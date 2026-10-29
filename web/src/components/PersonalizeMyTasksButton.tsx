@@ -1,12 +1,12 @@
+import type { ProfileTabs } from "@businessnjgovnavigator/shared/types";
+import { useMediaQuery } from "@mui/material";
+import { useRouter } from "next/compat/router";
+import type { ReactElement } from "react";
 import { GradientButton } from "@/components/njwds-extended/GradientButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
-import { useMediaQuery } from "@mui/material";
-import { useRouter } from "next/compat/router";
-import { ReactElement } from "react";
 
 interface Props {
   tabValue?: ProfileTabs;

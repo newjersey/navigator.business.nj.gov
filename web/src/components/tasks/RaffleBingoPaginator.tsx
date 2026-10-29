@@ -1,3 +1,7 @@
+import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared";
+import type { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
+import type { TaskProgress } from "@businessnjgovnavigator/shared/userData";
+import { type ReactElement, type ReactNode, useEffect, useRef, useState } from "react";
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
@@ -11,10 +15,6 @@ import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar"
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared";
-import { StepperStep, Task } from "@businessnjgovnavigator/shared/types";
-import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 
 interface Props {
   task: Task;
@@ -40,7 +40,6 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
     getRaffleBingoStep(stepIndex).then((step) => {
       setStep(step);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stepIndex]);
 
   const getStepLabels = async (): Promise<StepperStep[]> => {

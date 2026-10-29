@@ -1,11 +1,14 @@
-/* eslint-disable react/jsx-key */
-import { NavBarLoginButton } from "@/components/navbar/NavBarLoginButton";
-import { NavBarVariant } from "@/components/navbar/NavBarTypes";
+import { getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import type { UserData } from "@businessnjgovnavigator/shared/userData";
+import { type ReactElement, useState } from "react";
 import { NavBarLogoOnlyMobile } from "@/components/navbar/mobile/NavBarLogoOnlyMobile";
 import { NavBarMobileAccountSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileAccountSlideOutMenu";
 import { NavBarMobileHomeLogo } from "@/components/navbar/mobile/NavBarMobileHomeLogo";
 import { NavBarMobileQuickLinksSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu";
 import { NavBarMobileWrapper } from "@/components/navbar/mobile/NavBarMobileWrapper";
+import { NavBarLoginButton } from "@/components/navbar/NavBarLoginButton";
+import { NavBarVariant } from "@/components/navbar/NavBarTypes";
 import {
   AddBusinessItem,
   GetStartedMenuItem,
@@ -18,10 +21,6 @@ import {
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import { getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
-import { Task } from "@businessnjgovnavigator/shared/types";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, useState } from "react";
 
 interface Props {
   scrolled: boolean;
@@ -40,7 +39,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
 
   const isAuthenticated = props.variant === NavBarVariant.FULL_AUTHENTICATED;
   const isLanding = props.variant === NavBarVariant.FULL_LANDING;
-  let currentBusiness = undefined;
+  let currentBusiness;
   if (props.userData) {
     currentBusiness = getCurrentBusiness(props.userData);
   }

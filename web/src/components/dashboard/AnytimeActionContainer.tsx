@@ -1,12 +1,12 @@
+import type {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+} from "@businessnjgovnavigator/shared/types";
+import type { ReactElement } from "react";
 import { AnytimeActionSearch } from "@/components/dashboard/AnytimeActionSearch";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import {
-  AnytimeActionLicenseReinstatement,
-  AnytimeActionTask,
-} from "@businessnjgovnavigator/shared/types";
-import { ReactElement } from "react";
 
 interface Props {
   commonBusinessTasks: (AnytimeActionLicenseReinstatement | AnytimeActionTask)[];

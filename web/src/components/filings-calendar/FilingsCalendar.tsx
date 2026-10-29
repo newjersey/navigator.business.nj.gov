@@ -1,31 +1,31 @@
+import {
+  type Business,
+  getCurrentDate,
+  LookupLegalStructureById,
+  LookupOperatingPhaseById,
+} from "@businessnjgovnavigator/shared";
+import type {
+  LicenseEventType,
+  OperateReference,
+  XrayRenewalCalendarEventType,
+} from "@businessnjgovnavigator/shared/types";
+import { useMediaQuery } from "@mui/material";
+import { type ReactElement, useState } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { EmptyCalendar } from "@/components/filings-calendar/EmptyCalendar";
 import { FilingsCalendarAsList } from "@/components/filings-calendar/FilingsCalendarAsList";
 import { FilingsCalendarGrid } from "@/components/filings-calendar/FilingsCalendarGrid";
 import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsCalendarTaxAccess";
+import { Icon } from "@/components/njwds/Icon";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ThreeYearSelector } from "@/components/njwds-extended/ThreeYearSelector";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import {
-  Business,
-  getCurrentDate,
-  LookupLegalStructureById,
-  LookupOperatingPhaseById,
-} from "@businessnjgovnavigator/shared";
-import {
-  LicenseEventType,
-  OperateReference,
-  XrayRenewalCalendarEventType,
-} from "@businessnjgovnavigator/shared/types";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement, useState } from "react";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;

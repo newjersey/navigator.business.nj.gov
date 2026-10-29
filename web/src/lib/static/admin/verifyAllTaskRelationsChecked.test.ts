@@ -1,8 +1,7 @@
 // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { loadYamlFiles } from "@businessnjgovnavigator/shared/static";
+
 type AnyObject = { [key: string]: any };
 
 function countKeyValuePair(

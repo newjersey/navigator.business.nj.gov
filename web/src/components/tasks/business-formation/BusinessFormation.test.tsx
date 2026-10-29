@@ -1,3 +1,30 @@
+import {
+  defaultDateFormat,
+  type FormationData,
+  type FormationIncorporator,
+  type FormationMember,
+  generateBusiness,
+  generateMunicipality,
+  generateUserDataForBusiness,
+  getCurrentBusiness,
+  getCurrentDate,
+  getCurrentDateInNewJerseyFormatted,
+  type UserData,
+} from "@businessnjgovnavigator/shared";
+import { generateStartingProfileData } from "@businessnjgovnavigator/shared/";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  generateFormationData,
+  generateFormationSubmitResponse,
+  generateGetFilingResponse,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test/";
+import type { Task } from "@businessnjgovnavigator/shared/types";
+import type * as materialUi from "@mui/material";
+import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server.node";
+import { Content } from "@/components/Content";
 import * as api from "@/lib/api-client/apiClient";
 import { getDollarValue } from "@/lib/utils/formatters";
 import {
@@ -11,36 +38,8 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { currentBusiness } from "@/test/mock/withStatefulUserData";
-import {
-  defaultDateFormat,
-  FormationData,
-  FormationIncorporator,
-  FormationMember,
-  generateBusiness,
-  generateMunicipality,
-  generateUserDataForBusiness,
-  getCurrentBusiness,
-  getCurrentDate,
-  getCurrentDateInNewJerseyFormatted,
-  UserData,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  generateFormationData,
-  generateFormationSubmitResponse,
-  generateGetFilingResponse,
-  generateProfileData,
-  generateUserData,
-} from "@businessnjgovnavigator/shared/test/";
-import { Task } from "@businessnjgovnavigator/shared/types";
-
-import { Content } from "@/components/Content";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { generateStartingProfileData } from "@businessnjgovnavigator/shared/";
-import * as materialUi from "@mui/material";
-import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
-import { renderToStaticMarkup } from "react-dom/server.node";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -382,9 +381,9 @@ describe("<BusinessFormation />", () => {
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
-      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
-      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost, 10) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost, 10) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost, 10);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -500,9 +499,9 @@ describe("<BusinessFormation />", () => {
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
-      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
-      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost, 10) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost, 10) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost, 10);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -608,9 +607,9 @@ describe("<BusinessFormation />", () => {
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
-      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
-      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost, 10) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost, 10) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost, 10);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -724,9 +723,9 @@ describe("<BusinessFormation />", () => {
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
-      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
-      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost, 10) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost, 10) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost, 10);
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
 
     await page.submitBillingStep();
@@ -852,9 +851,10 @@ describe("<BusinessFormation />", () => {
     const expectedTotalCost =
       Number.parseInt(
         Config.formation.fields.certificateOfStanding.overrides["limited-partnership"].cost,
+        10,
       ) +
-      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
-      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost, 10) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost, 10);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -975,9 +975,10 @@ describe("<BusinessFormation />", () => {
     const expectedTotalCost =
       Number.parseInt(
         Config.formation.fields.certificateOfStanding.overrides["c-corporation"].cost,
+        10,
       ) +
-      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
-      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost, 10) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost, 10);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
 
@@ -1098,9 +1099,12 @@ describe("<BusinessFormation />", () => {
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides.nonprofit.cost) +
-      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
-      Number.parseInt(Config.formation.fields.officialFormationDocument.overrides.nonprofit.cost);
+      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides.nonprofit.cost, 10) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost, 10) +
+      Number.parseInt(
+        Config.formation.fields.officialFormationDocument.overrides.nonprofit.cost,
+        10,
+      );
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
 
@@ -1215,9 +1219,10 @@ describe("<BusinessFormation />", () => {
     const expectedTotalCost =
       Number.parseInt(
         Config.formation.fields.certificateOfStanding.overrides["foreign-nonprofit"].cost,
+        10,
       ) +
-      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
-      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost, 10) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost, 10);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
 

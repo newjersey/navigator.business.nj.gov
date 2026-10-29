@@ -1,7 +1,7 @@
+import type { ReactElement } from "react";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { ReactElement } from "react";
 
 export const LegalMessage = (): ReactElement => {
   const { Config } = useConfig();

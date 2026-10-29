@@ -1,5 +1,23 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import {
+  arrayOfCountriesObjects,
+  castPublicFilingLegalTypeToFormationType,
+  defaultDateFormat,
+  type FormationFormData,
+  type FormationLegalType,
+  generateFormationFormData,
+  generateFormationIncorporator,
+  generateFormationMember,
+  generateFormationSigner,
+  generateMunicipality,
+  LegalStructures,
+  type ProfileData,
+  type PublicFilingLegalType,
+  randomInt,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import type * as materialUi from "@mui/material";
+import { fireEvent, screen, within } from "@testing-library/react";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
   generateFormationProfileData,
@@ -8,26 +26,6 @@ import {
 } from "@/test/helpers/helpers-formation";
 import { withMarkup } from "@/test/helpers/helpers-testing-library-selectors";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
-import {
-  arrayOfCountriesObjects,
-  castPublicFilingLegalTypeToFormationType,
-  defaultDateFormat,
-  FormationFormData,
-  FormationLegalType,
-  generateFormationFormData,
-  generateFormationIncorporator,
-  generateFormationMember,
-  generateFormationSigner,
-  generateMunicipality,
-  LegalStructures,
-  ProfileData,
-  PublicFilingLegalType,
-  randomInt,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import * as materialUi from "@mui/material";
-import { fireEvent, screen, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -415,10 +413,8 @@ describe("Formation - ReviewStep", () => {
       async (legalStructure) => {
         await renderStep({ legalStructureId: legalStructure }, { members: [] });
         if (shouldShowMembersSectionNoMembers(legalStructure)) {
-          /* eslint-disable-next-line jest/no-conditional-expect */
           expect(screen.getByTestId("review-members")).toBeInTheDocument();
         } else {
-          /* eslint-disable-next-line jest/no-conditional-expect */
           expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
         }
       },
@@ -432,10 +428,8 @@ describe("Formation - ReviewStep", () => {
           { members: [generateFormationMember({})] },
         );
         if (legalStructure === "limited-partnership") {
-          /* eslint-disable-next-line jest/no-conditional-expect */
           expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
         } else {
-          /* eslint-disable-next-line jest/no-conditional-expect */
           expect(screen.getByTestId("review-members")).toBeInTheDocument();
         }
       },
@@ -459,7 +453,6 @@ describe("Formation - ReviewStep", () => {
         { addressCountry: "US", businessLocationType: "US" },
       );
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         screen.queryByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, {
           exact: false,
         }),
@@ -472,7 +465,6 @@ describe("Formation - ReviewStep", () => {
         { addressCountry: "US", businessLocationType: "INTL" },
       );
       expect(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         screen.getByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, {
           exact: false,
         }),

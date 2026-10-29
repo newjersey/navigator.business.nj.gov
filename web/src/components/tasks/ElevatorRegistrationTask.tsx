@@ -1,12 +1,20 @@
-import { Content } from "@/components/Content";
-import { TaskHeader } from "@/components/TaskHeader";
+import type {
+  ElevatorSafetyAddress,
+  ElevatorSafetyRegistrationSummary,
+} from "@businessnjgovnavigator/shared/elevatorSafety";
+import type { ElevatorRegistrationSearchError, Task } from "@businessnjgovnavigator/shared/types";
+import { Box, Tab, Tabs } from "@mui/material";
+import type React from "react";
+import { type ReactElement, useContext, useState } from "react";
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
+import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Icon } from "@/components/njwds/Icon";
 import { getTabId, getTabPanelId, TabPanel } from "@/components/TabPanel";
+import { TaskHeader } from "@/components/TaskHeader";
 import { CheckElevatorRegistrationStatus } from "@/components/tasks/CheckElevatorRegistrationStatus";
 import { ElevatorRegistrationStatusSummary } from "@/components/tasks/ElevatorRegistrationStatusSummary";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -17,13 +25,6 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-import {
-  ElevatorSafetyAddress,
-  ElevatorSafetyRegistrationSummary,
-} from "@businessnjgovnavigator/shared/elevatorSafety";
-import { ElevatorRegistrationSearchError, Task } from "@businessnjgovnavigator/shared/types";
-import { Box, Tab, Tabs } from "@mui/material";
-import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {
   task: Task;
@@ -48,7 +49,7 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
   const { municipalities } = useContext(HousingMunicipalitiesContext);
   const { Config } = useConfig();
 
-  const onSelectTab = (event: React.SyntheticEvent, newValue: number): void => {
+  const onSelectTab = (_event: React.SyntheticEvent, newValue: number): void => {
     analytics.event.task_elevator_registration.click.check_my_elevator_application_status_tab_click();
     setTabIndex(newValue);
   };

@@ -1,8 +1,8 @@
+import type { PropsWithChildren, ReactElement } from "react";
 import {
   CALLOUT_STYLES,
-  MiniCalloutProps,
+  type MiniCalloutProps,
 } from "@/components/njwds-extended/callout/calloutHelpers";
-import type { PropsWithChildren, ReactElement } from "react";
 
 export const MiniCallout = (props: PropsWithChildren<MiniCalloutProps>): ReactElement => {
   const styling = CALLOUT_STYLES[props.calloutType];

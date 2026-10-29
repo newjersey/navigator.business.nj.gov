@@ -1,10 +1,10 @@
+import type { ConfigType } from "@businessnjgovnavigator/shared/contexts";
+import type { ActionTile } from "@businessnjgovnavigator/shared/types";
+import { useRouter } from "next/compat/router";
+import type { ReactElement } from "react";
 import { LandingPageActionTile } from "@/components/LandingPageActionTile";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { navigateToUrl } from "@/lib/utils/navigation";
-import { ActionTile } from "@businessnjgovnavigator/shared/types";
-import { ConfigType } from "@businessnjgovnavigator/shared/contexts";
-import { useRouter } from "next/compat/router";
-import { ReactElement } from "react";
 
 export type TileConfig = Omit<ActionTile, "onClick"> & {
   flow: "starting" | "out-of-state" | "up-and-running";

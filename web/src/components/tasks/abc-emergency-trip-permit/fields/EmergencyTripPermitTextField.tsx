@@ -1,4 +1,6 @@
-import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
+import type { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
+import { type ReactElement, useContext } from "react";
+import { GenericTextField, type GenericTextFieldProps } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import {
   getErrorStateForEmergencyTripPermitField,
@@ -10,13 +12,9 @@ import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContex
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useEmergencyTripPermitErrors } from "@/lib/data-hooks/useEmergencyTripPermitErrors";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { EmergencyTripPermitUserEnteredFieldNames } from "@businessnjgovnavigator/shared";
-import { ReactElement, useContext } from "react";
 
-export interface Props extends Omit<
-  GenericTextFieldProps,
-  "value" | "fieldName" | "error" | "inputWidth"
-> {
+export interface Props
+  extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
   fieldName: EmergencyTripPermitUserEnteredFieldNames;
   secondaryLabel?: string;
   readOnly?: boolean;

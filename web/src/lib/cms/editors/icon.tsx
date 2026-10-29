@@ -22,7 +22,6 @@ export default {
   pattern: /:::icon[^:]+:::/g,
   collapsed: false,
   summary: "{{fields.title}}",
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fromBlock: (match: any): { type: string; body: string } => {
     const string = match[0];
     const openCurlyIndex = string.indexOf("{");

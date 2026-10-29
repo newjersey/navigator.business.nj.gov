@@ -1,11 +1,11 @@
+import { useMediaQuery } from "@mui/material";
+import { useRouter } from "next/compat/router";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import { useMediaQuery } from "@mui/material";
-import { useRouter } from "next/compat/router";
-import { ReactElement } from "react";
 
 interface Props {
   isCTAButtonHidden?: boolean;

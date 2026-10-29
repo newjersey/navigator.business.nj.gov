@@ -1,6 +1,6 @@
+import { fireEvent, render, screen } from "@testing-library/react";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import analytics from "@/lib/utils/analytics";
-import { fireEvent, render, screen } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
   return {

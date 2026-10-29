@@ -1,4 +1,4 @@
-import { Dispatch, Reducer } from "react";
+import type { Dispatch, Reducer } from "react";
 
 export type UserActionType = "LOGIN" | "LOGOUT" | "LOGIN_GUEST";
 
@@ -31,7 +31,7 @@ export interface AuthContextType {
 
 export type AuthReducer = Reducer<AuthState, AuthAction>;
 
-export const authReducer: AuthReducer = (state: AuthState, action: AuthAction): AuthState => {
+export const authReducer: AuthReducer = (_state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
     case "LOGIN":
       return {

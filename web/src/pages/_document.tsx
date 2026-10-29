@@ -1,14 +1,14 @@
-import { GTM_ID } from "@/lib/utils/analytics";
 import Document, {
-  DocumentContext,
-  DocumentInitialProps,
+  type DocumentContext,
+  type DocumentInitialProps,
   Head,
   Html,
   Main,
   NextScript,
 } from "next/document";
 import Script from "next/script";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+import { GTM_ID } from "@/lib/utils/analytics";
 
 function getFaviconPath(): string {
   const baseURL = new URL(process.env.NEXT_PUBLIC_WEB_BASE_URL ?? "http://localhost:3000");

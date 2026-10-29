@@ -1,3 +1,17 @@
+import {
+  type Business,
+  type BusinessPersona,
+  generateBusiness,
+  generateProfileData,
+  generateUserDataForBusiness,
+  LookupIndustryById,
+  type OperatingPhaseId,
+  type TaxFilingState,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import type { NaicsCodeObject, Task } from "@businessnjgovnavigator/shared/types";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
@@ -6,25 +20,11 @@ import { generateTask } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  BusinessPersona,
-  LookupIndustryById,
-  OperatingPhaseId,
-  TaxFilingState,
-  generateBusiness,
-  generateProfileData,
-  generateUserDataForBusiness,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import { NaicsCodeObject, Task } from "@businessnjgovnavigator/shared/types";
-import { ThemeProvider, createTheme } from "@mui/material";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -32,9 +32,7 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 jest.mock("@/lib/static/records/naics2022.json", () => {
   const industryId = "auto-body-repair";
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { generateNaicsObject } = require("@/test/factories");
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { LookupIndustryById } = require("@businessnjgovnavigator/shared");
   const naicsCodes = LookupIndustryById(industryId).naicsCodes?.split(",");
   const thing = generateNaicsObject({ SixDigitDescription: "test1234" }, naicsCodes[0]);
@@ -42,7 +40,6 @@ jest.mock("@/lib/static/records/naics2022.json", () => {
 });
 
 const validIndustryId = "auto-body-repair";
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const validNaicsCode = LookupIndustryById(validIndustryId).naicsCodes!.split(",")[0];
 const Config = getMergedConfig();
 
@@ -97,7 +94,6 @@ describe("<NaicsCodeTask />", () => {
     it("links description to NAICS code website", () => {
       renderPage();
 
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const description = (NaicsCodes as NaicsCodeObject[]).find((element) => {
         return element.SixDigitCode?.toString() === validNaicsCode;
       })!.SixDigitDescription!;

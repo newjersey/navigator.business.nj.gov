@@ -1,3 +1,38 @@
+import {
+  type Business,
+  type BusinessUser,
+  castPublicFilingLegalTypeToFormationType,
+  createEmptyFormationFormData,
+  type DateObject,
+  type FormationSubmitResponse,
+  generateBusiness,
+  generateBusinessNameAvailability,
+  generateFormationIncorporator,
+  generateMunicipality,
+  generateUser,
+  generateUserDataForBusiness,
+  type Municipality,
+  type NameAvailability,
+  type ProfileData,
+  type PublicFilingLegalType,
+  publicFilingLegalTypes,
+  randomInt,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  generateFormationData,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
+import {
+  defaultDisplayDateFormat,
+  type FormationDbaDisplayContent,
+  type FormationSignedAddress,
+  type Task,
+} from "@businessnjgovnavigator/shared/types";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
@@ -13,41 +48,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  BusinessUser,
-  castPublicFilingLegalTypeToFormationType,
-  createEmptyFormationFormData,
-  DateObject,
-  FormationSubmitResponse,
-  generateBusiness,
-  generateBusinessNameAvailability,
-  generateFormationIncorporator,
-  generateMunicipality,
-  generateUser,
-  generateUserDataForBusiness,
-  Municipality,
-  NameAvailability,
-  ProfileData,
-  PublicFilingLegalType,
-  publicFilingLegalTypes,
-  randomInt,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  generateFormationData,
-  generateProfileData,
-  generateUserData,
-} from "@businessnjgovnavigator/shared/test";
-import {
-  defaultDisplayDateFormat,
-  FormationDbaDisplayContent,
-  FormationSignedAddress,
-  Task,
-} from "@businessnjgovnavigator/shared/types";
-import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 
@@ -450,7 +450,6 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     testId: string,
     params: { type: string },
   ): HTMLInputElement => {
-    // eslint-disable-next-line testing-library/no-node-access
     return screen
       .getByTestId(testId)
       .querySelector(`input[type="${params.type}"]`) as HTMLInputElement;

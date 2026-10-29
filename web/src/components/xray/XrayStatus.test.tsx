@@ -1,6 +1,3 @@
-import { XrayStatus } from "@/components/xray/XrayStatus";
-import { generateEmptyFormationData } from "@/test/factories";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import {
   generateBusiness,
@@ -12,6 +9,9 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import type { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { XrayStatus } from "@/components/xray/XrayStatus";
+import { generateEmptyFormationData } from "@/test/factories";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 const Config = getMergedConfig();
 

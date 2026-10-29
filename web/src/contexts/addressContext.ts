@@ -1,5 +1,5 @@
-import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/";
-import { createContext, Dispatch, SetStateAction } from "react";
+import { emptyFormationAddressData, type FormationAddress } from "@businessnjgovnavigator/shared/";
+import { createContext, type Dispatch, type SetStateAction } from "react";
 
 interface AddressState {
   formationAddressData: FormationAddress;

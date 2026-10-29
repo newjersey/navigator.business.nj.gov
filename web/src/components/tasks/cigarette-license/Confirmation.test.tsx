@@ -1,14 +1,14 @@
-import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
-import * as api from "@/lib/api-client/apiClient";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { CigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
+import type { CigaretteLicenseData } from "@businessnjgovnavigator/shared/cigaretteLicense";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import { formatUTCDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { ConfirmationPage } from "@/components/tasks/cigarette-license/Confirmation";
+import * as api from "@/lib/api-client/apiClient";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 const Config = getMergedConfig();
 

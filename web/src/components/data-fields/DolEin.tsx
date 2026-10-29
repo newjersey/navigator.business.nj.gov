@@ -1,14 +1,14 @@
+import { DOL_EIN_CHARACTERS } from "@businessnjgovnavigator/shared";
+import { InputAdornment } from "@mui/material";
+import { type ReactElement, useContext, useState } from "react";
 import { Content } from "@/components/Content";
 import { ScrollableFormFieldWrapper } from "@/components/data-fields/ScrollableFormFieldWrapper";
 import { GenericTextField } from "@/components/GenericTextField";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext, useState } from "react";
-import { formatDolEin } from "@/lib/domain-logic/formatDolEin";
-import { ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
-import { InputAdornment } from "@mui/material";
+import { type ShowHideStatus, ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptValue } from "@/lib/api-client/apiClient";
-import { DOL_EIN_CHARACTERS } from "@businessnjgovnavigator/shared";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { formatDolEin } from "@/lib/domain-logic/formatDolEin";
 
 interface Props {
   editable?: boolean;

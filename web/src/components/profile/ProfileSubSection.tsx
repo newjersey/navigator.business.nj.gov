@@ -1,6 +1,6 @@
+import type { ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileTabSubText } from "@/components/profile/ProfileTabSubText";
-import { ReactElement } from "react";
 
 interface Props {
   heading: string;

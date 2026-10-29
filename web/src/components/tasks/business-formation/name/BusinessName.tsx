@@ -1,26 +1,26 @@
-import { Content } from "@/components/Content";
-import { WithErrorBar } from "@/components/WithErrorBar";
-import { Alert } from "@/components/njwds-extended/Alert";
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { getErrorStateForFormationField } from "@/components/tasks/business-formation/getErrorStateForFormationField";
-import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { MediaQueries } from "@/lib/PageSizes";
-import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { templateEval } from "@/lib/utils/helpers";
-import { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
+import type { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
 import { TextField, useMediaQuery } from "@mui/material";
 import {
-  FocusEvent,
-  FormEvent,
-  ReactElement,
+  type FocusEvent,
+  type FormEvent,
+  type ReactElement,
   useContext,
   useEffect,
   useRef,
   useState,
 } from "react";
+import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { getErrorStateForFormationField } from "@/components/tasks/business-formation/getErrorStateForFormationField";
+import { WithErrorBar } from "@/components/WithErrorBar";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
+import { templateEval } from "@/lib/utils/helpers";
 
 export const BusinessName = (): ReactElement => {
   const FIELD_NAME = "businessName";

@@ -1,11 +1,11 @@
-import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import {
-  Business,
+  type Business,
   isNexusBusiness,
   LookupOperatingPhaseById,
-  ProfileData,
+  type ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
+import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 
 export const displayHomedBaseBusinessQuestion = (
   profileData: ProfileData,

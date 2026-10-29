@@ -1,3 +1,24 @@
+import {
+  type Business,
+  createEmptyFormationFormData,
+  type FormationData,
+  type FormationLegalType,
+  generateBusiness,
+  generateUserDataForBusiness,
+  getCurrentBusiness,
+  getCurrentDateISOString,
+  OperatingPhases,
+  type UserData,
+} from "@businessnjgovnavigator/shared";
+import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import {
+  generateFormationData,
+  generateGetFilingResponse,
+  generateProfileData,
+  generateTaxFilingData,
+  randomLegalStructure,
+} from "@businessnjgovnavigator/shared/test";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access/TaxAccessStepTwo";
 import * as api from "@/lib/api-client/apiClient";
 import analytics from "@/lib/utils/analytics";
@@ -10,27 +31,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  createEmptyFormationFormData,
-  FormationData,
-  FormationLegalType,
-  generateBusiness,
-  generateUserDataForBusiness,
-  getCurrentBusiness,
-  getCurrentDateISOString,
-  OperatingPhases,
-  UserData,
-} from "@businessnjgovnavigator/shared";
-import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import {
-  generateFormationData,
-  generateGetFilingResponse,
-  generateProfileData,
-  generateTaxFilingData,
-  randomLegalStructure,
-} from "@businessnjgovnavigator/shared/test";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

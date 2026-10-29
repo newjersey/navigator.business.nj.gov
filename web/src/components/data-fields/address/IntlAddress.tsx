@@ -1,3 +1,4 @@
+import { type ReactElement, useContext } from "react";
 import { CountryDropdown } from "@/components/CountryDropdown";
 import { AddressLines1And2 } from "@/components/data-fields/address/AddressLines1And2";
 import { AddressTextField } from "@/components/data-fields/address/AddressTextField";
@@ -7,7 +8,6 @@ import { AddressContext } from "@/contexts/addressContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { formatIntlPostalCode } from "@/lib/domain-logic/formatIntlPostalCode";
-import { ReactElement, useContext } from "react";
 
 interface Props {
   onValidation: () => void;

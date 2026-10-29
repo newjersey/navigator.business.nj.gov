@@ -1,4 +1,3 @@
-/* eslint-disable cypress/no-unnecessary-waiting */
 describe("check login support page [smoke]", () => {
   beforeEach(() => {
     cy.visit("/support/login");

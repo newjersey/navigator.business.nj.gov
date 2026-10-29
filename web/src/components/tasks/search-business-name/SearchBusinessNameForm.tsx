@@ -1,22 +1,29 @@
+import {
+  determineIfNexusDbaNameNeeded,
+  emptyProfileData,
+  type NameAvailability,
+} from "@businessnjgovnavigator/shared/";
+import type { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
+import { TextField } from "@mui/material";
+import {
+  type FormEvent,
+  type ReactElement,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { AvailableProps } from "@/components/tasks/search-business-name/AvailableProps";
-import { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
+import type { AvailableProps } from "@/components/tasks/search-business-name/AvailableProps";
+import type { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval } from "@/lib/utils/helpers";
-import {
-  determineIfNexusDbaNameNeeded,
-  emptyProfileData,
-  NameAvailability,
-} from "@businessnjgovnavigator/shared/";
-import { SearchBusinessNameError } from "@businessnjgovnavigator/shared/types";
-import { TextField } from "@mui/material";
-import { FormEvent, ReactElement, useCallback, useContext, useEffect, useRef } from "react";
 
 type SearchBusinessNameFormConfig = {
   searchButtonText: string;
@@ -138,7 +145,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
         })
         .catch(() => {});
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [searchBusinessName],
   );
 

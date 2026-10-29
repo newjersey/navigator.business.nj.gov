@@ -1,17 +1,17 @@
-import { TaxPin, Props as TaxPinProps } from "@/components/data-fields/TaxPin";
-import * as api from "@/lib/api-client/apiClient";
-import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
-  ProfileData,
+  type ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { TaxPin, type Props as TaxPinProps } from "@/components/data-fields/TaxPin";
+import * as api from "@/lib/api-client/apiClient";
+import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

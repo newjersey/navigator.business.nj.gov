@@ -1,11 +1,11 @@
+import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
+import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, useContext } from "react";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
-import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
-import { useRouter } from "next/compat/router";
-import { ReactElement, useContext } from "react";
 
 export const DevOnlyResetUserDataButton = (): ReactElement => {
   const { state } = useContext(AuthContext);

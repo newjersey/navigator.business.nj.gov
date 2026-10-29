@@ -1,3 +1,9 @@
+import { formationTaskId } from "@businessnjgovnavigator/shared/";
+import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import type { TaskProgress } from "@businessnjgovnavigator/shared/userData";
+import { useRouter } from "next/compat/router";
+import { type ReactElement, type ReactNode, useEffect, useState } from "react";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
@@ -10,12 +16,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import { formationTaskId } from "@businessnjgovnavigator/shared/";
-import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
-import { useRouter } from "next/compat/router";
-import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 interface Props {
   taskId: string;

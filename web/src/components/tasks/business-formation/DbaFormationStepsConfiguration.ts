@@ -1,4 +1,4 @@
-import { DbaStepNames } from "@businessnjgovnavigator/shared/types";
+import type { DbaStepNames } from "@businessnjgovnavigator/shared/types";
 
 export const DbaFormationStepsConfiguration: {
   name: DbaStepNames;

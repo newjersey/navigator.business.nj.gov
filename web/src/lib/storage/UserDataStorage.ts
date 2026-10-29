@@ -1,9 +1,9 @@
-import { BrowserStorage, BrowserStorageFactory } from "@/lib/storage/BrowserStorage";
 import {
+  type RegistrationStatus,
   registrationStatusList,
-  RegistrationStatus,
-  UserData,
+  type UserData,
 } from "@businessnjgovnavigator/shared/";
+import { type BrowserStorage, BrowserStorageFactory } from "@/lib/storage/BrowserStorage";
 
 export interface UserDataStorage {
   get: (userId: string) => UserData | undefined;
