@@ -3,6 +3,8 @@ allowBuilds:
   "@swc/core": true
   esbuild: true
   sharp: true
+minimumReleaseAgeExclude:
+  - '@newjersey/feedback-widget@0.8.3'
 onlyBuiltDependencies:
   - "@parcel/watcher"
   - "@swc/core"
