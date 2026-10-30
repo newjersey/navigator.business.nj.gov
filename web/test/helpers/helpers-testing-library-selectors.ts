@@ -57,12 +57,15 @@ type Query = (f: MatcherFunction) => HTMLElement;
 
 export const withMarkup = (query: Query) => {
   return (text: string): HTMLElement => {
-    return query((_content: string, node: any) => {
-      const hasText = (node: HTMLElement): boolean => {
+    return query((_content: string, node: Element | null) => {
+      if (!node) {
+        return false;
+      }
+      const hasText = (node: Element): boolean => {
         return node.textContent === text;
       };
       const childrenDontHaveText = [...node.children].every((child) => {
-        return !hasText(child as HTMLElement);
+        return !hasText(child);
       });
       return hasText(node) && childrenDontHaveText;
     });

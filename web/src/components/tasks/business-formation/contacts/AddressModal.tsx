@@ -79,7 +79,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       required: boolean;
       maxLen: number;
       labelWhenMissing: string;
-      dataField: keyof T;
+      dataField: keyof T & keyof typeof Config.formation.addressModal;
     }): { label: string; invalid: boolean } => {
       const exists = !!data[params.dataField];
       const isTooLong = (data[params.dataField] as string)?.length > params.maxLen;
@@ -89,7 +89,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
         label = params.labelWhenMissing;
       } else if (isTooLong) {
         label = templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: (Config.formation.addressModal as any)[params.dataField].label,
+          field: Config.formation.addressModal[params.dataField].label,
           maxLen: params.maxLen.toString(),
         });
       }

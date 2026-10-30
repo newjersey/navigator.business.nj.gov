@@ -48,9 +48,9 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
 
   props.required && RegisterForOnSubmit(() => state.profileData[props.fieldName] !== undefined);
 
-  const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const value = props.choices.find((val) => {
-      return val.toString() === (event.target.value as any).toString();
+      return val.toString() === event.target.value;
     }) as T;
     setProfileData({
       ...state.profileData,

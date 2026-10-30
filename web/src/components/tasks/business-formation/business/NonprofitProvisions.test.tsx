@@ -74,7 +74,7 @@ describe("<NonprofitProvisions />", () => {
     { radio: "nonprofitBoardMemberRightsSpecified", terms: "nonprofitBoardMemberRightsTerms" },
     { radio: "nonprofitTrusteesMethodSpecified", terms: "nonprofitTrusteesMethodTerms" },
     { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" },
-  ];
+  ] as const;
 
   describe("hasNonprofitBoardMembers", () => {
     it("resets all other provisions questions and terms when No is selected", async () => {
@@ -172,14 +172,10 @@ describe("<NonprofitProvisions />", () => {
       );
       const termsLabel = camelCaseToSentence(args.terms);
       expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
-      expect(
-        screen.queryByText((Config.formation.fields as any)[args.radio].body),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields[args.radio].body)).not.toBeInTheDocument();
 
       page.chooseRadio(`hasNonprofitBoardMembers-true`);
-      expect(
-        screen.getByText((Config.formation.fields as any)[args.radio].body),
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields[args.radio].body)).toBeInTheDocument();
     });
 
     it(`does not show ${args.radio} when board members is undefined`, async () => {
@@ -189,14 +185,10 @@ describe("<NonprofitProvisions />", () => {
       );
       const termsLabel = camelCaseToSentence(args.terms);
       expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
-      expect(
-        screen.queryByText((Config.formation.fields as any)[args.radio].body),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields[args.radio].body)).not.toBeInTheDocument();
 
       page.chooseRadio(`hasNonprofitBoardMembers-true`);
-      expect(
-        screen.getByText((Config.formation.fields as any)[args.radio].body),
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields[args.radio].body)).toBeInTheDocument();
     });
   });
 });

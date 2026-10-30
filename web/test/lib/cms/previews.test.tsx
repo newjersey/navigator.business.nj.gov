@@ -60,7 +60,7 @@ const createPreviewProps = (slug: string): PreviewProps => {
   return {
     entry: {
       getIn: (): Record<string, unknown> => data,
-      toJS: (): Record<string, unknown> => data,
+      toJS: (): { slug: string } => data,
     },
     fieldsMetaData: {},
     widgetFor: (): undefined => undefined,

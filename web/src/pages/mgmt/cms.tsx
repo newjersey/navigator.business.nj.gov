@@ -14,6 +14,7 @@ import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { WriteOnceReadOnlyNoSpaceControl } from "@/lib/cms/fields/writeoncereadonlynospacefield";
 import { recentsFrontmatterFormat } from "@/lib/cms/formatters/recentsFrontmatterFormat";
 import { applyTheme } from "@/lib/cms/helpers/applyTheme";
+import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/AnytimeActionLicenseReinstatementPreview";
 import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
@@ -260,7 +261,7 @@ const registerAsCannabisLicensePreview = (CMS: typeof CmsType, names: string[]):
 const registerPreview = (
   CMS: typeof CmsType,
   name: string,
-  preview: (props: any) => ReactElement,
+  preview: (props: PreviewProps) => ReactElement,
 ): void => {
   CMS.registerPreviewTemplate(name, applyTheme(preview));
 };

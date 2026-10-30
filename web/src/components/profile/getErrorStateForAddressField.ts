@@ -9,6 +9,7 @@ import type {
   AddressFields,
   FieldsForAddressErrorHandling,
 } from "@businessnjgovnavigator/shared/types";
+import { getFormationFieldText } from "@/components/tasks/business-formation/formationFieldContent";
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
@@ -26,8 +27,8 @@ export const getErrorStateForAddressField = ({
     field: field,
     label:
       field === "addressZipCode" && formationAddressData.addressState?.shortCode !== "NJ"
-        ? (Config.formation.fields as any)[field].foreign.errorUS
-        : (Config.formation.fields as any)[field].error,
+        ? Config.formation.fields[field].foreign.errorUS
+        : getFormationFieldText(Config.formation.fields, field, "error"),
   };
 
   const fieldWithMaxLength = (params: {
@@ -40,7 +41,7 @@ export const getErrorStateForAddressField = ({
     const isValid = params.required ? exists && !isTooLong : !isTooLong;
     if (isTooLong) {
       label = templateEval(Config.formation.general.maximumLengthErrorText, {
-        field: (Config.formation.fields as any)[field].label,
+        field: getFormationFieldText(Config.formation.fields, field, "label"),
         maxLen: params.maxLen.toString(),
       });
     }

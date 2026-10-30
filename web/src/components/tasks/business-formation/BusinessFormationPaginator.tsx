@@ -21,6 +21,7 @@ import {
   BusinessFormationStepsConfiguration,
   LookupNameByStepIndex,
 } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import { getFormationFieldText } from "@/components/tasks/business-formation/formationFieldContent";
 import {
   getFieldByApiField,
   UNKNOWN_API_ERROR_FIELD,
@@ -520,7 +521,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
           configFieldName = getConfigFieldByLegalStructure(state.formationFormData.legalType);
         }
 
-        const label = (Config.formation.fields as any)[configFieldName].label;
+        const label = getFormationFieldText(Config.formation.fields, configFieldName, "label");
         return {
           name: configFieldName,
           label,

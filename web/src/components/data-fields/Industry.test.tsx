@@ -111,15 +111,23 @@ describe("<Industry />", () => {
       businessPersonas.map((persona) => {
         const choices = industrySpecificDataChoices[el.fieldName];
         const flowConfig = Config.profileDefaults.fields;
-        const fieldContent = Config.profileDefaults.fields[el.fieldName as keyof typeof flowConfig]
-          .default as any;
+        const fieldContent: Readonly<Record<string, unknown>> =
+          Config.profileDefaults.fields[el.fieldName as keyof typeof flowConfig].default;
+
+        const getContentText = (contentKey: string): string => {
+          const text = fieldContent[contentKey];
+          if (typeof text !== "string") {
+            throw new Error(`${contentKey} missing in config for ${el.fieldName}`);
+          }
+          return text;
+        };
 
         const chooseRadioWithContent = (div: HTMLElement, choice: string): void => {
           fireEvent.click(
             within(div).getByText(
-              fieldContent[
-                `radioButton${capitalizeFirstLetter(kebabSnakeSentenceToCamelCase(choice))}Text`
-              ],
+              getContentText(
+                `radioButton${capitalizeFirstLetter(kebabSnakeSentenceToCamelCase(choice))}Text`,
+              ),
             ),
           );
         };
@@ -140,7 +148,7 @@ describe("<Industry />", () => {
           ).toContainHTML(
             renderToStaticMarkup(
               Content({
-                children: fieldContent.description,
+                children: getContentText("description"),
               }),
             ),
           );

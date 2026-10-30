@@ -7,7 +7,7 @@ import { Heading } from "@/components/njwds-extended/Heading";
 export const ContextInfoElement = forwardRef(
   (
     props: { isVisible: boolean; header: string; markdown: string; close?: () => void },
-    ref?: React.LegacyRef<any>,
+    ref?: React.Ref<HTMLElement>,
   ): ReactElement => {
     return (
       <aside

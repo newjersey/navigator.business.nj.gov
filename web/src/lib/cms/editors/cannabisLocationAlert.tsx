@@ -5,7 +5,7 @@ export default {
   pattern: /:::cannabisLocationAlert[^:]+:::/g,
   collapsed: false,
   summary: "{{fields.title}}",
-  fromBlock: (match: any): { body: string } => {
+  fromBlock: (match: RegExpMatchArray): { body: string } => {
     const string = match[0];
     const startLength = ":::cannabisLocationAlert".length;
     const endLength = ":::".length;
