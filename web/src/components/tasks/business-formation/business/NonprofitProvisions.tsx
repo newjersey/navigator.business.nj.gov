@@ -6,6 +6,8 @@ import { FormationTextArea } from "@/components/tasks/business-formation/busines
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 
+export type NonprofitProvisionRadioField = Extract<FormationFields, `nonprofit${string}Specified`>;
+
 export const NonprofitProvisions = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
@@ -56,7 +58,7 @@ export const NonprofitProvisions = (): ReactElement => {
     );
   };
 
-  const getFormBylawsRadio = (fieldName: FormationFields): ReactNode => {
+  const getFormBylawsRadio = (fieldName: NonprofitProvisionRadioField): ReactNode => {
     return (
       <FormationRadio
         fieldName={fieldName}
@@ -69,7 +71,7 @@ export const NonprofitProvisions = (): ReactElement => {
           });
           setFieldsInteracted([fieldName]);
         }}
-        title={(Config.formation.fields as any)[fieldName].body}
+        title={Config.formation.fields[fieldName].body}
       />
     );
   };

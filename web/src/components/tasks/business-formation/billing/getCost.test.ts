@@ -7,6 +7,11 @@ import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 
 const Config = getMergedConfig();
 
+const getOverrideCost = (
+  overrides: Partial<Record<FormationLegalType, { readonly cost: string }>>,
+  legalType: FormationLegalType,
+): number => Number.parseInt(overrides[legalType]?.cost ?? "", 10);
+
 describe("getCost", () => {
   for (const legalStructureId of allFormationLegalTypes) {
     describe("certified copy of formation", () => {
@@ -40,10 +45,9 @@ describe("getCost", () => {
 
     for (const legalStructureId of overriddenCostIds) {
       it(`uses override cost for ${legalStructureId}`, async () => {
-        const standingCost = Number.parseInt(
-          (Config.formation.fields.officialFormationDocument.overrides as any)[legalStructureId]
-            .cost,
-          10,
+        const standingCost = getOverrideCost(
+          Config.formation.fields.officialFormationDocument.overrides,
+          legalStructureId,
         );
         expect(getCost("officialFormationDocument", legalStructureId)).toEqual(standingCost);
       });
@@ -72,9 +76,9 @@ describe("getCost", () => {
 
     for (const legalStructureId of overriddenCostIds) {
       it(`uses override cost for ${legalStructureId}`, async () => {
-        const standingCost = Number.parseInt(
-          (Config.formation.fields.certificateOfStanding.overrides as any)[legalStructureId].cost,
-          10,
+        const standingCost = getOverrideCost(
+          Config.formation.fields.certificateOfStanding.overrides,
+          legalStructureId,
         );
         expect(getCost("certificateOfStanding", legalStructureId)).toEqual(standingCost);
       });

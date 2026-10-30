@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { flattenObject, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 
 describe("useMountEffectWhenDefined", () => {
   interface Props {
@@ -62,5 +62,24 @@ describe("useMountEffectWhenDefined", () => {
 
     rerender({ value: ["changed", "changed"] });
     expect(mockFn).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("flattenObject", () => {
+  it("lifts nested object keys to the top level", () => {
+    expect(flattenObject({ a: 1, b: { c: 2, d: { e: 3 } } })).toEqual({ a: 1, c: 2, e: 3 });
+  });
+
+  it("keeps arrays and null as values", () => {
+    expect(flattenObject({ list: [1, { x: 2 }], empty: null })).toEqual({
+      list: [1, { x: 2 }],
+      empty: null,
+    });
+  });
+
+  it("lets a later key overwrite an earlier one with the same name", () => {
+    expect(flattenObject({ label: "outer", nested: { label: "inner" } })).toEqual({
+      label: "inner",
+    });
   });
 });

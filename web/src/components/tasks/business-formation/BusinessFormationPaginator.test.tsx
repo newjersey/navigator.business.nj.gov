@@ -33,6 +33,7 @@ import {
   BusinessFormationStepsConfiguration,
   LookupStepIndexByName,
 } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import { getFormationFieldText } from "@/components/tasks/business-formation/formationFieldContent";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import analytics from "@/lib/utils/analytics";
@@ -1465,7 +1466,7 @@ describe("<BusinessFormationPaginator />", () => {
               Config.formation.errorBanner.errorOnStep,
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent(
-              (Config.formation.fields as any)[fieldName as string].label,
+              getFormationFieldText(Config.formation.fields, fieldName, "label"),
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
           });
@@ -2071,7 +2072,7 @@ describe("<BusinessFormationPaginator />", () => {
               Config.formation.errorBanner.errorOnStep,
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent(
-              (Config.formation.fields as any)[fieldName as string].label,
+              getFormationFieldText(Config.formation.fields, fieldName, "label"),
             );
             expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
           });

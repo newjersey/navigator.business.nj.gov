@@ -23,6 +23,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   fieldName: string;
   inputWidth?: "full" | "default" | "reduced";
   fieldOptions?: TextFieldProps;
+  // biome-ignore lint/suspicious/noExplicitAny: forwardRef erases generics, so callers' form-data types can't reach this prop
   formContext?: Context<FormContextType<any>>;
   onValidation?: (fieldName: string, invalid: boolean, value?: string) => void;
   additionalValidationIsValid?: (value: string) => boolean;

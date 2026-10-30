@@ -7,7 +7,7 @@ import { isUserData } from "@/lib/utils/helpers";
 import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers/helpers-utilities";
 import { mockEncryptFields } from "@/test/mock/mockEncryptFields";
 
-type GenericData = Record<string, any>;
+type GenericData = object;
 
 export const statefulDataHelpers = (
   spy: jest.Mock,
