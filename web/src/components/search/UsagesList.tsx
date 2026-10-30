@@ -47,8 +47,6 @@ const UsageListElement = (props: UsageListElementProps): ReactElement => {
   if (props.usageArray !== undefined) {
     const collapsedMatches = props.usageArray.slice(0, COLLAPSED_LEN);
 
-    console.log(props.usageArray);
-
     return (
       <li>
         {props.myKey}

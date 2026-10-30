@@ -105,6 +105,7 @@ const shouldDebugUserDataFetch = (stage: string | undefined): boolean => {
 const userDataFetcher = async (key: UserDataKey): Promise<UserData> => {
   const [resource, userId] = key;
   if (shouldDebugUserDataFetch(process.env.STAGE)) {
+    // biome-ignore lint/suspicious/noConsole: stage-gated dev diagnostic, covered by useUserData tests
     console.debug("Fetching SWR user data", { resource, userId });
   }
 
