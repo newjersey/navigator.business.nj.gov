@@ -67,6 +67,24 @@ const cognitoPayload = ({ id }: { id: string }): any => {
   };
 };
 
+const profileNJCognitoPayload = ({ residentId }: { residentId?: string }): jwt.JwtPayload => {
+  return {
+    sub: "some-sub",
+    email: "some-email",
+    identities: [
+      {
+        dateCreated: "some-date",
+        issuer: "some-issuer",
+        primary: "true",
+        providerName: "ProfileNJ",
+        providerType: "OIDC",
+        userId: "auth0|abc123",
+      },
+    ],
+    ...(residentId === undefined ? {} : { "custom:profileNJResidentId": residentId }),
+  };
+};
+
 const fiftyNineMinutesAgo: string = getCurrentDate()
   .subtract(1, "hour")
   .add(1, "minute")
@@ -252,6 +270,65 @@ describe("userRouter", () => {
 
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(response.body).toEqual({ error: "error" });
+    });
+
+    describe("ProfileNJ users", () => {
+      const originalStage = process.env.STAGE;
+
+      afterEach(() => {
+        process.env.STAGE = originalStage;
+      });
+
+      it("gets the user keyed on the resident ID", async () => {
+        const userData = generateUserData({ user: generateUser({ id: "r-1" }) });
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        mockJwt.decode.mockReturnValue(profileNJCognitoPayload({ residentId: "r-1" }));
+
+        const response = await request(app)
+          .get(`/users/r-1`)
+          .set("Authorization", "Bearer profile-nj-token");
+
+        expect(response.status).toEqual(StatusCodes.OK);
+        expect(stubUnifiedDataClient.get).toHaveBeenCalledWith("r-1");
+      });
+
+      it("returns an error without reading the database when the token has no resident ID", async () => {
+        mockJwt.decode.mockReturnValue(profileNJCognitoPayload({}));
+
+        const response = await request(app)
+          .get(`/users/auth0|abc123`)
+          .set("Authorization", "Bearer profile-nj-token");
+
+        expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+        expect(stubUnifiedDataClient.get).not.toHaveBeenCalled();
+      });
+
+      it("returns NOT_FOUND instead of auto-creating an empty user in local", async () => {
+        process.env.STAGE = "local";
+        stubUnifiedDataClient.get.mockRejectedValue(new Error("Not found"));
+        mockJwt.decode.mockReturnValue(profileNJCognitoPayload({ residentId: "r-1" }));
+
+        const response = await request(app)
+          .get(`/users/r-1`)
+          .set("Authorization", "Bearer profile-nj-token");
+
+        expect(response.status).toEqual(StatusCodes.NOT_FOUND);
+        expect(stubUnifiedDataClient.put).not.toHaveBeenCalled();
+      });
+
+      it("still auto-creates an empty user for a myNJ user in local", async () => {
+        process.env.STAGE = "local";
+        stubUnifiedDataClient.get.mockRejectedValue(new Error("Not found"));
+        stubUnifiedDataClient.put.mockImplementation((userData) => Promise.resolve(userData));
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+
+        const response = await request(app)
+          .get(`/users/123`)
+          .set("Authorization", "Bearer user-123-token");
+
+        expect(response.status).toEqual(StatusCodes.OK);
+        expect(stubUnifiedDataClient.put).toHaveBeenCalledTimes(1);
+      });
     });
 
     describe("updating roadmap cards", () => {
@@ -1324,6 +1401,57 @@ describe("userRouter", () => {
             mockGovDeliveryClient,
           ),
         );
+      });
+
+      it("does not subscribe to the newsletter when creating a user's first record", async () => {
+        mockJwt.decode.mockReturnValue(profileNJCognitoPayload({ residentId: "r-1" }));
+        stubUnifiedDataClient.get.mockRejectedValue(new Error("Not found"));
+        stubUnifiedDataClient.put.mockImplementation((userData) => Promise.resolve(userData));
+        const newUser = generateUserData({
+          user: generateUser({ id: "r-1", receiveNewsletter: true, email: "jane@example.com" }),
+        });
+
+        const response = await request(appWithGovDelivery)
+          .post("/users")
+          .send(newUser)
+          .set("Authorization", "Bearer profile-nj-token");
+
+        expect(response.status).toBe(StatusCodes.OK);
+        expect(mockGovDeliveryClient.subscribe).not.toHaveBeenCalled();
+        expect(stubUnifiedDataClient.put).toHaveBeenCalledTimes(1);
+      });
+
+      it("still subscribes a myNJ user whose first record is created by POST", async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        stubUnifiedDataClient.get.mockRejectedValue(new Error("Not found"));
+        stubUnifiedDataClient.put.mockImplementation((userData) => Promise.resolve(userData));
+        const newUser = generateUserData({
+          user: generateUser({ id: "123", receiveNewsletter: true, email: "mynj@example.com" }),
+        });
+
+        await request(appWithGovDelivery)
+          .post("/users")
+          .send(newUser)
+          .set("Authorization", "Bearer user-123-token");
+
+        expect(mockGovDeliveryClient.subscribe).toHaveBeenCalledWith("mynj@example.com");
+      });
+
+      it("subscribes when an existing record turns on the newsletter", async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        stubUnifiedDataClient.put.mockImplementation((userData) => Promise.resolve(userData));
+        const oldUser = generateUserData({
+          user: generateUser({ id: "123", receiveNewsletter: false, email: "test@example.com" }),
+        });
+        const newUser = { ...oldUser, user: { ...oldUser.user, receiveNewsletter: true } };
+        stubUnifiedDataClient.get.mockResolvedValue(oldUser);
+
+        await request(appWithGovDelivery)
+          .post("/users")
+          .send(newUser)
+          .set("Authorization", "Bearer user-123-token");
+
+        expect(mockGovDeliveryClient.subscribe).toHaveBeenCalledWith("test@example.com");
       });
 
       it.skip("returns 502 with govDeliveryError body and does NOT call databaseClient.put when subscribe fails", async () => {
