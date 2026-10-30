@@ -6,8 +6,6 @@ import {
 import { type Context, useContext, useEffect, useMemo } from "react";
 import { useMountEffect } from "@/lib/utils/helpers";
 
-const debug = false;
-
 export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   fieldName: keyof T,
   context?: Context<FormContextType<T, FieldError>>,
@@ -29,15 +27,10 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
     isValidFunc: () => boolean,
     preventRefreshWhenUnmounted?: boolean,
   ): void => {
-    debug && console.log("register func");
     useMountEffect(() => {
-      debug && console.log("mounted");
-      debug && console.log(fieldName);
       reducer({ type: FieldStateActionKind.REGISTER, payload: { field: fieldName } });
 
       return (): void => {
-        debug && console.log("unmounted");
-        debug && console.log(fieldName);
         if (!preventRefreshWhenUnmounted) {
           reducer({ type: FieldStateActionKind.UNREGISTER, payload: { field: fieldName } });
         }
@@ -45,9 +38,6 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
     });
 
     useEffect(() => {
-      debug && console.log("validation");
-      debug && console.log(runValidations);
-      debug && console.log(isValidFunc());
       runValidations &&
         fieldStates[fieldName].updated !== undefined &&
         reducer({
@@ -58,7 +48,6 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   };
 
   const setIsValid = (isValid: boolean): void => {
-    debug && console.log("custom validation");
     reducer({
       type: FieldStateActionKind.VALIDATION,
       payload: { field: fieldName, invalid: !isValid, errorTypes },
