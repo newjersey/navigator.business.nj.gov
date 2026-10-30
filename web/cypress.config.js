@@ -37,6 +37,7 @@ export default defineConfig({
         lighthouse: lighthouse(),
         pa11y: pa11y(),
         log(message) {
+          // biome-ignore lint/suspicious/noConsole: Cypress log task prints to the terminal running Cypress
           console.log(message);
           return null;
         },

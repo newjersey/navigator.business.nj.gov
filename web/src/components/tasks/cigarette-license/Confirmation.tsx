@@ -70,7 +70,7 @@ export const ConfirmationPage = (props: Props): ReactElement => {
         data: currentBusiness?.cigaretteLicenseData || cigLicenseData,
       };
     } catch (error) {
-      console.log("API call failed:", error);
+      console.error("API call failed:", error);
       return {
         success: false,
         data: cigLicenseData,
@@ -93,7 +93,7 @@ export const ConfirmationPage = (props: Props): ReactElement => {
           setStatus("RETRY");
         }
       } catch (error) {
-        console.log("Payment confirmation check failed:", error);
+        console.error("Payment confirmation check failed:", error);
         setStatus("RETRY");
       }
     };

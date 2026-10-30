@@ -12,6 +12,7 @@ class CustomJSDOMEnvironment extends JSDOMEnvironment {
     if (event.name === "hook_failure" || event.name === "test_fn_failure") {
       const testRandomSeeds = this.global.testRandomSeeds as Map<string, string>;
       const currentTestName = this.getVmContext()?.expect.getState().currentTestName;
+      // biome-ignore lint/suspicious/noConsole: prints the replay seed to the terminal when a test fails
       console.log(
         `Failed ${currentTestName}. Replicate Math.random() values by running with RANDOM_SEED=${testRandomSeeds.get(
           currentTestName,
