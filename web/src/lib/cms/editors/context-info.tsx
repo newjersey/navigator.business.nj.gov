@@ -1,3 +1,12 @@
+interface ContextInfoBlock {
+  preFormat: string;
+  preContext: string;
+  title: string;
+  contextId: string;
+  postContext: string;
+  postFormat: string;
+}
+
 export default {
   id: "context-info",
   label: "Contextual Information Block",
@@ -51,7 +60,7 @@ export default {
   pattern: /(^\**)(.*)`(.*)\|(.*)`(.*?)(\**$)/,
   collapsed: true,
   summary: "{{fields.title}}",
-  fromBlock: (match: any): any => {
+  fromBlock: (match: RegExpMatchArray): ContextInfoBlock => {
     return {
       preFormat: match[1],
       preContext: match[2],
@@ -62,27 +71,13 @@ export default {
     };
   },
   // Function to create a text block from an instance of this component
-  toBlock: (obj: {
-    preFormat: string;
-    preContext: string;
-    title: string;
-    contextId: string;
-    postContext: string;
-    postFormat: string;
-  }): string => {
+  toBlock: (obj: ContextInfoBlock): string => {
     return `${obj.preFormat || ""}${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${
       obj.contextId || ""
     }\` ${(obj.postContext || "").trim()}${obj.postFormat || ""}`;
   },
 
-  toPreview: (obj: {
-    preFormat: string;
-    preContext: string;
-    title: string;
-    contextId: string;
-    postContext: string;
-    postFormat: string;
-  }): string => {
+  toPreview: (obj: ContextInfoBlock): string => {
     return `${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${
       obj.contextId || ""
     }\` ${(obj.postContext || "").trim()}`;

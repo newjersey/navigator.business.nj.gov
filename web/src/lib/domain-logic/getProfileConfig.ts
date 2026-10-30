@@ -3,17 +3,20 @@ import type { BusinessPersona } from "@businessnjgovnavigator/shared/profileData
 import type { profileFieldsFromConfig } from "@businessnjgovnavigator/shared/types";
 import { merge } from "lodash";
 
-type FieldContent = {
-  default: any;
-  overrides?: {
-    STARTING?: any;
-    OWNING?: any;
-    FOREIGN?: any;
-  };
-};
+type ProfileFieldText = string | Readonly<Record<string, string>>;
+type ProfileFieldContent = Readonly<Record<string, ProfileFieldText>>;
 
-interface ProfileFieldContent extends FieldContent {
-  onboarding: FieldContent;
+interface FieldContent {
+  readonly default: ProfileFieldContent;
+  readonly overrides?: {
+    readonly STARTING?: ProfileFieldContent;
+    readonly OWNING?: ProfileFieldContent;
+    readonly FOREIGN?: ProfileFieldContent;
+  };
+}
+
+interface ProfileFieldConfig extends FieldContent {
+  readonly onboarding?: FieldContent;
 }
 
 export const getProfileConfig = (props: {
@@ -21,10 +24,9 @@ export const getProfileConfig = (props: {
   fieldName: keyof typeof profileFieldsFromConfig;
   onboarding?: boolean;
   persona?: BusinessPersona;
+  // biome-ignore lint/suspicious/noExplicitAny: callers assign the result to per-field content types; a typed return needs a cross-caller retype
 }): any => {
-  const configForField: ProfileFieldContent = (props.config.profileDefaults as any).fields[
-    props.fieldName
-  ];
+  const configForField: ProfileFieldConfig = props.config.profileDefaults.fields[props.fieldName];
 
   let mergedConfig = configForField.default;
 

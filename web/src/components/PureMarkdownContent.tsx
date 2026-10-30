@@ -1,4 +1,5 @@
-import type { ReactElement } from "react";
+import type { Root } from "mdast";
+import type { ReactElement, ReactNode } from "react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import rehypeReact from "rehype-react";
 import remarkDirective from "remark-directive";
@@ -8,9 +9,13 @@ import remarkRehype from "remark-rehype";
 import { type Plugin, unified } from "unified";
 import { visit } from "unist-util-visit";
 
+// rehype-react builds each component's props from markdown at runtime, so their prop types
+// can't be checked against the markdown here; `never` accepts a component with any props.
+export type MarkdownComponents = Record<string, (props: never) => ReactNode>;
+
 interface Props {
   children: string;
-  components?: { [key: string]: ({ children }: { children: string[] }) => ReactElement };
+  components?: MarkdownComponents;
 }
 
 export const PureMarkdownContent = (props: Props): ReactElement => {
@@ -31,53 +36,52 @@ export const PureMarkdownContent = (props: Props): ReactElement => {
 };
 
 const customRemarkPlugin: Plugin = () => {
-  return (tree: any) => {
+  return (tree: Root) => {
     visit(tree, (node) => {
       if (node.type === "containerDirective") {
         const data = node.data || (node.data = {});
         data.hName = node.name;
+        // remark-directive always parses attributes into an object of strings; the types also allow
+        // null for hand-built nodes.
+        const attributes = node.attributes ?? {};
         switch (node.name) {
           case "cannabisLocationAlert":
           case "note":
-            data.hProperties = { header: node.attributes.header };
+            data.hProperties = { header: attributes.header };
             break;
           case "largeCallout":
             data.hProperties = {
               headerText:
-                node.attributes.headerText?.length > 0 ? node.attributes.headerText : undefined,
-              showHeader: node.attributes.showHeader === "true",
-              calloutType: node.attributes.calloutType,
+                (attributes.headerText?.length ?? 0) > 0 ? attributes.headerText : undefined,
+              showHeader: attributes.showHeader === "true",
+              calloutType: attributes.calloutType,
               amountIconText:
-                node.attributes.amountIconText?.length > 0
-                  ? node.attributes.amountIconText
+                (attributes.amountIconText?.length ?? 0) > 0
+                  ? attributes.amountIconText
                   : undefined,
               filingTypeIconText:
-                node.attributes.filingTypeIconText?.length > 0
-                  ? node.attributes.filingTypeIconText
+                (attributes.filingTypeIconText?.length ?? 0) > 0
+                  ? attributes.filingTypeIconText
                   : undefined,
               frequencyIconText:
-                node.attributes.frequencyIconText?.length > 0
-                  ? node.attributes.frequencyIconText
+                (attributes.frequencyIconText?.length ?? 0) > 0
+                  ? attributes.frequencyIconText
                   : undefined,
               phoneIconText:
-                node.attributes.phoneIconText?.length > 0
-                  ? node.attributes.phoneIconText
-                  : undefined,
+                (attributes.phoneIconText?.length ?? 0) > 0 ? attributes.phoneIconText : undefined,
               emailIconText:
-                node.attributes.emailIconText?.length > 0
-                  ? node.attributes.emailIconText
-                  : undefined,
+                (attributes.emailIconText?.length ?? 0) > 0 ? attributes.emailIconText : undefined,
             };
             break;
           case "miniCallout":
             data.hProperties = {
-              headerText: node.attributes.headerText,
-              calloutType: node.attributes.calloutType,
-              hideIcon: node.attributes.hideIcon === "true",
+              headerText: attributes.headerText,
+              calloutType: attributes.calloutType,
+              hideIcon: attributes.hideIcon === "true",
             };
             break;
           case "icon":
-            data.hProperties = { type: node.attributes.type };
+            data.hProperties = { type: attributes.type ?? undefined };
             break;
         }
       } else {

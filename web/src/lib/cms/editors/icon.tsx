@@ -22,7 +22,7 @@ export default {
   pattern: /:::icon[^:]+:::/g,
   collapsed: false,
   summary: "{{fields.title}}",
-  fromBlock: (match: any): { type: string; body: string } => {
+  fromBlock: (match: RegExpMatchArray): { type: string | undefined; body: string } => {
     const string = match[0];
     const openCurlyIndex = string.indexOf("{");
     const closedCurlyIndex = string.indexOf("}");

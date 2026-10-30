@@ -229,7 +229,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const showEscapeModal = escapeModalOpen || isBlocked;
 
   const redirect = (
-    params?: { [key: string]: any },
+    params?: Record<string, string>,
     routerType = router!.push,
   ): Promise<boolean> => {
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
@@ -399,7 +399,7 @@ const ProfilePage = (props: Props): ReactElement => {
               setPostSaveRedirectUrl(null);
             } else {
               allowNavigation();
-              await redirect({ success: true });
+              await redirect({ success: "true" });
             }
           })
           .catch((error) => {

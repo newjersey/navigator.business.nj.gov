@@ -24,6 +24,7 @@ import {
   isBusinessStartDateValid,
   isDateValid,
 } from "@/components/tasks/business-formation/business/BusinessDateValidators";
+import { getFormationFieldText } from "@/components/tasks/business-formation/formationFieldContent";
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
@@ -74,7 +75,7 @@ export const getErrorStateForFormationField = (inputParams: {
 
   const errorState = {
     field: field,
-    label: (Config.formation.fields as any)[field].label,
+    label: getFormationFieldText(Config.formation.fields, field, "label"),
   };
 
   // foreignGoodStandingFile must be first in order to prevent type errors
@@ -95,10 +96,10 @@ export const getErrorStateForFormationField = (inputParams: {
     let label = errorState.label;
     const isValid = params.required ? exists && !isTooLong : !isTooLong;
     if (params.required && !exists) {
-      label = (Config.formation.fields as any)[field].error;
+      label = getFormationFieldText(Config.formation.fields, field, "error");
     } else if (isTooLong) {
       label = templateEval(Config.formation.general.maximumLengthErrorText, {
-        field: (Config.formation.fields as any)[field].label,
+        field: getFormationFieldText(Config.formation.fields, field, "label"),
         maxLen: params.maxLen.toString(),
       });
     }
@@ -165,7 +166,8 @@ export const getErrorStateForFormationField = (inputParams: {
     const isAvailable = businessNameAvailability?.status === "AVAILABLE";
     const isValid = exists && isAvailable;
     const isConfirmed = formationFormData.businessNameConfirmation;
-    let label = errorState.label;
+    // biome-ignore lint/suspicious/noExplicitAny: shared FormationFieldErrorState.label is string, but an unavailable name clears it to undefined (tested)
+    let label: any = errorState.label;
 
     if (!exists) {
       label = Config.formation.fields.businessName.errorInlineEmpty;
@@ -244,7 +246,7 @@ export const getErrorStateForFormationField = (inputParams: {
         ...errorState,
         hasError: true,
         label: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: (Config.formation.fields as any)[field].label,
+          field: getFormationFieldText(Config.formation.fields, field, "label"),
           maxLen: SIGNER_NAME_MAX_CHAR.toString(),
         }),
       };
@@ -308,7 +310,7 @@ export const getErrorStateForFormationField = (inputParams: {
 
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: ["addressMunicipality", "addressLine1", "addressLine2"],
-      label: (Config.formation.fields as any)[field].error,
+      label: Config.formation.fields[field].error,
     });
 
     inRange = isZipCodeNj(formationFormData[field]);
@@ -332,7 +334,7 @@ export const getErrorStateForFormationField = (inputParams: {
     });
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: ["addressMunicipality", "addressZipCode", "addressLine2"],
-      label: (Config.formation.fields as any)[field].error,
+      label: Config.formation.fields[field].error,
     });
 
     return combineErrorStates({
@@ -344,7 +346,7 @@ export const getErrorStateForFormationField = (inputParams: {
   if (field === "addressMunicipality") {
     return fieldWithAssociatedFields({
       associatedFields: ["addressLine1", "addressZipCode", "addressLine2"],
-      label: (Config.formation.fields as any)[field].error,
+      label: Config.formation.fields[field].error,
     });
   }
 
