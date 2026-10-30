@@ -47,11 +47,7 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
         hideDivider
         name="year-selector"
         dropdownClassName="padding-x-05 bg-transparent"
-        wrapper={(props: {
-          children: ReactNode;
-          className?: string;
-          [key: string]: any;
-        }): ReactElement => (
+        wrapper={(props: { children: ReactNode; className?: string }): ReactElement => (
           <div
             {...props}
             className={`radius-lg font-body-2xs text-normal margin-x-05 usa-button padding-05 ${props.className}`}

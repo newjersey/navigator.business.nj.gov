@@ -1,9 +1,14 @@
+interface PreviewEntry {
+  getIn: (keyPath: string[]) => unknown;
+  toJS: () => { slug: string };
+}
+
 export type PreviewProps = {
-  entry?: any;
+  entry: PreviewEntry;
   window: Window;
   document: Document;
-  fieldsMetaData: any;
-  widgetsFor: (string: string) => any;
-  widgetFor: (string: string) => any;
-  getAsset: (string: string) => any;
+  fieldsMetaData: unknown;
+  widgetsFor: (string: string) => unknown;
+  widgetFor: (string: string) => unknown;
+  getAsset: (string: string) => unknown;
 };

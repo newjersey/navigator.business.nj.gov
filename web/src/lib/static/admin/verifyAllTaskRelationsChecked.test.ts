@@ -2,13 +2,7 @@
 
 import { loadYamlFiles } from "@businessnjgovnavigator/shared/static";
 
-type AnyObject = { [key: string]: any };
-
-function countKeyValuePair(
-  data: AnyObject | AnyObject[],
-  searchKey: string,
-  searchValue: any,
-): number {
+function countKeyValuePair(data: unknown, searchKey: string, searchValue: unknown): number {
   let count = 0;
 
   if (Array.isArray(data)) {

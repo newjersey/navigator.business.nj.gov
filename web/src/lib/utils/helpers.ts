@@ -271,24 +271,23 @@ export function isUserData(data: UserData | ProfileData): data is UserData {
   return (data as UserData).user !== undefined;
 }
 
-export const flattenObject = (obj: any): any => {
-  const flattened: any = {};
+const isNonArrayObject = (value: unknown): value is Readonly<Record<string, unknown>> => {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+};
 
-  if (typeof obj === "object" && obj !== null && !Array.isArray(obj)) {
-    for (const key of Object.keys(obj)) {
-      const value = obj[key];
+export const flattenObject = (obj: Readonly<Record<string, unknown>>): Record<string, unknown> => {
+  const flattened: Record<string, unknown> = {};
+  const entries: Array<[string, unknown]> = Object.entries(obj);
 
-      if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-        Object.assign(flattened, flattenObject(value));
-      } else {
-        flattened[key] = value;
-      }
+  for (const [key, value] of entries) {
+    if (isNonArrayObject(value)) {
+      Object.assign(flattened, flattenObject(value));
+    } else {
+      flattened[key] = value;
     }
-
-    return flattened;
-  } else {
-    return obj;
   }
+
+  return flattened;
 };
 
 export const isForeignCorporation = (legalStructure: FormationLegalType): boolean => {

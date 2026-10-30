@@ -5,21 +5,39 @@ import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { Icon } from "@/components/njwds/Icon";
 import { Alert } from "@/components/njwds-extended/Alert";
+import type {
+  LargeCalloutProps,
+  MiniCalloutProps,
+} from "@/components/njwds-extended/callout/calloutHelpers";
 import { LargeCallout } from "@/components/njwds-extended/callout/LargeCallout";
 import { MiniCallout } from "@/components/njwds-extended/callout/MiniCallout";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { PureMarkdownContent } from "@/components/PureMarkdownContent";
+import { type MarkdownComponents, PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import type { InlineIconType } from "@/lib/cms/types";
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 
+interface MarkdownElementProps {
+  children?: ReactNode;
+}
+
+interface MarkdownLinkProps {
+  children?: string[];
+  href?: string;
+  title?: string;
+}
+
+interface MarkdownIconProps extends MarkdownElementProps {
+  type?: string;
+}
+
 interface ContentProps {
   children: string;
   className?: string;
   style?: CSSProperties;
-  overrides?: { [key: string]: ({ children }: { children: string[] }) => ReactElement };
+  overrides?: MarkdownComponents;
   onClick?: (url?: string) => void;
   customComponents?: Record<string, ReactElement>;
   showLaunchIcon?: boolean;
@@ -33,31 +51,31 @@ export const Content = (props: ContentProps): ReactNode => {
 
   const components = {
     code: isTest
-      ? (props: any): ReactElement => {
+      ? (props: { children: string[] }): ReactElement => {
           return <>{`\`${props.children}\``}</>;
         }
       : ContextualInfoLink,
     a: Link(props.onClick, props.showLaunchIcon ?? true),
-    h2: (props: any): ReactElement => {
+    h2: (props: MarkdownElementProps): ReactElement => {
       return (
         <Heading level={2} style={{ marginTop: "1rem" }}>
           {props.children}
         </Heading>
       );
     },
-    h5: (props: any): ReactElement => {
+    h5: (props: MarkdownElementProps): ReactElement => {
       return <div className="h5-styling">{props.children}</div>;
     },
-    h6: (props: any): ReactElement => {
+    h6: (props: MarkdownElementProps): ReactElement => {
       return <div className="h6-styling">{props.children}</div>;
     },
     hr: (): ReactElement => {
       return <HorizontalLine />;
     },
-    note: (props: any): ReactElement => {
+    note: (props: MarkdownElementProps): ReactElement => {
       return <Alert variant="note">{props.children}</Alert>;
     },
-    largeCallout: (props: any): ReactElement => {
+    largeCallout: (props: LargeCalloutProps & MarkdownElementProps): ReactElement => {
       return (
         <LargeCallout
           showHeader={props.showHeader}
@@ -73,14 +91,14 @@ export const Content = (props: ContentProps): ReactNode => {
         </LargeCallout>
       );
     },
-    miniCallout: (props: any): ReactElement => {
+    miniCallout: (props: MiniCalloutProps & MarkdownElementProps): ReactElement => {
       return (
         <MiniCallout calloutType={props.calloutType} hideIcon={props.hideIcon}>
           {props.children}
         </MiniCallout>
       );
     },
-    infoAlert: (props: any): ReactElement => {
+    infoAlert: (props: MarkdownElementProps): ReactElement => {
       return <Alert variant="info">{props.children}</Alert>;
     },
     cannabisLocationAlert: (): ReactElement => (
@@ -94,7 +112,7 @@ export const Content = (props: ContentProps): ReactNode => {
     th: Unformatted,
     td: Unformatted,
     tbody: Unformatted,
-    del: (delProps: any): ReactElement => {
+    del: (delProps: { children: string }): ReactNode => {
       return props.customComponents ? props.customComponents[delProps.children] : delProps.children;
     },
     ...props.overrides,
@@ -107,9 +125,12 @@ export const Content = (props: ContentProps): ReactNode => {
   );
 };
 
-const Link = (onClick?: (url?: string) => void, showLaunchIcon?: boolean): any => {
+const Link = (
+  onClick?: (url?: string) => void,
+  showLaunchIcon?: boolean,
+): ((props: MarkdownLinkProps) => ReactElement) => {
   return Object.assign(
-    (props: any): ReactElement => {
+    (props: MarkdownLinkProps): ReactElement => {
       const childrenContent =
         props.children && Array.isArray(props.children) ? props.children[0] : props.children;
 
@@ -177,11 +198,11 @@ export const ExternalLink = ({
   );
 };
 
-const Unformatted = (props: any): ReactElement => {
+const Unformatted = (props: MarkdownElementProps): ReactElement => {
   return <div>{props.children}</div>;
 };
 
-const OutlineBox = (props: any): ReactElement => {
+const OutlineBox = (props: MarkdownElementProps): ReactElement => {
   return (
     <div className="text-normal padding-2 margin-top-2 border-base-lighter border-1px font-body-2xs">
       {props.children}
@@ -189,7 +210,7 @@ const OutlineBox = (props: any): ReactElement => {
   );
 };
 
-const ListOrCheckbox = (props: any): ReactElement => {
+const ListOrCheckbox = (props: MarkdownElementProps): ReactElement => {
   // rehype-react@8 passes a bare string for single-child list items; normalize to array
   const children: ReactNode[] = Array.isArray(props.children)
     ? props.children
@@ -213,7 +234,7 @@ const ListOrCheckbox = (props: any): ReactElement => {
   return <li>{props.children ?? ""}</li>;
 };
 
-const InlineIcon = (props: any): ReactElement => {
+const InlineIcon = (props: MarkdownIconProps): ReactElement => {
   const getIconByType = (): ReactElement => {
     switch (props.type as InlineIconType) {
       case "green checkmark":

@@ -11,6 +11,7 @@ import { createSignedEmptyFormationObject } from "@/components/tasks/business-fo
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
 import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
+import { getLegalTypeOverride } from "@/components/tasks/business-formation/formationFieldContent";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -28,15 +29,13 @@ export const ContactsStep = (): ReactElement => {
     );
   };
 
-  const getDescription = (field: string): string => {
-    const legalType = state.formationFormData.legalType;
-    const overriddenLegalTypes = Object.keys(
-      (Config.formation.fields as any)[field].overrides ?? {},
-    );
-    if (overriddenLegalTypes.includes(legalType)) {
-      return ((Config.formation.fields as any)[field].overrides as any)[legalType].description;
+  const getDescription = (field: "incorporators"): string => {
+    const fieldContent = Config.formation.fields[field];
+    const override = getLegalTypeOverride(fieldContent, state.formationFormData.legalType);
+    if (override) {
+      return override.description;
     }
-    return (Config.formation.fields as any)[field].description;
+    return fieldContent.description;
   };
 
   return (

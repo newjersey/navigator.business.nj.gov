@@ -54,8 +54,13 @@ const getPageHelper = async (
     lastVisitedPageIndex: 0,
   };
 
-  const business = generateBusiness({ profileData, formationData });
-  (business.profileData as any).municipality = formationData.formationFormData.addressMunicipality;
+  const business = generateBusiness({
+    profileData: {
+      ...profileData,
+      municipality: formationData.formationFormData.addressMunicipality,
+    },
+    formationData,
+  });
   const page = preparePage({ business, displayContent });
   await page.stepperClickToBusinessStep();
   return page;
@@ -128,7 +133,7 @@ describe("<MainBusinessAddressNj />", () => {
       ["addressLine1", ""],
       ["addressMunicipality", undefined],
       ["addressZipCode", ""],
-    ])(
+    ] as const)(
       "shows an error on submission when missing address field for %s",
       async (field, initialValue) => {
         const page = await getPageHelper({
@@ -138,7 +143,7 @@ describe("<MainBusinessAddressNj />", () => {
         await attemptApiSubmission(page);
 
         expect(screen.getByTestId("alert-error")).toHaveTextContent(
-          (Config.formation.fields as any)[field].label,
+          Config.formation.fields[field].label,
         );
       },
     );

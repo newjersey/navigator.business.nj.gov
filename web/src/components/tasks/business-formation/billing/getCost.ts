@@ -1,14 +1,18 @@
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
 import type { FormationLegalType } from "@businessnjgovnavigator/shared/formationData";
+import { getLegalTypeOverride } from "@/components/tasks/business-formation/formationFieldContent";
 
-export const getCost = (field: string, legalType: FormationLegalType): number => {
+type FormationDocumentField =
+  | "officialFormationDocument"
+  | "certifiedCopyOfFormationDocument"
+  | "certificateOfStanding";
+
+export const getCost = (field: FormationDocumentField, legalType: FormationLegalType): number => {
   const Config = getMergedConfig();
-  const overriddenLegalTypes = Object.keys((Config.formation.fields as any)[field].overrides ?? {});
-  if (overriddenLegalTypes.includes(legalType)) {
-    return Number.parseInt(
-      ((Config.formation.fields as any)[field].overrides as any)[legalType].cost,
-      10,
-    );
+  const fieldContent = Config.formation.fields[field];
+  const override = getLegalTypeOverride(fieldContent, legalType);
+  if (override) {
+    return Number.parseInt(override.cost, 10);
   }
-  return Number.parseInt((Config.formation.fields as any)[field].cost, 10);
+  return Number.parseInt(fieldContent.cost, 10);
 };

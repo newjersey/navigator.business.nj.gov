@@ -23,6 +23,7 @@ import {
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
+import { getFormationFieldText } from "@/components/tasks/business-formation/formationFieldContent";
 import {
   getErrorStateForFormationField,
   onlyHasErrorIfEmpty,
@@ -1360,7 +1361,8 @@ describe("getErrorStateForField", () => {
 
           it("inserts label from config", () => {
             const formationFormData = generateFormationFormData({ [field]: undefined });
-            const label = expectedLabel ?? (Config.formation.fields as any)[field].label;
+            const label =
+              expectedLabel ?? getFormationFieldText(Config.formation.fields, field, "label");
             if (!label) {
               throw `label missing in config for ${field}`;
             }
@@ -1402,7 +1404,7 @@ describe("getErrorStateForField", () => {
 
     it("inserts label from config", () => {
       const formationFormData = generateFormationFormData({});
-      const label = (Config.formation.fields as any)[field].errorMessageRequired;
+      const label = Config.formation.fields[field].errorMessageRequired;
       if (!label) {
         throw `label missing in config for ${field}`;
       }
@@ -1437,7 +1439,7 @@ describe("getErrorStateForField", () => {
 
           it("inserts label from config", () => {
             const formationFormData = generateFormationFormData({ [field]: "some-value" });
-            const expectedLabel = (Config.formation.fields as any)[field].label;
+            const expectedLabel = getFormationFieldText(Config.formation.fields, field, "label");
             if (!expectedLabel) {
               throw `label missing in config for ${field}`;
             }

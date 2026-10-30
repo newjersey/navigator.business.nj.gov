@@ -65,6 +65,7 @@ import type {
   AnytimeActionTask,
   CategoryItem,
   Certification,
+  CmsConfig,
   ContextualInfoFile,
   CovidItem,
   FaqItem,
@@ -100,7 +101,7 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 
 interface Props {
-  netlifyConfig: any;
+  netlifyConfig: unknown;
   noAuth: boolean;
   tasks: Task[];
   licenseTasks: Task[];
@@ -120,7 +121,7 @@ interface Props {
   anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   pageMetaData: PageMetadata[];
-  cmsConfig: any;
+  cmsConfig: CmsConfig;
   formationDbaContent: FormationDbaDisplayContent;
   addOns: IndustryRoadmap[];
   industries: Industry[];

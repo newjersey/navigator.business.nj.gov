@@ -2,6 +2,7 @@ import type { FormationFields, InFormInBylaws } from "@businessnjgovnavigator/sh
 import { Fragment, type ReactElement, useContext } from "react";
 import { Content } from "@/components/Content";
 import { ExpandCollapseString } from "@/components/ExpandCollapseString";
+import type { NonprofitProvisionRadioField } from "@/components/tasks/business-formation/business/NonprofitProvisions";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { ReviewNotEntered } from "@/components/tasks/review-screen-components/ReviewNotEntered";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
@@ -18,7 +19,7 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
     fieldName,
     value,
   }: {
-    fieldName: FormationFields;
+    fieldName: NonprofitProvisionRadioField;
     value: InFormInBylaws;
   }): ReactElement => {
     const endOfSentence = ((): string => {
@@ -32,7 +33,7 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
       }
     })();
 
-    const bodyText = ((Config.formation.fields as any)[fieldName] as any).body;
+    const bodyText = Config.formation.fields[fieldName].body;
 
     return (
       <div data-testid={fieldName}>
@@ -48,7 +49,10 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
     );
   };
 
-  const provisionsToDisplay: Array<{ radioField: FormationFields; termsField: FormationFields }> = [
+  const provisionsToDisplay: Array<{
+    radioField: NonprofitProvisionRadioField;
+    termsField: FormationFields;
+  }> = [
     {
       radioField: "nonprofitBoardMemberQualificationsSpecified",
       termsField: "nonprofitBoardMemberQualificationsTerms",

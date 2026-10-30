@@ -762,14 +762,14 @@ describe("Formation - ReviewStep", () => {
       { radio: "nonprofitBoardMemberRightsSpecified", terms: "nonprofitBoardMemberRightsTerms" },
       { radio: "nonprofitTrusteesMethodSpecified", terms: "nonprofitTrusteesMethodTerms" },
       { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" },
-    ])("provisions $radio radio questions", (args) => {
+    ] as const)("provisions $radio radio questions", (args) => {
       it(`does not display ${args.radio} when no board members`, async () => {
         await renderStep(
           { legalStructureId },
           { hasNonprofitBoardMembers: false, [args.radio]: "IN_FORM" },
         );
         expect(
-          screen.queryByText(((Config.formation.fields as any)[args.radio] as any).body),
+          screen.queryByText(Config.formation.fields[args.radio].body),
         ).not.toBeInTheDocument();
       });
 
@@ -780,7 +780,7 @@ describe("Formation - ReviewStep", () => {
         );
         const radioReviewSection = within(screen.getByTestId(args.radio));
         expect(
-          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body),
+          radioReviewSection.getByText(Config.formation.fields[args.radio].body),
         ).toBeInTheDocument();
         expect(
           radioReviewSection.getByText(
@@ -811,7 +811,7 @@ describe("Formation - ReviewStep", () => {
         );
         const radioReviewSection = within(screen.getByTestId(args.radio));
         expect(
-          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body),
+          radioReviewSection.getByText(Config.formation.fields[args.radio].body),
         ).toBeInTheDocument();
         expect(
           radioReviewSection.getByText(Config.formation.general.notEntered),
@@ -830,7 +830,7 @@ describe("Formation - ReviewStep", () => {
         );
         const radioReviewSection = within(screen.getByTestId(args.radio));
         expect(
-          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body),
+          radioReviewSection.getByText(Config.formation.fields[args.radio].body),
         ).toBeInTheDocument();
         expect(
           radioReviewSection.getByText(
