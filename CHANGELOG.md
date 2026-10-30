@@ -1,3 +1,10 @@
+## [2026.25.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.25.0...v2026.25.1) (2026-10-30)
+
+
+### Bug Fixes
+
+* [AB#18080](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18080) update feedback widget to 0.8.3 ([#13136](https://github.com/newjersey/navigator.business.nj.gov/issues/13136)) ([ccffe81](https://github.com/newjersey/navigator.business.nj.gov/commit/ccffe81f92af3d6ae29bb32eb824e76ec38c695d))
+
 # [2026.25.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.24.1...v2026.25.0) (2026-10-27)
 
 
