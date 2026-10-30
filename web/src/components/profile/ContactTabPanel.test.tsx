@@ -13,7 +13,9 @@ jest.mock("@/components/profile/ContactInformationTab", () => ({
   ContactInformationTab: (({ clearGovDeliveryError }: { clearGovDeliveryError?: () => void }) => (
     <div data-testid="contact-information-tab">
       {clearGovDeliveryError && (
-        <button onClick={clearGovDeliveryError}>Clear GovDelivery Error</button>
+        <button type="button" onClick={clearGovDeliveryError}>
+          Clear GovDelivery Error
+        </button>
       )}
     </div>
   )) as React.FC<{ clearGovDeliveryError?: () => void }>,

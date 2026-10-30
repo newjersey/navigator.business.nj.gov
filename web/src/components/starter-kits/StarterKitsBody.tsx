@@ -55,7 +55,7 @@ export const StarterKitsBody = (props: StarterKitsBodyProps): ReactElement => {
         </div>
 
         <div className="desktop:grid-col-6 desktop:display-block display-none">
-          <img className="width-100" src="/img/seo-img-main.webp" alt="" role="presentation" />
+          <img className="width-100" src="/img/seo-img-main.webp" alt="" />
         </div>
       </section>
       <section

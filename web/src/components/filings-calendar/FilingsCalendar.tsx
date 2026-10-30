@@ -176,7 +176,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             {renderToggleButton()}
           </div>
         </div>
-        <hr className="bg-base-lighter margin-top-2 margin-bottom-4" aria-hidden={true} />
+        <hr className="bg-base-lighter margin-top-2 margin-bottom-4" role="presentation" />
         {shouldRenderFilingsCalendarTaxAccess(business) && <FilingsCalendarTaxAccess />}
         {business?.taxFilingData?.filings && business?.taxFilingData.filings.length > 0 ? (
           <>

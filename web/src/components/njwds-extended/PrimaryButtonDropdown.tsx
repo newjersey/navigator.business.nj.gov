@@ -71,6 +71,7 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
           />
         </>
       </GenericButton>
+      {/* biome-ignore lint/a11y/useValidAriaRole: undefined removes MUI Popper's default role="tooltip" from this menu */}
       <Popper
         open={open}
         anchorEl={anchorRef.current}

@@ -73,6 +73,7 @@ export const CrtkSearchResult = (props: Props): ReactElement => {
               <>
                 {" "}
                 <button
+                  type="button"
                   onClick={props.onSearchAgain}
                   className="usa-button usa-button--unstyled text-primary text-underline"
                   data-testid="crtk-edit-business-info"

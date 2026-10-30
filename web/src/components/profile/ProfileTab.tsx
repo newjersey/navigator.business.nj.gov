@@ -22,6 +22,7 @@ export const ProfileTab = forwardRef<HTMLButtonElement, Props>(
   (props: Props, ref): ReactElement => {
     return (
       <button
+        type="button"
         id={`tab-${props.tab}`}
         role="tab"
         aria-selected={props.activeTab === props.tab}
@@ -35,7 +36,7 @@ export const ProfileTab = forwardRef<HTMLButtonElement, Props>(
       >
         <div className="profile-tab-left-content">
           {props.tab !== "personalize" || props.activeTab !== "personalize" ? (
-            <img src={`/img/${props.tabIcon}.svg`} alt="" role="presentation" />
+            <img src={`/img/${props.tabIcon}.svg`} alt="" />
           ) : (
             <div className="gradient-star" role="presentation" />
           )}

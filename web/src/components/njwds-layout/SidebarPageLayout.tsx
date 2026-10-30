@@ -48,7 +48,7 @@ export const SidebarPageLayout = ({
                 aria-label="Secondary"
                 className={`${nonWrappingLeftColumn ? "" : "desktop:grid-col-3"}  order-first`}
               >
-                {divider && <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />}
+                {divider && <hr className="margin-bottom-1 margin-top-0" role="presentation" />}
                 {navChildren}
               </nav>
             )}

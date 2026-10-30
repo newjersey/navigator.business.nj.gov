@@ -17,6 +17,7 @@ export const ContextInfoElement = forwardRef(
         ref={ref}
       >
         <button
+          type="button"
           className="fdr fac fjc info-panel-close cursor-pointer"
           aria-label="close panel"
           onClick={props.close}

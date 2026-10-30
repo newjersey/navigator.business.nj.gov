@@ -36,7 +36,6 @@ const Alert = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): Reac
   const variantClass = variant ? `usa-alert--${variant}` : "";
   const noIconClass = noIcon ? " usa-alert--no-icon" : "";
   const roundedClass = rounded ? " radius-md" : "";
-  const alertRole = props.noAlertRole ? {} : { role: "alert" };
   const defaultClassNames = "usa-alert margin-y-2 usa-alert--slim";
   const className = [
     defaultClassNames,
@@ -63,17 +62,24 @@ const Alert = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): Reac
     note: Config.calloutAlerts.note,
   };
 
+  // Only label the alert role: ARIA doesn't allow aria-label on a plain <div>.
+  const alertRoleProps = props.noAlertRole
+    ? {}
+    : {
+        role: "alert",
+        "aria-label": composeAriaGroupLabel(
+          Config.calloutAlerts.calloutAlertGroupTitle,
+          AlertVariantsAriaMapping[props.variant],
+        ),
+      };
+
   return (
     <div
       className={className}
       {...(dataTestid
         ? { "data-testid": dataTestid }
         : { "data-testid": `alert-${props.variant}` })}
-      aria-label={composeAriaGroupLabel(
-        Config.calloutAlerts.calloutAlertGroupTitle,
-        AlertVariantsAriaMapping[props.variant],
-      )}
-      {...alertRole}
+      {...alertRoleProps}
       ref={ref}
       tabIndex={-1}
     >

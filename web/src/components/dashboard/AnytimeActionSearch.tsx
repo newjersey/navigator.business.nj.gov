@@ -223,9 +223,7 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
 
                   input: {
                     ...params.slotProps.input,
-                    startAdornment: (
-                      <img className="" src="/img/search.svg" alt="" role="presentation" />
-                    ),
+                    startAdornment: <img className="" src="/img/search.svg" alt="" />,
                   },
 
                   htmlInput: {
@@ -303,6 +301,7 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
 
             return (
               // must fix for keyboard
+              // biome-ignore lint/a11y/noNoninteractiveElementInteractions: the spread MUI option props give this <li> role="option"
               <li
                 data-testid={`${option.filename}-option`}
                 {..._props}
@@ -317,12 +316,7 @@ export const AnytimeActionSearch = (props: Props): ReactElement => {
                   }
                 }}
               >
-                <img
-                  src="/img/subdirectory_arrow_right.svg"
-                  alt=""
-                  role="presentation"
-                  key={"subdirectory_arrow"}
-                />
+                <img src="/img/subdirectory_arrow_right.svg" alt="" key={"subdirectory_arrow"} />
                 <div className="fdc" key={option.filename}>
                   <AnytimeActionSearchElement secondaryText={descriptionText}>
                     {titleText}
