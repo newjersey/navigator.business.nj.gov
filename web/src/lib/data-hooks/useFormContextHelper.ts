@@ -8,8 +8,6 @@ import {
 } from "@businessnjgovnavigator/shared/types";
 import { type FormEvent, useCallback, useEffect, useReducer, useState } from "react";
 
-const debug = false;
-
 export const useFormContextHelper = <
   T extends ReducedFieldStates<keyof T, FieldError>,
   Tab = unknown,
@@ -40,13 +38,9 @@ export const useFormContextHelper = <
 
   const fieldStatesReducer: FormContextReducer<T> = (prevState, action) => {
     const { type, payload } = action;
-    debug && console.log(type);
-    debug && console.log(payload);
-    debug && console.log(prevState);
 
     switch (type) {
       case FieldStateActionKind.VALIDATION:
-        debug && console.log("reducer");
         if (Array.isArray(payload.field)) {
           return payload.field.reduce((reducer, field) => {
             reducer[field] = {
@@ -91,7 +85,6 @@ export const useFormContextHelper = <
   };
 
   const [fieldStates, fieldStateDispatch] = useReducer(fieldStatesReducer, initState);
-  debug && console.log(fieldStates);
 
   const getErrors = (): FieldError[] =>
     Object.values(fieldStates)
@@ -114,38 +107,24 @@ export const useFormContextHelper = <
       pageChange: boolean,
     ) => void | Promise<void>,
   ) => void = (onSubmitFunc, onChangeFunc) => {
-    debug && console.log("wrapper");
-
     useEffect(() => {
-      debug && console.log("submitEffect");
-
       const stillNeedsUpdates = Object.values(fieldStates).some(
         (k) => (k as FieldStatus<FieldErrorType>).updated === false,
       );
 
-      debug && console.log("submitwrapper");
-
-      debug && console.log(1);
-      debug && console.log(fieldStates);
-      debug && console.log(stillNeedsUpdates);
-      debug && console.log(2);
-
       const valid = isValid();
 
       if (onChangeFunc) {
-        debug && console.log("change func");
         onChangeFunc && onChangeFunc(valid, getErrors(), submitted || stagingTab !== undefined);
       }
 
       if (!stillNeedsUpdates) {
         if (valid) {
           if (submitted) {
-            debug && console.log("runs submit");
             onSubmitFunc();
           }
 
           if (stagingTab) {
-            debug && console.log("sets tab");
             setTab(stagingTab);
           }
         }
@@ -157,7 +136,6 @@ export const useFormContextHelper = <
 
   const onSubmit = useCallback(
     (event?: FormEvent<HTMLFormElement>): void => {
-      debug && console.log("submit");
       event?.preventDefault();
       !submitted && setSubmitted(true);
     },
@@ -166,15 +144,12 @@ export const useFormContextHelper = <
 
   const onTabChange = useCallback(
     (_tab: Tab): void => {
-      debug && console.log("tab");
-      debug && console.log(_tab);
       if (JSON.stringify(_tab) !== JSON.stringify(tab)) setStagingTab(_tab);
     },
     [tab],
   );
 
   const isValid = (): boolean => {
-    debug && console.log("form is valid");
     const thing = !Object.values(fieldStates).some(
       (k) =>
         (k as FieldStatus<FieldErrorType>).invalid && (k as FieldStatus<FieldErrorType>).updated,

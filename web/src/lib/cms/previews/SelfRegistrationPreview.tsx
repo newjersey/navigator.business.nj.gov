@@ -1,5 +1,4 @@
 import {
-  type BusinessUser,
   type RegistrationStatus,
   registrationStatusList,
 } from "@businessnjgovnavigator/shared/businessUser";
@@ -91,9 +90,7 @@ const SelfRegistrationPreview = (props: PreviewProps): ReactElement => {
                 intercomHash: undefined,
                 phoneNumber: undefined,
               }}
-              setUser={(user: BusinessUser): void => {
-                console.error(user);
-              }}
+              setUser={(): void => {}}
             />
           </div>
         </DataFormErrorMapContext.Provider>

@@ -1,12 +1,16 @@
 import fs from "node:fs";
 import path from "node:path";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { render, waitFor } from "@testing-library/react";
 import type { ReactElement } from "react";
+import * as api from "@/lib/api-client/apiClient";
 import { applyTheme } from "@/lib/cms/helpers/applyTheme";
 import type { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 
 jest.mock("@/lib/api-client/apiClient");
 jest.mock("@/lib/auth/sessionHelper");
+
+const mockApi = api as jest.Mocked<typeof api>;
 
 const PREVIEWS_DIR = path.join(__dirname, "..", "..", "..", "src", "lib", "cms", "previews");
 
@@ -84,6 +88,13 @@ describe("cms previews", () => {
     // jsdom does not implement createObjectURL; previews that render a blob need it
     URL.createObjectURL = jest.fn(() => "blob:preview");
     URL.revokeObjectURL = jest.fn();
+  });
+
+  beforeEach(() => {
+    // CigaretteLicenseConfirmationPreview checks payment on mount
+    mockApi.cigaretteLicenseConfirmPayment.mockResolvedValue(
+      generateUserDataForBusiness(generateBusiness({})),
+    );
   });
 
   it("finds preview components to test", () => {

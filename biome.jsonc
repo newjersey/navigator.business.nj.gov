@@ -151,7 +151,12 @@
             "noSyncScripts": "error"
           },
           "suspicious": {
-            "noUnknownAttribute": "error"
+            "noUnknownAttribute": "error",
+            // web has no logger: console.error/warn are its runtime error reporting
+            "noConsole": {
+              "level": "error",
+              "options": { "allow": ["error", "warn"] }
+            }
           }
         }
       }
@@ -216,6 +221,17 @@
         }
       }
     },
+    {
+      "includes": ["web/src/scripts/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            // CLI scripts report to stdout
+            "noConsole": "off"
+          }
+        }
+      }
+    },
     // Decap re-serializes these on save.
     {
       "includes": ["content/src/**/*.json"],
@@ -245,7 +261,6 @@
       "linter": {
         "rules": {
           "suspicious": {
-            "noConsole": "warn",
             "noExplicitAny": "warn",
             "noArrayIndexKey": "warn",
             "useIterableCallbackReturn": "warn",

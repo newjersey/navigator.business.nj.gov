@@ -546,6 +546,7 @@ export const findDeadContentLinks = async ({
   onEvent,
 }: FindDeadContentLinksOptions = {}): Promise<ContentDeadLink[]> => {
   const files = collectContentFiles();
+  // biome-ignore lint/suspicious/noConsole: server-side job progress; web has no logger
   console.log(`[deadlinks] Found ${files.length} content files to scan`);
 
   const fileData: { filePath: string; slug: string; foundUrls: FoundUrl[] }[] = [];
@@ -573,6 +574,7 @@ export const findDeadContentLinks = async ({
   }
 
   const allUniqueUrls = [...new Set(fileData.flatMap((f) => f.foundUrls.map((u) => u.url)))];
+  // biome-ignore lint/suspicious/noConsole: server-side job progress; web has no logger
   console.log(
     `[deadlinks] Extracted ${totalRawUrls} URLs total, ${allUniqueUrls.length} unique to check ` +
       `(skipped ${skippedTemplate} template, ${skippedFalsePositive} false positive)`,
@@ -607,6 +609,7 @@ export const findDeadContentLinks = async ({
       failureReason: result.failureReason,
     });
     if (!result.alive) {
+      // biome-ignore lint/suspicious/noConsole: server-side job progress; web has no logger
       console.log(
         `[deadlinks] Dead (${checked}/${allUniqueUrls.length}): ${url} — ${result.statusCode ?? ""} ${result.statusText}`,
       );
@@ -648,6 +651,7 @@ export const findDeadContentLinks = async ({
   }
 
   const totalDead = results.reduce((sum, r) => sum + r.deadUrls.length, 0);
+  // biome-ignore lint/suspicious/noConsole: server-side job progress; web has no logger
   console.log(
     `[deadlinks] Complete: ${totalDead} dead URLs across ${results.length} content items`,
   );
