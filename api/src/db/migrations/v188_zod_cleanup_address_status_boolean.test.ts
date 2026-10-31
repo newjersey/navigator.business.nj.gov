@@ -1,9 +1,9 @@
-import { migrate_v187_to_v188 } from "@db/migrations/v188_zod_cleanup_address_status_boolean";
 import {
   generatev187Business,
   generatev187ProfileData,
   generatev187UserData,
 } from "@db/migrations/v187_add_crtk_data";
+import { migrate_v187_to_v188 } from "@db/migrations/v188_zod_cleanup_address_status_boolean";
 
 describe("migrate_v187_to_v188", () => {
   it("set dateDeletedISO, deptOfLaborEin, addressLine1, addressLine2, and addressZipCode to empty string", async () => {

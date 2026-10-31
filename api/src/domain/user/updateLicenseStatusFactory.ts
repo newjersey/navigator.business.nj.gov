@@ -2,24 +2,24 @@ import {
   NO_ADDRESS_MATCH_ERROR,
   NO_MAIN_APPS_ERROR,
   NO_MATCH_ERROR,
-  SearchLicenseStatus,
-  UpdateLicenseStatus,
+  type SearchLicenseStatus,
+  type UpdateLicenseStatus,
 } from "@domain/types";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import {
   getLicenseTasksProgress,
   getNonLicenseTasks,
-  LicenseStatusResults,
+  type LicenseStatusResults,
 } from "@shared/domain-logic/licenseStatusHelpers";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
   enabledLicensesSources,
-  LicenseDetails,
-  LicenseName,
-  Licenses,
-  LicenseSearchNameAndAddress,
+  type LicenseDetails,
+  type LicenseName,
+  type LicenseSearchNameAndAddress,
+  type Licenses,
 } from "@shared/license";
-import { Business, UserData } from "@shared/userData";
+import type { Business, UserData } from "@shared/userData";
 
 const DEBUG = false; // this variable exists in RegulatedBusinessDynamicsLicenseStatusClient; enable both for debugging
 

@@ -1,8 +1,8 @@
-import { randomInt } from "@shared/intHelpers";
-import {
+import type {
   v175Business,
   v175UserData,
 } from "@db/migrations/v175_add_payment_complete_to_cig_license";
+import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v175_to_v176 = (userData: v175UserData): v176UserData => {
   return {

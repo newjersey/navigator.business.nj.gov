@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v117UserData } from "@db/migrations/v117_add_onboarding_nonprofit";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v117UserData } from "@db/migrations/v117_add_onboarding_nonprofit";
 
 export interface v118UserData {
   user: v118BusinessUser;
@@ -19,7 +19,6 @@ export interface v118UserData {
 
 export const migrate_v117_to_v118 = (
   v117Data: v117UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v118UserData => {
   const isRemoteSellerWorker =

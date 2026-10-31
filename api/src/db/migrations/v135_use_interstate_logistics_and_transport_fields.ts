@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v134Business,
   v134UserData,
 } from "@db/migrations/v134_added_planned_renovation_question_field";
@@ -28,7 +28,6 @@ export interface v135IndustrySpecificData {
 
 export const migrate_v134_to_v135 = (
   v134Data: v134UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v135UserData => {
   return {

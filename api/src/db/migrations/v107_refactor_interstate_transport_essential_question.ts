@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v106UserData } from "@db/migrations/v106_add_pet_care_housing_essential_question";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v106UserData } from "@db/migrations/v106_add_pet_care_housing_essential_question";
 
 export interface v107UserData {
   user: v107BusinessUser;
@@ -17,7 +17,6 @@ export interface v107UserData {
 
 export const migrate_v106_to_v107 = (
   v106Data: v106UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v107UserData => {
   const getLogisticsResponse = (): boolean => {

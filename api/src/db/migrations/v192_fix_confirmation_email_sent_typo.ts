@@ -1,11 +1,11 @@
-import {
+import { rotateKmsField } from "@db/migrations/kms_migration_utils";
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v191Business,
   v191BusinessUser,
   v191CigaretteLicenseData,
   v191UserData,
 } from "@db/migrations/v191_rotate_new_kms_keys";
-import { rotateKmsField } from "@db/migrations/kms_migration_utils";
-import { type MigrationClients } from "@db/migrations/types";
 import { randomInt } from "@shared/intHelpers";
 
 const hashTaxId = async (plaintext: string, clients: MigrationClients): Promise<string> => {

@@ -2,9 +2,9 @@ import {
   generatev73FormationFormData,
   generatev73ProfileData,
   generatev73User,
-  v73ProfileData,
-  v73TaskProgress,
-  v73UserData,
+  type v73ProfileData,
+  type v73TaskProgress,
+  type v73UserData,
 } from "@db/migrations/v73_add_operating_status_field";
 import { migrate_v73_to_v74 } from "@db/migrations/v74_change_register_for_taxes_foreign_id";
 

@@ -1,9 +1,9 @@
-import {
+import type {
   ElevatorInspection,
   ElevatorSafetyInspectionClient,
 } from "@client/dynamics/elevator-safety/types";
-import { LogWriterType } from "@libs/logWriter";
-import axios, { AxiosError } from "axios";
+import type { LogWriterType } from "@libs/logWriter";
+import axios, { type AxiosError } from "axios";
 
 export const DynamicsElevatorSafetyInspectionClient = (
   logWriter: LogWriterType,

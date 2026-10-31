@@ -2,8 +2,8 @@ import {
   generatev55FormationFormData,
   generatev55ProfileData,
   generatev55User,
-  v55ProfileData,
-  v55UserData,
+  type v55ProfileData,
+  type v55UserData,
 } from "@db/migrations/v55_marketing_and_pr";
 import { migrate_v55_to_v56 } from "@db/migrations/v56_cleaning_janitorial";
 

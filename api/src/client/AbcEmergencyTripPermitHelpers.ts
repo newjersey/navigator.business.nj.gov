@@ -1,7 +1,6 @@
-/* eslint-disable unicorn/no-null */
 // The API we are integrating with only accepts null and not undefined
-import { EmergencyTripPermitApplicationInfo } from "@shared/emergencyTripPermit";
-import { StateShortCodesDomestic } from "@shared/states";
+import type { EmergencyTripPermitApplicationInfo } from "@shared/emergencyTripPermit";
+import type { StateShortCodesDomestic } from "@shared/states";
 
 export interface ApiSubmission {
   Account: string; //API User Account id

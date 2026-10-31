@@ -1,4 +1,4 @@
-import { v179Business, v179UserData } from "@db/migrations/v179_add_business_deletion_date";
+import type { v179Business, v179UserData } from "@db/migrations/v179_add_business_deletion_date";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v179_to_v180 = (userData: v179UserData): v180UserData => {

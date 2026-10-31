@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v73UserData } from "@db/migrations/v73_add_operating_status_field";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v73UserData } from "@db/migrations/v73_add_operating_status_field";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v74UserData {
@@ -15,11 +15,7 @@ export interface v74UserData {
   version: number;
 }
 
-export const migrate_v73_to_v74 = (
-  v73Data: v73UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v74UserData => {
+export const migrate_v73_to_v74 = (v73Data: v73UserData, _?: MigrationClients): v74UserData => {
   const taskProgress = v73Data.taskProgress;
 
   if (

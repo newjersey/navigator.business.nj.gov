@@ -1,14 +1,14 @@
 import {
   getPropertyInterestTypeIntegerFromTitle,
-  HousingRegistrationClient,
-  HousingRegistrationRequest,
-  HousingRegistrationRequestResponse,
-  HousingRegistrationStatus,
+  type HousingRegistrationClient,
+  type HousingRegistrationRequest,
+  type HousingRegistrationRequestResponse,
+  type HousingRegistrationStatus,
 } from "@client/dynamics/housing/types";
-import { LogWriterType } from "@libs/logWriter";
+import type { LogWriterType } from "@libs/logWriter";
 import { parseDate } from "@shared/dateHelpers";
-import { PropertyInterestType } from "@shared/housing";
-import axios, { AxiosError } from "axios";
+import type { PropertyInterestType } from "@shared/housing";
+import axios, { type AxiosError } from "axios";
 
 export const DynamicsHousingRegistrationClient = (
   logWriter: LogWriterType,

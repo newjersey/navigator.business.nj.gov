@@ -1,15 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const AWSCrypto = require("@aws-crypto/client-node");
+
+import type { NonSharedBuffer } from "node:buffer";
+import * as crypto from "node:crypto";
+import { TextDecoder } from "node:util";
 import { fromBase64, toBase64 } from "@aws-sdk/util-base64-node";
 import {
   type EncryptionContext,
   type ForeignEnvironmentPolicy,
   validateCiphertextMetadata,
 } from "@client/CiphertextMetadata";
-import { type CryptoClient } from "@domain/types";
-import { type NonSharedBuffer } from "node:buffer";
-import * as crypto from "node:crypto";
-import { TextDecoder } from "node:util";
+import type { CryptoClient } from "@domain/types";
 
 export interface AWSCryptoFactoryOptions {
   readonly foreignEnvironmentPolicy?: ForeignEnvironmentPolicy;

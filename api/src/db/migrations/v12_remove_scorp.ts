@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v11UserData } from "@db/migrations/v11_change_license_statuses";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v11UserData } from "@db/migrations/v11_change_license_statuses";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v12UserData {
@@ -11,11 +11,7 @@ export interface v12UserData {
   version: number;
 }
 
-export const migrate_v11_to_v12 = (
-  v11Data: v11UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v12UserData => {
+export const migrate_v11_to_v12 = (v11Data: v11UserData, _?: MigrationClients): v12UserData => {
   const newLegalStructure =
     v11Data.onboardingData.legalStructure === "s-corporation"
       ? undefined

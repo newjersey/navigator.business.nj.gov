@@ -2,8 +2,8 @@ import {
   generatev54FormationFormData,
   generatev54ProfileData,
   generatev54User,
-  v54ProfileData,
-  v54UserData,
+  type v54ProfileData,
+  type v54UserData,
 } from "@db/migrations/v54_add_business_purpose";
 import { migrate_v54_to_v55 } from "@db/migrations/v55_marketing_and_pr";
 

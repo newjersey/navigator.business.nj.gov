@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v83UserData } from "@db/migrations/v83_add_hideable_roadmap_to_preferences";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v83UserData } from "@db/migrations/v83_add_hideable_roadmap_to_preferences";
 
 export interface v84UserData {
   user: v84BusinessUser;
@@ -14,11 +14,7 @@ export interface v84UserData {
   version: number;
 }
 
-export const migrate_v83_to_v84 = (
-  v83Data: v83UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v84UserData => {
+export const migrate_v83_to_v84 = (v83Data: v83UserData, _?: MigrationClients): v84UserData => {
   return {
     ...v83Data,
     formationData: {

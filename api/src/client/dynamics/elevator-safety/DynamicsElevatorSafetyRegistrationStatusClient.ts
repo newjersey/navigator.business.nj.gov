@@ -1,11 +1,11 @@
-import {
+import type {
   ElevatorRegistrationSummary,
   ElevatorSafetyRegistrationClient,
 } from "@client/dynamics/elevator-safety/types";
-import { HousingPropertyInterestClient } from "@client/dynamics/housing/types";
-import { AccessTokenClient } from "@client/dynamics/types";
-import { ElevatorSafetyRegistrationStatus } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
+import type { HousingPropertyInterestClient } from "@client/dynamics/housing/types";
+import type { AccessTokenClient } from "@client/dynamics/types";
+import type { ElevatorSafetyRegistrationStatus } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
 
 type Config = {
   accessTokenClient: AccessTokenClient;
@@ -15,7 +15,7 @@ type Config = {
 };
 
 export const DynamicsElevatorSafetyRegistrationStatusClient = (
-  logWriter: LogWriterType,
+  _logWriter: LogWriterType,
   config: Config,
 ): ElevatorSafetyRegistrationStatus => {
   return async (address: string, municipalityId: string): Promise<ElevatorRegistrationSummary> => {

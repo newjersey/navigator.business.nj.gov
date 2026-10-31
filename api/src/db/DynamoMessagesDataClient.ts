@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  DynamoDBDocumentClient,
+  type DynamoDBDocumentClient,
   GetCommand,
   PutCommand,
   QueryCommand,
 } from "@aws-sdk/lib-dynamodb";
-import { MessageData, MessagesDataClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
+import type { MessageData, MessagesDataClient } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
 
 export const DynamoMessagesDataClient = (
   db: DynamoDBDocumentClient,

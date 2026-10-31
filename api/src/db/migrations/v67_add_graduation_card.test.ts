@@ -2,8 +2,8 @@ import {
   generatev66FormationFormData,
   generatev66ProfileData,
   generatev66User,
-  v66ProfileData,
-  v66UserData,
+  type v66ProfileData,
+  type v66UserData,
 } from "@db/migrations/v66_add_nexus_to_profile";
 import { migrate_v66_to_v67 } from "@db/migrations/v67_add_graduation_card";
 

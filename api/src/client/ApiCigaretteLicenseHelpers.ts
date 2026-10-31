@@ -1,4 +1,5 @@
-import {
+import { randomUUID } from "node:crypto";
+import type {
   CigaretteLicenseData,
   EmailConfirmationResponse,
   EmailConfirmationSubmission,
@@ -7,8 +8,7 @@ import {
   PreparePaymentResponse,
 } from "@shared/cigaretteLicense";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import { UserData } from "@shared/userData";
-import { randomUUID } from "node:crypto";
+import type { UserData } from "@shared/userData";
 
 export type CigaretteLicenseApiConfig = {
   baseUrl: string;

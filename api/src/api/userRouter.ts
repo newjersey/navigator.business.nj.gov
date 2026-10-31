@@ -1,30 +1,35 @@
 import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
 import {
-  GovDeliveryCommCloudClientType,
+  type GovDeliveryCommCloudClientType,
   syncNewsletterSubscription,
 } from "@domain/newsletter/syncNewsletterSubscription";
 import {
-  CryptoClient,
-  DatabaseClient,
+  type CryptoClient,
+  type DatabaseClient,
   DatabaseThrottlingError,
   MigrationConflictError,
-  TimeStampBusinessSearch,
-  UpdateLicenseStatus,
-  UpdateOperatingPhase,
-  UpdateSidebarCards,
-  UpdateXrayRegistration,
+  type TimeStampBusinessSearch,
+  type UpdateLicenseStatus,
+  type UpdateOperatingPhase,
+  type UpdateSidebarCards,
+  type UpdateXrayRegistration,
 } from "@domain/types";
 import { encryptFieldsFactory } from "@domain/user/encryptFieldsFactory";
 import type { LogWriterType } from "@libs/logWriter";
-import { NameAvailability } from "@shared/businessNameSearch";
+import type { NameAvailability } from "@shared/businessNameSearch";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { determineIfNexusDbaNameNeeded } from "@shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
-import { createEmptyFormationFormData, FormationAddress } from "@shared/formationData";
-import { LicenseName, LicenseSearchNameAndAddress } from "@shared/license";
-import { Business, createEmptyUserData, CURRENT_VERSION, UserData } from "@shared/userData";
-import { Request, Response, Router } from "express";
+import { createEmptyFormationFormData, type FormationAddress } from "@shared/formationData";
+import type { LicenseName, LicenseSearchNameAndAddress } from "@shared/license";
+import {
+  type Business,
+  CURRENT_VERSION,
+  createEmptyUserData,
+  type UserData,
+} from "@shared/userData";
+import { type Request, type Response, Router } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
 
@@ -511,7 +516,6 @@ export const userRouterFactory = (
     }
   };
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const asyncUpdateLicenseStatus = async (userData: UserData): Promise<UserData> => {
     const currentBusiness = getCurrentBusiness(userData);
 

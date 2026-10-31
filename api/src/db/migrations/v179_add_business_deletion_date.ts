@@ -1,5 +1,5 @@
+import type { v178Business, v178UserData } from "@db/migrations/v178_add_employer_access";
 import { randomInt } from "@shared/intHelpers";
-import { v178Business, v178UserData } from "@db/migrations/v178_add_employer_access";
 
 export const migrate_v178_to_v179 = (userData: v178UserData): v179UserData => {
   return {

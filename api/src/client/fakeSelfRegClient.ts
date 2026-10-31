@@ -1,4 +1,4 @@
-import { SelfRegClient, SelfRegResponse } from "@domain/types";
+import type { SelfRegClient, SelfRegResponse } from "@domain/types";
 
 const resume = (myNJUserKey: string): Promise<SelfRegResponse> => {
   return Promise.resolve({

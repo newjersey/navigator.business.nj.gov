@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v131Business,
   v131UserData,
 } from "@db/migrations/v131_add_construction_type_essential_question";
@@ -41,7 +41,6 @@ export type v132CommunityAffairsAddress = {
 };
 export const migrate_v131_to_v132 = (
   v131Data: v131UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v132UserData => {
   return {

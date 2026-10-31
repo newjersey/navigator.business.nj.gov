@@ -1,26 +1,26 @@
 import { ApiCigaretteLicenseHealth } from "@client/ApiCigaretteLicenseHealth";
 import {
-  CigaretteLicenseApiConfig,
+  type CigaretteLicenseApiConfig,
   makeEmailConfirmationBody,
   makePostBody,
 } from "@client/ApiCigaretteLicenseHelpers";
-import {
+import type {
   CigaretteLicenseClient,
   HealthCheckMetadata,
   HealthCheckMethod,
   PowerAutomateEmailClient,
 } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
+import type { LogWriterType } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
-import {
+import type {
   EmailConfirmationResponse,
   GetOrderByTokenResponse,
   PaymentApiError,
   PreparePaymentResponse,
 } from "@shared/cigaretteLicense";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import { UserData } from "@shared/userData";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import type { UserData } from "@shared/userData";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 export const getConfig = async (): Promise<CigaretteLicenseApiConfig> => {
