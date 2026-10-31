@@ -45,6 +45,7 @@ export const SeeYourResponses = (): ReactElement => {
             <ul>
               {responses[mediaArea].map((value, i) => {
                 return (
+                  // biome-ignore lint/suspicious/noArrayIndexKey: read-only list of the user's saved responses, which have no id
                   <li key={i}>
                     <Content>{value}</Content>
                   </li>

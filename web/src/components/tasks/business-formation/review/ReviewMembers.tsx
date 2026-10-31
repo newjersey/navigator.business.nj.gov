@@ -30,6 +30,7 @@ export const ReviewMembers = (): ReactElement => {
       <>
         {state.formationFormData.members?.map((member, index) => {
           return (
+            // biome-ignore lint/suspicious/noArrayIndexKey: read-only review of saved members, which have no id
             <div key={`${member.name}-${index}`}>
               <ReviewLineItem
                 label={getConfig().label}

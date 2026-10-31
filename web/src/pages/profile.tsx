@@ -46,7 +46,7 @@ import { ForeignBusinessTypeField } from "@/components/data-fields/ForeignBusine
 import { Industry } from "@/components/data-fields/Industry";
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
 import { NexusBusinessNameField } from "@/components/data-fields/NexusBusinessNameField";
-import { NexusDBANameField } from "@/components/data-fields/NexusDBANameField";
+import { NexusDBANameField } from "@/components/data-fields/NexusDbaNameField";
 import { Notes } from "@/components/data-fields/Notes";
 import { CertificationsAndFundingNonEssentialQuestions } from "@/components/data-fields/non-essential-questions/CertificationsAndFundingNonEssentialQuestions";
 import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";

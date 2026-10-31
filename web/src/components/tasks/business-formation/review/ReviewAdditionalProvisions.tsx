@@ -13,6 +13,7 @@ export const ReviewAdditionalProvisions = (): ReactElement => {
       <div className="" data-testid="provisions">
         {state.formationFormData.additionalProvisions?.map((provision, index) => {
           return (
+            // biome-ignore lint/suspicious/noArrayIndexKey: read-only review of saved provisions, which have no id
             <div className="margin-bottom-2" key={index}>
               <div className="text-bold margin-bottom-05">
                 {index + 1}. {Config.formation.fields.additionalProvisions.secondaryLabel}

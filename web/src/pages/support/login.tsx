@@ -54,6 +54,7 @@ const LoginSupportPage = (): ReactElement => {
               <Content showLaunchIcon={false}>{loginSupport.myNewJerseyIntroContent}</Content>
               <ol className="padding-top-1">
                 {loginSupport.steps.map((step, index) => (
+                  // biome-ignore lint/suspicious/noArrayIndexKey: static CMS steps that never reorder
                   <li key={index} className="margin-y-05">
                     <Content showLaunchIcon={false}>{step.content}</Content>
                     {step.imagePath && (

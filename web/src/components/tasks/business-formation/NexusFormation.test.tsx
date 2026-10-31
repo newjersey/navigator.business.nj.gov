@@ -338,7 +338,8 @@ describe("<NexusFormationFlow />", () => {
           displayContent = {
             formationDbaContent: generateFormationDbaContent({}),
           };
-          return (initialBusiness = generateBusiness({ profileData, formationData }));
+          initialBusiness = generateBusiness({ profileData, formationData });
+          return initialBusiness;
         };
 
         beforeEach(() => {

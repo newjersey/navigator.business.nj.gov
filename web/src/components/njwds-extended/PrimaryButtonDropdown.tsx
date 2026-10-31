@@ -97,6 +97,7 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
                 >
                   {props.dropdownOptions.map((option, i) => {
                     return (
+                      // biome-ignore lint/suspicious/noArrayIndexKey: dropdown options are a fixed list from the caller and never reorder
                       <MenuItem onClick={option.onClick} key={i}>
                         <UnStyledButton isTextBold isSmallerText>
                           {option.text}

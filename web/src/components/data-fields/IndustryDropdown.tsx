@@ -58,7 +58,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
   const onIndustryIdChange = (industryId: string | undefined): void => {
     setProfileData((currentProfileData) => {
-      let cannabisLicenseType;
+      let cannabisLicenseType: CannabisLicenseType;
 
       const homeBasedBusiness: boolean | undefined =
         !isHomeBasedBusinessApplicable(industryId) || nexusLocationInNewJersey(currentProfileData)

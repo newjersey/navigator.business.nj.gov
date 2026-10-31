@@ -60,6 +60,6 @@ export const getStepForField = (field: FieldsForErrorHandling): FormationStepNam
       return "Billing";
 
     default:
-      throw `Unknown step for field ${field}`;
+      throw new Error(`Unknown step for field ${field}`);
   }
 };

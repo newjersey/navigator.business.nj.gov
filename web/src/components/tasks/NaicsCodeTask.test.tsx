@@ -32,8 +32,8 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 jest.mock("@/lib/static/records/naics2022.json", () => {
   const industryId = "auto-body-repair";
-  const { generateNaicsObject } = require("@/test/factories");
-  const { LookupIndustryById } = require("@businessnjgovnavigator/shared");
+  const { generateNaicsObject } = jest.requireActual("@/test/factories");
+  const { LookupIndustryById } = jest.requireActual("@businessnjgovnavigator/shared");
   const naicsCodes = LookupIndustryById(industryId).naicsCodes?.split(",");
   const thing = generateNaicsObject({ SixDigitDescription: "test1234" }, naicsCodes[0]);
   return [thing];

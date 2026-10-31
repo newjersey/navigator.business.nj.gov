@@ -52,6 +52,7 @@ const UsageListElement = (props: UsageListElementProps): ReactElement => {
         {props.myKey}
         <ul>
           {(expandedMatches ? props.usageArray : collapsedMatches).map((usage, i) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: stateless usage rows, rebuilt for each search and never reordered
             <li key={i}>
               <a href={usage.link} target="_blank" rel="noreferrer">
                 <div>{usage.description}</div>

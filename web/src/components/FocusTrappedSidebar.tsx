@@ -30,7 +30,7 @@ export const FocusTrappedSidebar = ({
       }, delayTime);
     }
     return (): void => {
-      return clearTimeout(timeoutId);
+      clearTimeout(timeoutId);
     };
   }, [isOpen, delayTime, showDiv]);
 

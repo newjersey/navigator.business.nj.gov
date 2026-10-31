@@ -18,6 +18,7 @@ export const Icon = (props: Props): ReactElement => {
       role="img"
       data-testid={props["data-testid"]}
       id={props.id}
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: every iconName caller passes a code-owned sprite id literal, never user or CMS input
       dangerouslySetInnerHTML={{
         __html: `<use xlink:href="/vendor/img/sprite.svg#${props.iconName}"></use>`,
       }}

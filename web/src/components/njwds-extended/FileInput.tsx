@@ -52,6 +52,7 @@ export const FileInput = ({
   value,
   onChange,
 }: Props): ReactElement => {
+  // biome-ignore lint/style/noCommonJs: USWDS file-input's polyfills read window at load; a module-scope import breaks the server build
   const fileInput = require("../../../../node_modules/@uswds/uswds/packages/usa-file-input/src");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const size = maxFileSize?.maxSizeInMegabytes
@@ -152,7 +153,7 @@ export const FileInput = ({
         dT.items.add(file);
         fileInputElement.files = dT.files;
         // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-        // @ts-ignore
+        // @ts-expect-error
         fileInputElement.dispatchEvent(new Event("change", { target: { files: [file] } }));
       }
     }

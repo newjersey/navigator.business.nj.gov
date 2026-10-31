@@ -239,6 +239,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
             {props.steps.map((step: StepperStep, index: number) => {
               return (
                 <div
+                  // biome-ignore lint/suspicious/noArrayIndexKey: stepper steps are a fixed list and never reorder
                   key={`${step.name}-${index}`}
                   id={`stepper-step-${index + 1}`}
                   className={
