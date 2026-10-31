@@ -44,43 +44,81 @@ export const migrate_v119_to_v120 = (
   };
 };
 
+// v119 records can carry fields that v119's types never declared, so read them as optional.
+type WithUndeclaredFields<T, Fields> = T & Partial<Fields>;
+type v119FormationFormData = v119Business["formationData"]["formationFormData"];
+type v119FormationMember = NonNullable<v119FormationFormData["members"]>[number];
+type v119FormationIncorporator = NonNullable<v119FormationFormData["incorporators"]>[number];
+
 const migrate_v119Business_to_v120Business = (v119BusinessData: v119Business): v120Business => {
+  const profileData: WithUndeclaredFields<
+    v119Business["profileData"],
+    Pick<v120ProfileData, "responsibleOwnerName" | "tradeName">
+  > = v119BusinessData.profileData;
+  const preferences: WithUndeclaredFields<
+    v119Business["preferences"],
+    Pick<v120Preferences, "phaseNewlyChanged">
+  > = v119BusinessData.preferences;
+  const formationFormData: WithUndeclaredFields<
+    v119FormationFormData,
+    Pick<v120FormationFormData, "legalType" | "willPracticeLaw" | "businessLocationType">
+  > = v119BusinessData.formationData.formationFormData;
+
   return {
     ...v119BusinessData,
     profileData: {
-      ...v119BusinessData.profileData,
-      responsibleOwnerName: (v119BusinessData.profileData as any).responsibleOwnerName ?? "",
-      tradeName: (v119BusinessData.profileData as any).tradeName ?? "",
+      ...profileData,
+      responsibleOwnerName: profileData.responsibleOwnerName ?? "",
+      tradeName: profileData.tradeName ?? "",
     },
     preferences: {
-      ...v119BusinessData.preferences,
-      phaseNewlyChanged: (v119BusinessData.preferences as any).phaseNewlyChanged ?? false,
+      ...preferences,
+      phaseNewlyChanged: preferences.phaseNewlyChanged ?? false,
     },
     taxFilingData: {
       ...v119BusinessData.taxFilingData,
-      filings: v119BusinessData.taxFilingData.filings.map((filing: v119TaxFiling) => ({
-        ...filing,
-        calendarEventType: (filing as any).calendarEventType || "TAX-FILING",
-      })),
+      filings: v119BusinessData.taxFilingData.filings.map(
+        (
+          filing: WithUndeclaredFields<
+            v119TaxFiling,
+            Pick<v120TaxFilingCalendarEvent, "calendarEventType">
+          >,
+        ) => ({
+          ...filing,
+          calendarEventType: filing.calendarEventType || "TAX-FILING",
+        }),
+      ),
     },
     formationData: {
       ...v119BusinessData.formationData,
       formationFormData: {
-        ...v119BusinessData.formationData.formationFormData,
-        legalType:
-          (v119BusinessData.formationData.formationFormData as any).legalType ??
-          v119BusinessData.profileData.legalStructureId,
-        willPracticeLaw: (v119BusinessData.formationData.formationFormData as any).willPracticeLaw,
-        businessLocationType: (v119BusinessData.formationData.formationFormData as any)
-          .businessLocationType,
-        members: v119BusinessData.formationData.formationFormData.members?.map((member) => ({
-          ...member,
-          businessLocationType: (member as any).businessLocationType,
-        })),
-        incorporators: v119BusinessData.formationData.formationFormData.incorporators?.map(
-          (incorporator) => ({
+        ...formationFormData,
+        // A v119 record can lack both, and this migration has always passed undefined through
+        // rather than rewrite those records.
+        legalType: (formationFormData.legalType ??
+          v119BusinessData.profileData.legalStructureId) as string,
+        willPracticeLaw: formationFormData.willPracticeLaw,
+        businessLocationType: formationFormData.businessLocationType,
+        members: formationFormData.members?.map(
+          (
+            member: WithUndeclaredFields<
+              v119FormationMember,
+              Pick<v120FormationMember, "businessLocationType">
+            >,
+          ) => ({
+            ...member,
+            businessLocationType: member.businessLocationType,
+          }),
+        ),
+        incorporators: formationFormData.incorporators?.map(
+          (
+            incorporator: WithUndeclaredFields<
+              v119FormationIncorporator,
+              Pick<v120FormationIncorporator, "businessLocationType">
+            >,
+          ) => ({
             ...incorporator,
-            businessLocationType: (incorporator as any).businessLocationType,
+            businessLocationType: incorporator.businessLocationType,
           }),
         ),
       },

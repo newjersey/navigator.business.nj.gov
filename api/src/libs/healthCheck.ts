@@ -64,11 +64,7 @@ const sendMetric = async (endpoint: string, logger: LogWriterType): Promise<void
     const stage = process.env.STAGE ?? "unknown";
     const message = `Failed to push metric to CloudWatch for endpoint "${endpoint}" in stage "${stage}"`;
 
-    if (error instanceof Error) {
-      logger.LogError(message, error as any);
-    } else {
-      logger.LogError(message, error as any);
-    }
+    logger.LogError(message, error);
   }
 };
 

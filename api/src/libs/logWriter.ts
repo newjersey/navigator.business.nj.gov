@@ -1,14 +1,22 @@
 import { randomUUID } from "node:crypto";
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
-import type { AxiosError } from "axios";
 import winston from "winston";
 import WinstonCloudWatch from "winston-cloudwatch";
 
 export interface LogWriterType {
-  LogError(message: string, details?: AxiosError): void;
+  LogError(message: string, details?: unknown): void;
   LogInfo(message: string): void;
   GetId(): string;
 }
+
+const serializeLogDetails = (details: unknown): unknown => {
+  return typeof details === "object" &&
+    details !== null &&
+    "toJSON" in details &&
+    typeof details.toJSON === "function"
+    ? details.toJSON()
+    : details;
+};
 
 const GetId = (): string => {
   return randomUUID();
@@ -27,9 +35,9 @@ export const DummyLogWriter: LogWriterType = {
 };
 
 export const ConsoleLogWriter: LogWriterType = {
-  LogError: async (message: string, details?: AxiosError): Promise<void> => {
+  LogError: async (message: string, details?: unknown): Promise<void> => {
     try {
-      const jsonDetails = typeof details?.toJSON === "function" ? details.toJSON() : details;
+      const jsonDetails = serializeLogDetails(details);
       console.error(`${message} - ${JSON.stringify(jsonDetails)}`);
     } catch (error) {
       console.error(`Error with LogError:${error}`);
@@ -58,9 +66,9 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
     }),
   );
 
-  const LogError = async (message: string, details?: AxiosError): Promise<void> => {
+  const LogError = async (message: string, details?: unknown): Promise<void> => {
     try {
-      const jsonDetails = typeof details?.toJSON === "function" ? details.toJSON() : details;
+      const jsonDetails = serializeLogDetails(details);
       console.error(`${message} - ${JSON.stringify(jsonDetails)}`);
       winston.error(message, details);
       await FlushLog();
@@ -85,12 +93,14 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
 
   const FlushLog = async (): Promise<void> => {
     const winstonCloudWatchTransport = logger.transports.find((t) => {
+      // winston-cloudwatch sets `name` from its options at runtime but doesn't declare it.
       return (
-        (t as unknown as any).name === `NavigatorCloudWatch-WinstonLogging${groupName}${logStream}`
+        (t as typeof t & { name?: string }).name ===
+        `NavigatorCloudWatch-WinstonLogging${groupName}${logStream}`
       );
-    });
+    }) as WinstonCloudWatch;
     await new Promise((resolve) => {
-      (winstonCloudWatchTransport as unknown as any).kthxbye(resolve);
+      winstonCloudWatchTransport.kthxbye(resolve);
     });
   };
 
