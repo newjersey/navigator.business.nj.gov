@@ -85,4 +85,9 @@ const getBusinessesWithMultipleValidMainApps = async (): Promise<void> => {
   console.log(businessAndValidMainApps.filter((app) => app.applicationIds.length > 1));
 };
 
-getBusinessesWithMultipleValidMainApps();
+// CommonJS has no top-level await. Catching and exiting with a nonzero code
+// ensures failures show up in the shell.
+getBusinessesWithMultipleValidMainApps().catch((error: unknown) => {
+  console.error(error);
+  process.exitCode = 1;
+});

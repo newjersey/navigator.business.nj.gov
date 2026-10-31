@@ -26,4 +26,9 @@ const runCmsIntegrityTests = async (): Promise<void> => {
   console.log("Succeeded No Errors");
 };
 
-runCmsIntegrityTests();
+// CommonJS has no top-level await. Catching and exiting with a nonzero code
+// fails the CMS content integrity CI job.
+runCmsIntegrityTests().catch((error: unknown) => {
+  console.error(error);
+  process.exitCode = 1;
+});
