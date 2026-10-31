@@ -257,7 +257,6 @@
         "rules": {
           "suspicious": {
             "noConsole": "warn",
-            "noExplicitAny": "warn",
             "noNestedPromises": "warn",
             "noImplicitAnyLet": "warn",
             "useIterableCallbackReturn": "warn"
