@@ -1,5 +1,5 @@
-const Airtable = require("airtable");
-const fs = require("node:fs");
+import fs from "node:fs";
+import Airtable from "airtable";
 
 // requires these env vars to be set!
 const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
