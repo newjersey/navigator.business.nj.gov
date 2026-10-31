@@ -79,6 +79,10 @@
       "includes": ["api/src/db/migrations/**"],
       "linter": {
         "rules": {
+          "suspicious": {
+            // MigrationFunction collects 196 differently typed migrations; typing the chain needs variadic tuples.
+            "noExplicitAny": "off"
+          },
           "style": {
             "useFilenamingConvention": {
               "level": "error",
@@ -293,7 +297,6 @@
         "rules": {
           "suspicious": {
             "noConsole": "warn",
-            "noExplicitAny": "warn",
             "noNestedPromises": "warn",
             "noImplicitAnyLet": "warn",
             "useIterableCallbackReturn": "warn"

@@ -75,7 +75,7 @@ function randomState(): string {
 }
 
 /** Render a html response with a script to finish a client-side github authentication */
-function renderResponse(status: "success" | "error", content: any): string {
+function renderResponse(status: "success" | "error", content: unknown): string {
   return dedent`
     <!DOCTYPE html>
     <html lang="en">

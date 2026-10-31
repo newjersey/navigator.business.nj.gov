@@ -66,7 +66,7 @@ export interface MessageData {
   templateId: MessageTemplateId;
   topic: MessageTopic;
   templateData: {
-    [key: string]: any;
+    [key: string]: unknown;
   };
   dueAt: string;
   deliveredAt: string | undefined;

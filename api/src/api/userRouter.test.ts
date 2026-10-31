@@ -48,7 +48,7 @@ jest.mock("jsonwebtoken", () => {
 });
 const mockJwt = jwt as jest.Mocked<typeof jwt>;
 
-const cognitoPayload = ({ id }: { id: string }): any => {
+const cognitoPayload = ({ id }: { id: string }): jwt.JwtPayload => {
   return {
     sub: "some-sub",
     "custom:myNJUserKey": undefined,
@@ -1050,7 +1050,7 @@ describe("userRouter", () => {
     });
   });
 
-  const sendRequest = async (body: any): Promise<Response> => {
+  const sendRequest = async (body: object): Promise<Response> => {
     return request(app).post(`/users/emailCheck`).send(body);
   };
 
