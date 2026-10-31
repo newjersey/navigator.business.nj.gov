@@ -9,6 +9,14 @@ jest.mock("@libs/ssmUtils", () => ({
   getConfigValue: jest.fn(),
 }));
 
+const mockCloudWatchSend = jest.fn();
+jest.mock("@aws-sdk/client-cloudwatch", () => ({
+  ...jest.requireActual("@aws-sdk/client-cloudwatch"),
+  CloudWatchClient: jest.fn().mockImplementation(() => ({
+    send: (...args: unknown[]): unknown => mockCloudWatchSend(...args),
+  })),
+}));
+
 describe("healthCheck", () => {
   const logger = DummyLogWriter;
 
@@ -58,5 +66,36 @@ describe("healthCheck", () => {
       xrayRegistration: "ERROR",
       taxFilingClient: "ERROR",
     });
+  });
+
+  it.each([
+    [
+      "fails",
+      (): void => {
+        mockAxios.get.mockResolvedValue({ data: { success: false } });
+      },
+    ],
+    [
+      "errors out",
+      (): void => {
+        mockAxios.get.mockRejectedValue({});
+      },
+    ],
+  ])("waits for the CloudWatch metric to be sent when a check %s", async (_, arrangeCheck) => {
+    arrangeCheck();
+    let releaseMetric = (): void => {};
+    mockCloudWatchSend.mockReturnValue(
+      new Promise<void>((resolve) => {
+        releaseMetric = resolve;
+      }),
+    );
+    const stillPending = Symbol("still pending");
+
+    const healthChecks = runHealthChecks(logger);
+    const afterIoTurn = new Promise((resolve) => setImmediate(() => resolve(stillPending)));
+
+    expect(await Promise.race([healthChecks, afterIoTurn])).toBe(stillPending);
+    releaseMetric();
+    await healthChecks;
   });
 });

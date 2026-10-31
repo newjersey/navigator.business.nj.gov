@@ -25,19 +25,19 @@ const healthCheck = async (type: string, url: string, logger: LogWriterType): Pr
 
   return axios
     .get(fullUrl)
-    .then((response: AxiosResponse) => {
+    .then(async (response: AxiosResponse): Promise<Status> => {
       if (response.data.success === true) {
         logger.LogInfo(`Health Check Status - Endpoint: ${type}: PASS`);
         return "PASS";
       } else {
         logger.LogError(`Health Check Status - Endpoint: ${type}: FAIL`, response.data);
-        sendMetric(type, logger);
+        await sendMetric(type, logger);
         return "FAIL";
       }
     })
-    .catch((error: AxiosError) => {
+    .catch(async (error: AxiosError): Promise<Status> => {
       logger.LogError(`Health Check Status - Endpoint: ${type}: FAIL ERROR`, error);
-      sendMetric(type, logger);
+      await sendMetric(type, logger);
       return "ERROR";
     });
 };

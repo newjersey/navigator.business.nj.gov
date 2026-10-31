@@ -34,18 +34,8 @@ export const uploadFile = async (
 };
 
 export const getFileFromURL = async (URI: string): Promise<AxiosResponse<Buffer>> =>
-  new Promise((resolve, reject) => {
-    try {
-      axios
-        .get(encodeURI(URI), {
-          responseType: "arraybuffer",
-        })
-        .then((response) => {
-          resolve(response);
-        });
-    } catch (error) {
-      reject(error);
-    }
+  axios.get(encodeURI(URI), {
+    responseType: "arraybuffer",
   });
 
 const escapeColons = (value: string): string => {
@@ -61,28 +51,16 @@ export const saveFileFromUrl = async (
   URI: string,
   fullName: string,
   bucket: string,
-): Promise<string> =>
-  new Promise((resolve, reject) => {
-    getFileFromURL(URI)
-      .then((object) => {
-        uploadFile(
-          fullName,
-          object.data,
-          String(object.headers["content-type"] ?? "application/octet-stream"),
-          bucket,
-        )
-          .then((s3response) => {
-            if (s3response.$metadata.httpStatusCode === StatusCodes.OK) {
-              resolve(escapeColons(`https://${bucket}.s3.us-east-1.amazonaws.com/${fullName}`));
-            } else {
-              reject(s3response.$metadata.httpStatusCode);
-            }
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+): Promise<string> => {
+  const object = await getFileFromURL(URI);
+  const s3response = await uploadFile(
+    fullName,
+    object.data,
+    String(object.headers["content-type"] ?? "application/octet-stream"),
+    bucket,
+  );
+  if (s3response.$metadata.httpStatusCode !== StatusCodes.OK) {
+    throw s3response.$metadata.httpStatusCode;
+  }
+  return escapeColons(`https://${bucket}.s3.us-east-1.amazonaws.com/${fullName}`);
+};

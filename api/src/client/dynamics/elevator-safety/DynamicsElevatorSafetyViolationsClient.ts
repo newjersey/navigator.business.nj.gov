@@ -29,52 +29,48 @@ export const DynamicsElevatorSafetyViolationsClient = (
         const deviceInspectionIds: string[] = [];
         await Promise.all(
           response.data.value.map(async (element: DynamicsElevatorSafetyBuildingResponse) => {
-            await axios
-              .get(
+            try {
+              const response = await axios.get(
                 `${orgUrl}/api/data/v9.2/ultra_elsadeviceinspections?$filter=(_ultra_building_value eq '${element.ultra_buildingid}')`,
                 {
                   headers: {
                     Authorization: `Bearer ${accessToken}`,
                   },
                 },
-              )
-              .then((response) => {
-                const inspections = response.data
-                  .value as DynamicsElevatorSafetyDeviceInspectionResponse[];
-                for (const inspection of inspections) {
-                  deviceInspectionIds.push(inspection.ultra_elsadeviceinspectionid);
-                }
-              })
-              .catch((error: AxiosError) => {
-                throw error.response?.status;
-              });
+              );
+              const inspections = response.data
+                .value as DynamicsElevatorSafetyDeviceInspectionResponse[];
+              for (const inspection of inspections) {
+                deviceInspectionIds.push(inspection.ultra_elsadeviceinspectionid);
+              }
+            } catch (error) {
+              throw (error as AxiosError).response?.status;
+            }
           }),
         );
 
         const violations: ElevatorSafetyViolation[] = [];
         await Promise.all(
           deviceInspectionIds.map(async (element) => {
-            await axios
-              .get(
+            try {
+              const response = await axios.get(
                 `${orgUrl}/api/data/v9.2/ultra_elsacitations?$filter=(_ultra_deviceinspection_value eq ${element})`,
                 {
                   headers: {
                     Authorization: `Bearer ${accessToken}`,
                   },
                 },
-              )
-              .then((response) => {
-                const violationsResponse = response.data
-                  .value as DynamicsElevatorSafetyViolationResponse[];
-                violationsResponse.map((violation) => {
-                  const formattedViolation =
-                    processDynamicsElevatorSafetyViolationResponse(violation);
-                  violations.push(formattedViolation);
-                });
-              })
-              .catch((error: AxiosError) => {
-                throw error.response?.status;
+              );
+              const violationsResponse = response.data
+                .value as DynamicsElevatorSafetyViolationResponse[];
+              violationsResponse.map((violation) => {
+                const formattedViolation =
+                  processDynamicsElevatorSafetyViolationResponse(violation);
+                violations.push(formattedViolation);
               });
+            } catch (error) {
+              throw (error as AxiosError).response?.status;
+            }
           }),
         );
 

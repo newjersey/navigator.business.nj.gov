@@ -35,21 +35,20 @@ export const DynamicsElevatorSafetyRegistrationClient = (
         );
         return await Promise.all(
           response.data.value.map(async (element: DynamicsElevatorSafetyRegistrationResponse) => {
-            const deviceCount = await axios
-              .get(
+            let deviceCount: number;
+            try {
+              const response = await axios.get(
                 `${orgUrl}/api/data/v9.2/ultra_elevatordeviceregistrationrequests?$filter=(_ultra_registrationrequestid_value eq ${element.ultra_elevatorregistrationrequestid})`,
                 {
                   headers: {
                     Authorization: `Bearer ${accessToken}`,
                   },
                 },
-              )
-              .then((response) => {
-                return response.data.value.length;
-              })
-              .catch((error: AxiosError) => {
-                throw error.response?.status;
-              });
+              );
+              deviceCount = response.data.value.length;
+            } catch (error) {
+              throw (error as AxiosError).response?.status;
+            }
             return processDynamicsElevatorSafetyRegistrationResponse(element, deviceCount);
           }),
         );
