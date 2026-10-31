@@ -11,12 +11,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { HousingDeveloperResourcesPage } from "@/components/learn/HousingDeveloperResourcesPage";
 import { resolvePageTitle } from "@/components/learn/resolvePageTitle";
+import { loadPageBySlug } from "@/domain/content/loadContent";
+import { isPageDisabled } from "@/domain/content/pageAccessFlags";
 import {
   HOUSING_DEVELOPER_RESOURCES_PATHNAME,
   HOUSING_DEVELOPER_RESOURCES_SLUG,
-  isHousingDeveloperResourcesEnabled,
-} from "@/domain/content/housingDeveloperResourcesFlag";
-import { loadPageBySlug } from "@/domain/content/loadContent";
+} from "@/domain/content/pagePaths";
 import { type AppLocale, hasAppLocale, resolveAppLocale } from "@/domain/i18n/locales";
 import { getApplicationMessages } from "@/domain/i18n/messages";
 import { buildPageMetadata } from "@/domain/metadata/pageMetadata";
@@ -55,11 +55,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 const HousingProgramsRoute = async ({ params }: Props) => {
   const { locale } = await params;
 
-  if (!hasAppLocale(locale)) {
-    notFound();
-  }
-
-  if (!isHousingDeveloperResourcesEnabled()) {
+  if (isPageDisabled(HOUSING_DEVELOPER_RESOURCES_SLUG) || !hasAppLocale(locale)) {
     notFound();
   }
 
