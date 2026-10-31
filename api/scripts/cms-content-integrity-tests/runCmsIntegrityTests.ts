@@ -26,4 +26,8 @@ const runCmsIntegrityTests = async (): Promise<void> => {
   console.log("Succeeded No Errors");
 };
 
-runCmsIntegrityTests();
+// CommonJS has no top-level await; a nonzero exit is how callers (CI) see the failure.
+runCmsIntegrityTests().catch((error: unknown) => {
+  console.error(error);
+  process.exitCode = 1;
+});
