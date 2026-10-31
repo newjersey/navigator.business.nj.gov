@@ -1,6 +1,6 @@
-const Airtable = require("airtable");
-const fs = require("node:fs");
-const path = require("node:path");
+import fs from "node:fs";
+import path from "node:path";
+import Airtable from "airtable";
 
 // requires these env vars to be set!
 const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
@@ -14,7 +14,7 @@ Airtable.configure({
 
 const base = Airtable.base(airtableBaseId);
 
-const outDir = path.resolve(__dirname, "..", "..", "..", `content/src/filings`);
+const outDir = path.resolve(import.meta.dirname, "..", "..", "..", `content/src/filings`);
 
 const saveRecords = async () => {
   const results = await airtableSelectAll();

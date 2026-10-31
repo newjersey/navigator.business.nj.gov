@@ -82,7 +82,7 @@ export default {
   },
   transformIgnorePatterns: [`/node_modules/(?!(${esmModulePattern}))`],
   transform: {
-    "\\.md$": "<rootDir>/test/jest-raw-loader.js",
+    "\\.md$": "<rootDir>/test/jest-raw-loader.mjs",
     "\\.m?[jt]sx?$": [
       "@swc/jest",
       {
