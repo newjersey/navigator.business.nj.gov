@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v58UserData } from "@db/migrations/v58_add_welcome_card_to_preferences";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v58UserData } from "@db/migrations/v58_add_welcome_card_to_preferences";
 
 export interface v59UserData {
   user: v59BusinessUser;
@@ -14,11 +14,7 @@ export interface v59UserData {
   version: number;
 }
 
-export const migrate_v58_to_v59 = (
-  v58Data: v58UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v59UserData => {
+export const migrate_v58_to_v59 = (v58Data: v58UserData, _?: MigrationClients): v59UserData => {
   const removedWelcomeCard = v58Data.preferences.visibleRoadmapSidebarCards.filter((id) => {
     return id !== "welcome";
   });

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { getSignedInUserId } from "@api/userRouter";
 import { setupExpress } from "@libs/express";
@@ -9,9 +8,9 @@ import {
   generateLicenseSearchNameAndAddress,
   generateUserDataForBusiness,
 } from "@shared/test";
-import { Express } from "express";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
-import { DatabaseClient } from "src/domain/types";
+import type { DatabaseClient } from "src/domain/types";
 import request from "supertest";
 
 jest.mock("@api/userRouter", () => {

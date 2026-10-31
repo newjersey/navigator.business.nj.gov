@@ -1,25 +1,24 @@
-/* eslint-disable unicorn/no-null */
-import { LicenseApplicationIdApiResponse } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseApplicationIdsClient";
-import { LicenseApplicationIdResponse } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
+import type { LicenseApplicationIdApiResponse } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseApplicationIdsClient";
+import type { LicenseApplicationIdResponse } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import {
-  ExternalStatus,
-  NewsletterResponse,
-  NewsletterStatus,
+  type ExternalStatus,
+  type NewsletterResponse,
+  type NewsletterStatus,
   newsletterStatusList,
-  UserTestingResponse,
+  type UserTestingResponse,
 } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString } from "@shared/dateHelpers";
-import { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelpers";
+import type { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelpers";
 import {
   castPublicFilingLegalTypeToFormationType,
-  FormationData,
-  FormationFormData,
-  InputFile,
-  PublicFilingLegalType,
+  type FormationData,
+  type FormationFormData,
+  type InputFile,
+  type PublicFilingLegalType,
 } from "@shared/formationData";
 import { randomInt, randomIntFromInterval } from "@shared/intHelpers";
-import { LicenseEntity } from "@shared/license";
-import { ProfileData } from "@shared/profileData";
+import type { LicenseEntity } from "@shared/license";
+import type { ProfileData } from "@shared/profileData";
 import {
   generateBusiness,
   generateFormationData,
@@ -29,19 +28,19 @@ import {
   generateUserDataForBusiness,
   randomPublicFilingLegalType,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
-import {
+import type { UserData } from "@shared/userData";
+import type {
   XrayRegistrationEntry,
   XrayRegistrationStatus,
   XrayRegistrationStatusResponse,
 } from "@shared/xray";
 import {
   getRandomDateInBetween,
-  randomElementFromArray,
   RGB_APP_TYPE_KEYS,
   RGB_LICENSE_APPLICATION_INFORMATION,
+  randomElementFromArray,
 } from "@test/helpers";
-import { SelfRegResponse, TaxFilingResult } from "src/domain/types";
+import type { SelfRegResponse, TaxFilingResult } from "src/domain/types";
 
 export const generateTaxFilingDates = (numberOfDates: number): string[] => {
   const dateToShortISO = (date: Date): string => {

@@ -1,8 +1,8 @@
+import { TextDecoder } from "node:util";
 import { NodeAlgorithmSuite } from "@aws-crypto/material-management-node";
 import { deserializeFactory } from "@aws-crypto/serialize";
 import { fromBase64 } from "@aws-sdk/util-base64-node";
 import { ForeignEnvironmentCiphertextError, QuarantinedCiphertextError } from "@domain/types";
-import { TextDecoder } from "node:util";
 
 export type ForeignEnvironmentPolicy = "reset" | "quarantine";
 

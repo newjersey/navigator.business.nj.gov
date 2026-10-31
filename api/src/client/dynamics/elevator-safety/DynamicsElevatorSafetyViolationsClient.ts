@@ -1,7 +1,7 @@
-import { ElevatorSafetyViolationsClient } from "@client/dynamics/elevator-safety/types";
-import { LogWriterType } from "@libs/logWriter";
-import { ElevatorSafetyViolation } from "@shared/elevatorSafety";
-import axios, { AxiosError } from "axios";
+import type { ElevatorSafetyViolationsClient } from "@client/dynamics/elevator-safety/types";
+import type { LogWriterType } from "@libs/logWriter";
+import type { ElevatorSafetyViolation } from "@shared/elevatorSafety";
+import axios, { type AxiosError } from "axios";
 
 export const DynamicsElevatorSafetyViolationsClient = (
   logWriter: LogWriterType,

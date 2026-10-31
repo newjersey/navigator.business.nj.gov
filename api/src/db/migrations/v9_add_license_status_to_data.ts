@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v8UserData } from "@db/migrations/v8_remove_bcorp";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v8UserData } from "@db/migrations/v8_remove_bcorp";
 import { parseDate } from "@shared/dateHelpers";
 
 export interface v9UserData {
@@ -11,11 +11,7 @@ export interface v9UserData {
   version: number;
 }
 
-export const migrate_v8_to_v9 = (
-  v8Data: v8UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v9UserData => {
+export const migrate_v8_to_v9 = (v8Data: v8UserData, _?: MigrationClients): v9UserData => {
   const licenseData: v9LicenseData | undefined = v8Data.licenseSearchData
     ? {
         nameAndAddress: v8Data.licenseSearchData.nameAndAddress,

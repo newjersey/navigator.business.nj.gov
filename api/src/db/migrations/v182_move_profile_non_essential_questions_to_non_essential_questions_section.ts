@@ -1,4 +1,4 @@
-import {
+import type {
   v181Business,
   v181UserData,
 } from "@db/migrations/v181_add_updates_reminders_and_phone_number";
@@ -18,11 +18,10 @@ export const migrate_v181_to_v182 = (userData: v181UserData): v182UserData => {
 
 const migrate_v181Business_to_v182Business = (business: v181Business): v182Business => {
   const newProfileData = { ...business.profileData };
-  newProfileData.nonEssentialRadioAnswers["vacantPropertyOwner"] =
-    newProfileData.vacantPropertyOwner;
-  newProfileData.nonEssentialRadioAnswers["carnivalRideOwningBusiness"] =
+  newProfileData.nonEssentialRadioAnswers.vacantPropertyOwner = newProfileData.vacantPropertyOwner;
+  newProfileData.nonEssentialRadioAnswers.carnivalRideOwningBusiness =
     newProfileData.carnivalRideOwningBusiness;
-  newProfileData.nonEssentialRadioAnswers["travelingCircusOrCarnivalOwningBusiness"] =
+  newProfileData.nonEssentialRadioAnswers.travelingCircusOrCarnivalOwningBusiness =
     newProfileData.travelingCircusOrCarnivalOwningBusiness;
 
   delete newProfileData.vacantPropertyOwner;

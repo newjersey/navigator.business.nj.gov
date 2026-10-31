@@ -1,10 +1,11 @@
-import { PreparePaymentApiSubmission } from "@businessnjgovnavigator/shared";
+import crypto from "node:crypto";
+import type { PreparePaymentApiSubmission } from "@businessnjgovnavigator/shared";
 import {
-  CigaretteLicenseApiConfig,
+  type CigaretteLicenseApiConfig,
   makeEmailConfirmationBody,
   makePostBody,
 } from "@client/ApiCigaretteLicenseHelpers";
-import { CigaretteLicenseData, CigaretteLicensePaymentInfo } from "@shared/cigaretteLicense";
+import type { CigaretteLicenseData, CigaretteLicensePaymentInfo } from "@shared/cigaretteLicense";
 import { randomInt } from "@shared/intHelpers";
 import {
   generateBusiness,
@@ -12,7 +13,6 @@ import {
   generateUser,
   generateUserData,
 } from "@shared/test";
-import crypto from "node:crypto";
 
 const mockUniqueId = "12345678-1234-1234-1234-123456789abc";
 

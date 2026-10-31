@@ -1,9 +1,9 @@
 import { externalEndpointRouterFactory } from "@api/externalEndpointRouter";
-import { AddNewsletter, NewsletterClient } from "@domain/types";
+import type { AddNewsletter, NewsletterClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { generateUser, generateUserData } from "@shared/test";
-import { Express } from "express";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 

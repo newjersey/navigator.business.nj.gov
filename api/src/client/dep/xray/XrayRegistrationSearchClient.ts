@@ -28,23 +28,23 @@ export const XrayRegistrationSearchClient = (
 
         return response.data.data.map((entry: { [x: string]: unknown }) => {
           return {
-            registrationNumber: entry["REGISTRATION_NUMBER"] ?? undefined,
+            registrationNumber: entry.REGISTRATION_NUMBER ?? undefined,
             roomId: entry["Room ID"] ?? undefined,
             registrationCategory: entry["Registration Category"] ?? undefined,
-            name: entry["NAME"] ?? undefined,
+            name: entry.NAME ?? undefined,
             modelNumber: entry["CONSOLE_MODEL#"] ?? undefined,
             serialNumber: entry["CONSOLE_SERIAL#"] ?? undefined,
-            annualFee: entry["ANNUAL_FEE"] ?? undefined,
+            annualFee: entry.ANNUAL_FEE ?? undefined,
             expirationDate: entry["Registration Expiration Date"] ?? undefined,
             deactivationDate: entry["Deactivation Date"] ?? undefined,
             streetAddress: entry["Street Address"] ?? undefined,
-            city: entry["CITY"] ?? undefined,
-            state: entry["STATE"] ?? undefined,
+            city: entry.CITY ?? undefined,
+            state: entry.STATE ?? undefined,
             zipCode: entry["Zip Code"] ?? undefined,
-            status: entry["Status"] ?? undefined,
+            status: entry.Status ?? undefined,
             contactType: entry["Contact Type"] ?? undefined,
             disposalDate: entry["Disposal Date"] ?? undefined,
-            businessName: entry["BUSINESS_NAME"] ?? undefined,
+            businessName: entry.BUSINESS_NAME ?? undefined,
           };
         });
       })
@@ -81,23 +81,23 @@ export const XrayRegistrationSearchClient = (
 
         return response.data.data.map((entry: { [x: string]: unknown }) => {
           return {
-            registrationNumber: entry["REGISTRATION_NUMBER"] ?? undefined,
+            registrationNumber: entry.REGISTRATION_NUMBER ?? undefined,
             roomId: entry["Room ID"] ?? undefined,
             registrationCategory: entry["Registration Category"] ?? undefined,
-            name: entry["NAME"] ?? undefined,
+            name: entry.NAME ?? undefined,
             modelNumber: entry["CONSOLE_MODEL#"] ?? undefined,
             serialNumber: entry["CONSOLE_SERIAL#"] ?? undefined,
-            annualFee: entry["ANNUAL_FEE"] ?? undefined,
+            annualFee: entry.ANNUAL_FEE ?? undefined,
             expirationDate: entry["Registration Expiration Date"] ?? undefined,
             deactivationDate: entry["Deactivation Date"] ?? undefined,
             streetAddress: entry["Street Address"] ?? undefined,
-            city: entry["CITY"] ?? undefined,
-            state: entry["STATE"] ?? undefined,
+            city: entry.CITY ?? undefined,
+            state: entry.STATE ?? undefined,
             zipCode: entry["Zip Code"] ?? undefined,
-            status: entry["Status"] ?? undefined,
+            status: entry.Status ?? undefined,
             contactType: entry["Contact Type"] ?? undefined,
             disposalDate: entry["Disposal Date"] ?? undefined,
-            businessName: entry["BUSINESS_NAME"] ?? undefined,
+            businessName: entry.BUSINESS_NAME ?? undefined,
           };
         });
       })

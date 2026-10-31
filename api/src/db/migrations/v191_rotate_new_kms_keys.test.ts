@@ -3,11 +3,11 @@ import {
   generatev190ProfileData,
   generatev190UserData,
 } from "@db/migrations/v190_remove_hidden_fundings_and_certifications";
-import { migrate_v190_to_v191 } from "@db/migrations/v191_rotate_new_kms_keys";
 import {
   generatev191Business,
   generatev191ProfileData,
   generatev191UserData,
+  migrate_v190_to_v191,
 } from "@db/migrations/v191_rotate_new_kms_keys";
 import { migrate_v191_to_v192 } from "@db/migrations/v192_fix_confirmation_email_sent_typo";
 import { type CryptoClient, ForeignEnvironmentCiphertextError } from "@domain/types";

@@ -1,6 +1,6 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v160Business, v160UserData } from "@db/migrations/v160_add_xray_registration_data";
-import { type CryptoClient } from "@domain/types";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v160Business, v160UserData } from "@db/migrations/v160_add_xray_registration_data";
+import type { CryptoClient } from "@domain/types";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v160_to_v161 = async (

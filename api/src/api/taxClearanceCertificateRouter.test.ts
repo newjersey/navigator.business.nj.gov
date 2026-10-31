@@ -1,9 +1,9 @@
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
-import { type CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
+import type { CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { generateUserData } from "@shared/test";
-import { Express } from "express";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 

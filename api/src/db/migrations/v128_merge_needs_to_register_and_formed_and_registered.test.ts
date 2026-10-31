@@ -3,7 +3,7 @@ import {
   generateV127Preferences,
   generateV127ProfileData,
   generateV127UserData,
-  v127OperatingPhase,
+  type v127OperatingPhase,
 } from "@db/migrations/v127_create_remote_worker_seller_phase";
 import { migrate_v127_to_v128 } from "@db/migrations/v128_merge_needs_to_register_and_formed_and_registered";
 

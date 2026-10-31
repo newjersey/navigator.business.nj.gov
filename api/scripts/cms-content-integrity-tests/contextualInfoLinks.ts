@@ -5,8 +5,8 @@ import {
 import { getMergedConfig } from "@businessnjgovnavigator/shared/src/contexts";
 import { getIndustries } from "@businessnjgovnavigator/shared/src/industry";
 import {
-  ConfigMatch,
-  FileData,
+  type ConfigMatch,
+  type FileData,
   getAnytimeActionLicenseReinstatementsData,
   getAnytimeActionTasksData,
   getBusinessFormationData,
@@ -21,7 +21,7 @@ import {
   getTaskData,
   getWebflowLicenseData,
   getXrayRenewalCalendarEventData,
-  Match,
+  type Match,
   searchConfig,
 } from "@businessnjgovnavigator/shared/src/lib/search";
 import {
@@ -45,7 +45,7 @@ import {
   loadStepsJsonPathTestJsonForTest,
   loadXrayRenewalCalendarEvent,
 } from "@businessnjgovnavigator/shared/src/static";
-import {
+import type {
   NonEssentialQuestion,
   SidebarCardContent,
   TaskWithoutLinks,

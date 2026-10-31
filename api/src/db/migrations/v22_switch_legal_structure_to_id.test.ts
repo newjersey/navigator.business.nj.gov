@@ -1,7 +1,7 @@
 import {
   generatev21OnboardingData,
   generatev21User,
-  v21UserData,
+  type v21UserData,
 } from "@db/migrations/v21_add_tax_fields";
 import { migrate_v21_to_v22 } from "@db/migrations/v22_switch_legal_structure_to_id";
 

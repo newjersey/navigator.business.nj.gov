@@ -1,10 +1,10 @@
+import { rotateKmsField } from "@db/migrations/kms_migration_utils";
+import type { MigrationClients } from "@db/migrations/types";
 import type {
   v192Business,
   v192BusinessUser,
   v192UserData,
 } from "@db/migrations/v192_fix_confirmation_email_sent_typo";
-import { rotateKmsField } from "@db/migrations/kms_migration_utils";
-import { type MigrationClients } from "@db/migrations/types";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v192_to_v193 = async (

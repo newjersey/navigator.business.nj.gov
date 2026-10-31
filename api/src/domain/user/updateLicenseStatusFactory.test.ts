@@ -2,7 +2,7 @@ import {
   NO_ADDRESS_MATCH_ERROR,
   NO_MAIN_APPS_ERROR,
   NO_MATCH_ERROR,
-  UpdateLicenseStatus,
+  type UpdateLicenseStatus,
 } from "@domain/types";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import * as getCurrentDateModule from "@shared/dateHelpers";
@@ -16,7 +16,7 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 
 jest.mock("@shared/dateHelpers", () => {
   return {

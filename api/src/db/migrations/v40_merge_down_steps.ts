@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v39UserData } from "@db/migrations/v39_add_tax_pin";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v39UserData } from "@db/migrations/v39_add_tax_pin";
 
 export interface v40UserData {
   user: v40BusinessUser;
@@ -24,11 +24,7 @@ const determineOpenSteps = (value: number): number => {
   }
 };
 
-export const migrate_v39_to_v40 = (
-  v39Data: v39UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v40UserData => {
+export const migrate_v39_to_v40 = (v39Data: v39UserData, _?: MigrationClients): v40UserData => {
   return {
     ...v39Data,
     preferences: {

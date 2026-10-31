@@ -1,4 +1,4 @@
-import { MunicipalityDetail } from "@shared/municipality";
+import type { MunicipalityDetail } from "@shared/municipality";
 export const fetchMunicipalityByName = async (
   name: string,
 ): Promise<MunicipalityDetail | undefined> => {

@@ -2,9 +2,9 @@ import {
   generatev75FormationFormData,
   generatev75ProfileData,
   generatev75User,
-  v75ProfileData,
-  v75TaskProgress,
-  v75UserData,
+  type v75ProfileData,
+  type v75TaskProgress,
+  type v75UserData,
 } from "@db/migrations/v75_fix_trade_name_operating_phase";
 import { migrate_v75_to_v76 } from "@db/migrations/v76_fix_trade_name_operating_phase_round_2";
 

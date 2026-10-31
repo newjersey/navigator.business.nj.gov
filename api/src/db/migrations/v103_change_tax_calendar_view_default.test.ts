@@ -2,7 +2,7 @@ import {
   generateV102Preferences,
   generateV102ProfileData,
   generateV102UserData,
-  v102OperatingPhase,
+  type v102OperatingPhase,
 } from "@db/migrations/v102_rename_tax_registration_nudge";
 import { migrate_v102_to_v103 } from "@db/migrations/v103_change_tax_calendar_view_default";
 

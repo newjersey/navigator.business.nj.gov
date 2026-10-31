@@ -1,6 +1,12 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { FormationClient } from "@domain/types";
-import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
+import { ApiFormationClient } from "@client/ApiFormationClient";
+import type {
+  ApiError,
+  ApiGetFilingResponse,
+  ApiResponse,
+  ApiSubmission,
+} from "@client/ApiFormationHelpers";
+import type { FormationClient } from "@domain/types";
+import { DummyLogWriter, LogWriter, type LogWriterType } from "@libs/logWriter";
 import {
   getCurrentDate,
   getCurrentDateISOString,
@@ -8,9 +14,10 @@ import {
   parseDateWithFormat,
 } from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import {
-  FormationFormData,
-  FormationLegalType,
+  type FormationFormData,
+  type FormationLegalType,
   formationApiDateFormat,
 } from "@shared/formationData";
 import { randomInt } from "@shared/intHelpers";
@@ -27,18 +34,9 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@shared/test";
+import type { UserData } from "@shared/userData";
 import { generateFormationUserData, generateInputFile } from "@test/factories";
 import axios from "axios";
-
-import { ApiFormationClient } from "@client/ApiFormationClient";
-import {
-  ApiError,
-  ApiGetFilingResponse,
-  ApiResponse,
-  ApiSubmission,
-} from "@client/ApiFormationHelpers";
-import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import { UserData } from "@shared/userData";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 jest.mock("axios");
@@ -1253,7 +1251,6 @@ describe("ApiFormationClient", () => {
     });
 
     describe("when Nonprofit", () => {
-      // eslint-disable-next-line unicorn/consistent-function-scoping
       const getUserDataForNonProfit = (formationFormData: FormationFormData): UserData => {
         return generateUserDataForBusiness(
           generateBusiness({

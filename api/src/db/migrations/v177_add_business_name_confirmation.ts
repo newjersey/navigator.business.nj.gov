@@ -1,5 +1,8 @@
+import type {
+  v176Business,
+  v176UserData,
+} from "@db/migrations/v176_add_check_name_reservation_options";
 import { randomInt } from "@shared/intHelpers";
-import { v176Business, v176UserData } from "@db/migrations/v176_add_check_name_reservation_options";
 
 export const migrate_v176_to_v177 = (userData: v176UserData): v177UserData => {
   return {

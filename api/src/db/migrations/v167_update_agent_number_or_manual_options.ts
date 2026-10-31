@@ -1,4 +1,4 @@
-import { v166Business, v166UserData } from "@db/migrations/v166_add_roadmap_task_data";
+import type { v166Business, v166UserData } from "@db/migrations/v166_add_roadmap_task_data";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v166_to_v167 = (userData: v166UserData): v167UserData => {

@@ -1,10 +1,9 @@
-/* eslint-disable unicorn/no-null */
 import { RegulatedBusinessDynamicsChecklistItemsClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsChecklistItemsClient";
-import {
+import type {
   ChecklistItemsForAllApplicationsClient,
   LicenseApplicationIdResponse,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
-import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, type LogWriterType } from "@libs/logWriter";
 import { generateLicenseApplicationIdResponseValue } from "@test/factories";
 import axios from "axios";
 

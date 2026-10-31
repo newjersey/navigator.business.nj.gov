@@ -1,9 +1,9 @@
-import { DummyLogWriter } from "@libs/logWriter";
 import { WebserviceEmployerRatesClient } from "@client/webservice/WebserviceEmployerRatesClient";
-import axios from "axios";
-import { EmployerRatesClient } from "@domain/types";
-import { generateEmployerRatesRequestData, generateEmployerRatesResponse } from "@shared/test";
+import type { EmployerRatesClient } from "@domain/types";
+import { DummyLogWriter } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
+import { generateEmployerRatesRequestData, generateEmployerRatesResponse } from "@shared/test";
+import axios from "axios";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;

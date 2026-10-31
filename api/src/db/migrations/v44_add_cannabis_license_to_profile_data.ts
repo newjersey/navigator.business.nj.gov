@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v43UserData } from "@db/migrations/v43_add_initial_flow_to_profile_data";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v43UserData } from "@db/migrations/v43_add_initial_flow_to_profile_data";
 
 export interface v44UserData {
   user: v44BusinessUser;
@@ -13,11 +13,7 @@ export interface v44UserData {
   version: number;
 }
 
-export const migrate_v43_to_v44 = (
-  v43Data: v43UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v44UserData => {
+export const migrate_v43_to_v44 = (v43Data: v43UserData, _?: MigrationClients): v44UserData => {
   return {
     ...v43Data,
     profileData: {

@@ -15,7 +15,7 @@ import {
   type MigrationDataClient,
   type UserDataClient,
 } from "@domain/types";
-import { type UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 
 const MAX_TRANSACTION_BUSINESSES = 99;
 

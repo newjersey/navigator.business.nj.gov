@@ -1,19 +1,19 @@
-import {
+import type {
   TaxClearanceCertificateResponse,
   TaxClearanceCertificateResponseErrorType,
   UnlinkTaxIdResponse,
 } from "@businessnjgovnavigator/shared";
-import {
-  type CryptoClient,
+import type {
+  CryptoClient,
   DatabaseClient,
   HealthCheckMetadata,
   TaxClearanceCertificateClient,
 } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
+import type { LogWriterType } from "@libs/logWriter";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { LookupTaxClearanceCertificateAgenciesById } from "@shared/taxClearanceCertificate";
-import { UserData } from "@shared/userData";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import type { UserData } from "@shared/userData";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 type Config = {
@@ -156,7 +156,7 @@ export const ApiTaxClearanceCertificateClient = (
         // which we often get as a result of a firewall.
         if (response.data.certificate === undefined) {
           const htmlString = Object.keys(response.data)
-            .sort((a, b) => Number.parseInt(a) - Number.parseInt(b))
+            .sort((a, b) => Number.parseInt(a, 10) - Number.parseInt(b, 10))
             .map((key) => response.data[key])
             .join("");
 
@@ -390,7 +390,7 @@ export const ApiTaxClearanceCertificateClient = (
       .then((response) => {
         if (response.data.certificate === undefined) {
           const htmlString = Object.keys(response.data)
-            .sort((a, b) => Number.parseInt(a) - Number.parseInt(b))
+            .sort((a, b) => Number.parseInt(a, 10) - Number.parseInt(b, 10))
             .map((key) => response.data[key])
             .join("");
 

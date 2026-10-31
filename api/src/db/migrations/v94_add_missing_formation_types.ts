@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v93UserData } from "@db/migrations/v93_merge_childcare_roadmaps";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v93UserData } from "@db/migrations/v93_merge_childcare_roadmaps";
 
 export interface v94UserData {
   user: v94BusinessUser;
@@ -14,11 +14,7 @@ export interface v94UserData {
   version: number;
 }
 
-export const migrate_v93_to_v94 = (
-  v93Data: v93UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v94UserData => {
+export const migrate_v93_to_v94 = (v93Data: v93UserData, _?: MigrationClients): v94UserData => {
   const castedV93FormationFormData = v93Data.formationData
     .formationFormData as v94FormationFormData;
   return {

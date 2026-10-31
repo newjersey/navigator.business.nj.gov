@@ -1,7 +1,7 @@
 import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
-import { TimeStampBusinessSearch } from "@domain/types";
+import type { TimeStampBusinessSearch } from "@domain/types";
 import type { LogWriterType } from "@libs/logWriter";
-import { UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 

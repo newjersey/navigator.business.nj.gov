@@ -1,7 +1,7 @@
 import { GovDeliveryCommCloudClient } from "@client/GovDeliveryCommCloudClient";
 import { DummyLogWriter } from "@libs/logWriter";
-import { GOV_DELIVERY_CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
-import { NewsletterResponse } from "@shared/businessUser";
+import { type GOV_DELIVERY_CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
+import type { NewsletterResponse } from "@shared/businessUser";
 import axios, { AxiosError } from "axios";
 
 jest.mock("axios");

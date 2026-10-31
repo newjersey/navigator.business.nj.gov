@@ -1,11 +1,11 @@
-import {
+import type {
   ChecklistItemsForAllApplicationsClient,
   LicenseApplicationIdResponse,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
-import { LogWriterType } from "@libs/logWriter";
-import { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelpers";
-import { CheckoffStatus, LicenseStatusItem } from "@shared/license";
-import axios, { AxiosError } from "axios";
+import type { LogWriterType } from "@libs/logWriter";
+import type { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelpers";
+import type { CheckoffStatus, LicenseStatusItem } from "@shared/license";
+import axios, { type AxiosError } from "axios";
 
 export const RegulatedBusinessDynamicsChecklistItemsClient = (
   logWriter: LogWriterType,

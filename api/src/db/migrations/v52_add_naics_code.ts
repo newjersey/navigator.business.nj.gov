@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v51UserData } from "@db/migrations/v51_add_cpa_field";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v51UserData } from "@db/migrations/v51_add_cpa_field";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v52UserData {
@@ -15,11 +15,7 @@ export interface v52UserData {
   version: number;
 }
 
-export const migrate_v51_to_v52 = (
-  v51Data: v51UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v52UserData => {
+export const migrate_v51_to_v52 = (v51Data: v51UserData, _?: MigrationClients): v52UserData => {
   return {
     ...v51Data,
     profileData: {

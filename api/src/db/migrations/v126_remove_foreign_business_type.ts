@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v125Business,
   v125UserData,
 } from "@db/migrations/v125_rename_provisions_to_additional_provisions";
@@ -31,7 +31,6 @@ export interface v126Business {
 
 export const migrate_v125_to_v126 = (
   v125Data: v125UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v126UserData => {
   return {
@@ -46,7 +45,6 @@ export const migrate_v125_to_v126 = (
 };
 
 const migrate_v125Business_to_v126Business = (v125BusinessData: v125Business): v126Business => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { foreignBusinessType, ...profileDataNoForeignBusinessType } = v125BusinessData.profileData;
 
   return {

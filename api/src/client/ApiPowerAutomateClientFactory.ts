@@ -1,6 +1,6 @@
-import { HealthCheckMetadata, PowerAutomateClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import axios, { AxiosResponse } from "axios";
+import type { HealthCheckMetadata, PowerAutomateClient } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
+import axios, { type AxiosResponse } from "axios";
 import { ReasonPhrases } from "http-status-codes";
 
 interface Config {
@@ -22,7 +22,7 @@ export const ApiPowerAutomateClientFactory = (config: Config): PowerAutomateClie
         {
           ...props.body,
           "api-key": config.apiKey,
-          "health-check": props.isHealthCheck ? true : false,
+          "health-check": !!props.isHealthCheck,
         },
         {
           headers: {

@@ -2,8 +2,8 @@ import {
   generatev76FormationFormData,
   generatev76ProfileData,
   generatev76User,
-  v76Preferences,
-  v76UserData,
+  type v76Preferences,
+  type v76UserData,
 } from "@db/migrations/v76_fix_trade_name_operating_phase_round_2";
 import { migrate_v76_to_v77 } from "@db/migrations/v77_remove_graduation_card";
 
