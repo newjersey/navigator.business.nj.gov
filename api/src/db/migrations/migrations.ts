@@ -198,6 +198,7 @@ import { migrate_v193_to_v194 } from "@db/migrations/v194_remove_ab_experience";
 import { migrate_v194_to_v195 } from "@db/migrations/v195_add_learning_business_field_to_business_user_data";
 
 // Effectively (data: v_UserData, clients: MigrationClients) => v_UserData | Promise<v_UserData>
+// biome-ignore lint/suspicious/noExplicitAny: each migration has its own input and output types, and one array type can't express the v_n -> v_n+1 chain
 export type MigrationFunction = (data: any, clients: MigrationClients) => any;
 
 export const Migrations: MigrationFunction[] = [

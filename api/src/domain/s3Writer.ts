@@ -33,7 +33,7 @@ export const uploadFile = async (
   return s3.send(command);
 };
 
-export const getFileFromURL = async (URI: string): Promise<AxiosResponse<any, any>> =>
+export const getFileFromURL = async (URI: string): Promise<AxiosResponse<Buffer>> =>
   new Promise((resolve, reject) => {
     try {
       axios

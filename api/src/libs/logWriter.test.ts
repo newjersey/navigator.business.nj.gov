@@ -1,4 +1,4 @@
-import { LogWriter, type LogWriterType } from "@libs/logWriter";
+import { ConsoleLogWriter, LogWriter, type LogWriterType } from "@libs/logWriter";
 import winston from "winston";
 
 jest.mock("winston");
@@ -20,5 +20,28 @@ describe("Logger", () => {
   it("Logs an info message", () => {
     logger.LogInfo("test error");
     expect(mockWinston.info).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("ConsoleLogWriter", () => {
+  let consoleError: jest.SpyInstance;
+
+  beforeEach(() => {
+    consoleError = jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    consoleError.mockRestore();
+  });
+
+  it("logs details through their toJSON, as AxiosError provides", () => {
+    const details = { toJSON: (): unknown => ({ status: 500 }), config: { headers: {} } };
+    ConsoleLogWriter.LogError("request failed", details);
+    expect(consoleError).toHaveBeenCalledWith('request failed - {"status":500}');
+  });
+
+  it("logs plain details as JSON", () => {
+    ConsoleLogWriter.LogError("request failed", { status: 404 });
+    expect(consoleError).toHaveBeenCalledWith('request failed - {"status":404}');
   });
 });
