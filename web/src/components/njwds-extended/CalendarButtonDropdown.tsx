@@ -80,6 +80,7 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
       >
         {props.dropdownOptions.map((option, i) => {
           return (
+            // biome-ignore lint/suspicious/noArrayIndexKey: dropdown options are a fixed list from the caller and never reorder
             <MenuItem onClick={option.onClick} key={i} className={props.dropdownClassName}>
               <Wrapper {...option.props}>{option.text}</Wrapper>
             </MenuItem>

@@ -62,8 +62,8 @@ const ModifyBusinessPage = (): ReactElement => {
                 </div>
                 {business?.licenseData?.licenses &&
                   Object.entries(business?.licenseData?.licenses).map(
-                    ([licenseName, licenseDetails], index) => (
-                      <div className="flex margin-bottom-05" key={`${licenseName}-${index}`}>
+                    ([licenseName, licenseDetails]) => (
+                      <div className="flex margin-bottom-05" key={licenseName}>
                         <div className="width-tablet">{licenseName}</div>
                         <div className="width-card-lg">{licenseDetails.licenseStatus}</div>
                         <div className="width-mobile">{LicenseNameTaskIdMapping[licenseName]}</div>

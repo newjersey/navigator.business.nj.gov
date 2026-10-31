@@ -943,11 +943,11 @@ describe("<FilingsCalendar />", () => {
       let annualReport: TaxFilingCalendarEvent;
       const operateReferences: Record<string, OperateReference> = {};
       const filings: TaxFilingCalendarEvent[] = [];
-      [
+      for (const dates of [
         getAprilDateOfThisYear(),
         getAprilDateOfThisYear().add(1, "years"),
         getAprilDateOfThisYear().add(2, "years"),
-      ].map((dates) => {
+      ]) {
         for (let i = 0; i < numberOfCalendarEntries; i++) {
           dueDate = dates.add(2, "months").add(i, "day");
           annualReport = generateTaxFilingCalendarEvent({
@@ -957,7 +957,7 @@ describe("<FilingsCalendar />", () => {
           filings.push(annualReport);
           operateReferences[`annual-report-${i}`] = generateOperateReference({});
         }
-      });
+      }
 
       const business = generateBusiness({
         profileData: generateProfileData({

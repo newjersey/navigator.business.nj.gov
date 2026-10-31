@@ -435,6 +435,7 @@ const DeadLinkResults = ({
                 </div>
                 <ul className="margin-top-05">
                   {item.deadUrls.map((deadUrl: FoundUrl, i: number) => (
+                    // biome-ignore lint/suspicious/noArrayIndexKey: stateless rows from one dead-link report, never reordered
                     <li key={i} className="margin-bottom-1">
                       <div>
                         <code className="text-error">{deadUrl.url}</code>{" "}

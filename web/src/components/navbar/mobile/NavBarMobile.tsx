@@ -1,6 +1,6 @@
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
 import type { Task } from "@businessnjgovnavigator/shared/types";
-import type { UserData } from "@businessnjgovnavigator/shared/userData";
+import type { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import { type ReactElement, useState } from "react";
 import { NavBarLogoOnlyMobile } from "@/components/navbar/mobile/NavBarLogoOnlyMobile";
 import { NavBarMobileAccountSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileAccountSlideOutMenu";
@@ -39,7 +39,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
 
   const isAuthenticated = props.variant === NavBarVariant.FULL_AUTHENTICATED;
   const isLanding = props.variant === NavBarVariant.FULL_LANDING;
-  let currentBusiness;
+  let currentBusiness: Business | undefined;
   if (props.userData) {
     currentBusiness = getCurrentBusiness(props.userData);
   }

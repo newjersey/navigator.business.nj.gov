@@ -15,12 +15,12 @@ export type JobState = {
 
 const GLOBAL_KEY = "__deadLinkJobState" as const;
 
-declare const globalThis: {
+const jobStore = globalThis as typeof globalThis & {
   [GLOBAL_KEY]?: JobState | null;
-} & typeof global;
+};
 
-export const getJobState = (): JobState | null => globalThis[GLOBAL_KEY] ?? null;
+export const getJobState = (): JobState | null => jobStore[GLOBAL_KEY] ?? null;
 
 export const setJobState = (job: JobState | null): void => {
-  globalThis[GLOBAL_KEY] = job;
+  jobStore[GLOBAL_KEY] = job;
 };

@@ -254,39 +254,6 @@
           "nursery": { "noFloatingPromises": "warn" }
         }
       }
-    },
-    // temporary: drained by the web rule PRs.
-    {
-      "includes": ["web/**"],
-      "linter": {
-        "rules": {
-          "suspicious": {
-            "noArrayIndexKey": "warn",
-            "useIterableCallbackReturn": "warn",
-            "noImplicitAnyLet": "warn",
-            "noAssignInExpressions": "warn",
-            "noShadowRestrictedNames": "warn",
-            "noRedeclare": "warn",
-            "useExpect": "warn"
-          },
-          "style": {
-            "noCommonJs": "warn",
-            "useThrowOnlyError": "warn",
-            "noParameterAssign": "warn",
-            "useFilenamingConvention": {
-              "level": "warn",
-              "options": { "filenameCases": ["kebab-case", "camelCase", "PascalCase"] }
-            }
-          },
-          "correctness": {
-            "noUnknownProperty": "warn",
-            "noVoidTypeReturn": "warn",
-            "noUnreachable": "warn"
-          },
-          "complexity": { "useMaxParams": "warn" },
-          "security": { "noDangerouslySetInnerHtml": "warn" }
-        }
-      }
     }
   ]
 }

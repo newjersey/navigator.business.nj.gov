@@ -80,6 +80,7 @@ export const AdditionalProvisions = (): ReactElement => {
       )}
       {state.formationFormData.additionalProvisions?.map((provision: string, index: number) => {
         return (
+          // biome-ignore lint/suspicious/noArrayIndexKey: provisions are bare strings with no id, and their field state is keyed by index via fieldName
           <div key={index}>
             <strong>
               <ModifiedContent>

@@ -118,6 +118,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
           />
         );
       }
+      return null;
     });
   };
 

@@ -39,7 +39,8 @@ const customRemarkPlugin: Plugin = () => {
   return (tree: Root) => {
     visit(tree, (node) => {
       if (node.type === "containerDirective") {
-        const data = node.data || (node.data = {});
+        node.data ||= {};
+        const data = node.data;
         data.hName = node.name;
         // remark-directive always parses attributes into an object of strings; the types also allow
         // null for hand-built nodes.

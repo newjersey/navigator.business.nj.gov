@@ -43,12 +43,13 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
 
   return ({ children, initialData }: StatefulDataProps): ReactElement => {
     const update = (
-      newData: GenericData | undefined,
+      incomingData: GenericData | undefined,
       config?: { local?: boolean },
     ): Promise<void> => {
-      if (!config?.local && isUserData(genericData as UserData | ProfileData)) {
-        newData = mockEncryptFields(newData as UserData);
-      }
+      const newData =
+        !config?.local && isUserData(genericData as UserData | ProfileData)
+          ? mockEncryptFields(incomingData as UserData)
+          : incomingData;
 
       spy(newData, config);
       setGenericData(newData);

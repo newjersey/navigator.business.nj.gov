@@ -76,7 +76,7 @@ export const getStaticProps = async ({
 }: {
   params: StarterKitsUrl;
 }): Promise<{ props: Props }> => {
-  let industry;
+  let industry: Industry;
   if (params.starterKitsUrl === STARTER_KITS_GENERIC_SLUG) {
     industry = LookupIndustryById("generic");
   } else {

@@ -17,7 +17,7 @@ import { Industry } from "@/components/data-fields/Industry";
 import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
 import { NexusBusinessNameField } from "@/components/data-fields/NexusBusinessNameField";
-import { NexusDBANameField } from "@/components/data-fields/NexusDBANameField";
+import { NexusDBANameField } from "@/components/data-fields/NexusDbaNameField";
 import { Notes } from "@/components/data-fields/Notes";
 import { Ownership } from "@/components/data-fields/Ownership";
 import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
@@ -185,9 +185,9 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
           <FieldLabelOnboarding fieldName="responsibleOwnerName" />
           <ResponsibleOwnerName />
 
-          {EssentialQuestions.map((props, index) => {
+          {EssentialQuestions.map((props) => {
             return (
-              <div className="margin-top-4" key={props.fieldName + index}>
+              <div className="margin-top-4" key={props.fieldName}>
                 <FieldLabelProfile fieldName={props.fieldName as ProfileContentField} />
                 <RadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
                   {...props}

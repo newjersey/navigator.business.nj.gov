@@ -195,6 +195,7 @@ export const get = async <T>(url: string, auth = true): Promise<T> => {
       return response.data;
     })
     .catch((error: AxiosError) => {
+      // biome-ignore lint/style/useThrowOnlyError: get's protected contract rejects with the HTTP status number
       throw error.response?.status || 500;
     });
 };
@@ -207,6 +208,7 @@ export const post = async <T, R>(url: string, data: R, auth = true): Promise<T> 
       return response.data;
     })
     .catch((error: AxiosError) => {
+      // biome-ignore lint/style/useThrowOnlyError: post's protected contract rejects with { status, data }
       throw { status: error.response?.status, data: error.response?.data };
     });
 };

@@ -34,6 +34,7 @@ export const ConfigMatchList = (props: Props): ReactElement => {
       </span>
       <ul>
         {(expanded ? props.matches : collapsedMatches).map((match, i) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: stateless match rows, rebuilt for each search and never reordered
           <li key={i}>
             {collectionInfo ? (
               <a

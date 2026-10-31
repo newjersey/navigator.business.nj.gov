@@ -374,8 +374,7 @@ const extractUrlsFromText = (text: string, fieldName: string): FoundUrl[] => {
   });
 
   const rawRegex = new RegExp(URL_REGEX.source, "g");
-  let match;
-  while ((match = rawRegex.exec(text)) !== null) {
+  for (const match of text.matchAll(rawRegex)) {
     const url = match[0].replace(/[!),.:;?]+$/, "");
     if (seen.has(url)) continue;
     let isSubstringOfKnown = false;

@@ -25,14 +25,14 @@ const UnusedContent = (props: Props): ReactElement => {
     let unusedTasksOutput = "Unused Tasks \n\n";
 
     unusedTasksOutput = `${unusedTasksOutput}\n\n Tasks:`;
-    props.deadTasks.map((deadTasks) => {
+    for (const deadTasks of props.deadTasks) {
       unusedTasksOutput = `${unusedTasksOutput}\n\n ${deadTasks}`;
-    });
+    }
 
     unusedTasksOutput = `${unusedTasksOutput}\n\n License Tasks:`;
-    props.deadLicenseTasks.map((deadLicenseTask) => {
+    for (const deadLicenseTask of props.deadLicenseTasks) {
       unusedTasksOutput = `${unusedTasksOutput}\n\n ${deadLicenseTask}`;
-    });
+    }
 
     return unusedTasksOutput;
   };
@@ -66,6 +66,7 @@ const UnusedContent = (props: Props): ReactElement => {
       </Heading>
       <ul>
         {props.deadTasks.map((task, i) => {
+          // biome-ignore lint/suspicious/noArrayIndexKey: stateless rows from one unused-content report, never reordered
           return <li key={i}>{task}</li>;
         })}
       </ul>
@@ -75,6 +76,7 @@ const UnusedContent = (props: Props): ReactElement => {
       </Heading>
       <ul>
         {props.deadLicenseTasks.map((licenseTasks, i) => {
+          // biome-ignore lint/suspicious/noArrayIndexKey: stateless rows from one unused-content report, never reordered
           return <li key={i}>{licenseTasks}</li>;
         })}
       </ul>

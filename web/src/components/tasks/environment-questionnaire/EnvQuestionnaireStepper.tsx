@@ -74,7 +74,7 @@ export const EnvQuestionnaireStepper = (): ReactElement => {
 
   let mediaArea: MediaArea | undefined;
   let optionsTextConfig: QuestionnaireConfig;
-  let questionnaireFieldIds;
+  let questionnaireFieldIds: string[] | undefined;
 
   if (envContext.state.stepIndex !== 0) {
     mediaArea = stepNumberToMediaArea[envContext.state.stepIndex] as MediaArea;

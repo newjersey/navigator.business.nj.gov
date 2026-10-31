@@ -54,6 +54,7 @@ export const MatchList = (props: Props): ReactElement => {
                 Snippet(s):
                 <ul>
                   {match.snippets.map((snippet, i) => (
+                    // biome-ignore lint/suspicious/noArrayIndexKey: stateless snippet rows, rebuilt for each search and never reordered
                     <li key={i}>{snippet}</li>
                   ))}
                 </ul>

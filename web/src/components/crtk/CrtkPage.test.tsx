@@ -14,6 +14,14 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 const mockApi = api as jest.Mocked<typeof api>;
 
+interface SearchFormValues {
+  readonly businessName: string;
+  readonly streetAddress: string;
+  readonly city: string;
+  readonly zip: string;
+  readonly ein?: string;
+}
+
 describe("<CrtkPage />", () => {
   const generateCrtkData = (overrides?: Partial<CrtkData>): CrtkData => ({
     lastUpdatedISO: "2025-01-15T10:30:00.000Z",
@@ -58,13 +66,13 @@ describe("<CrtkPage />", () => {
     );
   };
 
-  const fillOutSearchForm = (
-    businessName: string,
-    streetAddress: string,
-    city: string,
-    zip: string,
-    ein?: string,
-  ): void => {
+  const fillOutSearchForm = ({
+    businessName,
+    streetAddress,
+    city,
+    zip,
+    ein,
+  }: SearchFormValues): void => {
     fireEvent.change(screen.getByTestId("business-name"), {
       target: { value: businessName },
     });
@@ -152,13 +160,13 @@ describe("<CrtkPage />", () => {
 
       renderWithBusinessData();
 
-      fillOutSearchForm(
-        "M&U INTERNATIONAL LLC",
-        "31 READINGTON RD",
-        "BRANCHBURG TWP",
-        "08876",
-        "273265170",
-      );
+      fillOutSearchForm({
+        businessName: "M&U INTERNATIONAL LLC",
+        streetAddress: "31 READINGTON RD",
+        city: "BRANCHBURG TWP",
+        zip: "08876",
+        ein: "273265170",
+      });
 
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
@@ -172,7 +180,12 @@ describe("<CrtkPage />", () => {
     it("displays the not found flow when the business is not in CRTK database", async () => {
       mockApi.searchBusinessInCrtkDB.mockResolvedValue(mockNotFoundResponse);
       renderWithBusinessData();
-      fillOutSearchForm("Nonexistent Business", "123 Fake St", "Some City", "12345");
+      fillOutSearchForm({
+        businessName: "Nonexistent Business",
+        streetAddress: "123 Fake St",
+        city: "Some City",
+        zip: "12345",
+      });
       fireEvent.click(screen.getByTestId("crtk-submit"));
       await waitFor(() => {
         expect(screen.getByTestId("crtk-not-found")).toBeInTheDocument();
@@ -185,7 +198,12 @@ describe("<CrtkPage />", () => {
 
       renderWithBusinessData();
 
-      fillOutSearchForm("Test Business", "123 Test St", "Test City", "12345");
+      fillOutSearchForm({
+        businessName: "Test Business",
+        streetAddress: "123 Test St",
+        city: "Test City",
+        zip: "12345",
+      });
 
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
@@ -220,7 +238,12 @@ describe("<CrtkPage />", () => {
     it("validates zip code format", async () => {
       renderWithBusinessData();
 
-      fillOutSearchForm("Test Business", "123 Test St", "Test City", "123"); // Invalid zip
+      fillOutSearchForm({
+        businessName: "Test Business",
+        streetAddress: "123 Test St",
+        city: "Test City",
+        zip: "123",
+      }); // Invalid zip
 
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
@@ -234,7 +257,12 @@ describe("<CrtkPage />", () => {
 
       renderWithBusinessData();
 
-      fillOutSearchForm("M&U INTERNATIONAL LLC", "31 READINGTON RD", "BRANCHBURG TWP", "08876");
+      fillOutSearchForm({
+        businessName: "M&U INTERNATIONAL LLC",
+        streetAddress: "31 READINGTON RD",
+        city: "BRANCHBURG TWP",
+        zip: "08876",
+      });
 
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
@@ -254,13 +282,13 @@ describe("<CrtkPage />", () => {
 
       renderWithBusinessData();
 
-      fillOutSearchForm(
-        "M&U INTERNATIONAL LLC",
-        "31 READINGTON RD",
-        "BRANCHBURG TWP",
-        "08876",
-        "273265170",
-      );
+      fillOutSearchForm({
+        businessName: "M&U INTERNATIONAL LLC",
+        streetAddress: "31 READINGTON RD",
+        city: "BRANCHBURG TWP",
+        zip: "08876",
+        ein: "273265170",
+      });
 
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
@@ -301,7 +329,12 @@ describe("<CrtkPage />", () => {
 
       renderWithBusinessData();
 
-      fillOutSearchForm("Test Business", "123 Test St", "Test City", "12345");
+      fillOutSearchForm({
+        businessName: "Test Business",
+        streetAddress: "123 Test St",
+        city: "Test City",
+        zip: "12345",
+      });
 
       fireEvent.click(screen.getByTestId("crtk-submit"));
 
@@ -320,7 +353,12 @@ describe("<CrtkPage />", () => {
         ),
       );
 
-      fillOutSearchForm("M&U INTERNATIONAL LLC", "31 READINGTON RD", "BRANCHBURG TWP", "08876");
+      fillOutSearchForm({
+        businessName: "M&U INTERNATIONAL LLC",
+        streetAddress: "31 READINGTON RD",
+        city: "BRANCHBURG TWP",
+        zip: "08876",
+      });
 
       fireEvent.click(screen.getByTestId("crtk-submit"));
 

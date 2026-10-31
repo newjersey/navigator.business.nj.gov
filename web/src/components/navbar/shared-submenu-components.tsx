@@ -215,7 +215,9 @@ export const ProfileMenuItem = (props: {
         }
       }
 
-      businessMenuItems.push(<hr className="margin-0 hr-2px" key={`profile-break-${i}`} />);
+      businessMenuItems.push(
+        <hr className="margin-0 hr-2px" key={`profile-break-${businessId}`} />,
+      );
 
       return businessMenuItems;
     });
