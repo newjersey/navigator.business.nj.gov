@@ -4832,6 +4832,7 @@ __metadata:
     "@aws-sdk/types": "npm:3.893.0"
     "@aws-sdk/util-base64-node": "npm:3.209.0"
     "@aws-sdk/util-dynamodb": "npm:3.896.0"
+    "@biomejs/biome": "npm:2.6.3"
     "@businessnjgovnavigator/shared": "npm:*"
     "@jest/types": "npm:30.4.1"
     "@smithy/node-http-handler": "npm:4.8.0"

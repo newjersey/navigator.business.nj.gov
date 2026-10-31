@@ -30,6 +30,8 @@ api/wiremock/__files/tax-clearance-success.json
 api/cdk.out
 api/lib/
 api/dist/
+# migrated to Biome; keeps root Prettier/ESLint off it
+api
 
 api/cdk.context.json
 api/node_modules
