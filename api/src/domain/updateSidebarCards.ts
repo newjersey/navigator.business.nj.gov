@@ -1,9 +1,9 @@
-import { UpdateSidebarCards } from "@domain/types";
+import type { UpdateSidebarCards } from "@domain/types";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
 import { OperatingPhaseId } from "@shared/operatingPhase";
-import { UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 
 export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): UserData => {
   const currentBusiness = getCurrentBusiness(userData);

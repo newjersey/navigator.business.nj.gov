@@ -7,9 +7,9 @@
  * permitted in production source.
  */
 
-import { sortUnionParts } from "./userSchemaGenerator";
 import path from "node:path";
 import ts from "typescript";
+import { sortUnionParts } from "./userSchemaGenerator";
 
 /**
  * Recursively serializes a TypeScript type into a pretty-printed string

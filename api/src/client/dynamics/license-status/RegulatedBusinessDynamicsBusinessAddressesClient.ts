@@ -1,12 +1,12 @@
 import {
   ACTIVE_STATECODE,
-  BusinessAddressesClient,
-  BusinessIdAndLicenseSearchNameAndAddresses,
-  BusinessIdAndName,
+  type BusinessAddressesClient,
+  type BusinessIdAndLicenseSearchNameAndAddresses,
+  type BusinessIdAndName,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
-import { LogWriterType } from "@libs/logWriter";
-import { LicenseSearchAddress } from "@shared/license";
-import axios, { AxiosError } from "axios";
+import type { LogWriterType } from "@libs/logWriter";
+import type { LicenseSearchAddress } from "@shared/license";
+import axios, { type AxiosError } from "axios";
 
 export const RegulatedBusinessDynamicsBusinessAddressesClient = (
   logWriter: LogWriterType,

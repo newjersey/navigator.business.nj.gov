@@ -1,7 +1,7 @@
-import { NewsletterClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { NewsletterResponse, NewsletterStatus } from "@shared/businessUser";
-import axios, { AxiosError } from "axios";
+import type { NewsletterClient } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
+import type { NewsletterResponse, NewsletterStatus } from "@shared/businessUser";
+import axios, { type AxiosError } from "axios";
 
 type GovDeliveryNewsletterClientConfig = {
   baseUrl: string;

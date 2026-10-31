@@ -1,5 +1,5 @@
 import { getSignedInUserId } from "@api/userRouter";
-import { CrtkBusinessDetails } from "@businessnjgovnavigator/shared";
+import type { CrtkBusinessDetails } from "@businessnjgovnavigator/shared";
 import type { DatabaseClient, UpdateCrtk } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";

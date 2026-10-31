@@ -1,10 +1,10 @@
 import {
-  GovDeliveryCommCloudClientType,
+  type GovDeliveryCommCloudClientType,
   syncNewsletterSubscription,
 } from "@domain/newsletter/syncNewsletterSubscription";
-import { NewsletterResponse } from "@shared/businessUser";
+import type { NewsletterResponse } from "@shared/businessUser";
 import { generateUserData } from "@shared/test";
-import { UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 
 const SUCCESS_RESPONSE: NewsletterResponse = { success: true, status: "SUCCESS" };
 const FAILURE_RESPONSE: NewsletterResponse = { success: false, status: "CONNECTION_ERROR" };

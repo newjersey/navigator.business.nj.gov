@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v128Business,
   v128UserData,
 } from "@db/migrations/v128_merge_needs_to_register_and_formed_and_registered";
@@ -36,7 +36,6 @@ interface v129ProfileData extends v129IndustrySpecificData {
 
 export const migrate_v128_to_v129 = (
   v128Data: v128UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v129UserData => {
   return {

@@ -1,10 +1,10 @@
-import {
+import type {
   BusinessIdAndName,
   BusinessIdsAndNamesClient,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import { NO_ADDRESS_MATCH_ERROR } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import axios, { AxiosError } from "axios";
+import type { LogWriterType } from "@libs/logWriter";
+import axios, { type AxiosError } from "axios";
 
 export const RegulatedBusinessDynamicsBusinessIdsAndNamesClient = (
   logWriter: LogWriterType,

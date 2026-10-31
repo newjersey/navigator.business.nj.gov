@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v20UserData } from "@db/migrations/v20_switch_industry_to_id";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v20UserData } from "@db/migrations/v20_switch_industry_to_id";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v21UserData {
@@ -13,11 +13,7 @@ export interface v21UserData {
   version: number;
 }
 
-export const migrate_v20_to_v21 = (
-  v20Data: v20UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v21UserData => {
+export const migrate_v20_to_v21 = (v20Data: v20UserData, _?: MigrationClients): v21UserData => {
   return {
     ...v20Data,
     onboardingData: {

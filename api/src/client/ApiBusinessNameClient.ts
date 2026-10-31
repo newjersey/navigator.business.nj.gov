@@ -1,7 +1,7 @@
-import { BusinessNameClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { NameAvailabilityResponse, NameAvailabilityStatus } from "@shared/businessNameSearch";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import type { BusinessNameClient } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
+import type { NameAvailabilityResponse, NameAvailabilityStatus } from "@shared/businessNameSearch";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
 
 export const ApiBusinessNameClient = (
   baseUrl: string,
@@ -34,9 +34,7 @@ export const ApiBusinessNameClient = (
             "",
           );
         } else if (response.data.Reason.indexOf("invalid special character") > 0) {
-          {
-            responseStatus = "SPECIAL_CHARACTER_ERROR";
-          }
+          responseStatus = "SPECIAL_CHARACTER_ERROR";
         } else {
           responseStatus = "UNAVAILABLE";
         }

@@ -1,7 +1,10 @@
 import { DynamicsFireSafetyClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyClient";
-import { FireSafetyInfo, FireSafetyInspectionClient } from "@client/dynamics/fire-safety/types";
-import { AccessTokenClient } from "@client/dynamics/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import type {
+  FireSafetyInfo,
+  FireSafetyInspectionClient,
+} from "@client/dynamics/fire-safety/types";
+import type { AccessTokenClient } from "@client/dynamics/types";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 
 describe("DynamicsFireSafetyClient", () => {
   let client: FireSafetyInfo;

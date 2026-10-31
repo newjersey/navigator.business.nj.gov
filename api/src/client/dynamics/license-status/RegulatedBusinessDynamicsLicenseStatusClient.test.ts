@@ -1,17 +1,17 @@
 import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseStatusClient";
 
-import {
+import type {
   BusinessAddressesClient,
   BusinessIdsAndNamesClient,
   ChecklistItemsForAllApplicationsClient,
   LicenseApplicationIdsForAllBusinessIdsClient,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
-import { AccessTokenClient } from "@client/dynamics/types";
+import type { AccessTokenClient } from "@client/dynamics/types";
 import {
   NO_ADDRESS_MATCH_ERROR,
   NO_MAIN_APPS_ERROR,
   NO_MATCH_ERROR,
-  SearchLicenseStatus,
+  type SearchLicenseStatus,
 } from "@domain/types";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { generateLicenseSearchAddress, generateLicenseSearchNameAndAddress } from "@shared/test";

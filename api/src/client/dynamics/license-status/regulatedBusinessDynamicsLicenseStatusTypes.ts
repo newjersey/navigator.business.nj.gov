@@ -1,5 +1,5 @@
-import { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelpers";
-import { LicenseSearchAddress, LicenseStatus } from "@shared/license";
+import type { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelpers";
+import type { LicenseSearchAddress, LicenseStatus } from "@shared/license";
 
 export interface BusinessIdsAndNamesClient {
   getMatchedBusinessIdsAndNames: (

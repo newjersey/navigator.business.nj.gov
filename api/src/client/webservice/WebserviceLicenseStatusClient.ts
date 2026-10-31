@@ -1,7 +1,7 @@
-import { HealthCheckMetadata, HealthCheckMethod, LicenseStatusClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { LicenseEntity } from "@shared/license";
-import axios, { AxiosError } from "axios";
+import type { HealthCheckMetadata, HealthCheckMethod, LicenseStatusClient } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
+import type { LicenseEntity } from "@shared/license";
+import axios, { type AxiosError } from "axios";
 import { ReasonPhrases } from "http-status-codes";
 
 export const WebserviceLicenseStatusClient = (

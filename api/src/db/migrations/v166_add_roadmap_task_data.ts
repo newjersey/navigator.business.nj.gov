@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v165Business,
   v165UserData,
 } from "@db/migrations/v165_add_last_updated_iso_to_xray_registration_data";
@@ -8,7 +8,6 @@ import { cloneDeep } from "lodash";
 
 export const migrate_v165_to_v166 = async (
   v165Data: v165UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): Promise<v166UserData> => {
   const businesses = Object.values(v165Data.businesses);

@@ -1,5 +1,5 @@
-import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
-import { TaxFilingResult, TaxIdentifierToIdsRecord } from "src/domain/types";
+import type { TaxFilingCalendarEvent } from "@shared/calendarEvent";
+import type { TaxFilingResult, TaxIdentifierToIdsRecord } from "src/domain/types";
 
 export const slugifyTaxId = (id: string): string => {
   return id.trim().replaceAll(" ", "").replaceAll("/", "_").toLowerCase();

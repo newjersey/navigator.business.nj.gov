@@ -1,7 +1,7 @@
-import { CrtkBusinessDetails } from "@businessnjgovnavigator/shared";
-import { CrtkStatusLookup, UpdateCrtk } from "@domain/types";
+import type { CrtkBusinessDetails } from "@businessnjgovnavigator/shared";
+import type { CrtkStatusLookup, UpdateCrtk } from "@domain/types";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
-import { Business, UserData } from "@shared/userData";
+import type { Business, UserData } from "@shared/userData";
 
 export const updateCrtkStatusFactory = (crtkLookupClient: CrtkStatusLookup): UpdateCrtk => {
   return async (userData: UserData, businessDetails: CrtkBusinessDetails): Promise<UserData> => {

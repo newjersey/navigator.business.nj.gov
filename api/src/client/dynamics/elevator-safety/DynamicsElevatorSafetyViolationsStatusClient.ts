@@ -1,6 +1,6 @@
-import { ElevatorSafetyViolationsClient } from "@client/dynamics/elevator-safety/types";
-import { AccessTokenClient } from "@client/dynamics/types";
-import { ElevatorSafetyViolationsStatus } from "@domain/types";
+import type { ElevatorSafetyViolationsClient } from "@client/dynamics/elevator-safety/types";
+import type { AccessTokenClient } from "@client/dynamics/types";
+import type { ElevatorSafetyViolationsStatus } from "@domain/types";
 
 type Config = {
   accessTokenClient: AccessTokenClient;

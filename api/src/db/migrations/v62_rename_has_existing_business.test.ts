@@ -2,8 +2,8 @@ import {
   generatev61FormationFormData,
   generatev61ProfileData,
   generatev61User,
-  v61ProfileData,
-  v61UserData,
+  type v61ProfileData,
+  type v61UserData,
 } from "@db/migrations/v61_add_corp_formation";
 import { migrate_v61_to_v62 } from "@db/migrations/v62_rename_has_existing_business";
 

@@ -8,7 +8,7 @@ import {
   TAX_ID_MISSING_FIELD,
   TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE,
 } from "@client/ApiTaxClearanceCertificateClient";
-import { type CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
+import type { CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
 import {
   emptyTaxClearanceCertificateData,
@@ -20,7 +20,7 @@ import {
   generateUser,
   generateUserData,
 } from "@shared/test";
-import { Business, UserData } from "@shared/userData";
+import type { Business, UserData } from "@shared/userData";
 import axios from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 

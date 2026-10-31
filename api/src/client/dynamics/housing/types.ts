@@ -1,4 +1,4 @@
-import { PropertyInterestType } from "@shared/housing";
+import type { PropertyInterestType } from "@shared/housing";
 
 export interface HousingPropertyInterestClient {
   getPropertyInterest: (

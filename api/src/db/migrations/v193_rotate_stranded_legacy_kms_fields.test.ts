@@ -1,3 +1,4 @@
+import type { MigrationClients } from "@db/migrations/types";
 import {
   generatev192Business,
   generatev192CigaretteLicenseData,
@@ -7,12 +8,11 @@ import {
   type v192TaxClearanceCertificateData,
 } from "@db/migrations/v192_fix_confirmation_email_sent_typo";
 import { migrate_v192_to_v193 } from "@db/migrations/v193_rotate_stranded_legacy_kms_fields";
-import { type MigrationClients } from "@db/migrations/types";
 import {
   type CryptoClient,
   ForeignEnvironmentCiphertextError,
-  QuarantinedCiphertextError,
   isQuarantinedCiphertextError,
+  QuarantinedCiphertextError,
 } from "@domain/types";
 
 const makeCryptoClient = (): jest.Mocked<CryptoClient> => ({

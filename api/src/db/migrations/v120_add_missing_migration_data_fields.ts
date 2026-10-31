@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v119Business,
   v119TaxFiling,
   v119UserData,
@@ -31,7 +31,6 @@ export interface v120Business {
 
 export const migrate_v119_to_v120 = (
   v119Data: v119UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v120UserData => {
   return {
@@ -50,21 +49,17 @@ const migrate_v119Business_to_v120Business = (v119BusinessData: v119Business): v
     ...v119BusinessData,
     profileData: {
       ...v119BusinessData.profileData,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       responsibleOwnerName: (v119BusinessData.profileData as any).responsibleOwnerName ?? "",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tradeName: (v119BusinessData.profileData as any).tradeName ?? "",
     },
     preferences: {
       ...v119BusinessData.preferences,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       phaseNewlyChanged: (v119BusinessData.preferences as any).phaseNewlyChanged ?? false,
     },
     taxFilingData: {
       ...v119BusinessData.taxFilingData,
       filings: v119BusinessData.taxFilingData.filings.map((filing: v119TaxFiling) => ({
         ...filing,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         calendarEventType: (filing as any).calendarEventType || "TAX-FILING",
       })),
     },
@@ -73,23 +68,18 @@ const migrate_v119Business_to_v120Business = (v119BusinessData: v119Business): v
       formationFormData: {
         ...v119BusinessData.formationData.formationFormData,
         legalType:
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (v119BusinessData.formationData.formationFormData as any).legalType ??
           v119BusinessData.profileData.legalStructureId,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         willPracticeLaw: (v119BusinessData.formationData.formationFormData as any).willPracticeLaw,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         businessLocationType: (v119BusinessData.formationData.formationFormData as any)
           .businessLocationType,
         members: v119BusinessData.formationData.formationFormData.members?.map((member) => ({
           ...member,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           businessLocationType: (member as any).businessLocationType,
         })),
         incorporators: v119BusinessData.formationData.formationFormData.incorporators?.map(
           (incorporator) => ({
             ...incorporator,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             businessLocationType: (incorporator as any).businessLocationType,
           }),
         ),

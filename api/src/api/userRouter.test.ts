@@ -1,10 +1,10 @@
 import { userRouterFactory } from "@api/userRouter";
 import {
-  CryptoClient,
-  DatabaseClient,
+  type CryptoClient,
+  type DatabaseClient,
   DatabaseThrottlingError,
   MigrationConflictError,
-  TimeStampBusinessSearch,
+  type TimeStampBusinessSearch,
 } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
@@ -13,7 +13,7 @@ import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { createEmptyFormationFormData, emptyAddressData } from "@shared/formationData";
 import { randomInt } from "@shared/intHelpers";
-import { LicenseName } from "@shared/license";
+import type { LicenseName } from "@shared/license";
 import {
   generateBusiness,
   generateBusinessNameAvailability,
@@ -33,10 +33,10 @@ import {
   getSecondAnnualFiling,
   getThirdAnnualFiling,
 } from "@shared/test";
-import { CURRENT_VERSION, UserData } from "@shared/userData";
+import { CURRENT_VERSION, type UserData } from "@shared/userData";
 import { generateAnnualFilings, getLastCalledWith } from "@test/helpers";
 import dayjs from "dayjs";
-import { Express } from "express";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
 import request, { type Response } from "supertest";
@@ -48,7 +48,6 @@ jest.mock("jsonwebtoken", () => {
 });
 const mockJwt = jwt as jest.Mocked<typeof jwt>;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const cognitoPayload = ({ id }: { id: string }): any => {
   return {
     sub: "some-sub",
@@ -1051,7 +1050,6 @@ describe("userRouter", () => {
     });
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sendRequest = async (body: any): Promise<Response> => {
     return request(app).post(`/users/emailCheck`).send(body);
   };
@@ -1075,7 +1073,6 @@ describe("userRouter", () => {
     );
 
     it("looks up a user by email that does not exist and returns an error", async () => {
-      // eslint-disable-next-line unicorn/no-useless-undefined
       stubUnifiedDataClient.findByEmail.mockResolvedValue(undefined);
 
       const response = await sendRequest({ email: "user@example.org" });

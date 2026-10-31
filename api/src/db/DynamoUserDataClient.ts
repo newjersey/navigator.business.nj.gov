@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ExecuteStatementCommand,
   QueryCommand,
@@ -8,9 +6,9 @@ import {
 import { type DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { Migrations } from "@db/migrations/migrations";
-import { type MigrationClients } from "@db/migrations/types";
-import { type CryptoClient, type UserDataClient } from "@domain/types";
-import { type LogWriterType } from "@libs/logWriter";
+import type { MigrationClients } from "@db/migrations/types";
+import type { CryptoClient, UserDataClient } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
 import { CURRENT_VERSION, type UserData } from "@shared/userData";
 
 const marshallOptions = {

@@ -1,8 +1,8 @@
-import {
+import type {
   LicenseChecklistResponse,
   LicenseStatusResults,
 } from "@shared/domain-logic/licenseStatusHelpers";
-import { LicenseName } from "@shared/license";
+import type { LicenseName } from "@shared/license";
 
 export const formatRegulatedBusinessDynamicsApplications = (
   applications: LicenseChecklistResponse[],

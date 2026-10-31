@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v78UserData } from "@db/migrations/v78_remove_initial_business_persona";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v78UserData } from "@db/migrations/v78_remove_initial_business_persona";
 
 export interface v79UserData {
   user: v79BusinessUser;
@@ -14,11 +14,7 @@ export interface v79UserData {
   version: number;
 }
 
-export const migrate_v78_to_v79 = (
-  v78Data: v78UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v79UserData => {
+export const migrate_v78_to_v79 = (v78Data: v78UserData, _?: MigrationClients): v79UserData => {
   return {
     ...v78Data,
     preferences: {

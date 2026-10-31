@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v72UserData } from "@db/migrations/v72_add_real_estate_management";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v72UserData } from "@db/migrations/v72_add_real_estate_management";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { randomInt } from "@shared/intHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
@@ -17,11 +17,7 @@ export interface v73UserData {
   version: number;
 }
 
-export const migrate_v72_to_v73 = (
-  v72Data: v72UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v73UserData => {
+export const migrate_v72_to_v73 = (v72Data: v72UserData, _?: MigrationClients): v73UserData => {
   const taskProgress = v72Data.taskProgress;
   const isPublicFiling = LookupLegalStructureById(
     v72Data.profileData.legalStructureId,

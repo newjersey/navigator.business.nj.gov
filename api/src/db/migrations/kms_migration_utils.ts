@@ -1,4 +1,4 @@
-import { type MigrationClients } from "@db/migrations/types";
+import type { MigrationClients } from "@db/migrations/types";
 import { ForeignEnvironmentCiphertextError } from "@domain/types";
 
 export interface KmsFieldMigrationResult {

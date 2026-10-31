@@ -1,7 +1,7 @@
 import { InvokeCommand } from "@aws-sdk/client-lambda";
 import { AwsMessagingServiceClient } from "@client/AwsMessagingServiceClient";
-import { MessagingServiceClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
+import type { MessagingServiceClient } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
 import { randomInt } from "@shared/intHelpers";
 import { ReasonPhrases } from "http-status-codes";
 
