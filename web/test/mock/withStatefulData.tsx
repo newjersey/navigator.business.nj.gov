@@ -61,6 +61,7 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
       }
     };
 
+    // biome-ignore-start lint/correctness/useHookAtTopLevel: hooks inside a component defined by a test factory
     const [genericData, setGenericData] = useState<GenericData | undefined>(initialData);
     const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(getUpdateQueue(update));
 
@@ -69,6 +70,7 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
         updateQueue?.queue(genericData as UserData);
       }
     }, [genericData]);
+    // biome-ignore-end lint/correctness/useHookAtTopLevel: hooks inside a component defined by a test factory
 
     return (
       <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
