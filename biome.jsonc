@@ -279,7 +279,6 @@
             }
           },
           "correctness": {
-            "useHookAtTopLevel": "warn",
             "noUnknownProperty": "warn",
             "noVoidTypeReturn": "warn",
             "noUnreachable": "warn"
