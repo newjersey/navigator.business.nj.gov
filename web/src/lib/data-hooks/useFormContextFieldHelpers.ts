@@ -3,7 +3,7 @@ import {
   FieldStateActionKind,
   type FormContextType,
 } from "@businessnjgovnavigator/shared/types";
-import { type Context, useContext, useEffect, useMemo } from "react";
+import { type Context, use, useEffect, useMemo } from "react";
 import { useMountEffect } from "@/lib/utils/helpers";
 
 export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
@@ -15,14 +15,22 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   setIsValid: (isValid: boolean) => void;
   isFormFieldInvalid: boolean;
 } => {
-  if (!context) {
+  // `use` may be called conditionally (unlike useContext), which keeps useMemo below running on
+  // every render whether or not a form context is passed.
+  const formContext = context ? use(context) : undefined;
+  const fieldInvalid = formContext?.fieldStates[fieldName].invalid;
+  const isFormFieldInvalid = useMemo(() => {
+    return fieldInvalid === true;
+  }, [fieldInvalid]);
+
+  if (!formContext) {
     return {
       RegisterForOnSubmit: (_isValidFunc: () => boolean): void => {},
       setIsValid: (_isValid: boolean): void => {},
       isFormFieldInvalid: false,
     };
   }
-  const { runValidations, fieldStates, reducer } = useContext(context);
+  const { runValidations, fieldStates, reducer } = formContext;
   const RegisterForOnSubmit = (
     isValidFunc: () => boolean,
     preventRefreshWhenUnmounted?: boolean,
@@ -53,10 +61,6 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
       payload: { field: fieldName, invalid: !isValid, errorTypes },
     });
   };
-
-  const isFormFieldInvalid = useMemo(() => {
-    return fieldStates[fieldName].invalid === true;
-  }, [fieldStates[fieldName].invalid]);
 
   return {
     RegisterForOnSubmit,
