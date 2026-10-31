@@ -43,10 +43,10 @@ export default defineConfig({
         },
       });
 
-      config = dotenvPlugin(config);
-      config.env.ADMIN_PASSWORD =
-        process.env.ADMIN_PASSWORD || config.env.ADMIN_PASSWORD || "Test1!";
-      return config;
+      const configWithEnv = dotenvPlugin(config);
+      configWithEnv.env.ADMIN_PASSWORD =
+        process.env.ADMIN_PASSWORD || configWithEnv.env.ADMIN_PASSWORD || "Test1!";
+      return configWithEnv;
     },
     baseUrl: "http://localhost:3000",
     env: {

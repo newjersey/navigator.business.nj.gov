@@ -507,7 +507,7 @@ describe("profile - shared", () => {
   describe("Numbers Section", () => {
     describe("tax id", () => {
       describe("disabled", () => {
-        businessPersonas.map((businessPersona) => {
+        for (const businessPersona of businessPersonas) {
           it(`disables taxId for ${businessPersona} businessPersona when taxFiling Status is SUCCESS or PENDING`, () => {
             const business = generateBusinessForProfile({
               profileData: generateProfileData({
@@ -527,15 +527,15 @@ describe("profile - shared", () => {
             expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
             expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
           });
-        });
+        }
       });
 
       describe("disclaimer", () => {
-        businessPersonas.map((businessPersona) => {
+        for (const businessPersona of businessPersonas) {
           const foreignBusinessTypeIds: ForeignBusinessTypeId[] = [];
           if (businessPersona === "FOREIGN")
             foreignBusinessTypeIds.push("employeeOrContractorInNJ", "officeInNJ");
-          foreignBusinessTypeIds.map((foreignBusinessTypeId) => {
+          for (const foreignBusinessTypeId of foreignBusinessTypeIds) {
             it(`shows disclaimer for trade name legal structure for ${businessPersona} ${
               foreignBusinessTypeId ?? ""
             } businessPersona`, () => {
@@ -552,8 +552,8 @@ describe("profile - shared", () => {
                 markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd),
               );
             });
-          });
-        });
+          }
+        }
 
         it("does not show disclaimer for public filing legal structure", () => {
           const business = generateBusinessForProfile({

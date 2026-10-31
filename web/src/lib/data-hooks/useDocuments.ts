@@ -32,7 +32,7 @@ export const useDocuments = (): {
       return checkData();
     }, 900000);
     return (): void => {
-      return clearInterval(interval);
+      clearInterval(interval);
     };
   }, business);
 

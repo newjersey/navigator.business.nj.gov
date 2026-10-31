@@ -112,6 +112,7 @@ export const BusinessStep = (): ReactElement => {
   return (
     <div data-testid="business-step">
       {elementsToDisplay.map((element, i) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: sections render in a fixed order per legal structure and never reorder
         <Fragment key={i}>{element}</Fragment>
       ))}
     </div>

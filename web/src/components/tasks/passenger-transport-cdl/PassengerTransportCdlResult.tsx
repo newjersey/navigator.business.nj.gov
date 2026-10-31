@@ -10,7 +10,7 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 
-interface Content {
+interface EndorsementContent {
   dataTestId: string;
   classText: string;
   infoAccordionHeaderText: string;
@@ -50,7 +50,7 @@ export const PassengerTransportCdlResult = (props: Props): ReactElement => {
     updateQueue?.updateInBackground();
   };
 
-  const getEndorsementText = (): Content => {
+  const getEndorsementText = (): EndorsementContent => {
     const schoolBus =
       cmsOnlySchoolBusOverride || business?.roadmapTaskData?.passengerTransportSchoolBus;
     const passengers =

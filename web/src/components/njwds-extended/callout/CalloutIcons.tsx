@@ -63,9 +63,9 @@ export const IconTextList = (props: IconTextListProps): ReactElement | null => {
 
   return (
     <div className="margin-top-2">
-      {props.items.map((item, index) => (
+      {props.items.map((item) => (
         <IconTextItem
-          key={index}
+          key={item.iconName}
           iconName={item.iconName}
           text={item.text}
           type={item.type}

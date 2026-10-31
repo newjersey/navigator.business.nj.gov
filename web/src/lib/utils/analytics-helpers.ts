@@ -159,10 +159,10 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
 
   let eventQuestions: Partial<Questions> = {};
 
-  questions.map((question) => {
+  for (const question of questions) {
     let questionName = questionResponseMap[question.fieldName];
     if (newProfileData[question.fieldName] === undefined) {
-      return;
+      continue;
     }
     if (questionName === undefined) {
       questionName = camelCaseToSnakeCase(question.fieldName);
@@ -189,7 +189,7 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
               : "both_sizes",
       };
     }
-  });
+  }
 
   analytics.eventRunner.track({
     event: "form_submits",

@@ -594,6 +594,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                 {onboardingFlows[currentFlow].pages.map((onboardingPage, index) => {
                   return (
                     <CssTransition
+                      // biome-ignore lint/suspicious/noArrayIndexKey: a slide's identity is its page position; index + 1 is the page number
                       key={index}
                       isVisible={page.current === index + 1}
                       unmountOnExit

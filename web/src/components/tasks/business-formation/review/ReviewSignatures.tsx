@@ -30,7 +30,8 @@ export const ReviewSignatures = (): ReactElement => {
           return (
             <div
               data-testid="review-signers"
-              key={`${signer}-${index}`}
+              // biome-ignore lint/suspicious/noArrayIndexKey: read-only review of saved signers, which have no id
+              key={index}
               className={index === 0 ? "" : "margin-top-2"}
             >
               <ReviewLineItem
@@ -76,7 +77,8 @@ export const ReviewSignatures = (): ReactElement => {
       <>
         {state.formationFormData.incorporators?.map((signer, index) => {
           return (
-            <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>
+            // biome-ignore lint/suspicious/noArrayIndexKey: read-only review of saved incorporators, which have no id
+            <div key={index} className={index === 0 ? "" : "margin-top-2"}>
               <ReviewLineItem
                 label={getConfig().label}
                 value={signer.name}

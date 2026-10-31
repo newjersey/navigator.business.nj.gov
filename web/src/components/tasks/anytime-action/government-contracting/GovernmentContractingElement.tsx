@@ -41,16 +41,12 @@ export const GovernmentContractingElement = (props: Props): ReactElement => {
       ctaText = Config.governmentContracting.stepThreeButtonText;
       break;
     }
-    case 3:
-      {
-        bodyText = Config.governmentContracting.stepFourContent;
-        ctaLink = Config.governmentContracting.stepFourButtonLink;
-        ctaText = Config.governmentContracting.stepFourButtonText;
-        break;
-      }
-      bodyText = "";
-      ctaLink = "";
-      ctaText = "";
+    case 3: {
+      bodyText = Config.governmentContracting.stepFourContent;
+      ctaLink = Config.governmentContracting.stepFourButtonLink;
+      ctaText = Config.governmentContracting.stepFourButtonText;
+      break;
+    }
   }
 
   const stepperSteps: StepperStep[] = [

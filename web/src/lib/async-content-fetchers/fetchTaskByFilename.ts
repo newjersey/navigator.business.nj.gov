@@ -42,7 +42,7 @@ const fetchDependenciesFile = async (): Promise<TaskDependencies[]> => {
 
 // refactor needed
 const fetchTaskFile = async (filename: string): Promise<string> => {
-  let file;
+  let file: { default: string };
 
   if (process.env.NODE_ENV === "test") {
     file = await import(`@/lib/roadmap/fixtures/tasks/${filename}.md`);

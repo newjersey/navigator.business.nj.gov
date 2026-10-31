@@ -16,7 +16,7 @@ import { useEffect, useRef } from "react";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
 
 export const useMountEffect = (fun: () => void): void => {
-  return useEffect(fun, []);
+  useEffect(fun, []);
 };
 
 export const groupBy = <T>(
@@ -26,7 +26,9 @@ export const groupBy = <T>(
   Object.values(
     array.reduce(
       (acc, value, index, array) => {
-        (acc[predicate(value, index, array)] ||= []).push(value);
+        const group = predicate(value, index, array);
+        acc[group] ||= [];
+        acc[group].push(value);
         return acc;
       },
       {} as { [key: string]: T[] },
@@ -34,7 +36,7 @@ export const groupBy = <T>(
   );
 
 export const useOnWindowResize = (fun: () => void): void => {
-  return useEffect(() => {
+  useEffect(() => {
     window.addEventListener("resize", fun);
     return function cleanup() {
       window.removeEventListener("resize", fun);

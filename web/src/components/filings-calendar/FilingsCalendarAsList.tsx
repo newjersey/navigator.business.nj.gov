@@ -140,6 +140,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                     />
                   );
                 }
+                return null;
               })}
             </div>
           </div>
