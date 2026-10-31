@@ -1,4 +1,4 @@
-const fs = require("node:fs");
+import fs from "node:fs";
 
 const outPath = `${process.cwd()}/lib/static/records/naics2022.json`;
 const inPath = `${process.cwd()}/lib/static/records/6digit.csv`;
