@@ -519,9 +519,9 @@ class GTMTracker {
       events.push(createEvent(dataLessQuestions));
     }
 
-    events.map((event) => {
+    for (const event of events) {
       analytics.sendEvent(event);
-    });
+    }
   }
 
   custom_event_track(data: EventData): void {
@@ -611,7 +611,7 @@ export class DimensionQueueFactory {
   }
 
   update(): void {
-    return this.updateFunction(this.internalQueue);
+    this.updateFunction(this.internalQueue);
   }
 
   current(): GTMUserData {

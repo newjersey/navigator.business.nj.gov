@@ -48,7 +48,7 @@ describe("Formation - Members Field", () => {
   const legalStructureIds: FormationLegalType[] = ["limited-liability-company", "s-corporation"];
 
   describe(`shared behaviors`, () => {
-    legalStructureIds.map((legalStructureId) => {
+    for (const legalStructureId of legalStructureIds) {
       const configField =
         legalStructureId === "limited-liability-company" ? "members" : "directors";
       const nextButtonText = Config.formation.fields[configField].addButtonText;
@@ -262,7 +262,7 @@ describe("Formation - Members Field", () => {
           expect(screen.getByTestId("addresses-members-table")).toBeInTheDocument();
         });
       });
-    });
+    }
 
     describe(`default address checkbox`, () => {
       const legalStructureId = "limited-liability-company";

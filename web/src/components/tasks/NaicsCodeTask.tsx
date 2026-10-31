@@ -49,11 +49,11 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
   };
 
   const onEdit = (): void => {
-    return setBackToEditing({ remove: false });
+    setBackToEditing({ remove: false });
   };
 
   const onRemove = (): void => {
-    return setBackToEditing({ remove: true });
+    setBackToEditing({ remove: true });
   };
 
   const onSave = (changedIndustryName?: string): void => {

@@ -237,6 +237,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   if (formContextState.fieldStates[i].invalid && errorMessages[i]) {
                     return <li key={i}> {errorMessages[i]}</li>;
                   }
+                  return null;
                 })}
               </ul>
             </Alert>

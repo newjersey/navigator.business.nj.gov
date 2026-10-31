@@ -60,7 +60,7 @@ export const MunicipalityField = (props: Props): ReactElement => {
   };
 
   const handleChange = (): void => {
-    return setIsValid(true);
+    setIsValid(true);
   };
 
   const onSelect = (value: Municipality | undefined): void => {

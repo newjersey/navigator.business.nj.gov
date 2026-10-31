@@ -222,6 +222,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         </Script>
       )}
       <script
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: static code-owned dataLayer bootstrap with no interpolation
         dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || [];
           function gtm(layer){window.dataLayer.push(layer);};      `,

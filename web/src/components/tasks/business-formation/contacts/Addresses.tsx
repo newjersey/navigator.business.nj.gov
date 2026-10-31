@@ -126,10 +126,10 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
         {props.addressData.length > 0 ? (
           props.addressData.map((it, index) => {
             return (
+              // biome-ignore lint/suspicious/noArrayIndexKey: address rows have no id; rows are stateless and re-render from addressData
               <Fragment key={index}>
                 <tr
                   className={`${zebraOnOdd(index)} ${rowStylesForNumberColumns}`}
-                  key={index}
                   data-testid={`${props.fieldName}-${index}`}
                 >
                   <td className="break-word name">{it.name}</td>
@@ -168,7 +168,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                   </td>
                 </tr>
                 {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature && (
-                  <tr className={zebraOnOdd(index)} key={`error-${index}`}>
+                  <tr className={zebraOnOdd(index)}>
                     <td colSpan={4} className="text-error-dark text-bold">
                       {Config.formation.fields.signers.errorBannerCheckbox}
                     </td>

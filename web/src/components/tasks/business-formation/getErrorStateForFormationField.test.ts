@@ -1364,7 +1364,7 @@ describe("getErrorStateForField", () => {
             const label =
               expectedLabel ?? getFormationFieldText(Config.formation.fields, field, "label");
             if (!label) {
-              throw `label missing in config for ${field}`;
+              throw new Error(`label missing in config for ${field}`);
             }
             expect(getErrorStateForFormationField({ field, formationFormData }).label).toEqual(
               label,
@@ -1406,7 +1406,7 @@ describe("getErrorStateForField", () => {
       const formationFormData = generateFormationFormData({});
       const label = Config.formation.fields[field].errorMessageRequired;
       if (!label) {
-        throw `label missing in config for ${field}`;
+        throw new Error(`label missing in config for ${field}`);
       }
       expect(getErrorStateForFormationField({ field, formationFormData }).label).toEqual(label);
     });
@@ -1441,7 +1441,7 @@ describe("getErrorStateForField", () => {
             const formationFormData = generateFormationFormData({ [field]: "some-value" });
             const expectedLabel = getFormationFieldText(Config.formation.fields, field, "label");
             if (!expectedLabel) {
-              throw `label missing in config for ${field}`;
+              throw new Error(`label missing in config for ${field}`);
             }
             expect(getErrorStateForFormationField({ field, formationFormData }).label).toEqual(
               expectedLabel,

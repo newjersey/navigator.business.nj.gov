@@ -27,6 +27,7 @@ const RegisteredAgentInfoCallout = (): ReactElement => {
         <p>{Config.formation.registeredAgent.infoCalloutIntro}</p>
         <ul>
           {Config.formation.registeredAgent.infoCalloutBullets.map((bullet, i) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: bullets are static config copy and never reorder
             <li key={i}>{bullet}</li>
           ))}
         </ul>

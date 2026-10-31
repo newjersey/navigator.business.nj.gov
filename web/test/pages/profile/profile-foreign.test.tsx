@@ -428,6 +428,7 @@ describe("profile-foreign", () => {
 
           for (const legalStructure of allPublicFilingLegalStructures) {
             for (const operatingPhase of operatingPhases) {
+              // biome-ignore lint/suspicious/useExpect: expectLocationSavedAsUndefined asserts internally
               it(`allows saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
                 renderWithLegalStructureAndPhase({
                   legalStructureId: legalStructure,
@@ -448,6 +449,7 @@ describe("profile-foreign", () => {
           );
 
           for (const legalStructure of allTradeNameLegalStructures) {
+            // biome-ignore lint/suspicious/useExpect: expectLocationSavedAsUndefined asserts internally
             it(`allows saving with empty location for ${legalStructure} in GUEST_MODE`, async () => {
               renderWithLegalStructureAndPhase({
                 legalStructureId: legalStructure,
@@ -469,6 +471,7 @@ describe("profile-foreign", () => {
           });
 
           for (const legalStructure of allPublicFilingLegalStructures) {
+            // biome-ignore lint/suspicious/useExpect: expectLocationNotSavedAndError asserts internally
             it(`prevents saving with empty location for ${legalStructure} in FORMED`, async () => {
               renderWithLegalStructureAndPhase({
                 legalStructureId: legalStructure,
@@ -487,6 +490,7 @@ describe("profile-foreign", () => {
             },
           );
           for (const legalStructure of allTradeNameLegalStructures) {
+            // biome-ignore lint/suspicious/useExpect: expectLocationNotSavedAndError asserts internally
             it(`prevents saving with empty location for ${legalStructure}`, async () => {
               renderWithLegalStructureAndPhase({
                 legalStructureId: legalStructure,

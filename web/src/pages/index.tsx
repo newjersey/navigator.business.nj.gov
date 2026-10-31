@@ -18,6 +18,14 @@ import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
 
+interface TwoColumnRowContent {
+  readonly headingText: string;
+  readonly supportingText: string;
+  readonly imageSrc: string;
+  readonly imageAlt: string;
+  readonly reverseOrder?: boolean;
+}
+
 const Home = (): ReactElement => {
   const { business, userData, error } = useUserData();
   const { state } = useContext(AuthContext);
@@ -72,13 +80,13 @@ const Home = (): ReactElement => {
     }
   }, [router]);
 
-  const renderTwoColumnRow = (
-    headingText: string,
-    supportingText: string,
-    imageSrc: string,
-    imageAlt: string,
-    reverseOrder?: boolean,
-  ): ReactElement => {
+  const renderTwoColumnRow = ({
+    headingText,
+    supportingText,
+    imageSrc,
+    imageAlt,
+    reverseOrder,
+  }: TwoColumnRowContent): ReactElement => {
     return (
       <div className={`${isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"}`}>
         <div className="grid-row margin-x-05">
@@ -180,25 +188,28 @@ const Home = (): ReactElement => {
           </section>
 
           <section aria-label="Available Tools">
-            {renderTwoColumnRow(
-              landingPageConfig.section5FirstHeaderText,
-              landingPageConfig.section5FirstSupportingText,
-              "/img/Landing-step-by-step.svg",
-              "Example step-by-step guide from the My Profile application to check business name availability, get your tax registration from the IRS, and more. A progress bar that shows completion of business formation.",
-            )}
-            {renderTwoColumnRow(
-              landingPageConfig.section5SecondHeaderText,
-              landingPageConfig.section5SecondSupportingText,
-              "/img/Landing-funding-and-certifications.svg",
-              "Two example opportunity cards from the My Profile application as examples: small business lease grant funding details and veteran-owned business certification details.",
-              true,
-            )}
-            {renderTwoColumnRow(
-              landingPageConfig.section5ThirdHeaderText,
-              landingPageConfig.section5ThirdSupportingText,
-              "/img/Landing-and-more.svg",
-              "Example of the calendar in the My Profile application with upcoming due dates for annual report and license renewal. Example of progress bar with the heading to check available names and form your business.",
-            )}
+            {renderTwoColumnRow({
+              headingText: landingPageConfig.section5FirstHeaderText,
+              supportingText: landingPageConfig.section5FirstSupportingText,
+              imageSrc: "/img/Landing-step-by-step.svg",
+              imageAlt:
+                "Example step-by-step guide from the My Profile application to check business name availability, get your tax registration from the IRS, and more. A progress bar that shows completion of business formation.",
+            })}
+            {renderTwoColumnRow({
+              headingText: landingPageConfig.section5SecondHeaderText,
+              supportingText: landingPageConfig.section5SecondSupportingText,
+              imageSrc: "/img/Landing-funding-and-certifications.svg",
+              imageAlt:
+                "Two example opportunity cards from the My Profile application as examples: small business lease grant funding details and veteran-owned business certification details.",
+              reverseOrder: true,
+            })}
+            {renderTwoColumnRow({
+              headingText: landingPageConfig.section5ThirdHeaderText,
+              supportingText: landingPageConfig.section5ThirdSupportingText,
+              imageSrc: "/img/Landing-and-more.svg",
+              imageAlt:
+                "Example of the calendar in the My Profile application with upcoming due dates for annual report and license renewal. Example of progress bar with the heading to check available names and form your business.",
+            })}
           </section>
 
           <section

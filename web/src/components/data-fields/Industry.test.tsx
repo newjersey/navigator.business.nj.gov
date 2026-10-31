@@ -104,11 +104,11 @@ describe("<Industry />", () => {
       );
     });
 
-    nonConditionalEssentialQuestions.map((el) => {
+    for (const el of nonConditionalEssentialQuestions) {
       const validIndustryId = filterRandomIndustry(el.isQuestionApplicableToIndustry);
       const nonValidIndustryId = randomNegativeFilteredIndustry(el.isQuestionApplicableToIndustry);
 
-      businessPersonas.map((persona) => {
+      for (const persona of businessPersonas) {
         const choices = industrySpecificDataChoices[el.fieldName];
         const flowConfig = Config.profileDefaults.fields;
         const fieldContent: Readonly<Record<string, unknown>> =
@@ -152,13 +152,13 @@ describe("<Industry />", () => {
               }),
             ),
           );
-          choices.map((choice) => {
+          for (const choice of choices) {
             chooseRadioWithContent(
               screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
               choice.toString(),
             );
             expect(currentProfileData()[el.fieldName]).toEqual(choice);
-          });
+          }
           selectIndustry("generic");
           expect(
             screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
@@ -209,8 +209,8 @@ describe("<Industry />", () => {
           );
           expect(screen.getAllByTestId("FieldLabelOnboarding")[0]).toBeInTheDocument();
         });
-      });
-    });
+      }
+    }
 
     describe("conditional essential questions", () => {
       it("shows residentialConstructionType question if constructionType `residential` was selected", () => {
