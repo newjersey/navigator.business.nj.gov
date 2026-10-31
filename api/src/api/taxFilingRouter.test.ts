@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { taxFilingRouterFactory } from "@api/taxFilingRouter";
 import { getSignedInUserId } from "@api/userRouter";
-import { CryptoClient, DatabaseClient, TaxFilingInterface } from "@domain/types";
+import type { CryptoClient, DatabaseClient, TaxFilingInterface } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
@@ -11,8 +10,8 @@ import {
   generateTaxIdAndBusinessName,
   generateUserDataForBusiness,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
-import { Express } from "express";
+import type { UserData } from "@shared/userData";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 

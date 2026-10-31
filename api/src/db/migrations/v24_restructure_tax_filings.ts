@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v23UserData } from "@db/migrations/v23_rename_onboarding_data_to_profile_data";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v23UserData } from "@db/migrations/v23_rename_onboarding_data_to_profile_data";
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import { randomInt } from "@shared/intHelpers";
 
@@ -14,11 +14,7 @@ export interface v24UserData {
   version: number;
 }
 
-export const migrate_v23_to_v24 = (
-  v23Data: v23UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v24UserData => {
+export const migrate_v23_to_v24 = (v23Data: v23UserData, _?: MigrationClients): v24UserData => {
   return {
     ...v23Data,
     taxFilingData: {

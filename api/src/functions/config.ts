@@ -1,4 +1,4 @@
-import { type ForeignEnvironmentPolicy } from "@client/CiphertextMetadata";
+import type { ForeignEnvironmentPolicy } from "@client/CiphertextMetadata";
 
 interface ForeignEnvironmentPolicyConfig {
   readonly stage: string;
@@ -31,7 +31,7 @@ export const IS_DOCKER = process.env.IS_DOCKER === "true" || false;
 export const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 export const BUSINESSES_TABLE = process.env.BUSINESSES_TABLE || "businesses-table-local";
 export const MESSAGES_TABLE = process.env.MESSAGES_TABLE || "messages-table-local";
-export const DYNAMO_OFFLINE_PORT = Number.parseInt(process.env.DYNAMO_PORT || "8000");
+export const DYNAMO_OFFLINE_PORT = Number.parseInt(process.env.DYNAMO_PORT || "8000", 10);
 export const STAGE = process.env.STAGE || "local";
 export const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
 export const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";

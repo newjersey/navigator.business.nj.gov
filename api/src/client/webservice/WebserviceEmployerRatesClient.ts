@@ -1,9 +1,9 @@
-import { EmployerRatesClient } from "@domain/types";
+import type { EmployerRatesClient } from "@domain/types";
 import { STAGE } from "@functions/config";
-import { LogWriterType } from "@libs/logWriter";
+import type { LogWriterType } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
-import { EmployerRatesRequest, EmployerRatesResponse } from "@shared/employerRates";
-import axios, { AxiosError } from "axios";
+import type { EmployerRatesRequest, EmployerRatesResponse } from "@shared/employerRates";
+import axios, { type AxiosError } from "axios";
 
 export const WebserviceEmployerRatesClient = (logWriter: LogWriterType): EmployerRatesClient => {
   const getEmployerRates = async (

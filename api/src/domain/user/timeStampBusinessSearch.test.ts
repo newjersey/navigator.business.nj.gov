@@ -1,6 +1,6 @@
-import { BusinessNameClient, TimeStampBusinessSearch } from "@domain/types";
+import type { BusinessNameClient, TimeStampBusinessSearch } from "@domain/types";
 import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
-import { NameAvailabilityResponse } from "@shared/businessNameSearch";
+import type { NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { generateBusinessNameAvailabilityResponse } from "@shared/test";
 

@@ -1,14 +1,14 @@
 import {
   ACTIVE_STATECODE,
-  BusinessIdAndName,
-  LicenseApplicationIdResponse,
-  LicenseApplicationIdsForAllBusinessIdsClient,
+  type BusinessIdAndName,
+  type LicenseApplicationIdResponse,
+  type LicenseApplicationIdsForAllBusinessIdsClient,
   MAIN_APP_END_DIGITS,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import { NO_MATCH_ERROR } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { LicenseStatus } from "@shared/license";
-import axios, { AxiosError } from "axios";
+import type { LogWriterType } from "@libs/logWriter";
+import type { LicenseStatus } from "@shared/license";
+import axios, { type AxiosError } from "axios";
 
 export const RegulatedBusinessDynamicsLicenseApplicationIdsClient = (
   logWriter: LogWriterType,

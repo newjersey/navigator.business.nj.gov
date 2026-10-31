@@ -1,8 +1,8 @@
-import { GovDeliveryCommCloudClientType } from "@domain/newsletter/syncNewsletterSubscription";
+import type { GovDeliveryCommCloudClientType } from "@domain/newsletter/syncNewsletterSubscription";
 import { IS_DOCKER, STAGE } from "@functions/config";
 import type { LogWriterType } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
-import { NewsletterResponse } from "@shared/businessUser";
+import type { NewsletterResponse } from "@shared/businessUser";
 import axios, { AxiosError } from "axios";
 
 type GovDeliveryCommCloudClientConfig = {
@@ -80,7 +80,6 @@ const logError = (logger: LogWriterType, logId: string, method: string, error: u
 export const GovDeliveryCommCloudClient = (
   logger: LogWriterType,
 ): GovDeliveryCommCloudClientType => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const subscribe = async (email: string): Promise<NewsletterResponse> => {
     const config = await getConfig();
     if (config.useStub) return toSuccess();
@@ -121,7 +120,6 @@ export const GovDeliveryCommCloudClient = (
     }
   };
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const unsubscribe = async (email: string): Promise<NewsletterResponse> => {
     const config = await getConfig();
     if (config.useStub) return toSuccess();
@@ -151,7 +149,6 @@ export const GovDeliveryCommCloudClient = (
     }
   };
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const updateEmail = async (oldEmail: string, newEmail: string): Promise<NewsletterResponse> => {
     const config = await getConfig();
     if (config.useStub) return toSuccess();

@@ -1,9 +1,9 @@
 import {
   GovDeliveryNewsletterClient,
-  GovDeliveryResponse,
+  type GovDeliveryResponse,
 } from "@client/GovDeliveryNewsletterClient";
-import { NewsletterClient } from "@domain/types";
-import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
+import type { NewsletterClient } from "@domain/types";
+import { DummyLogWriter, LogWriter, type LogWriterType } from "@libs/logWriter";
 import { randomInt } from "@shared/intHelpers";
 import axios from "axios";
 

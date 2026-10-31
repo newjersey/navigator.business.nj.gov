@@ -1,10 +1,10 @@
-import { CURRENT_GENERATOR, Migrations } from "@db/migrations/migrations";
-import { generateV0UserData } from "@db/migrations/v0_user_data";
-import { type CryptoClient } from "@domain/types";
-import { ConsoleLogWriter } from "@libs/logWriter";
-import { CURRENT_VERSION } from "@shared/userData";
 import fs from "node:fs";
 import path from "node:path";
+import { CURRENT_GENERATOR, Migrations } from "@db/migrations/migrations";
+import { generateV0UserData } from "@db/migrations/v0_user_data";
+import type { CryptoClient } from "@domain/types";
+import { ConsoleLogWriter } from "@libs/logWriter";
+import { CURRENT_VERSION } from "@shared/userData";
 
 const areUserDatasEqual = (userData1: object, userData2: object): boolean => {
   // @ts-expect-error obj has any type but is a userData object
@@ -17,7 +17,7 @@ const areUserDatasEqual = (userData1: object, userData2: object): boolean => {
           const subkeys = getDeepKeys(obj[key]);
           keys = [
             ...keys,
-            ...subkeys.map(function (subkey) {
+            ...subkeys.map((subkey) => {
               const firstPeriodIndex = subkey.indexOf(".");
               const subkeyAfterBusinessId = subkey.slice(firstPeriodIndex + 1);
               if (subkeyAfterBusinessId.includes(".")) {
@@ -32,12 +32,7 @@ const areUserDatasEqual = (userData1: object, userData2: object): boolean => {
           ];
         } else {
           const subkeys = getDeepKeys(obj[key]);
-          keys = [
-            ...keys,
-            ...subkeys.map(function (subkey) {
-              return `${key}.${subkey}`;
-            }),
-          ];
+          keys = [...keys, ...subkeys.map((subkey) => `${key}.${subkey}`)];
         }
       }
     }
@@ -145,7 +140,7 @@ describe("migrations", () => {
     it("has CURRENT_VERSION as the version in last migration file", () => {
       const allVersionsAsNumbers = allMigrationVersionsFromFiles
         .filter((it) => it !== undefined)
-        .map((it) => Number.parseInt((it as string).slice(1)));
+        .map((it) => Number.parseInt((it as string).slice(1), 10));
 
       const sortedVersions = allVersionsAsNumbers.sort((a, b) => (a > b ? 1 : -1));
       const lastVersion = sortedVersions[sortedVersions.length - 1];

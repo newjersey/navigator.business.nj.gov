@@ -29,7 +29,6 @@ describe("xrayRegistrationSearchClient", () => {
         data: [
           {
             "Registration Category": "DENTIST",
-            // eslint-disable-next-line unicorn/no-null
             "Disposal Date": null,
             "Registration Expiration Date": "08/31/2025",
             NAME: "GENDEX CORP.",
@@ -46,13 +45,11 @@ describe("xrayRegistrationSearchClient", () => {
             FIRST_NAME: "JOE",
             LAST_NAME: "NEEL",
             "Contact Type": "OWNER",
-            // eslint-disable-next-line unicorn/no-null
             "Deactivation Date": null,
             ANNUAL_FEE: 92,
           },
           {
             "Registration Category": "DENTIST",
-            // eslint-disable-next-line unicorn/no-null
             "Disposal Date": null,
             "Registration Expiration Date": "08/31/2025",
             NAME: "GENDEX CORP.",
@@ -69,7 +66,6 @@ describe("xrayRegistrationSearchClient", () => {
             FIRST_NAME: "LEX",
             LAST_NAME: "NEEL",
             "Contact Type": "OWNER",
-            // eslint-disable-next-line unicorn/no-null
             "Deactivation Date": null,
             ANNUAL_FEE: 92,
           },
@@ -78,7 +74,6 @@ describe("xrayRegistrationSearchClient", () => {
             "Disposal Date": "07/31/2019",
             "Registration Expiration Date": "08/31/2025",
             NAME: "GENDEX CORP.",
-            // eslint-disable-next-line unicorn/no-null
             "Room ID": null,
             REGISTRATION_NUMBER: "330062",
             "CONSOLE_SERIAL#": "62-1664624DP",
@@ -92,7 +87,6 @@ describe("xrayRegistrationSearchClient", () => {
             FIRST_NAME: "JOE",
             LAST_NAME: "NEEL",
             "Contact Type": "OWNER",
-            // eslint-disable-next-line unicorn/no-null
             "Deactivation Date": null,
             ANNUAL_FEE: 92,
           },
@@ -101,7 +95,6 @@ describe("xrayRegistrationSearchClient", () => {
             "Disposal Date": "07/31/2019",
             "Registration Expiration Date": "08/31/2025",
             NAME: "GENDEX CORP.",
-            // eslint-disable-next-line unicorn/no-null
             "Room ID": null,
             REGISTRATION_NUMBER: "330062",
             "CONSOLE_SERIAL#": "62-1664624DP",
@@ -115,7 +108,6 @@ describe("xrayRegistrationSearchClient", () => {
             FIRST_NAME: "LEX",
             LAST_NAME: "NEEL",
             "Contact Type": "OWNER",
-            // eslint-disable-next-line unicorn/no-null
             "Deactivation Date": null,
             ANNUAL_FEE: 92,
           },
@@ -222,7 +214,6 @@ describe("xrayRegistrationSearchClient", () => {
         data: [
           {
             "Registration Category": "DENTIST",
-            // eslint-disable-next-line unicorn/no-null
             "Disposal Date": null,
             "Registration Expiration Date": "08/31/2025",
             NAME: "GENDEX CORP.",
@@ -239,13 +230,11 @@ describe("xrayRegistrationSearchClient", () => {
             FIRST_NAME: "JOE",
             LAST_NAME: "NEEL",
             "Contact Type": "OWNER",
-            // eslint-disable-next-line unicorn/no-null
             "Deactivation Date": null,
             ANNUAL_FEE: 92,
           },
           {
             "Registration Category": "DENTIST",
-            // eslint-disable-next-line unicorn/no-null
             "Disposal Date": null,
             "Registration Expiration Date": "08/31/2025",
             NAME: "GENDEX CORP.",
@@ -262,7 +251,6 @@ describe("xrayRegistrationSearchClient", () => {
             FIRST_NAME: "LEX",
             LAST_NAME: "NEEL",
             "Contact Type": "OWNER",
-            // eslint-disable-next-line unicorn/no-null
             "Deactivation Date": null,
             ANNUAL_FEE: 92,
           },
@@ -271,7 +259,6 @@ describe("xrayRegistrationSearchClient", () => {
             "Disposal Date": "07/31/2019",
             "Registration Expiration Date": "08/31/2025",
             NAME: "GENDEX CORP.",
-            // eslint-disable-next-line unicorn/no-null
             "Room ID": null,
             REGISTRATION_NUMBER: "330062",
             "CONSOLE_SERIAL#": "62-1664624DP",
@@ -285,7 +272,6 @@ describe("xrayRegistrationSearchClient", () => {
             FIRST_NAME: "JOE",
             LAST_NAME: "NEEL",
             "Contact Type": "OWNER",
-            // eslint-disable-next-line unicorn/no-null
             "Deactivation Date": null,
             ANNUAL_FEE: 92,
           },
@@ -294,7 +280,6 @@ describe("xrayRegistrationSearchClient", () => {
             "Disposal Date": "07/31/2019",
             "Registration Expiration Date": "08/31/2025",
             NAME: "GENDEX CORP.",
-            // eslint-disable-next-line unicorn/no-null
             "Room ID": null,
             REGISTRATION_NUMBER: "330062",
             "CONSOLE_SERIAL#": "62-1664624DP",
@@ -308,7 +293,6 @@ describe("xrayRegistrationSearchClient", () => {
             FIRST_NAME: "LEX",
             LAST_NAME: "NEEL",
             "Contact Type": "OWNER",
-            // eslint-disable-next-line unicorn/no-null
             "Deactivation Date": null,
             ANNUAL_FEE: 92,
           },

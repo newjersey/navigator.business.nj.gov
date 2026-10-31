@@ -1,4 +1,4 @@
-import {
+import type {
   v169Business,
   v169UserData,
 } from "@db/migrations/v169_remove_formationformdata_contactemail";

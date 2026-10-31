@@ -1,4 +1,4 @@
-import { type DynamoDBDocumentClient, TransactWriteCommand } from "@aws-sdk/lib-dynamodb";
+import type { DynamoDBDocumentClient, TransactWriteCommand } from "@aws-sdk/lib-dynamodb";
 import { DynamoMigrationDataClient } from "@db/DynamoMigrationDataClient";
 import {
   DatabaseThrottlingError,

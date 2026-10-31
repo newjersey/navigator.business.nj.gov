@@ -1,18 +1,18 @@
-import { CountriesShortCodes } from "@shared/countries";
+import type { CountriesShortCodes } from "@shared/countries";
 import { parseDateWithFormat } from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
 import { isStartingBusiness } from "@shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import {
-  BusinessSuffix,
+  type BusinessSuffix,
+  type FormationLegalType,
   formationApiDateFormat,
-  FormationLegalType,
-  InputFile,
-  PaymentType,
-  SignerTitle,
+  type InputFile,
+  type PaymentType,
+  type SignerTitle,
 } from "@shared/formationData";
-import { StateNames, StateShortCodes } from "@shared/states";
-import { UserData } from "@shared/userData";
+import type { StateNames, StateShortCodes } from "@shared/states";
+import type { UserData } from "@shared/userData";
 
 export type ApiConfig = {
   account: string;
@@ -90,7 +90,6 @@ export const makePostBody = (
     return input === "IN_FORM" ? terms : undefined;
   };
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const isInFormOrBylaw = (input: "IN_BYLAWS" | "IN_FORM" | undefined): "Herein" | "Bylaw" => {
     return input === "IN_FORM" ? "Herein" : "Bylaw";
   };
@@ -247,7 +246,7 @@ export const makePostBody = (
         MainAddress: getMainBusinessAddress(),
         TotalShares:
           formationFormData.businessTotalStock.length > 0
-            ? Number.parseInt(formationFormData.businessTotalStock)
+            ? Number.parseInt(formationFormData.businessTotalStock, 10)
             : undefined,
       },
       ...getAdditionalProvisions(),
@@ -260,7 +259,6 @@ export const makePostBody = (
           ? {
               Address1: formationFormData.agentOfficeAddressLine1,
               Address2: formationFormData.agentOfficeAddressLine2,
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               City: formationFormData.agentOfficeAddressCity,
               State: "New Jersey",
               Zipcode: formationFormData.agentOfficeAddressZipCode,
@@ -320,8 +318,7 @@ export const makePostBody = (
               Signed: signer.signature,
             };
           }) ?? [])
-        : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          (formationFormData.signers?.map((signer) => {
+        : (formationFormData.signers?.map((signer) => {
             return {
               Name: signer.name,
               Title: signer.title,

@@ -1,7 +1,7 @@
 import {
   type DatabaseItemSizeBucket,
-  DatabaseThrottlingError,
   type DatabaseThrottlingContext,
+  DatabaseThrottlingError,
 } from "@domain/types";
 
 const throttlingErrorNames = new Set([

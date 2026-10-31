@@ -1,10 +1,10 @@
-import {
+import type {
   HousingPropertyInterestClient,
   HousingRegistrationClient,
   HousingRegistrationRequestLookupResponse,
 } from "@client/dynamics/housing/types";
-import { AccessTokenClient } from "@client/dynamics/types";
-import { PropertyInterestType } from "@shared/housing";
+import type { AccessTokenClient } from "@client/dynamics/types";
+import type { PropertyInterestType } from "@shared/housing";
 
 type Config = {
   accessTokenClient: AccessTokenClient;

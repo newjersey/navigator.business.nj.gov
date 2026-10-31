@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import {
   generateV3OnboardingData,
   generateV3User,
-  v3UserData,
+  type v3UserData,
 } from "@db/migrations/v3_change_legal_structure";
 import { migrate_v3_to_v4 } from "@db/migrations/v4_add_municipality";
 

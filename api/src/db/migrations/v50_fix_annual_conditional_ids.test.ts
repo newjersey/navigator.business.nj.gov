@@ -2,8 +2,8 @@ import { generatev42FormationFormData } from "@db/migrations/v42_add_sector_to_p
 import {
   generatev49ProfileData,
   generatev49User,
-  v49ProfileData,
-  v49UserData,
+  type v49ProfileData,
+  type v49UserData,
 } from "@db/migrations/v49_add_cannabis_microbusiness";
 import { migrate_v49_to_v50 } from "@db/migrations/v50_fix_annual_conditional_ids";
 

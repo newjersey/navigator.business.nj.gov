@@ -1,6 +1,6 @@
 import { PutObjectCommand, S3Client, S3ServiceException } from "@aws-sdk/client-s3";
 import { STAGE } from "@functions/config";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 
 export const handler = async (): Promise<void> => {
   const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");

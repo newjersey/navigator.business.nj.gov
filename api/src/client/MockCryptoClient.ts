@@ -1,4 +1,4 @@
-import { CryptoClient } from "@domain/types";
+import type { CryptoClient } from "@domain/types";
 
 export class MockCryptoClient implements CryptoClient {
   async encryptValue(value: string): Promise<string> {

@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v114UserData } from "@db/migrations/v114_add_expired_iso_field_to_license";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v114UserData } from "@db/migrations/v114_add_expired_iso_field_to_license";
 
 export interface v115UserData {
   user: v115BusinessUser;
@@ -19,7 +19,6 @@ export interface v115UserData {
 
 export const migrate_v114_to_v115 = (
   v114Data: v114UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v115UserData => {
   return {

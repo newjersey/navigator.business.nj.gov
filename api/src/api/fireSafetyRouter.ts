@@ -1,8 +1,8 @@
-import { FireSafetyInspectionStatus } from "@domain/types";
+import type { FireSafetyInspectionStatus } from "@domain/types";
 
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
-import { FireSafetyInspectionResult } from "@shared/fireSafety";
+import type { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 

@@ -12,7 +12,6 @@ const LICENSE_TYPE = "";
 const DYNAMICS_URL = "";
 const APPLICATION_QUERY_COUNT = 100000;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getApplicationsByType = async (): Promise<any> => {
   const response = await axios.get(
     `${DYNAMICS_URL}/api/data/v9.2/rgb_applications?$select=rgb_number,statecode,rgb_applicationid, _rgb_businessid_value&$filter=(statecode eq 0 and _rgb_apptypeid_value eq ${LICENSE_TYPE})&$top=${APPLICATION_QUERY_COUNT}`,
@@ -25,7 +24,6 @@ const getApplicationsByType = async (): Promise<any> => {
   return response.data.value;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getApplicationsByBusinessId = async (businessId: string): Promise<any> => {
   const response = await axios.get(
     `${DYNAMICS_URL}/api/data/v9.2/rgb_applications?$select=rgb_number,statecode,rgb_applicationid&$filter=(_rgb_businessid_value eq ${businessId} and _rgb_apptypeid_value eq ${LICENSE_TYPE})&$top=50`,
@@ -38,7 +36,6 @@ const getApplicationsByBusinessId = async (businessId: string): Promise<any> => 
   return response.data.value;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getBusinessWithValidMainApps = async (allApplicationsInTheSystem: any): Promise<any> => {
   const businessCountRecord: Record<string, number> = {};
 
@@ -68,13 +65,7 @@ const getBusinessWithValidMainApps = async (allApplicationsInTheSystem: any): Pr
 const getBusinessesWithMultipleValidMainApps = async (): Promise<void> => {
   const allApplicationsInTheSystem = await getApplicationsByType();
   const businessAndValidMainApps = await getBusinessWithValidMainApps(allApplicationsInTheSystem);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  console.log(
-    businessAndValidMainApps.filter(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (app: any) => app.applicationIds.length > 1,
-    ),
-  );
+  console.log(businessAndValidMainApps.filter((app: any) => app.applicationIds.length > 1));
 };
 
 getBusinessesWithMultipleValidMainApps();

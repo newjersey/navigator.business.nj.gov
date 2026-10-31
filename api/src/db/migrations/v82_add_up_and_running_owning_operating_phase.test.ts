@@ -2,9 +2,9 @@ import {
   generatev81FormationFormData,
   generatev81ProfileData,
   generatev81User,
-  v81OperatingPhase,
-  v81ProfileData,
-  v81UserData,
+  type v81OperatingPhase,
+  type v81ProfileData,
+  type v81UserData,
 } from "@db/migrations/v81_add_completed_filing_payment";
 import { migrate_v81_to_v82 } from "@db/migrations/v82_add_up_and_running_owning_operating_phase";
 import { randomElementFromArray } from "@test/helpers";

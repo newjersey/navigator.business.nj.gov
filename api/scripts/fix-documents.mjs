@@ -11,6 +11,8 @@
  * SPECIFIC_BUSINESS_ID to process a single business.
  */
 
+import { writeFileSync } from "node:fs";
+import path from "node:path";
 import {
   AdminGetUserCommand,
   CognitoIdentityProviderClient,
@@ -24,8 +26,6 @@ import {
 import { CopyObjectCommand, DeleteObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { writeFileSync } from "fs";
-import path from "path";
 
 const DOCUMENT_TYPE = "formationDoc"; // "formationDoc" || "certifiedDoc" || "standingDoc"
 const BUSINESS_DYNAMO_TABLE_NAME = "businesses-table-prod";
@@ -44,12 +44,12 @@ async function findAffectedBusinesses() {
   console.log("Starting scan for businesses with undefined document paths...");
 
   const affectedBusinesses = [];
-  let lastEvaluatedKey = undefined;
+  let lastEvaluatedKey;
   const maxRetries = 5;
 
   let totalItemsScanned = 0;
   let batchesProcessed = 0;
-  let startTime = Date.now();
+  const startTime = Date.now();
 
   do {
     let retries = 0;
@@ -82,16 +82,14 @@ async function findAffectedBusinesses() {
                 }`,
               );
             }
-          } catch (error) {
-            continue;
-          }
+          } catch (_error) {}
         }
 
         lastEvaluatedKey = response.LastEvaluatedKey;
       } catch (error) {
         if (error.name === "ProvisionedThroughputExceededException") {
           retries++;
-          const delay = Math.pow(2, retries) * 100; // Exponential backoff
+          const delay = 2 ** retries * 100; // Exponential backoff
           console.log(
             `Throughput exceeded. Retrying in ${delay}ms (attempt ${retries}/${maxRetries})`,
           );

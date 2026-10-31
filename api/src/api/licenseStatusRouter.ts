@@ -1,9 +1,9 @@
 import { getSignedInUserId } from "@api/userRouter";
-import { DatabaseClient, UpdateLicenseStatus } from "@domain/types";
+import type { DatabaseClient, UpdateLicenseStatus } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
-import { LicenseSearchNameAndAddress } from "@shared/license";
-import { UserData } from "@shared/userData";
+import type { LicenseSearchNameAndAddress } from "@shared/license";
+import type { UserData } from "@shared/userData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 

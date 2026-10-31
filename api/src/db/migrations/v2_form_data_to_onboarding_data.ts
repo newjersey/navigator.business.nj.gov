@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v1UserData } from "@db/migrations/v1_add_task_progress";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v1UserData } from "@db/migrations/v1_add_task_progress";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v2UserData {
@@ -10,11 +10,7 @@ export interface v2UserData {
   version: number;
 }
 
-export const migrate_v1_to_v2 = (
-  v1Data: v1UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v2UserData => {
+export const migrate_v1_to_v2 = (v1Data: v1UserData, _?: MigrationClients): v2UserData => {
   const { formData, ...rest } = v1Data;
   let businessName = "";
   if (formData.businessName && formData.businessName.businessName) {

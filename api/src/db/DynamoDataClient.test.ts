@@ -2,21 +2,21 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
+import { DynamoDataClient } from "@db/DynamoDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
+import { parseUserData } from "@db/zodSchema/zodSchemas";
 import {
   type BusinessesDataClient,
-  DatabaseThrottlingError,
+  type CryptoClient,
   type DatabaseClient,
+  DatabaseThrottlingError,
   MigrationConflictError,
   type MigrationDataClient,
   QuarantinedCiphertextError,
   type UserDataClient,
-  type CryptoClient,
 } from "@domain/types";
 import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
-
-import { DynamoDataClient } from "@db/DynamoDataClient";
-
+import { getConfigValue } from "@libs/ssmUtils";
 import { randomInt } from "@shared/intHelpers";
 import {
   generateBusiness,
@@ -26,8 +26,6 @@ import {
 } from "@shared/test";
 import { CURRENT_VERSION, type UserData } from "@shared/userData";
 import dayjs from "dayjs";
-import { getConfigValue } from "@libs/ssmUtils";
-import { parseUserData } from "@db/zodSchema/zodSchemas";
 
 jest.mock("@libs/ssmUtils");
 jest.mock("@db/zodSchema/zodSchemas");
@@ -83,7 +81,6 @@ describe("User and Business Migration with DynamoDataClient", () => {
   };
   const userData = generateUserData();
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const mockLogger = () => {
     logger.LogInfo = jest.fn();
     logger.LogError = jest.fn();

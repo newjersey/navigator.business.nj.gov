@@ -1,15 +1,11 @@
 // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
-import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import { type CryptoClient, type UserDataClient } from "@domain/types";
+import { DynamoUserDataClient, dynamoDbTranslateConfig } from "@db/DynamoUserDataClient";
+import type { CryptoClient, UserDataClient } from "@domain/types";
 import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
-import * as sharedUserData from "@shared/userData";
+import type * as sharedUserData from "@shared/userData";
 
 function setupMockSharedUserData(): typeof sharedUserData {
   return {

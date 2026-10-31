@@ -1,12 +1,12 @@
-import { DatabaseClient, MessagingServiceClient, SelfRegClient } from "@domain/types";
+import { createHmac } from "node:crypto";
+import type { DatabaseClient, MessagingServiceClient, SelfRegClient } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
-import { UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
-import { createHmac } from "node:crypto";
 
 type Mutable<T> = {
   -readonly [P in keyof T]: T[P] extends object ? Mutable<T[P]> : T[P];

@@ -1,4 +1,4 @@
-import { EncryptTaxId, UserDataClient } from "@domain/types";
+import type { EncryptTaxId, UserDataClient } from "@domain/types";
 
 type EncryptTaxIdBatchResponse = {
   success: number;

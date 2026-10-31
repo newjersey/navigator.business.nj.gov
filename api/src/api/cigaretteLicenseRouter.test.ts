@@ -1,25 +1,25 @@
 import { cigaretteLicenseRouterFactory, sendEmailConfirmation } from "@api/cigaretteLicenseRouter";
+import { getSignedInUserId } from "@api/userRouter";
 import {
-  mockSuccessPostResponse,
-  mockSuccessGetResponse,
+  mockErrorEmailResponse,
   mockErrorGetResponse,
   mockErrorPostResponse,
   mockSuccessEmailResponse,
-  mockErrorEmailResponse,
+  mockSuccessGetResponse,
+  mockSuccessPostResponse,
 } from "@client/ApiCigaretteLicenseHelpers";
-import { getSignedInUserId } from "@api/userRouter";
-import { type CryptoClient, DatabaseClient, CigaretteLicenseClient } from "@domain/types";
+import type { CigaretteLicenseClient, CryptoClient, DatabaseClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
   generateBusiness,
   generateCigaretteLicenseData,
-  generateUserData,
   generateUser,
+  generateUserData,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
-import { Express } from "express";
+import type { UserData } from "@shared/userData";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 

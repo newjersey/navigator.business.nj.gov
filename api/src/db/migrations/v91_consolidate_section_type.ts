@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v90UserData } from "@db/migrations/v90_home_based_business_can_be_undefined";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v90UserData } from "@db/migrations/v90_home_based_business_can_be_undefined";
 
 export interface v91UserData {
   user: v91BusinessUser;
@@ -14,11 +14,7 @@ export interface v91UserData {
   version: number;
 }
 
-export const migrate_v90_to_v91 = (
-  v90Data: v90UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v91UserData => {
+export const migrate_v90_to_v91 = (v90Data: v90UserData, _?: MigrationClients): v91UserData => {
   return {
     ...v90Data,
     version: 91,

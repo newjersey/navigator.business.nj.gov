@@ -1,5 +1,5 @@
+import type { v172Business, v172UserData } from "@db/migrations/v172_add_cig_license_payment_info";
 import { randomInt } from "@shared/intHelpers";
-import { v172Business, v172UserData } from "@db/migrations/v172_add_cig_license_payment_info";
 
 export const migrate_v172_to_v173 = (userData: v172UserData): v173UserData => {
   return {

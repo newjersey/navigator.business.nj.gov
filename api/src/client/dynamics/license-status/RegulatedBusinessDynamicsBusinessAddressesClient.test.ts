@@ -1,7 +1,6 @@
-/* eslint-disable unicorn/no-null */
 import { RegulatedBusinessDynamicsBusinessAddressesClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsBusinessAddressesClient";
-import { BusinessAddressesClient } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
-import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
+import type { BusinessAddressesClient } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
+import { DummyLogWriter, LogWriter, type LogWriterType } from "@libs/logWriter";
 import { generateLicenseSearchAddress } from "@shared/test";
 import axios from "axios";
 

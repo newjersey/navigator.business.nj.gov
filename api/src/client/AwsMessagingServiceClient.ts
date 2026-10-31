@@ -1,8 +1,8 @@
 import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
-import { HealthCheckMetadata, MessagingServiceClient } from "@domain/types";
+import type { HealthCheckMetadata, MessagingServiceClient } from "@domain/types";
 import { STAGE } from "@functions/config";
 import { API_SERVICE_NAME } from "@libs/constants";
-import { LogWriterType } from "@libs/logWriter";
+import type { LogWriterType } from "@libs/logWriter";
 import { ReasonPhrases } from "http-status-codes";
 
 export const AwsMessagingServiceClient = (config: {

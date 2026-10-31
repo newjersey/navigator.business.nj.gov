@@ -1,5 +1,5 @@
-import { XrayRegistrationStatus } from "@businessnjgovnavigator/shared";
-import { UpdateXrayRegistration, XrayRegistrationStatusLookup } from "@domain/types";
+import type { XrayRegistrationStatus } from "@businessnjgovnavigator/shared";
+import type { UpdateXrayRegistration, XrayRegistrationStatusLookup } from "@domain/types";
 import { updateXrayRegistrationStatusFactory } from "@domain/user/updateXrayRegistrationStatusFactory";
 import { getCurrentDate } from "@shared/dateHelpers";
 import { generateUserData } from "@shared/test";

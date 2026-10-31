@@ -1,7 +1,7 @@
 import {
   generatev22OnboardingData,
   generatev22User,
-  v22UserData,
+  type v22UserData,
 } from "@db/migrations/v22_switch_legal_structure_to_id";
 import { migrate_v22_to_v23 } from "@db/migrations/v23_rename_onboarding_data_to_profile_data";
 

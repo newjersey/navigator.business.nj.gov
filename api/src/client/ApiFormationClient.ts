@@ -1,24 +1,23 @@
-import { FormationClient, HealthCheckMetadata, HealthCheckMethod } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { getCurrentDateISOString } from "@shared/dateHelpers";
+import { ApiFormationHealth } from "@client/ApiFormationHealth";
 import {
+  type ApiConfig,
+  type ApiErrorResponse,
+  type ApiGetFilingResponse,
+  type ApiResponse,
+  makePostBody,
+} from "@client/ApiFormationHelpers";
+import { splitErrorField } from "@client/splitErrorField";
+import type { FormationClient, HealthCheckMetadata, HealthCheckMethod } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
+import { getCurrentDateISOString } from "@shared/dateHelpers";
+import type {
   FormationSubmitError,
   FormationSubmitResponse,
   GetFilingResponse,
   InputFile,
 } from "@shared/formationData";
-import { UserData } from "@shared/userData";
-import axios, { AxiosError } from "axios";
-
-import { ApiFormationHealth } from "@client/ApiFormationHealth";
-import {
-  ApiConfig,
-  ApiErrorResponse,
-  ApiGetFilingResponse,
-  ApiResponse,
-  makePostBody,
-} from "@client/ApiFormationHelpers";
-import { splitErrorField } from "@client/splitErrorField";
+import type { UserData } from "@shared/userData";
+import axios, { type AxiosError } from "axios";
 import { ReasonPhrases } from "http-status-codes";
 
 export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): FormationClient => {

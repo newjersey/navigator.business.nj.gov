@@ -23,17 +23,15 @@ describe("migrate_v181_to_v182", () => {
     const v182UserData = migrate_v181_to_v182(v181UserData);
     expect(v182UserData.version).toBe(182);
     expect(
-      v182UserData.businesses["123"].profileData.nonEssentialRadioAnswers["vacantPropertyOwner"],
+      v182UserData.businesses["123"].profileData.nonEssentialRadioAnswers.vacantPropertyOwner,
     ).toBe(true);
     expect(
-      v182UserData.businesses["123"].profileData.nonEssentialRadioAnswers[
-        "carnivalRideOwningBusiness"
-      ],
+      v182UserData.businesses["123"].profileData.nonEssentialRadioAnswers
+        .carnivalRideOwningBusiness,
     ).toBe(false);
     expect(
-      v182UserData.businesses["123"].profileData.nonEssentialRadioAnswers[
-        "travelingCircusOrCarnivalOwningBusiness"
-      ],
+      v182UserData.businesses["123"].profileData.nonEssentialRadioAnswers
+        .travelingCircusOrCarnivalOwningBusiness,
     ).toBe(undefined);
   });
 });

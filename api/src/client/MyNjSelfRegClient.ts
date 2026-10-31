@@ -1,6 +1,6 @@
-import { SelfRegClient, SelfRegResponse } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { BusinessUser } from "@shared/businessUser";
+import type { SelfRegClient, SelfRegResponse } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
+import type { BusinessUser } from "@shared/businessUser";
 import axios from "axios";
 import xml2js from "xml2js";
 
@@ -46,12 +46,12 @@ export const MyNJSelfRegClientFactory = (
           console.log("response", response);
         }
         const xmlResponseName = type === "GRANT" ? "ns2:grantResponse" : "ns2:resumeResponse";
-        const xmlResponseObj = response["S:Envelope"]["S:Body"][0][xmlResponseName][0]["return"][0];
+        const xmlResponseObj = response["S:Envelope"]["S:Body"][0][xmlResponseName][0].return[0];
 
-        const success = xmlResponseObj["Success"];
-        const authId = xmlResponseObj["AuthID"];
-        const authURL = xmlResponseObj["AuthURL"];
-        const errors = xmlResponseObj["Errors"];
+        const success = xmlResponseObj.Success;
+        const authId = xmlResponseObj.AuthID;
+        const authURL = xmlResponseObj.AuthURL;
+        const errors = xmlResponseObj.Errors;
 
         if (!success || success[0] !== "true") {
           logger.LogError(

@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v103UserData } from "@db/migrations/v103_change_tax_calendar_view_default";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v103UserData } from "@db/migrations/v103_change_tax_calendar_view_default";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v104UserData {
@@ -18,7 +18,6 @@ export interface v104UserData {
 
 export const migrate_v103_to_v104 = (
   v103Data: v103UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v104UserData => {
   return {
@@ -26,7 +25,7 @@ export const migrate_v103_to_v104 = (
     profileData: {
       ...v103Data.profileData,
       nexusDbaName: v103Data.profileData.nexusDbaName ?? "",
-      needsNexusDbaName: v103Data.profileData.nexusDbaName === undefined ? false : true,
+      needsNexusDbaName: v103Data.profileData.nexusDbaName !== undefined,
     },
     version: 104,
   };

@@ -1,4 +1,4 @@
-import { v183Business, v183BusinessUser, v183UserData } from "@db/migrations/v183_zod_changes";
+import type { v183Business, v183BusinessUser, v183UserData } from "@db/migrations/v183_zod_changes";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v183_to_v184 = (userData: v183UserData): v184UserData => {

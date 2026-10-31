@@ -1,7 +1,7 @@
-import { render, toPlainText } from "@react-email/render";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
+import { render, toPlainText } from "@react-email/render";
 import { WelcomeEmailShortVersion } from "./emails/welcomeEmailShortVersion";
 
 const html = await render(<WelcomeEmailShortVersion />);

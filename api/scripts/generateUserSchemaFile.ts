@@ -9,9 +9,9 @@
  * - `scripts/generate-new-migration.sh` (keeps the cache fresh after each migration)
  */
 
-import { generateTsSourceFromCompiler } from "./userSchemaCompiler";
 import fs from "node:fs";
 import path from "node:path";
+import { generateTsSourceFromCompiler } from "./userSchemaCompiler";
 
 const migrationFilePath = path.resolve(
   __dirname,

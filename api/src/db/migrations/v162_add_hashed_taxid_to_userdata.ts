@@ -1,10 +1,9 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v161Business, v161UserData } from "@db/migrations/v161_add_encrypted_tax_pin";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v161Business, v161UserData } from "@db/migrations/v161_add_encrypted_tax_pin";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v161_to_v162 = async (
   v161Data: v161UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): Promise<v162UserData> => {
   const businesses = Object.values(v161Data.businesses);

@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v168Business,
   v168FormationData,
   v168FormationFormData,
@@ -9,7 +9,6 @@ import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v168_to_v169 = (
   v168Data: v168UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v169UserData => {
   return {

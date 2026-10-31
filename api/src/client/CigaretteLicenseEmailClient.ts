@@ -1,10 +1,10 @@
-import {
+import type {
   EmailConfirmationResponse,
   EmailConfirmationSubmission,
 } from "@businessnjgovnavigator/shared";
 import { ApiPowerAutomateClientFactory } from "@client/ApiPowerAutomateClientFactory";
-import { HealthCheckMetadata, PowerAutomateEmailClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
+import type { HealthCheckMetadata, PowerAutomateEmailClient } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 

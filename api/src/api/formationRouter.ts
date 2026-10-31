@@ -1,15 +1,15 @@
 import { getSignedInUser, getSignedInUserId } from "@api/userRouter";
 import { saveFileFromUrl } from "@domain/s3Writer";
-import { DatabaseClient, FormationClient } from "@domain/types";
+import type { DatabaseClient, FormationClient } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
-import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
-import { ProfileDocuments } from "@shared/profileData";
-import { UserData } from "@shared/userData";
-import { Request, Router } from "express";
+import type { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
+import type { ProfileDocuments } from "@shared/profileData";
+import type { UserData } from "@shared/userData";
+import { type Request, Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 type FormationPostBody = {

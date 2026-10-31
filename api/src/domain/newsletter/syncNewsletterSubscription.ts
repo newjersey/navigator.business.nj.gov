@@ -1,5 +1,5 @@
-import { NewsletterResponse } from "@shared/businessUser";
-import { UserData } from "@shared/userData";
+import type { NewsletterResponse } from "@shared/businessUser";
+import type { UserData } from "@shared/userData";
 
 export type GovDeliveryCommCloudClientType = {
   subscribe: (email: string) => Promise<NewsletterResponse>;

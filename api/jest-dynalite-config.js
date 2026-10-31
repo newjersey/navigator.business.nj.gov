@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/filename-case */
-/* eslint-disable no-undef */
 module.exports = {
   tables: [
     {

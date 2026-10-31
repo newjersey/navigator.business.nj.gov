@@ -1,10 +1,10 @@
-import {
+import type {
   ElevatorInspection,
   ElevatorSafetyInspectionClient,
   ElevatorSafetyInspectionInfo,
 } from "@client/dynamics/elevator-safety/types";
-import { AccessTokenClient } from "@client/dynamics/types";
-import { LogWriterType } from "@libs/logWriter";
+import type { AccessTokenClient } from "@client/dynamics/types";
+import type { LogWriterType } from "@libs/logWriter";
 
 type Config = {
   accessTokenClient: AccessTokenClient;
@@ -12,7 +12,7 @@ type Config = {
 };
 
 export const DynamicsElevatorSafetyInspectionStatusClient = (
-  logWriter: LogWriterType,
+  _logWriter: LogWriterType,
   config: Config,
 ): ElevatorSafetyInspectionInfo => {
   return async (address: string): Promise<ElevatorInspection[]> => {

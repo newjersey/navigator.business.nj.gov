@@ -4,8 +4,8 @@ import {
 } from "@db/migrations/v50_fix_annual_conditional_ids";
 import {
   generatev52ProfileData,
-  v52ProfileData,
-  v52UserData,
+  type v52ProfileData,
+  type v52UserData,
 } from "@db/migrations/v52_add_naics_code";
 import { migrate_v52_to_v53 } from "@db/migrations/v53_migrate_cannabis_dvob";
 

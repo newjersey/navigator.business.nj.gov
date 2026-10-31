@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v130Business,
   v130UserData,
 } from "@db/migrations/v130_remove_nexus_location_in_new_jersey";
@@ -27,7 +27,6 @@ export interface v131IndustrySpecificData {
 
 export const migrate_v130_to_v131 = (
   v130Data: v130UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v131UserData => {
   return {

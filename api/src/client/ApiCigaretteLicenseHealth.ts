@@ -1,8 +1,8 @@
 import { createEmptyUser } from "@shared/businessUser";
-import { CigaretteLicenseData } from "@shared/cigaretteLicense";
-import { getCurrentBusiness } from "@shared/index";
-import { createEmptyUserData, UserData } from "@shared/userData";
+import type { CigaretteLicenseData } from "@shared/cigaretteLicense";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
+import { getCurrentBusiness } from "@shared/index";
+import { createEmptyUserData, type UserData } from "@shared/userData";
 
 const cigLicenseData: CigaretteLicenseData = {
   businessName: "some-business-name",

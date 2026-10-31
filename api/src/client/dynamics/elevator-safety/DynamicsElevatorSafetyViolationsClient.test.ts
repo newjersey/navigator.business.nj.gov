@@ -1,6 +1,6 @@
 import { DynamicsElevatorSafetyViolationsClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyViolationsClient";
-import { ElevatorSafetyViolationsClient } from "@client/dynamics/elevator-safety/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import type { ElevatorSafetyViolationsClient } from "@client/dynamics/elevator-safety/types";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("axios");

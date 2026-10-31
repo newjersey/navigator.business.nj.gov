@@ -1,10 +1,10 @@
-import {
+import type {
   HousingPropertyInterest,
   HousingPropertyInterestClient,
   HousingPropertyInterestResponse,
 } from "@client/dynamics/housing/types";
-import { LogWriterType } from "@libs/logWriter";
-import axios, { AxiosError } from "axios";
+import type { LogWriterType } from "@libs/logWriter";
+import axios, { type AxiosError } from "axios";
 
 export const DynamicsHousingPropertyInterestClient = (
   logWriter: LogWriterType,

@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v94UserData } from "@db/migrations/v94_add_missing_formation_types";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v94UserData } from "@db/migrations/v94_add_missing_formation_types";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v95UserData {
@@ -15,11 +15,7 @@ export interface v95UserData {
   version: number;
 }
 
-export const migrate_v94_to_v95 = (
-  v94Data: v94UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v95UserData => {
+export const migrate_v94_to_v95 = (v94Data: v94UserData, _?: MigrationClients): v95UserData => {
   return {
     ...v94Data,
     version: 95,

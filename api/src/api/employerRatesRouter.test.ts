@@ -1,15 +1,15 @@
-import { Express } from "express";
-import { setupExpress } from "@libs/express";
 import { employerRatesRouterFactory } from "@api/employerRatesRouter";
-import request from "supertest";
+import type { EmployerRatesClient } from "@domain/types";
+import { setupExpress } from "@libs/express";
+import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
 import {
   generateEmployerRatesRequestData,
   generateEmployerRatesResponse,
   generateUserData,
 } from "@shared/test";
-import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
-import { EmployerRatesClient } from "@domain/types";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
+import request from "supertest";
 
 describe("employerRatesRouter", () => {
   let app: Express;

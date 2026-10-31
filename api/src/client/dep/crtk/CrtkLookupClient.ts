@@ -1,5 +1,5 @@
-import { CrtkData, CrtkEntry } from "@businessnjgovnavigator/shared";
-import { CrtkSearch, CrtkStatusLookup } from "@domain/types";
+import type { CrtkData, CrtkEntry } from "@businessnjgovnavigator/shared";
+import type { CrtkSearch, CrtkStatusLookup } from "@domain/types";
 import type { LogWriterType } from "@libs/logWriter";
 
 export const CrtkLookupClient = (

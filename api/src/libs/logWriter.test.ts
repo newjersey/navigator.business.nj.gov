@@ -1,4 +1,4 @@
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 import winston from "winston";
 
 jest.mock("winston");

@@ -1,4 +1,4 @@
-import {
+import type {
   v186Business,
   v186BusinessUser,
   v186UserData,

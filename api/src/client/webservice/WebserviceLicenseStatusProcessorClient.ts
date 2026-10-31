@@ -1,8 +1,12 @@
 import { inputManipulator } from "@domain/inputManipulator";
-import { LicenseStatusClient, NO_ADDRESS_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
-import { parseDateWithFormat } from "@shared/dateHelpers";
-import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import {
+  type LicenseStatusClient,
+  NO_ADDRESS_MATCH_ERROR,
+  type SearchLicenseStatus,
+} from "@domain/types";
+import { parseDateWithFormat } from "@shared/dateHelpers";
+import type { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
+import type {
   LicenseEntity,
   LicenseName,
   LicenseSearchNameAndAddress,

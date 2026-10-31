@@ -25,12 +25,12 @@
  * ```
  */
 
+import path from "node:path";
 import { v195UserDataSchema, withNoBase64Check } from "@db/zodSchema/zodSchemas";
+import { highlight } from "cli-highlight";
+import { z } from "zod";
 import { generateTsSourceFromCompiler } from "./userSchemaCompiler";
 import { generateTsSourceFromZod, generateZodSource } from "./userSchemaGenerator";
-import { highlight } from "cli-highlight";
-import path from "node:path";
-import { z } from "zod";
 
 const migrationFilePath = path.resolve(
   __dirname,

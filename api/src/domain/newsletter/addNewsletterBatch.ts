@@ -1,4 +1,4 @@
-import { AddNewsletter, UserDataClient } from "@domain/types";
+import type { AddNewsletter, UserDataClient } from "@domain/types";
 
 type AddNewsletterBatchResponse = {
   success: number;
