@@ -57,4 +57,24 @@ describe("s3Writer", () => {
       responseType: "arraybuffer",
     });
   });
+
+  it("rejects with the status code when the upload is not OK", async () => {
+    mockAxios.get.mockResolvedValue({ data: Buffer.from("asdasd"), headers: {} });
+    mockS3Upload.mockResolvedValueOnce({
+      $metadata: { httpStatusCode: StatusCodes.SERVICE_UNAVAILABLE },
+    });
+
+    await expect(
+      saveFileFromUrl("https://whatever.com/thing.pdf", "us-east-1:1234/zzz.pdf", "testBucket"),
+    ).rejects.toBe(StatusCodes.SERVICE_UNAVAILABLE);
+  });
+
+  it("rejects when the download fails", async () => {
+    const downloadError = new Error("download failed");
+    mockAxios.get.mockRejectedValue(downloadError);
+
+    await expect(
+      saveFileFromUrl("https://whatever.com/thing.pdf", "us-east-1:1234/zzz.pdf", "testBucket"),
+    ).rejects.toBe(downloadError);
+  });
 });

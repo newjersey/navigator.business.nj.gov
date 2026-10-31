@@ -224,11 +224,11 @@ export const userRouterFactory = (
       .then(async (userData: UserData) => {
         let updatedUserData = userData;
         if (userData.version >= CURRENT_VERSION) {
-          updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData)
-            .then((userData) => updateOperatingPhase(userData))
-            .then((userData) => updateRoadmapSidebarCards(userData))
-            .then((userData) => asyncUpdateLicenseStatus(userData))
-            .then((userData) => asyncUpdateXrayStatus(userData));
+          updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData);
+          updatedUserData = updateOperatingPhase(updatedUserData);
+          updatedUserData = updateRoadmapSidebarCards(updatedUserData);
+          updatedUserData = await asyncUpdateLicenseStatus(updatedUserData);
+          updatedUserData = await asyncUpdateXrayStatus(updatedUserData);
 
           await databaseClient.put(updatedUserData);
         }
