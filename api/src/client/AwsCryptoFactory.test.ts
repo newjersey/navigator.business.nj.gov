@@ -9,6 +9,21 @@ type AWSMockContext = {
   origin: string;
 };
 
+type MockEncryptResult = {
+  result: string;
+  messeageHeader: string;
+};
+
+type MockDecryptResult = {
+  plaintext: Uint8Array;
+  messageHeader: { encryptionContext: AWSMockContext };
+};
+
+type MockAWSCryptoClient = {
+  encrypt: (cmm: string, plaintext: string, op?: AWSMockContext) => Promise<MockEncryptResult>;
+  decrypt: (keyring: AWSCrypto.KeyringNode, value: string) => Promise<MockDecryptResult>;
+};
+
 type MockAWSCryptoType = {
   encryptValueCalledWith: string;
   decryptValueCalledWith: string;
@@ -19,13 +34,10 @@ type MockAWSCryptoType = {
     encryptionContext: AWSMockContext;
   };
   optionsCalledWith: string;
-  contextCalledWith: any;
-  buildClient: (options: string) => {
-    encrypt: (cmm: string, plaintext: string, op?: AWSMockContext) => Promise<any>;
-    decrypt: (keyring: AWSCrypto.KeyringNode, value: string) => Promise<any>;
-  };
+  contextCalledWith: Partial<AWSMockContext> | undefined;
+  buildClient: (options: string) => MockAWSCryptoClient;
   KmsKeyringNode: jest.Mock;
-  CommitmentPolicy: any;
+  CommitmentPolicy: { REQUIRE_ENCRYPT_REQUIRE_DECRYPT: string };
 };
 
 type MockAWSBase64 = {
@@ -312,24 +324,31 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
     optionsCalledWith: "",
     contextCalledWith: undefined,
     CommitmentPolicy: { REQUIRE_ENCRYPT_REQUIRE_DECRYPT: "REQUIRE_ENCRYPT_REQUIRE_DECRYPT" },
-    buildClient: function MockBuildClient(options: string): any {
+    buildClient: function MockBuildClient(options: string): MockAWSCryptoClient {
       this.optionsCalledWith = options;
-      const encrypt = (cmm: string, plaintext: string, op?: AWSMockContext): any => {
+      const encrypt = (
+        cmm: string,
+        plaintext: string,
+        op?: AWSMockContext,
+      ): Promise<MockEncryptResult> => {
         this.encryptKeyringCalledWith = cmm;
         this.encryptValueCalledWith = plaintext;
         this.contextCalledWith = { ...op };
-        return Promise.resolve(plaintext).then((): any => {
+        return Promise.resolve(plaintext).then((): MockEncryptResult => {
           return { result: plaintext, messeageHeader: "message-header" };
         });
       };
-      const decrypt = (keyring: AWSCrypto.KeyringNode, value: string): any => {
+      const decrypt = (
+        keyring: AWSCrypto.KeyringNode,
+        value: string,
+      ): Promise<MockDecryptResult> => {
         const encoder = new TextEncoder();
         this.decryptKeyringCalledWith = keyring;
         this.decryptValueCalledWith = value;
         if (this.decryptResult.error) {
           return Promise.reject(this.decryptResult.error);
         }
-        return Promise.resolve(value).then((): any => {
+        return Promise.resolve(value).then((): MockDecryptResult => {
           return {
             plaintext: encoder.encode("decrypted-value"),
             messageHeader: {
@@ -340,7 +359,7 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
       };
       return { encrypt, decrypt };
     },
-    KmsKeyringNode: jest.fn(function MockKeyRingNode(): any {}),
+    KmsKeyringNode: jest.fn(function MockKeyRingNode(): void {}),
   };
 });
 

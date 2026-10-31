@@ -28,7 +28,9 @@ const dbConfig = {
 
 let laterMigrationRan = false;
 
-const makeParams = (data: any): { TableName: string; Item: any } => {
+const makeParams = (data: {
+  user: { id: string };
+}): { TableName: string; Item: Record<string, unknown> } => {
   return {
     TableName: dbConfig.tableName,
     Item: {
@@ -117,7 +119,8 @@ describe("DynamoUserDataClient Migrations", () => {
   });
 
   it("puts the supplied version without running migrations", async () => {
-    const v1Data = await getDbItem("v1-id");
+    // v1 is an older schema than UserData; put must store it as-is.
+    const v1Data = (await getDbItem("v1-id")) as sharedUserData.UserData;
 
     expect(await dynamoUserDataClient.put(v1Data)).toEqual(v1Data);
     expect(await getDbItem("v1-id")).toEqual(v1Data);
@@ -143,7 +146,7 @@ describe("DynamoUserDataClient Migrations", () => {
       newV2Field: "some-value",
     };
 
-    // @ts-ignore
+    // @ts-expect-error
     await dynamoUserDataClient.put(v2Data);
 
     expect(await getDbItem("v2-id")).toEqual(v2Data);
@@ -156,7 +159,7 @@ describe("DynamoUserDataClient Migrations", () => {
     await client.send(new PutCommand(makeParams(v2Data)));
   };
 
-  const getDbItem = async (id: string): Promise<any> => {
+  const getDbItem = async (id: string): Promise<unknown> => {
     const params = {
       TableName: dbConfig.tableName,
       Key: {

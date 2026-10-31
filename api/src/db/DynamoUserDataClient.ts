@@ -157,7 +157,7 @@ export const DynamoUserDataClient = (
       }),
     );
 
-    const usersToMigrate = Items.map((object: any): UserData => {
+    const usersToMigrate = Items.map((object): UserData => {
       return unmarshall(object).data;
     });
 
@@ -167,7 +167,7 @@ export const DynamoUserDataClient = (
   const search = async (statement: string): Promise<UserData[]> => {
     const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
     return await Promise.all(
-      Items.map(async (object: any): Promise<UserData> => {
+      Items.map(async (object): Promise<UserData> => {
         return unmarshall(object).data;
       }),
     );

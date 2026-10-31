@@ -41,10 +41,10 @@ class BasicLogger {
     this.id = id;
   }
 
-  LogInfo(message: any, ...optionalParams: any[]): void {
+  LogInfo(message: unknown, ...optionalParams: unknown[]): void {
     console.log(`INFO [${this.id}]:`, message, ...optionalParams);
   }
-  LogError(message: any, ...optionalParams: any[]): void {
+  LogError(message: unknown, ...optionalParams: unknown[]): void {
     console.error(`ERROR [${this.id}]:`, message, ...optionalParams);
   }
   GetId(): string {
@@ -64,7 +64,9 @@ const generateUsers = (totalUsers: number): { userData: UserData; isOutdated: bo
   });
 };
 
-const batchWriteUsers = async (users: any[]): Promise<number> => {
+const batchWriteUsers = async (
+  users: { userData: UserData; isOutdated: boolean }[],
+): Promise<number> => {
   const chunks = [];
   let outdatedVersionCount = 0;
 
