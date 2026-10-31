@@ -200,11 +200,6 @@
         }
       }
     },
-    // VS Code organizeImports: Biome's and TS's sorters fight over alias order in unmigrated workspaces.
-    {
-      "includes": ["api/**", "!api/cdk/**"],
-      "assist": { "enabled": false }
-    },
     {
       "includes": ["content/build.ts", "content/validateFrontmatterDates.ts"],
       "linter": {
@@ -288,6 +283,71 @@
           },
           "complexity": { "useMaxParams": "warn" },
           "security": { "noDangerouslySetInnerHtml": "warn" }
+        }
+      }
+    },
+    // temporary: drained by the api rule PRs.
+    {
+      "includes": ["api/**", "!api/cdk/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "warn",
+            "noExplicitAny": "warn",
+            "noNestedPromises": "warn",
+            "noImplicitAnyLet": "warn",
+            "useIterableCallbackReturn": "warn"
+          },
+          "style": {
+            "useErrorCause": "warn",
+            "noCommonJs": "warn",
+            "noParameterAssign": "warn"
+          },
+          "correctness": { "noUnusedVariables": "warn" },
+          "complexity": { "useMaxParams": "warn" },
+          "nursery": { "noFloatingPromises": "warn" }
+        }
+      }
+    },
+    // temporary: file-scoped so the migrations' snake_case rule and the api/scripts and reactEmail exemptions still win.
+    {
+      "includes": [
+        "api/.dependency-cruiser.js",
+        "api/jest-dynalite-config.js",
+        "api/scripts/fix-documents.mjs"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": {
+              "level": "warn",
+              "options": { "filenameCases": ["camelCase", "PascalCase"] }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "api/jest.config.ts",
+        "api/src/domain/messagingService.test.ts",
+        "api/src/functions/messagingService/app.ts"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "warn",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [".", "..", "./**", "../**"],
+                    "message": "Use path-alias imports instead of relative imports."
+                  }
+                ]
+              }
+            }
+          }
         }
       }
     }
