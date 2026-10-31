@@ -1,5 +1,5 @@
 import { getSignedInUserId } from "@api/userRouter";
-import { CryptoClient, DatabaseClient, TaxFilingInterface } from "@domain/types";
+import type { CryptoClient, DatabaseClient, TaxFilingInterface } from "@domain/types";
 import type { LogWriterType } from "@libs/logWriter";
 import { maskingCharacter } from "@shared/profileData";
 import { Router } from "express";

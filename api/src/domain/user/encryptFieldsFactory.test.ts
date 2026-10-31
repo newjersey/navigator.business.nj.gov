@@ -1,4 +1,4 @@
-import { CryptoClient, EncryptTaxId } from "@domain/types";
+import type { CryptoClient, EncryptTaxId } from "@domain/types";
 import { encryptFieldsFactory } from "@domain/user/encryptFieldsFactory";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
@@ -8,7 +8,7 @@ import {
   generateTaxClearanceCertificateData,
   generateUserDataForBusiness,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 
 describe("encryptFieldsFactory", () => {
   let stubCryptoEncryptionClient: jest.Mocked<CryptoClient>;

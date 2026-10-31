@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v63UserData } from "@db/migrations/v63_add_foreign_persona";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v63UserData } from "@db/migrations/v63_add_foreign_persona";
 
 export interface v64UserData {
   user: v64BusinessUser;
@@ -14,11 +14,7 @@ export interface v64UserData {
   version: number;
 }
 
-export const migrate_v63_to_v64 = (
-  v63Data: v63UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v64UserData => {
+export const migrate_v63_to_v64 = (v63Data: v63UserData, _?: MigrationClients): v64UserData => {
   return {
     ...v63Data,
     formationData: {

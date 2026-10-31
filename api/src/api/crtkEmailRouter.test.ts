@@ -1,9 +1,9 @@
 import { crtkEmailRouter } from "@api/crtkEmailRouter";
-import { CrtkEmailMetadata } from "@businessnjgovnavigator/shared";
-import { PowerAutomateEmailClient } from "@domain/types";
+import type { CrtkEmailMetadata } from "@businessnjgovnavigator/shared";
+import type { PowerAutomateEmailClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
-import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
-import { Express } from "express";
+import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 

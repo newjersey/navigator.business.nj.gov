@@ -1,5 +1,8 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v120Business, v120UserData } from "@db/migrations/v120_add_missing_migration_data_fields";
+import type { MigrationClients } from "@db/migrations/types";
+import type {
+  v120Business,
+  v120UserData,
+} from "@db/migrations/v120_add_missing_migration_data_fields";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v121UserData {
@@ -28,7 +31,6 @@ export interface v121Business {
 
 export const migrate_v120_to_v121 = (
   v120Data: v120UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v121UserData => {
   return {

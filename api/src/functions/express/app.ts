@@ -67,7 +67,7 @@ import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { DynamoDataClient } from "@db/DynamoDataClient";
 import { DynamoMigrationDataClient } from "@db/DynamoMigrationDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import { HealthCheckMethod } from "@domain/types";
+import type { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
 import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
 import { updateCrtkStatusFactory } from "@domain/user/updateCrtkStatusFactory";
@@ -79,15 +79,15 @@ import {
   AWS_CRYPTO_CONTEXT_STAGE,
   AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
   AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
+  AWS_CRYPTO_TAX_ID_DECRYPT_ONLY_CONTEXTS,
   AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
   AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
-  AWS_CRYPTO_TAX_ID_DECRYPT_ONLY_CONTEXTS,
   AWS_CRYPTO_TAX_ID_FOREIGN_ENVIRONMENT_POLICY,
-  LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   AWS_CRYPTO_TAX_ID_HASHING_KEY,
   BUSINESSES_TABLE,
   DYNAMO_OFFLINE_PORT,
   IS_DOCKER,
+  LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
   STAGE,
 } from "@functions/config";
 import { setupExpress } from "@libs/express";

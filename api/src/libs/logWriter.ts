@@ -1,6 +1,6 @@
-import { getCurrentDateFormatted } from "@shared/dateHelpers";
-import { AxiosError } from "axios";
 import { randomUUID } from "node:crypto";
+import { getCurrentDateFormatted } from "@shared/dateHelpers";
+import type { AxiosError } from "axios";
 import winston from "winston";
 import WinstonCloudWatch from "winston-cloudwatch";
 
@@ -85,7 +85,6 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
 
   const FlushLog = async (): Promise<void> => {
     const winstonCloudWatchTransport = logger.transports.find((t) => {
-      /* eslint-disable @typescript-eslint/no-explicit-any */
       return (
         (t as unknown as any).name === `NavigatorCloudWatch-WinstonLogging${groupName}${logStream}`
       );
@@ -93,7 +92,6 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
     await new Promise((resolve) => {
       (winstonCloudWatchTransport as unknown as any).kthxbye(resolve);
     });
-    /* eslint-enable @typescript-eslint/no-explicit-any */
   };
 
   return {

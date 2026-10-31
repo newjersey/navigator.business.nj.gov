@@ -1,3 +1,4 @@
+import type { UserData } from "@businessnjgovnavigator/shared";
 import {
   generatev195Business,
   generatev195BusinessUser,
@@ -13,16 +14,16 @@ import {
 } from "@db/migrations/v195_add_learning_business_field_to_business_user_data";
 import {
   parseUserData,
+  v195BusinessUserSchema,
   v195FormationMemberSchema,
   v195MunicipalitySchema,
   v195PreferencesSchema,
-  v195BusinessUserSchema,
   v195QuestionnaireDataSchema,
   v195TaxClearanceCertificateDataSchema,
   v195TaxFilingDataSchema,
   v195UserDataSchema,
 } from "@db/zodSchema/zodSchemas";
-import { type LogWriterType } from "@libs/logWriter";
+import type { LogWriterType } from "@libs/logWriter";
 import {
   AGENT_EMAIL_MAX_CHAR,
   AGENT_NAME_MAX_CHAR,
@@ -37,7 +38,6 @@ import {
   CONTACT_LAST_NAME_MAX_CHAR,
   SIGNER_NAME_MAX_CHAR,
 } from "@shared/formationData";
-import { type UserData } from "@businessnjgovnavigator/shared";
 
 jest.mock("@db/zodSchema/zodSchemas", () => {
   const actual = jest.requireActual("@db/zodSchema/zodSchemas");
@@ -271,7 +271,7 @@ describe("Zod Schema validation", () => {
             licenseData: {
               lastUpdatedISO: "",
               licenses: {
-                ["Pharmacy-Pharmacy"]: generatev195LicenseDetails({}),
+                "Pharmacy-Pharmacy": generatev195LicenseDetails({}),
               },
             },
           }),

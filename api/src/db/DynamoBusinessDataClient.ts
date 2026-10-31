@@ -10,9 +10,9 @@ import {
   PutCommand,
 } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { type BusinessesDataClient } from "@domain/types";
-import { type LogWriterType } from "@libs/logWriter";
-import { type Business } from "@shared/userData";
+import type { BusinessesDataClient } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
+import type { Business } from "@shared/userData";
 
 export const createBusinessDataItem = (businessData: Business): Record<string, unknown> => {
   const businessName = businessData.profileData.businessName;

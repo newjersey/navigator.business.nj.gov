@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { TextEncoder } from "node:util";
 import * as AWSCrypto from "@aws-crypto/client-node";
 import { AWSCryptoFactory, cryptoUtils } from "@client/AwsCryptoFactory";
-import { type CryptoClient } from "@domain/types";
-import { TextEncoder } from "node:util";
+import type { CryptoClient } from "@domain/types";
 
 type AWSMockContext = {
   stage: string;
@@ -242,10 +241,9 @@ describe("AWSCryptoFactory", () => {
       await expect(client.hashValue("", 10)).rejects.toThrow(
         "Sensitive data must be a non-empty string",
       );
-      await expect(
-        // eslint-disable-next-line unicorn/no-null
-        client.hashValue(null as unknown as string, 10),
-      ).rejects.toThrow("Sensitive data must be a non-empty string");
+      await expect(client.hashValue(null as unknown as string, 10)).rejects.toThrow(
+        "Sensitive data must be a non-empty string",
+      );
       await expect(client.hashValue(undefined as unknown as string, 10)).rejects.toThrow(
         "Sensitive data must be a non-empty string",
       );
@@ -278,8 +276,7 @@ describe("AWSCryptoFactory", () => {
        */
       jest
         .spyOn(cryptoUtils, "pbkdf2")
-        .mockImplementationOnce((_password, _salt, iterations, _keylen, _digest, callback) => {
-          // eslint-disable-next-line unicorn/no-null
+        .mockImplementationOnce((_password, _salt, _iterations, _keylen, _digest, callback) => {
           callback(null, Buffer.alloc(64));
           return;
         });
@@ -317,7 +314,6 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
     CommitmentPolicy: { REQUIRE_ENCRYPT_REQUIRE_DECRYPT: "REQUIRE_ENCRYPT_REQUIRE_DECRYPT" },
     buildClient: function MockBuildClient(options: string): any {
       this.optionsCalledWith = options;
-      // eslint-disable-next-line unicorn/consistent-function-scoping
       const encrypt = (cmm: string, plaintext: string, op?: AWSMockContext): any => {
         this.encryptKeyringCalledWith = cmm;
         this.encryptValueCalledWith = plaintext;
@@ -326,7 +322,6 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
           return { result: plaintext, messeageHeader: "message-header" };
         });
       };
-      // eslint-disable-next-line unicorn/consistent-function-scoping
       const decrypt = (keyring: AWSCrypto.KeyringNode, value: string): any => {
         const encoder = new TextEncoder();
         this.decryptKeyringCalledWith = keyring;

@@ -3,8 +3,8 @@ import {
   generateV8NameAndAddress,
   generateV8OnboardingData,
   generateV8User,
-  v8LicenseSearchData,
-  v8UserData,
+  type v8LicenseSearchData,
+  type v8UserData,
 } from "@db/migrations/v8_remove_bcorp";
 import { migrate_v8_to_v9 } from "@db/migrations/v9_add_license_status_to_data";
 

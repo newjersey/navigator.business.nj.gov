@@ -1,5 +1,8 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v127Business, v127UserData } from "@db/migrations/v127_create_remote_worker_seller_phase";
+import type { MigrationClients } from "@db/migrations/types";
+import type {
+  v127Business,
+  v127UserData,
+} from "@db/migrations/v127_create_remote_worker_seller_phase";
 
 export interface v128UserData {
   user: v128BusinessUser;
@@ -27,7 +30,6 @@ export interface v128Business {
 
 export const migrate_v127_to_v128 = (
   v127Data: v127UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v128UserData => {
   return {

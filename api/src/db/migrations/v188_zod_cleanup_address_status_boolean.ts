@@ -1,4 +1,8 @@
-import { v187Business, v187BusinessUser, v187UserData } from "@db/migrations/v187_add_crtk_data";
+import type {
+  v187Business,
+  v187BusinessUser,
+  v187UserData,
+} from "@db/migrations/v187_add_crtk_data";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v187_to_v188 = (userData: v187UserData): v188UserData => {

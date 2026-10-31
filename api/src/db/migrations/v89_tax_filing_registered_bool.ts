@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v88UserData } from "@db/migrations/v88_add_interstate_transport";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v88UserData } from "@db/migrations/v88_add_interstate_transport";
 
 export interface v89UserData {
   user: v89BusinessUser;
@@ -14,11 +14,7 @@ export interface v89UserData {
   version: number;
 }
 
-export const migrate_v88_to_v89 = (
-  v88Data: v88UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v89UserData => {
+export const migrate_v88_to_v89 = (v88Data: v88UserData, _?: MigrationClients): v89UserData => {
   return {
     ...v88Data,
     taxFilingData: {

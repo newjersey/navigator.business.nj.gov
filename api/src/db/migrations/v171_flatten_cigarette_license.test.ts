@@ -1,7 +1,7 @@
 import {
   generatev170Business,
-  generatev170UserData,
   generatev170CigaretteLicenseData,
+  generatev170UserData,
 } from "@db/migrations/v170_consolidate_environment_data";
 import { migrate_v170_to_v171 } from "@db/migrations/v171_flatten_cigarette_license";
 

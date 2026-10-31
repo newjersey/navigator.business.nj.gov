@@ -1,8 +1,8 @@
 import {
   generatev176Business,
-  generatev176UserData,
   generatev176FormationData,
   generatev176FormationFormData,
+  generatev176UserData,
 } from "@db/migrations/v176_add_check_name_reservation_options";
 import { migrate_v176_to_v177 } from "@db/migrations/v177_add_business_name_confirmation";
 

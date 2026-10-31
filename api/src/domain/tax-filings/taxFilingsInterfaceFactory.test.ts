@@ -1,10 +1,10 @@
 import { taxFilingsInterfaceFactory } from "@domain/tax-filings/taxFilingsInterfaceFactory";
-import { TaxFilingClient, TaxFilingInterface } from "@domain/types";
+import type { TaxFilingClient, TaxFilingInterface } from "@domain/types";
 import * as fetchMunicipality from "@domain/user/fetchMunicipalityByName";
-import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
+import type { TaxFilingCalendarEvent } from "@shared/calendarEvent";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
-import { TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
+import type { TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
 import {
   generateBusiness,
   generateMunicipalityDetail,
@@ -15,7 +15,7 @@ import {
   generateTaxIdAndBusinessName,
   generateUserDataForBusiness,
 } from "@shared/test";
-import { Business, UserData } from "@shared/userData";
+import type { Business, UserData } from "@shared/userData";
 
 jest.mock("@domain/user/fetchMunicipalityByName", () => ({
   fetchMunicipalityByName: jest.fn(),
@@ -305,7 +305,6 @@ describe("TaxFilingsInterfaceFactory", () => {
       }
     });
 
-    /* eslint-disable unicorn/consistent-function-scoping */
     function setupInitialUserDataWithCal(params: {
       isCalendarFullView: boolean;
       numFilingsInCurrentYear: number;
@@ -322,7 +321,6 @@ describe("TaxFilingsInterfaceFactory", () => {
       );
     }
 
-    /* eslint-disable unicorn/consistent-function-scoping */
     function mockTaxFilingLookup(params: {
       state: TaxFilingState;
       numFilingsInCurrentYear: number;
@@ -333,7 +331,6 @@ describe("TaxFilingsInterfaceFactory", () => {
       });
     }
 
-    /* eslint-disable unicorn/consistent-function-scoping */
     function createFilings(params: {
       numFilingsInCurrentYear: number;
       numFilingsInNextYear?: number;

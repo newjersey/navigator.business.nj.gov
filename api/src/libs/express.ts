@@ -1,5 +1,5 @@
 import cors from "cors";
-import express, { Express, RequestHandler } from "express";
+import express, { type Express, type RequestHandler } from "express";
 import helmet from "helmet";
 
 const preserveEmptyRequestBody: RequestHandler = (req, _res, next) => {

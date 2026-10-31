@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v69UserData } from "@db/migrations/v69_change_form_business_entity_foreign_id";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v69UserData } from "@db/migrations/v69_change_form_business_entity_foreign_id";
 
 export interface v70UserData {
   user: v70BusinessUser;
@@ -14,11 +14,7 @@ export interface v70UserData {
   version: number;
 }
 
-export const migrate_v69_to_v70 = (
-  v69Data: v69UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v70UserData => {
+export const migrate_v69_to_v70 = (v69Data: v69UserData, _?: MigrationClients): v70UserData => {
   const taskProgress = v69Data.taskProgress;
 
   return {

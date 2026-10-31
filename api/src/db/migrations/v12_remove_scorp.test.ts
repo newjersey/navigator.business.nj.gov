@@ -1,7 +1,7 @@
 import {
   generatev11OnboardingData,
   generatev11User,
-  v11UserData,
+  type v11UserData,
 } from "@db/migrations/v11_change_license_statuses";
 import { migrate_v11_to_v12 } from "@db/migrations/v12_remove_scorp";
 

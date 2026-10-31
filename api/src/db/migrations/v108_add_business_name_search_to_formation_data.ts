@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v107UserData } from "@db/migrations/v107_refactor_interstate_transport_essential_question";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v107UserData } from "@db/migrations/v107_refactor_interstate_transport_essential_question";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v108UserData {
@@ -18,7 +18,6 @@ export interface v108UserData {
 
 export const migrate_v107_to_v108 = (
   v107Data: v107UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v108UserData => {
   return {

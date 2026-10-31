@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 type InputManipulator = {
   value: string;
   stripPunctuation: () => InputManipulator;

@@ -2,8 +2,8 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { DynamoMessagesDataClient } from "@db/DynamoMessagesDataClient";
-import { MessageData, MessagesDataClient } from "@domain/types";
-import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
+import type { MessageData, MessagesDataClient } from "@domain/types";
+import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
 import { randomInt } from "@shared/intHelpers";
 import { v4 as uuidv4 } from "uuid";
 

@@ -1,6 +1,9 @@
-import { ApiBusinessNameClient, ApiNameAvailabilityResponse } from "@client/ApiBusinessNameClient";
-import { BusinessNameClient } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import {
+  ApiBusinessNameClient,
+  type ApiNameAvailabilityResponse,
+} from "@client/ApiBusinessNameClient";
+import type { BusinessNameClient } from "@domain/types";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("axios");

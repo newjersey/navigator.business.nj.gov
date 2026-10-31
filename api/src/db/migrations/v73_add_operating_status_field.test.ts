@@ -2,9 +2,9 @@ import {
   generatev72FormationFormData,
   generatev72ProfileData,
   generatev72User,
-  v72ProfileData,
-  v72TaskProgress,
-  v72UserData,
+  type v72ProfileData,
+  type v72TaskProgress,
+  type v72UserData,
 } from "@db/migrations/v72_add_real_estate_management";
 import { migrate_v72_to_v73 } from "@db/migrations/v73_add_operating_status_field";
 

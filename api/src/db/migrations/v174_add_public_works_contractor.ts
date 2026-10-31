@@ -1,5 +1,8 @@
+import type {
+  v173Business,
+  v173UserData,
+} from "@db/migrations/v173_add_school_bus_passenger_transport";
 import { randomInt } from "@shared/intHelpers";
-import { v173Business, v173UserData } from "@db/migrations/v173_add_school_bus_passenger_transport";
 
 export const migrate_v173_to_v174 = (userData: v173UserData): v174UserData => {
   return {

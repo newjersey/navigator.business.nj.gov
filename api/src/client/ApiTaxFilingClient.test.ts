@@ -1,22 +1,19 @@
-/* eslint-disable unicorn/no-null */
-import { randomInt } from "@shared/intHelpers";
-import { TaxFilingLookUpRequest } from "@shared/taxFiling";
-import axios from "axios";
-
-import { TaxFilingClient } from "@domain/types";
-import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
-import { generateTaxIdAndBusinessName } from "@shared/test";
-import { generateTaxFilingDates, generateTaxFilingResult } from "@test/factories";
-
 import {
   ApiTaxFilingClient,
-  ApiTaxFilingLookupRequest,
-  ApiTaxFilingLookupResponse,
-  ApiTaxFilingOnboardingRequest,
-  ApiTaxFilingOnboardingResponse,
+  type ApiTaxFilingLookupRequest,
+  type ApiTaxFilingLookupResponse,
+  type ApiTaxFilingOnboardingRequest,
+  type ApiTaxFilingOnboardingResponse,
 } from "@client/ApiTaxFilingClient";
 import { dateToShortISO } from "@domain/tax-filings/taxIdHelper";
+import type { TaxFilingClient } from "@domain/types";
+import { DummyLogWriter, LogWriter, type LogWriterType } from "@libs/logWriter";
+import { randomInt } from "@shared/intHelpers";
+import type { TaxFilingLookUpRequest } from "@shared/taxFiling";
+import { generateTaxIdAndBusinessName } from "@shared/test";
+import { generateTaxFilingDates, generateTaxFilingResult } from "@test/factories";
 import { randomElementFromArray } from "@test/helpers";
+import axios from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 jest.mock("axios");

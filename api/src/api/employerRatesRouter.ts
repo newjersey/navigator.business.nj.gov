@@ -1,11 +1,11 @@
-import { Router } from "express";
-import { ExpressRequestBody } from "@api/types";
-import { EmployerRatesRequest } from "@shared/employerRates";
-import { UserData } from "@shared/userData";
-import type { LogWriterType } from "@libs/logWriter";
-import { EmployerRatesClient } from "@domain/types";
-import { StatusCodes } from "http-status-codes";
+import type { ExpressRequestBody } from "@api/types";
+import type { EmployerRatesClient } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
+import type { LogWriterType } from "@libs/logWriter";
+import type { EmployerRatesRequest } from "@shared/employerRates";
+import type { UserData } from "@shared/userData";
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
 
 type EmployerRatesRequestBody = {
   employerRates: EmployerRatesRequest;

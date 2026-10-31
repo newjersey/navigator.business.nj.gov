@@ -1,5 +1,5 @@
 import { flattenDeDupAndConvertTaxFilings } from "@domain/tax-filings/taxIdHelper";
-import {
+import type {
   HealthCheckMetadata,
   TaxFilingClient,
   TaxFilingLookupResponse,
@@ -7,8 +7,8 @@ import {
   TaxFilingResult,
   TaxIdentifierToIdsRecord,
 } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import axios, { AxiosError } from "axios";
+import type { LogWriterType } from "@libs/logWriter";
+import axios, { type AxiosError } from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 type ApiConfig = {

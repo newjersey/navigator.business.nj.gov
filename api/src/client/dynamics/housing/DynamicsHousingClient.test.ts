@@ -1,11 +1,10 @@
-import { AccessTokenClient } from "@client/dynamics/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
-
 import { DynamicsHousingClient } from "@client/dynamics/housing/DynamicsHousingClient";
-import {
+import type {
   HousingPropertyInterestClient,
   HousingPropertyInterestInfo,
 } from "@client/dynamics/housing/types";
+import type { AccessTokenClient } from "@client/dynamics/types";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 
 describe("DynamicsHousingClient", () => {
   let client: HousingPropertyInterestInfo;

@@ -1,8 +1,8 @@
 import { createEmptyUser } from "@shared/businessUser";
 import { getCurrentDateInNewJerseyISOString } from "@shared/dateHelpers";
-import { FormationData, getCurrentBusiness, ProfileData } from "@shared/index";
+import { type FormationData, getCurrentBusiness, type ProfileData } from "@shared/index";
 import { OperatingPhaseId } from "@shared/operatingPhase";
-import { createEmptyUserData, UserData } from "@shared/userData";
+import { createEmptyUserData, type UserData } from "@shared/userData";
 
 const profileData: ProfileData = {
   liquorLicense: true,

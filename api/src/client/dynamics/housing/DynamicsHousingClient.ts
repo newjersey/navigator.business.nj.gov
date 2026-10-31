@@ -1,10 +1,10 @@
-import {
+import type {
   HousingPropertyInterestClient,
   HousingPropertyInterestInfo,
   HousingPropertyInterestResponse,
 } from "@client/dynamics/housing/types";
-import { AccessTokenClient } from "@client/dynamics/types";
-import { LogWriterType } from "@libs/logWriter";
+import type { AccessTokenClient } from "@client/dynamics/types";
+import type { LogWriterType } from "@libs/logWriter";
 
 type Config = {
   accessTokenClient: AccessTokenClient;
@@ -12,7 +12,7 @@ type Config = {
 };
 
 export const DynamicsHousingClient = (
-  logWriter: LogWriterType,
+  _logWriter: LogWriterType,
   config: Config,
 ): HousingPropertyInterestInfo => {
   return async (

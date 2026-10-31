@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v68UserData } from "@db/migrations/v68_complete_formation_task_if_success";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v68UserData } from "@db/migrations/v68_complete_formation_task_if_success";
 
 export interface v69UserData {
   user: v69BusinessUser;
@@ -14,11 +14,7 @@ export interface v69UserData {
   version: number;
 }
 
-export const migrate_v68_to_v69 = (
-  v68Data: v68UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v69UserData => {
+export const migrate_v68_to_v69 = (v68Data: v68UserData, _?: MigrationClients): v69UserData => {
   const taskProgress = v68Data.taskProgress;
 
   if (

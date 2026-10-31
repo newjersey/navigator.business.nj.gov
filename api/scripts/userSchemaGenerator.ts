@@ -107,7 +107,6 @@ export const applyChecks = (baseExpression: string, def: UnknownRecord): string 
       checkDef.pattern instanceof RegExp
     ) {
       expression = `${expression}.regex(${checkDef.pattern.toString()})`;
-      continue;
     }
   }
 

@@ -3,11 +3,11 @@
  * their file metadata. Those values are the public URL segment for an entry.
  */
 
+import fs from "node:fs";
+import path from "node:path";
 import { loadCmsConfig } from "@businessnjgovnavigator/shared/src/static";
 import { publishSnsMessage } from "@libs/awsSns";
 import matter from "gray-matter";
-import fs from "node:fs";
-import path from "node:path";
 
 const SLUG_FIELDS = ["slug", "urlSlug"] as const; // not standardized and used interchangeably
 const SLUG_COLLISION_TITLE = ":warning: CMS Slug Collision";

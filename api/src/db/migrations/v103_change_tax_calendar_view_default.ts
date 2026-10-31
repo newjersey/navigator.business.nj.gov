@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v102UserData } from "@db/migrations/v102_rename_tax_registration_nudge";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v102UserData } from "@db/migrations/v102_rename_tax_registration_nudge";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v103UserData {
@@ -18,7 +18,6 @@ export interface v103UserData {
 
 export const migrate_v102_to_v103 = (
   v102Data: v102UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v103UserData => {
   const isUpAndRunning =

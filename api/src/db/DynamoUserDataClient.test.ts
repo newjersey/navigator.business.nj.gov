@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
-import { type CryptoClient, UserDataClient } from "@domain/types";
-import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
+import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
+import type { CryptoClient, UserDataClient } from "@domain/types";
+import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
 import { randomInt } from "@shared/intHelpers";
 import { generateUser, generateUserData } from "@shared/test";
 

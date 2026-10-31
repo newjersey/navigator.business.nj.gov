@@ -1,6 +1,6 @@
+import { userSchemaTs } from "@domain/userSchema.generated";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
-import { userSchemaTs } from "@domain/userSchema.generated";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 

@@ -1,7 +1,7 @@
 import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
-import { EmergencyTripPermitClient } from "@domain/types";
+import type { EmergencyTripPermitClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
-import { EmergencyTripPermitApplicationInfo } from "@shared/emergencyTripPermit";
+import type { EmergencyTripPermitApplicationInfo } from "@shared/emergencyTripPermit";
 import axios from "axios";
 
 jest.mock("axios");

@@ -1,9 +1,9 @@
-import {
+import type {
   BusinessIdAndLicenseSearchNameAndAddresses,
   BusinessIdAndName,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import { NO_ADDRESS_MATCH_ERROR } from "@domain/types";
-import { LicenseSearchAddress } from "@shared/license";
+import type { LicenseSearchAddress } from "@shared/license";
 
 export const searchBusinessAddressesForMatches = (
   businessIdsAndLicenseAddresses: BusinessIdAndLicenseSearchNameAndAddresses[],

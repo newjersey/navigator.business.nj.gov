@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // organize-imports-ignore
+
+import type { MigrationClients } from "@db/migrations/types";
 import { migrate_v0_to_v1 } from "@db/migrations/v1_add_task_progress";
 import { migrate_v1_to_v2 } from "@db/migrations/v2_form_data_to_onboarding_data";
 import { migrate_v2_to_v3 } from "@db/migrations/v3_change_legal_structure";
@@ -165,7 +166,6 @@ import { migrate_v161_to_v162 } from "@db/migrations/v162_add_hashed_taxid_to_us
 import { migrate_v162_to_v163 } from "@db/migrations/v163_waste_transport_to_waste_data";
 import { migrate_v163_to_v164 } from "@db/migrations/v164_track_tax_clearance_primary_business";
 import { migrate_v164_to_v165 } from "@db/migrations/v165_add_last_updated_iso_to_xray_registration_data";
-import { type MigrationClients } from "@db/migrations/types";
 import { migrate_v165_to_v166 } from "@db/migrations/v166_add_roadmap_task_data";
 import { migrate_v166_to_v167 } from "@db/migrations/v167_update_agent_number_or_manual_options";
 import { migrate_v167_to_v168 } from "@db/migrations/v168_add_cigarette_license_data";

@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v167Business,
   v167UserData,
 } from "@db/migrations/v167_update_agent_number_or_manual_options";
@@ -7,7 +7,6 @@ import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v167_to_v168 = (
   v167Data: v167UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v168UserData => {
   return {

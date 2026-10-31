@@ -1,4 +1,4 @@
-import { PublishCommand, PublishCommandOutput, SNSClient } from "@aws-sdk/client-sns";
+import { PublishCommand, type PublishCommandOutput, SNSClient } from "@aws-sdk/client-sns";
 
 export const snsClient = new SNSClient({});
 

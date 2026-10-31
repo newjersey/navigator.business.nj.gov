@@ -1,4 +1,7 @@
-import { v177Business, v177UserData } from "@db/migrations/v177_add_business_name_confirmation";
+import type {
+  v177Business,
+  v177UserData,
+} from "@db/migrations/v177_add_business_name_confirmation";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v177_to_v178 = (userData: v177UserData): v178UserData => {

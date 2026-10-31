@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import {
   generateV1FormData,
   generateV1User,
-  v1UserData,
+  type v1UserData,
 } from "@db/migrations/v1_add_task_progress";
 import { migrate_v1_to_v2 } from "@db/migrations/v2_form_data_to_onboarding_data";
 

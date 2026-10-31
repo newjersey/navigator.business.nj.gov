@@ -2,8 +2,8 @@ import {
   generatev77FormationFormData,
   generatev77ProfileData,
   generatev77User,
-  v77ProfileData,
-  v77UserData,
+  type v77ProfileData,
+  type v77UserData,
 } from "@db/migrations/v77_remove_graduation_card";
 import { migrate_v77_to_v78 } from "@db/migrations/v78_remove_initial_business_persona";
 

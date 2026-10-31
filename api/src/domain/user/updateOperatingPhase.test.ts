@@ -1,6 +1,9 @@
-/* eslint-disable unicorn/consistent-function-scoping */
-
+import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { businessStructureTaskId, formationTaskId } from "@shared/domain-logic/taskIds";
+import { randomInt } from "@shared/intHelpers";
+import { OperatingPhaseId } from "@shared/operatingPhase";
+import type { ProfileData } from "@shared/profileData";
 import {
   generateBusiness,
   generateOwningProfileData,
@@ -8,12 +11,6 @@ import {
   generateStartingProfileData,
   generateUserDataForBusiness,
 } from "@shared/test";
-
-import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
-import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import { randomInt } from "@shared/intHelpers";
-import { OperatingPhaseId } from "@shared/operatingPhase";
-import { ProfileData } from "@shared/profileData";
 
 describe("updateOperatingPhase", () => {
   describe("Owning", () => {

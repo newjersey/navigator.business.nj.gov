@@ -1,5 +1,8 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v124Business, v124UserData } from "@db/migrations/v124_remove_task_progress_sidebar_card";
+import type { MigrationClients } from "@db/migrations/types";
+import type {
+  v124Business,
+  v124UserData,
+} from "@db/migrations/v124_remove_task_progress_sidebar_card";
 
 export interface v125UserData {
   user: v125BusinessUser;
@@ -27,7 +30,6 @@ export interface v125Business {
 
 export const migrate_v124_to_v125 = (
   v124Data: v124UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v125UserData => {
   return {

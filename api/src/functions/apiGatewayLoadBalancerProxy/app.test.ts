@@ -1,8 +1,8 @@
-import { proxyApiGatewayRequest } from "@functions/apiGatewayLoadBalancerProxy/app";
 import type {
   ApiGatewayLoadBalancerEvent,
   FetchRequest,
 } from "@functions/apiGatewayLoadBalancerProxy/app";
+import { proxyApiGatewayRequest } from "@functions/apiGatewayLoadBalancerProxy/app";
 
 interface CapturedFetchCall {
   /** URL requested by the proxy. */

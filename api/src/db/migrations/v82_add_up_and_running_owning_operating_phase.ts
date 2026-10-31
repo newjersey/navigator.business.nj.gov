@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v81UserData } from "@db/migrations/v81_add_completed_filing_payment";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v81UserData } from "@db/migrations/v81_add_completed_filing_payment";
 
 export interface v82UserData {
   user: v82BusinessUser;
@@ -14,11 +14,7 @@ export interface v82UserData {
   version: number;
 }
 
-export const migrate_v81_to_v82 = (
-  v81Data: v81UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v82UserData => {
+export const migrate_v81_to_v82 = (v81Data: v81UserData, _?: MigrationClients): v82UserData => {
   const operatingPhase =
     v81Data.profileData.businessPersona === "OWNING" &&
     v81Data.profileData.operatingPhase === "UP_AND_RUNNING"

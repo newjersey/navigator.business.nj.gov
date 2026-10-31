@@ -1,15 +1,14 @@
+import { updateSidebarCards } from "@domain/updateSidebarCards";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
+import { OperatingPhaseId } from "@shared/index";
 import {
   generateBusiness,
   generatePreferences,
   generateProfileData,
   generateUserDataForBusiness,
 } from "@shared/test";
-
-import { updateSidebarCards } from "@domain/updateSidebarCards";
-import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
-import { OperatingPhaseId } from "@shared/index";
 
 const { formationNudge, fundingNudge, notRegistered, notRegisteredUpAndRunning } = SIDEBAR_CARDS;
 

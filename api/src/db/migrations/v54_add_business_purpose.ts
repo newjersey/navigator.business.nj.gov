@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v53UserData } from "@db/migrations/v53_migrate_cannabis_dvob";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v53UserData } from "@db/migrations/v53_migrate_cannabis_dvob";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v54UserData {
@@ -15,11 +15,7 @@ export interface v54UserData {
   version: number;
 }
 
-export const migrate_v53_to_v54 = (
-  v53Data: v53UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v54UserData => {
+export const migrate_v53_to_v54 = (v53Data: v53UserData, _?: MigrationClients): v54UserData => {
   return {
     ...v53Data,
     formationData: {

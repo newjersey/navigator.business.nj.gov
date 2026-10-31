@@ -1,9 +1,9 @@
 import { DynamicsElevatorSafetyRegistrationStatusClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyRegistrationStatusClient";
-import { ElevatorSafetyRegistrationClient } from "@client/dynamics/elevator-safety/types";
-import { HousingPropertyInterestClient } from "@client/dynamics/housing/types";
-import { AccessTokenClient } from "@client/dynamics/types";
-import { ElevatorSafetyRegistrationStatus } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import type { ElevatorSafetyRegistrationClient } from "@client/dynamics/elevator-safety/types";
+import type { HousingPropertyInterestClient } from "@client/dynamics/housing/types";
+import type { AccessTokenClient } from "@client/dynamics/types";
+import type { ElevatorSafetyRegistrationStatus } from "@domain/types";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 
 jest.mock("axios");
 jest.mock("winston");

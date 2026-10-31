@@ -1,11 +1,11 @@
-import {
+import type {
   ElevatorSafetyInspectionStatus,
   ElevatorSafetyRegistrationStatus,
   ElevatorSafetyViolationsStatus,
 } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
-import {
+import type {
   ElevatorSafetyDeviceInspectionDetails,
   ElevatorSafetyRegistrationSummary,
 } from "@shared/elevatorSafety";

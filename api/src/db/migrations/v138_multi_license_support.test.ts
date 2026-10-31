@@ -4,11 +4,11 @@ import {
   generatev137LicenseSearchNameAndAddress,
   generatev137LicenseStatusItem,
   generatev137ProfileData,
-  v137TaskProgress,
+  type v137TaskProgress,
 } from "@db/migrations/v137_add_employment_placement_personal_types";
 import {
   migrate_v137Business_to_v138Business,
-  v138LicenseName,
+  type v138LicenseName,
 } from "@db/migrations/v138_multi_license_support";
 
 describe("v138_multi_license_support", () => {

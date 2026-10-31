@@ -2,8 +2,8 @@ import {
   generatev50FormationFormData,
   generatev50ProfileData,
   generatev50User,
-  v50ProfileData,
-  v50UserData,
+  type v50ProfileData,
+  type v50UserData,
 } from "@db/migrations/v50_fix_annual_conditional_ids";
 import { migrate_v50_to_v51 } from "@db/migrations/v51_add_cpa_field";
 

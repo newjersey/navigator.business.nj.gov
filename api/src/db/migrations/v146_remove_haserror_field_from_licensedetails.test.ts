@@ -15,10 +15,10 @@ describe("v146_remove_haserror_field", () => {
       licenseData: {
         lastUpdatedISO: "some last iso",
         licenses: {
-          ["Pharmacy-Pharmacy"]: generatev145LicenseDetails({
+          "Pharmacy-Pharmacy": generatev145LicenseDetails({
             hasError: true,
           }),
-          ["Accountancy-Firm Registration"]: generatev145LicenseDetails({
+          "Accountancy-Firm Registration": generatev145LicenseDetails({
             hasError: false,
           }),
         },

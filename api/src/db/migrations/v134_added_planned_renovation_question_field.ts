@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v133Business,
   v133UserData,
 } from "@db/migrations/v133_change_agent_office_address_city_field";
@@ -42,7 +42,6 @@ export type v134CommunityAffairsAddress = {
 };
 export const migrate_v133_to_v134 = (
   v133Data: v133UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v134UserData => {
   return {

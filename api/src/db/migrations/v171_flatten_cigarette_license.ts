@@ -1,4 +1,4 @@
-import { v170Business, v170UserData } from "@db/migrations/v170_consolidate_environment_data";
+import type { v170Business, v170UserData } from "@db/migrations/v170_consolidate_environment_data";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v170_to_v171 = (userData: v170UserData): v171UserData => {

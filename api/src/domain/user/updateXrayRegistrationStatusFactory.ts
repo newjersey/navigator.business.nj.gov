@@ -1,7 +1,7 @@
-import { UpdateXrayRegistration, XrayRegistrationStatusLookup } from "@domain/types";
+import type { UpdateXrayRegistration, XrayRegistrationStatusLookup } from "@domain/types";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
-import { Business, UserData } from "@shared/userData";
-import { FacilityDetails } from "@shared/xray";
+import type { Business, UserData } from "@shared/userData";
+import type { FacilityDetails } from "@shared/xray";
 
 export const updateXrayRegistrationStatusFactory = (
   xrayRegistrationLookupClient: XrayRegistrationStatusLookup,

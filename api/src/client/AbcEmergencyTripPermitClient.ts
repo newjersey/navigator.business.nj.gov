@@ -1,7 +1,7 @@
-import { ApiConfig, getApiSubmissionBody } from "@client/AbcEmergencyTripPermitHelpers";
-import { EmergencyTripPermitClient } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import {
+import { type ApiConfig, getApiSubmissionBody } from "@client/AbcEmergencyTripPermitHelpers";
+import type { EmergencyTripPermitClient } from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
+import type {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitSubmitResponse,
 } from "@shared/emergencyTripPermit";

@@ -1,5 +1,5 @@
-import { BusinessNameClient, TimeStampBusinessSearch } from "@domain/types";
-import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
+import type { BusinessNameClient, TimeStampBusinessSearch } from "@domain/types";
+import type { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 
 export const timeStampBusinessSearch = (

@@ -3,10 +3,10 @@ import {
   generatev67GetFilingResponse,
   generatev67ProfileData,
   generatev67User,
-  v67GetFilingResponse,
-  v67ProfileData,
-  v67TaskProgress,
-  v67UserData,
+  type v67GetFilingResponse,
+  type v67ProfileData,
+  type v67TaskProgress,
+  type v67UserData,
 } from "@db/migrations/v67_add_graduation_card";
 import { migrate_v67_to_v68 } from "@db/migrations/v68_complete_formation_task_if_success";
 

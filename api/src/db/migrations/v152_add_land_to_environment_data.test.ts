@@ -6,7 +6,7 @@ import {
 } from "@db/migrations/v151_extract_business_data";
 import {
   migrate_v151_to_v152,
-  v152EnvironmentData,
+  type v152EnvironmentData,
 } from "@db/migrations/v152_add_land_to_environment_data";
 
 describe("v152_add_land_to_environment_data", () => {

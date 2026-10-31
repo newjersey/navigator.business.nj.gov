@@ -1,6 +1,6 @@
 import { XrayRegistrationHealthCheckClient } from "@client/dep/xray/XrayRegistrationHealthCheckClient";
-import { HealthCheckMethod } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import type { HealthCheckMethod } from "@domain/types";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 

@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v0UserData } from "@db/migrations/v0_user_data";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v0UserData } from "@db/migrations/v0_user_data";
 import { randomInt } from "@shared/intHelpers";
 
 export interface v1UserData {
@@ -10,11 +10,7 @@ export interface v1UserData {
   version: number;
 }
 
-export const migrate_v0_to_v1 = (
-  v0Data: v0UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v1UserData => {
+export const migrate_v0_to_v1 = (v0Data: v0UserData, _?: MigrationClients): v1UserData => {
   return {
     ...v0Data,
     taskProgress: {},

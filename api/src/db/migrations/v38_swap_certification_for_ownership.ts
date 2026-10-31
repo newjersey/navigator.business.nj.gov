@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v37UserData } from "@db/migrations/v37_add_dateofformation";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v37UserData } from "@db/migrations/v37_add_dateofformation";
 
 export interface v38UserData {
   user: v38BusinessUser;
@@ -13,12 +13,7 @@ export interface v38UserData {
   version: number;
 }
 
-export const migrate_v37_to_v38 = (
-  v37Data: v37UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v38UserData => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const migrate_v37_to_v38 = (v37Data: v37UserData, _?: MigrationClients): v38UserData => {
   const { certificationIds, ...profileData } = v37Data.profileData;
 
   return {

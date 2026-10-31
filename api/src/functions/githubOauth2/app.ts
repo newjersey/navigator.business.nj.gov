@@ -1,9 +1,9 @@
+import { randomBytes } from "node:crypto";
 import { setupExpress } from "@libs/express";
 import dedent from "dedent";
 import { StatusCodes } from "http-status-codes";
-import { randomBytes } from "node:crypto";
 import serverless from "serverless-http";
-import { AuthorizationCode, ModuleOptions } from "simple-oauth2";
+import { AuthorizationCode, type ModuleOptions } from "simple-oauth2";
 
 const {
   CMS_OAUTH_CLIENT_ID = "",
@@ -58,7 +58,7 @@ app.get("/api/cms/callback", async (req, res) => {
 
     res.status(StatusCodes.OK).send(
       renderResponse("success", {
-        token: accessToken.token["access_token"],
+        token: accessToken.token.access_token,
         provider: "github",
       }),
     );
@@ -75,7 +75,6 @@ function randomState(): string {
 }
 
 /** Render a html response with a script to finish a client-side github authentication */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function renderResponse(status: "success" | "error", content: any): string {
   return dedent`
     <!DOCTYPE html>

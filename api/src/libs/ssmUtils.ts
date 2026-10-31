@@ -1,5 +1,5 @@
 import { GetParameterCommand, PutParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
-import { LogWriterType } from "@libs/logWriter";
+import type { LogWriterType } from "@libs/logWriter";
 
 const ssmClient = new SSMClient({});
 const parameterName = `/${process.env.STAGE}/feature-flag/users-migration/kill-switch`;

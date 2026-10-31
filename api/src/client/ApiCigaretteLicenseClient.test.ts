@@ -1,6 +1,7 @@
+import crypto from "node:crypto";
 import { ApiCigaretteLicenseClient } from "@client/ApiCigaretteLicenseClient";
 import {
-  CigaretteLicenseApiConfig,
+  type CigaretteLicenseApiConfig,
   makeEmailConfirmationBody,
   makePostBody,
   mockErrorEmailResponse,
@@ -10,23 +11,21 @@ import {
   mockSuccessGetResponse,
   mockSuccessPostResponse,
 } from "@client/ApiCigaretteLicenseHelpers";
-import { PreparePaymentApiSubmission } from "@shared/cigaretteLicense";
-import { getCurrentBusiness } from "@shared/index";
-
-import { CigaretteLicenseClient, PowerAutomateEmailClient } from "@domain/types";
+import type { CigaretteLicenseClient, PowerAutomateEmailClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
-import { CIGARETTE_PAYMENT_CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
+import { type CIGARETTE_PAYMENT_CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
+import type { PreparePaymentApiSubmission } from "@shared/cigaretteLicense";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
+import { getCurrentBusiness } from "@shared/index";
 import {
   generateBusiness,
   generateCigaretteLicenseData,
   generateUser,
   generateUserData,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 import axios from "axios";
 import { StatusCodes } from "http-status-codes";
-import crypto from "node:crypto";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;

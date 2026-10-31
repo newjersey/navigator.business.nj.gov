@@ -1,5 +1,5 @@
 import { ApiPowerAutomateClientFactory } from "@client/ApiPowerAutomateClientFactory";
-import { PowerAutomateClient } from "@domain/types";
+import type { PowerAutomateClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
 import axios from "axios";
 import { ReasonPhrases } from "http-status-codes";

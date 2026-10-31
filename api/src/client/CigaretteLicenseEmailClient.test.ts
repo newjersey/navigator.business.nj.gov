@@ -4,7 +4,7 @@ import {
 } from "@client/ApiCigaretteLicenseHelpers";
 import { ApiPowerAutomateClientFactory } from "@client/ApiPowerAutomateClientFactory";
 import { CigaretteLicenseEmailClient } from "@client/CigaretteLicenseEmailClient";
-import { PowerAutomateClient } from "@domain/types";
+import type { PowerAutomateClient } from "@domain/types";
 import { DummyLogWriter } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
 import { generateEmailConfirmationSubmission } from "@shared/test";

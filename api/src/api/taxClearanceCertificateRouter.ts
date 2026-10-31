@@ -1,8 +1,8 @@
-import { ExpressRequestBody } from "@api/types";
-import { type CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
+import type { ExpressRequestBody } from "@api/types";
+import type { CryptoClient, DatabaseClient, TaxClearanceCertificateClient } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
-import { UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
@@ -62,7 +62,6 @@ export const taxClearanceCertificateRouterFactory = (
 
     const unlinkEnabled = process.env.DEV_ONLY_UNLINK_TAX_ID === "true";
 
-    // eslint-disable-next-line unicorn/no-negated-condition
     if (!unlinkEnabled) {
       const status = StatusCodes.UNAUTHORIZED;
       logger.LogError(

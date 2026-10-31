@@ -1,19 +1,18 @@
-/* eslint-disable unicorn/no-null */
+import * as console from "node:console";
 import {
   appTypeKeysString,
   licenseAppType,
   RegulatedBusinessDynamicsLicenseApplicationIdsClient,
 } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseApplicationIdsClient";
-import {
+import type {
   BusinessIdAndName,
   LicenseApplicationIdsForAllBusinessIdsClient,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import { NO_MATCH_ERROR } from "@domain/types";
-import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, type LogWriterType } from "@libs/logWriter";
 import { generateLicenseApplicationIdApiResponseValue } from "@test/factories";
 import { RGB_APP_TYPE_KEYS, RGB_LICENSE_APPLICATION_INFORMATION } from "@test/helpers";
 import axios from "axios";
-import * as console from "node:console";
 
 jest.mock("axios");
 jest.mock("winston");

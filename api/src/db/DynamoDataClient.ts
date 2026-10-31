@@ -1,20 +1,20 @@
-import { parseUserData } from "@db/zodSchema/zodSchemas";
-import {
-  type BusinessesDataClient,
-  DatabaseThrottlingError,
-  type DatabaseClient,
-  MigrationConflictError,
-  type MigrationDataClient,
-  type MigrationRunOptions,
-  type UserDataClient,
-  isQuarantinedCiphertextError,
-} from "@domain/types";
 import {
   getDynamoDbItemSizeBucket,
   isDynamoDbThrottlingError,
   toDatabaseThrottlingError,
 } from "@db/DynamoDbErrors";
-import { type LogWriterType } from "@libs/logWriter";
+import { parseUserData } from "@db/zodSchema/zodSchemas";
+import {
+  type BusinessesDataClient,
+  type DatabaseClient,
+  DatabaseThrottlingError,
+  isQuarantinedCiphertextError,
+  MigrationConflictError,
+  type MigrationDataClient,
+  type MigrationRunOptions,
+  type UserDataClient,
+} from "@domain/types";
+import type { LogWriterType } from "@libs/logWriter";
 import { getConfigValue } from "@libs/ssmUtils";
 import { type Business, CURRENT_VERSION, type UserData } from "@shared/userData";
 import { chunk } from "lodash";
@@ -51,7 +51,7 @@ export const DynamoDataClient = (
     const canStartNextUser = options?.canStartNextUser ?? ((): boolean => true);
 
     try {
-      let nextToken: string | undefined = undefined;
+      let nextToken: string | undefined;
       let migratedCount = 0;
       let quarantinedCount = 0;
       const batchSize = 25;

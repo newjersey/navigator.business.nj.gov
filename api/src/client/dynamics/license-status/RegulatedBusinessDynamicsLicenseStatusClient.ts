@@ -1,15 +1,15 @@
 import { formatRegulatedBusinessDynamicsApplications } from "@client/dynamics/license-status/formatRegulatedBusinessDynamicsApplications";
-import {
+import type {
   BusinessAddressesClient,
   BusinessIdsAndNamesClient,
   ChecklistItemsForAllApplicationsClient,
   LicenseApplicationIdsForAllBusinessIdsClient,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import { searchBusinessAddressesForMatches } from "@client/dynamics/license-status/searchBusinessAddressesForMatches";
-import { AccessTokenClient } from "@client/dynamics/types";
-import { SearchLicenseStatus } from "@domain/types";
-import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
-import { LicenseSearchNameAndAddress } from "@shared/license";
+import type { AccessTokenClient } from "@client/dynamics/types";
+import type { SearchLicenseStatus } from "@domain/types";
+import type { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
+import type { LicenseSearchNameAndAddress } from "@shared/license";
 
 interface RgbApiConfiguration {
   dynamicsAccessTokenClient: AccessTokenClient;

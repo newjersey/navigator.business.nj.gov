@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { formationRouterFactory } from "@api/formationRouter";
 import { getSignedInUser, getSignedInUserId } from "@api/userRouter";
 import { saveFileFromUrl } from "@domain/s3Writer";
-import { DatabaseClient, FormationClient } from "@domain/types";
+import type { DatabaseClient, FormationClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
@@ -18,7 +16,7 @@ import {
   generateUserDataForBusiness,
 } from "@shared/test";
 import { generateInputFile } from "@test/factories";
-import { Express } from "express";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 
@@ -177,7 +175,7 @@ describe("formationRouter", () => {
         return 1_487_076_708_000;
       });
       fakeSaveFileFromUrl.mockReset();
-      fakeSaveFileFromUrl.mockImplementation((link, location, bucket) => {
+      fakeSaveFileFromUrl.mockImplementation((_link, location, _bucket) => {
         return Promise.resolve(`http://${location}`);
       });
     });

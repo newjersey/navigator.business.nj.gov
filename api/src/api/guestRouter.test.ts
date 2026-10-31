@@ -1,8 +1,8 @@
 import { guestRouterFactory } from "@api/guestRouter";
-import { TimeStampBusinessSearch } from "@domain/types";
+import type { TimeStampBusinessSearch } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
-import { NameAvailability } from "@shared/businessNameSearch";
+import type { NameAvailability } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
@@ -18,7 +18,7 @@ import {
 } from "@shared/test";
 import { generateAnnualFilings } from "@test/helpers";
 import dayjs from "dayjs";
-import { Express } from "express";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 

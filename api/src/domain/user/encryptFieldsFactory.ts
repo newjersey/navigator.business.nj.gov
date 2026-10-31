@@ -1,10 +1,10 @@
-import { CryptoClient } from "@domain/types";
+import type { CryptoClient } from "@domain/types";
 import { maskTaxId } from "@domain/user/maskTaxId";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
-import { maskingCharacter } from "@shared/profileData";
-import { Business, UserData } from "@shared/userData";
 import { DOL_EIN_CHARACTERS } from "@shared/employerRates";
+import { maskingCharacter } from "@shared/profileData";
+import type { Business, UserData } from "@shared/userData";
 
 export const encryptFieldsFactory = (
   encryptionDecryptionClient: CryptoClient,
@@ -181,7 +181,7 @@ const hashProfileTaxId = async (
   const businesses: Record<string, Business> = {};
 
   for (const business of Object.values(userData.businesses)) {
-    let hashedTaxId = undefined;
+    let hashedTaxId;
     if (business.profileData.taxId) {
       hashedTaxId = await cryptoClient.hashValue(business.profileData.taxId);
     }

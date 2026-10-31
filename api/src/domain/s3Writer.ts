@@ -1,16 +1,16 @@
-import { PutObjectCommand, PutObjectCommandOutput, S3Client } from "@aws-sdk/client-s3";
-import { NodeHttpHandler } from "@smithy/node-http-handler";
-import axios, { AxiosResponse } from "axios";
-import { StatusCodes } from "http-status-codes";
 import { createHash } from "node:crypto";
 import * as https from "node:https";
+import { PutObjectCommand, type PutObjectCommandOutput, S3Client } from "@aws-sdk/client-s3";
+import { NodeHttpHandler } from "@smithy/node-http-handler";
+import axios, { type AxiosResponse } from "axios";
+import { StatusCodes } from "http-status-codes";
 
-export const uploadFile = async function (
+export const uploadFile = async (
   fullName: string,
   fileContent: Buffer,
   fileType: string,
   bucket: string,
-): Promise<PutObjectCommandOutput> {
+): Promise<PutObjectCommandOutput> => {
   const s3 = new S3Client({
     region: "us-east-1",
     requestHandler: new NodeHttpHandler({
@@ -33,9 +33,8 @@ export const uploadFile = async function (
   return s3.send(command);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getFileFromURL = async function (URI: string): Promise<AxiosResponse<any, any>> {
-  return new Promise((resolve, reject) => {
+export const getFileFromURL = async (URI: string): Promise<AxiosResponse<any, any>> =>
+  new Promise((resolve, reject) => {
     try {
       axios
         .get(encodeURI(URI), {
@@ -48,7 +47,6 @@ export const getFileFromURL = async function (URI: string): Promise<AxiosRespons
       reject(error);
     }
   });
-};
 
 const escapeColons = (value: string): string => {
   const segments = value.split(":");
@@ -59,12 +57,12 @@ const escapeColons = (value: string): string => {
   return [initial, segments.join("%3A")].join(":");
 };
 
-export const saveFileFromUrl = async function (
+export const saveFileFromUrl = async (
   URI: string,
   fullName: string,
   bucket: string,
-): Promise<string> {
-  return new Promise((resolve, reject) => {
+): Promise<string> =>
+  new Promise((resolve, reject) => {
     getFileFromURL(URI)
       .then((object) => {
         uploadFile(
@@ -88,4 +86,3 @@ export const saveFileFromUrl = async function (
         reject(error);
       });
   });
-};

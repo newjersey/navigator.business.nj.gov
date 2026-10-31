@@ -1,6 +1,6 @@
 import { findMatchingContextualInfo } from "@businessnjgovnavigator/api/scripts/cms-content-integrity-tests/contextualInfoLinks";
 import * as sharedContextualInfoUtils from "@businessnjgovnavigator/api/scripts/cms-content-integrity-tests/contextualInfoLinksUtil";
-import { FileData } from "@shared/lib/search";
+import type { FileData } from "@shared/lib/search";
 import { loadYamlFiles } from "@shared/static";
 
 jest.mock("./contextualInfoLinksUtil", () => ({

@@ -1,6 +1,6 @@
 import { DynamicsHousingPropertyInterestClient } from "@client/dynamics/housing/DynamicsHousingPropertyInterestClient";
-import { HousingPropertyInterestClient } from "@client/dynamics/housing/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import type { HousingPropertyInterestClient } from "@client/dynamics/housing/types";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("axios");

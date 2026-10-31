@@ -1,16 +1,16 @@
 import { selfRegRouterFactory } from "@api/selfRegRouter";
-import { DatabaseClient, MessagingServiceClient, SelfRegClient } from "@domain/types";
+import type { DatabaseClient, MessagingServiceClient, SelfRegClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
-import { CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
+import { type CONFIG_VARS, getConfigValue } from "@libs/ssmUtils";
 import { generateUser, generateUserData } from "@shared/test";
-import { UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 import { generateSelfRegResponse } from "@test/factories";
 import { generateHashedKey, getLastCalledWith } from "@test/helpers";
 import dayjs from "dayjs";
-import { Express } from "express";
+import type { Express } from "express";
 import { StatusCodes } from "http-status-codes";
-import request, { Response } from "supertest";
+import request, { type Response } from "supertest";
 
 jest.mock("@libs/ssmUtils", () => ({
   getConfigValue: jest.fn(),

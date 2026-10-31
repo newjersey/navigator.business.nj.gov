@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v75UserData } from "@db/migrations/v75_fix_trade_name_operating_phase";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v75UserData } from "@db/migrations/v75_fix_trade_name_operating_phase";
 import { randomInt } from "@shared/intHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 
@@ -16,11 +16,7 @@ export interface v76UserData {
   version: number;
 }
 
-export const migrate_v75_to_v76 = (
-  v75Data: v75UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v76UserData => {
+export const migrate_v75_to_v76 = (v75Data: v75UserData, _?: MigrationClients): v76UserData => {
   const legalStructure = LookupLegalStructureById(v75Data.profileData.legalStructureId);
   const newOperatingPhase =
     legalStructure.hasTradeName && v75Data.profileData.operatingPhase === "NEEDS_TO_FORM"

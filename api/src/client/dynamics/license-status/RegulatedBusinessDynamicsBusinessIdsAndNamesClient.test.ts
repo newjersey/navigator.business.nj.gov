@@ -1,7 +1,7 @@
 import { RegulatedBusinessDynamicsBusinessIdsAndNamesClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsBusinessIdsAndNamesClient";
-import { BusinessIdsAndNamesClient } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
+import type { BusinessIdsAndNamesClient } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import { NO_ADDRESS_MATCH_ERROR } from "@domain/types";
-import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, type LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("axios");

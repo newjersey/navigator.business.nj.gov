@@ -1,4 +1,4 @@
-import { PowerAutomateEmailClient } from "@domain/types";
+import type { PowerAutomateEmailClient } from "@domain/types";
 import type { LogWriterType } from "@libs/logWriter";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
