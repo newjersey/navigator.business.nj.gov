@@ -108,6 +108,7 @@ export const isKillSwitchOn = async (): Promise<boolean> => {
 
     return boolValue;
   } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: no logger injected here yet
     console.error("Failed to read kill switch parameter:", error);
     return false;
   }
@@ -124,6 +125,7 @@ export const updateKillSwitch = async (): Promise<void> => {
     });
     await ssmClient.send(command);
   } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: no logger injected here yet
     console.error("Failed to update kill switch parameter:", error);
     throw error;
   }

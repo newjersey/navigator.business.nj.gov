@@ -21,8 +21,6 @@ import {
 } from "@shared/license";
 import type { Business, UserData } from "@shared/userData";
 
-const DEBUG = false; // this variable exists in RegulatedBusinessDynamicsLicenseStatusClient; enable both for debugging
-
 const getLicenses = (args: {
   nameAndAddress: LicenseSearchNameAndAddress;
   licenseStatusResult: LicenseStatusResults;
@@ -85,14 +83,6 @@ export const updateLicenseStatusFactory = (
           [NO_ADDRESS_MATCH_ERROR, NO_MATCH_ERROR, NO_MAIN_APPS_ERROR].includes(
             rgbLicenseStatusResults.reason.message,
           );
-
-        if (DEBUG) {
-          console.log({
-            functionName: "updateLicenseStatusFactory",
-            webserviceLicenseStatusResults,
-            rgbLicenseStatusResults,
-          });
-        }
 
         if (
           !webserviceHasInvalidMatch &&

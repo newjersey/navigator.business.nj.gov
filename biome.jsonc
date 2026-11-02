@@ -231,6 +231,28 @@
         }
       }
     },
+    {
+      "includes": ["api/scripts/**", "api/src/functions/messagingService/reactEmail/build.tsx"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            // CLI scripts report to stdout
+            "noConsole": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["api/src/libs/logWriter.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            // the logger is where console output is supposed to live
+            "noConsole": "off"
+          }
+        }
+      }
+    },
     // Decap re-serializes these on save.
     {
       "includes": ["content/src/**/*.json"],
@@ -260,7 +282,6 @@
       "linter": {
         "rules": {
           "suspicious": {
-            "noConsole": "warn",
             "noImplicitAnyLet": "warn",
             "useIterableCallbackReturn": "warn"
           },

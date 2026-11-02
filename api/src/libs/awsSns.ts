@@ -31,6 +31,7 @@ export const publishSnsMessage = async (
     );
     return response;
   } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: no logger injected here yet
     console.error(`Error when trying to send AWS SNS message: ${error}`);
   }
 };

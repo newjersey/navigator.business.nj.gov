@@ -63,6 +63,7 @@ app.get("/api/cms/callback", async (req, res) => {
       }),
     );
   } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: no logger injected here yet
     console.error(JSON.stringify(error));
     res.status(StatusCodes.OK).send(renderResponse("error", error));
   }
