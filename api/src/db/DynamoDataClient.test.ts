@@ -96,12 +96,12 @@ describe("User and Business Migration with DynamoDataClient", () => {
     };
     client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
     dynamoBusinessesDataClient = DynamoBusinessDataClient(client, dbConfig.tableName, logger);
-    dynamoUsersDataClient = DynamoUserDataClient(
-      client,
+    dynamoUsersDataClient = DynamoUserDataClient({
+      db: client,
       cryptoClient,
-      usersDbConfig.tableName,
+      tableName: usersDbConfig.tableName,
       logger,
-    );
+    });
     migrationDataClient = {
       migrateAndPut: jest.fn(async (input) => ({
         ...input,
@@ -113,13 +113,13 @@ describe("User and Business Migration with DynamoDataClient", () => {
       })),
     };
 
-    dynamoDataClient = DynamoDataClient(
-      dynamoUsersDataClient,
-      dynamoBusinessesDataClient,
+    dynamoDataClient = DynamoDataClient({
+      userDataClient: dynamoUsersDataClient,
+      businessesDataClient: dynamoBusinessesDataClient,
       logger,
       isKillSwitchOn,
       migrationDataClient,
-    );
+    });
     (dynamoBusinessesDataClient.put as jest.Mock) = jest.fn();
     (dynamoUsersDataClient.put as jest.Mock) = jest.fn();
 
@@ -298,13 +298,13 @@ describe("User and Business Migration with DynamoDataClient", () => {
   });
 
   it("should skip migration when kill switch flag is true", async () => {
-    dynamoDataClient = DynamoDataClient(
-      dynamoUsersDataClient,
-      dynamoBusinessesDataClient,
+    dynamoDataClient = DynamoDataClient({
+      userDataClient: dynamoUsersDataClient,
+      businessesDataClient: dynamoBusinessesDataClient,
       logger,
-      isKillSwitchOnTruePath,
+      isKillSwitchOn: isKillSwitchOnTruePath,
       migrationDataClient,
-    );
+    });
     const putBusinessesSpy = jest.spyOn(dynamoBusinessesDataClient, "put");
     const putUsersSpy = jest.spyOn(dynamoUsersDataClient, "put");
 
@@ -415,13 +415,13 @@ describe("User and Business Migration with DynamoDataClient", () => {
   it("returns the unchanged stored record when the request-time kill switch is on", async () => {
     const outdatedUser = { ...generateUserData(), version: CURRENT_VERSION - 1 };
     jest.spyOn(dynamoUsersDataClient, "get").mockResolvedValueOnce(outdatedUser);
-    dynamoDataClient = DynamoDataClient(
-      dynamoUsersDataClient,
-      dynamoBusinessesDataClient,
+    dynamoDataClient = DynamoDataClient({
+      userDataClient: dynamoUsersDataClient,
+      businessesDataClient: dynamoBusinessesDataClient,
       logger,
-      isKillSwitchOnTruePath,
+      isKillSwitchOn: isKillSwitchOnTruePath,
       migrationDataClient,
-    );
+    });
 
     await expect(dynamoDataClient.get(outdatedUser.user.id)).resolves.toEqual(outdatedUser);
     expect(migrationDataClient.migrateAndPut).not.toHaveBeenCalled();

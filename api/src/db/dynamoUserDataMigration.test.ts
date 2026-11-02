@@ -61,7 +61,12 @@ describe("DynamoUserDataClient Migrations", () => {
       hashValue: jest.fn(),
     };
     logger = DummyLogWriter;
-    dynamoUserDataClient = DynamoUserDataClient(client, cryptoClient, dbConfig.tableName, logger);
+    dynamoUserDataClient = DynamoUserDataClient({
+      db: client,
+      cryptoClient,
+      tableName: dbConfig.tableName,
+      logger,
+    });
     await insertOldData();
   });
 

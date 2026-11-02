@@ -58,15 +58,15 @@ describe("AWSCryptoFactory", () => {
       purpose: "some-purpose",
       origin: "some-origin",
     };
-    client = AWSCryptoFactory(
-      "some-key",
-      {
+    client = AWSCryptoFactory({
+      generatorKeyId: "some-key",
+      context: {
         stage: "some-stage",
         purpose: "some-purpose",
         origin: "some-origin",
       },
-      "some-application-salt",
-    );
+      encryptedHashingSalt: "some-application-salt",
+    });
   });
 
   describe("keyrings", () => {
@@ -82,16 +82,15 @@ describe("AWSCryptoFactory", () => {
     });
 
     it("decrypts with a strict current and legacy key allowlist", async () => {
-      const clientWithLegacyKey = AWSCryptoFactory(
-        "current-key",
-        {
+      const clientWithLegacyKey = AWSCryptoFactory({
+        generatorKeyId: "current-key",
+        context: {
           stage: "some-stage",
           purpose: "some-purpose",
           origin: "some-origin",
         },
-        undefined,
-        ["legacy-key"],
-      );
+        decryptOnlyKeyIds: ["legacy-key"],
+      });
 
       await clientWithLegacyKey.decryptValue("encrypted-value");
 
@@ -104,16 +103,15 @@ describe("AWSCryptoFactory", () => {
     });
 
     it("deduplicates configured decrypt keys", () => {
-      AWSCryptoFactory(
-        "current-key",
-        {
+      AWSCryptoFactory({
+        generatorKeyId: "current-key",
+        context: {
           stage: "some-stage",
           purpose: "some-purpose",
           origin: "some-origin",
         },
-        undefined,
-        ["", "current-key", "legacy-key", "legacy-key"],
-      );
+        decryptOnlyKeyIds: ["", "current-key", "legacy-key", "legacy-key"],
+      });
 
       expect(mockAWSCrypto.KmsKeyringNode.mock.calls[3][0]).toEqual({
         keyIds: ["current-key", "legacy-key"],
@@ -166,23 +164,22 @@ describe("AWSCryptoFactory", () => {
   });
 
   it("accepts an explicitly configured decrypt-only encryption context", async () => {
-    const clientWithLegacyContext = AWSCryptoFactory(
-      "some-key",
-      {
+    const clientWithLegacyContext = AWSCryptoFactory({
+      generatorKeyId: "some-key",
+      context: {
         stage: "some-stage",
         purpose: "some-purpose",
         origin: "some-origin",
       },
-      undefined,
-      [],
-      [
+      decryptOnlyKeyIds: [],
+      decryptOnlyContexts: [
         {
           stage: "",
           purpose: "some-purpose",
           origin: "",
         },
       ],
-    );
+    });
     mockAWSCrypto.decryptResult.encryptionContext = {
       stage: "",
       purpose: "some-purpose",
@@ -195,23 +192,22 @@ describe("AWSCryptoFactory", () => {
   });
 
   it("requires every value in a decrypt-only encryption context to match", async () => {
-    const clientWithLegacyContext = AWSCryptoFactory(
-      "some-key",
-      {
+    const clientWithLegacyContext = AWSCryptoFactory({
+      generatorKeyId: "some-key",
+      context: {
         stage: "some-stage",
         purpose: "some-purpose",
         origin: "some-origin",
       },
-      undefined,
-      [],
-      [
+      decryptOnlyKeyIds: [],
+      decryptOnlyContexts: [
         {
           stage: "",
           purpose: "some-purpose",
           origin: "",
         },
       ],
-    );
+    });
     mockAWSCrypto.decryptResult.encryptionContext = {
       stage: "",
       purpose: "another-purpose",
@@ -268,6 +264,7 @@ describe("AWSCryptoFactory", () => {
       // Mock the wrapper to throw an Error instance via the callback
       jest
         .spyOn(cryptoUtils, "pbkdf2")
+        // biome-ignore lint/complexity/useMaxParams: mirrors node:crypto.pbkdf2's parameters
         .mockImplementationOnce((_password, _salt, _iterations, _keylen, _digest, callback) => {
           callback(new Error("Specific error message"), Buffer.alloc(0));
           return;
@@ -288,6 +285,7 @@ describe("AWSCryptoFactory", () => {
        */
       jest
         .spyOn(cryptoUtils, "pbkdf2")
+        // biome-ignore lint/complexity/useMaxParams: mirrors node:crypto.pbkdf2's parameters
         .mockImplementationOnce((_password, _salt, _iterations, _keylen, _digest, callback) => {
           callback(null, Buffer.alloc(64));
           return;
@@ -308,7 +306,7 @@ describe("AWSCryptoFactory", () => {
 });
 
 jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
-  return {
+  const mockModule: MockAWSCryptoType = {
     encryptValueCalledWith: "",
     decryptValueCalledWith: "",
     encryptKeyringCalledWith: undefined,
@@ -325,15 +323,15 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
     contextCalledWith: undefined,
     CommitmentPolicy: { REQUIRE_ENCRYPT_REQUIRE_DECRYPT: "REQUIRE_ENCRYPT_REQUIRE_DECRYPT" },
     buildClient: function MockBuildClient(options: string): MockAWSCryptoClient {
-      this.optionsCalledWith = options;
+      mockModule.optionsCalledWith = options;
       const encrypt = (
         cmm: string,
         plaintext: string,
         op?: AWSMockContext,
       ): Promise<MockEncryptResult> => {
-        this.encryptKeyringCalledWith = cmm;
-        this.encryptValueCalledWith = plaintext;
-        this.contextCalledWith = { ...op };
+        mockModule.encryptKeyringCalledWith = cmm;
+        mockModule.encryptValueCalledWith = plaintext;
+        mockModule.contextCalledWith = { ...op };
         return Promise.resolve(plaintext).then((): MockEncryptResult => {
           return { result: plaintext, messageHeader: "message-header" };
         });
@@ -343,16 +341,16 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
         value: string,
       ): Promise<MockDecryptResult> => {
         const encoder = new TextEncoder();
-        this.decryptKeyringCalledWith = keyring;
-        this.decryptValueCalledWith = value;
-        if (this.decryptResult.error) {
-          return Promise.reject(this.decryptResult.error);
+        mockModule.decryptKeyringCalledWith = keyring;
+        mockModule.decryptValueCalledWith = value;
+        if (mockModule.decryptResult.error) {
+          return Promise.reject(mockModule.decryptResult.error);
         }
         return Promise.resolve(value).then((): MockDecryptResult => {
           return {
             plaintext: encoder.encode("decrypted-value"),
             messageHeader: {
-              encryptionContext: this.decryptResult.encryptionContext,
+              encryptionContext: mockModule.decryptResult.encryptionContext,
             },
           };
         });
@@ -361,6 +359,7 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
     },
     KmsKeyringNode: jest.fn(function MockKeyRingNode(): void {}),
   };
+  return mockModule;
 });
 
 jest.mock("@aws-sdk/util-base64-node", (): MockAWSBase64 => {

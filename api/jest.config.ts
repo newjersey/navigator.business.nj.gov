@@ -1,5 +1,6 @@
 /** @jest-config-loader ts-node */
 
+// biome-ignore lint/style/noRestrictedImports: jest.shared is at the repo root, which no api alias covers
 import sharedConfig from "../jest.shared";
 
 process.env = Object.assign(process.env, {
@@ -9,8 +10,6 @@ process.env = Object.assign(process.env, {
 /** @type {import('jest').Config} */
 export default {
   ...sharedConfig,
-  ...require("jest-dynalite/jest-preset"),
-  ...require("ts-jest/jest-preset"),
   transformIgnorePatterns: ["/node_modules/(?!(uuid))"],
   transform: {
     "^.+\\.tsx?$": "ts-jest",
@@ -25,6 +24,7 @@ export default {
   ],
 
   moduleNameMapper: {
+    "\\.(html|txt)$": "<rootDir>/test/jestRawLoader.js",
     "@shared/(.*)": "<rootDir>/../shared/src/$1",
     "@domain/(.*)": "<rootDir>/src/domain/$1",
     "@db/(.*)": "<rootDir>/src/db/$1",
@@ -35,7 +35,6 @@ export default {
     "@test/(.*)": "<rootDir>/test/$1",
     "@wiremock/(.*)": "<rootDir>/wiremock/$1",
     "@scripts/(.*)": "<rootDir>/../scripts/$1",
-    "\\.(html|txt)$": "<rootDir>/test/jestRawLoader.js",
   },
   testPathIgnorePatterns: ["<rootDir>/cdk/", "<rootDir>/lib/", "<rootDir>/node_modules/"],
   globalSetup: "<rootDir>/test/globalSetup.ts",

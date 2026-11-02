@@ -111,7 +111,8 @@ export const DynamoMigrationDataClient = ({
       await db.send(new TransactWriteCommand({ TransactItems: transactItems }));
     } catch (error) {
       if (isMigrationConflict(error)) {
-        throw new MigrationConflictError();
+        // biome-ignore lint/style/useErrorCause: the cause is passed; Biome only looks for it in the second argument
+        throw new MigrationConflictError({ cause: error });
       }
       if (isDynamoDbThrottlingError(error)) {
         throw toDatabaseThrottlingError(error, {

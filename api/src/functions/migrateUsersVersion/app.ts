@@ -44,39 +44,40 @@ export const handler = async (_event?: unknown, context?: LambdaTimeContext): Pr
 
   const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const AWSTaxIDEncryptionClient = AWSCryptoFactory(
-    AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
     {
-      stage: AWS_CRYPTO_CONTEXT_STAGE,
-      purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-      origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+      generatorKeyId: AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+      context: {
+        stage: AWS_CRYPTO_CONTEXT_STAGE,
+        purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+        origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+      },
+      decryptOnlyKeyIds: [LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY],
+      decryptOnlyContexts: AWS_CRYPTO_TAX_ID_DECRYPT_ONLY_CONTEXTS,
     },
-    undefined,
-    [LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY],
-    AWS_CRYPTO_TAX_ID_DECRYPT_ONLY_CONTEXTS,
     {
       foreignEnvironmentPolicy: AWS_CRYPTO_TAX_ID_FOREIGN_ENVIRONMENT_POLICY,
     },
   );
 
-  const AWSTaxIDHashingClient = AWSCryptoFactory(
-    AWS_CRYPTO_TAX_ID_HASHING_KEY,
-    {
+  const AWSTaxIDHashingClient = AWSCryptoFactory({
+    generatorKeyId: AWS_CRYPTO_TAX_ID_HASHING_KEY,
+    context: {
       stage: AWS_CRYPTO_CONTEXT_STAGE,
       purpose: AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
       origin: AWS_CRYPTO_CONTEXT_ORIGIN,
     },
-    AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
-  );
+    encryptedHashingSalt: AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
+  });
 
-  const userDataClient = DynamoUserDataClient(
-    dynamoDb,
-    AWSTaxIDEncryptionClient,
-    USERS_TABLE,
+  const userDataClient = DynamoUserDataClient({
+    db: dynamoDb,
+    cryptoClient: AWSTaxIDEncryptionClient,
+    tableName: USERS_TABLE,
     logger,
-    {
+    migrationClients: {
       newHashingClient: AWSTaxIDHashingClient,
     },
-  );
+  });
 
   const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, logger);
   const migrationDataClient = DynamoMigrationDataClient({
@@ -85,13 +86,13 @@ export const handler = async (_event?: unknown, context?: LambdaTimeContext): Pr
     usersTableName: USERS_TABLE,
     businessesTableName: BUSINESSES_TABLE,
   });
-  const dynamoDataClient = DynamoDataClient(
+  const dynamoDataClient = DynamoDataClient({
     userDataClient,
     businessesDataClient,
     logger,
     isKillSwitchOn,
     migrationDataClient,
-  );
+  });
   const result = await dynamoDataClient.migrateOutdatedVersionUsers({
     canStartNextUser: () =>
       !context || context.getRemainingTimeInMillis() > MIGRATION_SHUTDOWN_BUFFER_MS,
