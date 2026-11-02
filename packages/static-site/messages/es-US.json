@@ -410,7 +410,7 @@
           "logoAlt": "Logotipo del Centro de Acción Empresarial de New Jersey",
           "link": {
             "label": "Centro de Acción Empresarial de New Jersey",
-            "href": "https://www.nj.gov/state/bac/bac.shtml",
+            "href": "https://www.nj.gov/state/bac/",
             "isInternal": false,
             "opensInNewTab": true
           }

@@ -8,7 +8,7 @@ main-link-text: View Resources
 heading-1: Business Action Center
 main-text-1: The New Jersey Business Action Center (NJBAC) is a business-first resource that can help you get answers from government agencies, direct you to appropriate officials or contacts, facilitate meetings and follow-ups with regulatory agencies and so much more, all at no cost and strictly confidential.
 link-text-1: Visit the Business Action Center Homepage
-link-url-1: https://nj.gov/state/bac/
+link-url-1: https://www.nj.gov/state/bac/
 heading-2: Small Business Development Centers
 main-text-2: There is no substitute for expert advice. Visit a New Jersey Small Business Development Center near you for help with growing your business. Receive free, hands-on guidance on business planning, taxes, marketing, and much more.
 link-text-2: View Development Center Resources

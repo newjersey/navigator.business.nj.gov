@@ -25,7 +25,7 @@ heading-2: Learn How to Get a Building Permit
 main-text-2: |-
   Each municipality may have a slightly different process, but most of the forms used in obtaining a Construction Permit can be used in any municipality. The Uniform Construction Code forms can be found at the link below and should be filed with the local Building Department.
 
-  Contact the [Business Action Center](https://www.nj.gov/state/bac/bac.shtml) for further assistance.
+  Contact the [Business Action Center](https://www.nj.gov/state/bac/) for further assistance.
 link-text-2: Uniform Construction Code Forms
 link-url-2: https://www.nj.gov/dca/codes/resources/constructionpermitforms.shtml
 heading-3: Sign Up for an Inspection
