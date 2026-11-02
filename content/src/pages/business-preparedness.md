@@ -20,7 +20,7 @@ heading-2: Determine Your Business's Expenses
 main-text-2: |-
   First, understand the financial state of your company by knowing the money your business makes and spends. This will help you determine how to structure your costs, such as wages, supplies, rent, and other expenses. Having your own bookkeeping skills can be helpful when keeping accurate records. An accountant or bookkeeper can also be useful.
 
-  Some trainings on good bookkeeping practices are available from the [New Jersey Business Action Center](https://nj.gov/state/bac/) and at some community colleges.
+  Some trainings on good bookkeeping practices are available from the [New Jersey Business Action Center](https://www.nj.gov/state/bac/) and at some community colleges.
 heading-3: Understand Your Inventory
 main-text-3: |-
   To remain competitive, small businesses constantly have to find new ways to offer high-quality goods at a price point that is affordable to their customers. It helps to have a strong point-of-sale (POS) system or other reliable methods to track your inventory, so you have a good sense of how much and how often you need to order your products and supplies so that you can minimize your waste. If your financial assessment shows that the current cost of your supplies is too high to be profitable, consider exploring other vendors or working with your current vendor to renegotiate your agreement. 
