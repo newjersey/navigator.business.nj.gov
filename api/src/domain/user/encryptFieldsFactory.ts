@@ -181,7 +181,7 @@ const hashProfileTaxId = async (
   const businesses: Record<string, Business> = {};
 
   for (const business of Object.values(userData.businesses)) {
-    let hashedTaxId;
+    let hashedTaxId: string | undefined;
     if (business.profileData.taxId) {
       hashedTaxId = await cryptoClient.hashValue(business.profileData.taxId);
     }

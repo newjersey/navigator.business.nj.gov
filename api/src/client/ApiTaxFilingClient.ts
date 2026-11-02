@@ -59,17 +59,9 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
 
       const apiResponse = response.data as ApiTaxFilingLookupResponse;
 
-      const city = apiResponse.Data?.find((item) => {
-        if (item.Name === "tax-city") {
-          return item;
-        }
-      });
+      const city = apiResponse.Data?.find((item) => item.Name === "tax-city");
 
-      const naicsCode = apiResponse.Data?.find((item) => {
-        if (item.Name === "naics-code") {
-          return item;
-        }
-      });
+      const naicsCode = apiResponse.Data?.find((item) => item.Name === "naics-code");
 
       return {
         state: "SUCCESS",

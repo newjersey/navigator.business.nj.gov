@@ -39,10 +39,13 @@ async function findDuplicateTaxIds(directory: string): Promise<void> {
   const taxIdMap: TaxIdMap = new Map();
   let count = 0;
 
-  const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
-    stage: AWS_CRYPTO_CONTEXT_STAGE,
-    purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+  const AWSTaxIDEncryptionClient = AWSCryptoFactory({
+    generatorKeyId: AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+    context: {
+      stage: AWS_CRYPTO_CONTEXT_STAGE,
+      purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+      origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+    },
   });
 
   const files = fs.readdirSync(directory);

@@ -1,6 +1,6 @@
+import { handler } from "@functions/messagingService/app";
 import { randomInt } from "@shared/intHelpers";
 import { generateUser, generateUserData } from "@shared/test";
-import { handler } from "../functions/messagingService/app";
 
 jest.mock("../functions/messagingService/emails/welcomeEmail.html", () => "<html>welcome</html>");
 jest.mock(

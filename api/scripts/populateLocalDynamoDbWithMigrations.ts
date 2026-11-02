@@ -26,10 +26,13 @@ import { CURRENT_VERSION, type UserData } from "@shared/userData";
 const BATCH_SIZE = 25;
 const dynamoDb = createDynamoDbClient(false, 8000);
 
-const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
-  stage: AWS_CRYPTO_CONTEXT_STAGE,
-  purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+const AWSTaxIDEncryptionClient = AWSCryptoFactory({
+  generatorKeyId: AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+  context: {
+    stage: AWS_CRYPTO_CONTEXT_STAGE,
+    purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+  },
 });
 const isKillSwitchOn = async (): Promise<boolean> => {
   return false;
@@ -98,7 +101,7 @@ const batchWriteUsers = async (
       await dynamoDb.send(new BatchWriteItemCommand(params));
     } catch (error) {
       console.error("Error inserting users:", error);
-      throw new Error("Failed to insert users into DynamoDB");
+      throw new Error("Failed to insert users into DynamoDB", { cause: error });
     }
   }
   console.log(`Total outdated versions inserted: ${outdatedVersionCount}`);
@@ -114,19 +117,19 @@ const run = async (): Promise<void> => {
   console.log("Done inserting users.");
   console.log(`Starting migration of ${outdatedVersionCount} users`);
 
-  const userDataClient = DynamoUserDataClient(
-    dynamoDb,
-    AWSTaxIDEncryptionClient,
-    USERS_TABLE,
+  const userDataClient = DynamoUserDataClient({
+    db: dynamoDb,
+    cryptoClient: AWSTaxIDEncryptionClient,
+    tableName: USERS_TABLE,
     logger,
-  );
+  });
   const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, logger);
-  const dynamoDataClient = DynamoDataClient(
+  const dynamoDataClient = DynamoDataClient({
     userDataClient,
     businessesDataClient,
     logger,
     isKillSwitchOn,
-  );
+  });
 
   await dynamoDataClient.migrateOutdatedVersionUsers();
 };

@@ -34,13 +34,21 @@ export const createUserDataItem = (userData: UserData): Record<string, unknown> 
   version: userData.version,
 });
 
-export const DynamoUserDataClient = (
-  db: DynamoDBDocumentClient,
-  cryptoClient: CryptoClient,
-  tableName: string,
-  logger: LogWriterType,
-  migrationClients?: Omit<MigrationClients, "cryptoClient">,
-): UserDataClient => {
+export interface DynamoUserDataClientConfig {
+  readonly db: DynamoDBDocumentClient;
+  readonly cryptoClient: CryptoClient;
+  readonly tableName: string;
+  readonly logger: LogWriterType;
+  readonly migrationClients?: Omit<MigrationClients, "cryptoClient">;
+}
+
+export const DynamoUserDataClient = ({
+  db,
+  cryptoClient,
+  tableName,
+  logger,
+  migrationClients,
+}: DynamoUserDataClientConfig): UserDataClient => {
   const migrateToLatest = async (data: UserData): Promise<UserData> => {
     const logId = logger.GetId();
     const dataVersion = data.version ?? CURRENT_VERSION;

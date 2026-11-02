@@ -45,8 +45,7 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
   });
 
   it("returns no property interest found for no property interest", async () => {
-    let propertyInterestUndefined;
-    stubHousingClient.getPropertyInterest.mockResolvedValue(propertyInterestUndefined);
+    stubHousingClient.getPropertyInterest.mockResolvedValue(undefined);
 
     expect(await client("address-1", "12345")).toEqual({
       lookupStatus: "NO PROPERTY INTERESTS FOUND",

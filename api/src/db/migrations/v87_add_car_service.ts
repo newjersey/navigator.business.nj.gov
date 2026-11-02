@@ -16,7 +16,7 @@ export interface v87UserData {
 }
 
 export const migrate_v86_to_v87 = (v86Data: v86UserData, _?: MigrationClients): v87UserData => {
-  let newIndustryID;
+  let newIndustryID: string | undefined;
   let newCarServiceType: v87CarServiceType;
   if (v86Data.profileData.industryId === "car-service") {
     newCarServiceType = "STANDARD";
