@@ -581,6 +581,7 @@ export const handler = serverless(app);
 if (require.main === module) {
   const port = process.env.PORT || 5002;
   app.listen(port, () => {
+    // biome-ignore lint/suspicious/noConsole: local dev server banner; never runs in Lambda
     console.log(`Local API running on http://localhost:${port}`);
   });
 }

@@ -87,7 +87,7 @@ export const DynamoUserDataClient = (
         return unmarshall(result.Items[0], unmarshallOptions).data;
       })
       .catch((error) => {
-        console.log(error);
+        logger.LogError(`Error finding user by email - Error: ${error}`);
         throw new Error("Not found");
       });
   };

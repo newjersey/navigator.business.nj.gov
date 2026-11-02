@@ -1,4 +1,3 @@
-import * as console from "node:console";
 import {
   appTypeKeysString,
   licenseAppType,
@@ -459,11 +458,10 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
 
         mockAxios.get.mockResolvedValue({ data: mockLicenseApplicationIdResponse });
 
-        const repsonse = await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
+        const response = await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
           mockBusinessNameAndId_1,
         ]);
-        console.log(repsonse[0].professionNameAndLicenseType);
-        expect(repsonse[0].professionNameAndLicenseType).toEqual(expectedProfession);
+        expect(response[0].professionNameAndLicenseType).toEqual(expectedProfession);
       },
     );
   });
