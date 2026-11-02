@@ -82,7 +82,7 @@ main-text-7: |-
   * Has the principal(s) prepared a loan proposal and business plan that demonstrates an understanding of the business and commitment to the success of the business?
   * Does the business have sufficient “cash flow” to make the monthly payments on the loan request?
 heading-8: Find Loan Resources
-main-text-8: "These organizations have workshops, people who can answer questions, mentoring programs, and more. Whether you’re refining a business plan, thinking through potential expansion, or need some questions clarified, these entities will have information and support.\_\n\n* [**New Jersey Business Action Center**](https://nj.gov/state/bac/)\n* [**Small Business Development Centers**](https://njsbdc.com/)\n* [**SCORE**](https://www.score.org/)\n\nFor more, visit the business.nj.gov [business support page](/pages/business-support)."
+main-text-8: "These organizations have workshops, people who can answer questions, mentoring programs, and more. Whether you’re refining a business plan, thinking through potential expansion, or need some questions clarified, these entities will have information and support.\_\n\n* [**New Jersey Business Action Center**](https://www.nj.gov/state/bac/)\n* [**Small Business Development Centers**](https://njsbdc.com/)\n* [**SCORE**](https://www.score.org/)\n\nFor more, visit the business.nj.gov [business support page](/pages/business-support)."
 heading-9: A Note of Caution
 main-text-9: |-
   Be aware of advertisements or programs from so-called experts that offer “insider information” on financing a business with claims the state government or other public organizations have funds in the form of grants or extremely low-rate loans are available to the following groups:

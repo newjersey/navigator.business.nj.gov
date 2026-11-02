@@ -378,7 +378,7 @@ following actions:
 
 [Business.NJ.gov](https://business.nj.gov) is being developed by the
 [New Jersey Innovation Authority](https://innovation.nj.gov),
-[New Jersey Department of State's Business Action Center](https://nj.gov/state/bac/), and the
+[New Jersey Department of State's Business Action Center](https://www.nj.gov/state/bac/), and the
 [New Jersey Economic Development Authority](https://www.njeda.gov) with support from departments and
 agencies across the State.
 

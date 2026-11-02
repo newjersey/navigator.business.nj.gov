@@ -410,7 +410,7 @@
           "logoAlt": "New Jersey Business Action Center Logo",
           "link": {
             "label": "New Jersey Business Action Center",
-            "href": "https://www.nj.gov/state/bac/bac.shtml",
+            "href": "https://www.nj.gov/state/bac/",
             "isInternal": false,
             "opensInNewTab": true
           }
