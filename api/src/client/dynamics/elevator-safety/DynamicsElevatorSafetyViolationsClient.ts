@@ -63,11 +63,9 @@ export const DynamicsElevatorSafetyViolationsClient = (
               );
               const violationsResponse = response.data
                 .value as DynamicsElevatorSafetyViolationResponse[];
-              violationsResponse.map((violation) => {
-                const formattedViolation =
-                  processDynamicsElevatorSafetyViolationResponse(violation);
-                violations.push(formattedViolation);
-              });
+              for (const violation of violationsResponse) {
+                violations.push(processDynamicsElevatorSafetyViolationResponse(violation));
+              }
             } catch (error) {
               throw (error as AxiosError).response?.status;
             }

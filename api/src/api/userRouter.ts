@@ -148,18 +148,31 @@ const businessHasFormed = (userData: UserData): boolean => {
   return getCurrentBusiness(userData).formationData.getFilingResponse?.success ?? false;
 };
 
-export const userRouterFactory = (
-  databaseClient: DatabaseClient,
-  updateLicenseStatus: UpdateLicenseStatus,
-  updateXrayStatus: UpdateXrayRegistration,
-  updateRoadmapSidebarCards: UpdateSidebarCards,
-  updateOperatingPhase: UpdateOperatingPhase,
-  encryptionDecryptionClient: CryptoClient,
-  hashingClient: CryptoClient,
-  timeStampBusinessSearch: TimeStampBusinessSearch,
-  logger: LogWriterType,
-  govDeliveryCommCloudClient?: GovDeliveryCommCloudClientType,
-): Router => {
+export interface UserRouterDependencies {
+  readonly databaseClient: DatabaseClient;
+  readonly updateLicenseStatus: UpdateLicenseStatus;
+  readonly updateXrayStatus: UpdateXrayRegistration;
+  readonly updateRoadmapSidebarCards: UpdateSidebarCards;
+  readonly updateOperatingPhase: UpdateOperatingPhase;
+  readonly encryptionDecryptionClient: CryptoClient;
+  readonly hashingClient: CryptoClient;
+  readonly timeStampBusinessSearch: TimeStampBusinessSearch;
+  readonly logger: LogWriterType;
+  readonly govDeliveryCommCloudClient?: GovDeliveryCommCloudClientType;
+}
+
+export const userRouterFactory = ({
+  databaseClient,
+  updateLicenseStatus,
+  updateXrayStatus,
+  updateRoadmapSidebarCards,
+  updateOperatingPhase,
+  encryptionDecryptionClient,
+  hashingClient,
+  timeStampBusinessSearch,
+  logger,
+  govDeliveryCommCloudClient,
+}: UserRouterDependencies): Router => {
   const router = Router();
   const encryptFields = encryptFieldsFactory(encryptionDecryptionClient, hashingClient);
 
@@ -383,7 +396,7 @@ export const userRouterFactory = (
   };
 
   const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {
-    let oldUserData;
+    let oldUserData: UserData;
     try {
       oldUserData = await databaseClient.get(userData.user.id);
     } catch {

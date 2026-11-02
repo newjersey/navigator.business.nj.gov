@@ -128,17 +128,17 @@ describe("userRouter", () => {
     };
     app = setupExpress(false);
     app.use(
-      userRouterFactory(
-        stubUnifiedDataClient,
-        stubUpdateLicenseStatus,
-        stubXrayRegistrationStatus,
-        stubUpdateRoadmapSidebarCards,
-        stubUpdateOperatingPhase,
-        stubCryptoEncryptionClient,
-        stubCryptoHashingClient,
-        stubTimeStampBusinessSearch,
-        DummyLogWriter,
-      ),
+      userRouterFactory({
+        databaseClient: stubUnifiedDataClient,
+        updateLicenseStatus: stubUpdateLicenseStatus,
+        updateXrayStatus: stubXrayRegistrationStatus,
+        updateRoadmapSidebarCards: stubUpdateRoadmapSidebarCards,
+        updateOperatingPhase: stubUpdateOperatingPhase,
+        encryptionDecryptionClient: stubCryptoEncryptionClient,
+        hashingClient: stubCryptoHashingClient,
+        timeStampBusinessSearch: stubTimeStampBusinessSearch,
+        logger: DummyLogWriter,
+      }),
     );
   });
 
@@ -1308,18 +1308,18 @@ describe("userRouter", () => {
         };
         appWithGovDelivery = setupExpress(false);
         appWithGovDelivery.use(
-          userRouterFactory(
-            stubUnifiedDataClient,
-            stubUpdateLicenseStatus,
-            stubXrayRegistrationStatus,
-            stubUpdateRoadmapSidebarCards,
-            stubUpdateOperatingPhase,
-            stubCryptoEncryptionClient,
-            stubCryptoHashingClient,
-            stubTimeStampBusinessSearch,
-            DummyLogWriter,
-            mockGovDeliveryClient,
-          ),
+          userRouterFactory({
+            databaseClient: stubUnifiedDataClient,
+            updateLicenseStatus: stubUpdateLicenseStatus,
+            updateXrayStatus: stubXrayRegistrationStatus,
+            updateRoadmapSidebarCards: stubUpdateRoadmapSidebarCards,
+            updateOperatingPhase: stubUpdateOperatingPhase,
+            encryptionDecryptionClient: stubCryptoEncryptionClient,
+            hashingClient: stubCryptoHashingClient,
+            timeStampBusinessSearch: stubTimeStampBusinessSearch,
+            logger: DummyLogWriter,
+            govDeliveryCommCloudClient: mockGovDeliveryClient,
+          }),
         );
       });
 

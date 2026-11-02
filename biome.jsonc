@@ -111,6 +111,17 @@
       }
     },
     {
+      "includes": ["api/.dependency-cruiser.mjs", "api/jest-dynalite-config.cjs"],
+      "linter": {
+        "rules": {
+          "style": {
+            // jest-dynalite only finds jest-dynalite-config.*; .dependency-cruiser is depcruise's conventional name
+            "useFilenamingConvention": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["web/**"],
       "linter": {
         "rules": {
@@ -273,67 +284,6 @@
             "noComponentHookFactories": "warn"
           },
           "nursery": { "noFloatingPromises": "warn" }
-        }
-      }
-    },
-    // temporary: drained by the api rule PRs.
-    {
-      "includes": ["api/**", "!api/cdk/**"],
-      "linter": {
-        "rules": {
-          "suspicious": {
-            "noImplicitAnyLet": "warn",
-            "useIterableCallbackReturn": "warn"
-          },
-          "style": {
-            "useErrorCause": "warn",
-            "noCommonJs": "warn",
-            "noParameterAssign": "warn"
-          },
-          "correctness": { "noUnusedVariables": "warn" },
-          "complexity": { "useMaxParams": "warn" }
-        }
-      }
-    },
-    // temporary: file-scoped so the migrations' snake_case rule and the api/scripts and reactEmail exemptions still win.
-    {
-      "includes": [
-        "api/.dependency-cruiser.js",
-        "api/jest-dynalite-config.js",
-        "api/scripts/fix-documents.mjs"
-      ],
-      "linter": {
-        "rules": {
-          "style": {
-            "useFilenamingConvention": {
-              "level": "warn",
-              "options": { "filenameCases": ["camelCase", "PascalCase"] }
-            }
-          }
-        }
-      }
-    },
-    {
-      "includes": [
-        "api/jest.config.ts",
-        "api/src/domain/messagingService.test.ts",
-        "api/src/functions/messagingService/app.ts"
-      ],
-      "linter": {
-        "rules": {
-          "style": {
-            "noRestrictedImports": {
-              "level": "warn",
-              "options": {
-                "patterns": [
-                  {
-                    "group": [".", "..", "./**", "../**"],
-                    "message": "Use path-alias imports instead of relative imports."
-                  }
-                ]
-              }
-            }
-          }
         }
       }
     }

@@ -22,7 +22,7 @@ export const ApiBusinessNameClient = (
           } : ${response.statusText}. Data: ${JSON.stringify(response.data)}`,
         );
         let responseStatus: NameAvailabilityStatus;
-        let invalidWord;
+        let invalidWord: string | undefined;
         if (response.data.Available) {
           responseStatus = "AVAILABLE";
         } else if (response.data.Reason.indexOf("business designators") > 0) {

@@ -14,7 +14,7 @@ export interface v25UserData {
 }
 
 export const migrate_v24_to_v25 = (v24Data: v24UserData, _?: MigrationClients): v25UserData => {
-  let intercomHash;
+  let intercomHash: string | undefined;
 
   if (v24Data.user.myNJUserKey) {
     intercomHash = createHmac("sha256", process.env.INTERCOM_HASH_SECRET || "")

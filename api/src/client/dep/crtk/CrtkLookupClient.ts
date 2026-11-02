@@ -1,4 +1,4 @@
-import type { CrtkData, CrtkEntry } from "@businessnjgovnavigator/shared";
+import type { CrtkBusinessDetails, CrtkData, CrtkEntry } from "@businessnjgovnavigator/shared";
 import type { CrtkSearch, CrtkStatusLookup } from "@domain/types";
 import type { LogWriterType } from "@libs/logWriter";
 
@@ -6,13 +6,13 @@ export const CrtkLookupClient = (
   crtkSearchClient: CrtkSearch,
   logWriter: LogWriterType,
 ): CrtkStatusLookup => {
-  const getStatus = async (
-    businessName: string,
-    addressLine1: string,
-    city: string,
-    addressZipCode: string,
-    ein?: string,
-  ): Promise<CrtkData> => {
+  const getStatus = async ({
+    businessName,
+    addressLine1,
+    city,
+    addressZipCode,
+    ein,
+  }: CrtkBusinessDetails): Promise<CrtkData> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`CRTK Lookup - Id:${logId}`);
 

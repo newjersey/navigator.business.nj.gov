@@ -32,13 +32,21 @@ const migrationSuccess = (
   ...(quarantinedCount > 0 ? { quarantinedCount } : {}),
 });
 
-export const DynamoDataClient = (
-  userDataClient: UserDataClient,
-  businessesDataClient: BusinessesDataClient,
-  logger: LogWriterType,
-  isKillSwitchOn: () => Promise<boolean>,
-  migrationDataClient?: MigrationDataClient,
-): DatabaseClient => {
+export interface DynamoDataClientConfig {
+  readonly userDataClient: UserDataClient;
+  readonly businessesDataClient: BusinessesDataClient;
+  readonly logger: LogWriterType;
+  readonly isKillSwitchOn: () => Promise<boolean>;
+  readonly migrationDataClient?: MigrationDataClient;
+}
+
+export const DynamoDataClient = ({
+  userDataClient,
+  businessesDataClient,
+  logger,
+  isKillSwitchOn,
+  migrationDataClient,
+}: DynamoDataClientConfig): DatabaseClient => {
   const MAX_SAFE_MIGRATION_COUNT = 5000;
   const migrateOutdatedVersionUsers = async (
     options?: MigrationRunOptions,
@@ -273,7 +281,7 @@ export const DynamoDataClient = (
       }
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.LogError(`Failed to process user ${userData.user.id}: ${errorMessage}`);
-      throw new Error(errorMessage);
+      throw new Error(errorMessage, { cause: error });
     }
   };
 
@@ -294,7 +302,7 @@ export const DynamoDataClient = (
 
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.LogError(`Failed to update user ${userData.user.id}: ${errorMessage}`);
-      throw new Error(errorMessage);
+      throw new Error(errorMessage, { cause: error });
     }
   };
 
@@ -319,7 +327,7 @@ export const DynamoDataClient = (
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.LogError(`Failed to get user for business "${businessName}": ${errorMessage}`);
-      throw new Error(errorMessage);
+      throw new Error(errorMessage, { cause: error });
     }
   };
 
@@ -337,7 +345,7 @@ export const DynamoDataClient = (
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.LogError(`Failed to get users for business prefix "${prefix}": ${errorMessage}`);
-      throw new Error(errorMessage);
+      throw new Error(errorMessage, { cause: error });
     }
   };
 
@@ -356,7 +364,7 @@ export const DynamoDataClient = (
       logger.LogError(
         `Failed to get Businesses with hashedTaxId matching ${truncatedValue}: ${errorMessage}`,
       );
-      throw new Error(errorMessage);
+      throw new Error(errorMessage, { cause: error });
     }
   };
 
