@@ -307,6 +307,7 @@ const Admin = (): ReactElement => {
         const level3Parent = getParent(level2Parent.element);
         const level4Parent = getParent(level3Parent.element);
 
+        // biome-ignore lint/suspicious/noConsole: CMS editors are told to read this in the browser console to find the field with the error
         console.log(
           `%c ${level4Parent.label ? `${level4Parent.label} > ` : ""}
          ${level3Parent.label ? `${level3Parent.label} > ` : ""}
