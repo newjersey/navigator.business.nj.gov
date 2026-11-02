@@ -148,7 +148,7 @@ const Home = (): ReactElement => {
                 } text-accent-cool-darker`}
               >
                 <div className="margin-x-3">
-                  <img className="" src="/img/Landing-documents.svg" alt="" role="presentation" />
+                  <img className="" src="/img/Landing-documents.svg" alt="" />
                   <div className="text-accent-cool-darker width-card margin-top-2">
                     {landingPageConfig.section4FirstIconText}
                   </div>
@@ -159,7 +159,7 @@ const Home = (): ReactElement => {
                   }`}
                 />
                 <div className="margin-x-3">
-                  <img className="" src="/img/Landing-checkmarks.svg" alt="" role="presentation" />
+                  <img className="" src="/img/Landing-checkmarks.svg" alt="" />
                   <div className="text-accent-cool-darker width-card margin-top-2">
                     {landingPageConfig.section4SecondIconText}
                   </div>
@@ -170,7 +170,7 @@ const Home = (): ReactElement => {
                   } `}
                 />{" "}
                 <div className="margin-x-3">
-                  <img className="" src="/img/Landing-building.svg" alt="" role="presentation" />
+                  <img className="" src="/img/Landing-building.svg" alt="" />
                   <div className="text-accent-cool-darker width-card margin-top-2">
                     {landingPageConfig.section4ThirdIconText}
                   </div>

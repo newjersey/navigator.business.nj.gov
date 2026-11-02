@@ -76,11 +76,7 @@ const LoginSupportPage = (): ReactElement => {
                 </div>
               )}
               <hr className="bg-base-light" />
-              <div
-                className="margin-top-6 bg-cool-extra-light"
-                role="region"
-                aria-label="Support contact"
-              >
+              <section className="margin-top-6 bg-cool-extra-light" aria-label="Support contact">
                 <div className="usa-alert__body padding-y-2">
                   <h2 className="usa-alert__heading text-secondary-darker">
                     {loginSupport.supportCallout.header}
@@ -96,7 +92,7 @@ const LoginSupportPage = (): ReactElement => {
                     {loginSupport.supportCallout.buttonText}
                   </PrimaryButton>
                 </div>
-              </div>
+              </section>
             </div>
           </SingleColumnContainer>
         </main>

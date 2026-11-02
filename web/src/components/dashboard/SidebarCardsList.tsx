@@ -77,7 +77,7 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
             ({props.cardCount})
           </span>
         </Heading>
-        <hr className="margin-top-2 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
+        <hr className="margin-top-2 margin-bottom-3 bg-cool-lighter" role="presentation" />
       </div>
 
       {props.sideBarCards.map((card) => {
@@ -118,7 +118,7 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
       </div>
       {renderLearnMoreFundingOpportunities && (
         <>
-          <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
+          <hr className="margin-top-3 bg-cool-lighter" role="presentation" />
           <div className="margin-y-3 weight-unset-override">
             <PrimaryButton
               isColor={"accent-cooler"}

@@ -18,7 +18,9 @@ const NexusDbaFormationPreview = (props: PreviewProps): ReactElement => {
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <div ref={ref} style={{ pointerEvents: "all" }}>
           <Heading level={2}>CTA Modal</Heading>
-          <button onClick={(): void => setModalOpen(true)}>Open CTA Modal</button>
+          <button type="button" onClick={(): void => setModalOpen(true)}>
+            Open CTA Modal
+          </button>
         </div>
 
         <ModalTwoButton

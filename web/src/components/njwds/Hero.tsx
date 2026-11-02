@@ -68,7 +68,7 @@ export const Hero = (): ReactElement => {
             </div>
 
             <div className="desktop:grid-col-5 order-first desktop:order-last desktop:display-block display-none">
-              <img className="width-100" src="/img/Hero-img-climb.svg" alt="" role="presentation" />
+              <img className="width-100" src="/img/Hero-img-climb.svg" alt="" />
             </div>
           </div>
         </div>

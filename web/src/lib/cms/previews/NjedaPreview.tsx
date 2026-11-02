@@ -16,7 +16,9 @@ const NjedaPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <button onClick={() => setModalOpen((prev) => prev + 1)}>toggle modal</button>
+      <button type="button" onClick={() => setModalOpen((prev) => prev + 1)}>
+        toggle modal
+      </button>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <NJEDAFundingsOnboardingPage
           fundings={fundings}

@@ -19,6 +19,7 @@ export const EmergencyTripPermitCountryDropdown = (props: Props): ReactElement =
   const fieldNameLabels = Config.abcEmergencyTripPermit.fields;
   return (
     <div className={"padding-top-1"}>
+      {/* biome-ignore lint/a11y/noLabelWithoutControl: the label wraps the <input> that CountryDropdown renders */}
       <label>
         <span className={"text-bold"}>{fieldNameLabels[props.fieldName]}</span>
         <CountryDropdown

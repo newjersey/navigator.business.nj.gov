@@ -34,6 +34,7 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
   return (
     <>
       <button
+        type="button"
         className="right-nav-menu-button radius-0"
         data-testid="nav-menu-mobile-quick-link-open"
         aria-label="site menu"
@@ -66,6 +67,7 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
             <hr className="margin-0 hr-2px" key="name-break" />
 
             <button
+              type="button"
               className="right-nav-close fac fdr fjc position-absolute usa-position-bottom-right top-0 right-0 margin-y-2 margin-x-105"
               aria-label="close menu"
               data-testid={"nav-menu-mobile-quick-link-close"}

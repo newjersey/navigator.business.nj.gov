@@ -16,7 +16,7 @@ const CannabisEligibilityModalPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <Heading level={2}>Eligibility Modal</Heading>
-      <button className="margin-2" onClick={(): void => setModalOpen(true)}>
+      <button type="button" className="margin-2" onClick={(): void => setModalOpen(true)}>
         Open Modal
       </button>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>

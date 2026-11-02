@@ -63,7 +63,7 @@ export const HideableTasks = (): ReactElement => {
           </SecondaryButton>
         </div>
       </div>
-      <hr className="margin-bottom-3 margin-top-0" aria-hidden={true} />
+      <hr className="margin-bottom-3 margin-top-0" role="presentation" />
 
       {business?.preferences.isHideableRoadmapOpen ? (
         <Roadmap />

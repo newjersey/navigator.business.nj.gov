@@ -79,6 +79,7 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
 
   return (
     <WithErrorBar hasError={isFormFieldInvalid} type={"ALWAYS"}>
+      {/* biome-ignore lint/a11y/noLabelWithoutControl: the label wraps the <input> that Autocomplete's TextField renders */}
       <label>
         <span className={"text-bold"}>{Config.abcEmergencyTripPermit.fields.permitStartTime}</span>
         <Autocomplete
