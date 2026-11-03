@@ -18,6 +18,7 @@ import {
   createSignedEmptyFormationObject,
   needsSignerTypeFunc,
 } from "@/components/tasks/business-formation/contacts/helpers";
+import { getLegalTypeOverride } from "@/components/tasks/business-formation/formationFieldContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -40,10 +41,12 @@ export const Signatures = (): ReactElement => {
   );
 
   const getDescription = (): string => {
-    const legalType = state.formationFormData.legalType;
-    const overriddenLegalTypes = Object.keys(Config.formation.fields.signers.overrides ?? {});
-    if (overriddenLegalTypes.includes(legalType)) {
-      return (Config.formation.fields.signers.overrides as any)[legalType].description;
+    const override = getLegalTypeOverride(
+      Config.formation.fields.signers,
+      state.formationFormData.legalType,
+    );
+    if (override) {
+      return override.description;
     }
     return Config.formation.fields.signers.description;
   };

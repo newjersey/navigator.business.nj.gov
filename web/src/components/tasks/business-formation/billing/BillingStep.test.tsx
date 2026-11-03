@@ -147,7 +147,7 @@ describe("Formation - BillingStep", () => {
 
   describe("certificateOfStanding", () => {
     const defaultCostIds = ["limited-liability-company", "limited-liability-partnership"];
-    const overriddenCostIds = ["s-corporation", "c-corporation", "limited-partnership"];
+    const overriddenCostIds = ["s-corporation", "c-corporation", "limited-partnership"] as const;
 
     for (const legalStructureId of defaultCostIds) {
       it(`uses default cost for ${legalStructureId}`, async () => {
@@ -196,7 +196,7 @@ describe("Formation - BillingStep", () => {
           10,
         );
         const standingCost = Number.parseInt(
-          (Config.formation.fields.certificateOfStanding.overrides as any)[legalStructureId].cost,
+          Config.formation.fields.certificateOfStanding.overrides[legalStructureId].cost,
           10,
         );
         const expectedTotal = officialFormationCost + standingCost;

@@ -46,7 +46,7 @@ export const renderPage = ({
   municipalities?: Municipality[];
   business?: Business;
   isAuthenticated?: IsAuthenticated;
-  setShowNeedsAccountModal?: jest.Mock<any, any, any>;
+  setShowNeedsAccountModal?: jest.Mock;
 }): void => {
   const genericTown = generateMunicipality({ displayName: "GenericTown" });
   const profileDataMunicipality = business && business.profileData.municipality;

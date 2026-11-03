@@ -4,9 +4,17 @@ import { type ReactElement, type ReactNode, useEffect, useRef, useState } from "
 import { Icon } from "@/components/njwds/Icon";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 
+interface DropdownOptionProps {
+  className?: string;
+}
+
+interface DropdownWrapperProps extends DropdownOptionProps {
+  children: ReactNode;
+}
+
 type ButtonDropdownOption = {
   text: string;
-  props?: Record<string, any>;
+  props?: DropdownOptionProps;
   onClick: () => void;
 };
 
@@ -14,7 +22,7 @@ interface Props {
   children: ReactNode;
   name?: string;
   dropdownOptions: ButtonDropdownOption[];
-  wrapper?: (props: { children: ReactNode; [key: string]: any }) => ReactElement;
+  wrapper?: (props: DropdownWrapperProps) => ReactElement;
   dropdownClassName?: string;
   horizontal?: boolean;
   hideDivider?: boolean;
@@ -53,13 +61,7 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
     }
   }
 
-  const DefaultButton = ({
-    children,
-    ...props
-  }: {
-    children: ReactNode;
-    [key: string]: any;
-  }): ReactElement => (
+  const DefaultButton = ({ children, ...props }: DropdownWrapperProps): ReactElement => (
     <UnStyledButton isTextBold isSmallerText {...props}>
       {children}
     </UnStyledButton>

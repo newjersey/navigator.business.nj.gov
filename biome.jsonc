@@ -261,7 +261,6 @@
       "linter": {
         "rules": {
           "suspicious": {
-            "noExplicitAny": "warn",
             "noArrayIndexKey": "warn",
             "useIterableCallbackReturn": "warn",
             "noImplicitAnyLet": "warn",
