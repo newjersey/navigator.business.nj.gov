@@ -25,7 +25,6 @@ type Props<T> = {
   contentFieldName?: ProfileContentField;
   ariaLabel?: string;
   choices: Exclude<T, undefined>[];
-  required?: boolean;
   labels?: Record<string, string>;
   onChange?: (value: T) => void;
 };
@@ -35,18 +34,13 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
   const { Config } = useConfig();
   const fieldName = props.contentFieldName ?? props.fieldName;
 
-  const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(
-    props.fieldName,
-    DataFormErrorMapContext,
-  );
+  const { setIsValid } = useFormContextFieldHelpers(props.fieldName, DataFormErrorMapContext);
 
   const contentFromConfig = getProfileConfig({
     config: Config,
     persona: state.flow,
     fieldName: fieldName as keyof typeof profileFieldsFromConfig,
   });
-
-  props.required && RegisterForOnSubmit(() => state.profileData[props.fieldName] !== undefined);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const value = props.choices.find((val) => {

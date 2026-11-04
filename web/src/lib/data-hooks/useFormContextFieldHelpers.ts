@@ -3,8 +3,7 @@ import {
   FieldStateActionKind,
   type FormContextType,
 } from "@businessnjgovnavigator/shared/types";
-import { type Context, useContext, useEffect, useMemo } from "react";
-import { useMountEffect } from "@/lib/utils/helpers";
+import { type Context, use, useEffect } from "react";
 
 export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   fieldName: keyof T,
@@ -15,48 +14,44 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   setIsValid: (isValid: boolean) => void;
   isFormFieldInvalid: boolean;
 } => {
-  if (!context) {
-    return {
-      RegisterForOnSubmit: (_isValidFunc: () => boolean): void => {},
-      setIsValid: (_isValid: boolean): void => {},
-      isFormFieldInvalid: false,
-    };
-  }
-  const { runValidations, fieldStates, reducer } = useContext(context);
+  // `use` may be called conditionally, unlike useContext. Every other hook here, including those
+  // in RegisterForOnSubmit, runs with or without a form context so the hook count never changes.
+  const formContext = context ? use(context) : undefined;
+  const isFormFieldInvalid = formContext?.fieldStates[fieldName].invalid === true;
+
   const RegisterForOnSubmit = (
     isValidFunc: () => boolean,
     preventRefreshWhenUnmounted?: boolean,
   ): void => {
-    useMountEffect(() => {
-      reducer({ type: FieldStateActionKind.REGISTER, payload: { field: fieldName } });
+    useEffect(() => {
+      formContext?.reducer({ type: FieldStateActionKind.REGISTER, payload: { field: fieldName } });
 
       return (): void => {
         if (!preventRefreshWhenUnmounted) {
-          reducer({ type: FieldStateActionKind.UNREGISTER, payload: { field: fieldName } });
+          formContext?.reducer({
+            type: FieldStateActionKind.UNREGISTER,
+            payload: { field: fieldName },
+          });
         }
       };
-    });
+    }, [context]);
 
     useEffect(() => {
-      runValidations &&
-        fieldStates[fieldName].updated !== undefined &&
-        reducer({
+      formContext?.runValidations &&
+        formContext.fieldStates[fieldName].updated !== undefined &&
+        formContext.reducer({
           type: FieldStateActionKind.VALIDATION,
           payload: { field: fieldName, invalid: !isValidFunc(), errorTypes },
         });
-    }, [runValidations]);
+    }, [formContext?.runValidations]);
   };
 
   const setIsValid = (isValid: boolean): void => {
-    reducer({
+    formContext?.reducer({
       type: FieldStateActionKind.VALIDATION,
       payload: { field: fieldName, invalid: !isValid, errorTypes },
     });
   };
-
-  const isFormFieldInvalid = useMemo(() => {
-    return fieldStates[fieldName].invalid === true;
-  }, [fieldStates[fieldName].invalid]);
 
   return {
     RegisterForOnSubmit,
