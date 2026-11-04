@@ -1,3 +1,22 @@
+# [2026.26.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.25.1...v2026.26.0) (2026-11-04)
+
+
+### Bug Fixes
+
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) call hooks unconditionally in useFormContextFieldHelpers ([494eb13](https://github.com/newjersey/navigator.business.nj.gov/commit/494eb130957a01e2b8e615a0e7b44be4054aab89))
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) remove or justify console statements in web ([7e166a5](https://github.com/newjersey/navigator.business.nj.gov/commit/7e166a54f2e40bebf6208a299f243c8dc6e72e42))
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) replace explicit any with specific types in web ([94c2c87](https://github.com/newjersey/navigator.business.nj.gov/commit/94c2c8768aca6de5ec62930c580b076139f52950))
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) resolve biome a11y violations in web ([7b3f9fb](https://github.com/newjersey/navigator.business.nj.gov/commit/7b3f9fb64cf8681e05c186f3cf8720c56d0b1dd5))
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) resolve rules-of-hooks violations in web ([bff3cd6](https://github.com/newjersey/navigator.business.nj.gov/commit/bff3cd60c00e47073116245ecafdb730b004a3fe))
+* [AB#18080](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18080) update feedback widget to 0.8.3 ([#13136](https://github.com/newjersey/navigator.business.nj.gov/issues/13136)) ([f758e88](https://github.com/newjersey/navigator.business.nj.gov/commit/f758e881131410133f67fb013c804f3251110024))
+* bump next to 16.4.3 to fix Turbopack dev page chunks ([851041f](https://github.com/newjersey/navigator.business.nj.gov/commit/851041feb53d17d7e6df52dc4f4e9439e141e71c))
+
+
+### Features
+
+* [AB#18041](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18041) add testimonial on the final learn page ([ccc9025](https://github.com/newjersey/navigator.business.nj.gov/commit/ccc902589bfff6e92824e3b239c156807baa2284))
+* [AB#18063](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18063) add icons to form your business sections ([b7aba7c](https://github.com/newjersey/navigator.business.nj.gov/commit/b7aba7c74c521c82112f9034e6c8fe92f15ac858))
+
 ## [2026.25.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.25.0...v2026.25.1) (2026-10-30)
 
 
