@@ -251,11 +251,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
       if (currentBusiness.onboardingFormProgress === "COMPLETED") {
-        if (
-          usingIntentSelection &&
-          currentBusiness.profileData.businessPersona === "STARTING" &&
-          !currentUserData.user.myNJUserKey
-        ) {
+        if (usingIntentSelection && currentBusiness.profileData.businessPersona === "STARTING") {
           if (currentUserData.user.onboardedAsLearningUser) {
             await router.replace(ROUTES.learnFlowLandingPage);
           } else {
@@ -399,11 +395,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     updateQueue.queue(newUserData);
     await updateQueue.update();
 
-    if (
-      usingIntentSelection &&
-      Object.keys(newUserData.businesses).length === 1 &&
-      !goToDashboard
-    ) {
+    if (usingIntentSelection && !goToDashboard) {
       let destination = ROUTES.accountSetup;
       if (newUserData.user.onboardedAsLearningUser) {
         destination = ROUTES.learnFlowLandingPage;

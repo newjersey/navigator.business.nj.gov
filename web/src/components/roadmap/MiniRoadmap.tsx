@@ -7,6 +7,11 @@ import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { ReactElement, useContext } from "react";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
+import { ReadyMiniRoadmap } from "@/components/roadmap//ReadyMiniRoadmap";
 
 interface Props {
   activeTaskId?: string | undefined;
@@ -17,6 +22,16 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
   const { isAuthenticated } = useContext(NeedsAccountContext);
+  const { business } = useUserData();
+  const doesUserHaveIndustry = business?.profileData.industryId;
+
+  if (
+    !doesUserHaveIndustry &&
+    business?.profileData.operatingPhase != OperatingPhaseId.UP_AND_RUNNING &&
+    business?.profileData.operatingPhase != OperatingPhaseId.UP_AND_RUNNING_OWNING
+  ) {
+    return <ReadyMiniRoadmap />;
+  }
 
   const dropdownIconClasses = "usa-icon--size-5 text-base-light";
 
