@@ -1,8 +1,8 @@
-import type { ReactElement } from "react";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { LearnMiniRoadmapTask } from "@/components/roadmap/LearnMiniRoadmapTask";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
+import { ReactElement } from "react";
+import { NumberedMiniRoadmapTask } from "@/components/roadmap/NumberedMiniRoadmapTask";
 
 interface Props {
   activeTaskId?: string | undefined;
@@ -26,7 +26,7 @@ export const LearnMiniRoadmap = (props: Props): ReactElement => {
         {Config.learnPages.steps.map((task, index) => {
           return (
             <div key={task.id} className="learn-mini-roadmap-step padding-y-05">
-              <LearnMiniRoadmapTask
+              <NumberedMiniRoadmapTask
                 task={task}
                 active={task.id === props.activeTaskId}
                 onTaskClick={() => {
@@ -38,6 +38,7 @@ export const LearnMiniRoadmap = (props: Props): ReactElement => {
                   );
                 }}
                 stepNumber={index + 1}
+                pathPrefix={"learn"}
               />
             </div>
           );
