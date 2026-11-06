@@ -19,8 +19,6 @@ interface RgbApiConfiguration {
   rgbChecklistItemsClient: ChecklistItemsForAllApplicationsClient;
 }
 
-const DEBUG = false; // this variable exists in updateLicenseStatusFactory; enable both for debugging
-
 export const RegulatedBusinessDynamicsLicenseStatusClient = (
   rgbApiConfiguration: RgbApiConfiguration,
 ): SearchLicenseStatus => {
@@ -35,37 +33,16 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
         nameAndAddress.name,
       );
 
-    if (DEBUG) {
-      console.log({
-        functionName: "getMatchedBusinessIdsAndNames",
-        results: matchedBusinessIdsAndNames,
-      });
-    }
-
     const businessAddressesForAllBusinessIds =
       await rgbApiConfiguration.rgbBusinessAddressesClient.getBusinessAddressesForAllBusinessIds(
         accessToken,
         matchedBusinessIdsAndNames,
       );
 
-    if (DEBUG) {
-      console.log({
-        functionName: "getBusinessAddressesForAllBusinessIds",
-        results: businessAddressesForAllBusinessIds,
-      });
-    }
-
     const matchedBusinessIdAndNameByAddress = searchBusinessAddressesForMatches(
       businessAddressesForAllBusinessIds,
       nameAndAddress,
     );
-
-    if (DEBUG) {
-      console.log({
-        functionName: "searchBusinessAddressesForMatches",
-        results: matchedBusinessIdAndNameByAddress,
-      });
-    }
 
     const applicationIdsForAllBusinessIdsResponse =
       await rgbApiConfiguration.rgbLicenseApplicationIdsClient.getLicenseApplicationIdsForAllBusinessIds(
@@ -73,27 +50,12 @@ export const RegulatedBusinessDynamicsLicenseStatusClient = (
         matchedBusinessIdAndNameByAddress,
       );
 
-    if (DEBUG) {
-      console.log({
-        functionName: "getLicenseApplicationIdsForAllBusinessIds",
-        results: applicationIdsForAllBusinessIdsResponse,
-      });
-    }
-
     const applicationsWithChecklistItems =
       await rgbApiConfiguration.rgbChecklistItemsClient.getChecklistItemsForAllApplications(
         accessToken,
         applicationIdsForAllBusinessIdsResponse,
       );
 
-    const results = formatRegulatedBusinessDynamicsApplications(applicationsWithChecklistItems);
-
-    if (DEBUG) {
-      console.log({
-        functionName: "formatRegulatedBusinessDynamicsApplications",
-        results: results,
-      });
-    }
-    return results;
+    return formatRegulatedBusinessDynamicsApplications(applicationsWithChecklistItems);
   };
 };
