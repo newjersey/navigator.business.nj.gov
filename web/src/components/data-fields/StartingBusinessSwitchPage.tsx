@@ -3,16 +3,14 @@ import type { ReactElement } from "react";
 import { Industry } from "@/components/data-fields/Industry";
 import { StartingBusinessIntent } from "@/components/data-fields/StartingBusinessIntent";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
+import { Industry } from "@/components/data-fields/Industry";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 
 export const StartingBusinessSwitchPage = (): ReactElement => {
-  const businessUser = useUserData().userData?.user;
   const { Config } = useConfig();
-  const enableIntentSelection = process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW === "true";
-  const userHasMyNJKey = !!businessUser?.myNJUserKey;
-  const shouldSeeBusinessIntentPage = enableIntentSelection && !userHasMyNJKey;
+  const shouldSeeBusinessIntentPage = process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW === "true";
   if (shouldSeeBusinessIntentPage) {
     return (
       <>
