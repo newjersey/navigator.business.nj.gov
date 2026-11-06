@@ -5036,7 +5036,7 @@ __metadata:
     "@types/seedrandom": "npm:3.0.8"
     "@types/simple-oauth2": "npm:5.0.8"
     "@types/supertest": "npm:6.0.3"
-    "@types/uuid": "npm:10.0.0"
+    "@types/uuid": "npm:11.0.0"
     "@types/xml2js": "npm:0.4.14"
     "@typescript-eslint/eslint-plugin": "npm:7.18.0"
     "@typescript-eslint/parser": "npm:7.18.0"
@@ -5174,7 +5174,7 @@ __metadata:
     "@types/node": "npm:24.13.3"
     "@types/react": "npm:19.2.17"
     "@types/seedrandom": "npm:3.0.8"
-    "@types/uuid": "npm:10.0.0"
+    "@types/uuid": "npm:11.0.0"
     "@typescript-eslint/eslint-plugin": "npm:7.18.0"
     "@typescript-eslint/parser": "npm:7.18.0"
     cross-env: "npm:10.1.0"
@@ -13554,10 +13554,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:10.0.0":
-  version: 10.0.0
-  resolution: "@types/uuid@npm:10.0.0"
-  checksum: 10/e3958f8b0fe551c86c14431f5940c3470127293280830684154b91dc7eb3514aeb79fe3216968833cf79d4d1c67f580f054b5be2cd562bebf4f728913e73e944
+"@types/uuid@npm:11.0.0":
+  version: 11.0.0
+  resolution: "@types/uuid@npm:11.0.0"
+  dependencies:
+    uuid: "npm:*"
+  checksum: 10/9f94bd34e5d220c53cc58ea9f48a0061d3bc343e29bc33a17edc705f5e21fedda21553318151f2bc227c2b2b03727bbb536da2b82a61f84d2e1ca38abc5e5c3f
   languageName: node
   linkType: hard
 
@@ -17473,14 +17475,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"content-type@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "content-type@npm:2.0.0"
-  checksum: 10/0bbb276b790ba7e86c479c7d69fae1861b2e908ff3ce2cb01975b516f93eede2216d242902ed6c5b15cd554014611ce9dfdcf51cd35b16569e45a979e50d0cef
-  languageName: node
-  linkType: hard
-
-"content-type@npm:^2.1.0":
+"content-type@npm:^2.0.0, content-type@npm:^2.1.0":
   version: 2.1.0
   resolution: "content-type@npm:2.1.0"
   checksum: 10/8aac907922538f430d8bfab1d8fe2fbdc1eb890a0fa7a619f712db4bfefe24be951ba464f972007df64840c775bf2db284ca8223547ac5317ad9ab2ee8e6501b
@@ -30704,17 +30699,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.10.0, qs@npm:^6.12.3, qs@npm:^6.14.0, qs@npm:^6.14.1":
-  version: 6.15.3
-  resolution: "qs@npm:6.15.3"
-  dependencies:
-    es-define-property: "npm:^1.0.1"
-    side-channel: "npm:^1.1.1"
-  checksum: 10/1cbb4b050872a19ba8a311445be29babb8f66ea5d6462b3c48c6efb2c95187cd286b69734cd4caea1878cca3b9d1f0e9b49335336be9e999a7d8d7cf137ba60d
-  languageName: node
-  linkType: hard
-
-"qs@npm:^6.16.1":
+"qs@npm:^6.10.0, qs@npm:^6.12.3, qs@npm:^6.14.0, qs@npm:^6.14.1, qs@npm:^6.16.1":
   version: 6.17.0
   resolution: "qs@npm:6.17.0"
   dependencies:
@@ -35953,7 +35938,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:14.0.1, uuid@npm:^14.0.0":
+"uuid@npm:*, uuid@npm:^14.0.0":
+  version: 14.0.3
+  resolution: "uuid@npm:14.0.3"
+  bin:
+    uuid: dist-node/bin/uuid
+  checksum: 10/a6ab4e6ef84ff77b574846215c425c915de035395710e09f083f3bc1d4744df63db78598da0d04619a0a60a15a9cce2bc7c1ef10bf302349e761838816d798a7
+  languageName: node
+  linkType: hard
+
+"uuid@npm:14.0.1":
   version: 14.0.1
   resolution: "uuid@npm:14.0.1"
   bin:
