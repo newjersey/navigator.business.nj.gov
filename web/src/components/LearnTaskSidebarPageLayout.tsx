@@ -1,9 +1,9 @@
 import type { ReactElement } from "react";
+import { Icon } from "@/components/njwds/Icon";
 import {
   SidebarPageLayout,
   type SidebarPageLayoutProps,
 } from "@/components/njwds-layout/SidebarPageLayout";
-import { Icon } from "@/components/njwds/Icon";
 import { LearnMiniRoadmap } from "@/components/roadmap/LearnMiniRoadmap";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";

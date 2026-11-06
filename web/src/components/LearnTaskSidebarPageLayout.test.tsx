@@ -1,10 +1,10 @@
-import { LearnTaskSidebarPageLayout } from "@/components/LearnTaskSidebarPageLayout";
-import { templateEval } from "@/lib/utils/helpers";
 import { ConfigContext } from "@businessnjgovnavigator/shared";
 import { getMergedConfig } from "@businessnjgovnavigator/shared/contexts";
-import * as materialUi from "@mui/material";
+import type * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";
+import { LearnTaskSidebarPageLayout } from "@/components/LearnTaskSidebarPageLayout";
+import { templateEval } from "@/lib/utils/helpers";
 
 function mockMaterialUI(): typeof materialUi {
   return {
