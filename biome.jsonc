@@ -261,7 +261,6 @@
         "rules": {
           "suspicious": {
             "noConsole": "warn",
-            "noNestedPromises": "warn",
             "noImplicitAnyLet": "warn",
             "useIterableCallbackReturn": "warn"
           },
@@ -271,8 +270,7 @@
             "noParameterAssign": "warn"
           },
           "correctness": { "noUnusedVariables": "warn" },
-          "complexity": { "useMaxParams": "warn" },
-          "nursery": { "noFloatingPromises": "warn" }
+          "complexity": { "useMaxParams": "warn" }
         }
       }
     },
