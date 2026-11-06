@@ -110,8 +110,8 @@ export interface MigrationDataClient {
 }
 
 export class MigrationConflictError extends Error {
-  constructor() {
-    super("User data changed during migration");
+  constructor(options?: ErrorOptions) {
+    super("User data changed during migration", options);
     this.name = "MigrationConflictError";
   }
 }
@@ -410,13 +410,7 @@ export type UpdateXrayRegistration = (
 ) => Promise<UserData>;
 
 export interface CrtkStatusLookup {
-  getStatus: (
-    businessName: string,
-    addressLine1: string,
-    city: string,
-    addressZipCode: string,
-    ein?: string,
-  ) => Promise<CrtkData>;
+  getStatus: (businessDetails: CrtkBusinessDetails) => Promise<CrtkData>;
 }
 
 export interface CrtkSearch {

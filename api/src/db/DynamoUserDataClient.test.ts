@@ -33,7 +33,12 @@ describe("DynamoUserDataClient", () => {
       hashValue: jest.fn(),
     };
     logger = DummyLogWriter;
-    dynamoUserDataClient = DynamoUserDataClient(client, cryptoClient, dbConfig.tableName, logger);
+    dynamoUserDataClient = DynamoUserDataClient({
+      db: client,
+      cryptoClient,
+      tableName: dbConfig.tableName,
+      logger,
+    });
   });
 
   it("throws an error when attempting to retrieve a non-existent user by ID", async () => {

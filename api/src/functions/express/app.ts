@@ -315,15 +315,16 @@ const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
 const AWSTaxIDEncryptionClient = isLocal
   ? new MockCryptoClient()
   : AWSCryptoFactory(
-      AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
       {
-        stage: AWS_CRYPTO_CONTEXT_STAGE,
-        purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-        origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+        generatorKeyId: AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+        context: {
+          stage: AWS_CRYPTO_CONTEXT_STAGE,
+          purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+          origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+        },
+        decryptOnlyKeyIds: [LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY],
+        decryptOnlyContexts: AWS_CRYPTO_TAX_ID_DECRYPT_ONLY_CONTEXTS,
       },
-      undefined,
-      [LEGACY_AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY],
-      AWS_CRYPTO_TAX_ID_DECRYPT_ONLY_CONTEXTS,
       {
         foreignEnvironmentPolicy: AWS_CRYPTO_TAX_ID_FOREIGN_ENVIRONMENT_POLICY,
       },
@@ -331,15 +332,15 @@ const AWSTaxIDEncryptionClient = isLocal
 
 const AWSTaxIDHashingClient = isLocal
   ? new MockCryptoClient()
-  : AWSCryptoFactory(
-      AWS_CRYPTO_TAX_ID_HASHING_KEY,
-      {
+  : AWSCryptoFactory({
+      generatorKeyId: AWS_CRYPTO_TAX_ID_HASHING_KEY,
+      context: {
         stage: AWS_CRYPTO_CONTEXT_STAGE,
         purpose: AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE,
         origin: AWS_CRYPTO_CONTEXT_ORIGIN,
       },
-      AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
-    );
+      encryptedHashingSalt: AWS_CRYPTO_TAX_ID_ENCRYPTED_HASHING_SALT,
+    });
 
 const taxFilingClient = ApiTaxFilingClient(
   {
@@ -362,15 +363,15 @@ const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
 
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
-const userDataClient = DynamoUserDataClient(
-  dynamoDb,
-  AWSTaxIDEncryptionClient,
-  USERS_TABLE,
-  dataLogger,
-  {
+const userDataClient = DynamoUserDataClient({
+  db: dynamoDb,
+  cryptoClient: AWSTaxIDEncryptionClient,
+  tableName: USERS_TABLE,
+  logger: dataLogger,
+  migrationClients: {
     newHashingClient: AWSTaxIDHashingClient,
   },
-);
+});
 const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, dataLogger);
 const migrationDataClient = DynamoMigrationDataClient({
   db: dynamoDb,
@@ -378,13 +379,13 @@ const migrationDataClient = DynamoMigrationDataClient({
   usersTableName: USERS_TABLE,
   businessesTableName: BUSINESSES_TABLE,
 });
-const dynamoDataClient = DynamoDataClient(
+const dynamoDataClient = DynamoDataClient({
   userDataClient,
   businessesDataClient,
-  dataLogger,
+  logger: dataLogger,
   isKillSwitchOn,
   migrationDataClient,
-);
+});
 
 const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
@@ -456,18 +457,18 @@ const emergencyTripPermitClient = AbcEmergencyTripPermitClient(
 
 app.use(
   "/api",
-  userRouterFactory(
-    dynamoDataClient,
+  userRouterFactory({
+    databaseClient: dynamoDataClient,
     updateLicenseStatus,
     updateXrayStatus,
-    updateSidebarCards,
+    updateRoadmapSidebarCards: updateSidebarCards,
     updateOperatingPhase,
-    AWSTaxIDEncryptionClient,
-    AWSTaxIDHashingClient,
-    timeStampToBusinessSearch,
+    encryptionDecryptionClient: AWSTaxIDEncryptionClient,
+    hashingClient: AWSTaxIDHashingClient,
+    timeStampBusinessSearch: timeStampToBusinessSearch,
     logger,
     govDeliveryCommCloudClient,
-  ),
+  }),
 );
 
 app.use(

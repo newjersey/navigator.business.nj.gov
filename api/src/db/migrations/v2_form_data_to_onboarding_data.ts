@@ -20,7 +20,7 @@ export const migrate_v1_to_v2 = (v1Data: v1UserData, _?: MigrationClients): v2Us
   if (formData.businessType && formData.businessType.businessType) {
     industry = formData.businessType.businessType;
   }
-  let legalStructure;
+  let legalStructure: v2LegalStructure | undefined;
   if (formData.businessStructure && formData.businessStructure.businessStructure) {
     legalStructure = formData.businessStructure.businessStructure;
   }

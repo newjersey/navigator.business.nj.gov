@@ -55,14 +55,10 @@ describe("migrate_v96_to_v97", () => {
       });
       const v97 = migrate_v96_to_v97(v96);
       const {
-        members,
-        signers,
         businessAddressCity,
         businessAddressLine1,
         businessAddressLine2,
-        businessAddressState,
         businessAddressZipCode,
-        ...formationFormData
       } = v96.formationData.formationFormData;
 
       it("renames businessAddress fields", () => {

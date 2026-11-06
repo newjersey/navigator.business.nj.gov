@@ -1,8 +1,7 @@
-const AWSCrypto = require("@aws-crypto/client-node");
-
 import type { NonSharedBuffer } from "node:buffer";
 import * as crypto from "node:crypto";
 import { TextDecoder } from "node:util";
+import * as AWSCrypto from "@aws-crypto/client-node";
 import { fromBase64, toBase64 } from "@aws-sdk/util-base64-node";
 import {
   type EncryptionContext,
@@ -10,6 +9,14 @@ import {
   validateCiphertextMetadata,
 } from "@client/CiphertextMetadata";
 import type { CryptoClient } from "@domain/types";
+
+export interface AWSCryptoFactoryConfig {
+  readonly generatorKeyId: string;
+  readonly context: EncryptionContext;
+  readonly encryptedHashingSalt?: string;
+  readonly decryptOnlyKeyIds?: readonly string[];
+  readonly decryptOnlyContexts?: readonly EncryptionContext[];
+}
 
 export interface AWSCryptoFactoryOptions {
   readonly foreignEnvironmentPolicy?: ForeignEnvironmentPolicy;
@@ -21,6 +28,7 @@ const contextMatches = (
 ): boolean => Object.entries(expectedContext).every(([key, value]) => actualContext[key] === value);
 
 export const cryptoUtils: { pbkdf2: typeof crypto.pbkdf2 } = {
+  // biome-ignore lint/complexity/useMaxParams: mirrors node:crypto.pbkdf2 so tests can spy on it
   pbkdf2: (
     password: crypto.BinaryLike,
     salt: crypto.BinaryLike,
@@ -34,11 +42,13 @@ export const cryptoUtils: { pbkdf2: typeof crypto.pbkdf2 } = {
 };
 
 export const AWSCryptoFactory = (
-  generatorKeyId: string,
-  context: EncryptionContext,
-  encryptedHashingSalt?: string,
-  decryptOnlyKeyIds: readonly string[] = [],
-  decryptOnlyContexts: readonly EncryptionContext[] = [],
+  {
+    generatorKeyId,
+    context,
+    encryptedHashingSalt,
+    decryptOnlyKeyIds = [],
+    decryptOnlyContexts = [],
+  }: AWSCryptoFactoryConfig,
   options: AWSCryptoFactoryOptions = {},
 ): CryptoClient => {
   const { encrypt, decrypt } = AWSCrypto.buildClient(
@@ -52,7 +62,8 @@ export const AWSCryptoFactory = (
 
   const encryptValue = async (plainTextValue: string): Promise<string> => {
     const { result } = await encrypt(encryptKeyring, plainTextValue, {
-      encryptionContext: context,
+      // the SDK types this with an index signature, which an interface can't satisfy; a copy can
+      encryptionContext: { ...context },
     });
     const base64Value = toBase64(result);
     return base64Value;
@@ -122,6 +133,7 @@ export const AWSCryptoFactory = (
     } catch (error) {
       throw new Error(
         `Hash generation failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+        { cause: error },
       );
     }
   };

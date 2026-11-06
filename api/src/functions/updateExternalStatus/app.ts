@@ -23,17 +23,20 @@ export const handler = async (): Promise<void> => {
     ? ConsoleLogWriter
     : LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
   const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
-  const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
-    stage: AWS_CRYPTO_CONTEXT_STAGE,
-    purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+  const AWSTaxIDEncryptionClient = AWSCryptoFactory({
+    generatorKeyId: AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+    context: {
+      stage: AWS_CRYPTO_CONTEXT_STAGE,
+      purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+      origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+    },
   });
-  const dbClient = DynamoUserDataClient(
-    dynamoDb,
-    AWSTaxIDEncryptionClient,
-    USERS_TABLE,
-    dataLogger,
-  );
+  const dbClient = DynamoUserDataClient({
+    db: dynamoDb,
+    cryptoClient: AWSTaxIDEncryptionClient,
+    tableName: USERS_TABLE,
+    logger: dataLogger,
+  });
   const logger = isLocal ? ConsoleLogWriter : LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 
   const GOV_DELIVERY_BASE_URL =

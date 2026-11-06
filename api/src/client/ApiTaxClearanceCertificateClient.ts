@@ -102,7 +102,7 @@ export const ApiTaxClearanceCertificateClient = (
           error instanceof Error ? error.message : String(error)
         }`,
       );
-      throw new Error("Failed to retrieve user data");
+      throw new Error("Failed to retrieve user data", { cause: error });
     }
 
     if (!currentHashedTaxId) {

@@ -22,13 +22,13 @@ import {
   STAGE,
   USERS_TABLE,
 } from "@functions/config";
+import welcomeEmailShortVersionTemplate from "@functions/messagingService/email-templates/welcomeEmailShortVersion.html";
+import welcomeEmailShortVersionPlaintext from "@functions/messagingService/email-templates/welcomeEmailShortVersion.txt";
+import testReminderHtmlTemplate from "@functions/messagingService/emails/testReminderEmail.html";
 import { REMINDER_EMAIL_CONFIG_SET_BASE, WELCOME_EMAIL_CONFIG_SET_BASE } from "@libs/constants";
 import { LogWriter, type LogWriterType } from "@libs/logWriter";
 import { getConfigValue, type USER_MESSAGING_CONFIG_VARS } from "@libs/ssmUtils";
 import { v4 as uuidv4 } from "uuid";
-import welcomeEmailShortVersionTemplate from "./email-templates/welcomeEmailShortVersion.html";
-import welcomeEmailShortVersionPlaintext from "./email-templates/welcomeEmailShortVersion.txt";
-import testReminderHtmlTemplate from "./emails/testReminderEmail.html";
 
 export interface SimpleSendRequest {
   userId: string;
@@ -36,10 +36,13 @@ export interface SimpleSendRequest {
   messageType: string;
 }
 
-const AWSTaxIDEncryptionClient = AWSCryptoFactory(AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY, {
-  stage: AWS_CRYPTO_CONTEXT_STAGE,
-  purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
-  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+const AWSTaxIDEncryptionClient = AWSCryptoFactory({
+  generatorKeyId: AWS_CRYPTO_TAX_ID_ENCRYPTION_KEY,
+  context: {
+    stage: AWS_CRYPTO_CONTEXT_STAGE,
+    purpose: AWS_CRYPTO_CONTEXT_TAX_ID_ENCRYPTION_PURPOSE,
+    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+  },
 });
 
 export const handler = async (
@@ -55,12 +58,12 @@ export const handler = async (
   if (!messagesBucketName) throw new Error("MessagingServiceClient - MESSAGES_BUCKET is not set.");
   const dynamoDb = createDynamoDbClient(IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const messageDataClient = DynamoMessagesDataClient(dynamoDb, MESSAGES_TABLE, logger);
-  const userDataClient = DynamoUserDataClient(
-    dynamoDb,
-    AWSTaxIDEncryptionClient,
-    USERS_TABLE,
+  const userDataClient = DynamoUserDataClient({
+    db: dynamoDb,
+    cryptoClient: AWSTaxIDEncryptionClient,
+    tableName: USERS_TABLE,
     logger,
-  );
+  });
 
   const userData = await userDataClient.get(event.userId);
 

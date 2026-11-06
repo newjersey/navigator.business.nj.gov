@@ -47,9 +47,7 @@ const removeNonAsciiCharacters = (text: string): string => {
 };
 
 const sanitizeText = (text: string): string => {
-  text = removeNewLines(text);
-  text = removeNonAsciiCharacters(text);
-  return text;
+  return removeNonAsciiCharacters(removeNewLines(text));
 };
 
 const containsDynamicPhrase = (text: string): boolean => {
