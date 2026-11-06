@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v113UserData } from "@db/migrations/v113_add_business_structure_task_completion";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v113UserData } from "@db/migrations/v113_add_business_structure_task_completion";
 
 export interface v114UserData {
   user: v114BusinessUser;
@@ -19,7 +19,6 @@ export interface v114UserData {
 
 export const migrate_v113_to_v114 = (
   v113Data: v113UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v114UserData => {
   return {

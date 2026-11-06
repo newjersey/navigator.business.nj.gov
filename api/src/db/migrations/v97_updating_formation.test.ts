@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   allFormationLegalTypes,
   v96FormationData,
@@ -61,7 +60,6 @@ describe("migrate_v96_to_v97", () => {
         businessAddressCity,
         businessAddressLine1,
         businessAddressLine2,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         businessAddressState,
         businessAddressZipCode,
         ...formationFormData

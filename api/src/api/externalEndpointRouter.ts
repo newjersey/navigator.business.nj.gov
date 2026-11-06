@@ -1,9 +1,9 @@
 import { shouldAddToNewsletter } from "@domain/newsletter/shouldAddToNewsletter";
-import { AddNewsletter, NewsletterClient } from "@domain/types";
+import type { AddNewsletter, NewsletterClient } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
 import { validateEmail } from "@shared/stringHelpers";
-import { UserData } from "@shared/userData";
+import type { UserData } from "@shared/userData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 

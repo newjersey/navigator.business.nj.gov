@@ -2,9 +2,9 @@ import {
   generatev68FormationFormData,
   generatev68ProfileData,
   generatev68User,
-  v68ProfileData,
-  v68TaskProgress,
-  v68UserData,
+  type v68ProfileData,
+  type v68TaskProgress,
+  type v68UserData,
 } from "@db/migrations/v68_complete_formation_task_if_success";
 import { migrate_v68_to_v69 } from "@db/migrations/v69_change_form_business_entity_foreign_id";
 

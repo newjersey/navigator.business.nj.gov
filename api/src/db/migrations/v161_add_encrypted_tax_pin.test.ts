@@ -4,7 +4,7 @@ import {
   generatev160UserData,
 } from "@db/migrations/v160_add_xray_registration_data";
 import { migrate_v160_to_v161 } from "@db/migrations/v161_add_encrypted_tax_pin";
-import { CryptoClient } from "@domain/types";
+import type { CryptoClient } from "@domain/types";
 
 describe("v161 migration encrypts and masks tax pin if defined", () => {
   let cryptoClient: CryptoClient;

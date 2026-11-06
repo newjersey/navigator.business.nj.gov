@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v141Business,
   v141UserData,
 } from "@db/migrations/v141_sync_migrated_and_newly_created_users";
@@ -7,7 +7,6 @@ import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v141_to_v142 = (
   v141Data: v141UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v142UserData => {
   return {

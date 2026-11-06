@@ -1,6 +1,6 @@
 import { CloudWatchClient, PutMetricDataCommand } from "@aws-sdk/client-cloudwatch";
-import { LogWriterType } from "@libs/logWriter";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import type { LogWriterType } from "@libs/logWriter";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
 
 type Status = "PASS" | "FAIL" | "ERROR";
 type StatusResult = Record<string, Status>;
@@ -42,7 +42,6 @@ const healthCheck = async (type: string, url: string, logger: LogWriterType): Pr
     });
 };
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const sendMetric = async (endpoint: string, logger: LogWriterType): Promise<void> => {
   try {
     await cw.send(

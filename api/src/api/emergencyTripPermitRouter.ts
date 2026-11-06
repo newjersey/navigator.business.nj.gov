@@ -1,8 +1,8 @@
-import { ExpressRequestBody } from "@api/types";
-import { EmergencyTripPermitClient } from "@domain/types";
+import type { ExpressRequestBody } from "@api/types";
+import type { EmergencyTripPermitClient } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
-import {
+import type {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitSubmitResponse,
 } from "@shared/emergencyTripPermit";

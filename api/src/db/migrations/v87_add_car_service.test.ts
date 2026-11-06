@@ -2,8 +2,8 @@ import {
   generatev86FormationFormData,
   generatev86ProfileData,
   generatev86User,
-  v86ProfileData,
-  v86UserData,
+  type v86ProfileData,
+  type v86UserData,
 } from "@db/migrations/v86_tax_filing_var_rename";
 import { migrate_v86_to_v87 } from "@db/migrations/v87_add_car_service";
 

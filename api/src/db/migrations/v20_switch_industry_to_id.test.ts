@@ -1,7 +1,7 @@
 import {
   generatev19OnboardingData,
   generatev19User,
-  v19UserData,
+  type v19UserData,
 } from "@db/migrations/v19_add_employment_agency_roadmap";
 import { migrate_v19_to_v20 } from "@db/migrations/v20_switch_industry_to_id";
 

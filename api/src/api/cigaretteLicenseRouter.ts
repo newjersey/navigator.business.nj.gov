@@ -1,17 +1,17 @@
-import { type CryptoClient, DatabaseClient, CigaretteLicenseClient } from "@domain/types";
 import { getSignedInUserId } from "@api/userRouter";
-import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import {
+import type { CigaretteLicenseClient, CryptoClient, DatabaseClient } from "@domain/types";
+import { getDurationMs } from "@libs/logUtils";
+import type { LogWriterType } from "@libs/logWriter";
+import type {
   EmailConfirmationResponse,
   GetOrderByTokenResponse,
   OrderDetails,
   PreparePaymentResponse,
 } from "@shared/cigaretteLicense";
-import { getDurationMs } from "@libs/logUtils";
-import type { LogWriterType } from "@libs/logWriter";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
-import { UserData } from "@shared/userData";
-import { Request, Router } from "express";
+import type { UserData } from "@shared/userData";
+import { type Request, Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 interface CigaretteLicensePreparePaymentBody {

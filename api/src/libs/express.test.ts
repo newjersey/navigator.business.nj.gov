@@ -1,6 +1,6 @@
 import { deflateSync, gzipSync } from "node:zlib";
 import { setupExpress } from "@libs/express";
-import { ErrorRequestHandler } from "express";
+import type { ErrorRequestHandler } from "express";
 import request from "supertest";
 
 const sendErrorResponse: ErrorRequestHandler = (error, req, res, next) => {

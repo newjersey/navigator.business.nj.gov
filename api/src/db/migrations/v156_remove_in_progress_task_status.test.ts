@@ -11,9 +11,9 @@ describe("v156 migration updates taskProgress values, merging NOT_STARTED and IN
         "biz-1": generatev155Business({
           id: "biz-1",
           taskProgress: {
-            ["task-1"]: "NOT_STARTED",
-            ["task-2"]: "IN_PROGRESS",
-            ["task-3"]: "COMPLETED",
+            "task-1": "NOT_STARTED",
+            "task-2": "IN_PROGRESS",
+            "task-3": "COMPLETED",
           },
         }),
       },

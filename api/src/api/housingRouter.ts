@@ -1,7 +1,7 @@
-import { HousingPropertyInterestStatus, HousingRegistrationStatus } from "@domain/types";
+import type { HousingPropertyInterestStatus, HousingRegistrationStatus } from "@domain/types";
 import { getDurationMs } from "@libs/logUtils";
 import type { LogWriterType } from "@libs/logWriter";
-import {
+import type {
   HousingPropertyInterestDetails,
   HousingRegistrationRequestLookupResponse,
 } from "@shared/housing";

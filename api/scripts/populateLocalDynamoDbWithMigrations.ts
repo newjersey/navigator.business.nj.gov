@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // Run yarn ts-node -r tsconfig-paths/register scripts/populateLocalDynamoDbWithMigrations.ts
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /*
   This script is for testing purposes. It populates the local DynamoDB with users
@@ -23,7 +21,7 @@ import {
   USERS_TABLE,
 } from "@functions/config";
 import { generateUserData } from "@shared/test";
-import { CURRENT_VERSION, UserData } from "@shared/userData";
+import { CURRENT_VERSION, type UserData } from "@shared/userData";
 
 const BATCH_SIZE = 25;
 const dynamoDb = createDynamoDbClient(false, 8000);
@@ -131,4 +129,4 @@ const run = async (): Promise<void> => {
   await dynamoDataClient.migrateOutdatedVersionUsers();
 };
 
-run().catch(console.error); // eslint-disable-line unicorn/prefer-top-level-await
+run().catch(console.error);

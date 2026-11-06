@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v77UserData } from "@db/migrations/v77_remove_graduation_card";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v77UserData } from "@db/migrations/v77_remove_graduation_card";
 
 export interface v78UserData {
   user: v78BusinessUser;
@@ -14,11 +14,7 @@ export interface v78UserData {
   version: number;
 }
 
-export const migrate_v77_to_v78 = (
-  v77Data: v77UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v78UserData => {
+export const migrate_v77_to_v78 = (v77Data: v77UserData, _?: MigrationClients): v78UserData => {
   const { initialOnboardingFlow, ...rest } = v77Data.profileData;
   const { visibleRoadmapSidebarCards, ...restPreferences } = v77Data.preferences;
 

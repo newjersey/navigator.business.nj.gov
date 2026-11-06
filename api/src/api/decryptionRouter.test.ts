@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { decryptionRouterFactory } from "@api/decryptionRouter";
-import { type CryptoClient } from "@domain/types";
+import type { CryptoClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter, type LogWriterType } from "@libs/logWriter";
-import { type Express } from "express";
+import type { Express } from "express";
 import request from "supertest";
 
 describe("decryptionRouter", () => {

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import {
+import type * as https from "node:https";
+import type {
   CrtkBusinessDetails,
   CrtkData,
   CrtkEntry,
@@ -10,42 +10,44 @@ import {
   XrayRegistrationEntry,
   XrayRegistrationStatusResponse,
 } from "@businessnjgovnavigator/shared";
-import { REMINDER_EMAIL_CONFIG_SET_BASE, WELCOME_EMAIL_CONFIG_SET_BASE } from "@libs/constants";
-import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
-import { BusinessUser, NewsletterResponse } from "@shared/businessUser";
-import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
-import {
+import type {
+  REMINDER_EMAIL_CONFIG_SET_BASE,
+  WELCOME_EMAIL_CONFIG_SET_BASE,
+} from "@libs/constants";
+import type { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
+import type { BusinessUser, NewsletterResponse } from "@shared/businessUser";
+import type { TaxFilingCalendarEvent } from "@shared/calendarEvent";
+import type {
   EmailConfirmationResponse,
   GetOrderByTokenResponse,
   PreparePaymentResponse,
 } from "@shared/cigaretteLicense";
-import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
-import {
+import type { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
+import type {
   ElevatorSafetyDeviceInspectionDetails,
   ElevatorSafetyRegistrationSummary,
 } from "@shared/elevatorSafety";
-import {
+import type {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitSubmitResponse,
 } from "@shared/emergencyTripPermit";
-import { EmployerRatesRequest, EmployerRatesResponse } from "@shared/employerRates";
-import { FireSafetyInspectionResult } from "@shared/fireSafety";
-import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
-import {
+import type { EmployerRatesRequest, EmployerRatesResponse } from "@shared/employerRates";
+import type { FireSafetyInspectionResult } from "@shared/fireSafety";
+import type { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
+import type {
   HousingPropertyInterestDetails,
   HousingRegistrationRequestLookupResponse,
   PropertyInterestType,
 } from "@shared/housing";
-import {
+import type {
   enabledLicensesSources,
   LicenseEntity,
   LicenseSearchNameAndAddress,
 } from "@shared/license";
-import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
-import { Business, UserData } from "@shared/userData";
-import { AxiosResponse } from "axios";
-import { ReasonPhrases } from "http-status-codes";
-import * as https from "node:https";
+import type { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
+import type { Business, UserData } from "@shared/userData";
+import type { AxiosResponse } from "axios";
+import type { ReasonPhrases } from "http-status-codes";
 
 type Environment = "dev" | "content" | "testing" | "staging" | "prod";
 
@@ -423,9 +425,10 @@ export interface CrtkSearch {
   searchByEIN: (ein: string) => Promise<CrtkEntry[]>;
 }
 
-export interface UpdateCrtk {
-  (userData: UserData, businessDetails: CrtkBusinessDetails): Promise<UserData>;
-}
+export type UpdateCrtk = (
+  userData: UserData,
+  businessDetails: CrtkBusinessDetails,
+) => Promise<UserData>;
 
 export interface MessagingServiceClient {
   sendMessage: (

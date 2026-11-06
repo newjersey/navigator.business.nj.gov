@@ -1,4 +1,4 @@
-import {
+import type {
   v185Business,
   v185BusinessUser,
   v185UserData,

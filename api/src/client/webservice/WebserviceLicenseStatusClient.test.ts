@@ -1,6 +1,6 @@
 import { WebserviceLicenseStatusClient } from "@client/webservice/WebserviceLicenseStatusClient";
-import { LicenseStatusClient } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import type { LicenseStatusClient } from "@domain/types";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 import { generateLicenseEntity } from "@test/factories";
 import axios from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";

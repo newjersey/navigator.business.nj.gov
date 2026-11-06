@@ -1,6 +1,6 @@
-import { type MigrationClients } from "@db/migrations/types";
-import { v24UserData } from "@db/migrations/v24_restructure_tax_filings";
 import { createHmac } from "node:crypto";
+import type { MigrationClients } from "@db/migrations/types";
+import type { v24UserData } from "@db/migrations/v24_restructure_tax_filings";
 
 export interface v25UserData {
   user: v25BusinessUser;
@@ -13,11 +13,7 @@ export interface v25UserData {
   version: number;
 }
 
-export const migrate_v24_to_v25 = (
-  v24Data: v24UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _?: MigrationClients,
-): v25UserData => {
+export const migrate_v24_to_v25 = (v24Data: v24UserData, _?: MigrationClients): v25UserData => {
   let intercomHash;
 
   if (v24Data.user.myNJUserKey) {

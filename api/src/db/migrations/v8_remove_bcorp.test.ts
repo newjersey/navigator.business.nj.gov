@@ -1,7 +1,7 @@
 import {
   generateV7OnboardingData,
   generateV7User,
-  v7UserData,
+  type v7UserData,
 } from "@db/migrations/v7_add_license_data";
 import { migrate_v7_to_v8 } from "@db/migrations/v8_remove_bcorp";
 

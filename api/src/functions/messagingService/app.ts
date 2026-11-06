@@ -1,15 +1,15 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { SendEmailCommand, SendEmailCommandInput, SESClient } from "@aws-sdk/client-ses";
+import { SESClient, SendEmailCommand, type SendEmailCommandInput } from "@aws-sdk/client-ses";
 import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoMessagesDataClient } from "@db/DynamoMessagesDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import {
+import type {
   EmailType,
+  MessageChannel,
   MessageData,
-  type MessageChannel,
-  type MessageTemplateId,
-  type MessageTopic,
+  MessageTemplateId,
+  MessageTopic,
 } from "@domain/types";
 import {
   AWS_CRYPTO_CONTEXT_ORIGIN,
@@ -23,14 +23,11 @@ import {
   USERS_TABLE,
 } from "@functions/config";
 import { REMINDER_EMAIL_CONFIG_SET_BASE, WELCOME_EMAIL_CONFIG_SET_BASE } from "@libs/constants";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
-import { getConfigValue, USER_MESSAGING_CONFIG_VARS } from "@libs/ssmUtils";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
+import { getConfigValue, type USER_MESSAGING_CONFIG_VARS } from "@libs/ssmUtils";
 import { v4 as uuidv4 } from "uuid";
-// eslint-disable-next-line no-restricted-imports
 import welcomeEmailShortVersionTemplate from "./email-templates/welcomeEmailShortVersion.html";
-// eslint-disable-next-line no-restricted-imports
 import welcomeEmailShortVersionPlaintext from "./email-templates/welcomeEmailShortVersion.txt";
-// eslint-disable-next-line no-restricted-imports
 import testReminderHtmlTemplate from "./emails/testReminderEmail.html";
 
 export interface SimpleSendRequest {

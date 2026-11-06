@@ -1,7 +1,7 @@
 import { DynamicsHousingHealthCheckClient } from "@client/dynamics/housing/DynamicsHousingHealthCheckClient";
-import { AccessTokenClient } from "@client/dynamics/types";
-import { HealthCheckMethod } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import type { AccessTokenClient } from "@client/dynamics/types";
+import type { HealthCheckMethod } from "@domain/types";
+import { LogWriter, type LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 

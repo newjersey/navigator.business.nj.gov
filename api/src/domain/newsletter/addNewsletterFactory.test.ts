@@ -1,5 +1,5 @@
 import { addNewsletterFactory } from "@domain/newsletter/addNewsletterFactory";
-import { AddNewsletter, NewsletterClient } from "@domain/types";
+import type { AddNewsletter, NewsletterClient } from "@domain/types";
 import { generateUser, generateUserData } from "@shared/test";
 
 describe("addNewsletter", () => {

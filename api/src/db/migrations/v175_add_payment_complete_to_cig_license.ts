@@ -1,5 +1,5 @@
+import type { v174Business, v174UserData } from "@db/migrations/v174_add_public_works_contractor";
 import { randomInt } from "@shared/intHelpers";
-import { v174Business, v174UserData } from "@db/migrations/v174_add_public_works_contractor";
 
 export const migrate_v174_to_v175 = (userData: v174UserData): v175UserData => {
   return {

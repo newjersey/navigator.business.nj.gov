@@ -1,5 +1,5 @@
-import { type MigrationClients } from "@db/migrations/types";
-import {
+import type { MigrationClients } from "@db/migrations/types";
+import type {
   v122Business,
   v122UserData,
 } from "@db/migrations/v122_remove_welcome_and_welcomeupandrunning_sidecards";
@@ -31,7 +31,6 @@ export interface v123Business {
 
 export const migrate_v122_to_v123 = (
   v122Data: v122UserData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _?: MigrationClients,
 ): v123UserData => {
   return {
