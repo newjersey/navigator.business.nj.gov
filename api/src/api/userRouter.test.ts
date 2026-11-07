@@ -1568,4 +1568,48 @@ describe("userRouter", () => {
       });
     });
   });
+
+  describe("consolidated accounts", () => {
+    const consolidation = {
+      userId: "target-id",
+      businessIds: ["b1"],
+      documentsCopied: [],
+      mergedAtISO: "2026-06-01T00:00:00.000Z",
+    };
+
+    it("returns 409 from GET for a consolidated account", async () => {
+      const userData = {
+        ...generateUserData({ user: generateUser({ id: "123" }) }),
+        consolidatedInto: consolidation,
+      };
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+      const response = await request(app)
+        .get(`/users/123`)
+        .set("Authorization", "Bearer user-123-token");
+
+      expect(response.status).toBe(StatusCodes.CONFLICT);
+      expect(response.body).toEqual({ error: "ACCOUNT_CONSOLIDATED", into: "target-id" });
+      expect(stubUnifiedDataClient.put).not.toHaveBeenCalled();
+    });
+
+    it("returns 409 from POST for a consolidated account", async () => {
+      const userData = {
+        ...generateUserData({ user: generateUser({ id: "123" }) }),
+        consolidatedInto: consolidation,
+      };
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+      const response = await request(app)
+        .post(`/users`)
+        .send(userData)
+        .set("Authorization", "Bearer user-123-token");
+
+      expect(response.status).toBe(StatusCodes.CONFLICT);
+      expect(response.body).toEqual({ error: "ACCOUNT_CONSOLIDATED", into: "target-id" });
+      expect(stubUnifiedDataClient.put).not.toHaveBeenCalled();
+    });
+  });
 });
