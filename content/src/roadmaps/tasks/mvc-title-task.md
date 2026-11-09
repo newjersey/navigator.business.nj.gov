@@ -62,7 +62,7 @@ summaryDescriptionMd: >-
   someone other than the intended business owner
 notesMd: ""
 formName: OS/SS-UTA
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 ## Application Requirements

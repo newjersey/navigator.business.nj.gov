@@ -31,7 +31,7 @@ export interface LicenseData {
   licenseCertificationClassification: string;
   summaryDescriptionMd?: string;
   contentMd: string;
-  syncToStaticSite?: boolean | string;
+  displayOnStaticSite?: boolean | string;
   formName?: string;
   webflowIndustry?: string;
   [key: string]: unknown;
@@ -83,7 +83,9 @@ export const loadAllNavigatorLicenses = (): LicenseData[] => {
       const fullPath = path.join(tasksAllDir, `${fileName}`);
       return loadLicenseByPath(fileName, fullPath);
     })
-    .filter((license) => license.syncToStaticSite === true || license.syncToStaticSite === "true");
+    .filter(
+      (license) => license.displayOnStaticSite === true || license.displayOnStaticSite === "true",
+    );
 
   return [...navigatorLicenses, ...municipalLicenses, ...tasksAllLicenses];
 };

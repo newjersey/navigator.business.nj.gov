@@ -170,6 +170,31 @@ export const loadLicenseReinstatements = (): AnytimeActionLicenseReinstatement[]
 export const loadLicenses = (): License[] =>
   (readContentJson("licenses.json") as { licenses: License[] }).licenses;
 
+/**
+ * Converts an Anytime Action to a licensing guide card. The CMS requires a
+ * staticSiteName when displayOnStaticSite is set; truthiness (not `??`) falls back
+ * to the action's own name if an author leaves it blank.
+ */
+const toAnytimeActionLicense = (
+  action: AnytimeActionTask | AnytimeActionLicenseReinstatement,
+): License => ({
+  name: action.staticSiteName || action.name,
+  urlSlug: action.urlSlug,
+  summaryDescriptionMd: action.summaryDescriptionMd,
+  agency: action.issuingAgency,
+  callToActionText: action.callToActionText,
+  callToActionLink: action.callToActionLink,
+});
+
+/**
+ * Loads Anytime Action tasks and license reinstatements flagged for the static site
+ * as licensing guide cards.
+ */
+export const loadStaticSiteAnytimeActionLicenses = (): License[] =>
+  [...loadAnytimeActions(), ...loadLicenseReinstatements()]
+    .filter((action) => action.displayOnStaticSite === true)
+    .map(toAnytimeActionLicense);
+
 export const loadPages = (): PageItem[] => readMarkdownDirectory<PageItem>("pages");
 
 export const loadPageBySlug = (slug: string): PageItem => readMarkdownFile<PageItem>("pages", slug);

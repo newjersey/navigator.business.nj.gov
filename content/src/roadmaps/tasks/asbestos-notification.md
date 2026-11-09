@@ -48,7 +48,7 @@ notesMd: >-
 
   Draft Document:
   https://docs.google.com/document/d/16SDcwVjI4j_6HXntd3eatGnL3Hh8TjP2BTamIKMiBIs/edit?tab=t.0
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 ## Asbestos Work That Does Not Require Notification

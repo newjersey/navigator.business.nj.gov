@@ -68,7 +68,7 @@ summaryDescriptionMd: >-
 
   :::
 formName: BA-208C
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 &nbsp;

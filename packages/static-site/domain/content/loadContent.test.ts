@@ -1,7 +1,12 @@
 import fs from "node:fs";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { generateIndustry } from "@/tests/factories";
-import { loadIndustries, loadRecents } from "./loadContent";
+import {
+  generateAnytimeActionLicenseReinstatement,
+  generateAnytimeActionTask,
+  generateIndustry,
+} from "@/tests/factories";
+import { loadIndustries, loadRecents, loadStaticSiteAnytimeActionLicenses } from "./loadContent";
+import type { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "./types";
 
 const enabledIndustry1 = generateIndustry({ isEnabled: true });
 const disabledIndustry = generateIndustry({ isEnabled: false });
@@ -84,5 +89,77 @@ describe("loadRecents", () => {
     const recents = loadRecents();
 
     expect(recents).toHaveLength(0);
+  });
+});
+
+const mockAnytimeActionContent = (
+  actions: AnytimeActionTask[],
+  licenseReinstatements: AnytimeActionLicenseReinstatement[],
+): void => {
+  vi.spyOn(fs, "readFileSync").mockImplementation((filePath) =>
+    String(filePath).endsWith("license-reinstatements.json")
+      ? JSON.stringify({ licenseReinstatements })
+      : JSON.stringify({ actions }),
+  );
+};
+
+describe("loadStaticSiteAnytimeActionLicenses", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("keeps only tasks and reinstatements flagged displayOnStaticSite", () => {
+    const shownTask = generateAnytimeActionTask({ displayOnStaticSite: true });
+    const shownReinstatement = generateAnytimeActionLicenseReinstatement({
+      displayOnStaticSite: true,
+    });
+    mockAnytimeActionContent(
+      [
+        shownTask,
+        generateAnytimeActionTask({ displayOnStaticSite: false }),
+        generateAnytimeActionTask(),
+      ],
+      [shownReinstatement, generateAnytimeActionLicenseReinstatement()],
+    );
+
+    const licenses = loadStaticSiteAnytimeActionLicenses();
+
+    expect(licenses.map((license) => license.urlSlug)).toEqual([
+      shownTask.urlSlug,
+      shownReinstatement.urlSlug,
+    ]);
+  });
+
+  it("maps card fields, using issuingAgency as the agency", () => {
+    const task = generateAnytimeActionTask({ displayOnStaticSite: true });
+    mockAnytimeActionContent([task], []);
+
+    expect(loadStaticSiteAnytimeActionLicenses()).toEqual([
+      {
+        name: task.name,
+        urlSlug: task.urlSlug,
+        summaryDescriptionMd: task.summaryDescriptionMd,
+        agency: task.issuingAgency,
+        callToActionText: task.callToActionText,
+        callToActionLink: task.callToActionLink,
+      },
+    ]);
+  });
+
+  it("prefers staticSiteName over name for the card title", () => {
+    const task = generateAnytimeActionTask({
+      displayOnStaticSite: true,
+      staticSiteName: "Static Site Name",
+    });
+    mockAnytimeActionContent([task], []);
+
+    expect(loadStaticSiteAnytimeActionLicenses()[0].name).toBe(task.staticSiteName);
+  });
+
+  it("falls back to name when staticSiteName is blank", () => {
+    const task = generateAnytimeActionTask({ displayOnStaticSite: true, staticSiteName: "" });
+    mockAnytimeActionContent([task], []);
+
+    expect(loadStaticSiteAnytimeActionLicenses()[0].name).toBe(task.name);
   });
 });

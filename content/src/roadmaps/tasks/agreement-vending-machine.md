@@ -14,7 +14,7 @@ summaryDescriptionMd: >-
 
   Signing your agreements under your registered business name may protect you
   from liabilities and associated costs.
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 ## Agreement Considerations

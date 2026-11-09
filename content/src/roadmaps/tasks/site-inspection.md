@@ -20,7 +20,7 @@ summaryDescriptionMd: >-
   application is complete.
 callToActionLink: ""
 callToActionText: ""
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 :::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }

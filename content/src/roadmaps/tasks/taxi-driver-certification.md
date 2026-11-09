@@ -28,7 +28,7 @@ summaryDescriptionMd: >-
   responsibility to file an application for a driver's certification if the
   driver doesn't already have one.
 formName: CLD-5
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 ## Eligibility Requirements

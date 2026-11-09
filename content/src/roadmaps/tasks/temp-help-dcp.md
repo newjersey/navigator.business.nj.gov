@@ -40,7 +40,7 @@ notesMd: >+
 
 
 industryId: ""
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 &nbsp;

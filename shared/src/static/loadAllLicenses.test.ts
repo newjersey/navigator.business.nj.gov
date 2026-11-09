@@ -9,11 +9,11 @@ describe("loadAllLicenses", () => {
     jest.restoreAllMocks();
   });
 
-  it("includes all webflow-licenses and license-tasks, and only tasks flagged syncToStaticSite", () => {
+  it("includes all webflow-licenses and license-tasks, and only tasks flagged displayOnStaticSite", () => {
     const all = loadAllLicenses();
     // A webflow-license file appears (sample a known slug).
     expect(all.some((l) => l.urlSlug === "adoption-agency")).toBe(true);
-    // A roadmaps/tasks file WITH syncToStaticSite appears.
+    // A roadmaps/tasks file WITH displayOnStaticSite appears.
     expect(all.some((l) => l.urlSlug === "trucking-usdot")).toBe(true);
     // The municipal-tasks file appears.
     expect(all.some((l) => l.urlSlug === "elevator-registration")).toBe(true);

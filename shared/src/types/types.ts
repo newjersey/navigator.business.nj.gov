@@ -177,6 +177,8 @@ interface AnytimeAction {
   filename: string;
   type: string;
   synonyms?: string[];
+  displayOnStaticSite?: boolean;
+  staticSiteName?: string;
 }
 
 export interface AnytimeActionTask extends AnytimeAction {

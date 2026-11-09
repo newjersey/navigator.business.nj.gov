@@ -50,7 +50,7 @@ summaryDescriptionMd: >-
   for registering it in NJ.
 notesMd: ""
 formName: BA-49
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 ## Application Requirements
