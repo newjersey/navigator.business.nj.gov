@@ -1,3 +1,19 @@
+# [2026.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.26.0...v2026.27.0) (2026-11-09)
+
+
+### Bug Fixes
+
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) convert web CommonJS modules to ES modules ([3f1b1b9](https://github.com/newjersey/navigator.business.nj.gov/commit/3f1b1b9a278926ca963d3012e0ceae5a19e45cc3))
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) resolve remaining biome violations in web ([10bcc80](https://github.com/newjersey/navigator.business.nj.gov/commit/10bcc80cddc1d601667e72dca136dd8923533d73))
+* [AB#18061](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18061) resolve biome errors in LearnTaskSidebarPageLayout ([78a98bb](https://github.com/newjersey/navigator.business.nj.gov/commit/78a98bbd33b750dc4f905b5a9da5fee1f2a1031c))
+
+
+### Features
+
+* [AB#18050](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18050) add ProfileNJ OIDC provider to dev Cognito pool via CDK ([5034750](https://github.com/newjersey/navigator.business.nj.gov/commit/503475071334ded4ed2258dcb6d14636e3715fb1))
+* [AB#18061](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18061) add mobile learn navigation accordion ([d67e3dd](https://github.com/newjersey/navigator.business.nj.gov/commit/d67e3dd8338748340925708b0002e62a053a8865))
+* [AB#18087](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18087) new lieutenant governor ([0134545](https://github.com/newjersey/navigator.business.nj.gov/commit/013454564efe8f49aa41c5f2d4880441d532b9b7))
+
 # [2026.26.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.25.1...v2026.26.0) (2026-11-04)
 
 
