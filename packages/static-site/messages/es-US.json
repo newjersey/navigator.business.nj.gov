@@ -17,7 +17,7 @@
         "opensInNewTab": true
       },
       "governorIdentityLink": {
-        "label": "Gobernadora Mikie Sherrill",
+        "label": "Gobernadora Mikie Sherrill • Vicegobernadora Shirley U. Emehelu",
         "href": "https://nj.gov/governor/",
         "isInternal": false,
         "opensInNewTab": true
@@ -147,6 +147,14 @@
           "link": {
             "label": "Gobernadora Mikie Sherrill",
             "href": "https://nj.gov/governor/admin/about/",
+            "isInternal": false,
+            "opensInNewTab": false
+          }
+        },
+        {
+          "link": {
+            "label": "Vicegobernadora Shirley U. Emehelu",
+            "href": "https://nj.gov/governor/admin/lt/",
             "isInternal": false,
             "opensInNewTab": false
           }
