@@ -106,6 +106,35 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
         ]),
       );
     });
+    it("includes static site props when they are set in frontmatter", () => {
+      const anytimeActionLicenseReinstatement =
+        "---\n" +
+        "name: anytime action license reinstatement name\n" +
+        "urlSlug: urlslug\n" +
+        "displayOnStaticSite: true\n" +
+        "staticSiteName: Static Site Name\n" +
+        "---\n" +
+        "Some content description";
+
+      const fakeCategoryMapping =
+        "---\n" +
+        "category-name: Reactivate My Expired Permit, License or Registration\n" +
+        "id: reactivate-my-expired-permit-license-or-registration\n" +
+        "---\n";
+
+      mockedFs.readdirSync
+        // @ts-expect-error
+        .mockReturnValueOnce(["opp.md"])
+        // @ts-expect-error
+        .mockReturnValueOnce(["fake-category.md"]);
+      mockedFs.readFileSync
+        .mockReturnValueOnce(anytimeActionLicenseReinstatement)
+        .mockReturnValueOnce(fakeCategoryMapping);
+
+      const [anytimeActionLicenseReinstatementResult] = loadAllAnytimeActionLicenseReinstatements();
+      expect(anytimeActionLicenseReinstatementResult.displayOnStaticSite).toBe(true);
+      expect(anytimeActionLicenseReinstatementResult.staticSiteName).toBe("Static Site Name");
+    });
   });
 
   describe("loadAnytimeActionLicenseReinstatementsByUrlSlug", () => {

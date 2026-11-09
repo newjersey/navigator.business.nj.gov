@@ -122,6 +122,21 @@ collections:
           create: true,
           field: { name: synonym, label: "Synonym", widget: string },
         }
+      - {
+          label: "Display on Static Site",
+          name: "displayOnStaticSite",
+          widget: "boolean",
+          required: false,
+          default: false,
+          hint: "You must provide a 'Static Site name' if this is selected",
+        }
+      - {
+          label: "Static Site Name",
+          hint: Required if "Sync to Static Site" is selected,
+          name: "staticSiteName",
+          widget: "string",
+          required: false,
+        }
 
   - name: "anytime-action-license-reinstatements"
     label: "Anytime Action With Consumer Affairs License Integrations (Reinstatements)"
@@ -181,6 +196,21 @@ collections:
           allow_add: true,
           create: true,
           field: { name: synonym, label: "Synonym", widget: string },
+        }
+      - {
+          label: "Display on Static Site",
+          name: "displayOnStaticSite",
+          widget: "boolean",
+          required: false,
+          default: false,
+          hint: "You must provide a 'Static Site name' if this is selected",
+        }
+      - {
+          label: "Static Site Name",
+          hint: Required if "Sync to Static Site" is selected,
+          name: "staticSiteName",
+          widget: "string",
+          required: false,
         }
   - name: "tax-clearance-certificate-anytime-action"
     label: "Tax Clearance Anytime Action"

@@ -107,6 +107,34 @@ describe("loadAnytimeActionTasks", () => {
         ]),
       );
     });
+    it("includes static site props when they are set in frontmatter", () => {
+      const anytimeActionTask =
+        "---\n" +
+        "name: anytime action task name\n" +
+        "urlSlug: urlslug\n" +
+        "category:\n" +
+        "  - test-cat\n" +
+        "displayOnStaticSite: true\n" +
+        "staticSiteName: Static Site Name\n" +
+        "---\n" +
+        "Some content description";
+
+      const fakeCategoryMapping =
+        "---\n" + "category-name: Test Cat\n" + "id: test-cat\n" + "---\n";
+
+      mockedFs.readdirSync
+        // @ts-expect-error
+        .mockReturnValueOnce(["opp.md"])
+        // @ts-expect-error
+        .mockReturnValueOnce(["fake-category.md"]);
+      mockedFs.readFileSync
+        .mockReturnValueOnce(anytimeActionTask)
+        .mockReturnValueOnce(fakeCategoryMapping);
+
+      const [anytimeActionTaskResult] = loadAllAnytimeActionTasks();
+      expect(anytimeActionTaskResult.displayOnStaticSite).toBe(true);
+      expect(anytimeActionTaskResult.staticSiteName).toBe("Static Site Name");
+    });
   });
 
   describe("loadAnytimeActionTaskByUrlSlug", () => {

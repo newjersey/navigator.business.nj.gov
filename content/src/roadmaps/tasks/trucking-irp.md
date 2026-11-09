@@ -29,7 +29,7 @@ summaryDescriptionMd: >
   and Canada, and **allows legal operation between jurisdictions.**
 agencyAdditionalContext: ""
 formName: IRP-7
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 &nbsp;

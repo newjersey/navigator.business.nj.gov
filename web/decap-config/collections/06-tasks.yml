@@ -329,8 +329,8 @@ collections:
           required: false,
         }
       - {
-          label: "Sync to Static Site",
-          name: "syncToStaticSite",
+          label: "Display on Static Site",
+          name: "displayOnStaticSite",
           widget: "boolean",
           required: false,
           default: false,

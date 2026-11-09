@@ -16,6 +16,10 @@ export interface AnytimeAction {
   readonly type: string;
   /** Alternative search terms for this action. */
   readonly synonyms?: string[];
+  /** Whether this action should be displayed on the Static Site */
+  readonly displayOnStaticSite?: boolean;
+  /** Alternative title for use on the static site */
+  readonly staticSiteName?: string;
 }
 
 /** An action a business can perform at any time, outside the roadmap sequence. */

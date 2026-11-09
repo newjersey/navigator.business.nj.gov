@@ -98,7 +98,7 @@ Test content`;
       expect(licenses.length).toBeGreaterThan(0);
     });
 
-    it("filters tasks by syncToStaticSite flag", () => {
+    it("filters tasks by displayOnStaticSite flag", () => {
       (mockFs.readdirSync as jest.Mock).mockImplementation((dir) => {
         if (dir.toString().includes("license-tasks")) {
           return [];
@@ -112,7 +112,7 @@ Test content`;
       mockFs.readFileSync.mockReturnValue("test content");
       mockMatter
         .mockReturnValueOnce({
-          data: createMockLicense({ syncToStaticSite: true }),
+          data: createMockLicense({ displayOnStaticSite: true }),
           content: "Test content",
           excerpt: "",
           matter: "",
@@ -121,7 +121,7 @@ Test content`;
           language: "",
         })
         .mockReturnValueOnce({
-          data: createMockLicense({ syncToStaticSite: false }),
+          data: createMockLicense({ displayOnStaticSite: false }),
           content: "Test content",
           excerpt: "",
           matter: "",
@@ -132,11 +132,11 @@ Test content`;
 
       const licenses = loadAllNavigatorLicenses();
 
-      const syncedLicenses = licenses.filter((l) => l.syncToStaticSite === true);
+      const syncedLicenses = licenses.filter((l) => l.displayOnStaticSite === true);
       expect(syncedLicenses.length).toBeGreaterThan(0);
     });
 
-    it("includes licenses with syncToStaticSite as string 'true'", () => {
+    it("includes licenses with displayOnStaticSite as string 'true'", () => {
       (mockFs.readdirSync as jest.Mock).mockImplementation((dir) => {
         if (dir.toString().includes("license-tasks")) {
           return [];
@@ -149,7 +149,7 @@ Test content`;
 
       mockFs.readFileSync.mockReturnValue("test content");
       mockMatter.mockReturnValueOnce({
-        data: createMockLicense({ syncToStaticSite: "true" }),
+        data: createMockLicense({ displayOnStaticSite: "true" }),
         content: "Test content",
         excerpt: "",
         matter: "",
@@ -160,7 +160,7 @@ Test content`;
 
       const licenses = loadAllNavigatorLicenses();
 
-      expect(licenses.some((l) => l.syncToStaticSite === "true")).toBe(true);
+      expect(licenses.some((l) => l.displayOnStaticSite === "true")).toBe(true);
     });
   });
 

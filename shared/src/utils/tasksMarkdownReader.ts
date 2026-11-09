@@ -135,6 +135,8 @@ type AnytimeActionTaskGrayMatter = {
   sectorIds: string[];
   applyToAllUsers: boolean;
   summaryDescriptionMd: string;
+  displayOnStaticSite?: boolean;
+  staticSiteName?: string;
 };
 
 type AnytimeActionLicenseReinstatementGrayMatter = {
@@ -145,4 +147,6 @@ type AnytimeActionLicenseReinstatementGrayMatter = {
   issuingAgency: string;
   licenseName: LicenseName;
   summaryDescriptionMd: string;
+  displayOnStaticSite?: boolean;
+  staticSiteName?: string;
 };

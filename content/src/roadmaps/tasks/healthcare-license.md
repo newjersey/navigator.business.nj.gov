@@ -12,7 +12,7 @@ agencyId: nj-consumer-affairs
 summaryDescriptionMd: >-
   All healthcare providers in your medical facility need to be licensed medical
   professionals.
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 ## Licensing Requirements By Role

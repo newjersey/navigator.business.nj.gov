@@ -61,7 +61,7 @@ notesMd: >-
   -- complete page 17 and choose "Employer of Domestic Household Employee(s)"
   under step A and "Domestic (Household Employer)" under step H.
 formName: NJ-Reg
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 ## Application Requirements

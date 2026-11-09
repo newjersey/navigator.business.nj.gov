@@ -41,7 +41,7 @@ summaryDescriptionMd: >-
 
   :::
 industryId: ""
-syncToStaticSite: true
+displayOnStaticSite: true
 ---
 
 ## Requirements for Businesses in New Jersey
