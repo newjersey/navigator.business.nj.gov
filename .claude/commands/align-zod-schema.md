@@ -33,7 +33,7 @@ Repeat the following loop until you judge the remaining diff lines are all accep
 ### Step 1: Run the diff
 
 ```bash
-yarn workspace @businessnjgovnavigator/api print:user-schema:diff
+pnpm --filter @businessnjgovnavigator/api run print:user-schema:diff
 ```
 
 If the output says "Schemas are identical", you're done — report success and stop.

@@ -53,7 +53,7 @@ export const FileInput = ({
   onChange,
 }: Props): ReactElement => {
   // biome-ignore lint/style/noCommonJs: USWDS file-input's polyfills read window at load; a module-scope import breaks the server build
-  const fileInput = require("../../../../node_modules/@uswds/uswds/packages/usa-file-input/src");
+  const fileInput = require("@uswds/uswds/js/usa-file-input");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const size = maxFileSize?.maxSizeInMegabytes
     ? maxFileSize.maxSizeInMegabytes * BYTES_IN_A_MB

@@ -5,22 +5,22 @@ it. `AGENTS.md` is read by Codex; `CLAUDE.md` is read by Claude Code.
 
 ## Project Shape
 
-Business.NJ.gov Navigator is a TypeScript monorepo managed with Yarn 4
+Business.NJ.gov Navigator is a TypeScript monorepo managed with pnpm 12
 workspaces. See `.nvmrc` for the required Node version.
 
-| Package                                          | Purpose                                                                                                |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `shared/`                                        | Domain types, shared utilities, and cross-package domain logic                                         |
-| `content/`                                       | Markdown/YAML/JSON content build system                                                                |
-| `api/`                                           | Express backend deployed as AWS Lambda functions                                                       |
-| `api/cdk/`                                       | AWS CDK infrastructure for the backend                                                                 |
-| `api/src/functions/messagingService/reactEmail/` | React Email templates compiled to static HTML/text                                                     |
-| `web/`                                           | Next.js frontend using MUI, SCSS, and Amplify auth                                                     |
-| `packages/content-types/`                        | Shared TypeScript content type definitions used by `content/` and `web`                                |
-| `packages/static-site/`                          | Static Next.js site (App Router, next-intl i18n, Biome, Vitest, Playwright a11y) — uses pnpm, not yarn |
+| Package                                          | Purpose                                                                          |
+| ------------------------------------------------ | -------------------------------------------------------------------------------- |
+| `shared/`                                        | Domain types, shared utilities, and cross-package domain logic                   |
+| `content/`                                       | Markdown/YAML/JSON content build system                                          |
+| `api/`                                           | Express backend deployed as AWS Lambda functions                                 |
+| `api/cdk/`                                       | AWS CDK infrastructure for the backend                                           |
+| `api/src/functions/messagingService/reactEmail/` | React Email templates compiled to static HTML/text                               |
+| `web/`                                           | Next.js frontend using MUI, SCSS, and Amplify auth                               |
+| `packages/content-types/`                        | Shared TypeScript content type definitions used by `content/` and `web`          |
+| `packages/static-site/`                          | Static Next.js site (App Router, next-intl i18n, Biome, Vitest, Playwright a11y) |
 
-Build order is `shared` -> `content` -> `api` / `api-cdk` / `react-email` /
-`web`.
+Build order is `content-types` -> `content` -> `shared` -> `api` / `api-cdk` /
+`react-email` / `web`.
 
 ## Working Rules
 
@@ -69,39 +69,39 @@ package-local command.
 
 ```bash
 # Environment
-yarn verify:node
-yarn services:up
-yarn services:down
+pnpm run verify:node
+pnpm run services:up
+pnpm run services:down
 
 # Development
-yarn start:dev
+pnpm run start:dev
 
 # Build and quality
-yarn build
-yarn build:clean
-yarn lint
-yarn typecheck
-yarn prettier:check
+pnpm run build
+pnpm run build:clean
+pnpm run lint
+pnpm run typecheck
+pnpm run prettier:check
 
 # Tests
-yarn test                  # Root Jest suite
-yarn test:ci               # Root Jest suite in CI mode
-yarn test:watch            # Root Jest suite in watch mode
-yarn test:python           # Python script tests
-yarn workspace @businessnjgovnavigator/content test
+pnpm run test                  # Root Jest suite
+pnpm run test:ci               # Root Jest suite in CI mode
+pnpm run test:watch            # Root Jest suite in watch mode
+pnpm run test:python           # Python script tests
+pnpm --filter @businessnjgovnavigator/content run test
 
 # Workspace-specific examples
-yarn workspace @businessnjgovnavigator/api test
-yarn workspace @businessnjgovnavigator/api-cdk test
-yarn workspace @businessnjgovnavigator/react-email build
-yarn workspace @businessnjgovnavigator/web test
-yarn workspace @businessnjgovnavigator/shared test
+pnpm --filter @businessnjgovnavigator/api run test
+pnpm --filter @businessnjgovnavigator/api-cdk run test
+pnpm --filter @businessnjgovnavigator/react-email run build
+pnpm --filter @businessnjgovnavigator/web run test
+pnpm --filter @businessnjgovnavigator/shared run test
 ```
 
 ## Repo-Specific Guardrails
 
 - The Decap CMS config at `web/public/mgmt/config.yml` is generated. Edit
-  source fragments and run `yarn decap:build-config`; do not hand-edit the
+  source fragments and run `pnpm run decap:build-config`; do not hand-edit the
   generated config.
 - Content source files are compiled by `content/` and consumed through
   `@businessnjgovnavigator/content`. Other packages should not import content
@@ -117,7 +117,7 @@ yarn workspace @businessnjgovnavigator/shared test
 
 - The change is minimal, typed, and follows nearby patterns.
 - Relevant unit or package tests were run, or you can state why they were not.
-- `yarn typecheck` or a narrower typecheck was run for TypeScript behavior
+- `pnpm run typecheck` or a narrower typecheck was run for TypeScript behavior
   changes.
 - Generated files are updated only through their generator.
 - No unrelated user or branch changes were reverted.

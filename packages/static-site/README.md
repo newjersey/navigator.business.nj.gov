@@ -52,8 +52,7 @@ cd navigator.business.nj.gov
 source scripts/install.sh
 ```
 
-The install script sets up root dependencies and also installs/builds `packages/static-site` with
-pnpm.
+The install script installs the shared pnpm workspace and builds `packages/static-site`.
 
 ## Usage
 

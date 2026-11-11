@@ -7,18 +7,18 @@ monitoring stacks.
 ## Commands
 
 ```bash
-yarn build
-yarn test
-yarn lint
-yarn cdk synth
-yarn cdk diff
+pnpm run build
+pnpm run test
+pnpm run lint
+pnpm run cdk synth
+pnpm run cdk diff
 ```
 
 From the repo root, use the workspace name:
 
 ```bash
-yarn workspace @businessnjgovnavigator/api-cdk cdk synth
-yarn workspace @businessnjgovnavigator/api-cdk cdk diff
+pnpm --filter @businessnjgovnavigator/api-cdk run cdk synth
+pnpm --filter @businessnjgovnavigator/api-cdk run cdk diff
 ```
 
 ## Boundaries

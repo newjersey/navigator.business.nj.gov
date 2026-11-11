@@ -130,11 +130,14 @@ def exceptions_for_cutover(
 
 def format_with_prettier(path: Path) -> None:
     result = subprocess.run(
-        ["npx", "prettier", "--write", str(path)], capture_output=True, text=True
+        ["pnpm", "exec", "prettier", "--write", str(path)],
+        capture_output=True,
+        text=True,
+        cwd=CONFIG_PATH.parent.parent,
     )
     if result.returncode != 0:
         print(
-            f"warning: prettier formatting failed, run `npx prettier --write {path}` "
+            f"warning: prettier formatting failed, run `pnpm exec prettier --write {path}` "
             f"by hand:\n{result.stderr}",
             file=sys.stderr,
         )

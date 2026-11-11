@@ -9,7 +9,7 @@ runs:
     - name: Install DynamoDB Local
       shell: bash
       run: |
-        yarn workspace @businessnjgovnavigator/api install-dynamo-local
+        pnpm --filter @businessnjgovnavigator/api run install-dynamo-local
 
     - name: Start DynamoDB Local
       shell: bash

@@ -4,12 +4,12 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "yarn generate:user-schema && tsc --project tsconfig.json",
-    "prestart": "yarn generate:user-schema",
+    "build": "pnpm run generate:user-schema && tsc --project tsconfig.json",
+    "prestart": "pnpm run generate:user-schema",
     "generate:user-schema": "tsx scripts/generateUserSchemaFile.ts",
     "clean": "rimraf cdk/cdk.out",
-    "dev": "concurrently \"yarn start:wiremock\" \"yarn start:hotReload\"",
-    "dependency-check": "yarn depcruise --config .dependency-cruiser.js src",
+    "dev": "concurrently \"pnpm run start:wiremock\" \"pnpm run start:hotReload\"",
+    "dependency-check": "depcruise --config .dependency-cruiser.js src",
     "install-dynamo-local": "./scripts/dynamodb-local.sh",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
@@ -27,7 +27,7 @@
     "start:wiremock:with-port": "wiremock --root-dir ./wiremock",
     "test": "jest",
     "typecheck": "tsc --noemit",
-    "cms-integrity-tests": "yarn dlx tsx ./scripts/cms-content-integrity-tests/runCmsIntegrityTests.ts",
+    "cms-integrity-tests": "tsx ./scripts/cms-content-integrity-tests/runCmsIntegrityTests.ts",
     "cms-slug-check": "tsx ./scripts/cms-content-integrity-tests/runSlugCollisionCheck.ts"
   },
   "engines": {
@@ -50,7 +50,7 @@
     "@aws-sdk/types": "3.893.0",
     "@aws-sdk/util-base64-node": "3.209.0",
     "@aws-sdk/util-dynamodb": "3.896.0",
-    "@businessnjgovnavigator/shared": "*",
+    "@businessnjgovnavigator/shared": "workspace:*",
     "@smithy/node-http-handler": "4.8.0",
     "axios": "1.20.0",
     "cors": "2.8.6",
@@ -72,7 +72,7 @@
   },
   "devDependencies": {
     "@aws-sdk/client-cognito-identity-provider": "3.777.0",
-    "@businessnjgovnavigator/shared": "*",
+    "@businessnjgovnavigator/shared": "workspace:*",
     "@jest/types": "30.4.1",
     "@types/cors": "2.8.19",
     "@types/dedent": "0.7.2",

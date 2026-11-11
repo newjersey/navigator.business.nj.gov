@@ -10,14 +10,14 @@ function cleanup() {
   if (shuttingDown) return;
   shuttingDown = true;
 
-  const down = run("yarn services:down");
+  const down = run("pnpm run services:down");
   down.on("exit", (code) => {
     process.exit(code ?? 0);
   });
 }
 
 async function main() {
-  const up = run("yarn services:up");
+  const up = run("pnpm run services:up");
   up.on("exit", (code) => {
     if (code !== 0) {
       process.exit(code);
@@ -25,7 +25,12 @@ async function main() {
   });
 
   up.on("close", () => {
-    const dev = run("yarn workspaces foreach --all -ptvi run dev");
+    const dev = run(
+      "pnpm --filter @businessnjgovnavigator/content run dev && " +
+        "pnpm --filter @businessnjgovnavigator/shared run dev && " +
+        "pnpm -r --parallel --filter @businessnjgovnavigator/api " +
+        "--filter @businessnjgovnavigator/web run dev",
+    );
 
     // On Ctrl+C or process termination
     process.on("SIGINT", cleanup);

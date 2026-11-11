@@ -31,7 +31,7 @@
     "formatter": { "enabled": false },
     "linter": { "enabled": false }
   },
-  // yarn build runs decap:build-config, which runs prettier -w on web/decap-config; Biome moves YAML in a later PR.
+  // pnpm build runs decap:build-config, which runs prettier -w on web/decap-config; Biome moves YAML in a later PR.
   "yaml": { "formatter": { "enabled": false } },
   "overrides": [
     {

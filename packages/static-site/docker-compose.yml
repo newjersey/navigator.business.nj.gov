@@ -18,18 +18,18 @@ services:
     tmpfs:
       - /tmp
     volumes:
-      - ./app:/app/app
-      - ./components:/app/components
-      - ./domain:/app/domain
-      - ./messages:/app/messages
-      - ./public:/app/public
-      - ./scripts:/app/scripts
-      - ./next.config.ts:/app/next.config.ts
-      - ./proxy.ts:/app/proxy.ts
-      - ./proxyAuth.ts:/app/proxyAuth.ts
-      - ./tsconfig.json:/app/tsconfig.json
-      - ../../content:/content
-      - static_site_next:/app/.next
+      - ./app:/app/packages/static-site/app
+      - ./components:/app/packages/static-site/components
+      - ./domain:/app/packages/static-site/domain
+      - ./messages:/app/packages/static-site/messages
+      - ./public:/app/packages/static-site/public
+      - ./scripts:/app/packages/static-site/scripts
+      - ./next.config.ts:/app/packages/static-site/next.config.ts
+      - ./proxy.ts:/app/packages/static-site/proxy.ts
+      - ./proxyAuth.ts:/app/packages/static-site/proxyAuth.ts
+      - ./tsconfig.json:/app/packages/static-site/tsconfig.json
+      - ../../content:/app/content
+      - static_site_next:/app/packages/static-site/.next
 
 networks:
   static_site_network:

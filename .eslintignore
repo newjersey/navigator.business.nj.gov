@@ -1,11 +1,11 @@
 node_modules
+pnpm-lock.yaml
 .venv
 venv
 
 # root
 aws_config_file_path.json
 scripts/
-.yarn
 .vscode
 .playwright-mcp
 coverage

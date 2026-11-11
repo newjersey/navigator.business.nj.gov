@@ -13,13 +13,14 @@ fi
 "${_setup_root}/scripts/_install.sh" || { echo "Install failed."; return 1 2>/dev/null || exit 1; }
 
 export PATH="$HOME/.local/bin:$PATH"
-export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
-export PATH="$PNPM_HOME/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 nvm use
+
+export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
+export PATH="$PNPM_HOME/bin:$PATH"
 
 [ -d "${_setup_root}/.venv" ] && source "${_setup_root}/.venv/bin/activate"
 

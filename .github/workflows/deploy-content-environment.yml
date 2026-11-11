@@ -128,18 +128,6 @@ jobs:
           ref: ${{ inputs.ref }}
           fetch-depth: 0
 
-      - uses: actions/setup-node@v7
-        with:
-          node-version-file: .nvmrc
-          cache: yarn
-
-      - uses: actions/cache@v6
-        with:
-          path: .yarn/cache
-          key: yarn-cache-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            yarn-cache-
-
       - uses: ./.github/actions/deploy
         with:
           service_name: bfs-navigator-content

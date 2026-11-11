@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsx -r tsconfig-paths/register ./build.ts",
     "clean": "rimraf lib",
-    "dev": "yarn build",
+    "dev": "pnpm run build",
     "test": "vitest run",
     "validate-frontmatter-dates": "tsx -r tsconfig-paths/register ./validateFrontmatterDates.ts",
     "lint": "biome check .",
@@ -22,8 +22,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.3",
-    "@businessnjgovnavigator/content-types": "*",
-    "@businessnjgovnavigator/shared": "*",
+    "@businessnjgovnavigator/content-types": "workspace:*",
+    "@businessnjgovnavigator/shared": "workspace:*",
     "@types/node": "24.13.3",
     "@vitest/coverage-v8": "4.1.9",
     "cross-env": "10.1.0",

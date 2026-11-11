@@ -3,7 +3,7 @@
 cd "$(git rev-parse --show-toplevel)"
 
 shopt -s expand_aliases
-alias nc='npx nc'
+alias nc='pnpm exec nc'
 
 WEB_PORT=3001
 API_PORT=5001
@@ -12,19 +12,19 @@ DYNAMO_PORT=8001
 WIREMOCK_PORT=9001
 API_BASE_URL=http://localhost:${API_PORT}
 
-npx kill-port ${WEB_PORT}
-npx kill-port ${API_PORT}
-npx kill-port ${DYNAMO_PORT}
-npx kill-port ${LAMBDA_PORT}
-npx kill-port ${WIREMOCK_PORT}
+pnpm exec kill-port ${WEB_PORT}
+pnpm exec kill-port ${API_PORT}
+pnpm exec kill-port ${DYNAMO_PORT}
+pnpm exec kill-port ${LAMBDA_PORT}
+pnpm exec kill-port ${WIREMOCK_PORT}
 
 set -e
 
 echo "🚀 build shared library"
-yarn workspace @businessnjgovnavigator/shared build
+pnpm --filter @businessnjgovnavigator/shared run build
 
 echo "🚀 starting wiremock"
-yarn workspace @businessnjgovnavigator/api start:wiremock:with-port --port ${WIREMOCK_PORT} &
+pnpm --filter @businessnjgovnavigator/api run start:wiremock:with-port --port ${WIREMOCK_PORT} &
 while ! echo exit | nc localhost ${WIREMOCK_PORT}; do sleep 1; done
 
 echo "🚀 starting api"
@@ -38,28 +38,28 @@ export GOV_DELIVERY_BASE_URL=http://localhost:${WIREMOCK_PORT}
 export FORMATION_API_BASE_URL=http://localhost:${WIREMOCK_PORT}
 export SKIP_SAVE_DOCUMENTS_TO_S3=true
 export USE_FAKE_SELF_REG=true
-yarn workspace @businessnjgovnavigator/api start &
+pnpm --filter @businessnjgovnavigator/api run start &
 while ! echo exit | nc localhost ${API_PORT}; do sleep 1; done
 
 # need to start api before building webapp so that it can query for municipalities
 echo "📦 building webapp"
-API_BASE_URL=${API_BASE_URL} DISABLE_GTM=true yarn workspace @businessnjgovnavigator/web build
+API_BASE_URL=${API_BASE_URL} DISABLE_GTM=true pnpm --filter @businessnjgovnavigator/web run build
 
 echo "🚀 starting webapp"
-yarn workspace @businessnjgovnavigator/web start --port=${WEB_PORT} &
+pnpm --filter @businessnjgovnavigator/web run start --port=${WEB_PORT} &
 while ! echo exit | nc localhost ${WEB_PORT}; do sleep 1; done
 
 echo "🌟 app started"
 
-CYPRESS_API_BASE_URL=${API_BASE_URL} yarn workspace @businessnjgovnavigator/web cypress:run:feature --browser=chrome --config baseUrl=http://localhost:${WEB_PORT}
+CYPRESS_API_BASE_URL=${API_BASE_URL} pnpm --filter @businessnjgovnavigator/web run cypress:run:feature --browser=chrome --config baseUrl=http://localhost:${WEB_PORT}
 
 set +e
 
-npx kill-port ${WEB_PORT}
-npx kill-port ${API_PORT}
-npx kill-port ${DYNAMO_PORT}
-npx kill-port ${LAMBDA_PORT}
-npx kill-port ${WIREMOCK_PORT}
+pnpm exec kill-port ${WEB_PORT}
+pnpm exec kill-port ${API_PORT}
+pnpm exec kill-port ${DYNAMO_PORT}
+pnpm exec kill-port ${LAMBDA_PORT}
+pnpm exec kill-port ${WIREMOCK_PORT}
 
 echo "   __            _                                             _"
 echo "  / _| ___  __ _| |_ _   _ _ __ ___  ___   _ __   __ _ ___ ___| |"

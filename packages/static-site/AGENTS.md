@@ -3,8 +3,8 @@
 Locale-aware static landing site (`@businessnjgovnavigator/static-site`). Next.js App Router with
 `next-intl` i18n, NJWDS components, and Playwright accessibility tests. Deployed to ECS/Fargate.
 
-**Toolchain differs from the rest of the repo:** uses **pnpm** (not yarn), **Biome** (not
-ESLint/Prettier), and **Vitest** (not Jest). Run commands from `packages/static-site`.
+**Toolchain differs from the rest of the repo:** uses **Biome** (not ESLint/Prettier)
+and **Vitest** (not Jest). Run commands from `packages/static-site`.
 
 ## Commands
 

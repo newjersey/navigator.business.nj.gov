@@ -89,7 +89,7 @@ the full check:
 python -m unittest discover -b -s scripts -p "test_*.py"
 python -m doctest scripts/ado_boards.py
 node -e 'require("./release.config.cjs"); console.log("config ok")'
-npx prettier --check scripts/ado-boards.json
+pnpm exec prettier --check scripts/ado-boards.json
 ```
 
 ### 6. Update the docstring

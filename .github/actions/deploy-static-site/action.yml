@@ -59,7 +59,7 @@ runs:
       shell: bash
       run: |
         echo "Deploying static site ECS service stack: StaticSiteServiceStack-${STAGE}"
-        STATIC_SITE_INFRA_ONLY=true yarn workspace @businessnjgovnavigator/api-cdk cdk deploy "StaticSiteServiceStack-${STAGE}" \
+        STATIC_SITE_INFRA_ONLY=true pnpm --filter @businessnjgovnavigator/api-cdk run cdk deploy "StaticSiteServiceStack-${STAGE}" \
           --qualifier biz-nj \
           --verbose \
           --region us-east-1 \

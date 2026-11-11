@@ -12,7 +12,7 @@ runs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        yarn semantic-release --branches "$GITHUB_REF_NAME"
+        pnpm exec semantic-release --branches "$GITHUB_REF_NAME"
 
     - name: Create PR to main
       shell: bash

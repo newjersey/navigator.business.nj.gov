@@ -37,20 +37,17 @@ jobs:
     environment: prod
     steps:
       - uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
-      - uses: actions/cache@v6
-        with:
-          path: .yarn/cache
-          key: yarn-cache-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            yarn-cache-
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
       - name: Install Dependencies
         shell: bash
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
       - uses: ./.github/actions/generate-release-notes
 
   deploy-production:
@@ -65,12 +62,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version-file: .nvmrc
-          cache: yarn
 
       - name: Export Production Environment Variables
         shell: bash

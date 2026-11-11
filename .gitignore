@@ -6,10 +6,7 @@ web/next-env.d.ts
 web/node_modules
 /.pnp
 .pnp.js
-.yarn/cache
-.yarn/install-state.gz
 
-.yarn-cache
 api/lib
 
 # scripts
@@ -73,6 +70,7 @@ amplify/backend/.temp
 build/
 dist/
 node_modules/
+.yarn/
 aws-exports.js
 web/aws-exports.js
 awsconfiguration.json
@@ -102,7 +100,7 @@ web/fundings.csv
 .venv/
 **/__pycache__/
 
-# yaml file generated from yarn build
+# yaml file generated from the build
 web/public/mgmt/config.yml
 web/src/lib/cms/CollectionMap.json
 

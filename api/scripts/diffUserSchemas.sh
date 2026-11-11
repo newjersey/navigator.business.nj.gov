@@ -3,7 +3,7 @@
 # the Zod-derived TypeScript interface (--ts-zod). Exits 0 if identical, 1 if different.
 #
 # Usage:
-#   yarn workspace @businessnjgovnavigator/api print:user-schema:diff
+#   pnpm --filter @businessnjgovnavigator/api run print:user-schema:diff
 
 set -euo pipefail
 

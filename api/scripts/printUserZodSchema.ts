@@ -12,16 +12,16 @@
  * @example
  * ```sh
  * # Print as Zod source (TypeScript)
- * yarn workspace @businessnjgovnavigator/api print:user-schema:zod
+ * pnpm --filter @businessnjgovnavigator/api run print:user-schema:zod
  *
  * # Print as JSON Schema
- * yarn workspace @businessnjgovnavigator/api print:user-schema:json
+ * pnpm --filter @businessnjgovnavigator/api run print:user-schema:json
  *
  * # Print as TypeScript interface (from TS Compiler API)
- * yarn workspace @businessnjgovnavigator/api print:user-schema:ts
+ * pnpm --filter @businessnjgovnavigator/api run print:user-schema:ts
  *
  * # Print as TypeScript interface (from Zod schema)
- * yarn workspace @businessnjgovnavigator/api print:user-schema:ts-zod
+ * pnpm --filter @businessnjgovnavigator/api run print:user-schema:ts-zod
  * ```
  */
 

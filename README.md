@@ -30,7 +30,7 @@ for CI/CD.
 
 ## Development
 
-You will need Node.js (with Yarn installed via `npm` or `corepack`) installed for primary
+You will need Node.js and the repository's pinned pnpm version installed for primary
 development. Additionally, for running the server in local development mode, you will need Python
 (for the AWS CLI and some of our scripts) installed (details below).
 
@@ -41,8 +41,7 @@ For pair programming, we recommend Visual Studio Code with the Live Share extens
 ### Software requirements
 
 - [Node.js 24 "Krypton" LTS](https://nodejs.org/en/download/) (We recommend using
-  [nvm](https://github.com/nvm-sh/nvm#readme) for managing Node.js versions. If installing via
-  package manager, we suggest installing `corepack` if available separately.)
+  [nvm](https://github.com/nvm-sh/nvm#readme) for managing Node.js versions.)
 - [Docker CLI](https://www.docker.com/) — required for running containers locally
   - **macOS:** We recommend using [Colima](https://github.com/abiosoft/colima) as your Docker
     runtime
@@ -55,7 +54,7 @@ For pair programming, we recommend Visual Studio Code with the Live Share extens
 - [AWS CLI](https://aws.amazon.com/cli/)
 - [Python 3.12+](https://www.python.org/downloads/) (managed automatically via
   [uv](https://docs.astral.sh/uv/))
-- [yarn](https://yarnpkg.com/)
+- [pnpm](https://pnpm.io/installation)
 - [wget](https://www.gnu.org/software/wget/)
 - [Java JDK](https://www.oracle.com/java/technologies/downloads/)
 
@@ -71,7 +70,11 @@ You will then set up your AWS credentials. See [Set up AWS CLI with SSO](https:/
 SSO sessions expire. Run `aws sso login` to log back in.
 
 Clone the code and navigate to the root of this repository. There is an installation script that
-will install all required development tools, yarn packages, and execute a yarn build.
+will install all required development tools and pnpm packages, and execute a build.
+
+If you are switching an existing checkout from Yarn, stale `node_modules` directories can shadow
+pnpm's installed packages. Use a clean checkout, or move the old root and workspace
+`node_modules` directories aside after reviewing their contents before running the install script.
 
 ```shell
 source scripts/install.sh
@@ -125,7 +128,7 @@ Before you can run locally, you will need to:
 - do an initial build (skip if you ran `install.sh`)
 
   ```shell
-  yarn build
+  pnpm run build
   ```
 
 ### Run tests
@@ -134,10 +137,10 @@ We use Jest for our TypeScript-based unit tests across our projects.
 
 ```shell
 # Run all unit tests
-yarn test
+pnpm run test
 
 # Run a single unit test or file, rerunning if files change
-yarn test <path to test file> -t "<part of test name>" --watch
+pnpm run test <path to test file> -t "<part of test name>" --watch
 ```
 
 We use Cypress for end-to-end (e2e) testing. You can run these tests locally as follows. Since some
@@ -146,7 +149,7 @@ application** to test against.
 
 ```shell
 # Terminal window 1
-yarn start:dev
+pnpm run start:dev
 ```
 
 ```shell
@@ -160,20 +163,20 @@ values used can be reproduced by finding the log output line containing
 indicated environment variable, as in:
 
 ```shell
-RANDOM_SEED=<random seed from failure log> yarn test <path to test file> -t "<part of test name>"
+RANDOM_SEED=<random seed from failure log> pnpm run test <path to test file> -t "<part of test name>"
 CYPRESS_RANDOM_SEED=<random seed from failure log> ./scripts/local-feature-tests.sh
 ```
 
 To run all tests with code coverage:
 
 ```shell
-yarn test:coverage
+pnpm run test:coverage
 ```
 
 We use Python's `unittest` for our Python tests. Run all Python unit tests with:
 
 ```shell
-yarn test:python
+pnpm run test:python
 ```
 
 ### Running locally
@@ -192,13 +195,13 @@ required technologies by running `source scripts/install.sh` from the root direc
 1. Build the application
 
    ```shell
-   yarn build # This happens in the install.sh script as well.
+   pnpm run build # This happens in the install.sh script as well.
    ```
 
 2. Launch all the services
 
    ```shell
-   yarn start:dev
+   pnpm run start:dev
    ```
 
 3. Open the application in your browser. The frontend is available at
@@ -208,7 +211,7 @@ required technologies by running `source scripts/install.sh` from the root direc
    you need to stop the Docker containers manually, run:
 
    ```shell
-   yarn services:down
+   pnpm run services:down
    ```
 
 ### Deploying
@@ -226,8 +229,8 @@ development environment for commits to the main branch.
 
 The frontend code lives in `./web`.
 
-When running locally, the `./scripts/start-web.sh` will execute `npm run dev` for local
-hot-refreshing of Next.js. In production, we run `npm run build` which will execute `next build` and
+When running locally, `web/scripts/start-web.sh` executes `pnpm run dev` for local
+hot-refreshing of Next.js. In production, `pnpm run build` executes `next build` and
 `next export`. This allows Next.js to build all our pages and pre-render what it can. The export
 puts the final files in `./web/out` directory, which is served via a Docker Container.
 
