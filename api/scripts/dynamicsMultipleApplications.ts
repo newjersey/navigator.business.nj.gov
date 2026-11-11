@@ -5,7 +5,7 @@ import axios from "axios";
 // Reference the Dynamics documentation in Google Drive for information on AUTH_TOKEN and LICENSE_TYPE
 // Enter a AUTH_TOKEN (get one using postman) and LICENSE_TYPE
 // Adjust APPLICATION_QUERY_COUNT if necessary
-// Run yarn ts-node dynamicsMultipleApplications.ts
+// Run pnpm exec ts-node dynamicsMultipleApplications.ts
 
 const AUTH_TOKEN = "";
 const LICENSE_TYPE = "";

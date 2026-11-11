@@ -19,6 +19,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 nvm use
 
+export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
+export PATH="$PNPM_HOME/bin:$PATH"
+
 [ -d "${_setup_root}/.venv" ] && source "${_setup_root}/.venv/bin/activate"
 
 unset _setup_dir _setup_root

@@ -20,8 +20,13 @@ RUN apt-get update && \
 # Tools/Dependencies needed for Browsers
 RUN apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2t64 libxtst6 xauth xvfb libu2f-udev
 
-# Install Yarn via Corepack
-RUN corepack enable
+# Install the pinned pnpm CLI used by CI and local builds.
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME/bin:$PATH"
+RUN curl -fsSL https://get.pnpm.io/install.sh -o /tmp/install-pnpm.sh \
+    && PNPM_VERSION=12.18.0 PNPM_NO_MODIFY_PATH=1 SHELL=/bin/sh sh /tmp/install-pnpm.sh \
+    && rm /tmp/install-pnpm.sh \
+    && chown -R circleci:circleci "$PNPM_HOME"
 
 # Install Browsers.
 #Chrome

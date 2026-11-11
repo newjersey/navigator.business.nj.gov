@@ -4,7 +4,7 @@ import {
   isAllowedDependencyVersion,
   validateManifest,
   validateRepository,
-  validateYarnToolchainState,
+  validatePackageManagerState,
 } from "./validate-dependency-policy.ts";
 
 test("allows exact versions and local dependency protocols", () => {
@@ -30,7 +30,7 @@ test("reports the manifest path, dependency section, package, and value", () => 
   const errors = validateManifest(
     {
       dependencies: { example: "^1.2.3" },
-      packageManager: "yarn@^4.18.0",
+      packageManager: "pnpm@^12.18.0",
       peerDependencies: { react: "^19.0.0" },
     },
     "example/package.json",
@@ -38,27 +38,21 @@ test("reports the manifest path, dependency section, package, and value", () => 
 
   assert.deepEqual(errors, [
     'example/package.json: dependencies.example must use an exact version, got "^1.2.3"',
-    'example/package.json: packageManager must use an exact version, got "yarn@^4.18.0"',
+    'example/package.json: packageManager must use an exact version, got "pnpm@^12.18.0"',
   ]);
 });
 
-test("reports mismatched Yarn declarations, configuration, and vendored releases", () => {
-  const errors = validateYarnToolchainState({
+test("reports mismatched package manager declarations", () => {
+  const errors = validatePackageManagerState({
     declarations: [
-      { packageManager: "yarn@4.18.0", path: "package.json" },
+      { packageManager: "pnpm@12.18.0", path: "package.json" },
       { packageManager: "yarn@4.17.1", path: "nested/package.json" },
     ],
-    rootVersion: "4.18.0",
-    vendoredReleaseNames: ["yarn-4.14.1.cjs"],
-    yarnPath: ".yarn/releases/yarn-4.17.1.cjs",
+    rootPackageManager: "pnpm@12.18.0",
   });
 
   assert.deepEqual(errors, [
-    'nested/package.json: packageManager must match root yarn@4.18.0, got "yarn@4.17.1"',
-    ".yarnrc.yml: yarnPath must be .yarn/releases/yarn-4.18.0.cjs, got " +
-      '".yarn/releases/yarn-4.17.1.cjs"',
-    ".yarn/releases: missing yarn-4.18.0.cjs",
-    ".yarn/releases: remove unexpected releases yarn-4.14.1.cjs",
+    'nested/package.json: packageManager must match root pnpm@12.18.0, got "yarn@4.17.1"',
   ]);
 });
 

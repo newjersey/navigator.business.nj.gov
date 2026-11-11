@@ -4,14 +4,14 @@ cd "$(git rev-parse --show-toplevel)"
 
 set -e
 
-yarn build
-yarn typecheck
-yarn workspace @businessnjgovnavigator/web typecheck:cypress
+pnpm run build
+pnpm run typecheck
+pnpm --filter @businessnjgovnavigator/web run typecheck:cypress
 
 # format files
-yarn prettier
-yarn spellcheck
-yarn dependency-check
+pnpm run prettier
+pnpm run spellcheck
+pnpm run dependency-check
 
 (
     cd packages/static-site
@@ -22,4 +22,4 @@ yarn dependency-check
 )
 
 # run linting and fix any fixable errors
-yarn lint:fix
+pnpm run lint:fix

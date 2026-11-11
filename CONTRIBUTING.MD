@@ -88,7 +88,7 @@ A few requirements before requesting review:
 
 1. **Keep PRs small.** A pull request should be reviewable in one sitting. If your change is large,
    decompose it into a sequence of focused, independently-mergeable increments.
-2. **All automated checks must pass.** Biome formatting and linting, `npm audit`, and any other CI
+2. **All automated checks must pass.** Biome formatting and linting, `pnpm audit`, and any other CI
    checks must be green before you request a human review.
 3. **Fill out the PR template.** Explain what was done and why, list the steps to test it, and note
    any accessibility considerations.

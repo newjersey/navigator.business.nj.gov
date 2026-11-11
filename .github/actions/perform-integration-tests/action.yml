@@ -15,31 +15,34 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Setup Node.js
-      uses: actions/setup-node@v7
-      with:
-        node-version-file: .nvmrc
-        cache: yarn
-
     - name: Configure and Build
       uses: ./.github/actions/configure-and-build
 
     - name: Setup Local DynamoDB
       uses: ./.github/actions/setup-local-dynamodb
 
+    - name: Setup Chrome
+      if: inputs.browser == 'chrome'
+      id: chrome
+      uses: browser-actions/setup-chrome@v1
+      with:
+        chrome-version: stable
+
     - name: Start Services
       shell: bash
       run: |
-        yarn workspace @businessnjgovnavigator/api start &
-        yarn workspace @businessnjgovnavigator/api start:wiremock &
-        yarn workspace @businessnjgovnavigator/web start &
+        pnpm --filter @businessnjgovnavigator/api run start &
+        pnpm --filter @businessnjgovnavigator/api run start:wiremock &
+        pnpm --filter @businessnjgovnavigator/web run start &
 
     - name: Run Cypress Integration Tests
       shell: bash
       working-directory: web
+      env:
+        BROWSER: ${{ steps.chrome.outputs.chrome-path || inputs.browser }}
       run: |
-        yarn cypress:run \
-          --browser=${{ inputs.browser }} \
+        pnpm run cypress:run \
+          --browser="$BROWSER" \
           --record=${{ inputs.enable-dashboard }} \
           --env SUITE=${{ inputs.suite }}
 

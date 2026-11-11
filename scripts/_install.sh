@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Setup script to setup machine for local development
 
-# Always run from the repo root so that .nvmrc, .venv, yarn.lock, etc. resolve correctly
+# Always run from the repo root so that .nvmrc, .venv, pnpm-lock.yaml, etc. resolve correctly
 cd "${0:a:h:h}"
 
 # Detect privilege escalation method
@@ -371,29 +371,32 @@ nvm install
 
 # ============================================================
 echo ""
-echo "=== [5/7] Package managers (Yarn + pnpm) ==="
+echo "=== [5/7] pnpm ==="
 # ============================================================
 
-corepack enable && echo "Corepack enabled." || { echo "Failed to enable corepack."; exit 1; }
-corepack prepare yarn@latest --activate && echo "Yarn activated." || { echo "Failed to activate Yarn."; exit 1; }
-corepack prepare pnpm@latest --activate && echo "pnpm activated." || { echo "Failed to activate pnpm."; exit 1; }
+export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
+export PATH="$PNPM_HOME/bin:$PATH"
+PNPM_VERSION="$(node -p 'require("./package.json").packageManager.split("@")[1].split("+")[0]')"
+fetch_url https://get.pnpm.io/install.sh | PNPM_VERSION="$PNPM_VERSION" PNPM_NO_MODIFY_PATH=1 SHELL="$SHELL" sh
 
 # ============================================================
 echo ""
 echo "=== [6/7] Install dependencies and build ==="
 # ============================================================
 
-yarn install && yarn build || { echo "Root install or build failed."; exit 1; }
+if [ -f node_modules/.yarn-state.yml ]; then
+    echo "This checkout still has a Yarn installation. Move the old root and workspace node_modules directories aside, or use a clean checkout, before installing with pnpm."
+    exit 1
+fi
 
-# Cypress's postinstall hook normally downloads the binary during `yarn install`,
-# but Yarn 4 disables dependency lifecycle scripts by default (enableScripts: false).
-# Explicitly verify the binary is present to avoid confusing errors later.
+pnpm install --frozen-lockfile && pnpm run build || { echo "Root install or build failed."; exit 1; }
+
+# Cypress's binary is installed explicitly rather than by a dependency lifecycle script.
 echo "Verifying Cypress binary..."
-yarn cypress install
+pnpm exec cypress install
 
 (
     cd packages/static-site
-    pnpm install
     # Playwright drives the static-site accessibility and e2e suites; install the
     # browsers here (dev/CI only) rather than via a package postinstall, which
     # would also pull Chromium into production Docker image builds. The headless
@@ -412,4 +415,4 @@ echo ""
 echo "=== [7/7] Git hooks (Husky) ==="
 # ============================================================
 
-yarn run prepare && echo "Git hooks installed." || { echo "Failed to install git hooks."; exit 1; }
+pnpm run prepare && echo "Git hooks installed." || { echo "Failed to install git hooks."; exit 1; }

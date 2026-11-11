@@ -117,12 +117,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v7
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version-file: .nvmrc
-          cache: yarn
-
       - name: Deploy to Staging
         uses: ./.github/actions/deploy
         with:

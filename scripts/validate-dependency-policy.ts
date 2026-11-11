@@ -6,7 +6,7 @@ import yaml from "js-yaml";
 
 /**
  * Enforces reproducible dependency declarations across package manifests and
- * keeps every Yarn version declaration synchronized with the vendored binary.
+ * keeps every package-manager declaration synchronized with the root pnpm version.
  *
  * Registry dependencies must use exact semantic versions. Local protocols,
  * non-registry sources, internal workspace wildcards, and peer dependency
@@ -34,20 +34,14 @@ type PackageManifest = Partial<Record<DependencySection, Record<string, unknown>
   readonly peerDependencies?: Readonly<Record<string, unknown>>;
 };
 
-interface YarnDeclaration {
+interface PackageManagerDeclaration {
   readonly packageManager: string;
   readonly path: string;
 }
 
-interface YarnToolchainState {
-  readonly declarations: readonly YarnDeclaration[];
-  readonly rootVersion: string;
-  readonly vendoredReleaseNames: readonly string[];
-  readonly yarnPath: unknown;
-}
-
-interface YarnConfiguration {
-  readonly yarnPath?: unknown;
+interface PackageManagerState {
+  readonly declarations: readonly PackageManagerDeclaration[];
+  readonly rootPackageManager: string;
 }
 
 interface ManifestFile {
@@ -115,41 +109,21 @@ export const validateManifest = (
 };
 
 /**
- * Ensures package manifests, `.yarnrc.yml`, and `.yarn/releases` all identify
- * one exact Yarn version so Corepack and `yarnPath` cannot select different
- * package-manager builds.
+ * Ensures every explicit package-manager declaration matches the root.
  */
-export const validateYarnToolchainState = ({
+export const validatePackageManagerState = ({
   declarations,
-  rootVersion,
-  vendoredReleaseNames,
-  yarnPath,
-}: YarnToolchainState): readonly string[] => {
+  rootPackageManager,
+}: PackageManagerState): readonly string[] => {
   const errors: string[] = [];
-  const expectedPackageManager = `yarn@${rootVersion}`;
-  const expectedReleaseName = `yarn-${rootVersion}.cjs`;
-  const expectedYarnPath = `.yarn/releases/${expectedReleaseName}`;
 
   for (const declaration of declarations) {
-    if (declaration.packageManager !== expectedPackageManager) {
+    if (declaration.packageManager !== rootPackageManager) {
       errors.push(
-        `${declaration.path}: packageManager must match root ${expectedPackageManager}, got "${declaration.packageManager}"`,
+        `${declaration.path}: packageManager must match root ${rootPackageManager}, got "${declaration.packageManager}"`,
       );
     }
   }
-
-  if (yarnPath !== expectedYarnPath) {
-    errors.push(`.yarnrc.yml: yarnPath must be ${expectedYarnPath}, got "${yarnPath}"`);
-  }
-
-  const unexpectedReleases = vendoredReleaseNames.filter((name) => name !== expectedReleaseName);
-  if (!vendoredReleaseNames.includes(expectedReleaseName)) {
-    errors.push(`.yarn/releases: missing ${expectedReleaseName}`);
-  }
-  if (unexpectedReleases.length > 0) {
-    errors.push(`.yarn/releases: remove unexpected releases ${unexpectedReleases.join(", ")}`);
-  }
-
   return errors;
 };
 
@@ -172,8 +146,7 @@ const readManifest = (rootDirectory: string, manifestPath: string): ManifestFile
 };
 
 /**
- * Validates every tracked package manifest plus the repository's Yarn
- * configuration and vendored release directory.
+ * Validates tracked package manifests and the root pnpm workspace configuration.
  */
 export const validateRepository = (rootDirectory: string): readonly string[] => {
   const errors: string[] = [];
@@ -185,41 +158,33 @@ export const validateRepository = (rootDirectory: string): readonly string[] => 
 
   const rootManifest = manifests.find(({ path: manifestPath }) => manifestPath === "package.json");
   const rootPackageManager = rootManifest?.manifest.packageManager;
-  if (typeof rootPackageManager !== "string" || !rootPackageManager.startsWith("yarn@")) {
+  if (typeof rootPackageManager !== "string" || !rootPackageManager.startsWith("pnpm@")) {
     errors.push(
-      `package.json: expected a Yarn packageManager declaration, got "${rootPackageManager}"`,
+      `package.json: expected a pnpm packageManager declaration, got "${rootPackageManager}"`,
     );
     return errors;
   }
 
-  const rootVersion = rootPackageManager.slice("yarn@".length);
-  const declarations: YarnDeclaration[] = [];
+  const declarations: PackageManagerDeclaration[] = [];
   for (const { manifest, path: manifestPath } of manifests) {
-    if (
-      typeof manifest.packageManager === "string" &&
-      manifest.packageManager.startsWith("yarn@")
-    ) {
+    if (typeof manifest.packageManager === "string") {
       declarations.push({
         packageManager: manifest.packageManager,
         path: manifestPath,
       });
     }
   }
-  const yarnConfiguration = yaml.load(
-    fs.readFileSync(path.join(rootDirectory, ".yarnrc.yml"), "utf8"),
-  ) as YarnConfiguration;
-  const vendoredReleaseNames = fs
-    .readdirSync(path.join(rootDirectory, ".yarn/releases"))
-    .filter((fileName) => fileName.startsWith("yarn-") && fileName.endsWith(".cjs"));
-
-  errors.push(
-    ...validateYarnToolchainState({
-      declarations,
-      rootVersion,
-      vendoredReleaseNames,
-      yarnPath: yarnConfiguration.yarnPath,
-    }),
-  );
+  errors.push(...validatePackageManagerState({ declarations, rootPackageManager }));
+  const configuration = yaml.load(
+    fs.readFileSync(path.join(rootDirectory, "pnpm-workspace.yaml"), "utf8"),
+  ) as { overrides?: Record<string, unknown> };
+  for (const [name, value] of Object.entries(configuration.overrides ?? {})) {
+    if (!isAllowedDependencyVersion(name, value)) {
+      errors.push(
+        `pnpm-workspace.yaml: overrides.${name} must use an exact version, got "${value}"`,
+      );
+    }
+  }
 
   return errors;
 };

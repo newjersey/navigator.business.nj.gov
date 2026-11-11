@@ -100,6 +100,18 @@ env: &integration-env
   CMS_OAUTH_CLIENT_SECRET: ${{secrets.CMS_OAUTH_CLIENT_SECRET}}
 
 jobs:
+  wiremock-image:
+    name: WireMock image smoke test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.CHECKOUT_REF }}
+      - name: Build and test WireMock image
+        run: bash scripts/test-wiremock-image.sh
+
   build:
     if: >
       github.event_name == 'push' || (
@@ -154,22 +166,26 @@ jobs:
         with:
           ref: ${{ env.CHECKOUT_REF }}
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       # `build` doesn't run on content-repo branches
       # This is a little redundant, but knowingly included
       - name: Install Dependencies
-        run: yarn install --immutable --mode skip-build
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Build Decap CMS Config
-        run: yarn decap:build-config
+        run: pnpm run decap:build-config
 
       - name: Check CMS Slug Collisions
-        run: yarn workspace @businessnjgovnavigator/api cms-slug-check
+        run: pnpm --filter @businessnjgovnavigator/api run cms-slug-check
 
   unit-tests:
     if: &tests_allowed >
@@ -199,52 +215,23 @@ jobs:
           name: build-outputs
           path: .
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
-
-      - name: Restore node_modules Cache
-        id: node-modules-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            node_modules
-            api/node_modules
-            api/cdk/node_modules
-            api/src/functions/messagingService/reactEmail/node_modules
-            content/node_modules
-            packages/content-types/node_modules
-            shared/node_modules
-            web/node_modules
-          key: node-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            node-modules-${{ runner.os }}-
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Dependencies
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        run: yarn install --immutable
-
-      - name: Save node_modules Cache
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            node_modules
-            api/node_modules
-            api/cdk/node_modules
-            api/src/functions/messagingService/reactEmail/node_modules
-            content/node_modules
-            packages/content-types/node_modules
-            shared/node_modules
-            web/node_modules
-          key: ${{ steps.node-modules-cache.outputs.cache-primary-key }}
+        run: pnpm install --frozen-lockfile
 
       - name: Run Unit Tests (Shard ${{ matrix.shard }}/8)
         run: |
           echo "Running shard ${{ matrix.shard }} of 8"
-          yarn test:ci --shard=${{ matrix.shard }}/8
+          pnpm run test:ci --shard=${{ matrix.shard }}/8
 
       - name: Upload Jest Test Results
         if: always()

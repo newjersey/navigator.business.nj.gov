@@ -63,25 +63,29 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v7
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Dependencies
         shell: bash
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       # The static site Dockerfile copies content/lib into the build, and
       # content/lib is generated rather than committed.
       - name: Build Content
         shell: bash
-        run: yarn workspace @businessnjgovnavigator/content build
+        run: pnpm --filter @businessnjgovnavigator/content run build
 
       - name: Build Content Types
         shell: bash
-        run: yarn workspace @businessnjgovnavigator/content-types build
+        run: pnpm --filter @businessnjgovnavigator/content-types run build
 
       - name: Deploy Static Site
         uses: ./.github/actions/deploy-static-site
@@ -118,25 +122,29 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v7
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Dependencies
         shell: bash
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       # The static site Dockerfile copies content/lib into the build, and
       # content/lib is generated rather than committed.
       - name: Build Content
         shell: bash
-        run: yarn workspace @businessnjgovnavigator/content build
+        run: pnpm --filter @businessnjgovnavigator/content run build
 
       - name: Build Content Types
         shell: bash
-        run: yarn workspace @businessnjgovnavigator/content-types build
+        run: pnpm --filter @businessnjgovnavigator/content-types run build
 
       - name: Deploy Static Site
         uses: ./.github/actions/deploy-static-site

@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "rimraf lib",
-    "dev": "yarn build",
+    "dev": "pnpm run build",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "snapshot:update": "jest --updateSnapshot",
@@ -23,8 +23,8 @@
     "typecheck": "tsc --noemit"
   },
   "dependencies": {
-    "@businessnjgovnavigator/content": "*",
-    "@businessnjgovnavigator/content-types": "*",
+    "@businessnjgovnavigator/content": "workspace:*",
+    "@businessnjgovnavigator/content-types": "workspace:*",
     "dayjs": "1.11.21",
     "gray-matter": "4.0.3",
     "js-yaml": "4.3.2",

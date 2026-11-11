@@ -4,12 +4,20 @@ on:
   pull_request:
     paths:
       - "packages/static-site/**"
+      - "packages/content-types/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - "pnpm-lock.yaml"
       - ".github/workflows/static-site-ci.yml"
   push:
     branches:
       - main
     paths:
       - "packages/static-site/**"
+      - "packages/content-types/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - "pnpm-lock.yaml"
       - ".github/workflows/static-site-ci.yml"
   workflow_dispatch:
 
@@ -24,7 +32,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
         with:
-          package_json_file: packages/static-site/package.json
+          package_json_file: package.json
           run_install: false
 
       - name: Setup Node.js
@@ -32,17 +40,16 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: pnpm
-          cache-dependency-path: packages/static-site/pnpm-lock.yaml
-
-      - name: Build content-types
-        working-directory: packages/content-types
-        run: |
-          pnpm install
-          pnpm build
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
-        working-directory: packages/static-site
         run: pnpm install --frozen-lockfile
+
+      - name: Build content-types
+        run: pnpm --filter @businessnjgovnavigator/content-types run build
+
+      - name: Build content
+        run: pnpm --filter @businessnjgovnavigator/content run build
 
       - name: Run lint
         working-directory: packages/static-site

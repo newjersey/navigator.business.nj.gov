@@ -18,7 +18,14 @@ fs.writeFileSync(
 );
 
 const runCspell = (filePath: string) => {
-  const result = spawnSync("npx", ["cspell", "--file", filePath, "--config", "./test/cspell.json"]);
+  const result = spawnSync("pnpm", [
+    "exec",
+    "cspell",
+    "--file",
+    filePath,
+    "--config",
+    "./test/cspell.json",
+  ]);
 
   return {
     status: result.status, // 0 = success, non-zero = spelling issues / errors

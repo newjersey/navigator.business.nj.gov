@@ -21,7 +21,7 @@ IMAGE_REPO="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers
 WEB_BUILD_ENVIRONMENT_FILE="$(mktemp "${RUNNER_TEMP:-/tmp}/web-build-environment.XXXXXX")"
 trap 'rm -f "$WEB_BUILD_ENVIRONMENT_FILE"' EXIT
 
-yarn tsx scripts/create-web-build-environment.ts > "$WEB_BUILD_ENVIRONMENT_FILE"
+pnpm exec tsx scripts/create-web-build-environment.ts > "$WEB_BUILD_ENVIRONMENT_FILE"
 
 echo "Building Docker image for $IMAGE_NAME"
 docker build -f WebApp.Dockerfile . \

@@ -97,7 +97,7 @@ sedi "s/v${MOST_RECENT_VERSION_NUMBER}/v${NEW_VERSION_NUMBER}/g" \
   "$USER_SCHEMA_GENERATOR_FILE"
 
 echo "Regenerating cached user schema..."
-yarn workspace @businessnjgovnavigator/api generate:user-schema
+pnpm --filter @businessnjgovnavigator/api run generate:user-schema
 
 echo ""
 echo "------------------------------------"

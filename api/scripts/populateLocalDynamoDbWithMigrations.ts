@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// Run yarn ts-node -r tsconfig-paths/register scripts/populateLocalDynamoDbWithMigrations.ts
+// Run pnpm exec ts-node -r tsconfig-paths/register scripts/populateLocalDynamoDbWithMigrations.ts
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /*

@@ -7,21 +7,36 @@ LABEL org.opencontainers.image.vendor="New Jersey Innovation Authority"
 LABEL org.opencontainers.image.licenses="MIT"
 
 ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PATH="$PNPM_HOME/bin:$PATH"
+ENV PNPM_CONFIG_VERIFY_DEPS_BEFORE_RUN=false
 
-RUN corepack enable
+COPY package.json /tmp/pnpm-package.json
+RUN wget -qO /tmp/install-pnpm.sh https://get.pnpm.io/install.sh \
+  && PNPM_VERSION="$(node -p 'require("/tmp/pnpm-package.json").packageManager.split("@")[1].split("+")[0]')" \
+    PNPM_NO_MODIFY_PATH=1 SHELL=/bin/sh sh /tmp/install-pnpm.sh \
+  && test "$(pnpm --version)" = "12.18.0" \
+  && rm /tmp/install-pnpm.sh /tmp/pnpm-package.json
 
-WORKDIR /app
+WORKDIR /source
 
-COPY packages/content-types /content-types
-COPY packages/static-site/package.json packages/static-site/pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
-RUN pnpm exec tsc --build /content-types/tsconfig.json
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY api/package.json api/package.json
+COPY api/cdk/package.json api/cdk/package.json
+COPY api/src/functions/messagingService/reactEmail/package.json api/src/functions/messagingService/reactEmail/package.json
+COPY content/package.json content/package.json
+COPY packages/content-types/package.json packages/content-types/package.json
+COPY packages/static-site/package.json packages/static-site/package.json
+COPY shared/package.json shared/package.json
+COPY web/package.json web/package.json
+COPY packages/content-types packages/content-types
+COPY packages/static-site packages/static-site
+RUN pnpm --filter @businessnjgovnavigator/content-types deploy /tmp/content-types --network-concurrency=4 --child-concurrency=2 \
+  && /tmp/content-types/node_modules/.bin/tsc --build /source/packages/content-types/tsconfig.json \
+  && pnpm --filter @businessnjgovnavigator/static-site deploy /app/packages/static-site --network-concurrency=4 --child-concurrency=2
+COPY content/lib /app/content/lib
+COPY content/src /app/content/src
 
-COPY packages/static-site .
-COPY content/lib /content/lib
-COPY content/src /content/src
-
+WORKDIR /app/packages/static-site
 EXPOSE 4000
 
 CMD ["pnpm", "dev", "--hostname", "0.0.0.0", "--port", "4000"]

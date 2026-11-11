@@ -1,35 +1,63 @@
-logFilters:
-  - code: YN0032
-    level: discard
-  - code: YN0060
-    level: discard
-    text: "@storybook/nextjs"
-  - code: YN0060
-    level: discard
-    text: decap-cms
-  - code: YN0060
-    level: discard
-    text: slate-base64-serializer
-  - code: YN0060
-    level: discard
-    text: slate-plain-serializer
-  - code: YN0060
-    level: discard
-    text: remark-slate-transformer
-  - code: YN0068
-    level: discard
-  - code: YN0069
-    level: discard
+packages:
+  - api
+  - api/cdk
+  - api/src/functions/messagingService/reactEmail
+  - content
+  - packages/content-types
+  - packages/static-site
+  - shared
+  - web
 
-approvedGitRepositories:
-  - "https://github.com/dsueltenfuss/nc.git"
-  - "https://github.com/dsueltenfuss/netcat.git"
+nodeLinker: hoisted
+sharedWorkspaceLockfile: true
+includeWorkspaceRoot: false
+pmOnFail: error
+saveExact: true
+verifyDepsBeforeRun: false
+enablePrePostScripts: true
+autoDedupe: false
+autoInstallPeers: false
+resolvePeersFromWorkspaceRoot: false
+# The existing nc dependency includes a Git-hosted netcat dependency.
+blockExoticSubdeps: false
 
-compressionLevel: mixed
+allowBuilds:
+  "@parcel/watcher": true
+  "@swc/core": true
+  esbuild: true
+  sharp: true
+  leveldown: true
+  unrs-resolver: true
+  core-js-pure: false
+  cypress: false
+  puppeteer: false
 
-nodeLinker: node-modules
+skills:
+  dirs: []
 
-npmMinimalAgeGate: 0
+python:
+  enabled: false
+cargo:
+  enabled: false
+
+overrides:
+  body-parser: 2.4.0
+  "trim@0.0.1": 1.0.1
+  postcss: 8.5.23
+  glob-parent: 6.0.2
+  tar: 7.5.22
+  ansi-regex: 5.0.1
+  trim-newlines: 5.0.0
+  react-is: 19.2.8
+  "nc>netcat": "git+https://github.com/dsueltenfuss/netcat.git#d24823a031f3da36d383945f5bfa354b41006fff"
+  # Keep the previously locked static-site resolutions when importing Yarn's lockfile.
+  "@uswds/uswds@3.13.0>sass-embedded-linux-x64:optional": 1.101.0
+  "next-intl@4.13.4>icu-minify": 4.13.4
+  "next-intl@4.13.4>next-intl-swc-plugin-extractor": 4.13.4
+  "next-intl@4.13.4>use-intl": 4.13.4
+  "cspell-lib@10.0.1>import-fresh": 4.0.0
+  "cspell-config-lib@10.0.1>yaml": 2.9.0
+  "lint-staged@17.2.0>yaml": 2.9.0
 
 packageExtensions:
   "@aws-sdk/credential-provider-ini@*":
@@ -166,11 +194,3 @@ packageExtensions:
     peerDependenciesMeta:
       "@types/node":
         optional: true
-
-plugins:
-  - path: .yarn/plugins/@yarnpkg/plugin-outdated.cjs
-    spec: "https://mskelton.dev/yarn-outdated/v2"
-  - path: .yarn/plugins/@yarnpkg/plugin-engines.cjs
-    spec: "https://raw.githubusercontent.com/devoto13/yarn-plugin-engines/main/bundles/%40yarnpkg/plugin-engines.js"
-
-yarnPath: .yarn/releases/yarn-4.18.0.cjs

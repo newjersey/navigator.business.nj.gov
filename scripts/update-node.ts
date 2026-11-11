@@ -1,9 +1,10 @@
 // Usage:
-// yarn dlx tsx ./scripts/update-node.ts <node_version> <npm_version>
+// pnpm exec tsx ./scripts/update-node.ts [node_version]
 
 import { execSync } from "child_process";
 import { promises as fs } from "fs";
 import * as path from "path";
+import { fileURLToPath } from "node:url";
 
 /**
  * Represents a Node.js release from the official distribution API
@@ -11,20 +12,8 @@ import * as path from "path";
 interface NodeRelease {
   /** Semver version with v prefix (e.g. "v18.18.2") */
   version: string;
-  /** NPM version that ships with this Node.js version */
-  npm: string;
   /** False if not LTS, codename string if LTS */
   lts: string | false;
-}
-
-/**
- * Represents resolved version numbers for Node.js and NPM
- */
-interface ResolvedVersions {
-  /** Semver version without v prefix */
-  nodeVersion: string;
-  /** NPM version number */
-  npmVersion: string;
 }
 
 /**
@@ -79,15 +68,10 @@ function findLatestLTS(releases: NodeRelease[]): NodeRelease {
  * @throws {Error} If no matching version is found
  * @returns {NodeRelease} Latest release for the specified major version
  */
-function findLatestInMajorVersion(
-  releases: NodeRelease[],
-  major: number
-): NodeRelease {
+function findLatestInMajorVersion(releases: NodeRelease[], major: number): NodeRelease {
   const majorVersions = releases
     .filter((r) => r.version.replace(/^v/, "").startsWith(`${major}.`))
-    .sort((a, b) =>
-      b.version.localeCompare(a.version, undefined, { numeric: true })
-    );
+    .sort((a, b) => b.version.localeCompare(a.version, undefined, { numeric: true }));
 
   if (majorVersions.length === 0) {
     throw new Error(`No versions found for Node.js ${major}.x`);
@@ -104,10 +88,7 @@ function findLatestInMajorVersion(
  * @throws {Error} If version is not found
  * @returns {NodeRelease} Matching release
  */
-function findExactVersion(
-  releases: NodeRelease[],
-  version: string
-): NodeRelease {
+function findExactVersion(releases: NodeRelease[], version: string): NodeRelease {
   const exactMatch = releases.find((r) => r.version === `v${version}`);
   if (!exactMatch) {
     throw new Error(`Version ${version} not found in Node.js releases`);
@@ -116,47 +97,28 @@ function findExactVersion(
 }
 
 /**
- * Resolves Node.js and NPM versions based on input parameters
+ * Resolves a Node.js version based on an optional version argument
  *
- * @param {string[]} args - Command line arguments
- * @throws {Error} If versions cannot be resolved
- * @returns {Promise<ResolvedVersions>} Resolved Node.js and NPM versions
+ * @param {string | undefined} nodeArg - Node.js version or major version
+ * @param {NodeRelease[]} releases - Available Node.js releases
+ * @throws {Error} If the version cannot be resolved
+ * @returns {string} Node.js version without the v prefix
  */
-async function resolveVersions(args: string[]): Promise<ResolvedVersions> {
-  const releases = await fetchNodeReleases();
-
-  if (args.length === 0) {
-    const latestLTS = findLatestLTS(releases);
-    return {
-      nodeVersion: latestLTS.version.replace(/^v/, ""),
-      npmVersion: latestLTS.npm,
-    };
+export function resolveNodeVersion(nodeArg: string | undefined, releases: NodeRelease[]): string {
+  if (nodeArg === undefined) {
+    return findLatestLTS(releases).version.replace(/^v/, "");
   }
 
-  if (args.length === 2) {
-    return {
-      nodeVersion: args[0],
-      npmVersion: args[1],
-    };
-  }
-
-  const nodeArg = args[0];
   const majorVersionMatch = nodeArg.match(/^(\d+)(?:\.x)?$/);
 
   if (majorVersionMatch) {
     const major = parseInt(majorVersionMatch[1]);
     const latest = findLatestInMajorVersion(releases, major);
-    return {
-      nodeVersion: latest.version.replace(/^v/, ""),
-      npmVersion: latest.npm,
-    };
+    return latest.version.replace(/^v/, "");
   }
 
   const exactMatch = findExactVersion(releases, nodeArg);
-  return {
-    nodeVersion: exactMatch.version.replace(/^v/, ""),
-    npmVersion: exactMatch.npm,
-  };
+  return exactMatch.version.replace(/^v/, "");
 }
 
 /**
@@ -199,11 +161,7 @@ function getCurrentBranchName(): string {
  * @param {string} newVersion - New Node.js version
  * @throws {Error} If file update fails
  */
-async function updateFile(
-  filePath: string,
-  oldVersion: string,
-  newVersion: string
-): Promise<void> {
+async function updateFile(filePath: string, oldVersion: string, newVersion: string): Promise<void> {
   try {
     const absolutePath = path.resolve(filePath);
     let content = await fs.readFile(absolutePath, "utf8");
@@ -219,25 +177,15 @@ async function updateFile(
  * Updates the verify:node script in package.json
  *
  * @param {string} filePath - Path to package.json
- * @param {string} newNPMVersion - New NPM version
  * @throws {Error} If update fails
  */
-async function updateVerifyNodeScript(
-  filePath: string,
-  newNPMVersion: string
-): Promise<void> {
+async function updateVerifyNodeScript(filePath: string): Promise<void> {
   try {
     const absolutePath = path.resolve(filePath);
     const content = await fs.readFile(absolutePath, "utf8");
     const jsonContent = JSON.parse(content);
-    jsonContent.scripts[
-      "verify:node"
-    ] = `check-node-version --node $(cat .nvmrc) --npm ${newNPMVersion}`;
-    await fs.writeFile(
-      absolutePath,
-      JSON.stringify(jsonContent, null, 2) + "\n",
-      "utf8"
-    );
+    jsonContent.scripts["verify:node"] = `check-node-version --node $(cat .nvmrc)`;
+    await fs.writeFile(absolutePath, JSON.stringify(jsonContent, null, 2) + "\n", "utf8");
     console.info(`✓ Updated verify:node script in ${filePath}`);
   } catch (error) {
     throw new Error(`Failed to update verify:node script: ${error.message}`);
@@ -250,16 +198,17 @@ async function updateVerifyNodeScript(
 async function main() {
   try {
     const args = process.argv.slice(2);
+    if (args.length > 1) {
+      throw new Error("Expected at most one Node.js version argument.");
+    }
 
     const currentBranch = getCurrentBranchName();
     if (currentBranch !== "new-docker-image") {
-      throw new Error(
-        'You must be on the "new-docker-image" branch to run this script.'
-      );
+      throw new Error('You must be on the "new-docker-image" branch to run this script.');
     }
 
-    const { nodeVersion, npmVersion } = await resolveVersions(args);
-    console.info(`Updating to Node.js ${nodeVersion} with npm ${npmVersion}`);
+    const nodeVersion = resolveNodeVersion(args[0], await fetchNodeReleases());
+    console.info(`Updating to Node.js ${nodeVersion}`);
 
     const oldNodeVersionDots = await getCurrentNodeVersion();
 
@@ -270,27 +219,22 @@ async function main() {
     await fs.writeFile(path.resolve(".nvmrc"), nodeVersion + "\n", "utf8");
     console.info(`✓ Updated .nvmrc to ${nodeVersion}`);
 
-    await updateVerifyNodeScript("package.json", npmVersion);
+    await updateVerifyNodeScript("package.json");
 
     console.info("\nAll files updated successfully! 🎉");
   } catch (error) {
     console.error("\n❌ Error:", error.message);
     console.error("\nUsage:");
-    console.error(
-      "  ./scripts/update-node.ts                  # Latest LTS version"
-    );
-    console.error(
-      "  ./scripts/update-node.ts 18              # Latest in 18.x line"
-    );
+    console.error("  ./scripts/update-node.ts                  # Latest LTS version");
+    console.error("  ./scripts/update-node.ts 18              # Latest in 18.x line");
     console.error("  ./scripts/update-node.ts 18.18.2         # Exact version");
-    console.error(
-      "  ./scripts/update-node.ts 18.18.2 9.8.1   # Exact versions"
-    );
     process.exit(1);
   }
 }
 
-main().catch((error) => {
-  console.error("Error:", error);
-  process.exit(1);
-});
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    console.error("Error:", error);
+    process.exit(1);
+  });
+}
