@@ -1,12 +1,15 @@
+pmOnFail: error
+verifyDepsBeforeRun: false
+enablePrePostScripts: true
+autoDedupe: false
+
 allowBuilds:
   "@parcel/watcher": true
   "@swc/core": true
   esbuild: true
   sharp: true
 minimumReleaseAgeExclude:
-  - '@newjersey/feedback-widget@0.8.3'
-onlyBuiltDependencies:
-  - "@parcel/watcher"
-  - "@swc/core"
-  - esbuild
-  - sharp
+  - "@newjersey/feedback-widget@0.8.3"
+
+skills:
+  dirs: []

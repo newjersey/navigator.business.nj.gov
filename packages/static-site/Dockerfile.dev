@@ -7,14 +7,19 @@ LABEL org.opencontainers.image.vendor="New Jersey Innovation Authority"
 LABEL org.opencontainers.image.licenses="MIT"
 
 ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PATH="$PNPM_HOME/bin:$PATH"
 
-RUN corepack enable
+COPY packages/static-site/package.json /tmp/pnpm-package.json
+RUN wget -qO /tmp/install-pnpm.sh https://get.pnpm.io/install.sh \
+  && PNPM_VERSION="$(node -p 'require("/tmp/pnpm-package.json").packageManager.split("@")[1].split("+")[0]')" \
+    PNPM_NO_MODIFY_PATH=1 SHELL=/bin/sh sh /tmp/install-pnpm.sh \
+  && test "$(pnpm --version)" = "12.18.0" \
+  && rm /tmp/install-pnpm.sh /tmp/pnpm-package.json
 
 WORKDIR /app
 
 COPY packages/content-types /content-types
-COPY packages/static-site/package.json packages/static-site/pnpm-lock.yaml ./
+COPY packages/static-site/package.json packages/static-site/pnpm-lock.yaml packages/static-site/pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 RUN pnpm exec tsc --build /content-types/tsconfig.json
 

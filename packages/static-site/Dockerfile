@@ -1,9 +1,14 @@
 FROM node:24-alpine AS base
 
 ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PATH="$PNPM_HOME/bin:$PATH"
 
-RUN corepack enable
+COPY packages/static-site/package.json /tmp/pnpm-package.json
+RUN wget -qO /tmp/install-pnpm.sh https://get.pnpm.io/install.sh \
+  && PNPM_VERSION="$(node -p 'require("/tmp/pnpm-package.json").packageManager.split("@")[1].split("+")[0]')" \
+    PNPM_NO_MODIFY_PATH=1 SHELL=/bin/sh sh /tmp/install-pnpm.sh \
+  && test "$(pnpm --version)" = "12.18.0" \
+  && rm /tmp/install-pnpm.sh /tmp/pnpm-package.json
 
 FROM base AS dependencies
 WORKDIR /app

@@ -35,10 +35,9 @@ jobs:
           cache-dependency-path: packages/static-site/pnpm-lock.yaml
 
       - name: Build content-types
-        working-directory: packages/content-types
         run: |
-          pnpm install
-          pnpm build
+          yarn install --immutable
+          yarn workspace @businessnjgovnavigator/content-types build
 
       - name: Install dependencies
         working-directory: packages/static-site

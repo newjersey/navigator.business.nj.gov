@@ -376,7 +376,10 @@ echo "=== [5/7] Package managers (Yarn + pnpm) ==="
 
 corepack enable && echo "Corepack enabled." || { echo "Failed to enable corepack."; exit 1; }
 corepack prepare yarn@latest --activate && echo "Yarn activated." || { echo "Failed to activate Yarn."; exit 1; }
-corepack prepare pnpm@latest --activate && echo "pnpm activated." || { echo "Failed to activate pnpm."; exit 1; }
+export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
+export PATH="$PNPM_HOME/bin:$PATH"
+PNPM_VERSION="$(node -p 'require("./packages/static-site/package.json").packageManager.split("@")[1].split("+")[0]')"
+fetch_url https://get.pnpm.io/install.sh | PNPM_VERSION="$PNPM_VERSION" PNPM_NO_MODIFY_PATH=1 SHELL="$SHELL" sh
 
 # ============================================================
 echo ""
