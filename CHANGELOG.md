@@ -1,3 +1,16 @@
+# [2026.28.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.27.0...v2026.28.0) (2026-11-12)
+
+
+### Bug Fixes
+
+* disable husky in release workflow ([015b6a3](https://github.com/newjersey/navigator.business.nj.gov/commit/015b6a39b10bad5ff2b4b7bb16fe4042497fa6e5))
+
+
+### Features
+
+* [AB#11210](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/11210) [AB#13054](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/13054) consolidate package management on pnpm 12.18.0 ([f0d862c](https://github.com/newjersey/navigator.business.nj.gov/commit/f0d862c463be2564783c494fc3ddff79d545f36e))
+* [AB#18039](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18039) toggle anytime actions visibility on static site ([cf58ff1](https://github.com/newjersey/navigator.business.nj.gov/commit/cf58ff19c64e1b2a8d56e5c7171ac6041d37430f))
+
 # [2026.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.26.0...v2026.27.0) (2026-11-09)
 
 
