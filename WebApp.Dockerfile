@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM node:24.18.0-alpine AS dependencies
+FROM node:24.22.3-alpine AS dependencies
 
 WORKDIR /app
 
@@ -48,7 +48,7 @@ RUN --mount=type=secret,id=web-build-environment,target=/app/web/.env.production
   && rm -f /app/web/.next/standalone/web/.env.production \
   && ! find /app/web/.next/standalone -name ".env*" -print | grep -q .
 
-FROM node:24.18.0-alpine AS runner
+FROM node:24.22.3-alpine AS runner
 
 WORKDIR /app
 
