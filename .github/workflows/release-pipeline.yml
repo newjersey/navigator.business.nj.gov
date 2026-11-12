@@ -35,6 +35,8 @@ jobs:
       pull-requests: write
       id-token: write
     environment: prod
+    env:
+      HUSKY: "0"
     steps:
       - uses: actions/checkout@v7
       - name: Set up pnpm
