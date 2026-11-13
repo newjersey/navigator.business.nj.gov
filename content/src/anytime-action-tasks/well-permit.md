@@ -18,6 +18,8 @@ summaryDescriptionMd: >
 issuingAgency: NJ Department of Environmental Protection, Water Supply and Geoscience
 callToActionText: Apply for a Permit for My Customer’s Well
 callToActionLink: https://dep.nj.gov/online/
+displayOnStaticSite: true
+staticSiteName: Apply for a Permit for Your Customer’s Well
 ---
 
 These are the basic application requirements for all types of wells. There may be some additional requirements depending on the type of well you select.

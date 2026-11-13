@@ -45,6 +45,8 @@ callToActionText: Register My Business with NJSTART
 callToActionLink: https://www.njstart.gov/bso/
 synonyms:
   - bidding
+displayOnStaticSite: true
+staticSiteName: Learn How to Contract with the NJ State Government
 ---
 
 ### Registration Requirements

@@ -34,6 +34,8 @@ synonyms:
   - fire safety approval
   - burning permit
   - fire marshal clearance
+displayOnStaticSite: true
+staticSiteName: Get a Fire Permit to Perform Hot Work
 ---
 
 ## How to Apply

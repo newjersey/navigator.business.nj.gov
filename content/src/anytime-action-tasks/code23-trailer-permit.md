@@ -32,6 +32,8 @@ issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Code 23 Trailer Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
 icon: govt-purple.svg
+displayOnStaticSite: true
+staticSiteName: Apply for Your Code 23 Special Oversize Trailer Permit
 ---
 
 ## Eligibility Criteria

@@ -27,7 +27,10 @@ summaryDescriptionMd: You must have a fire permit to do `fumigation|` or thermal
 issuingAgency: NJ Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
+displayOnStaticSite: true
+staticSiteName: Get a Fire Permit for Fumigation or Thermal Insecticide Fogging
 ---
+
 ## How to Apply
 
 Contact the `Local Enforcing Agency (LEA)|lea` in the town where you plan to do the activity. Your LEA can be your local fire department or the New Jersey Division of Fire Safety.

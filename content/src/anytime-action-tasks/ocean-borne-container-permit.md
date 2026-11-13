@@ -29,6 +29,8 @@ issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Ocean Borne Container Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
 icon: govt-purple.svg
+displayOnStaticSite: true
+staticSiteName: Apply for Your Ocean Borne Container Permit
 ---
 
 ## Eligibility Criteria

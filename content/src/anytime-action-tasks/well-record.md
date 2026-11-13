@@ -15,6 +15,8 @@ issuingAgency: NJ Department of Environmental Protection, Division of Water
   Supply and Geoscience
 callToActionText: File a Record for My Customer’s Well
 callToActionLink: https://dep.nj.gov/online/
+displayOnStaticSite: true
+staticSiteName: File a Record for Your Customer’s Well
 ---
 
 ## Record Requirements

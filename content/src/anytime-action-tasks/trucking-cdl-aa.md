@@ -66,6 +66,8 @@ summaryDescriptionMd: >-
 issuingAgency: NJ Motor Vehicle Commission
 callToActionText: Apply for My CDL
 callToActionLink: https://www.nj.gov/mvc/pdf/license/BA-208C.pdf
+displayOnStaticSite: true
+staticSiteName: Make Sure You or Your Drivers have a Commercial Driver's License (CDL)
 ---
 
 &nbsp;

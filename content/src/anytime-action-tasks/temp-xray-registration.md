@@ -26,6 +26,8 @@ issuingAgency: NJ Department of Environmental Protection, Radiation Protection
   Element, Bureau of X-Ray Compliance
 callToActionText: Register My Temporary X-Ray Machine
 callToActionLink: https://www.nj.gov/dep/rpp/reg/temp.htm
+displayOnStaticSite: true
+staticSiteName: Register Your Temporary X-Ray Machine
 ---
 
 ## Registration Requirements

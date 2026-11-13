@@ -33,6 +33,8 @@ issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Single Trip OS/OW Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
 icon: govt-purple.svg
+displayOnStaticSite: true
+staticSiteName: Apply for Your Single Trip OS/OW Permit (5-day)
 ---
 
 ## Eligibility Criteria

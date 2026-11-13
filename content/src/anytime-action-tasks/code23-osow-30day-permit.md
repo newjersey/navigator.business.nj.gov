@@ -31,6 +31,8 @@ summaryDescriptionMd: >-
 issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Code 23 OS/OW Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
+displayOnStaticSite: true
+staticSiteName: Apply for Your Code 23 OS/OW (30-day) Permit, if Applicable
 ---
 
 ## Eligibility Requirements

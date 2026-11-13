@@ -24,6 +24,8 @@ summaryDescriptionMd: >-
 issuingAgency: NJ Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
+displayOnStaticSite: true
+staticSiteName: Get a Fire Permit for Your Vacant or Unoccupied Property
 ---
 
 ## How to Apply

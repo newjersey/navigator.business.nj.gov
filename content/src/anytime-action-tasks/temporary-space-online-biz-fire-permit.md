@@ -25,6 +25,8 @@ callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summa
 synonyms:
   - fire safety
   - fire marshal
+displayOnStaticSite: true
+staticSiteName: Get a Fire Permit to Set Up Your Temporary Retail Space
 ---
 
 ## How to Apply
