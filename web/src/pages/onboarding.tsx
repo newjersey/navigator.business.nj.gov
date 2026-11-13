@@ -52,6 +52,7 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { hasNavigatorAccount } from "@/lib/auth/hasNavigatorAccount";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -254,7 +255,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         if (
           usingIntentSelection &&
           currentBusiness.profileData.businessPersona === "STARTING" &&
-          !currentUserData.user.myNJUserKey
+          !hasNavigatorAccount(currentUserData.user, state.isAuthenticated)
         ) {
           if (currentUserData.user.onboardedAsLearningUser) {
             await router.replace(ROUTES.learnFlowLandingPage);
