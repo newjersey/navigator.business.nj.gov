@@ -434,6 +434,35 @@ describe("userRouter", () => {
         });
       });
 
+      it("queries for license data using formation address if licenseData has no licenses", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: generateLicenseData({
+              lastUpdatedISO: sixtyOneMinutesAgo,
+              licenses: {},
+            }),
+            formationData: generateFormationData({
+              formationFormData: generateFormationFormData({
+                addressLine1: "123 Main Street",
+                addressLine2: "Suite 100",
+                addressZipCode: "07123",
+              }),
+            }),
+          }),
+        );
+
+        const currentBusiness = getCurrentBusiness(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).toHaveBeenLastCalledWith(userData, {
+          name: currentBusiness.profileData.businessName,
+          addressLine1: "123 Main Street",
+          addressLine2: "Suite 100",
+          zipCode: "07123",
+        });
+      });
+
       it("does not update license if licenseData lastCheckedDate is within the last hour", async () => {
         const userData = generateUserDataForBusiness(
           generateBusiness({
