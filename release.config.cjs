@@ -130,9 +130,9 @@ const linkifyMentions = (subject, host) =>
  * @returns {Commit | undefined}
  */
 const adoTransform = (commit, context) => {
-  commit.notes.forEach((note) => {
+  for (const note of commit.notes) {
     note.title = "BREAKING CHANGES";
-  });
+  }
 
   if (shouldDiscard(commit)) return;
 
