@@ -25,7 +25,7 @@ describe("<XrayStatus />", () => {
           }),
         )}
       >
-        <XrayStatus onSubmit={() => {}} error={undefined} isLoading={false} />;
+        <XrayStatus onSubmit={() => {}} error={undefined} isLoading={false} />
       </WithStatefulUserData>,
     );
   };
