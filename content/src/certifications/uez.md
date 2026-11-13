@@ -18,6 +18,7 @@ isSbe: false
 
 ## Eligibility Criteria
 
+- Hello! Editing this file to see if it will trigger a Smartling Automation.
 - Registered and authorized to do business in New Jersey
 - Business location must be in one of the [32 designated urban zones](https://njdca.maps.arcgis.com/apps/InformationLookup/index.html?appid=0db472ac220a419d938e9060574d2f21). If you have more than 1 location, only the locations in a designated zone are eligible for a UEZ certification
 - Meet all [State tax obligations](https://business.nj.gov/pages/filings-and-accounting)
