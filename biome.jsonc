@@ -30,8 +30,6 @@
     "formatter": { "enabled": false },
     "linter": { "enabled": false }
   },
-  // pnpm build runs decap:build-config, which runs prettier -w on web/decap-config; Biome moves YAML in a later PR.
-  "yaml": { "formatter": { "enabled": false } },
   "overrides": [
     {
       "includes": ["shared/**"],

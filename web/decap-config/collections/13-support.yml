@@ -59,8 +59,7 @@ collections:
                   label: "Logout If Still Having Trouble",
                   name: "logoutIfStillHavingTrouble",
                   widget: "string",
-                  hint:
-                    "This field is conditionally rendered. It will only display when a user is
+                  hint: "This field is conditionally rendered. It will only display when a user is
                     detected to be logged in.",
                 }
               - {
