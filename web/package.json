@@ -18,7 +18,7 @@
     "copy-vendor-assets": "tsx ./copyVendorAssets.ts",
     "dev": "pnpm run copy-vendor-assets && next dev",
     "eslint": "eslint",
-    "export:funding": "ts-node ./src/scripts/fundingExport.mjs",
+    "export:funding": "tsx ./src/scripts/fundingExport.ts",
     "dependency-check": "depcruise --config .dependency-cruiser.mjs src",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
