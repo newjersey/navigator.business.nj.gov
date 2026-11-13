@@ -69,7 +69,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
 
   switch (props.variant) {
     case NavBarVariant.LOGO_ONLY:
-      return <NavBarLogoOnlyDesktop logoType={props.logoVariant!} />;
+      return <NavBarLogoOnlyDesktop logoType={props.logoVariant ?? "NAVIGATOR_LOGO"} />;
 
     case NavBarVariant.LOGO_WITH_TEXT:
       return (

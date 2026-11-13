@@ -345,10 +345,10 @@ export const CigaretteLicense = (props: Props): ReactElement => {
     }
   };
 
-  return shouldShowConfirmation() ? (
+  return business && shouldShowConfirmation() ? (
     <div className="flex flex-column space-between min-height-38rem">
       <TaskHeader task={props.task} />
-      <ConfirmationPage business={business!} />
+      <ConfirmationPage business={business} />
     </div>
   ) : (
     <>

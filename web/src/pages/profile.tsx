@@ -156,10 +156,8 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const FEATURE_EMPLOYER_RATES_ENABLED = process.env.FEATURE_EMPLOYER_RATES === "true";
 
-  const profileTabSlugs = useMemo(
-    () =>
-      (Config.profileDefaults.default as { profileTabSlugs?: Record<ProfileTabs, string> })
-        .profileTabSlugs!,
+  const profileTabSlugs: Record<ProfileTabs, string> = useMemo(
+    () => Config.profileDefaults.default.profileTabSlugs,
     [Config],
   );
 
@@ -230,8 +228,11 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const redirect = (
     params?: Record<string, string>,
-    routerType = router!.push,
+    routerType = router?.push,
   ): Promise<boolean> => {
+    if (!routerType) {
+      throw new Error("Profile redirect needs a Pages Router instance");
+    }
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };

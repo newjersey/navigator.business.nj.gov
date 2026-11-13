@@ -24,9 +24,13 @@ export const getIsApplicableToFunctionByFieldName = (
   fieldName: ProfileContentField,
 ): ((industryId: string | undefined) => boolean) => {
   return (industryId: string | undefined): boolean => {
-    return EssentialQuestions.find((eQ) => {
+    const essentialQuestion = EssentialQuestions.find((eQ) => {
       return eQ.fieldName === fieldName;
-    })!.isQuestionApplicableToIndustry(LookupIndustryById(industryId));
+    });
+    if (!essentialQuestion) {
+      throw new Error(`No essential question for field ${fieldName}`);
+    }
+    return essentialQuestion.isQuestionApplicableToIndustry(LookupIndustryById(industryId));
   };
 };
 export const hasEssentialQuestion = (industryId: string | undefined): boolean => {

@@ -214,7 +214,7 @@ export const Signatures = (): ReactElement => {
             );
           })}
         </Select>
-        {hasError && state.formationFormData!.signers[index].title === undefined && (
+        {hasError && state.formationFormData.signers[index].title === undefined && (
           <FormHelperText className={"text-error-dark"}>
             {Config.formation.fields.signers.errorInlineSignerTitle}
           </FormHelperText>

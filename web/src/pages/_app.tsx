@@ -141,7 +141,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   Hub.listen("auth", listener);
 
   useMountEffectWhenDefined(() => {
-    setOnLoadDimensions(updateQueue!.current());
+    if (updateQueue) {
+      setOnLoadDimensions(updateQueue.current());
+    }
   }, updateQueue?.current);
 
   useMountEffect(() => {
