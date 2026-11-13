@@ -48,10 +48,11 @@ export const WebserviceLicenseStatusProcessorClient = (
       }
 
       const licenseName = `${professionName}-${licenseType}` as LicenseName;
-      if (licenseName in results) {
-        results[licenseName]!.checklistItems = updateChecklist(
+      const existingLicense = results[licenseName];
+      if (existingLicense) {
+        existingLicense.checklistItems = updateChecklist(
           checklistItem,
-          results[licenseName]!.checklistItems,
+          existingLicense.checklistItems,
         );
       } else {
         results[licenseName] = {
