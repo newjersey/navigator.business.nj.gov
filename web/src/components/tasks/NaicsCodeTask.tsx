@@ -68,8 +68,8 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
     setShowInput(false);
   };
 
-  const preLookupContent = props.task.contentMd.split("${naicsCodeLookupComponent}")[0];
-  const postLookupContent = props.task.contentMd.split("${naicsCodeLookupComponent}")[1];
+  const preLookupContent = props.task.contentMd.split(`\${naicsCodeLookupComponent}`)[0];
+  const postLookupContent = props.task.contentMd.split(`\${naicsCodeLookupComponent}`)[1];
 
   return (
     <div className="min-height-38rem">
