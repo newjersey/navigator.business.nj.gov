@@ -167,7 +167,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     }
   });
 
-  const isSeoPage = router && router.pathname.includes("/starter-kits");
+  const isSeoPage = router?.pathname.includes("/starter-kits");
 
   const heroTitle = insertIndustryContent(
     config.starterKits.hero.title,

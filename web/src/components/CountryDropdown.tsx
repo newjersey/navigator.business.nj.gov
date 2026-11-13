@@ -41,7 +41,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
     const value = event.target.value;
     const invalid = props.required ? !value.trim() || getCountry(value) === undefined : false;
 
-    props.onValidation && props.onValidation(props.fieldName, invalid);
+    props.onValidation?.(props.fieldName, invalid);
   };
 
   const handleInputChange = (_event: ChangeEvent<unknown>, value: string | null): void => {

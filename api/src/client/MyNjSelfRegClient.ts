@@ -50,7 +50,7 @@ export const MyNJSelfRegClientFactory = (
         const authURL = xmlResponseObj.AuthURL;
         const errors = xmlResponseObj.Errors;
 
-        if (!success || success[0] !== "true") {
+        if (success?.[0] !== "true") {
           logger.LogError(
             `myNJ Self-Reg - Id:${logId} - Error Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`,
           );

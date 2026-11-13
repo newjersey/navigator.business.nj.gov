@@ -152,13 +152,13 @@ export const GenericTextField = forwardRef(
     const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
       const isValid = isFieldValid(event.target.value);
       setIsValid(isValid);
-      props.onValidation && props.onValidation(props.fieldName, !isValid, event.target.value);
+      props.onValidation?.(props.fieldName, !isValid, event.target.value);
     };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
       const value = valueFilter ? valueFilter(event.target.value) : event.target.value;
-      props.handleChange && props.handleChange(value);
-      props.onChange && props.onChange(value);
+      props.handleChange?.(value);
+      props.onChange?.(value);
     };
 
     const error = props.error ?? isFormFieldInvalid;

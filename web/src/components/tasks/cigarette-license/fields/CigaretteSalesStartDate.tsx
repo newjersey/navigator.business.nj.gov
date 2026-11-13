@@ -28,8 +28,7 @@ export const CigaretteSalesStartDate = (props: Props): ReactElement => {
   };
 
   const onChange = (newValue: DateObject | null): void => {
-    const isDateValid = newValue && newValue.isValid();
-    const newDateValue = isDateValid ? newValue.toISOString() : "";
+    const newDateValue = newValue?.isValid() ? newValue.toISOString() : "";
 
     setCigaretteLicenseData((cigaretteLicenseData) => {
       return {

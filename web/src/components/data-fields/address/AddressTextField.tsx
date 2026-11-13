@@ -19,7 +19,7 @@ export const AddressTextField = ({ className, ...props }: Props): ReactElement =
   const { doesFieldHaveError } = useAddressErrors();
 
   const handleChange = (value: string): void => {
-    props.handleChange && props.handleChange(value);
+    props.handleChange?.(value);
     setAddressData((prevAddressData) => ({ ...prevAddressData, [props.fieldName]: value }));
   };
 

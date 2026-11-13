@@ -56,21 +56,21 @@ const LoadingPage = (): ReactElement => {
     if (!updateQueue) return;
     const business = updateQueue.currentBusiness();
     if (business?.onboardingFormProgress && !onboardingCompleted(business)) {
-      router && router.push({ pathname: ROUTES.onboarding, query: router.query });
+      router?.push({ pathname: ROUTES.onboarding, query: router.query });
     } else if (business.preferences.returnToLink) {
       const pageLink = business.preferences.returnToLink;
       updateQueue
         .queuePreferences({ returnToLink: "" })
         .update()
         .then(() => {
-          router && router.push(pageLink);
+          router?.push(pageLink);
         })
         .catch(() => undefined);
     } else {
       updateQueue
         .update()
         .then(() => {
-          router && router.push(ROUTES.dashboard);
+          router?.push(ROUTES.dashboard);
         })
         .catch(() => undefined);
     }

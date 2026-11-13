@@ -462,7 +462,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
   const getErrorComponent = (): ReactNode => {
     if (hasGenericApiError()) {
-      if (!business || !business.formationData.formationResponse) {
+      if (!business?.formationData.formationResponse) {
         return <></>;
       }
       return (

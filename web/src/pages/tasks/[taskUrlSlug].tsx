@@ -72,7 +72,7 @@ const TaskPage = (props: Props): ReactElement => {
         {previousUrlSlug && (
           <UnStyledButton
             onClick={(): void => {
-              router && router.push(`/tasks/${previousUrlSlug}`);
+              router?.push(`/tasks/${previousUrlSlug}`);
             }}
           >
             <Icon className="usa-icon--size-4" iconName="navigate_before" />
@@ -83,7 +83,7 @@ const TaskPage = (props: Props): ReactElement => {
           <UnStyledButton
             dataTestid={"nextUrlSlugButton"}
             onClick={(): void => {
-              router && router.push(`/tasks/${nextUrlSlug}`);
+              router?.push(`/tasks/${nextUrlSlug}`);
             }}
           >
             <span className="margin-right-2">{Config.taskDefaults.nextTaskButtonText}</span>

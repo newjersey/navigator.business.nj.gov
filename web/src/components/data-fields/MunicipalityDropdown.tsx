@@ -32,12 +32,12 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    props.handleChange && props.handleChange();
+    props.handleChange?.();
     setSearchText(event.target.value);
   };
 
   const handleMunicipality = (_event: ChangeEvent<unknown>, value: Municipality | null): void => {
-    props.handleChange && props.handleChange();
+    props.handleChange?.();
     setSearchText(value ? value.displayName : "");
     props.onSelect(value || undefined);
   };

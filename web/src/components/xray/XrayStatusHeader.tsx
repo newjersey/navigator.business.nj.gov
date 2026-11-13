@@ -107,7 +107,7 @@ export const XrayStatusHeader = (props: Props): ReactElement => {
                 className={`text-error-darker text-normal padding-0 margin-left-05`}
                 onClick={() => {
                   analytics.event.xray_registration_expired_status_card.click.xray_renewal_started_expired_card();
-                  router && router.push(Config.xrayRegistrationTask.renewRegistrationLink);
+                  router?.push(Config.xrayRegistrationTask.renewRegistrationLink);
                 }}
               >
                 <span className="hover:text-error-dark text-underline">

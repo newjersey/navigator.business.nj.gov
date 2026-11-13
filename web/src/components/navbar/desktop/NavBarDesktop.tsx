@@ -44,7 +44,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     event?: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>,
   ): void => {
     if (props.CMS_PREVIEW_ONLY_SHOW_MENU) return;
-    if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+    if (event && anchorRef.current?.contains(event.target as Node)) {
       return;
     }
 
