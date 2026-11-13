@@ -1,0 +1,32 @@
+import { LearnStepIndicator } from "@/components/roadmap/LearnStepIndicator";
+import Link from "next/link";
+import { ReactElement } from "react";
+
+interface Props {
+  task: { id: string; name: string };
+  active: boolean;
+  onTaskClick?: () => void;
+  stepNumber: number;
+  pathPrefix: string;
+}
+
+export const NumberedMiniRoadmapTask = (props: Props): ReactElement => {
+  return (
+    <Link
+      className="width-full display-block text-no-underline"
+      href={`/${props.pathPrefix}/${props.task.id}`}
+      onClick={props.onTaskClick}
+    >
+      <div
+        className={`flex flex-row width-full padding-y-1 padding-right-4 text-underline-hover h6-styling ${
+          props.active ? "learn-mini-roadmap-task--active" : ""
+        }`}
+        data-task={props.task.id}
+        data-testid={`mini-roadmap-task-${props.task.id}`}
+      >
+        <LearnStepIndicator stepNumber={props.stepNumber} active={props.active} />
+        <div className="margin-left-5">{props.task.name}</div>
+      </div>
+    </Link>
+  );
+};

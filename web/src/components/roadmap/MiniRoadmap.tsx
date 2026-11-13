@@ -1,12 +1,15 @@
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { type ReactElement, useContext } from "react";
 import { LockedTasksPrompt } from "@/components/dashboard/LockedTasksPrompt";
 import { Icon } from "@/components/njwds/Icon";
 import { Heading } from "@/components/njwds-extended/Heading";
+import { ReadyMiniRoadmap } from "@/components/roadmap//ReadyMiniRoadmap";
 import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 
 interface Props {
   activeTaskId?: string | undefined;
@@ -17,36 +20,44 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
   const { isAuthenticated } = useContext(NeedsAccountContext);
+  const { business } = useUserData();
+  const doesUserHaveIndustry = business?.profileData.industryId;
+
+  if (
+    !doesUserHaveIndustry &&
+    business?.profileData.operatingPhase !== OperatingPhaseId.UP_AND_RUNNING &&
+    business?.profileData.operatingPhase !== OperatingPhaseId.UP_AND_RUNNING_OWNING
+  ) {
+    return <ReadyMiniRoadmap />;
+  }
 
   const dropdownIconClasses = "usa-icon--size-5 text-base-light";
 
   return (
-    <>
-      <Accordion defaultExpanded>
-        <AccordionSummary
-          expandIcon={<Icon className={dropdownIconClasses} iconName="expand_more" />}
-        >
-          <Heading level={3} className="flex flex-align-center margin-0-override">
-            {Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderAbbreviatedText}
-          </Heading>
-        </AccordionSummary>
-        <AccordionDetails>
-          {roadmap?.tasks
-            .filter((task) => task.required)
-            .map((task) => {
-              return (
-                <div key={task.id} className="margin-y-1">
-                  <MiniRoadmapTask
-                    task={task}
-                    active={task.id === props.activeTaskId}
-                    onTaskClick={props.onTaskClick}
-                  />
-                </div>
-              );
-            })}
-          {isAuthenticated === "FALSE" && <LockedTasksPrompt isCTAButtonHidden />}
-        </AccordionDetails>
-      </Accordion>
-    </>
+    <Accordion defaultExpanded>
+      <AccordionSummary
+        expandIcon={<Icon className={dropdownIconClasses} iconName="expand_more" />}
+      >
+        <Heading level={3} className="flex flex-align-center margin-0-override">
+          {Config.dashboardRoadmapHeaderDefaults.roadmapTasksHeaderAbbreviatedText}
+        </Heading>
+      </AccordionSummary>
+      <AccordionDetails>
+        {roadmap?.tasks
+          .filter((task) => task.required)
+          .map((task) => {
+            return (
+              <div key={task.id} className="margin-y-1">
+                <MiniRoadmapTask
+                  task={task}
+                  active={task.id === props.activeTaskId}
+                  onTaskClick={props.onTaskClick}
+                />
+              </div>
+            );
+          })}
+        {isAuthenticated === "FALSE" && <LockedTasksPrompt isCTAButtonHidden />}
+      </AccordionDetails>
+    </Accordion>
   );
 };
