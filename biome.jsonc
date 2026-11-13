@@ -9,7 +9,6 @@
   "files": {
     "includes": [
       "**",
-      "!**/.yarn/*",
       "!pnpm-lock.yaml",
       "!.claude",
       "!packages/static-site",
@@ -158,6 +157,7 @@
             "noNoninteractiveElementInteractions": "error"
           },
           "performance": {
+            // ported from ESLint's explicit @next/next/no-img-element: off; AB#18079 evaluates Next's image optimizer
             "noImgElement": "off",
             "noSyncScripts": "error"
           },
@@ -267,19 +267,44 @@
         "enabled": false
       }
     },
-    // Deferred to AB#18076 (noFloatingPromises), AB#18077 (useExhaustiveDependencies), and AB#18078 (noComponentHookFactories); decided when ESLint is removed.
+    {
+      "includes": ["**/*.test.*", "web/test/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            // tests assert on fixtures they built; a wrong assumption fails the test loudly
+            "noNonNullAssertion": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["web/**/*.test.*", "web/test/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            // web test fixtures use ${name} as CMS and templateEval placeholder syntax
+            "noTemplateCurlyInString": "off"
+          }
+        }
+      }
+    },
+    // Fixing these changes runtime behavior, so each has its own ticket.
     {
       "includes": ["web/**"],
       "linter": {
         "rules": {
           "correctness": {
+            // AB#18077
             "useExhaustiveDependencies": {
-              "level": "warn",
+              "level": "off",
               "options": { "reportUnnecessaryDependencies": false }
             },
-            "noComponentHookFactories": "warn"
+            // AB#18078
+            "noComponentHookFactories": "off"
           },
-          "nursery": { "noFloatingPromises": "warn" }
+          // AB#18076
+          "nursery": { "noFloatingPromises": "off" }
         }
       }
     }
