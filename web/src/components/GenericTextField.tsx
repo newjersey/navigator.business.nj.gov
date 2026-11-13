@@ -29,8 +29,8 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   additionalValidationIsValid?: (value: string) => boolean;
   visualFilter?: (value: string) => string;
   valueFilter?: (value: string) => string;
-  handleChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
-  onChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
+  handleChange?: (value: string) => void;
+  onChange?: (value: string) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onClick?: () => void;
   onFocus?: () => void;
