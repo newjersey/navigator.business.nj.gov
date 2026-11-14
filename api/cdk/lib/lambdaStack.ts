@@ -72,7 +72,9 @@ export class LambdaStack extends Stack {
       process.env.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE || "";
     const awsCryptoTaxIdHashingSalt =
       props.stage === "local"
-        ? "${ssm:/dev/tax_id_hashing_salt}"
+        ? // TODO: revisit how this value is sourced in a follow-up ticket.
+          // biome-ignore lint/suspicious/noTemplateCurlyInString: pending the follow-up above
+          "${ssm:/dev/tax_id_hashing_salt}"
         : `\${ssm:/${props.stage}/tax_id_hashing_salt}`;
 
     const dynamicsLicenseStatusTenantId = process.env.DYNAMICS_LICENSE_STATUS_TENANT_ID || "";
