@@ -50,7 +50,7 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
       ...state.profileData,
       [props.fieldName]: value,
     });
-    props.onChange && props.onChange(value);
+    props.onChange?.(value);
     setIsValid(true);
   };
 

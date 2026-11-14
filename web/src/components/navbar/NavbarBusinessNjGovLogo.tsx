@@ -17,7 +17,7 @@ export const NavbarBusinessNjGovLogo = (props: Props): ReactElement => {
         dataTestid={"business-nj-gov-logo"}
         onClick={() => {
           analytics.event.business_nj_gov_logo.click.business_nj_gov_logo();
-          router && router.push(Config.navigationDefaults.navBarBusinessNJGovLink);
+          router?.push(Config.navigationDefaults.navBarBusinessNJGovLink);
         }}
       >
         <img

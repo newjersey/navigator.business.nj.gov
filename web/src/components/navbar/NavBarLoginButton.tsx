@@ -17,7 +17,7 @@ export const NavBarLoginButton = (): ReactElement => {
         dataTestid="login-button"
         onClick={(): void => {
           if (loginPageEnabled) {
-            router && router.push(ROUTES.login);
+            router?.push(ROUTES.login);
           } else {
             triggerSignIn();
             analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();

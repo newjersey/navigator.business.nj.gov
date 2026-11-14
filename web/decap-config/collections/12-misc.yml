@@ -24,22 +24,19 @@ collections:
                   label: "License Expiration Date Header Text",
                   name: "licenseExpirationHeaderText",
                   widget: "string",
-                  hint:
-                    "This appears in the license calendar events and anytime action reinstatement",
+                  hint: "This appears in the license calendar events and anytime action reinstatement",
                 }
               - {
                   label: "License Status Header Text",
                   name: "licenseStatusHeaderText",
                   widget: "string",
-                  hint:
-                    "This appears in the license calendar events and anytime action reinstatement",
+                  hint: "This appears in the license calendar events and anytime action reinstatement",
                 }
               - {
                   label: "License Last Updated Text",
                   name: "licenseLastUpdatedText",
                   widget: "string",
-                  hint:
-                    "This appears in the license calendar events and anytime action reinstatement",
+                  hint: "This appears in the license calendar events and anytime action reinstatement",
                 }
   - name: "starter-kits"
     label: "Starter Kits"
@@ -843,8 +840,7 @@ collections:
               - {
                   label: CTA Prefix for Guest Users,
                   name: "ctaPrefixForGuestUsers",
-                  hint:
-                    "This text appears before the call to action button text (e.g. 'Save' or
+                  hint: "This text appears before the call to action button text (e.g. 'Save' or
                     'Continue Forming My Business') for users that aren't logged in.",
                   widget: string,
                 }
@@ -3490,8 +3486,7 @@ collections:
                   label: Step Counter Text,
                   name: stepCounterText,
                   widget: string,
-                  hint:
-                    "Use ${currentStep} and ${totalSteps} for the current and total step numbers.",
+                  hint: "Use ${currentStep} and ${totalSteps} for the current and total step numbers.",
                 }
               - { label: Previous Step Text, name: previousStepText, widget: string }
               - { label: Next Step Text, name: nextStepText, widget: string }

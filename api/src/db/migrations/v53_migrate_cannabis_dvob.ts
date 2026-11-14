@@ -14,15 +14,18 @@ export interface v53UserData {
   version: number;
 }
 
+// v52 records can carry a top-level cannabisMicrobusiness that v52's types never declared.
+type v52UserDataWithLegacyMicrobusiness = v52UserData & { cannabisMicrobusiness?: boolean };
+
 export const migrate_v52_to_v53 = (v52Data: v52UserData, _?: MigrationClients): v53UserData => {
+  const v52DataWithLegacyFields: v52UserDataWithLegacyMicrobusiness = v52Data;
   const vetOwnedValue = v52Data.taskItemChecklist["general-veteran-owned"];
   delete v52Data.taskItemChecklist["general-veteran-owned"];
   return {
     ...v52Data,
     profileData: {
       ...v52Data.profileData,
-      // @ts-ignore
-      cannabisMicrobusiness: v52Data.cannabisMicrobusiness ?? undefined,
+      cannabisMicrobusiness: v52DataWithLegacyFields.cannabisMicrobusiness ?? undefined,
     },
     taskItemChecklist: {
       ...v52Data.taskItemChecklist,

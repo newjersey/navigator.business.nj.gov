@@ -150,10 +150,6 @@ packageExtensions:
     peerDependenciesMeta:
       decap-cms-ui-auth:
         optional: true
-  eslint-plugin-storybook@*:
-    peerDependenciesMeta:
-      typescript:
-        optional: true
   focus-trap-react@*:
     peerDependenciesMeta:
       prop-types:

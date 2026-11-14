@@ -38,7 +38,7 @@ export const NeedsAccountModal = (): ReactElement => {
       analytics.event.guest_modal.click.go_to_NavigatorAccount_setup();
     }
     setShowNeedsAccountModal(false);
-    router && router.push(ROUTES.accountSetup);
+    router?.push(ROUTES.accountSetup);
   };
 
   return (
@@ -77,7 +77,7 @@ export const NeedsAccountModal = (): ReactElement => {
               onClick={(): void => {
                 analytics.event.guest_modal.click.go_to_myNJ_login();
                 if (loginPageEnabled) {
-                  router && router.push(ROUTES.login);
+                  router?.push(ROUTES.login);
                 } else {
                   triggerSignIn();
                 }

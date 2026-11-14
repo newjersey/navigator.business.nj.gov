@@ -36,7 +36,7 @@ export const makeSnippet = (text: string, matchComparator: MatchComparator): str
   }
   if (matchComparator.term) {
     const index = text.toLowerCase().indexOf(matchComparator.term.toLowerCase());
-    const startIndex = index - 50 < 0 ? 0 : index - 50;
+    const startIndex = Math.max(0, index - 50);
     const endIndex = matchComparator.term.length + index + 50;
     return text.slice(startIndex, endIndex);
   }

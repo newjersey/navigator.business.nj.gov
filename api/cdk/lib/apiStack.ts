@@ -20,6 +20,7 @@ import {
   attachLambdaToResource,
   createLambda,
   createSesConfigSet,
+  requireEnv,
 } from "./stackUtils";
 
 /** Lambda function configuration consumed by API Gateway routes. */
@@ -174,10 +175,13 @@ export class ApiStack extends Stack {
     this.addGatewayResponses();
     const expressLambda = props.lambdas.express?.lambda;
     const githubLambda = props.lambdas.githubOauth2?.lambda;
+    if (!expressLambda) {
+      throw new Error("ApiStack requires the express Lambda in props.lambdas");
+    }
 
     const authorizer = this.createCognitoAuthorizer(props.stage);
-    this.setupRootRoutes(expressLambda!, authorizer);
-    this.setupApiRoutes(expressLambda!, authorizer, githubLambda);
+    this.setupRootRoutes(expressLambda, authorizer);
+    this.setupApiRoutes(expressLambda, authorizer, githubLambda);
 
     this.configureCustomDomain(props.stage);
     this.configureApiLoadBalancer(props.stage, props.lambdaRole);
@@ -212,7 +216,7 @@ export class ApiStack extends Stack {
   }
 
   private createCognitoAuthorizer(stage: string) {
-    const userPoolId = process.env.COGNITO_USER_POOL_ID!;
+    const userPoolId = requireEnv("COGNITO_USER_POOL_ID");
     const arn = `arn:aws:cognito-idp:${Stack.of(this).region}:${Stack.of(this).account}:userpool/${userPoolId}`;
 
     const userPool = cognito.UserPool.fromUserPoolArn(this, `UserPool-${stage}`, arn);
@@ -282,11 +286,7 @@ export class ApiStack extends Stack {
   }
 
   private getCustomDomainConfig(stage: string): CustomDomainConfig {
-    const certificateArn = process.env.API_GATEWAY_CERT_ARN;
-
-    if (!certificateArn) {
-      throw new Error("Missing required env var: API_GATEWAY_CERT_ARN");
-    }
+    const certificateArn = requireEnv("API_GATEWAY_CERT_ARN");
 
     const domainMap: Record<string, string> = {
       dev: "dev.api.account.business.nj.gov",

@@ -41,7 +41,7 @@ export const EmergencyTripPermitTextFieldEntry = ({ className, ...props }: Props
     });
   };
   const handleChange = (value: string): void => {
-    props.handleChange && props.handleChange(value);
+    props.handleChange?.(value);
     setValueForField(props.fieldName, value);
   };
 

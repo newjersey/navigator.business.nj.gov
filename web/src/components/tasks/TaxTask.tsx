@@ -20,8 +20,8 @@ export const TaxTask = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { business } = useUserData();
   const { isAuthenticated } = useContext(NeedsAccountContext);
-  const preInputContent = props.task.contentMd.split("${taxInputComponent}")[0];
-  const postInputContent = props.task.contentMd.split("${taxInputComponent}")[1];
+  const preInputContent = props.task.contentMd.split(`\${taxInputComponent}`)[0];
+  const postInputContent = props.task.contentMd.split(`\${taxInputComponent}`)[1];
 
   return (
     <div className="min-height-38rem">

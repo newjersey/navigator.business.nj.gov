@@ -26,7 +26,7 @@ import {
   TESTING_STAGE,
   USERS_TABLE,
 } from "./constants";
-import { createLambda, exportLambdaArn } from "./stackUtils";
+import { createLambda, exportLambdaArn, requireEnv } from "./stackUtils";
 
 export interface LambdaStackProps extends StackProps {
   stage: string;
@@ -72,7 +72,9 @@ export class LambdaStack extends Stack {
       process.env.AWS_CRYPTO_CONTEXT_TAX_ID_HASHING_PURPOSE || "";
     const awsCryptoTaxIdHashingSalt =
       props.stage === "local"
-        ? "${ssm:/dev/tax_id_hashing_salt}"
+        ? // TODO: revisit how this value is sourced in a follow-up ticket.
+          // biome-ignore lint/suspicious/noTemplateCurlyInString: pending the follow-up above
+          "${ssm:/dev/tax_id_hashing_salt}"
         : `\${ssm:/${props.stage}/tax_id_hashing_salt}`;
 
     const dynamicsLicenseStatusTenantId = process.env.DYNAMICS_LICENSE_STATUS_TENANT_ID || "";
@@ -151,10 +153,10 @@ export class LambdaStack extends Stack {
 
     // ---------- VPC/Subnet/SecurityGroup lookups for non-local ----------
     if (props.stage !== "local") {
-      const vpcId = process.env.VPC_ID!;
-      const subnetId1 = process.env.SUBNET_ID_01!;
-      const subnetId2 = process.env.SUBNET_ID_02!;
-      const sgId = process.env.SG_ID!;
+      const vpcId = requireEnv("VPC_ID");
+      const subnetId1 = requireEnv("SUBNET_ID_01");
+      const subnetId2 = requireEnv("SUBNET_ID_02");
+      const sgId = requireEnv("SG_ID");
 
       this.vpc = Vpc.fromLookup(this, "ImportedVpc", { vpcId });
       this.subnets.push(

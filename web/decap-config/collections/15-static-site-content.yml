@@ -203,8 +203,7 @@ collections:
           label: "FAQ Body",
           name: "body",
           widget: "markdown",
-          hint:
-            "IMPORTANT: Widgets used in the My Account app are not supported for static site content",
+          hint: "IMPORTANT: Widgets used in the My Account app are not supported for static site content",
         }
       - label: "Category"
         name: "category"

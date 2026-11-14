@@ -18,8 +18,6 @@ describe("Dashboard [feature] [all] [group2]", () => {
       if (Cypress._.isArray(size)) {
         cy.viewport(size[0], size[1]);
       } else {
-        // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-        // @ts-ignore
         cy.viewport(size);
       }
     });

@@ -44,7 +44,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     event?: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>,
   ): void => {
     if (props.CMS_PREVIEW_ONLY_SHOW_MENU) return;
-    if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+    if (event && anchorRef.current?.contains(event.target as Node)) {
       return;
     }
 
@@ -69,7 +69,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
 
   switch (props.variant) {
     case NavBarVariant.LOGO_ONLY:
-      return <NavBarLogoOnlyDesktop logoType={props.logoVariant!} />;
+      return <NavBarLogoOnlyDesktop logoType={props.logoVariant ?? "NAVIGATOR_LOGO"} />;
 
     case NavBarVariant.LOGO_WITH_TEXT:
       return (

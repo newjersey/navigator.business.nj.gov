@@ -58,8 +58,8 @@ export const EinTask = (props: Props): ReactElement => {
     setShowInput(false);
   };
 
-  const preInputContent = props.task.contentMd.split("${einInputComponent}")[0];
-  const postInputContent = props.task.contentMd.split("${einInputComponent}")[1];
+  const preInputContent = props.task.contentMd.split(`\${einInputComponent}`)[0];
+  const postInputContent = props.task.contentMd.split(`\${einInputComponent}`)[1];
 
   return (
     <div className="min-height-38rem">

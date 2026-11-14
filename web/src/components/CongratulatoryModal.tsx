@@ -17,7 +17,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
   const router = useRouter();
 
   const onClickComplete = (): void => {
-    router && router.push(ROUTES.dashboard);
+    router?.push(ROUTES.dashboard);
   };
 
   const publicName = props.nextSectionType ? Config.sectionHeaders[props.nextSectionType] : "";

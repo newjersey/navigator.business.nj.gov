@@ -23,17 +23,17 @@ export const Hero = (): ReactElement => {
   const existingBusinessTileSet = getExistingBusinessTileSet(Config.landingPage);
 
   const routeToOnboarding = (): void => {
-    router && router.push(ROUTES.onboarding);
+    router?.push(ROUTES.onboarding);
     analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
   };
 
   const section2CTAOnClick = (): void => {
-    router && router.push(ROUTES.onboarding);
+    router?.push(ROUTES.onboarding);
     analytics.event.landing_page_second_get_started.click.go_to_onboarding();
   };
 
   const section3CTAOnClick = (): void => {
-    router && router.push(ROUTES.onboarding);
+    router?.push(ROUTES.onboarding);
     analytics.event.landing_page_find_funding.click.go_to_onboarding();
   };
 

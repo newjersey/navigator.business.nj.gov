@@ -50,7 +50,7 @@ export const DynamoBusinessDataClient = (
     return db
       .send(new QueryCommand(params))
       .then((result) => {
-        if (!result.Items || result.Items.length !== 1) {
+        if (result.Items?.length !== 1) {
           return;
         }
         const item = unmarshall(result.Items[0]);

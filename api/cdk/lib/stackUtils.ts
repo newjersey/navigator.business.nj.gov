@@ -16,6 +16,14 @@ import * as logs from "aws-cdk-lib/aws-logs";
 import { ConfigurationSet } from "aws-cdk-lib/aws-ses";
 import type { Construct, IConstruct } from "constructs";
 
+export const requireEnv = (name: string): string => {
+  const value = process.env[name];
+  if (value === undefined || value.trim().length === 0) {
+    throw new Error(`Missing required env var: ${name}`);
+  }
+  return value;
+};
+
 /**
  * Apply standard tags to a given resource.
  */

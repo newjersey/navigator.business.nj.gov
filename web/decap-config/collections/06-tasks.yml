@@ -1822,8 +1822,7 @@ collections:
                   label: Aria Label Text,
                   name: ariaLabelText,
                   widget: string,
-                  hint:
-                    This is the text that is populates the Edit/Remove button aria label. It is
+                  hint: This is the text that is populates the Edit/Remove button aria label. It is
                     prepended by "Edit" or "Remove".,
                 }
   - name: "xray"
@@ -2454,8 +2453,7 @@ collections:
                   label: Aria Label Text,
                   name: ariaLabelText,
                   widget: string,
-                  hint:
-                    This is the text that is populates the Edit/Remove button aria label. It is
+                  hint: This is the text that is populates the Edit/Remove button aria label. It is
                     prepended by "Edit" or "Remove".,
                 }
               - {
@@ -2623,8 +2621,7 @@ collections:
                   label: Task Page Tooltip - Not Complete,
                   name: uncompletedTooltip,
                   widget: text,
-                  hint:
-                    The checkbox in the upper left is disabled for this task. This tooltip shows if
+                  hint: The checkbox in the upper left is disabled for this task. This tooltip shows if
                     the user hovers over the checkbox and explains what to do in order to complete
                     the task.,
                 }
@@ -2638,16 +2635,14 @@ collections:
                   label: Roadmap Page Tooltip - Not Complete,
                   name: uncompletedRoadmapTooltip,
                   widget: text,
-                  hint:
-                    This tooltip shows if the user hovers over the checkbox on the dashboard page
+                  hint: This tooltip shows if the user hovers over the checkbox on the dashboard page
                     showing the roadmap.,
                 }
               - {
                   label: Roadmap Page Tooltip - Completed,
                   name: completedRoadmapTooltip,
                   widget: text,
-                  hint:
-                    This tooltip shows if the user hovers over a completed checkbox on the dashboard
+                  hint: This tooltip shows if the user hovers over a completed checkbox on the dashboard
                     page showing the roadmap.,
                 }
 
@@ -2655,8 +2650,7 @@ collections:
                   label: Info Callout,
                   name: infoCallout,
                   widget: markdown,
-                  hint:
-                    This text appears above the radio selection and explains why the user has to
+                  hint: This text appears above the radio selection and explains why the user has to
                     select their business structure.,
                 }
 
@@ -2668,8 +2662,7 @@ collections:
                   label: Aria Label Text,
                   name: ariaLabelText,
                   widget: string,
-                  hint:
-                    This is the text that is populates the Edit/Remove button aria label. It is
+                  hint: This is the text that is populates the Edit/Remove button aria label. It is
                     prepended by "Edit" or "Remove".,
                 }
       - label: "Business Structure Prompt Component"

@@ -91,16 +91,14 @@ collections:
           name: "urlSlug",
           widget: "no-space",
           required: true,
-          hint:
-            "The suffix '-renewal' and '-expiration' are automatically appended to the url slug.",
+          hint: "The suffix '-renewal' and '-expiration' are automatically appended to the url slug.",
         }
       - {
           label: "Expiration Event Label",
           name: "expirationEventDisplayName",
           widget: "string",
           required: true,
-          hint:
-            "This field updates the label on the calendar in the dashboard and header text on the
+          hint: "This field updates the label on the calendar in the dashboard and header text on the
             expiration details page",
         }
       - {
@@ -108,8 +106,7 @@ collections:
           name: "renewalEventDisplayName",
           widget: "string",
           required: true,
-          hint:
-            "This field updates the label on the calendar in the dashboard and header text on the
+          hint: "This field updates the label on the calendar in the dashboard and header text on the
             renewal details page",
         }
       - {
@@ -117,8 +114,7 @@ collections:
           name: "disclaimerText",
           widget: "markdown",
           required: true,
-          default:
-            "You can renew your license 60 days before it expires and up to 30 days after
+          default: "You can renew your license 60 days before it expires and up to 30 days after
             expiration. If you fail to renew your license at this point, your license will be
             suspended and you won't be able to provide your licensed services.",
         }

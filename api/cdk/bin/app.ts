@@ -19,6 +19,7 @@ import { EncryptionStack } from "../lib/encryptionStack";
 import { IamStack } from "../lib/iamStack";
 import { LambdaStack } from "../lib/lambdaStack";
 import { MonitoringStack } from "../lib/monitoringStack";
+import { requireEnv } from "../lib/stackUtils";
 import { StaticSiteClusterStack } from "../lib/staticSiteClusterStack";
 import { StaticSiteRepositoryStack } from "../lib/staticSiteRepositoryStack";
 import { StaticSiteServiceStack } from "../lib/staticSiteServiceStack";
@@ -90,7 +91,7 @@ if (isMyAccountDeploy) {
   if (stage === DEV_STAGE) {
     new BackupStack(app, `BackupStack-${DEV_STAGE}-shared`, {
       env,
-      backupRole: iamStack.backupRole!,
+      backupRole: iamStack.requiredBackupRole,
       tableNames: [
         `${BUSINESSES_TABLE}-${DEV_STAGE}`,
         `${USERS_TABLE}-${DEV_STAGE}`,
@@ -108,7 +109,7 @@ if (isMyAccountDeploy) {
   if (stage === STAGING_STAGE) {
     new BackupStack(app, `BackupStack-${STAGING_STAGE}`, {
       env,
-      backupRole: iamStack.backupRole!,
+      backupRole: iamStack.requiredBackupRole,
       tableNames: [
         `${BUSINESSES_TABLE}-${STAGING_STAGE}`,
         `${MESSAGES_TABLE}-${STAGING_STAGE}`,
@@ -120,7 +121,7 @@ if (isMyAccountDeploy) {
   if (stage === PROD_STAGE) {
     new BackupStack(app, `BackupStack-${PROD_STAGE}`, {
       env,
-      backupRole: iamStack.backupRole!,
+      backupRole: iamStack.requiredBackupRole,
       tableNames: [
         `${BUSINESSES_TABLE}-${PROD_STAGE}`,
         `${MESSAGES_TABLE}-${PROD_STAGE}`,
@@ -150,7 +151,7 @@ if (isMyAccountDeploy) {
   new CognitoStack(app, `CognitoStack-${stage}`, {
     stage,
     env,
-    authRoleArn: iamStack.authRole?.roleArn ?? process.env.COGNITO_AUTH_ROLE_ARN!,
-    unAuthRoleArn: iamStack.unauthRole?.roleArn ?? process.env.COGNITO_UNAUTH_ROLE_ARN!,
+    authRoleArn: iamStack.authRole?.roleArn ?? requireEnv("COGNITO_AUTH_ROLE_ARN"),
+    unAuthRoleArn: iamStack.unauthRole?.roleArn ?? requireEnv("COGNITO_UNAUTH_ROLE_ARN"),
   });
 }
