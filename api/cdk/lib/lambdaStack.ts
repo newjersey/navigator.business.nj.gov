@@ -26,7 +26,7 @@ import {
   TESTING_STAGE,
   USERS_TABLE,
 } from "./constants";
-import { createLambda, exportLambdaArn } from "./stackUtils";
+import { createLambda, exportLambdaArn, requireEnvVar } from "./stackUtils";
 
 export interface LambdaStackProps extends StackProps {
   stage: string;
@@ -151,10 +151,10 @@ export class LambdaStack extends Stack {
 
     // ---------- VPC/Subnet/SecurityGroup lookups for non-local ----------
     if (props.stage !== "local") {
-      const vpcId = process.env.VPC_ID!;
-      const subnetId1 = process.env.SUBNET_ID_01!;
-      const subnetId2 = process.env.SUBNET_ID_02!;
-      const sgId = process.env.SG_ID!;
+      const vpcId = requireEnvVar("VPC_ID");
+      const subnetId1 = requireEnvVar("SUBNET_ID_01");
+      const subnetId2 = requireEnvVar("SUBNET_ID_02");
+      const sgId = requireEnvVar("SG_ID");
 
       this.vpc = Vpc.fromLookup(this, "ImportedVpc", { vpcId });
       this.subnets.push(
