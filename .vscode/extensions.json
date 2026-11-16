@@ -4,7 +4,6 @@
     "bierner.github-markdown-preview",
     "biomejs.biome",
     "cardinal90.multi-cursor-case-preserve",
-    "dbaeumer.vscode-eslint",
     "donjayamanne.python-extension-pack",
     "donjayamanne.python-environment-manager",
     "DotJoshJohnson.xml",
@@ -35,8 +34,5 @@
     "usernamehw.errorlens",
     "vivaxy.vscode-conventional-commits"
   ],
-  "unwantedRecommendations": [
-    "chakrounanas.turbo-console-log",
-    "circleci.circleci"
-  ]
+  "unwantedRecommendations": ["chakrounanas.turbo-console-log", "circleci.circleci"]
 }

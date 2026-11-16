@@ -1,6 +1,5 @@
 name: "Deploy Static Site"
-description:
-  "Builds the static-site image, pushes it to ECR, and refreshes the ECS Fargate service."
+description: "Builds the static-site image, pushes it to ECR, and refreshes the ECS Fargate service."
 
 inputs:
   image_tag:

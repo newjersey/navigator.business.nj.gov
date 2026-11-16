@@ -19,6 +19,7 @@ export class StorageStack extends Stack {
 
     const isLowerEnv = LOWER_STAGES.includes(props.stage);
     const removalPolicy = isLowerEnv ? RemovalPolicy.DESTROY : RemovalPolicy.RETAIN;
+    // biome-ignore lint/suspicious/noTemplateCurlyInString: IAM policy variable that IAM resolves per request
     const cognitoPrefix = "${cognito-identity.amazonaws.com:sub}";
 
     const authRole = iam.Role.fromRoleArn(
