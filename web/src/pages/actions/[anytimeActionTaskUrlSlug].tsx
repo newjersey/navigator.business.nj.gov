@@ -14,14 +14,14 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 
 interface Props {
   anytimeActionTask: AnytimeActionTask;
+  noAuth: boolean;
 }
-
 const AnytimeActionTaskPage = (props: Props): ReactElement => {
   return (
     <>
       <NextSeo title={getNextSeoTitle(props.anytimeActionTask.name)} />
       <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
-        <TaskSidebarPageLayout hideMiniRoadmap={true}>
+        <TaskSidebarPageLayout hideMiniRoadmap={true} showBackButton={!props.noAuth}>
           <AnytimeActionSwitchComponent anytimeActionTask={props.anytimeActionTask} />
         </TaskSidebarPageLayout>
       </PageSkeleton>
@@ -45,6 +45,7 @@ export const getStaticProps = ({
   return {
     props: {
       anytimeActionTask: loadAnytimeActionTaskByUrlSlug(params.anytimeActionTaskUrlSlug),
+      noAuth: params.anytimeActionTaskUrlSlug === "emergency-trip-permit",
     },
   };
 };

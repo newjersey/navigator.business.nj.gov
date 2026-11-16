@@ -32,46 +32,44 @@ export const SidebarPageLayout = ({
   const { Config } = useConfig();
 
   return (
-    <>
-      <div className={`usa-section padding-top-0 desktop:padding-top-6`}>
-        <div className="grid-container-widescreen desktop:padding-x-7">
-          {showBackButton && isLargeScreen && (
-            <>
-              <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
-              {titleOverColumns}
-            </>
-          )}
+    <div className={`usa-section padding-top-0 desktop:padding-top-6`}>
+      <div className="grid-container-widescreen desktop:padding-x-7">
+        {showBackButton && isLargeScreen && (
+          <>
+            <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
+            {titleOverColumns}
+          </>
+        )}
 
-          <div className="grid-row grid-gap flex-no-wrap">
-            {isLargeScreen && (
-              <nav
-                aria-label="Secondary"
-                className={`${nonWrappingLeftColumn ? "" : "desktop:grid-col-3"}  order-first`}
-              >
-                {divider && <hr className="margin-bottom-1 margin-top-0" role="presentation" />}
-                {navChildren}
-              </nav>
-            )}
-            <div className={nonWrappingLeftColumn ? "fg1" : "desktop:grid-col-9"}>
-              {showBackButton && !isLargeScreen && (
-                <div>
-                  <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
-                  {titleOverColumns}
-                  {stackNav && navChildren}
-                </div>
-              )}
-              <div
-                className={`margin-1 margin-top-4 ${
-                  outlineBox ? "border-1px border-base-light usa-prose padding-4 radius-lg" : ""
-                }`}
-              >
-                {children}
+        <div className="grid-row grid-gap flex-no-wrap">
+          {isLargeScreen && (
+            <nav
+              aria-label="Secondary"
+              className={`${nonWrappingLeftColumn ? "" : "desktop:grid-col-3"}  order-first`}
+            >
+              {divider && <hr className="margin-bottom-1 margin-top-0" role="presentation" />}
+              {navChildren}
+            </nav>
+          )}
+          <div className={nonWrappingLeftColumn ? "fg1" : "desktop:grid-col-9"}>
+            {showBackButton && !isLargeScreen && (
+              <div>
+                <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
+                {titleOverColumns}
+                {stackNav && navChildren}
               </div>
-              {belowBoxComponent}
+            )}
+            <div
+              className={`margin-1 margin-top-4 ${
+                outlineBox ? "border-1px border-base-light usa-prose padding-4 radius-lg" : ""
+              }`}
+            >
+              {children}
             </div>
+            {belowBoxComponent}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
