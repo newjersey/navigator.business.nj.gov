@@ -36,8 +36,7 @@ collections:
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
           widget: "string",
-          hint:
-            "This appears only in My Account, in the For You column, max char is 150 including
+          hint: "This appears only in My Account, in the For You column, max char is 150 including
             spaces, plain text only",
         }
       - {
@@ -79,8 +78,7 @@ collections:
           name: "callToActionText",
           widget: "string",
           required: false,
-          hint:
-            "If there is a link in the 'Call To Action Link' field above, this field is required",
+          hint: "If there is a link in the 'Call To Action Link' field above, this field is required",
         }
       - label: "Funding Type"
         name: "fundingType"
@@ -133,8 +131,7 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-        hint:
-          "Early stage business = not yet open or open less than 2 years; Established business =
+        hint: "Early stage business = not yet open or open less than 2 years; Established business =
           open 2 years or more"
       - {
           label: "Employees Required",
@@ -252,8 +249,7 @@ collections:
         name: "housingDeveloperResource"
         widget: "boolean"
         required: false
-        hint:
-          "Also displays this funding opportunity as a program card on
+        hint: "Also displays this funding opportunity as a program card on
           business.nj.gov/housing-developer-resources"
 
   - name: "archived-funding-opportunities"
@@ -286,8 +282,7 @@ collections:
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
           widget: "string",
-          hint:
-            "This appears only in My Account, in the For You column, max char is 150 including
+          hint: "This appears only in My Account, in the For You column, max char is 150 including
             spaces, plain text only",
         }
       - {
@@ -329,8 +324,7 @@ collections:
           name: "callToActionText",
           widget: "string",
           required: false,
-          hint:
-            "If there is a link in the 'Call To Action Link' field above, this field is required",
+          hint: "If there is a link in the 'Call To Action Link' field above, this field is required",
         }
       - label: "Funding Type"
         name: "fundingType"
@@ -381,8 +375,7 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-        hint:
-          "Early stage business = not yet open or open less than 2 years; Established business =
+        hint: "Early stage business = not yet open or open less than 2 years; Established business =
           open 2 years or more"
       - {
           label: "Employees Required",
