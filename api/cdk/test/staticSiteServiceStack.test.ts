@@ -175,6 +175,20 @@ describe("StaticSiteServiceStack", () => {
     });
   });
 
+  test.each(["dev", "testing", "content", "staging", "prod"])(
+    "uses a single listener certificate with no additional certificates on the %s listener",
+    (stage) => {
+      const template = createStaticSiteTemplate(stage);
+
+      expect(STATIC_SITE_CERTIFICATE_IDS_BY_STAGE[stage]).toBeDefined();
+      template.resourceCountIs("AWS::ElasticLoadBalancingV2::Listener", 1);
+      template.hasResourceProperties("AWS::ElasticLoadBalancingV2::Listener", {
+        Certificates: [{ CertificateArn: createStaticSiteCertificateArn(stage) }],
+      });
+      template.resourceCountIs("AWS::ElasticLoadBalancingV2::ListenerCertificate", 0);
+    },
+  );
+
   test("requires Basic Auth credentials for protected static-site tasks", () => {
     delete process.env.BASIC_AUTH_PASSWORD;
 
@@ -254,11 +268,31 @@ describe("StaticSiteServiceStack", () => {
 
     expect(template.toJSON()).toBeDefined();
     template.hasOutput("StaticSiteHostname", {
-      Value: "next.business.nj.gov",
+      Value: "business.nj.gov",
       Export: {
         Name: "bfs-static-site-prod-hostname",
       },
     });
+  });
+
+  test("exports the upcoming hostname alongside the existing one for non-prod stages", () => {
+    const template = createStaticSiteTemplate("staging");
+
+    expect(template.toJSON()).toBeDefined();
+    template.hasOutput("StaticSiteHostname", { Value: "staging.next.business.nj.gov" });
+    template.hasOutput("StaticSiteUpcomingHostname", {
+      Value: "staging.business.nj.gov",
+      Export: {
+        Name: "bfs-static-site-staging-upcoming-hostname",
+      },
+    });
+  });
+
+  test("serves production only from business.nj.gov with no upcoming hostname", () => {
+    const template = createStaticSiteTemplate("prod");
+
+    expect(template.toJSON().Outputs).not.toHaveProperty("StaticSiteUpcomingHostname");
+    template.resourceCountIs("AWS::ElasticLoadBalancingV2::ListenerCertificate", 0);
   });
 
   test("creates an SNS topic and Chatbot subscription for static-site alerts", () => {
