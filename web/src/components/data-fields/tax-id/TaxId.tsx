@@ -73,7 +73,7 @@ export const TaxId = (props: Props): ReactElement => {
       if (taxIdIsEncrypted) {
         await getDecryptedTaxId().then((decryptedTaxId) => {
           setProfileData({ ...state.profileData, taxId: decryptedTaxId });
-          toggleFunc && toggleFunc(decryptedTaxId);
+          toggleFunc?.(decryptedTaxId);
         });
       } else {
         toggleFunc && state.profileData.taxId && toggleFunc(state.profileData.taxId);

@@ -27,7 +27,7 @@ export const LoginMenuItem = (): ReactElement => {
       if (!router) return;
       analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
       if (loginPageEnabled) {
-        router && router.push(ROUTES.login);
+        router?.push(ROUTES.login);
       } else {
         triggerSignIn();
       }
@@ -106,7 +106,7 @@ export const RegisterMenuItem = (): ReactElement => {
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.guest_menu.click.go_to_NavigatorAccount_setup();
-      router && router.push(ROUTES.accountSetup);
+      router?.push(ROUTES.accountSetup);
     },
     icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
     itemText: Config.navigationDefaults.navBarGuestRegistrationText,
@@ -122,7 +122,7 @@ export const GetStartedMenuItem = (): ReactElement => {
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.landing_page_navbar_register.click.go_to_onboarding();
-      router && router.push(ROUTES.onboarding);
+      router?.push(ROUTES.onboarding);
     },
     itemText: Config.navigationDefaults.getStartedText,
     key: "getStartedMenuItem",
@@ -185,7 +185,7 @@ export const ProfileMenuItem = (props: {
         const profileLink = NavMenuItem({
           onClick: (): void => {
             analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-            router && router.push(ROUTES.profile);
+            router?.push(ROUTES.profile);
           },
           selected: isProfileSelected && isCurrent,
           icon: <ButtonIcon svgFilename="arrow-forward" />,

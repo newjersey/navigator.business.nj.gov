@@ -36,20 +36,17 @@ export const useFormationErrors = (): FormationErrorsResponse => {
   }, [state.formationFormData]);
 
   const errorStates: Record<FieldsForErrorHandling, FormationFieldErrorState> = useMemo(() => {
-    return validatedFields.reduce(
-      (acc, field) => {
-        return {
-          ...acc,
-          [field]: getErrorStateForFormationField({
-            field,
-            formationFormData: state.formationFormData,
-            businessNameAvailability: state.businessNameAvailability,
-            foreignGoodStandingFile: state.foreignGoodStandingFile,
-          }),
-        };
-      },
-      {} as Record<FieldsForErrorHandling, FormationFieldErrorState>,
-    );
+    return Object.fromEntries(
+      validatedFields.map((field) => [
+        field,
+        getErrorStateForFormationField({
+          field,
+          formationFormData: state.formationFormData,
+          businessNameAvailability: state.businessNameAvailability,
+          foreignGoodStandingFile: state.foreignGoodStandingFile,
+        }),
+      ]),
+    ) as Record<FieldsForErrorHandling, FormationFieldErrorState>;
   }, [
     validatedFields,
     state.formationFormData,

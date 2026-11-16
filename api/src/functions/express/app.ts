@@ -269,10 +269,10 @@ const dynamicsHousingRegistrationStatusClient = DynamicsHousingRegistrationStatu
 const ORG_URL =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
     ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
-    : process.env.TAX_CLEARANCE_CERTIFICATE_URL;
+    : process.env.TAX_CLEARANCE_CERTIFICATE_URL || "";
 
 const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
-  orgUrl: ORG_URL!,
+  orgUrl: ORG_URL,
   userName: process.env.TAX_CLEARANCE_CERTIFICATE_USER_NAME || "",
   password: process.env.TAX_CLEARANCE_CERTIFICATE_PASSWORD || "",
 });
@@ -285,8 +285,8 @@ const cigaretteLicenseHealthCheckClient = cigaretteLicenseClient.health;
 const BUSINESS_NAME_BASE_URL =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
     ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
-    : process.env.BUSINESS_NAME_BASE_URL;
-const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL!, logger);
+    : process.env.BUSINESS_NAME_BASE_URL || "";
+const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
 
 const GOV_DELIVERY_BASE_URL =
   process.env.GOV_DELIVERY_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
@@ -299,7 +299,7 @@ const FORMATION_API_KEY = process.env.FORMATION_API_KEY || "";
 const FORMATION_API_BASE_URL =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
     ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
-    : process.env.FORMATION_API_BASE_URL;
+    : process.env.FORMATION_API_BASE_URL || "";
 
 const GOV2GO_REGISTRATION_API_KEY = process.env.GOV2GO_REGISTRATION_API_KEY || "";
 const GOV2GO_REGISTRATION_BASE_URL = isLocal
@@ -437,7 +437,7 @@ const apiFormationClient = ApiFormationClient(
   {
     account: FORMATION_API_ACCOUNT,
     key: FORMATION_API_KEY,
-    baseUrl: FORMATION_API_BASE_URL!,
+    baseUrl: FORMATION_API_BASE_URL,
   },
   logger,
 );

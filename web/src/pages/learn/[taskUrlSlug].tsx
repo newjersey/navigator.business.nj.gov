@@ -108,7 +108,7 @@ const LearnTaskPage = (props: Props): ReactElement => {
                   learnSteps.find((step) => step.id === props.learnStep.id)?.name || "",
                   Config.learnPages.accountButtonHeading,
                 );
-                router && router.push("/account-setup/");
+                router?.push("/account-setup/");
               }}
             >
               <span>

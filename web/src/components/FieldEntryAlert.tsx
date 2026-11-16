@@ -18,7 +18,7 @@ export const FieldEntryAlert = (props: Props): ReactElement => {
 
   const onAnchorClick = (): void => {
     setTimeout(() => {
-      router && router.push(router.asPath, undefined, { shallow: true });
+      router?.push(router.asPath, undefined, { shallow: true });
     });
   };
 

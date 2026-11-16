@@ -204,8 +204,7 @@ const isReferencedInARoadmap = async (
 
   for (const industry of contents.industries) {
     if (
-      industry.modifications &&
-      industry.modifications.some((it) => {
+      industry.modifications?.some((it) => {
         return it.replaceWithFilename === filenameWithoutMd;
       })
     ) {
@@ -227,8 +226,7 @@ const isReferencedInARoadmap = async (
 
   for (const modification of contents.modifications) {
     if (
-      modification &&
-      modification.some((it) => {
+      modification?.some((it) => {
         return it.replaceWithFilename === filenameWithoutMd;
       })
     ) {

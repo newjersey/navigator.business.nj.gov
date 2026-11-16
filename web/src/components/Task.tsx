@@ -23,7 +23,7 @@ export const Task = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const taskProgressTagLookup = getTaskProgressTagLookup(Config);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "TO_DO";
+  const taskProgress = business?.taskProgress?.[props.task.id] || "TO_DO";
   const { isAuthenticated } = useContext(NeedsAccountContext);
 
   const renderRequiredLabel = (): ReactNode => {
