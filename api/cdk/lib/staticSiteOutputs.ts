@@ -2,7 +2,11 @@ import { CfnOutput } from "aws-cdk-lib";
 import type * as ecs from "aws-cdk-lib/aws-ecs";
 import type * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import type { Construct } from "constructs";
-import { STATIC_SITE_HOSTNAMES, STATIC_SITE_SERVICE_BASE_NAME } from "./constants";
+import {
+  STATIC_SITE_HOSTNAMES,
+  STATIC_SITE_SERVICE_BASE_NAME,
+  STATIC_SITE_UPCOMING_HOSTNAMES,
+} from "./constants";
 
 /** Inputs for creating static-site CloudFormation outputs. */
 export interface CreateStaticSiteOutputsProps {
@@ -31,6 +35,13 @@ export const createStaticSiteOutputs = (props: CreateStaticSiteOutputsProps): vo
     value: STATIC_SITE_HOSTNAMES[props.stage] ?? `${props.stage}.next.business.nj.gov`,
     exportName: `${STATIC_SITE_SERVICE_BASE_NAME}-${props.stage}-hostname`,
   });
+  const upcomingHostname = STATIC_SITE_UPCOMING_HOSTNAMES[props.stage];
+  if (upcomingHostname) {
+    new CfnOutput(props.scope, "StaticSiteUpcomingHostname", {
+      value: upcomingHostname,
+      exportName: `${STATIC_SITE_SERVICE_BASE_NAME}-${props.stage}-upcoming-hostname`,
+    });
+  }
   new CfnOutput(props.scope, "StaticSiteLoadBalancerDnsName", {
     value: props.loadBalancer.loadBalancerDnsName,
     exportName: `${STATIC_SITE_SERVICE_BASE_NAME}-${props.stage}-alb-dns-name`,
