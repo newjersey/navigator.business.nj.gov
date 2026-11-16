@@ -20,6 +20,7 @@ import {
   attachLambdaToResource,
   createLambda,
   createSesConfigSet,
+  requireEnvVar,
 } from "./stackUtils";
 
 /** Lambda function configuration consumed by API Gateway routes. */
@@ -38,14 +39,6 @@ export interface ApiStackProps extends StackProps {
 
   /** Lambda functions used by API Gateway integrations. */
   readonly lambdas: Record<string, LambdaConfig>;
-}
-
-interface RequiredEnvironmentValue {
-  /** Environment variable name to validate. */
-  readonly name: string;
-
-  /** Environment variable value to validate. */
-  readonly value: string | undefined;
 }
 
 interface ApiLoadBalancerNetwork {
@@ -89,14 +82,6 @@ const API_LOAD_BALANCER_HEALTH_CHECK_PATH = "/health";
 
 /** Number of seconds the internal API proxy Lambda can spend forwarding one request. */
 const API_LOAD_BALANCER_PROXY_TIMEOUT_SECONDS = 30;
-
-const requireEnvironmentValue = (props: RequiredEnvironmentValue): string => {
-  if (props.value === undefined || props.value.trim().length === 0) {
-    throw new Error(`${props.name} must be set to deploy the API load balancer`);
-  }
-
-  return props.value;
-};
 
 const createApiLoadBalancerName = (stage: string): string => {
   return `${API_SERVICE_NAME}-${stage}-alb`;
@@ -174,10 +159,13 @@ export class ApiStack extends Stack {
     this.addGatewayResponses();
     const expressLambda = props.lambdas.express?.lambda;
     const githubLambda = props.lambdas.githubOauth2?.lambda;
+    if (!expressLambda) {
+      throw new Error("ApiStack requires the express Lambda in props.lambdas");
+    }
 
     const authorizer = this.createCognitoAuthorizer(props.stage);
-    this.setupRootRoutes(expressLambda!, authorizer);
-    this.setupApiRoutes(expressLambda!, authorizer, githubLambda);
+    this.setupRootRoutes(expressLambda, authorizer);
+    this.setupApiRoutes(expressLambda, authorizer, githubLambda);
 
     this.configureCustomDomain(props.stage);
     this.configureApiLoadBalancer(props.stage, props.lambdaRole);
@@ -212,7 +200,7 @@ export class ApiStack extends Stack {
   }
 
   private createCognitoAuthorizer(stage: string) {
-    const userPoolId = process.env.COGNITO_USER_POOL_ID!;
+    const userPoolId = requireEnvVar("COGNITO_USER_POOL_ID");
     const arn = `arn:aws:cognito-idp:${Stack.of(this).region}:${Stack.of(this).account}:userpool/${userPoolId}`;
 
     const userPool = cognito.UserPool.fromUserPoolArn(this, `UserPool-${stage}`, arn);
@@ -282,11 +270,7 @@ export class ApiStack extends Stack {
   }
 
   private getCustomDomainConfig(stage: string): CustomDomainConfig {
-    const certificateArn = process.env.API_GATEWAY_CERT_ARN;
-
-    if (!certificateArn) {
-      throw new Error("Missing required env var: API_GATEWAY_CERT_ARN");
-    }
+    const certificateArn = requireEnvVar("API_GATEWAY_CERT_ARN");
 
     const domainMap: Record<string, string> = {
       dev: "dev.api.account.business.nj.gov",
@@ -350,18 +334,12 @@ export class ApiStack extends Stack {
   }
 
   private createLoadBalancerNetwork(): ApiLoadBalancerNetwork {
-    const subnetId01 = requireEnvironmentValue({
-      name: "SUBNET_ID_01",
-      value: process.env.SUBNET_ID_01,
-    });
-    const subnetId02 = requireEnvironmentValue({
-      name: "SUBNET_ID_02",
-      value: process.env.SUBNET_ID_02,
-    });
+    const subnetId01 = requireEnvVar("SUBNET_ID_01");
+    const subnetId02 = requireEnvVar("SUBNET_ID_02");
 
     return {
       vpc: ec2.Vpc.fromVpcAttributes(this, "ApiLoadBalancerVpc", {
-        vpcId: requireEnvironmentValue({ name: "VPC_ID", value: process.env.VPC_ID }),
+        vpcId: requireEnvVar("VPC_ID"),
         availabilityZones: ["us-east-1a", "us-east-1b"],
         privateSubnetIds: [subnetId01, subnetId02],
       }),
@@ -372,7 +350,7 @@ export class ApiStack extends Stack {
       securityGroup: ec2.SecurityGroup.fromSecurityGroupId(
         this,
         "ApiLoadBalancerSecurityGroup",
-        requireEnvironmentValue({ name: "SG_ID", value: process.env.SG_ID }),
+        requireEnvVar("SG_ID"),
         { mutable: true },
       ),
     };
@@ -445,10 +423,7 @@ export class ApiStack extends Stack {
     return acm.Certificate.fromCertificateArn(
       this,
       "ApiLoadBalancerCertificate",
-      requireEnvironmentValue({
-        name: "API_GATEWAY_CERT_ARN",
-        value: process.env.API_GATEWAY_CERT_ARN,
-      }),
+      requireEnvVar("API_GATEWAY_CERT_ARN"),
     );
   }
 
