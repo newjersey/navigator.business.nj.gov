@@ -20,12 +20,8 @@ export const migrate_v101_to_v102 = (
   v101Data: v101UserData,
   _?: MigrationClients,
 ): v102UserData => {
-  const visibleSidebarCards: string[] = v101Data.preferences.visibleSidebarCards.reduce(
-    (acc: string[], val: string) => {
-      const newVal = val === "tax-registration-nudge" ? "registered-for-taxes-nudge" : val;
-      return [...acc, newVal];
-    },
-    [],
+  const visibleSidebarCards: string[] = v101Data.preferences.visibleSidebarCards.map((val) =>
+    val === "tax-registration-nudge" ? "registered-for-taxes-nudge" : val,
   );
 
   return {

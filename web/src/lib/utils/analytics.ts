@@ -8,7 +8,7 @@ import analytics from "./analytics-base";
 
 export const GTM_ID = process.env.GOOGLE_TAG_MANAGER_ID;
 
-type Nothing = {};
+type Nothing = Record<never, never>;
 type Union<T, U> = T | (U & Nothing);
 
 type EventType =

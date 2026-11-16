@@ -21,7 +21,7 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
   const effectOccurred = useRef<boolean>(false);
 
   const redirect = useCallback(() => {
-    router && router.replace({ pathname: config.pagePath }, undefined, { shallow: true });
+    router?.replace({ pathname: config.pagePath }, undefined, { shallow: true });
   }, [router, config.pagePath]);
 
   useEffect(() => {

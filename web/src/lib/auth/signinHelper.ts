@@ -130,8 +130,7 @@ export const onGuestSignIn = async ({
     accountLinkingErrorStorage.setEncounteredMyNjLinkingError(encounteredMyNjLinkingError);
   }
   setUserId(activeUser.id, true);
-  const onboardingRoute =
-    asPath && asPath.startsWith(ROUTES.onboarding) ? asPath : ROUTES.onboarding;
+  const onboardingRoute = asPath?.startsWith(ROUTES.onboarding) ? asPath : ROUTES.onboarding;
   if (userData) {
     setAnalyticsDimensions(userData, true);
     if (getCurrentBusiness(userData).onboardingFormProgress === "UNSTARTED") {

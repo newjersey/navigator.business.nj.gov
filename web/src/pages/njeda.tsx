@@ -55,7 +55,7 @@ const FundingsHeader = (): ReactElement => {
             isButtonALink={true}
             ariaLabel={Config.fundingsOnboardingModal.pageHeader.logoAriaText}
             onClick={() => {
-              router && router.push(Config.fundingsOnboardingModal.pageHeader.logoLink);
+              router?.push(Config.fundingsOnboardingModal.pageHeader.logoLink);
             }}
           >
             <img src="/img/njeda-logo.webp" alt="" />
@@ -73,7 +73,7 @@ const FundingsHeader = (): ReactElement => {
         <PrimaryButton
           isColor={"accent-cool-darker"}
           onClick={() => {
-            router && router.push(ROUTES.dashboard);
+            router?.push(ROUTES.dashboard);
           }}
         >
           {Config.fundingsOnboardingModal.pageHeader.buttonText}

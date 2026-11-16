@@ -39,7 +39,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
   const routeToPage = (): void => {
     const url = `/${props.urlPath}/${props.opportunity.urlSlug}`;
     analytics.event.opportunity_card.click.go_to_opportunity_screen();
-    router && router.push(url);
+    router?.push(url);
   };
 
   return (

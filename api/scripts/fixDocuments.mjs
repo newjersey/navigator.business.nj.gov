@@ -74,7 +74,7 @@ async function findAffectedBusinesses() {
           try {
             const business = unmarshall(item);
             const docUrl = business?.data?.profileData?.documents?.[DOCUMENT_TYPE];
-            if (docUrl && docUrl.includes("undefined")) {
+            if (docUrl?.includes("undefined")) {
               affectedBusinesses.push(business);
               console.log(
                 `Found affected business: ${business.businessId} - ${
@@ -151,7 +151,7 @@ async function getBusinessById(businessId) {
 
     const business = unmarshall(response.Item);
     const docUrl = business?.data?.profileData?.documents?.[DOCUMENT_TYPE];
-    if (!docUrl || !docUrl.includes("undefined")) {
+    if (!docUrl?.includes("undefined")) {
       console.log(
         `Business ${businessId} is not affected (no document URL or no 'undefined' in URL)`,
       );

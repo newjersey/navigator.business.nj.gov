@@ -60,7 +60,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
-  const isLoading = !business || business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
+  const isLoading = business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const [hasElevatorViolations, setHasElevatorViolations] = useState(false);
 

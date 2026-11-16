@@ -14,14 +14,13 @@ export const DbaUnavailable = (props: UnavailableProps): ReactElement => {
           {templateEval(Config.nexusNameSearch.dbaUnavailableText, { name: props.submittedName })}
         </Content>
         <ul className="font-body-2xs">
-          {props.nameAvailability &&
-            props.nameAvailability.similarNames.map((otherName) => {
-              return (
-                <li className="text-uppercase text-bold margin-top-0" key={otherName}>
-                  {otherName}
-                </li>
-              );
-            })}
+          {props.nameAvailability?.similarNames.map((otherName) => {
+            return (
+              <li className="text-uppercase text-bold margin-top-0" key={otherName}>
+                {otherName}
+              </li>
+            );
+          })}
         </ul>
       </Alert>
     </div>

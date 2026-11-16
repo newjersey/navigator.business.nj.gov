@@ -66,7 +66,7 @@ export const useScrollToPathAnchor = (): void => {
     if (window.location.pathname === "/mgmt/cms") return;
 
     const path = window.location.hash;
-    if (path && path.includes("#")) {
+    if (path?.includes("#")) {
       const id = path.replace("#", "");
       const element = document.querySelector(`#${id}`);
       if (id && element) {

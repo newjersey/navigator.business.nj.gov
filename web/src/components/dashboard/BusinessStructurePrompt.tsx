@@ -48,7 +48,7 @@ export const BusinessStructurePrompt = (props: Props): ReactElement => {
               isRightMarginRemoved
               isFullWidthOnDesktop
               onClick={(): void => {
-                router && router.push(`/tasks/${businessStructureUrlSlug}`);
+                router?.push(`/tasks/${businessStructureUrlSlug}`);
               }}
               dataTestId={"business-structure-prompt-button"}
             >

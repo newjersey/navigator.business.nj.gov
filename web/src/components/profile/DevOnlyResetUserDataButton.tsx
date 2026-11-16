@@ -21,7 +21,7 @@ export const DevOnlyResetUserDataButton = (): ReactElement => {
       };
       const emptyUserData = createEmptyUserData(emptyUser);
       await updateQueue?.queue(emptyUserData).update();
-      router && router.push(ROUTES.landing);
+      router?.push(ROUTES.landing);
     }
   };
   if (process.env.NODE_ENV === "development") {

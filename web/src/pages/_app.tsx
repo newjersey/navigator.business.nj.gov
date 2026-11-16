@@ -141,7 +141,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   Hub.listen("auth", listener);
 
   useMountEffectWhenDefined(() => {
-    setOnLoadDimensions(updateQueue!.current());
+    if (updateQueue) {
+      setOnLoadDimensions(updateQueue.current());
+    }
   }, updateQueue?.current);
 
   useMountEffect(() => {
@@ -165,7 +167,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     }
   });
 
-  const isSeoPage = router && router.pathname.includes("/starter-kits");
+  const isSeoPage = router?.pathname.includes("/starter-kits");
 
   const heroTitle = insertIndustryContent(
     config.starterKits.hero.title,

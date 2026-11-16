@@ -115,7 +115,7 @@ export const useFormContextHelper = <
       const valid = isValid();
 
       if (onChangeFunc) {
-        onChangeFunc && onChangeFunc(valid, getErrors(), submitted || stagingTab !== undefined);
+        onChangeFunc?.(valid, getErrors(), submitted || stagingTab !== undefined);
       }
 
       if (!stillNeedsUpdates) {

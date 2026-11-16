@@ -84,8 +84,6 @@ export const triggerSignOut = async (): Promise<void> => {
 };
 
 export const triggerSignIn = async (): Promise<void> => {
-  // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
-  // @ts-ignore
   configureAmplify();
   await signInWithRedirect({
     provider: {
@@ -111,7 +109,7 @@ export const getSignedS3Link = async (value: string, expires?: number): Promise<
 
 export const getCurrentToken = async (): Promise<JWT> => {
   const session = await fetchAuthSession();
-  if (!session.tokens || !session.tokens.idToken) {
+  if (!session.tokens?.idToken) {
     throw new Error("Unable to retrieve access token. Ensure the session is valid.");
   }
   return session.tokens.idToken;

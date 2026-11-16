@@ -92,17 +92,15 @@ const AccountSetupPage = (): ReactElement => {
     }
   }, [router]);
 
-  // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
   const parseAndSendAnalyticsEvent = (source: string): void => {
-    const possibleAnalyticsEvents = Object.keys(analytics.event);
-
-    if (
-      possibleAnalyticsEvents.includes(source) && // @ts-ignore
-      Object.keys(analytics.event[source]).includes("click") && // @ts-ignore
-      Object.keys(analytics.event[source].click).includes("go_to_NavigatorAccount_setup")
-    ) {
-      // @ts-ignore
-      analytics.event[source].click.go_to_NavigatorAccount_setup();
+    // source comes from the query string, so look the event up by name and call it only if it exists.
+    const eventsByName: Record<
+      string,
+      { click?: Record<string, unknown>; [name: string]: unknown }
+    > = analytics.event;
+    const goToAccountSetup = eventsByName[source]?.click?.go_to_NavigatorAccount_setup;
+    if (typeof goToAccountSetup === "function") {
+      goToAccountSetup();
     }
   };
 

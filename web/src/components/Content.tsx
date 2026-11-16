@@ -145,7 +145,7 @@ const Link = (
           <ExternalLink
             href={props.href}
             id={props.title}
-            onClick={(): void => onClick && onClick(props.href)}
+            onClick={(): void => onClick?.(props.href)}
             showLaunchIcon={showLaunchIcon}
           >
             {linkText}
