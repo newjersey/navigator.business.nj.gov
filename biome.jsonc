@@ -243,6 +243,17 @@
       }
     },
     {
+      "includes": ["web/cypress/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            // Cypress commands chain through .then and can't be awaited, so nesting is how a command waits on a promise
+            "noNestedPromises": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["api/scripts/**", "api/src/functions/messagingService/reactEmail/build.tsx"],
       "linter": {
         "rules": {

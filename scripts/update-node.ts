@@ -1,9 +1,9 @@
 // Usage:
 // pnpm exec tsx ./scripts/update-node.ts [node_version]
 
-import { execSync } from "child_process";
-import { promises as fs } from "fs";
-import * as path from "path";
+import { execSync } from "node:child_process";
+import { promises as fs } from "node:fs";
+import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 
 /**
@@ -41,7 +41,7 @@ async function fetchNodeReleases(): Promise<NodeRelease[]> {
     }
     return (await response.json()) as NodeRelease[];
   } catch (error) {
-    throw new Error(`Failed to fetch Node.js releases: ${error.message}`);
+    throw new Error(`Failed to fetch Node.js releases: ${error.message}`, { cause: error });
   }
 }
 
@@ -133,7 +133,7 @@ async function getCurrentNodeVersion(): Promise<string> {
     const version = await fs.readFile(nvmrcPath, "utf8");
     return version.trim();
   } catch (error) {
-    throw new Error(`Failed to read .nvmrc: ${error.message}`);
+    throw new Error(`Failed to read .nvmrc: ${error.message}`, { cause: error });
   }
 }
 
@@ -149,7 +149,7 @@ function getCurrentBranchName(): string {
       encoding: "utf8",
     }).trim();
   } catch (error) {
-    throw new Error(`Failed to get current branch name: ${error.message}`);
+    throw new Error(`Failed to get current branch name: ${error.message}`, { cause: error });
   }
 }
 
@@ -169,7 +169,7 @@ async function updateFile(filePath: string, oldVersion: string, newVersion: stri
     await fs.writeFile(absolutePath, content, "utf8");
     console.info(`✓ Updated ${filePath}`);
   } catch (error) {
-    throw new Error(`Failed to update ${filePath}: ${error.message}`);
+    throw new Error(`Failed to update ${filePath}: ${error.message}`, { cause: error });
   }
 }
 
@@ -185,10 +185,10 @@ async function updateVerifyNodeScript(filePath: string): Promise<void> {
     const content = await fs.readFile(absolutePath, "utf8");
     const jsonContent = JSON.parse(content);
     jsonContent.scripts["verify:node"] = `check-node-version --node $(cat .nvmrc)`;
-    await fs.writeFile(absolutePath, JSON.stringify(jsonContent, null, 2) + "\n", "utf8");
+    await fs.writeFile(absolutePath, `${JSON.stringify(jsonContent, null, 2)}\n`, "utf8");
     console.info(`✓ Updated verify:node script in ${filePath}`);
   } catch (error) {
-    throw new Error(`Failed to update verify:node script: ${error.message}`);
+    throw new Error(`Failed to update verify:node script: ${error.message}`, { cause: error });
   }
 }
 
@@ -216,7 +216,7 @@ async function main() {
       await updateFile(filePath, oldNodeVersionDots, nodeVersion);
     }
 
-    await fs.writeFile(path.resolve(".nvmrc"), nodeVersion + "\n", "utf8");
+    await fs.writeFile(path.resolve(".nvmrc"), `${nodeVersion}\n`, "utf8");
     console.info(`✓ Updated .nvmrc to ${nodeVersion}`);
 
     await updateVerifyNodeScript("package.json");

@@ -1,7 +1,7 @@
 import { randomElementFromArray } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { OnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
-import { StartingOnboardingData } from "@businessnjgovnavigator/cypress/support/types";
-import { Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
+import type { OnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
+import type { StartingOnboardingData } from "@businessnjgovnavigator/cypress/support/types";
+import type { Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
 import { randomInt } from "@businessnjgovnavigator/shared/lib/shared/src/intHelpers";
 import {
   cannabisLicenseOptions,
@@ -291,9 +291,9 @@ export const answerIndustrySpecificQuestions = ({
     page.getCarService(carService).should("be.checked");
 
     const otherValues = carServiceOptions.filter((value) => value !== carService);
-    otherValues.forEach((value) => {
+    for (const value of otherValues) {
       page.getCarService(value).should("not.be.checked");
-    });
+    }
   }
 
   if (isChildcareForSixOrMore === undefined) {

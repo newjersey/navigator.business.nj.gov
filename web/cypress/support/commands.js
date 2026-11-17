@@ -45,7 +45,7 @@ Amplify.configure(
       },
     },
   },
-  { ssr: true }
+  { ssr: true },
 );
 
 Cypress.Commands.add("loginByCognitoApi", () => {
@@ -104,7 +104,9 @@ Cypress.Commands.add("loginByCognitoApi", () => {
               },
             }).then((response) => {
               expect(response.status).to.equal(200);
-              expect(getCurrentBusiness(response.body).onboardingFormProgress).to.equal("UNSTARTED");
+              expect(getCurrentBusiness(response.body).onboardingFormProgress).to.equal(
+                "UNSTARTED",
+              );
             });
           });
 

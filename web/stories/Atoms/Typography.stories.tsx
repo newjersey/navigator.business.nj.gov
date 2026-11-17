@@ -1,7 +1,8 @@
+// biome-ignore-all lint/correctness/noRestrictedElements: this story documents how raw h5/h6 elements render next to their .h5-styling/.h6-styling classes
+import type { Meta, StoryObj } from "@storybook/nextjs";
+import type { ReactElement } from "react";
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { Meta, StoryObj } from "@storybook/nextjs";
-import { ReactElement } from "react";
 
 const Template = () => {
   const renderFiveColumns = (section: {

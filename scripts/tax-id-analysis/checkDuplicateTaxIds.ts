@@ -5,10 +5,12 @@
  * */
 
 // @ts-nocheck
+// biome-ignore-all lint/correctness/noUnusedVariables: archived one-off analysis; its entry point and inputs are placeholders to fill in by hand
+// biome-ignore-all lint/suspicious/noImplicitAnyLet: the file is @ts-nocheck, so it has no types to satisfy
 
-import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 import * as fs from "node:fs";
 import * as path from "node:path";
+import { AWSCryptoFactory } from "@client/AwsCryptoFactory";
 
 interface BusinessProfile {
   profileData?: {
