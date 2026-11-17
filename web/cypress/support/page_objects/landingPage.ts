@@ -1,6 +1,6 @@
-import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getMergedConfig } from "@businessnjgovnavigator/shared";
 
-const { Config } = useConfig();
+const Config = getMergedConfig();
 
 class LandingPage {
   getHowItWorksSection = () => {

@@ -2,14 +2,14 @@ import { onBusinessStructurePage } from "@businessnjgovnavigator/cypress/support
 import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 import {
   allFormationLegalTypes,
-  EmploymentPlacementType,
-  FormationLegalType,
+  type EmploymentPlacementType,
+  type FormationLegalType,
   getMergedConfig,
-  Industry,
+  type Industry,
   LegalStructures,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { LighthouseConfig, Pa11yThresholds } from "../types";
+import type { LighthouseConfig, Pa11yThresholds } from "../types";
 
 const Config = getMergedConfig();
 
@@ -38,7 +38,7 @@ export const defaultPa11yThresholds: Pa11yThresholds = {
   runners: ["axe", "htmlcs"],
 };
 
-export const randomElementFromArray = (array: any[]) => {
+export const randomElementFromArray = <T>(array: readonly T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
 };
 

@@ -1,9 +1,10 @@
+import type { Meta, StoryObj } from "@storybook/nextjs";
+import { action } from "storybook/actions";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Template = () => {
   return (
@@ -16,7 +17,7 @@ const Template = () => {
             </div>
           }
         >
-          <LiveChatHelpButton analyticsEvent={() => console.log("Help button clicked")} />
+          <LiveChatHelpButton analyticsEvent={action("Help button clicked")} />
           <div className="margin-top-2 mobile-lg:margin-top-0">
             <SecondaryButton isColor="primary" onClick={() => {}}>
               SecondaryButton

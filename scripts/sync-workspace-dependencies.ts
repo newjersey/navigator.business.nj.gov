@@ -19,8 +19,10 @@ export const syncDependencies = (
   root: Manifest,
   workspaces: readonly WorkspaceManifest[],
 ): void => {
-  const rootDependencies = root.dependencies ?? (root.dependencies = {});
-  const rootDevDependencies = root.devDependencies ?? (root.devDependencies = {});
+  root.dependencies ??= {};
+  root.devDependencies ??= {};
+  const rootDependencies = root.dependencies;
+  const rootDevDependencies = root.devDependencies;
   const knownDependencies = { ...rootDependencies, ...rootDevDependencies };
 
   for (const { manifest } of workspaces) {

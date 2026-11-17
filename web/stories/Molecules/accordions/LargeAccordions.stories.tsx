@@ -1,13 +1,12 @@
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Template = () => {
   return (
     <Accordion onChange={() => {}}>
       <AccordionSummary
-        aria-controls=""
         expandIcon={<Icon className={"usa-icon--size-5 margin-left-1"} iconName="expand_more" />}
       >
         <div className="h3-styling margin-0-override">Accordion Summary Text</div>

@@ -1,6 +1,7 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import yaml from "yaml";
+
 const collectionDirectory = "web/decap-config/collections";
 const output = "web/src/lib/cms/CollectionMap.json";
 

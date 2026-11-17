@@ -1,7 +1,7 @@
-import * as fs from "fs";
-import * as yaml from "js-yaml";
+import * as fs from "node:fs";
+import * as path from "node:path";
 import { fileURLToPath } from "node:url";
-import * as path from "path";
+import * as yaml from "js-yaml";
 import { buildMunicipalityCmsOptions, Municipalities } from "../shared/src/municipality";
 
 const baseConfigPath = "web/decap-config/config-base.yml";

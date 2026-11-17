@@ -1,20 +1,20 @@
-import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import {
   answerIndustrySpecificQuestions,
   deriveIndustrySpecificAnswers,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-industry-specific-questions";
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
-import {
+import type {
   ExistingProfileData,
   ForeignProfileData,
   StartingProfileData,
 } from "@businessnjgovnavigator/cypress/support/types";
 import {
-  Industry,
+  type Industry,
   LookupLegalStructureById,
   LookupSectorTypeById,
 } from "@businessnjgovnavigator/shared/";
+import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 
 export const checkNewBusinessProfilePage = ({
   businessName,
@@ -119,10 +119,8 @@ export const checkExistingBusinessProfilePage = ({
     onProfilePage.getHomeBased(homeBasedQuestion).should("be.checked");
     onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
   }
-  if (!!ownershipDataValues && ownershipDataValues.length) {
-    ownershipDataValues.forEach((dataValue) => {
-      onProfilePage.getOwnershipDropdown().invoke("prop", "value").should("contain", dataValue);
-    });
+  for (const dataValue of ownershipDataValues ?? []) {
+    onProfilePage.getOwnershipDropdown().invoke("prop", "value").should("contain", dataValue);
   }
 
   const employerIdWithMatch = employerId.match("^[0-9]$") ? employerId.match("^[0-9]$") : "";
@@ -336,11 +334,11 @@ export const updateExistingBusinessProfilePage = ({
     onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
   }
 
-  if (ownershipDataValues !== undefined && ownershipDataValues.length) {
+  if (ownershipDataValues !== undefined && ownershipDataValues.length > 0) {
     onProfilePage.selectOwnership(ownershipDataValues);
-    ownershipDataValues.forEach((dataValue) => {
+    for (const dataValue of ownershipDataValues) {
       onProfilePage.getOwnershipDropdown().invoke("prop", "value").should("contain", dataValue);
-    });
+    }
   }
 
   if (employerId) {
