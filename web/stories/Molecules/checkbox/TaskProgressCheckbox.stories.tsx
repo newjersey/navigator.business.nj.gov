@@ -1,5 +1,5 @@
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
-import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Template = () => {
   return (

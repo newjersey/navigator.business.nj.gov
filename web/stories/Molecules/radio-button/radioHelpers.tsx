@@ -1,6 +1,6 @@
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { Content } from "@/components/Content";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 const longLabel =
   "Creating a label that wraps to over multiple lines, there is padding added around the label, the button is centered aligned";

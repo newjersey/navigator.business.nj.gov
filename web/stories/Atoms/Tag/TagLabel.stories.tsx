@@ -1,5 +1,5 @@
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { Tag } from "@/components/njwds-extended/Tag";
-import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof Tag> = {
   title: "Atoms/Tag/Label",

@@ -3,8 +3,8 @@ import test from "node:test";
 import {
   isAllowedDependencyVersion,
   validateManifest,
-  validateRepository,
   validatePackageManagerState,
+  validateRepository,
 } from "./validate-dependency-policy.ts";
 
 test("allows exact versions and local dependency protocols", () => {

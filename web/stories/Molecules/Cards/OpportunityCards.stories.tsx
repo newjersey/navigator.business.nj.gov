@@ -1,6 +1,6 @@
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { generateOpportunity } from "@/test/factories";
-import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof OpportunityCard> = {
   title: "Molecules/Cards/OpportunityCards",

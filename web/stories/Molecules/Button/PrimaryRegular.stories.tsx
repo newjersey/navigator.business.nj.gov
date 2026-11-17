@@ -1,6 +1,6 @@
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { Icon } from "@/components/njwds/Icon";
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 
 const meta: Meta<typeof PrimaryButton> = {
   title: "Molecules/Button/PrimaryRegular",

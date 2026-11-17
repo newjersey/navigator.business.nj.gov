@@ -1,13 +1,13 @@
 import {
-  CannabisLicenseType,
-  CarServiceType,
-  ConstructionType,
-  EmploymentAndPersonnelServicesType,
-  EmploymentPlacementType,
+  type CannabisLicenseType,
+  type CarServiceType,
+  type ConstructionType,
+  type EmploymentAndPersonnelServicesType,
+  type EmploymentPlacementType,
   LookupIndustryById,
   LookupSectorTypeById,
-  PropertyLeaseType,
-  ResidentialConstructionType,
+  type PropertyLeaseType,
+  type ResidentialConstructionType,
 } from "@businessnjgovnavigator/shared/";
 import { random } from "lodash";
 

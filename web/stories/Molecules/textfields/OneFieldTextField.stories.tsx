@@ -1,3 +1,10 @@
+import { ConfigContext, type ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyProfileData,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
+import type { Meta, StoryObj } from "@storybook/nextjs";
+import { useState } from "react";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -7,10 +14,6 @@ import {
 } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { ConfigContext, ConfigType, getMergedConfig } from "@businessnjgovnavigator/shared";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { Meta, StoryObj } from "@storybook/nextjs";
-import { useState } from "react";
 
 const Template = () => {
   const mergedConfig = getMergedConfig();

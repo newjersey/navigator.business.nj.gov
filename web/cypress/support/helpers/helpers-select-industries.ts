@@ -1,5 +1,8 @@
 import { randomElementFromArray } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { getIndustries, Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
+import {
+  getIndustries,
+  type Industry,
+} from "@businessnjgovnavigator/shared/lib/shared/src/industry";
 
 export const homeBasedIndustries = getIndustries().filter((industry) => {
   return industry.industryOnboardingQuestions.canBeHomeBased && industry.canHavePermanentLocation;
@@ -19,14 +22,14 @@ export const randomHomeBasedIndustry = (): Industry => {
 };
 export const randomNonHomeBasedIndustry = (): Industry => {
   return randomElementFromArray(
-    industriesNotHomeBasedOrLiquorLicense.filter((x) => x.isEnabled) as Industry[]
+    industriesNotHomeBasedOrLiquorLicense.filter((x) => x.isEnabled) as Industry[],
   );
 };
 
 export const randomNonHomeBasedNonDomesticEmployerIndustry = (): Industry => {
   return randomElementFromArray(
     industriesNotHomeBasedOrLiquorLicense.filter(
-      (x) => x.isEnabled && x.name !== "Domestic Employer"
-    ) as Industry[]
+      (x) => x.isEnabled && x.name !== "Domestic Employer",
+    ) as Industry[],
   );
 };

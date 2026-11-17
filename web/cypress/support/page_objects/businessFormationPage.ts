@@ -1,4 +1,4 @@
-import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
+import type { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 
 class BusinessFormationPage {
   getAvailableBusinessNameAlert() {
