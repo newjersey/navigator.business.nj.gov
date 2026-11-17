@@ -1,6 +1,6 @@
-import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { Industry } from "@businessnjgovnavigator/shared/industry";
-import {
+import type { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
+import type { Industry } from "@businessnjgovnavigator/shared/industry";
+import type {
   CannabisLicenseType,
   CarServiceType,
   ConstructionType,

@@ -1,5 +1,5 @@
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Template = () => {
   const renderColor = (variable: string, hexcode: string) => (

@@ -1,6 +1,6 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { Icon } from "@/components/njwds/Icon";
-import { Meta, StoryObj } from "@storybook/nextjs";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 
 const meta: Meta<typeof UnStyledButton> = {
   title: "Molecules/Button/Unstyled",

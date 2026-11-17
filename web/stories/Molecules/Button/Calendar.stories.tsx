@@ -1,6 +1,6 @@
-import { CalendarEventItem } from "@/components/filings-calendar/CalendarEventItem";
 import { defaultDateFormat, parseDateWithFormat } from "@businessnjgovnavigator/shared";
-import { Meta, StoryObj } from "@storybook/nextjs";
+import type { Meta, StoryObj } from "@storybook/nextjs";
+import { CalendarEventItem } from "@/components/filings-calendar/CalendarEventItem";
 
 const meta: Meta<typeof CalendarEventItem> = {
   title: "Molecules/Button/Calendar",

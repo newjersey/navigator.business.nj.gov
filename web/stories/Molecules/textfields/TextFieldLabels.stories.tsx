@@ -1,3 +1,13 @@
+import { generateFormationFormData, generateProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  ConfigContext,
+  type ConfigType,
+  getMergedConfig,
+} from "@businessnjgovnavigator/shared/contexts";
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { createEmptyDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
+import type { Meta, StoryObj } from "@storybook/nextjs";
+import { useState } from "react";
 import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
@@ -16,16 +26,6 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { getLegalStructureDisplayName } from "@/lib/domain-logic/getLegalStructureDisplayName";
-import { generateFormationFormData, generateProfileData } from "@businessnjgovnavigator/shared/";
-import {
-  ConfigContext,
-  ConfigType,
-  getMergedConfig,
-} from "@businessnjgovnavigator/shared/contexts";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { createEmptyDbaDisplayContent } from "@businessnjgovnavigator/shared/types";
-import { Meta, StoryObj } from "@storybook/nextjs";
-import { useState } from "react";
 
 const Template = () => {
   const mergedConfig = getMergedConfig();

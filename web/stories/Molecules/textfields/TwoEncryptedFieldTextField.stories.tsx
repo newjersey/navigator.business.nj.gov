@@ -1,3 +1,12 @@
+import { generateProfileData } from "@businessnjgovnavigator/shared";
+import {
+  ConfigContext,
+  type ConfigType,
+  getMergedConfig,
+} from "@businessnjgovnavigator/shared/contexts";
+import type { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import type { Meta, StoryObj } from "@storybook/nextjs";
+import { useState } from "react";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -9,15 +18,7 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { generateProfileData } from "@businessnjgovnavigator/shared";
-import {
-  ConfigContext,
-  ConfigType,
-  getMergedConfig,
-} from "@businessnjgovnavigator/shared/contexts";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { Meta, StoryObj } from "@storybook/nextjs";
-import { useState } from "react";
+
 const Template = () => {
   const taxId = "2";
   const [config, setConfig] = useState<ConfigType>(getMergedConfig());
