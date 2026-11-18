@@ -28,6 +28,7 @@ issuingAgency: NJ Department of Law & Public Safety, Division of Alcoholic
   Beverage Control (ABC)
 callToActionText: Apply for My Emergency Trip Permit
 callToActionLink: https://www.njportal.com/abc/eps
+displayOnStaticSite: true
 ---
 
 :::infoAlert
