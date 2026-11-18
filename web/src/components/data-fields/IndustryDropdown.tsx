@@ -90,12 +90,12 @@ export const IndustryDropdown = (props: Props): ReactElement => {
   const isForeignBusiness = state.profileData.businessPersona === "FOREIGN";
 
   const handleSearchBoxChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    props.handleChange && props.handleChange();
+    props.handleChange?.();
     setSearchText(event.target.value.trimEnd());
   };
 
   const handleIndustry = (_event: ChangeEvent<unknown>, value: Industry | null): void => {
-    props.handleChange && props.handleChange();
+    props.handleChange?.();
     onIndustryIdChange(value?.id);
     setSearchText(value ? value.name : "");
   };

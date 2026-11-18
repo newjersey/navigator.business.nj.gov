@@ -28,6 +28,15 @@ export class IamStack extends Stack {
   public readonly unauthRole?: iam.Role;
   public readonly githubOidcRole?: iam.Role;
 
+  get requiredBackupRole(): iam.Role {
+    if (!this.backupRole) {
+      throw new Error(
+        "IamStack creates the backup role only for the dev, staging, and prod stages",
+      );
+    }
+    return this.backupRole;
+  }
+
   constructor(scope: Construct, id: string, props: IamStackProps) {
     super(scope, id, props);
     this.serviceName = API_SERVICE_NAME;

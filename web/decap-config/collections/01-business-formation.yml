@@ -1318,15 +1318,13 @@ collections:
                   - { label: "Radio yes text", name: "radioYesText", widget: "string" }
                   - { label: "Remove Section Text", name: "removeSectionText", widget: "string" }
                   - {
-                      label:
-                        "Aria Context - Will Need to Provide Business date for checking formation
+                      label: "Aria Context - Will Need to Provide Business date for checking formation
                         task",
                       name: "ariaContextWillNeedToProvideBusinessDate",
                       widget: "string",
                     }
                   - {
-                      label:
-                        "Aria Context - Will Need to lose calendar / certifications access but
+                      label: "Aria Context - Will Need to lose calendar / certifications access but
                         un-starting formation",
                       name: "ariaContextWillLooseCalendarAndCertificationAccess",
                       widget: "string",

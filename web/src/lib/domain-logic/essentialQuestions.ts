@@ -10,23 +10,25 @@ export const getResetIndustrySpecificData = (
   industryId: string | undefined,
 ): Partial<IndustrySpecificData> => {
   const industry = LookupIndustryById(industryId);
-  return EssentialQuestions.filter((eQ) => {
+  const questionsToReset = EssentialQuestions.filter((eQ) => {
     return eQ.shouldBeResetWhenIndustryChanges && !eQ.isQuestionApplicableToIndustry(industry);
-  }).reduce(
-    (reducer, eQ) => {
-      return { ...reducer, [eQ.fieldName]: emptyIndustrySpecificData[eQ.fieldName] };
-    },
-    {} as Partial<IndustrySpecificData>,
-  );
+  });
+  return Object.fromEntries(
+    questionsToReset.map((eQ) => [eQ.fieldName, emptyIndustrySpecificData[eQ.fieldName]]),
+  ) as Partial<IndustrySpecificData>;
 };
 
 export const getIsApplicableToFunctionByFieldName = (
   fieldName: ProfileContentField,
 ): ((industryId: string | undefined) => boolean) => {
   return (industryId: string | undefined): boolean => {
-    return EssentialQuestions.find((eQ) => {
+    const essentialQuestion = EssentialQuestions.find((eQ) => {
       return eQ.fieldName === fieldName;
-    })!.isQuestionApplicableToIndustry(LookupIndustryById(industryId));
+    });
+    if (!essentialQuestion) {
+      throw new Error(`No essential question for field ${fieldName}`);
+    }
+    return essentialQuestion.isQuestionApplicableToIndustry(LookupIndustryById(industryId));
   };
 };
 export const hasEssentialQuestion = (industryId: string | undefined): boolean => {

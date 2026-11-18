@@ -9,7 +9,7 @@ pnpm run typecheck
 pnpm --filter @businessnjgovnavigator/web run typecheck:cypress
 
 # format files
-pnpm run prettier
+pnpm run format
 pnpm run spellcheck
 pnpm run dependency-check
 

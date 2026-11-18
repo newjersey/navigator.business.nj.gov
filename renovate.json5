@@ -99,18 +99,6 @@
       groupName: "jest",
     },
 
-    // ESLint + TypeScript-ESLint toolchain (eslint-config-prettier lives here too).
-    {
-      matchPackageNames: [
-        "@types/eslint",
-        "babel-eslint",
-        "@typescript-eslint/*",
-        "eslint*",
-        "eslint-config-prettier",
-      ],
-      groupName: "eslint",
-    },
-
     // @types/node: keep on its own and never auto-bump the major (tied to the
     // Node runtime in .nvmrc).
     { matchPackageNames: ["@types/node"] },
@@ -128,7 +116,7 @@
 
     { matchPackageNames: ["@testing-library/*"], groupName: "testing-library" },
     {
-      matchPackageNames: ["storybook", "@storybook/*", "eslint-plugin-storybook"],
+      matchPackageNames: ["storybook", "@storybook/*"],
       groupName: "storybook",
     },
     {
@@ -155,10 +143,10 @@
       groupName: "unified",
     },
 
-    // Next.js core + bundled plugins. eslint-config-next and next-seo track
-    // major Next versions; next-router-mock is a test helper that follows Next.
+    // Next.js core + bundled plugins. next-seo tracks major Next versions;
+    // next-router-mock is a test helper that follows Next.
     {
-      matchPackageNames: ["next", "@next/*", "eslint-config-next", "next-seo", "next-router-mock"],
+      matchPackageNames: ["next", "@next/*", "next-seo", "next-router-mock"],
       groupName: "next",
     },
 

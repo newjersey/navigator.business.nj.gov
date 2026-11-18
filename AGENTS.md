@@ -81,7 +81,7 @@ pnpm run build
 pnpm run build:clean
 pnpm run lint
 pnpm run typecheck
-pnpm run prettier:check
+pnpm run format:check
 
 # Tests
 pnpm run test                  # Root Jest suite

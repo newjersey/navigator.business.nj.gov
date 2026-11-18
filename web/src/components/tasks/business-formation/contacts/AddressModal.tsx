@@ -61,10 +61,16 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   type ErrorFields = (typeof validatedFields)[number];
   type AddressErrorMap = Record<ErrorFields, ErrorState>;
 
+  const buildAddressErrorMap = (
+    getErrorState: (field: ErrorFields) => ErrorState,
+  ): AddressErrorMap => {
+    return Object.fromEntries(
+      validatedFields.map((field) => [field, getErrorState(field)]),
+    ) as AddressErrorMap;
+  };
+
   const createAddressErrorMap = (invalid?: boolean): AddressErrorMap => {
-    return validatedFields.reduce((prev: AddressErrorMap, curr: ErrorFields) => {
-      return { ...prev, [curr]: { invalid, label: "" } };
-    }, {} as AddressErrorMap);
+    return buildAddressErrorMap(() => ({ invalid, label: "" }));
   };
 
   const [addressErrorMap, setAddressErrorMap] = useState<AddressErrorMap>(createAddressErrorMap());
@@ -178,9 +184,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       };
       setAddressData(data);
 
-      const errorMap = validatedFields.reduce((prev: AddressErrorMap, curr: ErrorFields) => {
-        return { ...prev, [curr]: getErrorStateForField(curr, { dataOverride: data }) };
-      }, {} as AddressErrorMap);
+      const errorMap = buildAddressErrorMap((field) =>
+        getErrorStateForField(field, { dataOverride: data }),
+      );
 
       setAddressErrorMap(errorMap);
     }
@@ -204,14 +210,10 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       return i.invalid === undefined;
     });
     if (unValidated) {
-      setAddressErrorMap(
-        validatedFields.reduce(
-          (prev: AddressErrorMap, curr: ErrorFields) => {
-            return { ...prev, [curr]: getErrorStateForField(curr) };
-          },
-          { ...addressErrorMap } as AddressErrorMap,
-        ),
-      );
+      setAddressErrorMap({
+        ...addressErrorMap,
+        ...buildAddressErrorMap((field) => getErrorStateForField(field)),
+      });
       return;
     }
 

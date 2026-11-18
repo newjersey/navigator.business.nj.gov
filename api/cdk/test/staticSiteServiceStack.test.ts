@@ -179,7 +179,7 @@ describe("StaticSiteServiceStack", () => {
     delete process.env.BASIC_AUTH_PASSWORD;
 
     expect(() => createStaticSiteTemplate("dev")).toThrow(
-      "BASIC_AUTH_PASSWORD is required to deploy Basic Auth for the static-site ECS service.",
+      "Missing required env var: BASIC_AUTH_PASSWORD",
     );
   });
 

@@ -13,15 +13,15 @@ export interface v2UserData {
 export const migrate_v1_to_v2 = (v1Data: v1UserData, _?: MigrationClients): v2UserData => {
   const { formData, ...rest } = v1Data;
   let businessName = "";
-  if (formData.businessName && formData.businessName.businessName) {
+  if (formData.businessName?.businessName) {
     businessName = formData.businessName.businessName;
   }
   let industry = "generic";
-  if (formData.businessType && formData.businessType.businessType) {
+  if (formData.businessType?.businessType) {
     industry = formData.businessType.businessType;
   }
   let legalStructure: v2LegalStructure | undefined;
-  if (formData.businessStructure && formData.businessStructure.businessStructure) {
+  if (formData.businessStructure?.businessStructure) {
     legalStructure = formData.businessStructure.businessStructure;
   }
   return {

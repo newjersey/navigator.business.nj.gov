@@ -29,8 +29,8 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   additionalValidationIsValid?: (value: string) => boolean;
   visualFilter?: (value: string) => string;
   valueFilter?: (value: string) => string;
-  handleChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
-  onChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
+  handleChange?: (value: string) => void;
+  onChange?: (value: string) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onClick?: () => void;
   onFocus?: () => void;
@@ -152,13 +152,13 @@ export const GenericTextField = forwardRef(
     const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
       const isValid = isFieldValid(event.target.value);
       setIsValid(isValid);
-      props.onValidation && props.onValidation(props.fieldName, !isValid, event.target.value);
+      props.onValidation?.(props.fieldName, !isValid, event.target.value);
     };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
       const value = valueFilter ? valueFilter(event.target.value) : event.target.value;
-      props.handleChange && props.handleChange(value);
-      props.onChange && props.onChange(value);
+      props.handleChange?.(value);
+      props.onChange?.(value);
     };
 
     const error = props.error ?? isFormFieldInvalid;

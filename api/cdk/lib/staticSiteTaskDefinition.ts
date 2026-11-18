@@ -14,7 +14,7 @@ import {
   STATIC_SITE_SERVICE_BASE_NAME,
   TESTING_STAGE,
 } from "./constants";
-import { applyStandardTags } from "./stackUtils";
+import { applyStandardTags, requireEnvVar } from "./stackUtils";
 
 /** Inputs for creating the static-site ECS task definition and IAM roles. */
 export interface CreateStaticSiteTaskDefinitionProps {
@@ -117,25 +117,12 @@ const isStaticSiteBasicAuthStage = (stage: string): boolean => {
 };
 
 /**
- * Reads a GitHub Actions-provided environment variable required for protected-stage Basic Auth.
- */
-const readRequiredEnvironmentValue = (name: string): string => {
-  const value = process.env[name];
-
-  if (!value) {
-    throw new Error(`${name} is required to deploy Basic Auth for the static-site ECS service.`);
-  }
-
-  return value;
-};
-
-/**
  * Reads Basic Auth credentials from the deployment environment.
  */
 const readStaticSiteBasicAuthEnvironment = (): StaticSiteBasicAuthEnvironment => {
   return {
-    username: readRequiredEnvironmentValue("BASIC_AUTH_USERNAME"),
-    password: readRequiredEnvironmentValue("BASIC_AUTH_PASSWORD"),
+    username: requireEnvVar("BASIC_AUTH_USERNAME"),
+    password: requireEnvVar("BASIC_AUTH_PASSWORD"),
   };
 };
 

@@ -13,7 +13,7 @@ import {
   STATIC_SITE_HEALTH_CHECK_PATH,
   STATIC_SITE_SERVICE_BASE_NAME,
 } from "./constants";
-import { applyStandardTags } from "./stackUtils";
+import { applyStandardTags, requireEnvVar } from "./stackUtils";
 import {
   createStaticSiteAlarms,
   createStaticSiteDeploymentFailureRule,
@@ -29,14 +29,6 @@ import {
 export interface StaticSiteServiceStackProps extends StackProps {
   /** Deployment stage that owns this ECS service, such as dev, testing, content, staging, or prod. */
   readonly stage: string;
-}
-
-interface RequiredEnvironmentValue {
-  /** Environment variable name to validate. */
-  readonly name: string;
-
-  /** Environment variable value to validate. */
-  readonly value: string | undefined;
 }
 
 interface StaticSiteNetwork {
@@ -93,14 +85,6 @@ const STATIC_SITE_HTTP_INGRESS_PORT = 80;
 
 /** HTTPS ingress port used by the static-site ALB listener. */
 const STATIC_SITE_HTTPS_INGRESS_PORT = 443;
-
-const requireEnvironmentValue = (props: RequiredEnvironmentValue): string => {
-  if (props.value === undefined || props.value.trim().length === 0) {
-    throw new Error(`${props.name} must be set to deploy the static site service`);
-  }
-
-  return props.value;
-};
 
 const createStaticSiteAlbName = (stage: string): string => {
   return `${STATIC_SITE_SERVICE_BASE_NAME}-${stage}-alb`;
@@ -194,18 +178,12 @@ export class StaticSiteServiceStack extends Stack {
   }
 
   private createNetwork(): StaticSiteNetwork {
-    const subnetId01 = requireEnvironmentValue({
-      name: "SUBNET_ID_01",
-      value: process.env.SUBNET_ID_01,
-    });
-    const subnetId02 = requireEnvironmentValue({
-      name: "SUBNET_ID_02",
-      value: process.env.SUBNET_ID_02,
-    });
+    const subnetId01 = requireEnvVar("SUBNET_ID_01");
+    const subnetId02 = requireEnvVar("SUBNET_ID_02");
 
     return {
       vpc: ec2.Vpc.fromVpcAttributes(this, "StaticSiteVpc", {
-        vpcId: requireEnvironmentValue({ name: "VPC_ID", value: process.env.VPC_ID }),
+        vpcId: requireEnvVar("VPC_ID"),
         availabilityZones: ["us-east-1a", "us-east-1b"],
         privateSubnetIds: [subnetId01, subnetId02],
       }),
@@ -216,7 +194,7 @@ export class StaticSiteServiceStack extends Stack {
       securityGroup: ec2.SecurityGroup.fromSecurityGroupId(
         this,
         "StaticSiteSecurityGroup",
-        requireEnvironmentValue({ name: "SG_ID", value: process.env.SG_ID }),
+        requireEnvVar("SG_ID"),
         { mutable: true },
       ),
     };

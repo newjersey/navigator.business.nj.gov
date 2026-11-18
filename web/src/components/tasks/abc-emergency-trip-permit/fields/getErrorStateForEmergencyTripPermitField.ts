@@ -36,7 +36,7 @@ export const getErrorStateForEmergencyTripPermitField = (
     return {
       field: fieldName,
       hasError: true,
-      label: "Enter a ${fieldName}.",
+      label: `Enter a \${fieldName}.`,
     };
   }
 
@@ -71,7 +71,7 @@ export const getErrorStateForEmergencyTripPermitField = (
       return {
         field: fieldName,
         hasError: true,
-        label: "${fieldName} must be no more than 15 minutes ago.",
+        label: `\${fieldName} must be no more than 15 minutes ago.`,
       };
     }
     const fiveDaysFromNowInNJ = dayjs().tz("America/New_York").add(5, "days");
@@ -80,7 +80,7 @@ export const getErrorStateForEmergencyTripPermitField = (
       return {
         field: fieldName,
         hasError: true,
-        label: "${fieldName} must be no more than 5 days from now.",
+        label: `\${fieldName} must be no more than 5 days from now.`,
       };
     }
   }
@@ -89,7 +89,7 @@ export const getErrorStateForEmergencyTripPermitField = (
     return {
       field: fieldName,
       hasError: true,
-      label: "${fieldName} must be a 4 digit number.",
+      label: `\${fieldName} must be a 4 digit number.`,
     };
   }
 
@@ -97,7 +97,7 @@ export const getErrorStateForEmergencyTripPermitField = (
     return {
       field: fieldName,
       hasError: true,
-      label: "${fieldName} must be 17 characters.",
+      label: `\${fieldName} must be 17 characters.`,
     };
   }
 
@@ -105,7 +105,7 @@ export const getErrorStateForEmergencyTripPermitField = (
     return {
       field: fieldName,
       hasError: true,
-      label: "${fieldName} is an invalid email.",
+      label: `\${fieldName} is an invalid email.`,
     };
   }
 

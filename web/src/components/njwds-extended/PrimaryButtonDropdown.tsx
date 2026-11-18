@@ -28,7 +28,7 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
   };
 
   const handleClose = (event: Event | SyntheticEvent): void => {
-    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+    if (anchorRef.current?.contains(event.target as HTMLElement)) {
       return;
     }
     setOpen(false);

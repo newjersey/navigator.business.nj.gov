@@ -535,20 +535,15 @@ export const userRouterFactory = ({
     if (!shouldCheckLicense(currentBusiness)) return userData;
 
     try {
-      let nameAndAddress: LicenseSearchNameAndAddress;
       const licenses = currentBusiness.licenseData?.licenses;
-      if (licenses) {
-        const [firstLicenseName] = Object.keys(licenses) as LicenseName[];
-        const licenseNameAndAddress = licenses[firstLicenseName]?.nameAndAddress;
-        nameAndAddress = licenseNameAndAddress!;
-      } else {
-        nameAndAddress = {
-          name: currentBusiness.profileData.businessName,
-          addressLine1: currentBusiness.formationData.formationFormData.addressLine1,
-          addressLine2: currentBusiness.formationData.formationFormData.addressLine2,
-          zipCode: currentBusiness.formationData.formationFormData.addressZipCode,
-        };
-      }
+      const [firstLicenseName] = Object.keys(licenses ?? {}) as LicenseName[];
+      const nameAndAddress: LicenseSearchNameAndAddress = licenses?.[firstLicenseName]
+        ?.nameAndAddress ?? {
+        name: currentBusiness.profileData.businessName,
+        addressLine1: currentBusiness.formationData.formationFormData.addressLine1,
+        addressLine2: currentBusiness.formationData.formationFormData.addressLine2,
+        zipCode: currentBusiness.formationData.formationFormData.addressZipCode,
+      };
 
       return await updateLicenseStatus(userData, nameAndAddress);
     } catch {

@@ -21,7 +21,7 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
   const { doesFieldHaveError } = useFormationErrors();
 
   const handleChange = (value: string): void => {
-    props.handleChange && props.handleChange(value);
+    props.handleChange?.(value);
     setFormationFormData((formationFormData) => ({
       ...formationFormData,
       [props.fieldName]: value,

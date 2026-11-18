@@ -21,8 +21,7 @@ collections:
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
           widget: "string",
-          hint:
-            "This appears only in My Account, in the For You column, max char is 150 including
+          hint: "This appears only in My Account, in the For You column, max char is 150 including
             spaces, plain text only",
         }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
@@ -91,8 +90,7 @@ collections:
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
           widget: "string",
-          hint:
-            "This appears only in My Account, in the For You column, max char is 150 including
+          hint: "This appears only in My Account, in the For You column, max char is 150 including
             spaces, plain text only",
         }
       - { label: "Content", name: "body", widget: "markdown" }

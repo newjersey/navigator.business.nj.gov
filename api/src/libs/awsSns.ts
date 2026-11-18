@@ -8,7 +8,7 @@ export const publishSnsMessage = async (
   message: string,
   topicArn: string,
   title: string = DEFAULT_TITLE,
-): Promise<PublishCommandOutput | void> => {
+): Promise<PublishCommandOutput | undefined> => {
   const formattedMessage = {
     version: "1.0",
     source: "custom",
@@ -33,5 +33,6 @@ export const publishSnsMessage = async (
   } catch (error) {
     // biome-ignore lint/suspicious/noConsole: no logger injected here yet
     console.error(`Error when trying to send AWS SNS message: ${error}`);
+    return undefined;
   }
 };
