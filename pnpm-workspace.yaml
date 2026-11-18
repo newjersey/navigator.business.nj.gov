@@ -51,7 +51,6 @@ overrides:
   react-is: 19.2.8
   "nc>netcat": "git+https://github.com/dsueltenfuss/netcat.git#d24823a031f3da36d383945f5bfa354b41006fff"
   # Keep the previously locked static-site resolutions when importing Yarn's lockfile.
-  "@uswds/uswds@3.13.0>sass-embedded-linux-x64:optional": 1.101.0
   "next-intl@4.13.4>icu-minify": 4.13.4
   "next-intl@4.13.4>next-intl-swc-plugin-extractor": 4.13.4
   "next-intl@4.13.4>use-intl": 4.13.4

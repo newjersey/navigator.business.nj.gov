@@ -172,7 +172,6 @@ overrides:
   trim-newlines: 5.0.0
   react-is: 19.2.8
   nc>netcat: git+https://github.com/dsueltenfuss/netcat.git#d24823a031f3da36d383945f5bfa354b41006fff
-  '@uswds/uswds@3.13.0>sass-embedded-linux-x64:optional': 1.101.0
   next-intl@4.13.4>icu-minify: 4.13.4
   next-intl@4.13.4>next-intl-swc-plugin-extractor: 4.13.4
   next-intl@4.13.4>use-intl: 4.13.4
@@ -13207,7 +13206,7 @@ packages:
       esbuild: '*'
       html-minifier-terser: '*'
       lightningcss: '*'
-      postcss: 8.5.23
+      postcss: '*'
       uglify-js: '*'
       webpack: ^5.1.0
     peerDependenciesMeta:
