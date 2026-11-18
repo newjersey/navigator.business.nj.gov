@@ -58,6 +58,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness";
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import { isLearnModeUser } from "@/lib/domain-logic/isLearnModeUser";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import {
   QUERIES,
@@ -251,16 +252,17 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
       if (currentBusiness.onboardingFormProgress === "COMPLETED") {
+        if (isLearnModeUser(currentUserData)) {
+          await router.replace(ROUTES.learnFlowLandingPage);
+          return;
+        }
+
         if (
           usingIntentSelection &&
           currentBusiness.profileData.businessPersona === "STARTING" &&
           !currentUserData.user.myNJUserKey
         ) {
-          if (currentUserData.user.onboardedAsLearningUser) {
-            await router.replace(ROUTES.learnFlowLandingPage);
-          } else {
-            await router.replace(ROUTES.accountSetup);
-          }
+          await router.replace(ROUTES.accountSetup);
           return;
         }
 

@@ -37,6 +37,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import { isLearnModeUser } from "@/lib/domain-logic/isLearnModeUser";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -56,16 +57,22 @@ interface Props {
 
 const DashboardPage = (props: Props): ReactElement => {
   usePageWithNeedsAccountSnackbar();
-  const { business, updateQueue } = useUserData();
+  const { business, userData, updateQueue } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
-  const isLoading = business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
+  const isLearnMode = isLearnModeUser(userData);
+  const isLoading = business?.onboardingFormProgress !== "COMPLETED" || !roadmap || isLearnMode;
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const [hasElevatorViolations, setHasElevatorViolations] = useState(false);
 
   useMountEffectWhenDefined(() => {
     void (async (): Promise<void> => {
+      if (isLearnMode) {
+        router && (await router.replace(ROUTES.learnFlowLandingPage));
+        return;
+      }
+
       if (
         business?.profileData.operatingPhase === OperatingPhaseId.GUEST_MODE &&
         (business?.profileData.businessPersona === "STARTING" ||
