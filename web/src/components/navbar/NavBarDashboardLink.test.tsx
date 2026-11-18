@@ -1,6 +1,7 @@
 import type { Business } from "@businessnjgovnavigator/shared";
 import {
   generateBusiness,
+  generateProfileData,
   generateUser,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
@@ -120,6 +121,34 @@ describe("<NavBarDashboardLink/>", () => {
       renderComponent({});
       fireEvent.click(screen.getByText(displayedLinkText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+    });
+
+    describe("when the user is in learn mode", () => {
+      const originalFlag = process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW;
+
+      beforeEach(() => {
+        process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
+      });
+
+      afterAll(() => {
+        process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = originalFlag;
+      });
+
+      it("navigates to the learn pages instead of the dashboard", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            onboardingFormProgress: "COMPLETED",
+            profileData: generateProfileData({ businessPersona: "STARTING" }),
+          }),
+          { user: generateUser({ onboardedAsLearningUser: true }) },
+        );
+        renderComponent({ userData });
+        fireEvent.click(screen.getByText(displayedLinkText));
+        await waitFor(() => {
+          expect(mockPush).toHaveBeenCalledWith(ROUTES.learnFlowLandingPage);
+        });
+        expect(mockPush).not.toHaveBeenCalledWith(ROUTES.dashboard);
+      });
     });
 
     it("doesn't update userData when link is clicked by the user", async () => {
