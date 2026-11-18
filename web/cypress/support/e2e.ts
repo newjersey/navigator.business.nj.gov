@@ -18,13 +18,10 @@ import seedrandom from "seedrandom";
 import "./commands";
 import { LighthouseConfig, LighthouseThresholds, Pa11yThresholds } from "./types";
 
-export const testUserEmail = Cypress.env("TEST_USER_EMAIL");
-export const testUserPassword = Cypress.env("TEST_USER_PASSWORD");
-
 const testRandomSeeds = new Map();
 
 const isRelevantSuite = () => {
-  let testSuite = Cypress.env("SUITE");
+  let testSuite = Cypress.expose("SUITE");
   if (!testSuite) {
     testSuite = "all";
   }
@@ -44,7 +41,7 @@ beforeEach(function () {
   // Reusing the same seed for reruns thus allows us to better discover breaking edge cases. Unlike in unit tests,
   // where we error on duplicate test name.
   const randomSeed =
-    Cypress.env("RANDOM_SEED") || testRandomSeeds.get(testName) || Math.random().toString(36).slice(2);
+    Cypress.expose("RANDOM_SEED") || testRandomSeeds.get(testName) || Math.random().toString(36).slice(2);
   testRandomSeeds.set(testName, randomSeed);
   seedrandom(randomSeed, { global: true });
 });

@@ -44,7 +44,7 @@ runs:
         pnpm run cypress:run \
           --browser="$BROWSER" \
           --record=${{ inputs.enable-dashboard }} \
-          --env SUITE=${{ inputs.suite }}
+          --expose SUITE=${{ inputs.suite }}
 
     - name: Upload Cypress Screenshots
       if: failure()
