@@ -1,3 +1,13 @@
+## [2026.28.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.28.0...v2026.28.1) (2026-11-18)
+
+
+### Bug Fixes
+
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) replace explicit any with specific types in api ([b92bc41](https://github.com/newjersey/navigator.business.nj.gov/commit/b92bc41a36222cd09215d627c75f01b829e49825))
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) resolve console statements in api ([73f8be7](https://github.com/newjersey/navigator.business.nj.gov/commit/73f8be717a8469714a3442a1af458994c5509778))
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) resolve floating and nested promises in api ([e886136](https://github.com/newjersey/navigator.business.nj.gov/commit/e886136c12cf5d24b706ca2818082609b95fffe1))
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) resolve remaining biome violations in api ([bc975c3](https://github.com/newjersey/navigator.business.nj.gov/commit/bc975c3616a864c91933376b2e07cacca89c7c2c))
+
 # [2026.28.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.27.0...v2026.28.0) (2026-11-12)
 
 
