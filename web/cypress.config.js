@@ -4,10 +4,21 @@ import { pa11y } from "@cypress-audit/pa11y";
 import { defineConfig } from "cypress";
 import dotenvPlugin from "cypress-dotenv";
 
+const PUBLIC_ENV_KEYS = [
+  "API_BASE_URL",
+  "COGNITO_IDENTITY_POOL_ID",
+  "COGNITO_USER_POOL_ID",
+  "COGNITO_WEB_CLIENT_ID",
+  "RANDOM_SEED",
+  "TEST_USER_EMAIL",
+];
+
 export default defineConfig({
   projectId: "o9nvo8",
   defaultCommandTimeout: 20000,
   viewportWidth: 1025,
+  // Cypress 16 dropped the default from 10ms to 0; the tax clearance flow fails in CI without it.
+  keystrokeDelay: 10,
   numTestsKeptInMemory: 5,
   lighthouse: {
     thresholds: {
@@ -17,6 +28,9 @@ export default defineConfig({
       seo: 90,
       pwa: 0,
     },
+  },
+  expose: {
+    API_BASE_URL: "http://localhost:5002",
   },
   reporter: "junit",
   reporterOptions: {
@@ -46,12 +60,16 @@ export default defineConfig({
       const configWithEnv = dotenvPlugin(config);
       configWithEnv.env.ADMIN_PASSWORD =
         process.env.ADMIN_PASSWORD || configWithEnv.env.ADMIN_PASSWORD || "Test1!";
+      // CI, the feature-test scripts, and .env supply these as CYPRESS_* variables, which only
+      // populate `env`. Specs read them with Cypress.expose(), so copy them across.
+      for (const key of PUBLIC_ENV_KEYS) {
+        if (configWithEnv.env[key] !== undefined) {
+          configWithEnv.expose[key] = configWithEnv.env[key];
+        }
+      }
       return configWithEnv;
     },
     baseUrl: "http://localhost:3000",
-    env: {
-      API_BASE_URL: "http://localhost:5002",
-    },
     specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}",
     retries: {
       runMode: 2,

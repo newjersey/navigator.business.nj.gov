@@ -33,15 +33,14 @@ import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import "cypress-wait-until";
 import { getCurrentBusiness } from "../../../shared/src/domain-logic/getCurrentBusiness";
 import { createEmptyUserData } from "../../../shared/src/userData";
-import { testUserEmail, testUserPassword } from "./e2e";
 
 Amplify.configure(
   {
     Auth: {
       Cognito: {
-        identityPoolId: Cypress.env("COGNITO_IDENTITY_POOL_ID"),
-        userPoolId: Cypress.env("COGNITO_USER_POOL_ID"),
-        userPoolClientId: Cypress.env("COGNITO_WEB_CLIENT_ID"),
+        identityPoolId: Cypress.expose("COGNITO_IDENTITY_POOL_ID"),
+        userPoolId: Cypress.expose("COGNITO_USER_POOL_ID"),
+        userPoolClientId: Cypress.expose("COGNITO_WEB_CLIENT_ID"),
         loginWith: { oauth: {} },
       },
     },
@@ -50,6 +49,7 @@ Amplify.configure(
 );
 
 Cypress.Commands.add("loginByCognitoApi", () => {
+  const testUserEmail = Cypress.expose("TEST_USER_EMAIL");
   const log = Cypress.log({
     displayName: "COGNITO LOGIN",
     message: [`🔐 Authenticating | ${testUserEmail}`],
@@ -64,55 +64,57 @@ Cypress.Commands.add("loginByCognitoApi", () => {
     win.sessionStorage.clear();
     win.localStorage.clear();
   });
-  cy.wrap(signOut()).then(() => {
-    cy.wrap(signIn({ username: testUserEmail, password: testUserPassword }), { log: true })
-      .then(() => fetchAuthSession())
-      .then((cognitoResponse) => {
-        cy.window().then((window) => {
-          cognitoUserPoolsTokenProvider.authTokenStore.loadTokens().then((tokens) => {
-            const { accessToken, idToken } = cognitoResponse.tokens;
-            const refreshToken = tokens.refreshToken;
-            const clockDrift = tokens.clockDrift;
-            const cognitoUsername = cognitoResponse.userSub;
+  cy.env(["TEST_USER_PASSWORD"]).then(({ TEST_USER_PASSWORD }) => {
+    cy.wrap(signOut()).then(() => {
+      cy.wrap(signIn({ username: testUserEmail, password: TEST_USER_PASSWORD }), { log: true })
+        .then(() => fetchAuthSession())
+        .then((cognitoResponse) => {
+          cy.window().then((window) => {
+            cognitoUserPoolsTokenProvider.authTokenStore.loadTokens().then((tokens) => {
+              const { accessToken, idToken } = cognitoResponse.tokens;
+              const refreshToken = tokens.refreshToken;
+              const clockDrift = tokens.clockDrift;
+              const cognitoUsername = cognitoResponse.userSub;
 
-            window.localStorage.setItem(`${cognitoUsername}.idToken`, idToken.toString());
-            window.localStorage.setItem(`${cognitoUsername}.accessToken`, accessToken.toString());
-            window.localStorage.setItem(`${cognitoUsername}.refreshToken`, refreshToken);
-            window.localStorage.setItem(`${cognitoUsername}.clockDrift`, clockDrift.toString());
-            window.localStorage.setItem(`${cognitoUsername}.LastAuthUser`, cognitoUsername);
-            window.localStorage.setItem("amplify-authenticator-authState", "signedIn");
+              window.localStorage.setItem(`${cognitoUsername}.idToken`, idToken.toString());
+              window.localStorage.setItem(`${cognitoUsername}.accessToken`, accessToken.toString());
+              window.localStorage.setItem(`${cognitoUsername}.refreshToken`, refreshToken);
+              window.localStorage.setItem(`${cognitoUsername}.clockDrift`, clockDrift.toString());
+              window.localStorage.setItem(`${cognitoUsername}.LastAuthUser`, cognitoUsername);
+              window.localStorage.setItem("amplify-authenticator-authState", "signedIn");
 
-            log.snapshot("after");
-            log.end();
+              log.snapshot("after");
+              log.end();
+            });
           });
-        });
 
-        cy.wait(2000).then(() => {
-          cy.request({
-            method: "POST",
-            url: `${Cypress.env("API_BASE_URL")}/api/users`,
-            body: createEmptyUserData({
-              email: testUserEmail,
-              name: "Some Name",
-              id: cognitoResponse.tokens.accessToken.payload.sub,
-              receiveNewsletter: true,
-              externalStatus: {},
-            }),
-            auth: {
-              bearer: cognitoResponse.tokens.accessToken.toString(),
+          cy.wait(2000).then(() => {
+            cy.request({
+              method: "POST",
+              url: `${Cypress.expose("API_BASE_URL")}/api/users`,
+              body: createEmptyUserData({
+                email: testUserEmail,
+                name: "Some Name",
+                id: cognitoResponse.tokens.accessToken.payload.sub,
+                receiveNewsletter: true,
+                externalStatus: {},
+              }),
+              auth: {
+                bearer: cognitoResponse.tokens.accessToken.toString(),
+              },
+            }).then((response) => {
+              expect(response.status).to.equal(200);
+              expect(getCurrentBusiness(response.body).onboardingFormProgress).to.equal("UNSTARTED");
+            });
+          });
+
+          cy.visit("/onboarding", {
+            onBeforeLoad: (win) => {
+              win.sessionStorage.clear();
             },
-          }).then((response) => {
-            expect(response.status).to.equal(200);
-            expect(getCurrentBusiness(response.body).onboardingFormProgress).to.equal("UNSTARTED");
           });
         });
-
-        cy.visit("/onboarding", {
-          onBeforeLoad: (win) => {
-            win.sessionStorage.clear();
-          },
-        });
-      });
+    });
   });
 });
 

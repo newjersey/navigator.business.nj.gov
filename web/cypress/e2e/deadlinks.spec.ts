@@ -12,7 +12,9 @@ describe("unusedContent page [feature] [all] [group3]", () => {
 
     it("allows the user to login", () => {
       cy.get('input[data-testid="mgmt-password-field"]').clear();
-      cy.get('input[data-testid="mgmt-password-field"]').type(Cypress.env("ADMIN_PASSWORD"));
+      cy.env(["ADMIN_PASSWORD"]).then(({ ADMIN_PASSWORD }) => {
+        cy.get('input[data-testid="mgmt-password-field"]').type(ADMIN_PASSWORD, { log: false });
+      });
       cy.get('button[data-testid="mgmt-submit-button"]').click();
       cy.get('[data-testid="dl-task-header"]').should("exist");
     });
@@ -32,7 +34,9 @@ describe("unusedContent page [feature] [all] [group3]", () => {
 
     it("allows the user to login", () => {
       cy.get('input[data-testid="mgmt-password-field"]').clear();
-      cy.get('input[data-testid="mgmt-password-field"]').type(Cypress.env("ADMIN_PASSWORD"));
+      cy.env(["ADMIN_PASSWORD"]).then(({ ADMIN_PASSWORD }) => {
+        cy.get('input[data-testid="mgmt-password-field"]').type(ADMIN_PASSWORD, { log: false });
+      });
       cy.get('button[data-testid="mgmt-submit-button"]').click();
       cy.get('[data-testid="dl-task-header"]').should("exist");
     });
