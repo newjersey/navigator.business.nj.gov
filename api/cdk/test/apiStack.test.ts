@@ -291,6 +291,51 @@ describe("ApiStack", () => {
     });
   });
 
+  test.each([
+    ["dev", "dev.api.account.business.nj.gov", "api.dev.account.business.nj.gov"],
+    ["content", "content.api.account.business.nj.gov", "api.content.account.business.nj.gov"],
+    ["testing", "testing.api.account.business.nj.gov", "api.testing.account.business.nj.gov"],
+    ["staging", "staging.api.account.business.nj.gov", "api.staging.account.business.nj.gov"],
+  ])(
+    "serves both the old and new custom API domains on the %s stage with one certificate",
+    (stage, existingDomainName, upcomingDomainName) => {
+      const { template } = createApiStackTemplate(stage);
+
+      expect(template.toJSON()).toBeDefined();
+      template.resourceCountIs("AWS::ApiGateway::DomainName", 2);
+      template.resourceCountIs("AWS::ApiGateway::BasePathMapping", 2);
+      template.hasResourceProperties("AWS::ApiGateway::DomainName", {
+        DomainName: existingDomainName,
+        CertificateArn: TEST_API_GATEWAY_CERT_ARN,
+      });
+      template.hasResourceProperties("AWS::ApiGateway::DomainName", {
+        DomainName: upcomingDomainName,
+        CertificateArn: TEST_API_GATEWAY_CERT_ARN,
+        EndpointConfiguration: { Types: ["EDGE"] },
+      });
+      template.resourceCountIs("AWS::ElasticLoadBalancingV2::ListenerCertificate", 0);
+      template.hasOutput("ApiUpcomingCustomDomainName", {
+        Value: upcomingDomainName,
+        Export: { Name: `${API_SERVICE_NAME}-${stage}-ApiUpcomingCustomDomainName` },
+      });
+      template.hasOutput("ApiUpcomingCustomDomainAliasTarget", {
+        Value: Match.anyValue(),
+        Export: { Name: `${API_SERVICE_NAME}-${stage}-ApiUpcomingCustomDomainAliasTarget` },
+      });
+    },
+  );
+
+  test("keeps a single custom API domain on the prod stage", () => {
+    const { template } = createApiStackTemplate("prod");
+
+    expect(template.toJSON().Outputs).not.toHaveProperty("ApiUpcomingCustomDomainName");
+    template.resourceCountIs("AWS::ApiGateway::DomainName", 1);
+    template.hasResourceProperties("AWS::ApiGateway::DomainName", {
+      DomainName: "api.account.business.nj.gov",
+    });
+    template.resourceCountIs("AWS::ElasticLoadBalancingV2::ListenerCertificate", 0);
+  });
+
   test("does not create an API load balancer for the local API stack", () => {
     const { template } = createApiStackTemplate("local");
 
