@@ -34,19 +34,19 @@ synonyms:
   - fire safety approval
   - burning permit
   - fire marshal clearance
+displayOnStaticSite: true
 ---
-
 ## How to Apply
 
 Contact your town's `Local Enforcing Agency (LEA)|lea` to see if you need a permit and how to apply. Your LEA can be your local fire department or the New Jersey Division of Fire Safety.
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="informational" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="informational" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
 This page does not list all business activities that require a fire permit. You may need to get other fire permits depending on your business activity, so check requirements with your LEA.
 
 :::
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
 A fire permit.
 
