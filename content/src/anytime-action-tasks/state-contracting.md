@@ -45,30 +45,30 @@ callToActionText: Register My Business with NJSTART
 callToActionLink: https://www.njstart.gov/bso/
 synonyms:
   - bidding
+displayOnStaticSite: true
 ---
-
 ### Registration Requirements
 
 1. Complete your pre-registration by submitting the following information:
 
-- `EIN|ein` or Social Security number (SSN)
-- Business name
-- Email address
+*  `EIN|ein` or Social Security number (SSN)
+* Business name
+* Email address
 
 You will then receive an email with your Vendor ID number and login link.
 
 2. Complete your registration by providing the following information:
 
-- `Tax ID|tax-id`
-- Business name
-- Profile administrator’s information (name, title, address, etc.). The administrator maintains and updates the business profile (also known as “vendor profile”)
-- Primary business function
-- Business formation
-- Electronic funds transfer certification
-- Tax ID certification statement
-- `NIGP commodity code|nigp-commodity-code`
+*  `Tax ID|tax-id` 
+* Business name
+* Profile administrator’s information (name, title, address, etc.). The administrator maintains and updates the business profile (also known as “vendor profile”)
+* Primary business function
+* Business formation
+* Electronic funds transfer certification
+* Tax ID certification statement
+*  `NIGP commodity code|nigp-commodity-code` 
 
-:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" emailIconText="" }
+:::largeCallout{ showHeader="true" headerText="" calloutType="conditional" amountIconText="" filingTypeIconText="" frequencyIconText="" phoneIconText="" phoneIconLabel="" emailIconText="" }
 
 A confirmation email.
 
