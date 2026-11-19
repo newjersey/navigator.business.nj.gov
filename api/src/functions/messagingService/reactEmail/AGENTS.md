@@ -18,6 +18,10 @@ pnpm --filter @businessnjgovnavigator/react-email run build
 pnpm --filter @businessnjgovnavigator/react-email run dev:email
 ```
 
+`dev:email` uses the root `package.json`'s `@react-email/ui`, which this
+workspace deliberately doesn't declare (a second declaration installs a second
+copy of `next`). Keep it in root, at the same version as `react-email`.
+
 ## Adding or Changing Emails
 
 - Email React components live in `emails/`.

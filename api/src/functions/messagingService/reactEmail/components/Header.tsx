@@ -1,4 +1,4 @@
-import { Column, Link, Markdown, Row, Section } from "@react-email/components";
+import { Column, Link, Markdown, Row, Section } from "react-email";
 
 export const Header = (props: { utmString?: string }): JSX.Element => {
   return (
