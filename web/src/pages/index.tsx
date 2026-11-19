@@ -214,7 +214,7 @@ const Home = (): ReactElement => {
 
           <section
             ref={sectionLookingForSupport}
-            aria-label="Looking for more support?"
+            aria-label={landingPageConfig.section6Header}
             className={`${isDesktopAndUp ? "landing-support-container" : ""}`}
           >
             <div className="bg-base-extra-light padding-x-2 desktop:padding-x-0 desktop:padding-bottom-10">
