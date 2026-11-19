@@ -3,11 +3,8 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "always",
-    "source.organizeImports.biome": "always",
-    "source.fixAll.eslint": "never"
+    "source.organizeImports.biome": "always"
   },
-  "eslint.enable": false,
-  "eslint.validate": [],
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },

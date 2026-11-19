@@ -3,8 +3,9 @@
 Locale-aware static landing site (`@businessnjgovnavigator/static-site`). Next.js App Router with
 `next-intl` i18n, NJWDS components, and Playwright accessibility tests. Deployed to ECS/Fargate.
 
-**Toolchain differs from the rest of the repo:** uses **Biome** (not ESLint/Prettier)
-and **Vitest** (not Jest). Run commands from `packages/static-site`.
+**Toolchain differs from the rest of the repo:** uses **Vitest** (not Jest). Its `biome.json`
+nests under the root `biome.jsonc` and adds only static-site's stricter rules. Run commands from
+`packages/static-site`.
 
 ## Commands
 
@@ -42,6 +43,7 @@ pnpm test:accessibility  # Playwright + axe-core a11y tests (requires running se
   changes. See `app/[locale]/not-found.test.tsx` and `components/learn/LearnSideNav.test.tsx`.
 - `proxy.ts` configures `next-intl` middleware for locale detection — edit with care.
 - The Docker build runs from the **repo root** (needs access to generated content packages):
+
   ```bash
   docker build -f packages/static-site/Dockerfile -t static-site:prod .
   ```

@@ -1,54 +1,21 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.5/schema.json",
-  "files": {
-    "includes": [
-      "**",
-      "!**/.yarn/*",
-      "!.next",
-      "!public/vendor",
-      "!public/assets",
-      "!public/img",
-      "!coverage",
-      "!test-results",
-      "!playwright-report",
-      "!package-lock.json",
-      "!pnpm-lock.yaml",
-      "!yarn.lock",
-      "!bun.lockb",
-      "!.claude"
-    ]
-  },
-  "formatter": {
-    "enabled": true,
-    "lineWidth": 100,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf"
-  },
+  "$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
+  "root": false,
+  "extends": "//",
   "linter": {
-    "enabled": true,
     "rules": {
-      "preset": "recommended",
       "complexity": {
-        "noExcessiveCognitiveComplexity": "warn",
+        "noExcessiveCognitiveComplexity": "error",
         "noExcessiveLinesPerFunction": {
-          "level": "warn",
+          "level": "error",
           "options": { "maxLines": 80 }
         },
-        "noForEach": "warn",
-        "useArrowFunction": "error",
         "useMaxParams": {
           "level": "error",
           "options": { "max": 2 }
         }
       },
-      "correctness": {
-        "noUnusedImports": "error",
-        "noUnusedVariables": "error"
-      },
       "style": {
-        "noCommonJs": "error",
-        "noParameterAssign": "error",
         "noProcessEnv": "error",
         "noRestrictedImports": {
           "level": "error",
@@ -60,43 +27,8 @@
               }
             ]
           }
-        },
-        "useConst": "error",
-        "useExportType": "error",
-        "useImportType": "error",
-        "useNodejsImportProtocol": "error",
-        "useTemplate": "warn",
-        "useThrowOnlyError": "error",
-        "useErrorCause": "warn"
-      },
-      "suspicious": {
-        "noConsole": "warn",
-        "noExplicitAny": "error",
-        "noImportCycles": "error",
-        "noVar": "error",
-        "noNestedPromises": "warn"
-      },
-      "nursery": {
-        "noFloatingPromises": "warn"
+        }
       }
-    }
-  },
-  "assist": {
-    "actions": {
-      "source": {
-        "organizeImports": "on"
-      }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "arrowParentheses": "always",
-      "bracketSameLine": false,
-      "bracketSpacing": true,
-      "jsxQuoteStyle": "double",
-      "quoteStyle": "double",
-      "semicolons": "always",
-      "trailingCommas": "all"
     }
   }
 }

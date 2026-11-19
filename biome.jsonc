@@ -11,9 +11,8 @@
       "**",
       "!pnpm-lock.yaml",
       "!.claude",
-      "!packages/static-site",
       "!api/wiremock/__files/tax-clearance-success.json",
-      "!**/public",
+      "!web/public",
       "!**/*.svg",
       "!**/*.min.js"
     ]

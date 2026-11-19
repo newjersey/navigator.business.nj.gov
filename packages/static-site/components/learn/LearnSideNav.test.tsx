@@ -176,7 +176,6 @@ describe("LearnSideNav", () => {
 
       const sublist = container.querySelector(".usa-sidenav__sublist");
       const childLink = sublist?.querySelector("a");
-      // biome-ignore lint/style/noNonNullAssertion: Needed for the test
       fireEvent.click(childLink!);
       expect(container.querySelector(".sidenav--collapsed")).toBeInTheDocument();
     });
