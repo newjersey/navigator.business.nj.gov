@@ -15,6 +15,7 @@ import type * as iam from "aws-cdk-lib/aws-iam";
 import type { IFunction } from "aws-cdk-lib/aws-lambda";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import type { Construct } from "constructs";
+import { API_UPCOMING_CUSTOM_DOMAIN_NAMES_BY_STAGE } from "./constants";
 import {
   applyStandardTags,
   attachLambdaToResource,
@@ -58,6 +59,14 @@ interface CustomDomainConfig {
 
   /** ACM certificate ARN used by the API Gateway custom domain. */
   readonly certificateArn: string;
+}
+
+interface ConfigureUpcomingCustomDomainProps {
+  /** Deployment stage used to look up the upcoming domain name and name its resources. */
+  readonly stage: string;
+
+  /** Certificate shared with the stage's existing custom domain; it must cover both domain names. */
+  readonly certificate: acm.ICertificate;
 }
 
 interface CreateLoadBalancerOutputsProps {
@@ -290,6 +299,35 @@ export class ApiStack extends Stack {
     };
   }
 
+  private configureUpcomingCustomDomain(props: ConfigureUpcomingCustomDomainProps): void {
+    const domainName = API_UPCOMING_CUSTOM_DOMAIN_NAMES_BY_STAGE[props.stage];
+
+    if (!domainName) {
+      return;
+    }
+
+    const domain = new apigateway.DomainName(this, `ApiUpcomingCustomDomain-${props.stage}`, {
+      domainName,
+      certificate: props.certificate,
+      endpointType: apigateway.EndpointType.EDGE,
+      securityPolicy: apigateway.SecurityPolicy.TLS_1_2,
+    });
+
+    new apigateway.BasePathMapping(this, `ApiUpcomingBasePathMapping-${props.stage}`, {
+      domainName: domain,
+      restApi: this.restApi,
+      stage: this.restApi.deploymentStage,
+    });
+    new CfnOutput(this, "ApiUpcomingCustomDomainName", {
+      value: domainName,
+      exportName: `${API_SERVICE_NAME}-${props.stage}-ApiUpcomingCustomDomainName`,
+    });
+    new CfnOutput(this, "ApiUpcomingCustomDomainAliasTarget", {
+      value: domain.domainNameAliasDomainName,
+      exportName: `${API_SERVICE_NAME}-${props.stage}-ApiUpcomingCustomDomainAliasTarget`,
+    });
+  }
+
   private configureCustomDomain(stage: string) {
     const { domainName, certificateArn } = this.getCustomDomainConfig(stage);
 
@@ -311,6 +349,8 @@ export class ApiStack extends Stack {
       restApi: this.restApi,
       stage: this.restApi.deploymentStage,
     });
+
+    this.configureUpcomingCustomDomain({ stage, certificate });
   }
 
   private configureApiLoadBalancer(stage: string, lambdaRole: iam.Role): void {

@@ -55,6 +55,18 @@ export const STATIC_SITE_CERTIFICATE_IDS_BY_STAGE: Record<string, string> = {
   [STAGING_STAGE]: "e25a9a20-422f-4d6f-8d9b-8ea9a17b13a6",
   [PROD_STAGE]: "360cd9b3-13b8-41ce-a7f9-2a3131c7269b",
 };
+/**
+ * api.{stage}.account.business.nj.gov domains served alongside the existing
+ * {stage}.api.account.business.nj.gov domains until those are retired. They share the stage's
+ * API_GATEWAY_CERT_ARN certificate, which must cover both names. Prod keeps
+ * api.account.business.nj.gov.
+ */
+export const API_UPCOMING_CUSTOM_DOMAIN_NAMES_BY_STAGE: Record<string, string> = {
+  [DEV_STAGE]: "api.dev.account.business.nj.gov",
+  [CONTENT_STAGE]: "api.content.account.business.nj.gov",
+  [TESTING_STAGE]: "api.testing.account.business.nj.gov",
+  [STAGING_STAGE]: "api.staging.account.business.nj.gov",
+};
 export const HEALTH_CHECK_ENDPOINTS: Record<string, string> = {
   self: "self",
   elevator: "dynamics/elevator",
