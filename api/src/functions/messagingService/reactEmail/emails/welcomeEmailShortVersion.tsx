@@ -10,7 +10,7 @@ import {
   Row,
   Section,
   Text,
-} from "@react-email/components";
+} from "react-email";
 import { Header } from "../components/Header";
 
 export const WelcomeEmailShortVersion = (): JSX.Element => {
