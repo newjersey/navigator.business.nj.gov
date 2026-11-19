@@ -1,19 +1,22 @@
 import { randomElementFromArray } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import { updateNewBusinessProfilePage } from "@businessnjgovnavigator/cypress/support/helpers/helpers-profile";
 import { onOnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
-import {
+import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
+import type {
   ExistingOnboardingData,
   ForeignOnboardingData,
   Registration,
   StartingOnboardingData,
 } from "@businessnjgovnavigator/cypress/support/types";
-import { getIndustries, Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import {
+  getIndustries,
+  type Industry,
+} from "@businessnjgovnavigator/shared/lib/shared/src/industry";
 import {
   arrayOfSectors,
   LookupSectorTypeById,
 } from "@businessnjgovnavigator/shared/lib/shared/src/sector";
-import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
-import { updateNewBusinessProfilePage } from "@businessnjgovnavigator/cypress/support/helpers/helpers-profile";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 
 type Props = {
   isLearningBusiness?: boolean;
@@ -42,7 +45,7 @@ export const completeNewBusinessOnboarding = (props?: Props): void => {
 export const completeExistingBusinessOnboarding = ({
   sectorId = randomElementFromArray(arrayOfSectors).id,
 }: Partial<ExistingOnboardingData> & Partial<Registration>): void => {
-  let pageIndex = 1;
+  const pageIndex = 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
   onOnboardingPage.selectBusinessPersona("OWNING");

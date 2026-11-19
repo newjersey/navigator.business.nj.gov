@@ -1,6 +1,6 @@
-import { OnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
 import { typeTaxId } from "@businessnjgovnavigator/cypress/support/helpers/helpers-form";
-import { ProfileTabs } from "@businessnjgovnavigator/shared/types";
+import { OnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
+import type { ProfileTabs } from "@businessnjgovnavigator/shared/types";
 
 export class ProfilePage extends OnboardingPage {
   private openTab(tab: ProfileTabs): void {

@@ -24,7 +24,7 @@
     "format:yamlInput": "biome format --write web/decap-config",
     "format:check": "biome format . && prettier --check \"**/*.{html,json5}\"",
     "spellcheck": "cspell '*.md' --config cspell.json --no-progress && pnpm -r --no-sort --workspace-concurrency=1 --filter '!@businessnjgovnavigator/static-site' run spellcheck",
-    "start:dev": "node scripts/start-dev.js",
+    "start:dev": "node scripts/start-dev.mjs",
     "sync:deps": "tsx scripts/sync-workspace-dependencies.ts --fix",
     "test": "jest",
     "test:ci": "jest --colors --runInBand --ci",

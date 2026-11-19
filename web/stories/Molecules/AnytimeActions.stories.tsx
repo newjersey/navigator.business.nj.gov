@@ -1,9 +1,9 @@
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { AnytimeActionSearch } from "@/components/dashboard/AnytimeActionSearch";
 import {
   generateAnytimeActionLicenseReinstatement,
   generateAnytimeActionTask,
 } from "@/test/factories";
-import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof AnytimeActionSearch> = {
   title: "Molecules/AnytimeAction",

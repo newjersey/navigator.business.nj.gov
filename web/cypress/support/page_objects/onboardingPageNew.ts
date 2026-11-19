@@ -1,12 +1,12 @@
 import {
-  CarServiceType,
-  ConstructionType,
-  EmploymentAndPersonnelServicesType,
-  EmploymentPlacementType,
+  type CarServiceType,
+  type ConstructionType,
+  type EmploymentAndPersonnelServicesType,
+  type EmploymentPlacementType,
   LookupIndustryById,
   LookupSectorTypeById,
-  PropertyLeaseType,
-  ResidentialConstructionType,
+  type PropertyLeaseType,
+  type ResidentialConstructionType,
 } from "@businessnjgovnavigator/shared";
 
 class OnboardingSharedElements {

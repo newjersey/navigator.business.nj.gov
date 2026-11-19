@@ -1,4 +1,4 @@
-const { spawn } = require("child_process");
+import { spawn } from "node:child_process";
 
 function run(cmd, args, opts = {}) {
   return spawn(cmd, args, { stdio: "inherit", shell: true, ...opts });
@@ -37,7 +37,7 @@ async function main() {
     process.on("SIGTERM", cleanup);
     process.on("exit", cleanup);
 
-    dev.on("exit", (code) => {
+    dev.on("exit", () => {
       cleanup();
     });
   });

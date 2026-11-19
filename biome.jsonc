@@ -12,11 +12,6 @@
       "!pnpm-lock.yaml",
       "!.claude",
       "!packages/static-site",
-      "!packages/content-types",
-      "!scripts",
-      "!web/stories",
-      "!web/cypress/support",
-      "!web/cypress/plugins",
       "!api/wiremock/__files/tax-clearance-success.json",
       "!**/public",
       "!**/*.svg",
@@ -232,6 +227,28 @@
           "suspicious": {
             // CLI scripts report to stdout
             "noConsole": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["scripts/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            // CLI scripts report to stdout
+            "noConsole": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["web/cypress/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            // Cypress commands chain through .then and can't be awaited, so nesting is how a command waits on a promise
+            "noNestedPromises": "off"
           }
         }
       }

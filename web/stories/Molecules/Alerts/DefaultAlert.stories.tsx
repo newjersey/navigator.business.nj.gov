@@ -1,5 +1,5 @@
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof Alert> = {
   title: "Molecules/Alerts",
