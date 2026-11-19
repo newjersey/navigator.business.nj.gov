@@ -21,7 +21,10 @@
     }
   ],
   "name": "Demo Only",
-  "nonEssentialQuestionsIds": ["weights-measures", "demo-only"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "demo-only"
+  ],
   "displayname": "Demo Only",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
@@ -40,7 +43,7 @@
     "isProvidesStaffingServicesApplicable": false
   },
   "isEnabled": false,
-  "additionalSearchTerms": "dev, qa, test",
+  "additionalSearchTerms": "dev, qa, test, jp",
   "id": "demo-only",
   "description": "This is a demo industry used for the purpose of QAing edge cases throughout the application."
 }
