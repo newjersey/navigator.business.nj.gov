@@ -32,6 +32,7 @@ summaryDescriptionMd: >
 issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Single Trip OS/OW Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
+displayOnStaticSite: true
 icon: govt-purple.svg
 ---
 
