@@ -128,16 +128,16 @@ def exceptions_for_cutover(
     return {"legacy": sorted(legacy), "current": sorted(current)}
 
 
-def format_with_prettier(path: Path) -> None:
+def format_with_biome(path: Path) -> None:
     result = subprocess.run(
-        ["pnpm", "exec", "prettier", "--write", str(path)],
+        ["pnpm", "exec", "biome", "format", "--write", str(path)],
         capture_output=True,
         text=True,
         cwd=CONFIG_PATH.parent.parent,
     )
     if result.returncode != 0:
         print(
-            f"warning: prettier formatting failed, run `pnpm exec prettier --write {path}` "
+            f"warning: biome formatting failed, run `pnpm exec biome format --write {path}` "
             f"by hand:\n{result.stderr}",
             file=sys.stderr,
         )
@@ -202,7 +202,7 @@ def main() -> None:
 
     if args.write:
         CONFIG_PATH.write_text(updated_text)
-        format_with_prettier(CONFIG_PATH)
+        format_with_biome(CONFIG_PATH)
         print(f"Wrote {CONFIG_PATH}", file=sys.stderr)
     else:
         print(updated_text)

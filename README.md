@@ -216,7 +216,7 @@ required technologies by running `source scripts/install.sh` from the root direc
 
 ### Deploying
 
-Use `ship-it` to run prettier, linting, and tests before pushing:
+Use `ship-it` to run formatting, linting, and tests before pushing:
 
 ```shell
 ./scripts/ship-it.sh

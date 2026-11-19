@@ -1,5 +1,5 @@
 name: "Code Quality Checks"
-description: "Runs typecheck, formatting and lint checks, spellcheck, dependency checks, and Storybook build."
+description: "Runs typecheck, Biome (formatting and lint), spellcheck, dependency checks, and Storybook build."
 
 runs:
   using: "composite"
@@ -23,11 +23,6 @@ runs:
       shell: bash
       run: |
         pnpm --filter @businessnjgovnavigator/web run typecheck:cypress
-
-    - name: Check Formatting
-      shell: bash
-      run: |
-        pnpm run format:check
 
     - name: Run Biome
       shell: bash

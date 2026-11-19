@@ -13,7 +13,7 @@ the compiled package exports.
 pnpm run build          # Compile all content to lib/
 pnpm run test           # Vitest (NOT Jest; don't use Jest APIs here)
 pnpm run spellcheck     # cSpell validation
-pnpm run prettier
+pnpm run format         # Biome formatting
 ```
 
 ## Test Runner: Vitest

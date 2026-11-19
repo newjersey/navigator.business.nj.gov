@@ -134,8 +134,6 @@
     "jest-environment-jsdom": "30.4.1",
     "jest-junit": "17.0.0",
     "next-router-mock": "0.9.13",
-    "prettier": "3.8.3",
-    "prettier-plugin-organize-imports": "4.3.0",
     "raw-loader": "4.0.2",
     "require-from-string": "2.0.2",
     "rimraf": "6.1.3",
