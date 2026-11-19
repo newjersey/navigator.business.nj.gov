@@ -15,16 +15,17 @@
       "!api/wiremock/__files/tax-clearance-success.json",
       "!**/public",
       "!**/*.svg",
-      "!**/*.min.js",
-      "!**/*.html"
+      "!**/*.min.js"
     ]
   },
-  // Decap writes content Markdown without hooks; Prettier keeps Markdown for now.
   "markdown": {
     "parser": { "frontmatter": true },
-    "formatter": { "enabled": false },
+    "formatter": { "enabled": true },
     "linter": { "enabled": false }
   },
+  // HTML formatting is opt-in in Biome 2.6; it covers the email and PowerAutomate templates.
+  // Keep the slash on void elements (<meta />) as the templates had it, in case a consumer parses them as XHTML.
+  "html": { "formatter": { "enabled": true, "selfCloseVoidElements": "always" } },
   "overrides": [
     {
       "includes": ["shared/**"],
@@ -282,6 +283,20 @@
         "enabled": false
       }
     },
+    // Decap writes content Markdown without hooks, so formatting it would only cause churn.
+    {
+      "includes": ["content/src/**/*.md"],
+      "formatter": {
+        "enabled": false
+      }
+    },
+    // semantic-release generates the changelog.
+    {
+      "includes": ["CHANGELOG.md"],
+      "formatter": {
+        "enabled": false
+      }
+    },
     {
       "includes": ["**/*.test.*", "web/test/**"],
       "linter": {
@@ -322,6 +337,15 @@
           "nursery": { "noFloatingPromises": "off" }
         }
       }
+    },
+    // Email and PDF templates follow email-client markup (Outlook mso-* CSS, !important, labels as captions), not web rules.
+    // Last, so the web/** overrides above can't re-enable rules for them.
+    {
+      "includes": [
+        "api/src/functions/messagingService/emails/**/*.html",
+        "web/src/powerautomate/**/*.html"
+      ],
+      "linter": { "enabled": false }
     }
   ]
 }

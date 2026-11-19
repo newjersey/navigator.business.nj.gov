@@ -96,7 +96,7 @@ export default {
     },
     {
       from: { path: "src/functions/messagingService/reactEmail" },
-      to: { path: "@react-email/components" },
+      to: { path: "react-email" },
     },
     {
       from: { path: "src/functions/messagingService/reactEmail" },
