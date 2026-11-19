@@ -21,6 +21,7 @@ By default, GovDelivery stubs return HTTP 200 (success). To test failure handlin
    ```
 
 3. **View current scenario states**:
+
    ```bash
    curl http://localhost:9000/__admin/scenarios
    ```

@@ -20,9 +20,9 @@
     "lint:fix": "biome check --write .",
     "lint:staged": "lint-staged",
     "prepare": "husky",
-    "format": "biome format --write . && prettier --write \"**/*.{html,json5}\"",
+    "format": "biome format --write .",
     "format:yamlInput": "biome format --write web/decap-config",
-    "format:check": "biome format . && prettier --check \"**/*.{html,json5}\"",
+    "format:check": "biome format .",
     "spellcheck": "cspell '*.md' --config cspell.json --no-progress && pnpm -r --no-sort --workspace-concurrency=1 --filter '!@businessnjgovnavigator/static-site' run spellcheck",
     "start:dev": "node scripts/start-dev.mjs",
     "sync:deps": "tsx scripts/sync-workspace-dependencies.ts --fix",
@@ -219,8 +219,6 @@
     "next-router-mock": "0.9.13",
     "playwright": "1.59.1",
     "playwright-core": "1.59.1",
-    "prettier": "3.8.3",
-    "prettier-plugin-organize-imports": "4.3.0",
     "raw-loader": "4.0.2",
     "react-email": "5.0.6",
     "require-from-string": "2.0.2",
@@ -259,8 +257,7 @@
   "homepage": "https://github.com/newjersey/navigator.business.nj.gov#readme",
   "lint-staged": {
     "packages/static-site/**/*.{css,js,json,md,ts,tsx,yaml,yml}": "bash -c 'cd packages/static-site && pnpm lint:fix' --",
-    "*.{js,mjs,cjs,mts,cts,jsx,ts,tsx,css,scss,json,jsonc,yml,yaml}": "biome check --write --error-on-warnings --no-errors-on-unmatched",
-    "*.{html,md,json5}": "prettier --write"
+    "*.{js,mjs,cjs,mts,cts,jsx,ts,tsx,css,scss,json,jsonc,yml,yaml,md,html}": "biome check --write --error-on-warnings --no-errors-on-unmatched"
   },
   "packageManager": "pnpm@12.18.0"
 }
