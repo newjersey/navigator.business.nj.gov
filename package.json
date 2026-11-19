@@ -255,7 +255,6 @@
   },
   "homepage": "https://github.com/newjersey/navigator.business.nj.gov#readme",
   "lint-staged": {
-    "packages/static-site/**/*.{css,js,json,md,ts,tsx,yaml,yml}": "bash -c 'cd packages/static-site && pnpm lint:fix' --",
     "*.{js,mjs,cjs,mts,cts,jsx,ts,tsx,css,scss,json,jsonc,yml,yaml,md,html}": "biome check --write --error-on-warnings --no-errors-on-unmatched"
   },
   "packageManager": "pnpm@12.18.0"

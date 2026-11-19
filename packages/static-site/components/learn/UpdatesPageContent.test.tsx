@@ -217,9 +217,9 @@ const testSorting = () => {
 };
 
 describe("UpdatesPageContent", () => {
-  describe("static content and pagination", testStaticContentAndPagination);
-  describe("search filtering", testSearchFiltering);
-  describe("category filtering", testCategoryFiltering);
-  describe("reset", testReset);
-  describe("sorting", testSorting);
+  describe("static content and pagination", () => testStaticContentAndPagination());
+  describe("search filtering", () => testSearchFiltering());
+  describe("category filtering", () => testCategoryFiltering());
+  describe("reset", () => testReset());
+  describe("sorting", () => testSorting());
 });

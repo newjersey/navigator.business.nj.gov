@@ -132,7 +132,6 @@ describe.each(
     const genericTitle = getApplicationMessages({ locale: "en-US" }).metadata.title;
 
     for (const params of paramCases) {
-      // biome-ignore lint/style/noNonNullAssertion: asserted defined above.
       const metadata = await routeModule.generateMetadata!({ params: Promise.resolve(params) });
       const titleText = resolveTitleText(metadata.title);
       const context = `"${routeId}" with params ${JSON.stringify(params)}`;

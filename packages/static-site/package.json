@@ -23,9 +23,9 @@
     "dependency-check": "node -e \"console.log('static-site dependency-check is not implemented yet')\"",
     "format": "biome format --write .",
     "format:check": "biome format .",
-    "lint": "biome check .",
+    "lint": "biome check --error-on-warnings .",
     "lint:fix": "biome check --write .",
-    "check": "biome check .",
+    "check": "biome check --error-on-warnings .",
     "check:fix": "biome check --write .",
     "spellcheck": "cspell '**/*.{ts,tsx,md,json}' '!**/*.test.{ts,tsx}' '!.next/**' '!coverage/**' '!test-results/**' '!messages/es-US.json' '!messages/ar-US.json' --config ../../cspell.json --no-progress",
     "typecheck": "tsc --noemit",
@@ -48,7 +48,6 @@
   "license": "MIT",
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",
-    "@biomejs/biome": "2.5.5",
     "@playwright/test": "1.62.0",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "7.0.0",
@@ -75,7 +74,7 @@
     "vitest": "4.1.11"
   },
   "lint-staged": {
-    "*": "biome check --write --no-errors-on-unmatched"
+    "*": "biome check --write --error-on-warnings --no-errors-on-unmatched"
   },
   "dependencies": {
     "@businessnjgovnavigator/content-types": "workspace:*",
