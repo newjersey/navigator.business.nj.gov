@@ -2,6 +2,9 @@
 
 Next.js 16 frontend with Material-UI, SCSS, and AWS Amplify auth.
 
+Next.js docs matching the installed version live in `node_modules/next/dist/docs/`;
+check them before using a Next API you're unsure about.
+
 ## Commands
 
 ```bash
