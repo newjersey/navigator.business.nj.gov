@@ -4,6 +4,7 @@ import {
   generateBusiness,
   generatePreferences,
   generateProfileData,
+  generateUser,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import type {
@@ -19,7 +20,11 @@ import DashboardPage from "@/pages/dashboard";
 import { generateSidebarCardContent, generateXrayRenewalCalendarEvent } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { setMockUserDataResponse, useMockBusiness } from "@/test/mock/mockUseUserData";
+import {
+  setMockUserDataResponse,
+  useMockBusiness,
+  useMockUserData,
+} from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -124,6 +129,51 @@ describe("dashboard page", () => {
     useMockBusiness({ onboardingFormProgress: "UNSTARTED" });
     renderDashboardPage();
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
+  });
+
+  describe("learn mode", () => {
+    const originalFlag = process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW;
+
+    const setupLearnModeUser = (): void => {
+      const business = generateBusiness({
+        onboardingFormProgress: "COMPLETED",
+        profileData: generateProfileData({ businessPersona: "STARTING" }),
+      });
+      useMockUserData(
+        generateUserDataForBusiness(business, {
+          user: generateUser({ onboardedAsLearningUser: true }),
+        }),
+      );
+    };
+
+    beforeEach(() => {
+      process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "true";
+    });
+
+    afterAll(() => {
+      process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = originalFlag;
+    });
+
+    it("redirects a learn mode user to the learn pages", async () => {
+      setupLearnModeUser();
+      renderDashboardPage();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalledWith(ROUTES.learnFlowLandingPage);
+      });
+    });
+
+    it("does not render the dashboard for a learn mode user", () => {
+      setupLearnModeUser();
+      renderDashboardPage();
+      expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
+    });
+
+    it("does not redirect a learn mode user when the intent selection flow is disabled", () => {
+      process.env.FEATURE_ENABLE_INTENT_SELECTION_FLOW = "false";
+      setupLearnModeUser();
+      renderDashboardPage();
+      expect(mockPush).not.toHaveBeenCalledWith(ROUTES.learnFlowLandingPage);
+    });
   });
 
   it("renders the DashboardAlert element", () => {

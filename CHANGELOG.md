@@ -1,3 +1,14 @@
+## [2026.28.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.28.1...v2026.28.2) (2026-11-19)
+
+
+### Bug Fixes
+
+* [AB#18043](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18043) correct the bugs found by the biome lint audit ([bea1067](https://github.com/newjersey/navigator.business.nj.gov/commit/bea10677add4549f15d248d5c6d9f9a037f8a031))
+* migrate react-email to v6 and @react-email/ui [security] ([72c18a3](https://github.com/newjersey/navigator.business.nj.gov/commit/72c18a3fca0caa5957062fe921d2f589d484f2f5))
+* remove sass-embedded optional override that breaks Renovate ([db10fc7](https://github.com/newjersey/navigator.business.nj.gov/commit/db10fc7d953d5e86d02d68e7cce1c4ef28d7bc1b))
+* update next to v16.4.5 in static-site [security] ([9e2a928](https://github.com/newjersey/navigator.business.nj.gov/commit/9e2a928e8a9ebe9aecb54aa1d9fea583f64bd4b5))
+* update next to v16.4.5 in web [security] ([c0432fc](https://github.com/newjersey/navigator.business.nj.gov/commit/c0432fcf073ea35f348d2b6b21245e7c7c13d9d6))
+
 ## [2026.28.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.28.0...v2026.28.1) (2026-11-18)
 
 

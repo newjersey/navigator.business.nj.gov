@@ -1,8 +1,9 @@
 # Static Site Package (`@businessnjgovnavigator/static-site`)
 
-This package contains the locale-aware static landing site implementation for Business.NJ.gov. It
-uses the Next.js App Router, renders NJWDS-based page sections through typed React components, and
-loads localized content from validated message files.
+This package contains the locale-aware static landing site implementation for
+Business.NJ.Gov. It uses the Next.js App Router, renders Grove-based page
+sections through typed React components, and loads localized content from
+validated message files.
 
 ## Table of Contents
 
@@ -16,8 +17,8 @@ loads localized content from validated message files.
 
 ## Architecture
 
-The static-site package is organized around a locale-prefixed route shell (`app/[locale]`) and a
-typed content pipeline.
+The static-site package is organized around a locale-prefixed route shell
+(`app/[locale]`) and a typed content pipeline.
 
 - Route handling and metadata generation happen in `app/[locale]/layout.tsx` and
   `app/[locale]/page.tsx`.
@@ -27,14 +28,16 @@ typed content pipeline.
   `domain/i18n/messages.ts`.
 - Landing page content is loaded through `domain/landing/loadLandingContent.ts`.
 - Stateless presentation components are implemented in `components/landing/*`.
-- Accessibility checks run in `tests/accessibility/*` with Playwright and axe-core.
+- Accessibility checks run in `tests/accessibility/*` with Playwright and
+  axe-core.
 
 ### Built With
 
 - [Next.js](https://nextjs.org/)
 - [React](https://react.dev/)
 - [next-intl](https://next-intl.dev/)
-- [NJWDS (`@newjersey/njwds`)](https://www.npmjs.com/package/@newjersey/njwds)
+- [Grove, the Garden State Design System](https://grove.nj.gov/)
+  (`@newjersey/njwds`)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Biome](https://biomejs.dev/)
 - [Vitest](https://vitest.dev/)
@@ -52,7 +55,8 @@ cd navigator.business.nj.gov
 source scripts/install.sh
 ```
 
-The install script installs the shared pnpm workspace and builds `packages/static-site`.
+The install script installs the shared pnpm workspace. To build the static site,
+run `pnpm build` from `packages/static-site` as shown below.
 
 ## Usage
 
@@ -61,7 +65,7 @@ Run commands from `packages/static-site`.
 ```bash
 cd packages/static-site
 
-# Start local dev server
+# Start local dev server on http://localhost:4000
 pnpm dev
 
 # Create production build
@@ -114,16 +118,17 @@ This package includes two deployment targets.
 - AWS Amplify:
   - Build config: `amplify.yml` at repository root
 
-Static-site ECS deploys run from the existing environment deployment workflows. Non-production
-images are tagged with the Git SHA. Production images are tagged with the root `package.json`
-version. Pre-launch ECS deployments enable HTTP Basic Auth from the repository-level
-`BASIC_AUTH_USERNAME` variable and `BASIC_AUTH_PASSWORD` secret. Local runs leave Basic Auth
-disabled by default.
+Static-site ECS deploys run from the existing environment deployment workflows.
+Non-production images are tagged with the Git SHA. Production images are tagged
+with the root `package.json` version. Pre-launch ECS deployments enable HTTP
+Basic Auth from the repository-level `BASIC_AUTH_USERNAME` variable and
+`BASIC_AUTH_PASSWORD` secret. Local runs leave Basic Auth disabled by default.
 
 ## Testing
 
-Test factories in `tests/factories.ts` use a seeded PRNG for deterministic random data generation.
-A seed is generated once per test run and logged to stdout at the start:
+Test factories in `tests/factories.ts` use a seeded PRNG for deterministic
+random data generation. A seed is generated once per test run and logged to
+stdout at the start:
 
 ```
 [test] seed: 2503204477
