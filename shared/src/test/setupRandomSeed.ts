@@ -1,4 +1,5 @@
-import seedrandom from "seedrandom";
+import { randomBytes } from "node:crypto";
+import { createSeededRandom } from "./createSeededRandom";
 
 type TestGlobalThis = {
   testRandomSeeds: Map<string, string>;
@@ -16,7 +17,7 @@ beforeEach(() => {
       }. Please make test names unique.`,
     );
   }
-  const randomSeed = process.env.RANDOM_SEED || Math.random().toString(36).slice(2);
+  const randomSeed = process.env.RANDOM_SEED || randomBytes(32).toString("hex");
   (global as unknown as TestGlobalThis).testRandomSeeds.set(currentTestName, randomSeed);
-  seedrandom(randomSeed, { global: true });
+  Math.random = createSeededRandom({ seed: randomSeed });
 });
