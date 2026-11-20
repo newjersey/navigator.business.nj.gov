@@ -1,3 +1,10 @@
+## [2026.28.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.28.2...v2026.28.3) (2026-11-20)
+
+
+### Bug Fixes
+
+* [AB#18088](https://dev.azure.com/NJInnovation/BizX/_workitems/edit/18088) home redirect to learn pages instead of dashboard ([d5ec93d](https://github.com/newjersey/navigator.business.nj.gov/commit/d5ec93d86bafeeeba935b63ce690c8d0fcf7535d))
+
 ## [2026.28.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2026.28.1...v2026.28.2) (2026-11-19)
 
 
