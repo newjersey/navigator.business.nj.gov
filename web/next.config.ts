@@ -2,6 +2,8 @@ import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Keeps `next dev` from rewriting the tracked AGENTS.md when it detects an AI agent.
+  agentRules: false,
   output: "standalone",
   outputFileTracingRoot: path.resolve(import.meta.dirname, ".."),
   // Turbopack misses these module-sync conditional exports when tracing Axios.
