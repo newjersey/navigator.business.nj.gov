@@ -583,8 +583,8 @@ importers:
         specifier: 9.0.10
         version: 9.0.10
       '@types/lodash':
-        specifier: 4.17.24
-        version: 4.17.24
+        specifier: 4.17.27
+        version: 4.17.27
       '@types/node':
         specifier: 24.13.3
         version: 24.13.3
@@ -908,8 +908,8 @@ importers:
         specifier: 9.0.10
         version: 9.0.10
       '@types/lodash':
-        specifier: 4.17.24
-        version: 4.17.24
+        specifier: 4.17.27
+        version: 4.17.27
       '@types/node':
         specifier: 24.13.3
         version: 24.13.3
@@ -1510,8 +1510,8 @@ importers:
         specifier: 4.0.9
         version: 4.0.9
       '@types/lodash':
-        specifier: 4.17.24
-        version: 4.17.24
+        specifier: 4.17.27
+        version: 4.17.27
       '@types/node':
         specifier: 24.13.3
         version: 24.13.3
@@ -6545,8 +6545,8 @@ packages:
   '@types/jsonwebtoken@9.0.10':
     resolution: {integrity: sha512-asx5hIG9Qmf/1oStypjanR7iKTv0gXQ1Ov/jfrX6kS/EO0OFni8orbmGCn0672NHR3kXHwpAwR+B368ZGN/2rA==}
 
-  '@types/lodash@4.17.24':
-    resolution: {integrity: sha512-gIW7lQLZbue7lRSWEFql49QJJWThrTFFeIMJdp3eH4tKoxm1OvEPg02rm4wCCSHS0cL3/Fizimb35b7k8atwsQ==}
+  '@types/lodash@4.17.27':
+    resolution: {integrity: sha512-VenMRv/eKNrspX9v3H4dbmjsrnCOYdYBG3kxXKk3dG6X+urBGcj2Prww3xw1U5K4FV/mE4h5GbWd0szEKf+9ew==}
 
   '@types/lru-cache@5.1.1':
     resolution: {integrity: sha512-ssE3Vlrys7sdIzs5LOxCzTVMsU7i9oa/IaW92wF32JFb3CVczqOkru2xspuKczHEbG3nvmPY7IFqVmGGHdNbYw==}
@@ -22020,7 +22020,7 @@ snapshots:
       '@types/ms': 2.1.0
       '@types/node': 24.13.3
 
-  '@types/lodash@4.17.24': {}
+  '@types/lodash@4.17.27': {}
 
   '@types/lru-cache@5.1.1': {}
 
