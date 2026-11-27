@@ -14,14 +14,14 @@
     "format:check": "biome format ."
   },
   "devDependencies": {
-    "@jest/globals": "30.4.1",
+    "@jest/globals": "30.5.2",
     "@types/jest": "30.0.0",
     "@types/node": "24.13.3",
     "aws-cdk": "2.1132.1",
     "aws-cdk-lib": "2.262.0",
     "esbuild": "0.28.1",
-    "jest": "30.4.2",
-    "ts-jest": "29.4.9",
+    "jest": "30.5.2",
+    "ts-jest": "29.4.15",
     "ts-node": "10.9.2",
     "typescript": "5.9.3"
   },
