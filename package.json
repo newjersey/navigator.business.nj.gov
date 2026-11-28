@@ -214,7 +214,7 @@
     "jest-junit": "17.0.0",
     "jsdom": "29.1.1",
     "kill-port": "1.6.1",
-    "lint-staged": "16.2.7",
+    "lint-staged": "16.4.0",
     "nc": "git+https://github.com/dsueltenfuss/nc.git#c1b8baf157cbd94a3142dc90c0d530bd2ee5f0a0",
     "next-router-mock": "0.9.13",
     "playwright": "1.59.1",
