@@ -118,7 +118,7 @@
     "@types/react-swipeable-views": "0.13.6",
     "@types/remove-markdown": "0.3.4",
     "airtable": "0.12.2",
-    "axe-core": "4.11.1",
+    "axe-core": "4.14.1",
     "babel-jest": "30.5.2",
     "babel-loader": "10.1.1",
     "babel-plugin-react-compiler": "1.0.0",

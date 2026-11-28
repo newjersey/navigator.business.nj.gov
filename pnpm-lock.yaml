@@ -310,7 +310,7 @@ importers:
         version: 2.8.6
       cypress-axe:
         specifier: 1.7.0
-        version: 1.7.0(axe-core@4.11.1)(cypress@16.3.0)
+        version: 1.7.0(axe-core@4.14.1)(cypress@16.3.0)
       dayjs:
         specifier: 1.11.21
         version: 1.11.21
@@ -445,8 +445,8 @@ importers:
         specifier: 3.893.0
         version: 3.893.0
       '@axe-core/playwright':
-        specifier: 4.11.2
-        version: 4.11.2(playwright-core@1.59.1)
+        specifier: 4.14.1
+        version: 4.14.1(playwright-core@1.59.1)
       '@babel/core':
         specifier: 7.29.13
         version: 7.29.13(supports-color@8.1.1)
@@ -628,8 +628,8 @@ importers:
         specifier: 2.262.0
         version: 2.262.0(constructs@10.0.0)
       axe-core:
-        specifier: 4.11.1
-        version: 4.11.1
+        specifier: 4.14.1
+        version: 4.14.1
       babel-loader:
         specifier: 10.1.1
         version: 10.1.1(@babel/core@7.29.13(supports-color@8.1.1))(webpack@5.109.0(@swc/core@1.16.22(@swc/helpers@0.5.23))(clean-css@5.3.3)(esbuild@0.28.1)(html-minifier-terser@6.1.0)(lightningcss@1.32.0)(postcss@8.5.23)(uglify-js@3.19.3))
@@ -1339,7 +1339,7 @@ importers:
         version: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       cypress-axe:
         specifier: 1.7.0
-        version: 1.7.0(axe-core@4.11.1)(cypress@16.3.0)
+        version: 1.7.0(axe-core@4.14.1)(cypress@16.3.0)
       dayjs:
         specifier: 1.11.21
         version: 1.11.21
@@ -1531,8 +1531,8 @@ importers:
         specifier: 0.12.2
         version: 0.12.2(encoding@0.1.13)
       axe-core:
-        specifier: 4.11.1
-        version: 4.11.1
+        specifier: 4.14.1
+        version: 4.14.1
       babel-jest:
         specifier: 30.5.2
         version: 30.5.2(@babel/core@7.29.13(supports-color@8.1.1))(supports-color@8.1.1)
@@ -2426,13 +2426,14 @@ packages:
     resolution: {integrity: sha512-sl4Bm6yiMNYrZKkqqDFWN0UfnWhlS8ivKxrYl+6t0gCLrqr8y3B2IqZZbFRkfaVVp7C/baApyh71P+LeE1A2sQ==}
     engines: {node: '>=18.0.0'}
 
-  '@axe-core/playwright@4.11.2':
-    resolution: {integrity: sha512-iP6hfNl9G0j/SEUSo8M7D80RbcDo9KRAAfDP4IT5OHB+Wm6zUHIrm8Y51BKI+Oyqduvipf9u1hcRy57zCBKzWQ==}
+  '@axe-core/playwright@4.12.1':
+    resolution: {integrity: sha512-rMd7xriptqKpP+w5265i4Hdkv2X5kbu6uiBi/B2I7uf3hieRBM3qDCfaKPtxfiYb2mKXfF+yLODJwIx+Jv1GDw==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
 
-  '@axe-core/playwright@4.12.1':
-    resolution: {integrity: sha512-rMd7xriptqKpP+w5265i4Hdkv2X5kbu6uiBi/B2I7uf3hieRBM3qDCfaKPtxfiYb2mKXfF+yLODJwIx+Jv1GDw==}
+  '@axe-core/playwright@4.14.1':
+    resolution: {integrity: sha512-cSN1ijrWLnlOof22sPN4RtWGSoPpt7GzOVyOKomyhnPsy1fPNoRdBiJAUziuCRs8KoK50kKufiMUFt7itAuwOg==}
+    engines: {node: '>=22.12.0'}
     peerDependencies:
       playwright-core: '>= 1.0.0'
 
@@ -7506,16 +7507,12 @@ packages:
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
 
-  axe-core@4.11.1:
-    resolution: {integrity: sha512-BASOg+YwO2C+346x3LZOeoovTIoTrRqEsqMa6fmfAV0P+U9mFr9NsyOEpiYvFjbc64NMrSswhV50WdXzdb/Z5A==}
-    engines: {node: '>=4'}
-
-  axe-core@4.11.4:
-    resolution: {integrity: sha512-KunSNx+TVpkAw/6ULfhnx+HWRecjqZGTOyquAoWHYLRSdK1tB5Ihce1ZW+UY3fj33bYAFWPu7W/GRSmmrCGuxA==}
-    engines: {node: '>=4'}
-
   axe-core@4.12.1:
     resolution: {integrity: sha512-s7iGf5GaVMxEG0ENN9x+xTr7GFZCb1ZP/1uATUpCEK2X78nDB3RwbtFCo9pGAf9ru+VwoQ464DkaLEeRM08wJA==}
+    engines: {node: '>=4'}
+
+  axe-core@4.14.1:
+    resolution: {integrity: sha512-FHfa+lmNjQZfJz1q8wKqIDwC6DExcHt/pkjNQb09a3NPjCKg2rhu5qb2S4r76ASyFNNtuFooJpZe37OgudVGtQ==}
     engines: {node: '>=4'}
 
   axe-core@4.2.4:
@@ -17357,15 +17354,15 @@ snapshots:
 
   '@aws/lambda-invoke-store@0.3.0': {}
 
-  '@axe-core/playwright@4.11.2(playwright-core@1.59.1)':
-    dependencies:
-      axe-core: 4.11.4
-      playwright-core: 1.59.1
-
   '@axe-core/playwright@4.12.1(playwright-core@1.62.0)':
     dependencies:
       axe-core: 4.12.1
       playwright-core: 1.62.0
+
+  '@axe-core/playwright@4.14.1(playwright-core@1.59.1)':
+    dependencies:
+      axe-core: 4.14.1
+      playwright-core: 1.59.1
 
   '@babel/code-frame@7.29.7':
     dependencies:
@@ -21045,7 +21042,7 @@ snapshots:
   '@storybook/addon-a11y@10.6.8(storybook@10.6.8(@types/react@19.2.17)(prettier@3.8.3)(react@19.2.8))':
     dependencies:
       '@storybook/global': 5.0.0
-      axe-core: 4.11.1
+      axe-core: 4.14.1
       storybook: 10.6.8(@types/react@19.2.17)(prettier@3.8.3)(react@19.2.8)
 
   '@storybook/addon-actions@8.6.14(storybook@10.6.8(@types/react@19.2.17)(prettier@3.8.3)(react@19.2.8))':
@@ -22949,11 +22946,9 @@ snapshots:
 
   aws4@1.13.2: {}
 
-  axe-core@4.11.1: {}
-
-  axe-core@4.11.4: {}
-
   axe-core@4.12.1: {}
+
+  axe-core@4.14.1: {}
 
   axe-core@4.2.4: {}
 
@@ -24051,9 +24046,9 @@ snapshots:
 
   csstype@3.2.3: {}
 
-  cypress-axe@1.7.0(axe-core@4.11.1)(cypress@16.3.0):
+  cypress-axe@1.7.0(axe-core@4.14.1)(cypress@16.3.0):
     dependencies:
-      axe-core: 4.11.1
+      axe-core: 4.14.1
       cypress: 16.3.0
 
   cypress-dotenv@3.0.1(cypress@16.3.0)(dotenv@17.4.2)(supports-color@8.1.1):
