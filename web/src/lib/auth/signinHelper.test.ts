@@ -7,6 +7,7 @@ import {
 import { waitFor } from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";
 import type { AuthAction } from "@/lib/auth/AuthContext";
+import * as profileNjFirstLogin from "@/lib/auth/profileNjFirstLogin";
 import * as session from "@/lib/auth/sessionHelper";
 import {
   onGuestSignIn,
@@ -38,6 +39,12 @@ jest.mock("@/lib/auth/sessionHelper", () => ({
 }));
 
 const mockSession = session as jest.Mocked<typeof session>;
+
+jest.mock("@/lib/auth/profileNjFirstLogin", () => ({
+  ensureProfileNJUserRecord: jest.fn(),
+  createProfileNJFirstLoginDependencies: jest.fn(),
+}));
+const mockProfileNjFirstLogin = profileNjFirstLogin as jest.Mocked<typeof profileNjFirstLogin>;
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   getUserData: jest.fn(),
@@ -79,6 +86,23 @@ describe("SigninHelper", () => {
         type: "LOGIN",
         activeUser: activeUser,
       });
+    });
+
+    it("ensures the user's record exists before dispatching LOGIN", async () => {
+      mockApi.getUserData.mockResolvedValue(generateUserData({}));
+      mockProfileNjFirstLogin.ensureProfileNJUserRecord.mockResolvedValue();
+      const activeUser = generateActiveUser({ signInProvider: "ProfileNJ" });
+      mockSession.getActiveUser.mockResolvedValue(activeUser);
+
+      await onSignIn(mockDispatch);
+
+      expect(mockProfileNjFirstLogin.ensureProfileNJUserRecord).toHaveBeenCalledWith(
+        activeUser,
+        mockProfileNjFirstLogin.createProfileNJFirstLoginDependencies(),
+      );
+      expect(
+        mockProfileNjFirstLogin.ensureProfileNJUserRecord.mock.invocationCallOrder.at(-1),
+      ).toBeLessThan(mockDispatch.mock.invocationCallOrder[0]);
     });
   });
 

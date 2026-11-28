@@ -38,6 +38,7 @@ export * from "./ownership";
 export * from "./profileData";
 export * from "./roadmapTaskData";
 export * from "./sector";
+export * from "./signedInUser";
 export * from "./states";
 export * from "./stringHelpers";
 export * from "./taskAgency";

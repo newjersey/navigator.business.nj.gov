@@ -4,6 +4,10 @@ import { useRouter } from "next/compat/router";
 import { type ReactElement, useContext, useEffect, useState } from "react";
 import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
+import {
+  createProfileNJFirstLoginDependencies,
+  ensureProfileNJUserRecord,
+} from "@/lib/auth/profileNjFirstLogin";
 import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
@@ -17,6 +21,7 @@ const LoadingPage = (): ReactElement => {
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);
   const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
+  const profileNJLoginEnabled = process.env.FEATURE_PROFILE_NJ_LOGIN === "true";
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
@@ -36,12 +41,22 @@ const LoadingPage = (): ReactElement => {
     if (!router?.isReady) {
       return;
     }
+
+    const logInReturningUser = async (): Promise<void> => {
+      const currentUser = await getActiveUser();
+      await ensureProfileNJUserRecord(currentUser, createProfileNJFirstLoginDependencies());
+      dispatch({ type: "LOGIN", activeUser: currentUser });
+    };
+
     if (router.query[QUERIES.code]) {
-      getActiveUser().then((currentUser) => {
-        dispatch({ type: "LOGIN", activeUser: currentUser });
+      logInReturningUser().catch((error: unknown) => {
+        console.error("Failed to complete sign-in", error);
+        setShowError(true);
       });
     } else if (router?.asPath?.includes(signInSamlError)) {
       analytics.event.landing_page.arrive.get_unlinked_myNJ_account();
+      setShowError(true);
+    } else if (profileNJLoginEnabled && router.query.error) {
       setShowError(true);
     } else {
       if (loginPageEnabled) {
@@ -50,7 +65,7 @@ const LoadingPage = (): ReactElement => {
         triggerSignIn();
       }
     }
-  }, [router, dispatch, loginPageEnabled]);
+  }, [router, dispatch, loginPageEnabled, profileNJLoginEnabled]);
 
   useMountEffectWhenDefined(() => {
     if (!updateQueue) return;
