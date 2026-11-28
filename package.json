@@ -204,7 +204,7 @@
     "cypress-wait-until": "3.0.2",
     "dependency-cruiser": "17.4.3",
     "dotenv": "17.4.2",
-    "esbuild": "0.28.1",
+    "esbuild": "0.28.2",
     "http-status-codes": "2.3.0",
     "husky": "9.1.7",
     "identity-obj-proxy": "3.0.0",
