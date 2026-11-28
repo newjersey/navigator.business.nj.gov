@@ -76,7 +76,7 @@
     "@uswds/uswds": "3.0.1",
     "@types/mdast": "4.0.4",
     "airtable": "0.12.2",
-    "aws-amplify": "6.19.0",
+    "aws-amplify": "6.22.2",
     "axios": "1.20.0",
     "babel-jest": "30.5.2",
     "constructs": "10.0.0",

@@ -50,7 +50,7 @@
     "@pigment-css/react": "0.0.31",
     "@uswds/uswds": "3.0.1",
     "@types/mdast": "4.0.4",
-    "aws-amplify": "6.19.0",
+    "aws-amplify": "6.22.2",
     "axios": "1.20.0",
     "cypress-axe": "1.7.0",
     "dayjs": "1.11.21",
