@@ -29,7 +29,7 @@
     "gray-matter": "4.0.3",
     "js-yaml": "4.3.2",
     "lodash": "4.18.1",
-    "uuid": "14.0.1"
+    "uuid": "14.0.3"
   },
   "devDependencies": {
     "@jest/types": "30.5.1",
