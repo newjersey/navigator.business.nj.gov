@@ -75,7 +75,7 @@
     "@businessnjgovnavigator/shared": "workspace:*",
     "@jest/types": "30.5.1",
     "@types/cors": "2.8.19",
-    "@types/dedent": "0.7.2",
+    "@types/dedent": "1.7.2",
     "@types/express": "5.0.6",
     "@types/jest": "30.0.0",
     "@types/jsonwebtoken": "9.0.10",
