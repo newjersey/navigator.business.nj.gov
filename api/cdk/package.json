@@ -17,8 +17,8 @@
     "@jest/globals": "30.5.2",
     "@types/jest": "30.0.0",
     "@types/node": "24.13.3",
-    "aws-cdk": "2.1132.1",
-    "aws-cdk-lib": "2.262.0",
+    "aws-cdk": "2.1149.0",
+    "aws-cdk-lib": "2.278.0",
     "esbuild": "0.28.1",
     "jest": "30.5.2",
     "ts-jest": "29.4.15",
@@ -26,6 +26,6 @@
     "typescript": "5.9.3"
   },
   "dependencies": {
-    "constructs": "10.0.0"
+    "constructs": "10.8.1"
   }
 }
