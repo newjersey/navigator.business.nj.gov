@@ -186,14 +186,14 @@ importers:
   .:
     dependencies:
       '@aws-crypto/client-node':
-        specifier: 4.2.1
-        version: 4.2.1
+        specifier: 5.0.2
+        version: 5.0.2
       '@aws-crypto/material-management-node':
-        specifier: 4.2.1
-        version: 4.2.1
+        specifier: 5.0.2
+        version: 5.0.2
       '@aws-crypto/serialize':
-        specifier: 4.2.1
-        version: 4.2.1
+        specifier: 5.0.2
+        version: 5.0.2
       '@aws-crypto/sha256-browser':
         specifier: 5.2.0
         version: 5.2.0
@@ -781,14 +781,14 @@ importers:
   api:
     dependencies:
       '@aws-crypto/client-node':
-        specifier: 4.2.1
-        version: 4.2.1
+        specifier: 5.0.2
+        version: 5.0.2
       '@aws-crypto/material-management-node':
-        specifier: 4.2.1
-        version: 4.2.1
+        specifier: 5.0.2
+        version: 5.0.2
       '@aws-crypto/serialize':
-        specifier: 4.2.1
-        version: 4.2.1
+        specifier: 5.0.2
+        version: 5.0.2
       '@aws-sdk/client-cloudwatch':
         specifier: 3.896.0
         version: 3.896.0
@@ -1705,17 +1705,17 @@ packages:
       - jsonschema
       - semver
 
-  '@aws-crypto/branch-keystore-node@4.2.1':
-    resolution: {integrity: sha512-7UbG4rIFutSBMLKe7zncGLe0Qu55+xubxpNX1BsUED54n9+HyfC6X0V/RTl5tm2r4X/bxmP56zNDRhwtVzcauw==}
+  '@aws-crypto/branch-keystore-node@5.0.2':
+    resolution: {integrity: sha512-Bpfa2DUHbcjj4XrZkgxldCUCeK+lZyQ/oSi3bapFJq4vHA+yA55ax2LbMZg2IP7ht6uH4kRG+iqWo5HPT5d+AQ==}
 
-  '@aws-crypto/cache-material@4.2.1':
-    resolution: {integrity: sha512-gulPvwrOKMPKHy5cHzsTrbMOFRCmuvAA6RZXiqR26KPgA1gTS3XJ89UyQoekpfrwkQE//bR+XTF/O12ELagyCw==}
+  '@aws-crypto/cache-material@5.0.2':
+    resolution: {integrity: sha512-IYddhLIE6QownHsr3g8sjAmQxt7t5R2tIeHRu3OBynswqqSEM1i3dIjnbZADYvKIv7mb9ye7hHZw6NbqS02ucw==}
 
-  '@aws-crypto/caching-materials-manager-node@4.2.1':
-    resolution: {integrity: sha512-YCbsD515MCRZdvt1vwGsSTmo2lvTiuztBZt3kwfMwkLS9uRSyanvztOwVeZ7gvoLsj9+BB3+ukyE8RWG28d9vA==}
+  '@aws-crypto/caching-materials-manager-node@5.0.2':
+    resolution: {integrity: sha512-FuCaTjuTUu/g0o0AAn8nIniB1HknLSg1Gt/28nCmTJKzTRBkoktt5Y4fSOQjN/2uGJH10QqGyT5E46P2ja17sA==}
 
-  '@aws-crypto/client-node@4.2.1':
-    resolution: {integrity: sha512-kcvLgaWp+ADWFgm2V/h+hh4+xfMeioFm3FhMuOkPtItDHxMMetYpNdfSpqK2KHOUPPPYPE93YI5xXFeXxH+jcQ==}
+  '@aws-crypto/client-node@5.0.2':
+    resolution: {integrity: sha512-MH4IAmIIJ/BMnSBCAPO6APRdapy7gEShRRLrvFV/a3VA7e92pjgej6UG8GDEWHgEpvGng2Jg67ysThlkyFcATw==}
 
   '@aws-crypto/crc32@5.2.0':
     resolution: {integrity: sha512-nLbCWqQNgUiwwtFsen1AdzAtvuLRsQS8rYgMuxCrdKf9kOssamGLuPwyTY9wyYblNr9+1XM8v6zoDTPPSIeANg==}
@@ -1724,41 +1724,41 @@ packages:
   '@aws-crypto/crc32c@5.2.0':
     resolution: {integrity: sha512-+iWb8qaHLYKrNvGRbiYRHSdKRWhto5XlZUEBwDjYNf+ly5SVYG6zEoYIdxvf5R3zyeP16w4PLBn3rH1xc74Rag==}
 
-  '@aws-crypto/decrypt-node@4.2.1':
-    resolution: {integrity: sha512-UZUvicn9eGDtxCp/O5CiNx6lgX7/gs3V5xRRqcrJvqq42YPVBh7jZhExv933el74Voh7wcN1BjWjuu9pxIh1ZQ==}
+  '@aws-crypto/decrypt-node@5.0.2':
+    resolution: {integrity: sha512-CCXjVeXIsMynlXxyNRmjYelazWYrtxSNVQuZuSyFxqIWIbbmSoY5ecmF3e6s7Qq2gUeiJsKexwb0y+0WvmZ4Qw==}
 
-  '@aws-crypto/encrypt-node@4.2.1':
-    resolution: {integrity: sha512-yUKWFnUu3cfx3zWrn5/XxXlF5SDUaWf7dsmJ6cn7kXbCqrD+ns8QEdo3AT889EUI1ffyfO/XCxAQ+hwh3l7FLA==}
+  '@aws-crypto/encrypt-node@5.0.2':
+    resolution: {integrity: sha512-PQq1rJ2spoQSd1xX/r/1yEfycjp05JSewytyEizKyaxhOT6zaG01h9kBWJhf68CKPUw68uMBKoWrB4fDw+oq3Q==}
 
-  '@aws-crypto/hkdf-node@4.0.0':
-    resolution: {integrity: sha512-FytH3TF9c0OP+vnicc4YJoxoFoLajdRzzuRchDHmh4yXk32lj/HzgXGPfj+kSyy0chkh4XVONh2/zMRmqsA/hQ==}
+  '@aws-crypto/hkdf-node@5.0.2':
+    resolution: {integrity: sha512-VJC1zsQ9e/u/ru0Gtk0MTXmokzWzNgc0d9txqwLK/ZQT0LzHDDsrdvNqLmXnu9u+Wx3/E+hB17ZDnmaTpsklYQ==}
 
-  '@aws-crypto/kdf-ctr-mode-node@4.1.0':
-    resolution: {integrity: sha512-63A5mgEN3NWdVpHF4Y+4TLl2F62UP6KaFZ6cF5MT7hZ3rDaiyh6u45Tjcxe6/mB5U3FiMBOba/2AXrSX0hNkCw==}
+  '@aws-crypto/kdf-ctr-mode-node@5.0.2':
+    resolution: {integrity: sha512-b2gxEa4zF+kvVyS35TdvxYBfwKaTE18wfZFNvBqYzNymAS3PtYMEah50DxGhvb35U/3j5pXBugTb6cfZ1qHwpQ==}
 
-  '@aws-crypto/kms-keyring-node@4.2.1':
-    resolution: {integrity: sha512-XVAdGHXMraCX+CjG90GYO7DlbGOcgjkHvxGxNGQX8NKiviQtmC9hXK/JC9toGINkWC6mQKqLFPOy2hj+v2im7g==}
+  '@aws-crypto/kms-keyring-node@5.0.2':
+    resolution: {integrity: sha512-AL1Gtz69EILFlwNSEStRr87MwalkLnV3znRDVeCFNV0A5SwRT3FVPj6m1r8+/ExGsVbp+IFG/oemlITmScBmtQ==}
 
-  '@aws-crypto/kms-keyring@4.2.1':
-    resolution: {integrity: sha512-FCcL/aX2dtBZSP4eoYuJN5pTxux52IHW7oeU/30C1TJOD2tHw/kuiLOqMZQcHuzq8ykZGmnbtwvxGUBSH3M+Pw==}
+  '@aws-crypto/kms-keyring@5.0.2':
+    resolution: {integrity: sha512-05iY+lmtkDUNP+2awmTdaSRU6MkmqurqurArHhrMG27bN6VNf+PtspAUlN1K+LPhhhY6TQY/zNLxGpIzLFdcMw==}
 
-  '@aws-crypto/material-management-node@4.2.1':
-    resolution: {integrity: sha512-HrmhikSjqeLEs9oO71IzqcZ1yW+v9oEyfkz+g+BszVPUx3tx17XLZ02z3B+Uj1nQMHc6GStLXGrljK3gmX8CYA==}
+  '@aws-crypto/material-management-node@5.0.2':
+    resolution: {integrity: sha512-36DOENaITlydQ6xduVGpX3G9U67n/tpLUT9QGDH75kAhhK7s1RJcBrLJ4Bhz3piRL4D5FkY18h4AXfqQlw3BoA==}
 
-  '@aws-crypto/material-management@4.2.1':
-    resolution: {integrity: sha512-9TU/0RZcSaEgSKEUiiAYMEPt6n/GFCKgFrrq4f3t6u60jNLBaNVdnUqoKkafcLYU4wsiyfiqGZRp3/7fwsSrYQ==}
+  '@aws-crypto/material-management@5.0.2':
+    resolution: {integrity: sha512-LyrgDGPfd4w/ZRgsqGYAH+i0hbYNllk8VWd5ZkRd/ofFmlmm5UfTiirxOzVYTN8QmRhgwWvVhtCkN9Ipyn4hPw==}
 
-  '@aws-crypto/raw-aes-keyring-node@4.2.1':
-    resolution: {integrity: sha512-w2sRjUB9xeQUgr/7O0Mo/FVUsXPvChslHFAnkglnYrEM0H3L18EiQ8oc3u4Y2czocV8AMFgCJXP9PmJvIKktIw==}
+  '@aws-crypto/raw-aes-keyring-node@5.0.2':
+    resolution: {integrity: sha512-BuYJQq1Q1RJAkaxXj/VAT2nQCC1t4v3tChE44jHNm0S2afID/A2ChvMtJb/bvWNMgvoIB+sViV5ieG6Rk/RqJQ==}
 
-  '@aws-crypto/raw-keyring@4.2.1':
-    resolution: {integrity: sha512-UBX5HRVJ/O4miCxJbjOdJs2BbaQdiwLQVCt6T0T/xH+/AjHmEmQlYLqkWkzMnkH/cl7lm2dJDMg7L/a+15QzmA==}
+  '@aws-crypto/raw-keyring@5.0.2':
+    resolution: {integrity: sha512-ITtsg+HmvVe1wISGtVElKMCtvnR+lNYT+2bkuxKLvRmo4mBXqc76A5fl+XcJK4hp5ZYqJp9aQeolVGja587e6A==}
 
-  '@aws-crypto/raw-rsa-keyring-node@4.2.1':
-    resolution: {integrity: sha512-oAqfc8b8S1YzAPpTmZ9EB+NXbwTev65M7G1OsstHi/F0vqNbkVeoyHBgO+i6LTb9uIUk0npDTxqCXyeJbEo/jA==}
+  '@aws-crypto/raw-rsa-keyring-node@5.0.2':
+    resolution: {integrity: sha512-wM8HB9lkUb5o3c299hL51x55j8yVMvZRZaj0YLTwg4qVl+4pYCjY/rbo9iRDQA1VDm/Une9By77c2FcoQjWEug==}
 
-  '@aws-crypto/serialize@4.2.1':
-    resolution: {integrity: sha512-lS7PzyUsF0vpW4KJH6T4ODAuvOLb9qe01WxC1cr+9xMEaAniUu6kvfFRdCN6GIgzwKo3RMyjCk/nTUrjd0eLTw==}
+  '@aws-crypto/serialize@5.0.2':
+    resolution: {integrity: sha512-TKFABiTVow9VYk0m1nUKQYzj/DYG6x7HquBuva+VByFO5rJDxdsPrHNehTXgcQop3Huz5juP/vwrJK4F9/vMpg==}
 
   '@aws-crypto/sha1-browser@5.2.0':
     resolution: {integrity: sha512-OH6lveCFfcDjX4dbAvCFSYUjJZjDr/3XJ3xHtjn3Oj5b9RjojQo8npoLeA/bNwkOkrSQ0wgrHzXk4tDRxGKJeg==}
@@ -7686,8 +7686,8 @@ packages:
   bn.js@4.12.2:
     resolution: {integrity: sha512-n4DSx829VRTRByMRGdjQ9iqsN0Bh4OolPsFnaZBLcbi8iXcB+kJ9s7EnRt4wILZNV3kPLHkRVfOc/HvhC3ovDw==}
 
-  bn.js@5.2.2:
-    resolution: {integrity: sha512-v2YAxEmKaBLahNwE1mjp4WON6huMNeuDvagFZW+ASCuA/ku0bXR9hSMw0XpiqMoA3+rmnyck/tPRSFQkoC9Cuw==}
+  bn.js@5.2.5:
+    resolution: {integrity: sha512-Vq886eXykuP5E6HcKSSStP3bJgrE6In5WKxVUvJ8XGpWWYs2xZHWqUwzCtGgEtBcxyd57KBFDPFoUfNzdaHCNg==}
 
   body-parser@2.4.0:
     resolution: {integrity: sha512-Ifk1KcLrxaGt1occQagQNFNNOqRt1LFuehEnHHzB8Z6cRgIxRU1TBaiIsUiCdA+gy5PL7Y1IX31DNKkRmxtXjQ==}
@@ -14537,11 +14537,6 @@ packages:
   utila@0.4.0:
     resolution: {integrity: sha512-Z0DbgELS9/L/75wZbro8xAnT50pBVFQZ+hUEueGDU5FN51YSCYM+jdxsfCiHjwNP/4LCDD0i/graKpeBnOXKRA==}
 
-  uuid@10.0.0:
-    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
-    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
-    hasBin: true
-
   uuid@11.1.1:
     resolution: {integrity: sha512-vIYxrBCC/N/K+Js3qSN88go7kIfNPssr/hHCesKCQNAjmgvYS2oqr69kIufEG+O4+PfezOH4EbIeHCfFov8ZgQ==}
     hasBin: true
@@ -15209,42 +15204,44 @@ snapshots:
 
   '@aws-cdk/cloud-assembly-schema@54.13.0': {}
 
-  '@aws-crypto/branch-keystore-node@4.2.1':
+  '@aws-crypto/branch-keystore-node@5.0.2':
     dependencies:
-      '@aws-crypto/kms-keyring': 4.2.1
+      '@aws-crypto/kms-keyring': 5.0.2
       '@aws-sdk/client-dynamodb': 3.896.0
+      '@aws-sdk/client-kms': 3.936.0
       '@aws-sdk/util-dynamodb': 3.896.0(@aws-sdk/client-dynamodb@3.896.0)
       tslib: 2.8.1
+      uuid: 11.1.1
     transitivePeerDependencies:
       - '@aws-sdk/client-sso-oidc'
       - '@aws-sdk/client-sts'
       - aws-crt
 
-  '@aws-crypto/cache-material@4.2.1':
+  '@aws-crypto/cache-material@5.0.2':
     dependencies:
-      '@aws-crypto/material-management': 4.2.1
-      '@aws-crypto/serialize': 4.2.1
+      '@aws-crypto/material-management': 5.0.2
+      '@aws-crypto/serialize': 5.0.2
       '@types/lru-cache': 5.1.1
       lru-cache: 6.0.0
       tslib: 2.8.1
 
-  '@aws-crypto/caching-materials-manager-node@4.2.1':
+  '@aws-crypto/caching-materials-manager-node@5.0.2':
     dependencies:
-      '@aws-crypto/cache-material': 4.2.1
-      '@aws-crypto/material-management-node': 4.2.1
+      '@aws-crypto/cache-material': 5.0.2
+      '@aws-crypto/material-management-node': 5.0.2
       tslib: 2.8.1
 
-  '@aws-crypto/client-node@4.2.1':
+  '@aws-crypto/client-node@5.0.2':
     dependencies:
-      '@aws-crypto/branch-keystore-node': 4.2.1
-      '@aws-crypto/caching-materials-manager-node': 4.2.1
-      '@aws-crypto/decrypt-node': 4.2.1
-      '@aws-crypto/encrypt-node': 4.2.1
-      '@aws-crypto/kms-keyring': 4.2.1
-      '@aws-crypto/kms-keyring-node': 4.2.1
-      '@aws-crypto/material-management-node': 4.2.1
-      '@aws-crypto/raw-aes-keyring-node': 4.2.1
-      '@aws-crypto/raw-rsa-keyring-node': 4.2.1
+      '@aws-crypto/branch-keystore-node': 5.0.2
+      '@aws-crypto/caching-materials-manager-node': 5.0.2
+      '@aws-crypto/decrypt-node': 5.0.2
+      '@aws-crypto/encrypt-node': 5.0.2
+      '@aws-crypto/kms-keyring': 5.0.2
+      '@aws-crypto/kms-keyring-node': 5.0.2
+      '@aws-crypto/material-management-node': 5.0.2
+      '@aws-crypto/raw-aes-keyring-node': 5.0.2
+      '@aws-crypto/raw-rsa-keyring-node': 5.0.2
       tslib: 2.8.1
     transitivePeerDependencies:
       - '@aws-sdk/client-sso-oidc'
@@ -15263,40 +15260,40 @@ snapshots:
       '@aws-sdk/types': 3.893.0
       tslib: 2.8.1
 
-  '@aws-crypto/decrypt-node@4.2.1':
+  '@aws-crypto/decrypt-node@5.0.2':
     dependencies:
-      '@aws-crypto/material-management-node': 4.2.1
-      '@aws-crypto/serialize': 4.2.1
+      '@aws-crypto/material-management-node': 5.0.2
+      '@aws-crypto/serialize': 5.0.2
       '@types/duplexify': 3.6.5
       duplexify: 4.1.3
       readable-stream: 3.6.2
       tslib: 2.8.1
 
-  '@aws-crypto/encrypt-node@4.2.1':
+  '@aws-crypto/encrypt-node@5.0.2':
     dependencies:
-      '@aws-crypto/material-management-node': 4.2.1
-      '@aws-crypto/serialize': 4.2.1
+      '@aws-crypto/material-management-node': 5.0.2
+      '@aws-crypto/serialize': 5.0.2
       '@types/duplexify': 3.6.5
       duplexify: 4.1.3
       readable-stream: 3.6.2
       tslib: 2.8.1
 
-  '@aws-crypto/hkdf-node@4.0.0':
+  '@aws-crypto/hkdf-node@5.0.2':
     dependencies:
       tslib: 2.8.1
 
-  '@aws-crypto/kdf-ctr-mode-node@4.1.0':
+  '@aws-crypto/kdf-ctr-mode-node@5.0.2':
     dependencies:
       tslib: 2.8.1
 
-  '@aws-crypto/kms-keyring-node@4.2.1':
+  '@aws-crypto/kms-keyring-node@5.0.2':
     dependencies:
-      '@aws-crypto/branch-keystore-node': 4.2.1
-      '@aws-crypto/cache-material': 4.2.1
-      '@aws-crypto/kdf-ctr-mode-node': 4.1.0
-      '@aws-crypto/kms-keyring': 4.2.1
-      '@aws-crypto/material-management-node': 4.2.1
-      '@aws-crypto/serialize': 4.2.1
+      '@aws-crypto/branch-keystore-node': 5.0.2
+      '@aws-crypto/cache-material': 5.0.2
+      '@aws-crypto/kdf-ctr-mode-node': 5.0.2
+      '@aws-crypto/kms-keyring': 5.0.2
+      '@aws-crypto/material-management-node': 5.0.2
+      '@aws-crypto/serialize': 5.0.2
       '@aws-sdk/client-dynamodb': 3.896.0
       '@aws-sdk/client-kms': 3.936.0
       tslib: 2.8.1
@@ -15305,51 +15302,51 @@ snapshots:
       - '@aws-sdk/client-sts'
       - aws-crt
 
-  '@aws-crypto/kms-keyring@4.2.1':
+  '@aws-crypto/kms-keyring@5.0.2':
     dependencies:
-      '@aws-crypto/material-management': 4.2.1
+      '@aws-crypto/material-management': 5.0.2
       tslib: 2.8.1
 
-  '@aws-crypto/material-management-node@4.2.1':
+  '@aws-crypto/material-management-node@5.0.2':
     dependencies:
-      '@aws-crypto/hkdf-node': 4.0.0
-      '@aws-crypto/material-management': 4.2.1
-      '@aws-crypto/serialize': 4.2.1
+      '@aws-crypto/hkdf-node': 5.0.2
+      '@aws-crypto/material-management': 5.0.2
+      '@aws-crypto/serialize': 5.0.2
       tslib: 2.8.1
 
-  '@aws-crypto/material-management@4.2.1':
+  '@aws-crypto/material-management@5.0.2':
     dependencies:
       asn1.js: 5.4.1
-      bn.js: 5.2.2
+      bn.js: 5.2.5
       tslib: 2.8.1
-      uuid: 10.0.0
+      uuid: 11.1.1
 
-  '@aws-crypto/raw-aes-keyring-node@4.2.1':
+  '@aws-crypto/raw-aes-keyring-node@5.0.2':
     dependencies:
-      '@aws-crypto/material-management-node': 4.2.1
-      '@aws-crypto/raw-keyring': 4.2.1
-      '@aws-crypto/serialize': 4.2.1
-      tslib: 2.8.1
-
-  '@aws-crypto/raw-keyring@4.2.1':
-    dependencies:
-      '@aws-crypto/material-management': 4.2.1
-      '@aws-crypto/serialize': 4.2.1
+      '@aws-crypto/material-management-node': 5.0.2
+      '@aws-crypto/raw-keyring': 5.0.2
+      '@aws-crypto/serialize': 5.0.2
       tslib: 2.8.1
 
-  '@aws-crypto/raw-rsa-keyring-node@4.2.1':
+  '@aws-crypto/raw-keyring@5.0.2':
     dependencies:
-      '@aws-crypto/material-management-node': 4.2.1
-      '@aws-crypto/raw-keyring': 4.2.1
+      '@aws-crypto/material-management': 5.0.2
+      '@aws-crypto/serialize': 5.0.2
       tslib: 2.8.1
 
-  '@aws-crypto/serialize@4.2.1':
+  '@aws-crypto/raw-rsa-keyring-node@5.0.2':
     dependencies:
-      '@aws-crypto/material-management': 4.2.1
+      '@aws-crypto/material-management-node': 5.0.2
+      '@aws-crypto/raw-keyring': 5.0.2
+      tslib: 2.8.1
+
+  '@aws-crypto/serialize@5.0.2':
+    dependencies:
+      '@aws-crypto/material-management': 5.0.2
       asn1.js: 5.4.1
-      bn.js: 5.2.2
+      bn.js: 5.2.5
       tslib: 2.8.1
-      uuid: 10.0.0
+      uuid: 11.1.1
 
   '@aws-crypto/sha1-browser@5.2.0':
     dependencies:
@@ -23136,7 +23133,7 @@ snapshots:
 
   bn.js@4.12.2: {}
 
-  bn.js@5.2.2: {}
+  bn.js@5.2.5: {}
 
   body-parser@2.4.0(supports-color@8.1.1):
     dependencies:
@@ -23201,13 +23198,13 @@ snapshots:
 
   browserify-rsa@4.1.1:
     dependencies:
-      bn.js: 5.2.2
+      bn.js: 5.2.5
       randombytes: 2.1.0
       safe-buffer: 5.2.1
 
   browserify-sign@4.2.5:
     dependencies:
-      bn.js: 5.2.2
+      bn.js: 5.2.5
       browserify-rsa: 4.1.1
       create-hash: 1.2.0
       create-hmac: 1.1.7
@@ -31535,8 +31532,6 @@ snapshots:
       which-typed-array: 1.1.19
 
   utila@0.4.0: {}
-
-  uuid@10.0.0: {}
 
   uuid@11.1.1: {}
 
