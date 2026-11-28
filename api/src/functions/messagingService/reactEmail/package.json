@@ -6,7 +6,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-email": "6.11.16",
-    "tsx": "4.23.1"
+    "tsx": "4.23.15"
   },
   "scripts": {
     "dev:email": "email dev --port 3001",
