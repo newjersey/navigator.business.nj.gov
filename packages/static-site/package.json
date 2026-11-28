@@ -63,7 +63,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "cspell": "10.0.1",
     "husky": "9.1.7",
-    "jsdom": "29.1.1",
+    "jsdom": "31.0.1",
     "lint-staged": "17.2.0",
     "playwright": "1.62.0",
     "playwright-core": "1.62.0",
