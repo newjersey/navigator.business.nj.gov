@@ -34,7 +34,7 @@
   "devDependencies": {
     "@jest/types": "30.5.1",
     "@types/jest": "30.0.0",
-    "@types/node": "24.13.3",
+    "@types/node": "24.19.4",
     "@types/react": "19.2.17",
     "@types/seedrandom": "3.0.8",
     "@types/uuid": "11.0.0",

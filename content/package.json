@@ -23,7 +23,7 @@
   "devDependencies": {
     "@businessnjgovnavigator/content-types": "workspace:*",
     "@businessnjgovnavigator/shared": "workspace:*",
-    "@types/node": "24.13.3",
+    "@types/node": "24.19.4",
     "@vitest/coverage-v8": "4.1.9",
     "cross-env": "10.1.0",
     "cspell": "9.8.0",
