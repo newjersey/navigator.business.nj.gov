@@ -172,7 +172,7 @@ overrides:
   trim-newlines: 5.0.0
   react-is: 19.2.8
   nc>netcat: git+https://github.com/dsueltenfuss/netcat.git#d24823a031f3da36d383945f5bfa354b41006fff
-  next-intl@4.13.4>icu-minify: 4.13.4
+  next-intl@4.13.4>icu-minify: 4.15.3
   next-intl@4.13.4>next-intl-swc-plugin-extractor: 4.13.4
   next-intl@4.13.4>use-intl: 4.13.4
   cspell-lib@10.0.1>import-fresh: 4.0.0
@@ -10202,8 +10202,8 @@ packages:
     peerDependencies:
       postcss: 8.5.23
 
-  icu-minify@4.13.4:
-    resolution: {integrity: sha512-yK6HyPLGlQjqm8fTKtnBpM77z7vl7JdDBN2EXLvmgAu/b7XaOHWZb73M3ISl9ahBTehBv7RYeqqWSHfk1v2YcA==}
+  icu-minify@4.15.3:
+    resolution: {integrity: sha512-sDQdvX7BG43XOCO+TyR7lGQYyvhltSWpQBXcKwipu7bRF/afr22S5pzjtcwPsSxFQl34tQzy1jEp8DcqPc4Qhg==}
 
   idb@5.0.6:
     resolution: {integrity: sha512-/PFvOWPzRcEPmlDt5jEvzVZVs0wyd/EvGvkDIcbBpGuMMLQKrTPG0TxvE2UJtgZtCQCmOtM2QD7yQJBVEjKGOw==}
@@ -26378,7 +26378,7 @@ snapshots:
     dependencies:
       postcss: 8.5.23
 
-  icu-minify@4.13.4:
+  icu-minify@4.15.3:
     dependencies:
       '@formatjs/icu-messageformat-parser': 3.5.6
 
@@ -28384,7 +28384,7 @@ snapshots:
       '@formatjs/intl-localematcher': 0.8.5
       '@parcel/watcher': 2.6.0
       '@swc/core': 1.16.22(@swc/helpers@0.5.23)
-      icu-minify: 4.13.4
+      icu-minify: 4.15.3
       negotiator: 1.0.0
       next: 16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.99.0)
       next-intl-swc-plugin-extractor: 4.13.4
@@ -28401,7 +28401,7 @@ snapshots:
       '@formatjs/intl-localematcher': 0.8.5
       '@parcel/watcher': 2.6.0
       '@swc/core': 1.16.22(@swc/helpers@0.5.23)
-      icu-minify: 4.13.4
+      icu-minify: 4.15.3
       negotiator: 1.0.0
       next: 16.4.6(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.59.1)(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.99.0)
       next-intl-swc-plugin-extractor: 4.13.4
@@ -31497,7 +31497,7 @@ snapshots:
     dependencies:
       '@formatjs/fast-memoize': 3.1.3
       '@schummar/icu-type-parser': 1.21.5
-      icu-minify: 4.13.4
+      icu-minify: 4.15.3
       intl-messageformat: 11.2.3
       react: 19.2.8
 
