@@ -168,7 +168,7 @@ overrides:
   postcss: 8.5.23
   glob-parent: 6.0.2
   tar: 7.5.22
-  ansi-regex: 5.0.1
+  ansi-regex: 6.6.0
   trim-newlines: 5.0.0
   react-is: 19.2.8
   nc>netcat: git+https://github.com/dsueltenfuss/netcat.git#d24823a031f3da36d383945f5bfa354b41006fff
@@ -7284,9 +7284,9 @@ packages:
     resolution: {integrity: sha512-ozbS3LuenHVxNRh/wdnN16QapUHzauqSomAl1jwwJRRsGwFwtj644lIhxfWu0Fy0acCij2+AEgHvjscq3dlVXg==}
     hasBin: true
 
-  ansi-regex@5.0.1:
-    resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
-    engines: {node: '>=8'}
+  ansi-regex@6.6.0:
+    resolution: {integrity: sha512-XZ5apbzreCbXSKwPjJstu8R0zOi247w3XYwWxtwBXgpZrCyc1Ka7p9/xY0A9/diMewmHbEKz+FIraWaEWjlN5g==}
+    engines: {node: '>=12'}
 
   ansi-styles@3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
@@ -22730,7 +22730,7 @@ snapshots:
 
   ansi-html@0.0.9: {}
 
-  ansi-regex@5.0.1: {}
+  ansi-regex@6.6.0: {}
 
   ansi-styles@3.2.1:
     dependencies:
@@ -23954,7 +23954,7 @@ snapshots:
       '@cspell/cspell-worker': 10.0.1
       '@cspell/dynamic-import': 10.0.1
       '@cspell/url': 10.0.1
-      ansi-regex: 5.0.1
+      ansi-regex: 6.6.0
       chalk: 5.6.2
       chalk-template: 1.1.2
       commander: 14.0.3
@@ -23978,7 +23978,7 @@ snapshots:
       '@cspell/cspell-worker': 9.8.0
       '@cspell/dynamic-import': 9.8.0
       '@cspell/url': 9.8.0
-      ansi-regex: 5.0.1
+      ansi-regex: 6.6.0
       chalk: 5.6.2
       chalk-template: 1.1.2
       commander: 14.0.3
@@ -29162,7 +29162,7 @@ snapshots:
 
   pretty-format@27.5.1:
     dependencies:
-      ansi-regex: 5.0.1
+      ansi-regex: 6.6.0
       ansi-styles: 5.2.0
       react-is: 19.2.8
 
@@ -30717,11 +30717,11 @@ snapshots:
 
   strip-ansi@6.0.1:
     dependencies:
-      ansi-regex: 5.0.1
+      ansi-regex: 6.6.0
 
   strip-ansi@7.1.2:
     dependencies:
-      ansi-regex: 5.0.1
+      ansi-regex: 6.6.0
 
   strip-bom-string@1.0.0: {}
 
