@@ -118,7 +118,7 @@
     "simple-oauth2": "5.1.0",
     "swr": "2.4.2",
     "unified": "11.0.5",
-    "unist-util-visit": "5.1.0",
+    "unist-util-visit": "5.2.0",
     "uuid": "14.0.1",
     "winston": "3.19.0",
     "winston-cloudwatch": "6.3.0",

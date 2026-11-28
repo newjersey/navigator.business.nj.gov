@@ -81,7 +81,7 @@
     "remove-markdown": "0.6.4",
     "swr": "2.4.2",
     "unified": "11.0.5",
-    "unist-util-visit": "5.1.0"
+    "unist-util-visit": "5.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.29.13",
