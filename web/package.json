@@ -128,7 +128,7 @@
     "cypress-dotenv": "3.0.1",
     "cypress-wait-until": "3.0.2",
     "dependency-cruiser": "17.4.3",
-    "dotenv": "17.4.2",
+    "dotenv": "18.0.10",
     "identity-obj-proxy": "3.0.0",
     "jest": "30.5.2",
     "jest-environment-jsdom": "30.5.2",

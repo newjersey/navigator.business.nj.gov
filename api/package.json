@@ -89,7 +89,7 @@
     "cross-env": "10.1.0",
     "cspell": "9.8.0",
     "dependency-cruiser": "17.4.3",
-    "dotenv": "17.4.2",
+    "dotenv": "18.0.10",
     "esbuild": "0.28.1",
     "jest": "30.5.2",
     "jest-dynalite": "3.6.1",

@@ -563,7 +563,7 @@ importers:
         version: 2.8.19
       '@types/cypress-dotenv':
         specifier: 3.0.0
-        version: 3.0.0(dotenv@17.4.2)
+        version: 3.0.0(dotenv@18.0.10)
       '@types/dedent':
         specifier: 0.7.2
         version: 0.7.2
@@ -659,7 +659,7 @@ importers:
         version: 16.3.0
       cypress-dotenv:
         specifier: 3.0.1
-        version: 3.0.1(cypress@16.3.0)(dotenv@17.4.2)(supports-color@8.1.1)
+        version: 3.0.1(cypress@16.3.0)(dotenv@18.0.10)(supports-color@8.1.1)
       cypress-wait-until:
         specifier: 3.0.2
         version: 3.0.2
@@ -667,8 +667,8 @@ importers:
         specifier: 17.4.3
         version: 17.4.3
       dotenv:
-        specifier: 17.4.2
-        version: 17.4.2
+        specifier: 18.0.10
+        version: 18.0.10
       esbuild:
         specifier: 0.28.1
         version: 0.28.1
@@ -938,8 +938,8 @@ importers:
         specifier: 17.4.3
         version: 17.4.3
       dotenv:
-        specifier: 17.4.2
-        version: 17.4.2
+        specifier: 18.0.10
+        version: 18.0.10
       esbuild:
         specifier: 0.28.1
         version: 0.28.1
@@ -1499,7 +1499,7 @@ importers:
         version: 14.6.1(@testing-library/dom@10.4.1)
       '@types/cypress-dotenv':
         specifier: 3.0.0
-        version: 3.0.0(dotenv@17.4.2)
+        version: 3.0.0(dotenv@18.0.10)
       '@types/hast':
         specifier: 3.0.5
         version: 3.0.5
@@ -1553,7 +1553,7 @@ importers:
         version: 16.3.0
       cypress-dotenv:
         specifier: 3.0.1
-        version: 3.0.1(cypress@16.3.0)(dotenv@17.4.2)(supports-color@8.1.1)
+        version: 3.0.1(cypress@16.3.0)(dotenv@18.0.10)(supports-color@8.1.1)
       cypress-wait-until:
         specifier: 3.0.2
         version: 3.0.2
@@ -1561,8 +1561,8 @@ importers:
         specifier: 17.4.3
         version: 17.4.3
       dotenv:
-        specifier: 17.4.2
-        version: 17.4.2
+        specifier: 18.0.10
+        version: 18.0.10
       identity-obj-proxy:
         specifier: 3.0.0
         version: 3.0.0
@@ -9146,9 +9146,10 @@ packages:
     resolution: {integrity: sha512-/Tezlx6xpDqR6zKg1V4vLCeQtHWiELhWoBz5A/E0+A1lXN9iIkNbbfc4THSymS0LQUo8F1PMiIwVG8ai/HrnSA==}
     engines: {node: '>= 8.3.0'}
 
-  dotenv@17.4.2:
-    resolution: {integrity: sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw==}
+  dotenv@18.0.10:
+    resolution: {integrity: sha512-89FAA1xchzK2mxVWdr5F/0rldwiueXs6zJM86rO66EzekR1iBdiXRthyG+m5GvkJaFH3C2LESzamTkgndmLT2A==}
     engines: {node: '>=12'}
+    hasBin: true
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -21896,10 +21897,10 @@ snapshots:
     dependencies:
       '@types/node': 24.13.3
 
-  '@types/cypress-dotenv@3.0.0(dotenv@17.4.2)':
+  '@types/cypress-dotenv@3.0.0(dotenv@18.0.10)':
     dependencies:
       '@types/node': 24.13.3
-      dotenv: 17.4.2
+      dotenv: 18.0.10
 
   '@types/debug@4.1.12':
     dependencies:
@@ -24056,11 +24057,11 @@ snapshots:
       axe-core: 4.11.1
       cypress: 16.3.0
 
-  cypress-dotenv@3.0.1(cypress@16.3.0)(dotenv@17.4.2)(supports-color@8.1.1):
+  cypress-dotenv@3.0.1(cypress@16.3.0)(dotenv@18.0.10)(supports-color@8.1.1):
     dependencies:
       camelcase: 6.3.0
       cypress: 16.3.0
-      dotenv: 17.4.2
+      dotenv: 18.0.10
       dotenv-parse-variables: 2.0.0(supports-color@8.1.1)
       lodash.clonedeep: 4.5.0
     transitivePeerDependencies:
@@ -24994,7 +24995,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  dotenv@17.4.2: {}
+  dotenv@18.0.10: {}
 
   dunder-proto@1.0.1:
     dependencies:
