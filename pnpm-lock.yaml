@@ -173,7 +173,7 @@ overrides:
   react-is: 19.2.8
   nc>netcat: git+https://github.com/dsueltenfuss/netcat.git#d24823a031f3da36d383945f5bfa354b41006fff
   next-intl@4.13.4>icu-minify: 4.13.4
-  next-intl@4.13.4>next-intl-swc-plugin-extractor: 4.13.4
+  next-intl@4.13.4>next-intl-swc-plugin-extractor: 4.15.1
   next-intl@4.13.4>use-intl: 4.13.4
   cspell-lib@10.0.1>import-fresh: 4.0.0
   cspell-config-lib@10.0.1>yaml: 2.9.1
@@ -11828,8 +11828,8 @@ packages:
     resolution: {integrity: sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==}
     engines: {node: '>= 0.4.0'}
 
-  next-intl-swc-plugin-extractor@4.13.4:
-    resolution: {integrity: sha512-uN1+NMUYbG6YkO3q+rjc2bvAPX9nQ23owemvHJAyW0pRbQjVDwvNhmrV5qaak0oQc/9okbK17KLT49AoMGhVEQ==}
+  next-intl-swc-plugin-extractor@4.15.1:
+    resolution: {integrity: sha512-n+CrfyQ3obIpZoaHtlHvtTLg6EuFcmSC3c71Yv0Kh4/5zenBJ8WeYP/xAnsiwQjZcaK9zie0SHwWeIG+5OJaBw==}
 
   next-intl@4.13.4:
     resolution: {integrity: sha512-jhPAT0u0lahIK6E4gVdZAehugWCosBhLG8sV7xMzgSVoJpxHObP+Fiu+z2FfkEW0XPPtr7uEXoUlLEfhxhNMTg==}
@@ -28377,7 +28377,7 @@ snapshots:
 
   netmask@2.0.2: {}
 
-  next-intl-swc-plugin-extractor@4.13.4: {}
+  next-intl-swc-plugin-extractor@4.15.1: {}
 
   next-intl@4.13.4(@swc/helpers@0.5.23)(next@16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.99.0))(react@19.2.8)(typescript@7.0.2):
     dependencies:
@@ -28387,7 +28387,7 @@ snapshots:
       icu-minify: 4.13.4
       negotiator: 1.0.0
       next: 16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.99.0)
-      next-intl-swc-plugin-extractor: 4.13.4
+      next-intl-swc-plugin-extractor: 4.15.1
       po-parser: 2.1.1
       react: 19.2.8
       use-intl: 4.13.4(react@19.2.8)
@@ -28404,7 +28404,7 @@ snapshots:
       icu-minify: 4.13.4
       negotiator: 1.0.0
       next: 16.4.6(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.59.1)(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.99.0)
-      next-intl-swc-plugin-extractor: 4.13.4
+      next-intl-swc-plugin-extractor: 4.15.1
       po-parser: 2.1.1
       react: 19.2.8
       use-intl: 4.13.4(react@19.2.8)
