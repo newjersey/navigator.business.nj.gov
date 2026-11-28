@@ -90,7 +90,7 @@
     "focus-trap-react": "12.0.3",
     "gray-matter": "4.0.3",
     "hast": "1.0.0",
-    "hast-util-from-html": "2.0.3",
+    "hast-util-from-html": "2.1.0",
     "helmet": "8.3.0",
     "js-yaml": "4.3.2",
     "jsonwebtoken": "9.0.3",
