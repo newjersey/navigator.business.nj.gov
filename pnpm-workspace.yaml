@@ -44,7 +44,7 @@ overrides:
   body-parser: 2.4.0
   "trim@0.0.1": 1.0.1
   postcss: 8.5.23
-  glob-parent: 6.0.2
+  glob-parent: 7.0.0
   tar: 7.5.22
   ansi-regex: 5.0.1
   trim-newlines: 5.0.0
