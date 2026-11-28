@@ -79,7 +79,7 @@
     "remark-rehype": "11.1.2",
     "remark-stringify": "11.0.0",
     "remove-markdown": "0.6.4",
-    "swr": "2.4.2",
+    "swr": "2.5.1",
     "unified": "11.0.5",
     "unist-util-visit": "5.1.0"
   },

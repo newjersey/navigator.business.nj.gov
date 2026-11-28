@@ -414,8 +414,8 @@ importers:
         specifier: 5.1.0
         version: 5.1.0(supports-color@8.1.1)
       swr:
-        specifier: 2.4.2
-        version: 2.4.2(react@19.2.8)
+        specifier: 2.5.1
+        version: 2.5.1(react@19.2.8)
       unified:
         specifier: 11.0.5
         version: 11.0.5
@@ -1419,8 +1419,8 @@ importers:
         specifier: 0.6.4
         version: 0.6.4
       swr:
-        specifier: 2.4.2
-        version: 2.4.2(react@19.2.8)
+        specifier: 2.5.1
+        version: 2.5.1(react@19.2.8)
       unified:
         specifier: 11.0.5
         version: 11.0.5
@@ -13856,8 +13856,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  swr@2.4.2:
-    resolution: {integrity: sha512-ej644Y2bvkIajfR32KGeSSdBXQW+ScjGjkybZgSE7kFpk9eGnV44XY9FJylXi+W75pavSX1PVNB57W5EbhGIYw==}
+  swr@2.5.1:
+    resolution: {integrity: sha512-BRw55e8r0B7SpDN20CAzoQAHl7y1yP7/Zt7oqUjMv0vSt2u2Xnkm88Ws+VypbV9BXHQVuSuyVq7zMjO16wSExw==}
     peerDependencies:
       react: ^16.11.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -30850,7 +30850,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  swr@2.4.2(react@19.2.8):
+  swr@2.5.1(react@19.2.8):
     dependencies:
       dequal: 2.0.3
       react: 19.2.8

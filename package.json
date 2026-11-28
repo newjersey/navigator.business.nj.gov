@@ -116,7 +116,7 @@
     "remove-markdown": "0.6.4",
     "serverless-http": "4.0.0",
     "simple-oauth2": "5.1.0",
-    "swr": "2.4.2",
+    "swr": "2.5.1",
     "unified": "11.0.5",
     "unist-util-visit": "5.1.0",
     "uuid": "14.0.1",
