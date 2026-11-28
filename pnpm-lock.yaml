@@ -175,7 +175,7 @@ overrides:
   next-intl@4.13.4>icu-minify: 4.13.4
   next-intl@4.13.4>next-intl-swc-plugin-extractor: 4.13.4
   next-intl@4.13.4>use-intl: 4.13.4
-  cspell-lib@10.0.1>import-fresh: 4.0.0
+  cspell-lib@10.0.1>import-fresh: 4.0.1
   cspell-config-lib@10.0.1>yaml: 2.9.1
   lint-staged@17.2.0>yaml: 2.9.0
 
@@ -10255,8 +10255,8 @@ packages:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
     engines: {node: '>=6'}
 
-  import-fresh@4.0.0:
-    resolution: {integrity: sha512-Fpi660c7VPDM3fPKYovStd9IP1CPOikf6v/dGxJJMmHPcwYQIMJ4W7kO1avBYEpMqkCh+Dx3Ln6H7VYqgztLjw==}
+  import-fresh@4.0.1:
+    resolution: {integrity: sha512-/XFeXYgkuWgbtqPC7qPKvciXTvhtz7WMNQKQsAM1Kz+j0I5OWJDrybfiya6QtHF9oEvPkLwTHmC9+4OR/MmfIA==}
     engines: {node: '>=22.15'}
 
   import-from@4.0.0:
@@ -23904,7 +23904,7 @@ snapshots:
       cspell-trie-lib: 10.0.1(@cspell/cspell-types@10.0.1)
       env-paths: 4.0.0
       gensequence: 8.0.8
-      import-fresh: 4.0.0
+      import-fresh: 4.0.1
       resolve-from: 5.0.0
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
@@ -26417,7 +26417,7 @@ snapshots:
       parent-module: 1.0.1
       resolve-from: 4.0.0
 
-  import-fresh@4.0.0: {}
+  import-fresh@4.0.1: {}
 
   import-from@4.0.0: {}
 
