@@ -51,7 +51,7 @@
     "@uswds/uswds": "3.0.1",
     "@types/mdast": "4.0.4",
     "aws-amplify": "6.19.0",
-    "axios": "1.20.0",
+    "axios": "1.21.1",
     "cypress-axe": "1.7.0",
     "dayjs": "1.11.21",
     "decap-cms-app": "3.15.1",
