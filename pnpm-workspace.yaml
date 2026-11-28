@@ -56,7 +56,7 @@ overrides:
   "next-intl@4.13.4>use-intl": 4.13.4
   "cspell-lib@10.0.1>import-fresh": 4.0.0
   "cspell-config-lib@10.0.1>yaml": 2.9.1
-  "lint-staged@17.2.0>yaml": 2.9.0
+  "lint-staged@17.2.0>yaml": 2.9.1
 
 packageExtensions:
   "@aws-sdk/credential-provider-ini@*":
