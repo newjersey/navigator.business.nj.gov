@@ -198,7 +198,7 @@
     "cli-highlight": "2.1.11",
     "concurrently": "9.2.5",
     "cross-env": "10.1.0",
-    "cspell": "9.8.0",
+    "cspell": "10.5.2",
     "cypress": "16.3.0",
     "cypress-dotenv": "3.0.1",
     "cypress-wait-until": "3.0.2",
