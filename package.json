@@ -162,7 +162,7 @@
     "@swc/core": "1.16.22",
     "@swc/jest": "0.2.39",
     "@testing-library/dom": "10.4.1",
-    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/jest-dom": "8.0.0",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "@types/conventional-changelog-writer": "4.0.11",
