@@ -316,7 +316,7 @@ importers:
         version: 1.11.21
       decap-cms-app:
         specifier: 3.15.1
-        version: 3.15.1(@types/hoist-non-react-statics@3.3.7(@types/react@19.2.17))(@types/node@24.13.3)(@types/react@19.2.17)(graphql@15.10.1)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(supports-color@8.1.1)(use-sync-external-store@1.6.0(react@19.2.8))
+        version: 3.15.1(@types/hoist-non-react-statics@3.3.7(@types/react@19.2.17))(@types/node@24.13.3)(@types/react@19.2.17)(graphql@15.10.1)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(supports-color@8.1.1)(use-sync-external-store@1.6.0(react@19.2.8))
       dedent:
         specifier: 1.7.2
         version: 1.7.2(babel-plugin-macros@3.1.0)
@@ -1103,31 +1103,31 @@ importers:
         version: 2.9.1
       '@trussworks/react-uswds':
         specifier: 11.2.0
-        version: 11.2.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@uswds/uswds@3.13.0)(focus-trap-react@11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 11.2.0(@types/react-dom@19.3.0(@types/react@19.3.3))(@types/react@19.3.3)(@uswds/uswds@3.13.0)(focus-trap-react@11.0.6(@types/react-dom@19.3.0(@types/react@19.3.3))(@types/react@19.3.3)(prop-types@15.8.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@uswds/uswds':
         specifier: 3.13.0
         version: 3.13.0
       focus-trap-react:
         specifier: 11.0.6
-        version: 11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 11.0.6(@types/react-dom@19.3.0(@types/react@19.3.3))(@types/react@19.3.3)(prop-types@15.8.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       gray-matter:
         specifier: 4.0.3
         version: 4.0.3
       next:
         specifier: 16.4.5
-        version: 16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.99.0)
+        version: 16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.99.0)
       next-intl:
         specifier: 4.13.4
-        version: 4.13.4(@swc/helpers@0.5.23)(next@16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.99.0))(react@19.2.8)(typescript@7.0.2)
+        version: 4.13.4(@swc/helpers@0.5.23)(next@16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.99.0))(react@19.3.1)(typescript@7.0.2)
       react:
-        specifier: 19.2.8
-        version: 19.2.8
+        specifier: 19.3.1
+        version: 19.3.1
       react-dom:
-        specifier: 19.2.8
-        version: 19.2.8(react@19.2.8)
+        specifier: 19.3.1
+        version: 19.3.1(react@19.3.1)
       react-markdown:
         specifier: 10.1.0
-        version: 10.1.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1)
+        version: 10.1.0(@types/react@19.3.3)(react@19.3.1)(supports-color@8.1.1)
       unist-util-visit-parents:
         specifier: 6.0.2
         version: 6.0.2
@@ -1146,7 +1146,7 @@ importers:
         version: 7.0.0(@testing-library/dom@10.4.1)
       '@testing-library/react':
         specifier: 16.3.2
-        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.3.0(@types/react@19.3.3))(@types/react@19.3.3)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@testing-library/user-event':
         specifier: 14.6.1
         version: 14.6.1(@testing-library/dom@10.4.1)
@@ -1157,11 +1157,11 @@ importers:
         specifier: 26.1.1
         version: 26.1.1
       '@types/react':
-        specifier: 19.2.17
-        version: 19.2.17
+        specifier: 19.3.3
+        version: 19.3.3
       '@types/react-dom':
-        specifier: 19.2.3
-        version: 19.2.3(@types/react@19.2.17)
+        specifier: 19.3.0
+        version: 19.3.0(@types/react@19.3.3)
       '@types/unist':
         specifier: 3.0.3
         version: 3.0.3
@@ -1345,7 +1345,7 @@ importers:
         version: 1.11.21
       decap-cms-app:
         specifier: 3.15.1
-        version: 3.15.1(@types/hoist-non-react-statics@3.3.7(@types/react@19.2.17))(@types/node@24.13.3)(@types/react@19.2.17)(graphql@15.10.1)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(supports-color@8.1.1)(use-sync-external-store@1.6.0(react@19.2.8))
+        version: 3.15.1(@types/hoist-non-react-statics@3.3.7(@types/react@19.2.17))(@types/node@24.13.3)(@types/react@19.2.17)(graphql@15.10.1)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(supports-color@8.1.1)(use-sync-external-store@1.6.0(react@19.2.8))
       fast-deep-equal:
         specifier: 3.1.3
         version: 3.1.3
@@ -6596,6 +6596,11 @@ packages:
     peerDependencies:
       '@types/react': ^19.2.0
 
+  '@types/react-dom@19.3.0':
+    resolution: {integrity: sha512-ZI7bU42mZXXKHn/qNLEw2IrbiINU7X5+vfgdixBHkCNpYWXjKgfQ/P+uyGb5CjOLB9UcnTeg3rylQtV2hym44Q==}
+    peerDependencies:
+      '@types/react': ^19.3.0
+
   '@types/react-redux@7.1.34':
     resolution: {integrity: sha512-GdFaVjEbYv4Fthm2ZLvj1VSCedV7TqE5y1kNwnjSdBOTXuRSgowux6J8TAct15T3CKBr63UMk+2CO7ilRhyrAQ==}
 
@@ -6609,6 +6614,9 @@ packages:
 
   '@types/react@19.2.17':
     resolution: {integrity: sha512-MXfmqaVPEVgkBT/aY0aGCkRWWtByiYQXo3xdQ8r5RzuFrPiRn8Gar2tQdXSUQ2GKV3bkXckek89V8wQBY2Q/Aw==}
+
+  '@types/react@19.3.3':
+    resolution: {integrity: sha512-K8uWpJc4teiuOPdiP1umjeA9rGMgVPiXuoL66fcS1QlwBT1WMqY8PORmub9FadopIs+RCW6siYEs7Lpq+vDlog==}
 
   '@types/remove-markdown@0.3.4':
     resolution: {integrity: sha512-i753EH/p02bw7bLlpfS/4CV1rdikbGiLabWyVsAvsFid3cA5RNU1frG7JycgY+NSnFwtoGlElvZVceCytecTDA==}
@@ -12781,6 +12789,11 @@ packages:
     peerDependencies:
       react: ^19.2.8
 
+  react-dom@19.3.1:
+    resolution: {integrity: sha512-Y0bARz53lhEC1NMCASs0/j+faB/zqt3R8hpvg1e8+61ZVJ4UL0UdC4cBbXfZMcIuhrfgeILTLe+ZeBCavQPtKQ==}
+    peerDependencies:
+      react: ^19.3.1
+
   react-email@6.11.16:
     resolution: {integrity: sha512-/d0gipOg2mB4IOqM46SfcQIZsJP2rumyxZWREOB8hKcyLAFDSlurCyvfWKVA85JaMUZECVFTN/U0UdqUAIBgXQ==}
     engines: {node: '>=20.19.0'}
@@ -12950,6 +12963,10 @@ packages:
 
   react@19.2.8:
     resolution: {integrity: sha512-PWaYA1L/q9u2u7xYQi+Y3L3Yfnie7XyLeaJICV1MGD6LprsBxcAqGjYyr0eY3p+QdsA+x/Irkt4Qif8D63+Sbw==}
+    engines: {node: '>=0.10.0'}
+
+  react@19.3.1:
+    resolution: {integrity: sha512-QNhWdt7nrgVWWQG58QuGsAR3jv3Hbe4mb4vz7w2csnHavciZJgda1CPNaldF6eVxv90ud3jUXpKlHL69gO38yw==}
     engines: {node: '>=0.10.0'}
 
   reactcss@1.2.3:
@@ -13318,6 +13335,9 @@ packages:
 
   scheduler@0.27.0:
     resolution: {integrity: sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==}
+
+  scheduler@0.28.0:
+    resolution: {integrity: sha512-juorfCmIkIw8tT+p5BXSm6PJjQF/ycEYmKyzURCIt/RaZIhL+PulbQ9Yu2z1HdOJDdqDTlxA1+xKBmHXJsczAw==}
 
   schema-utils@3.3.0:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
@@ -20146,13 +20166,13 @@ snapshots:
 
   '@pkgr/core@0.2.9': {}
 
-  '@platejs/basic-nodes@49.0.0(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@platejs/basic-nodes@49.0.0(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      platejs: 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))
+      platejs: 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
-  '@platejs/core@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))':
+  '@platejs/core@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))':
     dependencies:
       '@platejs/slate': 49.2.21
       '@udecode/react-hotkeys': 37.0.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -20175,7 +20195,7 @@ snapshots:
       slate-react: 0.117.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(slate-dom@0.118.1(slate@0.118.1))(slate@0.118.1)
       use-deep-compare: 1.3.0(react@19.2.8)
       zustand: 5.0.14(@types/react@19.2.17)(immer@11.1.15)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
-      zustand-x: 6.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(zustand@5.0.14(@types/react@19.2.17)(immer@11.1.15)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8)))
+      zustand-x: 6.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(zustand@5.0.14(@types/react@19.2.17)(immer@11.1.15)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8)))
     transitivePeerDependencies:
       - '@types/react'
       - immer
@@ -20183,25 +20203,25 @@ snapshots:
       - scheduler
       - use-sync-external-store
 
-  '@platejs/floating@50.3.2(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@platejs/floating@50.3.2(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@floating-ui/core': 1.8.0
       '@floating-ui/react': 0.27.20(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      platejs: 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))
+      platejs: 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
-  '@platejs/link@50.3.2(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@platejs/link@50.3.2(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@platejs/floating': 50.3.2(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      platejs: 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))
+      '@platejs/floating': 50.3.2(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      platejs: 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
-  '@platejs/list-classic@49.1.0(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@platejs/list-classic@49.1.0(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       lodash: 4.18.1
-      platejs: 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))
+      platejs: 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
@@ -20213,9 +20233,9 @@ snapshots:
       slate: 0.118.1
       slate-dom: 0.118.1(slate@0.118.1)
 
-  '@platejs/utils@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))':
+  '@platejs/utils@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))':
     dependencies:
-      '@platejs/core': 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))
+      '@platejs/core': 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))
       '@platejs/slate': 49.2.21
       '@udecode/react-utils': 49.0.15(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@udecode/utils': 47.2.7
@@ -21806,6 +21826,16 @@ snapshots:
       '@types/react': 19.2.17
       '@types/react-dom': 19.2.3(@types/react@19.2.17)
 
+  '@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.3.0(@types/react@19.3.3))(@types/react@19.3.3)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+    dependencies:
+      '@babel/runtime': 7.29.7
+      '@testing-library/dom': 10.4.1
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
+    optionalDependencies:
+      '@types/react': 19.3.3
+      '@types/react-dom': 19.3.0(@types/react@19.3.3)
+
   '@testing-library/user-event@14.5.2(@testing-library/dom@10.4.0)':
     optionalDependencies:
       '@testing-library/dom': 10.4.0
@@ -21820,14 +21850,14 @@ snapshots:
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
-  '@trussworks/react-uswds@11.2.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@uswds/uswds@3.13.0)(focus-trap-react@11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@trussworks/react-uswds@11.2.0(@types/react-dom@19.3.0(@types/react@19.3.3))(@types/react@19.3.3)(@uswds/uswds@3.13.0)(focus-trap-react@11.0.6(@types/react-dom@19.3.0(@types/react@19.3.3))(@types/react@19.3.3)(prop-types@15.8.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
-      '@types/react': 19.2.17
-      '@types/react-dom': 19.2.3(@types/react@19.2.17)
+      '@types/react': 19.3.3
+      '@types/react-dom': 19.3.0(@types/react@19.3.3)
       '@uswds/uswds': 3.13.0
-      focus-trap-react: 11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      react: 19.2.8
-      react-dom: 19.2.8(react@19.2.8)
+      focus-trap-react: 11.0.6(@types/react-dom@19.3.0(@types/react@19.3.3))(@types/react@19.3.3)(prop-types@15.8.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
 
   '@tsconfig/node10@1.0.12': {}
 
@@ -22043,6 +22073,10 @@ snapshots:
     dependencies:
       '@types/react': 19.2.17
 
+  '@types/react-dom@19.3.0(@types/react@19.3.3)':
+    dependencies:
+      '@types/react': 19.3.3
+
   '@types/react-redux@7.1.34':
     dependencies:
       '@types/hoist-non-react-statics': 3.3.7(@types/react@19.2.17)
@@ -22059,6 +22093,10 @@ snapshots:
       '@types/react': 19.2.17
 
   '@types/react@19.2.17':
+    dependencies:
+      csstype: 3.2.3
+
+  '@types/react@19.3.3':
     dependencies:
       csstype: 3.2.3
 
@@ -24180,7 +24218,7 @@ snapshots:
 
   decamelize@1.2.0: {}
 
-  decap-cms-app@3.15.1(@types/hoist-non-react-statics@3.3.7(@types/react@19.2.17))(@types/node@24.13.3)(@types/react@19.2.17)(graphql@15.10.1)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(supports-color@8.1.1)(use-sync-external-store@1.6.0(react@19.2.8)):
+  decap-cms-app@3.15.1(@types/hoist-non-react-statics@3.3.7(@types/react@19.2.17))(@types/node@24.13.3)(@types/react@19.2.17)(graphql@15.10.1)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(supports-color@8.1.1)(use-sync-external-store@1.6.0(react@19.2.8)):
     dependencies:
       '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1)
@@ -24215,7 +24253,7 @@ snapshots:
       decap-cms-widget-number: 3.4.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(decap-cms-ui-default@3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(immutable@3.8.2)(prop-types@15.8.1)(react@19.2.8)
       decap-cms-widget-object: 3.7.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(decap-cms-ui-default@3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-immutable-proptypes@2.2.0(immutable@3.8.2))(react@19.2.8)
       decap-cms-widget-relation: 3.7.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(decap-cms-lib-widgets@3.4.0(immutable@3.8.2)(lodash@4.18.1))(decap-cms-ui-default@3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
-      decap-cms-widget-richtext: 3.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(decap-cms-ui-default@3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(immer@11.1.15)(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react-immutable-proptypes@2.2.0(immutable@3.8.2))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))
+      decap-cms-widget-richtext: 3.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(decap-cms-ui-default@3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(immer@11.1.15)(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react-immutable-proptypes@2.2.0(immutable@3.8.2))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))
       decap-cms-widget-select: 3.4.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(decap-cms-lib-widgets@3.4.0(immutable@3.8.2)(lodash@4.18.1))(decap-cms-ui-default@3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(immutable@3.8.2)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react-immutable-proptypes@2.2.0(immutable@3.8.2))(react@19.2.8)(supports-color@8.1.1)
       decap-cms-widget-string: 3.3.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(decap-cms-ui-default@3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(prop-types@15.8.1)(react@19.2.8)
       decap-cms-widget-text: 3.3.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(decap-cms-ui-default@3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(prop-types@15.8.1)(react@19.2.8)
@@ -24687,20 +24725,20 @@ snapshots:
       - react-dom
       - supports-color
 
-  decap-cms-widget-richtext@3.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(decap-cms-ui-default@3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(immer@11.1.15)(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react-immutable-proptypes@2.2.0(immutable@3.8.2))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8)):
+  decap-cms-widget-richtext@3.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(decap-cms-ui-default@3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(immer@11.1.15)(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react-immutable-proptypes@2.2.0(immutable@3.8.2))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8)):
     dependencies:
       '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1)
-      '@platejs/basic-nodes': 49.0.0(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@platejs/link': 50.3.2(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@platejs/list-classic': 49.1.0(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@platejs/basic-nodes': 49.0.0(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@platejs/link': 50.3.2(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@platejs/list-classic': 49.1.0(platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       decap-cms-ui-default: 3.9.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(immutable@3.8.2)(lodash@4.18.1)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       dompurify: 3.4.12
       immutable: 3.8.2
       lodash: 4.18.1
       mdast-util-definitions: 1.2.5
       mdast-util-to-string: 2.0.0
-      platejs: 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))
+      platejs: 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))
       prop-types: 15.8.1
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
@@ -25568,13 +25606,13 @@ snapshots:
 
   focus-group@0.3.1: {}
 
-  focus-trap-react@11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+  focus-trap-react@11.0.6(@types/react-dom@19.3.0(@types/react@19.3.3))(@types/react@19.3.3)(prop-types@15.8.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
-      '@types/react': 19.2.17
-      '@types/react-dom': 19.2.3(@types/react@19.2.17)
+      '@types/react': 19.3.3
+      '@types/react-dom': 19.3.0(@types/react@19.3.3)
       focus-trap: 7.8.0
-      react: 19.2.8
-      react-dom: 19.2.8(react@19.2.8)
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
       tabbable: 6.5.0
     optionalDependencies:
       prop-types: 15.8.1
@@ -28379,18 +28417,18 @@ snapshots:
 
   next-intl-swc-plugin-extractor@4.13.4: {}
 
-  next-intl@4.13.4(@swc/helpers@0.5.23)(next@16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.99.0))(react@19.2.8)(typescript@7.0.2):
+  next-intl@4.13.4(@swc/helpers@0.5.23)(next@16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.99.0))(react@19.3.1)(typescript@7.0.2):
     dependencies:
       '@formatjs/intl-localematcher': 0.8.5
       '@parcel/watcher': 2.6.0
       '@swc/core': 1.16.22(@swc/helpers@0.5.23)
       icu-minify: 4.13.4
       negotiator: 1.0.0
-      next: 16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.99.0)
+      next: 16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.99.0)
       next-intl-swc-plugin-extractor: 4.13.4
       po-parser: 2.1.1
-      react: 19.2.8
-      use-intl: 4.13.4(react@19.2.8)
+      react: 19.3.1
+      use-intl: 4.13.4(react@19.3.1)
     optionalDependencies:
       typescript: 7.0.2
     transitivePeerDependencies:
@@ -28435,16 +28473,16 @@ snapshots:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
-  next@16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.99.0):
+  next@16.4.5(@babel/core@7.29.13(supports-color@8.1.1))(@playwright/test@1.62.0)(@types/node@26.1.1)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.99.0):
     dependencies:
       '@next/env': 16.4.5
       '@swc/helpers': 0.5.23
       baseline-browser-mapping: 2.10.11
       caniuse-lite: 1.0.30001769
       postcss: 8.5.23
-      react: 19.2.8
-      react-dom: 19.2.8(react@19.2.8)
-      styled-jsx: 5.1.6(@babel/core@7.29.13(supports-color@8.1.1))(babel-plugin-macros@3.1.0)(react@19.2.8)
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
+      styled-jsx: 5.1.6(@babel/core@7.29.13(supports-color@8.1.1))(babel-plugin-macros@3.1.0)(react@19.3.1)
     optionalDependencies:
       '@next/swc-darwin-arm64': 16.4.5
       '@next/swc-darwin-x64': 16.4.5
@@ -29065,11 +29103,11 @@ snapshots:
     dependencies:
       find-up: 6.3.0
 
-  platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8)):
+  platejs@49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8)):
     dependencies:
-      '@platejs/core': 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))
+      '@platejs/core': 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))
       '@platejs/slate': 49.2.21
-      '@platejs/utils': 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(use-sync-external-store@1.6.0(react@19.2.8))
+      '@platejs/utils': 49.2.21(@types/react@19.2.17)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(use-sync-external-store@1.6.0(react@19.2.8))
       '@udecode/react-hotkeys': 37.0.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@udecode/react-utils': 49.0.15(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@udecode/utils': 47.2.7
@@ -29427,6 +29465,11 @@ snapshots:
       react: 19.2.8
       scheduler: 0.27.0
 
+  react-dom@19.3.1(react@19.3.1):
+    dependencies:
+      react: 19.3.1
+      scheduler: 0.28.0
+
   react-email@6.11.16(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1):
     dependencies:
       '@babel/parser': 7.29.2
@@ -29472,16 +29515,16 @@ snapshots:
 
   react-lifecycles-compat@3.0.4: {}
 
-  react-markdown@10.1.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1):
+  react-markdown@10.1.0(@types/react@19.3.3)(react@19.3.1)(supports-color@8.1.1):
     dependencies:
       '@types/hast': 3.0.5
       '@types/mdast': 4.0.4
-      '@types/react': 19.2.17
+      '@types/react': 19.3.3
       devlop: 1.1.0
       hast-util-to-jsx-runtime: 2.3.6(supports-color@8.1.1)
       html-url-attributes: 3.0.1
       mdast-util-to-hast: 13.2.0
-      react: 19.2.8
+      react: 19.3.1
       remark-parse: 11.0.0(supports-color@8.1.1)
       remark-rehype: 11.1.2
       unified: 11.0.5
@@ -29621,12 +29664,12 @@ snapshots:
       react: 19.2.8
       topbar: 0.1.4
 
-  react-tracked@1.7.14(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0):
+  react-tracked@1.7.14(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0):
     dependencies:
       proxy-compare: 2.6.0
       react: 19.2.8
-      scheduler: 0.27.0
-      use-context-selector: 1.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)
+      scheduler: 0.28.0
+      use-context-selector: 1.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)
     optionalDependencies:
       react-dom: 19.2.8(react@19.2.8)
 
@@ -29662,6 +29705,8 @@ snapshots:
       react-dom: 19.2.8(react@19.2.8)
 
   react@19.2.8: {}
+
+  react@19.3.1: {}
 
   reactcss@1.2.3(react@19.2.8):
     dependencies:
@@ -30149,6 +30194,8 @@ snapshots:
       xmlchars: 2.2.0
 
   scheduler@0.27.0: {}
+
+  scheduler@0.28.0: {}
 
   schema-utils@3.3.0:
     dependencies:
@@ -30779,6 +30826,14 @@ snapshots:
     dependencies:
       client-only: 0.0.1
       react: 19.2.8
+    optionalDependencies:
+      '@babel/core': 7.29.13(supports-color@8.1.1)
+      babel-plugin-macros: 3.1.0
+
+  styled-jsx@5.1.6(@babel/core@7.29.13(supports-color@8.1.1))(babel-plugin-macros@3.1.0)(react@19.3.1):
+    dependencies:
+      client-only: 0.0.1
+      react: 19.3.1
     optionalDependencies:
       '@babel/core': 7.29.13(supports-color@8.1.1)
       babel-plugin-macros: 3.1.0
@@ -31481,10 +31536,10 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.17
 
-  use-context-selector@1.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0):
+  use-context-selector@1.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0):
     dependencies:
       react: 19.2.8
-      scheduler: 0.27.0
+      scheduler: 0.28.0
     optionalDependencies:
       react-dom: 19.2.8(react@19.2.8)
 
@@ -31500,6 +31555,14 @@ snapshots:
       icu-minify: 4.13.4
       intl-messageformat: 11.2.3
       react: 19.2.8
+
+  use-intl@4.13.4(react@19.3.1):
+    dependencies:
+      '@formatjs/fast-memoize': 3.1.3
+      '@schummar/icu-type-parser': 1.21.5
+      icu-minify: 4.13.4
+      intl-messageformat: 11.2.3
+      react: 19.3.1
 
   use-isomorphic-layout-effect@1.2.1(@types/react@19.2.17)(react@19.2.8):
     dependencies:
@@ -32096,12 +32159,12 @@ snapshots:
 
   zod@4.6.6: {}
 
-  zustand-x@6.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(zustand@5.0.14(@types/react@19.2.17)(immer@11.1.15)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))):
+  zustand-x@6.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)(zustand@5.0.14(@types/react@19.2.17)(immer@11.1.15)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))):
     dependencies:
       immer: 10.2.0
       lodash.mapvalues: 4.6.0
       mutative: 1.1.0
-      react-tracked: 1.7.14(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)
+      react-tracked: 1.7.14(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.28.0)
       use-sync-external-store: 1.4.0(react@19.2.8)
       zustand: 5.0.14(@types/react@19.2.17)(immer@11.1.15)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
     transitivePeerDependencies:
