@@ -238,7 +238,7 @@
     "typescript": "5.9.3",
     "vite": "8.1.6",
     "vitest": "4.1.11",
-    "webpack": "5.109.0",
+    "webpack": "5.113.0",
     "wiremock": "3.13.2"
   },
   "engines": {
