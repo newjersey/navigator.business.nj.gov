@@ -43,7 +43,7 @@ cargo:
 overrides:
   body-parser: 2.4.0
   "trim@0.0.1": 1.0.1
-  postcss: 8.5.23
+  postcss: 8.5.33
   glob-parent: 6.0.2
   tar: 7.5.22
   ansi-regex: 5.0.1
