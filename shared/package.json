@@ -25,7 +25,7 @@
   "dependencies": {
     "@businessnjgovnavigator/content": "workspace:*",
     "@businessnjgovnavigator/content-types": "workspace:*",
-    "dayjs": "1.11.21",
+    "dayjs": "1.11.23",
     "gray-matter": "4.0.3",
     "js-yaml": "4.3.2",
     "lodash": "4.18.1",

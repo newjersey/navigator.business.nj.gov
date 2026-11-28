@@ -271,7 +271,7 @@ importers:
         version: 9.0.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@pigment-css/react@0.0.31(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)(typescript@5.9.3))(@types/react@19.2.17)(react@19.2.8)
       '@mui/x-date-pickers':
         specifier: 9.4.0
-        version: 9.4.0(27efb34c88790f09cc711c8a596494a6)
+        version: 9.4.0(bf001cfad38a3e0fdb67fdce1b0fd0ed)
       '@newjersey/njwds':
         specifier: 0.3.0
         version: 0.3.0
@@ -312,8 +312,8 @@ importers:
         specifier: 1.7.0
         version: 1.7.0(axe-core@4.11.1)(cypress@16.3.0)
       dayjs:
-        specifier: 1.11.21
-        version: 1.11.21
+        specifier: 1.11.23
+        version: 1.11.23
       decap-cms-app:
         specifier: 3.15.1
         version: 3.15.1(@types/hoist-non-react-statics@3.3.7(@types/react@19.2.17))(@types/node@24.13.3)(@types/react@19.2.17)(graphql@15.10.1)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(supports-color@8.1.1)(use-sync-external-store@1.6.0(react@19.2.8))
@@ -841,8 +841,8 @@ importers:
         specifier: 2.8.6
         version: 2.8.6
       dayjs:
-        specifier: 1.11.21
-        version: 1.11.21
+        specifier: 1.11.23
+        version: 1.11.23
       dedent:
         specifier: 1.7.2
         version: 1.7.2(babel-plugin-macros@3.1.0)
@@ -1217,8 +1217,8 @@ importers:
         specifier: workspace:*
         version: link:../packages/content-types
       dayjs:
-        specifier: 1.11.21
-        version: 1.11.21
+        specifier: 1.11.23
+        version: 1.11.23
       gray-matter:
         specifier: 4.0.3
         version: 4.0.3
@@ -1318,7 +1318,7 @@ importers:
         version: 9.0.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@pigment-css/react@0.0.31(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)(typescript@5.9.3))(@types/react@19.2.17)(react@19.2.8)
       '@mui/x-date-pickers':
         specifier: 9.4.0
-        version: 9.4.0(27efb34c88790f09cc711c8a596494a6)
+        version: 9.4.0(bf001cfad38a3e0fdb67fdce1b0fd0ed)
       '@newjersey/njwds':
         specifier: 0.3.0
         version: 0.3.0
@@ -1341,8 +1341,8 @@ importers:
         specifier: 1.7.0
         version: 1.7.0(axe-core@4.11.1)(cypress@16.3.0)
       dayjs:
-        specifier: 1.11.21
-        version: 1.11.21
+        specifier: 1.11.23
+        version: 1.11.23
       decap-cms-app:
         specifier: 3.15.1
         version: 3.15.1(@types/hoist-non-react-statics@3.3.7(@types/react@19.2.17))(@types/node@24.13.3)(@types/react@19.2.17)(graphql@15.10.1)(immer@11.1.15)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(scheduler@0.27.0)(supports-color@8.1.1)(use-sync-external-store@1.6.0(react@19.2.8))
@@ -8487,9 +8487,6 @@ packages:
 
   dateformat@3.0.3:
     resolution: {integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==}
-
-  dayjs@1.11.21:
-    resolution: {integrity: sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==}
 
   dayjs@1.11.23:
     resolution: {integrity: sha512-QDTCU0M0MxR3hQfnlDJfwekQiaanm1ubOD231u73WBckQ/fsamwRLiE2GBz6D3a/xF1NgfiDLJjXBa1hYOYTtQ==}
@@ -19696,7 +19693,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.17
 
-  '@mui/x-date-pickers@9.4.0(27efb34c88790f09cc711c8a596494a6)':
+  '@mui/x-date-pickers@9.4.0(bf001cfad38a3e0fdb67fdce1b0fd0ed)':
     dependencies:
       '@babel/runtime': 7.29.7
       '@mui/material': 9.0.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@mui/material-pigment-css@9.0.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@pigment-css/react@0.0.31(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)(typescript@5.9.3))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -19712,7 +19709,7 @@ snapshots:
     optionalDependencies:
       '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1)
-      dayjs: 1.11.21
+      dayjs: 1.11.23
     transitivePeerDependencies:
       - '@types/react'
 
@@ -24135,8 +24132,6 @@ snapshots:
 
   dateformat@3.0.3: {}
 
-  dayjs@1.11.21: {}
-
   dayjs@1.11.23: {}
 
   debounce-fn@6.0.0:
@@ -24408,7 +24403,7 @@ snapshots:
       ajv-keywords: 5.1.0(ajv@8.17.1)
       buffer: 6.0.3
       common-tags: 1.8.2
-      dayjs: 1.11.21
+      dayjs: 1.11.23
       decap-cms-editor-component-image: 3.4.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
       decap-cms-lib-auth: 3.2.1(immutable@3.8.2)(lodash@4.18.1)
       decap-cms-lib-util: 3.8.0(immutable@3.8.2)(lodash@4.18.1)
@@ -24480,7 +24475,7 @@ snapshots:
 
   decap-cms-lib-widgets@3.4.0(immutable@3.8.2)(lodash@4.18.1):
     dependencies:
-      dayjs: 1.11.21
+      dayjs: 1.11.23
       immutable: 3.8.2
       lodash: 4.18.1
       path-browserify: 1.0.1
@@ -24553,7 +24548,7 @@ snapshots:
   decap-cms-widget-datetime@3.6.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1))(prop-types@15.8.1)(react@19.2.8):
     dependencies:
       '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.8)(supports-color@8.1.1)
-      dayjs: 1.11.21
+      dayjs: 1.11.23
       prop-types: 15.8.1
       react: 19.2.8
 

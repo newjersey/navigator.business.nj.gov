@@ -82,7 +82,7 @@
     "constructs": "10.0.0",
     "cors": "2.8.6",
     "cypress-axe": "1.7.0",
-    "dayjs": "1.11.21",
+    "dayjs": "1.11.23",
     "decap-cms-app": "3.15.1",
     "dedent": "1.7.2",
     "express": "5.2.1",
