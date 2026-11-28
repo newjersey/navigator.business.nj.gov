@@ -83,7 +83,7 @@
     "cors": "2.8.6",
     "cypress-axe": "1.7.0",
     "dayjs": "1.11.21",
-    "decap-cms-app": "3.15.1",
+    "decap-cms-app": "3.18.0",
     "dedent": "1.7.2",
     "express": "5.2.1",
     "fast-deep-equal": "3.1.3",
