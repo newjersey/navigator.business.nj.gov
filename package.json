@@ -73,7 +73,7 @@
     "@pigment-css/react": "0.0.31",
     "@react-email/render": "2.3.1",
     "@smithy/node-http-handler": "4.8.0",
-    "@uswds/uswds": "3.0.1",
+    "@uswds/uswds": "3.14.0",
     "@types/mdast": "4.0.4",
     "airtable": "0.12.2",
     "aws-amplify": "6.19.0",

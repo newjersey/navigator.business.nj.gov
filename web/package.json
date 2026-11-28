@@ -48,7 +48,7 @@
     "@mui/x-date-pickers": "9.4.0",
     "@newjersey/njwds": "0.3.0",
     "@pigment-css/react": "0.0.31",
-    "@uswds/uswds": "3.0.1",
+    "@uswds/uswds": "3.14.0",
     "@types/mdast": "4.0.4",
     "aws-amplify": "6.19.0",
     "axios": "1.20.0",
