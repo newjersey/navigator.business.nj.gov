@@ -81,7 +81,7 @@
     "@newjersey/feedback-widget": "0.8.3",
     "@newjersey/njwds": "2.9.1",
     "@trussworks/react-uswds": "11.2.0",
-    "@uswds/uswds": "3.13.0",
+    "@uswds/uswds": "3.14.0",
     "focus-trap-react": "11.0.6",
     "gray-matter": "4.0.3",
     "next": "16.4.5",
