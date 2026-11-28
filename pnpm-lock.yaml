@@ -1102,8 +1102,8 @@ importers:
         specifier: 2.9.1
         version: 2.9.1
       '@trussworks/react-uswds':
-        specifier: 11.2.0
-        version: 11.2.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@uswds/uswds@3.13.0)(focus-trap-react@11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: 13.0.1
+        version: 13.0.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@uswds/uswds@3.13.0)(focus-trap-react@11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@uswds/uswds':
         specifier: 3.13.0
         version: 3.13.0
@@ -6393,13 +6393,13 @@ packages:
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
 
-  '@trussworks/react-uswds@11.2.0':
-    resolution: {integrity: sha512-tg8/oq4FgikF/7bsUN1cwYGfSetBDYlDCrkr6dXSxxC2o/PRr03tschKxiJ8Aa9XvE131LF95FtqzZlGy4kP5Q==}
-    engines: {node: '>= 20'}
+  '@trussworks/react-uswds@13.0.1':
+    resolution: {integrity: sha512-8+DTfbDtX1YBLnd3hoXD7mG9xW1UzMAVrYkiSw7/EmH08gw4J/P5OLDNsFX0CBiYJHbhlfJ3tjRVRWy14Hqp3Q==}
+    engines: {node: '>= 22'}
     peerDependencies:
       '@types/react': ^16.x || ^17.x || ^18.x || ^19.x
       '@types/react-dom': ^16.x || ^17.x || ^18.x || ^19.x
-      '@uswds/uswds': ^3.13.0
+      '@uswds/uswds': ^3.14.0
       focus-trap-react: ^11.0.4
       react: ^16.x || ^17.x || ^18.x || ^19.x
       react-dom: ^16.x || ^17.x || ^18.x || ^19.x
@@ -21820,7 +21820,7 @@ snapshots:
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
-  '@trussworks/react-uswds@11.2.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@uswds/uswds@3.13.0)(focus-trap-react@11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@trussworks/react-uswds@13.0.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@uswds/uswds@3.13.0)(focus-trap-react@11.0.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(prop-types@15.8.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@types/react': 19.2.17
       '@types/react-dom': 19.2.3(@types/react@19.2.17)
